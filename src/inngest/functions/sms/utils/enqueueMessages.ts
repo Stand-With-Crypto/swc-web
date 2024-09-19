@@ -58,6 +58,8 @@ export async function enqueueMessages(
     payload.map(({ phoneNumber }) => phoneNumber),
   )
 
+  logger.info('Got variables')
+
   let segmentsSent = 0
   let queuedMessages = 0
   const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
@@ -150,11 +152,15 @@ export async function enqueueMessages(
     logger.info(`Creating ${journeyType} communication journey`)
 
     await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
+
+    logger.info(`Created ${journeyType} communication journey`)
   }
 
   if (invalidPhoneNumbers.length > 0) {
     logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
     await flagInvalidPhoneNumbers(invalidPhoneNumbers)
+
+    logger.info(`Invalid phone numbers flagged`)
   }
 
   if (unsubscribedUsers.length > 0) {
@@ -166,6 +172,8 @@ export async function enqueueMessages(
     })
 
     await Promise.all(optOutUserPromises)
+
+    logger.info(`Opted out ${unsubscribedUsers.length} users`)
   }
 
   const failedEnqueueMessagePayload: EnqueueMessagePayload[] = Object.keys(failedPhoneNumbers).map(
@@ -180,7 +188,7 @@ export async function enqueueMessages(
     const waitingTime = 1000 * (attempt + 1)
 
     logger.info(
-      `Failed to send SMS to ${failedEnqueueMessagePayload.length} phone numbers. Attempting again in ${waitingTime} seconds`,
+      `Failed to send SMS to ${failedEnqueueMessagePayload.length} phone numbers. Attempting again in ${waitingTime} millisecond`,
     )
 
     await sleep(waitingTime)
@@ -194,6 +202,8 @@ export async function enqueueMessages(
     segmentsSent += segments
     queuedMessages += messages
   }
+
+  logger.info('Messages queued successfully')
 
   return { segments: segmentsSent, messages: queuedMessages }
 }
