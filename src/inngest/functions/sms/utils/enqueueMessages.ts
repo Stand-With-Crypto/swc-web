@@ -21,7 +21,7 @@ import { flagInvalidPhoneNumbers } from './flagInvalidPhoneNumbers'
 const MAX_RETRY_ATTEMPTS = 5
 const PAYLOAD_LIMIT = 10000
 
-const logger = getLogger('enqueueMessages')
+const defaultLogger = getLogger('enqueueMessages')
 
 export interface PayloadMessage {
   body?: string
@@ -35,7 +35,11 @@ export interface EnqueueMessagePayload {
   messages: PayloadMessage[]
 }
 
-export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt = 0) {
+export async function enqueueMessages(
+  payload: EnqueueMessagePayload[],
+  logger = defaultLogger,
+  attempt = 0,
+) {
   if (attempt > MAX_RETRY_ATTEMPTS) return { segments: 0, messages: 0 }
   if (payload.length > PAYLOAD_LIMIT) {
     throw new NonRetriableError(`Enqueue messages payload exceeded the limit ${PAYLOAD_LIMIT}`)
@@ -47,6 +51,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
     [key in UserCommunicationJourneyType]?: BulkCreateCommunicationJourneyPayload
   } = {}
   const unsubscribedUsers: string[] = []
+
+  logger.info('Fetching variables')
 
   const userSMSVariables = await getSMSVariablesByPhoneNumbers(
     payload.map(({ phoneNumber }) => phoneNumber),
@@ -132,6 +138,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
     }
   })
 
+  logger.info(`Attempt ${attempt + 1} queuing messages`)
+
   await Promise.all(enqueueMessagesPromise)
 
   logger.info(`Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`)
@@ -177,7 +185,11 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
     await sleep(waitingTime)
 
-    const { messages, segments } = await enqueueMessages(failedEnqueueMessagePayload, attempt + 1)
+    const { messages, segments } = await enqueueMessages(
+      failedEnqueueMessagePayload,
+      logger,
+      attempt + 1,
+    )
 
     segmentsSent += segments
     queuedMessages += messages
