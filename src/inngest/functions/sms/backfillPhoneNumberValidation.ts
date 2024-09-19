@@ -8,7 +8,7 @@ import { flagInvalidPhoneNumbers } from './utils'
 
 const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_FUNCTION_ID =
   'script.backfill-phone-number-validation'
-export const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME =
+const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME =
   'script.backfill-phone-number-validation'
 
 const MAX_RETRY_COUNT = 0

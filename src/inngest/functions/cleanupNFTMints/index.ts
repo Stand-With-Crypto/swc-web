@@ -4,7 +4,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
 
 const CLEANUP_NFT_MINTS_FUNCTION_ID = 'script.cleanup-nft-mints'
-export const CLEANUP_NFT_MINTS_EVENT_NAME = 'script/cleanup.nft.mints'
+const CLEANUP_NFT_MINTS_EVENT_NAME = 'script/cleanup.nft.mints'
 
 export const cleanupNFTMintsWithInngest = inngest.createFunction(
   {

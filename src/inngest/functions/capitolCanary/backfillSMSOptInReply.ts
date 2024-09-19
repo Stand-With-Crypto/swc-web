@@ -15,7 +15,7 @@ const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_PAGE_INTERVALS = 100
 
 const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_FUNCTION_ID =
   'capitol-canary.backfill-sms-opt-in-reply'
-export const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME =
+const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/backfill.sms.opt.in.reply'
 
 /**
@@ -113,7 +113,7 @@ const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_PAGES_FOR_BATCH = 105
 
 const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_FUNCTION_ID =
   'capitol-canary.backfill-sms-opt-in-reply.update-batch-of-users'
-export const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_EVENT_NAME =
+const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_EVENT_NAME =
   'capitol.canary/backfill.sms.opt.in.reply/update.batch.of.users'
 
 /**

@@ -31,7 +31,7 @@ const LOW_ETH_BALANCE_THRESHOLD = 0.01
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 9 * 60 * 1000 // 9 minutes timeframe to backfill the records, leaving 1 minute before the next run.
 const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minutes.
 const BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID = 'script.backfill-nft-cron-job'
-export const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
+const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
 
 /**
  * This Inngest function is a cron job responsible for backfilling the NFTs for the user actions that were skipped/missed.

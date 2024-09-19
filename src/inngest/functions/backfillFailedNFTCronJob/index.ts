@@ -19,7 +19,7 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
   Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE) || 20
 
 const BACKFILL_FAILED_NFT_INNGEST_FUNCTION_ID = 'script.backfill-failed-nft'
-export const BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME = 'script/backfill.failed.nft'
+const BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME = 'script/backfill.failed.nft'
 
 const LOW_ETH_BALANCE_THRESHOLD = 0.01
 

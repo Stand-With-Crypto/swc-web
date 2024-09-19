@@ -2,7 +2,7 @@ import { cleanPostalCodes } from '@/inngest/functions/cleanupPostalCodes/logic'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-export const CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME = 'script/cleanup-postal-codes'
+const CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME = 'script/cleanup-postal-codes'
 const CLEANUP_POSTAL_CODES_INNGEST_FUNCTION_ID = 'script.cleanup-postal-codes'
 
 export const cleanupPostalCodesWithInngest = inngest.createFunction(

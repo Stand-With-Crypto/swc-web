@@ -1,9 +1,7 @@
 import { differenceInDays, format, startOfDay } from 'date-fns'
 
-import {
-  BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-  BulkSMSPayload,
-} from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
+import { BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
+import { BulkSMSPayload } from '@/inngest/functions/sms/types'
 import { inngest } from '@/inngest/inngest'
 import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { prismaClient } from '@/utils/server/prismaClient'

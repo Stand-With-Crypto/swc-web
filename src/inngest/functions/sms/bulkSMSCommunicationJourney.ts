@@ -3,6 +3,7 @@ import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } f
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, update } from 'lodash-es'
 
+import { GetPhoneNumberOptions } from '@/inngest/functions/sms/types'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -31,23 +32,6 @@ const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_Q
 const MIN_ENQUEUE_HOUR = 11 // 11 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
-export interface BulkSMSPayload {
-  messages: Array<{
-    smsBody: string
-    userWhereInput?: GetPhoneNumberOptions['userWhereInput']
-    includePendingDoubleOptIn?: boolean
-    campaignName: string
-    media?: string[]
-  }>
-  // default to ET: -4
-  timezone?: number
-  send?: boolean
-  // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
-  sleepTime?: string | number
-  // This is used to take into account the current queue size when queuing new messages
-  currentSegmentsInQueue?: number
-}
-
 export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
     id: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,
@@ -58,13 +42,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const {
-      send,
-      sleepTime,
-      messages,
-      timezone = -4,
-      currentSegmentsInQueue = 0,
-    } = event.data as BulkSMSPayload
+    const { send, sleepTime, messages, timezone = -4, currentSegmentsInQueue = 0 } = event.data
 
     if (!messages) {
       throw new NonRetriableError('Missing messages to send')
@@ -358,13 +336,6 @@ const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroup
 // Add a space before the welcome message to ensure proper formatting. If the message ends with a link,
 // appending the welcome message directly could break the link.
 const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
-
-interface GetPhoneNumberOptions {
-  includePendingDoubleOptIn?: boolean
-  cursor?: Date
-  userWhereInput?: Prisma.UserGroupByArgs['where']
-  campaignName?: string
-}
 
 async function fetchAllPhoneNumbers(
   options: Omit<GetPhoneNumberOptions, 'cursor'>,

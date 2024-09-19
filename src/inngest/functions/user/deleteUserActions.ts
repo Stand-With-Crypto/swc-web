@@ -5,7 +5,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-export const DELETE_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/delete-user-actions'
+const DELETE_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/delete-user-actions'
 const DELETE_USER_ACTIONS_INNGEST_FUNCTION_ID = 'script.delete-user-actions'
 
 export const deleteUserActions = inngest.createFunction(

@@ -29,7 +29,7 @@ interface User {
   }[]
 }
 
-export const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
+const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_FUNCTION_ID = 'script.backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE =
   Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 50

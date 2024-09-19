@@ -12,7 +12,7 @@ const defaultLogger = getLogger('backfillUsCongressionalDistrictsCronJob')
 
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID =
   'script.backfill-us-congressional-districts-cron-job'
-export const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME =
+const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME =
   'script/backfill.us.congressional.districts.cron.job'
 
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEDULE = '0 9 * * *' //everyday 09:00AM UTC or 01:00 AM PST

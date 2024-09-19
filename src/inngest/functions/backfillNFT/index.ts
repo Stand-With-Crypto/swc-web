@@ -2,7 +2,7 @@ import { backfillNFT } from '@/inngest/functions/backfillNFT/logic'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-export const BACKFILL_NFT_INNGEST_EVENT_NAME = 'script/backfill-nft'
+const BACKFILL_NFT_INNGEST_EVENT_NAME = 'script/backfill-nft'
 const BACKFILL_NFT_INNGEST_FUNCTION_ID = 'script.backfill-nft'
 
 export const backfillNFTWithInngest = inngest.createFunction(

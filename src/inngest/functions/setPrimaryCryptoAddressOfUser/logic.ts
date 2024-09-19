@@ -39,6 +39,7 @@ export async function setPrimaryCryptoAddressOfUser(
   }
   if (!persist) {
     logger.info('Dry run, exiting')
+    return
   }
 
   await prismaClient.user.update({

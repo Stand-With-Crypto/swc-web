@@ -1,40 +1,8 @@
-import { User, UserActionType } from '@prisma/client'
+import { Prisma, User, UserActionType } from '@prisma/client'
 import { EventSchemas } from 'inngest'
 import { z } from 'zod'
 
-import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
-import { BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
-import { BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/backfillFailedNFTCronJob'
-import { BACKFILL_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/backfillNFT'
-import { BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME } from '@/inngest/functions/backfillNFTCronJob'
-import { BACKFILL_REACTIVATION_INNGEST_EVENT_NAME } from '@/inngest/functions/backfillReactivation'
-import { BACKFILL_SESSION_ID_INNGEST_EVENT_NAME } from '@/inngest/functions/backfillSessionId'
-import {
-  CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME,
-  CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_EVENT_NAME,
-} from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
-import { CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
-import { CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
-import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
-import { CLEANUP_NFT_MINTS_EVENT_NAME } from '@/inngest/functions/cleanupNFTMints'
-import { CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME } from '@/inngest/functions/cleanupPostalCodes'
-import { INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
-import { MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_NAME } from '@/inngest/functions/monitorBaseETHBalances'
-import { SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
-import { BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
-import {
-  BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-  BulkSMSPayload,
-} from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
-import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
-import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
-import { WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
-import { DELETE_USER_ACTIONS_INNGEST_EVENT_NAME } from '@/inngest/functions/user/deleteUserActions'
-import { AUDIT_USER_BATCH_EVENT_NAME } from '@/inngest/functions/usersTotalDonationAmountUsd/audit'
-import {
-  BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME,
-  UPDATE_USER_BATCH_EVENT_NAME,
-} from '@/inngest/functions/usersTotalDonationAmountUsd/backfill'
+import { BulkSMSPayload } from '@/inngest/functions/sms/types'
 import {
   CapitolCanaryCampaignId,
   SandboxCapitolCanaryCampaignId,
@@ -46,7 +14,7 @@ import {
 import { NFTSlug } from '@/utils/shared/nft'
 
 type CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_PAYLOAD = {
-  name: typeof CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME
+  name: 'capitol.canary/check.sms.opt.in.reply'
   data: {
     campaignId?: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId
     user: User
@@ -54,7 +22,7 @@ type CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_PAYLOAD = {
 }
 
 type AIRDROP_NFT_INNGEST_PAYLOAD = {
-  name: typeof AIRDROP_NFT_INNGEST_EVENT_NAME
+  name: 'app/airdrop.request'
   data: {
     nftMintId: string
     nftSlug: NFTSlug
@@ -64,11 +32,11 @@ type AIRDROP_NFT_INNGEST_PAYLOAD = {
 }
 
 type BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_PAYLOAD = {
-  name: typeof BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME
+  name: 'script/backfill.us.congressional.districts.cron.job'
 }
 
 type BACKFILL_FAILED_NFT_INNGEST_PAYLOAD = {
-  name: typeof BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME
+  name: 'script/backfill.failed.nft'
   data: {
     limit?: number
     failed: boolean
@@ -77,7 +45,7 @@ type BACKFILL_FAILED_NFT_INNGEST_PAYLOAD = {
 }
 
 type BACKFILL_NFT_INNGEST_PAYLOAD = {
-  name: typeof BACKFILL_NFT_INNGEST_EVENT_NAME
+  name: 'script/backfill-nft'
   data: {
     limit?: number
     persist: boolean
@@ -85,11 +53,11 @@ type BACKFILL_NFT_INNGEST_PAYLOAD = {
 }
 
 type BACKFILL_NFT_INNGEST_CRON_JOB_PAYLOAD = {
-  name: typeof BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME
+  name: 'script/backfill.nft.cron.job'
 }
 
 type BACKFILL_REACTIVATION_INNGEST_PAYLOAD = {
-  name: typeof BACKFILL_REACTIVATION_INNGEST_EVENT_NAME
+  name: 'script/backfill-reactivation'
   data: {
     testEmail?: string
     persist?: boolean
@@ -98,46 +66,46 @@ type BACKFILL_REACTIVATION_INNGEST_PAYLOAD = {
 }
 
 type BACKFILL_SESSION_ID_INNGEST_PAYLOAD = {
-  name: typeof BACKFILL_SESSION_ID_INNGEST_EVENT_NAME
+  name: 'script/backfill.session.id'
 }
 
 type CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_PAYLOAD = {
-  name: typeof CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME
+  name: 'capitol.canary/backfill.sms.opt.in.reply'
 }
 
 type CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_PAYLOAD = {
-  name: typeof CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_EVENT_NAME
+  name: 'capitol.canary/backfill.sms.opt.in.reply/update.batch.of.users'
   data: {
     page: number
   }
 }
 
 type CAPITOL_CANARY_EMAIL_INNGEST_EVENT_PAYLOAD = {
-  name: typeof CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME
+  name: 'capitol.canary/email'
   data: EmailViaCapitolCanaryPayloadRequirements
 }
 
 type CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_PAYLOAD = {
-  name: typeof CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME
+  name: 'capitol.canary/upsert.advocate'
   data: UpsertAdvocateInCapitolCanaryPayloadRequirements
 }
 
 type CLEANUP_NFT_MINTS_EVENT_PAYLOAD = {
-  name: typeof CLEANUP_NFT_MINTS_EVENT_NAME
+  name: 'script/cleanup.nft.mints'
   data: {
     persist: boolean
   }
 }
 
 type CLEANUP_POSTAL_CODES_INNGEST_EVENT_PAYLOAD = {
-  name: typeof CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME
+  name: 'script/cleanup-postal-codes'
   data: {
     persist: boolean
   }
 }
 
 type SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_PAYLOAD = {
-  name: typeof SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME
+  name: 'script/set-primary-crypto-address-of-user'
   data: {
     userId: string
     cryptoAddressId: string
@@ -146,40 +114,40 @@ type SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_PAYLOAD = {
 }
 
 type BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_PAYLOAD = {
-  name: typeof BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME
+  name: 'script.backfill-phone-number-validation'
   data: {
     persist?: boolean
   }
 }
 
 type BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_PAYLOAD = {
-  name: typeof BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  name: 'app/user.communication/bulk.sms'
   data: BulkSMSPayload
 }
 
 type GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_PAYLOAD = {
-  name: typeof GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  name: 'app/user.communication/goodbye.sms'
   data: {
     phoneNumber: string
   }
 }
 
 type UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_PAYLOAD = {
-  name: typeof UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  name: 'app/user.communication/unstop-confirmation.sms'
   data: {
     phoneNumber: string
   }
 }
 
 type WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_PAYLOAD = {
-  name: typeof WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  name: 'app/user.communication/welcome.sms'
   data: {
     phoneNumber: string
   }
 }
 
 type DELETE_USER_ACTIONS_INNGEST_EVENT_PAYLOAD = {
-  name: typeof DELETE_USER_ACTIONS_INNGEST_EVENT_NAME
+  name: 'script/delete-user-actions'
   data: {
     userId: string
     customActions?: Exclude<UserActionType, 'OPT_IN'>[]
@@ -188,28 +156,28 @@ type DELETE_USER_ACTIONS_INNGEST_EVENT_PAYLOAD = {
 }
 
 type AUDIT_USER_BATCH_EVENT_PAYLOAD = {
-  name: typeof AUDIT_USER_BATCH_EVENT_NAME
+  name: 'script/audit.users.total.donation.amount.usd/audit.batch.of.users'
   data: {
     userCursor: string
   }
 }
 
 type BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_PAYLOAD = {
-  name: typeof BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME
+  name: 'script/backfill.users.total.donation.amount.usd'
   data: {
     userCursor: string
   }
 }
 
 type UPDATE_USER_BATCH_EVENT_PAYLOAD = {
-  name: typeof UPDATE_USER_BATCH_EVENT_NAME
+  name: 'script/backfill.users.total.donation.amount.usd/update.batch.of.users'
   data: {
     userCursor: string
   }
 }
 
 type MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_PAYLOAD = {
-  name: typeof MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_NAME
+  name: 'monitor.base.eth.balances'
 }
 
 type EventTypes =
@@ -240,7 +208,7 @@ type EventTypes =
   | MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_PAYLOAD
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_PAYLOAD = z.object({
-  name: z.literal(INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME),
+  name: z.literal('app/user.communication/initial.signup'),
   data: z.object({
     userId: z.string(),
     sessionId: z.string().optional().nullable(),
