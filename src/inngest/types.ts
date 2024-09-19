@@ -1,4 +1,4 @@
-import { Prisma, User, UserActionType } from '@prisma/client'
+import { User, UserActionType } from '@prisma/client'
 import { EventSchemas } from 'inngest'
 import { z } from 'zod'
 
