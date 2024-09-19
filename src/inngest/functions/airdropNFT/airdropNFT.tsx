@@ -27,13 +27,10 @@ import {
   ThirdwebTransactionStatus,
 } from '@/utils/server/thirdweb/engineGetMintStatus'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
-import { getLogger } from '@/utils/shared/logger'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
 const AIRDROP_NFT_INNGEST_FUNCTION_ID = 'airdrop-nft'
 const AIRDROP_NFT_RETRY = 2
-
-const logger = getLogger('airdropNFTWithInngest')
 
 const WEI_TO_ETH_UNIT = 1e-18
 
@@ -44,7 +41,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
     onFailure: onFailureAirdropNFT,
   },
   { event: AIRDROP_NFT_INNGEST_EVENT_NAME },
-  async ({ event, step }) => {
+  async ({ event, step, logger }) => {
     const payload = event.data as AirdropPayload
 
     const queryId = await step.run('airdrop-NFT', async () => {
