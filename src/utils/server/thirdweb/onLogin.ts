@@ -99,7 +99,6 @@ export async function login(payload: VerifyLoginPayloadParams) {
       existingVerifiedUser,
       cryptoAddress,
       localUser,
-      getUserSessionId: () => _getUserSessionId(),
     })
 
     await Promise.all([
@@ -161,7 +160,7 @@ type ExistingUserLoginParams = {
   existingVerifiedUser: User
   cryptoAddress: string
   localUser: ServerLocalUser | null
-  getUserSessionId: () => string | null
+  // getUserSessionId: () => string | null
 }
 
 /**
@@ -171,48 +170,49 @@ async function onExistingUserLogin({
   existingVerifiedUser,
   cryptoAddress,
   localUser,
-  getUserSessionId,
 }: ExistingUserLoginParams) {
   const log = getLog(cryptoAddress)
 
-  const userSessionId = getUserSessionId()
-
-  if (!userSessionId) {
-    Sentry.captureMessage('onExistingUserLogin: no user session id', {
-      extra: { cryptoAddress, existingVerifiedUser, localUser },
-    })
-    log('onExistingUserLogin: no user session id, not merging users')
-    return
-  }
-
-  const usersToDelete: User[] = await prismaClient.user.findMany({
-    where: {
-      userSessions: { some: { id: userSessionId } },
-    },
+  const { existingUsersWithSource } = await queryMatchingUsers({
+    cryptoAddress,
+    localUser,
+    getUserSessionId: () => _getUserSessionId(),
+    injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
   })
-  if (usersToDelete.length === 0) {
+  if (existingUsersWithSource.length === 0) {
     log('onExistingUserLogin: no users to merge')
     return
   }
 
-  log(`onExistingUserLogin: proceeding with potential ${usersToDelete.length} users to merge`)
+  log(
+    `onExistingUserLogin: proceeding with potential ${existingUsersWithSource.length} users to merge`,
+  )
   const userToKeepId = existingVerifiedUser.id
-  for (const userToDelete of usersToDelete) {
-    if (userToDelete.id === userToKeepId) {
+  const merge = findUsersToMerge(existingUsersWithSource, {
+    userToKeepId,
+  })
+
+  if (!merge?.usersToDelete?.length) {
+    log('onExistingUserLogin: no users to merge')
+    return
+  }
+
+  for (const userToDelete of merge.usersToDelete) {
+    if (userToDelete.user.id === userToKeepId) {
       Sentry.captureMessage(
         'onExistingUserLogin: invalid logic, user to keep is the same as user to delete',
         { extra: { cryptoAddress, existingVerifiedUser, localUser } },
       )
       log(
-        `onExistingUserLogin: user ${userToDelete.id} is the same as the user to keep ${userToKeepId}`,
+        `onExistingUserLogin: user ${userToDelete.user.id} is the same as the user to keep ${userToKeepId}`,
       )
       continue
     }
-    log(`onExistingUserLogin: merging user ${userToDelete.id} into user ${userToKeepId}`)
+    log(`onExistingUserLogin: merging user ${userToDelete.user.id} into user ${userToKeepId}`)
     await mergeUsers({
       persist: true,
       userToKeepId,
-      userToDeleteId: userToDelete.id,
+      userToDeleteId: userToDelete.user.id,
     })
   }
 }
@@ -536,11 +536,18 @@ async function queryMatchingUsers({
   return { embeddedWalletUserDetails, existingUsersWithSource }
 }
 
+type FindUsersToMergeOptions = {
+  userToKeepId?: string
+}
+
 function findUsersToMerge(
   existingUsersWithSource: Awaited<
     ReturnType<typeof queryMatchingUsers>
   >['existingUsersWithSource'],
+  options: FindUsersToMergeOptions = {},
 ) {
+  const { userToKeepId } = options
+
   if (!existingUsersWithSource.length) {
     return null
   }
@@ -570,6 +577,7 @@ function findUsersToMerge(
   })
 
   const userToKeep =
+    existingUsersWithSource.find(x => x.user.id === userToKeepId) ||
     usersToMerge.find(x => x.sourceOfExistingUser === 'Embedded Wallet Email Address') ||
     usersToMerge.find(x => x.sourceOfExistingUser === 'Unverified User Crypto Address') ||
     usersToMerge[0]
