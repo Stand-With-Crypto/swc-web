@@ -10,7 +10,6 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalances'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
-import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
@@ -23,8 +22,6 @@ const BACKFILL_FAILED_NFT_INNGEST_FUNCTION_ID = 'script.backfill-failed-nft'
 const BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME = 'script/backfill.failed.nft'
 
 const LOW_ETH_BALANCE_THRESHOLD = 0.01
-
-const logger = getLogger('backfillFailedNFTCronJob')
 
 interface BackfillFailedNFTPayload {
   limit?: number
@@ -42,7 +39,7 @@ export const backfillFailedNFT = inngest.createFunction(
   {
     event: BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME,
   },
-  async ({ step, event }) => {
+  async ({ step, event, logger }) => {
     const { limit, failed, timedout } = event.data as BackfillFailedNFTPayload
 
     const failedMintsBatches = await step.run('script.fetch-failed-mints', async () => {
