@@ -182,7 +182,9 @@ async function onExistingUserLogin({
     )
 
     const userToKeepId = existingVerifiedUser.id
-    const { usersToDelete } = findUsersToMerge(existingUsersWithSource) || {
+    const { usersToDelete } = findUsersToMerge(existingUsersWithSource, {
+      allowMergeWithVerifiedCryptoAddress: true,
+    }) || {
       userToKeep: existingVerifiedUser,
       usersToDelete: [],
     }
@@ -528,11 +530,18 @@ async function queryMatchingUsers({
   return { embeddedWalletUserDetails, existingUsersWithSource }
 }
 
+type FindUsersToMergeOptions = {
+  allowMergeWithVerifiedCryptoAddress?: boolean
+}
+
 function findUsersToMerge(
   existingUsersWithSource: Awaited<
     ReturnType<typeof queryMatchingUsers>
   >['existingUsersWithSource'],
+  options: FindUsersToMergeOptions = {},
 ) {
+  const { allowMergeWithVerifiedCryptoAddress = false } = options
+
   if (!existingUsersWithSource.length) {
     return null
   }
@@ -549,9 +558,9 @@ function findUsersToMerge(
     }
     if (user.user.userCryptoAddresses.some(addr => addr.hasBeenVerifiedViaAuth)) {
       logger.info(
-        `findUsersToMerge: found user with verified crypto address ${user.user.userCryptoAddresses[0].cryptoAddress}, merging`,
+        `findUsersToMerge: found user with verified crypto address ${user.user.userCryptoAddresses[0].cryptoAddress}, ${allowMergeWithVerifiedCryptoAddress ? '' : 'not'} merging`,
       )
-      return true
+      return allowMergeWithVerifiedCryptoAddress
     }
     if (user.sourceOfExistingUser === 'Embedded Wallet Email Address') {
       return true
