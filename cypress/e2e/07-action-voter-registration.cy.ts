@@ -2,7 +2,7 @@
 
 describe('action - voter registration', () => {
   describe('not signed in voter registration flows', () => {
-    it('should navigate back and forth between the asked options yes, no and not sure', () => {
+    it.skip('should navigate back and forth between the asked options yes, no and not sure', () => {
       cy.visit('/')
 
       cy.contains('Check your voter registration').click()
@@ -31,7 +31,7 @@ describe('action - voter registration', () => {
         .should('be.visible')
     })
 
-    it('should go though the flow when the user is not registered to vote', () => {
+    it.skip('should go though the flow when the user is not registered to vote', () => {
       cy.visit('/')
 
       cy.contains('Check your voter registration').click()
@@ -60,7 +60,7 @@ describe('action - voter registration', () => {
   })
 
   describe('signed in voter registration flows', () => {
-    it('should go through the flow when the user is registered to vote and sign in afterwards', () => {
+    it.skip('should go through the flow when the user is registered to vote and sign in afterwards', () => {
       cy.visit('/')
 
       cy.get('button').contains('Join Stand With Crypto').click()

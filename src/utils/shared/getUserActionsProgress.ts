@@ -1,7 +1,8 @@
 import { UserActionType } from '@prisma/client'
-import { uniqBy } from 'lodash-es'
+import { flatMap } from 'lodash-es'
 
-import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
+import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
@@ -28,28 +29,39 @@ export function getUserActionsProgress({
       : USER_ACTIONS_EXCLUDED_FROM_CTA,
   )
 
-  const activeUserActionCTAWithCampaign = new Set<string>(
-    USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.map(
-      ({ action, campaign }) => `${action}-${campaign}`,
-    ),
+  const performedUserActionObj = performedUserActionTypes.reduce(
+    (acc, performedUserAction) => {
+      acc[`${performedUserAction.actionType}-${performedUserAction.campaignName}`] =
+        performedUserAction
+      return acc
+    },
+    {} as Record<string, any>,
   )
 
-  const numActionsCompleted = uniqBy(
-    performedUserActionTypes,
-    action => `${action.actionType}-${action.campaignName}`,
-  ).reduce((count, action) => {
-    const actionWithCampaign = `${action.actionType}-${action.campaignName}`
+  const allCampaignsCombined: Array<UserActionGridCTACampaign> = flatMap(
+    USER_ACTION_CTAS_FOR_GRID_DISPLAY,
+    cta => {
+      return cta.campaigns.filter(campaign => !excludeUserActionTypes.has(campaign.actionType))
+    },
+  )
 
-    if (excludeUserActionTypes.has(action.actionType)) return count
+  const filteredActiveAndCompletedCampaigns = allCampaignsCombined.filter(
+    campaign =>
+      !!performedUserActionObj[`${campaign.actionType}-${campaign.campaignName}`] ||
+      campaign.isCampaignActive,
+  )
 
-    if (!activeUserActionCTAWithCampaign.has(actionWithCampaign)) return count
-
-    return count + 1
+  const completedCampaigns = allCampaignsCombined.reduce((acc, campaign) => {
+    const key = `${campaign.actionType}-${campaign.campaignName}`
+    return performedUserActionObj[key] ? acc + 1 : acc
   }, 0)
 
-  const numActionsAvailable = USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
-    ({ action }) => !excludeUserActionTypes.has(action),
-  ).length
+  const numActionsCompleted = completedCampaigns
+
+  const numActionsAvailable =
+    completedCampaigns > filteredActiveAndCompletedCampaigns.length
+      ? completedCampaigns
+      : filteredActiveAndCompletedCampaigns.length
 
   return {
     progressValue: (numActionsCompleted / numActionsAvailable) * 100,

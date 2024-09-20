@@ -6,9 +6,8 @@ import { sumBy, uniq } from 'lodash-es'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
-import { PreviousCampaignsList } from '@/components/app/pageUserProfile/previousCampaignsList'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
-import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -22,11 +21,6 @@ import { useSession } from '@/hooks/useSession'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
-import { pluralize } from '@/utils/shared/pluralize'
-import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN,
-} from '@/utils/shared/userActionCampaigns'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
@@ -48,17 +42,10 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
   const performedUserActionTypes = uniq(
     userActions.map(x => ({ actionType: x.actionType, campaignName: x.campaignName })),
   )
-  const { progressValue, numActionsCompleted, numActionsAvailable, excludeUserActionTypes } =
-    getUserActionsProgress({
-      userHasEmbeddedWallet: user.hasEmbeddedWallet,
-      performedUserActionTypes,
-    })
-
-  const userActionsFromPreviousCampaigns = userActions.filter(
-    action =>
-      action.campaignName !== USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action.actionType] &&
-      !USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN[action.actionType]?.includes(action.campaignName),
-  )
+  const { progressValue, numActionsCompleted, numActionsAvailable } = getUserActionsProgress({
+    userHasEmbeddedWallet: user.hasEmbeddedWallet,
+    performedUserActionTypes,
+  })
 
   return (
     <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
@@ -144,30 +131,15 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
           Your advocacy progress
         </PageTitle>
         <PageSubTitle className="mb-5">
-          You've completed {numActionsCompleted} out of {numActionsAvailable} active campaigns.{' '}
+          You've completed {numActionsCompleted} out of {numActionsAvailable} campaigns.{' '}
           {numActionsCompleted === numActionsAvailable ? 'Great job!' : 'Keep going!'}
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
           <Progress value={progressValue} />
         </div>
-        <UserActionRowCTAsList
-          excludeUserActionTypes={Array.from(excludeUserActionTypes)}
-          performedUserActionTypes={performedUserActionTypes}
-        />
-      </section>
-      {userActionsFromPreviousCampaigns.length > 0 && (
-        <section>
-          <PageTitle className="mb-4" size="sm">
-            Previous campaigns
-          </PageTitle>
-          <PageSubTitle className="mb-5">
-            Nice work. You completed {userActionsFromPreviousCampaigns.length} previous{' '}
-            {pluralize({ singular: 'campaign', count: userActionsFromPreviousCampaigns.length })}.
-          </PageSubTitle>
 
-          <PreviousCampaignsList userActions={userActionsFromPreviousCampaigns} />
-        </section>
-      )}
+        <UserActionGridCTAs />
+      </section>
 
       <section>
         <a className="mt-[-72px] h-0 pt-[72px]" id="nfts" />

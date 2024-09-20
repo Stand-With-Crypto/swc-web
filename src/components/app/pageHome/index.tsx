@@ -8,7 +8,7 @@ import { HeroImage } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -60,6 +60,17 @@ export function PageHome({
       </section>
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
+
+        <section className="mb-16 md:mb-36">
+          <PageTitle as="h3" className="mb-6 !text-[32px]">
+            Voter guide
+          </PageTitle>
+          <PageSubTitle as="h4" className="mb-10">
+            This year’s election is critical to the future of crypto. Here’s how to become an
+            informed voter.
+          </PageSubTitle>
+          <UserActionGridCTAs />
+        </section>
 
         <section className="mb-16 md:mb-36">
           <PageTitle as="h3" className="mb-6 !text-[32px]">
@@ -146,16 +157,6 @@ export function PageHome({
               <InternalLink href={urls.partners()}>View all</InternalLink>
             </Button>
           </div>
-        </section>
-
-        <section className="mb-16 md:mb-36">
-          <PageTitle as="h3" className="mb-6 !text-[32px]">
-            Get involved
-          </PageTitle>
-          <PageSubTitle as="h4" className="mb-10">
-            The future of crypto is in your hands. Here's how you can help.
-          </PageSubTitle>
-          <UserActionRowCTAsAnimatedListWithApi />
         </section>
       </div>
       <section className="mb-16 space-y-6 md:mb-36">
