@@ -1,7 +1,6 @@
 import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
 import { PressSection } from '@/components/app/pagePress/press/pressSection'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
@@ -32,7 +31,7 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
           const isInternal = link.startsWith('/')
 
           const LinkComponent = isInternal ? TrackedInternalLink : TrackedExternalLink
-          const currentLink = isInternal ? `/press/${slugify(link)}` : link
+          const currentLink = isInternal ? `/press/${slugify(link) ?? ''}` : link
 
           return (
             <PressSection

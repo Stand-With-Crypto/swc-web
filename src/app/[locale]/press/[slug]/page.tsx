@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
+import { PagePressRelease } from '@/components/app/pagePress/pressRelease'
+import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { toBool } from '@/utils/shared/toBool'
-import { PageProps } from '@/types'
-import { PagePressRelease } from '@/components/app/pagePress/pressRelease'
-import { notFound } from 'next/navigation'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
@@ -17,12 +17,17 @@ type PressReleasePageProps = PageProps<{
 export async function generateMetadata({ params }: PressReleasePageProps): Promise<Metadata> {
   const currentArticle = MOCK_PRESS_CONTENT.find(article => article.link === `/${params.slug}`)
 
-  const title = `${currentArticle?.publication}: ${currentArticle?.heading}`
-  const description = currentArticle?.heading
+  if (currentArticle) {
+    return generateMetadataDetails({
+      title: `${currentArticle?.publication}: ${currentArticle?.heading}`,
+      description: currentArticle?.heading,
+    })
+  }
+
+  const title = 'Press Release'
 
   return generateMetadataDetails({
     title,
-    description,
   })
 }
 

@@ -580,8 +580,8 @@ export const MOCK_PRESS_CONTENT = [
           <a
             className="text-primary-cta hover:underline"
             href="https://www.standwithcrypto.org/"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             https://www.standwithcrypto.org/
           </a>
@@ -794,8 +794,8 @@ export const MOCK_PRESS_CONTENT = [
           Stand With Crypto's report card on candidates and incumbent members of Congress can be
           viewed at{' '}
           <a
-            href="https://www.standwithcrypto.org/politicians"
             className="text-primary-cta hover:underline"
+            href="https://www.standwithcrypto.org/politicians"
           >
             https://www.standwithcrypto.org/politicians
           </a>
@@ -820,8 +820,8 @@ export const MOCK_PRESS_CONTENT = [
         <p className="mb-4">
           Recording of today's announcement press call{' '}
           <a
-            href="https://drive.google.com/file/d/1A8Cz408dreEPUmWvSrZfbLSWWrtXRANc/view?usp=share_link"
             className="text-primary-cta hover:underline"
+            href="https://drive.google.com/file/d/1A8Cz408dreEPUmWvSrZfbLSWWrtXRANc/view?usp=share_link"
           >
             here
           </a>
@@ -909,7 +909,7 @@ export const MOCK_PRESS_CONTENT = [
           Already, the crypto community has contacted policy makers more than 144,000 times. To see
           the number of engaged activists who are communicating about the issue, giving to the
           cause, and taking part in other activities throughout this cycle, visit{' '}
-          <a href="https://www.standwithcrypto.org/" className="text-primary-cta hover:underline">
+          <a className="text-primary-cta hover:underline" href="https://www.standwithcrypto.org/">
             https://www.standwithcrypto.org/
           </a>
           . These individuals are regular people who want to make sure that Crypto has clear,

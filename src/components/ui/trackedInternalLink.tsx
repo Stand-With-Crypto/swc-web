@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 
+import { InternalLink } from '@/components/ui/link'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { trackInternalLink } from '@/utils/web/clientAnalytics'
-import { InternalLink } from '@/components/ui/link'
 
 export const TrackedInternalLink = React.forwardRef<
   React.ElementRef<typeof InternalLink>,
