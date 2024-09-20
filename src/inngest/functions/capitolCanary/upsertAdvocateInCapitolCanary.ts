@@ -20,6 +20,11 @@ const CAPITOL_CANARY_UPSERT_ADVOCATE_RETRY_LIMIT = 20
 const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_FUNCTION_ID = 'capitol-canary.upsert-advocate'
 export const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME = 'capitol.canary/upsert.advocate'
 
+export type CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_SCHEMA = {
+  name: typeof CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME
+  data: UpsertAdvocateInCapitolCanaryPayloadRequirements
+}
+
 /**
  * Refer to `src/bin/smokeTests/capitolCanary/upsertAdvocateWithInngest.ts` to see how to call this function.
  */
@@ -31,7 +36,7 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   },
   { event: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const data = event.data as UpsertAdvocateInCapitolCanaryPayloadRequirements
+    const data = event.data
 
     // If the user does not have an SwC advocate ID, then we need to create one for them.
     if (

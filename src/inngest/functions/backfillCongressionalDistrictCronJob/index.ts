@@ -8,6 +8,12 @@ import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCong
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
+export type BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEMA = {
+  name: 'script/backfill.us.congressional.districts.cron.job'
+}
+
+const defaultLogger = getLogger('backfillUsCongressionalDistrictsCronJob')
+
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID =
   'script.backfill-us-congressional-districts-cron-job'
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME =
@@ -22,7 +28,6 @@ const BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE =
 const MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT =
   Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) || 150000 // Our quota is 250000 queries per day
 
-const logger = getLogger('backfillUsCongressionalDistrictsCronJob')
 export const backfillCongressionalDistrictCronJob = inngest.createFunction(
   {
     id: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID,
@@ -35,7 +40,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
       ? { cron: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEDULE }
       : { event: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME }),
   },
-  async ({ step }) => {
+  async ({ step, logger }) => {
     let currentCursor: string | undefined = undefined
     const numBatches = Math.ceil(
       MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT /
@@ -70,7 +75,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
           return
         }
 
-        await backfillUsCongressionalDistricts(addressBatch)
+        await backfillUsCongressionalDistricts(addressBatch, logger)
 
         logger.info(
           `Finished backfilling batch ${i} of ${numBatches} maximum batches of addresses without usCongressionalDistrict`,
@@ -94,6 +99,7 @@ async function backfillUsCongressionalDistricts(
     Address,
     'id' | 'formattedDescription' | 'countryCode'
   >[],
+  logger = defaultLogger,
 ) {
   for (const address of addressesWithoutCongressionalDistricts) {
     let usCongressionalDistrict: Awaited<

@@ -3,12 +3,14 @@ import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } f
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, update } from 'lodash-es'
 
+import { BulkSMSPayload, GetPhoneNumberOptions } from '@/inngest/functions/sms/types'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { BULK_WELCOME_MESSAGE } from '@/utils/server/sms/messages'
 import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
+import { prettyStringify } from '@/utils/shared/prettyLog'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -17,6 +19,11 @@ import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
+
+export type BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+  name: typeof BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: BulkSMSPayload
+}
 
 const MAX_RETRY_COUNT = 0
 const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
@@ -30,23 +37,6 @@ const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_Q
 const MIN_ENQUEUE_HOUR = 11 // 11 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
-export interface BulkSMSPayload {
-  messages: Array<{
-    smsBody: string
-    userWhereInput?: GetPhoneNumberOptions['userWhereInput']
-    includePendingDoubleOptIn?: boolean
-    campaignName: string
-    media?: string[]
-  }>
-  // default to ET: -4
-  timezone?: number
-  send?: boolean
-  // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
-  sleepTime?: string | number
-  // This is used to take into account the current queue size when queuing new messages
-  currentSegmentsInQueue?: number
-}
-
 export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
     id: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,
@@ -57,13 +47,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const {
-      send,
-      sleepTime,
-      messages,
-      timezone = -4,
-      currentSegmentsInQueue = 0,
-    } = event.data as BulkSMSPayload
+    const { send, sleepTime, messages, timezone = -4, currentSegmentsInQueue = 0 } = event.data
 
     if (!messages) {
       throw new NonRetriableError('Missing messages to send')
@@ -79,9 +63,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       }
     })
 
-    const logInfo = (key: string, info?: object) =>
-      logger.info('bulk-info', key, info ? JSON.stringify(info) : '')
-
     // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
@@ -94,6 +75,14 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     for (const message of messages) {
       const { campaignName, smsBody, includePendingDoubleOptIn, media, userWhereInput } = message
+
+      logger.info(
+        'Fetching phone numbers for message',
+        prettyStringify({
+          campaignName,
+          smsBody,
+        }),
+      )
 
       const phoneNumbersThatShouldReceiveWelcomeText = await step.run(
         'fetch-phone-numbers-that-should-receive-welcome-text',
@@ -198,7 +187,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     if (!send) {
       return bulkInfo
     } else {
-      logInfo('initial-info', bulkInfo)
+      logger.info('initial-info', prettyStringify(bulkInfo))
     }
 
     if (NEXT_PUBLIC_ENVIRONMENT !== 'production' && totalMessagesCount > 100) {
@@ -208,7 +197,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     }
 
     if (sleepTime) {
-      logInfo('scheduled-sleep', { sleepTime })
+      logger.info('scheduled-sleep', sleepTime)
       await step.sleep('scheduled-sleep', sleepTime)
     }
 
@@ -225,19 +214,19 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       if (now < minEnqueueHourToday) {
         const waitingTime = differenceInMilliseconds(minEnqueueHourToday, now)
-        logInfo('late-night-messaging-prevention', {
-          waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toString()}) it's earlier than minEnqueueHourToday (${minEnqueueHourToday.toString()})`,
-        })
+        logger.info(
+          `now (${now.toString()}) it's earlier than minEnqueueHourToday (${minEnqueueHourToday.toString()})`,
+          `Sleep for: ${formatTime(waitingTime / 1000)}`,
+        )
         await step.sleep('wait-until-min-enqueue-hour', waitingTime)
       }
 
       if (now > maxEnqueueHourToday) {
         const waitingTime = differenceInMilliseconds(addDays(minEnqueueHourToday, 1), now)
-        logInfo('late-night-messaging-prevention', {
-          waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toString()}) it's later than maxEnqueueHourToday (${maxEnqueueHourToday.toString()})`,
-        })
+        logger.info(
+          `now (${now.toString()}) it's later than maxEnqueueHourToday (${maxEnqueueHourToday.toString()})`,
+          `Sleep for: ${formatTime(waitingTime / 1000)}`,
+        )
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
       }
 
@@ -246,8 +235,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         async () => {
           const payloadChunk = enqueueMessagesPayloadChunks[i]
 
-          const { messages: messagesCount, segments: segmentsCount } =
-            await enqueueMessages(payloadChunk)
+          const { messages: messagesCount, segments: segmentsCount } = await enqueueMessages(
+            payloadChunk,
+            logger,
+          )
 
           const timeInSecondsToSendAllSegments = getWaitingTimeInSeconds(segmentsCount)
 
@@ -274,10 +265,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             : addDays(minEnqueueHourToday, 1),
           now,
         )
-        logInfo('late-night-messaging-prevention', {
-          waitingTime: formatTime(waitingTime / 1000),
-          reason: `queue will be empty at ${emptyQueueTime.toString()}`,
-        })
+        logger.info(
+          `queue will be empty at ${emptyQueueTime.toString()}`,
+          `Sleep for: ${formatTime(waitingTime / 1000)}`,
+        )
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
 
         segmentsInQueue = 0
@@ -291,10 +282,13 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           const { segments: nextPayloadSegments } = countMessagesAndSegments(nextPayloadChunk)
 
           if (segmentsInQueue + nextPayloadSegments >= MAX_QUEUE_LENGTH) {
-            logInfo('queue-overflow-control', {
-              segmentsInQueue,
-              timeToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
-            })
+            logger.info(
+              'queue-overflow-control',
+              prettyStringify({
+                segmentsInQueue,
+                timeToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
+              }),
+            )
 
             await step.sleep(
               `waiting-${formatTime(timeInSecondsToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
@@ -307,14 +301,18 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         }
       }
 
-      logInfo(`summary-info - ${i + 1}/${enqueueMessagesPayloadChunks.length}`, {
-        totalTimeToSendAllSegments: formatTime(timeInSecondsToEmptyQueue),
-        totalQueuedMessages,
-        totalQueuedSegments,
-      })
+      logger.info(
+        `summary-info - ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
+        prettyStringify({
+          totalTimeToSendAllSegments: formatTime(timeInSecondsToEmptyQueue),
+          segmentsInQueue,
+          totalQueuedMessages,
+          totalQueuedSegments,
+        }),
+      )
     }
 
-    logInfo('Finished')
+    logger.info('Finished')
 
     return {
       totalQueuedMessages,
@@ -343,13 +341,6 @@ const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroup
 // Add a space before the welcome message to ensure proper formatting. If the message ends with a link,
 // appending the welcome message directly could break the link.
 const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
-
-interface GetPhoneNumberOptions {
-  includePendingDoubleOptIn?: boolean
-  cursor?: Date
-  userWhereInput?: Prisma.UserGroupByArgs['where']
-  campaignName?: string
-}
 
 async function fetchAllPhoneNumbers(
   options: Omit<GetPhoneNumberOptions, 'cursor'>,

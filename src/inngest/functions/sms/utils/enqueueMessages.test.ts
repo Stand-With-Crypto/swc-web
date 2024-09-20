@@ -20,6 +20,7 @@ import {
   TOO_MANY_REQUESTS_CODE,
 } from '@/utils/server/sms/SendSMSError'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
+import { Logger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 import { fullUrl } from '@/utils/shared/urls'
 
@@ -82,6 +83,13 @@ jest.mock('@/utils/server/sms', () => ({
   }),
 }))
 
+const mockedLogger: Logger = {
+  debug: jest.fn(),
+  error: jest.fn(),
+  info: jest.fn(),
+  warn: jest.fn(),
+}
+
 describe('enqueueMessages function', () => {
   afterEach(() => {
     jest.clearAllMocks()
@@ -111,7 +119,7 @@ describe('enqueueMessages function', () => {
     countMessagesAndSegments(mockedPayload)
 
   it(`should call sendSMS with each phone number`, async () => {
-    await enqueueMessages(mockedPayload)
+    await enqueueMessages(mockedPayload, mockedLogger)
 
     expect(sendSMS).toHaveBeenCalledTimes(mockedPayload.length)
     mockedPayload.forEach(({ messages, phoneNumber }) => {
@@ -122,20 +130,23 @@ describe('enqueueMessages function', () => {
   })
 
   it(`should return the exact number of messages sent`, async () => {
-    const { messages, segments } = await enqueueMessages(mockedPayload)
+    const { messages, segments } = await enqueueMessages(mockedPayload, mockedLogger)
 
     expect(segments).toBe(expectedSegments)
     expect(messages).toBe(expectedMessages)
   })
 
   it(`Should flag invalid phone numbers`, async () => {
-    await enqueueMessages([
-      ...mockedPayload,
-      {
-        phoneNumber: invalidPhoneNumber,
-        messages: [getFakeMessage()],
-      },
-    ])
+    await enqueueMessages(
+      [
+        ...mockedPayload,
+        {
+          phoneNumber: invalidPhoneNumber,
+          messages: [getFakeMessage()],
+        },
+      ],
+      mockedLogger,
+    )
 
     expect(flagInvalidPhoneNumbers).toBeCalledTimes(1)
     expect(flagInvalidPhoneNumbers).toBeCalledWith([invalidPhoneNumber])
@@ -151,7 +162,7 @@ describe('enqueueMessages function', () => {
         mockedPayload[0].phoneNumber,
       ),
     )
-    const { segments } = await enqueueMessages(mockedPayload)
+    const { segments } = await enqueueMessages(mockedPayload, mockedLogger)
 
     expect(sleep).toHaveBeenCalledTimes(1)
     expect(segments).toBe(expectedSegments)
@@ -160,13 +171,16 @@ describe('enqueueMessages function', () => {
   })
 
   it('Should opt out user if got unsubscribed user error', async () => {
-    await enqueueMessages([
-      ...mockedPayload,
-      {
-        phoneNumber: optedOutUserPhoneNumber,
-        messages: [getFakeMessage()],
-      },
-    ])
+    await enqueueMessages(
+      [
+        ...mockedPayload,
+        {
+          phoneNumber: optedOutUserPhoneNumber,
+          messages: [getFakeMessage()],
+        },
+      ],
+      mockedLogger,
+    )
 
     expect(optOutUser).toBeCalledTimes(1)
     expect(optOutUser).toBeCalledWith(optedOutUserPhoneNumber, undefined)
@@ -199,12 +213,15 @@ describe('enqueueMessages function', () => {
       }),
     )
 
-    await enqueueMessages([
-      {
-        messages: [{ body: input, journeyType: 'BULK_SMS' }],
-        phoneNumber: mockedUser.phoneNumber,
-      },
-    ])
+    await enqueueMessages(
+      [
+        {
+          messages: [{ body: input, journeyType: 'BULK_SMS' }],
+          phoneNumber: mockedUser.phoneNumber,
+        },
+      ],
+      mockedLogger,
+    )
 
     expect(sendSMS).toHaveBeenCalledWith({ body: output, to: mockedUser.phoneNumber })
   })

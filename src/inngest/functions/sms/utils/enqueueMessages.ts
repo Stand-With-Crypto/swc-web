@@ -21,7 +21,7 @@ import { flagInvalidPhoneNumbers } from './flagInvalidPhoneNumbers'
 const MAX_RETRY_ATTEMPTS = 5
 const PAYLOAD_LIMIT = 10000
 
-const logger = getLogger('enqueueMessages')
+const defaultLogger = getLogger('enqueueMessages')
 
 export interface PayloadMessage {
   body?: string
@@ -35,7 +35,11 @@ export interface EnqueueMessagePayload {
   messages: PayloadMessage[]
 }
 
-export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt = 0) {
+export async function enqueueMessages(
+  payload: EnqueueMessagePayload[],
+  logger = defaultLogger,
+  attempt = 0,
+) {
   if (attempt > MAX_RETRY_ATTEMPTS) return { segments: 0, messages: 0 }
   if (payload.length > PAYLOAD_LIMIT) {
     throw new NonRetriableError(`Enqueue messages payload exceeded the limit ${PAYLOAD_LIMIT}`)
@@ -48,9 +52,13 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
   } = {}
   const unsubscribedUsers: string[] = []
 
+  logger.info('Fetching variables')
+
   const userSMSVariables = await getSMSVariablesByPhoneNumbers(
     payload.map(({ phoneNumber }) => phoneNumber),
   )
+
+  logger.info('Got variables')
 
   let segmentsSent = 0
   let queuedMessages = 0
@@ -132,6 +140,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
     }
   })
 
+  logger.info(`Attempt ${attempt + 1} queuing messages`)
+
   await Promise.all(enqueueMessagesPromise)
 
   logger.info(`Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`)
@@ -142,11 +152,15 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
     logger.info(`Creating ${journeyType} communication journey`)
 
     await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
+
+    logger.info(`Created ${journeyType} communication journey`)
   }
 
   if (invalidPhoneNumbers.length > 0) {
     logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
     await flagInvalidPhoneNumbers(invalidPhoneNumbers)
+
+    logger.info(`Invalid phone numbers flagged`)
   }
 
   if (unsubscribedUsers.length > 0) {
@@ -158,6 +172,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
     })
 
     await Promise.all(optOutUserPromises)
+
+    logger.info(`Opted out ${unsubscribedUsers.length} users`)
   }
 
   const failedEnqueueMessagePayload: EnqueueMessagePayload[] = Object.keys(failedPhoneNumbers).map(
@@ -172,16 +188,22 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
     const waitingTime = 1000 * (attempt + 1)
 
     logger.info(
-      `Failed to send SMS to ${failedEnqueueMessagePayload.length} phone numbers. Attempting again in ${waitingTime} seconds`,
+      `Failed to send SMS to ${failedEnqueueMessagePayload.length} phone numbers. Attempting again in ${waitingTime} millisecond`,
     )
 
     await sleep(waitingTime)
 
-    const { messages, segments } = await enqueueMessages(failedEnqueueMessagePayload, attempt + 1)
+    const { messages, segments } = await enqueueMessages(
+      failedEnqueueMessagePayload,
+      logger,
+      attempt + 1,
+    )
 
     segmentsSent += segments
     queuedMessages += messages
   }
+
+  logger.info('Messages queued successfully')
 
   return { segments: segmentsSent, messages: queuedMessages }
 }

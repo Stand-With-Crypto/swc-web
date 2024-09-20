@@ -1,16 +1,14 @@
 import { differenceInDays, format, startOfDay } from 'date-fns'
 
-import {
-  BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-  BulkSMSPayload,
-} from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
+import { BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
+import { BulkSMSPayload } from '@/inngest/functions/sms/types'
 import { inngest } from '@/inngest/inngest'
 import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 
-const logger = getLogger('sendEventNotifications')
+const defaultLogger = getLogger('sendEventNotifications')
 
 interface Notification {
   userId: string
@@ -25,7 +23,7 @@ interface SendEventNotificationsResponse {
   notifications: Array<Notification>
 }
 
-export async function sendEventNotifications() {
+export async function sendEventNotifications(logger = defaultLogger) {
   const allEvents = await getEvents()
 
   if (!allEvents || !allEvents.length) {

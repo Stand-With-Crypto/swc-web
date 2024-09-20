@@ -24,6 +24,11 @@ const CAPITOL_CANARY_EMAIL_RETRY_LIMIT = 20
 export const CAPITOL_CANARY_EMAIL_INNGEST_FUNCTION_ID = 'capitol-canary.email'
 export const CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME = 'capitol.canary/email'
 
+export type CAPITOL_CANARY_EMAIL_INNGEST_EVENT_SCHEMA = {
+  name: typeof CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME
+  data: EmailViaCapitolCanaryPayloadRequirements
+}
+
 /**
  * Refer to `src/bin/smokeTests/capitolCanary/emailWithInngest.ts` to see how to call this function.
  */
@@ -35,7 +40,7 @@ export const emailViaCapitolCanaryWithInngest = inngest.createFunction(
   },
   { event: CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const data = event.data as EmailViaCapitolCanaryPayloadRequirements
+    const data = event.data
     let emailAdvocateId = 0
 
     // If the user does not have an SwC advocate ID, then we need to create one for them.

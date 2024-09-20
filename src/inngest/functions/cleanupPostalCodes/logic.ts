@@ -1,9 +1,9 @@
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 
-const logger = getLogger('cleanPostalCodes')
+const defaultLogger = getLogger('cleanPostalCodes')
 
-export async function cleanPostalCodes(persist: boolean) {
+export async function cleanPostalCodes(persist: boolean, logger = defaultLogger) {
   const postalCodesWithSuffix = await prismaClient.address.findMany({
     where: {
       postalCode: {

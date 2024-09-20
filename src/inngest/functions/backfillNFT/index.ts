@@ -2,13 +2,17 @@ import { backfillNFT } from '@/inngest/functions/backfillNFT/logic'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-interface ScriptPayload {
-  limit: number
-  persist: boolean
-}
-
 const BACKFILL_NFT_INNGEST_EVENT_NAME = 'script/backfill-nft'
 const BACKFILL_NFT_INNGEST_FUNCTION_ID = 'script.backfill-nft'
+
+export type BACKFILL_NFT_INNGEST_SCHEMA = {
+  name: typeof BACKFILL_NFT_INNGEST_EVENT_NAME
+  data: {
+    limit?: number
+    persist: boolean
+  }
+}
+
 export const backfillNFTWithInngest = inngest.createFunction(
   {
     id: BACKFILL_NFT_INNGEST_FUNCTION_ID,
@@ -16,13 +20,16 @@ export const backfillNFTWithInngest = inngest.createFunction(
     onFailure: onScriptFailure,
   },
   { event: BACKFILL_NFT_INNGEST_EVENT_NAME },
-  async ({ event, step }) => {
-    const payload = event.data as ScriptPayload
+  async ({ event, step, logger }) => {
+    const payload = event.data
     return await step.run('execute-script', async () => {
-      return await backfillNFT({
-        limit: payload.limit,
-        persist: payload.persist,
-      })
+      return await backfillNFT(
+        {
+          limit: payload.limit,
+          persist: payload.persist,
+        },
+        logger,
+      )
     })
   },
 )

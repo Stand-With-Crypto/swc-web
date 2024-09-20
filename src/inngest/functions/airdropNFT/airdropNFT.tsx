@@ -12,7 +12,6 @@ import {
   NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
 } from '@/utils/server/email/templates/common/constants'
 import NFTArrivedEmail from '@/utils/server/email/templates/nftArrived'
-import { AirdropPayload } from '@/utils/server/nft/payload'
 import {
   THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,
   updateMintNFTStatus,
@@ -27,13 +26,22 @@ import {
   ThirdwebTransactionStatus,
 } from '@/utils/server/thirdweb/engineGetMintStatus'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
-import { getLogger } from '@/utils/shared/logger'
+import { NFTSlug } from '@/utils/shared/nft'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
+
+export type AIRDROP_NFT_INNGEST_SCHEMA = {
+  name: typeof AIRDROP_NFT_INNGEST_EVENT_NAME
+  data: {
+    nftMintId: string
+    nftSlug: NFTSlug
+    recipientWalletAddress: string
+    userId: string
+  }
+}
+
 const AIRDROP_NFT_INNGEST_FUNCTION_ID = 'airdrop-nft'
 const AIRDROP_NFT_RETRY = 2
-
-const logger = getLogger('airdropNFTWithInngest')
 
 const WEI_TO_ETH_UNIT = 1e-18
 
@@ -44,8 +52,8 @@ export const airdropNFTWithInngest = inngest.createFunction(
     onFailure: onFailureAirdropNFT,
   },
   { event: AIRDROP_NFT_INNGEST_EVENT_NAME },
-  async ({ event, step }) => {
-    const payload = event.data as AirdropPayload
+  async ({ event, step, logger }) => {
+    const payload = event.data
 
     const queryId = await step.run('airdrop-NFT', async () => {
       return engineAirdropNFT(payload.nftSlug, payload.recipientWalletAddress, 1)

@@ -64,6 +64,11 @@ export const customLogger = (
   }
   return console.log(message.formattedMessage, ...formatting, ...optionalParams)
 }
+
+export type Logger = typeof logger & {
+  child?: (childMetadata?: ChildMetadata) => Logger
+}
+
 export const logger = {
   error: wrappedLogger('error', console.error),
   warn: wrappedLogger('warn', console.warn),
@@ -71,11 +76,18 @@ export const logger = {
   debug: wrappedLogger('debug', console.debug),
 }
 
-export function getLogger(namespace: string) {
+type ChildMetadata = Record<string, string>
+
+export function getLogger(namespace: string): Logger {
   return {
     error: wrappedLogger('error', console.error, namespace),
     warn: wrappedLogger('warn', console.warn, namespace),
     info: wrappedLogger('info', console.info, namespace),
     debug: wrappedLogger('debug', console.debug, namespace),
+    child: (childMetadata?: ChildMetadata) =>
+      getLogger(`${namespace} [${formatChildMetadata(childMetadata)}]`),
   }
 }
+
+const formatChildMetadata = (childMetadata?: ChildMetadata) =>
+  childMetadata ? Object.values(childMetadata).join('; ') : ''

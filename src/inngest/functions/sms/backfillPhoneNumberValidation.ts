@@ -11,12 +11,15 @@ const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_FUNCTION_ID =
 const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME =
   'script.backfill-phone-number-validation'
 
+export type BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_SCHEMA = {
+  name: typeof BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME
+  data: {
+    persist?: boolean
+  }
+}
+
 const MAX_RETRY_COUNT = 0
 const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
-
-interface BackfillPhoneNumberValidationPayload {
-  persist?: boolean
-}
 
 export const backfillPhoneNumberValidation = inngest.createFunction(
   {
@@ -27,7 +30,7 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
     event: BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME,
   },
   async ({ step, event }) => {
-    const { persist } = event.data as BackfillPhoneNumberValidationPayload
+    const { persist } = event.data
 
     let allPhoneNumbers: string[] = []
     let cursor: Date | undefined

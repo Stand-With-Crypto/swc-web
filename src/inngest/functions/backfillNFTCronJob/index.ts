@@ -10,10 +10,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalances'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
-import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-
-const logger = getLogger('backfillNFTCronJob')
 
 // This is the milliseconds to wait before processing the next batch of user actions.
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
@@ -36,6 +33,9 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minute
 const BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID = 'script.backfill-nft-cron-job'
 const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
 
+export type BACKFILL_NFT_INNGEST_CRON_JOB_SCHEMA = {
+  name: typeof BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME
+}
 /**
  * This Inngest function is a cron job responsible for backfilling the NFTs for the user actions that were skipped/missed.
  * The code is written in a fashion to support Inngest multi-step functions and memoize states.
@@ -52,7 +52,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       ? { cron: BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE }
       : { event: BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME }),
   },
-  async ({ step }) => {
+  async ({ step, logger }) => {
     // Initialize variables.
     // The initialization of variables using `step.run` might seem silly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
     const currentTime = await step.run('script.initialize-constant-variables', async () => {
