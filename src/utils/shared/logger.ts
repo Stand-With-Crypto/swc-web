@@ -85,13 +85,9 @@ export function getLogger(namespace: string): Logger {
     info: wrappedLogger('info', console.info, namespace),
     debug: wrappedLogger('debug', console.debug, namespace),
     child: (childMetadata?: ChildMetadata) =>
-      getLogger(`${namespace}: ${formatChildMetadata(childMetadata)}`),
+      getLogger(`${namespace} [${formatChildMetadata(childMetadata)}]`),
   }
 }
 
 const formatChildMetadata = (childMetadata?: ChildMetadata) =>
-  childMetadata
-    ? Object.keys(childMetadata)
-        .map(key => `${key}:${childMetadata[key]}`)
-        .join('; ')
-    : ''
+  childMetadata ? Object.values(childMetadata).join('; ') : ''
