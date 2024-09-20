@@ -1,4 +1,4 @@
-import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
+import { UserActionGridCTAsSkeleton } from '@/components/app/userActionGridCTAs/skeleton'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -62,7 +62,7 @@ export function PageUserProfileSkeleton() {
       <div className="mx-auto mb-5 max-w-xl">
         <Progress value={0} />
       </div>
-      <UserActionRowCTAsList className="mb-14" />
+      <UserActionGridCTAsSkeleton />
     </div>
   )
 }
