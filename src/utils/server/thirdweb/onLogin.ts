@@ -160,7 +160,6 @@ type ExistingUserLoginParams = {
   existingVerifiedUser: User
   cryptoAddress: string
   localUser: ServerLocalUser | null
-  // getUserSessionId: () => string | null
 }
 
 /**
@@ -259,6 +258,7 @@ If we find any users using the method above
   - any users found that match the unverified crypto address should be merged
   - any users found that match via verified email should be merged UNLESS the user already has a verified crypto address
   - any users found that match via session id should be merged UNLESS the user already has a verified crypto address
+  - if an `userToKeepId` is provided, it will be used as the user to keep and all other users will be merged into this user, according to the above logic
 - situations we want to avoid merging (which is why we check for verified crypto address) because it would be confusing for the user and it's unclear whether that's their intent:
   - a user logs in to multiple crypto wallets with the same session id
   - a user creates a web3 wallet with a verified email from CB and then creates an embedded wallet with the same email
