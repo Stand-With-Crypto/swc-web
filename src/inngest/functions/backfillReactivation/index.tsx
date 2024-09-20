@@ -34,6 +34,15 @@ const BACKFILL_REACTIVATION_INNGEST_FUNCTION_ID = 'script.backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE =
   Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 50
 
+export type BACKFILL_REACTIVATION_INNGEST_SCHEMA = {
+  name: typeof BACKFILL_REACTIVATION_INNGEST_EVENT_NAME
+  data: {
+    testEmail?: string
+    persist?: boolean
+    limit?: number
+  }
+}
+
 const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-cron-job'
 const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE =
   'TZ=America/New_York 0 11,12,13,14,15,16,17 * * *' // Every hour between 11AM and 5PM EST

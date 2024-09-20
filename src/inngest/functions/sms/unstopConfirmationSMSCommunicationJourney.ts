@@ -12,9 +12,15 @@ import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbe
 
 const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/unstop-confirmation.sms'
-
 const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
   'user-communication.unstop-confirmation-sms'
+
+export type UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+  name: typeof UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: {
+    phoneNumber: string
+  }
+}
 
 const MAX_RETRY_COUNT = 3
 

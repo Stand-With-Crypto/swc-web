@@ -11,8 +11,14 @@ import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from './utils'
 
 const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/goodbye.sms'
-
 const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.goodbye-sms'
+
+export type GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+  name: typeof GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: {
+    phoneNumber: string
+  }
+}
 
 const MAX_RETRY_COUNT = 3
 

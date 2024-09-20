@@ -1,8 +1,12 @@
-import { SMSStatus } from '@prisma/client'
+import { SMSStatus, User } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import {
+  CapitolCanaryCampaignId,
+  SandboxCapitolCanaryCampaignId,
+} from '@/utils/server/capitolCanary/campaigns'
 import {
   fetchAdvocatesFromCapitolCanary,
   formatCheckSMSOptInReplyRequest,
@@ -17,6 +21,14 @@ const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_RETRY_LIMIT = 10
 const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_FUNCTION_ID = 'capitol-canary.check-sms-opt-in-reply'
 export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/check.sms.opt.in.reply'
+
+export type CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_SCHEMA = {
+  name: typeof CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME
+  data: {
+    campaignId?: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId
+    user: User
+  }
+}
 
 const SLEEP_SCHEDULE = ['3m', '6m', '20m', '1h', '12h', '1d', '1d', '2d', '2d']
 

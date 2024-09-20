@@ -26,8 +26,20 @@ import {
   ThirdwebTransactionStatus,
 } from '@/utils/server/thirdweb/engineGetMintStatus'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
+import { NFTSlug } from '@/utils/shared/nft'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
+
+export type AIRDROP_NFT_INNGEST_SCHEMA = {
+  name: typeof AIRDROP_NFT_INNGEST_EVENT_NAME
+  data: {
+    nftMintId: string
+    nftSlug: NFTSlug
+    recipientWalletAddress: string
+    userId: string
+  }
+}
+
 const AIRDROP_NFT_INNGEST_FUNCTION_ID = 'airdrop-nft'
 const AIRDROP_NFT_RETRY = 2
 

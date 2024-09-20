@@ -8,6 +8,7 @@ import {
   createAdvocateInCapitolCanary,
   formatCapitolCanaryAdvocateCreationRequest,
 } from '@/utils/server/capitolCanary/createAdvocate'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import {
   formatCapitolCanaryAdvocateUpdateRequest,
   updateAdvocateInCapitolCanary,
@@ -18,6 +19,11 @@ const CAPITOL_CANARY_UPSERT_ADVOCATE_RETRY_LIMIT = 20
 
 const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_FUNCTION_ID = 'capitol-canary.upsert-advocate'
 export const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME = 'capitol.canary/upsert.advocate'
+
+export type CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_SCHEMA = {
+  name: typeof CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME
+  data: UpsertAdvocateInCapitolCanaryPayloadRequirements
+}
 
 /**
  * Refer to `src/bin/smokeTests/capitolCanary/upsertAdvocateWithInngest.ts` to see how to call this function.

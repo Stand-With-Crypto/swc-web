@@ -3,7 +3,7 @@ import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } f
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, update } from 'lodash-es'
 
-import { GetPhoneNumberOptions } from '@/inngest/functions/sms/types'
+import { BulkSMSPayload, GetPhoneNumberOptions } from '@/inngest/functions/sms/types'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -19,6 +19,11 @@ import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
+
+export type BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+  name: typeof BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: BulkSMSPayload
+}
 
 const MAX_RETRY_COUNT = 0
 const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined

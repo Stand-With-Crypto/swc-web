@@ -5,6 +5,15 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 const SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME = 'script/set-primary-crypto-address-of-user'
 const SET_CRYPTO_ADDRESS_OF_USER_INNGEST_FUNCTION_ID = 'script.set-primary-crypto-address-of-user'
 
+export type SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_SCHEMA = {
+  name: typeof SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME
+  data: {
+    userId: string
+    cryptoAddressId: string
+    persist: boolean
+  }
+}
+
 export const setPrimaryCryptoAddressOfUserWithInngest = inngest.createFunction(
   {
     id: SET_CRYPTO_ADDRESS_OF_USER_INNGEST_FUNCTION_ID,

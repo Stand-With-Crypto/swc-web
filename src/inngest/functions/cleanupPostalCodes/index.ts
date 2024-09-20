@@ -5,6 +5,13 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 const CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME = 'script/cleanup-postal-codes'
 const CLEANUP_POSTAL_CODES_INNGEST_FUNCTION_ID = 'script.cleanup-postal-codes'
 
+export type CLEANUP_POSTAL_CODES_INNGEST_EVENT_SCHEMA = {
+  name: typeof CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME
+  data: {
+    persist: boolean
+  }
+}
+
 export const cleanupPostalCodesWithInngest = inngest.createFunction(
   {
     id: CLEANUP_POSTAL_CODES_INNGEST_FUNCTION_ID,

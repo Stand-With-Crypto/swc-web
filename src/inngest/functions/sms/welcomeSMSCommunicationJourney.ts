@@ -13,9 +13,14 @@ import { createCommunication, createCommunicationJourneys } from './utils/commun
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
-
 const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.welcome-sms'
 
+export type WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+  name: typeof WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: {
+    phoneNumber: string
+  }
+}
 const MAX_RETRY_COUNT = 3
 
 // Please, never call this function manually, it should be called from "@/utils/server/sms/actions.ts"

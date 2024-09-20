@@ -12,6 +12,7 @@ import {
   emailViaCapitolCanary,
   formatCapitolCanaryEmailRequest,
 } from '@/utils/server/capitolCanary/email'
+import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import {
   formatCapitolCanaryAdvocateUpdateRequest,
   updateAdvocateInCapitolCanary,
@@ -22,6 +23,11 @@ const CAPITOL_CANARY_EMAIL_RETRY_LIMIT = 20
 
 export const CAPITOL_CANARY_EMAIL_INNGEST_FUNCTION_ID = 'capitol-canary.email'
 export const CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME = 'capitol.canary/email'
+
+export type CAPITOL_CANARY_EMAIL_INNGEST_EVENT_SCHEMA = {
+  name: typeof CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME
+  data: EmailViaCapitolCanaryPayloadRequirements
+}
 
 /**
  * Refer to `src/bin/smokeTests/capitolCanary/emailWithInngest.ts` to see how to call this function.
