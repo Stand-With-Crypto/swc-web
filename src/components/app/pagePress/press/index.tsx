@@ -1,10 +1,13 @@
 import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
 import { PressSection } from '@/components/app/pagePress/press/pressSection'
 import { Button } from '@/components/ui/button'
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
+import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { slugify } from '@/utils/shared/slugify'
 
 interface PagePressProps {
   title: string
@@ -26,6 +29,11 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
 
       <div className="flex flex-col gap-16">
         {pressContent.map(({ dateHeading, heading, publication, link }) => {
+          const isInternal = link.startsWith('/')
+
+          const LinkComponent = isInternal ? TrackedInternalLink : TrackedExternalLink
+          const currentLink = isInternal ? `/press/${slugify(link)}` : link
+
           return (
             <PressSection
               dateHeading={dateHeading}
@@ -34,7 +42,7 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
               publication={publication}
             >
               <Button asChild variant="secondary">
-                <TrackedExternalLink
+                <LinkComponent
                   aria-label={`Read more about ${heading}`}
                   className="text-foreground no-underline hover:no-underline"
                   eventProperties={{
@@ -44,11 +52,11 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
                     page: 'Press',
                     surface: 'Press Section',
                   }}
-                  href={link}
+                  href={currentLink}
                   title={`Read more about ${heading}`}
                 >
                   Read more
-                </TrackedExternalLink>
+                </LinkComponent>
               </Button>
             </PressSection>
           )
