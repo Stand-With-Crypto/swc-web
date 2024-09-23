@@ -117,3 +117,7 @@ In our testing or production environment, it is recommended to run a script thro
 ## Pull requests
 
 Maintainers merge pull requests by squashing all commits and editing the commit message if necessary using the GitHub user interface.
+
+## Inngest schemas
+
+When creating new functions on Inngest, make sure to export its correct typings to add under Inngest schemas at [Inngest types](../src/inngest/types.ts#L62) so that every Inngest method has type inference, e.g. `createFunction` and `send`.
