@@ -3,11 +3,13 @@ import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils'
+import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
+import { applySMSVariables } from '@/utils/server/sms/utils/variables'
 
 import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
 
@@ -43,9 +45,11 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
 
-    const message = await step.run('send-sms', () =>
-      sendSMS({
-        body: messages.WELCOME_MESSAGE,
+    const message = await step.run('send-sms', async () => {
+      const variables = await getSMSVariablesByPhoneNumbers([phoneNumber])
+
+      return sendSMS({
+        body: applySMSVariables(messages.WELCOME_MESSAGE, variables[phoneNumber]),
         to: phoneNumber,
       }).catch(error => {
         if (error instanceof SendSMSError) {
@@ -59,8 +63,8 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
             domain: 'welcomeSMS',
           },
         })
-      }),
-    )
+      })
+    })
 
     if (!message) {
       throw new Error('Failed to send SMS')
