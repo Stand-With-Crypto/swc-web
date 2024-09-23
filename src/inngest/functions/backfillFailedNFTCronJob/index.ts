@@ -5,7 +5,6 @@ import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/a
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { LEGACY_NFT_DEPLOYER_WALLET, SWC_DOT_ETH_WALLET } from '@/utils/server/nft/constants'
-import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalances'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -117,16 +116,14 @@ export const backfillFailedNFT = inngest.createFunction(
 
             if (!user?.primaryUserCryptoAddress) return
 
-            const payload: AirdropPayload = {
-              nftMintId: mint.id,
-              nftSlug: mint.nftSlug as NFTSlug,
-              userId: user.id,
-              recipientWalletAddress: user.primaryUserCryptoAddress.cryptoAddress,
-            }
-
             return inngest.send({
               name: AIRDROP_NFT_INNGEST_EVENT_NAME,
-              data: payload,
+              data: {
+                nftMintId: mint.id,
+                nftSlug: mint.nftSlug as NFTSlug,
+                userId: user.id,
+                recipientWalletAddress: user.primaryUserCryptoAddress.cryptoAddress,
+              },
             })
           }),
         ),
