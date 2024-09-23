@@ -2,6 +2,7 @@ import { NFTCurrency, NFTMintStatus } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { NonRetriableError } from 'inngest'
 
 import { onFailureAirdropNFT } from '@/inngest/functions/airdropNFT/onFailureAirdropNFT'
@@ -169,7 +170,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
           })
         })
 
-        await analytics.flush()
+        waitUntil(analytics.flush())
 
         return {
           messageId,
