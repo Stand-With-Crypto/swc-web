@@ -2,7 +2,7 @@ import { isJest } from '@/utils/shared/executionEnvironment'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 // Campaign IDs representing the different campaigns in the sandbox Capitol Canary.
-export const enum SandboxCapitolCanaryCampaignId {
+export enum SandboxCapitolCanaryCampaignId {
   // Campaign IDs to use when registering a user as a member. Should include "C4 Member" tag when creating.
   DEFAULT_MEMBERSHIP = 142628,
 
@@ -19,7 +19,7 @@ export const enum SandboxCapitolCanaryCampaignId {
 // Campaign IDs representing the different campaigns in the production Capitol Canary.
 // You should only use the campaign IDs if the environment is production.
 //   (hint: use `NEXT_PUBLIC_ENVIRONMENT` to check if environment is production).
-export const enum CapitolCanaryCampaignId {
+export enum CapitolCanaryCampaignId {
   // Campaign IDs to use when registering a user as a member. Should include "C4 Member" tag when creating.
   DEFAULT_MEMBERSHIP = 137775,
 

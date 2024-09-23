@@ -8,7 +8,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 
 /**
  * Run this script only after you have the server AND Inngest running locally.
@@ -25,26 +24,26 @@ async function smokeTestEmailWithInngest() {
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
 
-  const payload: EmailViaCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
-    user: {
-      ...mockedUser,
-      address: mockedAddress,
-    },
-    userEmailAddress: mockedEmailAddress,
-    metadata: {
-      tags: ['Smoke Test User'],
-    },
-    opts: {
-      isEmailOptin: true,
-    },
-    emailSubject: 'This is a test email subject.',
-    emailMessage: 'This is a test email message.',
-  }
-
   await inngest.send({
     name: CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      campaignId: getCapitolCanaryCampaignID(
+        CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE,
+      ),
+      user: {
+        ...mockedUser,
+        address: mockedAddress,
+      },
+      userEmailAddress: mockedEmailAddress,
+      metadata: {
+        tags: ['Smoke Test User'],
+      },
+      opts: {
+        isEmailOptin: true,
+      },
+      emailSubject: 'This is a test email subject.',
+      emailMessage: 'This is a test email message.',
+    },
   })
 }
 

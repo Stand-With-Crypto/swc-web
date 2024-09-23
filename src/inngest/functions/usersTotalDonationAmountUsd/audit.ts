@@ -85,6 +85,13 @@ const AUDIT_USER_BATCH_FUNCTION_ID =
 const AUDIT_USER_BATCH_EVENT_NAME =
   'script/audit.users.total.donation.amount.usd/audit.batch.of.users'
 
+export interface AuditUserBatchEventSchema {
+  name: typeof AUDIT_USER_BATCH_EVENT_NAME
+  data: {
+    userCursor: string
+  }
+}
+
 export const auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers = inngest.createFunction(
   {
     id: AUDIT_USER_BATCH_FUNCTION_ID,

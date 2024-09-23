@@ -17,7 +17,6 @@ import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
-import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -172,24 +171,23 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
    * Inngest will create a new advocate in Capitol Canary if we do not have the user's advocate ID, or will reuse an existing advocate.
    * By this point, the email address and physical address should have been added to our database.
    */
-  const payload: EmailViaCapitolCanaryPayloadRequirements = {
-    campaignId: CapitolCanaryCampaignId.ABC_EMAIL,
-    user: {
-      ...user,
-      address: user.address!,
-    },
-    userEmailAddress: user.userEmailAddresses.find(
-      emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
-    ),
-    opts: {
-      isEmailOptin: true,
-    },
-    emailSubject: validatedFields.data.subject,
-    emailMessage: validatedFields.data.message,
-  }
   await inngest.send({
     name: CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      campaignId: CapitolCanaryCampaignId.ABC_EMAIL,
+      user: {
+        ...user,
+        address: user.address!,
+      },
+      userEmailAddress: user.userEmailAddresses.find(
+        emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
+      ),
+      opts: {
+        isEmailOptin: true,
+      },
+      emailSubject: validatedFields.data.subject,
+      emailMessage: validatedFields.data.message,
+    },
   })
 
   await beforeFinish()
