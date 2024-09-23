@@ -28,7 +28,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
@@ -99,6 +98,12 @@ export async function login(payload: VerifyLoginPayloadParams) {
       existingVerifiedUser,
       cryptoAddress,
       localUser,
+    }).catch(e => {
+      Sentry.captureException(e, {
+        tags: { domain: 'onLogin/existingUser' },
+        extra: { existingVerifiedUser, cryptoAddress, localUser },
+      })
+      throw e
     })
 
     await Promise.all([
@@ -139,7 +144,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     .then(res => ({ userId: res.userId }))
     .catch(e => {
       Sentry.captureException(e, {
-        tags: { domain: 'onLogin' },
+        tags: { domain: 'onLogin/newUser' },
         extra: { cryptoAddress, localUser },
       })
       throw e
@@ -802,20 +807,19 @@ async function upsertCapitalCanaryAdvocate({
   ) {
     return false
   }
-  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-    user: {
-      ...user,
-      address: user.address || null,
-    },
-    userEmailAddress: user.primaryUserEmailAddress,
-    opts: {
-      isEmailOptin: true,
-    },
-  }
   await inngest.send({
     name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: {
+        ...user,
+        address: user.address || null,
+      },
+      userEmailAddress: user.primaryUserEmailAddress,
+      opts: {
+        isEmailOptin: true,
+      },
+    },
   })
   getLog(cryptoAddress)(`upsertCapitalCanaryAdvocate: metadata added to capital canary`)
   return true

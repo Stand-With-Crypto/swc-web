@@ -6,7 +6,6 @@ import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAd
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
-import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
@@ -47,16 +46,14 @@ async function smokeTestAirdropNFTWithInngest() {
     },
   })
 
-  const payload: AirdropPayload = {
-    nftMintId: action.nftMintId!,
-    nftSlug: NFTSlug.SWC_SHIELD,
-    recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,
-    userId: user.id,
-  }
-
   await inngest.send({
     name: AIRDROP_NFT_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      nftMintId: action.nftMintId!,
+      nftSlug: NFTSlug.SWC_SHIELD,
+      recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,
+      userId: user.id,
+    },
   })
 }
 

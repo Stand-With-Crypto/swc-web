@@ -1,5 +1,19 @@
 # Contributing Guide
 
+- [Questions](#questions)
+- [Reporting Issues](#reporting-issues)
+- [Suggesting new features](#suggesting-new-features)
+- [Development](#development)
+  - [Knowledge pre-requisites](#knowledge-pre-requisites)
+  - [Required tools](#required-tools)
+  - [Developing your feature/fix](#developing-your-featurefix)
+  - [Pre-commit audits & testing](#pre-commit-audits--testing)
+  - [Useful development tips](#useful-development-tips)
+  - [Updating the database schema](#updating-the-database-schema)
+  - [Running One Time Scripts in Testing or Production Environment](#running-one-time-scripts-in-testing-or-production-environment)
+- [Pull requests](#pull-requests)
+- [Inngest functions](#inngest-functions)
+
 ## Questions
 
 If you have questions about implementation details, help, or support, then please use our dedicated community forum at [GitHub Discussions](https://github.com/Stand-With-Crypto/swc-web/discussions). PLEASE NOTE: If you choose to instead open an issue for your question, your issue will be immediately closed and redirected to the forum.
@@ -117,3 +131,19 @@ In our testing or production environment, it is recommended to run a script thro
 ## Pull requests
 
 Maintainers merge pull requests by squashing all commits and editing the commit message if necessary using the GitHub user interface.
+
+## Inngest functions
+
+1. Create a function
+
+- Place the file under `src/inngest/functions` with a meaningful name. You can use this [Inngest Function](../src/inngest/functions/user/deleteUserActions.ts) as an example.
+
+2. Create its typings
+
+- When creating new functions on Inngest, don't forget to export its correct typings to add under Inngest schemas at [Inngest types](../src/inngest/types.ts#L62) so that every Inngest method has type inference, e.g. `createFunction` and `send`. More info at [Inngest event payload types](https://www.inngest.com/docs/reference/client/create#defining-event-payload-types).
+
+3. Add the function to the route file [here](../src/app/api/inngest/route.ts#L48)
+
+4. Now the function is available to test at http://localhost:8288 by running `npm run inngest`.
+
+5. PS.: Always add `persist?: boolean` on the event payload and the function logic.

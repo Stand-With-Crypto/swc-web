@@ -1,5 +1,13 @@
 # Add a new user action
 
+- [Create UI](#create-ui)
+- [Update database schema](#update-database-schema)
+- [Create a new server action](#create-a-new-server-action)
+- [Add a new airdrop NFT](#add-a-new-airdrop-nft)
+- [Create `/action/actionName` deeplink](#create-actionactionname-deeplink)
+- [Unit tests / E2E tests](#unit-tests--e2e-tests)
+- [Having two or more campaigns active at the same time](#having-two-or-more-campaigns-active-at-the-same-time)
+
 **NOTE: Replace `ActionName` in variable/folder names with the name of the new user action**
 
 ## Create UI

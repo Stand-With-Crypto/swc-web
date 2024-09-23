@@ -5,7 +5,6 @@ import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/a
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { LEGACY_NFT_DEPLOYER_WALLET, SWC_DOT_ETH_WALLET } from '@/utils/server/nft/constants'
-import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalances'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -21,13 +20,16 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
 const BACKFILL_FAILED_NFT_INNGEST_FUNCTION_ID = 'script.backfill-failed-nft'
 const BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME = 'script/backfill.failed.nft'
 
-const LOW_ETH_BALANCE_THRESHOLD = 0.01
-
-interface BackfillFailedNFTPayload {
-  limit?: number
-  failed: boolean
-  timedout: boolean
+export interface BackfillFailedNftInngestSchema {
+  name: typeof BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME
+  data: {
+    limit?: number
+    failed: boolean
+    timedout: boolean
+  }
 }
+
+const LOW_ETH_BALANCE_THRESHOLD = 0.01
 
 export const backfillFailedNFT = inngest.createFunction(
   {
@@ -40,7 +42,7 @@ export const backfillFailedNFT = inngest.createFunction(
     event: BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { limit, failed, timedout } = event.data as BackfillFailedNFTPayload
+    const { limit, failed, timedout } = event.data
 
     const failedMintsBatches = await step.run('script.fetch-failed-mints', async () => {
       const failedMints = await prismaClient.nFTMint.findMany({
@@ -114,16 +116,14 @@ export const backfillFailedNFT = inngest.createFunction(
 
             if (!user?.primaryUserCryptoAddress) return
 
-            const payload: AirdropPayload = {
-              nftMintId: mint.id,
-              nftSlug: mint.nftSlug as NFTSlug,
-              userId: user.id,
-              recipientWalletAddress: user.primaryUserCryptoAddress.cryptoAddress,
-            }
-
             return inngest.send({
               name: AIRDROP_NFT_INNGEST_EVENT_NAME,
-              data: payload,
+              data: {
+                nftMintId: mint.id,
+                nftSlug: mint.nftSlug as NFTSlug,
+                userId: user.id,
+                recipientWalletAddress: user.primaryUserCryptoAddress.cryptoAddress,
+              },
             })
           }),
         ),

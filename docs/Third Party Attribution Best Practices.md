@@ -1,5 +1,11 @@
 # Third Party Attribution Best Practices
 
+- [UTM parameters](#utm-parameters)
+  - [Formatting](#formatting)
+  - [utm_source](#utm_source)
+  - [utm_medium](#utm_medium)
+  - [utm_campaign](#utm_campaign)
+
 To ensure that we can properly track the source of new advocates signing up for Stand With Crypto, we encourage product/marketing teams from other companies that would like to link to SWC to follow the attribution best practices below:
 
 ## UTM parameters

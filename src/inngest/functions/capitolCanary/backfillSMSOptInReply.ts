@@ -18,6 +18,10 @@ const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_FUNCTION_ID =
 const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/backfill.sms.opt.in.reply'
 
+export interface CapitolCanaryBackfillSmsOptInReplySchema {
+  name: typeof CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME
+}
+
 /**
  * Fetches the advocates from Capitol Canary and returns the advocate IDs with subscribed phones.
  * We return the minimal information instead of returning the full advocate payload from the step functions because
@@ -115,6 +119,13 @@ const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_FUNCTION_ID
   'capitol-canary.backfill-sms-opt-in-reply.update-batch-of-users'
 const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_EVENT_NAME =
   'capitol.canary/backfill.sms.opt.in.reply/update.batch.of.users'
+
+export interface CapitolCanaryBackfillSmsOptInReplyUpdateBatchOfUsersSchema {
+  name: typeof CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_UPDATE_BATCH_OF_USERS_EVENT_NAME
+  data: {
+    page: number
+  }
+}
 
 /**
  * In case you want to process a specific batch of users, you can use this function.
