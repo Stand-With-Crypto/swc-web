@@ -13,7 +13,7 @@ import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbe
 const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/goodbye.sms'
 const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.goodbye-sms'
 
-export type GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+export type GoodbyeSmsCommunicationJourneyInngestEventSchema = {
   name: typeof GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
   data: {
     phoneNumber: string

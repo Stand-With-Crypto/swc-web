@@ -28,7 +28,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
@@ -717,20 +716,19 @@ async function upsertCapitalCanaryAdvocate({
   ) {
     return false
   }
-  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-    user: {
-      ...user,
-      address: user.address || null,
-    },
-    userEmailAddress: user.primaryUserEmailAddress,
-    opts: {
-      isEmailOptin: true,
-    },
-  }
   await inngest.send({
     name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: {
+        ...user,
+        address: user.address || null,
+      },
+      userEmailAddress: user.primaryUserEmailAddress,
+      opts: {
+        isEmailOptin: true,
+      },
+    },
   })
   getLog(cryptoAddress)(`upsertCapitalCanaryAdvocate: metadata added to capital canary`)
   return true

@@ -30,7 +30,7 @@ import { NFTSlug } from '@/utils/shared/nft'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
 
-export type AIRDROP_NFT_INNGEST_SCHEMA = {
+export type AirdropNftInngestSchema = {
   name: typeof AIRDROP_NFT_INNGEST_EVENT_NAME
   data: {
     nftMintId: string

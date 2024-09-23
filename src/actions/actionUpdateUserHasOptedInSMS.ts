@@ -12,7 +12,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
@@ -75,17 +74,15 @@ async function handleCapitolCanarySMSUpdate(
     primaryUserCryptoAddress: UserCryptoAddress | null
   },
 ) {
-  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-    user: updatedUser,
-    opts: {
-      isSmsOptin: true,
-      // shouldSendSmsOptinConfirmation: true,
-    },
-  }
-
   await inngest.send({
     name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: updatedUser,
+      opts: {
+        isSmsOptin: true,
+        // shouldSendSmsOptinConfirmation: true,
+      },
+    },
   })
 }

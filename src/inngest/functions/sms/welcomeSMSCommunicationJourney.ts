@@ -15,7 +15,7 @@ export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
 const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.welcome-sms'
 
-export type WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+export type WelcomeSmsCommunicationJourneyInngestEventSchema = {
   name: typeof WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
   data: {
     phoneNumber: string

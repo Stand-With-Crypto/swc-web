@@ -15,7 +15,7 @@ const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
 const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
   'user-communication.unstop-confirmation-sms'
 
-export type UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
+export type UnstopConfirmationSmsCommunicationJourneyInngestEventSchema = {
   name: typeof UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
   data: {
     phoneNumber: string

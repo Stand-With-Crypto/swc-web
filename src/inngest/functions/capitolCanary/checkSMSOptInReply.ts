@@ -22,7 +22,7 @@ const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_FUNCTION_ID = 'capitol-canary.check-
 export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/check.sms.opt.in.reply'
 
-export type CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_SCHEMA = {
+export type CapitolCanaryCheckSmsOptInReplySchema = {
   name: typeof CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME
   data: {
     campaignId?: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId

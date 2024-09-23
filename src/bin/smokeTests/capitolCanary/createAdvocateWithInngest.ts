@@ -8,7 +8,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 
 /**
  * Run this script only after you have the server AND Inngest running locally.
@@ -24,24 +23,22 @@ async function smokeTestCreateAdvocateWithInngest() {
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
 
-  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
-    user: {
-      ...mockedUser,
-      address: mockedAddress,
-    },
-    userEmailAddress: mockedEmailAddress,
-    opts: {
-      isEmailOptin: true,
-    },
-    metadata: {
-      tags: ['C4 Member', 'Smoke Test User'],
-    },
-  }
-
   await inngest.send({
     name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
+      user: {
+        ...mockedUser,
+        address: mockedAddress,
+      },
+      userEmailAddress: mockedEmailAddress,
+      opts: {
+        isEmailOptin: true,
+      },
+      metadata: {
+        tags: ['C4 Member', 'Smoke Test User'],
+      },
+    },
   })
 }
 

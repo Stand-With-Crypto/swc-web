@@ -20,7 +20,7 @@ const CAPITOL_CANARY_UPSERT_ADVOCATE_RETRY_LIMIT = 20
 const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_FUNCTION_ID = 'capitol-canary.upsert-advocate'
 export const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME = 'capitol.canary/upsert.advocate'
 
-export type CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_SCHEMA = {
+export type CapitolCanaryUpsertAdvocateInngestSchema = {
   name: typeof CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME
   data: UpsertAdvocateInCapitolCanaryPayloadRequirements
 }

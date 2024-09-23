@@ -8,7 +8,7 @@ import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCong
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-export type BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEMA = {
+export type BackfillUsCongressionalDistrictsInngestCronJobSchema = {
   name: 'script/backfill.us.congressional.districts.cron.job'
 }
 

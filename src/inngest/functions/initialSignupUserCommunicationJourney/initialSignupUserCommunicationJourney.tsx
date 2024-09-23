@@ -37,7 +37,7 @@ const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
 const STEP_FOLLOW_UP_TIMEOUT_MINUTES = '7d'
 const FAST_STEP_FOLLOW_UP_TIMEOUT_MINUTES = '3 mins'
 
-export type INITIAL_SIGNUP_USER_COMMUNICATION_SCHEMA = z.infer<
+export type InitialSignupUserCommunicationSchema = z.infer<
   typeof initialSignUpUserCommunicationJourneyPayload
 >
 
@@ -275,7 +275,7 @@ async function sendInitialSignUpEmail({
 }: {
   userCommunicationJourneyId: string
   step: InitialSignUpEmailStep
-} & Pick<INITIAL_SIGNUP_USER_COMMUNICATION_SCHEMA['data'], 'userId' | 'sessionId'>) {
+} & Pick<InitialSignupUserCommunicationSchema['data'], 'userId' | 'sessionId'>) {
   const user = await getUser(userId)
 
   if (!user.primaryUserEmailAddress) {

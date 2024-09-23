@@ -24,7 +24,7 @@ const CAPITOL_CANARY_EMAIL_RETRY_LIMIT = 20
 export const CAPITOL_CANARY_EMAIL_INNGEST_FUNCTION_ID = 'capitol-canary.email'
 export const CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME = 'capitol.canary/email'
 
-export type CAPITOL_CANARY_EMAIL_INNGEST_EVENT_SCHEMA = {
+export type CapitolCanaryEmailInngestEventSchema = {
   name: typeof CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME
   data: EmailViaCapitolCanaryPayloadRequirements
 }

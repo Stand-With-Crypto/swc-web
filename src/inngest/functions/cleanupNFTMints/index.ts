@@ -6,7 +6,7 @@ import { NFTSlug } from '@/utils/shared/nft'
 const CLEANUP_NFT_MINTS_FUNCTION_ID = 'script.cleanup-nft-mints'
 const CLEANUP_NFT_MINTS_EVENT_NAME = 'script/cleanup.nft.mints'
 
-export type CLEANUP_NFT_MINTS_EVENT_SCHEMA = {
+export type CleanupNftMintsEventSchema = {
   name: typeof CLEANUP_NFT_MINTS_EVENT_NAME
   data: {
     persist: boolean

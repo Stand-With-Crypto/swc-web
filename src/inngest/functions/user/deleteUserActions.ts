@@ -8,7 +8,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 const DELETE_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/delete-user-actions'
 const DELETE_USER_ACTIONS_INNGEST_FUNCTION_ID = 'script.delete-user-actions'
 
-export type DELETE_USER_ACTIONS_INNGEST_EVENT_SCHEMA = {
+export type DeleteUserActionsInngestEventSchema = {
   name: typeof DELETE_USER_ACTIONS_INNGEST_EVENT_NAME
   data: {
     userId: string
