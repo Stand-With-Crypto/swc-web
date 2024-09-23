@@ -5,7 +5,7 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 const BACKFILL_NFT_INNGEST_EVENT_NAME = 'script/backfill-nft'
 const BACKFILL_NFT_INNGEST_FUNCTION_ID = 'script.backfill-nft'
 
-export type BackfillNftInngestSchema = {
+export interface BackfillNftInngestSchema {
   name: typeof BACKFILL_NFT_INNGEST_EVENT_NAME
   data: {
     limit?: number

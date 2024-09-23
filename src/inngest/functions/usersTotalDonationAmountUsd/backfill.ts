@@ -14,7 +14,7 @@ const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_FUNCTION_ID =
 const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME =
   'script/backfill.users.total.donation.amount.usd'
 
-export type BackfillUsersTotalDonationAmountUsdEventSchema = {
+export interface BackfillUsersTotalDonationAmountUsdEventSchema {
   name: typeof BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME
   data: {
     userCursor: string
@@ -97,7 +97,7 @@ const UPDATE_USER_BATCH_FUNCTION_ID =
 const UPDATE_USER_BATCH_EVENT_NAME =
   'script/backfill.users.total.donation.amount.usd/update.batch.of.users'
 
-export type UpdateUserBatchEventSchema = {
+export interface UpdateUserBatchEventSchema {
   name: typeof UPDATE_USER_BATCH_EVENT_NAME
   data: {
     userCursor: string

@@ -24,12 +24,9 @@ const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
   'user-communication.initial-signup'
 
 const initialSignUpUserCommunicationJourneyPayload = z.object({
-  name: z.literal(INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME),
-  data: z.object({
-    userId: z.string(),
-    sessionId: z.string().optional().nullable(),
-    decreaseTimers: z.boolean().default(false).optional(),
-  }),
+  userId: z.string(),
+  sessionId: z.string().optional().nullable(),
+  decreaseTimers: z.boolean().default(false).optional(),
 })
 
 const MAX_RETRY_COUNT = 2
@@ -37,9 +34,14 @@ const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
 const STEP_FOLLOW_UP_TIMEOUT_MINUTES = '7d'
 const FAST_STEP_FOLLOW_UP_TIMEOUT_MINUTES = '3 mins'
 
-export type InitialSignupUserCommunicationSchema = z.infer<
+type InitialSignupUserCommunicationDataSchema = z.infer<
   typeof initialSignUpUserCommunicationJourneyPayload
 >
+
+export interface InitialSignupUserCommunicationSchema {
+  name: typeof INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: InitialSignupUserCommunicationDataSchema
+}
 
 export const initialSignUpUserCommunicationJourney = inngest.createFunction(
   {
@@ -49,7 +51,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
   },
   { event: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const { data: payload } = await initialSignUpUserCommunicationJourneyPayload
+    const payload = await initialSignUpUserCommunicationJourneyPayload
       .parseAsync(event.data)
       .catch(err => {
         throw new NonRetriableError(err.message ?? 'Invalid payload')
@@ -275,7 +277,7 @@ async function sendInitialSignUpEmail({
 }: {
   userCommunicationJourneyId: string
   step: InitialSignUpEmailStep
-} & Pick<InitialSignupUserCommunicationSchema['data'], 'userId' | 'sessionId'>) {
+} & Pick<InitialSignupUserCommunicationDataSchema, 'userId' | 'sessionId'>) {
   const user = await getUser(userId)
 
   if (!user.primaryUserEmailAddress) {

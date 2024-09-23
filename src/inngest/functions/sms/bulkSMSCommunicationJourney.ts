@@ -19,7 +19,7 @@ import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
 
-export type BulkSmsCommunicationJourneyInngestEventSchema = {
+export interface BulkSmsCommunicationJourneyInngestEventSchema {
   name: typeof BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
   data: BulkSMSPayload
 }

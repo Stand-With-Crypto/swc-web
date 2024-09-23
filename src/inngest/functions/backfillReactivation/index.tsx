@@ -34,7 +34,7 @@ const BACKFILL_REACTIVATION_INNGEST_FUNCTION_ID = 'script.backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE =
   Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 50
 
-export type BackfillReactivationInngestSchema = {
+export interface BackfillReactivationInngestSchema {
   name: typeof BACKFILL_REACTIVATION_INNGEST_EVENT_NAME
   data: {
     testEmail?: string

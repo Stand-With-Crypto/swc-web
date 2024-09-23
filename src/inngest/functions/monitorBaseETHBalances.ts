@@ -10,7 +10,7 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 const MONITOR_BASE_ETH_BALANCES_INNGEST_FUNCTION_ID = 'monitor-base-eth-balances'
 const MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_NAME = 'monitor.base.eth.balances'
 
-export type MonitorBaseEthBalancesInngestEventSchema = {
+export interface MonitorBaseEthBalancesInngestEventSchema {
   name: typeof MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_NAME
 }
 

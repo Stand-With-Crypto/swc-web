@@ -5,7 +5,7 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 const SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME = 'script/set-primary-crypto-address-of-user'
 const SET_CRYPTO_ADDRESS_OF_USER_INNGEST_FUNCTION_ID = 'script.set-primary-crypto-address-of-user'
 
-export type SetCryptoAddressOfUserInngestEventSchema = {
+export interface SetCryptoAddressOfUserInngestEventSchema {
   name: typeof SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME
   data: {
     userId: string

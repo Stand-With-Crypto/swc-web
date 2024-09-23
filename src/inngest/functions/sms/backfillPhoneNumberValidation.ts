@@ -11,7 +11,7 @@ const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_FUNCTION_ID =
 const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME =
   'script.backfill-phone-number-validation'
 
-export type BackfillPhoneNumberValidationInngestEventSchema = {
+export interface BackfillPhoneNumberValidationInngestEventSchema {
   name: typeof BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME
   data: {
     persist?: boolean

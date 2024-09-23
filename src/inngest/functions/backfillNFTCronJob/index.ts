@@ -33,7 +33,7 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minute
 const BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID = 'script.backfill-nft-cron-job'
 const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
 
-export type BackfillNftInngestCronJobSchema = {
+export interface BackfillNftInngestCronJobSchema {
   name: typeof BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME
 }
 /**
