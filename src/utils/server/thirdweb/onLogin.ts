@@ -99,6 +99,12 @@ export async function login(payload: VerifyLoginPayloadParams) {
       existingVerifiedUser,
       cryptoAddress,
       localUser,
+    }).catch(e => {
+      Sentry.captureException(e, {
+        tags: { domain: 'onLogin/existingUser' },
+        extra: { existingVerifiedUser, cryptoAddress, localUser },
+      })
+      throw e
     })
 
     await Promise.all([
@@ -139,7 +145,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     .then(res => ({ userId: res.userId }))
     .catch(e => {
       Sentry.captureException(e, {
-        tags: { domain: 'onLogin' },
+        tags: { domain: 'onLogin/newUser' },
         extra: { cryptoAddress, localUser },
       })
       throw e
