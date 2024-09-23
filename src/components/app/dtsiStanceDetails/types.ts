@@ -3,6 +3,7 @@ import {
   DTSI_BillPersonRelationship,
   DTSI_Person,
   DTSI_PersonStance,
+  DTSI_PersonStanceDetailsFragment,
   DTSI_PersonStanceQuote,
   DTSI_PersonStanceType,
   DTSI_Tweet,
@@ -43,8 +44,8 @@ export type DTSIStanceDetailsStanceProp<
 > = Pick<DTSI_PersonStance, 'id' | 'dateStanceMade' | 'computedStanceScore'> & D
 
 export type DTSIStanceDetailsStancePassedProp = Pick<
-  DTSI_PersonStance,
-  'id' | 'dateStanceMade' | 'stanceType' | 'computedStanceScore'
+  DTSI_PersonStanceDetailsFragment,
+  'id' | 'dateStanceMade' | 'stanceType' | 'computedStanceScore' | 'analysis' | 'additionalAnalysis'
 > &
   Omit<PartialButDefined<DTSIStanceDetailsQuoteProp>, 'stanceType'> &
   Omit<PartialButDefined<DTSIStanceDetailsTweetProp>, 'stanceType'> &

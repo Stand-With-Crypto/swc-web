@@ -1,6 +1,5 @@
-import React from 'react'
-
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { AnalysisDetails } from '@/components/app/dtsiAnalysisDetails'
 import { DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsQuote'
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
@@ -8,10 +7,15 @@ import {
   DTSIStanceDetailsStanceProp,
   IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
+import { DTSIUserAvatar } from '@/components/app/dtsiUserAvatar'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { ExternalLink } from '@/components/ui/link'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
+import { listOfThings } from '@/utils/web/listOfThings'
 
 function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
@@ -43,12 +47,88 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
 export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) {
   const stance = props.stance
   const stanceScore = stance.computedStanceScore
-
+  const hasVisibleAnalysis =
+    Boolean(stance.analysis.length) || Boolean(stance.additionalAnalysis.length)
+  const additionalAnalysisUsers = stance.additionalAnalysis.map(x => x.publicUser)
   return (
     <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
       <StanceTypeContent {...props} />
       {stance.stanceType !== DTSI_PersonStanceType.BILL_RELATIONSHIP && (
-        <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
+        <div className="flex items-center justify-between">
+          <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
+          <Dialog analytics={'View DTSI Analysis'}>
+            <DialogTrigger asChild>
+              <Button>View Analysis</Button>
+            </DialogTrigger>
+            <DialogContent a11yTitle="View DTSI Analysis" className="max-w-2xl">
+              <DialogBody className="space-y-8">
+                <div>
+                  <h3 className="text-xl font-bold">Top analysis on stance</h3>
+                  <h4 className="mt-2 text-lg">
+                    Crypto advocates like you can submit your own analysis of this stance on our
+                    data partner{' '}
+                    <ExternalLink
+                      href={`https://www.dotheysupportit.com/stances/${stance.id}/create-analysis`}
+                    >
+                      DoTheySupportIt.com
+                    </ExternalLink>
+                    .
+                    {!!stance.analysis.length &&
+                      " Below you'll see some of the top contributions from the crypto community:"}
+                  </h4>
+                </div>
+                {hasVisibleAnalysis && (
+                  <>
+                    <div className="flex flex-col space-y-5">
+                      {stance.analysis.map(analysis => {
+                        return (
+                          <div key={analysis.id}>
+                            <AnalysisDetails analysis={analysis} analysisType="stance" />
+                          </div>
+                        )
+                      })}
+                    </div>
+                    {Boolean(additionalAnalysisUsers.length) && (
+                      <div>
+                        <div className="flex">
+                          {additionalAnalysisUsers.slice(0, 25).map((user, index) => (
+                            <DTSIUserAvatar
+                              key={user.id}
+                              size={24}
+                              style={{ transform: `translateX(-${index * 5}px)` }}
+                              user={user}
+                            />
+                          ))}
+                        </div>
+                        <div className="text-sm">
+                          {additionalAnalysisUsers.length ? 'Other analysis' : 'analysis'} submitted
+                          by{' '}
+                          {listOfThings(
+                            additionalAnalysisUsers.length > 5
+                              ? [
+                                  ...additionalAnalysisUsers
+                                    .slice(0, 3)
+                                    .map(user => user.displayName),
+                                  `and ${additionalAnalysisUsers.length - 3} other users`,
+                                ]
+                              : additionalAnalysisUsers.slice(0, 3).map(user => user.displayName),
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+                <Button asChild>
+                  <ExternalLink
+                    href={`https://www.dotheysupportit.com/stances/${stance.id}/create-analysis`}
+                  >
+                    Submit New Analysis on DoTheySupportIt.com
+                  </ExternalLink>
+                </Button>
+              </DialogBody>
+            </DialogContent>
+          </Dialog>
+        </div>
       )}
     </article>
   )

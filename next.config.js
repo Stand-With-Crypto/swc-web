@@ -208,6 +208,7 @@ const nextConfig = {
       },
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
+      { protocol: 'https', hostname: 'pbs.twimg.com' },
       // builder.io image cdn
       {
         protocol: 'https',
