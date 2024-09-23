@@ -3,7 +3,6 @@ import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } f
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, update } from 'lodash-es'
 
-import { BulkSMSPayload, GetPhoneNumberOptions } from '@/inngest/functions/sms/types'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -23,6 +22,23 @@ export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communic
 export type BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_SCHEMA = {
   name: typeof BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
   data: BulkSMSPayload
+}
+
+export interface BulkSMSPayload {
+  messages: Array<{
+    smsBody: string
+    userWhereInput?: GetPhoneNumberOptions['userWhereInput']
+    includePendingDoubleOptIn?: boolean
+    campaignName: string
+    media?: string[]
+  }>
+  // default to ET: -4
+  timezone?: number
+  send?: boolean
+  // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
+  sleepTime?: string | number
+  // This is used to take into account the current queue size when queuing new messages
+  currentSegmentsInQueue?: number
 }
 
 const MAX_RETRY_COUNT = 0
@@ -391,6 +407,13 @@ async function fetchAllPhoneNumbers(
 
   // Using uniq here to not send multiple messages to the same phone number
   return uniq(allPhoneNumbers)
+}
+
+export interface GetPhoneNumberOptions {
+  includePendingDoubleOptIn?: boolean
+  cursor?: Date
+  userWhereInput?: Prisma.UserGroupByArgs['where']
+  campaignName?: string
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
