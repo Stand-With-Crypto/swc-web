@@ -4,7 +4,7 @@ import { MaybeNextImgProps, NextImage } from '@/components/ui/image'
 import { DTSI_PublicUser } from '@/data/dtsi/generated'
 import { cn, twNoop } from '@/utils/web/cn'
 
-type AvatarBaseProps = {
+interface AvatarBaseProps {
   size: number
   className?: string
   style?: CSSProperties
@@ -16,7 +16,7 @@ export type AvatarProps = (
 ) &
   AvatarBaseProps
 
-const getFontSize = (size: number) => {
+function getFontSize(size: number) {
   if (size < 20) {
     return twNoop('text-sm')
   }
@@ -26,7 +26,7 @@ const getFontSize = (size: number) => {
   return twNoop('text-lg')
 }
 
-const Avatar: React.FC<AvatarProps> = ({ size, className, style, ...props }) => {
+function Avatar({ size, className, style, ...props }: AvatarProps) {
   if ('src' in props) {
     return (
       <div className={cn('relative', className)} style={{ width: size, height: size, ...style }}>
@@ -54,10 +54,7 @@ const Avatar: React.FC<AvatarProps> = ({ size, className, style, ...props }) => 
 }
 Avatar.displayName = 'Avatar'
 
-export const DTSIUserAvatar: React.FC<{ user: DTSI_PublicUser } & AvatarBaseProps> = ({
-  user,
-  ...props
-}) => {
+export function DTSIUserAvatar({ user, ...props }: { user: DTSI_PublicUser } & AvatarBaseProps) {
   const words = user.displayName.split(' ')
   const initials = [
     words[0].slice(0, 1),

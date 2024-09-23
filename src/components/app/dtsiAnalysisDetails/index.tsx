@@ -1,21 +1,22 @@
 import React from 'react'
 
 import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFormatter'
+import { RichTextEditorValue } from '@/components/app/dtsiRichText/types'
 import { DTSIUserAvatar } from '@/components/app/dtsiUserAvatar'
 import { ExternalLink } from '@/components/ui/link'
 import { DTSI_PersonStanceDetailsFragment } from '@/data/dtsi/generated'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
 
-export type AnalysisDetailsProps = {
+export interface AnalysisDetailsProps {
   analysis: DTSI_PersonStanceDetailsFragment['analysis'][0]
   analysisType: 'bill' | 'stance'
 }
 
-export const AnalysisDetails: React.FC<AnalysisDetailsProps> = ({ analysis, analysisType }) => {
+export function AnalysisDetails({ analysis, analysisType }: AnalysisDetailsProps) {
   const { publicUser } = analysis
   const descriptor = analysisType
-  const commentary = analysis.richTextCommentary as any[] | null
+  const commentary = analysis.richTextCommentary as RichTextEditorValue | null
   const hasCommentary = Boolean(commentary?.length)
   return (
     <div className={cn(hasCommentary && 'border border-gray-700', 'rounded-lg p-2')}>
