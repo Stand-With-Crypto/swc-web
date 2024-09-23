@@ -10,7 +10,7 @@ import { cn } from '@/utils/web/cn'
 
 export interface AnalysisDetailsProps {
   analysis: DTSI_PersonStanceDetailsFragment['analysis'][0]
-  analysisType: 'bill' | 'stance'
+  analysisType: 'bill' | 'statement'
 }
 
 export function AnalysisDetails({ analysis, analysisType }: AnalysisDetailsProps) {

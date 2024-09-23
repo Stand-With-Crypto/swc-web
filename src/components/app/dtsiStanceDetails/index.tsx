@@ -66,10 +66,10 @@ export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) 
               <DialogBody className="flex flex-col justify-between space-y-8">
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-xl font-bold">Top analysis on stance</h3>
+                    <h3 className="text-xl font-bold">Top analysis on statement</h3>
                     <h4 className="mt-2 text-lg">
-                      Crypto advocates like you can submit your own analysis of this stance on our
-                      data partner{' '}
+                      Crypto advocates like you can submit your own analysis of this statement on
+                      our data partner{' '}
                       <ExternalLink
                         href={`https://www.dotheysupportit.com/stances/${stance.id}/create-analysis`}
                       >
@@ -86,7 +86,7 @@ export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) 
                         {stance.analysis.map(analysis => {
                           return (
                             <div key={analysis.id}>
-                              <AnalysisDetails analysis={analysis} analysisType="stance" />
+                              <AnalysisDetails analysis={analysis} analysisType="statement" />
                             </div>
                           )
                         })}
