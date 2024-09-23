@@ -112,7 +112,7 @@ export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) 
                                     ...additionalAnalysisUsers
                                       .slice(0, 3)
                                       .map(user => user.displayName),
-                                    `and ${additionalAnalysisUsers.length - 3} other users`,
+                                    `${additionalAnalysisUsers.length - 3} other users`,
                                   ]
                                 : additionalAnalysisUsers.slice(0, 3).map(user => user.displayName),
                             )}
