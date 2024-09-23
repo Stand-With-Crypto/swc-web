@@ -13,14 +13,15 @@ import { createCommunication, createCommunicationJourneys } from './utils/commun
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
-
 const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.welcome-sms'
 
-const MAX_RETRY_COUNT = 3
-
-interface WelcomeSMSCommunicationJourneyPayload {
-  phoneNumber: string
+export interface WelcomeSmsCommunicationJourneyInngestEventSchema {
+  name: typeof WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: {
+    phoneNumber: string
+  }
 }
+const MAX_RETRY_COUNT = 3
 
 // Please, never call this function manually, it should be called from "@/utils/server/sms/actions.ts"
 export const welcomeSMSCommunicationJourney = inngest.createFunction(
@@ -33,7 +34,7 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     event: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ event, step }) => {
-    const { phoneNumber } = event.data as WelcomeSMSCommunicationJourneyPayload
+    const { phoneNumber } = event.data
 
     if (!isPhoneNumberSupported(phoneNumber)) {
       throw new NonRetriableError('Phone number not supported')

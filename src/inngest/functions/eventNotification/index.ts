@@ -3,6 +3,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 const SEND_EVENT_NOTIFICATION_INNGEST_FUNCTION_ID = 'script.send-event-notification'
+
 export const sendEventNotificationWithInngest = inngest.createFunction(
   {
     id: SEND_EVENT_NOTIFICATION_INNGEST_FUNCTION_ID,

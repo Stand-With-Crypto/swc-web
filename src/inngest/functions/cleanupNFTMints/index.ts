@@ -3,12 +3,16 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
 
-interface ScriptPayload {
-  persist: boolean
-}
-
 const CLEANUP_NFT_MINTS_FUNCTION_ID = 'script.cleanup-nft-mints'
 const CLEANUP_NFT_MINTS_EVENT_NAME = 'script/cleanup.nft.mints'
+
+export interface CleanupNftMintsEventSchema {
+  name: typeof CLEANUP_NFT_MINTS_EVENT_NAME
+  data: {
+    persist: boolean
+  }
+}
+
 export const cleanupNFTMintsWithInngest = inngest.createFunction(
   {
     id: CLEANUP_NFT_MINTS_FUNCTION_ID,
@@ -17,7 +21,7 @@ export const cleanupNFTMintsWithInngest = inngest.createFunction(
   },
   { event: CLEANUP_NFT_MINTS_EVENT_NAME },
   async ({ event, step }) => {
-    const payload = event.data as ScriptPayload
+    const payload = event.data
 
     // Get `nft_mint` rows where:
     // - `nft_slug` = 'swc-shield'

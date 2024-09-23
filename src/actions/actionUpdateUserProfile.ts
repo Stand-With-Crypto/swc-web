@@ -24,7 +24,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { claimOptInNFTIfNotClaimed } from '@/utils/server/nft/claimOptInNft'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -225,20 +224,19 @@ async function handleCapitolCanaryAdvocateUpsert(
     (!primaryUserEmailAddress ||
       oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress)
   if (hasChangedEmail) {
-    const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-      user: {
-        ...updatedUser, // Use new user information EXCEPT for the phone number.
-        address: updatedUser.address,
-      },
-      userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
-      opts: {
-        isEmailOptout: hasChangedEmail,
-      },
-    }
     await inngest.send({
       name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-      data: unsubscribePayload,
+      data: {
+        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+        user: {
+          ...updatedUser, // Use new user information EXCEPT for the phone number.
+          address: updatedUser.address,
+        },
+        userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
+        opts: {
+          isEmailOptout: hasChangedEmail,
+        },
+      },
     })
   }
 
@@ -258,26 +256,26 @@ async function handleCapitolCanaryAdvocateUpsert(
       (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership)) &&
     (primaryUserEmailAddress || updatedUser.phoneNumber)
   ) {
-    const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-      user: {
-        ...updatedUser, // Using new user information (including new phone number).
-        address: updatedUser.address,
-      },
-      userEmailAddress: primaryUserEmailAddress, // Using new email here.
-      opts: {
-        isEmailOptin: true,
-        isSmsOptin: updatedUser.smsStatus === SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
-      },
-    }
-    if (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership) {
-      payload.metadata = {
-        tags: ['C4 Member'],
-      }
-    }
     await inngest.send({
       name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-      data: payload,
+      data: {
+        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+        user: {
+          ...updatedUser, // Using new user information (including new phone number).
+          address: updatedUser.address,
+        },
+        userEmailAddress: primaryUserEmailAddress, // Using new email here.
+        opts: {
+          isEmailOptin: true,
+          isSmsOptin: updatedUser.smsStatus === SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
+        },
+        ...(!oldUser.hasOptedInToMembership &&
+          updatedUser.hasOptedInToMembership && {
+            metadata: {
+              tags: ['C4 Member'],
+            },
+          }),
+      },
     })
   }
 }
