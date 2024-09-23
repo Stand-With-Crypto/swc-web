@@ -30,6 +30,8 @@ export async function mergeUsers({
   const userToKeep = usersWithData.find(x => x.id === userToKeepId)!
   const userToDelete = usersWithData.find(x => x.id === userToDeleteId)!
 
+  const shouldTransferAddress = !userToKeep.addressId && userToDelete.addressId
+
   const emailsToTransfer = userToDelete.userEmailAddresses.filter(userToDeleteEmail => {
     const correspondingEmail = userToKeep.userEmailAddresses.find(
       y => y.emailAddress === userToDeleteEmail.emailAddress,
@@ -139,6 +141,7 @@ export async function mergeUsers({
     },
   )
   logger.info(`Merging user ${userToDelete.id} into user ${userToKeep.id}`)
+  logger.info(`${shouldTransferAddress ? 'Transferring' : 'Not transferring'} address`)
   logger.info(`Transferring ${emailsToTransfer.length} emails`)
   logger.info(`Deleting ${emailsToDelete.length} emails`)
   logger.info(`Deleting ${cryptoAddressesToDelete.length} crypto addresses`)
@@ -155,104 +158,119 @@ export async function mergeUsers({
     return
   }
 
-  await prismaClient.$transaction(async client => {
-    if (userToDelete.userSessions.length) {
-      await client.userSession.updateMany({
-        where: { id: { in: userToDelete.userSessions.map(session => session.id) } },
-        data: {
-          userId: userToKeep.id,
-        },
-      })
-    }
-
-    // Not using `Promise.all` bc we don't have control over how many updates we would be doing
-    for (const userActionUpdatePayload of userActionUpdatePayloads) {
-      await client.userAction.update(userActionUpdatePayload)
-    }
-
-    await client.user.update({
-      where: { id: userToDelete.id },
-      data: {
-        primaryUserCryptoAddressId: null,
-        primaryUserEmailAddressId: null,
-      },
-    })
-
-    const willChangePrimaryEmailAddress = emailsToDelete.some(
-      emailToDelete => emailToDelete.id === userToKeep.primaryUserEmailAddressId,
-    )
-    const userToKeepPrimaryEmailAddress = userToKeep.primaryUserEmailAddress
-    if (willChangePrimaryEmailAddress && userToKeepPrimaryEmailAddress) {
-      const newPrimaryEmailAddress = emailsToTransfer.find(
-        email => email.emailAddress === userToKeepPrimaryEmailAddress.emailAddress,
-      )
-
-      if (newPrimaryEmailAddress) {
-        await client.user.update({
-          where: { id: userToKeep.id },
+  await prismaClient.$transaction(
+    async client => {
+      if (userToDelete.userSessions.length) {
+        await client.userSession.updateMany({
+          where: { id: { in: userToDelete.userSessions.map(session => session.id) } },
           data: {
-            primaryUserEmailAddressId: newPrimaryEmailAddress.id,
+            userId: userToKeep.id,
           },
         })
       }
-    }
 
-    await client.userEmailAddress.deleteMany({
-      where: { id: { in: emailsToDelete.map(e => e.id) } },
-    })
+      // Not using `Promise.all` bc we don't have control over how many updates we would be doing
+      for (const userActionUpdatePayload of userActionUpdatePayloads) {
+        await client.userAction.update(userActionUpdatePayload)
+      }
 
-    await client.userEmailAddress.updateMany({
-      where: { id: { in: emailsToTransfer.map(e => e.id) } },
-      data: {
-        userId: userToKeep.id,
-      },
-    })
-
-    await client.userCryptoAddress.deleteMany({
-      where: { id: { in: cryptoAddressesToDelete.map(c => c.id) } },
-    })
-
-    const cryptoAddressesToUpdate = userToDelete.userCryptoAddresses.filter(x =>
-      cryptoAddressesToDelete.every(deletedAddress => deletedAddress.id !== x.id),
-    )
-    if (cryptoAddressesToUpdate.length) {
-      await client.userCryptoAddress.updateMany({
-        where: {
-          id: {
-            in: cryptoAddressesToUpdate.map(c => c.id),
-          },
+      await client.user.update({
+        where: { id: userToDelete.id },
+        data: {
+          primaryUserCryptoAddressId: null,
+          primaryUserEmailAddressId: null,
         },
+      })
+
+      const willChangePrimaryEmailAddress = emailsToDelete.some(
+        emailToDelete => emailToDelete.id === userToKeep.primaryUserEmailAddressId,
+      )
+      const userToKeepPrimaryEmailAddress = userToKeep.primaryUserEmailAddress
+      if (willChangePrimaryEmailAddress && userToKeepPrimaryEmailAddress) {
+        const newPrimaryEmailAddress = emailsToTransfer.find(
+          email => email.emailAddress === userToKeepPrimaryEmailAddress.emailAddress,
+        )
+
+        if (newPrimaryEmailAddress) {
+          await client.user.update({
+            where: { id: userToKeep.id },
+            data: {
+              primaryUserEmailAddressId: newPrimaryEmailAddress.id,
+            },
+          })
+        }
+      }
+
+      await client.userEmailAddress.deleteMany({
+        where: { id: { in: emailsToDelete.map(e => e.id) } },
+      })
+
+      await client.userEmailAddress.updateMany({
+        where: { id: { in: emailsToTransfer.map(e => e.id) } },
         data: {
           userId: userToKeep.id,
         },
       })
-    }
 
-    await client.userMergeAlert.deleteMany({
-      where: {
-        OR: [{ userBId: userToDelete.id }, { userAId: userToDelete.id }],
-      },
-    })
+      await client.userCryptoAddress.deleteMany({
+        where: { id: { in: cryptoAddressesToDelete.map(c => c.id) } },
+      })
 
-    await client.user.update({
-      where: { id: userToKeep.id },
-      data: {
-        totalDonationAmountUsd: {
-          increment: userToDelete.totalDonationAmountUsd,
+      const cryptoAddressesToUpdate = userToDelete.userCryptoAddresses.filter(x =>
+        cryptoAddressesToDelete.every(deletedAddress => deletedAddress.id !== x.id),
+      )
+      if (cryptoAddressesToUpdate.length) {
+        await client.userCryptoAddress.updateMany({
+          where: {
+            id: {
+              in: cryptoAddressesToUpdate.map(c => c.id),
+            },
+          },
+          data: {
+            userId: userToKeep.id,
+          },
+        })
+      }
+
+      await client.userMergeAlert.deleteMany({
+        where: {
+          OR: [{ userBId: userToDelete.id }, { userAId: userToDelete.id }],
         },
-      },
-    })
+      })
 
-    await client.user.delete({
-      where: { id: userToDelete.id },
-    })
+      await client.user.update({
+        where: { id: userToKeep.id },
+        data: {
+          totalDonationAmountUsd: {
+            increment: userToDelete.totalDonationAmountUsd,
+          },
+        },
+      })
 
-    await client.userMergeEvent.create({
-      data: {
-        userId: userToKeep.id,
-      },
-    })
-  })
+      if (shouldTransferAddress) {
+        await client.user.update({
+          where: { id: userToKeep.id },
+          data: {
+            addressId: userToDelete.addressId,
+          },
+        })
+      }
+
+      await client.user.delete({
+        where: { id: userToDelete.id },
+      })
+
+      await client.userMergeEvent.create({
+        data: {
+          userId: userToKeep.id,
+        },
+      })
+    },
+    {
+      maxWait: 5000,
+      timeout: 10000,
+    },
+  )
 
   logger.info(`merge of user ${userToDelete.id} into user ${userToKeep.id} complete`)
 }
