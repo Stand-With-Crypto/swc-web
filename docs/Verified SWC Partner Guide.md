@@ -1,5 +1,10 @@
 # Verified SWC Partner Guide
 
+- [API Response Structure](#api-response-structure)
+- [Structuring Deep Links from API responses](#structuring-deep-links-from-api-responses)
+- [Current Endpoints](#current-endpoints)
+  - [/api/verified-swc-partner/user-action-opt-in](#apiverified-swc-partneruser-action-opt-in)
+
 For verified partners, Stand With Crypto provides APIs that allow you to programmatically subscribe and perform actions on behalf of users. See the `/src/app/api/verified-swc-partner` folder for all available API endpoints.
 
 Interested in integrating this flow in to your product? [Reach out to our team](https://forms.gle/cGwyA3Yx2A42GaAY9) for additional information.
@@ -28,3 +33,7 @@ After an API request is triggered, the partner may wish to deeplink the user in 
 ### /api/verified-swc-partner/user-action-opt-in
 
 This API endpoint allows verified partners to sign their users up to become members of Stand With Crypto programmatically from their own application.
+
+### /api/verified-swc-partner/view-key-races
+
+This API endpoint adds an user action of type VIWE_KEY_RACES alongside some metadata whenever a signed in user who has at least OPT_IN view certain pages, e.g. /races on the web and a View Key Races CTA on the app.
