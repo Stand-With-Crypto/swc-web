@@ -1,5 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 import * as Sentry from '@sentry/nextjs'
+import type { ScopeContext } from '@sentry/types'
 import { isError, noop } from 'lodash-es'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
@@ -28,12 +29,14 @@ export async function triggerServerActionForForm<
     analyticsProps,
     onError = form?.setError ?? noop,
     payload,
+    errorScopeContext = {},
   }: {
     payload: P
     form?: F
     formName: string
     analyticsProps?: AnalyticProperties
     onError?: (key: string, error: { message: string }) => void
+    errorScopeContext?: Partial<ScopeContext>
   },
   fn: Fn,
 ) {
@@ -44,6 +47,7 @@ export async function triggerServerActionForForm<
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error })
       Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {
+        ...errorScopeContext,
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Unexpected' },
         extra: { analyticsProps, error, formName, payload },
       })
@@ -52,14 +56,17 @@ export async function triggerServerActionForForm<
       trackFormSubmitErrored(formName, { 'Error Type': error.response.status, ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
       Sentry.captureException(error, {
+        ...errorScopeContext,
         fingerprint: [formName, 'FetchReqError', `${error.response.status}`],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'FetchReqError' },
         extra: { analyticsProps, error, formName, payload },
+        ...(error.response.status === 401 && { level: 'warning' }),
       })
     } else {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unexpected', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error.message })
       Sentry.captureException(error, {
+        ...errorScopeContext,
         fingerprint: [formName, 'Error', error.message],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
         extra: { analyticsProps, error, formName, payload },

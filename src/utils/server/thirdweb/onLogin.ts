@@ -102,6 +102,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
       Sentry.captureException(e, {
         tags: { domain: 'onLogin/existingUser' },
         extra: { existingVerifiedUser, cryptoAddress, localUser },
+        level: 'fatal',
       })
       throw e
     })
@@ -146,6 +147,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
       Sentry.captureException(e, {
         tags: { domain: 'onLogin/newUser' },
         extra: { cryptoAddress, localUser },
+        level: 'fatal',
       })
       throw e
     })
