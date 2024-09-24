@@ -437,7 +437,7 @@ export const MOCK_PRESS_CONTENT = [
   },
   {
     source: 'Fox Business',
-    dateHeading: 'April 1, 2024',
+    dateHeading: 'September 24, 2024',
     heading: 'Exodus donates $1.3M to crypto advocacy group to aid Election Day vote efforts',
     publication: 'Fox Business',
     link: 'https://www.foxbusiness.com/politics/exodus-donates-1-3m-crypto-advocacy-group-aid-election-day-vote-efforts',
