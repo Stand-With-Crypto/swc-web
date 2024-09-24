@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
-import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1/control'
+import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
