@@ -333,7 +333,7 @@ const nextConfig = {
         source: '/w/vote/:sessionId*',
         destination:
           '/vote?utm_source=swc&utm_medium=sms&utm_campaign=welcome_sms&utm_id=sst&utm_content=v1&sessionId=:sessionId*',
-        permanent: false,
+        permanent: true,
       },
       {
         source: '/voter-day-1/:sessionId*',
