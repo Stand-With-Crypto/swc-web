@@ -4,6 +4,7 @@ import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, update } from 'lodash-es'
 
 import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
+import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -14,8 +15,6 @@ import { prettyStringify } from '@/utils/shared/prettyLog'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-
-import { countMessagesAndSegments } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
@@ -101,6 +100,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         }),
       )
 
+      // If the user didn't receive our welcome message with legalese text we need to include it in the bulk text
       const phoneNumbersThatShouldReceiveWelcomeText = await step.run(
         'fetch-phone-numbers-that-should-receive-welcome-text',
         () =>
@@ -122,6 +122,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
               journeyType: UserCommunicationJourneyType.WELCOME_SMS,
             },
             {
+              // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
+              // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
               body: addWelcomeMessage(smsBody),
               campaignName,
               journeyType: UserCommunicationJourneyType.BULK_SMS,
@@ -167,6 +169,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
 
+      // This is for debugging and estimation purposes only
+      // Grouping bulk send metadata by campaign name
       update(
         messagesInfo,
         [campaignName],
@@ -186,6 +190,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       )
 
       enqueueMessagesPayloadChunks.push(...payloadChunks)
+
       totalSegmentsCount += segmentsCount
       totalMessagesCount += messagesCount
       totalTime += timeToSendSegments
@@ -333,15 +338,13 @@ function formatTime(seconds: number) {
   } else if (seconds < SECONDS_DURATION.HOUR) {
     const minutes = Math.ceil(seconds / SECONDS_DURATION.MINUTE)
     return `${minutes} minutes`
-  } else if (seconds < SECONDS_DURATION.DAY) {
+  } else {
     const hours = Math.ceil(seconds / SECONDS_DURATION.HOUR)
     return `${hours} hours`
-  } else {
-    const days = Math.ceil(seconds / SECONDS_DURATION.DAY)
-    return `${days} days`
   }
 }
 
+// Doing this so lodash merge is typed
 const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroupByArgs['where']>
 
 // Add a space before the welcome message to ensure proper formatting. If the message ends with a link,

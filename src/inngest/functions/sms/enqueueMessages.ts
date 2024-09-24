@@ -3,12 +3,12 @@ import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 import { update } from 'lodash-es'
 
-import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils'
 import {
   bulkCreateCommunicationJourney,
   BulkCreateCommunicationJourneyPayload,
   DEFAULT_CAMPAIGN_NAME,
 } from '@/inngest/functions/sms/utils/communicationJourney'
+import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
 import { inngest } from '@/inngest/inngest'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
@@ -53,10 +53,12 @@ export const enqueueSMS = inngest.createFunction(
   async ({ event, step, logger }) => {
     const { payload, variables, attempt = 0 } = event.data
 
+    // This function has a built-in mechanism that retries only failed messages
     if (attempt >= 4) {
       throw new NonRetriableError(`SMS queuing attempt limit exceeded`)
     }
 
+    // This mechanism reuses previous variables to save an Inngest step
     let userSMSVariables = variables
     if (!userSMSVariables) {
       logger.info('Fetching variables')
@@ -70,12 +72,16 @@ export const enqueueSMS = inngest.createFunction(
     let totalSegmentsSent = 0
 
     const {
+      // Phone numbers that sendSMS returned a isTooManyRequests error. Messages are grouped by phone number, so [{ [phoneNumber]: [failedMessageInfo] }]
       failedPhoneNumbers,
+      // Phone numbers that sendSMS returned a isInvalidPhoneNumber error
       invalidPhoneNumbers,
+      // Phone numbers that sendSMS returned a isUnsubscribedUser error
+      unsubscribedUsers,
+      // Messages grouped by journey type and campaign name, Ex: BULK_SMS -> some-campaign-name: ["messageId"]
       messagesSentByJourneyType,
       queuedMessages,
       segmentsSent,
-      unsubscribedUsers,
     } = await step.run('enqueue-messages', async () => {
       const invalidPhoneNumbers: string[] = []
       const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
@@ -118,6 +124,8 @@ export const enqueueSMS = inngest.createFunction(
                 queuedMessages += 1
               }
             } else {
+              // Bulk-SMS have logic to check if the phone number already received a welcome message, if it didn't it includes the welcome message at the end of the bulk message.
+              // When doing this, it also adds a WELCOME_SMS journeyType to enqueueSMS payload, so we need to register that the user received the welcome legalese inside the bulk message
               update(
                 messagesSentByJourneyType,
                 [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
@@ -184,11 +192,13 @@ export const enqueueSMS = inngest.createFunction(
     })
 
     await step.run('persist-results-to-db', async () => {
+      // Remember messagesSentByJourneyType have messages grouped by journeyType and campaignName
       for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
         const journeyType = journeyTypeKey as UserCommunicationJourneyType
 
         logger.info(`Creating ${journeyType} communication journey`)
 
+        // We need to bulk create both communication and communication journey for better performance
         await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
 
         logger.info(`Created ${journeyType} communication journey`)
@@ -218,6 +228,7 @@ export const enqueueSMS = inngest.createFunction(
     totalQueuedMessages += queuedMessages
     totalSegmentsSent += segmentsSent
 
+    // Here we're creating the payload for the next execution of enqueueSMS, only with failed messages
     const failedEnqueueMessagePayload: EnqueueMessagePayload[] = Object.keys(
       failedPhoneNumbers,
     ).map(phoneNumber => ({
@@ -226,6 +237,7 @@ export const enqueueSMS = inngest.createFunction(
     }))
 
     if (failedEnqueueMessagePayload.length > 0) {
+      // Increase timeout each attempt
       const waitingTime = 1000 * (attempt * attempt)
 
       logger.info(
