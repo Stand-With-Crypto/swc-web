@@ -91,12 +91,12 @@ export const enqueueSMS = inngest.createFunction(
         for (const message of messages) {
           const { body, journeyType, campaignName, media } = message
 
-          const variables = userSMSVariables[phoneNumber]
+          const phoneNumberVariables = userSMSVariables[phoneNumber]
 
           try {
             if (body) {
               const queuedMessage = await sendSMS({
-                body: applySMSVariables(body, variables),
+                body: applySMSVariables(body, phoneNumberVariables),
                 to: phoneNumber,
                 media,
               })
@@ -234,7 +234,7 @@ export const enqueueSMS = inngest.createFunction(
 
       await step.sleep('wait-to-retry-failing-messages', waitingTime)
 
-      const { queuedMessages, segmentsSent } = await step.invoke('enqueue-failed-messages', {
+      const queuedFailedMessages = await step.invoke('enqueue-failed-messages', {
         function: enqueueSMS,
         data: {
           payload: failedEnqueueMessagePayload,
@@ -243,8 +243,8 @@ export const enqueueSMS = inngest.createFunction(
         },
       })
 
-      totalQueuedMessages += queuedMessages
-      totalSegmentsSent += segmentsSent
+      totalQueuedMessages += queuedFailedMessages.queuedMessages
+      totalSegmentsSent += queuedFailedMessages.segmentsSent
     }
 
     return {
