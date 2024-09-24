@@ -359,13 +359,9 @@ const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroup
 const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
 
 async function fetchAllPhoneNumbers(
-  options: Omit<GetPhoneNumberOptions, 'cursor'>,
+  options: Omit<GetPhoneNumberOptions, 'skip'>,
   hasWelcomeMessage: boolean,
 ) {
-  const allPhoneNumbers: string[] = []
-  let cursor: Date | undefined
-  let hasNumbersLeft = true
-
   const customWhere = mergeWhereParams(
     { ...options.userWhereInput },
     {
@@ -385,22 +381,24 @@ async function fetchAllPhoneNumbers(
     },
   )
 
+  const allPhoneNumbers: string[] = []
+  let hasNumbersLeft = true
+  let skip = 0
+
   while (hasNumbersLeft) {
     const phoneNumberList = await getPhoneNumberList({
       ...options,
-      cursor,
+      skip,
       userWhereInput: customWhere,
     })
 
-    cursor = phoneNumberList.at(-1)?.datetimeCreated
+    skip += phoneNumberList.length
 
-    const phoneNumbers = phoneNumberList
-      .map(({ phoneNumber }) => phoneNumber)
-      .filter(isPhoneNumberSupported)
+    allPhoneNumbers.push(
+      ...phoneNumberList.map(({ phoneNumber }) => phoneNumber).filter(isPhoneNumberSupported),
+    )
 
-    allPhoneNumbers.push(...phoneNumbers)
-
-    if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
+    if (!DATABASE_QUERY_LIMIT || phoneNumberList.length < DATABASE_QUERY_LIMIT) {
       hasNumbersLeft = false
     }
   }
@@ -411,21 +409,18 @@ async function fetchAllPhoneNumbers(
 
 export interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean
-  cursor?: Date
+  skip: number
   userWhereInput?: Prisma.UserGroupByArgs['where']
   campaignName?: string
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
   return prismaClient.user.groupBy({
-    by: ['phoneNumber', 'datetimeCreated'],
+    by: ['phoneNumber'],
     where: {
       ...mergeWhereParams(
         { ...options.userWhereInput },
         {
-          datetimeCreated: {
-            gte: options.cursor,
-          },
           UserCommunicationJourney: {
             every: {
               campaignName: {
@@ -444,7 +439,8 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
         ],
       },
     },
+    skip: options.skip,
     take: DATABASE_QUERY_LIMIT,
-    orderBy: [{ datetimeCreated: 'asc' }, { phoneNumber: 'asc' }],
+    orderBy: { phoneNumber: 'asc' },
   })
 }
