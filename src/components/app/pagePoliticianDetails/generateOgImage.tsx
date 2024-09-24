@@ -45,7 +45,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
       )
       break
     case 'B':
-      letterImage = await fetch(new URL('./images/B.png', import.meta.url)).then(res =>
+      letterImage = await fetch(new URL('./images/B-light.png', import.meta.url)).then(res =>
         res.arrayBuffer(),
       )
       break
@@ -55,7 +55,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
       )
       break
     case 'D':
-      letterImage = await fetch(new URL('./images/D.png', import.meta.url)).then(res =>
+      letterImage = await fetch(new URL('./images/D-light.png', import.meta.url)).then(res =>
         res.arrayBuffer(),
       )
       break

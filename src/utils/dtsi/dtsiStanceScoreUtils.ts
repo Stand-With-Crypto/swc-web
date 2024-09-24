@@ -50,13 +50,13 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguage = (
     return 'Strongly supportive'
   }
   if (score >= 70) {
-    return 'Supportive'
+    return 'Somewhat Supportive'
   }
   if (score >= 50) {
     return 'Neutral'
   }
   if (score >= 30) {
-    return 'Against'
+    return 'Somewhat Against'
   }
   return 'Strongly against'
 }
@@ -72,13 +72,13 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence = (
     return 'Strongly supports crypto'
   }
   if (score >= 70) {
-    return 'Supports crypto'
+    return 'Somewhat supports crypto'
   }
   if (score >= 50) {
     return 'Neutral on crypto'
   }
   if (score >= 30) {
-    return 'Against crypto'
+    return 'Somewhat against crypto'
   }
   return 'Strongly against crypto'
 }
