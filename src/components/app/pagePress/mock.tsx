@@ -953,19 +953,30 @@ export const MOCK_PRESS_CONTENT = [
         </p>
 
         <p className="mb-4">
-          "Exodus has been an unwavering advocate for user empowerment in the crypto world, and this
-          $1.3 million commitment is a testament to their leadership and dedication to making sure
-          crypto's voice is heard this election cycle," said SWC Executive Director Logan Dobson.
-          "These resources will allow us to deepen our engagement with communities, lawmakers, and
-          stakeholders to ensure a future where crypto innovation can thrive in the U.S."
+          <i>
+            "Exodus has been an unwavering advocate for user empowerment in the crypto world, and
+            this $1.3 million commitment is a testament to their leadership and dedication to making
+            sure crypto's voice is heard this election cycle,"
+          </i>{' '}
+          said SWC Executive Director Logan Dobson.
+          <i>
+            "These resources will allow us to deepen our engagement with communities, lawmakers, and
+            stakeholders to ensure a future where crypto innovation can thrive in the U.S."
+          </i>
         </p>
 
         <p className="mb-4">
-          "At Exodus, we've always believed that the future of finance lies in decentralization and
-          individual empowerment," said Exodus CEO JP Richardson. "Stand with Crypto is doing
-          critical work to make sure this future is realized, and we are proud to contribute to
-          their cause. Together, we're making strides toward a future where crypto and blockchain
-          technology are fostered and developed right here in the U.S."
+          <i>
+            "At Exodus, we've always believed that the future of finance lies in decentralization
+            and individual empowerment,"
+          </i>{' '}
+          said Exodus CEO JP Richardson.{' '}
+          <i>
+            "Stand with Crypto is doing critical work to make sure this future is realized, and we
+            are proud to contribute to their cause. Together, we're making strides toward a future
+            where crypto and blockchain technology are fostered and developed right here in the
+            U.S."
+          </i>
         </p>
 
         <p className="mb-4">
