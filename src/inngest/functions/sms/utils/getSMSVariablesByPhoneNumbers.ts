@@ -9,8 +9,8 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
       },
     },
     orderBy: {
-      // Use asc here so we take the latest updated user when reducing
-      datetimeUpdated: 'asc',
+      // Use asc here so we take the latest created user when reducing
+      datetimeCreated: 'asc',
     },
     include: {
       userSessions: {
