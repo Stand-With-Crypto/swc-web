@@ -59,6 +59,7 @@ Sentry.init({
       // NOTE: when upgrading Sentry major versions we need to manually update this file for compatibility
       workerUrl: '/workers/sentry.worker.js',
     }),
+    Sentry.captureConsoleIntegration(),
   ],
   denyUrls: [
     /vitals\.vercel-analytics\.com/i,
@@ -90,6 +91,15 @@ Sentry.init({
 
     // prevent legacy browsers from triggering sentry
     if (!isSupportedBrowser) {
+      return null
+    }
+
+    // Avoid capturing logs or errors from this very Sentry initialization code
+    // this is simply meant to hide console from this file being captured
+    // we can also create different sentry events rather than consoling it
+    // after that, we can also only return the event if it meets certain criteria, e.g.
+    // having thirdweb into its stack
+    if (hint?.syntheticException?.stack?.includes('sentry.client')) {
       return null
     }
 
@@ -144,5 +154,5 @@ function getErrorMessage(error: unknown) {
     return JSON.stringify(error.reason)
   }
 
-  return JSON.stringify(error)
+  return typeof error !== 'string' ? JSON.stringify(error) : error
 }
