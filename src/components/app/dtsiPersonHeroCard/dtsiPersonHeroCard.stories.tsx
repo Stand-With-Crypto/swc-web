@@ -24,6 +24,7 @@ const getDefaultProps = () => {
       nameSuffix: '',
       politicalAffiliationCategory: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
       computedStanceScore: 0,
+      computedSumStanceScoreWeight: 5,
       manuallyOverriddenStanceScore: undefined,
       profilePictureUrl:
         'https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Joe_Biden_presidential_portrait.jpg',

@@ -13,7 +13,7 @@ export enum DTSILetterGrade {
 
 type PersonWithStanceScore = Pick<
   DTSI_Person,
-  'computedStanceScore' | 'manuallyOverriddenStanceScore'
+  'computedStanceScore' | 'manuallyOverriddenStanceScore' | 'computedSumStanceScoreWeight'
 >
 
 const getScore = (item: PersonWithStanceScore) =>
@@ -44,10 +44,13 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguage = (
 ) => {
   const score = getScore(entity)
   if (isNil(score)) {
-    return 'Pending'
+    if (!entity.computedSumStanceScoreWeight) {
+      return 'No Stance'
+    }
+    return 'Not Enough Information'
   }
   if (score >= 90) {
-    return 'Strongly supportive'
+    return 'Strongly Supportive'
   }
   if (score >= 70) {
     return 'Somewhat Supportive'
@@ -66,7 +69,10 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence = (
 ) => {
   const score = getScore(entity)
   if (isNil(score)) {
-    return 'Pending stance on crypto'
+    if (!entity.computedSumStanceScoreWeight) {
+      return 'No stance on crypto'
+    }
+    return 'Not enough information'
   }
   if (score >= 90) {
     return 'Strongly supports crypto'

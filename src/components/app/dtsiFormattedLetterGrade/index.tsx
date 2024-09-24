@@ -6,7 +6,12 @@ import {
 
 export const DTSIFormattedLetterGrade: React.FC<
   (
-    | { person: Pick<DTSI_Person, 'computedStanceScore' | 'manuallyOverriddenStanceScore'> }
+    | {
+        person: Pick<
+          DTSI_Person,
+          'computedStanceScore' | 'manuallyOverriddenStanceScore' | 'computedSumStanceScoreWeight'
+        >
+      }
     | { letterGrade: DTSILetterGrade | null }
   ) & {
     className: string
