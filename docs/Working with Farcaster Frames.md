@@ -1,5 +1,10 @@
 # Working with Farcaster Frames
 
+- [Resources](#resources)
+- [Development](#development)
+  - [Local Frames Tooling](#local-frames-tooling)
+  - [Development Tooling](#development-tooling)
+
 ## Resources
 
 Before working with Frames in this repository, you should have a basic understanding of how Frames work. Here are some resources we recommend:

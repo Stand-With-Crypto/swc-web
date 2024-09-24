@@ -1,5 +1,11 @@
 # React Server Components At Scale with Next.js App Router
 
+1. [Introduction](#introduction)
+2. [RSC Empowers Front End Engineers To Own The Entire Stack](#rsc-empowers-front-end-engineers-to-own-the-entire-stack)
+3. [APIs As Needed](#apis-as-needed)
+
+## Introduction
+
 [In 2020](https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components) the React core team announced React Server Components (RSC). Rather than attempt to document what this new architecture unlocks, I’ll link to a bunch blog posts that do an excellent job of explaining not just what RSC are, but why they’re a massive user-experience and developer productivity improvement compared to the current way web apps are built today:
 
 - [Making Sense of React Server Components](https://www.joshwcomeau.com/react/server-components/) - (if you prefer video, [t3.gg has an excellent breakdown](https://www.youtube.com/watch?v=VIwWgV3Lc6s) of this blog post)

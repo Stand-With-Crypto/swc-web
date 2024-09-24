@@ -85,6 +85,10 @@ export function trackExternalLink(eventProperties?: AnalyticProperties) {
   trackClientAnalytic('External Link clicked', { ...eventProperties })
 }
 
+export function trackInternalLink(eventProperties?: AnalyticProperties) {
+  trackClientAnalytic('Internal Link clicked', { ...eventProperties })
+}
+
 export function trackSectionVisible(
   { section, sectionGroup }: { section: string; sectionGroup: string },
   eventProperties?: AnalyticProperties,

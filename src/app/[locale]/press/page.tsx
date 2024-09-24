@@ -17,7 +17,9 @@ export const metadata: Metadata = {
 }
 
 export default async function PressPage() {
-  const pressContent = MOCK_PRESS_CONTENT
+  const pressContent = MOCK_PRESS_CONTENT.sort((a, b) => {
+    return new Date(b.dateHeading).getTime() - new Date(a.dateHeading).getTime()
+  })
 
   return <PagePress description={description} pressContent={pressContent} title={title} />
 }

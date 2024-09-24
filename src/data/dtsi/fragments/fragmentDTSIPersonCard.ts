@@ -12,6 +12,7 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
     profilePictureUrl
     profilePictureUrlDimensions
     promotedPositioning
+    stanceCount(verificationStatusIn: APPROVED)
     primaryRole {
       dateEnd
       dateStart

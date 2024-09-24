@@ -7,6 +7,10 @@ import { prismaClient } from '@/utils/server/prismaClient'
 const BACKFILL_SESSION_ID_CRON_JOB_FUNCTION_ID = 'script.backfill-session-id'
 const BACKFILL_SESSION_ID_INNGEST_EVENT_NAME = 'script/backfill.session.id'
 
+export interface BackfillSessionIdInngestSchema {
+  name: typeof BACKFILL_SESSION_ID_INNGEST_EVENT_NAME
+}
+
 const BACKFILL_SESSION_ID_BATCH_SIZE = Number(process.env.BACKFILL_SESSION_ID_BATCH_SIZE) || 2000
 
 export const backfillSessionIdCronJob = inngest.createFunction(

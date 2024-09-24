@@ -19,7 +19,6 @@ import {
 } from '@/utils/server/email/templates/common/constants'
 import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
-import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
@@ -163,16 +162,14 @@ export async function claimNFT(
     },
   })
 
-  const payload: AirdropPayload = {
-    nftMintId: action.nftMintId!,
-    nftSlug,
-    recipientWalletAddress: userCryptoAddress.cryptoAddress,
-    userId: action.userId,
-  }
-
   return inngest.send({
     name: AIRDROP_NFT_INNGEST_EVENT_NAME,
-    data: payload,
+    data: {
+      nftMintId: action.nftMintId!,
+      nftSlug,
+      recipientWalletAddress: userCryptoAddress.cryptoAddress,
+      userId: action.userId,
+    },
   })
 }
 
