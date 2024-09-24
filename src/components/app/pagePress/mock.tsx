@@ -933,17 +933,12 @@ export const MOCK_PRESS_CONTENT = [
   {
     source: 'Press release',
     dateHeading: 'September 24, 2024',
-    heading: 'Stand With Crypto Announces 2024 Advocacy Campaign',
+    heading:
+      'Stand With Crypto Receives $1.3 Million Commitment From Exodus To Boost Advocacy Efforts',
     publication: 'Press Release',
     link: '/stand-with-crypto-announces-2024-advocacy-campaign',
     Article: () => (
       <div className="mx-auto">
-        <p className="mb-4">
-          <strong>
-            Stand With Crypto Receives $1.3 Million Commitment From Exodus To Boost Advocacy Efforts
-          </strong>
-        </p>
-
         <p className="mb-4">
           Washington, D.C. - September 24, 2024 - Stand With Crypto Alliance, Inc. (SWC), a leading
           advocacy group dedicated to educating and mobilizing crypto voters, announced today that
