@@ -1,4 +1,4 @@
-import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
+import { MOCK_PRESS_CONTENT } from '@/components/app/pagePress/mock'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 

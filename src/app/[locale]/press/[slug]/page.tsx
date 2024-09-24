@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
+import { MOCK_PRESS_CONTENT } from '@/components/app/pagePress/mock'
 import { PagePressRelease } from '@/components/app/pagePress/pressRelease'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'

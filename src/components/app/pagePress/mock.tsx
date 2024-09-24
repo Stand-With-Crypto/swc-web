@@ -1,3 +1,6 @@
+import React from 'react'
+
+// this is temporary while we don't leverage builder.io for this content
 export const MOCK_PRESS_CONTENT = [
   {
     source: 'Chris Matthews',
@@ -431,6 +434,14 @@ export const MOCK_PRESS_CONTENT = [
         </p>
       </div>
     ),
+  },
+  {
+    source: 'Fox Business',
+    dateHeading: 'April 1, 2024',
+    heading: 'Exodus donates $1.3M to crypto advocacy group to aid Election Day vote efforts',
+    publication: 'Fox Business',
+    link: 'https://www.foxbusiness.com/politics/exodus-donates-1-3m-crypto-advocacy-group-aid-election-day-vote-efforts',
+    Article: () => null,
   },
   {
     source: 'Press release',
@@ -915,6 +926,51 @@ export const MOCK_PRESS_CONTENT = [
           . These individuals are regular people who want to make sure that Crypto has clear,
           sensible regulation that prioritizes consumer protection and places the nation at the
           forefront of innovation and growth.
+        </p>
+      </div>
+    ),
+  },
+  {
+    source: 'Press release',
+    dateHeading: 'September 24, 2024',
+    heading: 'Stand With Crypto Announces 2024 Advocacy Campaign',
+    publication: 'Press Release',
+    link: '/stand-with-crypto-announces-2024-advocacy-campaign',
+    Article: () => (
+      <div className="mx-auto">
+        <p className="mb-4">
+          <strong>
+            Stand With Crypto Receives $1.3 Million Commitment From Exodus To Boost Advocacy Efforts
+          </strong>
+        </p>
+
+        <p className="mb-4">
+          Washington, D.C. - September 24, 2024 - Stand With Crypto Alliance, Inc. (SWC), a leading
+          advocacy group dedicated to educating and mobilizing crypto voters, announced today that
+          it had received a $1.3 million commitment from Exodus, one of the world's most trusted
+          non-custodial crypto wallet providers. These funds will help SWC continue to scale its
+          public education and community engagement efforts across the country.
+        </p>
+
+        <p className="mb-4">
+          "Exodus has been an unwavering advocate for user empowerment in the crypto world, and this
+          $1.3 million commitment is a testament to their leadership and dedication to making sure
+          crypto's voice is heard this election cycle," said SWC Executive Director Logan Dobson.
+          "These resources will allow us to deepen our engagement with communities, lawmakers, and
+          stakeholders to ensure a future where crypto innovation can thrive in the U.S."
+        </p>
+
+        <p className="mb-4">
+          "At Exodus, we've always believed that the future of finance lies in decentralization and
+          individual empowerment," said Exodus CEO JP Richardson. "Stand with Crypto is doing
+          critical work to make sure this future is realized, and we are proud to contribute to
+          their cause. Together, we're making strides toward a future where crypto and blockchain
+          technology are fostered and developed right here in the U.S."
+        </p>
+
+        <p className="mb-4">
+          The funds will be used to support SWC's mission of educating and mobilizing crypto voters
+          around the country.
         </p>
       </div>
     ),
