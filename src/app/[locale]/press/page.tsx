@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
+import { MOCK_PRESS_CONTENT } from '@/components/app/pagePress/mock'
 import { PagePress } from '@/components/app/pagePress/press'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
