@@ -9,6 +9,7 @@ const FAIRSHAKE_DONATIONS_AMOUNT_USD = 177_877_738.13
 const MANUALLY_TRACKED_DONATIONS = [
   FAIRSHAKE_DONATIONS_AMOUNT_USD,
   1_000_000, // 2024-05-13 MoonPay donation
+  1_300_000, // 2024-09-23 Exodus donation
 ]
 
 export const getSumDonations = async () => {
