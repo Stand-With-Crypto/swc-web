@@ -6,7 +6,7 @@ import { useSWRConfig } from 'swr'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
-import { UpdateUserProfileFormExperimentTesting } from '@/components/app/updateUserProfileForm/step1'
+import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { UpdateUserInformationVisibilityForm } from '@/components/app/updateUserProfileForm/step2'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { useSections } from '@/hooks/useSections'
@@ -48,7 +48,7 @@ export function UpdateUserProfileFormContainer({
 
   if (sections.currentSection === UserProfileFormSections.Profile) {
     return (
-      <UpdateUserProfileFormExperimentTesting
+      <UpdateUserProfileForm
         onSuccess={newFields => {
           const { address: _, ...updatedFields } = newFields
           setStatefulUser(prev => ({ ...prev, ...updatedFields }))

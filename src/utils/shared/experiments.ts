@@ -41,13 +41,6 @@ export const EXPERIMENTS_CONFIG = {
       { name: 'variant2' as const, percentage: 0.5 },
     ],
   },
-  gh02_SWCSignUpFlowExperiment: {
-    analyticsPropertyName: 'SWC Sign Up Flow Experiment',
-    variants: [
-      { name: 'control' as const, percentage: 0.5 },
-      { name: 'optionalFieldsVariant' as const, percentage: 0.5 },
-    ],
-  },
 } satisfies Record<string, Omit<ExperimentConfig, 'name'>>
 export type Experiments = keyof typeof EXPERIMENTS_CONFIG
 type _ExperimentVariantsConfig<K extends Experiments> =
