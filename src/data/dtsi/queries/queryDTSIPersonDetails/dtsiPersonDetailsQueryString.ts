@@ -37,6 +37,7 @@ export const dtsiPersonDetailsQueryString = /* GraphQL */ `
       politicalAffiliationCategory
       politicalAffiliation
       computedStanceScore
+      computedSumStanceScoreWeight
       manuallyOverriddenStanceScore
       stances(verificationStatusIn: APPROVED) {
         ...PersonStanceDetails
