@@ -21,6 +21,7 @@ import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functio
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
 import type { BulkSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
+import type { EnqueueSMSInngestEventSchema } from '@/inngest/functions/sms/enqueueMessages'
 import type { GoodbyeSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
 import type { UnstopConfirmationSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
 import type { WelcomeSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
@@ -58,5 +59,6 @@ type EventTypes =
   | UpdateUserBatchEventSchema
   | MonitorBaseEthBalancesInngestEventSchema
   | InitialSignupUserCommunicationSchema
+  | EnqueueSMSInngestEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

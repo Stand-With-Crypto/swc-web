@@ -3,6 +3,7 @@ import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } f
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, update } from 'lodash-es'
 
+import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -14,7 +15,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from './utils'
+import { countMessagesAndSegments } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
@@ -246,31 +247,20 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
       }
 
-      const { queuedMessages, queuedSegments, timeInSecondsToSendAllSegments } = await step.run(
-        `enqueue-messages-${i + 1}`,
-        async () => {
-          const payloadChunk = enqueueMessagesPayloadChunks[i]
+      const payloadChunk = enqueueMessagesPayloadChunks[i]
 
-          const { messages: messagesCount, segments: segmentsCount } = await enqueueMessages(
-            payloadChunk,
-            logger,
-          )
-
-          const timeInSecondsToSendAllSegments = getWaitingTimeInSeconds(segmentsCount)
-
-          return {
-            queuedMessages: messagesCount,
-            queuedSegments: segmentsCount,
-            timeInSecondsToSendAllSegments,
-          }
+      const { queuedMessages, segmentsSent } = await step.invoke(`enqueue-messages-${i + 1}`, {
+        function: enqueueSMS,
+        data: {
+          payload: payloadChunk,
         },
-      )
+      })
 
       totalQueuedMessages += queuedMessages
-      totalQueuedSegments += queuedSegments
+      totalQueuedSegments += segmentsSent
 
-      segmentsInQueue += queuedSegments
-      timeInSecondsToEmptyQueue += timeInSecondsToSendAllSegments
+      segmentsInQueue += segmentsSent
+      timeInSecondsToEmptyQueue += getWaitingTimeInSeconds(segmentsSent)
 
       const emptyQueueTime = addSeconds(now, timeInSecondsToEmptyQueue)
 

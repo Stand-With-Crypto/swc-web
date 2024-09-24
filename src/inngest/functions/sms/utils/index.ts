@@ -1,4 +1,3 @@
 export { createCommunication, createCommunicationJourneys } from './communicationJourney'
-export type { EnqueueMessagePayload } from './enqueueMessages'
-export { countMessagesAndSegments, enqueueMessages } from './enqueueMessages'
+export { countMessagesAndSegments } from './countMessagesAndSegments'
 export { flagInvalidPhoneNumbers } from './flagInvalidPhoneNumbers'
