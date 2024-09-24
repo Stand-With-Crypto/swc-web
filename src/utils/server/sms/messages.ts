@@ -1,4 +1,6 @@
-export const WELCOME_MESSAGE = `Thanks for subscribing to Stand With Crypto! You can expect news, opportunities to engage, and critical updates on crypto policy. The most important thing you can do NOW is to learn where your politicians stand on crypto and get ready to vote at https://www.standwithcrypto.org/w/vote/{{ sessionId }} \n\nMessage & data rates may apply. Message frequency varies. Reply HELP for help or STOP to opt out.`
+import { fullUrl } from '@/utils/shared/urls'
+
+export const WELCOME_MESSAGE = `Thanks for subscribing to Stand With Crypto! You can expect news, opportunities to engage, and critical updates on crypto policy. The most important thing you can do NOW is to learn where your politicians stand on crypto and get ready to vote at ${fullUrl('/w/vote/{{ sessionId }}')} \n\nMessage & data rates may apply. Message frequency varies. Reply HELP for help or STOP to opt out.`
 
 export const GOODBYE_MESSAGE = `You have opted out and will no longer receive texts from Stand With Crypto. Text START to receive texts from SWC.`
 
