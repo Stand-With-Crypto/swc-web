@@ -1,29 +1,40 @@
+import { update } from 'lodash-es'
+
 import { EnqueueMessagePayload } from '@/inngest/functions/sms/enqueueMessages'
 import { countSegments } from '@/utils/server/sms/utils'
 
-export function countMessagesAndSegments(payload: EnqueueMessagePayload[]) {
-  return payload.reduce(
-    (acc, curr) => {
-      let segmentsCount = 0
+export function countMessagesAndSegments(payload: EnqueueMessagePayload[]): {
+  segments: number
+  messages: number
+} {
+  let segmentsCount = 0
+  let messagesCount = 0
 
-      curr.messages.forEach(message => {
-        if (message.body) {
-          segmentsCount += countSegments(message.body)
-        }
-        if (message.media) {
-          // Each image count as one segment in the queue
-          segmentsCount += message.media.length
-        }
-      })
+  const userCountByMessageBody: Record<string, number> = {}
 
-      return {
-        messages: acc.messages + curr.messages.filter(({ body }) => !!body).length,
-        segments: acc.segments + segmentsCount,
+  payload.forEach(({ messages }) => {
+    messages.forEach(msg => {
+      if (msg.media) {
+        // Each image count as one segment in the queue
+        segmentsCount += msg.media.length
       }
-    },
-    {
-      segments: 0,
-      messages: 0,
-    },
-  )
+
+      if (msg.body) {
+        messagesCount += 1
+
+        update(userCountByMessageBody, [msg.body], (current = 0) => current + 1)
+      }
+    })
+  })
+
+  Object.keys(userCountByMessageBody).forEach(message => {
+    const messageSegments = countSegments(message)
+
+    segmentsCount += messageSegments * userCountByMessageBody[message]
+  })
+
+  return {
+    segments: segmentsCount,
+    messages: messagesCount,
+  }
 }
