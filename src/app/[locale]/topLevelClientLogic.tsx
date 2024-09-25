@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ThirdwebProvider, useAutoConnect } from 'thirdweb/react'
 
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
@@ -12,6 +12,7 @@ import { useReloadDueToInactivity } from '@/hooks/useReloadDueToInactivity'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
+import { getUserIdOnClient } from '@/utils/shared/userId'
 import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
@@ -20,6 +21,7 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 const InitialOrchestration = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const router = useRouter()
   const authUser = useThirdwebAuthUser()
 
   useReloadDueToInactivity({ timeInMinutes: 25 })
@@ -37,20 +39,20 @@ const InitialOrchestration = () => {
       Sentry.setUser({ id: sessionId, idType: 'session' })
     }
   }, [])
-  const searchParamsUserId = searchParams?.get('userId')
   useEffect(() => {
-    if (authUser.user?.userId || searchParamsUserId) {
-      identifyUserOnClient({ userId: authUser.user?.userId ?? searchParamsUserId! })
+    const clientUserId = getUserIdOnClient()
+    if (authUser.user?.userId || clientUserId) {
+      identifyUserOnClient({ userId: authUser.user?.userId ?? clientUserId! })
     }
-    if (authUser.user && searchParamsUserId && authUser.user.userId !== searchParamsUserId) {
-      Sentry.captureMessage('mismatch between authenticated user and userId in search param', {
+    if (authUser.user && clientUserId && authUser.user.userId !== clientUserId) {
+      Sentry.captureMessage('mismatch between authenticated user and userId in cookie value', {
         extra: {
           authUserId: authUser.user.userId,
-          searchParamsUserId,
+          clientUserId,
         },
       })
     }
-  }, [authUser.user, searchParamsUserId])
+  }, [authUser.user])
   const unexpectedUrl = searchParams?.get('unexpectedUrl')
   useEffect(() => {
     if (unexpectedUrl) {
@@ -67,6 +69,17 @@ const InitialOrchestration = () => {
       action: AnalyticActionType.view,
     })
   }, [pathname])
+
+  useEffect(() => {
+    const searchParamsSessionId = searchParams?.get('sessionId')
+    if (searchParamsSessionId) {
+      const params = new URLSearchParams(searchParams?.toString())
+      params.delete('sessionId')
+      params.delete('userId')
+      router.replace(`${pathname || '/'}?${params.toString()}`)
+    }
+  }, [router, searchParams, pathname])
+
   return null
 }
 
