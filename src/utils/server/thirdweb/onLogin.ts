@@ -102,6 +102,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
       Sentry.captureException(e, {
         tags: { domain: 'onLogin/existingUser' },
         extra: { existingVerifiedUser, cryptoAddress, localUser },
+        level: 'fatal',
       })
       throw e
     })
@@ -146,6 +147,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
       Sentry.captureException(e, {
         tags: { domain: 'onLogin/newUser' },
         extra: { cryptoAddress, localUser },
+        level: 'fatal',
       })
       throw e
     })
@@ -875,11 +877,7 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
 
-    const signUpFlowExperimentVariant =
-      localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
-    if (signUpFlowExperimentVariant === 'control') {
-      await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
-    }
+    await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
 
     if (embeddedWalletUserDetails?.phone) {
       await smsActions.optInUser(embeddedWalletUserDetails.phone, user)

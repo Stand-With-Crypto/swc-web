@@ -1,4 +1,4 @@
-import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
+import { MOCK_PRESS_CONTENT } from '@/components/app/pagePress/mock'
 import { PressSection } from '@/components/app/pagePress/press/pressSection'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -28,7 +28,7 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
 
       <div className="flex flex-col gap-16">
         {pressContent.map(({ dateHeading, heading, publication, link }) => {
-          const isInternal = link.startsWith('/')
+          const isInternal = publication === 'Press Release' && link.startsWith('/')
 
           const LinkComponent = isInternal ? TrackedInternalLink : TrackedExternalLink
           const currentLink = isInternal ? `/press/${slugify(link) ?? ''}` : link

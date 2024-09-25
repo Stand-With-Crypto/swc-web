@@ -123,7 +123,6 @@ export const apiUrls = {
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
   totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
-  userClaimedOptInNFT: () => `/api/identified-user/claimed-opt-in-nft`,
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
