@@ -92,85 +92,126 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     for (const message of messages) {
       const { campaignName, smsBody, includePendingDoubleOptIn, media, userWhereInput } = message
 
-      logger.info(
-        'Fetching phone numbers for message',
-        prettyStringify({
-          campaignName,
-          smsBody,
-        }),
-      )
+      logger.info(prettyStringify(message))
 
-      // If the user didn't receive our welcome message with legalese text we need to include it in the bulk text
-      const phoneNumbersThatShouldReceiveWelcomeText = await step.run(
-        'fetch-phone-numbers-that-should-receive-welcome-text',
-        () =>
-          fetchAllPhoneNumbers(
-            {
-              campaignName,
-              includePendingDoubleOptIn,
-              userWhereInput,
-            },
-            false,
-          ),
-      )
+      let messagesPayload: EnqueueMessagePayload[] = []
+      let segmentsCount = 0
+      let messagesCount = 0
+      let timeToSendSegments = 0
 
-      const messagesPayload: EnqueueMessagePayload[] = phoneNumbersThatShouldReceiveWelcomeText.map(
-        phoneNumber => ({
+      for (const hasWelcomeMessage of [true, false]) {
+        logger.info(`Merging params`)
+
+        const customWhere = mergeWhereParams(
+          { ...userWhereInput },
+          {
+            UserCommunicationJourney: hasWelcomeMessage
+              ? {
+                  some: {
+                    journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                  },
+                }
+              : {
+                  every: {
+                    journeyType: {
+                      not: UserCommunicationJourneyType.WELCOME_SMS,
+                    },
+                  },
+                },
+          },
+        )
+
+        const allPhoneNumbers: string[] = []
+        let hasNumbersLeft = true
+        let skip = 0
+
+        logger.info(
+          'Fetching phone numbers',
+          prettyStringify({
+            hasWelcomeMessage,
+            campaignName,
+            smsBody,
+          }),
+        )
+
+        let index = 0
+        while (hasNumbersLeft) {
+          const phoneNumberList = await step.run(
+            `fetching-phone-numbers-welcome-${String(hasWelcomeMessage)}-${index}`,
+            () =>
+              getPhoneNumberList({
+                campaignName,
+                includePendingDoubleOptIn,
+                skip,
+                userWhereInput: customWhere,
+              }),
+          )
+
+          skip += phoneNumberList.length
+          index += 1
+
+          allPhoneNumbers.push(
+            ...phoneNumberList.map(({ phoneNumber }) => phoneNumber).filter(isPhoneNumberSupported),
+          )
+
+          logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
+
+          if (!DATABASE_QUERY_LIMIT || phoneNumberList.length < DATABASE_QUERY_LIMIT) {
+            hasNumbersLeft = false
+          }
+        }
+
+        logger.info('Got phone numbers, adding to messagesPayload')
+
+        const body = hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
+
+        // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
+        const payload = uniq(allPhoneNumbers).map(phoneNumber => ({
           phoneNumber,
           messages: [
-            {
-              journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-            },
+            ...(hasWelcomeMessage
+              ? [{ journeyType: UserCommunicationJourneyType.WELCOME_SMS }]
+              : []),
             {
               // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
               // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
-              body: addWelcomeMessage(smsBody),
+              body,
               campaignName,
               journeyType: UserCommunicationJourneyType.BULK_SMS,
               media,
             },
           ],
-        }),
-      )
+        }))
 
-      const phoneNumberThatAlreadyReceivedWelcomeMessage = await step.run(
-        'fetch-phone-numbers',
-        () =>
-          fetchAllPhoneNumbers(
-            {
-              campaignName,
-              includePendingDoubleOptIn,
-              userWhereInput,
-            },
-            true,
-          ),
-      )
+        // We need to use concat here because using spread is exceeding maximum call stack size
+        messagesPayload = messagesPayload.concat(payload)
 
-      messagesPayload.push(
-        ...phoneNumberThatAlreadyReceivedWelcomeMessage.map(phoneNumber => ({
-          phoneNumber,
-          messages: [
-            {
-              body: smsBody,
-              campaignName,
-              journeyType: UserCommunicationJourneyType.BULK_SMS,
-              media,
-            },
-          ],
-        })),
-      )
+        logger.info(`messagesPayload.length ${messagesPayload.length}`)
 
-      const { segments: segmentsCount, messages: messagesCount } = await step.run(
-        'count-messages-and-segments',
-        () => countMessagesAndSegments(messagesPayload),
-      )
+        logger.info(`Counting segments`)
 
-      const timeToSendSegments = getWaitingTimeInSeconds(segmentsCount)
+        const payloadCounts = await step.run(
+          `count-messages-and-segments-welcome-${String(hasWelcomeMessage)}`,
+          () => countMessagesAndSegments(payload),
+        )
+
+        segmentsCount += payloadCounts.segments
+        messagesCount += payloadCounts.messages
+        timeToSendSegments += getWaitingTimeInSeconds(payloadCounts.segments)
+
+        logger.info(
+          prettyStringify({
+            segmentsCount,
+            messagesCount,
+            timeToSendSegments: getWaitingTimeInSeconds(payloadCounts.segments),
+          }),
+        )
+      }
 
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
 
       // This is for debugging and estimation purposes only
-      // Grouping bulk send metadata by campaign name
+      // Grouping bulk send count by campaign name
       update(
         messagesInfo,
         [campaignName],
@@ -350,55 +391,6 @@ const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroup
 // Add a space before the welcome message to ensure proper formatting. If the message ends with a link,
 // appending the welcome message directly could break the link.
 const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
-
-async function fetchAllPhoneNumbers(
-  options: Omit<GetPhoneNumberOptions, 'skip'>,
-  hasWelcomeMessage: boolean,
-) {
-  const customWhere = mergeWhereParams(
-    { ...options.userWhereInput },
-    {
-      UserCommunicationJourney: hasWelcomeMessage
-        ? {
-            some: {
-              journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-            },
-          }
-        : {
-            every: {
-              journeyType: {
-                not: UserCommunicationJourneyType.WELCOME_SMS,
-              },
-            },
-          },
-    },
-  )
-
-  const allPhoneNumbers: string[] = []
-  let hasNumbersLeft = true
-  let skip = 0
-
-  while (hasNumbersLeft) {
-    const phoneNumberList = await getPhoneNumberList({
-      ...options,
-      skip,
-      userWhereInput: customWhere,
-    })
-
-    skip += phoneNumberList.length
-
-    allPhoneNumbers.push(
-      ...phoneNumberList.map(({ phoneNumber }) => phoneNumber).filter(isPhoneNumberSupported),
-    )
-
-    if (!DATABASE_QUERY_LIMIT || phoneNumberList.length < DATABASE_QUERY_LIMIT) {
-      hasNumbersLeft = false
-    }
-  }
-
-  // Using uniq here to not send multiple messages to the same phone number
-  return uniq(allPhoneNumbers)
-}
 
 export interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean
