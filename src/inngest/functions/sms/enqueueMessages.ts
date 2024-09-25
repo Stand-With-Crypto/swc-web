@@ -74,11 +74,9 @@ export const enqueueSMS = inngest.createFunction(
     const {
       // Phone numbers that sendSMS returned a isTooManyRequests error. Messages are grouped by phone number, so [{ [phoneNumber]: [failedMessageInfo] }]
       failedPhoneNumbers,
-      // Phone numbers that sendSMS returned a isInvalidPhoneNumber error
       invalidPhoneNumbers,
-      // Phone numbers that sendSMS returned a isUnsubscribedUser error
       unsubscribedUsers,
-      // Messages grouped by journey type and campaign name, Ex: BULK_SMS -> some-campaign-name: ["messageId"]
+      // Messages grouped by journey type and campaign name, Ex: BULK_SMS -> campaign-name: ["messageId"]
       messagesSentByJourneyType,
       queuedMessages,
       segmentsSent,
@@ -192,7 +190,7 @@ export const enqueueSMS = inngest.createFunction(
     })
 
     await step.run('persist-results-to-db', async () => {
-      // Remember messagesSentByJourneyType have messages grouped by journeyType and campaignName
+      // messagesSentByJourneyType have messages grouped by journeyType and campaignName
       for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
         const journeyType = journeyTypeKey as UserCommunicationJourneyType
 
@@ -237,7 +235,6 @@ export const enqueueSMS = inngest.createFunction(
     }))
 
     if (failedEnqueueMessagePayload.length > 0) {
-      // Increase timeout each attempt
       const waitingTime = 1000 * (attempt * attempt)
 
       logger.info(

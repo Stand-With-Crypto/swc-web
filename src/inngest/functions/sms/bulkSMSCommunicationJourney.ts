@@ -266,6 +266,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
+    let totalTimeToSendMessagesInSeconds = 0
 
     let segmentsInQueue = currentSegmentsInQueue ?? 0
     let timeInSecondsToEmptyQueue = getWaitingTimeInSeconds(segmentsInQueue)
@@ -306,7 +307,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       totalQueuedSegments += segmentsSent
 
       segmentsInQueue += segmentsSent
-      timeInSecondsToEmptyQueue += getWaitingTimeInSeconds(segmentsSent)
+      const timeToSendSegments = getWaitingTimeInSeconds(segmentsSent)
+
+      timeInSecondsToEmptyQueue += timeToSendSegments
+      totalTimeToSendMessagesInSeconds += timeToSendSegments
 
       const emptyQueueTime = addSeconds(now, timeInSecondsToEmptyQueue)
 
@@ -354,9 +358,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       }
 
       logger.info(
+        `shipping-estimate`,
+        prettyStringify({
+          messages: bulkInfo.total.messagesCount - totalQueuedMessages,
+          time: formatTime(totalTime - totalTimeToSendMessagesInSeconds),
+        }),
+      )
+
+      logger.info(
         `summary-info - ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
         prettyStringify({
-          totalTimeToSendAllSegments: formatTime(timeInSecondsToEmptyQueue),
+          timeInSecondsToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
           segmentsInQueue,
           totalQueuedMessages,
           totalQueuedSegments,
