@@ -39,8 +39,8 @@ const InitialOrchestration = () => {
       Sentry.setUser({ id: sessionId, idType: 'session' })
     }
   }, [])
-  const clientUserId = getUserIdOnClient()
   useEffect(() => {
+    const clientUserId = getUserIdOnClient()
     if (authUser.user?.userId || clientUserId) {
       identifyUserOnClient({ userId: authUser.user?.userId ?? clientUserId! })
     }
@@ -52,7 +52,7 @@ const InitialOrchestration = () => {
         },
       })
     }
-  }, [authUser.user, clientUserId])
+  }, [authUser.user])
   const unexpectedUrl = searchParams?.get('unexpectedUrl')
   useEffect(() => {
     if (unexpectedUrl) {

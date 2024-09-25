@@ -10,6 +10,7 @@ import {
 } from '@/utils/server/getCountryCode'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
+import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 const logger = getLogger('middleware')
@@ -43,6 +44,15 @@ export function middleware(request: NextRequest) {
     i18nParsedResponse.cookies.set({
       name: USER_SESSION_ID_COOKIE_NAME,
       value: sessionId,
+      httpOnly: false,
+    })
+  }
+
+  const urlUserId = request.nextUrl.searchParams.get('userId')
+  if (urlUserId) {
+    i18nParsedResponse.cookies.set({
+      name: USER_ID_COOKIE_NAME,
+      value: urlUserId,
       httpOnly: false,
     })
   }
