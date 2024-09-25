@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ThirdwebProvider, useAutoConnect } from 'thirdweb/react'
 
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
@@ -20,6 +20,7 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 const InitialOrchestration = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const router = useRouter()
   const authUser = useThirdwebAuthUser()
 
   useReloadDueToInactivity({ timeInMinutes: 25 })
@@ -67,6 +68,16 @@ const InitialOrchestration = () => {
       action: AnalyticActionType.view,
     })
   }, [pathname])
+  const searchParamsSessionId = searchParams?.get('sessionId')
+  useEffect(() => {
+    if (searchParamsSessionId) {
+      const params = new URLSearchParams(searchParams?.toString())
+      params.delete('sessionId')
+      params.delete('userId')
+      router.replace(`${pathname || '/'}?${params.toString()}`)
+    }
+  }, [searchParamsSessionId, router, searchParams, pathname])
+
   return null
 }
 
