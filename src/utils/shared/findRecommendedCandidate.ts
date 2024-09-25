@@ -4,6 +4,7 @@ export function findRecommendedCandidate<
   T extends {
     manuallyOverriddenStanceScore: number | null | undefined
     computedStanceScore: number | null | undefined
+    computedSumStanceScoreWeight: number | null | undefined
   },
 >(items: T[]) {
   const veryProCrypto: T[] = []

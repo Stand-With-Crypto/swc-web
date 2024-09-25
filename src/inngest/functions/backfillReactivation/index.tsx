@@ -10,12 +10,6 @@ import { EmailActiveActions } from '@/utils/server/email/templates/common/consta
 import ReactivationReminder from '@/utils/server/email/templates/reactivationReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-interface ReactivationEmailPayload {
-  testEmail?: string
-  persist?: boolean
-  limit?: number
-}
-
 interface EmailResult {
   userId: string
   messageId: string
@@ -39,6 +33,15 @@ const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_FUNCTION_ID = 'script.backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE =
   Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 50
+
+export interface BackfillReactivationInngestSchema {
+  name: typeof BACKFILL_REACTIVATION_INNGEST_EVENT_NAME
+  data: {
+    testEmail?: string
+    persist?: boolean
+    limit?: number
+  }
+}
 
 const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-cron-job'
 const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE =
@@ -68,7 +71,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
     event: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
   },
   async ({ event, step, logger }) => {
-    const { testEmail, persist, limit } = event.data as ReactivationEmailPayload
+    const { testEmail, persist, limit } = event.data
 
     const usersWithoutCommunicationJourney = await step.run(
       'get-users-without-communication-journey',

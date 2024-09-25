@@ -24,11 +24,13 @@ const getDefaultProps = () => {
       nameSuffix: '',
       politicalAffiliationCategory: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
       computedStanceScore: 0,
+      computedSumStanceScoreWeight: 5,
       manuallyOverriddenStanceScore: undefined,
       profilePictureUrl:
         'https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Joe_Biden_presidential_portrait.jpg',
       profilePictureUrlDimensions: { width: 220, height: 275 },
       promotedPositioning: undefined,
+      stanceCount: 2,
       primaryRole: {
         dateEnd: undefined,
         dateStart: '2021-01-20',
@@ -67,6 +69,10 @@ type Story = StoryObj<typeof meta>
 
 export const Single: Story = {
   args: {},
+}
+
+export const SomeWhatSupportive: Story = {
+  args: { person: { ...getDefaultProps().person, computedStanceScore: 75 } },
 }
 
 export const Recommended: Story = {

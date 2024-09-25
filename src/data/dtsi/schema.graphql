@@ -121,6 +121,7 @@ scalar Json
 type Person {
   billRelationships: [BillPersonRelationship!]!
   computedStanceScore: Float
+  computedSumStanceScoreWeight: Float
   contactFormUrl: String!
   crpId: String!
   cspanId: String!

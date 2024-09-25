@@ -1,5 +1,14 @@
 # Working with two or more campaigns active at the same time
 
+- [Create the campaign](#create-the-campaign)
+- [Change CTAs priority order](#change-ctas-priority-order)
+- [Create the corresponding modules for the campaign](#create-the-corresponding-modules-for-the-campaign)
+- [Create the campaign CTA](#create-the-campaign-cta)
+- [Update the deeplink URL for our internal deeplink page](#update-the-deeplink-url-for-our-internal-deeplink-page)
+- [Update the variantRecentActivityRow](#update-the-variantrecentactivityrow)
+- [Create a new card to display when the campaign is deactivated](#create-a-new-card-to-display-when-the-campaign-is-deactivated)
+- [How to remove the campaign after it is not necessary anymore](#how-to-remove-the-campaign-after-it-is-not-necessary-anymore)
+
 ## Create the campaign
 
 - Add the new campaign to the appropriate user action in `src/utils/shared/userActionCampaigns.ts`. Please choose a specific campaign name that isn’t too generic to avoid potential issues in the future. One suggestion is to include a date in the name. e.g.:

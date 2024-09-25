@@ -6,7 +6,12 @@ import {
 
 export const DTSIFormattedLetterGrade: React.FC<
   (
-    | { person: Pick<DTSI_Person, 'computedStanceScore' | 'manuallyOverriddenStanceScore'> }
+    | {
+        person: Pick<
+          DTSI_Person,
+          'computedStanceScore' | 'manuallyOverriddenStanceScore' | 'computedSumStanceScoreWeight'
+        >
+      }
     | { letterGrade: DTSILetterGrade | null }
   ) & {
     className: string
@@ -21,11 +26,11 @@ export const DTSIFormattedLetterGrade: React.FC<
       case 'A':
         return '/dtsiLetterGrade/a-grade.svg'
       case 'B':
-        return '/dtsiLetterGrade/b-grade.svg'
+        return '/dtsiLetterGrade/b-grade-light.svg'
       case 'C':
         return '/dtsiLetterGrade/c-grade.svg'
       case 'D':
-        return '/dtsiLetterGrade/d-grade.svg'
+        return '/dtsiLetterGrade/d-grade-light.svg'
       case 'F':
         return '/dtsiLetterGrade/f-grade.svg'
       default:

@@ -19,17 +19,10 @@ import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
 
-const MAX_RETRY_COUNT = 0
-const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
-
-// This constants are specific to our twilio phone number type
-const MESSAGE_SEGMENTS_PER_SECOND = Number(
-  requiredEnv(process.env.MESSAGE_SEGMENTS_PER_SECOND, 'MESSAGE_SEGMENTS_PER_SECOND'),
-)
-const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
-
-const MIN_ENQUEUE_HOUR = 11 // 11 am
-const MAX_ENQUEUE_HOUR = 22 // 10 pm
+export interface BulkSmsCommunicationJourneyInngestEventSchema {
+  name: typeof BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME
+  data: BulkSMSPayload
+}
 
 export interface BulkSMSPayload {
   messages: Array<{
@@ -48,6 +41,18 @@ export interface BulkSMSPayload {
   currentSegmentsInQueue?: number
 }
 
+const MAX_RETRY_COUNT = 0
+const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
+
+// This constants are specific to our twilio phone number type
+const MESSAGE_SEGMENTS_PER_SECOND = Number(
+  requiredEnv(process.env.MESSAGE_SEGMENTS_PER_SECOND, 'MESSAGE_SEGMENTS_PER_SECOND'),
+)
+const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
+
+const MIN_ENQUEUE_HOUR = 11 // 11 am
+const MAX_ENQUEUE_HOUR = 22 // 10 pm
+
 export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
     id: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,
@@ -58,13 +63,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const {
-      send,
-      sleepTime,
-      messages,
-      timezone = -4,
-      currentSegmentsInQueue = 0,
-    } = event.data as BulkSMSPayload
+    const { send, sleepTime, messages, timezone = -4, currentSegmentsInQueue = 0 } = event.data
 
     if (!messages) {
       throw new NonRetriableError('Missing messages to send')
@@ -359,13 +358,6 @@ const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroup
 // appending the welcome message directly could break the link.
 const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
 
-interface GetPhoneNumberOptions {
-  includePendingDoubleOptIn?: boolean
-  cursor?: Date
-  userWhereInput?: Prisma.UserGroupByArgs['where']
-  campaignName?: string
-}
-
 async function fetchAllPhoneNumbers(
   options: Omit<GetPhoneNumberOptions, 'cursor'>,
   hasWelcomeMessage: boolean,
@@ -415,6 +407,13 @@ async function fetchAllPhoneNumbers(
 
   // Using uniq here to not send multiple messages to the same phone number
   return uniq(allPhoneNumbers)
+}
+
+export interface GetPhoneNumberOptions {
+  includePendingDoubleOptIn?: boolean
+  cursor?: Date
+  userWhereInput?: Prisma.UserGroupByArgs['where']
+  campaignName?: string
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {

@@ -18,6 +18,7 @@ import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguage,
   convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { pluralize } from '@/utils/shared/pluralize'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -66,7 +67,7 @@ function DTSIPersonHeroCardFooter({
       className={cn(
         'p-4 text-center font-bold text-fontcolor',
         isRecommended ? recommendedClasses : notRecommendedClasses,
-        !forceMobile && 'sm:px-3 sm:py-6 sm:text-sm xl:p-6 xl:text-lg',
+        !forceMobile && 'sm:px-3 sm:py-6 sm:text-sm xl:p-5 xl:text-lg',
         className,
       )}
     >
@@ -148,6 +149,10 @@ export function DTSIPersonHeroCard(props: Props) {
               >
                 {displayName}
               </div>
+              <div className="text-xs text-white">
+                {person.stanceCount}{' '}
+                {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
+              </div>
               {subheaderString && (
                 <div className="mt-2">
                   <div
@@ -182,7 +187,11 @@ export function DTSIPersonHeroCard(props: Props) {
             footer
           ) : (
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-muted text-xs">
+              <div className="mb-2 text-xs">
+                {person.stanceCount}{' '}
+                {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
                 <div className="shrink-0">
                   <DTSIFormattedLetterGrade className="h-5 w-5" person={person} />
                 </div>

@@ -88,7 +88,21 @@ function manuallyAdjustResults(results: SumDonationsByUser) {
       },
     }),
   }
-  return [moonpay, ...results]
+  const exodus: SumDonationsByUser[0] = {
+    totalAmountUsd: 1_300_000,
+    user: getClientModel({
+      id: 'manually-added-exodus',
+      firstName: null,
+      lastName: null,
+      informationVisibility: UserInformationVisibility.ALL_INFO,
+      primaryUserCryptoAddress: null,
+      manuallySetInformation: {
+        displayName: 'Exodus',
+        profilePictureUrl: '/userManuallySetInformation/exodus.jpg',
+      },
+    }),
+  }
+  return [exodus, moonpay, ...results]
 }
 
 export async function getSumDonationsByUser(config: SumDonationsByUserConfig) {

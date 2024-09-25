@@ -9,7 +9,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import {
   EmailEvent,
   EmailEventName,
@@ -68,17 +67,15 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
     })
 
     if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {
-      const capitolCanaryPayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-        user: user,
-        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
-        opts: {
-          isEmailOptout: true,
-        },
-      }
-
       await inngest.send({
         name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-        data: capitolCanaryPayload,
+        data: {
+          user: user,
+          campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
+          opts: {
+            isEmailOptout: true,
+          },
+        },
       })
     }
 

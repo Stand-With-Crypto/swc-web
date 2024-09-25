@@ -8,10 +8,12 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
     nameSuffix
     politicalAffiliationCategory
     computedStanceScore
+    computedSumStanceScoreWeight
     manuallyOverriddenStanceScore
     profilePictureUrl
     profilePictureUrlDimensions
     promotedPositioning
+    stanceCount(verificationStatusIn: APPROVED)
     primaryRole {
       dateEnd
       dateStart

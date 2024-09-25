@@ -33,6 +33,9 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minute
 const BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID = 'script.backfill-nft-cron-job'
 const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
 
+export interface BackfillNftInngestCronJobSchema {
+  name: typeof BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME
+}
 /**
  * This Inngest function is a cron job responsible for backfilling the NFTs for the user actions that were skipped/missed.
  * The code is written in a fashion to support Inngest multi-step functions and memoize states.

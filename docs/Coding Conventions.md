@@ -1,5 +1,16 @@
 # Coding Conventions
 
+- [General](#general)
+- [TypeScript](#typescript)
+- [Validation](#validation)
+- [UI Development](#ui-development)
+- [Backend Development](#backend-development)
+- [Security](#security)
+- [Database](#database)
+- [Data Fetching/Rendering](#data-fetchingrendering)
+- [Analytics](#analytics)
+- [Testing](#testing)
+
 Below is a non-exhaustive list of coding conventions that we follow. This list is ever evolving and suggestions submitted via PR are highly encouraged!
 
 ## General

@@ -17,6 +17,9 @@ export function DonateButton() {
         formName: 'Donate Button',
         onError: toastGenericError,
         payload: undefined,
+        errorScopeContext: {
+          level: 'fatal',
+        },
       },
       () =>
         actionCreateCoinbaseCommerceCharge().then(res => {
