@@ -10,6 +10,7 @@ import { toBool } from '@/utils/shared/toBool'
 import { getIsSupportedBrowser, maybeDetectBrowser } from './maybeDetectBrowser'
 
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
+const shouldSuppress = toBool(process.env.NEXT_PUBLIC_SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
 
 const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'No internet connection detected',
@@ -39,6 +40,7 @@ const isSupportedBrowser = getIsSupportedBrowser(maybeDetectBrowser())
 
 // Single source of truth for log prefixes and messages
 const LOG_MESSAGE_PREFIXES = {
+  suppressedMessage: shouldSuppress ? 'Suppressed Sentry' : 'Sentry',
   forceFingerprintTransaction: 'Sentry: Forced fingerprint to',
   forceFingerprintError: 'Sentry: Forced fingerprint to',
   transactionNameMatch: 'transaction name match against COMMON_TRANSACTION_NAMES_TO_GROUP',
@@ -94,16 +96,14 @@ Sentry.init({
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-      const shouldSuppress = toBool(process.env.NEXT_PUBLIC_SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
+      console.debug(
+        LOG_MESSAGE_PREFIXES.suppressedMessage,
+        hint?.originalException || hint?.syntheticException,
+      )
 
       if (shouldSuppress) {
         return null
       }
-
-      console.debug(
-        `${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
-        hint?.originalException || hint?.syntheticException,
-      )
     }
 
     // prevent legacy browsers from triggering sentry
