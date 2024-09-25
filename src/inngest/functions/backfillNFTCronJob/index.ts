@@ -157,19 +157,12 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
 
     // Fetch the remaining user actions that are in the backlog.
     const userActionsRemaining = await step.run('script.get-user-actions-remaining', async () => {
-      const userIdsWithCryptoAddress = await prismaClient.user
-        .findMany({
-          where: { primaryUserCryptoAddress: { isNot: null } },
-          select: { id: true },
-        })
-        .then(users => users.map(user => user.id))
-
       return await prismaClient.userAction.count({
         where: {
           datetimeCreated: { gte: GO_LIVE_DATE },
           nftMint: null,
           actionType: { in: actionsWithNFT },
-          userId: { in: userIdsWithCryptoAddress },
+          user: { primaryUserCryptoAddress: { isNot: null } },
         },
       })
     })

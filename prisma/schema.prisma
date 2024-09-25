@@ -307,6 +307,7 @@ model UserAction {
   userActionVotingInformationResearched UserActionVotingInformationResearched?
 
   @@index([datetimeCreated])
+  @@index([userId, nftMintId])
   @@index([userId, actionType, campaignName])
   @@index([actionType, campaignName])
   @@index([userCryptoAddressId])
