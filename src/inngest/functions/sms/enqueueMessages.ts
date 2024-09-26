@@ -14,30 +14,28 @@ import { inngest } from '@/inngest/inngest'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
-import { applySMSVariables } from '@/utils/server/sms/utils/variables'
+import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
 
 export const ENQUEUE_SMS_INNGEST_EVENT_NAME = 'app/enqueue.sms'
 const ENQUEUE_SMS_INNGEST_FUNCTION_ID = 'app.enqueue-sms'
 
 const MAX_RETRY_COUNT = 0
 
-interface PayloadMessage {
-  body?: string
-  journeyType: UserCommunicationJourneyType
-  campaignName?: string
-  media?: string[]
-}
-
 export interface EnqueueMessagePayload {
   phoneNumber: string
-  messages: PayloadMessage[]
+  messages: Array<{
+    body?: string
+    journeyType: UserCommunicationJourneyType
+    campaignName?: string
+    media?: string[]
+  }>
 }
 
 export interface EnqueueSMSInngestEventSchema {
   name: typeof ENQUEUE_SMS_INNGEST_EVENT_NAME
   data: {
     payload: EnqueueMessagePayload[]
-    variables?: Awaited<ReturnType<typeof getSMSVariablesByPhoneNumbers>>
+    variables?: EnqueueMessagesVariables
     attempt?: number
   }
 }
@@ -71,6 +69,8 @@ export const enqueueSMS = inngest.createFunction(
     let totalQueuedMessages = 0
     let totalSegmentsSent = 0
 
+    logger.info(`Attempt ${attempt + 1} queuing messages`)
+
     const {
       // Phone numbers that sendSMS returned a isTooManyRequests error. Messages are grouped by phone number, so [{ [phoneNumber]: [failedMessageInfo] }]
       failedPhoneNumbers,
@@ -80,116 +80,11 @@ export const enqueueSMS = inngest.createFunction(
       messagesSentByJourneyType,
       queuedMessages,
       segmentsSent,
-    } = await step.run('enqueue-messages', async () => {
-      const invalidPhoneNumbers: string[] = []
-      const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
-      const messagesSentByJourneyType: {
-        [key in UserCommunicationJourneyType]?: BulkCreateCommunicationJourneyPayload
-      } = {}
-      const unsubscribedUsers: string[] = []
+    } = await step.run('enqueue-messages', () => enqueueMessages(payload, userSMSVariables))
 
-      let segmentsSent = 0
-      let queuedMessages = 0
-
-      const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
-        for (const message of messages) {
-          const { body, journeyType, campaignName, media } = message
-
-          const phoneNumberVariables = userSMSVariables[phoneNumber]
-
-          try {
-            if (body) {
-              const queuedMessage = await sendSMS({
-                body: applySMSVariables(body, phoneNumberVariables),
-                to: phoneNumber,
-                media,
-              })
-
-              if (queuedMessage) {
-                update(
-                  messagesSentByJourneyType,
-                  [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
-                  (existingPayload = []) => [
-                    ...existingPayload,
-                    {
-                      messageId: queuedMessage.sid,
-                      phoneNumber,
-                    },
-                  ],
-                )
-
-                segmentsSent += countSegments(queuedMessage.body)
-                queuedMessages += 1
-              }
-            } else {
-              // Bulk-SMS have logic to check if the phone number already received a welcome message, if it didn't it includes the welcome message at the end of the bulk message.
-              // When doing this, it also adds a WELCOME_SMS journeyType to enqueueSMS payload, so we need to register that the user received the welcome legalese inside the bulk message
-              update(
-                messagesSentByJourneyType,
-                [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
-                (existingPayload = []) => [
-                  ...existingPayload,
-                  {
-                    phoneNumber,
-                  },
-                ],
-              )
-            }
-          } catch (error) {
-            if (error instanceof NonRetriableError) {
-              throw error
-            }
-
-            if (error instanceof SendSMSError) {
-              if (error.isTooManyRequests) {
-                return update(failedPhoneNumbers, [error.phoneNumber], (current = []) =>
-                  current.push(message),
-                )
-              }
-              if (error.isInvalidPhoneNumber) {
-                return invalidPhoneNumbers.push(error.phoneNumber)
-              }
-              if (error.isUnsubscribedUser) {
-                return unsubscribedUsers.push(error.phoneNumber)
-              }
-
-              return Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
-                extra: { reason: error },
-                tags: {
-                  domain: 'enqueueMessages',
-                },
-              })
-            }
-
-            Sentry.captureException(`sendSMS unexpected Error: ${(error as any)?.message}`, {
-              extra: {
-                reason: error,
-              },
-              tags: {
-                domain: 'enqueueMessages',
-              },
-            })
-          }
-        }
-      })
-
-      logger.info(`Attempt ${attempt + 1} queuing messages`)
-
-      await Promise.all(enqueueMessagesPromise)
-
-      logger.info(
-        `Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`,
-      )
-
-      return {
-        invalidPhoneNumbers,
-        failedPhoneNumbers,
-        messagesSentByJourneyType,
-        unsubscribedUsers,
-        segmentsSent,
-        queuedMessages,
-      }
-    })
+    logger.info(
+      `Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`,
+    )
 
     await step.run('persist-results-to-db', async () => {
       // messagesSentByJourneyType have messages grouped by journeyType and campaignName
@@ -264,3 +159,113 @@ export const enqueueSMS = inngest.createFunction(
     }
   },
 )
+
+type EnqueueMessagesVariables = Record<string, UserSMSVariables>
+
+export async function enqueueMessages(
+  payload: EnqueueMessagePayload[],
+  variables: EnqueueMessagesVariables,
+) {
+  const invalidPhoneNumbers: string[] = []
+  const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
+  const messagesSentByJourneyType: {
+    [key in UserCommunicationJourneyType]?: BulkCreateCommunicationJourneyPayload
+  } = {}
+  const unsubscribedUsers: string[] = []
+
+  let segmentsSent = 0
+  let queuedMessages = 0
+
+  const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
+    for (const message of messages) {
+      const { body, journeyType, campaignName, media } = message
+
+      const phoneNumberVariables = variables[phoneNumber]
+
+      try {
+        if (body) {
+          const queuedMessage = await sendSMS({
+            body: applySMSVariables(body, phoneNumberVariables),
+            to: phoneNumber,
+            media,
+          })
+
+          if (queuedMessage) {
+            update(
+              messagesSentByJourneyType,
+              [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
+              (existingPayload = []) => [
+                ...existingPayload,
+                {
+                  messageId: queuedMessage.sid,
+                  phoneNumber,
+                },
+              ],
+            )
+
+            segmentsSent += countSegments(queuedMessage.body)
+            queuedMessages += 1
+          }
+        } else {
+          // Bulk-SMS have logic to check if the phone number already received a welcome message, if it didn't it includes the welcome message at the end of the bulk message.
+          // When doing this, it also adds a WELCOME_SMS journeyType to enqueueSMS payload, so we need to register that the user received the welcome legalese inside the bulk message
+          update(
+            messagesSentByJourneyType,
+            [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
+            (existingPayload = []) => [
+              ...existingPayload,
+              {
+                phoneNumber,
+              },
+            ],
+          )
+        }
+      } catch (error) {
+        if (error instanceof NonRetriableError) {
+          throw error
+        }
+
+        if (error instanceof SendSMSError) {
+          if (error.isTooManyRequests) {
+            return update(failedPhoneNumbers, [error.phoneNumber], (current = []) =>
+              current.push(message),
+            )
+          }
+          if (error.isInvalidPhoneNumber) {
+            return invalidPhoneNumbers.push(error.phoneNumber)
+          }
+          if (error.isUnsubscribedUser) {
+            return unsubscribedUsers.push(error.phoneNumber)
+          }
+
+          return Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
+            extra: { reason: error },
+            tags: {
+              domain: 'enqueueMessages',
+            },
+          })
+        }
+
+        Sentry.captureException(`sendSMS unexpected Error: ${(error as any)?.message}`, {
+          extra: {
+            reason: error,
+          },
+          tags: {
+            domain: 'enqueueMessages',
+          },
+        })
+      }
+    }
+  })
+
+  await Promise.all(enqueueMessagesPromise)
+
+  return {
+    invalidPhoneNumbers,
+    failedPhoneNumbers,
+    messagesSentByJourneyType,
+    unsubscribedUsers,
+    segmentsSent,
+    queuedMessages,
+  }
+}
