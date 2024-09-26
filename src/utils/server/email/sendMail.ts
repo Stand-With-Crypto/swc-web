@@ -32,6 +32,7 @@ interface CommonPayload {
   customArgs?: {
     variant?: string
     userId?: string
+    campaign?: string
     [key: string]: string | undefined
   }
 }

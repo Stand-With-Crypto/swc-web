@@ -61,9 +61,10 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       'Sendgrid Message Id': messageId,
       'Sendgrid Event Id': eventEntry.sg_event_id,
       ...(eventEntry.useragent && { 'User Agent': eventEntry.useragent }),
-      ...(eventEntry.url && { Url: eventEntry.url }),
+      ...(eventEntry.url && { Url: new URL(eventEntry.url)?.origin }),
       ...(eventEntry.variant && { Variant: eventEntry.variant }),
       ...(eventEntry.category && { Category: eventEntry.category }),
+      ...(eventEntry.campaign && { Campaign: eventEntry.campaign }),
     })
 
     if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {

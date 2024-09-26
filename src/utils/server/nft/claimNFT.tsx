@@ -239,6 +239,7 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
       userId: user.id,
       userActionId: userAction.id,
       actionType: userAction.actionType,
+      campaign: NFTOnTheWayEmail.campaign,
     },
   }).catch(err => {
     Sentry.captureException(err, {

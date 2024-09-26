@@ -14,6 +14,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type PhoneNumberReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 PhoneNumberReminderEmail.subjectLine = 'Get text updates from SWC'
+PhoneNumberReminderEmail.campaign = 'phone_number_reminder'
 
 export default function PhoneNumberReminderEmail({
   previewText,
@@ -22,7 +23,7 @@ export default function PhoneNumberReminderEmail({
   ...keepUpTheFightSectionProps
 }: PhoneNumberReminderEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'phone_number_reminder',
+    utm_campaign: PhoneNumberReminderEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }

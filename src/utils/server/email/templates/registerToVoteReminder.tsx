@@ -17,6 +17,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type RegisterToVoteReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 RegisterToVoteReminderEmail.subjectLine = 'Register to vote and get a free NFT'
+RegisterToVoteReminderEmail.campaign = 'register_to_vote_reminder'
 
 export default function RegisterToVoteReminderEmail({
   previewText,
@@ -25,7 +26,7 @@ export default function RegisterToVoteReminderEmail({
   ...keepUpTheFightSectionProps
 }: RegisterToVoteReminderEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'register_to_vote_reminder',
+    utm_campaign: RegisterToVoteReminderEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }

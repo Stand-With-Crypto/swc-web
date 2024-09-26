@@ -239,6 +239,7 @@ async function sendBatchEmails(users: User[]) {
       customArgs: {
         userId: user.id,
         category: 'Reactivation Email Reminder',
+        campaign: ReactivationReminder.campaign,
       },
       html: render(
         <ReactivationReminder

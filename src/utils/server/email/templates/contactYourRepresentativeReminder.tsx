@@ -14,6 +14,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type ContactYourRepresentativeReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 ContactYourRepresentativeReminderEmail.subjectLine = 'Make your voice heard'
+ContactYourRepresentativeReminderEmail.campaign = 'contact_your_representative_reminder'
 
 export default function ContactYourRepresentativeReminderEmail({
   previewText,
@@ -22,7 +23,7 @@ export default function ContactYourRepresentativeReminderEmail({
   ...keepUpTheFightSectionProps
 }: ContactYourRepresentativeReminderEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'contact_your_representative_reminder',
+    utm_campaign: ContactYourRepresentativeReminderEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }
