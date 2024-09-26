@@ -136,37 +136,39 @@ export const enqueueSMS = inngest.createFunction(
               )
             }
           } catch (error) {
+            if (error instanceof NonRetriableError) {
+              throw error
+            }
+
             if (error instanceof SendSMSError) {
               if (error.isTooManyRequests) {
-                if (failedPhoneNumbers[error.phoneNumber]) {
-                  failedPhoneNumbers[error.phoneNumber].push(message)
-                } else {
-                  failedPhoneNumbers[error.phoneNumber] = [message]
-                }
-              } else if (error.isInvalidPhoneNumber) {
-                invalidPhoneNumbers.push(error.phoneNumber)
-              } else if (error.isUnsubscribedUser) {
-                unsubscribedUsers.push(error.phoneNumber)
-              } else {
-                Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
-                  extra: { reason: error },
-                  tags: {
-                    domain: 'enqueueMessages',
-                  },
-                })
+                return update(failedPhoneNumbers, [error.phoneNumber], (current = []) =>
+                  current.push(message),
+                )
               }
-            } else if (error instanceof NonRetriableError) {
-              throw error
-            } else {
-              Sentry.captureException(`sendSMS unexpected Error: ${(error as any)?.message}`, {
-                extra: {
-                  reason: error,
-                },
+              if (error.isInvalidPhoneNumber) {
+                return invalidPhoneNumbers.push(error.phoneNumber)
+              }
+              if (error.isUnsubscribedUser) {
+                return unsubscribedUsers.push(error.phoneNumber)
+              }
+
+              return Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
+                extra: { reason: error },
                 tags: {
                   domain: 'enqueueMessages',
                 },
               })
             }
+
+            Sentry.captureException(`sendSMS unexpected Error: ${(error as any)?.message}`, {
+              extra: {
+                reason: error,
+              },
+              tags: {
+                domain: 'enqueueMessages',
+              },
+            })
           }
         }
       })
