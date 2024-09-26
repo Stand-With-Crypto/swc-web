@@ -20,6 +20,7 @@ type NFTOnTheWayEmailProps = KeepUpTheFightSectionProps &
   }
 
 NFTOnTheWayEmail.subjectLine = 'Your NFT is on the way!'
+NFTOnTheWayEmail.campaign = 'nft_on_the_way'
 
 export default function NFTOnTheWayEmail({
   previewText,
@@ -31,7 +32,7 @@ export default function NFTOnTheWayEmail({
   ...keepUpTheFightSectionProps
 }: NFTOnTheWayEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'nft_on_the_way',
+    utm_campaign: NFTOnTheWayEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }

@@ -14,6 +14,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type FinishSettingUpProfileReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 FinishSettingUpProfileReminderEmail.subjectLine = 'Finish setting up your profile'
+FinishSettingUpProfileReminderEmail.campaign = 'finish_setting_up_profile'
 
 export default function FinishSettingUpProfileReminderEmail({
   previewText,
@@ -22,7 +23,7 @@ export default function FinishSettingUpProfileReminderEmail({
   ...keepUpTheFightSectionProps
 }: FinishSettingUpProfileReminderEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'finish_setting_up_profile',
+    utm_campaign: FinishSettingUpProfileReminderEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }

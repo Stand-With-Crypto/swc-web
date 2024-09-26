@@ -17,6 +17,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type FollowOnXReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 FollowOnXReminderEmail.subjectLine = 'Stay up to date on crypto policy'
+FollowOnXReminderEmail.campaign = 'follow_on_x_reminder'
 
 export default function FollowOnXReminderEmail({
   previewText,
@@ -25,7 +26,7 @@ export default function FollowOnXReminderEmail({
   ...keepUpTheFightSectionProps
 }: FollowOnXReminderEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'follow_on_x_reminder',
+    utm_campaign: FollowOnXReminderEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }

@@ -13,6 +13,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type InitialSignUpEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 InitialSignUpEmail.subjectLine = 'Thanks for joining SWC!'
+InitialSignUpEmail.campaign = 'initial_signup'
 
 export default function InitialSignUpEmail({
   previewText,
@@ -21,7 +22,7 @@ export default function InitialSignUpEmail({
   ...keepUpTheFightSectionProps
 }: InitialSignUpEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'initial_signup',
+    utm_campaign: InitialSignUpEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }

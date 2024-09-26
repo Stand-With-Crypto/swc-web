@@ -21,6 +21,7 @@ type NFTArrivedEmailProps = KeepUpTheFightSectionProps &
   }
 
 NFTArrivedEmail.subjectLine = 'Your NFT has arrived!'
+NFTArrivedEmail.campaign = 'nft_arrived'
 
 export default function NFTArrivedEmail({
   previewText,
@@ -32,7 +33,7 @@ export default function NFTArrivedEmail({
   ...keepUpTheFightSectionProps
 }: NFTArrivedEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'nft_arrived',
+    utm_campaign: NFTArrivedEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }
