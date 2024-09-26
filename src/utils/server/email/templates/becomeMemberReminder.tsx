@@ -14,6 +14,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type BecomeMemberReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 BecomeMemberReminderEmail.subjectLine = 'Level up your advocacy'
+BecomeMemberReminderEmail.campaign = 'become_member_reminder'
 
 export default function BecomeMemberReminderEmail({
   previewText,
@@ -22,7 +23,7 @@ export default function BecomeMemberReminderEmail({
   ...keepUpTheFightSectionProps
 }: BecomeMemberReminderEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'become_member_reminder',
+    utm_campaign: BecomeMemberReminderEmail.campaign,
     ...hrefSearchParams,
     ...session,
   }

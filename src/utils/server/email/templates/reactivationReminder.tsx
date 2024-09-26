@@ -13,6 +13,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type ReactivationReminderProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
 ReactivationReminder.subjectLine = 'Connect with SWC'
+ReactivationReminder.campaign = 'reactivation_reminder'
 
 export default function ReactivationReminder({
   previewText,
@@ -21,7 +22,7 @@ export default function ReactivationReminder({
   ...keepUpTheFightSectionProps
 }: ReactivationReminderProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'reactivation_reminder',
+    utm_campaign: ReactivationReminder.campaign,
     ...hrefSearchParams,
     ...session,
   }

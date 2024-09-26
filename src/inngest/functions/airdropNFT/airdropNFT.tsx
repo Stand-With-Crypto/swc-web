@@ -169,6 +169,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
           customArgs: {
             userId: user.id,
             actionType,
+            campaign: NFTArrivedEmail.campaign,
           },
         }).catch(err => {
           Sentry.captureException(err, {

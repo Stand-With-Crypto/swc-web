@@ -305,6 +305,7 @@ async function sendInitialSignUpEmail({
     ),
     customArgs: {
       userId: user.id,
+      campaign: Template.campaign,
     },
   }).catch(err => {
     Sentry.captureException(err, {
