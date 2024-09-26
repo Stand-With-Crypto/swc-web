@@ -25,6 +25,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         partner,
         requestBody,
       },
+      level: 'log',
     })
     return NextResponse.json({ error: baseValidationResult.error }, { status: 400 })
   }
