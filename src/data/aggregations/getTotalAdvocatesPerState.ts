@@ -12,7 +12,7 @@ const fetchAllFromPrisma = async () => {
   return prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
     SELECT
       address.administrative_area_level_1 AS state,
-      COUNT(DISTINCT user.id) AS totalAdvocates
+      COUNT(user.id) AS totalAdvocates
     FROM address
     JOIN user ON user.address_id = address.id
     WHERE address.country_code = 'US'
@@ -27,10 +27,12 @@ const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerSt
       ? 1
       : Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000
 
-  return totalAdvocatesPerState.map(({ state, totalAdvocates }) => ({
-    state,
-    totalAdvocates: parseInt(totalAdvocates.toString(), 10) * multiplier,
-  }))
+  return totalAdvocatesPerState
+    .map(({ state, totalAdvocates }) => ({
+      state,
+      totalAdvocates: parseInt(totalAdvocates.toString(), 10) * multiplier,
+    }))
+    .filter(({ state }) => state.length <= 2)
 }
 
 export const getTotalAdvocatesPerState = async () => {
