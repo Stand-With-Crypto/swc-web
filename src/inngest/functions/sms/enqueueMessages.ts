@@ -15,6 +15,7 @@ import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
+import { Logger } from '@/utils/shared/logger'
 
 export const ENQUEUE_SMS_INNGEST_EVENT_NAME = 'app/enqueue.sms'
 const ENQUEUE_SMS_INNGEST_FUNCTION_ID = 'app.enqueue-sms'
@@ -71,54 +72,24 @@ export const enqueueSMS = inngest.createFunction(
 
     logger.info(`Attempt ${attempt + 1} queuing messages`)
 
+    const enqueueMessagesResults = await step.run('enqueue-messages', () =>
+      enqueueMessages(payload, userSMSVariables),
+    )
+
     const {
-      // Phone numbers that sendSMS returned a isTooManyRequests error. Messages are grouped by phone number, so [{ [phoneNumber]: [failedMessageInfo] }]
+      // Phone numbers that sendSMS returned a isTooManyRequests error. Messages are grouped by phone number. Ex: [{ [phoneNumber]: [failedMessageInfo] }]
       failedPhoneNumbers,
-      invalidPhoneNumbers,
-      unsubscribedUsers,
-      // Messages grouped by journey type and campaign name, Ex: BULK_SMS -> campaign-name: ["messageId"]
-      messagesSentByJourneyType,
       queuedMessages,
       segmentsSent,
-    } = await step.run('enqueue-messages', () => enqueueMessages(payload, userSMSVariables))
+    } = enqueueMessagesResults
 
     logger.info(
       `Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`,
     )
 
-    await step.run('persist-results-to-db', async () => {
-      // messagesSentByJourneyType have messages grouped by journeyType and campaignName
-      for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
-        const journeyType = journeyTypeKey as UserCommunicationJourneyType
-
-        logger.info(`Creating ${journeyType} communication journey`)
-
-        // We need to bulk create both communication and communication journey for better performance
-        await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
-
-        logger.info(`Created ${journeyType} communication journey`)
-      }
-
-      if (invalidPhoneNumbers.length > 0) {
-        logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
-        await flagInvalidPhoneNumbers(invalidPhoneNumbers)
-
-        logger.info(`Invalid phone numbers flagged`)
-      }
-
-      if (unsubscribedUsers.length > 0) {
-        logger.info(`Found ${unsubscribedUsers.length} unsubscribed users`)
-        const optOutUserPromises = unsubscribedUsers.map(async phoneNumber => {
-          const user = await getUserByPhoneNumber(phoneNumber)
-
-          await optOutUser(phoneNumber, user)
-        })
-
-        await Promise.all(optOutUserPromises)
-
-        logger.info(`Opted out ${unsubscribedUsers.length} users`)
-      }
-    })
+    await step.run('persist-results-to-db', () =>
+      persistEnqueueMessagesResults(enqueueMessagesResults, logger),
+    )
 
     totalQueuedMessages += queuedMessages
     totalSegmentsSent += segmentsSent
@@ -168,6 +139,7 @@ export async function enqueueMessages(
 ) {
   const invalidPhoneNumbers: string[] = []
   const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
+  // Messages grouped by journey type and campaign name, Ex: BULK_SMS -> campaign-name: ["messageId"]
   const messagesSentByJourneyType: {
     [key in UserCommunicationJourneyType]?: BulkCreateCommunicationJourneyPayload
   } = {}
@@ -267,5 +239,46 @@ export async function enqueueMessages(
     unsubscribedUsers,
     segmentsSent,
     queuedMessages,
+  }
+}
+
+export async function persistEnqueueMessagesResults(
+  {
+    invalidPhoneNumbers,
+    messagesSentByJourneyType,
+    unsubscribedUsers,
+  }: Awaited<ReturnType<typeof enqueueMessages>>,
+  logger: Logger,
+) {
+  // messagesSentByJourneyType have messages grouped by journeyType and campaignName
+  for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
+    const journeyType = journeyTypeKey as UserCommunicationJourneyType
+
+    logger.info(`Creating ${journeyType} communication journey`)
+
+    // We need to bulk create both communication and communication journey for better performance
+    await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
+
+    logger.info(`Created ${journeyType} communication journey`)
+  }
+
+  if (invalidPhoneNumbers.length > 0) {
+    logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
+    await flagInvalidPhoneNumbers(invalidPhoneNumbers)
+
+    logger.info(`Invalid phone numbers flagged`)
+  }
+
+  if (unsubscribedUsers.length > 0) {
+    logger.info(`Found ${unsubscribedUsers.length} unsubscribed users`)
+    const optOutUserPromises = unsubscribedUsers.map(async phoneNumber => {
+      const user = await getUserByPhoneNumber(phoneNumber)
+
+      await optOutUser(phoneNumber, user)
+    })
+
+    await Promise.all(optOutUserPromises)
+
+    logger.info(`Opted out ${unsubscribedUsers.length} users`)
   }
 }
