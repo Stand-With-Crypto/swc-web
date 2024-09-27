@@ -25,7 +25,6 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         partner,
         requestBody,
       },
-      level: 'log',
     })
     return NextResponse.json({ error: baseValidationResult.error }, { status: 400 })
   }
@@ -43,6 +42,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         partner,
         requestBody,
       },
+      level: 'warning',
     })
     validatedFields = { ...validatedFields, phoneNumber: (requestBody as RequestBody)?.phoneNumber }
   } else {
