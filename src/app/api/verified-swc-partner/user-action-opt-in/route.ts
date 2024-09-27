@@ -42,6 +42,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         partner,
         requestBody,
       },
+      level: 'warning',
     })
     validatedFields = { ...validatedFields, phoneNumber: (requestBody as RequestBody)?.phoneNumber }
   } else {
