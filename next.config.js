@@ -330,6 +330,11 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/voter-guide-1',
+        destination: '/vote?utm_source=swc&utm_medium=p2p-sms&utm_campaign=vg-1',
+        permanent: true,
+      },
+      {
         source: '/w/vote/:sessionId*',
         destination:
           '/vote?utm_source=swc&utm_medium=sms&utm_campaign=welcome_sms&utm_id=sst&utm_content=v1&sessionId=:sessionId*',
