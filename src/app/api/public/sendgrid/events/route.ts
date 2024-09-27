@@ -61,7 +61,7 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       'Sendgrid Message Id': messageId,
       'Sendgrid Event Id': eventEntry.sg_event_id,
       ...(eventEntry.useragent && { 'User Agent': eventEntry.useragent }),
-      ...(eventEntry.url && { Url: new URL(eventEntry.url)?.origin }),
+      ...(eventEntry.url && { Url: removeSearchParamsFromURL(eventEntry.url) }),
       ...(eventEntry.variant && { Variant: eventEntry.variant }),
       ...(eventEntry.category && { Category: eventEntry.category }),
       ...(eventEntry.campaign && { Campaign: eventEntry.campaign }),
@@ -123,5 +123,15 @@ async function getServerAnalyticsFromEvent(emailEvent: EmailEvent) {
   return {
     analytics: getServerAnalytics({ userId: user.id, localUser: getLocalUserFromUser(user) }),
     user,
+  }
+}
+
+function removeSearchParamsFromURL(url: string) {
+  try {
+    const urlObj = new URL(url)
+    urlObj.search = ''
+    return urlObj.toString()
+  } catch {
+    return null
   }
 }
