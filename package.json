@@ -13,7 +13,7 @@
     "start": "next start",
     "lint": "concurrently \"next lint --max-warnings=0\"  \"prettier --check .\"",
     "typecheck": "tsc --noEmit --incremental",
-    "test": "jest --silent",
+    "test": "jest",
     "prettier": "prettier --write .",
     "storybook": "storybook dev -p 6006",
     "audit": "concurrently \"next lint --max-warnings=0 --fix\"  \"prettier --log-level silent --write .\" \"npm run typecheck\" \"npm run test -- -u\"",

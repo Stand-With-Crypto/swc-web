@@ -1,6 +1,6 @@
 import { update } from 'lodash-es'
 
-import { EnqueueMessagePayload } from '@/inngest/functions/sms/enqueueMessages'
+import type { EnqueueMessagePayload } from '@/inngest/functions/sms/enqueueMessages'
 import { countSegments } from '@/utils/server/sms/utils'
 
 export function countMessagesAndSegments(payload: EnqueueMessagePayload[]): {
