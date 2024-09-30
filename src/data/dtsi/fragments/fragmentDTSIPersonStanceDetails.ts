@@ -43,5 +43,30 @@ export const fragmentDTSIPersonStanceDetails = /* GraphQL */ `
       }
       text
     }
+    analysis {
+      id
+      stanceScore
+      richTextCommentary
+      datetimeUpdated
+      publicUser {
+        id
+        importanceScore
+        displayName
+        twitterUsername
+        profilePictureUrl
+        profilePictureUrlDimensions
+      }
+    }
+    additionalAnalysis {
+      id
+      publicUser {
+        id
+        importanceScore
+        displayName
+        twitterUsername
+        profilePictureUrl
+        profilePictureUrlDimensions
+      }
+    }
   }
 `
