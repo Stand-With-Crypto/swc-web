@@ -159,13 +159,13 @@ export async function fetchRacesData(params?: GetRacesParams) {
 
   logger.debug(`fetchRacesData returned with status ${response.status}`)
 
-  const json = (await response.json()) as { data: GetRacesResponse } | { errors: any[] }
+  const json = (await response.json()) as GetRacesResponse | { errors: any[] }
 
   if ('errors' in json) {
     throw new Error(`fetchRacesData threw with ${JSON.stringify(json.errors)}`)
   }
 
-  return json.data
+  return json
 }
 
 export async function fetchAllRacesPerYear(year = 2024) {
@@ -253,11 +253,11 @@ export async function fetchDelegatesData(year = 2024) {
 
   logger.debug(`fetchDelegatesData returned with status ${response.status}`)
 
-  const json = (await response.json()) as { data: GetDelegatesResponse } | { errors: any[] }
+  const json = (await response.json()) as GetDelegatesResponse | { errors: any[] }
 
   if ('errors' in json) {
     throw new Error(`fetchDelegatesData threw with ${JSON.stringify(json.errors)}`)
   }
 
-  return json.data
+  return json
 }
