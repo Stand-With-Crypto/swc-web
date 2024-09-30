@@ -21,9 +21,7 @@ import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functio
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
 import type { BulkSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
-import type { GoodbyeSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
-import type { UnstopConfirmationSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
-import type { WelcomeSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
+import type { EnqueueSMSInngestEventSchema } from '@/inngest/functions/sms/enqueueMessages'
 import type { DeleteUserActionsInngestEventSchema } from '@/inngest/functions/user/deleteUserActions'
 import type { AuditUserBatchEventSchema } from '@/inngest/functions/usersTotalDonationAmountUsd/audit'
 import type {
@@ -49,14 +47,12 @@ type EventTypes =
   | SetCryptoAddressOfUserInngestEventSchema
   | BackfillPhoneNumberValidationInngestEventSchema
   | BulkSmsCommunicationJourneyInngestEventSchema
-  | GoodbyeSmsCommunicationJourneyInngestEventSchema
-  | UnstopConfirmationSmsCommunicationJourneyInngestEventSchema
-  | WelcomeSmsCommunicationJourneyInngestEventSchema
   | DeleteUserActionsInngestEventSchema
   | AuditUserBatchEventSchema
   | BackfillUsersTotalDonationAmountUsdEventSchema
   | UpdateUserBatchEventSchema
   | MonitorBaseEthBalancesInngestEventSchema
   | InitialSignupUserCommunicationSchema
+  | EnqueueSMSInngestEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

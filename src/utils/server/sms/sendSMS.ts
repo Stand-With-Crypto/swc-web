@@ -27,15 +27,14 @@ export const sendSMS = async (payload: SendSMSPayload) => {
   const { body, to, media } = validatedInput.data
 
   try {
-    let statusCallback
-    if (NEXT_PUBLIC_ENVIRONMENT !== 'local') {
-      statusCallback = fullUrl(apiUrls.smsStatusCallback())
+    if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
+      return
     }
 
     const message = await messagingClient.messages.create({
       from: TWILIO_PHONE_NUMBER,
       body,
-      statusCallback,
+      statusCallback: fullUrl(apiUrls.smsStatusCallback()),
       to,
       mediaUrl: media,
     })
