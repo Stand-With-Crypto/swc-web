@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationUnitedStates } from '@/components/app/pageLocationKeyRaces/locationUnitedStates'
+import { LocationUnitedStatesLiveResults } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -30,5 +30,6 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
     prismaClient.user.count(),
   ])
 
-  return <LocationUnitedStates countAdvocates={countAdvocates} {...dtsiResults} {...{ locale }} />
+  // return <LocationUnitedStates countAdvocates={countAdvocates} {...dtsiResults} {...{ locale }} />
+  return <LocationUnitedStatesLiveResults {...dtsiResults} {...{ locale }} />
 }
