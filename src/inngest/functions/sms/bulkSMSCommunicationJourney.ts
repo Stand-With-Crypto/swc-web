@@ -3,6 +3,8 @@ import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } f
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, update } from 'lodash-es'
 
+import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
+import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -13,8 +15,6 @@ import { prettyStringify } from '@/utils/shared/prettyLog'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-
-import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
@@ -92,80 +92,126 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     for (const message of messages) {
       const { campaignName, smsBody, includePendingDoubleOptIn, media, userWhereInput } = message
 
-      logger.info(
-        'Fetching phone numbers for message',
-        prettyStringify({
-          campaignName,
-          smsBody,
-        }),
-      )
+      logger.info(prettyStringify(message))
 
-      const phoneNumbersThatShouldReceiveWelcomeText = await step.run(
-        'fetch-phone-numbers-that-should-receive-welcome-text',
-        () =>
-          fetchAllPhoneNumbers(
-            {
-              campaignName,
-              includePendingDoubleOptIn,
-              userWhereInput,
-            },
-            false,
-          ),
-      )
+      let messagesPayload: EnqueueMessagePayload[] = []
+      let segmentsCount = 0
+      let messagesCount = 0
+      let timeToSendSegments = 0
 
-      const messagesPayload: EnqueueMessagePayload[] = phoneNumbersThatShouldReceiveWelcomeText.map(
-        phoneNumber => ({
+      for (const hasWelcomeMessage of [true, false]) {
+        logger.info(`Merging params`)
+
+        const customWhere = mergeWhereParams(
+          { ...userWhereInput },
+          {
+            UserCommunicationJourney: hasWelcomeMessage
+              ? {
+                  some: {
+                    journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                  },
+                }
+              : {
+                  every: {
+                    journeyType: {
+                      not: UserCommunicationJourneyType.WELCOME_SMS,
+                    },
+                  },
+                },
+          },
+        )
+
+        const allPhoneNumbers: string[] = []
+        let hasNumbersLeft = true
+        let skip = 0
+
+        logger.info(
+          'Fetching phone numbers',
+          prettyStringify({
+            hasWelcomeMessage,
+            campaignName,
+            smsBody,
+          }),
+        )
+
+        let index = 0
+        while (hasNumbersLeft) {
+          const phoneNumberList = await step.run(
+            `fetching-phone-numbers-welcome-${String(hasWelcomeMessage)}-${index}`,
+            () =>
+              getPhoneNumberList({
+                campaignName,
+                includePendingDoubleOptIn,
+                skip,
+                userWhereInput: customWhere,
+              }),
+          )
+
+          skip += phoneNumberList.length
+          index += 1
+
+          allPhoneNumbers.push(
+            ...phoneNumberList.map(({ phoneNumber }) => phoneNumber).filter(isPhoneNumberSupported),
+          )
+
+          logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
+
+          if (!DATABASE_QUERY_LIMIT || phoneNumberList.length < DATABASE_QUERY_LIMIT) {
+            hasNumbersLeft = false
+          }
+        }
+
+        logger.info('Got phone numbers, adding to messagesPayload')
+
+        const body = hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
+
+        // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
+        const payload = uniq(allPhoneNumbers).map(phoneNumber => ({
           phoneNumber,
           messages: [
+            ...(hasWelcomeMessage
+              ? [{ journeyType: UserCommunicationJourneyType.WELCOME_SMS }]
+              : []),
             {
-              journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-            },
-            {
-              body: addWelcomeMessage(smsBody),
+              // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
+              // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
+              body,
               campaignName,
               journeyType: UserCommunicationJourneyType.BULK_SMS,
               media,
             },
           ],
-        }),
-      )
+        }))
 
-      const phoneNumberThatAlreadyReceivedWelcomeMessage = await step.run(
-        'fetch-phone-numbers',
-        () =>
-          fetchAllPhoneNumbers(
-            {
-              campaignName,
-              includePendingDoubleOptIn,
-              userWhereInput,
-            },
-            true,
-          ),
-      )
+        // We need to use concat here because using spread is exceeding maximum call stack size
+        messagesPayload = messagesPayload.concat(payload)
 
-      messagesPayload.push(
-        ...phoneNumberThatAlreadyReceivedWelcomeMessage.map(phoneNumber => ({
-          phoneNumber,
-          messages: [
-            {
-              body: smsBody,
-              campaignName,
-              journeyType: UserCommunicationJourneyType.BULK_SMS,
-              media,
-            },
-          ],
-        })),
-      )
+        logger.info(`messagesPayload.length ${messagesPayload.length}`)
 
-      const { segments: segmentsCount, messages: messagesCount } = await step.run(
-        'count-messages-and-segments',
-        () => countMessagesAndSegments(messagesPayload),
-      )
+        logger.info(`Counting segments`)
 
-      const timeToSendSegments = getWaitingTimeInSeconds(segmentsCount)
+        const payloadCounts = await step.run(
+          `count-messages-and-segments-welcome-${String(hasWelcomeMessage)}`,
+          () => countMessagesAndSegments(payload),
+        )
+
+        segmentsCount += payloadCounts.segments
+        messagesCount += payloadCounts.messages
+        timeToSendSegments += getWaitingTimeInSeconds(payloadCounts.segments)
+
+        logger.info(
+          prettyStringify({
+            segmentsCount,
+            messagesCount,
+            timeToSendSegments: getWaitingTimeInSeconds(payloadCounts.segments),
+          }),
+        )
+      }
 
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
 
+      // This is for debugging and estimation purposes only
+      // Grouping bulk send count by campaign name
       update(
         messagesInfo,
         [campaignName],
@@ -185,6 +231,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       )
 
       enqueueMessagesPayloadChunks.push(...payloadChunks)
+
       totalSegmentsCount += segmentsCount
       totalMessagesCount += messagesCount
       totalTime += timeToSendSegments
@@ -219,6 +266,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
+    let totalTimeToSendMessagesInSeconds = 0
 
     let segmentsInQueue = currentSegmentsInQueue ?? 0
     let timeInSecondsToEmptyQueue = getWaitingTimeInSeconds(segmentsInQueue)
@@ -246,31 +294,23 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
       }
 
-      const { queuedMessages, queuedSegments, timeInSecondsToSendAllSegments } = await step.run(
-        `enqueue-messages-${i + 1}`,
-        async () => {
-          const payloadChunk = enqueueMessagesPayloadChunks[i]
+      const payloadChunk = enqueueMessagesPayloadChunks[i]
 
-          const { messages: messagesCount, segments: segmentsCount } = await enqueueMessages(
-            payloadChunk,
-            logger,
-          )
-
-          const timeInSecondsToSendAllSegments = getWaitingTimeInSeconds(segmentsCount)
-
-          return {
-            queuedMessages: messagesCount,
-            queuedSegments: segmentsCount,
-            timeInSecondsToSendAllSegments,
-          }
+      const { queuedMessages, segmentsSent } = await step.invoke(`enqueue-messages-${i + 1}`, {
+        function: enqueueSMS,
+        data: {
+          payload: payloadChunk,
         },
-      )
+      })
 
       totalQueuedMessages += queuedMessages
-      totalQueuedSegments += queuedSegments
+      totalQueuedSegments += segmentsSent
 
-      segmentsInQueue += queuedSegments
-      timeInSecondsToEmptyQueue += timeInSecondsToSendAllSegments
+      segmentsInQueue += segmentsSent
+      const timeToSendSegments = getWaitingTimeInSeconds(segmentsSent)
+
+      timeInSecondsToEmptyQueue += timeToSendSegments
+      totalTimeToSendMessagesInSeconds += timeToSendSegments
 
       const emptyQueueTime = addSeconds(now, timeInSecondsToEmptyQueue)
 
@@ -318,9 +358,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       }
 
       logger.info(
+        `shipping-estimate`,
+        prettyStringify({
+          messages: bulkInfo.total.messagesCount - totalQueuedMessages,
+          time: formatTime(totalTime - totalTimeToSendMessagesInSeconds),
+        }),
+      )
+
+      logger.info(
         `summary-info - ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
         prettyStringify({
-          totalTimeToSendAllSegments: formatTime(timeInSecondsToEmptyQueue),
+          timeInSecondsToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
           segmentsInQueue,
           totalQueuedMessages,
           totalQueuedSegments,
@@ -343,89 +391,33 @@ function formatTime(seconds: number) {
   } else if (seconds < SECONDS_DURATION.HOUR) {
     const minutes = Math.ceil(seconds / SECONDS_DURATION.MINUTE)
     return `${minutes} minutes`
-  } else if (seconds < SECONDS_DURATION.DAY) {
+  } else {
     const hours = Math.ceil(seconds / SECONDS_DURATION.HOUR)
     return `${hours} hours`
-  } else {
-    const days = Math.ceil(seconds / SECONDS_DURATION.DAY)
-    return `${days} days`
   }
 }
 
+// Doing this so lodash merge is typed
 const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroupByArgs['where']>
 
 // Add a space before the welcome message to ensure proper formatting. If the message ends with a link,
 // appending the welcome message directly could break the link.
 const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
 
-async function fetchAllPhoneNumbers(
-  options: Omit<GetPhoneNumberOptions, 'cursor'>,
-  hasWelcomeMessage: boolean,
-) {
-  const allPhoneNumbers: string[] = []
-  let cursor: Date | undefined
-  let hasNumbersLeft = true
-
-  const customWhere = mergeWhereParams(
-    { ...options.userWhereInput },
-    {
-      UserCommunicationJourney: hasWelcomeMessage
-        ? {
-            some: {
-              journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-            },
-          }
-        : {
-            every: {
-              journeyType: {
-                not: UserCommunicationJourneyType.WELCOME_SMS,
-              },
-            },
-          },
-    },
-  )
-
-  while (hasNumbersLeft) {
-    const phoneNumberList = await getPhoneNumberList({
-      ...options,
-      cursor,
-      userWhereInput: customWhere,
-    })
-
-    cursor = phoneNumberList.at(-1)?.datetimeCreated
-
-    const phoneNumbers = phoneNumberList
-      .map(({ phoneNumber }) => phoneNumber)
-      .filter(isPhoneNumberSupported)
-
-    allPhoneNumbers.push(...phoneNumbers)
-
-    if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
-      hasNumbersLeft = false
-    }
-  }
-
-  // Using uniq here to not send multiple messages to the same phone number
-  return uniq(allPhoneNumbers)
-}
-
 export interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean
-  cursor?: Date
+  skip: number
   userWhereInput?: Prisma.UserGroupByArgs['where']
   campaignName?: string
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
   return prismaClient.user.groupBy({
-    by: ['phoneNumber', 'datetimeCreated'],
+    by: ['phoneNumber'],
     where: {
       ...mergeWhereParams(
         { ...options.userWhereInput },
         {
-          datetimeCreated: {
-            gte: options.cursor,
-          },
           UserCommunicationJourney: {
             every: {
               campaignName: {
@@ -444,7 +436,8 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
         ],
       },
     },
+    skip: options.skip,
     take: DATABASE_QUERY_LIMIT,
-    orderBy: [{ datetimeCreated: 'asc' }, { phoneNumber: 'asc' }],
+    orderBy: { phoneNumber: 'asc' },
   })
 }
