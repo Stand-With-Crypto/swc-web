@@ -155,3 +155,29 @@ export interface State {
   state_name: string
   candidates: CandidateResults
 }
+
+export interface GetElectoralCollegeResponse {
+  candidates: ElectoralCandidate[]
+  states: ElectoralState[]
+}
+
+export interface ElectoralCandidate {
+  cand_id: number
+  party_name: string
+  party_id: number
+  first_name: string
+  last_name: string
+  incumbent: boolean
+  votes: number
+  percentage: number
+  called: boolean
+  electoral_votes_total: number
+}
+
+export interface ElectoralState {
+  state_fips: string
+  state_name: string
+  electoral_college_votes: number
+  called: boolean
+  called_candidate: any
+}

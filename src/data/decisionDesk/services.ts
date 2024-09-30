@@ -7,6 +7,7 @@ import { GetRacesParams, GetRacesParamsSchema } from '@/data/decisionDesk/schema
 import {
   GetBearerTokenResponse,
   GetDelegatesResponse,
+  GetElectoralCollegeResponse,
   GetRacesResponse,
 } from '@/data/decisionDesk/types'
 import { redis } from '@/utils/server/redis'
@@ -257,6 +258,53 @@ export async function fetchDelegatesData(year = 2024) {
 
   if ('errors' in json) {
     throw new Error(`fetchDelegatesData threw with ${JSON.stringify(json.errors)}`)
+  }
+
+  return json
+}
+
+export async function fetchElectoralCollege(year = 2024) {
+  logger.debug('fetchElectoralCollege called')
+
+  const endpointURL = new URL(`${API_ENDPOINT}/electoral_college/${year}`)
+
+  const bearerToken = await getBearerToken()
+
+  if (!bearerToken) {
+    throw new Error('Bearer key not found')
+  }
+
+  const response = await pRetry(
+    attemptCount =>
+      fetchReq(
+        endpointURL.href,
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        },
+        {
+          withScope: scope => {
+            const name = `fetchElectoralCollege attempt #${attemptCount}`
+            scope.setFingerprint([name])
+            scope.setTags({ domain: 'fetchElectoralCollege' })
+            scope.setTag('attemptCount', attemptCount)
+            scope.setTransactionName(name)
+          },
+        },
+      ),
+    {
+      retries: 1,
+      minTimeout: 4000,
+    },
+  )
+
+  logger.debug(`fetchElectoralCollege returned with status ${response.status}`)
+
+  const json = (await response.json()) as GetElectoralCollegeResponse | { errors: any[] }
+
+  if ('errors' in json) {
+    throw new Error(`fetchElectoralCollege threw with ${JSON.stringify(json.errors)}`)
   }
 
   return json
