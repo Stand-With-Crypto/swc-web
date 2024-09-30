@@ -4,12 +4,17 @@ import pRetry from 'p-retry'
 
 import { API_ENDPOINT } from '@/data/decisionDesk/constants'
 import { GetRacesParams, GetRacesParamsSchema } from '@/data/decisionDesk/schemas'
-import { GetBearerTokenResponse, GetRacesResponse } from '@/data/decisionDesk/types'
+import {
+  GetBearerTokenResponse,
+  GetDelegatesResponse,
+  GetRacesResponse,
+} from '@/data/decisionDesk/types'
 import { redis } from '@/utils/server/redis'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
+const DECISION_DESK_BEARER_TOKEN = 'decisionDeskBearerToken'
 const DECISION_DESK_CLIENT_ID = requiredEnv(
   process.env.DECISION_DESK_CLIENT_ID,
   'DECISION_DESK_CLIENT_ID',
@@ -18,7 +23,7 @@ const DECISION_DESK_SECRET = requiredEnv(process.env.DECISION_DESK_SECRET, 'DECI
 
 const logger = getLogger('decisionDesk services')
 
-export async function fetchBearerToken() {
+async function fetchBearerToken() {
   logger.debug('fetchBearerToken called')
 
   if (!DECISION_DESK_CLIENT_ID || !DECISION_DESK_SECRET) {
@@ -67,6 +72,29 @@ export async function fetchBearerToken() {
   return json
 }
 
+export async function getBearerToken() {
+  logger.debug('getBearerToken called')
+
+  const hasCachedBearerToken = await redis.get<GetBearerTokenResponse>(DECISION_DESK_BEARER_TOKEN)
+
+  if (hasCachedBearerToken) {
+    logger.debug('getBearerToken found cached token')
+    return hasCachedBearerToken.access_token
+  }
+
+  logger.debug('getBearerToken did not find cached token')
+
+  const bearerToken = await fetchBearerToken()
+
+  await redis.set(DECISION_DESK_BEARER_TOKEN, bearerToken, {
+    ex: bearerToken.expires_in,
+  })
+
+  logger.debug('getBearerToken set new token in cache')
+
+  return bearerToken.access_token
+}
+
 export async function fetchRacesData(params?: GetRacesParams) {
   logger.debug('fetchRacesData called')
 
@@ -104,8 +132,6 @@ export async function fetchRacesData(params?: GetRacesParams) {
     throw new Error('Bearer key not found')
   }
 
-  console.log('endpointURL', endpointURL)
-
   const response = await pRetry(
     attemptCount =>
       fetchReq(
@@ -142,25 +168,96 @@ export async function fetchRacesData(params?: GetRacesParams) {
   return json.data
 }
 
-export async function getBearerToken() {
-  logger.debug('getBearerToken called')
+export async function fetchAllRacesPerYear(year = 2024) {
+  logger.debug('fetchAllRacesPerYear called')
 
-  const hasCachedBearerToken = await redis.get<GetBearerTokenResponse>('decisionDeskBearerToken')
+  const endpointURL = new URL(`${API_ENDPOINT}/races/${year}`)
 
-  if (hasCachedBearerToken) {
-    logger.debug('getBearerToken found cached token')
-    return hasCachedBearerToken.access_token
+  const bearerToken = await getBearerToken()
+
+  if (!bearerToken) {
+    throw new Error('Bearer key not found')
   }
 
-  logger.debug('getBearerToken did not find cached token')
+  const response = await pRetry(
+    attemptCount =>
+      fetchReq(
+        endpointURL.href,
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        },
+        {
+          withScope: scope => {
+            const name = `fetchAllRacesPerYear attempt #${attemptCount}`
+            scope.setFingerprint([name])
+            scope.setTags({ domain: 'fetchRacesData' })
+            scope.setTag('attemptCount', attemptCount)
+            scope.setTransactionName(name)
+          },
+        },
+      ),
+    {
+      retries: 1,
+      minTimeout: 4000,
+    },
+  )
 
-  const bearerToken = await fetchBearerToken()
+  logger.debug(`fetchAllRacesPerYear returned with status ${response.status}`)
 
-  await redis.set('decisionDeskBearerToken', bearerToken, {
-    ex: bearerToken.expires_in,
-  })
+  const json = (await response.json()) as { data: GetRacesResponse } | { errors: any[] }
 
-  logger.debug('getBearerToken set new token in cache')
+  if ('errors' in json) {
+    throw new Error(`fetchAllRacesPerYear threw with ${JSON.stringify(json.errors)}`)
+  }
 
-  return bearerToken.access_token
+  return json.data.data.map(currentRace => currentRace)
+}
+
+export async function fetchDelegatesData(year = 2024) {
+  logger.debug('fetchDelegatesData called')
+
+  const endpointURL = new URL(`${API_ENDPOINT}/delegates/${year}`)
+
+  const bearerToken = await getBearerToken()
+
+  if (!bearerToken) {
+    throw new Error('Bearer key not found')
+  }
+
+  const response = await pRetry(
+    attemptCount =>
+      fetchReq(
+        endpointURL.href,
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        },
+        {
+          withScope: scope => {
+            const name = `fetchDelegatesData attempt #${attemptCount}`
+            scope.setFingerprint([name])
+            scope.setTags({ domain: 'fetchDelegatesData' })
+            scope.setTag('attemptCount', attemptCount)
+            scope.setTransactionName(name)
+          },
+        },
+      ),
+    {
+      retries: 1,
+      minTimeout: 4000,
+    },
+  )
+
+  logger.debug(`fetchDelegatesData returned with status ${response.status}`)
+
+  const json = (await response.json()) as { data: GetDelegatesResponse } | { errors: any[] }
+
+  if ('errors' in json) {
+    throw new Error(`fetchDelegatesData threw with ${JSON.stringify(json.errors)}`)
+  }
+
+  return json.data
 }

@@ -21,7 +21,7 @@ export interface GetRacesResponse {
   total_pages: number
   limit: number
   next_page_url: string
-  data: RacesData
+  data: RacesData[]
   md5: string
   sha256: string
 }
@@ -77,6 +77,10 @@ export interface VotingData {
   [key: string]: VotingMetrics | undefined
 }
 
+export interface CandidateResults {
+  [key: string]: number | undefined
+}
+
 export interface VotingMetrics {
   absentee_ballots_early_votes: number
   election_day_votes: number
@@ -129,4 +133,25 @@ export interface Vcu {
   precincts: Precincts
   votes: Votes
   voting_data: VotingData
+}
+
+export interface GetDelegatesResponse {
+  delegates: Delegate[]
+  candidates: Candidate[]
+}
+
+export interface Delegate {
+  party_id: number
+  name: string
+  total: number
+  national: CandidateResults
+  states: State[]
+}
+
+export interface State {
+  state_fips: string
+  state: string
+  total: number
+  state_name: string
+  candidates: CandidateResults
 }

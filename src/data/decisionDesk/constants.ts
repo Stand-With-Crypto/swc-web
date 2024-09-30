@@ -1,4 +1,4 @@
-export const API_ENDPOINT = 'https://resultsapi.decisiondeskhq.com/api/v3'
+export const API_ENDPOINT = 'https://resultsapi.decisiondeskhq.com/api/v4'
 
 export const OFFICES = [
   {
