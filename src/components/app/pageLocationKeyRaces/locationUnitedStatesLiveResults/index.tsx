@@ -9,6 +9,7 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserAddressVoterGuideInputSection } from '@/components/app/pageLocationKeyRaces/locationUnitedStates/userAddressVoterGuideInput'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
+import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -85,10 +86,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
-            <Badge className="mx-auto px-2 py-1 pr-5 text-base" variant="green-subtle">
-              <DotFilledIcon className="h-[30px] w-[30px]" />
-              Live
-            </Badge>
+            <LiveStatusBadge status="live" />
           </div>
 
           <Card.Group>
@@ -112,7 +110,7 @@ export function LocationUnitedStatesLiveResults({
           title="Critical elections"
           titleProps={{ size: 'xs' }}
         >
-          <div className="container grid grid-cols-[repeat(auto-fill,minmax(375px,1fr))] justify-items-center gap-12">
+          <div className="container grid grid-cols-[repeat(auto-fill,minmax(375px,1fr))] justify-items-center gap-16">
             {Object.entries(groups.keyRaces).map(([stateCode, keyRaces]) => (
               <KeyRaceLiveResult
                 candidates={keyRaces?.flatMap(race =>

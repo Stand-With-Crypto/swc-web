@@ -4,6 +4,7 @@ import { isNil } from 'lodash-es'
 
 import { DTSIAvatar, DTSIAvatarProps } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
@@ -24,7 +25,7 @@ const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) 
     return twNoop('bg-green-700')
   }
   if (score === 50) {
-    return twNoop('bg-gray-500')
+    return twNoop('bg-yellow-700')
   }
   return twNoop('bg-red-700')
 }
@@ -62,17 +63,14 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
   }
 
   return (
-    <div className={cn('flex w-full max-w-md flex-col gap-6', className)}>
-      <div className="flex items-center justify-between">
-        <div className="space-y-4">
+    <div className={cn('flex w-full max-w-lg flex-col gap-8', className)}>
+      <div className="flex items-start justify-between">
+        <div className="space-y-2">
           <p className="text-lg font-semibold">{raceName}</p>
           <p className="text-sm text-muted-foreground">Data updated {mockDate.current}</p>
         </div>
 
-        <Badge className="px-1 pr-4 text-base" variant="green-subtle">
-          <DotFilledIcon className="h-[30px] w-[30px]" />
-          Live
-        </Badge>
+        <LiveStatusBadge status="live" />
       </div>
 
       <div className="flex justify-between">
@@ -85,7 +83,7 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
             />
           </div>
           <div className="mt-4 space-y-2">
-            <p className="font-bold">
+            <p className="font-semibold">
               {dtsiPersonFullName(candidateA)}
               {!!candidateA.politicalAffiliationCategory &&
                 ` (${getPoliticalCategoryAbbr(candidateA.politicalAffiliationCategory)})`}
@@ -105,7 +103,7 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
             />
           </div>
           <div className="mt-4 space-y-2">
-            <p className="font-bold">
+            <p className="font-semibold">
               {dtsiPersonFullName(candidateB)}
               {!!candidateB.politicalAffiliationCategory &&
                 ` (${getPoliticalCategoryAbbr(candidateB.politicalAffiliationCategory)})`}
