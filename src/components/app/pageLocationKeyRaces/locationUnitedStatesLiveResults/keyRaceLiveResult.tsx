@@ -162,7 +162,6 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
   }
 
   const getOpacity = (candidate: DTSI_DDHQ_Candidate | null) => {
-    console.log('getOpacity: ', { calledCandidateId, candidate, ddhqCandidateA, ddhqCandidateB })
     if (!calledCandidateId) return 'opacity-100'
     if (!candidate) return 'opacity-100'
     if (calledCandidateId !== candidate.cand_id) return 'opacity-50'
@@ -201,7 +200,7 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
               candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
             ),
           )}
-          value={Number(getVotePercentage(ddhqCandidateA))}
+          value={Math.min(Number(getVotePercentage(ddhqCandidateA)) * 2, 100)}
         />
         <Progress
           className="rounded-l-none rounded-r-full  bg-secondary"
@@ -212,7 +211,7 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
             ),
           )}
           inverted
-          value={Number(getVotePercentage(ddhqCandidateB))}
+          value={Math.min(Number(getVotePercentage(ddhqCandidateB)) * 2, 100)}
         />
       </div>
 
