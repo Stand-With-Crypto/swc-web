@@ -53,6 +53,10 @@ const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_Q
 const MIN_ENQUEUE_HOUR = 11 // 11 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
+// Before this date we were sending messages with a toll-free number, now that we're changing to a short-code number we need to send the legal text again in the first message
+// TODO: change this later
+const SHORT_CODE_GO_LIVE_DATE = new Date('2024-10-01 00:00:00.000')
+
 export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
     id: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,
@@ -100,8 +104,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       let timeToSendSegments = 0
 
       for (const hasWelcomeMessage of [true, false]) {
-        logger.info(`Merging params`)
-
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
@@ -109,13 +111,26 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
               ? {
                   some: {
                     journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                    datetimeCreated: {
+                      gt: SHORT_CODE_GO_LIVE_DATE,
+                    },
                   },
                 }
               : {
                   every: {
-                    journeyType: {
-                      not: UserCommunicationJourneyType.WELCOME_SMS,
-                    },
+                    OR: [
+                      {
+                        journeyType: {
+                          not: UserCommunicationJourneyType.WELCOME_SMS,
+                        },
+                      },
+                      {
+                        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                        datetimeCreated: {
+                          lt: SHORT_CODE_GO_LIVE_DATE,
+                        },
+                      },
+                    ],
                   },
                 },
           },
