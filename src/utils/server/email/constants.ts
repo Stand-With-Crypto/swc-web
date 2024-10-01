@@ -1,5 +1,3 @@
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-
 export enum EmailEventName {
   PROCESSED = 'processed',
   DEFERRED = 'deferred',

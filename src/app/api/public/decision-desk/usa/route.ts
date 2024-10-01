@@ -6,7 +6,7 @@ import { GetRacesParamsSchema } from '@/data/decisionDesk/schemas'
 import { fetchRacesData } from '@/data/decisionDesk/services'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const dynamic = 'error'
+export const dynamic = 'auto'
 export const revalidate = SECONDS_DURATION.MINUTE
 
 export async function GET(request: NextRequest) {
