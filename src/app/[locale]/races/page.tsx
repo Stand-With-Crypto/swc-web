@@ -4,7 +4,6 @@ import { LocationUnitedStatesLiveResults } from '@/components/app/pageLocationKe
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { prismaClient } from '@/utils/server/prismaClient'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -15,8 +14,9 @@ export const revalidate = SECONDS_DURATION['10_MINUTES']
 type LocationUnitedStatesPageProps = PageProps
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `Key Races in the United States`
-  const description = `View the races critical to keeping crypto in America.`
+  const title = 'Who will defend crypto in America?'
+  const description =
+    'View live election results on for U.S. Senate Race (CA) on Stand With Crypto.'
   return generateMetadataDetails({
     title,
     description,
@@ -25,11 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function LocationUnitedStatesPage({ params }: LocationUnitedStatesPageProps) {
   const { locale } = params
-  const [dtsiResults, countAdvocates] = await Promise.all([
-    queryDTSILocationUnitedStatesInformation(),
-    prismaClient.user.count(),
-  ])
+  const [dtsiResults] = await Promise.all([queryDTSILocationUnitedStatesInformation()])
 
-  // return <LocationUnitedStates countAdvocates={countAdvocates} {...dtsiResults} {...{ locale }} />
   return <LocationUnitedStatesLiveResults {...dtsiResults} {...{ locale }} />
 }
