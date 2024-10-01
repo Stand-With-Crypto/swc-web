@@ -23,6 +23,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
+import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 
 interface LocationUnitedStatesLiveResultsProps
   extends QueryDTSILocationUnitedStatesInformationData {
@@ -109,18 +110,21 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="container grid grid-cols-[repeat(auto-fill,minmax(375px,1fr))] justify-items-center gap-16">
-            {Object.entries(groups.keyRaces).map(([stateCode, keyRaces]) => (
-              <KeyRaceLiveResult
-                candidates={keyRaces?.flatMap(race =>
-                  race?.map(candidates => {
-                    return candidates
-                  }),
-                )}
-                key={stateCode}
-                locale={locale}
-                stateCode={stateCode as USStateCode}
-              />
-            ))}
+            {Object.entries(groups.keyRaces).map(([stateCode, keyRaces]) =>
+              keyRaces.map(race => (
+                <KeyRaceLiveResult
+                  candidates={race}
+                  key={stateCode}
+                  primaryDistrict={
+                    race[0].runningForSpecificRole.primaryDistrict
+                      ? normalizeDTSIDistrictId(race[0].runningForSpecificRole)
+                      : undefined
+                  }
+                  locale={locale}
+                  stateCode={stateCode as USStateCode}
+                />
+              )),
+            )}
           </div>
         </ContentSection>
 

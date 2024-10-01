@@ -7,7 +7,9 @@ import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationU
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Progress } from '@/components/ui/progress'
+import { GetRacesResponse } from '@/data/decisionDesk/types'
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
@@ -32,6 +34,13 @@ const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) 
   return twNoop('bg-red-700')
 }
 
+const getPoliticalCategoryAbbr = (category: DTSI_PersonPoliticalAffiliationCategory) => {
+  if (!category) return ''
+  return dtsiPersonPoliticalAffiliationCategoryAbbreviation(category) || ''
+}
+
+const mockDate = new Date().toLocaleString()
+
 interface KeyRaceLiveResultProps {
   locale: SupportedLocale
   candidates: (DTSIAvatarProps['person'] &
@@ -50,8 +59,6 @@ interface KeyRaceLiveResultProps {
 export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
   const { candidates, stateCode, primaryDistrict, className, locale } = props
 
-  const mockDate = useRef(new Date().toLocaleString())
-
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const raceName = primaryDistrict
     ? `${stateName} ${formatDTSIDistrictId(primaryDistrict)} Congressional District Race`
@@ -68,17 +75,20 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
   const candidateA = candidates?.[0] || {}
   const candidateB = candidates?.[1] || {}
 
-  const getPoliticalCategoryAbbr = (category: DTSI_PersonPoliticalAffiliationCategory) => {
-    if (!category) return ''
-    return dtsiPersonPoliticalAffiliationCategoryAbbreviation(category) || ''
-  }
+  const { data, error } = useApiDecisionDeskRaces({} as GetRacesResponse, {
+    district: primaryDistrict?.toString(),
+    state: stateCode,
+    office_id: '4',
+  })
+
+  console.log('DecisionDesk Data: ', data, error)
 
   return (
     <div className={cn('flex w-full max-w-lg flex-col gap-8', className)}>
       <div className="flex items-start justify-between">
         <div className="space-y-2">
           <p className="text-lg font-semibold">{raceName}</p>
-          <p className="text-sm text-muted-foreground">Data updated {mockDate.current}</p>
+          <p className="text-sm text-muted-foreground">Data updated {mockDate}</p>
         </div>
 
         <LiveStatusBadge status="live" />
