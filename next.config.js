@@ -208,6 +208,8 @@ const nextConfig = {
       },
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
+      { protocol: 'https', hostname: 'testing.dotheysupportit.com' },
+      { protocol: 'https', hostname: 'www.dotheysupportit.com' },
       // builder.io image cdn
       {
         protocol: 'https',
