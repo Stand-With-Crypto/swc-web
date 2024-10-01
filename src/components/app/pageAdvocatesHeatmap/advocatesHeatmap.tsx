@@ -104,10 +104,10 @@ export function AdvocatesHeatmap({
     <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
       <div
         className={cn(
-          'flex w-full flex-col items-start gap-4 md:flex-row',
+          'flex w-full flex-col items-start gap-4',
           isEmbedded
-            ? ''
-            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
+            ? 'md:flex-row'
+            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
         )}
       >
         {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
@@ -187,7 +187,11 @@ const MapComponent = ({
 
   return (
     <>
-      <ComposableMap projection="geoAlbersUsa" viewBox="-20 40 850 550">
+      <ComposableMap
+        projection="geoAlbersUsa"
+        style={{ width: '100%', height: '100%' }}
+        viewBox="-20 40 850 550"
+      >
         <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
           {({ geographies }) => (
             <>
