@@ -1,8 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
-
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { PACFooter } from '@/components/app/pacFooter'
@@ -16,7 +13,7 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
+import { GetRacesResponse } from '@/data/decisionDesk/types'
 import { SupportedLocale } from '@/intl/locales'
 import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -25,21 +22,18 @@ import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
 
-interface LocationUnitedStatesLiveResultsProps
-  extends QueryDTSILocationUnitedStatesInformationData {
+interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
+  races: ReturnType<typeof organizePeople>
+  ddhqResults: Record<string, GetRacesResponse>
 }
 
 export function LocationUnitedStatesLiveResults({
   locale,
-  ...queryData
+  races,
+  ddhqResults = {},
 }: LocationUnitedStatesLiveResultsProps) {
-  const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
-
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces()
-  }, [])
 
   return (
     <div className="space-y-20">
@@ -67,7 +61,7 @@ export function LocationUnitedStatesLiveResults({
             </Button>
           </div>
 
-          <PresidentialRaceResult candidates={groups.president} />
+          <PresidentialRaceResult candidates={races.president} />
 
           <Button asChild className="w-full max-w-xs font-bold lg:hidden" variant="secondary">
             <InternalLink href={urls.locationUnitedStatesPresidential()}>
@@ -110,20 +104,27 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="container grid grid-cols-[repeat(auto-fill,minmax(375px,1fr))] justify-items-center gap-16">
-            {Object.entries(groups.keyRaces).map(([stateCode, keyRaces]) =>
-              keyRaces.map(race => (
-                <KeyRaceLiveResult
-                  candidates={race}
-                  key={`${stateCode}-${race[0]?.runningForSpecificRole?.primaryDistrict}`}
-                  locale={locale}
-                  primaryDistrict={
-                    race[0].runningForSpecificRole.primaryDistrict
-                      ? normalizeDTSIDistrictId(race[0].runningForSpecificRole)
-                      : undefined
-                  }
-                  stateCode={stateCode as USStateCode}
-                />
-              )),
+            {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
+              keyRaces.map(race => {
+                const primaryDistrict = race[0].runningForSpecificRole.primaryDistrict
+                  ? normalizeDTSIDistrictId(race[0].runningForSpecificRole)
+                  : undefined
+
+                const officeId = primaryDistrict ? '3' : '4'
+                const key = `${stateCode}_${primaryDistrict?.toString() || 'undefined'}_${officeId}`
+
+                return (
+                  <KeyRaceLiveResult
+                    candidates={race}
+                    initialRaceData={ddhqResults[key] || undefined}
+                    key={key}
+                    locale={locale}
+                    officeId={officeId}
+                    primaryDistrict={primaryDistrict}
+                    stateCode={stateCode as USStateCode}
+                  />
+                )
+              }),
             )}
           </div>
         </ContentSection>
