@@ -1,4 +1,5 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { GetRacesParams } from '@/data/decisionDesk/schemas'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
@@ -142,4 +143,21 @@ export const apiUrls = {
     district: number
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
   smsStatusCallback: () => `/api/public/sms/events/status`,
+  decisionDeskRaces: (params?: GetRacesParams): string => {
+    const endpointURL = new URL('api/public/decision-desk/usa')
+    const paramsEntries = Object.entries(params ?? {})
+    const currentURLSearchParams = new URLSearchParams({
+      year: '2024',
+    })
+
+    if (paramsEntries.length > 0) {
+      paramsEntries.forEach(([key, value]) => {
+        currentURLSearchParams.set(key, value.toString())
+      })
+    }
+
+    endpointURL.search = currentURLSearchParams.toString()
+
+    return endpointURL.href
+  },
 }
