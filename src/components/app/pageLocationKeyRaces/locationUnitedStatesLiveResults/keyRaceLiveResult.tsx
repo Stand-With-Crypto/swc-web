@@ -1,17 +1,21 @@
 import { useMemo } from 'react'
 import { isNil } from 'lodash-es'
 
-import { DTSIAvatar, DTSIAvatarProps } from '@/components/app/dtsiAvatar'
+import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import {
   LiveStatusBadge,
   Status,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
+import {
+  DTSI_Candidate,
+  DTSI_DDHQ_Candidate,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Progress } from '@/components/ui/progress'
-import { Candidate, GetRacesResponse } from '@/data/decisionDesk/types'
-import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import { GetRacesResponse } from '@/data/decisionDesk/types'
+import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -41,17 +45,6 @@ const getPoliticalCategoryAbbr = (category: DTSI_PersonPoliticalAffiliationCateg
   if (!category) return ''
   return dtsiPersonPoliticalAffiliationCategoryAbbreviation(category) || ''
 }
-
-type DTSI_Candidate = DTSIAvatarProps['person'] &
-  Pick<
-    DTSI_Person,
-    | 'politicalAffiliationCategory'
-    | 'computedStanceScore'
-    | 'computedSumStanceScoreWeight'
-    | 'manuallyOverriddenStanceScore'
-  >
-
-type DTSI_DDHQ_Candidate = DTSI_Candidate & Candidate
 
 interface KeyRaceLiveResultProps {
   locale: SupportedLocale

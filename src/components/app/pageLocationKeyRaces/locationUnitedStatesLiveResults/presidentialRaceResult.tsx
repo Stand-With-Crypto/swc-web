@@ -1,6 +1,7 @@
-import { DTSIAvatar, DTSIAvatarProps } from '@/components/app/dtsiAvatar'
+import { DTSIAvatar } from '@/components/app/dtsiAvatar'
+import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { Progress } from '@/components/ui/progress'
-import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { cn } from '@/utils/web/cn'
 
 const PARTY_COLOR_MAP: Record<DTSI_PersonPoliticalAffiliationCategory, string> = {
@@ -12,7 +13,7 @@ const PARTY_COLOR_MAP: Record<DTSI_PersonPoliticalAffiliationCategory, string> =
 }
 
 interface PresidentialRaceResultProps {
-  candidates: (DTSIAvatarProps['person'] & Pick<DTSI_Person, 'politicalAffiliationCategory'>)[]
+  candidates: DTSI_Candidate[]
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
@@ -24,14 +25,8 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
       <div className="flex justify-between">
-        <div>
-          <DTSIAvatar className="rounded-full" person={candidateA} size={100} />
-          <p className="font-bold">999</p>
-        </div>
-        <div className="flex flex-col items-end">
-          <DTSIAvatar className="rounded-full" person={candidateB} size={100} />
-          <p className="text-right font-bold">999</p>
-        </div>
+        <AvatarBox candidate={candidateA} />
+        <AvatarBox candidate={candidateB} className="flex flex-col items-end text-right" />
       </div>
 
       <div className="flex">
@@ -71,6 +66,22 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           <p className="font-bold">50%</p> <span className="text-fontcolor-muted">99,999,999</span>
         </div>
       </div>
+    </div>
+  )
+}
+
+interface AvatarBoxProps {
+  candidate: DTSI_Candidate
+  className?: string
+}
+
+function AvatarBox(props: AvatarBoxProps) {
+  const { candidate, className } = props
+
+  return (
+    <div className={className}>
+      <DTSIAvatar className="rounded-full" person={candidate} size={125} />
+      <p className="font-bold">999</p>
     </div>
   )
 }
