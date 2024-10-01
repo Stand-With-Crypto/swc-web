@@ -8,6 +8,7 @@ import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserAddressVoterGuideInputSection } from '@/components/app/pageLocationKeyRaces/locationUnitedStates/userAddressVoterGuideInput'
+import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -107,20 +108,29 @@ export function LocationUnitedStatesLiveResults({
         <UserAddressVoterGuideInputSection locale={locale} />
 
         <ContentSection
-          className="container"
           subtitle="These elections are critical to the future of crypto in America. View live updates below."
           title="Critical elections"
           titleProps={{ size: 'xs' }}
         >
-          <div className="flex justify-center"></div>
+          <div className="container grid grid-cols-[repeat(auto-fill,minmax(375px,1fr))] justify-items-center gap-12">
+            {Object.entries(groups.keyRaces).map(([stateCode, keyRaces]) => (
+              <KeyRaceLiveResult
+                candidates={keyRaces?.flatMap(race =>
+                  race?.map(candidates => {
+                    return candidates
+                  }),
+                )}
+                key={stateCode}
+                stateCode={stateCode as USStateCode}
+              />
+            ))}
+          </div>
         </ContentSection>
 
         <ContentSection
           className="container"
-          subtitle={
-            'There are dozens of races in the House and the Senate that matter in this upcoming election. View your state below:'
-          }
-          title={'Key Races Across US States'}
+          subtitle="Dive deeper and discover races in other states across America."
+          title="Other states"
         >
           <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
             {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {

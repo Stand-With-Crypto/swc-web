@@ -18,15 +18,18 @@ interface PresidentialRaceResultProps {
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   const { candidates } = props
 
+  const candidateA = candidates?.[0] || {}
+  const candidateB = candidates?.[1] || {}
+
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
       <div className="flex justify-between">
         <div>
-          <DTSIAvatar className="rounded-full" person={candidates[0]} size={100} />
+          <DTSIAvatar className="rounded-full" person={candidateA} size={100} />
           <p className="font-bold">999</p>
         </div>
-        <div>
-          <DTSIAvatar className="rounded-full" person={candidates[1]} size={100} />
+        <div className="flex flex-col items-end">
+          <DTSIAvatar className="rounded-full" person={candidateB} size={100} />
           <p className="text-right font-bold">999</p>
         </div>
       </div>
@@ -37,7 +40,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           indicatorClassName={cn(
             'bg-none rounded-r-none',
             PARTY_COLOR_MAP[
-              candidates[0].politicalAffiliationCategory ||
+              candidateA.politicalAffiliationCategory ||
                 DTSI_PersonPoliticalAffiliationCategory.OTHER
             ],
           )}
@@ -48,7 +51,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           indicatorClassName={cn(
             'bg-none rounded-l-none',
             PARTY_COLOR_MAP[
-              candidates[1].politicalAffiliationCategory ||
+              candidateB.politicalAffiliationCategory ||
                 DTSI_PersonPoliticalAffiliationCategory.OTHER
             ],
           )}
@@ -57,17 +60,15 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         />
       </div>
 
-      <div className="flex justify-between text-sm">
-        <div className="flex gap-2">
-          <p className="text-center font-bold">50%</p>{' '}
-          <span className="text-fontcolor-muted">99,999,999</span>
+      <div className="flex items-center justify-between text-sm">
+        <div className="flex items-center gap-2">
+          <p className="font-bold">50%</p> <span className="text-fontcolor-muted">99,999,999</span>
         </div>
 
-        <p>270 to win</p>
+        <p className="text-sm">270 to win</p>
 
-        <div className="flex gap-2">
-          <p className="text-center font-bold">50%</p>{' '}
-          <span className="text-fontcolor-muted">99,999,999</span>
+        <div className="flex items-center gap-2">
+          <p className="font-bold">50%</p> <span className="text-fontcolor-muted">99,999,999</span>
         </div>
       </div>
     </div>
