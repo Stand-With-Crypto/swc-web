@@ -39,16 +39,3 @@ export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string>
   [EmailEventName.GROUP_UNSUBSCRIBE]: 'Group Unsubscribe',
   [EmailEventName.GROUP_RESUBSCRIBE]: 'Group Resubscribe',
 }
-
-function getBaseUrl() {
-  switch (NEXT_PUBLIC_ENVIRONMENT) {
-    case 'production':
-      return 'https://www.standwithcrypto.org'
-    case 'preview':
-      return `https://${process.env.VERCEL_URL!}`
-    default:
-      return 'http://localhost:3000'
-  }
-}
-
-export const INTERNAL_BASE_URL = getBaseUrl()

@@ -6,6 +6,19 @@ import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
+function getBaseUrl() {
+  switch (NEXT_PUBLIC_ENVIRONMENT) {
+    case 'production':
+      return 'https://www.standwithcrypto.org'
+    case 'preview':
+      return `https://${process.env.VERCEL_URL!}`
+    default:
+      return 'http://localhost:3000'
+  }
+}
+
+export const INTERNAL_BASE_URL = getBaseUrl()
+
 export const getIntlPrefix = (locale: SupportedLocale) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   locale === DEFAULT_LOCALE ? '' : `/${locale}`
@@ -144,7 +157,7 @@ export const apiUrls = {
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
   smsStatusCallback: () => `/api/public/sms/events/status`,
   decisionDeskRaces: (params?: GetRacesParams): string => {
-    const endpointURL = new URL('api/public/decision-desk/usa')
+    const endpointURL = new URL('api/public/decision-desk/usa', INTERNAL_BASE_URL)
     const paramsEntries = Object.entries(params ?? {})
     const currentURLSearchParams = new URLSearchParams({
       year: '2024',
