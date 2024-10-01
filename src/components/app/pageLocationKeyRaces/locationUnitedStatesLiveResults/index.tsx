@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { DotFilledIcon } from '@radix-ui/react-icons'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
@@ -11,7 +10,6 @@ import { UserAddressVoterGuideInputSection } from '@/components/app/pageLocation
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { NextImage } from '@/components/ui/image'
@@ -119,6 +117,7 @@ export function LocationUnitedStatesLiveResults({
                   }),
                 )}
                 key={stateCode}
+                locale={locale}
                 stateCode={stateCode as USStateCode}
               />
             ))}

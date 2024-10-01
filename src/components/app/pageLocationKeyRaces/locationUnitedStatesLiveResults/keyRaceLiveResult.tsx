@@ -1,19 +1,21 @@
 import { useRef } from 'react'
-import { DotFilledIcon } from '@radix-ui/react-icons'
 import { isNil } from 'lodash-es'
 
 import { DTSIAvatar, DTSIAvatarProps } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { InternalLink } from '@/components/ui/link'
 import { Progress } from '@/components/ui/progress'
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn, twNoop } from '@/utils/web/cn'
 
@@ -25,12 +27,13 @@ const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) 
     return twNoop('bg-green-700')
   }
   if (score === 50) {
-    return twNoop('bg-yellow-700')
+    return twNoop('bg-yellow-600')
   }
   return twNoop('bg-red-700')
 }
 
 interface KeyRaceLiveResultProps {
+  locale: SupportedLocale
   candidates: (DTSIAvatarProps['person'] &
     Pick<
       DTSI_Person,
@@ -45,14 +48,22 @@ interface KeyRaceLiveResultProps {
 }
 
 export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
-  const { candidates, stateCode, primaryDistrict, className } = props
+  const { candidates, stateCode, primaryDistrict, className, locale } = props
 
   const mockDate = useRef(new Date().toLocaleString())
 
-  const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
+  const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const raceName = primaryDistrict
     ? `${stateName} ${formatDTSIDistrictId(primaryDistrict)} Congressional District Race`
     : `${stateName} Senate Race`
+
+  const urls = getIntlUrls(locale)
+  const link = primaryDistrict
+    ? urls.locationDistrictSpecific({
+        stateCode: stateCode,
+        district: primaryDistrict,
+      })
+    : urls.locationStateSpecificSenateRace(stateCode)
 
   const candidateA = candidates?.[0] || {}
   const candidateB = candidates?.[1] || {}
@@ -150,6 +161,10 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
           <p className="font-bold">50%</p> <span className="text-fontcolor-muted">99,999,999</span>
         </div>
       </div>
+
+      <Button asChild className="mx-auto w-fit" variant="secondary">
+        <InternalLink href={link}>View Race</InternalLink>
+      </Button>
     </div>
   )
 }
