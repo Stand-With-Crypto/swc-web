@@ -152,7 +152,7 @@ export async function enqueueMessages(
     for (const message of messages) {
       const { body, journeyType, campaignName, media } = message
 
-      const phoneNumberVariables = variables[phoneNumber]
+      const phoneNumberVariables = variables[phoneNumber] ?? {}
 
       try {
         if (body) {
