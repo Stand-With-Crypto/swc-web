@@ -18,12 +18,12 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { SupportedLocale } from '@/intl/locales'
+import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
-import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 
 interface LocationUnitedStatesLiveResultsProps
   extends QueryDTSILocationUnitedStatesInformationData {
@@ -114,13 +114,13 @@ export function LocationUnitedStatesLiveResults({
               keyRaces.map(race => (
                 <KeyRaceLiveResult
                   candidates={race}
-                  key={stateCode}
+                  key={`${stateCode}-${race[0]?.runningForSpecificRole?.primaryDistrict}`}
+                  locale={locale}
                   primaryDistrict={
                     race[0].runningForSpecificRole.primaryDistrict
                       ? normalizeDTSIDistrictId(race[0].runningForSpecificRole)
                       : undefined
                   }
-                  locale={locale}
                   stateCode={stateCode as USStateCode}
                 />
               )),
