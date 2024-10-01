@@ -7,7 +7,10 @@ import { apiUrls, fullUrl } from '@/utils/shared/urls'
 import { messagingClient } from './messagingClient'
 import { SendSMSError } from './SendSMSError'
 
-const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
+const TWILIO_MESSAGING_SERVICE_SID = requiredEnv(
+  process.env.TWILIO_MESSAGING_SERVICE_SID,
+  'TWILIO_MESSAGING_SERVICE_SID',
+)
 
 const zodSendSMSSchema = z.object({
   to: z.string(),
@@ -32,7 +35,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     }
 
     const message = await messagingClient.messages.create({
-      from: TWILIO_PHONE_NUMBER,
+      messagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
       body,
       statusCallback: fullUrl(apiUrls.smsStatusCallback()),
       to,
