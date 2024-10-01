@@ -117,7 +117,9 @@ export async function fetchRacesData(params?: GetRacesParams) {
     logger.debug('fetchRacesData received params', params)
 
     paramsEntries.forEach(([key, value]) => {
-      currentURLSearchParams.set(key, value.toString())
+      if (!value) {
+        currentURLSearchParams.delete(key)
+      } else currentURLSearchParams.set(key, value.toString())
     })
   }
 

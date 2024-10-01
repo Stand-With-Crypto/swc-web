@@ -49,13 +49,16 @@ const getPoliticalCategoryAbbr = (category: DTSI_PersonPoliticalAffiliationCateg
 interface KeyRaceLiveResultProps {
   locale: SupportedLocale
   candidates: DTSI_Candidate[]
+  initialRaceData: GetRacesResponse
   stateCode: USStateCode
+  officeId: string
   primaryDistrict?: NormalizedDTSIDistrictId
   className?: string
 }
 
 export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
-  const { candidates, stateCode, primaryDistrict, className, locale } = props
+  const { candidates, stateCode, officeId, primaryDistrict, className, locale, initialRaceData } =
+    props
 
   const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
   const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
@@ -73,15 +76,22 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
       })
     : urls.locationStateSpecificSenateRace(stateCode)
 
-  const { data } = useApiDecisionDeskRaces({} as GetRacesResponse, {
+  const { data } = useApiDecisionDeskRaces(initialRaceData, {
     district: primaryDistrict?.toString(),
     state: stateCode,
-    office_id: primaryDistrict ? '3' : '4',
+    office_id: officeId,
   })
 
-  // console.log('DecisionDesk Data: ', { stateName, primaryDistrict, data, isLoading, isValidating })
+  // console.log('DecisionDesk Data: ', {
+  //   stateName,
+  //   primaryDistrict,
+  //   data,
+  //   initialRaceData,
+  //   isLoading,
+  //   isValidating,
+  // })
 
-  const raceData = data.data?.[0]
+  const raceData = data?.data?.[0]
 
   const ddhqCandidateA = useMemo<DTSI_DDHQ_Candidate | null>(() => {
     if (!raceData) return null
