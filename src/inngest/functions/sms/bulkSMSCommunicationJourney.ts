@@ -1,7 +1,7 @@
 import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
 import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk, merge, uniq, update } from 'lodash-es'
+import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
 
 import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
 import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
@@ -99,11 +99,9 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       logger.info(prettyStringify(message))
 
       let messagesPayload: EnqueueMessagePayload[] = []
-      let segmentsCount = 0
-      let messagesCount = 0
-      let timeToSendSegments = 0
 
-      for (const hasWelcomeMessage of [true, false]) {
+      // We should keep this order [false, true] because later we're using uniqBy and if the user already received a welcome message with this phone number we shouldn't send another
+      for (const hasWelcomeMessage of [false, true]) {
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
@@ -202,28 +200,20 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         messagesPayload = messagesPayload.concat(payload)
 
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
-
-        logger.info(`Counting segments`)
-
-        const payloadCounts = await step.run(
-          `count-messages-and-segments-welcome-${String(hasWelcomeMessage)}`,
-          () => countMessagesAndSegments(payload),
-        )
-
-        segmentsCount += payloadCounts.segments
-        messagesCount += payloadCounts.messages
-        timeToSendSegments += getWaitingTimeInSeconds(payloadCounts.segments)
-
-        logger.info(
-          prettyStringify({
-            segmentsCount,
-            messagesCount,
-            timeToSendSegments: getWaitingTimeInSeconds(payloadCounts.segments),
-          }),
-        )
       }
 
+      messagesPayload = uniqBy(messagesPayload, 'phoneNumber')
+
+      logger.info(`Counting segments`)
+
+      const payloadCounts = await step.run(`count-messages-and-segments`, () =>
+        countMessagesAndSegments(messagesPayload),
+      )
+
+      // Using uniqBy here because the same phone number can show up whether hasWelcomeMessage is true or false, thanks to how where works with groupBy.
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
+
+      const timeToSendSegments = getWaitingTimeInSeconds(payloadCounts.segments)
 
       // This is for debugging and estimation purposes only
       // Grouping bulk send count by campaign name
@@ -238,8 +228,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             chunks: 0,
           },
         ) => ({
-          segmentsCount: segmentsCount + existingPayload.segmentsCount,
-          messagesCount: messagesCount + existingPayload.messagesCount,
+          segmentsCount: payloadCounts.segments + existingPayload.segmentsCount,
+          messagesCount: payloadCounts.messages + existingPayload.messagesCount,
           totalTime: timeToSendSegments + existingPayload.totalTime,
           chunks: payloadChunks.length + existingPayload.chunks,
         }),
@@ -247,8 +237,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       enqueueMessagesPayloadChunks.push(...payloadChunks)
 
-      totalSegmentsCount += segmentsCount
-      totalMessagesCount += messagesCount
+      totalSegmentsCount += payloadCounts.segments
+      totalMessagesCount += payloadCounts.messages
       totalTime += timeToSendSegments
     }
 
