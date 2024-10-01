@@ -75,13 +75,13 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
   const candidateA = candidates?.[0] || {}
   const candidateB = candidates?.[1] || {}
 
-  const { data, error } = useApiDecisionDeskRaces({} as GetRacesResponse, {
+  const { data, isLoading, isValidating } = useApiDecisionDeskRaces({} as GetRacesResponse, {
     district: primaryDistrict?.toString(),
     state: stateCode,
-    office_id: '4',
+    office_id: primaryDistrict ? '3' : '4',
   })
 
-  console.log('DecisionDesk Data: ', data, error)
+  console.log('DecisionDesk Data: ', { stateName, primaryDistrict, data, isLoading, isValidating })
 
   return (
     <div className={cn('flex w-full max-w-lg flex-col gap-8', className)}>
