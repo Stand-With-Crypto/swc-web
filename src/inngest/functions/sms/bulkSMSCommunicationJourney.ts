@@ -176,13 +176,13 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
         logger.info('Got phone numbers, adding to messagesPayload')
 
-        const body = hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
+        const body = !hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
 
         // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
         const payload = uniq(allPhoneNumbers).map(phoneNumber => ({
           phoneNumber,
           messages: [
-            ...(hasWelcomeMessage
+            ...(!hasWelcomeMessage
               ? [{ journeyType: UserCommunicationJourneyType.WELCOME_SMS }]
               : []),
             {
@@ -202,6 +202,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
       }
 
+      // Using uniqBy here because the same phone number can show up whether hasWelcomeMessage is true or false, thanks to how where works with groupBy.
       messagesPayload = uniqBy(messagesPayload, 'phoneNumber')
 
       logger.info(`Counting segments`)
@@ -210,7 +211,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         countMessagesAndSegments(messagesPayload),
       )
 
-      // Using uniqBy here because the same phone number can show up whether hasWelcomeMessage is true or false, thanks to how where works with groupBy.
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
 
       const timeToSendSegments = getWaitingTimeInSeconds(payloadCounts.segments)
