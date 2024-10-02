@@ -11,40 +11,22 @@ import {
   DTSI_Candidate,
   DTSI_DDHQ_Candidate,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
+import {
+  convertDTSIStanceScoreToBgColorClass,
+  getPoliticalCategoryAbbr,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Progress } from '@/components/ui/progress'
 import { GetRacesResponse } from '@/data/decisionDesk/types'
-import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import {
-  dtsiPersonFullName,
-  dtsiPersonPoliticalAffiliationCategoryAbbreviation,
-} from '@/utils/dtsi/dtsiPersonUtils'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
-import { cn, twNoop } from '@/utils/web/cn'
-
-const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
-  if (isNil(score)) {
-    return twNoop('bg-gray-400')
-  }
-  if (score > 50) {
-    return twNoop('bg-green-700')
-  }
-  if (score === 50) {
-    return twNoop('bg-yellow-600')
-  }
-  return twNoop('bg-red-700')
-}
-
-const getPoliticalCategoryAbbr = (category: DTSI_PersonPoliticalAffiliationCategory) => {
-  if (!category) return ''
-  return dtsiPersonPoliticalAffiliationCategoryAbbreviation(category) || ''
-}
+import { cn } from '@/utils/web/cn'
 
 interface KeyRaceLiveResultProps {
   locale: SupportedLocale
@@ -218,13 +200,15 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
         />
       </div>
 
-      <div className="flex items-center justify-between text-sm">
+      <div className="relative flex items-center justify-between text-sm">
         <div className="flex items-center gap-2">
           <p className="font-bold">{getVotePercentage(ddhqCandidateA)}%</p>
           <span className="text-fontcolor-muted">{getTotalVotes(ddhqCandidateA)} votes</span>
         </div>
 
-        {/* <p className="text-sm text-fontcolor-muted">999 votes to win</p> */}
+        {/* <p className="absolute left-1/2 right-1/2 w-fit text-fontcolor-muted -translate-x-1/2 text-nowrap text-sm">
+          999 votes to win
+        </p> */}
 
         <div className="flex items-center gap-2 text-right">
           <p className="font-bold">{getVotePercentage(ddhqCandidateB)}%</p>

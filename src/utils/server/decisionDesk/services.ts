@@ -151,8 +151,8 @@ export async function fetchRacesData(params?: GetRacesParams) {
         },
       ),
     {
-      retries: 1,
-      minTimeout: 4000,
+      retries: 2,
+      minTimeout: 5000,
     },
   )
 

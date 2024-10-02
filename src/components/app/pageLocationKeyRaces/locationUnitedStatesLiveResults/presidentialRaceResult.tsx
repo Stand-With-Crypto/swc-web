@@ -1,23 +1,15 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import {
   DTSI_Candidate,
   DTSI_DDHQ_Candidate,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
+import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Progress } from '@/components/ui/progress'
 import { GetRacesResponse } from '@/data/decisionDesk/types'
-import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
 import { cn } from '@/utils/web/cn'
-
-const PARTY_COLOR_MAP: Record<DTSI_PersonPoliticalAffiliationCategory, string> = {
-  [DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT]: 'bg-blue-600',
-  [DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN]: 'bg-red-600',
-  [DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT]: 'bg-gray-600',
-  [DTSI_PersonPoliticalAffiliationCategory.LIBERTARIAN]: 'bg-yellow-600',
-  [DTSI_PersonPoliticalAffiliationCategory.OTHER]: '',
-}
 
 interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
@@ -30,21 +22,15 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
   const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
 
-  const { data, isLoading, isValidating } = useApiDecisionDeskRaces(initialRaceData, {
+  const { data } = useApiDecisionDeskRaces(initialRaceData, {
     race_date: '2020-11-03',
     election_type_id: '1',
     year: '2020',
     limit: '250',
+    office_id: '1',
   })
 
   const raceData = data?.data?.[0]
-
-  console.log('PRESIDENT Data: ', {
-    data,
-    initialRaceData,
-    isLoading,
-    isValidating,
-  })
 
   const ddhqCandidateA = useMemo<DTSI_DDHQ_Candidate | null>(() => {
     if (!raceData) return null
@@ -76,6 +62,20 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     }
   }, [candidateB, raceData])
 
+  const getTotalVotes = useCallback(
+    (candidate: DTSI_DDHQ_Candidate | null) => {
+      if (!data?.data || !candidate?.cand_id) return 0
+      let votes = 0
+      data.data.forEach(race => {
+        if (race.topline_results?.total_votes !== 0) {
+          votes += race.topline_results?.votes[candidate.cand_id] || 0
+        }
+      })
+      return votes
+    },
+    [data],
+  )
+
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
       <div className="flex justify-between">
@@ -88,10 +88,9 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           className="h-6 rounded-l-full rounded-r-none bg-gray-800"
           indicatorClassName={cn(
             'bg-none rounded-r-none',
-            PARTY_COLOR_MAP[
-              candidateA.politicalAffiliationCategory ||
-                DTSI_PersonPoliticalAffiliationCategory.OTHER
-            ],
+            convertDTSIStanceScoreToBgColorClass(
+              candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
+            ),
           )}
           value={50}
         />
@@ -99,25 +98,28 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           className="h-6 rounded-l-none rounded-r-full border-l bg-gray-800"
           indicatorClassName={cn(
             'bg-none rounded-l-none',
-            PARTY_COLOR_MAP[
-              candidateB.politicalAffiliationCategory ||
-                DTSI_PersonPoliticalAffiliationCategory.OTHER
-            ],
+            convertDTSIStanceScoreToBgColorClass(
+              candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
+            ),
           )}
           inverted
           value={50}
         />
       </div>
 
-      <div className="flex items-center justify-between text-sm">
+      <div className="relative flex items-center justify-between text-sm">
         <div className="flex items-center gap-2">
-          <p className="font-bold">50%</p> <span className="text-fontcolor-muted">99,999,999</span>
+          <p className="font-bold">50%</p>{' '}
+          <span className="text-fontcolor-muted">{getTotalVotes(ddhqCandidateA)}</span>
         </div>
 
-        <p className="text-sm">270 to win</p>
+        <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
+          270 to win
+        </p>
 
         <div className="flex items-center gap-2">
-          <p className="font-bold">50%</p> <span className="text-fontcolor-muted">99,999,999</span>
+          <p className="font-bold">50%</p>{' '}
+          <span className="text-fontcolor-muted">{getTotalVotes(ddhqCandidateB)}</span>
         </div>
       </div>
     </div>
@@ -135,7 +137,7 @@ function AvatarBox(props: AvatarBoxProps) {
   return (
     <div className={className}>
       <DTSIAvatar className="rounded-full" person={candidate} size={125} />
-      <p className="font-bold">999</p>
+      <p className="text-lg font-bold">999</p>
     </div>
   )
 }
