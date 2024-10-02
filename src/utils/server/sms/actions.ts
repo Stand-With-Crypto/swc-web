@@ -49,6 +49,7 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
             phoneNumber,
             messages: [
               {
+                campaignName: 'default',
                 journeyType: UserCommunicationJourneyType.WELCOME_SMS,
                 body: messages.WELCOME_MESSAGE,
               },
@@ -111,6 +112,7 @@ export async function optOutUser(phoneNumber: string, user?: User | null) {
               {
                 journeyType: UserCommunicationJourneyType.GOODBYE_SMS,
                 body: messages.GOODBYE_MESSAGE,
+                campaignName: 'default',
               },
             ],
           },
@@ -171,6 +173,7 @@ export async function optUserBackIn(phoneNumber: string, user?: User | null) {
               {
                 journeyType: UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
                 body: messages.UNSTOP_CONFIRMATION_MESSAGE,
+                campaignName: 'default',
               },
             ],
           },

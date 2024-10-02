@@ -180,25 +180,30 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         const body = !hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
 
         // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
-        const payload = uniq(allPhoneNumbers).map(phoneNumber => ({
-          phoneNumber,
-          messages: [
-            ...(!hasWelcomeMessage
-              ? [{ journeyType: UserCommunicationJourneyType.WELCOME_SMS }]
-              : []),
-            {
-              // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
-              // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
-              body,
-              campaignName,
-              journeyType: UserCommunicationJourneyType.BULK_SMS,
-              media,
-            },
-          ],
-        }))
-
         // We need to use concat here because using spread is exceeding maximum call stack size
-        messagesPayload = messagesPayload.concat(payload)
+        messagesPayload = messagesPayload.concat(
+          uniq(allPhoneNumbers).map(phoneNumber => ({
+            phoneNumber,
+            messages: [
+              ...(!hasWelcomeMessage
+                ? [
+                    {
+                      journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                      campaignName: 'bulk-welcome',
+                    },
+                  ]
+                : []),
+              {
+                // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
+                // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
+                body,
+                campaignName,
+                journeyType: UserCommunicationJourneyType.BULK_SMS,
+                media,
+              },
+            ],
+          })),
+        )
 
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
       }

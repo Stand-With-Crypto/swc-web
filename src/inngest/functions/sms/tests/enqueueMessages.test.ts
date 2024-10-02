@@ -68,6 +68,7 @@ describe('enqueueMessages', () => {
     messages: randomArray(() => ({
       journeyType: 'BULK_SMS',
       body: faker.string.alpha(10),
+      campaignName: 'unit-tests',
     })),
   }))
 
@@ -158,7 +159,7 @@ describe('enqueueMessages', () => {
     await enqueueMessages(
       [
         {
-          messages: [{ body: input, journeyType: 'BULK_SMS' }],
+          messages: [{ body: input, journeyType: 'BULK_SMS', campaignName: 'unit-tests' }],
           phoneNumber,
         },
       ],

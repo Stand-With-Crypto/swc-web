@@ -6,7 +6,6 @@ import { update } from 'lodash-es'
 import {
   bulkCreateCommunicationJourney,
   BulkCreateCommunicationJourneyPayload,
-  BULK_WELCOME_CAMPAIGN_NAME,
 } from '@/inngest/functions/sms/utils/communicationJourney'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
@@ -27,7 +26,7 @@ export interface EnqueueMessagePayload {
   messages: Array<{
     body?: string
     journeyType: UserCommunicationJourneyType
-    campaignName?: string
+    campaignName: string
     media?: string[]
   }>
 }
@@ -165,7 +164,7 @@ export async function enqueueMessages(
           if (queuedMessage) {
             update(
               messagesSentByJourneyType,
-              [journeyType, campaignName ?? ''],
+              [journeyType, campaignName],
               (existingPayload = []) => [
                 ...existingPayload,
                 {
@@ -181,16 +180,12 @@ export async function enqueueMessages(
         } else {
           // Bulk-SMS have logic to check if the phone number already received a welcome message, if it didn't it includes the welcome message at the end of the bulk message.
           // When doing this, it also adds a WELCOME_SMS journeyType to enqueueSMS payload, so we need to register that the user received the welcome legalese inside the bulk message
-          update(
-            messagesSentByJourneyType,
-            [journeyType, BULK_WELCOME_CAMPAIGN_NAME],
-            (existingPayload = []) => [
-              ...existingPayload,
-              {
-                phoneNumber,
-              },
-            ],
-          )
+          update(messagesSentByJourneyType, [journeyType, campaignName], (existingPayload = []) => [
+            ...existingPayload,
+            {
+              phoneNumber,
+            },
+          ])
         }
       } catch (error) {
         if (error instanceof NonRetriableError) {
