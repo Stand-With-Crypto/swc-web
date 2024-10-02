@@ -100,8 +100,9 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       let messagesPayload: EnqueueMessagePayload[] = []
 
-      // We should keep this order [false, true] because later we're using uniqBy and if the user already received a welcome message with this phone number we shouldn't send another
-      for (const hasWelcomeMessage of [false, true]) {
+      // We need to keep this order as true -> false because later we use groupBy, which keeps the first occurrence of each element. In this case, that would be the user who already received the welcome message, so we don’t need to send the legal disclaimer again.
+      // This happens because of how where works with groupBy, and there are cases where different users with the same phone number show up in both groups. So, in those cases, we don’t want to send two messages—just one.
+      for (const hasWelcomeMessage of [true, false]) {
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
@@ -202,7 +203,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
       }
 
-      // Using uniqBy here because the same phone number can show up whether hasWelcomeMessage is true or false, thanks to how where works with groupBy.
+      // Using uniqBy here because different users with the same phone number can show up in both groups when hasWelcomeMessage is either true or false. This happens because where runs before groupBy
       messagesPayload = uniqBy(messagesPayload, 'phoneNumber')
 
       logger.info(`Counting segments`)
