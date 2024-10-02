@@ -12,7 +12,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
-export const dynamic = 'error'
+export const dynamic = 'auto'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
 export const revalidate = SECONDS_DURATION['5_MINUTES']
 

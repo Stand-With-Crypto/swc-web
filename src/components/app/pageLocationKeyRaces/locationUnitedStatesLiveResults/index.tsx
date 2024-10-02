@@ -89,7 +89,7 @@ export function LocationUnitedStatesLiveResults({
             {[
               { value: '9,999', label: 'Pro-crypto candidates elected' },
               { value: '999,999', label: 'Votes cast for pro-crypto candidates' },
-              { value: '64%', label: 'of races won by pro-crypto candidates' },
+              { value: '999%', label: 'of races won by pro-crypto candidates' },
             ].map(({ value, label }) => (
               <Card className="p-8" key={label}>
                 <p className="text-4xl font-bold">{value}</p>

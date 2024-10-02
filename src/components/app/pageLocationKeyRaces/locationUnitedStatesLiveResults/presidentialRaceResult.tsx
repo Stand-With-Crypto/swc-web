@@ -8,7 +8,7 @@ import {
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Progress } from '@/components/ui/progress'
 import { GetRacesResponse } from '@/data/decisionDesk/types'
-import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
+import { useDecisionDeskPresidentRace } from '@/hooks/useApiDecisionDeskRaces'
 import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
@@ -22,7 +22,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
   const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
 
-  const { data } = useApiDecisionDeskRaces(initialRaceData, {
+  const { data } = useDecisionDeskPresidentRace(initialRaceData, {
     race_date: '2020-11-03',
     election_type_id: '1',
     year: '2020',
