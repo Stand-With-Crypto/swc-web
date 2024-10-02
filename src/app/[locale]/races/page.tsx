@@ -10,10 +10,11 @@ import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
+import * as Sentry from '@sentry/nextjs'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['2_MINUTES']
+export const revalidate = SECONDS_DURATION['5_MINUTES']
 
 type LocationUnitedStatesPageProps = PageProps
 
@@ -44,14 +45,38 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
       const officeId = primaryDistrict ? '3' : '4'
       const key = `${state}_${primaryDistrict?.toString() || 'undefined'}_${officeId}`
 
-      const raceData = await fetchRacesData({
-        state,
-        district: primaryDistrict?.toString(),
-        office_id: officeId,
-      })
-      racesDataMap[key] = raceData
+      try {
+        const raceData = await fetchRacesData({
+          state,
+          district: primaryDistrict?.toString(),
+          office_id: officeId,
+        })
+        racesDataMap[key] = raceData
+      } catch (error) {
+        Sentry.captureException(error, {
+          extra: { key },
+        })
+        console.log(`Error fetching race data for ${key}:`, error)
+        racesDataMap[key] = {} as GetRacesResponse
+      }
     }),
   )
+
+  try {
+    const presidentRaceData = await fetchRacesData({
+      race_date: '2020-11-03',
+      election_type_id: '1',
+      year: '2020',
+      limit: '250',
+    })
+    racesDataMap['president'] = presidentRaceData
+  } catch (error) {
+    Sentry.captureException(error, {
+      extra: { key: 'president' },
+    })
+    console.log(`Error fetching race data for ${'president'}:`, error)
+    racesDataMap['president'] = {} as GetRacesResponse
+  }
 
   await Promise.all(racePromises)
 

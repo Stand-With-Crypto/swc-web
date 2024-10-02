@@ -61,7 +61,10 @@ export function LocationUnitedStatesLiveResults({
             </Button>
           </div>
 
-          <PresidentialRaceResult candidates={races.president} />
+          <PresidentialRaceResult
+            candidates={races.president}
+            initialRaceData={ddhqResults['president']}
+          />
 
           <Button asChild className="w-full max-w-xs font-bold lg:hidden" variant="secondary">
             <InternalLink href={urls.locationUnitedStatesPresidential()}>
