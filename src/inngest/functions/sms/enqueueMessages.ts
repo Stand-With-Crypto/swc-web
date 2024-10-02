@@ -6,7 +6,7 @@ import { update } from 'lodash-es'
 import {
   bulkCreateCommunicationJourney,
   BulkCreateCommunicationJourneyPayload,
-  DEFAULT_CAMPAIGN_NAME,
+  BULK_WELCOME_CAMPAIGN_NAME,
 } from '@/inngest/functions/sms/utils/communicationJourney'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
@@ -165,7 +165,7 @@ export async function enqueueMessages(
           if (queuedMessage) {
             update(
               messagesSentByJourneyType,
-              [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
+              [journeyType, campaignName ?? ''],
               (existingPayload = []) => [
                 ...existingPayload,
                 {
@@ -183,7 +183,7 @@ export async function enqueueMessages(
           // When doing this, it also adds a WELCOME_SMS journeyType to enqueueSMS payload, so we need to register that the user received the welcome legalese inside the bulk message
           update(
             messagesSentByJourneyType,
-            [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
+            [journeyType, BULK_WELCOME_CAMPAIGN_NAME],
             (existingPayload = []) => [
               ...existingPayload,
               {

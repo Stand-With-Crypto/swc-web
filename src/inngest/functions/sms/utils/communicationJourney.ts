@@ -9,10 +9,10 @@ const journeyTypesWithSingleJourney = [
   UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
 ]
 
-export const DEFAULT_CAMPAIGN_NAME = 'default'
+export const BULK_WELCOME_CAMPAIGN_NAME = 'bulk-welcome'
 
 export type BulkCreateCommunicationJourneyPayload = Record<
-  string, // campaign name || DEFAULT_CAMPAIGN_NAME
+  string, // campaign name || BULK_WELCOME_CAMPAIGN_NAME
   Array<{ phoneNumber: string; messageId: string }>
 >
 
