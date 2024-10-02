@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { Metadata } from 'next'
 
 import { LocationUnitedStatesLiveResults } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults'
@@ -10,7 +11,6 @@ import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
-import * as Sentry from '@sentry/nextjs'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
@@ -68,6 +68,7 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
       election_type_id: '1',
       year: '2020',
       limit: '250',
+      office_id: '1',
     })
     racesDataMap['president'] = presidentRaceData
   } catch (error) {
