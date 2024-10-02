@@ -1,7 +1,14 @@
+import { useMemo } from 'react'
+
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
+import {
+  DTSI_Candidate,
+  DTSI_DDHQ_Candidate,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { Progress } from '@/components/ui/progress'
+import { GetRacesResponse } from '@/data/decisionDesk/types'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
 import { cn } from '@/utils/web/cn'
 
 const PARTY_COLOR_MAP: Record<DTSI_PersonPoliticalAffiliationCategory, string> = {
@@ -14,13 +21,60 @@ const PARTY_COLOR_MAP: Record<DTSI_PersonPoliticalAffiliationCategory, string> =
 
 interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
+  initialRaceData: GetRacesResponse
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
-  const { candidates } = props
+  const { candidates, initialRaceData = {} as GetRacesResponse } = props
 
-  const candidateA = candidates?.[0] || {}
-  const candidateB = candidates?.[1] || {}
+  const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
+  const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
+
+  const { data, isLoading, isValidating } = useApiDecisionDeskRaces(initialRaceData, {
+    race_date: '2020-11-03',
+    election_type_id: '1',
+    year: '2020',
+    limit: '250',
+  })
+
+  const raceData = data?.data?.[0]
+
+  console.log('PRESIDENT Data: ', {
+    data,
+    initialRaceData,
+    isLoading,
+    isValidating,
+  })
+
+  const ddhqCandidateA = useMemo<DTSI_DDHQ_Candidate | null>(() => {
+    if (!raceData) return null
+
+    const candidate = raceData?.candidates?.find(
+      _candidate => _candidate?.last_name.toLowerCase() === candidateA.lastName.toLowerCase(),
+    )
+
+    if (!candidate) return null
+
+    return {
+      ...candidateA,
+      ...candidate,
+    }
+  }, [candidateA, raceData])
+
+  const ddhqCandidateB = useMemo<DTSI_DDHQ_Candidate | null>(() => {
+    if (!raceData) return null
+
+    const candidate = raceData?.candidates?.find(
+      _candidate => _candidate?.last_name.toLowerCase() === candidateB.lastName.toLowerCase(),
+    )
+
+    if (!candidate) return null
+
+    return {
+      ...candidateB,
+      ...candidate,
+    }
+  }, [candidateB, raceData])
 
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
