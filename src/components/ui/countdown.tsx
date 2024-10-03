@@ -97,7 +97,7 @@ export function Countdown({ targetDate, variant = 'default' }: CountdownProps) {
   return (
     <p>
       {countDownTimeEntries.map(([unit, value], idx) => (
-        <span className="text-sm font-bold" key={unit}>
+        <span key={unit}>
           {`0${value}`.slice(-2)}
           {UNITS_BY_VARIANT[variant][unit as keyof CountdownTime]}
           {idx < countDownTimeEntries.length - 1 ? ' ' : ''}
