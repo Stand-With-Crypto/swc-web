@@ -120,10 +120,7 @@ export function LocationUnitedStatesLiveResults({
                 const key = `${stateCode}_${primaryDistrict?.toString() || 'undefined'}_${officeId}`
 
                 return (
-                  <div
-                    className="flex w-full items-center justify-center px-6 py-10 md:px-12 md:py-14 lg:px-20"
-                    key={key}
-                  >
+                  <GridItem key={key}>
                     <KeyRaceLiveResult
                       candidates={candidates}
                       className="flex-1"
@@ -134,10 +131,26 @@ export function LocationUnitedStatesLiveResults({
                       primaryDistrict={primaryDistrict}
                       stateCode={stateCode as USStateCode}
                     />
-                  </div>
+                  </GridItem>
                 )
               }),
             )}
+
+            <GridItem>
+              <div className="flex flex-col items-center justify-center gap-8 text-center">
+                <NextImage
+                  alt="SWC shield"
+                  src="/shields/shield_DoublePurple.png"
+                  width={120}
+                  height={120}
+                />
+                <div className="space-y-2">
+                  <p className="text-xl font-semibold">Did you vote in this year's election?</p>
+                  <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
+                </div>
+                <Button className="w-fit">I voted!</Button>
+              </div>
+            </GridItem>
           </section>
         </ContentSection>
 
@@ -164,6 +177,14 @@ export function LocationUnitedStatesLiveResults({
 
         <PACFooter className="container text-center" />
       </div>
+    </div>
+  )
+}
+
+function GridItem({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex w-full items-center justify-center px-6 py-10 md:px-12 md:py-14 lg:px-20">
+      {children}
     </div>
   )
 }
