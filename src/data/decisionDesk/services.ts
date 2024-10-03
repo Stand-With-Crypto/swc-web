@@ -25,7 +25,7 @@ const DECISION_DESK_SECRET = requiredEnv(process.env.DECISION_DESK_SECRET, 'DECI
 const logger = getLogger('decisionDesk services')
 
 async function fetchBearerToken() {
-  logger.info('fetchBearerToken called')
+  logger.debug('fetchBearerToken called')
 
   if (!DECISION_DESK_CLIENT_ID || !DECISION_DESK_SECRET) {
     throw new Error('DECISION_DESK_CLIENT_ID or DECISION_DESK_SECRET not set')
@@ -62,7 +62,7 @@ async function fetchBearerToken() {
     },
   )
 
-  logger.info(`fetchBearerToken returned with status ${response.status}`)
+  logger.debug(`fetchBearerToken returned with status ${response.status}`)
 
   const json = (await response.json()) as GetBearerTokenResponse | { errors: any[] }
 
@@ -74,16 +74,16 @@ async function fetchBearerToken() {
 }
 
 async function getBearerToken() {
-  logger.info('getBearerToken called')
+  logger.debug('getBearerToken called')
 
   const hasCachedBearerToken = await redis.get<GetBearerTokenResponse>(DECISION_DESK_BEARER_TOKEN)
 
   if (hasCachedBearerToken) {
-    logger.info('getBearerToken found cached token')
+    logger.debug('getBearerToken found cached token')
     return hasCachedBearerToken.access_token
   }
 
-  logger.info('getBearerToken did not find cached token')
+  logger.debug('getBearerToken did not find cached token')
 
   const bearerToken = await fetchBearerToken()
 
@@ -91,13 +91,13 @@ async function getBearerToken() {
     ex: bearerToken.expires_in,
   })
 
-  logger.info('getBearerToken set new token in cache')
+  logger.debug('getBearerToken set new token in cache')
 
   return bearerToken.access_token
 }
 
 export async function fetchRacesData(params?: GetRacesParams) {
-  logger.info('fetchRacesData called')
+  logger.debug('fetchRacesData called')
 
   const endpointURL = new URL(`${API_ENDPOINT}/races`)
   const paramsEntries = Object.entries(params ?? {})
@@ -106,7 +106,7 @@ export async function fetchRacesData(params?: GetRacesParams) {
   })
 
   if (paramsEntries.length > 0) {
-    logger.info('fetchRacesData received params', params)
+    logger.debug('fetchRacesData received params', params)
 
     paramsEntries.forEach(([key, value]) => {
       currentURLSearchParams.set(key, value.toString())
@@ -146,7 +146,7 @@ export async function fetchRacesData(params?: GetRacesParams) {
     },
   )
 
-  logger.info(`fetchRacesData returned with status ${response.status}`)
+  logger.debug(`fetchRacesData returned with status ${response.status}`)
 
   const json = (await response.json()) as GetRacesResponse | { errors: any[] }
 
@@ -158,7 +158,7 @@ export async function fetchRacesData(params?: GetRacesParams) {
 }
 
 export async function fetchDelegatesData(year = '2024') {
-  logger.info('fetchDelegatesData called')
+  logger.debug('fetchDelegatesData called')
 
   const endpointURL = new URL(`${API_ENDPOINT}/delegates/${year}`)
 
@@ -193,7 +193,7 @@ export async function fetchDelegatesData(year = '2024') {
     },
   )
 
-  logger.info(`fetchDelegatesData returned with status ${response.status}`)
+  logger.debug(`fetchDelegatesData returned with status ${response.status}`)
 
   const json = (await response.json()) as GetDelegatesResponse | { errors: any[] }
 
@@ -205,7 +205,7 @@ export async function fetchDelegatesData(year = '2024') {
 }
 
 export async function fetchElectoralCollege(year = '2024') {
-  logger.info('fetchElectoralCollege called')
+  logger.debug('fetchElectoralCollege called')
 
   const endpointURL = new URL(`${API_ENDPOINT}/electoral_college/${year}`)
 
@@ -240,7 +240,7 @@ export async function fetchElectoralCollege(year = '2024') {
     },
   )
 
-  logger.info(`fetchElectoralCollege returned with status ${response.status}`)
+  logger.debug(`fetchElectoralCollege returned with status ${response.status}`)
 
   const json = (await response.json()) as GetElectoralCollegeResponse | { errors: any[] }
 

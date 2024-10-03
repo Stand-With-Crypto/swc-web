@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 import { LocationUnitedStates } from '@/components/app/pageLocationKeyRaces/locationUnitedStates'
+import { getRacesVotingData } from '@/data/aggregations/getRacesVotingData'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -30,5 +31,17 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
     prismaClient.user.count(),
   ])
 
-  return <LocationUnitedStates countAdvocates={countAdvocates} {...dtsiResults} {...{ locale }} />
+  const racesVotingData = await getRacesVotingData({
+    year: '2024',
+    office: 'president',
+  })
+
+  return (
+    <LocationUnitedStates
+      countAdvocates={countAdvocates}
+      racesVotingData={racesVotingData}
+      {...dtsiResults}
+      {...{ locale }}
+    />
+  )
 }

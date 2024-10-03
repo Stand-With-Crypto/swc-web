@@ -2,8 +2,8 @@ import 'server-only'
 
 import { NextRequest, NextResponse } from 'next/server'
 
+import { getRacesVotingData } from '@/data/aggregations/getRacesVotingData'
 import { GetRacesParamsSchema } from '@/data/decisionDesk/schemas'
-import { fetchRacesData } from '@/data/decisionDesk/services'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'auto'
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     })
   }
 
-  const data = await fetchRacesData(validationResult.data)
+  const data = await getRacesVotingData(validationResult.data)
 
   return NextResponse.json(data)
 }
