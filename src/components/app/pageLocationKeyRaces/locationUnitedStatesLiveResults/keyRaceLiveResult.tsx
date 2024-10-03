@@ -154,7 +154,7 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
   }
 
   return (
-    <div className={cn('flex w-full max-w-lg flex-col gap-8', className)}>
+    <div className={cn('flex w-full flex-col gap-8', className)}>
       <div className="flex items-start justify-between">
         <div className="space-y-2">
           <p className="text-lg font-semibold">{raceName}</p>

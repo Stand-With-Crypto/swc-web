@@ -1,5 +1,5 @@
 import type { DTSIAvatarProps } from '@/components/app/dtsiAvatar'
-import type { Candidate } from '@/data/decisionDesk/types'
+import type { Candidate, ElectoralCandidate } from '@/data/decisionDesk/types'
 import type { DTSI_Person } from '@/data/dtsi/generated'
 
 export type DTSI_Candidate = DTSIAvatarProps['person'] &
@@ -12,3 +12,4 @@ export type DTSI_Candidate = DTSIAvatarProps['person'] &
   >
 
 export type DTSI_DDHQ_Candidate = DTSI_Candidate & Candidate
+export type DTSI_DDHQ_PresidentCandidate = DTSI_Candidate & ElectoralCandidate

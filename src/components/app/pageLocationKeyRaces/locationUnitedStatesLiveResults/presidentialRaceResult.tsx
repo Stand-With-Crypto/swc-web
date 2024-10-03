@@ -1,41 +1,42 @@
-import { useCallback, useMemo } from 'react'
+'use client'
+
+import { useMemo } from 'react'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import {
   DTSI_Candidate,
-  DTSI_DDHQ_Candidate,
+  DTSI_DDHQ_PresidentCandidate,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Progress } from '@/components/ui/progress'
-import { GetRacesResponse } from '@/data/decisionDesk/types'
+import { GetElectoralCollegeResponse } from '@/data/decisionDesk/types'
 import { useDecisionDeskPresidentRace } from '@/hooks/useApiDecisionDeskRaces'
 import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
-  initialRaceData: GetRacesResponse
+  initialRaceData: GetElectoralCollegeResponse
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
-  const { candidates, initialRaceData = {} as GetRacesResponse } = props
+  const { candidates, initialRaceData = {} as GetElectoralCollegeResponse } = props
 
   const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
   const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
 
-  const { data } = useDecisionDeskPresidentRace(initialRaceData, {
-    race_date: '2020-11-03',
-    election_type_id: '1',
-    year: '2020',
-    limit: '250',
-    office_id: '1',
+  const { data, isLoading, isValidating } = useDecisionDeskPresidentRace(initialRaceData)
+
+  console.log('PRESIDENT DATA: ', {
+    initialRaceData,
+    data,
+    isLoading,
+    isValidating,
   })
 
-  const raceData = data?.data?.[0]
+  const ddhqCandidateA = useMemo<DTSI_DDHQ_PresidentCandidate | null>(() => {
+    if (!data) return null
 
-  const ddhqCandidateA = useMemo<DTSI_DDHQ_Candidate | null>(() => {
-    if (!raceData) return null
-
-    const candidate = raceData?.candidates?.find(
+    const candidate = data?.candidates?.find(
       _candidate => _candidate?.last_name.toLowerCase() === candidateA.lastName.toLowerCase(),
     )
 
@@ -45,12 +46,12 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       ...candidateA,
       ...candidate,
     }
-  }, [candidateA, raceData])
+  }, [candidateA, data])
 
-  const ddhqCandidateB = useMemo<DTSI_DDHQ_Candidate | null>(() => {
-    if (!raceData) return null
+  const ddhqCandidateB = useMemo<DTSI_DDHQ_PresidentCandidate | null>(() => {
+    if (!data) return null
 
-    const candidate = raceData?.candidates?.find(
+    const candidate = data?.candidates?.find(
       _candidate => _candidate?.last_name.toLowerCase() === candidateB.lastName.toLowerCase(),
     )
 
@@ -60,27 +61,17 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       ...candidateB,
       ...candidate,
     }
-  }, [candidateB, raceData])
-
-  const getTotalVotes = useCallback(
-    (candidate: DTSI_DDHQ_Candidate | null) => {
-      if (!data?.data || !candidate?.cand_id) return 0
-      let votes = 0
-      data.data.forEach(race => {
-        if (race.topline_results?.total_votes !== 0) {
-          votes += race.topline_results?.votes[candidate.cand_id] || 0
-        }
-      })
-      return votes
-    },
-    [data],
-  )
+  }, [candidateB, data])
 
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
       <div className="flex justify-between">
-        <AvatarBox candidate={candidateA} />
-        <AvatarBox candidate={candidateB} className="flex flex-col items-end text-right" />
+        <AvatarBox candidate={candidateA} electoralVotes={ddhqCandidateA?.electoral_votes_total} />
+        <AvatarBox
+          candidate={candidateB}
+          className="flex flex-col items-end text-right"
+          electoralVotes={ddhqCandidateB?.electoral_votes_total}
+        />
       </div>
 
       <div className="flex">
@@ -109,8 +100,8 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
       <div className="relative flex items-center justify-between text-sm">
         <div className="flex items-center gap-2">
-          <p className="font-bold">50%</p>{' '}
-          <span className="text-fontcolor-muted">{getTotalVotes(ddhqCandidateA)}</span>
+          <p className="font-bold">{ddhqCandidateA?.percentage}</p>{' '}
+          <span className="text-fontcolor-muted">{ddhqCandidateA?.votes}</span>
         </div>
 
         <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
@@ -118,8 +109,8 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         </p>
 
         <div className="flex items-center gap-2">
-          <p className="font-bold">50%</p>{' '}
-          <span className="text-fontcolor-muted">{getTotalVotes(ddhqCandidateB)}</span>
+          <p className="font-bold">{ddhqCandidateB?.percentage}</p>{' '}
+          <span className="text-fontcolor-muted">{ddhqCandidateB?.votes}</span>
         </div>
       </div>
     </div>
@@ -128,16 +119,17 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
 interface AvatarBoxProps {
   candidate: DTSI_Candidate
+  electoralVotes: number | undefined
   className?: string
 }
 
 function AvatarBox(props: AvatarBoxProps) {
-  const { candidate, className } = props
+  const { candidate, electoralVotes, className } = props
 
   return (
     <div className={className}>
       <DTSIAvatar className="rounded-full" person={candidate} size={125} />
-      <p className="text-lg font-bold">999</p>
+      {electoralVotes ? <p className="text-lg font-bold">{electoralVotes}</p> : null}
     </div>
   )
 }
