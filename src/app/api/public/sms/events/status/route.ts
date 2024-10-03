@@ -25,6 +25,8 @@ interface SMSStatusEvent {
   AccountSid: string
 }
 
+export const maxDuration = 30
+
 const MAX_RETRY_COUNT = 3
 
 type UserCommunicationWithRelations =
