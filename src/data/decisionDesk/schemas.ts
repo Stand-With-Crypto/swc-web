@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { OFFICES, PARTIES } from '@/data/decisionDesk/constants'
+
 export const GetRacesParamsSchema = z.object({
   /**
    * Maximum is 250
@@ -21,7 +23,7 @@ export const GetRacesParamsSchema = z.object({
   /**
    * Party ID as in PARTIES inside src/data/decisionDesk/constants.ts
    */
-  party_id: z.string().pipe(z.coerce.number()).pipe(z.coerce.string()).optional(),
+  party_id: z.literal(PARTIES.map(currentParty => currentParty.partyId).join()).optional(),
   type: z.string().optional(),
   name: z.string().optional(),
   /**
@@ -35,7 +37,7 @@ export const GetRacesParamsSchema = z.object({
   /**
    * Office as in OFFICES inside src/data/decisionDesk/constants.ts must contain at least 2 characters
    */
-  office: z.string().min(2).optional(),
+  office: z.literal(OFFICES.map(currentOffice => currentOffice.officeName).join()).optional(),
   district: z.string().optional(),
   race_id: z.string().pipe(z.coerce.number()).pipe(z.coerce.string()).optional(),
 })

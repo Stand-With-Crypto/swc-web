@@ -13,16 +13,19 @@ export interface RacesVotingDataResponse {
   candidatesWithVotes: CandidatesWithVote[]
 }
 interface CandidatesWithVote {
+  id: number
   firstName: string
   lastName: string
   party: string
   votes: number
 }
 
-export async function getRacesVotingData(
-  params: GetRacesParams,
-): Promise<RacesVotingDataResponse[]> {
-  const { data: firstPageData, total_pages } = await fetchRacesData({ ...params, page: '1' })
+export async function getAllRacesData(params: GetRacesParams): Promise<RacesVotingDataResponse[]> {
+  const { data: firstPageData, total_pages } = await fetchRacesData({
+    ...params,
+    page: '1',
+    limit: '100',
+  })
 
   const pageIteration = Array.from({ length: total_pages - 1 }, (_, i) => (i + 2).toString())
 
@@ -47,12 +50,8 @@ export async function getRacesVotingData(
       year: currentData.year,
       party: currentData.party,
       totalVotes: currentData.topline_results.total_votes,
-      candidates: currentData.candidates.map(candidate => ({
-        firstName: candidate.first_name,
-        lastName: candidate.last_name,
-        party: candidate.party_name,
-      })),
       candidatesWithVotes: currentData.candidates.map(candidate => ({
+        id: candidate.cand_id,
         firstName: candidate.first_name,
         lastName: candidate.last_name,
         party: candidate.party_name,

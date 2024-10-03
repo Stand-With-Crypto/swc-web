@@ -2,13 +2,13 @@
 
 import useSWR from 'swr'
 
-import { RacesVotingDataResponse } from '@/data/aggregations/getRacesVotingData'
+import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/getDtsiPresidentialWithVotingData'
 import { GetRacesParams } from '@/data/decisionDesk/schemas'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
 export function useApiDecisionDeskRaces(
-  fallbackData: RacesVotingDataResponse,
+  fallbackData: PresidentialDataWithVotingResponse,
   params?: GetRacesParams,
 ) {
   return useSWR(
@@ -16,7 +16,7 @@ export function useApiDecisionDeskRaces(
     url =>
       fetchReq(url)
         .then(res => res.json())
-        .then(data => data as RacesVotingDataResponse),
+        .then(data => data as PresidentialDataWithVotingResponse),
     {
       fallbackData,
       refreshInterval: 120 * 1000,
