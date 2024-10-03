@@ -2,10 +2,10 @@
 
 import useSWR from 'swr'
 
+import { RacesVotingDataResponse } from '@/data/aggregations/getRacesVotingData'
 import { GetRacesParams } from '@/data/decisionDesk/schemas'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
-import { RacesVotingDataResponse } from '@/data/aggregations/getRacesVotingData'
 
 export function useApiDecisionDeskRaces(
   fallbackData: RacesVotingDataResponse,
