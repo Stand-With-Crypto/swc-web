@@ -11,7 +11,7 @@ interface SaveProgressToastProps {
   onClose: () => void
 }
 
-export const SaveProgressToast = (props: SaveProgressToastProps) => {
+export function SaveProgressToast(props: SaveProgressToastProps) {
   const { isOpen, onClose } = props
 
   return (
