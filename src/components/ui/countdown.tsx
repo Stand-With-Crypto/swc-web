@@ -2,18 +2,36 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-type CountdownTime = {
+interface CountdownTime {
   days: number
   hours: number
   minutes: number
   seconds: number
 }
 
+type CountdownVariant = 'default' | 'compact'
+
 interface CountdownProps {
   targetDate: Date
+  variant?: CountdownVariant
 }
 
-export const Countdown = ({ targetDate }: CountdownProps) => {
+const UNITS_BY_VARIANT: Record<CountdownVariant, Record<keyof CountdownTime, string>> = {
+  default: {
+    days: 'days',
+    hours: 'hours',
+    minutes: 'minutes',
+    seconds: 'seconds',
+  },
+  compact: {
+    days: 'd',
+    hours: 'h',
+    minutes: 'm',
+    seconds: 's',
+  },
+}
+
+export function Countdown({ targetDate, variant = 'default' }: CountdownProps) {
   const [countDownTime, setCountDownTime] = useState<CountdownTime>({
     days: 0,
     hours: 0,
@@ -60,15 +78,31 @@ export const Countdown = ({ targetDate }: CountdownProps) => {
     }
   }, [startCountDown])
 
-  return (
-    <div className="flex gap-6 overflow-hidden md:gap-8">
-      {(['days', 'hours', 'minutes', 'seconds'] as const).map(unit => (
-        <div className="flex flex-col items-center gap-3 text-center" key={unit}>
-          <span className="text-2xl font-bold md:text-4xl">{countDownTime[unit]}</span>
+  const countDownTimeEntries = Object.entries(countDownTime)
 
-          <span className="text-sm uppercase text-muted-foreground md:text-lg">{unit}</span>
-        </div>
+  if (variant === 'default') {
+    return (
+      <div className="flex gap-6 overflow-hidden md:gap-8">
+        {countDownTimeEntries.map(([unit, value]) => (
+          <div className="flex flex-col items-center gap-3 text-center" key={unit}>
+            <span className="text-2xl font-bold md:text-4xl">{value}</span>
+
+            <span className="text-sm uppercase text-muted-foreground md:text-lg">{unit}</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  return (
+    <p>
+      {countDownTimeEntries.map(([unit, value], idx) => (
+        <span className="text-sm font-bold" key={unit}>
+          {`0${value}`.slice(-2)}
+          {UNITS_BY_VARIANT[variant][unit as keyof CountdownTime]}
+          {idx < countDownTimeEntries.length - 1 ? ' ' : ''}
+        </span>
       ))}
-    </div>
+    </p>
   )
 }
