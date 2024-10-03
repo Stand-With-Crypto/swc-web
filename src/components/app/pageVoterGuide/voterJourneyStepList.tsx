@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { UserActionType } from '@prisma/client'
 import { ClassValue } from 'clsx'
 
@@ -19,22 +20,34 @@ export function VoterJourneyStepList(props: VoterJourneyStepListProps) {
 
   const performedActions = useApiResponseForUserPerformedUserActionTypes()
 
-  const getStepStatus = (action: UserActionType, campaignName: string) => {
-    if (performedActions?.isLoading) {
-      return 'unknown'
-    }
+  const getStepStatus = React.useCallback(
+    (action: UserActionType, campaignName: string) => {
+      if (performedActions?.isLoading) {
+        return 'unknown'
+      }
 
-    return performedActions?.data?.performedUserActionTypes?.some(
-      performedAction =>
-        performedAction.actionType === action && performedAction.campaignName === campaignName,
-    )
-      ? 'complete'
-      : 'incomplete'
-  }
+      return performedActions?.data?.performedUserActionTypes?.some(
+        performedAction =>
+          performedAction.actionType === action && performedAction.campaignName === campaignName,
+      )
+        ? 'complete'
+        : 'incomplete'
+    },
+    [performedActions],
+  )
+
+  const hydratedSteps = React.useMemo(
+    () =>
+      VOTER_GUIDE_STEPS.map(step => ({
+        ...step,
+        status: getStepStatus(step.action, step.campaignName),
+      })),
+    [getStepStatus],
+  )
 
   return (
     <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-3', className)}>
-      {VOTER_GUIDE_STEPS.map(({ WrapperComponent, ...stepProps }, index) => (
+      {hydratedSteps.map(({ WrapperComponent, status, ...stepProps }, index) => (
         <WrapperComponent key={index}>
           <button
             className={cn(
@@ -71,17 +84,13 @@ export function VoterJourneyStepList(props: VoterJourneyStepListProps) {
               <div className="mt-auto flex items-center gap-4 pt-5">
                 <div className="relative h-8 w-6">
                   <CheckIcon
-                    completed={
-                      getStepStatus(stepProps.action, stepProps.campaignName) === 'complete'
-                    }
+                    completed={status === 'complete'}
                     index={0}
                     svgClassname="border-2 border-muted bg-muted"
                   />
                 </div>
                 <span className="text-xs lg:text-base">
-                  {getStepStatus(stepProps.action, stepProps.campaignName) === 'complete'
-                    ? 'Complete'
-                    : 'Not complete'}
+                  {status === 'complete' ? 'Complete' : 'Not complete'}
                 </span>
               </div>
             </div>

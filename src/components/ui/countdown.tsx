@@ -30,6 +30,7 @@ const UNITS_BY_VARIANT: Record<CountdownVariant, Record<keyof CountdownTime, str
     seconds: 's',
   },
 }
+const padNumber = (num: number) => num.toString().padStart(2, '0')
 
 export function Countdown({ targetDate, variant = 'default' }: CountdownProps) {
   const [countDownTime, setCountDownTime] = useState<CountdownTime>({
@@ -78,7 +79,8 @@ export function Countdown({ targetDate, variant = 'default' }: CountdownProps) {
     }
   }, [startCountDown])
 
-  const countDownTimeEntries = Object.entries(countDownTime)
+  const countDownTimeEntries = Object.entries(countDownTime) as [keyof CountdownTime, number][]
+  const getUnitReadableString = (unit: keyof CountdownTime) => UNITS_BY_VARIANT[variant][unit]
 
   if (variant === 'default') {
     return (
@@ -87,7 +89,9 @@ export function Countdown({ targetDate, variant = 'default' }: CountdownProps) {
           <div className="flex flex-col items-center gap-3 text-center" key={unit}>
             <span className="text-2xl font-bold md:text-4xl">{value}</span>
 
-            <span className="text-sm uppercase text-muted-foreground md:text-lg">{unit}</span>
+            <span className="text-sm uppercase text-muted-foreground md:text-lg">
+              {getUnitReadableString(unit)}
+            </span>
           </div>
         ))}
       </div>
@@ -98,8 +102,8 @@ export function Countdown({ targetDate, variant = 'default' }: CountdownProps) {
     <p>
       {countDownTimeEntries.map(([unit, value], idx) => (
         <span key={unit}>
-          {`0${value}`.slice(-2)}
-          {UNITS_BY_VARIANT[variant][unit as keyof CountdownTime]}
+          {padNumber(value)}
+          {getUnitReadableString(unit)}
           {idx < countDownTimeEntries.length - 1 ? ' ' : ''}
         </span>
       ))}
