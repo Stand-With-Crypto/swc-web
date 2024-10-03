@@ -46,7 +46,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   let userCommunication: UserCommunicationWithRelations = null
 
-  for (let i = 0; i < MAX_RETRY_COUNT; i += 1) {
+  for (let i = 1; i <= MAX_RETRY_COUNT; i += 1) {
     userCommunication = await prismaClient.userCommunication.findFirst({
       where: {
         messageId: body.MessageSid,
@@ -69,7 +69,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
     // Calls to this webhook are being received before the messages are registered in our database. Therefore, we need to implement a retry mechanism for fetching the messages.
     if (!userCommunication) {
-      await sleep(1000)
+      await sleep(1000 * (i * i))
     }
   }
 
