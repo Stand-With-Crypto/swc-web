@@ -12,9 +12,12 @@ export function PageVoterGuide() {
         className="flex w-full justify-between rounded-2xl p-6 text-base font-bold"
         variant="primary-cta-subtle"
       >
-        <span>Countdown to the election on Nov 5th</span>
+        <span className="hidden md:inline-block">Countdown to the election on Nov 5th</span>
+        <span className="md:hidden">Countdown to election</span>
 
-        <Countdown targetDate={new Date('2024-11-05T00:00:00')} variant="compact" />
+        <span className="font-normal md:font-bold">
+          <Countdown targetDate={new Date('2024-11-05T00:00:00')} variant="compact" />
+        </span>
       </Badge>
 
       <div className="space-y-2">

@@ -47,7 +47,7 @@ export function VoterJourneyStepList(props: VoterJourneyStepListProps) {
                 className="hidden lg:block"
                 height={150}
                 src={stepProps.image}
-                width={stepProps.wideDesktopImage ? 200 : 150}
+                width={stepProps.wideDesktopImage ? 180 : 150}
               />
               <NextImage
                 alt={stepProps.title}
