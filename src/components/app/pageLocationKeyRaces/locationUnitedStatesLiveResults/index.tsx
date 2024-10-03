@@ -13,7 +13,7 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { GetRacesResponse } from '@/data/decisionDesk/types'
+import { GetElectoralCollegeResponse, GetRacesResponse } from '@/data/decisionDesk/types'
 import { SupportedLocale } from '@/intl/locales'
 import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -26,12 +26,14 @@ interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
   races: ReturnType<typeof organizePeople>
   ddhqResults: Record<string, GetRacesResponse>
+  presidentRaceData: GetElectoralCollegeResponse
 }
 
 export function LocationUnitedStatesLiveResults({
   locale,
   races,
   ddhqResults = {},
+  presidentRaceData,
 }: LocationUnitedStatesLiveResultsProps) {
   const urls = getIntlUrls(locale)
 
@@ -63,7 +65,7 @@ export function LocationUnitedStatesLiveResults({
 
           <PresidentialRaceResult
             candidates={races.president}
-            initialRaceData={ddhqResults['president']}
+            initialRaceData={presidentRaceData}
           />
 
           <Button asChild className="w-full max-w-xs font-bold lg:hidden" variant="secondary">
@@ -106,30 +108,36 @@ export function LocationUnitedStatesLiveResults({
           title="Critical elections"
           titleProps={{ size: 'xs' }}
         >
-          <div className="container grid grid-cols-[repeat(auto-fill,minmax(375px,1fr))] justify-items-center gap-16">
+          <section className="grid grid-cols-1 divide-x-2 divide-y-2 lg:grid-cols-2">
             {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
-              keyRaces.map(race => {
-                const primaryDistrict = race[0].runningForSpecificRole.primaryDistrict
-                  ? normalizeDTSIDistrictId(race[0].runningForSpecificRole)
+              keyRaces.map(candidates => {
+                const primaryDistrict = candidates[0].runningForSpecificRole.primaryDistrict
+                  ? normalizeDTSIDistrictId(candidates[0].runningForSpecificRole)
                   : undefined
 
                 const officeId = primaryDistrict ? '3' : '4'
                 const key = `${stateCode}_${primaryDistrict?.toString() || 'undefined'}_${officeId}`
 
                 return (
-                  <KeyRaceLiveResult
-                    candidates={race}
-                    initialRaceData={ddhqResults[key] || undefined}
+                  <div
+                    className="flex w-full items-center justify-center px-6 py-10 md:px-12 md:py-14 lg:px-20"
                     key={key}
-                    locale={locale}
-                    officeId={officeId}
-                    primaryDistrict={primaryDistrict}
-                    stateCode={stateCode as USStateCode}
-                  />
+                  >
+                    <KeyRaceLiveResult
+                      candidates={candidates}
+                      className="flex-1"
+                      initialRaceData={ddhqResults[key] || undefined}
+                      key={key}
+                      locale={locale}
+                      officeId={officeId}
+                      primaryDistrict={primaryDistrict}
+                      stateCode={stateCode as USStateCode}
+                    />
+                  </div>
                 )
               }),
             )}
-          </div>
+          </section>
         </ContentSection>
 
         <ContentSection
