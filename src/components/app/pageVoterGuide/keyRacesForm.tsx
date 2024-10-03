@@ -42,7 +42,7 @@ interface KeyRacesFormProps {
   initialValues?: VoterGuideFormValues
 }
 
-export const KeyRacesForm = (props: KeyRacesFormProps) => {
+export function KeyRacesForm(props: KeyRacesFormProps) {
   const { onSubmit, initialValues, onViewKeyRacesActionSuccess } = props
 
   const router = useRouter()

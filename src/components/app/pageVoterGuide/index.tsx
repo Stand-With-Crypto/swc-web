@@ -8,26 +8,28 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 export function PageVoterGuide() {
   return (
     <div className="standard-spacing-from-navbar container flex flex-col items-center gap-16">
+      <Badge
+        className="flex w-full justify-between rounded-2xl p-6 text-base font-bold"
+        variant="primary-cta-subtle"
+      >
+        <span className="hidden md:inline-block">Countdown to the election on Nov 5th</span>
+        <span className="md:hidden">Countdown to election</span>
+
+        <span className="font-normal md:font-bold">
+          <Countdown targetDate={new Date('2024-11-05T00:00:00')} variant="compact" />
+        </span>
+      </Badge>
+
       <div className="space-y-2">
-        <PageTitle size="xs">Voter guide</PageTitle>
+        <PageTitle size="xs">Your crypto voter guide</PageTitle>
         <PageSubTitle>
-          This year's election is critical to the future of crypto. Here's how to become an informed
-          voter.
+          This year’s election is critical to the future of crypto in America. Stand With Crypto is
+          on a mission to inform voters on where politicians stand on crypto. Complete the following
+          actions to make an informed vote.
         </PageSubTitle>
       </div>
 
       <VoterJourneyStepList className="w-full" />
-
-      <div className="flex flex-col items-center justify-center gap-10">
-        <Badge
-          className="p-2.5 font-bold antialiased md:text-base lg:px-6 lg:py-3.5"
-          variant="primary-cta-subtle"
-        >
-          Countdown to election on Nov 5
-        </Badge>
-
-        <Countdown targetDate={new Date('2024-11-05T00:00:00')} />
-      </div>
 
       <TurbovoteDisclaimer />
     </div>

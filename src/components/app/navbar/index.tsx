@@ -136,7 +136,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       onClick={maybeCloseAfterNavigating}
       variant="default"
     >
-      <InternalLink href={urls.voterGuide()}>Vote</InternalLink>
+      <InternalLink href={urls.voterGuide()}>Voter guide</InternalLink>
     </Button>
   )
 
