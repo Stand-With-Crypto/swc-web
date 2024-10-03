@@ -21,6 +21,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
+import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 
 interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
@@ -87,18 +88,18 @@ export function LocationUnitedStatesLiveResults({
             <LiveStatusBadge status="live" />
           </div>
 
-          <Card.Group>
-            {[
-              { value: '9,999', label: 'Pro-crypto candidates elected' },
-              { value: '999,999', label: 'Votes cast for pro-crypto candidates' },
-              { value: '999%', label: 'of races won by pro-crypto candidates' },
-            ].map(({ value, label }) => (
-              <Card className="p-8" key={label}>
-                <p className="text-4xl font-bold">{value}</p>
-                <p className="text-muted-foreground">{label}</p>
-              </Card>
-            ))}
-          </Card.Group>
+          <div className="flex flex-wrap gap-4">
+            <ResultsOverviewCard
+              antiCryptoCandidatesElected={999}
+              proCryptoCandidatesElected={999}
+              title="House of Representatives"
+            />
+            <ResultsOverviewCard
+              antiCryptoCandidatesElected={999}
+              proCryptoCandidatesElected={999}
+              title="Senate"
+            />
+          </div>
         </ContentSection>
 
         <UserAddressVoterGuideInputSection locale={locale} />
