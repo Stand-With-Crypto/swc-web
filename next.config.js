@@ -333,7 +333,7 @@ const nextConfig = {
       // SMS shortlinks
       {
         source: '/voter-guide-1',
-        destination: '/vote?utm_source=swc&utm_medium=p2p-sms&utm_campaign=vg-1',
+        destination: '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-1',
         permanent: true,
       },
       {
