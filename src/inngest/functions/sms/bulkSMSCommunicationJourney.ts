@@ -1,7 +1,7 @@
 import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
 import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk, merge, uniq, update } from 'lodash-es'
+import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
 
 import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
 import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
@@ -53,6 +53,9 @@ const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_Q
 const MIN_ENQUEUE_HOUR = 11 // 11 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
+// Before this date we were sending messages with a toll-free number, now that we're changing to a short-code number we need to send the legal text again in the first message
+const SHORT_CODE_GO_LIVE_DATE = new Date('2024-10-03 12:00:00.000')
+
 export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
     id: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,
@@ -95,13 +98,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       logger.info(prettyStringify(message))
 
       let messagesPayload: EnqueueMessagePayload[] = []
-      let segmentsCount = 0
-      let messagesCount = 0
-      let timeToSendSegments = 0
 
+      // We need to keep this order as true -> false because later we use groupBy, which keeps the first occurrence of each element. In this case, that would be the user who already received the welcome message, so we don’t need to send the legal disclaimer again.
+      // This happens because of how where works with groupBy, and there are cases where different users with the same phone number show up in both groups. So, in those cases, we don’t want to send two messages—just one.
       for (const hasWelcomeMessage of [true, false]) {
-        logger.info(`Merging params`)
-
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
@@ -109,13 +109,26 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
               ? {
                   some: {
                     journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                    datetimeCreated: {
+                      gt: SHORT_CODE_GO_LIVE_DATE,
+                    },
                   },
                 }
               : {
                   every: {
-                    journeyType: {
-                      not: UserCommunicationJourneyType.WELCOME_SMS,
-                    },
+                    OR: [
+                      {
+                        journeyType: {
+                          not: UserCommunicationJourneyType.WELCOME_SMS,
+                        },
+                      },
+                      {
+                        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                        datetimeCreated: {
+                          lt: SHORT_CODE_GO_LIVE_DATE,
+                        },
+                      },
+                    ],
                   },
                 },
           },
@@ -163,52 +176,49 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
         logger.info('Got phone numbers, adding to messagesPayload')
 
-        const body = hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
+        const body = !hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
 
         // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
-        const payload = uniq(allPhoneNumbers).map(phoneNumber => ({
-          phoneNumber,
-          messages: [
-            ...(hasWelcomeMessage
-              ? [{ journeyType: UserCommunicationJourneyType.WELCOME_SMS }]
-              : []),
-            {
-              // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
-              // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
-              body,
-              campaignName,
-              journeyType: UserCommunicationJourneyType.BULK_SMS,
-              media,
-            },
-          ],
-        }))
-
         // We need to use concat here because using spread is exceeding maximum call stack size
-        messagesPayload = messagesPayload.concat(payload)
+        messagesPayload = messagesPayload.concat(
+          uniq(allPhoneNumbers).map(phoneNumber => ({
+            phoneNumber,
+            messages: [
+              ...(!hasWelcomeMessage
+                ? [
+                    {
+                      journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                      campaignName: 'bulk-welcome',
+                    },
+                  ]
+                : []),
+              {
+                // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
+                // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
+                body,
+                campaignName,
+                journeyType: UserCommunicationJourneyType.BULK_SMS,
+                media,
+              },
+            ],
+          })),
+        )
 
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
-
-        logger.info(`Counting segments`)
-
-        const payloadCounts = await step.run(
-          `count-messages-and-segments-welcome-${String(hasWelcomeMessage)}`,
-          () => countMessagesAndSegments(payload),
-        )
-
-        segmentsCount += payloadCounts.segments
-        messagesCount += payloadCounts.messages
-        timeToSendSegments += getWaitingTimeInSeconds(payloadCounts.segments)
-
-        logger.info(
-          prettyStringify({
-            segmentsCount,
-            messagesCount,
-            timeToSendSegments: getWaitingTimeInSeconds(payloadCounts.segments),
-          }),
-        )
       }
 
+      // Using uniqBy here because different users with the same phone number can show up in both groups when hasWelcomeMessage is either true or false. This happens because where runs before groupBy
+      messagesPayload = uniqBy(messagesPayload, 'phoneNumber')
+
+      logger.info(`Counting segments`)
+
+      const payloadCounts = await step.run(`count-messages-and-segments`, () =>
+        countMessagesAndSegments(messagesPayload),
+      )
+
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
+
+      const timeToSendSegments = getWaitingTimeInSeconds(payloadCounts.segments)
 
       // This is for debugging and estimation purposes only
       // Grouping bulk send count by campaign name
@@ -223,8 +233,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             chunks: 0,
           },
         ) => ({
-          segmentsCount: segmentsCount + existingPayload.segmentsCount,
-          messagesCount: messagesCount + existingPayload.messagesCount,
+          segmentsCount: payloadCounts.segments + existingPayload.segmentsCount,
+          messagesCount: payloadCounts.messages + existingPayload.messagesCount,
           totalTime: timeToSendSegments + existingPayload.totalTime,
           chunks: payloadChunks.length + existingPayload.chunks,
         }),
@@ -232,8 +242,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       enqueueMessagesPayloadChunks.push(...payloadChunks)
 
-      totalSegmentsCount += segmentsCount
-      totalMessagesCount += messagesCount
+      totalSegmentsCount += payloadCounts.segments
+      totalMessagesCount += payloadCounts.messages
       totalTime += timeToSendSegments
     }
 

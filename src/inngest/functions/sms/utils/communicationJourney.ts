@@ -5,15 +5,12 @@ import { prismaClient } from '@/utils/server/prismaClient'
 
 // this journey types should have only one UserCommunicationJourney per user
 const journeyTypesWithSingleJourney = [
-  UserCommunicationJourneyType.WELCOME_SMS,
   UserCommunicationJourneyType.GOODBYE_SMS,
   UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
 ]
 
-export const DEFAULT_CAMPAIGN_NAME = 'default'
-
 export type BulkCreateCommunicationJourneyPayload = Record<
-  string, // campaign name || DEFAULT_CAMPAIGN_NAME
+  string, // campaign name || BULK_WELCOME_CAMPAIGN_NAME
   Array<{ phoneNumber: string; messageId: string }>
 >
 
@@ -21,16 +18,11 @@ export async function bulkCreateCommunicationJourney(
   journeyType: UserCommunicationJourneyType,
   payload: BulkCreateCommunicationJourneyPayload,
 ) {
-  const getCampaignName = (campaignName: string) =>
-    campaignName === DEFAULT_CAMPAIGN_NAME ? undefined : campaignName
-
-  for (const campaignKey of Object.keys(payload)) {
-    const campaignName = getCampaignName(campaignKey)
-
+  for (const campaignName of Object.keys(payload)) {
     const users = await prismaClient.user.findMany({
       where: {
         phoneNumber: {
-          in: payload[campaignKey].map(({ phoneNumber }) => phoneNumber),
+          in: payload[campaignName].map(({ phoneNumber }) => phoneNumber),
         },
       },
       select: {
@@ -85,7 +77,7 @@ export async function bulkCreateCommunicationJourney(
     const createCommunicationPayload = users
       .map(user => {
         // Using phone number here because multiple users can have the same phone number
-        const message = payload[campaignKey].find(
+        const message = payload[campaignName].find(
           ({ phoneNumber }) => phoneNumber === user.phoneNumber,
         )
         const communicationJourney = createdCommunicationJourneys.find(
