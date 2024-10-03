@@ -4,7 +4,6 @@ import { SMSStatus, User, UserCommunicationJourneyType } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 
 import { ENQUEUE_SMS_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/enqueueMessages'
-// TODO: Uncomment this after we start using Messaging Service
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -50,6 +49,7 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
             phoneNumber,
             messages: [
               {
+                campaignName: 'default',
                 journeyType: UserCommunicationJourneyType.WELCOME_SMS,
                 body: messages.WELCOME_MESSAGE,
               },
@@ -101,26 +101,25 @@ export async function optOutUser(phoneNumber: string, user?: User | null) {
     },
   })
 
-  // TODO: Uncomment this after we start using Messaging Service
-  // We shouldn't send a message if the user replied with a default STOP keyword because Twilio will block it
-  // if (smsProvider === SMSProviders.TWILIO) {
-  //   await inngest.send({
-  //     name: ENQUEUE_SMS_INNGEST_EVENT_NAME,
-  //     data: {
-  //       payload: [
-  //         {
-  //           phoneNumber,
-  //           messages: [
-  //             {
-  //               journeyType: UserCommunicationJourneyType.GOODBYE_SMS,
-  //               body: messages.GOODBYE_MESSAGE,
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   })
-  // }
+  if (smsProvider === SMSProviders.TWILIO) {
+    await inngest.send({
+      name: ENQUEUE_SMS_INNGEST_EVENT_NAME,
+      data: {
+        payload: [
+          {
+            phoneNumber,
+            messages: [
+              {
+                journeyType: UserCommunicationJourneyType.GOODBYE_SMS,
+                body: messages.GOODBYE_MESSAGE,
+                campaignName: 'default',
+              },
+            ],
+          },
+        ],
+      },
+    })
+  }
 
   if (user) {
     waitUntil(
@@ -163,25 +162,25 @@ export async function optUserBackIn(phoneNumber: string, user?: User | null) {
     },
   })
 
-  // TODO: Uncomment this after we start using Messaging Service
-  // if (smsProvider === SMSProviders.TWILIO) {
-  //   await inngest.send({
-  //     name: ENQUEUE_SMS_INNGEST_EVENT_NAME,
-  //     data: {
-  //       payload: [
-  //         {
-  //           phoneNumber,
-  //           messages: [
-  //             {
-  //               journeyType: UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
-  //               body: messages.UNSTOP_CONFIRMATION_MESSAGE,
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   })
-  // }
+  if (smsProvider === SMSProviders.TWILIO) {
+    await inngest.send({
+      name: ENQUEUE_SMS_INNGEST_EVENT_NAME,
+      data: {
+        payload: [
+          {
+            phoneNumber,
+            messages: [
+              {
+                journeyType: UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
+                body: messages.UNSTOP_CONFIRMATION_MESSAGE,
+                campaignName: 'default',
+              },
+            ],
+          },
+        ],
+      },
+    })
+  }
 
   if (user) {
     waitUntil(
