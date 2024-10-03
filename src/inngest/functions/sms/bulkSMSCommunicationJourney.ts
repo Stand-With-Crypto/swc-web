@@ -54,7 +54,7 @@ const MIN_ENQUEUE_HOUR = 11 // 11 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
 // Before this date we were sending messages with a toll-free number, now that we're changing to a short-code number we need to send the legal text again in the first message
-const SHORT_CODE_GO_LIVE_DATE = new Date('2024-10-03 00:00:00.000')
+const SHORT_CODE_GO_LIVE_DATE = new Date('2024-10-03 12:00:00.000')
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
