@@ -1,9 +1,9 @@
 import { isNil } from 'lodash-es'
 
 import { DTSI_DDHQ_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
-import { RacesData } from '@/data/decisionDesk/types'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { dtsiPersonPoliticalAffiliationCategoryAbbreviation } from '@/utils/dtsi/dtsiPersonUtils'
+import { RacesData } from '@/utils/server/decisionDesk/types'
 import { twNoop } from '@/utils/web/cn'
 
 export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {

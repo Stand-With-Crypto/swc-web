@@ -39,8 +39,15 @@ interface KeyRaceLiveResultProps {
 }
 
 export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
-  const { candidates, stateCode, officeId, primaryDistrict, className, locale, initialRaceData } =
-    props
+  const {
+    candidates,
+    stateCode,
+    // officeId,
+    primaryDistrict,
+    className,
+    locale,
+    // initialRaceData
+  } = props
 
   const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
   const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])

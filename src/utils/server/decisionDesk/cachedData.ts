@@ -1,6 +1,6 @@
 import { SetCommandOptions } from '@upstash/redis'
 
-import { redis } from '@/utils/server/redis'
+import { redis, redisWithCache } from '@/utils/server/redis'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 enum DecisionDeskKeys {
@@ -23,5 +23,5 @@ export async function setDecisionDataOnRedis(
 }
 
 export async function getDecisionDataFromRedis<T extends object>(key: DecisionDeskRedisKeys) {
-  return redis.get<T>(key)
+  return redisWithCache.get<T>(key)
 }
