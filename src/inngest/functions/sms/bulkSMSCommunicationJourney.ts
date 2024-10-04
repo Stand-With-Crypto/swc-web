@@ -3,7 +3,11 @@ import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } f
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
 
-import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
+import {
+  EnqueueMessagePayload,
+  enqueueSMS,
+  FUNCTION_MAXIMUM_PARALLELISM,
+} from '@/inngest/functions/sms/enqueueMessages'
 import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -281,7 +285,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     let segmentsInQueue = currentSegmentsInQueue ?? 0
     let timeInSecondsToEmptyQueue = getWaitingTimeInSeconds(segmentsInQueue)
 
-    for (let i = 0; i < enqueueMessagesPayloadChunks.length; i += 1) {
+    const parallelEnqueueMessagesChunks = chunk(
+      enqueueMessagesPayloadChunks,
+      FUNCTION_MAXIMUM_PARALLELISM,
+    )
+
+    for (let i = 0; i < parallelEnqueueMessagesChunks.length; i += 1) {
       const now = addHours(new Date(), timezone)
       const minEnqueueHourToday = addHours(startOfDay(now), MIN_ENQUEUE_HOUR)
       const maxEnqueueHourToday = addHours(startOfDay(now), MAX_ENQUEUE_HOUR)
@@ -304,23 +313,30 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
       }
 
-      const payloadChunk = enqueueMessagesPayloadChunks[i]
+      const payloadChunks = parallelEnqueueMessagesChunks[i]
 
-      const { queuedMessages, segmentsSent } = await step.invoke(`enqueue-messages-${i + 1}`, {
-        function: enqueueSMS,
-        data: {
-          payload: payloadChunk,
-        },
+      const enqueueMessagesPromises = payloadChunks.map(async payload => {
+        const { queuedMessages, segmentsSent } = await step.invoke(
+          `enqueue-messages-${i + 1}/${enqueueMessagesPayloadChunks.length}`,
+          {
+            function: enqueueSMS,
+            data: {
+              payload,
+            },
+          },
+        )
+
+        totalQueuedMessages += queuedMessages
+        totalQueuedSegments += segmentsSent
+
+        segmentsInQueue += segmentsSent
+        const timeToSendSegments = getWaitingTimeInSeconds(segmentsSent)
+
+        timeInSecondsToEmptyQueue += timeToSendSegments
+        totalTimeToSendMessagesInSeconds += timeToSendSegments
       })
 
-      totalQueuedMessages += queuedMessages
-      totalQueuedSegments += segmentsSent
-
-      segmentsInQueue += segmentsSent
-      const timeToSendSegments = getWaitingTimeInSeconds(segmentsSent)
-
-      timeInSecondsToEmptyQueue += timeToSendSegments
-      totalTimeToSendMessagesInSeconds += timeToSendSegments
+      await Promise.all(enqueueMessagesPromises)
 
       const emptyQueueTime = addSeconds(now, timeInSecondsToEmptyQueue)
 

@@ -20,6 +20,7 @@ export const ENQUEUE_SMS_INNGEST_EVENT_NAME = 'app/enqueue.sms'
 const ENQUEUE_SMS_INNGEST_FUNCTION_ID = 'app.enqueue-sms'
 
 const MAX_RETRY_COUNT = 0
+export const FUNCTION_MAXIMUM_PARALLELISM = 5
 
 export interface EnqueueMessagePayload {
   phoneNumber: string
