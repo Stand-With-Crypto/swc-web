@@ -194,9 +194,10 @@ export async function enqueueMessages(
 
         if (error instanceof SendSMSError) {
           if (error.isTooManyRequests) {
-            return update(failedPhoneNumbers, [error.phoneNumber], (current = []) =>
-              current.push(message),
-            )
+            return update(failedPhoneNumbers, [error.phoneNumber], (current = []) => [
+              ...current,
+              message,
+            ])
           }
           if (error.isInvalidPhoneNumber) {
             return invalidPhoneNumbers.push(error.phoneNumber)
