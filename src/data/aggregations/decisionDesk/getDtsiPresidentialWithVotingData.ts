@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node'
 
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch, normalizeName } from '@/data/aggregations/decisionDesk/utils'
+import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { fetchElectoralCollege } from '@/utils/server/decisionDesk/services'
 
@@ -37,21 +37,12 @@ export async function getDtsiPresidentialWithVotingData(
       const [currentPoliticianFirstName] = currentPolitician.firstName.split(' ')
       const [currentPoliticianLastName] = currentPolitician.lastName.split(' ')
 
-      const normalizedPoliticianFirstName = normalizeName(currentPoliticianFirstName)
-      const normalizedPoliticianLastName = normalizeName(currentPoliticianLastName)
-      const normalizedVotingDataFirstName = normalizeName(currentVotingData.firstName)
-      const normalizedVotingDataLastName = normalizeName(currentVotingData.lastName)
-
-      return getPoliticianFindMatch({
-        dtsiPerson: {
-          politicianFirstName: normalizedPoliticianFirstName,
-          politicianLastName: normalizedPoliticianLastName,
-        },
-        decisionDeskPerson: {
-          votingDataFirstName: normalizedVotingDataFirstName,
-          votingDataLastName: normalizedVotingDataLastName,
-        },
-      })
+      return getPoliticianFindMatch(
+        currentPoliticianFirstName,
+        currentPoliticianLastName,
+        currentVotingData.firstName,
+        currentVotingData.lastName,
+      )
     })
 
     return {

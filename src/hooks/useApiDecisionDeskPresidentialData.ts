@@ -52,20 +52,3 @@ export function useApiDecisionDeskPresidentialData(
 
   return swrData
 }
-
-export function useDecisionDeskPresidentRace(fallbackData: PresidentialDataWithVotingResponse) {
-  return useSWR(
-    apiUrls.decisionDeskRaces(),
-    url =>
-      fetchReq(url)
-        .then(res => res.json())
-        .then(data => data as PresidentialDataWithVotingResponse),
-    {
-      fallbackData,
-      refreshInterval: 120 * 1000,
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  )
-}

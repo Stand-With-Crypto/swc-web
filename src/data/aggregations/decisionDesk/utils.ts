@@ -1,33 +1,33 @@
 import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 
-interface GetPoliticianFindMatch {
-  dtsiPerson: { politicianFirstName: string; politicianLastName: string }
-  decisionDeskPerson: {
-    votingDataFirstName: string
-    votingDataLastName: string
-  }
-}
-export const getPoliticianFindMatch = ({
-  dtsiPerson,
-  decisionDeskPerson,
-}: GetPoliticianFindMatch) => {
-  const { politicianFirstName, politicianLastName } = dtsiPerson
-  const { votingDataFirstName, votingDataLastName } = decisionDeskPerson
-
-  if (politicianFirstName === votingDataFirstName && politicianLastName === votingDataLastName) {
-    return true
-  }
+export const getPoliticianFindMatch = (
+  politicianFirstName: string,
+  politicianLastName: string,
+  votingDataFirstName: string,
+  votingDataLastName: string,
+) => {
+  const normalizedPoliticianFirstName = normalizeName(politicianFirstName)
+  const normalizedPoliticianLastName = normalizeName(politicianLastName)
+  const normalizedVotingDataFirstName = normalizeName(votingDataFirstName)
+  const normalizedVotingDataLastName = normalizeName(votingDataLastName)
 
   if (
-    politicianFirstName.startsWith(votingDataFirstName) &&
-    politicianLastName.startsWith(votingDataLastName)
+    normalizedPoliticianFirstName === normalizedVotingDataFirstName &&
+    normalizedPoliticianLastName === normalizedVotingDataLastName
   ) {
     return true
   }
 
   if (
-    votingDataFirstName.startsWith(politicianFirstName) &&
-    votingDataLastName.startsWith(politicianLastName)
+    normalizedPoliticianFirstName.startsWith(normalizedVotingDataFirstName) &&
+    normalizedPoliticianLastName.startsWith(normalizedVotingDataLastName)
+  ) {
+    return true
+  }
+
+  if (
+    normalizedVotingDataFirstName.startsWith(normalizedPoliticianFirstName) &&
+    normalizedVotingDataLastName.startsWith(normalizedPoliticianLastName)
   ) {
     return true
   }
@@ -35,6 +35,6 @@ export const getPoliticianFindMatch = ({
   return false
 }
 
-export const normalizeName = (name: string) => {
+const normalizeName = (name: string) => {
   return convertToOnlyEnglishCharacters(name.toLowerCase().trim()).replace(/[.-\s]/g, '')
 }
