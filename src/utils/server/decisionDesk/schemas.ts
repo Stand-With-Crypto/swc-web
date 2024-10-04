@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { OFFICES, PARTIES } from '@/data/decisionDesk/constants'
+import { OFFICES, PARTIES } from '@/utils/server/decisionDesk/constants'
 
 export const GetRacesParamsSchema = z.object({
   /**

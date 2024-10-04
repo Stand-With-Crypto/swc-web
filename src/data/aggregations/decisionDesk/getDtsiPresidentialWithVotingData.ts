@@ -1,6 +1,6 @@
-import { fetchElectoralCollege } from '@/data/decisionDesk/services'
 import { DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
+import { fetchElectoralCollege } from '@/utils/server/decisionDesk/services'
 import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 
 interface VotingData {

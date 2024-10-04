@@ -1,6 +1,6 @@
-import { ELECTION_TYPES, OFFICES } from '@/data/decisionDesk/constants'
-import { GetRacesParams } from '@/data/decisionDesk/schemas'
-import { fetchRacesData } from '@/data/decisionDesk/services'
+import { ELECTION_TYPES, OFFICES } from '@/utils/server/decisionDesk/constants'
+import { GetRacesParams } from '@/utils/server/decisionDesk/schemas'
+import { fetchRacesData } from '@/utils/server/decisionDesk/services'
 
 export interface RacesVotingDataResponse {
   state: string

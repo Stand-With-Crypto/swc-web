@@ -1,9 +1,9 @@
 import { getAllRacesData } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { getDtsiPresidentialWithVotingData } from '@/data/aggregations/decisionDesk/getDtsiPresidentialWithVotingData'
-import { setDecisionDataOnRedis } from '@/data/decisionDesk/cachedData'
-import { GetRacesParams } from '@/data/decisionDesk/schemas'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
+import { setDecisionDataOnRedis } from '@/utils/server/decisionDesk/cachedData'
+import { GetRacesParams } from '@/utils/server/decisionDesk/schemas'
 
 const FETCH_PRESIDENTIAL_RACES_INNGEST_EVENT_NAME = 'script/fetch-presidential-races-data'
 const FETCH_PRESIDENTIAL_RACES_INNGEST_FUNCTION_ID = 'script.fetch-presidential-races-data'

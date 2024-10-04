@@ -2,15 +2,18 @@ import 'server-only'
 
 import pRetry from 'p-retry'
 
-import { getDecisionDataFromRedis, setDecisionDataOnRedis } from '@/data/decisionDesk/cachedData'
-import { API_ENDPOINT } from '@/data/decisionDesk/constants'
-import { GetRacesParams } from '@/data/decisionDesk/schemas'
+import {
+  getDecisionDataFromRedis,
+  setDecisionDataOnRedis,
+} from '@/utils/server/decisionDesk/cachedData'
+import { API_ENDPOINT } from '@/utils/server/decisionDesk/constants'
+import { GetRacesParams } from '@/utils/server/decisionDesk/schemas'
 import {
   GetBearerTokenResponse,
   GetDelegatesResponse,
   GetElectoralCollegeResponse,
   GetRacesResponse,
-} from '@/data/decisionDesk/types'
+} from '@/utils/server/decisionDesk/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
