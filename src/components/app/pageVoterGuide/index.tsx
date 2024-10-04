@@ -7,9 +7,9 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 
 export function PageVoterGuide() {
   return (
-    <div className="standard-spacing-from-navbar container flex flex-col items-center gap-16">
+    <div className="standard-spacing-from-navbar container space-y-16">
       <Badge
-        className="flex w-full justify-between rounded-2xl p-6 text-base font-bold"
+        className="flex w-full justify-between rounded-2xl p-6 text-sm font-bold md:text-base"
         variant="primary-cta-subtle"
       >
         <span className="hidden md:inline-block">Countdown to the election on Nov 5th</span>
