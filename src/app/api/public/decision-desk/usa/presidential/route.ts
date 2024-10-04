@@ -3,7 +3,7 @@ import 'server-only'
 import { NextResponse } from 'next/server'
 
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/getDtsiPresidentialWithVotingData'
-import { getDecisionDataFromRedis } from '@/data/decisionDesk/cachedData'
+import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
