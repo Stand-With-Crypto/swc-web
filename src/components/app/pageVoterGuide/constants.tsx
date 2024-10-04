@@ -17,6 +17,9 @@ type VoterGuideStep = {
   WrapperComponent: (args: { children: React.ReactNode }) => React.ReactNode
   action: UserActionType
   campaignName: UserActionCampaignName
+  image: string
+  mobileImage?: string
+  wideDesktopImage?: boolean
 }
 
 export const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Get Informed'
@@ -28,6 +31,9 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     WrapperComponent: KeyRacesDialog,
     action: UserActionType.VOTER_ATTESTATION,
     campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
+    image: '/actionTypeIcons/getInformed.png',
+    mobileImage: '/actionTypeIcons/optIn.png',
+    wideDesktopImage: true,
   },
   {
     title: 'Check your voter registration',
@@ -35,6 +41,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     WrapperComponent: UserActionFormVoterRegistrationDialog,
     action: UserActionType.VOTER_REGISTRATION,
     campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+    image: '/actionTypeIcons/voterAttestation.png',
   },
   {
     title: 'Prepare to vote',
@@ -56,5 +63,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     },
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
     campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+    image: '/actionTypeIcons/votingResearched.png',
+    wideDesktopImage: true,
   },
 ]

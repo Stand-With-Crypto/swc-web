@@ -27,9 +27,7 @@ import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/se
 import {
   backfillPhoneNumberValidation,
   bulkSMSCommunicationJourney,
-  goodbyeSMSCommunicationJourney,
-  unstopConfirmationSMSCommunicationJourney,
-  welcomeSMSCommunicationJourney,
+  enqueueSMS,
 } from '@/inngest/functions/sms'
 import { deleteUserActions } from '@/inngest/functions/user/deleteUserActions'
 import {
@@ -67,9 +65,6 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
     backfillCongressionalDistrictCronJob,
-    welcomeSMSCommunicationJourney,
-    goodbyeSMSCommunicationJourney,
-    unstopConfirmationSMSCommunicationJourney,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
     backfillReactivationWithInngest,
@@ -77,5 +72,6 @@ export const { GET, POST, PUT } = serve({
     sendEventNotificationWithInngest,
     deleteUserActions,
     fetchPresidentialRacesData,
+    enqueueSMS,
   ],
 })

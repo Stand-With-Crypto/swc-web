@@ -208,6 +208,8 @@ const nextConfig = {
       },
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
+      { protocol: 'https', hostname: 'testing.dotheysupportit.com' },
+      { protocol: 'https', hostname: 'www.dotheysupportit.com' },
       // builder.io image cdn
       {
         protocol: 'https',
@@ -329,6 +331,12 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      {
+        source: '/voter-guide-1/:sessionId*',
+        destination:
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-1&sessionId=:sessionId*',
+        permanent: true,
+      },
       {
         source: '/w/vote/:sessionId*',
         destination:

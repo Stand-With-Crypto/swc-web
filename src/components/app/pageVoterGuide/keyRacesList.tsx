@@ -19,7 +19,7 @@ interface KeyRacesListProps {
   races: RacesByAddressData | undefined
 }
 
-export const KeyRacesList = (props: KeyRacesListProps) => {
+export function KeyRacesList(props: KeyRacesListProps) {
   const { races } = props
 
   const locale = useLocale()

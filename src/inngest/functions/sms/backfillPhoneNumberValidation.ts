@@ -1,10 +1,9 @@
 import { uniq } from 'lodash-es'
 
+import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
-
-import { flagInvalidPhoneNumbers } from './utils'
 
 const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_FUNCTION_ID =
   'script.backfill-phone-number-validation'

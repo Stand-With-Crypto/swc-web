@@ -3,99 +3,14 @@ import { NonRetriableError } from 'inngest'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
-type CreatedCommunicationJourneys = Awaited<ReturnType<typeof createCommunicationJourneys>>
-
 // this journey types should have only one UserCommunicationJourney per user
 const journeyTypesWithSingleJourney = [
-  UserCommunicationJourneyType.WELCOME_SMS,
   UserCommunicationJourneyType.GOODBYE_SMS,
   UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
 ]
 
-export async function createCommunicationJourneys(
-  phoneNumber: string,
-  journeyType: UserCommunicationJourneyType,
-  campaignName?: string,
-) {
-  const usersWithPhoneNumber = (
-    await prismaClient.user.findMany({
-      where: {
-        phoneNumber,
-      },
-      select: {
-        id: true,
-      },
-    })
-  ).map(({ id }) => id)
-
-  if (usersWithPhoneNumber.length === 0) {
-    throw new NonRetriableError('User not found')
-  }
-
-  let usersWithExistingCommunicationJourney: string[] = []
-
-  if (journeyTypesWithSingleJourney.includes(journeyType)) {
-    usersWithExistingCommunicationJourney = (
-      await prismaClient.userCommunicationJourney.findMany({
-        where: {
-          userId: {
-            in: usersWithPhoneNumber,
-          },
-          journeyType,
-        },
-        select: {
-          userId: true,
-        },
-      })
-    ).map(({ userId }) => userId)
-  }
-
-  await prismaClient.userCommunicationJourney.createMany({
-    data: usersWithPhoneNumber
-      .filter(id => !usersWithExistingCommunicationJourney.includes(id))
-      .map(id => ({
-        userId: id,
-        journeyType,
-        campaignName,
-      })),
-  })
-
-  return prismaClient.userCommunicationJourney.findMany({
-    where: {
-      userId: {
-        in: usersWithPhoneNumber,
-      },
-      journeyType,
-      campaignName,
-    },
-    select: {
-      id: true,
-      userCommunications: {
-        select: {
-          messageId: true,
-        },
-      },
-    },
-  })
-}
-
-export async function createCommunication(
-  communicationJourneys: CreatedCommunicationJourneys,
-  messageId: string,
-) {
-  await prismaClient.userCommunication.createMany({
-    data: communicationJourneys.map(({ id }) => ({
-      communicationType: CommunicationType.SMS,
-      messageId,
-      userCommunicationJourneyId: id,
-    })),
-  })
-}
-
-export const DEFAULT_CAMPAIGN_NAME = 'default'
-
 export type BulkCreateCommunicationJourneyPayload = Record<
-  string, // campaign name || DEFAULT_CAMPAIGN_NAME
+  string, // campaign name || BULK_WELCOME_CAMPAIGN_NAME
   Array<{ phoneNumber: string; messageId: string }>
 >
 
@@ -103,16 +18,11 @@ export async function bulkCreateCommunicationJourney(
   journeyType: UserCommunicationJourneyType,
   payload: BulkCreateCommunicationJourneyPayload,
 ) {
-  const getCampaignName = (campaignName: string) =>
-    campaignName === DEFAULT_CAMPAIGN_NAME ? undefined : campaignName
-
-  for (const campaignKey of Object.keys(payload)) {
-    const campaignName = getCampaignName(campaignKey)
-
+  for (const campaignName of Object.keys(payload)) {
     const users = await prismaClient.user.findMany({
       where: {
         phoneNumber: {
-          in: payload[campaignKey].map(({ phoneNumber }) => phoneNumber),
+          in: payload[campaignName].map(({ phoneNumber }) => phoneNumber),
         },
       },
       select: {
@@ -167,7 +77,7 @@ export async function bulkCreateCommunicationJourney(
     const createCommunicationPayload = users
       .map(user => {
         // Using phone number here because multiple users can have the same phone number
-        const message = payload[campaignKey].find(
+        const message = payload[campaignName].find(
           ({ phoneNumber }) => phoneNumber === user.phoneNumber,
         )
         const communicationJourney = createdCommunicationJourneys.find(
