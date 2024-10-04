@@ -18,12 +18,12 @@ import {
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Progress } from '@/components/ui/progress'
-import { GetRacesResponse } from '@/data/decisionDesk/types'
-import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
+import { Skeleton } from '@/components/ui/skeleton'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { GetRacesResponse } from '@/utils/server/decisionDesk/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -58,11 +58,13 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
       })
     : urls.locationStateSpecificSenateRace(stateCode)
 
-  const { data } = useApiDecisionDeskRaces(initialRaceData, {
-    district: primaryDistrict?.toString(),
-    state: stateCode,
-    office_id: officeId,
-  })
+  // const { data } = useApiDecisionDeskRaces(initialRaceData, {
+  //   district: primaryDistrict?.toString(),
+  //   state: stateCode,
+  //   office_id: officeId,
+  // })
+
+  const data = {} as GetRacesResponse
 
   // console.log('DecisionDesk Data: ', {
   //   stateName,
@@ -153,6 +155,8 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
     return 'opacity-100'
   }
 
+  const canShowProgress = Boolean(data)
+
   return (
     <div className={cn('flex w-full flex-col gap-8', className)}>
       <div className="flex items-start justify-between">
@@ -177,27 +181,35 @@ export const KeyRaceLiveResult = (props: KeyRaceLiveResultProps) => {
       </div>
 
       <div className="flex gap-1">
-        <Progress
-          className="rounded-l-full rounded-r-none bg-secondary"
-          indicatorClassName={cn(
-            'bg-none rounded-r-none',
-            convertDTSIStanceScoreToBgColorClass(
-              candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
-            ),
-          )}
-          value={Math.min(Number(getVotePercentage(ddhqCandidateA)) * 2, 100)}
-        />
-        <Progress
-          className="rounded-l-none rounded-r-full  bg-secondary"
-          indicatorClassName={cn(
-            'bg-none rounded-l-none',
-            convertDTSIStanceScoreToBgColorClass(
-              candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
-            ),
-          )}
-          inverted
-          value={Math.min(Number(getVotePercentage(ddhqCandidateB)) * 2, 100)}
-        />
+        {canShowProgress ? (
+          <Progress
+            className="rounded-l-full rounded-r-none bg-secondary"
+            indicatorClassName={cn(
+              'bg-none rounded-r-none',
+              convertDTSIStanceScoreToBgColorClass(
+                candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
+              ),
+            )}
+            value={Math.min(Number(getVotePercentage(ddhqCandidateA)) * 2, 100)}
+          />
+        ) : (
+          <Skeleton className="h-4 w-full rounded-full" />
+        )}
+        {canShowProgress ? (
+          <Progress
+            className="rounded-l-none rounded-r-full  bg-secondary"
+            indicatorClassName={cn(
+              'bg-none rounded-l-none',
+              convertDTSIStanceScoreToBgColorClass(
+                candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
+              ),
+            )}
+            inverted
+            value={Math.min(Number(getVotePercentage(ddhqCandidateB)) * 2, 100)}
+          />
+        ) : (
+          <Skeleton className="h-4 w-full rounded-full" />
+        )}
       </div>
 
       <div className="relative flex items-center justify-between text-sm">

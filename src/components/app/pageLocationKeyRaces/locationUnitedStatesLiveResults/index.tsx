@@ -10,14 +10,13 @@ import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationU
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { GetElectoralCollegeResponse, GetRacesResponse } from '@/data/decisionDesk/types'
+import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { SupportedLocale } from '@/intl/locales'
-import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { GetRacesResponse } from '@/utils/server/decisionDesk/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -28,14 +27,14 @@ interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
   races: ReturnType<typeof organizePeople>
   ddhqResults: Record<string, GetRacesResponse>
-  presidentRaceData: GetElectoralCollegeResponse
+  presidentialRaceData: PresidentialDataWithVotingResponse | null
 }
 
 export function LocationUnitedStatesLiveResults({
   locale,
   races,
   ddhqResults = {},
-  presidentRaceData,
+  presidentialRaceData,
 }: LocationUnitedStatesLiveResultsProps) {
   const urls = getIntlUrls(locale)
 
@@ -67,7 +66,7 @@ export function LocationUnitedStatesLiveResults({
 
           <PresidentialRaceResult
             candidates={races.president}
-            initialRaceData={presidentRaceData}
+            initialRaceData={presidentialRaceData}
           />
 
           <Button asChild className="w-full max-w-xs font-bold lg:hidden" variant="secondary">
@@ -111,7 +110,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <LiveResultsGrid>
-            {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
+            {/* {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
               keyRaces.map(candidates => {
                 const primaryDistrict = candidates[0].runningForSpecificRole.primaryDistrict
                   ? normalizeDTSIDistrictId(candidates[0].runningForSpecificRole)
@@ -135,7 +134,7 @@ export function LocationUnitedStatesLiveResults({
                   </LiveResultsGrid.GridItem>
                 )
               }),
-            )}
+            )} */}
 
             <LiveResultsGrid.GridItem>
               <div className="flex flex-col items-center justify-center gap-8 text-center">

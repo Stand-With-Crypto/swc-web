@@ -18,10 +18,9 @@ import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { GetRacesResponse } from '@/data/decisionDesk/types'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
-import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
 import { SupportedLocale } from '@/intl/locales'
+import { GetRacesResponse } from '@/utils/server/decisionDesk/types'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
@@ -58,10 +57,12 @@ export function LocationStateSpecific({
     }),
   )
 
-  const { data } = useApiDecisionDeskRaces({} as GetRacesResponse, {
-    race_date: '2024-11-05',
-    state: stateCode,
-  })
+  // const { data } = useApiDecisionDeskRaces({} as GetRacesResponse, {
+  //   race_date: '2024-11-05',
+  //   state: stateCode,
+  // })
+
+  const data = {} as GetRacesResponse
 
   console.log('DecisionDesk Data: ', {
     stateName,

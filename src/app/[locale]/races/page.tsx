@@ -3,16 +3,16 @@ import { Metadata } from 'next'
 
 import { LocationUnitedStatesLiveResults } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults'
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/organizePeople'
-import { fetchElectoralCollege, fetchRacesData } from '@/data/decisionDesk/services'
-import { GetElectoralCollegeResponse, GetRacesResponse } from '@/data/decisionDesk/types'
+import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { PageProps } from '@/types'
-import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
+import { GetRacesResponse } from '@/utils/server/decisionDesk/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
-export const dynamic = 'auto'
+export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
 export const revalidate = SECONDS_DURATION['5_MINUTES']
 
@@ -63,22 +63,23 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
   // )
   // await Promise.all(racePromises)
 
-  let presidentRaceData = {} as GetElectoralCollegeResponse
+  let presidentialRaceData: PresidentialDataWithVotingResponse | null = null
   try {
-    presidentRaceData = await fetchElectoralCollege()
+    presidentialRaceData =
+      await getDecisionDataFromRedis<PresidentialDataWithVotingResponse>('PRESIDENTIAL_RACES_DATA')
   } catch (error) {
     Sentry.captureException(error, {
-      extra: { key: 'president' },
+      extra: { key: 'presidential' },
     })
-    console.log(`Error fetching race data for ${'president'}:`, error)
-    presidentRaceData = {} as GetElectoralCollegeResponse
+    console.log(`Error fetching presidential race data:`, error)
+    presidentialRaceData = null
   }
 
   return (
     <LocationUnitedStatesLiveResults
       ddhqResults={racesDataMap}
       locale={locale}
-      presidentRaceData={presidentRaceData}
+      presidentialRaceData={presidentialRaceData}
       races={races}
     />
   )

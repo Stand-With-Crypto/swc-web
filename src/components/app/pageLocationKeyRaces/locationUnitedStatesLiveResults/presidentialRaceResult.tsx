@@ -3,28 +3,27 @@
 import { useMemo } from 'react'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import {
-  DTSI_Candidate,
-  DTSI_DDHQ_PresidentCandidate,
-} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
+import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Progress } from '@/components/ui/progress'
-import { GetElectoralCollegeResponse } from '@/data/decisionDesk/types'
-import { useDecisionDeskPresidentRace } from '@/hooks/useApiDecisionDeskRaces'
+import { Skeleton } from '@/components/ui/skeleton'
+import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
+import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
 import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
-  initialRaceData: GetElectoralCollegeResponse
+  initialRaceData: PresidentialDataWithVotingResponse | null
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
-  const { candidates, initialRaceData = {} as GetElectoralCollegeResponse } = props
+  const { candidates, initialRaceData = null } = props
 
   const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
   const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
 
-  const { data, isLoading, isValidating } = useDecisionDeskPresidentRace(initialRaceData)
+  const { data, isLoading, isValidating } = useApiDecisionDeskPresidentialData(initialRaceData)
 
   console.log('PRESIDENT DATA: ', {
     initialRaceData,
@@ -33,26 +32,33 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     isValidating,
   })
 
-  const ddhqCandidateA = useMemo<DTSI_DDHQ_PresidentCandidate | null>(() => {
+  const ddhqCandidateA = useMemo(() => {
     if (!data) return null
 
-    const candidate = data?.candidates?.find(
-      _candidate => _candidate?.last_name.toLowerCase() === candidateA.lastName.toLowerCase(),
+    const candidate = data?.find(_candidate =>
+      getPoliticianFindMatch(
+        candidateA.firstName,
+        candidateA.lastName,
+        _candidate.firstName,
+        _candidate.lastName,
+      ),
     )
 
     if (!candidate) return null
 
-    return {
-      ...candidateA,
-      ...candidate,
-    }
+    return candidate
   }, [candidateA, data])
 
-  const ddhqCandidateB = useMemo<DTSI_DDHQ_PresidentCandidate | null>(() => {
+  const ddhqCandidateB = useMemo(() => {
     if (!data) return null
 
-    const candidate = data?.candidates?.find(
-      _candidate => _candidate?.last_name.toLowerCase() === candidateB.lastName.toLowerCase(),
+    const candidate = data?.find(_candidate =>
+      getPoliticianFindMatch(
+        candidateB.firstName,
+        candidateB.lastName,
+        _candidate.firstName,
+        _candidate.lastName,
+      ),
     )
 
     if (!candidate) return null
@@ -63,45 +69,56 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     }
   }, [candidateB, data])
 
+  const canShowProgress = Boolean(data)
+
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
       <div className="flex justify-between">
-        <AvatarBox candidate={candidateA} electoralVotes={ddhqCandidateA?.electoral_votes_total} />
+        <AvatarBox
+          candidate={candidateA}
+          electoralVotes={ddhqCandidateA?.votingData?.electoralVotes}
+        />
         <AvatarBox
           candidate={candidateB}
           className="flex flex-col items-end text-right"
-          electoralVotes={ddhqCandidateB?.electoral_votes_total}
+          electoralVotes={ddhqCandidateB?.votingData?.electoralVotes}
         />
       </div>
 
       <div className="flex">
-        <Progress
-          className="h-6 rounded-l-full rounded-r-none bg-gray-800"
-          indicatorClassName={cn(
-            'bg-none rounded-r-none',
-            convertDTSIStanceScoreToBgColorClass(
-              candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
-            ),
-          )}
-          value={50}
-        />
-        <Progress
-          className="h-6 rounded-l-none rounded-r-full border-l bg-gray-800"
-          indicatorClassName={cn(
-            'bg-none rounded-l-none',
-            convertDTSIStanceScoreToBgColorClass(
-              candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
-            ),
-          )}
-          inverted
-          value={50}
-        />
+        {canShowProgress ? (
+          <>
+            <Progress
+              className="h-6 rounded-l-full rounded-r-none bg-gray-800"
+              indicatorClassName={cn(
+                'bg-none rounded-r-none',
+                convertDTSIStanceScoreToBgColorClass(
+                  candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
+                ),
+              )}
+              value={(ddhqCandidateA?.votingData?.percentage || 0) * 2}
+            />
+            <Progress
+              className="h-6 rounded-l-none rounded-r-full border-l bg-gray-800"
+              indicatorClassName={cn(
+                'bg-none rounded-l-none',
+                convertDTSIStanceScoreToBgColorClass(
+                  candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
+                ),
+              )}
+              inverted
+              value={(ddhqCandidateB?.votingData?.percentage || 0) * 2}
+            />
+          </>
+        ) : (
+          <Skeleton className="h-6 w-full rounded-full" />
+        )}
       </div>
 
       <div className="relative flex items-center justify-between text-sm">
         <div className="flex items-center gap-2">
-          <p className="font-bold">{ddhqCandidateA?.percentage}</p>{' '}
-          <span className="text-fontcolor-muted">{ddhqCandidateA?.votes}</span>
+          <p className="font-bold">{ddhqCandidateA?.votingData?.percentage}</p>{' '}
+          <span className="text-fontcolor-muted">{ddhqCandidateA?.votingData?.votes}</span>
         </div>
 
         <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
@@ -109,8 +126,8 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         </p>
 
         <div className="flex items-center gap-2">
-          <p className="font-bold">{ddhqCandidateB?.percentage}</p>{' '}
-          <span className="text-fontcolor-muted">{ddhqCandidateB?.votes}</span>
+          <p className="font-bold">{ddhqCandidateB?.votingData?.percentage}</p>{' '}
+          <span className="text-fontcolor-muted">{ddhqCandidateB?.votingData?.votes}</span>
         </div>
       </div>
     </div>

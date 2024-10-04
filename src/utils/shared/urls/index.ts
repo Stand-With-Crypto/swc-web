@@ -155,7 +155,7 @@ export const apiUrls = {
     district: number
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
   smsStatusCallback: () => `/api/public/sms/events/status`,
-  decisionDeskPresidentialData: (): string => 'api/public/decision-desk/usa/presidential',
+  decisionDeskPresidentialData: (): string => '/api/public/decision-desk/usa/presidential',
   decisionDeskStateData: (stateCode: string, district?: number) =>
     district
       ? `api/public/decision-desk/usa/state/${stateCode}/${district}`
