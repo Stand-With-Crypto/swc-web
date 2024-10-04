@@ -1,5 +1,4 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { GetRacesParams } from '@/data/decisionDesk/schemas'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'

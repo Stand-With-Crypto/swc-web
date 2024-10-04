@@ -11,7 +11,6 @@ import {
   GetElectoralCollegeResponse,
   GetRacesResponse,
 } from '@/data/decisionDesk/types'
-import { redis } from '@/utils/server/redis'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
