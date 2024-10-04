@@ -12,7 +12,7 @@ export async function setDecisionDataOnRedis(
   return redis.set(key, value, { ex: 86400 })
 }
 
-export async function getDecisionDataFromRedis<T extends {}>(
+export async function getDecisionDataFromRedis<T extends object>(
   key: keyof typeof DECISION_DESK_REDIS_KEYS,
 ) {
   return redis.get<T>(key)
