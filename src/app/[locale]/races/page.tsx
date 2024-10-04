@@ -36,33 +36,6 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
 
   const racesDataMap: Record<string, GetRacesResponse> = {}
 
-  // const racePromises = Object.entries(races.keyRaces).flatMap(([state, keyRaces]) =>
-  //   keyRaces.map(async race => {
-  //     const primaryDistrict = race[0].runningForSpecificRole.primaryDistrict
-  //       ? normalizeDTSIDistrictId(race[0].runningForSpecificRole)
-  //       : undefined
-
-  //     const officeId = primaryDistrict ? '3' : '4'
-  //     const key = `${state}_${primaryDistrict?.toString() || 'undefined'}_${officeId}`
-
-  //     try {
-  //       // const raceData = await fetchRacesData({
-  //       //   state,
-  //       //   district: primaryDistrict?.toString(),
-  //       //   office_id: officeId,
-  //       // })
-  //       // racesDataMap[key] = raceData
-  //     } catch (error) {
-  //       Sentry.captureException(error, {
-  //         extra: { key },
-  //       })
-  //       console.log(`Error fetching race data for ${key}:`, error)
-  //       racesDataMap[key] = {} as GetRacesResponse
-  //     }
-  //   }),
-  // )
-  // await Promise.all(racePromises)
-
   let presidentialRaceData: PresidentialDataWithVotingResponse | null = null
   try {
     presidentialRaceData =
