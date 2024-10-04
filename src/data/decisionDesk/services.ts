@@ -2,6 +2,7 @@ import 'server-only'
 
 import pRetry from 'p-retry'
 
+import { getDecisionDataFromRedis, setDecisionDataOnRedis } from '@/data/decisionDesk/cachedData'
 import { API_ENDPOINT } from '@/data/decisionDesk/constants'
 import { GetRacesParams } from '@/data/decisionDesk/schemas'
 import {
@@ -15,7 +16,6 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
-const DECISION_DESK_BEARER_TOKEN = 'decisionDeskBearerToken'
 const DECISION_DESK_CLIENT_ID = requiredEnv(
   process.env.DECISION_DESK_CLIENT_ID,
   'DECISION_DESK_CLIENT_ID',
@@ -76,7 +76,9 @@ async function fetchBearerToken() {
 async function getBearerToken() {
   logger.debug('getBearerToken called')
 
-  const hasCachedBearerToken = await redis.get<GetBearerTokenResponse>(DECISION_DESK_BEARER_TOKEN)
+  const hasCachedBearerToken = await getDecisionDataFromRedis<GetBearerTokenResponse>(
+    'DECISION_DESK_BEARER_TOKEN',
+  )
 
   if (hasCachedBearerToken) {
     logger.debug('getBearerToken found cached token')
@@ -87,7 +89,7 @@ async function getBearerToken() {
 
   const bearerToken = await fetchBearerToken()
 
-  await redis.set(DECISION_DESK_BEARER_TOKEN, bearerToken, {
+  await setDecisionDataOnRedis('DECISION_DESK_BEARER_TOKEN', JSON.stringify(bearerToken), {
     ex: bearerToken.expires_in,
   })
 
@@ -96,6 +98,10 @@ async function getBearerToken() {
   return bearerToken.access_token
 }
 
+/**
+ * Don't call directly, fetch it from src/data/decisionDesk/cachedData.ts, unless
+ * you know what you're doing as decisionDesk has rate limiting of 40 requests per minute
+ */
 export async function fetchRacesData(params?: GetRacesParams) {
   logger.debug('fetchRacesData called')
 
@@ -157,6 +163,10 @@ export async function fetchRacesData(params?: GetRacesParams) {
   return json
 }
 
+/**
+ * Don't call directly, fetch it from src/data/decisionDesk/cachedData.ts, unless
+ * you know what you're doing as decisionDesk has rate limiting of 40 requests per minute
+ */
 export async function fetchDelegatesData(year = '2024') {
   logger.debug('fetchDelegatesData called')
 
@@ -204,6 +214,10 @@ export async function fetchDelegatesData(year = '2024') {
   return json
 }
 
+/**
+ * Don't call directly, fetch it from src/data/decisionDesk/cachedData.ts, unless
+ * you know what you're doing as decisionDesk has rate limiting of 40 requests per minute
+ */
 export async function fetchElectoralCollege(year = '2024') {
   logger.debug('fetchElectoralCollege called')
 
