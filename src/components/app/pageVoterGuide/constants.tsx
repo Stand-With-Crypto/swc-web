@@ -64,6 +64,5 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
     campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
     image: '/actionTypeIcons/votingResearched.png',
-    wideDesktopImage: true,
   },
 ]
