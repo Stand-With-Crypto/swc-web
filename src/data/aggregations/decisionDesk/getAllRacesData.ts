@@ -5,6 +5,7 @@ import { fetchRacesData } from '@/utils/server/decisionDesk/services'
 export interface RacesVotingDataResponse {
   state: string
   stateName: string
+  district: string
   office: (typeof OFFICES)[0] | null
   electionType: (typeof ELECTION_TYPES)[0] | null
   year: number
@@ -41,6 +42,7 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
     return {
       state: currentData.state,
       stateName: currentData.state_name,
+      district: currentData.district,
       office:
         OFFICES.find(currentOffice => +currentOffice.officeId === currentData.office_id) ?? null,
       electionType:
