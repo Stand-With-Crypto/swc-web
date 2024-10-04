@@ -72,13 +72,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
     const stateKeys = Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)
 
+    let startDate: Date
     let requestIteration = 0
     let timeTakenInSeconds = 0
-    let startDate = new Date()
     const persistedStates = []
 
     for (const stateKey of stateKeys) {
-      // cant call more than 40 requests per minute
+      startDate = new Date()
+
       if (requestIteration >= DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE && timeTakenInSeconds < 60) {
         logger.info('Rate limiting from Decision Desk API reached. Sleeping for 60s.')
 
@@ -106,33 +107,40 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         })
       })
 
+      timeTakenInSeconds = (new Date().getTime() - startDate.getTime()) / 1000
+
       const stateRacesDataOnly = stateRacesData.filter(
         currentStateRacesData => currentStateRacesData.office?.officeName !== 'President',
       )
 
       requestIteration += 1
-      timeTakenInSeconds = (new Date().getTime() - startDate.getTime()) / 1000
 
-      if (!stateRacesDataOnly) {
-        logger.error(`State data not fetched for ${currentStateKey}.`)
+      if (stateRacesDataOnly.length === 0) {
+        logger.error(`No valid state race data fetched for ${currentStateKey}.`)
+        continue
       }
 
       if (!persist) {
         logger.info(`Dry run. State data not persisted on Redis for ${currentStateKey}.`)
-
         continue
       }
 
       logger.info(`Persisting ${currentStateKey}_STATE_RACES_DATA on Redis.`)
 
-      const persistedState = await setDecisionDataOnRedis(
-        `${currentStateKey}_STATE_RACES_DATA`,
-        JSON.stringify(stateRacesDataOnly),
-      )
+      try {
+        const persistedState = await setDecisionDataOnRedis(
+          `${currentStateKey}_STATE_RACES_DATA`,
+          JSON.stringify(stateRacesDataOnly),
+        )
 
-      persistedStates.push({
-        [currentStateKey]: persistedState,
-      })
+        persistedStates.push({
+          [currentStateKey]: persistedState,
+        })
+      } catch (error) {
+        logger.error(
+          `Failed to persist state data for ${currentStateKey}: ${(error as Error).message}`,
+        )
+      }
     }
 
     if (!presidentialRacesData) {
