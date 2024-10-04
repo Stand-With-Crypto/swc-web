@@ -3,10 +3,12 @@
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { PACFooter } from '@/components/app/pacFooter'
+import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
 import { UserAddressVoterGuideInputSection } from '@/components/app/pageLocationKeyRaces/locationUnitedStates/userAddressVoterGuideInput'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
+import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { NextImage } from '@/components/ui/image'
@@ -21,7 +23,6 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
-import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 
 interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
@@ -40,7 +41,7 @@ export function LocationUnitedStatesLiveResults({
 
   return (
     <div className="space-y-20">
-      <DarkHeroSection className="bg-black py-8 lg:px-28 lg:py-20">
+      <DarkHeroSection className="py-8 lg:px-28 lg:py-20">
         <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
           <div className="space-y-6 text-center">
             <NextImage
@@ -109,7 +110,7 @@ export function LocationUnitedStatesLiveResults({
           title="Critical elections"
           titleProps={{ size: 'xs' }}
         >
-          <section className="grid grid-cols-1 divide-x-2 divide-y-2 lg:grid-cols-2">
+          <LiveResultsGrid>
             {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
               keyRaces.map(candidates => {
                 const primaryDistrict = candidates[0].runningForSpecificRole.primaryDistrict
@@ -120,7 +121,7 @@ export function LocationUnitedStatesLiveResults({
                 const key = `${stateCode}_${primaryDistrict?.toString() || 'undefined'}_${officeId}`
 
                 return (
-                  <GridItem key={key}>
+                  <LiveResultsGrid.GridItem key={key}>
                     <KeyRaceLiveResult
                       candidates={candidates}
                       className="flex-1"
@@ -131,18 +132,18 @@ export function LocationUnitedStatesLiveResults({
                       primaryDistrict={primaryDistrict}
                       stateCode={stateCode as USStateCode}
                     />
-                  </GridItem>
+                  </LiveResultsGrid.GridItem>
                 )
               }),
             )}
 
-            <GridItem>
+            <LiveResultsGrid.GridItem>
               <div className="flex flex-col items-center justify-center gap-8 text-center">
                 <NextImage
                   alt="SWC shield"
+                  height={120}
                   src="/shields/shield_DoublePurple.png"
                   width={120}
-                  height={120}
                 />
                 <div className="space-y-2">
                   <p className="text-xl font-semibold">Did you vote in this year's election?</p>
@@ -150,8 +151,8 @@ export function LocationUnitedStatesLiveResults({
                 </div>
                 <Button className="w-fit">I voted!</Button>
               </div>
-            </GridItem>
-          </section>
+            </LiveResultsGrid.GridItem>
+          </LiveResultsGrid>
         </ContentSection>
 
         <ContentSection
@@ -177,14 +178,6 @@ export function LocationUnitedStatesLiveResults({
 
         <PACFooter className="container text-center" />
       </div>
-    </div>
-  )
-}
-
-function GridItem({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex w-full items-center justify-center px-6 py-10 md:px-12 md:py-14 lg:px-20">
-      {children}
     </div>
   )
 }

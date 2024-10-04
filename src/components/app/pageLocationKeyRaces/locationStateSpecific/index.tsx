@@ -9,13 +9,18 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
-import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
+import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
+import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { GetRacesResponse } from '@/data/decisionDesk/types'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import { useApiDecisionDeskRaces } from '@/hooks/useApiDecisionDeskRaces'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -53,6 +58,16 @@ export function LocationStateSpecific({
     }),
   )
 
+  const { data } = useApiDecisionDeskRaces({} as GetRacesResponse, {
+    race_date: '2024-11-05',
+    state: stateCode,
+  })
+
+  console.log('DecisionDesk Data: ', {
+    stateName,
+    data,
+  })
+
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
       usaState: stateCode,
@@ -72,6 +87,9 @@ export function LocationStateSpecific({
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in {stateName}
           </PageTitle>
+          <h3 className="mt-4 text-xl text-fontcolor-muted">
+            View the races critical to keeping crypto in {stateName}.
+          </h3>
           {countAdvocates > 1000 && (
             <h3 className="mt-4 font-mono text-xl font-light">
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
@@ -84,14 +102,62 @@ export function LocationStateSpecific({
               </ExternalLink>
             </Button>
           ) : (
-            <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
-              <Button className="mt-6 w-full max-w-xs" variant="secondary">
-                Make sure you're registered to vote
-              </Button>
-            </UserActionFormVoterRegistrationDialog>
+            <Button className="mt-6 w-full max-w-xs md:w-fit" variant="secondary">
+              I voted
+            </Button>
           )}
         </div>
       </DarkHeroSection>
+
+      <div className="mt-20 space-y-20">
+        <ContentSection
+          className="container"
+          subtitle={`Follow our tracker to see how many pro-crypto candidates get elected in ${stateName}.`}
+          title="Live election results"
+          titleProps={{ size: 'xs' }}
+        >
+          <div className="flex justify-center">
+            <LiveStatusBadge status="live" />
+          </div>
+
+          <div className="flex flex-wrap gap-4">
+            <ResultsOverviewCard
+              antiCryptoCandidatesElected={999}
+              proCryptoCandidatesElected={999}
+              title="House of Representatives"
+            />
+            <ResultsOverviewCard
+              antiCryptoCandidatesElected={999}
+              proCryptoCandidatesElected={999}
+              title="Senate"
+            />
+          </div>
+        </ContentSection>
+
+        <ContentSection
+          subtitle="These elections are critical to the future of crypto in America. View live updates below."
+          title={`Critical elections in ${stateName}`}
+          titleProps={{ size: 'xs' }}
+        >
+          <LiveResultsGrid>
+            <LiveResultsGrid.GridItem>
+              <div className="flex flex-col items-center justify-center gap-8 text-center">
+                <NextImage
+                  alt="SWC shield"
+                  height={120}
+                  src="/shields/shield_DoublePurple.png"
+                  width={120}
+                />
+                <div className="space-y-2">
+                  <p className="text-xl font-semibold">Did you vote in this year's election?</p>
+                  <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
+                </div>
+                <Button className="w-fit">I voted!</Button>
+              </div>
+            </LiveResultsGrid.GridItem>
+          </LiveResultsGrid>
+        </ContentSection>
+      </div>
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
         <PageTitle as="h3" className="mt-20" size="sm">
