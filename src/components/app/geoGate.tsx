@@ -7,6 +7,7 @@ import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
+import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
 
 interface GeoGateProps {
   children: React.ReactNode
@@ -25,7 +26,28 @@ export const GeoGate = (props: GeoGateProps) => {
 
   if (!hasHydrated) return children
 
-  if (!bypassCountryCheck && parsedExistingCountryCode?.countryCode !== countryCode) {
+  function isValidCountryCode() {
+    if (bypassCountryCheck) {
+      return true
+    }
+    // we want to avoid blocking content in situations where a users IP isn't set for some reason
+    if (!parsedExistingCountryCode?.countryCode) {
+      return true
+    }
+    if (parsedExistingCountryCode?.countryCode === countryCode) {
+      return true
+    }
+    // there are cases where users in the US are getting blocked if they are close to the US border so we want to be more permissive with Canada/Mexico
+    if (
+      countryCode === SUPPORTED_COUNTRY_CODES.US &&
+      ['MX', 'CA'].includes(parsedExistingCountryCode.countryCode)
+    ) {
+      return true
+    }
+    return false
+  }
+
+  if (!isValidCountryCode()) {
     return unavailableContent
   }
 
