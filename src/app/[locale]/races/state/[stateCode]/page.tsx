@@ -1,8 +1,13 @@
 import { Metadata } from 'next'
 
 import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/locationStateSpecific'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
+import {
+  DecisionDeskRedisKeys,
+  getDecisionDataFromRedis,
+} from '@/utils/server/decisionDesk/cachedData'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -10,6 +15,7 @@ import { toBool } from '@/utils/shared/toBool'
 import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
 } from '@/utils/shared/usStateUtils'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
@@ -55,6 +61,9 @@ export default async function LocationStateSpecificPage({
     }),
   ])
 
+  const key: DecisionDeskRedisKeys = `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
+  const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
+
   if (!dtsiResults) {
     throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
@@ -62,6 +71,7 @@ export default async function LocationStateSpecificPage({
   return (
     <LocationStateSpecific
       countAdvocates={countAdvocates}
+      initialRaceData={data}
       {...dtsiResults}
       {...{ stateCode, locale }}
     />

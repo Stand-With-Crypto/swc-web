@@ -43,9 +43,7 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
   const racesPromises = Object.entries(races.keyRaces).flatMap(async ([stateCode]) => {
     const key: DecisionDeskRedisKeys = `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
 
-    const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(
-      `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`,
-    )
+    const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
     racesDataMap[key] = data
   })
 
