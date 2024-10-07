@@ -4,8 +4,7 @@ import { cookies } from 'next/headers'
 
 import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
-
-import { isValidCountryCode } from './isValidCountryCode'
+import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
 
 export function createCountryCodeValidation(requiredCountryCode: string) {
   return async () => {

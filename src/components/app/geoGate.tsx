@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
-import { isValidCountryCode } from '@/utils/server/userActionValidation/isValidCountryCode'
+import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
 
 interface GeoGateProps {
   children: React.ReactNode
