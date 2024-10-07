@@ -10,6 +10,7 @@ import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/d
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
+import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { Button } from '@/components/ui/button'
@@ -18,9 +19,9 @@ import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
-import { GetRacesResponse } from '@/utils/server/decisionDesk/types'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
@@ -34,6 +35,7 @@ interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery 
   stateCode: USStateCode
   locale: SupportedLocale
   countAdvocates: number
+  initialRaceData: RacesVotingDataResponse[]
 }
 
 export function LocationStateSpecific({
@@ -42,6 +44,7 @@ export function LocationStateSpecific({
   locale,
   countAdvocates,
   personStances,
+  initialRaceData,
 }: LocationStateSpecificProps) {
   const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
   const groups = organizeStateSpecificPeople(people)
@@ -56,18 +59,6 @@ export function LocationStateSpecific({
       return district
     }),
   )
-
-  // const { data } = useApiDecisionDeskRaces({} as GetRacesResponse, {
-  //   race_date: '2024-11-05',
-  //   state: stateCode,
-  // })
-
-  const data = {} as GetRacesResponse
-
-  console.log('DecisionDesk Data: ', {
-    stateName,
-    data,
-  })
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
@@ -141,6 +132,29 @@ export function LocationStateSpecific({
           titleProps={{ size: 'xs' }}
         >
           <LiveResultsGrid>
+            <LiveResultsGrid.GridItem>
+              <KeyRaceLiveResult
+                candidates={groups.senators}
+                initialRaceData={initialRaceData}
+                locale={locale}
+                stateCode={stateCode}
+              />
+            </LiveResultsGrid.GridItem>
+
+            <LiveResultsGrid.GridItem>
+              {Object.entries(groups.congresspeople).map(([district, candidates]) => {
+                return (
+                  <KeyRaceLiveResult
+                    candidates={candidates.people}
+                    initialRaceData={initialRaceData}
+                    key={district}
+                    locale={locale}
+                    stateCode={stateCode}
+                  />
+                )
+              })}
+            </LiveResultsGrid.GridItem>
+
             <LiveResultsGrid.GridItem>
               <div className="flex flex-col items-center justify-center gap-8 text-center">
                 <NextImage

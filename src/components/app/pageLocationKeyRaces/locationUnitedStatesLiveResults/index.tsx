@@ -14,9 +14,11 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { SupportedLocale } from '@/intl/locales'
-import { GetRacesResponse } from '@/utils/server/decisionDesk/types'
+import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { DecisionDeskRedisKeys } from '@/utils/server/decisionDesk/cachedData'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -26,14 +28,14 @@ import { organizePeople } from './organizePeople'
 interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
   races: ReturnType<typeof organizePeople>
-  ddhqResults: Record<string, GetRacesResponse>
+  ddhqResults: Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null>
   presidentialRaceData: PresidentialDataWithVotingResponse | null
 }
 
 export function LocationUnitedStatesLiveResults({
   locale,
   races,
-  ddhqResults = {},
+  ddhqResults,
   presidentialRaceData,
 }: LocationUnitedStatesLiveResultsProps) {
   const urls = getIntlUrls(locale)
@@ -110,14 +112,13 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <LiveResultsGrid>
-            {/* {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
+            {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
               keyRaces.map(candidates => {
                 const primaryDistrict = candidates[0].runningForSpecificRole.primaryDistrict
                   ? normalizeDTSIDistrictId(candidates[0].runningForSpecificRole)
                   : undefined
 
-                const officeId = primaryDistrict ? '3' : '4'
-                const key = `${stateCode}_${primaryDistrict?.toString() || 'undefined'}_${officeId}`
+                const key: DecisionDeskRedisKeys = `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
 
                 return (
                   <LiveResultsGrid.GridItem key={key}>
@@ -127,14 +128,13 @@ export function LocationUnitedStatesLiveResults({
                       initialRaceData={ddhqResults[key] || undefined}
                       key={key}
                       locale={locale}
-                      officeId={officeId}
                       primaryDistrict={primaryDistrict}
                       stateCode={stateCode as USStateCode}
                     />
                   </LiveResultsGrid.GridItem>
                 )
               }),
-            )} */}
+            )}
 
             <LiveResultsGrid.GridItem>
               <div className="flex flex-col items-center justify-center gap-8 text-center">

@@ -18,10 +18,14 @@ export async function GET(
   const { state, district } = GetRacesParamsSchema.parse(params)
 
   if (!state && !district) {
-    return NextResponse.json({
-      status: 500,
-      error: 'State and district are required',
-    })
+    return NextResponse.json(
+      {
+        error: 'State and district are required',
+      },
+      {
+        status: 400,
+      },
+    )
   }
 
   const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(
@@ -29,10 +33,12 @@ export async function GET(
   )
 
   if (!data) {
-    return NextResponse.json({
-      status: 404,
-      error: 'Data not found',
-    })
+    return NextResponse.json(
+      {
+        error: 'Data not found',
+      },
+      { status: 400 },
+    )
   }
 
   const dataFilteredByItsDistrict = data.filter(
@@ -40,10 +46,14 @@ export async function GET(
   )
 
   if (!dataFilteredByItsDistrict.length) {
-    return NextResponse.json({
-      status: 404,
-      error: 'Data not found',
-    })
+    return NextResponse.json(
+      {
+        error: 'Data not found',
+      },
+      {
+        status: 400,
+      },
+    )
   }
 
   return NextResponse.json(dataFilteredByItsDistrict)

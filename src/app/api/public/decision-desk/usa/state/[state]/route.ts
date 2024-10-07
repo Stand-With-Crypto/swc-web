@@ -15,10 +15,14 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
   const { state } = GetRacesParamsSchema.parse(params)
 
   if (!state) {
-    return NextResponse.json({
-      status: 500,
-      error: 'State is required',
-    })
+    return NextResponse.json(
+      {
+        error: 'State is required',
+      },
+      {
+        status: 400,
+      },
+    )
   }
 
   const data = await getDecisionDataFromRedis<RacesVotingDataResponse>(
@@ -26,10 +30,14 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
   )
 
   if (!data) {
-    return NextResponse.json({
-      status: 404,
-      error: 'Data not found',
-    })
+    return NextResponse.json(
+      {
+        error: 'Data not found',
+      },
+      {
+        status: 400,
+      },
+    )
   }
 
   return NextResponse.json(data)
