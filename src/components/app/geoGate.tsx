@@ -3,11 +3,8 @@
 import Cookies from 'js-cookie'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
-import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
+import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import { isValidCountryCode } from '@/utils/server/userActionValidation/checkCountryCode'
 
 interface GeoGateProps {
   children: React.ReactNode
@@ -21,33 +18,11 @@ export const GeoGate = (props: GeoGateProps) => {
 
   const hasHydrated = useHasHydrated()
 
-  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
-  const parsedExistingCountryCode = parseUserCountryCodeCookie(userCountryCode)
-
   if (!hasHydrated) return children
 
-  function isValidCountryCode() {
-    if (bypassCountryCheck) {
-      return true
-    }
-    // we want to avoid blocking content in situations where a users IP isn't set for some reason
-    if (!parsedExistingCountryCode?.countryCode) {
-      return true
-    }
-    if (parsedExistingCountryCode?.countryCode === countryCode) {
-      return true
-    }
-    // there are cases where users in the US are getting blocked if they are close to the US border so we want to be more permissive with Canada/Mexico
-    if (
-      countryCode === SUPPORTED_COUNTRY_CODES.US &&
-      ['MX', 'CA'].includes(parsedExistingCountryCode.countryCode)
-    ) {
-      return true
-    }
-    return false
-  }
+  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
 
-  if (!isValidCountryCode()) {
+  if (!isValidCountryCode({ countryCode, userCountryCode, bypassCountryCheck })) {
     return unavailableContent
   }
 
