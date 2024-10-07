@@ -12,7 +12,7 @@ enum DecisionDeskKeys {
 
 type StateRaceKeys = `SWC_${keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`
 
-type DecisionDeskRedisKeys = keyof typeof DecisionDeskKeys | StateRaceKeys
+export type DecisionDeskRedisKeys = keyof typeof DecisionDeskKeys | StateRaceKeys
 
 export async function setDecisionDataOnRedis(
   key: DecisionDeskRedisKeys,

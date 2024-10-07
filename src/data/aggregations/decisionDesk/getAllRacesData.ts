@@ -39,6 +39,10 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
       totalVotes: currentData.topline_results.total_votes,
       raceDate: currentData.race_date,
       lastUpdated: currentData.last_updated,
+      calledCandidate:
+        currentData.candidates.find(
+          candidate => candidate.cand_id === currentData.topline_results.called_candidates?.[0],
+        ) || null,
       candidatesWithVotes: currentData.candidates.map(candidate => ({
         id: candidate.cand_id,
         firstName: candidate.first_name,

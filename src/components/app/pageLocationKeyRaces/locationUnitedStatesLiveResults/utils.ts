@@ -1,9 +1,11 @@
 import { isNil } from 'lodash-es'
 
-import { DTSI_DDHQ_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
+import {
+  CandidatesWithVote,
+  RacesVotingDataResponse,
+} from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { dtsiPersonPoliticalAffiliationCategoryAbbreviation } from '@/utils/dtsi/dtsiPersonUtils'
-import { RacesData } from '@/utils/server/decisionDesk/types'
 import { twNoop } from '@/utils/web/cn'
 
 export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
@@ -24,24 +26,24 @@ export const getPoliticalCategoryAbbr = (category: DTSI_PersonPoliticalAffiliati
   return dtsiPersonPoliticalAffiliationCategoryAbbreviation(category) || ''
 }
 
-export const getTotalVotes = (candidate: DTSI_DDHQ_Candidate | null, raceData: RacesData) => {
+export const getVotePercentage = (
+  candidate: CandidatesWithVote | null,
+  raceData: RacesVotingDataResponse | null,
+) => {
   if (!candidate) return 0
-  return raceData?.topline_results?.votes?.[candidate.cand_id] || 0
-}
-
-export const getVotePercentage = (candidate: DTSI_DDHQ_Candidate | null, raceData: RacesData) => {
-  if (!candidate) return 0
-  const totalVotes = raceData?.topline_results?.total_votes
+  const totalVotes = raceData?.totalVotes
   if (isNil(totalVotes)) return 0
-  const candidateVotes = raceData.topline_results?.votes?.[candidate.cand_id]
-  return candidateVotes ? ((candidateVotes / totalVotes) * 100).toFixed(2) : 0
+  return candidate.votes ? ((candidate.votes / totalVotes) * 100).toFixed(2) : 0
 }
 
-export const getOpacity = (candidate: DTSI_DDHQ_Candidate | null, raceData: RacesData) => {
-  const calledCandidateId = raceData?.topline_results?.called_candidates?.[0]
-  if (!calledCandidateId) return 'opacity-100'
+export const getOpacity = (
+  candidate: CandidatesWithVote | null,
+  raceData: RacesVotingDataResponse | null,
+) => {
+  const calledCandidate = raceData?.calledCandidate
+  if (!calledCandidate) return 'opacity-100'
   if (!candidate) return 'opacity-100'
-  if (calledCandidateId !== candidate.cand_id) return 'opacity-50'
+  if (calledCandidate.cand_id !== candidate.id) return 'opacity-50'
   return 'opacity-100'
 }
 
