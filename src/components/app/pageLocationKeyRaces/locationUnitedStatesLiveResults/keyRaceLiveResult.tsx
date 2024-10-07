@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { usePathname } from 'next/navigation'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -40,6 +41,20 @@ interface KeyRaceLiveResultProps {
 export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   const { candidates, stateCode, primaryDistrict, className, locale, initialRaceData } = props
 
+  const pathname = usePathname()
+  const isDistrictPage = pathname?.includes(
+    getIntlUrls(locale).locationDistrictSpecific({
+      stateCode,
+      district: primaryDistrict || ('' as NormalizedDTSIDistrictId),
+    }),
+  )
+  const isSenatePage = pathname?.includes(
+    getIntlUrls(locale).locationStateSpecificSenateRace(stateCode),
+  )
+  const isPresidentialPage = pathname?.includes(
+    getIntlUrls(locale).locationUnitedStatesPresidential(),
+  )
+
   const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
   const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
 
@@ -55,6 +70,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         district: primaryDistrict,
       })
     : urls.locationStateSpecificSenateRace(stateCode)
+  const showLink = !isDistrictPage && !isSenatePage && !isPresidentialPage
 
   const { data, isLoading, isValidating } = useApiDecisionDeskData(initialRaceData, {
     stateCode,
@@ -164,18 +180,20 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
   return (
     <div className={cn('flex w-full flex-col gap-8', className)}>
-      <div className="flex items-start justify-between">
-        <div className="space-y-2">
-          <p className="text-lg font-semibold">{raceName}</p>
-          {lastUpdated ? (
+      {showLink ? (
+        <div className="flex items-start justify-between">
+          <div className="space-y-2">
+            <p className="text-lg font-semibold">{raceName}</p>
             <p className="text-sm text-fontcolor-muted">Data updated {lastUpdated}</p>
-          ) : (
-            <p className="text-sm text-fontcolor-muted"> </p>
-          )}
+          </div>
+          <LiveStatusBadge status={raceStatus} />
         </div>
-
-        <LiveStatusBadge status={raceStatus} />
-      </div>
+      ) : (
+        <div className="mb-4 flex flex-col items-center gap-6">
+          <LiveStatusBadge status={raceStatus} />
+          <p className="text-center text-base text-fontcolor-muted">Data updated {lastUpdated}</p>
+        </div>
+      )}
 
       <div className="flex justify-between">
         <AvatarBox candidate={candidateA} className={getOpacity(ddhqCandidateA, raceData)} />
@@ -233,9 +251,11 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         </div>
       </div>
 
-      <Button asChild className="mx-auto w-fit" variant="secondary">
-        <InternalLink href={link}>View Race</InternalLink>
-      </Button>
+      {showLink && (
+        <Button asChild className="mx-auto w-fit" variant="secondary">
+          <InternalLink href={link}>View Race</InternalLink>
+        </Button>
+      )}
     </div>
   )
 }

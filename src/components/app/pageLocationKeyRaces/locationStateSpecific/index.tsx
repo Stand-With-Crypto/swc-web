@@ -6,7 +6,6 @@ import { compact, isEmpty, times } from 'lodash-es'
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
-import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
@@ -15,7 +14,6 @@ import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationU
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
@@ -29,7 +27,6 @@ import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usState
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
-import { UserLocationRaceInfo } from './userLocationRaceInfo'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
@@ -167,7 +164,7 @@ export function LocationStateSpecific({
                   return null
                 }
                 return (
-                  <LiveResultsGrid.GridItem>
+                  <LiveResultsGrid.GridItem key={district}>
                     <KeyRaceLiveResult
                       candidates={districtPeople}
                       initialRaceData={initialRaceData || undefined}

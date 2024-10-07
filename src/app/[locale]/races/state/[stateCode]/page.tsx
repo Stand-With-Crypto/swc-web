@@ -62,7 +62,7 @@ export default async function LocationStateSpecificPage({
   ])
 
   const key: DecisionDeskRedisKeys = `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
-  const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
+  const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
 
   if (!dtsiResults) {
     throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
@@ -71,7 +71,7 @@ export default async function LocationStateSpecificPage({
   return (
     <LocationStateSpecific
       countAdvocates={countAdvocates}
-      initialRaceData={data}
+      initialRaceData={liveResultdata}
       {...dtsiResults}
       {...{ stateCode, locale }}
     />
