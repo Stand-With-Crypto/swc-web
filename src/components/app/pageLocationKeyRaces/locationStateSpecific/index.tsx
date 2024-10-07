@@ -35,7 +35,7 @@ interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery 
   stateCode: USStateCode
   locale: SupportedLocale
   countAdvocates: number
-  initialRaceData: RacesVotingDataResponse[]
+  initialRaceData: RacesVotingDataResponse[] | null
 }
 
 export function LocationStateSpecific({
@@ -125,53 +125,6 @@ export function LocationStateSpecific({
             />
           </div>
         </ContentSection>
-
-        <ContentSection
-          subtitle="These elections are critical to the future of crypto in America. View live updates below."
-          title={`Critical elections in ${stateName}`}
-          titleProps={{ size: 'xs' }}
-        >
-          <LiveResultsGrid>
-            <LiveResultsGrid.GridItem>
-              <KeyRaceLiveResult
-                candidates={groups.senators}
-                initialRaceData={initialRaceData}
-                locale={locale}
-                stateCode={stateCode}
-              />
-            </LiveResultsGrid.GridItem>
-
-            <LiveResultsGrid.GridItem>
-              {Object.entries(groups.congresspeople).map(([district, candidates]) => {
-                return (
-                  <KeyRaceLiveResult
-                    candidates={candidates.people}
-                    initialRaceData={initialRaceData}
-                    key={district}
-                    locale={locale}
-                    stateCode={stateCode}
-                  />
-                )
-              })}
-            </LiveResultsGrid.GridItem>
-
-            <LiveResultsGrid.GridItem>
-              <div className="flex flex-col items-center justify-center gap-8 text-center">
-                <NextImage
-                  alt="SWC shield"
-                  height={120}
-                  src="/shields/shield_DoublePurple.png"
-                  width={120}
-                />
-                <div className="space-y-2">
-                  <p className="text-xl font-semibold">Did you vote in this year's election?</p>
-                  <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
-                </div>
-                <Button className="w-fit">I voted!</Button>
-              </div>
-            </LiveResultsGrid.GridItem>
-          </LiveResultsGrid>
-        </ContentSection>
       </div>
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
@@ -179,44 +132,54 @@ export function LocationStateSpecific({
           There's no election data for {stateName}
         </PageTitle>
       ) : (
-        <div className="space-y-20">
-          {!!groups.senators.length && (
-            <div className="mt-20">
-              <DTSIPersonHeroCardSection
-                cta={
-                  <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
-                    View Race
-                  </InternalLink>
+        <div className="mt-20 space-y-20">
+          <ContentSection
+            subtitle="These elections are critical to the future of crypto in America. View live updates below."
+            title={`Critical elections in ${stateName}`}
+            titleProps={{ size: 'xs' }}
+          >
+            <LiveResultsGrid>
+              {!!groups.senators.length && (
+                <LiveResultsGrid.GridItem>
+                  <KeyRaceLiveResult
+                    candidates={groups.senators}
+                    initialRaceData={initialRaceData || undefined}
+                    locale={locale}
+                    stateCode={stateCode}
+                  />
+                </LiveResultsGrid.GridItem>
+              )}
+
+              {!!groups.congresspeople['at-large']?.people.length && (
+                <LiveResultsGrid.GridItem>
+                  <KeyRaceLiveResult
+                    candidates={groups.congresspeople['at-large'].people}
+                    initialRaceData={initialRaceData || undefined}
+                    locale={locale}
+                    stateCode={stateCode}
+                  />
+                </LiveResultsGrid.GridItem>
+              )}
+
+              {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
+                const districtPeople = groups.congresspeople[district]?.people
+                if (!districtPeople) {
+                  return null
                 }
-                locale={locale}
-                people={groups.senators}
-                title={<>U.S. Senate Race ({stateCode})</>}
-              />
-            </div>
-          )}
-          {groups.congresspeople['at-large']?.people.length ? (
-            <div className="mt-20">
-              <DTSIPersonHeroCardSection
-                cta={
-                  <InternalLink
-                    href={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
-                  >
-                    View Race
-                  </InternalLink>
-                }
-                locale={locale}
-                people={groups.congresspeople['at-large'].people}
-                title={<>At-Large Congressional District</>}
-              />
-            </div>
-          ) : (
-            <UserLocationRaceInfo
-              groups={groups}
-              locale={locale}
-              stateCode={stateCode}
-              stateName={stateName}
-            />
-          )}
+                return (
+                  <LiveResultsGrid.GridItem>
+                    <KeyRaceLiveResult
+                      candidates={districtPeople}
+                      initialRaceData={initialRaceData || undefined}
+                      locale={locale}
+                      stateCode={stateCode}
+                    />
+                  </LiveResultsGrid.GridItem>
+                )
+              })}
+            </LiveResultsGrid>
+          </ContentSection>
+
           {!!stances.length && (
             <ContentSection
               subtitle={
@@ -248,25 +211,6 @@ export function LocationStateSpecific({
               </ScrollArea>
             </ContentSection>
           )}
-          {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
-            const districtPeople = groups.congresspeople[district]?.people
-            if (!districtPeople) {
-              return null
-            }
-            return (
-              <DTSIPersonHeroCardSection
-                cta={
-                  <InternalLink href={urls.locationDistrictSpecific({ stateCode, district })}>
-                    View Race
-                  </InternalLink>
-                }
-                key={district}
-                locale={locale}
-                people={districtPeople}
-                title={<>Congressional District {district}</>}
-              />
-            )
-          })}
 
           {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
             <ContentSection

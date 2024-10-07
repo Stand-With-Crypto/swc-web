@@ -126,7 +126,7 @@ export function LocationUnitedStatesLiveResults({
                       candidates={candidates}
                       className="flex-1"
                       initialRaceData={ddhqResults[key] || undefined}
-                      key={key}
+                      key={key + primaryDistrict}
                       locale={locale}
                       primaryDistrict={primaryDistrict}
                       stateCode={stateCode as USStateCode}
