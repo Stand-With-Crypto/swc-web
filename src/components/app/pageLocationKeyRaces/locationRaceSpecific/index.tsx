@@ -8,10 +8,12 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
+import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonPoliticalAffiliationCategory,
@@ -29,6 +31,7 @@ interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuer
   stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
+  initialRaceData: RacesVotingDataResponse[] | null
 }
 
 function organizeRaceSpecificPeople(
@@ -79,6 +82,7 @@ export function LocationRaceSpecific({
   district,
   people,
   locale,
+  initialRaceData,
 }: LocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people, { district, stateCode })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
@@ -135,47 +139,62 @@ export function LocationRaceSpecific({
           </Button>
         </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
+
       <div className="divide-y-2">
-        {compact([
-          recommended && { person: recommended, isRecommended: true },
-          ...others.map(person => ({ person, isRecommended: false })),
-        ]).map(({ person, isRecommended }) => (
-          <div key={person.id}>
-            <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
-              <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
-                <div className="sticky top-24 text-center">
-                  <DTSIPersonHeroCard
-                    isRecommended={isRecommended}
-                    locale={locale}
-                    person={person}
-                    subheader="role"
-                  />
-                </div>
-              </div>
-              <div className="w-full py-10 md:py-20">
-                {person.stances.length ? (
-                  <>
-                    <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
-                      {dtsiPersonFullName(person)} statements on crypto
-                    </PageTitle>
-                    <MaybeOverflowedStances
+        <KeyRaceLiveResult
+          candidates={compact([
+            recommended && { person: recommended, isRecommended: true },
+            ...others.map(person => ({ person, isRecommended: false })),
+          ]).map(({ person }) => person)}
+          className="mx-auto mb-20 mt-20 max-w-2xl"
+          initialRaceData={initialRaceData || undefined}
+          locale={locale}
+          stateCode={stateCode as USStateCode}
+        />
+
+        <div className="divide-y-2">
+          {compact([
+            recommended && { person: recommended, isRecommended: true },
+            ...others.map(person => ({ person, isRecommended: false })),
+          ]).map(({ person, isRecommended }) => (
+            <div key={person.id}>
+              <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
+                <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
+                  <div className="sticky top-24 text-center">
+                    <DTSIPersonHeroCard
+                      isRecommended={isRecommended}
                       locale={locale}
                       person={person}
-                      stances={person.stances}
+                      subheader="role"
                     />
-                  </>
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-center">
-                    <h3 className="text-xl md:text-2xl">
-                      {dtsiPersonFullName(person)} has no statements on crypto.
-                    </h3>
                   </div>
-                )}
-              </div>
-            </section>
-          </div>
-        ))}
+                </div>
+                <div className="w-full py-10 md:py-20">
+                  {person.stances.length ? (
+                    <>
+                      <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                        {dtsiPersonFullName(person)} statements on crypto
+                      </PageTitle>
+                      <MaybeOverflowedStances
+                        locale={locale}
+                        person={person}
+                        stances={person.stances}
+                      />
+                    </>
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-center">
+                      <h3 className="text-xl md:text-2xl">
+                        {dtsiPersonFullName(person)} has no statements on crypto.
+                      </h3>
+                    </div>
+                  )}
+                </div>
+              </section>
+            </div>
+          ))}
+        </div>
       </div>
+
       <PACFooter className="container" />
     </div>
   )

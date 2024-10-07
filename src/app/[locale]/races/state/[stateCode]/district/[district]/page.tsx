@@ -2,9 +2,14 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import {
+  DecisionDeskRedisKeys,
+  getDecisionDataFromRedis,
+} from '@/utils/server/decisionDesk/cachedData'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
@@ -61,14 +66,25 @@ export default async function LocationDistrictSpecificPage({
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
 
-  const data = await queryDTSILocationDistrictSpecificInformation({
+  const dtsiResults = await queryDTSILocationDistrictSpecificInformation({
     stateCode,
     district,
   })
 
-  if (!data) {
+  const key: DecisionDeskRedisKeys = `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
+  const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
+  const dataByDistrict =
+    liveResultdata?.filter?.(data => data.district?.toLowerCase() === district.toString()) ?? null
+
+  if (!dtsiResults) {
     throw new Error(`Invalid params for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return <LocationRaceSpecific {...data} {...{ stateCode, district, locale }} />
+  return (
+    <LocationRaceSpecific
+      {...dtsiResults}
+      {...{ stateCode, district, locale }}
+      initialRaceData={dataByDistrict}
+    />
+  )
 }
