@@ -256,6 +256,13 @@ export async function mergeUsers({
         })
       }
 
+      await client.userCommunicationJourney.updateMany({
+        where: { userId: userToDelete.id },
+        data: {
+          userId: userToKeep.id,
+        },
+      })
+
       await client.user.delete({
         where: { id: userToDelete.id },
       })
