@@ -2,7 +2,7 @@ import 'server-only'
 
 import { NextRequest, NextResponse } from 'next/server'
 
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { GetRacesParamsSchema } from '@/utils/server/decisionDesk/schemas'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -26,7 +26,7 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
     `${state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`,
   )
 
-  const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(
+  const data = await getDecisionDataFromRedis<RacesVotingDataResponse>(
     `${state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`,
   )
 

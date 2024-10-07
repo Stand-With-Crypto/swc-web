@@ -2,7 +2,7 @@ import 'server-only'
 
 import { NextRequest, NextResponse } from 'next/server'
 
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { GetRacesParamsSchema } from '@/utils/server/decisionDesk/schemas'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'

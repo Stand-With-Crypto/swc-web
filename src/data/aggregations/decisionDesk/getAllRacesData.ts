@@ -1,25 +1,7 @@
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { ELECTION_TYPES, OFFICES } from '@/utils/server/decisionDesk/constants'
 import { GetRacesParams } from '@/utils/server/decisionDesk/schemas'
 import { fetchRacesData } from '@/utils/server/decisionDesk/services'
-
-export interface RacesVotingDataResponse {
-  state: string
-  stateName: string
-  district: string
-  office: (typeof OFFICES)[0] | null
-  electionType: (typeof ELECTION_TYPES)[0] | null
-  year: number
-  party: string | null
-  totalVotes: number
-  candidatesWithVotes: CandidatesWithVote[]
-}
-interface CandidatesWithVote {
-  id: number
-  firstName: string
-  lastName: string
-  party: string
-  votes: number
-}
 
 export async function getAllRacesData(params: GetRacesParams): Promise<RacesVotingDataResponse[]> {
   const { data: firstPageData, total_pages } = await fetchRacesData({
@@ -31,12 +13,15 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
   const pageIteration = Array.from({ length: total_pages - 1 }, (_, i) => (i + 2).toString())
 
   const allData = await Promise.all(
-    pageIteration.map(currentPage => {
-      return fetchRacesData({ ...params, page: currentPage })
+    pageIteration.map(async currentPage => {
+      const response = await fetchRacesData({ ...params, page: currentPage })
+      return response?.data ?? []
     }),
-  )
+  ).catch(error => {
+    return Promise.reject(error)
+  })
 
-  const aggregatedData = [...firstPageData, ...allData.flatMap(response => response.data)]
+  const aggregatedData = [...firstPageData, ...allData.flat()]
 
   const mappedAggregatedData = aggregatedData.map(currentData => {
     return {

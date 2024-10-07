@@ -79,7 +79,7 @@ async function getBearerToken() {
   logger.debug('getBearerToken called')
 
   const hasCachedBearerToken = await getDecisionDataFromRedis<GetBearerTokenResponse>(
-    'DECISION_DESK_BEARER_TOKEN',
+    'SWC_DECISION_DESK_BEARER_TOKEN',
   )
 
   if (hasCachedBearerToken) {
@@ -91,7 +91,7 @@ async function getBearerToken() {
 
   const bearerToken = await fetchBearerToken()
 
-  await setDecisionDataOnRedis('DECISION_DESK_BEARER_TOKEN', JSON.stringify(bearerToken), {
+  await setDecisionDataOnRedis('SWC_DECISION_DESK_BEARER_TOKEN', JSON.stringify(bearerToken), {
     ex: bearerToken.expires_in,
   })
 

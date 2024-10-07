@@ -1,3 +1,4 @@
+import { getAllCongressData } from '@/data/aggregations/decisionDesk/getAllCongressData'
 import { getAllRacesData } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { getDtsiPresidentialWithVotingData } from '@/data/aggregations/decisionDesk/getDtsiPresidentialWithVotingData'
 import { inngest } from '@/inngest/inngest'
@@ -38,7 +39,7 @@ export const backfillReactivationCron = inngest.createFunction(
 export const fetchPresidentialRacesData = inngest.createFunction(
   {
     id: FETCH_PRESIDENTIAL_RACES_INNGEST_FUNCTION_ID,
-    retries: 0,
+    retries: 2,
     onFailure: onScriptFailure,
   },
   { event: FETCH_PRESIDENTIAL_RACES_INNGEST_EVENT_NAME },
@@ -55,9 +56,17 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
     logger.info('Fetching presidential race data from getDtsiPresidentialWithVotingData.')
 
+    let requestsMade = 0
+
     const presidentialRacesData = await step.run('fetch-presidential-races-data', async () =>
       getDtsiPresidentialWithVotingData(year),
     )
+
+    requestsMade += 1
+
+    if (!presidentialRacesData) {
+      logger.error('Presidential data not fetched.')
+    }
 
     const allRacesData = await step.run('fetch-all-races-data', async () =>
       getAllRacesData({
@@ -70,64 +79,110 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       }),
     )
 
+    requestsMade += 1
+
+    if (!allRacesData) {
+      logger.error('All races data not fetched.')
+    }
+
+    const senateData = await step.run('fetch-senate-data', async () =>
+      getAllRacesData({
+        year,
+        limit,
+        name,
+        race_date,
+        office_id: '4',
+        ...rest,
+      }),
+    )
+
+    requestsMade += 1
+
+    if (!senateData) {
+      logger.error('Senate data not fetched.')
+    }
+
+    const houseData = await step.run('fetch-house-data', async () =>
+      getAllRacesData({
+        year,
+        limit,
+        name,
+        race_date,
+        office_id: '3',
+        ...rest,
+      }),
+    )
+
+    requestsMade += 1
+
+    if (!houseData) {
+      logger.error('House data not fetched.')
+    }
+
+    const allCongressData = await step.run('fetch-all-congress-data', async () =>
+      getAllCongressData({ senateData, houseData }),
+    )
+
     const stateKeys = Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)
+    const persistedStates = []
 
     let startDate: Date
-    let requestIteration = 0
     let timeTakenInSeconds = 0
-    const persistedStates = []
 
     for (const stateKey of stateKeys) {
       startDate = new Date()
 
-      if (requestIteration >= DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE && timeTakenInSeconds < 60) {
+      if (requestsMade >= DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE && timeTakenInSeconds < 60) {
         logger.info('Rate limiting from Decision Desk API reached. Sleeping for 60s.')
 
         await step.sleep('await-for-decision-desk-rate-limiting', 60 * 1000)
 
-        requestIteration = 0
+        requestsMade = 0
         timeTakenInSeconds = 0
         startDate = new Date()
       }
 
       logger.info(
-        `Fetching ${stateKey} races data from Decision Desk API. Current iteration ${requestIteration}.`,
+        `Fetching ${stateKey} races data from Decision Desk API. Current request count: ${requestsMade}.`,
       )
 
       const currentStateKey = stateKey as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
 
-      const stateRacesData = await step.run(`fetch-${currentStateKey}-races-data`, async () => {
-        return getAllRacesData({
-          year,
-          limit,
-          name,
-          race_date,
-          state: currentStateKey,
-          ...rest,
-        })
-      })
-
-      timeTakenInSeconds = (new Date().getTime() - startDate.getTime()) / 1000
-
-      const stateRacesDataOnly = stateRacesData.filter(
-        currentStateRacesData => currentStateRacesData.office?.officeName !== 'President',
-      )
-
-      requestIteration += 1
-
-      if (stateRacesDataOnly.length === 0) {
-        logger.error(`No valid state race data fetched for ${currentStateKey}.`)
-        continue
-      }
-
-      if (!persist) {
-        logger.info(`Dry run. State data not persisted on Redis for ${currentStateKey}.`)
-        continue
-      }
-
-      logger.info(`Persisting ${currentStateKey}_STATE_RACES_DATA on Redis.`)
-
       try {
+        const stateRacesData = await step.run(
+          `fetch-${currentStateKey}-and-persist-races-data`,
+          async () => {
+            return getAllRacesData({
+              year,
+              limit,
+              name,
+              race_date,
+              state: currentStateKey,
+              ...rest,
+            })
+          },
+        )
+
+        requestsMade += 1
+
+        timeTakenInSeconds = (new Date().getTime() - startDate.getTime()) / 1000
+
+        const stateRacesDataOnly = stateRacesData.filter(
+          currentStateRacesData => currentStateRacesData.office?.officeName !== 'President',
+        )
+
+        if (stateRacesDataOnly.length === 0) {
+          logger.error(`No valid state race data fetched for ${currentStateKey}.`)
+          continue
+        }
+
+        if (!persist) {
+          logger.info(`Dry run. State data not persisted on Redis for ${currentStateKey}.`)
+          continue
+        }
+
+        logger.info(`Persisting ${currentStateKey}_STATE_RACES_DATA on Redis.`)
+
         const persistedState = await setDecisionDataOnRedis(
           `${currentStateKey}_STATE_RACES_DATA`,
           JSON.stringify(stateRacesDataOnly),
@@ -143,27 +198,29 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       }
     }
 
-    if (!presidentialRacesData) {
-      logger.error('Presidential data not fetched.')
-    }
-
-    if (!allRacesData) {
-      logger.error('All races data not fetched.')
-    }
-
     if (!persist) {
       return {
         message: 'Dry run. Races data not persisted on Redis.',
         presidentialRacesData,
         allRacesData,
+        allCongressData,
       }
     }
 
     const persistedAllRacesData = await step.run('persist-all-races-data-on-redis', async () => {
       logger.info('Persisting all races data')
 
-      await setDecisionDataOnRedis('ALL_RACES_DATA', JSON.stringify(allRacesData))
+      await setDecisionDataOnRedis('SWC_ALL_RACES_DATA', JSON.stringify(allRacesData))
     })
+
+    const persistedAllCongressData = await step.run(
+      'persist-all-congress-data-on-redis',
+      async () => {
+        logger.info('Persisting congress data')
+
+        await setDecisionDataOnRedis('SWC_ALL_CONGRESS_DATA', JSON.stringify(allCongressData))
+      },
+    )
 
     const persistedPresidentialRacesData = await step.run(
       'persist-presidential-races-data-on-redis',
@@ -171,7 +228,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         logger.info('Persisting presidential races data')
 
         await setDecisionDataOnRedis(
-          'PRESIDENTIAL_RACES_DATA',
+          'SWC_PRESIDENTIAL_RACES_DATA',
           JSON.stringify(presidentialRacesData),
         )
       },
@@ -180,6 +237,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
     return {
       message: 'Presidential data persisted on Redis.',
       persistedPresidentialRacesData,
+      persistedAllCongressData,
       persistedAllRacesData,
       persistedStates,
     }

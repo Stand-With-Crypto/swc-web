@@ -1,54 +1,7 @@
-import { DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
+import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
+import { getPoliticianFindMatch, normalizeName } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { fetchElectoralCollege } from '@/utils/server/decisionDesk/services'
-import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
-
-interface VotingData {
-  id: number
-  firstName: string
-  lastName: string
-  votes: number
-  percentage: number
-  electoralVotes: number
-  partyName: string
-}
-
-export type PresidentialDataWithVotingResponse = Array<
-  DTSI_UnitedStatesPresidentialQuery['people'][0] & {
-    votingData?: VotingData
-  }
->
-
-const normalizeName = (name: string) => {
-  return convertToOnlyEnglishCharacters(name.toLowerCase().trim()).replace(/[.-\s]/g, '')
-}
-
-const getPoliticianFindMatch = (
-  politicianFirstName: string,
-  politicianLastName: string,
-  votingDataFirstName: string,
-  votingDataLastName: string,
-) => {
-  if (politicianFirstName === votingDataFirstName && politicianLastName === votingDataLastName) {
-    return true
-  }
-
-  if (
-    politicianFirstName.startsWith(votingDataFirstName) &&
-    politicianLastName.startsWith(votingDataLastName)
-  ) {
-    return true
-  }
-
-  if (
-    votingDataFirstName.startsWith(politicianFirstName) &&
-    votingDataLastName.startsWith(politicianLastName)
-  ) {
-    return true
-  }
-
-  return false
-}
 
 async function getPresidentialData(year = '2024') {
   const { candidates } = await fetchElectoralCollege(year)
@@ -72,7 +25,7 @@ async function getPresidentialData(year = '2024') {
 
 export async function getDtsiPresidentialWithVotingData(
   year = '2024',
-): Promise<PresidentialDataWithVotingResponse> {
+): Promise<PresidentialDataWithVotingResponse[]> {
   const presidentialData = await getPresidentialData(year)
   const dtsiData = await queryDTSILocationUnitedStatesPresidential()
 
