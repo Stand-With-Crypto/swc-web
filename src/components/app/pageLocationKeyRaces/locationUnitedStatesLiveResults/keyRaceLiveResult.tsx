@@ -28,6 +28,7 @@ import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/u
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
+import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
 interface KeyRaceLiveResultProps {
   locale: SupportedLocale
@@ -55,8 +56,28 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     getIntlUrls(locale).locationUnitedStatesPresidential(),
   )
 
-  const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
-  const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
+  const candidateA = useMemo(
+    () =>
+      candidates?.find(
+        candidate =>
+          candidate.politicalAffiliationCategory ===
+          DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+      ) ||
+      candidates?.[0] ||
+      {},
+    [candidates],
+  )
+  const candidateB = useMemo(
+    () =>
+      candidates?.find(
+        candidate =>
+          candidate.politicalAffiliationCategory ===
+          DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+      ) ||
+      candidates?.[1] ||
+      {},
+    [candidates],
+  )
 
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const raceName = primaryDistrict
@@ -72,7 +93,11 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     : urls.locationStateSpecificSenateRace(stateCode)
   const showLink = !isDistrictPage && !isSenatePage && !isPresidentialPage
 
-  const { data, isLoading, isValidating } = useApiDecisionDeskData(initialRaceData, {
+  const {
+    data: liveResultData,
+    isLoading,
+    isValidating,
+  } = useApiDecisionDeskData(initialRaceData, {
     stateCode,
     district: primaryDistrict?.toString(),
   })
@@ -80,20 +105,21 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   console.log('DecisionDesk Data: ', {
     stateName,
     primaryDistrict,
-    data,
+    liveResultData,
     initialRaceData,
     isLoading,
     isValidating,
   })
 
   const raceData = useMemo(() => {
-    if (!data) return null
+    if (!liveResultData) return null
 
     if (primaryDistrict) {
       return (
-        data?.find?.(race => {
+        liveResultData?.find?.(race => {
           return (
             race.district === primaryDistrict &&
+            race.office?.officeId === '3' &&
             Boolean(
               race.candidatesWithVotes.find(
                 candidate =>
@@ -107,7 +133,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     }
 
     return (
-      data?.find?.(race =>
+      liveResultData?.find?.(race =>
         Boolean(
           race.candidatesWithVotes.find(
             candidate =>
@@ -117,7 +143,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         ),
       ) ?? null
     )
-  }, [candidateA, candidateB, data, primaryDistrict])
+  }, [candidateA, candidateB, liveResultData, primaryDistrict])
 
   const ddhqCandidateA = useMemo(() => {
     if (!raceData) return null
@@ -167,7 +193,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     }
 
     const now = new Date()
-    const raceDate = new Date(raceData.raceDate)
+    const raceDate = new Date(raceData.raceDate || '2024-11-05')
 
     if (now < raceDate) {
       return 'not-started'
@@ -176,7 +202,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     return 'live'
   }, [raceData])
 
-  const canShowProgress = Boolean(data)
+  const canShowProgress = Boolean(liveResultData)
 
   return (
     <div className={cn('flex w-full flex-col gap-8', className)}>

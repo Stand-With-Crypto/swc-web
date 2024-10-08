@@ -63,7 +63,7 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
           currentData.topline_results.voting_data[candidate.cand_id]?.election_day_votes ??
           currentData.topline_results.votes[candidate.cand_id] ??
           0,
-        winner: candidate.cand_id === calledCandidate?.cand_id,
+        elected: candidate.cand_id === calledCandidate?.cand_id,
       })),
     }
   })

@@ -1,4 +1,4 @@
-import { DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
+import { DTSI_AllPeopleQuery, DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
 import { ELECTION_TYPES, OFFICES } from '@/utils/server/decisionDesk/constants'
 import { Candidate } from '@/utils/server/decisionDesk/types'
 
@@ -52,7 +52,9 @@ interface VotingData {
 }
 
 export type PresidentialDataWithVotingResponse = DTSI_UnitedStatesPresidentialQuery['people'][0] & {
-  votingData?: VotingData
+  votingData?: VotingData & {
+    called: boolean
+  }
 }
 
 export interface GetAllCongressDataProps {
@@ -61,10 +63,14 @@ export interface GetAllCongressDataProps {
 }
 
 export interface GetAllCongressDataResponse {
-  senateDataWithDtsi: CongressDataResponse & {
-    dtsiData?: VotingData
+  senateDataWithDtsi: Omit<CongressDataResponse, 'candidatesWithVotes'> & {
+    candidatesWithVotes: (CandidatesWithVote & {
+      dtsiData: DTSI_AllPeopleQuery['people'][number] | null
+    })[]
   }
-  houseDataWithDtsi: CongressDataResponse & {
-    dtsiData?: VotingData
+  houseDataWithDtsi: Omit<CongressDataResponse, 'candidatesWithVotes'> & {
+    candidatesWithVotes: (CandidatesWithVote & {
+      dtsiData: DTSI_AllPeopleQuery['people'][number] | null
+    })[]
   }
 }

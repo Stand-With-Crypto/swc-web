@@ -2,8 +2,9 @@ import { isNil } from 'lodash-es'
 
 import {
   CandidatesWithVote,
+  GetAllCongressDataResponse,
   RacesVotingDataResponse,
-} from '@/data/aggregations/decisionDesk/getAllRacesData'
+} from '@/data/aggregations/decisionDesk/types'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { dtsiPersonPoliticalAffiliationCategoryAbbreviation } from '@/utils/dtsi/dtsiPersonUtils'
 import { twNoop } from '@/utils/web/cn'
@@ -45,6 +46,34 @@ export const getOpacity = (
   if (!candidate) return 'opacity-100'
   if (calledCandidate.cand_id !== candidate.id) return 'opacity-50'
   return 'opacity-100'
+}
+
+export const congressLiveResultOverview = (
+  data: GetAllCongressDataResponse['senateDataWithDtsi'] | undefined,
+) => {
+  if (!data?.candidatesWithVotes?.length)
+    return { proCryptoCandidatesElected: 0, antiCryptoCandidatesElected: 0 }
+
+  return data.candidatesWithVotes.reduce(
+    (acc, candidate) => {
+      if (!candidate?.votingData) return acc
+
+      if (!candidate.elected) return acc
+
+      const stanceScore =
+        candidate.votingData.manuallyOverriddenStanceScore ||
+        candidate.votingData.computedStanceScore
+      if (isNil(stanceScore)) return acc
+
+      if (stanceScore > 50) {
+        acc.proCryptoCandidatesElected += 1
+      } else {
+        acc.antiCryptoCandidatesElected += 1
+      }
+      return acc
+    },
+    { proCryptoCandidatesElected: 0, antiCryptoCandidatesElected: 0 },
+  )
 }
 
 export const PARTY_COLOR_MAP: Record<DTSI_PersonPoliticalAffiliationCategory, string> = {
