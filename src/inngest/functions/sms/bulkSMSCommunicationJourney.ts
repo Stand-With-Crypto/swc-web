@@ -82,6 +82,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       }
     })
 
+    if (sleepTime) {
+      logger.info('scheduled-sleep', sleepTime)
+      await step.sleep('scheduled-sleep', sleepTime)
+    }
+
     // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
@@ -269,11 +274,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       )
     }
 
-    if (sleepTime) {
-      logger.info('scheduled-sleep', sleepTime)
-      await step.sleep('scheduled-sleep', sleepTime)
-    }
-
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
     let totalTimeToSendMessagesInSeconds = 0
@@ -306,12 +306,15 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       const payloadChunk = enqueueMessagesPayloadChunks[i]
 
-      const { queuedMessages, segmentsSent } = await step.invoke(`enqueue-messages-${i + 1}`, {
-        function: enqueueSMS,
-        data: {
-          payload: payloadChunk,
+      const { queuedMessages, segmentsSent } = await step.invoke(
+        `enqueue-messages-${i + 1}/${enqueueMessagesPayloadChunks.length}`,
+        {
+          function: enqueueSMS,
+          data: {
+            payload: payloadChunk,
+          },
         },
-      })
+      )
 
       totalQueuedMessages += queuedMessages
       totalQueuedSegments += segmentsSent
@@ -368,15 +371,16 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       }
 
       logger.info(
-        `shipping-estimate`,
+        `Shipping estimate: ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
         prettyStringify({
-          messages: bulkInfo.total.messagesCount - totalQueuedMessages,
-          time: formatTime(totalTime - totalTimeToSendMessagesInSeconds),
+          chunksLeft: enqueueMessagesPayloadChunks.length - (i + 1),
+          messagesLeft: bulkInfo.total.messagesCount - totalQueuedMessages,
+          timeLeft: formatTime(totalTime - totalTimeToSendMessagesInSeconds),
         }),
       )
 
       logger.info(
-        `summary-info - ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
+        `Summary info: ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
         prettyStringify({
           timeInSecondsToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
           segmentsInQueue,
