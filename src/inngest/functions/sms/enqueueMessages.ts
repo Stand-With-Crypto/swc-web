@@ -10,7 +10,7 @@ import {
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
 import { inngest } from '@/inngest/inngest'
-import { sendSMS, SendSMSError } from '@/utils/server/sms'
+import { sendSMS, SendSMSError, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
@@ -50,6 +50,10 @@ export const enqueueSMS = inngest.createFunction(
   },
   async ({ event, step, logger }) => {
     const { payload, variables, attempt = 0 } = event.data
+
+    if (payload.length > TWILIO_RATE_LIMIT) {
+      throw new NonRetriableError('Payload exceeds the limit allowed')
+    }
 
     // This function has a built-in mechanism that retries only failed messages
     if (attempt >= 4) {
