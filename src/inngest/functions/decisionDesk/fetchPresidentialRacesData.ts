@@ -210,7 +210,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
     const persistedAllRacesData = await step.run('persist-all-races-data-on-redis', async () => {
       logger.info('Persisting all races data')
 
-      await setDecisionDataOnRedis('SWC_ALL_RACES_DATA', JSON.stringify(allRacesData))
+      return await setDecisionDataOnRedis('SWC_ALL_RACES_DATA', JSON.stringify(allRacesData))
     })
 
     const persistedAllCongressData = await step.run(
@@ -218,7 +218,10 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       async () => {
         logger.info('Persisting congress data')
 
-        await setDecisionDataOnRedis('SWC_ALL_CONGRESS_DATA', JSON.stringify(allCongressData))
+        return await setDecisionDataOnRedis(
+          'SWC_ALL_CONGRESS_DATA',
+          JSON.stringify(allCongressData),
+        )
       },
     )
 
@@ -227,7 +230,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       async () => {
         logger.info('Persisting presidential races data')
 
-        await setDecisionDataOnRedis(
+        return await setDecisionDataOnRedis(
           'SWC_PRESIDENTIAL_RACES_DATA',
           JSON.stringify(presidentialRacesData),
         )
