@@ -82,6 +82,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       }
     })
 
+    if (sleepTime) {
+      logger.info('scheduled-sleep', sleepTime)
+      await step.sleep('scheduled-sleep', sleepTime)
+    }
+
     // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
@@ -267,11 +272,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       throw new NonRetriableError(
         'Cannot send more then 100 messages in a non-production environment',
       )
-    }
-
-    if (sleepTime) {
-      logger.info('scheduled-sleep', sleepTime)
-      await step.sleep('scheduled-sleep', sleepTime)
     }
 
     let totalQueuedMessages = 0
