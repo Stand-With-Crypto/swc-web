@@ -37,7 +37,10 @@ export function useSessionControl() {
   const internalUrls = useIntlUrls()
 
   const handleLogoutSuccess = React.useCallback(() => {
-    Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
+    Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId(), {
+      sameSite: 'lax',
+      secure: true,
+    })
 
     window.location.replace(internalUrls.home())
   }, [internalUrls])
