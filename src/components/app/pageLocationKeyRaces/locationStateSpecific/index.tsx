@@ -169,6 +169,7 @@ export function LocationStateSpecific({
                       candidates={districtPeople}
                       initialRaceData={initialRaceData || undefined}
                       locale={locale}
+                      primaryDistrict={district}
                       stateCode={stateCode}
                     />
                   </LiveResultsGrid.GridItem>
