@@ -71,7 +71,7 @@ export default async function LocationDistrictSpecificPage({
     district,
   })
 
-  const key: DecisionDeskRedisKeys = `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
+  const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
   const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
   const dataByDistrict =
     liveResultdata?.filter?.(data => data.district?.toLowerCase() === district.toString()) ?? null

@@ -9,12 +9,14 @@ import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locatio
 import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
+import { congressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
+  GetAllCongressDataResponse,
   PresidentialDataWithVotingResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
@@ -26,21 +28,31 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
+import { isBefore, startOfDay } from 'date-fns'
 
 interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
-  races: ReturnType<typeof organizePeople>
+  dtsiResults: ReturnType<typeof organizePeople>
   ddhqResults: Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null>
-  presidentialRaceData: PresidentialDataWithVotingResponse[] | null
+  presidentialRaceLiveResult: PresidentialDataWithVotingResponse[] | null
+  congressRaceLiveResult: GetAllCongressDataResponse | null
 }
 
 export function LocationUnitedStatesLiveResults({
   locale,
-  races,
+  dtsiResults,
   ddhqResults,
-  presidentialRaceData,
+  presidentialRaceLiveResult,
+  congressRaceLiveResult,
 }: LocationUnitedStatesLiveResultsProps) {
   const urls = getIntlUrls(locale)
+
+  const senateElectedData = congressLiveResultOverview(congressRaceLiveResult?.senateDataWithDtsi)
+  const houseElectedData = congressLiveResultOverview(congressRaceLiveResult?.houseDataWithDtsi)
+
+  const presidentialRaceCalledStatus = presidentialRaceLiveResult?.some(
+    candidate => candidate.votingData?.called,
+  )
 
   return (
     <div className="space-y-20">
@@ -69,8 +81,8 @@ export function LocationUnitedStatesLiveResults({
           </div>
 
           <PresidentialRaceResult
-            candidates={races.president}
-            initialRaceData={presidentialRaceData}
+            candidates={dtsiResults.president}
+            initialRaceData={presidentialRaceLiveResult}
           />
 
           <Button asChild className="w-full max-w-xs font-bold lg:hidden" variant="secondary">
@@ -89,18 +101,26 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
-            <LiveStatusBadge status="live" />
+            <LiveStatusBadge
+              status={
+                presidentialRaceCalledStatus
+                  ? 'called'
+                  : isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
+                    ? 'not-started'
+                    : 'live'
+              }
+            />
           </div>
 
           <div className="flex flex-wrap gap-4">
             <ResultsOverviewCard
-              antiCryptoCandidatesElected={999}
-              proCryptoCandidatesElected={999}
+              antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
+              proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}
               title="House of Representatives"
             />
             <ResultsOverviewCard
-              antiCryptoCandidatesElected={999}
-              proCryptoCandidatesElected={999}
+              antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected}
+              proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected}
               title="Senate"
             />
           </div>
@@ -114,13 +134,13 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <LiveResultsGrid>
-            {Object.entries(races.keyRaces).map(([stateCode, keyRaces]) =>
+            {Object.entries(dtsiResults.keyRaces).map(([stateCode, keyRaces]) =>
               keyRaces.map(candidates => {
                 const primaryDistrict = candidates[0].runningForSpecificRole.primaryDistrict
                   ? normalizeDTSIDistrictId(candidates[0].runningForSpecificRole)
                   : undefined
 
-                const key: DecisionDeskRedisKeys = `${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
+                const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
 
                 return (
                   <LiveResultsGrid.GridItem key={key}>
