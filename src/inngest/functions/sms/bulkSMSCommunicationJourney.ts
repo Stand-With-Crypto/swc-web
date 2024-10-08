@@ -41,7 +41,7 @@ export interface BulkSMSPayload {
   currentSegmentsInQueue?: number
 }
 
-const MAX_RETRY_COUNT = 0
+const MAX_RETRY_COUNT = 1
 const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
 
 // This constants are specific to our twilio phone number type
