@@ -35,6 +35,6 @@ export const getPoliticianFindMatch = (
   return false
 }
 
-const normalizeName = (name: string) => {
+export const normalizeName = (name: string) => {
   return convertToOnlyEnglishCharacters(name.toLowerCase().trim()).replace(/[.-\s]/g, '')
 }

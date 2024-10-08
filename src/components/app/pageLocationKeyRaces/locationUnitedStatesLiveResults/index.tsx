@@ -14,8 +14,10 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
-import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
+import {
+  PresidentialDataWithVotingResponse,
+  RacesVotingDataResponse,
+} from '@/data/aggregations/decisionDesk/types'
 import { SupportedLocale } from '@/intl/locales'
 import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { DecisionDeskRedisKeys } from '@/utils/server/decisionDesk/cachedData'
@@ -29,7 +31,7 @@ interface LocationUnitedStatesLiveResultsProps {
   locale: SupportedLocale
   races: ReturnType<typeof organizePeople>
   ddhqResults: Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null>
-  presidentialRaceData: PresidentialDataWithVotingResponse | null
+  presidentialRaceData: PresidentialDataWithVotingResponse[] | null
 }
 
 export function LocationUnitedStatesLiveResults({

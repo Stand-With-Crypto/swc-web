@@ -13,7 +13,7 @@ import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActi
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonPoliticalAffiliationCategory,

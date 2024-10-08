@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/locationStateSpecific'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
 import {
