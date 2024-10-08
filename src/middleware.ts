@@ -35,6 +35,8 @@ export function middleware(request: NextRequest) {
       name: USER_SESSION_ID_COOKIE_NAME,
       value: urlSessionId,
       httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
     })
   } else if (!existingSessionId) {
     const sessionId = generateUserSessionId()
@@ -45,6 +47,8 @@ export function middleware(request: NextRequest) {
       name: USER_SESSION_ID_COOKIE_NAME,
       value: sessionId,
       httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
     })
   }
 
@@ -54,6 +58,8 @@ export function middleware(request: NextRequest) {
       name: USER_ID_COOKIE_NAME,
       value: urlUserId,
       httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
     })
   }
 
@@ -70,6 +76,8 @@ export function middleware(request: NextRequest) {
       name: USER_COUNTRY_CODE_COOKIE_NAME,
       value: JSON.stringify({ countryCode: userCountryCode, bypassed: false }),
       httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
     })
   }
 
