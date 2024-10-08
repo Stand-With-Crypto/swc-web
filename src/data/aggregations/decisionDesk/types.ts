@@ -25,6 +25,7 @@ export interface CandidatesWithVote {
   lastName: string
   party: string
   votes: number
+  elected: boolean
 }
 
 interface VotingData {
@@ -35,6 +36,7 @@ interface VotingData {
   percentage: number
   electoralVotes: number
   partyName: string
+  called: boolean
 }
 
 export type PresidentialDataWithVotingResponse = DTSI_UnitedStatesPresidentialQuery['people'][0] & {
@@ -48,9 +50,9 @@ export interface GetAllCongressDataProps {
 
 export interface GetAllCongressDataResponse {
   senateDataWithDtsi: CongressDataResponse & {
-    votingData?: VotingData
+    dtsiData?: VotingData
   }
   houseDataWithDtsi: CongressDataResponse & {
-    votingData?: VotingData
+    dtsiData?: VotingData
   }
 }

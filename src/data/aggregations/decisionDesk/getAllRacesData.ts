@@ -42,6 +42,7 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
         firstName: candidate.first_name,
         lastName: candidate.last_name,
         party: candidate.party_name,
+        elected: currentData.topline_results.called_candidates.includes(candidate.cand_id),
         votes:
           currentData.topline_results.voting_data[candidate.cand_id]?.election_day_votes ??
           currentData.topline_results.votes[candidate.cand_id] ??

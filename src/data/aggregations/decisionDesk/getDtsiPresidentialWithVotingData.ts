@@ -19,6 +19,7 @@ async function getPresidentialData(year = '2024') {
       percentage: currentCandidate.percentage,
       electoralVotes: currentCandidate.electoral_votes_total,
       partyName: currentCandidate.party_name,
+      called: currentCandidate.called,
     }
   })
 }

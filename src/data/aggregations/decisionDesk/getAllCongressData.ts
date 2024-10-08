@@ -45,7 +45,7 @@ const enhanceCongressData = (
   const { people } = dtsiAllPeopleData
 
   const enhancedCandidatesWithVote = congressData.candidatesWithVotes.map(currentCandidate => {
-    const votingData =
+    const dtsiData =
       people.find(currentPerson => {
         const [currentPersonFirstName] = currentPerson.firstName.split(' ')
         const [currentPersonLastName] = currentPerson.lastName.split(' ')
@@ -65,7 +65,7 @@ const enhanceCongressData = (
 
     return {
       ...currentCandidate,
-      votingData,
+      dtsiData,
     }
   })
 
