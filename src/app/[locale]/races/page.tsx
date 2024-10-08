@@ -3,8 +3,10 @@ import { Metadata } from 'next'
 
 import { LocationUnitedStatesLiveResults } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults'
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/organizePeople'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
-import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
+import {
+  PresidentialDataWithVotingResponse,
+  RacesVotingDataResponse,
+} from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { PageProps } from '@/types'
 import {
@@ -49,10 +51,11 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
 
   await Promise.all(racesPromises)
 
-  let presidentialRaceData: PresidentialDataWithVotingResponse | null = null
+  let presidentialRaceData: PresidentialDataWithVotingResponse[] | null = null
   try {
-    presidentialRaceData =
-      await getDecisionDataFromRedis<PresidentialDataWithVotingResponse>('PRESIDENTIAL_RACES_DATA')
+    presidentialRaceData = await getDecisionDataFromRedis<PresidentialDataWithVotingResponse[]>(
+      'SWC_PRESIDENTIAL_RACES_DATA',
+    )
   } catch (error) {
     Sentry.captureException(error, {
       extra: { key: 'presidential' },

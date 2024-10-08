@@ -2,7 +2,7 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'

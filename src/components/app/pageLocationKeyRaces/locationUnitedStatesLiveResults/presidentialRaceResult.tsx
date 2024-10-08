@@ -14,7 +14,7 @@ import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
-  initialRaceData: PresidentialDataWithVotingResponse | null
+  initialRaceData: PresidentialDataWithVotingResponse[] | null
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
@@ -25,7 +25,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
   const { data, isLoading, isValidating } = useApiDecisionDeskPresidentialData(initialRaceData)
 
-  console.log('PRESIDENT DATA: ', {
+  console.log('PRESIDENTIAL: ', {
     initialRaceData,
     data,
     isLoading,
@@ -145,7 +145,7 @@ function AvatarBox(props: AvatarBoxProps) {
 
   return (
     <div className={className}>
-      <DTSIAvatar className="rounded-full" person={candidate} size={125} />
+      <DTSIAvatar className="rounded-full" person={candidate} size={135} />
       {electoralVotes ? <p className="text-lg font-bold">{electoralVotes}</p> : null}
     </div>
   )

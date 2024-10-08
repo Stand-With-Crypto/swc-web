@@ -24,6 +24,11 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
   const aggregatedData = [...firstPageData, ...allData.flat()]
 
   const mappedAggregatedData = aggregatedData.map(currentData => {
+    const calledCandidate =
+      currentData.candidates.find(
+        candidate => candidate.cand_id === currentData.topline_results.called_candidates?.[0],
+      ) || null
+
     return {
       state: currentData.state,
       stateName: currentData.state_name,
@@ -39,10 +44,7 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
       totalVotes: currentData.topline_results.total_votes,
       raceDate: currentData.race_date,
       lastUpdated: currentData.last_updated,
-      calledCandidate:
-        currentData.candidates.find(
-          candidate => candidate.cand_id === currentData.topline_results.called_candidates?.[0],
-        ) || null,
+      calledCandidate,
       candidatesWithVotes: currentData.candidates.map(candidate => ({
         id: candidate.cand_id,
         firstName: candidate.first_name,
@@ -61,6 +63,7 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
           currentData.topline_results.voting_data[candidate.cand_id]?.election_day_votes ??
           currentData.topline_results.votes[candidate.cand_id] ??
           0,
+        winner: candidate.cand_id === calledCandidate?.cand_id,
       })),
     }
   })

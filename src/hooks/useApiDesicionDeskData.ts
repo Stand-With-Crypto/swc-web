@@ -2,7 +2,7 @@
 
 import useSWR from 'swr'
 
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/getAllRacesData'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 

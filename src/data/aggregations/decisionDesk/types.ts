@@ -1,5 +1,6 @@
 import { DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
 import { ELECTION_TYPES, OFFICES } from '@/utils/server/decisionDesk/constants'
+import { Candidate } from '@/utils/server/decisionDesk/types'
 
 export interface RacesVotingDataResponse {
   state: string
@@ -12,6 +13,7 @@ export interface RacesVotingDataResponse {
   totalVotes: number
   raceDate: string
   lastUpdated: string
+  calledCandidate: Candidate | null
   candidatesWithVotes: CandidatesWithVote[]
 }
 
