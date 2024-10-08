@@ -149,6 +149,7 @@ export function LocationRaceSpecific({
           className="mx-auto mb-20 mt-20 max-w-2xl"
           initialRaceData={initialRaceData || undefined}
           locale={locale}
+          primaryDistrict={district}
           stateCode={stateCode as USStateCode}
         />
 
