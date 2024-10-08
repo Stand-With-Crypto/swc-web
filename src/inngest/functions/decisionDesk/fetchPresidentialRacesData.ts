@@ -181,10 +181,10 @@ export const fetchPresidentialRacesData = inngest.createFunction(
           continue
         }
 
-        logger.info(`Persisting ${currentStateKey}_STATE_RACES_DATA on Redis.`)
+        logger.info(`Persisting SWC_${currentStateKey}_STATE_RACES_DATA on Redis.`)
 
         const persistedState = await setDecisionDataOnRedis(
-          `${currentStateKey}_STATE_RACES_DATA`,
+          `SWC_${currentStateKey}_STATE_RACES_DATA`,
           JSON.stringify(stateRacesDataOnly),
         )
 

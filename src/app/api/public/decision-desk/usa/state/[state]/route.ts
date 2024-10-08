@@ -21,13 +21,8 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
     })
   }
 
-  console.log(
-    'state races key',
-    `${state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`,
-  )
-
   const data = await getDecisionDataFromRedis<RacesVotingDataResponse>(
-    `${state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`,
+    `SWC_${state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`,
   )
 
   if (!data) {

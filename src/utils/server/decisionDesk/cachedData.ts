@@ -10,7 +10,7 @@ enum DecisionDeskKeys {
   SWC_DECISION_DESK_BEARER_TOKEN = 'SWC_DECISION_DESK_BEARER_TOKEN',
 }
 
-type StateRaceKeys = `${keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`
+type StateRaceKeys = `SWC_${keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP}_STATE_RACES_DATA`
 
 type DecisionDeskRedisKeys = keyof typeof DecisionDeskKeys | StateRaceKeys
 
