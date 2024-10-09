@@ -7,7 +7,7 @@ import {
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch, normalizeName } from '@/data/aggregations/decisionDesk/utils'
+import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_AllPeopleQuery } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 
@@ -49,24 +49,7 @@ const enhanceCongressData = (
   const enhancedCandidatesWithVote = congressData.candidatesWithVotes.map(currentCandidate => {
     const dtsiData =
       people.find(currentPerson => {
-        const [currentPersonFirstName] = currentPerson.firstName.split(' ')
-        const [currentPersonLastName] = currentPerson.lastName.split(' ')
-
-        const normalizedPersonFirstName = normalizeName(currentPersonFirstName)
-        const normalizedPersonLastName = normalizeName(currentPersonLastName)
-        const normalizedCandidateFirstName = normalizeName(currentCandidate.firstName)
-        const normalizedCandidateLastName = normalizeName(currentCandidate.lastName)
-
-        return getPoliticianFindMatch({
-          dtsiPerson: {
-            politicianFirstName: normalizedPersonFirstName,
-            politicianLastName: normalizedPersonLastName,
-          },
-          decisionDeskPerson: {
-            votingDataFirstName: normalizedCandidateFirstName,
-            votingDataLastName: normalizedCandidateLastName,
-          },
-        })
+        return getPoliticianFindMatch(currentPerson, currentCandidate)
       }) ?? null
 
     if (!dtsiData) {

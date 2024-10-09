@@ -7,7 +7,10 @@ import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUn
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
-import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
+import {
+  CandidatesWithVote,
+  PresidentialDataWithVotingResponse,
+} from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
 import { cn } from '@/utils/web/cn'
@@ -36,12 +39,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     if (!data) return null
 
     const candidate = data?.find(_candidate =>
-      getPoliticianFindMatch(
-        candidateA.firstName,
-        candidateA.lastName,
-        _candidate.firstName,
-        _candidate.lastName,
-      ),
+      getPoliticianFindMatch(candidateA, _candidate.votingData),
     )
 
     if (!candidate) return null
@@ -53,12 +51,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     if (!data) return null
 
     const candidate = data?.find(_candidate =>
-      getPoliticianFindMatch(
-        candidateB.firstName,
-        candidateB.lastName,
-        _candidate.firstName,
-        _candidate.lastName,
-      ),
+      getPoliticianFindMatch(candidateB, _candidate.votingData),
     )
 
     if (!candidate) return null

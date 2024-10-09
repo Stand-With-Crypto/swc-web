@@ -124,19 +124,9 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             race.office?.officeId?.toString() === '3' &&
             Boolean(
               race.candidatesWithVotes.find(
-                candidate =>
-                  getPoliticianFindMatch(
-                    candidateA.firstName,
-                    candidateA.lastName,
-                    candidate.firstName,
-                    candidate.lastName,
-                  ) ||
-                  getPoliticianFindMatch(
-                    candidateB.firstName,
-                    candidateB.lastName,
-                    candidate.firstName,
-                    candidate.lastName,
-                  ),
+                _candidate =>
+                  getPoliticianFindMatch(candidateA, _candidate) ||
+                  getPoliticianFindMatch(candidateB, _candidate),
               ),
             )
           )
@@ -148,19 +138,9 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       liveResultData?.find?.(race =>
         Boolean(
           race.candidatesWithVotes.find(
-            candidate =>
-              getPoliticianFindMatch(
-                candidateA.firstName,
-                candidateA.lastName,
-                candidate.firstName,
-                candidate.lastName,
-              ) ||
-              getPoliticianFindMatch(
-                candidateB.firstName,
-                candidateB.lastName,
-                candidate.firstName,
-                candidate.lastName,
-              ),
+            _candidate =>
+              getPoliticianFindMatch(candidateA, _candidate) ||
+              getPoliticianFindMatch(candidateB, _candidate),
           ),
         ),
       ) ?? null
@@ -171,12 +151,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     if (!raceData) return null
 
     const candidate = raceData?.candidatesWithVotes?.find(_candidate =>
-      getPoliticianFindMatch(
-        candidateA.firstName,
-        candidateA.lastName,
-        _candidate.firstName,
-        _candidate.lastName,
-      ),
+      getPoliticianFindMatch(candidateA, _candidate),
     )
 
     if (!candidate) return null
@@ -188,12 +163,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     if (!raceData) return null
 
     const candidate = raceData?.candidatesWithVotes?.find(_candidate =>
-      getPoliticianFindMatch(
-        candidateB.firstName,
-        candidateB.lastName,
-        _candidate.firstName,
-        _candidate.lastName,
-      ),
+      getPoliticianFindMatch(candidateB, _candidate),
     )
 
     if (!candidate) return null
@@ -225,6 +195,16 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   }, [raceData])
 
   const canShowProgress = Boolean(liveResultData)
+
+  if ((!ddhqCandidateB || !ddhqCandidateA) && stateCode === 'CO') {
+    console.log('Missing DDHQ data:', {
+      ddhqCandidateA,
+      ddhqCandidateB,
+      raceData,
+      candidateA,
+      candidateB,
+    })
+  }
 
   return (
     <div className={cn('flex w-full max-w-xl flex-col gap-6', className)}>

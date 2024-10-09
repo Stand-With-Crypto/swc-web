@@ -1,34 +1,45 @@
+import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
+import {
+  CandidatesWithVote,
+  PresidentialDataWithVotingResponse,
+} from '@/data/aggregations/decisionDesk/types'
+import { DTSI_Person } from '@/data/dtsi/generated'
 import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 
 export const getPoliticianFindMatch = (
-  politicianFirstName: string,
-  politicianLastName: string,
-  votingDataFirstName: string,
-  votingDataLastName: string,
+  dtsiPerson: DTSI_Candidate,
+  ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'] | undefined,
 ) => {
-  const normalizedPoliticianFirstName = normalizeName(politicianFirstName)
-  const normalizedPoliticianLastName = normalizeName(politicianLastName)
-  const normalizedVotingDataFirstName = normalizeName(votingDataFirstName)
-  const normalizedVotingDataLastName = normalizeName(votingDataLastName)
+  if (!ddhqCandidate) return false
 
-  if (
-    normalizedPoliticianFirstName === normalizedVotingDataFirstName &&
-    normalizedPoliticianLastName === normalizedVotingDataLastName
-  ) {
+  const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
+  const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
+  const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
+
+  const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
+  const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
+
+  if (normalizedDTSIName === normalizedDDHQName) {
     return true
   }
 
-  if (
-    normalizedPoliticianFirstName.startsWith(normalizedVotingDataFirstName) &&
-    normalizedPoliticianLastName.startsWith(normalizedVotingDataLastName)
-  ) {
+  if (normalizedDTSINickname === normalizedDDHQName) {
     return true
   }
 
-  if (
-    normalizedVotingDataFirstName.startsWith(normalizedPoliticianFirstName) &&
-    normalizedVotingDataLastName.startsWith(normalizedPoliticianLastName)
-  ) {
+  if (normalizedDDHQName.startsWith(normalizedDTSIName)) {
+    return true
+  }
+
+  if (normalizedDDHQName.startsWith(normalizedDTSINickname)) {
+    return true
+  }
+
+  if (normalizedDTSIName.startsWith(normalizedDDHQName)) {
+    return true
+  }
+
+  if (normalizedDTSILastName === normalizedDDHQLastName) {
     return true
   }
 
