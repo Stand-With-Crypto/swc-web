@@ -1,3 +1,5 @@
+'use client'
+
 import { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 
@@ -118,13 +120,23 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       return (
         liveResultData?.find?.(race => {
           return (
-            race.district === primaryDistrict &&
-            race.office?.officeId === '3' &&
+            race.district.toString() === primaryDistrict.toString() &&
+            race.office?.officeId?.toString() === '3' &&
             Boolean(
               race.candidatesWithVotes.find(
                 candidate =>
-                  candidate.lastName.toLowerCase() === candidateA.lastName.toLowerCase() ||
-                  candidate.lastName.toLowerCase() === candidateB.lastName.toLowerCase(),
+                  getPoliticianFindMatch(
+                    candidateA.firstName,
+                    candidateA.lastName,
+                    candidate.firstName,
+                    candidate.lastName,
+                  ) ||
+                  getPoliticianFindMatch(
+                    candidateB.firstName,
+                    candidateB.lastName,
+                    candidate.firstName,
+                    candidate.lastName,
+                  ),
               ),
             )
           )
@@ -137,8 +149,18 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         Boolean(
           race.candidatesWithVotes.find(
             candidate =>
-              candidate.lastName.toLowerCase() === candidateA.lastName.toLowerCase() ||
-              candidate.lastName.toLowerCase() === candidateB.lastName.toLowerCase(),
+              getPoliticianFindMatch(
+                candidateA.firstName,
+                candidateA.lastName,
+                candidate.firstName,
+                candidate.lastName,
+              ) ||
+              getPoliticianFindMatch(
+                candidateB.firstName,
+                candidateB.lastName,
+                candidate.firstName,
+                candidate.lastName,
+              ),
           ),
         ),
       ) ?? null
@@ -205,7 +227,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   const canShowProgress = Boolean(liveResultData)
 
   return (
-    <div className={cn('flex w-full max-w-xl flex-col gap-8', className)}>
+    <div className={cn('flex w-full max-w-xl flex-col gap-6', className)}>
       {showLink ? (
         <div className="flex items-start justify-between">
           <div className="space-y-2">
@@ -226,58 +248,66 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       )}
 
       <div className="flex justify-between">
-        <AvatarBox candidate={candidateA} className={getOpacity(ddhqCandidateA, raceData)} />
+        <AvatarBox
+          candidate={candidateA}
+          className={cn(
+            getOpacity(ddhqCandidateA, raceData),
+            ddhqCandidateA ? 'border-2 border-green-500' : 'border-2 border-red-500',
+          )}
+        />
         <AvatarBox
           candidate={candidateB}
-          className={cn('flex flex-col items-end text-right', getOpacity(ddhqCandidateB, raceData))}
+          className={cn(
+            'flex flex-col items-end text-right',
+            getOpacity(ddhqCandidateB, raceData),
+            ddhqCandidateB ? 'border-2 border-green-500' : 'border-2 border-red-500',
+          )}
         />
       </div>
 
-      <div className="flex gap-1">
-        {canShowProgress ? (
-          <Progress
-            className="rounded-l-full rounded-r-none bg-secondary"
-            indicatorClassName={cn(
-              'bg-none rounded-r-none',
-              convertDTSIStanceScoreToBgColorClass(
-                candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
-              ),
-            )}
-            value={Math.min(Number(getVotePercentage(ddhqCandidateA, raceData)) * 2, 100)}
-          />
-        ) : (
-          <Skeleton className="h-4 w-full rounded-full" />
-        )}
-        {canShowProgress ? (
-          <Progress
-            className="rounded-l-none rounded-r-full  bg-secondary"
-            indicatorClassName={cn(
-              'bg-none rounded-l-none',
-              convertDTSIStanceScoreToBgColorClass(
-                candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
-              ),
-            )}
-            inverted
-            value={Math.min(Number(getVotePercentage(ddhqCandidateB, raceData)) * 2, 100)}
-          />
-        ) : (
-          <Skeleton className="h-4 w-full rounded-full" />
-        )}
-      </div>
-
-      <div className="relative flex items-center justify-between text-sm">
-        <div className="flex items-center gap-2">
-          <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
-          <span className="text-fontcolor-muted">{ddhqCandidateA?.votes} votes</span>
+      <div className="space-y-3">
+        <div className="flex gap-1">
+          {canShowProgress ? (
+            <Progress
+              className="rounded-l-full rounded-r-none bg-secondary"
+              indicatorClassName={cn(
+                'bg-none rounded-r-none',
+                convertDTSIStanceScoreToBgColorClass(
+                  candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
+                ),
+              )}
+              value={Math.min(Number(getVotePercentage(ddhqCandidateA, raceData)) * 2, 100)}
+            />
+          ) : (
+            <Skeleton className="h-4 w-full rounded-full" />
+          )}
+          {canShowProgress ? (
+            <Progress
+              className="rounded-l-none rounded-r-full  bg-secondary"
+              indicatorClassName={cn(
+                'bg-none rounded-l-none',
+                convertDTSIStanceScoreToBgColorClass(
+                  candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
+                ),
+              )}
+              inverted
+              value={Math.min(Number(getVotePercentage(ddhqCandidateB, raceData)) * 2, 100)}
+            />
+          ) : (
+            <Skeleton className="h-4 w-full rounded-full" />
+          )}
         </div>
 
-        {/* <p className="absolute left-1/2 right-1/2 w-fit text-fontcolor-muted -translate-x-1/2 text-nowrap text-sm">
-          999 votes to win
-        </p> */}
+        <div className="relative flex items-center justify-between text-sm">
+          <div className="flex items-center gap-2">
+            <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
+            <span className="text-fontcolor-muted">{ddhqCandidateA?.votes || 0} votes</span>
+          </div>
 
-        <div className="flex items-center gap-2 text-right">
-          <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
-          <span className="text-fontcolor-muted">{ddhqCandidateB?.votes} votes</span>
+          <div className="flex items-center gap-2 text-right">
+            <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
+            <span className="text-fontcolor-muted">{ddhqCandidateB?.votes || 0} votes</span>
+          </div>
         </div>
       </div>
 
@@ -307,7 +337,7 @@ function AvatarBox(props: AvatarBoxProps) {
           person={candidate}
         />
       </div>
-      <div className="mt-4 space-y-2">
+      <div className="mt-6 space-y-2">
         <p className="font-semibold">
           {dtsiPersonFullName(candidate)}
           {!!candidate.politicalAffiliationCategory &&
