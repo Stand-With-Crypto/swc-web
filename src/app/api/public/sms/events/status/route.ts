@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { User, UserCommunication, UserCommunicationJourney } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
+// import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -76,13 +76,15 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   }
 
   if (!userCommunication) {
-    Sentry.captureMessage(`Received message status update but couldn't find user_communication`, {
-      extra: { body },
-      tags: {
-        domain: 'smsMessageStatusWebhook',
-      },
-    })
-    return new NextResponse('not found', { status: 404 })
+    // TODO: Uncomment this when we fix this problem https://github.com/Stand-With-Crypto/swc-internal/issues/260
+    // Sentry.captureMessage(`Received message status update but couldn't find user_communication`, {
+    //   extra: { body },
+    //   tags: {
+    //     domain: 'smsMessageStatusWebhook',
+    //   },
+    // })
+    // If we return 4xx or 5xx Twilio will trigger our fails webhook with this warning -> https://www.twilio.com/docs/api/errors/11200 and it's flooding Sentry
+    return new NextResponse('success', { status: 200 })
   }
 
   const user = userCommunication?.userCommunicationJourney.user
