@@ -47,20 +47,7 @@ const enhanceCongressData = (
   const enhancedCandidatesWithVote = congressData.candidatesWithVotes.map(currentCandidate => {
     const dtsiData =
       people.find(currentPerson => {
-        const [currentPersonFirstName] = currentPerson.firstName.split(' ')
-        const [currentPersonLastName] = currentPerson.lastName.split(' ')
-
-        const normalizedPersonFirstName = normalizeName(currentPersonFirstName)
-        const normalizedPersonLastName = normalizeName(currentPersonLastName)
-        const normalizedCandidateFirstName = normalizeName(currentCandidate.firstName)
-        const normalizedCandidateLastName = normalizeName(currentCandidate.lastName)
-
-        return getPoliticianFindMatch(
-          normalizedPersonFirstName,
-          normalizedPersonLastName,
-          normalizedCandidateFirstName,
-          normalizedCandidateLastName,
-        )
+        return getPoliticianFindMatch(currentPerson, currentCandidate)
       }) ?? null
 
     return {

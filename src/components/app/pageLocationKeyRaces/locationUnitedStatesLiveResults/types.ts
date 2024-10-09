@@ -8,4 +8,7 @@ export type DTSI_Candidate = DTSIAvatarProps['person'] &
     | 'computedStanceScore'
     | 'computedSumStanceScoreWeight'
     | 'manuallyOverriddenStanceScore'
+    | 'firstName'
+    | 'lastName'
+    | 'firstNickname'
   >

@@ -32,15 +32,7 @@ export async function getDtsiPresidentialWithVotingData(
 
   return dtsiData.people.map(currentPolitician => {
     const votingData = presidentialData.find(currentVotingData => {
-      const [currentPoliticianFirstName] = currentPolitician.firstName.split(' ')
-      const [currentPoliticianLastName] = currentPolitician.lastName.split(' ')
-
-      return getPoliticianFindMatch(
-        currentPoliticianFirstName,
-        currentPoliticianLastName,
-        currentVotingData.firstName,
-        currentVotingData.lastName,
-      )
+      return getPoliticianFindMatch(currentPolitician, currentVotingData)
     })
 
     return {
