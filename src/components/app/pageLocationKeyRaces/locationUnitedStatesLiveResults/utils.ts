@@ -42,11 +42,13 @@ export const getOpacity = (
   candidate: CandidatesWithVote | null,
   raceData: RacesVotingDataResponse | null,
 ) => {
+  if (!candidate) return 'opacity-100'
+  if (candidate.elected) return 'opacity-100'
+
   const calledCandidate = raceData?.calledCandidate
   if (!calledCandidate) return 'opacity-100'
-  if (!candidate) return 'opacity-100'
-  if (calledCandidate.cand_id !== candidate.id) return 'opacity-50'
-  return 'opacity-100'
+
+  return calledCandidate.cand_id === candidate.id ? 'opacity-100' : 'opacity-50'
 }
 
 export const congressLiveResultOverview = (

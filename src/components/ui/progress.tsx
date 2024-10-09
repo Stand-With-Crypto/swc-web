@@ -26,8 +26,6 @@ const Progress = React.forwardRef<
         transform: inverted
           ? `translateX(${100 - (value || 0)}%)`
           : `translateX(-${100 - (value || 0)}%)`,
-        backgroundSize: `${value || 0}% 100%`,
-        backgroundPositionX: inverted ? `0%` : `100%`,
       }}
     />
   </ProgressPrimitive.Root>
