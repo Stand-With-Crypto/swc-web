@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { compact } from 'lodash-es'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
@@ -9,11 +9,16 @@ import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
+import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
+import { isPresidentialData } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import {
+  PresidentialDataWithVotingResponse,
+  RacesVotingDataResponse,
+} from '@/data/aggregations/decisionDesk/types'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonPoliticalAffiliationCategory,
@@ -31,7 +36,7 @@ interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuer
   stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
-  initialRaceData: RacesVotingDataResponse[] | null
+  initialLiveResultData: RacesVotingDataResponse[] | PresidentialDataWithVotingResponse[] | null
 }
 
 function organizeRaceSpecificPeople(
@@ -82,12 +87,21 @@ export function LocationRaceSpecific({
   district,
   people,
   locale,
-  initialRaceData,
+  initialLiveResultData,
 }: LocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people, { district, stateCode })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(locale)
   const { recommended, others } = findRecommendedCandidate(groups)
+
+  const candidates = useMemo(
+    () =>
+      compact([
+        recommended && { person: recommended, isRecommended: true },
+        ...others.map(person => ({ person, isRecommended: false })),
+      ]),
+    [others, recommended],
+  )
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
@@ -141,23 +155,25 @@ export function LocationRaceSpecific({
       </DarkHeroSection>
 
       <div className="divide-y-2">
-        <KeyRaceLiveResult
-          candidates={compact([
-            recommended && { person: recommended, isRecommended: true },
-            ...others.map(person => ({ person, isRecommended: false })),
-          ]).map(({ person }) => person)}
-          className="mx-auto mb-20 mt-20 max-w-2xl"
-          initialRaceData={initialRaceData || undefined}
-          locale={locale}
-          primaryDistrict={district}
-          stateCode={stateCode as USStateCode}
-        />
+        <div className="mx-auto mb-20 mt-20 flex w-full max-w-2xl justify-center">
+          {isPresidentialData(initialLiveResultData) ? (
+            <PresidentialRaceResult
+              candidates={candidates.map(({ person }) => person)}
+              initialRaceData={initialLiveResultData}
+            />
+          ) : (
+            <KeyRaceLiveResult
+              candidates={candidates.map(({ person }) => person)}
+              initialRaceData={initialLiveResultData || undefined}
+              locale={locale}
+              primaryDistrict={district}
+              stateCode={stateCode || ('' as USStateCode)}
+            />
+          )}
+        </div>
 
         <div className="divide-y-2">
-          {compact([
-            recommended && { person: recommended, isRecommended: true },
-            ...others.map(person => ({ person, isRecommended: false })),
-          ]).map(({ person, isRecommended }) => (
+          {candidates.map(({ person, isRecommended }) => (
             <div key={person.id}>
               <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
                 <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">

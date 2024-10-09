@@ -21,7 +21,7 @@ import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['10_MINUTES']
+export const revalidate = SECONDS_DURATION['MINUTE']
 
 type LocationStateSpecificPageProps = PageProps<{
   stateCode: string
