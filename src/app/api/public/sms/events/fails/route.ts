@@ -25,6 +25,9 @@ interface SMSFailedEventPayload {
   error_code?: string
 }
 
+// These errors are related to the user's mobile carrier not being available when we send messages
+const filteredErrors = ['30003', '30005']
+
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SMSFailedEvent>(request)
 
@@ -44,14 +47,16 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       await handleSMSErrors(errorCode, messageId)
     }
 
-    Sentry.captureMessage(`SMS event ${body.Level}: ${errorCode}`, {
-      extra: {
-        body,
-      },
-      tags: {
-        domain: 'smsEventsFailsRoute',
-      },
-    })
+    if (!filteredErrors.includes(errorCode)) {
+      Sentry.captureMessage(`SMS event ${body.Level}: ${errorCode}`, {
+        extra: {
+          body,
+        },
+        tags: {
+          domain: 'smsEventsFailsRoute',
+        },
+      })
+    }
   } catch (error) {
     Sentry.captureException(error, {
       extra: { body },
