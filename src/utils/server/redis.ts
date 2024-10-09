@@ -20,5 +20,5 @@ export const redis = new Redis({
 export const redisWithCache = new Redis({
   url: UPSTASH_REDIS_REST_URL,
   token: UPSTASH_REDIS_REST_TOKEN,
-  cache: 'force-cache',
+  cache: 'default',
 })
