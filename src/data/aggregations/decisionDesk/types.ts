@@ -10,6 +10,8 @@ export interface RacesVotingDataResponse {
   year: number
   party: string | null
   totalVotes: number
+  raceDate: string
+  lastUpdated: string
   candidatesWithVotes: CandidatesWithVote[]
 }
 

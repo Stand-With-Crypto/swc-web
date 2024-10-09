@@ -37,6 +37,8 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
       year: currentData.year,
       party: currentData.party,
       totalVotes: currentData.topline_results.total_votes,
+      raceDate: currentData.race_date,
+      lastUpdated: currentData.last_updated,
       candidatesWithVotes: currentData.candidates.map(candidate => ({
         id: candidate.cand_id,
         firstName: candidate.first_name,
