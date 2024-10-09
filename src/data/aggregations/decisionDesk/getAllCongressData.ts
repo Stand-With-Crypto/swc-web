@@ -5,7 +5,7 @@ import {
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch, normalizeName } from '@/data/aggregations/decisionDesk/utils'
+import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_AllPeopleQuery } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 
