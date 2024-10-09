@@ -24,7 +24,7 @@ import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['10_MINUTES']
+export const revalidate = SECONDS_DURATION['MINUTE']
 
 type LocationDistrictSpecificPageProps = PageProps<{
   stateCode: string
@@ -82,9 +82,9 @@ export default async function LocationDistrictSpecificPage({
 
   return (
     <LocationRaceSpecific
+      initialLiveResultData={dataByDistrict}
       {...dtsiResults}
       {...{ stateCode, district, locale }}
-      initialRaceData={dataByDistrict}
     />
   )
 }

@@ -72,7 +72,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   const canShowProgress = Boolean(data)
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <div className="flex justify-between">
         <AvatarBox
           candidate={candidateA}
@@ -117,7 +117,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
       <div className="relative flex items-center justify-between text-sm">
         <div className="flex items-center gap-2">
-          <p className="font-bold">{ddhqCandidateA?.votingData?.percentage}</p>{' '}
+          <p className="font-bold">{ddhqCandidateA?.votingData?.percentage}%</p>{' '}
           <span className="text-fontcolor-muted">{ddhqCandidateA?.votingData?.votes}</span>
         </div>
 
@@ -126,7 +126,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         </p>
 
         <div className="flex items-center gap-2">
-          <p className="font-bold">{ddhqCandidateB?.votingData?.percentage}</p>{' '}
+          <p className="font-bold">{ddhqCandidateB?.votingData?.percentage}%</p>{' '}
           <span className="text-fontcolor-muted">{ddhqCandidateB?.votingData?.votes}</span>
         </div>
       </div>

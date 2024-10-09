@@ -20,6 +20,7 @@ import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { useApiDecisionDeskData } from '@/hooks/useApiDesicionDeskData'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -28,7 +29,6 @@ import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/u
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
-import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
 interface KeyRaceLiveResultProps {
   locale: SupportedLocale
@@ -210,14 +210,18 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         <div className="flex items-start justify-between">
           <div className="space-y-2">
             <p className="text-lg font-semibold">{raceName}</p>
-            <p className="text-sm text-fontcolor-muted">Data updated {lastUpdated}</p>
+            {lastUpdated && (
+              <p className="text-sm text-fontcolor-muted">Data updated {lastUpdated}</p>
+            )}
           </div>
           <LiveStatusBadge status={raceStatus} />
         </div>
       ) : (
         <div className="mb-4 flex flex-col items-center gap-6">
           <LiveStatusBadge status={raceStatus} />
-          <p className="text-center text-base text-fontcolor-muted">Data updated {lastUpdated}</p>
+          {lastUpdated && (
+            <p className="text-center text-base text-fontcolor-muted">Data updated {lastUpdated}</p>
+          )}
         </div>
       )}
 

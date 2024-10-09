@@ -3,6 +3,7 @@ import { isNil } from 'lodash-es'
 import {
   CandidatesWithVote,
   GetAllCongressDataResponse,
+  PresidentialDataWithVotingResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
@@ -51,8 +52,9 @@ export const getOpacity = (
 export const congressLiveResultOverview = (
   data: GetAllCongressDataResponse['senateDataWithDtsi'] | undefined,
 ) => {
-  if (!data?.candidatesWithVotes?.length)
+  if (!data?.candidatesWithVotes?.length) {
     return { proCryptoCandidatesElected: 0, antiCryptoCandidatesElected: 0 }
+  }
 
   return data.candidatesWithVotes.reduce(
     (acc, candidate) => {
@@ -73,6 +75,12 @@ export const congressLiveResultOverview = (
     },
     { proCryptoCandidatesElected: 0, antiCryptoCandidatesElected: 0 },
   )
+}
+
+export function isPresidentialData(
+  data: RacesVotingDataResponse[] | PresidentialDataWithVotingResponse[] | null,
+): data is PresidentialDataWithVotingResponse[] {
+  return 'votingData' in (data?.[0] || {})
 }
 
 export const PARTY_COLOR_MAP: Record<DTSI_PersonPoliticalAffiliationCategory, string> = {
