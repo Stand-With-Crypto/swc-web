@@ -1,5 +1,3 @@
-'use client'
-
 import { isBefore, startOfDay } from 'date-fns'
 
 import { ContentSection } from '@/components/app/ContentSection'
@@ -7,6 +5,7 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
+import { LiveResultsMap } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveResultsMap'
 import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
@@ -53,6 +52,11 @@ export function LocationUnitedStatesLiveResults({
   const presidentialRaceCalledStatus = presidentialRaceLiveResult?.some(
     candidate => candidate.votingData?.called,
   )
+  const raceStatus = presidentialRaceCalledStatus
+    ? 'called'
+    : isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
+      ? 'not-started'
+      : 'live'
 
   return (
     <div className="space-y-20">
@@ -80,10 +84,12 @@ export function LocationUnitedStatesLiveResults({
             </Button>
           </div>
 
-          <PresidentialRaceResult
-            candidates={dtsiResults.president}
-            initialRaceData={presidentialRaceLiveResult}
-          />
+          <div className="w-full max-w-md">
+            <PresidentialRaceResult
+              candidates={dtsiResults.president}
+              initialRaceData={presidentialRaceLiveResult}
+            />
+          </div>
 
           <Button asChild className="w-full max-w-xs font-bold lg:hidden" variant="secondary">
             <InternalLink href={urls.locationUnitedStatesPresidential()}>
@@ -101,15 +107,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
-            <LiveStatusBadge
-              status={
-                presidentialRaceCalledStatus
-                  ? 'called'
-                  : isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
-                    ? 'not-started'
-                    : 'live'
-              }
-            />
+            <LiveStatusBadge status={raceStatus} />
           </div>
 
           <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
@@ -124,6 +122,16 @@ export function LocationUnitedStatesLiveResults({
               title="Senate"
             />
           </div>
+        </ContentSection>
+
+        <ContentSection
+          className="container"
+          subtitle="When a state turns purple, it means a pro-crypto candidate has been elected. Follow along to see what states vote pro-crypto."
+          title="Map view"
+          titleProps={{ size: 'xs' }}
+        >
+          <LiveStatusBadge status={raceStatus} />
+          <LiveResultsMap />
         </ContentSection>
 
         {/* <UserAddressVoterGuideInputSection locale={locale} /> */}
