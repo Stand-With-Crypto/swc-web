@@ -1,0 +1,4064 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 24886,
+        "lastName": "Jackson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marcus",
+        "id": 53773,
+        "lastName": "Lewis",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:28:31.117Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 64292,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robin",
+        "id": 8568,
+        "lastName": "Kelly",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ashley",
+        "id": 24915,
+        "lastName": "Ramos",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:11:59.002Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 190974,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 53774,
+        "lastName": "Booras",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Angel",
+        "id": 85007,
+        "lastName": "Oakley",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Delia",
+        "id": 24895,
+        "lastName": "Ramirez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jesus",
+        "id": 24897,
+        "lastName": "Garcia",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lupe",
+        "id": 48194,
+        "lastName": "Castillo",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ed",
+        "id": 44312,
+        "lastName": "Hershey",
+        "party": "Working Class",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:11:59.002Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 119060,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 1233,
+        "lastName": "Quigley",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 11074,
+        "lastName": "Hanson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sean",
+        "id": 8580,
+        "lastName": "Casten",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Niki",
+        "id": 24919,
+        "lastName": "Conforti",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chad",
+        "id": 24926,
+        "lastName": "Koppie",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Danny",
+        "id": 1237,
+        "lastName": "Davis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 53782,
+        "lastName": "Rice",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Raja",
+        "id": 1238,
+        "lastName": "Krishnamoorthi",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:11:59.002Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 169551,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jan",
+        "id": 85009,
+        "lastName": "Schakowsky",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Seth",
+        "id": 85010,
+        "lastName": "Cohen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:04:38.153Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 128627,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 53783,
+        "lastName": "Carris",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 1242,
+        "lastName": "Schneider",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 85011,
+        "lastName": "Severino",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 12453,
+        "lastName": "Foster",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jerry",
+        "id": 12627,
+        "lastName": "Evans",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:09.412Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 352606,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 53785,
+        "lastName": "Roberts",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 8598,
+        "lastName": "Bost",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:35.409Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 304839,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joshua",
+        "id": 53788,
+        "lastName": "Loyd",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nikki",
+        "id": 24902,
+        "lastName": "Budzinski",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:11:59.002Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 90268,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lauren",
+        "id": 8620,
+        "lastName": "Underwood",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 12630,
+        "lastName": "Marter",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:11:59.002Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 268320,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 8537,
+        "lastName": "Miller",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Darin ",
+        "id": 1257,
+        "lastName": "LaHood",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eric",
+        "id": 24907,
+        "lastName": "Sorensen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 85013,
+        "lastName": "McGraw",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:53:09.568Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 54313,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carlos",
+        "id": 31740,
+        "lastName": "Gonzalez",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Javier",
+        "id": 24971,
+        "lastName": "Cervantes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:39.898Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 35030,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kimberly",
+        "id": 24976,
+        "lastName": "Lightford",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 85190,
+        "lastName": "Sumrell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:09:42.908Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 74152,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 24979,
+        "lastName": "Simmons",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 24982,
+        "lastName": "Martwick",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jon",
+        "id": 53793,
+        "lastName": "Luers",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:30:09.289Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 19275,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 85191,
+        "lastName": "Kirchner",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 24987,
+        "lastName": "Peters",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Willie",
+        "id": 24990,
+        "lastName": "Preston",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 24994,
+        "lastName": "Hastings",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Samantha",
+        "id": 53794,
+        "lastName": "Gasca",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:45:14.981Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 114669,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cristina",
+        "id": 24997,
+        "lastName": "Castro",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Karina",
+        "id": 24999,
+        "lastName": "Villa",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 25022,
+        "lastName": "Brown",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:49:46.998Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 50969,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laura",
+        "id": 25002,
+        "lastName": "Murphy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 25005,
+        "lastName": "Edly-Allen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ashley",
+        "id": 85192,
+        "lastName": "Jensen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Crystal",
+        "id": 85193,
+        "lastName": "Soltow",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 25007,
+        "lastName": "Stadelman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:18:59.448Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 58206,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Li",
+        "id": 25221,
+        "lastName": "Arellano",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "37",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patrick",
+        "id": 25010,
+        "lastName": "Joyce",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Philip",
+        "id": 25036,
+        "lastName": "Nagel",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "40",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rachel",
+        "id": 12619,
+        "lastName": "Ventura",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 53805,
+        "lastName": "Monson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "43",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:50:45.469Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 82854,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 25013,
+        "lastName": "Koehler",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sally",
+        "id": 53806,
+        "lastName": "Owens",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "46",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:25:17.855Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 5897,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Katie",
+        "id": 48036,
+        "lastName": "Deane-Schlottman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Meg",
+        "id": 25014,
+        "lastName": "Cappel",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "49",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:25:50.463Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 69287,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 53808,
+        "lastName": "Brownfield",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 53807,
+        "lastName": "Faraci",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "52",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:34:25.841Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 56203,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jason",
+        "id": 25055,
+        "lastName": "Plummer",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "55",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terri",
+        "id": 25058,
+        "lastName": "Bryant",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "58",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Aaron",
+        "id": 25060,
+        "lastName": "Ortiz",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Max",
+        "id": 85194,
+        "lastName": "Olivo",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:34:25.841Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 1167,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Elizabeth",
+        "id": 12437,
+        "lastName": "Hernandez",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Laura",
+        "id": 53813,
+        "lastName": "Hruska",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:56:39.331Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 33701,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eva-Dina",
+        "id": 25061,
+        "lastName": "Delgado",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Juvandy",
+        "id": 85195,
+        "lastName": "Rivera",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lilian",
+        "id": 25062,
+        "lastName": "Jimenez",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nancy",
+        "id": 85196,
+        "lastName": "Rodriguez",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Al",
+        "id": 53816,
+        "lastName": "Rasho",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kimberly",
+        "id": 53815,
+        "lastName": "Dubuclet",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sonya",
+        "id": 25066,
+        "lastName": "Harper",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sean",
+        "id": 53818,
+        "lastName": "Dwyer",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 85197,
+        "lastName": "Welch",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Leslie",
+        "id": 85198,
+        "lastName": "Collazo",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "La Shawn",
+        "id": 25069,
+        "lastName": "Ford",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:36.314Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 24627,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Yolonda",
+        "id": 53819,
+        "lastName": "Morris",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Omar",
+        "id": 85199,
+        "lastName": "Williams",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ann",
+        "id": 25072,
+        "lastName": "Williams",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Margaret",
+        "id": 25073,
+        "lastName": "Croke",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hoan",
+        "id": 25075,
+        "lastName": "Huynh",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 85200,
+        "lastName": "Le",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kelly",
+        "id": 25079,
+        "lastName": "Cassidy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 25174,
+        "lastName": "Albers",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 25080,
+        "lastName": "Kelly",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:37:29.620Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 20821,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 25083,
+        "lastName": "Olickal",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 53820,
+        "lastName": "Geldermann",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 25084,
+        "lastName": "Gong-Gershowitz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:50:45.469Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 57544,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robyn",
+        "id": 25085,
+        "lastName": "Gabel",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Charles",
+        "id": 25177,
+        "lastName": "Hutchinson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:18:59.011Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 16632,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 85201,
+        "lastName": "Zimmers",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lindsey",
+        "id": 25086,
+        "lastName": "LaPointe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 25178,
+        "lastName": "Stephens",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Abdelnasser",
+        "id": 25089,
+        "lastName": "Rashid",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angie",
+        "id": 53824,
+        "lastName": "Guerrero-Cuellar",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Edgar",
+        "id": 25091,
+        "lastName": "Gonzalez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Theresa",
+        "id": 25092,
+        "lastName": "Mah",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Natalian",
+        "id": 53828,
+        "lastName": "Bolton",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Curtis",
+        "id": 25093,
+        "lastName": "Tarver",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Audrey",
+        "id": 53831,
+        "lastName": "Barrett",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kam",
+        "id": 53830,
+        "lastName": "Buckner",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Justin",
+        "id": 25096,
+        "lastName": "Slaughter",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 85202,
+        "lastName": "Rita",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Thaddeus",
+        "id": 25099,
+        "lastName": "Jones",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patricia",
+        "id": 25181,
+        "lastName": "Bonk",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Will",
+        "id": 85203,
+        "lastName": "Davis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:56:39.331Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 44172,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carl",
+        "id": 25183,
+        "lastName": "Kunz",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 53834,
+        "lastName": "Crawford",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:19:51.410Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 17583,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 53835,
+        "lastName": "Davis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marcus",
+        "id": 25104,
+        "lastName": "Evans",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nick",
+        "id": 85204,
+        "lastName": "Smith",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Frederick",
+        "id": 25184,
+        "lastName": "Walls",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Herbert",
+        "id": 25185,
+        "lastName": "Hebein",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 53838,
+        "lastName": "Gill",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christine",
+        "id": 25017,
+        "lastName": "McGovern",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rick",
+        "id": 53840,
+        "lastName": "Ryan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "36",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:39.898Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 24849,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Debbie",
+        "id": 25108,
+        "lastName": "Meyers-Martin",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "38",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 48198,
+        "lastName": "Curran",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Will",
+        "id": 25109,
+        "lastName": "Guzzardi",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "39",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jaime",
+        "id": 25110,
+        "lastName": "Andrade",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patrycja",
+        "id": 48184,
+        "lastName": "Karlin",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "40",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Janet",
+        "id": 25111,
+        "lastName": "Rohr",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "41",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terra",
+        "id": 25112,
+        "lastName": "Howard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "42",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Donald",
+        "id": 85205,
+        "lastName": "Puckett",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anna",
+        "id": 25113,
+        "lastName": "Moeller",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "43",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:35:15.389Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 25312,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Fred",
+        "id": 25114,
+        "lastName": "Crespo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "44",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dennis",
+        "id": 25020,
+        "lastName": "Reboletti",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marti",
+        "id": 85206,
+        "lastName": "Deuter",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "45",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:06.421Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 21113,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rusty",
+        "id": 85207,
+        "lastName": "Stevens",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Diane",
+        "id": 25116,
+        "lastName": "Blair-Sherlock",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "46",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:39.898Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 30302,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jackie",
+        "id": 48200,
+        "lastName": "Williamson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Amy",
+        "id": 25196,
+        "lastName": "Grant",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "47",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:19:51.410Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 58903,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 25197,
+        "lastName": "Sanalitro",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 53845,
+        "lastName": "Vesey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "48",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:04:29.573Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 52250,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maura",
+        "id": 25118,
+        "lastName": "Hirschauer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Hannah",
+        "id": 53846,
+        "lastName": "Billingsley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "49",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:39.898Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 44787,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Barbara",
+        "id": 25119,
+        "lastName": "Hernandez",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Teresa",
+        "id": 85208,
+        "lastName": "Alexander",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "50",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:27:16.221Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 33546,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nabeela",
+        "id": 25121,
+        "lastName": "Syed",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tosi",
+        "id": 53848,
+        "lastName": "Ufodike",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "51",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:45:14.981Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 58004,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 25000,
+        "lastName": "Peterson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Martin",
+        "id": 25200,
+        "lastName": "McLaughlin",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "52",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:21:48.008Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 44921,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nicolle",
+        "id": 85209,
+        "lastName": "Grasse",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ronald",
+        "id": 85210,
+        "lastName": "Andermann",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "53",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michele",
+        "id": 25202,
+        "lastName": "Hunter",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 25124,
+        "lastName": "Canty",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "54",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Martin",
+        "id": 25125,
+        "lastName": "Moylan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "55",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 25126,
+        "lastName": "Mussman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "56",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tracy",
+        "id": 85212,
+        "lastName": "Muhl",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 85211,
+        "lastName": "Behr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "57",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:35:15.389Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 33603,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carl",
+        "id": 53850,
+        "lastName": "Lambrecht",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 25128,
+        "lastName": "Morgan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "58",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:35:15.389Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 37224,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 25129,
+        "lastName": "Didech",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 53851,
+        "lastName": "Henning",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "59",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:27:16.221Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 2378,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rita",
+        "id": 25130,
+        "lastName": "Mayfield",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "60",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joyce",
+        "id": 25131,
+        "lastName": "Mason",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 85213,
+        "lastName": "Mitchell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "61",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:28:03.238Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 17874,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laura",
+        "id": 25132,
+        "lastName": "Dias",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "62",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 25777,
+        "lastName": "Mahady",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 25208,
+        "lastName": "Reick",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "63",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:21:48.008Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 36346,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hoan",
+        "id": 25075,
+        "lastName": "Huynh",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 85200,
+        "lastName": "Le",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kelly",
+        "id": 25079,
+        "lastName": "Cassidy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 25174,
+        "lastName": "Albers",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 25080,
+        "lastName": "Kelly",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:37:29.620Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 20821,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 25083,
+        "lastName": "Olickal",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 53820,
+        "lastName": "Geldermann",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 25084,
+        "lastName": "Gong-Gershowitz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:50:45.469Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 57544,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robyn",
+        "id": 25085,
+        "lastName": "Gabel",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Charles",
+        "id": 25177,
+        "lastName": "Hutchinson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:18:59.011Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 16632,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 85201,
+        "lastName": "Zimmers",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lindsey",
+        "id": 25086,
+        "lastName": "LaPointe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 25178,
+        "lastName": "Stephens",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Abdelnasser",
+        "id": 25089,
+        "lastName": "Rashid",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angie",
+        "id": 53824,
+        "lastName": "Guerrero-Cuellar",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Edgar",
+        "id": 25091,
+        "lastName": "Gonzalez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Theresa",
+        "id": 25092,
+        "lastName": "Mah",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Natalian",
+        "id": 53828,
+        "lastName": "Bolton",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Curtis",
+        "id": 25093,
+        "lastName": "Tarver",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Audrey",
+        "id": 53831,
+        "lastName": "Barrett",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kam",
+        "id": 53830,
+        "lastName": "Buckner",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Justin",
+        "id": 25096,
+        "lastName": "Slaughter",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 85202,
+        "lastName": "Rita",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Thaddeus",
+        "id": 25099,
+        "lastName": "Jones",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patricia",
+        "id": 25181,
+        "lastName": "Bonk",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Will",
+        "id": 85203,
+        "lastName": "Davis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:56:39.331Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 44172,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carl",
+        "id": 25183,
+        "lastName": "Kunz",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 53834,
+        "lastName": "Crawford",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:19:51.410Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 17583,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 53835,
+        "lastName": "Davis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marcus",
+        "id": 25104,
+        "lastName": "Evans",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nick",
+        "id": 85204,
+        "lastName": "Smith",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Frederick",
+        "id": 25184,
+        "lastName": "Walls",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Herbert",
+        "id": 25185,
+        "lastName": "Hebein",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 53838,
+        "lastName": "Gill",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christine",
+        "id": 25017,
+        "lastName": "McGovern",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rick",
+        "id": 53840,
+        "lastName": "Ryan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "36",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:39.898Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 24849,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Debbie",
+        "id": 25108,
+        "lastName": "Meyers-Martin",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "38",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 48198,
+        "lastName": "Curran",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Will",
+        "id": 25109,
+        "lastName": "Guzzardi",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "39",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jaime",
+        "id": 25110,
+        "lastName": "Andrade",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patrycja",
+        "id": 48184,
+        "lastName": "Karlin",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "40",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Janet",
+        "id": 25111,
+        "lastName": "Rohr",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "41",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terra",
+        "id": 25112,
+        "lastName": "Howard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "42",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Donald",
+        "id": 85205,
+        "lastName": "Puckett",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anna",
+        "id": 25113,
+        "lastName": "Moeller",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "43",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:35:15.389Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 25312,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Fred",
+        "id": 25114,
+        "lastName": "Crespo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "44",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dennis",
+        "id": 25020,
+        "lastName": "Reboletti",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marti",
+        "id": 85206,
+        "lastName": "Deuter",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "45",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:06.421Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 21113,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rusty",
+        "id": 85207,
+        "lastName": "Stevens",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Diane",
+        "id": 25116,
+        "lastName": "Blair-Sherlock",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "46",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:39.898Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 30302,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jackie",
+        "id": 48200,
+        "lastName": "Williamson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Amy",
+        "id": 25196,
+        "lastName": "Grant",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "47",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:19:51.410Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 58903,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 25197,
+        "lastName": "Sanalitro",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 53845,
+        "lastName": "Vesey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "48",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:04:29.573Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 52250,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maura",
+        "id": 25118,
+        "lastName": "Hirschauer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Hannah",
+        "id": 53846,
+        "lastName": "Billingsley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "49",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:39.898Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 44787,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Barbara",
+        "id": 25119,
+        "lastName": "Hernandez",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Teresa",
+        "id": 85208,
+        "lastName": "Alexander",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "50",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:27:16.221Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 33546,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nabeela",
+        "id": 25121,
+        "lastName": "Syed",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tosi",
+        "id": 53848,
+        "lastName": "Ufodike",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "51",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:45:14.981Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 58004,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 25000,
+        "lastName": "Peterson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Martin",
+        "id": 25200,
+        "lastName": "McLaughlin",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "52",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:21:48.008Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 44921,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nicolle",
+        "id": 85209,
+        "lastName": "Grasse",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ronald",
+        "id": 85210,
+        "lastName": "Andermann",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "53",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michele",
+        "id": 25202,
+        "lastName": "Hunter",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 25124,
+        "lastName": "Canty",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "54",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Martin",
+        "id": 25125,
+        "lastName": "Moylan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "55",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 25126,
+        "lastName": "Mussman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "56",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tracy",
+        "id": 85212,
+        "lastName": "Muhl",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 85211,
+        "lastName": "Behr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "57",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:35:15.389Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 33603,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carl",
+        "id": 53850,
+        "lastName": "Lambrecht",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 25128,
+        "lastName": "Morgan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "58",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:35:15.389Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 37224,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 25129,
+        "lastName": "Didech",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 53851,
+        "lastName": "Henning",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "59",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:27:16.221Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 2378,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rita",
+        "id": 25130,
+        "lastName": "Mayfield",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "60",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joyce",
+        "id": 25131,
+        "lastName": "Mason",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 85213,
+        "lastName": "Mitchell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "61",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:28:03.238Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 17874,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laura",
+        "id": 25132,
+        "lastName": "Dias",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "62",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:49:01.165Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 25777,
+        "lastName": "Mahady",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 25208,
+        "lastName": "Reick",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "63",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:21:48.008Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 36346,
+    "year": 2024
+  }
+]

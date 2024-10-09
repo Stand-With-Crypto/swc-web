@@ -1,0 +1,394 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hung",
+        "id": 44452,
+        "lastName": "Cao",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": true,
+        "firstName": "Tim",
+        "id": 8289,
+        "lastName": "Kaine",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:56.532Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 4045964,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Robert J",
+        "id": 1706,
+        "lastName": "Wittman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leslie",
+        "id": 69513,
+        "lastName": "Mehta",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:55:02.562Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 409876,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 85154,
+        "lastName": "Kiggans",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Missy",
+        "id": 85155,
+        "lastName": "Cotter Smasal",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 85156,
+        "lastName": "Reid",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:14:06.209Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 119965,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Robert C.",
+        "id": 85157,
+        "lastName": "Scott",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 50181,
+        "lastName": "Sitka III",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:49:23.780Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 299407,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 76623,
+        "lastName": "Moher",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 16706,
+        "lastName": "McClellan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:55:02.562Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 255425,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gloria",
+        "id": 85159,
+        "lastName": "Tinsley Witt",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 13706,
+        "lastName": "McGuire III",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:51:57.436Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 391820,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 76620,
+        "lastName": "Mitchell",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 102231,
+        "lastName": "Well Jr.",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Benjamin Lee",
+        "id": 85160,
+        "lastName": "Cline",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:26:21.728Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 305541,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eugene",
+        "id": 69520,
+        "lastName": "Vindman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Derrick",
+        "id": 24614,
+        "lastName": "Anderson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:40:04.700Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 354769,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 85163,
+        "lastName": "Kennedy",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jerry",
+        "id": 30315,
+        "lastName": "Torres",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brentley",
+        "id": 102232,
+        "lastName": "Hensel",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Donald Sternoff",
+        "id": 85161,
+        "lastName": "Beyer Jr.",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:16:19.373Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 182225,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "H. Morgan",
+        "id": 44450,
+        "lastName": "Griffith",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Karen",
+        "id": 76621,
+        "lastName": "Baker",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:55:02.562Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 356230,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 69537,
+        "lastName": "Clancy",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Suhas",
+        "id": 11609,
+        "lastName": "Subramanyam",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:51:57.436Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 374562,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gerald",
+        "id": 1725,
+        "lastName": "Connolly",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 50153,
+        "lastName": "Van Meter",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:48:56.083Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 372958,
+    "year": 2024
+  }
+]

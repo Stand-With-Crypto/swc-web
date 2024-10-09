@@ -1,0 +1,2958 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Caroline",
+        "id": 76175,
+        "lastName": "Gleich",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 8307,
+        "lastName": "Curtis",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carlton E.",
+        "id": 84967,
+        "lastName": "Bowen",
+        "party": "American Independent Party",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "J. Robert",
+        "id": 14660,
+        "lastName": "Latham",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tommy",
+        "id": 84968,
+        "lastName": "Williams",
+        "party": "American Independent Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 46198,
+        "lastName": "King",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Spencer",
+        "id": 13810,
+        "lastName": "Cox",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 84969,
+        "lastName": "Tomeny",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "2", "officeName": "Governor", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Blake",
+        "id": 13823,
+        "lastName": "Moore",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 15072,
+        "lastName": "Cottam",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 76178,
+        "lastName": "Campbell",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tyler",
+        "id": 85151,
+        "lastName": "Murset",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Celeste",
+        "id": 50723,
+        "lastName": "Maloy",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nathaniel",
+        "id": 85150,
+        "lastName": "Woodward",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cassie",
+        "id": 44437,
+        "lastName": "Easley",
+        "party": "Constitution",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Glenn",
+        "id": 44439,
+        "lastName": "Wright",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 44870,
+        "lastName": "Kennedy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Vaughn",
+        "id": 85153,
+        "lastName": "Cook",
+        "party": "United Utah",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Burgess",
+        "id": 13822,
+        "lastName": "Owens",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Katrina",
+        "id": 76184,
+        "lastName": "Fallick-Wang",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "M. Evan",
+        "id": 85152,
+        "lastName": "Bullard",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 95843,
+        "lastName": "Quist",
+        "party": "United Utah",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Austin",
+        "id": 95845,
+        "lastName": "Hepworth",
+        "party": "Unaffiliated",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 95844,
+        "lastName": "McCullough",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rudy",
+        "id": 76185,
+        "lastName": "Bautista",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Derek",
+        "id": 76188,
+        "lastName": "Brown",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "27", "officeName": "Attorney General", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tina",
+        "id": 25575,
+        "lastName": "Cannon",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeffrey",
+        "id": 95846,
+        "lastName": "Ostler",
+        "party": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Catherine",
+        "id": 44862,
+        "lastName": "Voutaz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "135", "officeName": "Auditor", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Miles",
+        "id": 95847,
+        "lastName": "Pomeroy",
+        "party": "Utah Forward",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Neil",
+        "id": 46181,
+        "lastName": "Hansen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marlo",
+        "id": 47506,
+        "lastName": "Oaks",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "146", "officeName": "Treasurer", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nancy",
+        "id": 76197,
+        "lastName": "Huntly",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 50429,
+        "lastName": "Wilson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 73298,
+        "lastName": "Johnson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stacy",
+        "id": 76209,
+        "lastName": "Bernal",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Calvin",
+        "id": 76210,
+        "lastName": "Musselman",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-08T20:01:20.886Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laren",
+        "id": 95848,
+        "lastName": "Livingston",
+        "party": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Alisa",
+        "id": 95849,
+        "lastName": "Van Langeveld",
+        "party": "Unaffiliated",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Aaron",
+        "id": 76211,
+        "lastName": "Wiley",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Todd",
+        "id": 76212,
+        "lastName": "Weiler",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kyle",
+        "id": 76190,
+        "lastName": "Erb",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Luz",
+        "id": 76191,
+        "lastName": "Escamilla",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 76192,
+        "lastName": "Cuthbertson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathleen",
+        "id": 50726,
+        "lastName": "Riebe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Monnica",
+        "id": 95850,
+        "lastName": "Manuel",
+        "party": "Unaffiliated",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wayne",
+        "id": 76194,
+        "lastName": "Harper",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lincoln",
+        "id": 76196,
+        "lastName": "Fillmore",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pamela",
+        "id": 95851,
+        "lastName": "Bloom",
+        "party": "Unaffiliated",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Heidi",
+        "id": 76199,
+        "lastName": "Balderree",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-08T20:01:20.886Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 95852,
+        "lastName": "Hinckley",
+        "party": "Utah Forward",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Keven",
+        "id": 46263,
+        "lastName": "Stratton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lori",
+        "id": 95853,
+        "lastName": "Spruance",
+        "party": "Unaffiliated",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alan",
+        "id": 76201,
+        "lastName": "Hansen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 76202,
+        "lastName": "Mckell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Oran",
+        "id": 95854,
+        "lastName": "Stainbrook",
+        "party": "Unaffiliated",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 76203,
+        "lastName": "Hinkins",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Corbin",
+        "id": 76204,
+        "lastName": "Frost",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Derrin",
+        "id": 76205,
+        "lastName": "Owens",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Don",
+        "id": 76207,
+        "lastName": "Ipson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Deidra",
+        "id": 76206,
+        "lastName": "Ritchhart",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Thomas",
+        "id": 76213,
+        "lastName": "Peterson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Claudia",
+        "id": 76214,
+        "lastName": "Bigler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 76224,
+        "lastName": "Liljegren",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 76225,
+        "lastName": "Petersen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patrick",
+        "id": 95858,
+        "lastName": "Belmont",
+        "party": "Unaffiliated",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jason",
+        "id": 65943,
+        "lastName": "Thompson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kris",
+        "id": 46176,
+        "lastName": "Campbell",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kera",
+        "id": 25595,
+        "lastName": "Birkeland",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Casey",
+        "id": 46177,
+        "lastName": "Snider",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matthew",
+        "id": 76277,
+        "lastName": "Gwynn",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Amber",
+        "id": 76276,
+        "lastName": "Hardy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 46179,
+        "lastName": "Wilcox",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jason",
+        "id": 25598,
+        "lastName": "Kyle",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angela",
+        "id": 76295,
+        "lastName": "Choberka",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jacob",
+        "id": 46183,
+        "lastName": "Johnson",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 76296,
+        "lastName": "Sawyer",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jill",
+        "id": 25600,
+        "lastName": "Koford",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rosemary",
+        "id": 46184,
+        "lastName": "Lesser",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Katy",
+        "id": 25602,
+        "lastName": "Hall",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sharon",
+        "id": 76215,
+        "lastName": "Hilton",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 46185,
+        "lastName": "Schultz",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Karen",
+        "id": 46187,
+        "lastName": "Peterson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lorri",
+        "id": 76216,
+        "lastName": "Rogers",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Karianne",
+        "id": 46188,
+        "lastName": "Lisonbee",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-08T20:01:20.886Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Josh",
+        "id": 95855,
+        "lastName": "Smith",
+        "party": "Utah Forward",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ariel",
+        "id": 76217,
+        "lastName": "Defay",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Trevor",
+        "id": 46191,
+        "lastName": "Lee",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Zeaid",
+        "id": 76218,
+        "lastName": "Hasan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 44853,
+        "lastName": "Feller",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stewart",
+        "id": 46193,
+        "lastName": "Barlow",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 25603,
+        "lastName": "Cutler",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 76221,
+        "lastName": "Hartwick",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Raymond",
+        "id": 25605,
+        "lastName": "Ward",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cameron",
+        "id": 95856,
+        "lastName": "Dransfield",
+        "party": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nick",
+        "id": 76222,
+        "lastName": "Wadsworth",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lew",
+        "id": 76227,
+        "lastName": "Jeppson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 25607,
+        "lastName": "Ballard",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 46196,
+        "lastName": "Atkin",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sandra",
+        "id": 46195,
+        "lastName": "Hollins",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 76229,
+        "lastName": "Dailey-Provost",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 76230,
+        "lastName": "Harmsen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "M. Scott",
+        "id": 95857,
+        "lastName": "Romney",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Hoang",
+        "id": 76232,
+        "lastName": "Nguyen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cabot",
+        "id": 46200,
+        "lastName": "Nelson",
+        "party": "United Utah",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Grant",
+        "id": 76235,
+        "lastName": "Miller",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 76236,
+        "lastName": "Nowak",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Angela",
+        "id": 46202,
+        "lastName": "Romero",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeanetta",
+        "id": 76237,
+        "lastName": "Williams",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 76238,
+        "lastName": "Macpherson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dawn",
+        "id": 76239,
+        "lastName": "Stevenson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 46207,
+        "lastName": "Loubet",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Fred",
+        "id": 76240,
+        "lastName": "Baker",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nicholeen",
+        "id": 76241,
+        "lastName": "Peck",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bridger",
+        "id": 25609,
+        "lastName": "Bolinder",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ron",
+        "id": 76242,
+        "lastName": "Draper",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Fred",
+        "id": 76244,
+        "lastName": "Cox",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 76243,
+        "lastName": "Fitisemanu",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Verona",
+        "id": 76246,
+        "lastName": "Mauga",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 46215,
+        "lastName": "Nieto",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 46218,
+        "lastName": "Bean",
+        "party": "United Utah",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sahara",
+        "id": 46216,
+        "lastName": "Hayes",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sarah",
+        "id": 76247,
+        "lastName": "Montes",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Doug",
+        "id": 1703,
+        "lastName": "Owens",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sheryl",
+        "id": 76248,
+        "lastName": "Fraser",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carol",
+        "id": 46220,
+        "lastName": "Moss",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dennis",
+        "id": 44861,
+        "lastName": "Roach",
+        "party": "United Utah",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Karl",
+        "id": 76249,
+        "lastName": "Jurek",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 76250,
+        "lastName": "Bird",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rosalba",
+        "id": 76251,
+        "lastName": "Dominguez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 46225,
+        "lastName": "Dunnigan",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "36",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 74088,
+        "lastName": "Johnson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ashlee",
+        "id": 46226,
+        "lastName": "Matthews",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "37",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cheryl",
+        "id": 46228,
+        "lastName": "Acton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 76252,
+        "lastName": "Laude",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "38",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 76253,
+        "lastName": "Staples",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 95859,
+        "lastName": "Wignall",
+        "party": "Unaffiliated",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 46230,
+        "lastName": "Ivory",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "39",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tyler",
+        "id": 76255,
+        "lastName": "Glaittli",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 95860,
+        "lastName": "Jackson",
+        "party": "United Utah",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 46231,
+        "lastName": "Stoddard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "40",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Roy",
+        "id": 76257,
+        "lastName": "Piskadlo",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gay Lynn",
+        "id": 76256,
+        "lastName": "Bennion",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "41",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Travis",
+        "id": 76258,
+        "lastName": "Smith",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Clint",
+        "id": 76260,
+        "lastName": "Okerlund",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "42",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 46239,
+        "lastName": "Eliason",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jason",
+        "id": 76262,
+        "lastName": "Barber",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "43",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 76263,
+        "lastName": "Green",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jordan",
+        "id": 46241,
+        "lastName": "Teuscher",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "44",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tracy",
+        "id": 76265,
+        "lastName": "Miller",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sara",
+        "id": 76264,
+        "lastName": "Cimmers",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "45",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cal",
+        "id": 76266,
+        "lastName": "Roberts",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "46",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 46243,
+        "lastName": "Strong",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 95861,
+        "lastName": "Lundgren",
+        "party": "United Utah",
+        "votes": 0
+      }
+    ],
+    "district": "47",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Doug",
+        "id": 76267,
+        "lastName": "Fiefia",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stephen",
+        "id": 76268,
+        "lastName": "Middleton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "48",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Samuel",
+        "id": 76269,
+        "lastName": "Winkler",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Candice",
+        "id": 46248,
+        "lastName": "Pierucci",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "49",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 46249,
+        "lastName": "Gricius",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "50",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Jefferson",
+        "id": 46250,
+        "lastName": "Moss",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "51",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-08T20:01:20.886Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 76270,
+        "lastName": "Keller",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cory",
+        "id": 46252,
+        "lastName": "Maloy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "52",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kay",
+        "id": 46254,
+        "lastName": "Christofferson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Alex",
+        "id": 95862,
+        "lastName": "Day",
+        "party": "United Utah",
+        "votes": 0
+      }
+    ],
+    "district": "53",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brady",
+        "id": 46257,
+        "lastName": "Brammer",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "54",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jon",
+        "id": 46259,
+        "lastName": "Hawkins",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "55",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Val",
+        "id": 46260,
+        "lastName": "Peterson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "56",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alan",
+        "id": 76271,
+        "lastName": "Keele",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nelson",
+        "id": 46261,
+        "lastName": "Abbott",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "57",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joshua",
+        "id": 76272,
+        "lastName": "Sorensen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 76273,
+        "lastName": "Shallenberger",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "58",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 46265,
+        "lastName": "Kohler",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Julie",
+        "id": 76275,
+        "lastName": "Monahan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "59",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tyler",
+        "id": 76278,
+        "lastName": "Clancy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "60",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 76280,
+        "lastName": "Shepherd",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "61",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 76281,
+        "lastName": "Slater",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Norm",
+        "id": 46270,
+        "lastName": "Thurston",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "62",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephen",
+        "id": 46271,
+        "lastName": "Whyte",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 76282,
+        "lastName": "Youngquist",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "63",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rick",
+        "id": 76283,
+        "lastName": "Dougan",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 76284,
+        "lastName": "Burton",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "64",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Douglas",
+        "id": 76286,
+        "lastName": "Welton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 76285,
+        "lastName": "Hansen",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "65",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Troy",
+        "id": 76288,
+        "lastName": "Shelley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "66",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christine",
+        "id": 95863,
+        "lastName": "Facer Watkins",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 76289,
+        "lastName": "Christman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "67",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 46277,
+        "lastName": "Chew",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "68",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Logan James",
+        "id": 95864,
+        "lastName": "Monson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Davina",
+        "id": 46278,
+        "lastName": "Smith",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "69",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Zeno",
+        "id": 46281,
+        "lastName": "Parry",
+        "party": "United Utah",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carl",
+        "id": 46280,
+        "lastName": "Albrecht",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "70",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 76292,
+        "lastName": "Merrill",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rex",
+        "id": 46283,
+        "lastName": "Shipp",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "71",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 25620,
+        "lastName": "Elison",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "72",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Colin",
+        "id": 25622,
+        "lastName": "Jack",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "73",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "R. Neil",
+        "id": 76293,
+        "lastName": "Walter",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "74",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Walt",
+        "id": 46286,
+        "lastName": "Brooks",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joshua",
+        "id": 76294,
+        "lastName": "Dutson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "75",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "UT",
+    "stateName": "Utah",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

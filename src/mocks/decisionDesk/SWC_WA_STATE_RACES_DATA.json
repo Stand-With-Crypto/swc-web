@@ -1,0 +1,4308 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 8226,
+        "lastName": "Cantwell",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Raul",
+        "id": 14042,
+        "lastName": "Garcia",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Suzan",
+        "id": 1727,
+        "lastName": "DelBene",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeb",
+        "id": 27849,
+        "lastName": "Brewer",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cody",
+        "id": 27762,
+        "lastName": "Hart",
+        "party": "MAGA Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rick",
+        "id": 1729,
+        "lastName": "Larsen",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 27767,
+        "lastName": "Kent",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marie",
+        "id": 82754,
+        "lastName": "Gluesenkamp Perez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jerrod",
+        "id": 27777,
+        "lastName": "Sessler",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 1734,
+        "lastName": "Newhouse",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carmela",
+        "id": 82763,
+        "lastName": "Conroy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 82766,
+        "lastName": "Baumgartner",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 27818,
+        "lastName": "Randall",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Drew",
+        "id": 27837,
+        "lastName": "MacEwen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Pramila",
+        "id": 1739,
+        "lastName": "Jayapal",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 82771,
+        "lastName": "Alexander",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carmen",
+        "id": 28079,
+        "lastName": "Goers",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kim",
+        "id": 10132,
+        "lastName": "Schrier",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 1743,
+        "lastName": "Smith",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 82774,
+        "lastName": "Chaudhry",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Don",
+        "id": 14125,
+        "lastName": "Hewett",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marilyn",
+        "id": 14134,
+        "lastName": "Strickland",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 27759,
+        "lastName": "Matthews",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Denny",
+        "id": 1745,
+        "lastName": "Heck",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "8", "officeName": "Lt Governor", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dale",
+        "id": 82800,
+        "lastName": "Whitaker",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 27801,
+        "lastName": "Hobbs",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "39", "officeName": "Secretary of State", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 82802,
+        "lastName": "Pellicciotti",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sharon",
+        "id": 82803,
+        "lastName": "Hanek",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "146", "officeName": "Treasurer", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 10222,
+        "lastName": "Hawkins",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pat",
+        "id": 82804,
+        "lastName": "McCarthy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "135", "officeName": "Auditor", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nick",
+        "id": 82806,
+        "lastName": "Brown",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pete",
+        "id": 82805,
+        "lastName": "Serrano",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "27", "officeName": "Attorney General", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 82808,
+        "lastName": "Upthegrove",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jaime",
+        "id": 101453,
+        "lastName": "Beutler",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "142", "officeName": "Public Lands Commissioner", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 82814,
+        "lastName": "Reykdal",
+        "party": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 82816,
+        "lastName": "Olson",
+        "party": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": {
+      "officeId": "139",
+      "officeName": "Superintendent of Public Instruction",
+      "officeTypeId": "1"
+    },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Phil",
+        "id": 14040,
+        "lastName": "Fortunato",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patty",
+        "id": 27857,
+        "lastName": "Kuderer",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "144", "officeName": "Insurance Commissioner", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Derek",
+        "id": 82945,
+        "lastName": "Stanford",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 82823,
+        "lastName": "Davies",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Davina",
+        "id": 27859,
+        "lastName": "Duerr",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Shelley",
+        "id": 27861,
+        "lastName": "Kloba",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 82948,
+        "lastName": "McCune",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Erasmo",
+        "id": 82946,
+        "lastName": "Gonzalez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 27863,
+        "lastName": "Barkis",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 82892,
+        "lastName": "Marshall",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 82894,
+        "lastName": "Snaza",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marcus",
+        "id": 27866,
+        "lastName": "Riccelli",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Natasha",
+        "id": 27779,
+        "lastName": "Hill",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tony",
+        "id": 82850,
+        "lastName": "Kiepe",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Timm",
+        "id": 27868,
+        "lastName": "Ormsby",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Leonard",
+        "id": 27875,
+        "lastName": "Christian",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Miguel",
+        "id": 82952,
+        "lastName": "Valencia",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristopher",
+        "id": 101454,
+        "lastName": "Pockell",
+        "party": "No Party Preference",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Suzanne",
+        "id": 27873,
+        "lastName": "Schmidt",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ted",
+        "id": 27871,
+        "lastName": "Cummings",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rob",
+        "id": 27874,
+        "lastName": "Chase",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 27876,
+        "lastName": "Ramos",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chad",
+        "id": 27880,
+        "lastName": "Magendanz",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Victoria",
+        "id": 82871,
+        "lastName": "Hunt",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 82873,
+        "lastName": "Hargrove",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patrick",
+        "id": 82938,
+        "lastName": "Peacock",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 27879,
+        "lastName": "Callan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 82874,
+        "lastName": "McCray II",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 27881,
+        "lastName": "Volz",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michaela",
+        "id": 27882,
+        "lastName": "Kelso",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jenny",
+        "id": 27883,
+        "lastName": "Graham",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 82876,
+        "lastName": "Engell",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Soo",
+        "id": 82877,
+        "lastName": "Ing-Moody",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 82942,
+        "lastName": "Dean",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Hunter",
+        "id": 82940,
+        "lastName": "Abell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 27887,
+        "lastName": "Barnard",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "April",
+        "id": 27891,
+        "lastName": "Connors",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 27890,
+        "lastName": "Christenson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 82953,
+        "lastName": "Schoesler",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 27894,
+        "lastName": "Dye",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patrick",
+        "id": 82878,
+        "lastName": "Miller",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Pam",
+        "id": 82943,
+        "lastName": "Kohlmeier",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 27895,
+        "lastName": "Schmick",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Janet",
+        "id": 82955,
+        "lastName": "St. Clair",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ron",
+        "id": 82956,
+        "lastName": "Muzzall",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Clyde",
+        "id": 27896,
+        "lastName": "Shavers",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carrie",
+        "id": 14079,
+        "lastName": "Kennedy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gary",
+        "id": 82879,
+        "lastName": "Wray",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 27898,
+        "lastName": "Paul",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 82957,
+        "lastName": "Hasegawa",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 27900,
+        "lastName": "Hackney",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 27902,
+        "lastName": "Bergquist",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Justin",
+        "id": 27793,
+        "lastName": "Greywolf",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Keith",
+        "id": 27904,
+        "lastName": "Goehner",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 82958,
+        "lastName": "Mayhew",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 82825,
+        "lastName": "Koellen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 82826,
+        "lastName": "Burnett",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 82880,
+        "lastName": "Scott",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 27905,
+        "lastName": "Steele",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 27907,
+        "lastName": "Dent",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alex",
+        "id": 27908,
+        "lastName": "Ybarra",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 82960,
+        "lastName": "Beltran",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Curtis",
+        "id": 82959,
+        "lastName": "King",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chelsea",
+        "id": 82829,
+        "lastName": "Dimas",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gloria",
+        "id": 82830,
+        "lastName": "Mendoza",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ana",
+        "id": 82882,
+        "lastName": "Kennedy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Deb",
+        "id": 82883,
+        "lastName": "Manjarrez",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chase",
+        "id": 101455,
+        "lastName": "Foster",
+        "party": "No Party Preference",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 27909,
+        "lastName": "Corry",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeremie",
+        "id": 82884,
+        "lastName": "Dufault",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rich",
+        "id": 82885,
+        "lastName": "Bright",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kari",
+        "id": 82962,
+        "lastName": "Isaacson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Perry",
+        "id": 82961,
+        "lastName": "Dozier",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Linda",
+        "id": 82832,
+        "lastName": "Gunshefski",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 27917,
+        "lastName": "Klicker",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Craig",
+        "id": 82886,
+        "lastName": "Woodard",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Skyler",
+        "id": 27920,
+        "lastName": "Rude",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 27926,
+        "lastName": "Harris",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marla",
+        "id": 82963,
+        "lastName": "Keethler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 27924,
+        "lastName": "Waters",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terri",
+        "id": 27921,
+        "lastName": "Niles",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 82887,
+        "lastName": "Stuebe",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrian",
+        "id": 82964,
+        "lastName": "Cortes",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 27931,
+        "lastName": "Benton",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 27929,
+        "lastName": "McClintock",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Deken",
+        "id": 82833,
+        "lastName": "Letinich",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 27928,
+        "lastName": "Zingale",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 27933,
+        "lastName": "Ley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 82965,
+        "lastName": "Wilson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andi",
+        "id": 82966,
+        "lastName": "Day",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 27935,
+        "lastName": "Walsh",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 82834,
+        "lastName": "Coverdale",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joel",
+        "id": 27937,
+        "lastName": "McEntire",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 82889,
+        "lastName": "Carlson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 82967,
+        "lastName": "Braun",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Melvin",
+        "id": 82835,
+        "lastName": "Apana",
+        "party": "Culture Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 27939,
+        "lastName": "Abbarno",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ed",
+        "id": 27940,
+        "lastName": "Orcutt",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Strom",
+        "id": 27941,
+        "lastName": "Peterson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Riaz",
+        "id": 82836,
+        "lastName": "Khan",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lillian",
+        "id": 27943,
+        "lastName": "Ortiz-Self",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kristina",
+        "id": 82896,
+        "lastName": "Mitchell",
+        "party": "Conservative",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 82969,
+        "lastName": "Iyall",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 32424,
+        "lastName": "Bateman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 101456,
+        "lastName": "Owens",
+        "party": "No Party Preference",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Beth",
+        "id": 14123,
+        "lastName": "Doglio",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 82897,
+        "lastName": "Parshley",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Syd",
+        "id": 82898,
+        "lastName": "Locke",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Drew",
+        "id": 27955,
+        "lastName": "Hansen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lance",
+        "id": 82970,
+        "lastName": "Byrd",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kurt",
+        "id": 82840,
+        "lastName": "Robertson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tarra",
+        "id": 27952,
+        "lastName": "Simmons",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jamie",
+        "id": 82901,
+        "lastName": "Miles",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 82899,
+        "lastName": "Nance",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 27957,
+        "lastName": "Chapman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marcia",
+        "id": 82971,
+        "lastName": "Kelbon",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matthew",
+        "id": 82841,
+        "lastName": "Roberson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 82843,
+        "lastName": "Bernbaum",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 32426,
+        "lastName": "Tharinger",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 82903,
+        "lastName": "Roberts",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kenneth",
+        "id": 82973,
+        "lastName": "King",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 82972,
+        "lastName": "Gildon",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 82846,
+        "lastName": "Keaton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cameron",
+        "id": 48298,
+        "lastName": "Severns",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cyndy",
+        "id": 27963,
+        "lastName": "Jacobsen",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Shellie",
+        "id": 82905,
+        "lastName": "Willis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adison",
+        "id": 27964,
+        "lastName": "Richards",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jesse",
+        "id": 27820,
+        "lastName": "Young",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 27967,
+        "lastName": "Caldier",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tiffiny",
+        "id": 82906,
+        "lastName": "Mitchell",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Yasmin",
+        "id": 30186,
+        "lastName": "Trudeau",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carole",
+        "id": 82974,
+        "lastName": "Braaten",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laurie",
+        "id": 27968,
+        "lastName": "Jinkins",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 82848,
+        "lastName": "Paulson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Devin",
+        "id": 82910,
+        "lastName": "Kelly",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 27971,
+        "lastName": "Fey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "T'wina",
+        "id": 82975,
+        "lastName": "Nobles",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Maia",
+        "id": 82976,
+        "lastName": "Espinoza",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gabe",
+        "id": 27977,
+        "lastName": "Sachwitz",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mari",
+        "id": 27974,
+        "lastName": "Leavitt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 82911,
+        "lastName": "Herr",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 27978,
+        "lastName": "Bronoske",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 82849,
+        "lastName": "Miller",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melanie",
+        "id": 27981,
+        "lastName": "Morgan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sharlett",
+        "id": 27985,
+        "lastName": "Mena",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jamila",
+        "id": 27986,
+        "lastName": "Taylor",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 82852,
+        "lastName": "Hamilton",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Keith",
+        "id": 27904,
+        "lastName": "Goehner",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 82958,
+        "lastName": "Mayhew",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 82825,
+        "lastName": "Koellen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 82826,
+        "lastName": "Burnett",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 82880,
+        "lastName": "Scott",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 27905,
+        "lastName": "Steele",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 27907,
+        "lastName": "Dent",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alex",
+        "id": 27908,
+        "lastName": "Ybarra",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 82960,
+        "lastName": "Beltran",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Curtis",
+        "id": 82959,
+        "lastName": "King",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chelsea",
+        "id": 82829,
+        "lastName": "Dimas",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gloria",
+        "id": 82830,
+        "lastName": "Mendoza",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ana",
+        "id": 82882,
+        "lastName": "Kennedy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Deb",
+        "id": 82883,
+        "lastName": "Manjarrez",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chase",
+        "id": 101455,
+        "lastName": "Foster",
+        "party": "No Party Preference",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 27909,
+        "lastName": "Corry",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeremie",
+        "id": 82884,
+        "lastName": "Dufault",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rich",
+        "id": 82885,
+        "lastName": "Bright",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kari",
+        "id": 82962,
+        "lastName": "Isaacson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Perry",
+        "id": 82961,
+        "lastName": "Dozier",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Linda",
+        "id": 82832,
+        "lastName": "Gunshefski",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 27917,
+        "lastName": "Klicker",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Craig",
+        "id": 82886,
+        "lastName": "Woodard",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Skyler",
+        "id": 27920,
+        "lastName": "Rude",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 27926,
+        "lastName": "Harris",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marla",
+        "id": 82963,
+        "lastName": "Keethler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 27924,
+        "lastName": "Waters",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terri",
+        "id": 27921,
+        "lastName": "Niles",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 82887,
+        "lastName": "Stuebe",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrian",
+        "id": 82964,
+        "lastName": "Cortes",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 27931,
+        "lastName": "Benton",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 27929,
+        "lastName": "McClintock",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Deken",
+        "id": 82833,
+        "lastName": "Letinich",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 27928,
+        "lastName": "Zingale",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 27933,
+        "lastName": "Ley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 82965,
+        "lastName": "Wilson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andi",
+        "id": 82966,
+        "lastName": "Day",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 27935,
+        "lastName": "Walsh",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 82834,
+        "lastName": "Coverdale",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joel",
+        "id": 27937,
+        "lastName": "McEntire",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 82889,
+        "lastName": "Carlson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 82967,
+        "lastName": "Braun",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Melvin",
+        "id": 82835,
+        "lastName": "Apana",
+        "party": "Culture Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 27939,
+        "lastName": "Abbarno",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ed",
+        "id": 27940,
+        "lastName": "Orcutt",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Strom",
+        "id": 27941,
+        "lastName": "Peterson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Riaz",
+        "id": 82836,
+        "lastName": "Khan",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lillian",
+        "id": 27943,
+        "lastName": "Ortiz-Self",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kristina",
+        "id": 82896,
+        "lastName": "Mitchell",
+        "party": "Conservative",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 82969,
+        "lastName": "Iyall",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 32424,
+        "lastName": "Bateman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 101456,
+        "lastName": "Owens",
+        "party": "No Party Preference",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Beth",
+        "id": 14123,
+        "lastName": "Doglio",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 82897,
+        "lastName": "Parshley",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Syd",
+        "id": 82898,
+        "lastName": "Locke",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Drew",
+        "id": 27955,
+        "lastName": "Hansen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lance",
+        "id": 82970,
+        "lastName": "Byrd",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kurt",
+        "id": 82840,
+        "lastName": "Robertson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tarra",
+        "id": 27952,
+        "lastName": "Simmons",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jamie",
+        "id": 82901,
+        "lastName": "Miles",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 82899,
+        "lastName": "Nance",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 27957,
+        "lastName": "Chapman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marcia",
+        "id": 82971,
+        "lastName": "Kelbon",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matthew",
+        "id": 82841,
+        "lastName": "Roberson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 82843,
+        "lastName": "Bernbaum",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 32426,
+        "lastName": "Tharinger",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 82903,
+        "lastName": "Roberts",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kenneth",
+        "id": 82973,
+        "lastName": "King",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 82972,
+        "lastName": "Gildon",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 82846,
+        "lastName": "Keaton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cameron",
+        "id": 48298,
+        "lastName": "Severns",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cyndy",
+        "id": 27963,
+        "lastName": "Jacobsen",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Shellie",
+        "id": 82905,
+        "lastName": "Willis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adison",
+        "id": 27964,
+        "lastName": "Richards",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jesse",
+        "id": 27820,
+        "lastName": "Young",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 27967,
+        "lastName": "Caldier",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tiffiny",
+        "id": 82906,
+        "lastName": "Mitchell",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Yasmin",
+        "id": 30186,
+        "lastName": "Trudeau",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carole",
+        "id": 82974,
+        "lastName": "Braaten",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laurie",
+        "id": 27968,
+        "lastName": "Jinkins",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 82848,
+        "lastName": "Paulson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Devin",
+        "id": 82910,
+        "lastName": "Kelly",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 27971,
+        "lastName": "Fey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "T'wina",
+        "id": 82975,
+        "lastName": "Nobles",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Maia",
+        "id": 82976,
+        "lastName": "Espinoza",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gabe",
+        "id": 27977,
+        "lastName": "Sachwitz",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mari",
+        "id": 27974,
+        "lastName": "Leavitt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 82911,
+        "lastName": "Herr",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 27978,
+        "lastName": "Bronoske",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 82849,
+        "lastName": "Miller",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melanie",
+        "id": 27981,
+        "lastName": "Morgan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sharlett",
+        "id": 27985,
+        "lastName": "Mena",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jamila",
+        "id": 27986,
+        "lastName": "Taylor",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 82852,
+        "lastName": "Hamilton",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:30:23.127Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

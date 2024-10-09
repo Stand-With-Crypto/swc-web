@@ -1,8 +1,11 @@
 'use client'
 
+import { useCookie } from 'react-use'
 import useSWR from 'swr'
 
+import { INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import * as stateRacesMockData from '@/mocks/decisionDesk'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
@@ -11,6 +14,28 @@ export function useApiDecisionDeskStateData(
   state: string,
   district?: number,
 ) {
+  const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
+
+  if (apiTamperedValue && state) {
+    const key = `SWC_${state.toUpperCase()}_STATE_RACES_DATA`
+
+    const stateRacesData = stateRacesMockData[
+      key as keyof typeof stateRacesMockData
+    ] as RacesVotingDataResponse[]
+
+    return stateRacesData.map(currentStateRaceData => {
+      return {
+        ...currentStateRaceData,
+        candidatesWithVotes: currentStateRaceData.candidatesWithVotes.map(currentCandidate => {
+          return {
+            ...currentCandidate,
+            votes: Math.round((currentCandidate.votes ?? 1000) * (+apiTamperedValue / 100)),
+          }
+        }),
+      }
+    })
+  }
+
   return useSWR(
     apiUrls.decisionDeskStateData(state, district),
     url =>

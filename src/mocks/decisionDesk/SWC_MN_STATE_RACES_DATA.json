@@ -1,0 +1,4496 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Amy",
+        "id": 8233,
+        "lastName": "Klobuchar",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Royce",
+        "id": 28730,
+        "lastName": "White",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joyce",
+        "id": 102177,
+        "lastName": "Lacey",
+        "party": "Independence-Alliance Party of Minnesota",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rebecca",
+        "id": 102178,
+        "lastName": "Whiting",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:58:09.821Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 692645,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 22174,
+        "lastName": "Finstad",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rachel",
+        "id": 83442,
+        "lastName": "Bohman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:56:19.876Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 84147,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angie",
+        "id": 1356,
+        "lastName": "Craig",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 83443,
+        "lastName": "Teirab",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Thomas",
+        "id": 102176,
+        "lastName": "Bowman",
+        "party": "Conservative",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tad",
+        "id": 83446,
+        "lastName": "Jude",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kelly",
+        "id": 45013,
+        "lastName": "Morrison",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:44:43.349Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 15199,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Betty",
+        "id": 1360,
+        "lastName": "McCollum",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "May",
+        "id": 28727,
+        "lastName": "Lor Xiong",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ilhan",
+        "id": 10474,
+        "lastName": "Omar",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dalia",
+        "id": 14257,
+        "lastName": "Al-Aqidi",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T15:16:00.398Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 1365,
+        "lastName": "Emmer",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeanne",
+        "id": 44463,
+        "lastName": "Hendricks",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:56:19.876Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 56271,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 14264,
+        "lastName": "Fischbach",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 8810,
+        "lastName": "Peters",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:56:19.876Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 84816,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 44465,
+        "lastName": "Schultz",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 85048,
+        "lastName": "Stauber",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:55:17.338Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 54718,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 46644,
+        "lastName": "Burkel",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 46643,
+        "lastName": "Sceville",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 83455,
+        "lastName": "Gander",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 83456,
+        "lastName": "Christopherson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bidal",
+        "id": 83457,
+        "lastName": "Duran",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Reed",
+        "id": 46680,
+        "lastName": "Olson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 46683,
+        "lastName": "Bliss",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 83458,
+        "lastName": "Reyes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rich",
+        "id": 101794,
+        "lastName": "Tru",
+        "party": "Forward",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Roger",
+        "id": 28813,
+        "lastName": "Skraba",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Harley",
+        "id": 83459,
+        "lastName": "Droba",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Natalie",
+        "id": 46722,
+        "lastName": "Zeleznikar",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 83460,
+        "lastName": "Munger",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joshua",
+        "id": 83461,
+        "lastName": "Zincke",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 46759,
+        "lastName": "Keeler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Thaddeus",
+        "id": 83462,
+        "lastName": "Laugisch",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 46762,
+        "lastName": "Joy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 46800,
+        "lastName": "Hobson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Krista",
+        "id": 46801,
+        "lastName": "Knudsen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gregg",
+        "id": 83463,
+        "lastName": "Hendrickson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 28815,
+        "lastName": "Wiener",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Earl",
+        "id": 83464,
+        "lastName": "Butenhoff",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ben",
+        "id": 46829,
+        "lastName": "Davis",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Josh",
+        "id": 28816,
+        "lastName": "Heintzeman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 83466,
+        "lastName": "LeClaire",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Troy",
+        "id": 101795,
+        "lastName": "Scheffler",
+        "party": "Americans First",
+        "votes": 0
+      }
+    ],
+    "district": "6B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Spencer",
+        "id": 46832,
+        "lastName": "Igo",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Aron",
+        "id": 83467,
+        "lastName": "Schnaser",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lorrie",
+        "id": 83470,
+        "lastName": "Janatopoulos",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cal",
+        "id": 83469,
+        "lastName": "Warwas",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 83471,
+        "lastName": "McGrew",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pete",
+        "id": 101796,
+        "lastName": "Johnson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Shawn",
+        "id": 83475,
+        "lastName": "Savela",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Alicia",
+        "id": 28791,
+        "lastName": "Kozlowski",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 46838,
+        "lastName": "Backer",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 83477,
+        "lastName": "Ziomko",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jason",
+        "id": 46839,
+        "lastName": "Satter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 46840,
+        "lastName": "Murphy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Julia",
+        "id": 83479,
+        "lastName": "Hipp",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ron",
+        "id": 28820,
+        "lastName": "Kresha",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 5280,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "JoEllen",
+        "id": 101797,
+        "lastName": "Burns",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Isaac",
+        "id": 28823,
+        "lastName": "Schultz",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:49:48.820Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 6544,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 46610,
+        "lastName": "Dotseth",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pete",
+        "id": 46609,
+        "lastName": "Radosevich",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:56:18.105Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 1082,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eric",
+        "id": 46611,
+        "lastName": "Olson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nathan",
+        "id": 46612,
+        "lastName": "Nelson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:35.769Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 9453,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 12826,
+        "lastName": "Anderson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Becky",
+        "id": 49085,
+        "lastName": "Parker",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 6169,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 46615,
+        "lastName": "Franson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Judd",
+        "id": 83480,
+        "lastName": "Hoff",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cindy",
+        "id": 83481,
+        "lastName": "Aho",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 46617,
+        "lastName": "Demuth",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dusty",
+        "id": 83482,
+        "lastName": "Bolstad",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tim",
+        "id": 46619,
+        "lastName": "O'Driscoll",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:55:16.395Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7233,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Abdi",
+        "id": 83483,
+        "lastName": "Daisane",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bernie",
+        "id": 46621,
+        "lastName": "Perryman",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:24:29.419Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 8313,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sue",
+        "id": 83484,
+        "lastName": "Ek",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 46622,
+        "lastName": "Wolgamott",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:12.227Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7999,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 46625,
+        "lastName": "Swedzinski",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 83485,
+        "lastName": "Studemann",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 46627,
+        "lastName": "Torkelson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 46626,
+        "lastName": "Kuster",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:45:13.274Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 4162,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 83486,
+        "lastName": "Van Binsbergen",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathy",
+        "id": 83487,
+        "lastName": "Hegstad",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:45:13.274Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 13681,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Josiah",
+        "id": 83488,
+        "lastName": "Ampian",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 46631,
+        "lastName": "Baker",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:28:25.655Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7062,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chad",
+        "id": 44965,
+        "lastName": "Tschimperle",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dawn",
+        "id": 46633,
+        "lastName": "Gillman",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 83490,
+        "lastName": "Nuesse",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bobbie",
+        "id": 46634,
+        "lastName": "Harder",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Erica",
+        "id": 83491,
+        "lastName": "Schwartz",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 46635,
+        "lastName": "Brand",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:14.519Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 6491,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dar",
+        "id": 46638,
+        "lastName": "Vosburg",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Luke",
+        "id": 46637,
+        "lastName": "Frederick",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 83493,
+        "lastName": "Navarro",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Keith",
+        "id": 83492,
+        "lastName": "Allen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 101798,
+        "lastName": "Sexton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Edelgard",
+        "id": 83496,
+        "lastName": "Mejia",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Pam",
+        "id": 28825,
+        "lastName": "Altendorf",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 83497,
+        "lastName": "Arndt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "20A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:24:29.419Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 8384,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 83498,
+        "lastName": "Hutchinson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 46650,
+        "lastName": "Jacob",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:58:12.316Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 13673,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 46652,
+        "lastName": "Schomacker",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Creedence",
+        "id": 101799,
+        "lastName": "Petroff",
+        "party": "Independence-Alliance Party of Minnesota",
+        "votes": 0
+      }
+    ],
+    "district": "21A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:30:10.228Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 997,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jon",
+        "id": 83499,
+        "lastName": "Wilson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marj",
+        "id": 28827,
+        "lastName": "Fogelman",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:12.227Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 5257,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marisa",
+        "id": 46654,
+        "lastName": "Ulmen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bjorn",
+        "id": 46655,
+        "lastName": "Olson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:35.769Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 3758,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 83500,
+        "lastName": "Stier",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sara",
+        "id": 83501,
+        "lastName": "Nett-Torgrimson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:54:25.065Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 15198,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 83502,
+        "lastName": "Staloch",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Peggy",
+        "id": 46659,
+        "lastName": "Bennett",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 101800,
+        "lastName": "Pacovsky",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patricia",
+        "id": 46661,
+        "lastName": "Mueller",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:38.653Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 1364,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 83504,
+        "lastName": "Holmes",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Duane",
+        "id": 46663,
+        "lastName": "Quam",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:58:12.316Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 6184,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 83506,
+        "lastName": "Sepeda",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tina",
+        "id": 46664,
+        "lastName": "Liebling",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kim",
+        "id": 46666,
+        "lastName": "Hicks",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 22177,
+        "lastName": "Navitsky",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:35.769Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7544,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 46668,
+        "lastName": "Smith",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wes",
+        "id": 83507,
+        "lastName": "Lund",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Aaron",
+        "id": 83509,
+        "lastName": "Repinski",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sarah",
+        "id": 83511,
+        "lastName": "Kruger",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:06.421Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 10633,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Allie",
+        "id": 83516,
+        "lastName": "Wolf",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 28828,
+        "lastName": "Davids",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kathryn",
+        "id": 83517,
+        "lastName": "Geary",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Shane",
+        "id": 46673,
+        "lastName": "Mekeland",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bryan",
+        "id": 59063,
+        "lastName": "Lawrence",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 83518,
+        "lastName": "Scouten",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 83519,
+        "lastName": "Gordon",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tim",
+        "id": 83520,
+        "lastName": "Dummer",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:49:48.820Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 9231,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Max",
+        "id": 83521,
+        "lastName": "Rymer",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 46721,
+        "lastName": "Murphy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:44:41.633Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 12124,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 46678,
+        "lastName": "McDonald",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 44985,
+        "lastName": "Brazelton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Colton",
+        "id": 83523,
+        "lastName": "Kratky",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marion",
+        "id": 83522,
+        "lastName": "Rarick",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:38:27.073Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7351,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sonja",
+        "id": 46684,
+        "lastName": "Buckmeier",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Walter",
+        "id": 46685,
+        "lastName": "Hudson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 83525,
+        "lastName": "Bolin",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 46687,
+        "lastName": "Novotny",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:23:11.106Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 2483,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Harry",
+        "id": 46689,
+        "lastName": "Niska",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dara",
+        "id": 83526,
+        "lastName": "Grimmer",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "31A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gadisa",
+        "id": 83527,
+        "lastName": "Berkessa",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Peggy",
+        "id": 46691,
+        "lastName": "Scott",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7928,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ashton",
+        "id": 28795,
+        "lastName": "Ramsammy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nolan",
+        "id": 46692,
+        "lastName": "West",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "32A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alex",
+        "id": 44952,
+        "lastName": "Moe",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 46693,
+        "lastName": "Norris",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "32B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patti",
+        "id": 46696,
+        "lastName": "Anderson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 83528,
+        "lastName": "Ross",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 83529,
+        "lastName": "Johnson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Josiah",
+        "id": 28796,
+        "lastName": "Hill",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Danny",
+        "id": 46698,
+        "lastName": "Nadeau",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 46697,
+        "lastName": "Raines",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 46700,
+        "lastName": "Simmons",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 46699,
+        "lastName": "Hortman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Josh",
+        "id": 83530,
+        "lastName": "Jungling",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Zack",
+        "id": 46701,
+        "lastName": "Stephenson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "35A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kari",
+        "id": 44995,
+        "lastName": "Rehrauer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 83531,
+        "lastName": "Pape",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "35B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 10972,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Elliott",
+        "id": 46706,
+        "lastName": "Engen",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Janelle",
+        "id": 83533,
+        "lastName": "Calhoun",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "36A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 25873,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brion",
+        "id": 46707,
+        "lastName": "Curran",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patty",
+        "id": 83534,
+        "lastName": "Bradway",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "36B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:12.227Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 13036,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristin",
+        "id": 46710,
+        "lastName": "Robbins",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Laurie",
+        "id": 83536,
+        "lastName": "Wolfe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "37A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristin",
+        "id": 46711,
+        "lastName": "Bahner",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 46712,
+        "lastName": "Bristol",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "37B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:55:16.395Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 16760,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 83537,
+        "lastName": "Olson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Huldah",
+        "id": 28745,
+        "lastName": "Hiltsley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "38A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 4948,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Samantha",
+        "id": 46714,
+        "lastName": "Vang",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 46715,
+        "lastName": "Marvin",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "38B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rod",
+        "id": 46717,
+        "lastName": "Sylvester",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Erin",
+        "id": 46716,
+        "lastName": "Koegel",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "39A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "KT",
+        "id": 83541,
+        "lastName": "Jacobs",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sandra",
+        "id": 46718,
+        "lastName": "Feist",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "39B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kelly",
+        "id": 46723,
+        "lastName": "Moller",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "40A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:59:43.319Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Curtis",
+        "id": 83543,
+        "lastName": "Johnson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 83542,
+        "lastName": "Wikstrom",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "40B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lucia",
+        "id": 83545,
+        "lastName": "Wroblewski",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wayne",
+        "id": 68011,
+        "lastName": "Johnson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "41A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jen",
+        "id": 83546,
+        "lastName": "Fox",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 28784,
+        "lastName": "Dippel",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "41B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:39.464Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 10234,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ned",
+        "id": 46731,
+        "lastName": "Carroll",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathy",
+        "id": 46732,
+        "lastName": "Burkett",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "42A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ginny",
+        "id": 46733,
+        "lastName": "Klevorn",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Perry",
+        "id": 83547,
+        "lastName": "Nouis",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "42B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cedrick",
+        "id": 46735,
+        "lastName": "Frazier",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Todd",
+        "id": 83548,
+        "lastName": "Hesemann",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "43A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 11041,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 83549,
+        "lastName": "Merriman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 46736,
+        "lastName": "Freiberg",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "43B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:25:50.947Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 9031,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 46737,
+        "lastName": "Fischer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Karla",
+        "id": 83550,
+        "lastName": "Nelson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "44A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 83551,
+        "lastName": "Dahn",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "TJ",
+        "id": 46741,
+        "lastName": "Hawthorne",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leon",
+        "id": 46739,
+        "lastName": "Lillie",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "44B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tracey",
+        "id": 83552,
+        "lastName": "Breazeale",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 46743,
+        "lastName": "Myers",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "45A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patty",
+        "id": 46744,
+        "lastName": "Acomb",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "45B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:59:43.319Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 46652,
+        "lastName": "Schomacker",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Creedence",
+        "id": 101799,
+        "lastName": "Petroff",
+        "party": "Independence-Alliance Party of Minnesota",
+        "votes": 0
+      }
+    ],
+    "district": "21A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:30:10.228Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 997,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jon",
+        "id": 83499,
+        "lastName": "Wilson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marj",
+        "id": 28827,
+        "lastName": "Fogelman",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:12.227Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 5257,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marisa",
+        "id": 46654,
+        "lastName": "Ulmen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bjorn",
+        "id": 46655,
+        "lastName": "Olson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:35.769Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 3758,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 83500,
+        "lastName": "Stier",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sara",
+        "id": 83501,
+        "lastName": "Nett-Torgrimson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:54:25.065Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 15198,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 83502,
+        "lastName": "Staloch",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Peggy",
+        "id": 46659,
+        "lastName": "Bennett",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 101800,
+        "lastName": "Pacovsky",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patricia",
+        "id": 46661,
+        "lastName": "Mueller",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:38.653Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 1364,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 83504,
+        "lastName": "Holmes",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Duane",
+        "id": 46663,
+        "lastName": "Quam",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:58:12.316Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 6184,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 83506,
+        "lastName": "Sepeda",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tina",
+        "id": 46664,
+        "lastName": "Liebling",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kim",
+        "id": 46666,
+        "lastName": "Hicks",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 22177,
+        "lastName": "Navitsky",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:35.769Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7544,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 46668,
+        "lastName": "Smith",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wes",
+        "id": 83507,
+        "lastName": "Lund",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Aaron",
+        "id": 83509,
+        "lastName": "Repinski",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sarah",
+        "id": 83511,
+        "lastName": "Kruger",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:43:06.421Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 10633,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Allie",
+        "id": 83516,
+        "lastName": "Wolf",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 28828,
+        "lastName": "Davids",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kathryn",
+        "id": 83517,
+        "lastName": "Geary",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Shane",
+        "id": 46673,
+        "lastName": "Mekeland",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bryan",
+        "id": 59063,
+        "lastName": "Lawrence",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 83518,
+        "lastName": "Scouten",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 83519,
+        "lastName": "Gordon",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tim",
+        "id": 83520,
+        "lastName": "Dummer",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:49:48.820Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 9231,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Max",
+        "id": 83521,
+        "lastName": "Rymer",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 46721,
+        "lastName": "Murphy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:44:41.633Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 12124,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 46678,
+        "lastName": "McDonald",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 44985,
+        "lastName": "Brazelton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Colton",
+        "id": 83523,
+        "lastName": "Kratky",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marion",
+        "id": 83522,
+        "lastName": "Rarick",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:38:27.073Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7351,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sonja",
+        "id": 46684,
+        "lastName": "Buckmeier",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Walter",
+        "id": 46685,
+        "lastName": "Hudson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 83525,
+        "lastName": "Bolin",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 46687,
+        "lastName": "Novotny",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:23:11.106Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 2483,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Harry",
+        "id": 46689,
+        "lastName": "Niska",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dara",
+        "id": 83526,
+        "lastName": "Grimmer",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "31A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gadisa",
+        "id": 83527,
+        "lastName": "Berkessa",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Peggy",
+        "id": 46691,
+        "lastName": "Scott",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 7928,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ashton",
+        "id": 28795,
+        "lastName": "Ramsammy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nolan",
+        "id": 46692,
+        "lastName": "West",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "32A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alex",
+        "id": 44952,
+        "lastName": "Moe",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 46693,
+        "lastName": "Norris",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "32B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patti",
+        "id": 46696,
+        "lastName": "Anderson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 83528,
+        "lastName": "Ross",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 83529,
+        "lastName": "Johnson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Josiah",
+        "id": 28796,
+        "lastName": "Hill",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Danny",
+        "id": 46698,
+        "lastName": "Nadeau",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 46697,
+        "lastName": "Raines",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 46700,
+        "lastName": "Simmons",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 46699,
+        "lastName": "Hortman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Josh",
+        "id": 83530,
+        "lastName": "Jungling",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Zack",
+        "id": 46701,
+        "lastName": "Stephenson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "35A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kari",
+        "id": 44995,
+        "lastName": "Rehrauer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 83531,
+        "lastName": "Pape",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "35B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 10972,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Elliott",
+        "id": 46706,
+        "lastName": "Engen",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Janelle",
+        "id": 83533,
+        "lastName": "Calhoun",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "36A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 25873,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brion",
+        "id": 46707,
+        "lastName": "Curran",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Patty",
+        "id": 83534,
+        "lastName": "Bradway",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "36B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:12.227Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 13036,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristin",
+        "id": 46710,
+        "lastName": "Robbins",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Laurie",
+        "id": 83536,
+        "lastName": "Wolfe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "37A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristin",
+        "id": 46711,
+        "lastName": "Bahner",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 46712,
+        "lastName": "Bristol",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "37B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:55:16.395Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 16760,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 83537,
+        "lastName": "Olson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Huldah",
+        "id": 28745,
+        "lastName": "Hiltsley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "38A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 4948,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Samantha",
+        "id": 46714,
+        "lastName": "Vang",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 46715,
+        "lastName": "Marvin",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "38B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rod",
+        "id": 46717,
+        "lastName": "Sylvester",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Erin",
+        "id": 46716,
+        "lastName": "Koegel",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "39A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "KT",
+        "id": 83541,
+        "lastName": "Jacobs",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sandra",
+        "id": 46718,
+        "lastName": "Feist",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "39B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kelly",
+        "id": 46723,
+        "lastName": "Moller",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "40A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:59:43.319Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Curtis",
+        "id": 83543,
+        "lastName": "Johnson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 83542,
+        "lastName": "Wikstrom",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "40B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lucia",
+        "id": 83545,
+        "lastName": "Wroblewski",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wayne",
+        "id": 68011,
+        "lastName": "Johnson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "41A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jen",
+        "id": 83546,
+        "lastName": "Fox",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 28784,
+        "lastName": "Dippel",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "41B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:39.464Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 10234,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ned",
+        "id": 46731,
+        "lastName": "Carroll",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathy",
+        "id": 46732,
+        "lastName": "Burkett",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "42A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ginny",
+        "id": 46733,
+        "lastName": "Klevorn",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Perry",
+        "id": 83547,
+        "lastName": "Nouis",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "42B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cedrick",
+        "id": 46735,
+        "lastName": "Frazier",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Todd",
+        "id": 83548,
+        "lastName": "Hesemann",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "43A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:51:41.058Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 11041,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 83549,
+        "lastName": "Merriman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 46736,
+        "lastName": "Freiberg",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "43B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:25:50.947Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 9031,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 46737,
+        "lastName": "Fischer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Karla",
+        "id": 83550,
+        "lastName": "Nelson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "44A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 83551,
+        "lastName": "Dahn",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "TJ",
+        "id": 46741,
+        "lastName": "Hawthorne",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leon",
+        "id": 46739,
+        "lastName": "Lillie",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "44B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tracey",
+        "id": 83552,
+        "lastName": "Breazeale",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 46743,
+        "lastName": "Myers",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "45A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patty",
+        "id": 46744,
+        "lastName": "Acomb",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "45B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:59:43.319Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

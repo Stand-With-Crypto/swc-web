@@ -1,0 +1,5748 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ted",
+        "id": 14930,
+        "lastName": "Brown",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Colin",
+        "id": 8358,
+        "lastName": "Allred",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ted",
+        "id": 2,
+        "lastName": "Cruz",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:10:03.482Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 6975698,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nathaniel",
+        "id": 18154,
+        "lastName": "Moran",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 52726,
+        "lastName": "Filler",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 85131,
+        "lastName": "Crenshaw",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 301336,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sandeep",
+        "id": 18098,
+        "lastName": "Srivastava",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Keith",
+        "id": 18161,
+        "lastName": "Self",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:44:43.349Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 341505,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Pat",
+        "id": 14965,
+        "lastName": "Fallon",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Simon",
+        "id": 52727,
+        "lastName": "Cardell",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 317922,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lance",
+        "id": 8498,
+        "lastName": "Gooden",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ruth",
+        "id": 52729,
+        "lastName": "Torres",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 279958,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 9772,
+        "lastName": "Love",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 15174,
+        "lastName": "Ellzey",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:04:17.187Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 229856,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lizzie",
+        "id": 8476,
+        "lastName": "Fletcher",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Caroline",
+        "id": 52734,
+        "lastName": "Kane",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 239709,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laura",
+        "id": 12438,
+        "lastName": "Jones",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Morgan",
+        "id": 18176,
+        "lastName": "Luttrell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:07:53.887Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 221265,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Al",
+        "id": 1648,
+        "lastName": "Green",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:07:53.887Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 1651,
+        "lastName": "McCaul",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Theresa",
+        "id": 52736,
+        "lastName": "Boisseau",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 45229,
+        "lastName": "Miller",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 306948,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "August",
+        "id": 12312,
+        "lastName": "Pfluger",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wacey",
+        "id": 14926,
+        "lastName": "Cody",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 172466,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Trey",
+        "id": 18105,
+        "lastName": "Hunt",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Craig",
+        "id": 15330,
+        "lastName": "Goldman",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 307161,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 2183,
+        "lastName": "Kolls",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ronny",
+        "id": 12322,
+        "lastName": "Jackson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 160536,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Randy",
+        "id": 1657,
+        "lastName": "Weber",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rhonda",
+        "id": 52744,
+        "lastName": "Hart",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 219956,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Arthur",
+        "id": 14937,
+        "lastName": "DiBianca",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Monica",
+        "id": 18190,
+        "lastName": "De La Cruz",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 18113,
+        "lastName": "Vallejo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:07:35.782Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 189441,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Veronica",
+        "id": 8450,
+        "lastName": "Escobar",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Irene",
+        "id": 12337,
+        "lastName": "Armendariz-Jackson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:07:53.887Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 79632,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 52747,
+        "lastName": "Lorenzen",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pete",
+        "id": 1689,
+        "lastName": "Sessions",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Clyde",
+        "id": 85135,
+        "lastName": "Garland",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 249817,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sylvester",
+        "id": 102226,
+        "lastName": "Turner",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lana",
+        "id": 52750,
+        "lastName": "Centonze",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 216080,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nathan",
+        "id": 44428,
+        "lastName": "Lewis",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jodey",
+        "id": 1665,
+        "lastName": "Arrington",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bernard",
+        "id": 85137,
+        "lastName": "Johnson",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 142866,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Pat",
+        "id": 85138,
+        "lastName": "Dixon",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joaquin",
+        "id": 1666,
+        "lastName": "Castro",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 179838,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chip",
+        "id": 8429,
+        "lastName": "Roy",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bob",
+        "id": 85140,
+        "lastName": "King",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kristin",
+        "id": 52753,
+        "lastName": "Hook",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:21.509Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 378714,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marquette",
+        "id": 52754,
+        "lastName": "Greene-Scott",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Troy",
+        "id": 12374,
+        "lastName": "Nehls",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 293255,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tony",
+        "id": 12384,
+        "lastName": "Gonzales",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Santos",
+        "id": 52756,
+        "lastName": "Limon",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 263855,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Beth",
+        "id": 12547,
+        "lastName": "Van Duyne",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sam",
+        "id": 52760,
+        "lastName": "Eppler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 300779,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Roger",
+        "id": 1676,
+        "lastName": "Williams",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brandon",
+        "id": 52767,
+        "lastName": "Gill",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ernest",
+        "id": 85142,
+        "lastName": "Lineberger",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Phil",
+        "id": 1812,
+        "lastName": "Gray",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:07:53.887Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 343913,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tanya",
+        "id": 52774,
+        "lastName": "Lloyd",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 8390,
+        "lastName": "Cloud",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 262073,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jay",
+        "id": 52777,
+        "lastName": "Furman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Henry",
+        "id": 1681,
+        "lastName": "Cuellar",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bailey",
+        "id": 85144,
+        "lastName": "Cole",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:07:53.887Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 213619,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sylvia",
+        "id": 8374,
+        "lastName": "Garcia",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Alan",
+        "id": 52783,
+        "lastName": "Garza",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 153980,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jasmine",
+        "id": 18131,
+        "lastName": "Crockett",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 2203,
+        "lastName": "Ashby",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 220003,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Caleb",
+        "id": 85145,
+        "lastName": "Ferrell",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stuart",
+        "id": 52787,
+        "lastName": "Whitlow",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 1688,
+        "lastName": "Carter",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:38:28.357Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 320496,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Darrell",
+        "id": 18232,
+        "lastName": "Day",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Julie",
+        "id": 15399,
+        "lastName": "Johnson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 14916,
+        "lastName": "Hale",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 226094,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patrick",
+        "id": 18237,
+        "lastName": "Gillespie",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marc",
+        "id": 1690,
+        "lastName": "Veasey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 164508,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brent",
+        "id": 85148,
+        "lastName": "Lewis",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mayra",
+        "id": 18240,
+        "lastName": "Flores",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Vicente",
+        "id": 1658,
+        "lastName": "Gonzalez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 186203,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 52804,
+        "lastName": "Wright",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 18144,
+        "lastName": "Casar",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Clark",
+        "id": 2192,
+        "lastName": "Patterson",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 238783,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 1696,
+        "lastName": "Babin",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dayna",
+        "id": 8353,
+        "lastName": "Steele",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "36",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 105216,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Girish",
+        "id": 85149,
+        "lastName": "Altekar",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jenny",
+        "id": 12414,
+        "lastName": "Sharon",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lloyd",
+        "id": 1694,
+        "lastName": "Doggett",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "37",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:00.462Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 306235,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 52807,
+        "lastName": "McDonough",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wesley",
+        "id": 12293,
+        "lastName": "Hunt",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chad",
+        "id": 14964,
+        "lastName": "Abbey",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "38",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 328197,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hawk",
+        "id": 97075,
+        "lastName": "Dunlap",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Christi",
+        "id": 52812,
+        "lastName": "Craddick",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Eddie",
+        "id": 97076,
+        "lastName": "Espinoza",
+        "party": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Katherine",
+        "id": 52810,
+        "lastName": "Culbert",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "150", "officeName": "Railroad Commissioner", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 9738614,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jimmy",
+        "id": 52818,
+        "lastName": "Blacklock",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dasean",
+        "id": 52816,
+        "lastName": "Jones",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 7933898,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 52820,
+        "lastName": "Devine",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Christine",
+        "id": 52819,
+        "lastName": "Weems",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 9689496,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "J.",
+        "id": 97077,
+        "lastName": "Roberson",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jane",
+        "id": 15091,
+        "lastName": "Bland",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bonnie",
+        "id": 52822,
+        "lastName": "Goldstein",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 9071378,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 18088,
+        "lastName": "Schenck",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Holly",
+        "id": 97078,
+        "lastName": "Taylor",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "153", "officeName": "Court of Criminal Appeals", "officeTypeId": "5" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 8184494,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nancy",
+        "id": 97079,
+        "lastName": "Mulder",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gina",
+        "id": 58985,
+        "lastName": "Parker",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "153", "officeName": "Court of Criminal Appeals", "officeTypeId": "5" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 7511951,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chika",
+        "id": 97080,
+        "lastName": "Anyiam",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lee",
+        "id": 58987,
+        "lastName": "Finley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "153", "officeName": "Court of Criminal Appeals", "officeTypeId": "5" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 8837491,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gustavo",
+        "id": 52824,
+        "lastName": "Reveles",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 18626,
+        "lastName": "Stevens",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:36.132Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 966969,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marisa",
+        "id": 18607,
+        "lastName": "Perez-Diaz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Staci",
+        "id": 22151,
+        "lastName": "Childs",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Raquel",
+        "id": 52826,
+        "lastName": "Ortiz",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 15117,
+        "lastName": "Maynard",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:36.132Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 843852,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brandon",
+        "id": 52830,
+        "lastName": "Hall",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rayna",
+        "id": 52829,
+        "lastName": "Glasser",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Hunter",
+        "id": 47501,
+        "lastName": "Crow",
+        "party": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:49.449Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 1749539,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "George",
+        "id": 52832,
+        "lastName": "King",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pam",
+        "id": 18647,
+        "lastName": "Little",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:49.449Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 1859092,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Aaron",
+        "id": 18655,
+        "lastName": "Kinsey",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Morgan",
+        "id": 52834,
+        "lastName": "Kirkpatrick",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jack",
+        "id": 14928,
+        "lastName": "Westbrook",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:49.449Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 627418,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Martha",
+        "id": 15461,
+        "lastName": "Fierro",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carol",
+        "id": 15129,
+        "lastName": "Alvarado",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 137375,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 18287,
+        "lastName": "Bettencourt",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 52835,
+        "lastName": "Gwinn",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 372820,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angela",
+        "id": 18288,
+        "lastName": "Paxton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rachel",
+        "id": 52837,
+        "lastName": "Mello",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 411878,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Phil",
+        "id": 15263,
+        "lastName": "King",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andy",
+        "id": 52838,
+        "lastName": "Morris",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 130855,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tan",
+        "id": 15267,
+        "lastName": "Parker",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 52839,
+        "lastName": "Draper",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 410447,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Sarah",
+        "id": 18271,
+        "lastName": "Eckhardt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 52843,
+        "lastName": "Trahan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Molly",
+        "id": 18272,
+        "lastName": "Cook",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 319690,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nathan",
+        "id": 18274,
+        "lastName": "Johnson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joan",
+        "id": 18298,
+        "lastName": "Huffman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathy",
+        "id": 15092,
+        "lastName": "Cheng",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 332097,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Juan",
+        "id": 15144,
+        "lastName": "Hinojosa",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Royce",
+        "id": 12426,
+        "lastName": "West",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Merrie",
+        "id": 52844,
+        "lastName": "Fox",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Donna",
+        "id": 18306,
+        "lastName": "Campbell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 320069,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 18309,
+        "lastName": "Hinojosa",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robin",
+        "id": 97081,
+        "lastName": "Vargas",
+        "party": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Morgan",
+        "id": 18282,
+        "lastName": "Lamantia",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 192655,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "César",
+        "id": 15156,
+        "lastName": "Blanco",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dale",
+        "id": 52846,
+        "lastName": "Frey",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brent",
+        "id": 52850,
+        "lastName": "Hagenbuch",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 386706,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gary",
+        "id": 15159,
+        "lastName": "Vandeaver",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristen",
+        "id": 51263,
+        "lastName": "Washington",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brent",
+        "id": 51266,
+        "lastName": "Money",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 53391,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cecil",
+        "id": 15162,
+        "lastName": "Bell Jr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alex",
+        "id": 52854,
+        "lastName": "Bar-Sela",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Keith",
+        "id": 15164,
+        "lastName": "Bell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 71571,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cole",
+        "id": 15166,
+        "lastName": "Hefner",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cody",
+        "id": 18317,
+        "lastName": "Grace",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 52857,
+        "lastName": "Alders",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 73512,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jay",
+        "id": 15170,
+        "lastName": "Dean",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marlena",
+        "id": 52858,
+        "lastName": "Cooper",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 75453,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carolyn",
+        "id": 12435,
+        "lastName": "Salter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cody",
+        "id": 15172,
+        "lastName": "Harris",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 68618,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Trent",
+        "id": 15256,
+        "lastName": "Ashby",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 16079,
+        "lastName": "Harrison",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joanne",
+        "id": 52861,
+        "lastName": "Shofner",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Trey",
+        "id": 52863,
+        "lastName": "Wharton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dee",
+        "id": 52862,
+        "lastName": "Mullins",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 61265,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Albert",
+        "id": 52864,
+        "lastName": "Hunter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Angelia",
+        "id": 18435,
+        "lastName": "Orr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 48055,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Fred",
+        "id": 52865,
+        "lastName": "Medina",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 52867,
+        "lastName": "Dyson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 60756,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 15183,
+        "lastName": "Toth",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Will",
+        "id": 15184,
+        "lastName": "Metcalf",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 52869,
+        "lastName": "Midler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 71885,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Desiree",
+        "id": 52870,
+        "lastName": "Venable",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stan",
+        "id": 18440,
+        "lastName": "Gerdes",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 40661,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Janis",
+        "id": 18444,
+        "lastName": "Holt",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kodi",
+        "id": 97082,
+        "lastName": "Sawin",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dwain",
+        "id": 52871,
+        "lastName": "Handley",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ellen",
+        "id": 18449,
+        "lastName": "Troxclair",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 55380,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephen",
+        "id": 52874,
+        "lastName": "Wyman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 15190,
+        "lastName": "Wilson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 98638,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dade",
+        "id": 15191,
+        "lastName": "Phelan",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christian",
+        "id": 52878,
+        "lastName": "Manuel",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terri",
+        "id": 18454,
+        "lastName": "Wilson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dev",
+        "id": 52881,
+        "lastName": "Merugumala",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 74509,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Greg",
+        "id": 15196,
+        "lastName": "Bonnen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "J.",
+        "id": 97083,
+        "lastName": "Daggett",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cody",
+        "id": 18455,
+        "lastName": "Vasut",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 43958,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 15904,
+        "lastName": "Lee",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 26259,
+        "lastName": "Morgan",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 57391,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ronald",
+        "id": 52885,
+        "lastName": "Reynolds",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ibifrisolam",
+        "id": 52886,
+        "lastName": "Max-Alalibo",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 82449,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gary",
+        "id": 15205,
+        "lastName": "Gates",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marty",
+        "id": 18372,
+        "lastName": "Rocha",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 84509,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrienne",
+        "id": 8457,
+        "lastName": "Bell",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeffrey",
+        "id": 52887,
+        "lastName": "Barry",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 38884,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 52891,
+        "lastName": "Bassham",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "A.J.",
+        "id": 18214,
+        "lastName": "Louderback",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 48258,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 18458,
+        "lastName": "Guillen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Raquel",
+        "id": 52826,
+        "lastName": "Ortiz",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 15117,
+        "lastName": "Maynard",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:49.449Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 844074,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brandon",
+        "id": 52830,
+        "lastName": "Hall",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rayna",
+        "id": 52829,
+        "lastName": "Glasser",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Hunter",
+        "id": 47501,
+        "lastName": "Crow",
+        "party": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:49.449Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 1749539,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "George",
+        "id": 52832,
+        "lastName": "King",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pam",
+        "id": 18647,
+        "lastName": "Little",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:49.449Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 1859092,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Aaron",
+        "id": 18655,
+        "lastName": "Kinsey",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Morgan",
+        "id": 52834,
+        "lastName": "Kirkpatrick",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jack",
+        "id": 14928,
+        "lastName": "Westbrook",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:49.449Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 627418,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Martha",
+        "id": 15461,
+        "lastName": "Fierro",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carol",
+        "id": 15129,
+        "lastName": "Alvarado",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 137375,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 18287,
+        "lastName": "Bettencourt",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 52835,
+        "lastName": "Gwinn",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 372820,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angela",
+        "id": 18288,
+        "lastName": "Paxton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rachel",
+        "id": 52837,
+        "lastName": "Mello",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 411878,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Phil",
+        "id": 15263,
+        "lastName": "King",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andy",
+        "id": 52838,
+        "lastName": "Morris",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 130855,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tan",
+        "id": 15267,
+        "lastName": "Parker",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 52839,
+        "lastName": "Draper",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 410447,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Sarah",
+        "id": 18271,
+        "lastName": "Eckhardt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 52843,
+        "lastName": "Trahan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Molly",
+        "id": 18272,
+        "lastName": "Cook",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 319690,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nathan",
+        "id": 18274,
+        "lastName": "Johnson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joan",
+        "id": 18298,
+        "lastName": "Huffman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathy",
+        "id": 15092,
+        "lastName": "Cheng",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 332097,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Juan",
+        "id": 15144,
+        "lastName": "Hinojosa",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Royce",
+        "id": 12426,
+        "lastName": "West",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Merrie",
+        "id": 52844,
+        "lastName": "Fox",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Donna",
+        "id": 18306,
+        "lastName": "Campbell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 320069,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 18309,
+        "lastName": "Hinojosa",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robin",
+        "id": 97081,
+        "lastName": "Vargas",
+        "party": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Morgan",
+        "id": 18282,
+        "lastName": "Lamantia",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 192655,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "César",
+        "id": 15156,
+        "lastName": "Blanco",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dale",
+        "id": 52846,
+        "lastName": "Frey",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brent",
+        "id": 52850,
+        "lastName": "Hagenbuch",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:11:42.179Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 386706,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gary",
+        "id": 15159,
+        "lastName": "Vandeaver",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristen",
+        "id": 51263,
+        "lastName": "Washington",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brent",
+        "id": 51266,
+        "lastName": "Money",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 53391,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cecil",
+        "id": 15162,
+        "lastName": "Bell Jr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alex",
+        "id": 52854,
+        "lastName": "Bar-Sela",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Keith",
+        "id": 15164,
+        "lastName": "Bell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 71571,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cole",
+        "id": 15166,
+        "lastName": "Hefner",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cody",
+        "id": 18317,
+        "lastName": "Grace",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 52857,
+        "lastName": "Alders",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 73512,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jay",
+        "id": 15170,
+        "lastName": "Dean",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marlena",
+        "id": 52858,
+        "lastName": "Cooper",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 75453,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carolyn",
+        "id": 12435,
+        "lastName": "Salter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cody",
+        "id": 15172,
+        "lastName": "Harris",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 68618,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Trent",
+        "id": 15256,
+        "lastName": "Ashby",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 16079,
+        "lastName": "Harrison",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joanne",
+        "id": 52861,
+        "lastName": "Shofner",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Trey",
+        "id": 52863,
+        "lastName": "Wharton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dee",
+        "id": 52862,
+        "lastName": "Mullins",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 61265,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Albert",
+        "id": 52864,
+        "lastName": "Hunter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Angelia",
+        "id": 18435,
+        "lastName": "Orr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 48055,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Fred",
+        "id": 52865,
+        "lastName": "Medina",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 52867,
+        "lastName": "Dyson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 60756,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 15183,
+        "lastName": "Toth",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Will",
+        "id": 15184,
+        "lastName": "Metcalf",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 52869,
+        "lastName": "Midler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 71885,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Desiree",
+        "id": 52870,
+        "lastName": "Venable",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stan",
+        "id": 18440,
+        "lastName": "Gerdes",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 40661,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Janis",
+        "id": 18444,
+        "lastName": "Holt",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kodi",
+        "id": 97082,
+        "lastName": "Sawin",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dwain",
+        "id": 52871,
+        "lastName": "Handley",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ellen",
+        "id": 18449,
+        "lastName": "Troxclair",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 55380,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephen",
+        "id": 52874,
+        "lastName": "Wyman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 15190,
+        "lastName": "Wilson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 98638,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dade",
+        "id": 15191,
+        "lastName": "Phelan",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christian",
+        "id": 52878,
+        "lastName": "Manuel",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terri",
+        "id": 18454,
+        "lastName": "Wilson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dev",
+        "id": 52881,
+        "lastName": "Merugumala",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 74509,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Greg",
+        "id": 15196,
+        "lastName": "Bonnen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "J.",
+        "id": 97083,
+        "lastName": "Daggett",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cody",
+        "id": 18455,
+        "lastName": "Vasut",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 43958,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 15904,
+        "lastName": "Lee",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 26259,
+        "lastName": "Morgan",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 57391,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ronald",
+        "id": 52885,
+        "lastName": "Reynolds",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ibifrisolam",
+        "id": 52886,
+        "lastName": "Max-Alalibo",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 82449,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gary",
+        "id": 15205,
+        "lastName": "Gates",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Marty",
+        "id": 18372,
+        "lastName": "Rocha",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 84509,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrienne",
+        "id": 8457,
+        "lastName": "Bell",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeffrey",
+        "id": 52887,
+        "lastName": "Barry",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 38884,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 52891,
+        "lastName": "Bassham",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "A.J.",
+        "id": 18214,
+        "lastName": "Louderback",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 48258,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 18458,
+        "lastName": "Guillen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Todd",
+        "id": 15213,
+        "lastName": "Hunter",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cathy",
+        "id": 52895,
+        "lastName": "Mcauliffe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 73568,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Katrina",
+        "id": 52896,
+        "lastName": "Pierson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Denise",
+        "id": 52899,
+        "lastName": "Villalobos",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Solomon",
+        "id": 52898,
+        "lastName": "Ortiz Jr",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Oscar",
+        "id": 15218,
+        "lastName": "Longoria",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sergio",
+        "id": 97084,
+        "lastName": "Muñoz Jr.",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "36",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Janie",
+        "id": 18465,
+        "lastName": "Lopez",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 18339,
+        "lastName": "Gracia",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "37",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 49906,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Erin",
+        "id": 18338,
+        "lastName": "Gamez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "38",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Armando",
+        "id": 15223,
+        "lastName": "Martinez",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jimmie",
+        "id": 18467,
+        "lastName": "Garcia",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "39",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 44474,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Terry",
+        "id": 15224,
+        "lastName": "Canales",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "40",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 18468,
+        "lastName": "Guerra",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bobby",
+        "id": 15226,
+        "lastName": "Guerra",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "41",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 54872,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 18341,
+        "lastName": "Raymond",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "42",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mariana",
+        "id": 52902,
+        "lastName": "Casarez",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "J.M.",
+        "id": 18470,
+        "lastName": "Lozano",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "43",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 56352,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alan",
+        "id": 52905,
+        "lastName": "Schoolcraft",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Eric",
+        "id": 52903,
+        "lastName": "Norman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "44",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 53881,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Erin",
+        "id": 15233,
+        "lastName": "Zwiener",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tennyson",
+        "id": 52908,
+        "lastName": "Moreno",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "45",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 77732,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nikki",
+        "id": 52909,
+        "lastName": "Kosich",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sheryl",
+        "id": 15234,
+        "lastName": "Cole",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "46",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 76585,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Vikki",
+        "id": 15237,
+        "lastName": "Goodwin",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 52910,
+        "lastName": "Firsing",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "47",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 72979,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Donna",
+        "id": 15238,
+        "lastName": "Howard",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 45235,
+        "lastName": "McCarthy",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "48",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 53504,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gina",
+        "id": 15240,
+        "lastName": "Hinojosa",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "49",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 15247,
+        "lastName": "Talarico",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "50",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Maria",
+        "id": 18346,
+        "lastName": "Flores",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "51",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Caroline",
+        "id": 52914,
+        "lastName": "Davila",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jennie",
+        "id": 52912,
+        "lastName": "Birkholz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "52",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 90858,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Wes",
+        "id": 52916,
+        "lastName": "Virdell",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 15249,
+        "lastName": "Herrera",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "B.",
+        "id": 97085,
+        "lastName": "Holk",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "53",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 89533,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dawn",
+        "id": 52917,
+        "lastName": "Richardson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brad",
+        "id": 15251,
+        "lastName": "Buckley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "54",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 36237,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hillary",
+        "id": 52921,
+        "lastName": "Hickland",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jennifer",
+        "id": 52918,
+        "lastName": "Lee",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "55",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 33442,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Erin",
+        "id": 18354,
+        "lastName": "Shank",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pat",
+        "id": 52922,
+        "lastName": "Curry",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "56",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 75254,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 18481,
+        "lastName": "Hayes",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Collin",
+        "id": 52924,
+        "lastName": "Johnson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Darren",
+        "id": 14940,
+        "lastName": "Hamilton",
+        "party": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "57",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 79906,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 97086,
+        "lastName": "Windmann",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Helen",
+        "id": 52925,
+        "lastName": "Kerwin",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "58",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 60370,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hannah",
+        "id": 52927,
+        "lastName": "Bohm",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Shelby",
+        "id": 15260,
+        "lastName": "Slawson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "59",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 58248,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 18484,
+        "lastName": "Olcott",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "60",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Keresa",
+        "id": 52930,
+        "lastName": "Richardson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tony",
+        "id": 52928,
+        "lastName": "Adams",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "61",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 87006,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tiffany",
+        "id": 52931,
+        "lastName": "Drake",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Shelley",
+        "id": 18488,
+        "lastName": "Luther",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "62",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 77311,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 15271,
+        "lastName": "Beckley",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ben",
+        "id": 18489,
+        "lastName": "Bumgarner",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "63",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 78059,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Andy",
+        "id": 18493,
+        "lastName": "Hopper",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Angela",
+        "id": 15269,
+        "lastName": "Brewer",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "64",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 70198,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Detrick",
+        "id": 52933,
+        "lastName": "Deburr",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mitch",
+        "id": 52934,
+        "lastName": "Little",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "65",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 46219,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 52935,
+        "lastName": "Carstens",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 15275,
+        "lastName": "Shaheen",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "66",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 88847,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeff",
+        "id": 15276,
+        "lastName": "Leach",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Makala",
+        "id": 52938,
+        "lastName": "Washington",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "67",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 85667,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stacey",
+        "id": 52940,
+        "lastName": "Swann",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 15828,
+        "lastName": "Spiller",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "68",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:46.731Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 84203,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Walter",
+        "id": 18360,
+        "lastName": "Coppage",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 15280,
+        "lastName": "Frank",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "69",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 59888,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 52942,
+        "lastName": "Kinard",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mihaela",
+        "id": 18362,
+        "lastName": "Plesa",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "70",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 71404,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stan",
+        "id": 15284,
+        "lastName": "Lambert",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Linda",
+        "id": 18363,
+        "lastName": "Goolsbee",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "71",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:46.731Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 66304,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Drew",
+        "id": 15285,
+        "lastName": "Darby",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "72",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carrie",
+        "id": 15232,
+        "lastName": "Isaac",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sally",
+        "id": 52944,
+        "lastName": "Duval",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "73",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 22799,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eddie",
+        "id": 52945,
+        "lastName": "Morales Jr",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 18299,
+        "lastName": "Garza",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "74",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 42960,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 15290,
+        "lastName": "Gonzalez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "75",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Suleman",
+        "id": 18369,
+        "lastName": "Lalani",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lea",
+        "id": 52949,
+        "lastName": "Simmons",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "76",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 72627,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Vincent",
+        "id": 52951,
+        "lastName": "Perez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "77",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 15294,
+        "lastName": "Moody",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "78",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Claudia",
+        "id": 52953,
+        "lastName": "Ordaz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "79",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cecilia",
+        "id": 52954,
+        "lastName": "Castellano",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Don",
+        "id": 52959,
+        "lastName": "Mclaughlin Jr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "80",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 53463,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brooks",
+        "id": 15297,
+        "lastName": "Landgraf",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "81",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:08:17.767Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "TX",
+    "stateName": "Texas",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

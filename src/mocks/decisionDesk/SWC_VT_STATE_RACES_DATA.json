@@ -1,0 +1,4584 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steve",
+        "id": 101849,
+        "lastName": "Berry",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bernie",
+        "id": 8,
+        "lastName": "Sanders",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 102228,
+        "lastName": "Hill",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gerald",
+        "id": 28838,
+        "lastName": "Malloy",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Justin",
+        "id": 85171,
+        "lastName": "Schoville",
+        "party": "Peace and Justice",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 102227,
+        "lastName": "Greenstein",
+        "party": "Epic Party",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:07:01.801Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 295850,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Esther",
+        "id": 83182,
+        "lastName": "Charlestin",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Phil",
+        "id": 393,
+        "lastName": "Scott",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "June",
+        "id": 85172,
+        "lastName": "Goodband",
+        "party": "Peace and Justice",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 15076,
+        "lastName": "Hoyt",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Eli",
+        "id": 84972,
+        "lastName": "Mutino",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T17:23:50.719Z",
+    "office": { "officeId": "2", "officeName": "Governor", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 9237,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 102230,
+        "lastName": "Diamondstone",
+        "party": "Peace and Justice",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 44468,
+        "lastName": "Ortiz",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 28910,
+        "lastName": "Coester",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Becca",
+        "id": 28841,
+        "lastName": "Balint",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "At-Large",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:44:43.349Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 303822,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robin",
+        "id": 28915,
+        "lastName": "Scheu",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Amy",
+        "id": 28916,
+        "lastName": "Sheldon",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Addison-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 28917,
+        "lastName": "Conlon",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Addison-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matt",
+        "id": 28919,
+        "lastName": "Birong",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rob",
+        "id": 29047,
+        "lastName": "North",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Diane",
+        "id": 28920,
+        "lastName": "Lanpher",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Addison-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chanin",
+        "id": 83211,
+        "lastName": "Hill",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Herb",
+        "id": 83212,
+        "lastName": "Olson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Renee",
+        "id": 83215,
+        "lastName": "McGuinness",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mari",
+        "id": 28921,
+        "lastName": "Cordes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Addison-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Del",
+        "id": 83216,
+        "lastName": "Thompson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jubilee",
+        "id": 28923,
+        "lastName": "McGill",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Addison-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 83217,
+        "lastName": "Casey",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Addison-Rutland",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 83218,
+        "lastName": "Cooper",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bruce",
+        "id": 47707,
+        "lastName": "Busa",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Bennington-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Timothy",
+        "id": 83222,
+        "lastName": "Corcoran II",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Will",
+        "id": 101805,
+        "lastName": "Greer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 83219,
+        "lastName": "Cook",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Bennington-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Victor",
+        "id": 83224,
+        "lastName": "Harwood Jr.",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 28927,
+        "lastName": "Durfee",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Bennington-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kathleen",
+        "id": 28929,
+        "lastName": "James",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rob",
+        "id": 101806,
+        "lastName": "Hunter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 47708,
+        "lastName": "Gervais",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Bennington-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 28931,
+        "lastName": "Carroll",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 28930,
+        "lastName": "Nigro",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 29052,
+        "lastName": "Morrissey",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Bennington-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 30231,
+        "lastName": "Rice",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sandy",
+        "id": 101807,
+        "lastName": "Pinsonault",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Bennington-Rutland",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bobby",
+        "id": 30232,
+        "lastName": "Farlice-Rubio",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Debra",
+        "id": 83227,
+        "lastName": "Powers",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Caledonia-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 83229,
+        "lastName": "Southworth",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sabrina",
+        "id": 83230,
+        "lastName": "Morrison",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Caledonia-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dennis",
+        "id": 28936,
+        "lastName": "Labounty",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Eileen",
+        "id": 28935,
+        "lastName": "Boland",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Beth",
+        "id": 83231,
+        "lastName": "Quimby",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Martha",
+        "id": 83233,
+        "lastName": "Feltus",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Caledonia-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 28932,
+        "lastName": "Campbell",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Frank",
+        "id": 83234,
+        "lastName": "Empsall",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Caledonia-Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 83236,
+        "lastName": "Burtt",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Thomas",
+        "id": 83237,
+        "lastName": "Ziobrowski",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Caledonia-Washington",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jana",
+        "id": 28937,
+        "lastName": "Brown",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 28950,
+        "lastName": "Nugent",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 28951,
+        "lastName": "Minier",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Martin",
+        "id": 28952,
+        "lastName": "Lalonde",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tiff",
+        "id": 28953,
+        "lastName": "Bluemle",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Bram",
+        "id": 83238,
+        "lastName": "Kleppner",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Barbara",
+        "id": 28955,
+        "lastName": "Rachelson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mary-Katherine",
+        "id": 28956,
+        "lastName": "Stone",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Troy",
+        "id": 28958,
+        "lastName": "Headrick",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 28957,
+        "lastName": "Cina",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jill",
+        "id": 28959,
+        "lastName": "Krowinski",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 28961,
+        "lastName": "Logan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Abbey",
+        "id": 83241,
+        "lastName": "Duke",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carol",
+        "id": 28964,
+        "lastName": "Ode",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 28963,
+        "lastName": "Hooper",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Leland",
+        "id": 83243,
+        "lastName": "Gazo",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wendy",
+        "id": 83244,
+        "lastName": "Critchlow",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Spencer",
+        "id": 46844,
+        "lastName": "Sherman",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sarita",
+        "id": 28965,
+        "lastName": "Austin",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angela",
+        "id": 28939,
+        "lastName": "Arsenault",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Erin",
+        "id": 28938,
+        "lastName": "Brady",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Doug",
+        "id": 29060,
+        "lastName": "Wood",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gayle",
+        "id": 83246,
+        "lastName": "Pezzo",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Doug",
+        "id": 83245,
+        "lastName": "Bishop",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chloe",
+        "id": 83247,
+        "lastName": "Tomlinson",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chloe",
+        "id": 101808,
+        "lastName": "Tomlinson",
+        "party": "Vermont Progressive",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daisy",
+        "id": 28969,
+        "lastName": "Berbeco",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Karen",
+        "id": 28970,
+        "lastName": "Dolan",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lori",
+        "id": 28971,
+        "lastName": "Houghton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lynn",
+        "id": 22053,
+        "lastName": "Smith",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leonora",
+        "id": 28973,
+        "lastName": "Dodge",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Golrang",
+        "id": 83249,
+        "lastName": "Garofano",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alyssa",
+        "id": 28974,
+        "lastName": "Black",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Julia",
+        "id": 28975,
+        "lastName": "Andrews",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brenda",
+        "id": 83250,
+        "lastName": "Steady",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Edye",
+        "id": 28941,
+        "lastName": "Graning",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Trevor",
+        "id": 28940,
+        "lastName": "Squirrell",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Phil",
+        "id": 28943,
+        "lastName": "Pouech",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chea",
+        "id": 28945,
+        "lastName": "Evans",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 28946,
+        "lastName": "Lalley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Shawn",
+        "id": 83252,
+        "lastName": "Sweeney",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bridget",
+        "id": 83253,
+        "lastName": "Burkhardt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emilie",
+        "id": 83254,
+        "lastName": "Krasnow",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 83255,
+        "lastName": "Micklus",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 29057,
+        "lastName": "Taylor",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Henry",
+        "id": 83256,
+        "lastName": "Bonges III",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lonnie",
+        "id": 83257,
+        "lastName": "Poland",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Chittenden-Franklin",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 29064,
+        "lastName": "Kascenska",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Essex-Caledonia",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Larry",
+        "id": 29066,
+        "lastName": "Labor",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Essex-Orleans",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carolyn",
+        "id": 101809,
+        "lastName": "Branagan",
+        "party": "Democratic/Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ashley",
+        "id": 101810,
+        "lastName": "Bartley",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eileen",
+        "id": 101811,
+        "lastName": "Dickinson",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 29071,
+        "lastName": "Luneau",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 28979,
+        "lastName": "McCarthy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matthew",
+        "id": 101812,
+        "lastName": "Walker",
+        "party": "Democratic/Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Thomas",
+        "id": 101813,
+        "lastName": "Oliver",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 101814,
+        "lastName": "Hango",
+        "party": "Democratic/Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wayne",
+        "id": 101815,
+        "lastName": "Laroche",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 101816,
+        "lastName": "Gregoire",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 83259,
+        "lastName": "Moore",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Allen",
+        "id": 30228,
+        "lastName": "Demar",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Casey",
+        "id": 29077,
+        "lastName": "Toof",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Zach",
+        "id": 83260,
+        "lastName": "Scheffler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Leland",
+        "id": 28899,
+        "lastName": "Morgan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Luke",
+        "id": 83261,
+        "lastName": "Richter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 29078,
+        "lastName": "Morgan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Josie",
+        "id": 47717,
+        "lastName": "Leavitt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Grand Isle-Chittenden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jed",
+        "id": 46847,
+        "lastName": "Lipsky",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 29082,
+        "lastName": "Bailey",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 28986,
+        "lastName": "Noyes",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 83262,
+        "lastName": "Ryan",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Malcolm",
+        "id": 29083,
+        "lastName": "Teale",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lucy",
+        "id": 28987,
+        "lastName": "Boyden",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 101817,
+        "lastName": "Sciortino",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jaiel",
+        "id": 101819,
+        "lastName": "Pulskamp",
+        "party": "Vermont Progressive",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Charles",
+        "id": 101818,
+        "lastName": "Burnham",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nick",
+        "id": 76412,
+        "lastName": "Lopez",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Saudia",
+        "id": 28983,
+        "lastName": "Lamont",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 83263,
+        "lastName": "Yacovone",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-Washington",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carl",
+        "id": 28991,
+        "lastName": "Demrow",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 44532,
+        "lastName": "Tagliavia",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Zack",
+        "id": 46848,
+        "lastName": "Lang",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Monique",
+        "id": 28993,
+        "lastName": "Priestley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Josh",
+        "id": 101820,
+        "lastName": "Dobrovich",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 46849,
+        "lastName": "Parsons",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 101821,
+        "lastName": "Merriam",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-Caledonia",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Wayne",
+        "id": 29087,
+        "lastName": "Townsend",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rob",
+        "id": 101822,
+        "lastName": "Sikora",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jay",
+        "id": 28989,
+        "lastName": "Hooper",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Larry",
+        "id": 28990,
+        "lastName": "Satcowitz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-Washington-Addison",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 50807,
+        "lastName": "Nelson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Woodman",
+        "id": 29093,
+        "lastName": "Page",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 83266,
+        "lastName": "Wells",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tony",
+        "id": 101823,
+        "lastName": "Daniels",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leanne",
+        "id": 83269,
+        "lastName": "Harple",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 101824,
+        "lastName": "Marcotte",
+        "party": "Democratic/Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 101825,
+        "lastName": "Higley",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-Lamoille",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patricia",
+        "id": 29097,
+        "lastName": "McCoy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "William",
+        "id": 29105,
+        "lastName": "Canfield",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 29106,
+        "lastName": "Harrison",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 28999,
+        "lastName": "Potter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 29098,
+        "lastName": "Burditt",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 83270,
+        "lastName": "Bosch",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 27581,
+        "lastName": "Brown",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Anna",
+        "id": 28885,
+        "lastName": "Tadio",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Christopher",
+        "id": 83272,
+        "lastName": "Howland",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eric",
+        "id": 29102,
+        "lastName": "Maguire",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 29001,
+        "lastName": "Howard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "William",
+        "id": 29002,
+        "lastName": "Notte",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alicia",
+        "id": 101826,
+        "lastName": "Malay",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Todd",
+        "id": 101827,
+        "lastName": "Nielsen",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 29003,
+        "lastName": "Jerome",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robin",
+        "id": 47719,
+        "lastName": "Chesnut-Tangerman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 83274,
+        "lastName": "Pritchard",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-Bennington",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrienne",
+        "id": 83276,
+        "lastName": "Raymond",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 83277,
+        "lastName": "Winter",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-Windsor",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kenneth",
+        "id": 29110,
+        "lastName": "Goslant",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anne",
+        "id": 101830,
+        "lastName": "Donahue",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 101829,
+        "lastName": "Rapacz",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lucas",
+        "id": 101828,
+        "lastName": "Herring",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gene",
+        "id": 101832,
+        "lastName": "Bifano",
+        "party": "Common Sense Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dara",
+        "id": 29006,
+        "lastName": "Torre",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Candice",
+        "id": 83278,
+        "lastName": "White",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 101831,
+        "lastName": "Burns",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 101835,
+        "lastName": "Boutin",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carol",
+        "id": 101834,
+        "lastName": "Dawes",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Teddy",
+        "id": 101833,
+        "lastName": "Waszazak",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 29008,
+        "lastName": "Williams",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 29011,
+        "lastName": "McCann",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Conor",
+        "id": 29009,
+        "lastName": "Casey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Elanor",
+        "id": 46854,
+        "lastName": "Chapin",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marc",
+        "id": 29017,
+        "lastName": "Mihaly",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 83280,
+        "lastName": "Griffin",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 46855,
+        "lastName": "Stevens",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 101836,
+        "lastName": "Haddad",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Theresa",
+        "id": 29020,
+        "lastName": "Wood",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-Chittenden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 29004,
+        "lastName": "Battah",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Francis",
+        "id": 29107,
+        "lastName": "McFaun",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gina",
+        "id": 29108,
+        "lastName": "Galfetti",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-Orange",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nancy",
+        "id": 29116,
+        "lastName": "Gassett",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Zon",
+        "id": 83282,
+        "lastName": "Eastes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laura",
+        "id": 46857,
+        "lastName": "Sibilia",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 83283,
+        "lastName": "Coyne",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 29022,
+        "lastName": "Bos-Lun",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leslie",
+        "id": 29023,
+        "lastName": "Goldman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Casey",
+        "id": 101837,
+        "lastName": "Cota",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 101839,
+        "lastName": "Peyton",
+        "party": "Vermont Progressive",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 29024,
+        "lastName": "Mrowicki",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lynne",
+        "id": 101838,
+        "lastName": "Wilkins",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 29025,
+        "lastName": "Long",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 83284,
+        "lastName": "Carris-Duncan",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pam",
+        "id": 101840,
+        "lastName": "Baker",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Susan",
+        "id": 83286,
+        "lastName": "Murray",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Emilie",
+        "id": 29027,
+        "lastName": "Kornheiser",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eileen",
+        "id": 101811,
+        "lastName": "Dickinson",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joe",
+        "id": 29071,
+        "lastName": "Luneau",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 28979,
+        "lastName": "McCarthy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Matthew",
+        "id": 101812,
+        "lastName": "Walker",
+        "party": "Democratic/Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Thomas",
+        "id": 101813,
+        "lastName": "Oliver",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lisa",
+        "id": 101814,
+        "lastName": "Hango",
+        "party": "Democratic/Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Wayne",
+        "id": 101815,
+        "lastName": "Laroche",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 101816,
+        "lastName": "Gregoire",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Heather",
+        "id": 83259,
+        "lastName": "Moore",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Allen",
+        "id": 30228,
+        "lastName": "Demar",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Casey",
+        "id": 29077,
+        "lastName": "Toof",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Zach",
+        "id": 83260,
+        "lastName": "Scheffler",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Franklin-8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Leland",
+        "id": 28899,
+        "lastName": "Morgan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Luke",
+        "id": 83261,
+        "lastName": "Richter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 29078,
+        "lastName": "Morgan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Josie",
+        "id": 47717,
+        "lastName": "Leavitt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Grand Isle-Chittenden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jed",
+        "id": 46847,
+        "lastName": "Lipsky",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 29082,
+        "lastName": "Bailey",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 28986,
+        "lastName": "Noyes",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 83262,
+        "lastName": "Ryan",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Malcolm",
+        "id": 29083,
+        "lastName": "Teale",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lucy",
+        "id": 28987,
+        "lastName": "Boyden",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 101817,
+        "lastName": "Sciortino",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jaiel",
+        "id": 101819,
+        "lastName": "Pulskamp",
+        "party": "Vermont Progressive",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Charles",
+        "id": 101818,
+        "lastName": "Burnham",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nick",
+        "id": 76412,
+        "lastName": "Lopez",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Saudia",
+        "id": 28983,
+        "lastName": "Lamont",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 83263,
+        "lastName": "Yacovone",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Lamoille-Washington",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carl",
+        "id": 28991,
+        "lastName": "Demrow",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 44532,
+        "lastName": "Tagliavia",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Zack",
+        "id": 46848,
+        "lastName": "Lang",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Monique",
+        "id": 28993,
+        "lastName": "Priestley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Josh",
+        "id": 101820,
+        "lastName": "Dobrovich",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 46849,
+        "lastName": "Parsons",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 101821,
+        "lastName": "Merriam",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-Caledonia",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Wayne",
+        "id": 29087,
+        "lastName": "Townsend",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Rob",
+        "id": 101822,
+        "lastName": "Sikora",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jay",
+        "id": 28989,
+        "lastName": "Hooper",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Larry",
+        "id": 28990,
+        "lastName": "Satcowitz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orange-Washington-Addison",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 50807,
+        "lastName": "Nelson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Woodman",
+        "id": 29093,
+        "lastName": "Page",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ken",
+        "id": 83266,
+        "lastName": "Wells",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tony",
+        "id": 101823,
+        "lastName": "Daniels",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leanne",
+        "id": 83269,
+        "lastName": "Harple",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 101824,
+        "lastName": "Marcotte",
+        "party": "Democratic/Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 101825,
+        "lastName": "Higley",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Orleans-Lamoille",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patricia",
+        "id": 29097,
+        "lastName": "McCoy",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "William",
+        "id": 29105,
+        "lastName": "Canfield",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 29106,
+        "lastName": "Harrison",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 28999,
+        "lastName": "Potter",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 29098,
+        "lastName": "Burditt",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 83270,
+        "lastName": "Bosch",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 27581,
+        "lastName": "Brown",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Anna",
+        "id": 28885,
+        "lastName": "Tadio",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Christopher",
+        "id": 83272,
+        "lastName": "Howland",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eric",
+        "id": 29102,
+        "lastName": "Maguire",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 29001,
+        "lastName": "Howard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "William",
+        "id": 29002,
+        "lastName": "Notte",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alicia",
+        "id": 101826,
+        "lastName": "Malay",
+        "party": "Democratic/Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Todd",
+        "id": 101827,
+        "lastName": "Nielsen",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Stephanie",
+        "id": 29003,
+        "lastName": "Jerome",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robin",
+        "id": 47719,
+        "lastName": "Chesnut-Tangerman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 83274,
+        "lastName": "Pritchard",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-Bennington",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrienne",
+        "id": 83276,
+        "lastName": "Raymond",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 83277,
+        "lastName": "Winter",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Rutland-Windsor",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kenneth",
+        "id": 29110,
+        "lastName": "Goslant",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anne",
+        "id": 101830,
+        "lastName": "Donahue",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dave",
+        "id": 101829,
+        "lastName": "Rapacz",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lucas",
+        "id": 101828,
+        "lastName": "Herring",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Gene",
+        "id": 101832,
+        "lastName": "Bifano",
+        "party": "Common Sense Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dara",
+        "id": 29006,
+        "lastName": "Torre",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Candice",
+        "id": 83278,
+        "lastName": "White",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 101831,
+        "lastName": "Burns",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 101835,
+        "lastName": "Boutin",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Carol",
+        "id": 101834,
+        "lastName": "Dawes",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Teddy",
+        "id": 101833,
+        "lastName": "Waszazak",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 29008,
+        "lastName": "Williams",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 29011,
+        "lastName": "McCann",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Conor",
+        "id": 29009,
+        "lastName": "Casey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Elanor",
+        "id": 46854,
+        "lastName": "Chapin",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marc",
+        "id": 29017,
+        "lastName": "Mihaly",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 83280,
+        "lastName": "Griffin",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tom",
+        "id": 46855,
+        "lastName": "Stevens",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 101836,
+        "lastName": "Haddad",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Theresa",
+        "id": 29020,
+        "lastName": "Wood",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-Chittenden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Melissa",
+        "id": 29004,
+        "lastName": "Battah",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Francis",
+        "id": 29107,
+        "lastName": "McFaun",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Gina",
+        "id": 29108,
+        "lastName": "Galfetti",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Washington-Orange",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nancy",
+        "id": 29116,
+        "lastName": "Gassett",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Zon",
+        "id": 83282,
+        "lastName": "Eastes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Laura",
+        "id": 46857,
+        "lastName": "Sibilia",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 83283,
+        "lastName": "Coyne",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 29022,
+        "lastName": "Bos-Lun",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Leslie",
+        "id": 29023,
+        "lastName": "Goldman",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Casey",
+        "id": 101837,
+        "lastName": "Cota",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 101839,
+        "lastName": "Peyton",
+        "party": "Vermont Progressive",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 29024,
+        "lastName": "Mrowicki",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lynne",
+        "id": 101838,
+        "lastName": "Wilkins",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 29025,
+        "lastName": "Long",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Emily",
+        "id": 83284,
+        "lastName": "Carris-Duncan",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Pam",
+        "id": 101840,
+        "lastName": "Baker",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Susan",
+        "id": 83286,
+        "lastName": "Murray",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Emilie",
+        "id": 29027,
+        "lastName": "Kornheiser",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Windham-7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

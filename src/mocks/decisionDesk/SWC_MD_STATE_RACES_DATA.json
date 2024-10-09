@@ -1,0 +1,386 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Larry",
+        "id": 10832,
+        "lastName": "Hogan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 84947,
+        "lastName": "Scott",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Angela",
+        "id": 67193,
+        "lastName": "Alsobrooks",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 2424337,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joshua",
+        "id": 85039,
+        "lastName": "O'Brien",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Blane",
+        "id": 85037,
+        "lastName": "Miller",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andy",
+        "id": 1307,
+        "lastName": "Harris",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 366498,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kim",
+        "id": 67213,
+        "lastName": "Klacik",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jasen",
+        "id": 2138,
+        "lastName": "Wunder",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 85040,
+        "lastName": "Olszewski",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 352306,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Miguel",
+        "id": 85041,
+        "lastName": "Barajas",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Sarah",
+        "id": 25942,
+        "lastName": "Elfreth",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 67230,
+        "lastName": "Steinberger",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 378688,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "George",
+        "id": 13034,
+        "lastName": "McDermott",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Glenn",
+        "id": 27,
+        "lastName": "Ivey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 103333,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steny",
+        "id": 1316,
+        "lastName": "Hoyer",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 25982,
+        "lastName": "Talkington",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 259586,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Neil",
+        "id": 13047,
+        "lastName": "Parrott",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "April",
+        "id": 85042,
+        "lastName": "McClain-Delaney",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 161566,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kweisi",
+        "id": 11940,
+        "lastName": "Mfume",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Ronald",
+        "id": 102153,
+        "lastName": "Owens-Bey",
+        "party": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Scott",
+        "id": 13017,
+        "lastName": "Collier",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cheryl",
+        "id": 67250,
+        "lastName": "Riley",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jamie",
+        "id": 44,
+        "lastName": "Raskin",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nancy",
+        "id": 2137,
+        "lastName": "Wallace",
+        "party": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 259407,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Angela",
+        "id": 98076,
+        "lastName": "Eaves",
+        "party": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "Appellate Circuit 2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Matthew",
+        "id": 98077,
+        "lastName": "Fader",
+        "party": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "Appellate Circuit 3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "firstName": "Shirley",
+        "id": 98078,
+        "lastName": "Watts",
+        "party": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "Appellate Circuit 6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:57:39.806Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MD",
+    "stateName": "Maryland",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

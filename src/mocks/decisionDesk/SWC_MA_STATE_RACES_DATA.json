@@ -1,0 +1,4692 @@
+[
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Shiva",
+        "id": 11165,
+        "lastName": "Ayyadurai",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Elizabeth",
+        "id": 8284,
+        "lastName": "Warren",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 84377,
+        "lastName": "Deaton",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Brandon",
+        "id": 102155,
+        "lastName": "Griffin",
+        "party": "Workers Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 102154,
+        "lastName": "Schena",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:35.409Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 130195,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 102156,
+        "lastName": "Celata",
+        "party": "No Party Affiliation",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Nadia",
+        "id": 102157,
+        "lastName": "Milleron",
+        "party": "Unenrolled",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 10750,
+        "lastName": "Neal",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:41:19.716Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 153224,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jim",
+        "id": 30688,
+        "lastName": "McGovern",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Cornelius",
+        "id": 102158,
+        "lastName": "Shea",
+        "party": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:28:31.117Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 183242,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lori",
+        "id": 10761,
+        "lastName": "Trahan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jake",
+        "id": 30689,
+        "lastName": "Auchincloss",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Katherine",
+        "id": 1299,
+        "lastName": "Clark",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Seth",
+        "id": 1300,
+        "lastName": "Moulton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ayanna",
+        "id": 10765,
+        "lastName": "Pressley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Stephen",
+        "id": 1302,
+        "lastName": "Lynch",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Robert",
+        "id": 30695,
+        "lastName": "Burke",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:53:17.534Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 282064,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 8293,
+        "lastName": "Sullivan",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "William ",
+        "id": 1304,
+        "lastName": "Keating",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T18:49:28.040Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 358610,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 30716,
+        "lastName": "Rodrigues",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Bristol and Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Pavel",
+        "id": 30717,
+        "lastName": "Payano",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bruce",
+        "id": 30766,
+        "lastName": "Tarr",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Essex and Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Edward",
+        "id": 30720,
+        "lastName": "Kennedy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Karla",
+        "id": 31016,
+        "lastName": "Miller",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patrick",
+        "id": 30767,
+        "lastName": "O'Connor",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Plymouth and Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nick",
+        "id": 30722,
+        "lastName": "Collins",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Robyn",
+        "id": 30723,
+        "lastName": "Kennedy",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 30725,
+        "lastName": "Montigny",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Bristol and Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joan",
+        "id": 30726,
+        "lastName": "Lovely",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Damian",
+        "id": 30769,
+        "lastName": "Anketell",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Barry",
+        "id": 30728,
+        "lastName": "Finegold",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Essex and Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Patricia",
+        "id": 30729,
+        "lastName": "Jehlen",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 30730,
+        "lastName": "Brady",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Plymouth and Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Liz",
+        "id": 30735,
+        "lastName": "Miranda",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 16866,
+        "lastName": "Moore",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 84263,
+        "lastName": "Pacheco",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kelly",
+        "id": 84382,
+        "lastName": "Dooner",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3rd Bristol and Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brendan",
+        "id": 30738,
+        "lastName": "Crighton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3rd Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 30739,
+        "lastName": "Barrett",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3rd Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lydia",
+        "id": 30740,
+        "lastName": "Edwards",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jeanna",
+        "id": 84383,
+        "lastName": "Tamas",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3rd Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cindy",
+        "id": 30741,
+        "lastName": "Friedman",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jason",
+        "id": 30742,
+        "lastName": "Lewis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 30743,
+        "lastName": "Mark",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 14419,
+        "lastName": "Rosa",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Berkshire, Hampden, Franklin, and Hampshire",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 30745,
+        "lastName": "Feeney",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Bristol and Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christopher",
+        "id": 30775,
+        "lastName": "Lauzon",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Julian",
+        "id": 30746,
+        "lastName": "Cyr",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Cape and Islands",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 30749,
+        "lastName": "Gomez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30750,
+        "lastName": "Velis",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Hampden and Hampshire",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jacob",
+        "id": 30748,
+        "lastName": "Oliveira",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Hampden, Hampshire, and Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jo",
+        "id": 30751,
+        "lastName": "Comerford",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Hampshire, Franklin and Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Karen",
+        "id": 30752,
+        "lastName": "Spilka",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Middlesex and Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sal",
+        "id": 30753,
+        "lastName": "DiDomenico",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Middlesex and Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 30754,
+        "lastName": "Eldridge",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Middlesex and Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Cynthia",
+        "id": 30758,
+        "lastName": "Creem",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Norfolk and Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30759,
+        "lastName": "Keenan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Norfolk and Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 30760,
+        "lastName": "Rush",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Norfolk and Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "William",
+        "id": 101898,
+        "lastName": "Driscoll Jr.",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Norfolk, Plymouth, and Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Becca",
+        "id": 30757,
+        "lastName": "Rausch",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Norfolk, Worcester, and Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mathew",
+        "id": 30974,
+        "lastName": "Muratore",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Dylan",
+        "id": 30968,
+        "lastName": "Fernandes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Plymouth and Barnstable",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "William",
+        "id": 30762,
+        "lastName": "Brownsberger",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Suffolk and Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 30783,
+        "lastName": "Fattman",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Anthony",
+        "id": 84271,
+        "lastName": "Allard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Worcester and Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Peter",
+        "id": 30994,
+        "lastName": "Durant",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "Worcester and Hampshire",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nicholas",
+        "id": 101899,
+        "lastName": "Pirro III",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30764,
+        "lastName": "Cronin",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Worcester and Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 84386,
+        "lastName": "Pires",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 84284,
+        "lastName": "Sylvia",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 30882,
+        "lastName": "Cahill",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carlos",
+        "id": 30883,
+        "lastName": "Gonzalez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30884,
+        "lastName": "Lawn",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeffrey",
+        "id": 30885,
+        "lastName": "Roy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Charles",
+        "id": 101900,
+        "lastName": "BaileyIi",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 30886,
+        "lastName": "DuBois",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 49506,
+        "lastName": "MacGregor",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 30888,
+        "lastName": "Murray",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christopher",
+        "id": 30889,
+        "lastName": "Hendricks",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sean",
+        "id": 84289,
+        "lastName": "Reid",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bud",
+        "id": 30891,
+        "lastName": "Williams",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Vladislav",
+        "id": 84390,
+        "lastName": "Yanovsky",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Amy",
+        "id": 84296,
+        "lastName": "Sangiolo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 30894,
+        "lastName": "McMurtry",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rita",
+        "id": 30896,
+        "lastName": "Mendes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Judith",
+        "id": 101901,
+        "lastName": "García",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hannah",
+        "id": 31010,
+        "lastName": "Kane",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Norman",
+        "id": 31011,
+        "lastName": "Orrall",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Thomas",
+        "id": 30901,
+        "lastName": "Walsh",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angelo",
+        "id": 101902,
+        "lastName": "Puppolo Jr.",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 84299,
+        "lastName": "Schwartz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 21136,
+        "lastName": "Rogers",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eric",
+        "id": 31012,
+        "lastName": "Meschino",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathleen",
+        "id": 30904,
+        "lastName": "LaNatra",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brandy",
+        "id": 30905,
+        "lastName": "Oakley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Meghan",
+        "id": 30906,
+        "lastName": "Kilcoyne",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Antonio",
+        "id": 30907,
+        "lastName": "Cabral",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sally",
+        "id": 30908,
+        "lastName": "Kerans",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carmine",
+        "id": 30909,
+        "lastName": "Gentile",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joshua",
+        "id": 84308,
+        "lastName": "Tarsky",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 30911,
+        "lastName": "Hunt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30912,
+        "lastName": "Mahoney",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 84387,
+        "lastName": "Cannata",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 30913,
+        "lastName": "Scanlon",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrianne",
+        "id": 30914,
+        "lastName": "Ramos",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Simon",
+        "id": 30916,
+        "lastName": "Cataldo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alice",
+        "id": 30918,
+        "lastName": "Peisch",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rob",
+        "id": 30919,
+        "lastName": "Consalvo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 30920,
+        "lastName": "O'Day",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 30921,
+        "lastName": "Hamilton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 30922,
+        "lastName": "Ciccolo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tommy",
+        "id": 30923,
+        "lastName": "Vitolo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sam",
+        "id": 30927,
+        "lastName": "Montaño",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 30929,
+        "lastName": "Keefe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Francisco",
+        "id": 30931,
+        "lastName": "Paulino",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rodney",
+        "id": 30933,
+        "lastName": "Elliott",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 30934,
+        "lastName": "Giannino",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 30935,
+        "lastName": "Donahue",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Frank",
+        "id": 30936,
+        "lastName": "Moran",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Vanna",
+        "id": 30937,
+        "lastName": "Howard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 30938,
+        "lastName": "Honan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 30939,
+        "lastName": "LeBoeuf",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Nicholas",
+        "id": 101899,
+        "lastName": "Pirro III",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30764,
+        "lastName": "Cronin",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "Worcester and Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 84386,
+        "lastName": "Pires",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Mark",
+        "id": 84284,
+        "lastName": "Sylvia",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dan",
+        "id": 30882,
+        "lastName": "Cahill",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carlos",
+        "id": 30883,
+        "lastName": "Gonzalez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30884,
+        "lastName": "Lawn",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeffrey",
+        "id": 30885,
+        "lastName": "Roy",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Charles",
+        "id": 101900,
+        "lastName": "BaileyIi",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 30886,
+        "lastName": "DuBois",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bill",
+        "id": 49506,
+        "lastName": "MacGregor",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 30888,
+        "lastName": "Murray",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christopher",
+        "id": 30889,
+        "lastName": "Hendricks",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sean",
+        "id": 84289,
+        "lastName": "Reid",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bud",
+        "id": 30891,
+        "lastName": "Williams",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Vladislav",
+        "id": 84390,
+        "lastName": "Yanovsky",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Amy",
+        "id": 84296,
+        "lastName": "Sangiolo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 30894,
+        "lastName": "McMurtry",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rita",
+        "id": 30896,
+        "lastName": "Mendes",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Judith",
+        "id": 101901,
+        "lastName": "García",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Hannah",
+        "id": 31010,
+        "lastName": "Kane",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Norman",
+        "id": 31011,
+        "lastName": "Orrall",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Thomas",
+        "id": 30901,
+        "lastName": "Walsh",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Angelo",
+        "id": 101902,
+        "lastName": "Puppolo Jr.",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Greg",
+        "id": 84299,
+        "lastName": "Schwartz",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 21136,
+        "lastName": "Rogers",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Eric",
+        "id": 31012,
+        "lastName": "Meschino",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathleen",
+        "id": 30904,
+        "lastName": "LaNatra",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brandy",
+        "id": 30905,
+        "lastName": "Oakley",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Meghan",
+        "id": 30906,
+        "lastName": "Kilcoyne",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Antonio",
+        "id": 30907,
+        "lastName": "Cabral",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sally",
+        "id": 30908,
+        "lastName": "Kerans",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Carmine",
+        "id": 30909,
+        "lastName": "Gentile",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joshua",
+        "id": 84308,
+        "lastName": "Tarsky",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 30911,
+        "lastName": "Hunt",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 30912,
+        "lastName": "Mahoney",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 84387,
+        "lastName": "Cannata",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Adam",
+        "id": 30913,
+        "lastName": "Scanlon",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrianne",
+        "id": 30914,
+        "lastName": "Ramos",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Simon",
+        "id": 30916,
+        "lastName": "Cataldo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Alice",
+        "id": 30918,
+        "lastName": "Peisch",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rob",
+        "id": 30919,
+        "lastName": "Consalvo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 30920,
+        "lastName": "O'Day",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Ryan",
+        "id": 30921,
+        "lastName": "Hamilton",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 30922,
+        "lastName": "Ciccolo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tommy",
+        "id": 30923,
+        "lastName": "Vitolo",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sam",
+        "id": 30927,
+        "lastName": "Montaño",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mary",
+        "id": 30929,
+        "lastName": "Keefe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Francisco",
+        "id": 30931,
+        "lastName": "Paulino",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Rodney",
+        "id": 30933,
+        "lastName": "Elliott",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jessica",
+        "id": 30934,
+        "lastName": "Giannino",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 30935,
+        "lastName": "Donahue",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Frank",
+        "id": 30936,
+        "lastName": "Moran",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Vanna",
+        "id": 30937,
+        "lastName": "Howard",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kevin",
+        "id": 30938,
+        "lastName": "Honan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 30939,
+        "lastName": "LeBoeuf",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tram",
+        "id": 30940,
+        "lastName": "Nguyen",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18th Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tara",
+        "id": 30942,
+        "lastName": "Hong",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 30944,
+        "lastName": "Moran",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 31019,
+        "lastName": "McKenna",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 31020,
+        "lastName": "Sarnowski",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "George",
+        "id": 101903,
+        "lastName": "Ferdinand",
+        "party": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 30945,
+        "lastName": "Robertson",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeffrey",
+        "id": 15899,
+        "lastName": "Turco",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19th Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 30946,
+        "lastName": "Donaghue",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19th Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Chris",
+        "id": 30786,
+        "lastName": "Flanagan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Barnstable",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 101904,
+        "lastName": "Barrett III",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Berkshire",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 48223,
+        "lastName": "Chaisson",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kostas",
+        "id": 84280,
+        "lastName": "Loukos",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Dawne",
+        "id": 48152,
+        "lastName": "Shand",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Natalie",
+        "id": 30791,
+        "lastName": "Blais",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Franklin",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Todd",
+        "id": 30971,
+        "lastName": "Smola",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Lindsay",
+        "id": 30792,
+        "lastName": "Sabadosa",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Hampshire",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Margaret",
+        "id": 30793,
+        "lastName": "Scarsdale",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Lynne",
+        "id": 30972,
+        "lastName": "Archambault",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bruce",
+        "id": 30794,
+        "lastName": "Ayers",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jesse",
+        "id": 30697,
+        "lastName": "Brown",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Michelle",
+        "id": 84309,
+        "lastName": "Badger",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Adrian",
+        "id": 30798,
+        "lastName": "Madaro",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1st Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kimberly",
+        "id": 30975,
+        "lastName": "Ferguson",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bradley",
+        "id": 101905,
+        "lastName": "Jones Jr.",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kenneth",
+        "id": 30947,
+        "lastName": "Gordon",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21st Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Marc",
+        "id": 31023,
+        "lastName": "Lombardo",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22nd Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sean",
+        "id": 30950,
+        "lastName": "Garballey",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23rd Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 30951,
+        "lastName": "Rogers",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Evan",
+        "id": 84301,
+        "lastName": "MacKay",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Mike",
+        "id": 30953,
+        "lastName": "Connolly",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Erika",
+        "id": 30954,
+        "lastName": "Uyterhoeven",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Joseph",
+        "id": 101906,
+        "lastName": "McGonagle Jr.",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 30958,
+        "lastName": "Owens",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "29th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kip",
+        "id": 30799,
+        "lastName": "Diggs",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Susanne",
+        "id": 84385,
+        "lastName": "Conley",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Barnstable",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Tricia",
+        "id": 30800,
+        "lastName": "Farley-Bouvier",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Berkshire",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 30801,
+        "lastName": "Hawkins",
+        "party": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Andrew",
+        "id": 101907,
+        "lastName": "Nelson",
+        "party": "Workers Party",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Bristol",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kristin",
+        "id": 30802,
+        "lastName": "Kassner",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Essex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Jeffrey",
+        "id": 30978,
+        "lastName": "Raymond",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Franklin",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Brian",
+        "id": 30803,
+        "lastName": "Ashe",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Hampden",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Homar",
+        "id": 84292,
+        "lastName": "Gomez",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Hampshire",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "James",
+        "id": 30805,
+        "lastName": "Arciero",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Sharon",
+        "id": 30980,
+        "lastName": "Cintolo",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Tackey",
+        "id": 30806,
+        "lastName": "Chan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Norfolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "John",
+        "id": 84394,
+        "lastName": "Gaskey",
+        "party": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Plymouth",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Daniel",
+        "id": 30807,
+        "lastName": "Ryan",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Suffolk",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Bruce",
+        "id": 30982,
+        "lastName": "Chester",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Jonathan",
+        "id": 30808,
+        "lastName": "Zlotnik",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Worcester",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Richard",
+        "id": 30959,
+        "lastName": "Haggerty",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "30th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Michael",
+        "id": 30963,
+        "lastName": "Day",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "31st Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Kate",
+        "id": 30960,
+        "lastName": "Lipper-Garabedian",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "32nd Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Steven",
+        "id": 30961,
+        "lastName": "Ultrino",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "33rd Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Christine",
+        "id": 30962,
+        "lastName": "Barber",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "34th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Paul",
+        "id": 101908,
+        "lastName": "Donato Sr.",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "35th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Colleen",
+        "id": 30966,
+        "lastName": "Garry",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "36th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "Danillo",
+        "id": 30967,
+        "lastName": "Sena",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "37th Middlesex",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-09-30T20:04:09.744Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "firstName": "David",
+        "id": 30983,
+        "lastName": "Vieira",
+        "party": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "firstName": "Kathleen",
+        "id": 48217,
+        "lastName": "Alfano",
+        "party": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3rd Barnstable",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T16:32:57.360Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "party": null,
+    "raceDate": "2024-11-05",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]
