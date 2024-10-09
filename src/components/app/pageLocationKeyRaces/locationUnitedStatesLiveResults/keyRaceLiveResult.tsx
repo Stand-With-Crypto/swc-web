@@ -196,16 +196,6 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
   const canShowProgress = Boolean(liveResultData)
 
-  if ((!ddhqCandidateB || !ddhqCandidateA) && stateCode === 'CO') {
-    console.log('Missing DDHQ data:', {
-      ddhqCandidateA,
-      ddhqCandidateB,
-      raceData,
-      candidateA,
-      candidateB,
-    })
-  }
-
   return (
     <div className={cn('flex w-full max-w-xl flex-col gap-6', className)}>
       {showLink ? (

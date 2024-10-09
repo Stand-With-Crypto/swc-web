@@ -7,10 +7,7 @@ import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUn
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
-import {
-  CandidatesWithVote,
-  PresidentialDataWithVotingResponse,
-} from '@/data/aggregations/decisionDesk/types'
+import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
 import { cn } from '@/utils/web/cn'
@@ -23,34 +20,46 @@ interface PresidentialRaceResultProps {
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   const { candidates, initialRaceData = null } = props
 
-  const candidateA = useMemo(() => candidates?.[0] || {}, [candidates])
-  const candidateB = useMemo(() => candidates?.[1] || {}, [candidates])
+  const candidateA = useMemo(
+    () => candidates?.find(_candidate => _candidate.lastName === 'Trump') || candidates?.[0],
+    [candidates],
+  )
+  const candidateB = useMemo(
+    () => candidates?.find(_candidate => _candidate.lastName === 'Harris') || candidates?.[1],
+    [candidates],
+  )
 
-  const { data, isLoading, isValidating } = useApiDecisionDeskPresidentialData(initialRaceData)
+  const {
+    data: liveResultData,
+    isLoading,
+    isValidating,
+  } = useApiDecisionDeskPresidentialData(initialRaceData)
 
   console.log('PRESIDENTIAL: ', {
     initialRaceData,
-    data,
+    liveResultData,
     isLoading,
     isValidating,
   })
 
   const ddhqCandidateA = useMemo(() => {
-    if (!data) return null
+    if (!liveResultData) return null
+    if (!candidateA) return null
 
-    const candidate = data?.find(_candidate =>
+    const candidate = liveResultData?.find(_candidate =>
       getPoliticianFindMatch(candidateA, _candidate.votingData),
     )
 
     if (!candidate) return null
 
     return candidate
-  }, [candidateA, data])
+  }, [candidateA, liveResultData])
 
   const ddhqCandidateB = useMemo(() => {
-    if (!data) return null
+    if (!liveResultData) return null
+    if (!candidateB) return null
 
-    const candidate = data?.find(_candidate =>
+    const candidate = liveResultData?.find(_candidate =>
       getPoliticianFindMatch(candidateB, _candidate.votingData),
     )
 
@@ -60,9 +69,9 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       ...candidateB,
       ...candidate,
     }
-  }, [candidateB, data])
+  }, [candidateB, liveResultData])
 
-  const canShowProgress = Boolean(data)
+  const canShowProgress = Boolean(liveResultData)
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -82,25 +91,27 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         {canShowProgress ? (
           <>
             <Progress
-              className="h-6 rounded-l-full rounded-r-none bg-gray-800"
+              className="h-6 rounded-l-full rounded-r-none bg-[#23262B]"
               indicatorClassName={cn(
                 'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
                   candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
                 ),
+                getOpacity(candidateA, liveResultData),
               )}
-              value={(ddhqCandidateA?.votingData?.percentage || 0) * 2}
+              value={Math.min((ddhqCandidateA?.votingData?.percentage || 0) * 2, 100)}
             />
             <Progress
-              className="h-6 rounded-l-none rounded-r-full border-l bg-gray-800"
+              className="h-6 rounded-l-none rounded-r-full border-l bg-[#23262B]"
               indicatorClassName={cn(
                 'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(
                   candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
                 ),
+                getOpacity(candidateB, liveResultData),
               )}
               inverted
-              value={(ddhqCandidateB?.votingData?.percentage || 0) * 2}
+              value={Math.min((ddhqCandidateB?.votingData?.percentage || 0) * 2, 100)}
             />
           </>
         ) : (
@@ -142,4 +153,17 @@ function AvatarBox(props: AvatarBoxProps) {
       {electoralVotes ? <p className="text-lg font-bold">{electoralVotes}</p> : null}
     </div>
   )
+}
+
+function getOpacity(
+  candidate: DTSI_Candidate | null,
+  raceData: PresidentialDataWithVotingResponse[] | undefined,
+) {
+  if (!raceData) return 'opacity-100'
+  if (!candidate) return 'opacity-100'
+
+  const calledCandidate = raceData?.find(_candidate => _candidate.votingData?.called)
+  if (!calledCandidate) return 'opacity-100'
+
+  return calledCandidate.id === candidate.id ? 'opacity-100' : 'opacity-50'
 }

@@ -3,7 +3,6 @@ import {
   CandidatesWithVote,
   PresidentialDataWithVotingResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { DTSI_Person } from '@/data/dtsi/generated'
 import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 
 export const getPoliticianFindMatch = (
