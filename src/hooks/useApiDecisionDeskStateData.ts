@@ -12,12 +12,11 @@ import { apiUrls } from '@/utils/shared/urls'
 export function useApiDecisionDeskStateData(
   fallbackData: RacesVotingDataResponse[] | null,
   state: string,
-  district?: number,
 ) {
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID)
 
   const swrData = useSWR(
-    apiTamperedValue ? null : apiUrls.decisionDeskStateData(state, district),
+    apiTamperedValue ? null : apiUrls.decisionDeskStateData({ stateCode: state }),
     url =>
       fetchReq(url)
         .then(res => res.json())

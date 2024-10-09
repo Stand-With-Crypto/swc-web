@@ -103,6 +103,13 @@ export function LocationRaceSpecific({
     [others, recommended],
   )
 
+  console.log('LocationRaceSpecific: ', {
+    stateCode,
+    district,
+    candidates,
+    initialLiveResultData,
+  })
+
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
       usaState: stateCode,

@@ -58,28 +58,37 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     getIntlUrls(locale).locationUnitedStatesPresidential(),
   )
 
-  const candidateA = useMemo(
-    () =>
-      candidates?.find(
-        candidate =>
-          candidate.politicalAffiliationCategory ===
-          DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-      ) ||
-      candidates?.[0] ||
-      {},
-    [candidates],
-  )
-  const candidateB = useMemo(
-    () =>
-      candidates?.find(
-        candidate =>
-          candidate.politicalAffiliationCategory ===
-          DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-      ) ||
-      candidates?.[1] ||
-      {},
-    [candidates],
-  )
+  const [candidateA, candidateB] = useMemo(() => {
+    let democrat: DTSI_Candidate | null = null
+    let republican: DTSI_Candidate | null = null
+    let independent: DTSI_Candidate | null = null
+    const otherCandidates: DTSI_Candidate[] = []
+
+    candidates.forEach(candidate => {
+      switch (candidate.politicalAffiliationCategory) {
+        case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
+          democrat = democrat || candidate
+          break
+        case DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN:
+          republican = republican || candidate
+          break
+        case DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT:
+          independent = independent || candidate
+          break
+        default:
+          otherCandidates.push(candidate)
+      }
+    })
+
+    if (democrat && republican) {
+      return [democrat, republican]
+    }
+
+    const candidateA = democrat || republican || independent || otherCandidates[0]
+    const candidateB = republican || independent || otherCandidates[1] || otherCandidates[0]
+
+    return [candidateA, candidateB]
+  }, [candidates])
 
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const raceName = primaryDistrict

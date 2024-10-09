@@ -130,7 +130,9 @@ export function LocationUnitedStatesLiveResults({
           title="Map view"
           titleProps={{ size: 'xs' }}
         >
-          <LiveStatusBadge status={raceStatus} />
+          <div className="flex justify-center">
+            <LiveStatusBadge status={raceStatus} />
+          </div>
           <LiveResultsMap />
         </ContentSection>
 
