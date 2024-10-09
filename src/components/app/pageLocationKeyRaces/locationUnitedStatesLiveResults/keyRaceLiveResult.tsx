@@ -205,7 +205,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   const canShowProgress = Boolean(liveResultData)
 
   return (
-    <div className={cn('flex w-full flex-col gap-8', className)}>
+    <div className={cn('flex w-full max-w-xl flex-col gap-8', className)}>
       {showLink ? (
         <div className="flex items-start justify-between">
           <div className="space-y-2">

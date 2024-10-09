@@ -112,7 +112,7 @@ export function LocationUnitedStatesLiveResults({
             />
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
             <ResultsOverviewCard
               antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
               proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}
@@ -126,7 +126,7 @@ export function LocationUnitedStatesLiveResults({
           </div>
         </ContentSection>
 
-        <UserAddressVoterGuideInputSection locale={locale} />
+        {/* <UserAddressVoterGuideInputSection locale={locale} /> */}
 
         <ContentSection
           subtitle="These elections are critical to the future of crypto in America. View live updates below."
@@ -134,7 +134,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <LiveResultsGrid>
-            {Object.entries(dtsiResults.keyRaces).map(([stateCode, keyRaces]) =>
+            {Object.entries(dtsiResults.keyRaces).flatMap(([stateCode, keyRaces]) =>
               keyRaces.map(candidates => {
                 const primaryDistrict = candidates[0].runningForSpecificRole.primaryDistrict
                   ? normalizeDTSIDistrictId(candidates[0].runningForSpecificRole)
@@ -159,7 +159,7 @@ export function LocationUnitedStatesLiveResults({
             )}
 
             <LiveResultsGrid.GridItem>
-              <div className="flex flex-col items-center justify-center gap-8 text-center">
+              <div className="mx-auto flex flex-col items-center justify-center gap-8 text-center">
                 <NextImage
                   alt="SWC shield"
                   height={120}

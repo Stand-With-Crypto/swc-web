@@ -56,13 +56,12 @@ export const congressLiveResultOverview = (
 
   return data.candidatesWithVotes.reduce(
     (acc, candidate) => {
-      if (!candidate?.votingData) return acc
+      if (!candidate?.dtsiData) return acc
 
       if (!candidate.elected) return acc
 
       const stanceScore =
-        candidate.votingData.manuallyOverriddenStanceScore ||
-        candidate.votingData.computedStanceScore
+        candidate.dtsiData.manuallyOverriddenStanceScore || candidate.dtsiData.computedStanceScore
       if (isNil(stanceScore)) return acc
 
       if (stanceScore > 50) {
