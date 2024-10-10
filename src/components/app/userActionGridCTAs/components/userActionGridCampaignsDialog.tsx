@@ -23,15 +23,26 @@ interface UserActionGridCampaignsDialogProps {
   shouldOpenDeeplink?: boolean
 }
 
-export function UserActionGridCampaignsDialog({
+export function UserActionGridCampaignsDialog(props: UserActionGridCampaignsDialogProps) {
+  const dialogProps = useDialog({ analytics: 'Grid CTA Campaign Dialog' })
+
+  return (
+    <Dialog {...dialogProps}>
+      <DialogTrigger asChild>{props.children}</DialogTrigger>
+      <DialogContent a11yTitle={props.title} className="max-w-xl">
+        <UserActionGridCampaignsDialogContent {...props} />
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+export function UserActionGridCampaignsDialogContent({
   title,
   description,
   campaigns,
   performedUserActions,
-  children,
   shouldOpenDeeplink,
-}: UserActionGridCampaignsDialogProps) {
-  const dialogProps = useDialog({ analytics: 'Grid CTA Campaign Dialog' })
+}: Omit<UserActionGridCampaignsDialogProps, 'children'>) {
   const locale = useLocale()
 
   const activeCampaigns = campaigns.filter(campaign => campaign.isCampaignActive)
@@ -42,29 +53,76 @@ export function UserActionGridCampaignsDialog({
   )
 
   return (
-    <Dialog {...dialogProps}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent a11yTitle="ABC debate email" className="max-w-xl">
-        <div className="flex flex-col items-center gap-2 pb-4">
-          <h3 className="font-sans text-xl font-bold">
-            <Balancer>{title}</Balancer>
-          </h3>
-          <p className="text-center font-mono text-base text-muted-foreground">
-            <Balancer>{description}</Balancer>
-          </p>
+    <div className="flex flex-col items-center gap-2 pb-4">
+      <h3 className="font-sans text-xl font-bold">
+        <Balancer>{title}</Balancer>
+      </h3>
+      <p className="text-center font-mono text-base text-muted-foreground">
+        <Balancer>{description}</Balancer>
+      </p>
+
+      <ScrollArea className="w-full">
+        <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-80">
+          {activeCampaigns.map(campaign => {
+            const WrapperComponent = campaign.WrapperComponent
+            const campaignKey = `${campaign.actionType}-${campaign.campaignName}`
+            const isCompleted = !!performedUserActions[campaignKey]
+
+            return (
+              <WrapperComponent key={campaignKey}>
+                <CampaignCard
+                  description={campaign.description}
+                  isCompleted={isCompleted}
+                  title={campaign.title}
+                />
+              </WrapperComponent>
+            )
+          })}
+        </div>
+
+        <ScrollBar />
+      </ScrollArea>
+
+      {completedInactiveCampaigns.length > 0 && (
+        <>
+          <h4 className="pt-6 font-sans text-lg font-semibold">Past completed campaigns</h4>
 
           <ScrollArea className="w-full">
             <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-80">
-              {activeCampaigns.map(campaign => {
+              {completedInactiveCampaigns.map(campaign => {
+                const url = shouldOpenDeeplink
+                  ? getUserActionDeeplink({
+                      actionType: campaign.actionType as UserActionTypesWithDeeplink,
+                      config: {
+                        locale,
+                      },
+                      campaign: campaign.campaignName as any,
+                    })
+                  : null
+
                 const WrapperComponent = campaign.WrapperComponent
                 const campaignKey = `${campaign.actionType}-${campaign.campaignName}`
                 const isCompleted = !!performedUserActions[campaignKey]
+
+                if (url) {
+                  return (
+                    <Link href={url} key={campaignKey}>
+                      <CampaignCard
+                        description={campaign.description}
+                        isCompleted={isCompleted}
+                        isReadOnly
+                        title={campaign.title}
+                      />
+                    </Link>
+                  )
+                }
 
                 return (
                   <WrapperComponent key={campaignKey}>
                     <CampaignCard
                       description={campaign.description}
                       isCompleted={isCompleted}
+                      isReadOnly
                       title={campaign.title}
                     />
                   </WrapperComponent>
@@ -74,61 +132,9 @@ export function UserActionGridCampaignsDialog({
 
             <ScrollBar />
           </ScrollArea>
-
-          {completedInactiveCampaigns.length > 0 && (
-            <>
-              <h4 className="pt-6 font-sans text-lg font-semibold">Past completed campaigns</h4>
-
-              <ScrollArea className="w-full">
-                <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-80">
-                  {completedInactiveCampaigns.map(campaign => {
-                    const url = shouldOpenDeeplink
-                      ? getUserActionDeeplink({
-                          actionType: campaign.actionType as UserActionTypesWithDeeplink,
-                          config: {
-                            locale,
-                          },
-                          campaign: campaign.campaignName as any,
-                        })
-                      : null
-
-                    const WrapperComponent = campaign.WrapperComponent
-                    const campaignKey = `${campaign.actionType}-${campaign.campaignName}`
-                    const isCompleted = !!performedUserActions[campaignKey]
-
-                    if (url) {
-                      return (
-                        <Link href={url} key={campaignKey}>
-                          <CampaignCard
-                            description={campaign.description}
-                            isCompleted={isCompleted}
-                            isReadOnly
-                            title={campaign.title}
-                          />
-                        </Link>
-                      )
-                    }
-
-                    return (
-                      <WrapperComponent key={campaignKey}>
-                        <CampaignCard
-                          description={campaign.description}
-                          isCompleted={isCompleted}
-                          isReadOnly
-                          title={campaign.title}
-                        />
-                      </WrapperComponent>
-                    )
-                  })}
-                </div>
-
-                <ScrollBar />
-              </ScrollArea>
-            </>
-          )}
-        </div>
-      </DialogContent>
-    </Dialog>
+        </>
+      )}
+    </div>
   )
 }
 
