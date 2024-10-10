@@ -14,6 +14,18 @@ export function useApiDecisionDeskPresidentialData(
 ) {
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
 
+  const swrData = useSWR(
+    apiUrls.decisionDeskPresidentialData(),
+    url =>
+      fetchReq(url)
+        .then(res => res.json())
+        .then(data => data as PresidentialDataWithVotingResponse[]),
+    {
+      fallbackData: fallbackData ?? undefined,
+      refreshInterval: 120 * 1000,
+    },
+  )
+
   if (apiTamperedValue) {
     return SWC_PRESIDENTIAL_RACES_DATA.map(currentPresidentialData => {
       const currentVotingData = currentPresidentialData.votingData
@@ -28,6 +40,7 @@ export function useApiDecisionDeskPresidentialData(
               (currentVotingData.electoralVotes ?? 1000) * (+apiTamperedValue / 100),
             ),
             votes: Math.round((currentVotingData.votes ?? 1000) * (+apiTamperedValue / 100)),
+            called: +apiTamperedValue === 100 ? true : currentVotingData.called,
           },
         }
       }
@@ -36,15 +49,5 @@ export function useApiDecisionDeskPresidentialData(
     })
   }
 
-  return useSWR(
-    apiUrls.decisionDeskPresidentialData(),
-    url =>
-      fetchReq(url)
-        .then(res => res.json())
-        .then(data => data as PresidentialDataWithVotingResponse[]),
-    {
-      fallbackData: fallbackData ?? undefined,
-      refreshInterval: 120 * 1000,
-    },
-  )
+  return swrData
 }

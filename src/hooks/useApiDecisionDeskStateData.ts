@@ -16,6 +16,18 @@ export function useApiDecisionDeskStateData(
 ) {
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
 
+  const swrData = useSWR(
+    apiUrls.decisionDeskStateData(state, district),
+    url =>
+      fetchReq(url)
+        .then(res => res.json())
+        .then(data => data as RacesVotingDataResponse[]),
+    {
+      fallbackData: fallbackData ?? undefined,
+      refreshInterval: 120 * 1000,
+    },
+  )
+
   if (apiTamperedValue && state) {
     const key = `SWC_${state.toUpperCase()}_STATE_RACES_DATA`
 
@@ -36,15 +48,5 @@ export function useApiDecisionDeskStateData(
     })
   }
 
-  return useSWR(
-    apiUrls.decisionDeskStateData(state, district),
-    url =>
-      fetchReq(url)
-        .then(res => res.json())
-        .then(data => data as RacesVotingDataResponse[]),
-    {
-      fallbackData: fallbackData ?? undefined,
-      refreshInterval: 120 * 1000,
-    },
-  )
+  return swrData
 }

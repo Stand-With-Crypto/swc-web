@@ -12,6 +12,18 @@ import { apiUrls } from '@/utils/shared/urls'
 export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataResponse | null) {
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
 
+  const swrData = useSWR(
+    apiUrls.decisionDeskCongressData(),
+    url =>
+      fetchReq(url)
+        .then(res => res.json())
+        .then(data => data as GetAllCongressDataResponse),
+    {
+      fallbackData: fallbackData ?? undefined,
+      refreshInterval: 120 * 1000,
+    },
+  )
+
   if (apiTamperedValue) {
     return {
       houseWithDtsi: {
@@ -39,15 +51,5 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
     }
   }
 
-  return useSWR(
-    apiUrls.decisionDeskCongressData(),
-    url =>
-      fetchReq(url)
-        .then(res => res.json())
-        .then(data => data as GetAllCongressDataResponse),
-    {
-      fallbackData: fallbackData ?? undefined,
-      refreshInterval: 120 * 1000,
-    },
-  )
+  return swrData
 }
