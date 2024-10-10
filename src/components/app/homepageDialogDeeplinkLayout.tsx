@@ -20,12 +20,14 @@ interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
   size?: 'sm' | 'md'
   pageParams: PageProps['params']
   hideModal?: boolean
+  dialogContentClassName?: string
 }
 
 export async function HomepageDialogDeeplinkLayout({
   children,
   size = 'md',
   pageParams,
+  dialogContentClassName,
 }: HomepageDialogDeeplinkLayoutProps) {
   const urls = getIntlUrls(pageParams.locale)
   const [{ sumDonations, countUsers, countPolicymakerContacts }] = await Promise.all([
@@ -40,7 +42,14 @@ export async function HomepageDialogDeeplinkLayout({
         href={urls.home()}
         replace
       />
-      <div className={cn(dialogContentStyles, size === 'md' && 'max-w-3xl', 'min-h-[400px]')}>
+      <div
+        className={cn(
+          dialogContentStyles,
+          size === 'md' && 'max-w-3xl',
+          'min-h-[400px]',
+          dialogContentClassName,
+        )}
+      >
         {children}
         <InternalLink className={dialogCloseStyles} href={urls.home()} replace>
           <X size={20} />
