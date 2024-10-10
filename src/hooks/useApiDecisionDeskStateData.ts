@@ -3,7 +3,7 @@
 import { useCookie } from 'react-use'
 import useSWR from 'swr'
 
-import { INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE } from '@/app/[locale]/internal/api-tampering/key-races/page'
+import { INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import * as stateRacesMockData from '@/mocks/decisionDesk'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -14,7 +14,7 @@ export function useApiDecisionDeskStateData(
   state: string,
   district?: number,
 ) {
-  const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
+  const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID)
 
   const swrData = useSWR(
     apiTamperedValue ? null : apiUrls.decisionDeskStateData(state, district),
@@ -42,10 +42,14 @@ export function useApiDecisionDeskStateData(
           return {
             ...currentCandidate,
             votes: Math.round((currentCandidate.votes ?? 1000) * (+apiTamperedValue / 100)),
+            estimatedVotes: {
+              ...currentCandidate.estimatedVotes,
+              estimatedVotesMid: +apiTamperedValue,
+            },
           }
         }),
       }
-    })
+    }) as RacesVotingDataResponse[]
   }
 
   return swrData

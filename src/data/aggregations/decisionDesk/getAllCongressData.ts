@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/node'
+
 import {
   CandidatesWithVote,
   CongressDataResponse,
@@ -55,13 +57,26 @@ const enhanceCongressData = (
         const normalizedCandidateFirstName = normalizeName(currentCandidate.firstName)
         const normalizedCandidateLastName = normalizeName(currentCandidate.lastName)
 
-        return getPoliticianFindMatch(
-          normalizedPersonFirstName,
-          normalizedPersonLastName,
-          normalizedCandidateFirstName,
-          normalizedCandidateLastName,
-        )
+        return getPoliticianFindMatch({
+          dtsiPerson: {
+            politicianFirstName: normalizedPersonFirstName,
+            politicianLastName: normalizedPersonLastName,
+          },
+          decisionDeskPerson: {
+            votingDataFirstName: normalizedCandidateFirstName,
+            votingDataLastName: normalizedCandidateLastName,
+          },
+        })
       }) ?? null
+
+    if (!dtsiData) {
+      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
+        extra: {
+          domain: 'aggregations/decisionDesk/getAllCongressData',
+          candidateName: `${currentCandidate.firstName} ${currentCandidate.lastName}`,
+        },
+      })
+    }
 
     return {
       ...currentCandidate,

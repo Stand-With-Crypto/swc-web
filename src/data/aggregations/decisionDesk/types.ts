@@ -28,6 +28,14 @@ export interface CandidatesWithVote {
   party: string
   votes: number
   elected: boolean
+  estimatedVotes: {
+    estimatedVotesLow: number
+    turnoutLow: number
+    estimatedVotesMid: number
+    turnoutMid: number
+    estimatedVotesHigh: number
+    turnoutHigh: number
+  }
 }
 
 interface VotingData {

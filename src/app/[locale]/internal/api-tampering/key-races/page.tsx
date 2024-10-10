@@ -5,17 +5,20 @@ import { useCookieState } from '@/hooks/useCookieState'
 
 export const dynamic = 'error'
 
-export const INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE =
-  'INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE'
+export const INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID =
+  'INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID'
 
 export default function ApiTamperingPage() {
-  const [keyRacesPercentCoverage, setKeyRacesPercentCoverage] = useCookieState(
-    INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE,
+  const [keyRacesEstimatedVotesMid, setKeyRacesEstimatedVotesMid] = useCookieState(
+    INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID,
   )
 
-  const handlePhaseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyRacesPercentCoverage(event.target.value, {
+  const handleEstimatedVotesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.replace(/\D/g, '')
+
+    setKeyRacesEstimatedVotesMid(value, {
       sameSite: 'strict',
+      expires: 1,
     })
   }
 
@@ -28,68 +31,39 @@ export default function ApiTamperingPage() {
         <div className="space-y-4">
           <button
             className="rounded-md bg-blue-500 px-4 py-2 text-white"
-            onClick={() => setKeyRacesPercentCoverage('')}
+            onClick={() => {
+              setKeyRacesEstimatedVotesMid('', {
+                sameSite: 'strict',
+                expires: new Date(0),
+              })
+            }}
           >
             Remove tampering
           </button>
         </div>
         <h2 className="mb-4 text-xl font-bold">Select percentage coverage</h2>
         <div className="space-y-4">
-          <label className="flex cursor-pointer items-center space-x-3">
+          <div className="mb-4">
+            <label htmlFor="estimatedVotesMid" className="block text-sm font-medium text-gray-700">
+              Enter Estimated Votes (Mid)
+            </label>
             <input
-              checked={keyRacesPercentCoverage === '25'}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500"
-              name="electionPhase"
-              onChange={handlePhaseChange}
-              type="radio"
-              value="25"
+              type="number"
+              id="estimatedVotesMid"
+              value={keyRacesEstimatedVotesMid}
+              onChange={handleEstimatedVotesChange}
+              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              placeholder="Enter estimated number of votes (mid)"
             />
-            <span className="text-gray-700">At the Beginning 25%</span>
-          </label>
-
-          <label className="flex cursor-pointer items-center space-x-3">
-            <input
-              checked={keyRacesPercentCoverage === '50'}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500"
-              name="electionPhase"
-              onChange={handlePhaseChange}
-              type="radio"
-              value="50"
-            />
-            <span className="text-gray-700">Throughout the day 50%</span>
-          </label>
-
-          <label className="flex cursor-pointer items-center space-x-3">
-            <input
-              checked={keyRacesPercentCoverage === '75'}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500"
-              name="electionPhase"
-              onChange={handlePhaseChange}
-              type="radio"
-              value="75"
-            />
-            <span className="text-gray-700">Ending 75%</span>
-          </label>
-
-          <label className="flex cursor-pointer items-center space-x-3">
-            <input
-              checked={keyRacesPercentCoverage === '100'}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500"
-              name="electionPhase"
-              onChange={handlePhaseChange}
-              type="radio"
-              value="100"
-            />
-            <span className="text-gray-700">Completed 100%</span>
-          </label>
+          </div>
         </div>
 
         <div className="mt-6">
           <h3 className="text-lg font-semibold">
-            {keyRacesPercentCoverage ? (
+            {keyRacesEstimatedVotesMid ? (
               <>
-                Currently covering:{' '}
-                <span className="capitalize text-blue-600">{keyRacesPercentCoverage}%</span>
+                Current estimated votes (mid):{' '}
+                <span className="capitalize text-blue-600">{keyRacesEstimatedVotesMid}</span>
               </>
             ) : (
               'Not tampered'

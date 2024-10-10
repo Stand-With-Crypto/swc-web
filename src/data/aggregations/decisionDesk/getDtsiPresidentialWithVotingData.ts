@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/node'
+
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch, normalizeName } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
@@ -30,7 +32,7 @@ export async function getDtsiPresidentialWithVotingData(
   const presidentialData = await getPresidentialData(year)
   const dtsiData = await queryDTSILocationUnitedStatesPresidential()
 
-  return dtsiData.people.map(currentPolitician => {
+  const presidentialVoteData = dtsiData.people.map(currentPolitician => {
     const votingData = presidentialData.find(currentVotingData => {
       const [currentPoliticianFirstName] = currentPolitician.firstName.split(' ')
       const [currentPoliticianLastName] = currentPolitician.lastName.split(' ')
@@ -40,12 +42,16 @@ export async function getDtsiPresidentialWithVotingData(
       const normalizedVotingDataFirstName = normalizeName(currentVotingData.firstName)
       const normalizedVotingDataLastName = normalizeName(currentVotingData.lastName)
 
-      return getPoliticianFindMatch(
-        normalizedPoliticianFirstName,
-        normalizedPoliticianLastName,
-        normalizedVotingDataFirstName,
-        normalizedVotingDataLastName,
-      )
+      return getPoliticianFindMatch({
+        dtsiPerson: {
+          politicianFirstName: normalizedPoliticianFirstName,
+          politicianLastName: normalizedPoliticianLastName,
+        },
+        decisionDeskPerson: {
+          votingDataFirstName: normalizedVotingDataFirstName,
+          votingDataLastName: normalizedVotingDataLastName,
+        },
+      })
     })
 
     return {
@@ -53,4 +59,23 @@ export async function getDtsiPresidentialWithVotingData(
       votingData,
     }
   })
+
+  const notFoundVotingData = presidentialVoteData.filter(
+    currentVoteData => !currentVoteData.votingData,
+  )
+
+  if (notFoundVotingData.length > 0) {
+    const candidateNames = notFoundVotingData.map(
+      currentCandidate => `${currentCandidate.firstName} ${currentCandidate.lastName}`,
+    )
+
+    Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
+      extra: {
+        domain: 'aggregations/decisionDesk/getDtsiPresidentialWithVotingData',
+        candidateNames,
+      },
+    })
+  }
+
+  return presidentialVoteData
 }

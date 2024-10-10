@@ -3,7 +3,7 @@
 import { useCookie } from 'react-use'
 import useSWR from 'swr'
 
-import { INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE } from '@/app/[locale]/internal/api-tampering/key-races/page'
+import { INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { SWC_PRESIDENTIAL_RACES_DATA } from '@/mocks/decisionDesk'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -12,7 +12,7 @@ import { apiUrls } from '@/utils/shared/urls'
 export function useApiDecisionDeskPresidentialData(
   fallbackData: PresidentialDataWithVotingResponse[] | null,
 ) {
-  const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
+  const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID)
 
   const swrData = useSWR(
     apiTamperedValue ? null : apiUrls.decisionDeskPresidentialData(),
@@ -27,26 +27,27 @@ export function useApiDecisionDeskPresidentialData(
   )
 
   if (apiTamperedValue) {
-    return SWC_PRESIDENTIAL_RACES_DATA.map(currentPresidentialData => {
-      const currentVotingData = currentPresidentialData.votingData
+    return (SWC_PRESIDENTIAL_RACES_DATA as PresidentialDataWithVotingResponse[]).map(
+      currentPresidentialData => {
+        const currentVotingData = currentPresidentialData.votingData
 
-      if (currentVotingData) {
-        return {
-          ...currentPresidentialData,
-          votingData: {
-            ...currentVotingData,
-            percentage: (currentVotingData.percentage ?? 100) * (+apiTamperedValue / 100),
-            electoralVotes: Math.round(
-              (currentVotingData.electoralVotes ?? 1000) * (+apiTamperedValue / 100),
-            ),
-            votes: Math.round((currentVotingData.votes ?? 1000) * (+apiTamperedValue / 100)),
-            called: +apiTamperedValue === 100 ? true : currentVotingData.called,
-          },
+        if (currentVotingData) {
+          return {
+            ...currentPresidentialData,
+            votingData: {
+              ...currentVotingData,
+              percentage: (currentVotingData.percentage ?? 100) * (+apiTamperedValue / 100),
+              electoralVotes: Math.round(
+                (currentVotingData.electoralVotes ?? 1000) * (+apiTamperedValue / 100),
+              ),
+              votes: Math.round((currentVotingData.votes ?? 1000) * (+apiTamperedValue / 100)),
+            },
+          }
         }
-      }
 
-      return currentPresidentialData
-    })
+        return currentPresidentialData
+      },
+    ) as PresidentialDataWithVotingResponse[]
   }
 
   return swrData

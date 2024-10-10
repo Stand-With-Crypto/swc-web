@@ -3,14 +3,14 @@
 import { useCookie } from 'react-use'
 import useSWR from 'swr'
 
-import { INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE } from '@/app/[locale]/internal/api-tampering/key-races/page'
+import { INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { SWC_ALL_CONGRESS_DATA } from '@/mocks/decisionDesk'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
 export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataResponse | null) {
-  const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
+  const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID)
 
   const swrData = useSWR(
     apiTamperedValue ? null : apiUrls.decisionDeskCongressData(),
@@ -26,8 +26,9 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
 
   if (apiTamperedValue) {
     return {
-      houseWithDtsi: {
-        ...SWC_ALL_CONGRESS_DATA.houseDataWithDtsi,
+      houseDataWithDtsi: {
+        ...(SWC_ALL_CONGRESS_DATA as Pick<GetAllCongressDataResponse, 'houseDataWithDtsi'>)
+          .houseDataWithDtsi,
         candidatesWithVotes: SWC_ALL_CONGRESS_DATA.houseDataWithDtsi.candidatesWithVotes.map(
           currentHouseCandidate => {
             return {
@@ -38,7 +39,8 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
         ),
       },
       senateDataWithDtsi: {
-        ...SWC_ALL_CONGRESS_DATA.senateDataWithDtsi,
+        ...(SWC_ALL_CONGRESS_DATA as Pick<GetAllCongressDataResponse, 'senateDataWithDtsi'>)
+          .senateDataWithDtsi,
         candidatesWithVotes: SWC_ALL_CONGRESS_DATA.senateDataWithDtsi.candidatesWithVotes.map(
           currentSenateCandidate => {
             return {
@@ -48,7 +50,7 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
           },
         ),
       },
-    }
+    } as GetAllCongressDataResponse
   }
 
   return swrData

@@ -1,11 +1,19 @@
 import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 
-export const getPoliticianFindMatch = (
-  politicianFirstName: string,
-  politicianLastName: string,
-  votingDataFirstName: string,
-  votingDataLastName: string,
-) => {
+interface GetPoliticianFindMatch {
+  dtsiPerson: { politicianFirstName: string; politicianLastName: string }
+  decisionDeskPerson: {
+    votingDataFirstName: string
+    votingDataLastName: string
+  }
+}
+export const getPoliticianFindMatch = ({
+  dtsiPerson,
+  decisionDeskPerson,
+}: GetPoliticianFindMatch) => {
+  const { politicianFirstName, politicianLastName } = dtsiPerson
+  const { votingDataFirstName, votingDataLastName } = decisionDeskPerson
+
   if (politicianFirstName === votingDataFirstName && politicianLastName === votingDataLastName) {
     return true
   }
