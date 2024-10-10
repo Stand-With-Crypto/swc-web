@@ -127,7 +127,7 @@ export function LocationUnitedStatesLiveResults({
 
         <ContentSection
           className="container"
-          subtitle="When a state turns purple, it means a pro-crypto candidate has been elected. Follow along to see what states vote pro-crypto."
+          subtitle="When a state turns purple, it means a pro-crypto candidate has been elected. Follow along to see which states vote pro-crypto."
           title="Map view"
           titleProps={{ size: 'xs' }}
         >
