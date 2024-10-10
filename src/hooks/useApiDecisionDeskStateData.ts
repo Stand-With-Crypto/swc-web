@@ -1,7 +1,7 @@
 'use client'
 
 import { useCookie } from 'react-use'
-import useSWR from 'swr'
+import useSWR, { SWRResponse } from 'swr'
 
 import { INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
@@ -34,7 +34,7 @@ export function useApiDecisionDeskStateData(
       key as keyof typeof stateRacesMockData
     ] as RacesVotingDataResponse[]
 
-    return stateRacesData.map(currentStateRaceData => {
+    const mockedData = stateRacesData.map(currentStateRaceData => {
       return {
         ...currentStateRaceData,
         candidatesWithVotes: currentStateRaceData.candidatesWithVotes.map(currentCandidate => {
@@ -48,7 +48,14 @@ export function useApiDecisionDeskStateData(
           }
         }),
       }
-    }) as RacesVotingDataResponse[]
+    })
+
+    return {
+      data: mockedData,
+      error: undefined,
+      isLoading: false,
+      isValidating: false,
+    } as SWRResponse<RacesVotingDataResponse[]>
   }
 
   return swrData

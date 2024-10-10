@@ -1,7 +1,7 @@
 'use client'
 
 import { useCookie } from 'react-use'
-import useSWR from 'swr'
+import useSWR, { SWRResponse } from 'swr'
 
 import { INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/types'
@@ -25,10 +25,9 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
   )
 
   if (apiTamperedValue) {
-    return {
+    const mockedData = {
       houseDataWithDtsi: {
-        ...(SWC_ALL_CONGRESS_DATA as Pick<GetAllCongressDataResponse, 'houseDataWithDtsi'>)
-          .houseDataWithDtsi,
+        ...SWC_ALL_CONGRESS_DATA.houseDataWithDtsi,
         candidatesWithVotes: SWC_ALL_CONGRESS_DATA.houseDataWithDtsi.candidatesWithVotes.map(
           currentHouseCandidate => {
             return {
@@ -50,7 +49,14 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
           },
         ),
       },
-    } as GetAllCongressDataResponse
+    }
+
+    return {
+      data: mockedData,
+      error: undefined,
+      isLoading: false,
+      isValidating: false,
+    } as SWRResponse<GetAllCongressDataResponse>
   }
 
   return swrData
