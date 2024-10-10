@@ -52,10 +52,11 @@ export function LocationUnitedStatesLiveResults({
   const presidentialRaceCalledStatus = presidentialRaceLiveResult?.some(
     candidate => candidate.votingData?.called,
   )
-  const raceStatus = presidentialRaceCalledStatus
-    ? 'called'
-    : isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
-      ? 'not-started'
+
+  const raceStatus = isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
+    ? 'not-started'
+    : presidentialRaceCalledStatus
+      ? 'final'
       : 'live'
 
   return (

@@ -190,15 +190,15 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   const raceStatus = useMemo<Status>(() => {
     if (!raceData) return 'unknown'
 
-    if (raceData.calledCandidate) {
-      return 'called'
-    }
-
     const now = new Date()
     const raceDate = new Date(raceData.raceDate || '2024-11-05')
 
     if (now < raceDate) {
       return 'not-started'
+    }
+
+    if (raceData.calledCandidate) {
+      return 'final'
     }
 
     return 'live'

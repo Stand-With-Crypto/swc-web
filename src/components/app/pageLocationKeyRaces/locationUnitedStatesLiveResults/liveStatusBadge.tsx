@@ -3,7 +3,7 @@ import { DotFilledIcon } from '@radix-ui/react-icons'
 import { Badge, BadgeProps } from '@/components/ui/badge'
 import { cn } from '@/utils/web/cn'
 
-export type Status = 'live' | 'not-started' | 'called' | 'unknown'
+export type Status = 'live' | 'not-started' | 'final' | 'unknown'
 
 interface LiveStatusBadgeProps {
   status: Status
@@ -16,7 +16,7 @@ export function LiveStatusBadge(props: LiveStatusBadgeProps) {
   switch (status) {
     case 'live':
       return <LiveBadge className={className} />
-    case 'called':
+    case 'final':
       return <CalledBadge className={className} />
     case 'not-started':
       return <NotStartedBadge className={className} />
