@@ -3,21 +3,32 @@
 import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 import { isNil } from 'lodash-es'
+import { useRouter } from 'next/navigation'
 
 import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
 import { useLocale } from '@/hooks/useLocale'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import { SupportedLocale } from '@/intl/locales'
+import { getIntlUrls } from '@/utils/shared/urls'
+import {
+  getUSStateCodeFromStateName,
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 interface LiveResultsMapProps {
   initialRaceData: GetAllCongressDataResponse | null
+  locale: SupportedLocale
 }
 
 export function LiveResultsMap(props: LiveResultsMapProps) {
-  const { initialRaceData } = props
+  const { initialRaceData, locale } = props
+
+  const urls = getIntlUrls(locale)
+  const router = useRouter()
 
   const { data: liveResultData } = useApiDecisionDeskCongressData(initialRaceData)
 
@@ -39,7 +50,7 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
 
         if (isNil(stanceScore) || isNil(stateName)) return acc
 
-        if (stanceScore > 50) {
+        if (stanceScore > 50 && candidate.elected) {
           acc[stateName] = (acc[stateName] || 0) + 1
         }
 
@@ -76,8 +87,17 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
     setHoveredStateName(null)
   }
 
+  const handleStateClick = useCallback(
+    (geo: any) => {
+      const stateCode = getUSStateCodeFromStateName(geo.properties.name)
+      if (!stateCode) return
+      router.push(urls.locationStateSpecific(stateCode))
+    },
+    [router, urls],
+  )
+
   return (
-    <>
+    <div className="relative h-full w-full">
       <ComposableMap
         projection="geoAlbersUsa"
         style={{ width: '100%', height: '100%' }}
@@ -87,8 +107,10 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
           {({ geographies }) =>
             geographies.map(geo => (
               <Geography
+                cursor={proCryptoStates[geo.properties.name] ? 'pointer' : 'default'}
                 geography={geo}
                 key={geo.rsmKey}
+                onClick={_event => handleStateClick(geo)}
                 onMouseMove={event => handleStateMouseHover(geo, event)}
                 onMouseOut={handleStateMouseOut}
                 stroke="#FFF"
@@ -99,19 +121,22 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
                     strokeWidth: '0.777px',
                     outline: 'none',
                     transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
+                    cursor: proCryptoStates[geo.properties.name] ? 'pointer' : 'default',
                   },
                   hover: {
-                    fill: proCryptoStates[geo.properties.name] ? '#7620FF' : '#DDC9FF',
+                    fill: proCryptoStates[geo.properties.name] ? '#7620FF' : '#F4EEFF',
                     outline: 'none',
                     stroke: '#DAC5FF',
                     strokeWidth: '0.777px',
                     transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
+                    cursor: proCryptoStates[geo.properties.name] ? 'pointer' : 'default',
                   },
                   pressed: {
                     fill: '#DDC9FF',
                     outline: 'none',
                     stroke: '#DAC5FF',
                     strokeWidth: '0.777px',
+                    cursor: proCryptoStates[geo.properties.name] ? 'pointer' : 'default',
                   },
                 }}
               />
@@ -126,7 +151,7 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
         hoveredStateName={hoveredStateName}
         mousePosition={mousePosition}
       />
-    </>
+    </div>
   )
 }
 
@@ -175,8 +200,7 @@ function Tooltip({
   return (
     <div
       className={cn(
-        'pointer-events-none fixed z-50 flex h-[46px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white',
-        `w-[${tooltipWidth}px]`,
+        'pointer-events-none fixed z-50 flex flex-col items-center justify-center gap-2 rounded-2xl bg-black p-4 font-sans text-base text-white',
       )}
       style={{
         top: mousePosition.y,
@@ -185,7 +209,8 @@ function Tooltip({
         pointerEvents: 'none',
       }}
     >
-      {formattedNumber}
+      <p>{formattedNumber}</p>
+      <p className="text-base font-light text-fontcolor-muted">Click state to view</p>
     </div>
   )
 }

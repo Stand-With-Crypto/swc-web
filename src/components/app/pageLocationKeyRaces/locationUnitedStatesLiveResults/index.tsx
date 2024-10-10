@@ -133,7 +133,7 @@ export function LocationUnitedStatesLiveResults({
           <div className="flex justify-center">
             <LiveStatusBadge status={raceStatus} />
           </div>
-          <LiveResultsMap initialRaceData={congressRaceLiveResult} />
+          <LiveResultsMap initialRaceData={congressRaceLiveResult} locale={locale} />
         </ContentSection>
 
         <ContentSection
