@@ -99,7 +99,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
                 ),
                 getOpacity(candidateA, liveResultData),
               )}
-              value={Math.min((ddhqCandidateA?.votingData?.percentage || 0) * 2, 100)}
+              value={Math.min(+(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2) * 2, 100)}
             />
             <Progress
               className="h-6 rounded-l-none rounded-r-full border-l bg-[#23262B]"
@@ -111,7 +111,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
                 getOpacity(candidateB, liveResultData),
               )}
               inverted
-              value={Math.min((ddhqCandidateB?.votingData?.percentage || 0) * 2, 100)}
+              value={Math.min(+(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2) * 2, 100)}
             />
           </>
         ) : (
@@ -121,7 +121,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
       <div className="relative flex items-center justify-between text-sm">
         <div className="flex items-center gap-2">
-          <p className="font-bold">{ddhqCandidateA?.votingData?.percentage}%</p>{' '}
+          <p className="font-bold">{ddhqCandidateA?.votingData?.percentage?.toFixed(2)}%</p>{' '}
           <span className="text-fontcolor-muted">{ddhqCandidateA?.votingData?.votes}</span>
         </div>
 
@@ -130,7 +130,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         </p>
 
         <div className="flex items-center gap-2">
-          <p className="font-bold">{ddhqCandidateB?.votingData?.percentage}%</p>{' '}
+          <p className="font-bold">{ddhqCandidateB?.votingData?.percentage?.toFixed(2)}%</p>{' '}
           <span className="text-fontcolor-muted">{ddhqCandidateB?.votingData?.votes}</span>
         </div>
       </div>

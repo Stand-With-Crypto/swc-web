@@ -35,7 +35,7 @@ export const getVotePercentage = (
   if (!candidate) return 0
   const totalVotes = raceData?.totalVotes
   if (isNil(totalVotes)) return 0
-  return candidate.votes ? ((candidate.votes / totalVotes) * 100).toFixed(2) : 0
+  return candidate.votes ? +((candidate.votes / totalVotes) * 100).toFixed(2) : 0
 }
 
 export const getOpacity = (

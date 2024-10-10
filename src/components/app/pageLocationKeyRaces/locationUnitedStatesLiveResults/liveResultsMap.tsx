@@ -1,36 +1,107 @@
 'use client'
 
+import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
+import { isNil } from 'lodash-es'
 
 import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/types'
+import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
+import { useLocale } from '@/hooks/useLocale'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import { cn } from '@/utils/web/cn'
 
-export function LiveResultsMap() {
+interface LiveResultsMapProps {
+  initialRaceData: GetAllCongressDataResponse | null
+}
+
+export function LiveResultsMap(props: LiveResultsMapProps) {
+  const { initialRaceData } = props
+
+  const { data: liveResultData } = useApiDecisionDeskCongressData(initialRaceData)
+
+  const proCryptoStates = useMemo<Record<string, number>>(() => {
+    if (!liveResultData) return {}
+
+    const candidates = [
+      ...(liveResultData.senateDataWithDtsi.candidatesWithVotes || []),
+      ...(liveResultData.houseDataWithDtsi.candidatesWithVotes || []),
+    ]
+
+    const statesMap = candidates.reduce(
+      (acc, candidate) => {
+        const stanceScore =
+          candidate.dtsiData?.manuallyOverriddenStanceScore ||
+          candidate.dtsiData?.computedStanceScore
+        const state = candidate.dtsiData?.primaryRole?.primaryState as USStateCode
+        const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[state]
+
+        if (isNil(stanceScore) || isNil(stateName)) return acc
+
+        if (stanceScore > 50) {
+          acc[stateName] = (acc[stateName] || 0) + 1
+        }
+
+        return acc
+      },
+      {} as Record<string, number>,
+    )
+
+    return statesMap
+  }, [liveResultData])
+
+  const getTotalElectedCandidatesByState = useCallback(
+    (stateName: string) => {
+      return proCryptoStates[stateName] || 0
+    },
+    [proCryptoStates],
+  )
+
+  const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
+
+  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
+    const { clientX, clientY } = event
+    setMousePosition({ x: clientX, y: clientY })
+    setHoveredStateName(geo.properties.name)
+  }, [])
+
+  const handleStateMouseOut = useCallback(() => {
+    setHoveredStateName(null)
+  }, [])
+
+  const handleClearPressedState = () => {
+    setMousePosition(null)
+    setHoveredStateName(null)
+  }
+
   return (
-    <ComposableMap
-      projection="geoAlbersUsa"
-      style={{ width: '100%', height: '100%' }}
-      viewBox="-20 40 850 550"
-    >
-      <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
-        {({ geographies }) => (
-          <>
-            {geographies.map(geo => (
+    <>
+      <ComposableMap
+        projection="geoAlbersUsa"
+        style={{ width: '100%', height: '100%' }}
+        viewBox="-20 40 850 550"
+      >
+        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+          {({ geographies }) =>
+            geographies.map(geo => (
               <Geography
                 geography={geo}
                 key={geo.rsmKey}
-                onMouseMove={event => console.log(geo, event)}
-                onMouseOut={console.log}
+                onMouseMove={event => handleStateMouseHover(geo, event)}
+                onMouseOut={handleStateMouseOut}
                 stroke="#FFF"
                 style={{
                   default: {
-                    fill: '#F4EEFF',
+                    fill: proCryptoStates[geo.properties.name] ? '#6200FF' : '#F4EEFF',
                     stroke: '#DAC5FF',
                     strokeWidth: '0.777px',
                     outline: 'none',
                     transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
                   },
                   hover: {
-                    fill: '#6200FF',
+                    fill: proCryptoStates[geo.properties.name] ? '#7620FF' : '#DDC9FF',
                     outline: 'none',
                     stroke: '#DAC5FF',
                     strokeWidth: '0.777px',
@@ -44,28 +115,77 @@ export function LiveResultsMap() {
                   },
                 }}
               />
-            ))}
-            {/* <AnimatePresence>
-                    {[{}].map(({ id, name, coordinates, actionType, iconType }) => {
-                      const currentActionInfo = `Someone in ${name} ${iconType?.labelActionTooltip ?? ''}`
-                      const IconComponent = iconType?.icon as FC<IconProps>
-                      const markerKey = `${name}-${actionType}-${id}`
+            ))
+          }
+        </Geographies>
+      </ComposableMap>
 
-                      return (
-                        <AdvocateHeatmapMarker
-                          IconComponent={IconComponent}
-                          coordinates={[0, 0]}
-                          currentActionInfo={currentActionInfo}
-                          handleActionMouseLeave={console.log}
-                          handleActionMouseOver={console.log}
-                          key={markerKey}
-                        />
-                      )
-                    })}
-                  </AnimatePresence> */}
-          </>
-        )}
-      </Geographies>
-    </ComposableMap>
+      <Tooltip
+        getTotalElectedCandidatesByState={getTotalElectedCandidatesByState}
+        handleClearPressedState={handleClearPressedState}
+        hoveredStateName={hoveredStateName}
+        mousePosition={mousePosition}
+      />
+    </>
+  )
+}
+
+function Tooltip({
+  getTotalElectedCandidatesByState,
+  hoveredStateName,
+  mousePosition,
+  handleClearPressedState,
+}: {
+  hoveredStateName: string | null
+  mousePosition: { x: number; y: number } | null
+  handleClearPressedState: () => void
+  getTotalElectedCandidatesByState: (stateName: string) => number
+}) {
+  const locale = useLocale()
+
+  useEffect(() => {
+    const handleInteraction = () => {
+      handleClearPressedState()
+    }
+
+    window.addEventListener('scroll', handleInteraction)
+    window.addEventListener('touchstart', handleInteraction)
+    window.addEventListener('touchmove', handleInteraction)
+
+    return () => {
+      window.removeEventListener('scroll', handleInteraction)
+      window.removeEventListener('touchstart', handleInteraction)
+      window.removeEventListener('touchmove', handleInteraction)
+    }
+  }, [handleClearPressedState])
+
+  if (!mousePosition || !hoveredStateName) return null
+
+  const totalElectedCandidates = getTotalElectedCandidatesByState(hoveredStateName)
+  if (!totalElectedCandidates) return null
+
+  const formattedNumber = `${FormattedNumber({ amount: totalElectedCandidates, locale })} pro-crypto politicians elected in ${hoveredStateName}`
+
+  const tooltipWidth = formattedNumber.length * 10
+  const offsetX = tooltipWidth / 2
+
+  const centeredX = mousePosition.x - offsetX
+  const adjustedX = Math.min(Math.max(centeredX, 0), window.innerWidth - tooltipWidth)
+
+  return (
+    <div
+      className={cn(
+        'pointer-events-none fixed z-50 flex h-[46px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white',
+        `w-[${tooltipWidth}px]`,
+      )}
+      style={{
+        top: mousePosition.y,
+        left: adjustedX,
+        transform: 'translate(0, -125%)',
+        pointerEvents: 'none',
+      }}
+    >
+      {formattedNumber}
+    </div>
   )
 }

@@ -23,7 +23,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
-import { useApiDecisionDeskData } from '@/hooks/useApiDesicionDeskData'
+import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -108,7 +108,8 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     data: liveResultData,
     isLoading,
     isValidating,
-  } = useApiDecisionDeskData(initialRaceData, {
+  } = useApiDecisionDeskData({
+    initialRaceData,
     stateCode,
     district: primaryDistrict?.toString(),
   })

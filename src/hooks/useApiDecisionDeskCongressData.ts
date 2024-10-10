@@ -20,7 +20,8 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
         .then(data => data as GetAllCongressDataResponse),
     {
       fallbackData: fallbackData ?? undefined,
-      refreshInterval: 120 * 1000,
+      refreshInterval: 60 * 1000,
+      errorRetryInterval: 30 * 1000,
     },
   )
 
@@ -32,7 +33,7 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
           currentHouseCandidate => {
             return {
               ...currentHouseCandidate,
-              votes: Math.round((currentHouseCandidate.votes ?? 1000) * (+apiTamperedValue / 100)),
+              votes: Math.round((currentHouseCandidate.votes || 1000) * (+apiTamperedValue / 100)),
             }
           },
         ),
@@ -44,7 +45,7 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
           currentSenateCandidate => {
             return {
               ...currentSenateCandidate,
-              votes: Math.round((currentSenateCandidate.votes ?? 1000) * (+apiTamperedValue / 100)),
+              votes: Math.round((currentSenateCandidate.votes || 1000) * (+apiTamperedValue / 100)),
             }
           },
         ),

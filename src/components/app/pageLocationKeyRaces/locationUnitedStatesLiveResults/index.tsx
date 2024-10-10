@@ -133,10 +133,8 @@ export function LocationUnitedStatesLiveResults({
           <div className="flex justify-center">
             <LiveStatusBadge status={raceStatus} />
           </div>
-          <LiveResultsMap />
+          <LiveResultsMap initialRaceData={congressRaceLiveResult} />
         </ContentSection>
-
-        {/* <UserAddressVoterGuideInputSection locale={locale} /> */}
 
         <ContentSection
           subtitle="These elections are critical to the future of crypto in America. View live updates below."

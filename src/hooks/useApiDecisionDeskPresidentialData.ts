@@ -22,7 +22,8 @@ export function useApiDecisionDeskPresidentialData(
         .then(data => data as PresidentialDataWithVotingResponse[]),
     {
       fallbackData: fallbackData ?? undefined,
-      refreshInterval: 120 * 1000,
+      refreshInterval: 60 * 1000,
+      errorRetryInterval: 30 * 1000,
     },
   )
 
@@ -35,11 +36,12 @@ export function useApiDecisionDeskPresidentialData(
           ...currentPresidentialData,
           votingData: {
             ...currentVotingData,
-            percentage: (currentVotingData.percentage ?? 100) * (+apiTamperedValue / 100),
+            percentage: (currentVotingData.percentage || 100) * (+apiTamperedValue / 100),
             electoralVotes: Math.round(
-              (currentVotingData.electoralVotes ?? 1000) * (+apiTamperedValue / 100),
+              (currentVotingData.electoralVotes || 1000) * (+apiTamperedValue / 100),
             ),
-            votes: Math.round((currentVotingData.votes ?? 1000) * (+apiTamperedValue / 100)),
+            votes: Math.round((currentVotingData.votes || 1000) * (+apiTamperedValue / 100)),
+            called: +apiTamperedValue === 100 ? true : currentVotingData.called,
           },
         }
       }
