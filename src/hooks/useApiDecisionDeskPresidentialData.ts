@@ -15,7 +15,7 @@ export function useApiDecisionDeskPresidentialData(
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
 
   const swrData = useSWR(
-    apiUrls.decisionDeskPresidentialData(),
+    apiTamperedValue ? null : apiUrls.decisionDeskPresidentialData(),
     url =>
       fetchReq(url)
         .then(res => res.json())

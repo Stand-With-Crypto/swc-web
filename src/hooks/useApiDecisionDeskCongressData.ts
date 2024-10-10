@@ -13,7 +13,7 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE)
 
   const swrData = useSWR(
-    apiUrls.decisionDeskCongressData(),
+    apiTamperedValue ? null : apiUrls.decisionDeskCongressData(),
     url =>
       fetchReq(url)
         .then(res => res.json())
