@@ -1,7 +1,7 @@
 'use client'
 
 import { useCookie } from 'react-use'
-import useSWR from 'swr'
+import useSWR, { SWRResponse } from 'swr'
 
 import { INTERNAL_API_TAMPERING_KEY_RACES_PERCENTAGE_COVERAGE } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
@@ -27,7 +27,7 @@ export function useApiDecisionDeskPresidentialData(
   )
 
   if (apiTamperedValue) {
-    return SWC_PRESIDENTIAL_RACES_DATA.map(currentPresidentialData => {
+    const mockedData = SWC_PRESIDENTIAL_RACES_DATA.map(currentPresidentialData => {
       const currentVotingData = currentPresidentialData.votingData
 
       if (currentVotingData) {
@@ -47,6 +47,13 @@ export function useApiDecisionDeskPresidentialData(
 
       return currentPresidentialData
     })
+
+    return {
+      data: mockedData,
+      error: undefined,
+      isLoading: false,
+      isValidating: false,
+    } as SWRResponse<PresidentialDataWithVotingResponse[]>
   }
 
   return swrData
