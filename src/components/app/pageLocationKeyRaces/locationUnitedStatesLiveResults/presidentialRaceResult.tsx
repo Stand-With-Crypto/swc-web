@@ -78,11 +78,15 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       <div className="flex justify-between">
         <AvatarBox
           candidate={candidateA}
+          className={cn(getOpacity(candidateA, liveResultData))}
           electoralVotes={ddhqCandidateA?.votingData?.electoralVotes}
         />
         <AvatarBox
           candidate={candidateB}
-          className="flex flex-col items-end text-right"
+          className={cn(
+            'flex flex-col items-end text-right',
+            getOpacity(candidateB, liveResultData),
+          )}
           electoralVotes={ddhqCandidateB?.votingData?.electoralVotes}
         />
       </div>
@@ -120,7 +124,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       </div>
 
       <div className="relative flex items-center justify-between text-sm">
-        <div className="flex items-center gap-2">
+        <div className={cn('flex items-center gap-2', getOpacity(candidateA, liveResultData))}>
           <p className="font-bold">{ddhqCandidateA?.votingData?.percentage?.toFixed(2)}%</p>{' '}
           <span className="text-fontcolor-muted">{ddhqCandidateA?.votingData?.votes}</span>
         </div>
@@ -129,7 +133,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           270 to win
         </p>
 
-        <div className="flex items-center gap-2">
+        <div className={cn('flex items-center gap-2', getOpacity(candidateB, liveResultData))}>
           <p className="font-bold">{ddhqCandidateB?.votingData?.percentage?.toFixed(2)}%</p>{' '}
           <span className="text-fontcolor-muted">{ddhqCandidateB?.votingData?.votes}</span>
         </div>

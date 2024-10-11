@@ -32,16 +32,17 @@ export function useApiDecisionDeskPresidentialData(
       const currentVotingData = currentPresidentialData.votingData
 
       if (currentVotingData) {
+        const votes = Math.min(Math.round(+apiTamperedValue * Math.random()), +apiTamperedValue)
+        const called = votes > +apiTamperedValue / 2
+        const percentage = (votes / +apiTamperedValue) * 100
+
         return {
           ...currentPresidentialData,
           votingData: {
             ...currentVotingData,
-            percentage: (currentVotingData.percentage || 100) * (+apiTamperedValue / 100),
-            electoralVotes: Math.round(
-              (currentVotingData.electoralVotes || 1000) * (+apiTamperedValue / 100),
-            ),
-            votes: Math.round((currentVotingData.votes || 1000) * (+apiTamperedValue / 100)),
-            called: +apiTamperedValue === 100 ? true : currentVotingData.called,
+            percentage,
+            votes,
+            called,
           },
         }
       }

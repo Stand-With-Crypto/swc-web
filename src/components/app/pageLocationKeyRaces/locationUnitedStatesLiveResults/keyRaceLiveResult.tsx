@@ -190,6 +190,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   const raceStatus = useMemo<Status>(() => {
     if (!raceData) return 'unknown'
 
+    if (raceData.calledCandidate) {
+      return 'called'
+    }
+
     const now = new Date()
     const raceDate = new Date(raceData.raceDate || '2024-11-05')
 
@@ -197,12 +201,19 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       return 'not-started'
     }
 
-    if (raceData.calledCandidate) {
-      return 'final'
-    }
-
     return 'live'
   }, [raceData])
+
+  const totalVotes = useMemo(
+    () =>
+      Number(
+        Math.max(
+          (ddhqCandidateA || ddhqCandidateB)?.estimatedVotes?.estimatedVotesMid || 0,
+          raceData?.totalVotes || 0,
+        ),
+      ),
+    [ddhqCandidateA, ddhqCandidateB, raceData?.totalVotes],
+  )
 
   const canShowProgress = Boolean(liveResultData)
 
@@ -249,21 +260,27 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         <div className="flex gap-1">
           {canShowProgress ? (
             <Progress
-              className="rounded-l-full rounded-r-none bg-secondary"
+              className={cn(
+                'rounded-l-full rounded-r-none bg-secondary',
+                getOpacity(ddhqCandidateA, raceData),
+              )}
               indicatorClassName={cn(
                 'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
                   candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
                 ),
               )}
-              value={Math.min(Number(getVotePercentage(ddhqCandidateA, raceData)) * 2, 100)}
+              value={+getVotePercentage(ddhqCandidateA, raceData).toFixed(2) * 2}
             />
           ) : (
             <Skeleton className="h-4 w-full rounded-full" />
           )}
           {canShowProgress ? (
             <Progress
-              className="rounded-l-none rounded-r-full  bg-secondary"
+              className={cn(
+                'rounded-l-none rounded-r-full  bg-secondary',
+                getOpacity(ddhqCandidateB, raceData),
+              )}
               indicatorClassName={cn(
                 'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(
@@ -271,7 +288,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
                 ),
               )}
               inverted
-              value={Math.min(Number(getVotePercentage(ddhqCandidateB, raceData)) * 2, 100)}
+              value={+getVotePercentage(ddhqCandidateB, raceData).toFixed(2) * 2}
             />
           ) : (
             <Skeleton className="h-4 w-full rounded-full" />
@@ -279,12 +296,23 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         </div>
 
         <div className="relative flex items-center justify-between text-sm">
-          <div className="flex items-center gap-2">
+          <div className={cn('flex items-center gap-2', getOpacity(ddhqCandidateA, raceData))}>
             <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
             <span className="text-fontcolor-muted">{ddhqCandidateA?.votes || 0} votes</span>
           </div>
 
-          <div className="flex items-center gap-2 text-right">
+          {totalVotes && (
+            <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
+              {Math.ceil(totalVotes / 2) + 1} to win
+            </p>
+          )}
+
+          <div
+            className={cn(
+              'flex items-center gap-2 text-right',
+              getOpacity(ddhqCandidateB, raceData),
+            )}
+          >
             <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
             <span className="text-fontcolor-muted">{ddhqCandidateB?.votes || 0} votes</span>
           </div>
