@@ -58,6 +58,7 @@ export const getOpacity = (
 
 export const congressLiveResultOverview = (
   data: GetAllCongressDataResponse['senateDataWithDtsi'] | undefined,
+  stateCode?: string,
 ) => {
   if (!data?.candidatesWithVotes?.length) {
     return { proCryptoCandidatesElected: 0, antiCryptoCandidatesElected: 0 }
@@ -66,8 +67,8 @@ export const congressLiveResultOverview = (
   return data.candidatesWithVotes.reduce(
     (acc, candidate) => {
       if (!candidate?.dtsiData) return acc
-
       if (!candidate.elected) return acc
+      if (stateCode && candidate.dtsiData.primaryRole?.primaryState !== stateCode) return acc
 
       const stanceScore =
         candidate.dtsiData.manuallyOverriddenStanceScore || candidate.dtsiData.computedStanceScore

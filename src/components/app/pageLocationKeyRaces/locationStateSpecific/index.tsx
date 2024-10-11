@@ -12,13 +12,18 @@ import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResul
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
+import { congressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import {
+  GetAllCongressDataResponse,
+  RacesVotingDataResponse,
+} from '@/data/aggregations/decisionDesk/types'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -33,6 +38,7 @@ interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery 
   locale: SupportedLocale
   countAdvocates: number
   initialRaceData: RacesVotingDataResponse[] | null
+  initialCongressLiveResultData: GetAllCongressDataResponse | null
 }
 
 export function LocationStateSpecific({
@@ -42,6 +48,7 @@ export function LocationStateSpecific({
   countAdvocates,
   personStances,
   initialRaceData,
+  initialCongressLiveResultData,
 }: LocationStateSpecificProps) {
   const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
   const groups = organizeStateSpecificPeople(people)
@@ -55,6 +62,19 @@ export function LocationStateSpecific({
       }
       return district
     }),
+  )
+
+  const { data: congressRaceLiveResult } = useApiDecisionDeskCongressData(
+    initialCongressLiveResultData,
+  )
+
+  const senateElectedData = congressLiveResultOverview(
+    congressRaceLiveResult?.senateDataWithDtsi,
+    stateCode,
+  )
+  const houseElectedData = congressLiveResultOverview(
+    congressRaceLiveResult?.houseDataWithDtsi,
+    stateCode,
   )
 
   useEffect(() => {
@@ -111,13 +131,13 @@ export function LocationStateSpecific({
 
           <div className="flex flex-wrap gap-4">
             <ResultsOverviewCard
-              antiCryptoCandidatesElected={999}
-              proCryptoCandidatesElected={999}
+              antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
+              proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}
               title="House of Representatives"
             />
             <ResultsOverviewCard
-              antiCryptoCandidatesElected={999}
-              proCryptoCandidatesElected={999}
+              antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected}
+              proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected}
               title="Senate"
             />
           </div>

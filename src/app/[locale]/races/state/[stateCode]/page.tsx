@@ -1,7 +1,11 @@
+import * as Sentry from '@sentry/nextjs'
 import { Metadata } from 'next'
 
 import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/locationStateSpecific'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import {
+  GetAllCongressDataResponse,
+  RacesVotingDataResponse,
+} from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
 import {
@@ -64,6 +68,17 @@ export default async function LocationStateSpecificPage({
   const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
   const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
 
+  let congressRaceLiveResult: GetAllCongressDataResponse | null = null
+  try {
+    congressRaceLiveResult =
+      await getDecisionDataFromRedis<GetAllCongressDataResponse>('SWC_ALL_CONGRESS_DATA')
+  } catch (error) {
+    Sentry.captureException(error, {
+      extra: { key: 'SWC_ALL_CONGRESS_DATA' },
+    })
+    throw error
+  }
+
   if (!dtsiResults) {
     throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
@@ -71,6 +86,7 @@ export default async function LocationStateSpecificPage({
   return (
     <LocationStateSpecific
       countAdvocates={countAdvocates}
+      initialCongressLiveResultData={congressRaceLiveResult}
       initialRaceData={liveResultdata}
       {...dtsiResults}
       {...{ stateCode, locale }}
