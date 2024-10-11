@@ -10,9 +10,11 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
 
-type Props = React.PropsWithChildren<PageProps<{ action: UserActionType }>>
+type UserActionCampaignsLayoutProps = React.PropsWithChildren<PageProps<{ action: UserActionType }>>
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: UserActionCampaignsLayoutProps): Promise<Metadata> {
   const { action } = params
   const parsedAction = action?.toUpperCase()
 
@@ -29,7 +31,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
-export default async function UserActionCampaignsLayout({ params, children }: Props) {
+export default async function UserActionCampaignsLayout({
+  params,
+  children,
+}: UserActionCampaignsLayoutProps) {
   const { action } = params
   const parsedAction = action?.toUpperCase()
 
