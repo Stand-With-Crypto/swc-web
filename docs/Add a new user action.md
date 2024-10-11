@@ -191,6 +191,12 @@ export default function UserActionActionNameDeepLink({ params }: PageProps) {
 
 Unit tests can be added in the same folder as where new UI components are created, and E2E tests are stored in the `cypress` folder.
 
+### Action Card - CTA
+
+To add a call-to-action (CTA) for the new user action, you need to create a new object within `USER_ACTION_CTAS_FOR_GRID_DISPLAY`, including all the required fields. For details about each field, please refer to `src/components/app/userActionGridCTAs/types/index.ts`.
+
+Additionally, **the order of the objects determines how the CTAs will be displayed to users**, so please keep this in mind.
+
 ### Having two or more campaigns active at the same time
 
 If you ever need to run multiple campaigns simultaneously, please refer to [this documentation](/docs/Working%20with%20two%20or%20more%20campaigns%20active.md) for guidance on how to add multiple campaigns and how to disable them later.
