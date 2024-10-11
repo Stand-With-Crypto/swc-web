@@ -31,9 +31,15 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
         ...SWC_ALL_CONGRESS_DATA.houseDataWithDtsi,
         candidatesWithVotes: SWC_ALL_CONGRESS_DATA.houseDataWithDtsi.candidatesWithVotes.map(
           currentHouseCandidate => {
+            const votes = Math.min(
+              Math.round(+apiTamperedValue * Math.abs(Math.random() - 0.25)),
+              +apiTamperedValue,
+            )
+            const elected = votes > +apiTamperedValue / 2
             return {
               ...currentHouseCandidate,
-              votes: Math.round((currentHouseCandidate.votes || 1000) * (+apiTamperedValue / 100)),
+              votes,
+              elected,
             }
           },
         ),
@@ -43,9 +49,15 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
           .senateDataWithDtsi,
         candidatesWithVotes: SWC_ALL_CONGRESS_DATA.senateDataWithDtsi.candidatesWithVotes.map(
           currentSenateCandidate => {
+            const votes = Math.min(
+              Math.round(+apiTamperedValue * Math.abs(Math.random() - 0.25)),
+              +apiTamperedValue,
+            )
+            const elected = votes > +apiTamperedValue / 2
             return {
               ...currentSenateCandidate,
-              votes: Math.round((currentSenateCandidate.votes || 1000) * (+apiTamperedValue / 100)),
+              votes,
+              elected,
             }
           },
         ),
