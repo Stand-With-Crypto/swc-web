@@ -12,7 +12,7 @@ function GridItem({ children, className }: { children: React.ReactNode; classNam
   return (
     <div
       className={cn(
-        'flex w-full items-center justify-center px-6 py-10 md:px-12 md:py-14 lg:px-20 lg:odd:justify-end lg:even:justify-start lg:[&:nth-child(-n+2)]:!border-t-0',
+        'flex w-full items-center justify-center px-6 py-10 last:!border-r-2 md:px-12 md:py-14 lg:px-20 lg:odd:justify-end lg:even:justify-start lg:[&:nth-child(-n+2)]:!border-t-0',
         className,
       )}
     >
