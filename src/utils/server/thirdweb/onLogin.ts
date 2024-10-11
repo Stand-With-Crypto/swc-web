@@ -951,13 +951,15 @@ async function getExistingUsers({
       })
     : null
 
-  const existingUsersQueries = compact([
-    existingUsersWithCryptoAddressNotVerifiedViaAuth,
-    existingUsersWithCurrentUserSessionId,
-    existingUsersWithEmailVerifiedEqualToEmbeddedWalletEmail,
-    existingUsersWithEmailNotVerifiedFromInitialBackfill,
-    existingUsersWithOptedInPhoneEqualToEmbeddedWalletPhone,
-  ])
+  const existingUsers = await Promise.all(
+    compact([
+      existingUsersWithCryptoAddressNotVerifiedViaAuth,
+      existingUsersWithCurrentUserSessionId,
+      existingUsersWithEmailVerifiedEqualToEmbeddedWalletEmail,
+      existingUsersWithEmailNotVerifiedFromInitialBackfill,
+      existingUsersWithOptedInPhoneEqualToEmbeddedWalletPhone,
+    ]),
+  )
 
-  return (await Promise.all(existingUsersQueries)).flat()
+  return existingUsers.flat()
 }
