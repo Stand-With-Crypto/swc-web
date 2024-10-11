@@ -72,11 +72,19 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
   const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
-  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
-    const { clientX, clientY } = event
-    setMousePosition({ x: clientX, y: clientY })
-    setHoveredStateName(geo.properties.name)
-  }, [])
+  const handleStateMouseHover = useCallback(
+    (geo: any, event: MouseEvent<SVGPathElement>) => {
+      const { clientX, clientY } = event
+      setMousePosition({ x: clientX, y: clientY })
+      setHoveredStateName(geo.properties.name)
+
+      const stateCode = getUSStateCodeFromStateName(geo.properties.name)
+      if (stateCode) {
+        router.prefetch(urls.locationStateSpecific(stateCode))
+      }
+    },
+    [router, urls],
+  )
 
   const handleStateMouseOut = useCallback(() => {
     setHoveredStateName(null)
