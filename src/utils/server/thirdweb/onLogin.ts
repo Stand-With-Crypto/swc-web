@@ -480,42 +480,13 @@ async function queryMatchingUsers({
   if (embeddedWalletUserDetails) {
     log(`queryMatchingUsers: found embedded wallet user details`)
   }
-  const existingUsers: UpsertedUser[] = await prismaClient.user.findMany({
-    include: {
-      address: true,
-      primaryUserEmailAddress: true,
-      userEmailAddresses: true,
-      userCryptoAddresses: true,
-    },
-    where: {
-      OR: compact([
-        {
-          userCryptoAddresses: {
-            some: { cryptoAddress, hasBeenVerifiedViaAuth: false },
-          },
-        },
-        userSessionId && { userSessions: { some: { id: userSessionId } } },
-        embeddedWalletUserDetails?.email && {
-          userEmailAddresses: {
-            some: { emailAddress: embeddedWalletUserDetails.email, isVerified: true },
-          },
-        },
-        embeddedWalletUserDetails?.email && {
-          userEmailAddresses: {
-            some: {
-              emailAddress: embeddedWalletUserDetails.email,
-              isVerified: false,
-              dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-            },
-          },
-        },
-        embeddedWalletUserDetails?.phone && {
-          phoneNumber: embeddedWalletUserDetails.phone,
-          smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
-        },
-      ]),
-    },
+
+  const existingUsers = await getExistingUsers({
+    cryptoAddress,
+    userSessionId,
+    embeddedWalletUserDetails,
   })
+
   prettyLog(existingUsers)
   const existingUsersWithSource = existingUsers.map(user => {
     const existingUnverifiedUserCryptoAddress = user.userCryptoAddresses.find(
@@ -906,4 +877,87 @@ async function triggerPostLoginUserActionSteps({
   }
   const pastActionsMinted = await mintPastActions(user.id, userCryptoAddress, localUser)
   return { pastActionsMinted, hadOptInUserAction, optInUserAction }
+}
+
+type GetExistingUserArgs = {
+  cryptoAddress: string
+  userSessionId: string | null
+  embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata | null
+}
+
+async function getExistingUsers({
+  cryptoAddress,
+  userSessionId,
+  embeddedWalletUserDetails,
+}: GetExistingUserArgs) {
+  const include = {
+    address: true,
+    primaryUserEmailAddress: true,
+    userEmailAddresses: true,
+    userCryptoAddresses: true,
+  }
+
+  const existingUsersWithCryptoAddressNotVerifiedViaAuth = prismaClient.user.findMany({
+    include,
+    where: {
+      userCryptoAddresses: {
+        some: { cryptoAddress, hasBeenVerifiedViaAuth: false },
+      },
+    },
+  })
+
+  const existingUsersWithCurrentUserSessionId = userSessionId
+    ? prismaClient.user.findMany({
+        include,
+        where: {
+          userSessions: { some: { id: userSessionId } },
+        },
+      })
+    : null
+
+  const existingUsersWithEmailVerifiedEqualToEmbeddedWalletEmail = embeddedWalletUserDetails?.email
+    ? prismaClient.user.findMany({
+        include,
+        where: {
+          userEmailAddresses: {
+            some: { emailAddress: embeddedWalletUserDetails.email, isVerified: true },
+          },
+        },
+      })
+    : null
+
+  const existingUsersWithEmailNotVerifiedFromInitialBackfill = embeddedWalletUserDetails?.email
+    ? prismaClient.user.findMany({
+        include,
+        where: {
+          userEmailAddresses: {
+            some: {
+              emailAddress: embeddedWalletUserDetails.email,
+              isVerified: false,
+              dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            },
+          },
+        },
+      })
+    : null
+
+  const existingUsersWithOptedInPhoneEqualToEmbeddedWalletPhone = embeddedWalletUserDetails?.phone
+    ? prismaClient.user.findMany({
+        include,
+        where: {
+          phoneNumber: embeddedWalletUserDetails.phone,
+          smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
+        },
+      })
+    : null
+
+  const existingUsersQueries = compact([
+    existingUsersWithCryptoAddressNotVerifiedViaAuth,
+    existingUsersWithCurrentUserSessionId,
+    existingUsersWithEmailVerifiedEqualToEmbeddedWalletEmail,
+    existingUsersWithEmailNotVerifiedFromInitialBackfill,
+    existingUsersWithOptedInPhoneEqualToEmbeddedWalletPhone,
+  ])
+
+  return (await Promise.all(existingUsersQueries)).flat()
 }
