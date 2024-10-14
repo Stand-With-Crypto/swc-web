@@ -50,12 +50,12 @@ export const getPoliticianFindMatch = (
     return true
   }
 
-  // if (
-  //   normalizedDTSIParty === normalizedDDHQParty &&
-  //   normalizedDTSIFirstName === normalizedDDHQFirstName
-  // ) {
-  //   return true
-  // }
+  if (
+    normalizedDTSIParty === normalizedDDHQParty &&
+    normalizedDTSIFirstName === normalizedDDHQFirstName
+  ) {
+    return true
+  }
 
   return false
 }

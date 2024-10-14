@@ -1,1 +1,3724 @@
-[{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":423568,"estimatedVotesLow":346515,"estimatedVotesMid":385014,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Dusty","id":9629,"lastName":"Johnson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":423568,"estimatedVotesLow":346515,"estimatedVotesMid":385014,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Sheryl","id":44812,"lastName":"Johnson","partyName":"Democratic","votes":0}],"district":"At-Large","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:41:24.975Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":384926,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":423606,"estimatedVotesLow":346547,"estimatedVotesMid":385051,"turnoutHigh":90.11,"turnoutLow":110.15,"turnoutMid":99},"firstName":"A.","id":98422,"lastName":"Oakes","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":423606,"estimatedVotesLow":346547,"estimatedVotesMid":385051,"turnoutHigh":90.11,"turnoutLow":110.15,"turnoutMid":99},"firstName":"Kristie","id":98423,"lastName":"Fiegen","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":423606,"estimatedVotesLow":346547,"estimatedVotesMid":385051,"turnoutHigh":90.11,"turnoutLow":110.15,"turnoutMid":99},"firstName":"Forrest","id":98421,"lastName":"Wilson","partyName":"Democratic","votes":0}],"district":"","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:31:34.918Z","office":{"officeId":"148","officeName":"Public Utilities Commissioner","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":381715,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Michael","id":23210,"lastName":"Rohl","partyName":"Republican","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Steve","id":23212,"lastName":"Kolbeck","partyName":"Republican","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Carl","id":23251,"lastName":"Perry","partyName":"Republican","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Stephanie","id":23258,"lastName":"Sauder","partyName":"Republican","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11539,"estimatedVotesLow":9441,"estimatedVotesMid":10490,"turnoutHigh":90.87,"turnoutLow":111.07,"turnoutMid":99},"firstName":"Dennis","id":98424,"lastName":"Solberg","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11539,"estimatedVotesLow":9441,"estimatedVotesMid":10490,"turnoutHigh":90.87,"turnoutLow":111.07,"turnoutMid":99},"firstName":"Glen","id":75918,"lastName":"Vilhauer","partyName":"Republican","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:13:15.195Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10486,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ernie","id":45920,"lastName":"Otten","partyName":"Republican","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tim","id":23219,"lastName":"Reed","partyName":"Republican","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Casey","id":23220,"lastName":"Crabtree","partyName":"Republican","votes":0}],"district":"8","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Joy","id":71755,"lastName":"Hohn","partyName":"Republican","votes":0}],"district":"9","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Liz","id":98425,"lastName":"Larson","partyName":"Democratic","votes":0}],"district":"10","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12388,"estimatedVotesLow":10135,"estimatedVotesMid":11261,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Chris","id":23268,"lastName":"Karr","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12388,"estimatedVotesLow":10135,"estimatedVotesMid":11261,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Steve","id":75921,"lastName":"Natz","partyName":"Democratic","votes":0}],"district":"11","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:17:04.763Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":11258,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11301,"estimatedVotesLow":9246,"estimatedVotesMid":10273,"turnoutHigh":89.39,"turnoutLow":109.26,"turnoutMid":98.34},"firstName":"Arch","id":44815,"lastName":"Beal","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11301,"estimatedVotesLow":9246,"estimatedVotesMid":10273,"turnoutHigh":89.39,"turnoutLow":109.26,"turnoutMid":98.34},"firstName":"Clay","id":75922,"lastName":"Hoffman","partyName":"Democratic","votes":0}],"district":"12","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:25:43.510Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10102,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":14467,"estimatedVotesLow":11837,"estimatedVotesMid":13152,"turnoutHigh":86.38,"turnoutLow":105.58,"turnoutMid":95.02},"firstName":"Sue","id":23277,"lastName":"Peterson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":14467,"estimatedVotesLow":11837,"estimatedVotesMid":13152,"turnoutHigh":86.38,"turnoutLow":105.58,"turnoutMid":95.02},"firstName":"Ali","id":75923,"lastName":"Horsted","partyName":"Democratic","votes":0}],"district":"13","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:33:15.662Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":12497,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13420,"estimatedVotesLow":10976,"estimatedVotesMid":12196,"turnoutHigh":75.59,"turnoutLow":92.42,"turnoutMid":83.17},"firstName":"Larry","id":44819,"lastName":"Zikmund","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13420,"estimatedVotesLow":10976,"estimatedVotesMid":12196,"turnoutHigh":75.59,"turnoutLow":92.42,"turnoutMid":83.17},"firstName":"Sandra","id":75924,"lastName":"Henry","partyName":"Democratic","votes":0}],"district":"14","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:36:10.391Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10144,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10750,"estimatedVotesLow":8830,"estimatedVotesMid":9811,"turnoutHigh":82.39,"turnoutLow":100.31,"turnoutMid":90.28},"firstName":"Jamie","id":27961,"lastName":"Smith","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10750,"estimatedVotesLow":8830,"estimatedVotesMid":9811,"turnoutHigh":82.39,"turnoutLow":100.31,"turnoutMid":90.28},"firstName":"Brenda","id":44821,"lastName":"Lawrence","partyName":"Republican","votes":0}],"district":"15","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T16:57:25.644Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":8857,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kevin","id":23284,"lastName":"Jensen","partyName":"Republican","votes":0}],"district":"16","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sydney","id":44825,"lastName":"Davis","partyName":"Republican","votes":0}],"district":"17","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11182,"estimatedVotesLow":9148,"estimatedVotesMid":10165,"turnoutHigh":90.06,"turnoutLow":110.09,"turnoutMid":99},"firstName":"Lauren","id":71757,"lastName":"Nelson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11182,"estimatedVotesLow":9148,"estimatedVotesMid":10165,"turnoutHigh":90.06,"turnoutLow":110.09,"turnoutMid":99},"firstName":"Sarah","id":98426,"lastName":"Carda","partyName":"Democratic","votes":0}],"district":"18","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:30:53.291Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10071,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12571,"estimatedVotesLow":10285,"estimatedVotesMid":11428,"turnoutHigh":73.93,"turnoutLow":90.36,"turnoutMid":81.33},"firstName":"Kyle","id":44829,"lastName":"Schoenfish","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12571,"estimatedVotesLow":10285,"estimatedVotesMid":11428,"turnoutHigh":73.93,"turnoutLow":90.36,"turnoutMid":81.33},"firstName":"Michael","id":98427,"lastName":"Miller","partyName":"Independent","votes":0}],"district":"19","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T16:58:17.180Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":9294,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Paul","id":75927,"lastName":"Miskimins","partyName":"Republican","votes":0}],"district":"20","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11900,"estimatedVotesLow":9734,"estimatedVotesMid":10816,"turnoutHigh":90.95,"turnoutLow":111.19,"turnoutMid":99},"firstName":"Mykala","id":71758,"lastName":"Voita","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11900,"estimatedVotesLow":9734,"estimatedVotesMid":10816,"turnoutHigh":90.95,"turnoutLow":111.19,"turnoutMid":99},"firstName":"Dan","id":44831,"lastName":"Andersson","partyName":"Democratic","votes":0}],"district":"21","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:10:39.278Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10823,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10328,"estimatedVotesLow":8450,"estimatedVotesMid":9389,"turnoutHigh":90.7,"turnoutLow":110.85,"turnoutMid":99},"firstName":"David","id":44833,"lastName":"Wheeler","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10328,"estimatedVotesLow":8450,"estimatedVotesMid":9389,"turnoutHigh":90.7,"turnoutLow":110.85,"turnoutMid":99},"firstName":"Jim","id":26655,"lastName":"Schmidt","partyName":"Democratic","votes":0}],"district":"22","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:41:51.965Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":9367,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mark","id":71759,"lastName":"Lapka","partyName":"Republican","votes":0}],"district":"23","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jim","id":23229,"lastName":"Mehlhaff","partyName":"Republican","votes":0}],"district":"24","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":14047,"estimatedVotesLow":11492,"estimatedVotesMid":12770,"turnoutHigh":90.18,"turnoutLow":110.23,"turnoutMid":99},"firstName":"Brian","id":75928,"lastName":"Wirth","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":14047,"estimatedVotesLow":11492,"estimatedVotesMid":12770,"turnoutHigh":90.18,"turnoutLow":110.23,"turnoutMid":99},"firstName":"Tom","id":23232,"lastName":"Pischke","partyName":"Republican","votes":0}],"district":"25","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:42:40.737Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":12668,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8304,"estimatedVotesLow":6789,"estimatedVotesMid":7543,"turnoutHigh":91.03,"turnoutLow":111.34,"turnoutMid":99},"firstName":"Shawn","id":44834,"lastName":"Bordeaux","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8304,"estimatedVotesLow":6789,"estimatedVotesMid":7543,"turnoutHigh":91.03,"turnoutLow":111.34,"turnoutMid":99},"firstName":"Tamara","id":75929,"lastName":"Grove","partyName":"Republican","votes":0}],"district":"26","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:40:21.823Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":7559,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":7764,"estimatedVotesLow":6340,"estimatedVotesMid":7046,"turnoutHigh":87.55,"turnoutLow":107.21,"turnoutMid":96.47},"firstName":"Red Dawn","id":98428,"lastName":"Foster","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":7764,"estimatedVotesLow":6340,"estimatedVotesMid":7046,"turnoutHigh":87.55,"turnoutLow":107.21,"turnoutMid":96.47},"firstName":"Anthony","id":71762,"lastName":"Kathol","partyName":"Republican","votes":0}],"district":"27","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:41:33.540Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":6797,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11245,"estimatedVotesLow":9198,"estimatedVotesMid":10220,"turnoutHigh":91.01,"turnoutLow":111.26,"turnoutMid":99},"firstName":"Sam","id":71764,"lastName":"Marty","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11245,"estimatedVotesLow":9198,"estimatedVotesMid":10220,"turnoutHigh":91.01,"turnoutLow":111.26,"turnoutMid":99},"firstName":"Shane","id":98429,"lastName":"Farlee","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11245,"estimatedVotesLow":9198,"estimatedVotesMid":10220,"turnoutHigh":91.01,"turnoutLow":111.26,"turnoutMid":99},"firstName":"Dean","id":75930,"lastName":"Schrempp","partyName":"Democratic","votes":0}],"district":"28","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:30:54.271Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10234,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":23234,"lastName":"Carley","partyName":"Republican","votes":0}],"district":"29","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15130,"estimatedVotesLow":12380,"estimatedVotesMid":13754,"turnoutHigh":86.04,"turnoutLow":105.15,"turnoutMid":94.65},"firstName":"Amber","id":71766,"lastName":"Hulse","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15130,"estimatedVotesLow":12380,"estimatedVotesMid":13754,"turnoutHigh":86.04,"turnoutLow":105.15,"turnoutMid":94.65},"firstName":"Bret","id":45908,"lastName":"Swanson","partyName":"Democratic","votes":0}],"district":"30","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:37:01.908Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":13018,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Randy","id":23239,"lastName":"Deibert","partyName":"Republican","votes":0}],"district":"31","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9252,"estimatedVotesLow":7567,"estimatedVotesMid":8408,"turnoutHigh":53.3,"turnoutLow":65.16,"turnoutMid":58.65},"firstName":"Karen","id":98430,"lastName":"McNeal","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9252,"estimatedVotesLow":7567,"estimatedVotesMid":8408,"turnoutHigh":53.3,"turnoutLow":65.16,"turnoutMid":58.65},"firstName":"Helene","id":44840,"lastName":"Duhamel","partyName":"Republican","votes":0}],"district":"32","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T16:44:01.846Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":4931,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Curt","id":71769,"lastName":"Voight","partyName":"Republican","votes":0}],"district":"33","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Taffy","id":23208,"lastName":"Howard","partyName":"Republican","votes":0}],"district":"34","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Greg","id":71772,"lastName":"Blanc","partyName":"Republican","votes":0}],"district":"35","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13020,"estimatedVotesLow":10656,"estimatedVotesMid":11839,"turnoutHigh":91.31,"turnoutLow":111.56,"turnoutMid":99},"firstName":"Christopher","id":71713,"lastName":"Reder","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13020,"estimatedVotesLow":10656,"estimatedVotesMid":11839,"turnoutHigh":91.31,"turnoutLow":111.56,"turnoutMid":99},"firstName":"Tamara","id":44263,"lastName":"Lesnar","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13020,"estimatedVotesLow":10656,"estimatedVotesMid":11839,"turnoutHigh":91.31,"turnoutLow":111.56,"turnoutMid":99},"firstName":"Logan","id":71714,"lastName":"Manhart","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13020,"estimatedVotesLow":10656,"estimatedVotesMid":11839,"turnoutHigh":91.31,"turnoutLow":111.56,"turnoutMid":99},"firstName":"Steven","id":45867,"lastName":"McCleerey","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13020,"estimatedVotesLow":10656,"estimatedVotesMid":11839,"turnoutHigh":91.31,"turnoutLow":111.56,"turnoutMid":99},"firstName":"Mark","id":98431,"lastName":"Sumption","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13020,"estimatedVotesLow":10656,"estimatedVotesMid":11839,"turnoutHigh":91.31,"turnoutLow":111.56,"turnoutMid":99},"firstName":"Josh","id":98432,"lastName":"Dennert","partyName":"Libertarian","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:23:03.234Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":11888,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":23247,"lastName":"Kull","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":23250,"lastName":"Sjaarda","partyName":"Republican","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11524,"estimatedVotesLow":9428,"estimatedVotesMid":10475,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Erin","id":75933,"lastName":"Rudner","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11524,"estimatedVotesLow":9428,"estimatedVotesMid":10475,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brandei","id":23254,"lastName":"Schaefbauer","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11524,"estimatedVotesLow":9428,"estimatedVotesMid":10475,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Al","id":23214,"lastName":"Novstrup","partyName":"Republican","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T13:33:36.203Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Dylan","id":71716,"lastName":"Jordan","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kent","id":71717,"lastName":"Roe","partyName":"Republican","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11539,"estimatedVotesLow":9441,"estimatedVotesMid":10490,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Josephine","id":71719,"lastName":"Garcia","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11539,"estimatedVotesLow":9441,"estimatedVotesMid":10490,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Amy","id":75935,"lastName":"Rambow","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11539,"estimatedVotesLow":9441,"estimatedVotesMid":10490,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Diane","id":75934,"lastName":"Drake","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11539,"estimatedVotesLow":9441,"estimatedVotesMid":10490,"turnoutHigh":90.88,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Matt","id":71720,"lastName":"Roby","partyName":"Republican","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:51:51.934Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10487,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12040,"estimatedVotesLow":9852,"estimatedVotesMid":10947,"turnoutHigh":90.82,"turnoutLow":110.99,"turnoutMid":99},"firstName":"Herman","id":44809,"lastName":"Otten","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12040,"estimatedVotesLow":9852,"estimatedVotesMid":10947,"turnoutHigh":90.82,"turnoutLow":110.99,"turnoutMid":99},"firstName":"Aaron","id":45919,"lastName":"Aylward","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12040,"estimatedVotesLow":9852,"estimatedVotesMid":10947,"turnoutHigh":90.82,"turnoutLow":110.99,"turnoutMid":99},"firstName":"Garret","id":75936,"lastName":"Campbell","partyName":"Democratic","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:22:02.863Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10935,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10454,"estimatedVotesLow":8555,"estimatedVotesMid":9506,"turnoutHigh":91.96,"turnoutLow":112.37,"turnoutMid":99},"firstName":"Fedora","id":98434,"lastName":"Sutton-Butler","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10454,"estimatedVotesLow":8555,"estimatedVotesMid":9506,"turnoutHigh":91.96,"turnoutLow":112.37,"turnoutMid":99},"firstName":"Roger","id":23259,"lastName":"DeGroot","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10454,"estimatedVotesLow":8555,"estimatedVotesMid":9506,"turnoutHigh":91.96,"turnoutLow":112.37,"turnoutMid":99},"firstName":"Mellissa","id":23261,"lastName":"Heermann","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10454,"estimatedVotesLow":8555,"estimatedVotesMid":9506,"turnoutHigh":91.96,"turnoutLow":112.37,"turnoutMid":99},"firstName":"Blake","id":98433,"lastName":"Stevens","partyName":"Democratic","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:54:08.778Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":9613,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13915,"estimatedVotesLow":11385,"estimatedVotesMid":12650,"turnoutHigh":91.11,"turnoutLow":111.36,"turnoutMid":99},"firstName":"Greg","id":98435,"lastName":"Zimmerman","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13915,"estimatedVotesLow":11385,"estimatedVotesMid":12650,"turnoutHigh":91.11,"turnoutLow":111.36,"turnoutMid":99},"firstName":"Tim","id":23263,"lastName":"Reisch","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13915,"estimatedVotesLow":11385,"estimatedVotesMid":12650,"turnoutHigh":91.11,"turnoutLow":111.36,"turnoutMid":99},"firstName":"Tim","id":71724,"lastName":"Walburg","partyName":"Republican","votes":0}],"district":"8","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:36:10.391Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":12678,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11867,"estimatedVotesLow":9708,"estimatedVotesMid":10787,"turnoutHigh":90.8,"turnoutLow":110.99,"turnoutMid":99},"firstName":"Beverly","id":75938,"lastName":"Johnson","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11867,"estimatedVotesLow":9708,"estimatedVotesMid":10787,"turnoutHigh":90.8,"turnoutLow":110.99,"turnoutMid":99},"firstName":"Bethany","id":23265,"lastName":"Soye","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11867,"estimatedVotesLow":9708,"estimatedVotesMid":10787,"turnoutHigh":90.8,"turnoutLow":110.99,"turnoutMid":99},"firstName":"Tesa","id":71727,"lastName":"Schwans","partyName":"Republican","votes":0}],"district":"9","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:53:09.373Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10775,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9965,"estimatedVotesLow":8156,"estimatedVotesMid":9062,"turnoutHigh":90.98,"turnoutLow":111.16,"turnoutMid":99},"firstName":"Erin","id":45870,"lastName":"Healy","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9965,"estimatedVotesLow":8156,"estimatedVotesMid":9062,"turnoutHigh":90.98,"turnoutLow":111.16,"turnoutMid":99},"firstName":"Bobbi","id":75939,"lastName":"Andera","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9965,"estimatedVotesLow":8156,"estimatedVotesMid":9062,"turnoutHigh":90.98,"turnoutLow":111.16,"turnoutMid":99},"firstName":"Kameron","id":45871,"lastName":"Nelson","partyName":"Democratic","votes":0}],"district":"10","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T16:32:40.678Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":9066,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12388,"estimatedVotesLow":10135,"estimatedVotesMid":11261,"turnoutHigh":90.89,"turnoutLow":111.09,"turnoutMid":99},"firstName":"Sonja","id":75941,"lastName":"Mentzer","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12388,"estimatedVotesLow":10135,"estimatedVotesMid":11261,"turnoutHigh":90.89,"turnoutLow":111.09,"turnoutMid":99},"firstName":"Brian","id":23270,"lastName":"Mulder","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12388,"estimatedVotesLow":10135,"estimatedVotesMid":11261,"turnoutHigh":90.89,"turnoutLow":111.09,"turnoutMid":99},"firstName":"Keri","id":71730,"lastName":"Weems","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12388,"estimatedVotesLow":10135,"estimatedVotesMid":11261,"turnoutHigh":90.89,"turnoutLow":111.09,"turnoutMid":99},"firstName":"Aaron","id":75940,"lastName":"Matson","partyName":"Democratic","votes":0}],"district":"11","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T16:50:49.586Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":11259,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11802,"estimatedVotesLow":9651,"estimatedVotesMid":10723,"turnoutHigh":87.79,"turnoutLow":107.36,"turnoutMid":96.62},"firstName":"JR","id":75942,"lastName":"Anderson","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11802,"estimatedVotesLow":9651,"estimatedVotesMid":10723,"turnoutHigh":87.79,"turnoutLow":107.36,"turnoutMid":96.62},"firstName":"Erin","id":45876,"lastName":"Royer","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11802,"estimatedVotesLow":9651,"estimatedVotesMid":10723,"turnoutHigh":87.79,"turnoutLow":107.36,"turnoutMid":96.62},"firstName":"Amber","id":23273,"lastName":"Arlint","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11802,"estimatedVotesLow":9651,"estimatedVotesMid":10723,"turnoutHigh":87.79,"turnoutLow":107.36,"turnoutMid":96.62},"firstName":"Greg","id":23272,"lastName":"Jamison","partyName":"Republican","votes":0}],"district":"12","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:04:09.661Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10361,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":71733,"lastName":"Hughes","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tony","id":23280,"lastName":"Venhuizen","partyName":"Republican","votes":0}],"district":"13","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13420,"estimatedVotesLow":10976,"estimatedVotesMid":12196,"turnoutHigh":90.79,"turnoutLow":111.01,"turnoutMid":99},"firstName":"BJ","id":75944,"lastName":"Motley","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13420,"estimatedVotesLow":10976,"estimatedVotesMid":12196,"turnoutHigh":90.79,"turnoutLow":111.01,"turnoutMid":99},"firstName":"Taylor","id":23281,"lastName":"Rehfeldt","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13420,"estimatedVotesLow":10976,"estimatedVotesMid":12196,"turnoutHigh":90.79,"turnoutLow":111.01,"turnoutMid":99},"firstName":"Keith","id":75943,"lastName":"Block","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13420,"estimatedVotesLow":10976,"estimatedVotesMid":12196,"turnoutHigh":90.79,"turnoutLow":111.01,"turnoutMid":99},"firstName":"Tony","id":71734,"lastName":"Kayser","partyName":"Republican","votes":0}],"district":"14","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:33:37.377Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":12184,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10750,"estimatedVotesLow":8830,"estimatedVotesMid":9811,"turnoutHigh":91.69,"turnoutLow":111.63,"turnoutMid":99},"firstName":"Joni","id":45882,"lastName":"Tschetter","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10750,"estimatedVotesLow":8830,"estimatedVotesMid":9811,"turnoutHigh":91.69,"turnoutLow":111.63,"turnoutMid":99},"firstName":"Erik","id":75945,"lastName":"Muckey","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10750,"estimatedVotesLow":8830,"estimatedVotesMid":9811,"turnoutHigh":91.69,"turnoutLow":111.63,"turnoutMid":99},"firstName":"Brad","id":75946,"lastName":"Lindwurm","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10750,"estimatedVotesLow":8830,"estimatedVotesMid":9811,"turnoutHigh":91.69,"turnoutLow":111.63,"turnoutMid":99},"firstName":"Kadyn","id":45880,"lastName":"Wittman","partyName":"Democratic","votes":0}],"district":"15","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:10:22.483Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":9857,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12772,"estimatedVotesLow":10447,"estimatedVotesMid":11608,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Richard","id":23285,"lastName":"Vasgaard","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12772,"estimatedVotesLow":10447,"estimatedVotesMid":11608,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Matthew","id":98436,"lastName":"Ness","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12772,"estimatedVotesLow":10447,"estimatedVotesMid":11608,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Karla","id":23286,"lastName":"Lems","partyName":"Republican","votes":0}],"district":"16","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:53:09.373Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":11620,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11106,"estimatedVotesLow":9088,"estimatedVotesMid":10098,"turnoutHigh":91.4,"turnoutLow":111.7,"turnoutMid":99},"firstName":"William","id":45886,"lastName":"Shorma","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11106,"estimatedVotesLow":9088,"estimatedVotesMid":10098,"turnoutHigh":91.4,"turnoutLow":111.7,"turnoutMid":99},"firstName":"Chris","id":45885,"lastName":"Kassin","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11106,"estimatedVotesLow":9088,"estimatedVotesMid":10098,"turnoutHigh":91.4,"turnoutLow":111.7,"turnoutMid":99},"firstName":"Ray","id":75947,"lastName":"Ring","partyName":"Democratic","votes":0}],"district":"17","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:53:09.373Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10151,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11182,"estimatedVotesLow":9148,"estimatedVotesMid":10165,"turnoutHigh":91.69,"turnoutLow":112.08,"turnoutMid":99},"firstName":"Mike","id":45888,"lastName":"Stevens","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11182,"estimatedVotesLow":9148,"estimatedVotesMid":10165,"turnoutHigh":91.69,"turnoutLow":112.08,"turnoutMid":99},"firstName":"Julie","id":45889,"lastName":"Auch","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11182,"estimatedVotesLow":9148,"estimatedVotesMid":10165,"turnoutHigh":91.69,"turnoutLow":112.08,"turnoutMid":99},"firstName":"Sarah","id":75949,"lastName":"Mechtenberg","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11182,"estimatedVotesLow":9148,"estimatedVotesMid":10165,"turnoutHigh":91.69,"turnoutLow":112.08,"turnoutMid":99},"firstName":"Paul","id":75948,"lastName":"Harens","partyName":"Democratic","votes":0}],"district":"18","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:56:20.293Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":10253,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Drew","id":23291,"lastName":"Peterson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jessica","id":23288,"lastName":"Bahmuller","partyName":"Republican","votes":0}],"district":"19","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jeff","id":23293,"lastName":"Bathke","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kaley","id":98437,"lastName":"Nolz","partyName":"Republican","votes":0}],"district":"20","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jim","id":71739,"lastName":"Halverson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Marty","id":45892,"lastName":"Overweg","partyName":"Republican","votes":0}],"district":"21","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kevin","id":71741,"lastName":"Van Diepen","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lana","id":71742,"lastName":"Greenfield","partyName":"Republican","votes":0}],"district":"22","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Scott","id":23297,"lastName":"Moore","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Spencer","id":23227,"lastName":"Gosch","partyName":"Republican","votes":0}],"district":"23","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mike","id":23300,"lastName":"Weisgram","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Will","id":23299,"lastName":"Mortenson","partyName":"Republican","votes":0}],"district":"24","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jon","id":45898,"lastName":"Hansen","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Les","id":98438,"lastName":"Heinemann","partyName":"Republican","votes":0}],"district":"25","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5064,"estimatedVotesLow":4142,"estimatedVotesMid":4603,"turnoutHigh":64.36,"turnoutLow":78.68,"turnoutMid":70.8},"firstName":"David","id":98439,"lastName":"Reis","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5064,"estimatedVotesLow":4142,"estimatedVotesMid":4603,"turnoutHigh":64.36,"turnoutLow":78.68,"turnoutMid":70.8},"firstName":"Rebecca","id":45899,"lastName":"Reimer","partyName":"Republican","votes":0}],"district":"26B","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:51:00.616Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":3259,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":7764,"estimatedVotesLow":6340,"estimatedVotesMid":7046,"turnoutHigh":90.74,"turnoutLow":111.12,"turnoutMid":99},"firstName":"Elsie","id":75952,"lastName":"Meeks","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":7764,"estimatedVotesLow":6340,"estimatedVotesMid":7046,"turnoutHigh":90.74,"turnoutLow":111.12,"turnoutMid":99},"firstName":"Peri","id":45900,"lastName":"Pourier","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":7764,"estimatedVotesLow":6340,"estimatedVotesMid":7046,"turnoutHigh":90.74,"turnoutLow":111.12,"turnoutMid":99},"firstName":"Liz","id":13010,"lastName":"May","partyName":"Republican","votes":0}],"district":"27","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:58:11.675Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":7045,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kathy","id":23309,"lastName":"Rice","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Terri","id":71746,"lastName":"Jorgenson","partyName":"Republican","votes":0}],"district":"29","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15133,"estimatedVotesLow":12383,"estimatedVotesMid":13758,"turnoutHigh":91.18,"turnoutLow":111.44,"turnoutMid":99},"firstName":"Trish","id":23310,"lastName":"Ladner","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15133,"estimatedVotesLow":12383,"estimatedVotesMid":13758,"turnoutHigh":91.18,"turnoutLow":111.44,"turnoutMid":99},"firstName":"Susan","id":75954,"lastName":"Scheirbeck","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15133,"estimatedVotesLow":12383,"estimatedVotesMid":13758,"turnoutHigh":91.18,"turnoutLow":111.44,"turnoutMid":99},"firstName":"Tim","id":23238,"lastName":"Goodwin","partyName":"Republican","votes":0}],"district":"30","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:34:52.923Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":13799,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13707,"estimatedVotesLow":11214,"estimatedVotesMid":12460,"turnoutHigh":91.2,"turnoutLow":111.48,"turnoutMid":99},"firstName":"Shana","id":98440,"lastName":"McVickers","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13707,"estimatedVotesLow":11214,"estimatedVotesMid":12460,"turnoutHigh":91.2,"turnoutLow":111.48,"turnoutMid":99},"firstName":"Scott","id":23316,"lastName":"Odenbach","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13707,"estimatedVotesLow":11214,"estimatedVotesMid":12460,"turnoutHigh":91.2,"turnoutLow":111.48,"turnoutMid":99},"firstName":"Victoria","id":98441,"lastName":"Greenlee","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13707,"estimatedVotesLow":11214,"estimatedVotesMid":12460,"turnoutHigh":91.2,"turnoutLow":111.48,"turnoutMid":99},"firstName":"Mary","id":23315,"lastName":"Fitzgerald","partyName":"Republican","votes":0}],"district":"31","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:42:42.578Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":12501,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9252,"estimatedVotesLow":7567,"estimatedVotesMid":8408,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Nicole","id":75955,"lastName":"Uhre-Balk","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9252,"estimatedVotesLow":7567,"estimatedVotesMid":8408,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brook","id":71751,"lastName":"Kaufman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9252,"estimatedVotesLow":7567,"estimatedVotesMid":8408,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Steve","id":23319,"lastName":"Duffy","partyName":"Republican","votes":0}],"district":"32","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T13:33:42.055Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Curt","id":23323,"lastName":"Massie","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Phil","id":23321,"lastName":"Jensen","partyName":"Republican","votes":0}],"district":"33","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Heather","id":71752,"lastName":"Baxter","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mike","id":23325,"lastName":"Derby","partyName":"Republican","votes":0}],"district":"34","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15931,"estimatedVotesLow":12993,"estimatedVotesMid":14436,"turnoutHigh":89.08,"turnoutLow":109.22,"turnoutMid":98.3},"firstName":"Pat","id":45914,"lastName":"Cromwell","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15931,"estimatedVotesLow":12993,"estimatedVotesMid":14436,"turnoutHigh":89.08,"turnoutLow":109.22,"turnoutMid":98.3},"firstName":"Tina","id":23328,"lastName":"Mulally","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15931,"estimatedVotesLow":12993,"estimatedVotesMid":14436,"turnoutHigh":89.08,"turnoutLow":109.22,"turnoutMid":98.3},"firstName":"Jason","id":75956,"lastName":"Lind","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15931,"estimatedVotesLow":12993,"estimatedVotesMid":14436,"turnoutHigh":89.08,"turnoutLow":109.22,"turnoutMid":98.3},"firstName":"Tony","id":23329,"lastName":"Randolph","partyName":"Republican","votes":0}],"district":"35","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T16:50:49.586Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":14191,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3239,"estimatedVotesLow":2645,"estimatedVotesMid":2939,"turnoutHigh":91.08,"turnoutLow":111.53,"turnoutMid":99},"firstName":"William","id":98442,"lastName":"Lafferty","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3239,"estimatedVotesLow":2645,"estimatedVotesMid":2939,"turnoutHigh":91.08,"turnoutLow":111.53,"turnoutMid":99},"firstName":"Eric","id":23245,"lastName":"Emery","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3239,"estimatedVotesLow":2645,"estimatedVotesMid":2939,"turnoutHigh":91.08,"turnoutLow":111.53,"turnoutMid":99},"firstName":"Ron","id":23303,"lastName":"Frederick","partyName":"Republican","votes":0}],"district":"26A","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:41:34.460Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":2950,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":4777,"estimatedVotesLow":3906,"estimatedVotesMid":4341,"turnoutHigh":91.1,"turnoutLow":111.42,"turnoutMid":99},"firstName":"Carl","id":75953,"lastName":"Petersen","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":4777,"estimatedVotesLow":3906,"estimatedVotesMid":4341,"turnoutHigh":91.1,"turnoutLow":111.42,"turnoutMid":99},"firstName":"Jana","id":71744,"lastName":"Hunt","partyName":"Republican","votes":0}],"district":"28A","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:51:51.934Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":4352,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Travis","id":71745,"lastName":"Ismay","partyName":"Republican","votes":0}],"district":"28B","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:12:36.172Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"SD","stateName":"South Dakota","totalVotes":0,"year":2024}]
+[
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 423568,
+          "estimatedVotesLow": 346515,
+          "estimatedVotesMid": 385014,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Dusty",
+        "id": 9629,
+        "lastName": "Johnson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 423568,
+          "estimatedVotesLow": 346515,
+          "estimatedVotesMid": 385014,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Sheryl",
+        "id": 44812,
+        "lastName": "Johnson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "At-Large",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:41:24.975Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 384926,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 423606,
+          "estimatedVotesLow": 346547,
+          "estimatedVotesMid": 385051,
+          "turnoutHigh": 90.11,
+          "turnoutLow": 110.15,
+          "turnoutMid": 99
+        },
+        "firstName": "A.",
+        "id": 98422,
+        "lastName": "Oakes",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 423606,
+          "estimatedVotesLow": 346547,
+          "estimatedVotesMid": 385051,
+          "turnoutHigh": 90.11,
+          "turnoutLow": 110.15,
+          "turnoutMid": 99
+        },
+        "firstName": "Kristie",
+        "id": 98423,
+        "lastName": "Fiegen",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 423606,
+          "estimatedVotesLow": 346547,
+          "estimatedVotesMid": 385051,
+          "turnoutHigh": 90.11,
+          "turnoutLow": 110.15,
+          "turnoutMid": 99
+        },
+        "firstName": "Forrest",
+        "id": 98421,
+        "lastName": "Wilson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:31:34.918Z",
+    "office": {
+      "officeId": "148",
+      "officeName": "Public Utilities Commissioner",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 381715,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Michael",
+        "id": 23210,
+        "lastName": "Rohl",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Steve",
+        "id": 23212,
+        "lastName": "Kolbeck",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Carl",
+        "id": 23251,
+        "lastName": "Perry",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Stephanie",
+        "id": 23258,
+        "lastName": "Sauder",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11539,
+          "estimatedVotesLow": 9441,
+          "estimatedVotesMid": 10490,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.07,
+          "turnoutMid": 99
+        },
+        "firstName": "Dennis",
+        "id": 98424,
+        "lastName": "Solberg",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11539,
+          "estimatedVotesLow": 9441,
+          "estimatedVotesMid": 10490,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.07,
+          "turnoutMid": 99
+        },
+        "firstName": "Glen",
+        "id": 75918,
+        "lastName": "Vilhauer",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:13:15.195Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10486,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ernie",
+        "id": 45920,
+        "lastName": "Otten",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tim",
+        "id": 23219,
+        "lastName": "Reed",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Casey",
+        "id": 23220,
+        "lastName": "Crabtree",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joy",
+        "id": 71755,
+        "lastName": "Hohn",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Liz",
+        "id": 98425,
+        "lastName": "Larson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12388,
+          "estimatedVotesLow": 10135,
+          "estimatedVotesMid": 11261,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Chris",
+        "id": 23268,
+        "lastName": "Karr",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12388,
+          "estimatedVotesLow": 10135,
+          "estimatedVotesMid": 11261,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Steve",
+        "id": 75921,
+        "lastName": "Natz",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:17:04.763Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 11258,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11301,
+          "estimatedVotesLow": 9246,
+          "estimatedVotesMid": 10273,
+          "turnoutHigh": 89.39,
+          "turnoutLow": 109.26,
+          "turnoutMid": 98.34
+        },
+        "firstName": "Arch",
+        "id": 44815,
+        "lastName": "Beal",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11301,
+          "estimatedVotesLow": 9246,
+          "estimatedVotesMid": 10273,
+          "turnoutHigh": 89.39,
+          "turnoutLow": 109.26,
+          "turnoutMid": 98.34
+        },
+        "firstName": "Clay",
+        "id": 75922,
+        "lastName": "Hoffman",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:25:43.510Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10102,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14467,
+          "estimatedVotesLow": 11837,
+          "estimatedVotesMid": 13152,
+          "turnoutHigh": 86.38,
+          "turnoutLow": 105.58,
+          "turnoutMid": 95.02
+        },
+        "firstName": "Sue",
+        "id": 23277,
+        "lastName": "Peterson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14467,
+          "estimatedVotesLow": 11837,
+          "estimatedVotesMid": 13152,
+          "turnoutHigh": 86.38,
+          "turnoutLow": 105.58,
+          "turnoutMid": 95.02
+        },
+        "firstName": "Ali",
+        "id": 75923,
+        "lastName": "Horsted",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:33:15.662Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 12497,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13420,
+          "estimatedVotesLow": 10976,
+          "estimatedVotesMid": 12196,
+          "turnoutHigh": 75.59,
+          "turnoutLow": 92.42,
+          "turnoutMid": 83.17
+        },
+        "firstName": "Larry",
+        "id": 44819,
+        "lastName": "Zikmund",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13420,
+          "estimatedVotesLow": 10976,
+          "estimatedVotesMid": 12196,
+          "turnoutHigh": 75.59,
+          "turnoutLow": 92.42,
+          "turnoutMid": 83.17
+        },
+        "firstName": "Sandra",
+        "id": 75924,
+        "lastName": "Henry",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:36:10.391Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10144,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10750,
+          "estimatedVotesLow": 8830,
+          "estimatedVotesMid": 9811,
+          "turnoutHigh": 82.39,
+          "turnoutLow": 100.31,
+          "turnoutMid": 90.28
+        },
+        "firstName": "Jamie",
+        "id": 27961,
+        "lastName": "Smith",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10750,
+          "estimatedVotesLow": 8830,
+          "estimatedVotesMid": 9811,
+          "turnoutHigh": 82.39,
+          "turnoutLow": 100.31,
+          "turnoutMid": 90.28
+        },
+        "firstName": "Brenda",
+        "id": 44821,
+        "lastName": "Lawrence",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T16:57:25.644Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 8857,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kevin",
+        "id": 23284,
+        "lastName": "Jensen",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sydney",
+        "id": 44825,
+        "lastName": "Davis",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11182,
+          "estimatedVotesLow": 9148,
+          "estimatedVotesMid": 10165,
+          "turnoutHigh": 90.06,
+          "turnoutLow": 110.09,
+          "turnoutMid": 99
+        },
+        "firstName": "Lauren",
+        "id": 71757,
+        "lastName": "Nelson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11182,
+          "estimatedVotesLow": 9148,
+          "estimatedVotesMid": 10165,
+          "turnoutHigh": 90.06,
+          "turnoutLow": 110.09,
+          "turnoutMid": 99
+        },
+        "firstName": "Sarah",
+        "id": 98426,
+        "lastName": "Carda",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:30:53.291Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10071,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12571,
+          "estimatedVotesLow": 10285,
+          "estimatedVotesMid": 11428,
+          "turnoutHigh": 73.93,
+          "turnoutLow": 90.36,
+          "turnoutMid": 81.33
+        },
+        "firstName": "Kyle",
+        "id": 44829,
+        "lastName": "Schoenfish",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12571,
+          "estimatedVotesLow": 10285,
+          "estimatedVotesMid": 11428,
+          "turnoutHigh": 73.93,
+          "turnoutLow": 90.36,
+          "turnoutMid": 81.33
+        },
+        "firstName": "Michael",
+        "id": 98427,
+        "lastName": "Miller",
+        "partyName": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T16:58:17.180Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 9294,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Paul",
+        "id": 75927,
+        "lastName": "Miskimins",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11900,
+          "estimatedVotesLow": 9734,
+          "estimatedVotesMid": 10816,
+          "turnoutHigh": 90.95,
+          "turnoutLow": 111.19,
+          "turnoutMid": 99
+        },
+        "firstName": "Mykala",
+        "id": 71758,
+        "lastName": "Voita",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11900,
+          "estimatedVotesLow": 9734,
+          "estimatedVotesMid": 10816,
+          "turnoutHigh": 90.95,
+          "turnoutLow": 111.19,
+          "turnoutMid": 99
+        },
+        "firstName": "Dan",
+        "id": 44831,
+        "lastName": "Andersson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:10:39.278Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10823,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10328,
+          "estimatedVotesLow": 8450,
+          "estimatedVotesMid": 9389,
+          "turnoutHigh": 90.7,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "David",
+        "id": 44833,
+        "lastName": "Wheeler",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10328,
+          "estimatedVotesLow": 8450,
+          "estimatedVotesMid": 9389,
+          "turnoutHigh": 90.7,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "Jim",
+        "id": 26655,
+        "lastName": "Schmidt",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:41:51.965Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 9367,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mark",
+        "id": 71759,
+        "lastName": "Lapka",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jim",
+        "id": 23229,
+        "lastName": "Mehlhaff",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14047,
+          "estimatedVotesLow": 11492,
+          "estimatedVotesMid": 12770,
+          "turnoutHigh": 90.18,
+          "turnoutLow": 110.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Brian",
+        "id": 75928,
+        "lastName": "Wirth",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14047,
+          "estimatedVotesLow": 11492,
+          "estimatedVotesMid": 12770,
+          "turnoutHigh": 90.18,
+          "turnoutLow": 110.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Tom",
+        "id": 23232,
+        "lastName": "Pischke",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:42:40.737Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 12668,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8304,
+          "estimatedVotesLow": 6789,
+          "estimatedVotesMid": 7543,
+          "turnoutHigh": 91.03,
+          "turnoutLow": 111.34,
+          "turnoutMid": 99
+        },
+        "firstName": "Shawn",
+        "id": 44834,
+        "lastName": "Bordeaux",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8304,
+          "estimatedVotesLow": 6789,
+          "estimatedVotesMid": 7543,
+          "turnoutHigh": 91.03,
+          "turnoutLow": 111.34,
+          "turnoutMid": 99
+        },
+        "firstName": "Tamara",
+        "id": 75929,
+        "lastName": "Grove",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:40:21.823Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 7559,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7764,
+          "estimatedVotesLow": 6340,
+          "estimatedVotesMid": 7046,
+          "turnoutHigh": 87.55,
+          "turnoutLow": 107.21,
+          "turnoutMid": 96.47
+        },
+        "firstName": "Red Dawn",
+        "id": 98428,
+        "lastName": "Foster",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7764,
+          "estimatedVotesLow": 6340,
+          "estimatedVotesMid": 7046,
+          "turnoutHigh": 87.55,
+          "turnoutLow": 107.21,
+          "turnoutMid": 96.47
+        },
+        "firstName": "Anthony",
+        "id": 71762,
+        "lastName": "Kathol",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:41:33.540Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 6797,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11245,
+          "estimatedVotesLow": 9198,
+          "estimatedVotesMid": 10220,
+          "turnoutHigh": 91.01,
+          "turnoutLow": 111.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Sam",
+        "id": 71764,
+        "lastName": "Marty",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11245,
+          "estimatedVotesLow": 9198,
+          "estimatedVotesMid": 10220,
+          "turnoutHigh": 91.01,
+          "turnoutLow": 111.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Shane",
+        "id": 98429,
+        "lastName": "Farlee",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11245,
+          "estimatedVotesLow": 9198,
+          "estimatedVotesMid": 10220,
+          "turnoutHigh": 91.01,
+          "turnoutLow": 111.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Dean",
+        "id": 75930,
+        "lastName": "Schrempp",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:30:54.271Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10234,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 23234,
+        "lastName": "Carley",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15130,
+          "estimatedVotesLow": 12380,
+          "estimatedVotesMid": 13754,
+          "turnoutHigh": 86.04,
+          "turnoutLow": 105.15,
+          "turnoutMid": 94.65
+        },
+        "firstName": "Amber",
+        "id": 71766,
+        "lastName": "Hulse",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15130,
+          "estimatedVotesLow": 12380,
+          "estimatedVotesMid": 13754,
+          "turnoutHigh": 86.04,
+          "turnoutLow": 105.15,
+          "turnoutMid": 94.65
+        },
+        "firstName": "Bret",
+        "id": 45908,
+        "lastName": "Swanson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:37:01.908Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 13018,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Randy",
+        "id": 23239,
+        "lastName": "Deibert",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9252,
+          "estimatedVotesLow": 7567,
+          "estimatedVotesMid": 8408,
+          "turnoutHigh": 53.3,
+          "turnoutLow": 65.16,
+          "turnoutMid": 58.65
+        },
+        "firstName": "Karen",
+        "id": 98430,
+        "lastName": "McNeal",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9252,
+          "estimatedVotesLow": 7567,
+          "estimatedVotesMid": 8408,
+          "turnoutHigh": 53.3,
+          "turnoutLow": 65.16,
+          "turnoutMid": 58.65
+        },
+        "firstName": "Helene",
+        "id": 44840,
+        "lastName": "Duhamel",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T16:44:01.846Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 4931,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Curt",
+        "id": 71769,
+        "lastName": "Voight",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Taffy",
+        "id": 23208,
+        "lastName": "Howard",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Greg",
+        "id": 71772,
+        "lastName": "Blanc",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13020,
+          "estimatedVotesLow": 10656,
+          "estimatedVotesMid": 11839,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
+        },
+        "firstName": "Christopher",
+        "id": 71713,
+        "lastName": "Reder",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13020,
+          "estimatedVotesLow": 10656,
+          "estimatedVotesMid": 11839,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
+        },
+        "firstName": "Tamara",
+        "id": 44263,
+        "lastName": "Lesnar",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13020,
+          "estimatedVotesLow": 10656,
+          "estimatedVotesMid": 11839,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
+        },
+        "firstName": "Logan",
+        "id": 71714,
+        "lastName": "Manhart",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13020,
+          "estimatedVotesLow": 10656,
+          "estimatedVotesMid": 11839,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
+        },
+        "firstName": "Steven",
+        "id": 45867,
+        "lastName": "McCleerey",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13020,
+          "estimatedVotesLow": 10656,
+          "estimatedVotesMid": 11839,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
+        },
+        "firstName": "Mark",
+        "id": 98431,
+        "lastName": "Sumption",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13020,
+          "estimatedVotesLow": 10656,
+          "estimatedVotesMid": 11839,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
+        },
+        "firstName": "Josh",
+        "id": 98432,
+        "lastName": "Dennert",
+        "partyName": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:23:03.234Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 11888,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 23247,
+        "lastName": "Kull",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 23250,
+        "lastName": "Sjaarda",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11524,
+          "estimatedVotesLow": 9428,
+          "estimatedVotesMid": 10475,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Erin",
+        "id": 75933,
+        "lastName": "Rudner",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11524,
+          "estimatedVotesLow": 9428,
+          "estimatedVotesMid": 10475,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brandei",
+        "id": 23254,
+        "lastName": "Schaefbauer",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11524,
+          "estimatedVotesLow": 9428,
+          "estimatedVotesMid": 10475,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Al",
+        "id": 23214,
+        "lastName": "Novstrup",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T13:33:36.203Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Dylan",
+        "id": 71716,
+        "lastName": "Jordan",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kent",
+        "id": 71717,
+        "lastName": "Roe",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11539,
+          "estimatedVotesLow": 9441,
+          "estimatedVotesMid": 10490,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Josephine",
+        "id": 71719,
+        "lastName": "Garcia",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11539,
+          "estimatedVotesLow": 9441,
+          "estimatedVotesMid": 10490,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Amy",
+        "id": 75935,
+        "lastName": "Rambow",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11539,
+          "estimatedVotesLow": 9441,
+          "estimatedVotesMid": 10490,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Diane",
+        "id": 75934,
+        "lastName": "Drake",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11539,
+          "estimatedVotesLow": 9441,
+          "estimatedVotesMid": 10490,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Matt",
+        "id": 71720,
+        "lastName": "Roby",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:51:51.934Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10487,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12040,
+          "estimatedVotesLow": 9852,
+          "estimatedVotesMid": 10947,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
+        },
+        "firstName": "Herman",
+        "id": 44809,
+        "lastName": "Otten",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12040,
+          "estimatedVotesLow": 9852,
+          "estimatedVotesMid": 10947,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
+        },
+        "firstName": "Aaron",
+        "id": 45919,
+        "lastName": "Aylward",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12040,
+          "estimatedVotesLow": 9852,
+          "estimatedVotesMid": 10947,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
+        },
+        "firstName": "Garret",
+        "id": 75936,
+        "lastName": "Campbell",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:22:02.863Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10935,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10454,
+          "estimatedVotesLow": 8555,
+          "estimatedVotesMid": 9506,
+          "turnoutHigh": 91.96,
+          "turnoutLow": 112.37,
+          "turnoutMid": 99
+        },
+        "firstName": "Fedora",
+        "id": 98434,
+        "lastName": "Sutton-Butler",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10454,
+          "estimatedVotesLow": 8555,
+          "estimatedVotesMid": 9506,
+          "turnoutHigh": 91.96,
+          "turnoutLow": 112.37,
+          "turnoutMid": 99
+        },
+        "firstName": "Roger",
+        "id": 23259,
+        "lastName": "DeGroot",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10454,
+          "estimatedVotesLow": 8555,
+          "estimatedVotesMid": 9506,
+          "turnoutHigh": 91.96,
+          "turnoutLow": 112.37,
+          "turnoutMid": 99
+        },
+        "firstName": "Mellissa",
+        "id": 23261,
+        "lastName": "Heermann",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10454,
+          "estimatedVotesLow": 8555,
+          "estimatedVotesMid": 9506,
+          "turnoutHigh": 91.96,
+          "turnoutLow": 112.37,
+          "turnoutMid": 99
+        },
+        "firstName": "Blake",
+        "id": 98433,
+        "lastName": "Stevens",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:54:08.778Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 9613,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13915,
+          "estimatedVotesLow": 11385,
+          "estimatedVotesMid": 12650,
+          "turnoutHigh": 91.11,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
+        },
+        "firstName": "Greg",
+        "id": 98435,
+        "lastName": "Zimmerman",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13915,
+          "estimatedVotesLow": 11385,
+          "estimatedVotesMid": 12650,
+          "turnoutHigh": 91.11,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
+        },
+        "firstName": "Tim",
+        "id": 23263,
+        "lastName": "Reisch",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13915,
+          "estimatedVotesLow": 11385,
+          "estimatedVotesMid": 12650,
+          "turnoutHigh": 91.11,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
+        },
+        "firstName": "Tim",
+        "id": 71724,
+        "lastName": "Walburg",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:36:10.391Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 12678,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11867,
+          "estimatedVotesLow": 9708,
+          "estimatedVotesMid": 10787,
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
+        },
+        "firstName": "Beverly",
+        "id": 75938,
+        "lastName": "Johnson",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11867,
+          "estimatedVotesLow": 9708,
+          "estimatedVotesMid": 10787,
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
+        },
+        "firstName": "Bethany",
+        "id": 23265,
+        "lastName": "Soye",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11867,
+          "estimatedVotesLow": 9708,
+          "estimatedVotesMid": 10787,
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
+        },
+        "firstName": "Tesa",
+        "id": 71727,
+        "lastName": "Schwans",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:53:09.373Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10775,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9965,
+          "estimatedVotesLow": 8156,
+          "estimatedVotesMid": 9062,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.16,
+          "turnoutMid": 99
+        },
+        "firstName": "Erin",
+        "id": 45870,
+        "lastName": "Healy",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9965,
+          "estimatedVotesLow": 8156,
+          "estimatedVotesMid": 9062,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.16,
+          "turnoutMid": 99
+        },
+        "firstName": "Bobbi",
+        "id": 75939,
+        "lastName": "Andera",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9965,
+          "estimatedVotesLow": 8156,
+          "estimatedVotesMid": 9062,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.16,
+          "turnoutMid": 99
+        },
+        "firstName": "Kameron",
+        "id": 45871,
+        "lastName": "Nelson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T16:32:40.678Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 9066,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12388,
+          "estimatedVotesLow": 10135,
+          "estimatedVotesMid": 11261,
+          "turnoutHigh": 90.89,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
+        },
+        "firstName": "Sonja",
+        "id": 75941,
+        "lastName": "Mentzer",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12388,
+          "estimatedVotesLow": 10135,
+          "estimatedVotesMid": 11261,
+          "turnoutHigh": 90.89,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
+        },
+        "firstName": "Brian",
+        "id": 23270,
+        "lastName": "Mulder",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12388,
+          "estimatedVotesLow": 10135,
+          "estimatedVotesMid": 11261,
+          "turnoutHigh": 90.89,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
+        },
+        "firstName": "Keri",
+        "id": 71730,
+        "lastName": "Weems",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12388,
+          "estimatedVotesLow": 10135,
+          "estimatedVotesMid": 11261,
+          "turnoutHigh": 90.89,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
+        },
+        "firstName": "Aaron",
+        "id": 75940,
+        "lastName": "Matson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T16:50:49.586Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 11259,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11802,
+          "estimatedVotesLow": 9651,
+          "estimatedVotesMid": 10723,
+          "turnoutHigh": 87.79,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.62
+        },
+        "firstName": "JR",
+        "id": 75942,
+        "lastName": "Anderson",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11802,
+          "estimatedVotesLow": 9651,
+          "estimatedVotesMid": 10723,
+          "turnoutHigh": 87.79,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.62
+        },
+        "firstName": "Erin",
+        "id": 45876,
+        "lastName": "Royer",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11802,
+          "estimatedVotesLow": 9651,
+          "estimatedVotesMid": 10723,
+          "turnoutHigh": 87.79,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.62
+        },
+        "firstName": "Amber",
+        "id": 23273,
+        "lastName": "Arlint",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11802,
+          "estimatedVotesLow": 9651,
+          "estimatedVotesMid": 10723,
+          "turnoutHigh": 87.79,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.62
+        },
+        "firstName": "Greg",
+        "id": 23272,
+        "lastName": "Jamison",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:04:09.661Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10361,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 71733,
+        "lastName": "Hughes",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tony",
+        "id": 23280,
+        "lastName": "Venhuizen",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13420,
+          "estimatedVotesLow": 10976,
+          "estimatedVotesMid": 12196,
+          "turnoutHigh": 90.79,
+          "turnoutLow": 111.01,
+          "turnoutMid": 99
+        },
+        "firstName": "BJ",
+        "id": 75944,
+        "lastName": "Motley",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13420,
+          "estimatedVotesLow": 10976,
+          "estimatedVotesMid": 12196,
+          "turnoutHigh": 90.79,
+          "turnoutLow": 111.01,
+          "turnoutMid": 99
+        },
+        "firstName": "Taylor",
+        "id": 23281,
+        "lastName": "Rehfeldt",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13420,
+          "estimatedVotesLow": 10976,
+          "estimatedVotesMid": 12196,
+          "turnoutHigh": 90.79,
+          "turnoutLow": 111.01,
+          "turnoutMid": 99
+        },
+        "firstName": "Keith",
+        "id": 75943,
+        "lastName": "Block",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13420,
+          "estimatedVotesLow": 10976,
+          "estimatedVotesMid": 12196,
+          "turnoutHigh": 90.79,
+          "turnoutLow": 111.01,
+          "turnoutMid": 99
+        },
+        "firstName": "Tony",
+        "id": 71734,
+        "lastName": "Kayser",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:33:37.377Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 12184,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10750,
+          "estimatedVotesLow": 8830,
+          "estimatedVotesMid": 9811,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 111.63,
+          "turnoutMid": 99
+        },
+        "firstName": "Joni",
+        "id": 45882,
+        "lastName": "Tschetter",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10750,
+          "estimatedVotesLow": 8830,
+          "estimatedVotesMid": 9811,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 111.63,
+          "turnoutMid": 99
+        },
+        "firstName": "Erik",
+        "id": 75945,
+        "lastName": "Muckey",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10750,
+          "estimatedVotesLow": 8830,
+          "estimatedVotesMid": 9811,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 111.63,
+          "turnoutMid": 99
+        },
+        "firstName": "Brad",
+        "id": 75946,
+        "lastName": "Lindwurm",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10750,
+          "estimatedVotesLow": 8830,
+          "estimatedVotesMid": 9811,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 111.63,
+          "turnoutMid": 99
+        },
+        "firstName": "Kadyn",
+        "id": 45880,
+        "lastName": "Wittman",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:10:22.483Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 9857,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12772,
+          "estimatedVotesLow": 10447,
+          "estimatedVotesMid": 11608,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Richard",
+        "id": 23285,
+        "lastName": "Vasgaard",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12772,
+          "estimatedVotesLow": 10447,
+          "estimatedVotesMid": 11608,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Matthew",
+        "id": 98436,
+        "lastName": "Ness",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12772,
+          "estimatedVotesLow": 10447,
+          "estimatedVotesMid": 11608,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Karla",
+        "id": 23286,
+        "lastName": "Lems",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:53:09.373Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 11620,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11106,
+          "estimatedVotesLow": 9088,
+          "estimatedVotesMid": 10098,
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.7,
+          "turnoutMid": 99
+        },
+        "firstName": "William",
+        "id": 45886,
+        "lastName": "Shorma",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11106,
+          "estimatedVotesLow": 9088,
+          "estimatedVotesMid": 10098,
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.7,
+          "turnoutMid": 99
+        },
+        "firstName": "Chris",
+        "id": 45885,
+        "lastName": "Kassin",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11106,
+          "estimatedVotesLow": 9088,
+          "estimatedVotesMid": 10098,
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.7,
+          "turnoutMid": 99
+        },
+        "firstName": "Ray",
+        "id": 75947,
+        "lastName": "Ring",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:53:09.373Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10151,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11182,
+          "estimatedVotesLow": 9148,
+          "estimatedVotesMid": 10165,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Mike",
+        "id": 45888,
+        "lastName": "Stevens",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11182,
+          "estimatedVotesLow": 9148,
+          "estimatedVotesMid": 10165,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Julie",
+        "id": 45889,
+        "lastName": "Auch",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11182,
+          "estimatedVotesLow": 9148,
+          "estimatedVotesMid": 10165,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Sarah",
+        "id": 75949,
+        "lastName": "Mechtenberg",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11182,
+          "estimatedVotesLow": 9148,
+          "estimatedVotesMid": 10165,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Paul",
+        "id": 75948,
+        "lastName": "Harens",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:56:20.293Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 10253,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Drew",
+        "id": 23291,
+        "lastName": "Peterson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jessica",
+        "id": 23288,
+        "lastName": "Bahmuller",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jeff",
+        "id": 23293,
+        "lastName": "Bathke",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kaley",
+        "id": 98437,
+        "lastName": "Nolz",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jim",
+        "id": 71739,
+        "lastName": "Halverson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Marty",
+        "id": 45892,
+        "lastName": "Overweg",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kevin",
+        "id": 71741,
+        "lastName": "Van Diepen",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lana",
+        "id": 71742,
+        "lastName": "Greenfield",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Scott",
+        "id": 23297,
+        "lastName": "Moore",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Spencer",
+        "id": 23227,
+        "lastName": "Gosch",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mike",
+        "id": 23300,
+        "lastName": "Weisgram",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Will",
+        "id": 23299,
+        "lastName": "Mortenson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jon",
+        "id": 45898,
+        "lastName": "Hansen",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Les",
+        "id": 98438,
+        "lastName": "Heinemann",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5064,
+          "estimatedVotesLow": 4142,
+          "estimatedVotesMid": 4603,
+          "turnoutHigh": 64.36,
+          "turnoutLow": 78.68,
+          "turnoutMid": 70.8
+        },
+        "firstName": "David",
+        "id": 98439,
+        "lastName": "Reis",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5064,
+          "estimatedVotesLow": 4142,
+          "estimatedVotesMid": 4603,
+          "turnoutHigh": 64.36,
+          "turnoutLow": 78.68,
+          "turnoutMid": 70.8
+        },
+        "firstName": "Rebecca",
+        "id": 45899,
+        "lastName": "Reimer",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:51:00.616Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 3259,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7764,
+          "estimatedVotesLow": 6340,
+          "estimatedVotesMid": 7046,
+          "turnoutHigh": 90.74,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
+        },
+        "firstName": "Elsie",
+        "id": 75952,
+        "lastName": "Meeks",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7764,
+          "estimatedVotesLow": 6340,
+          "estimatedVotesMid": 7046,
+          "turnoutHigh": 90.74,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
+        },
+        "firstName": "Peri",
+        "id": 45900,
+        "lastName": "Pourier",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7764,
+          "estimatedVotesLow": 6340,
+          "estimatedVotesMid": 7046,
+          "turnoutHigh": 90.74,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
+        },
+        "firstName": "Liz",
+        "id": 13010,
+        "lastName": "May",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:58:11.675Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 7045,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kathy",
+        "id": 23309,
+        "lastName": "Rice",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Terri",
+        "id": 71746,
+        "lastName": "Jorgenson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15133,
+          "estimatedVotesLow": 12383,
+          "estimatedVotesMid": 13758,
+          "turnoutHigh": 91.18,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
+        },
+        "firstName": "Trish",
+        "id": 23310,
+        "lastName": "Ladner",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15133,
+          "estimatedVotesLow": 12383,
+          "estimatedVotesMid": 13758,
+          "turnoutHigh": 91.18,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
+        },
+        "firstName": "Susan",
+        "id": 75954,
+        "lastName": "Scheirbeck",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15133,
+          "estimatedVotesLow": 12383,
+          "estimatedVotesMid": 13758,
+          "turnoutHigh": 91.18,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
+        },
+        "firstName": "Tim",
+        "id": 23238,
+        "lastName": "Goodwin",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:34:52.923Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 13799,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13707,
+          "estimatedVotesLow": 11214,
+          "estimatedVotesMid": 12460,
+          "turnoutHigh": 91.2,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Shana",
+        "id": 98440,
+        "lastName": "McVickers",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13707,
+          "estimatedVotesLow": 11214,
+          "estimatedVotesMid": 12460,
+          "turnoutHigh": 91.2,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Scott",
+        "id": 23316,
+        "lastName": "Odenbach",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13707,
+          "estimatedVotesLow": 11214,
+          "estimatedVotesMid": 12460,
+          "turnoutHigh": 91.2,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Victoria",
+        "id": 98441,
+        "lastName": "Greenlee",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13707,
+          "estimatedVotesLow": 11214,
+          "estimatedVotesMid": 12460,
+          "turnoutHigh": 91.2,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Mary",
+        "id": 23315,
+        "lastName": "Fitzgerald",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:42:42.578Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 12501,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9252,
+          "estimatedVotesLow": 7567,
+          "estimatedVotesMid": 8408,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nicole",
+        "id": 75955,
+        "lastName": "Uhre-Balk",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9252,
+          "estimatedVotesLow": 7567,
+          "estimatedVotesMid": 8408,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brook",
+        "id": 71751,
+        "lastName": "Kaufman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9252,
+          "estimatedVotesLow": 7567,
+          "estimatedVotesMid": 8408,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Steve",
+        "id": 23319,
+        "lastName": "Duffy",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T13:33:42.055Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Curt",
+        "id": 23323,
+        "lastName": "Massie",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Phil",
+        "id": 23321,
+        "lastName": "Jensen",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Heather",
+        "id": 71752,
+        "lastName": "Baxter",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mike",
+        "id": 23325,
+        "lastName": "Derby",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15931,
+          "estimatedVotesLow": 12993,
+          "estimatedVotesMid": 14436,
+          "turnoutHigh": 89.08,
+          "turnoutLow": 109.22,
+          "turnoutMid": 98.3
+        },
+        "firstName": "Pat",
+        "id": 45914,
+        "lastName": "Cromwell",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15931,
+          "estimatedVotesLow": 12993,
+          "estimatedVotesMid": 14436,
+          "turnoutHigh": 89.08,
+          "turnoutLow": 109.22,
+          "turnoutMid": 98.3
+        },
+        "firstName": "Tina",
+        "id": 23328,
+        "lastName": "Mulally",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15931,
+          "estimatedVotesLow": 12993,
+          "estimatedVotesMid": 14436,
+          "turnoutHigh": 89.08,
+          "turnoutLow": 109.22,
+          "turnoutMid": 98.3
+        },
+        "firstName": "Jason",
+        "id": 75956,
+        "lastName": "Lind",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15931,
+          "estimatedVotesLow": 12993,
+          "estimatedVotesMid": 14436,
+          "turnoutHigh": 89.08,
+          "turnoutLow": 109.22,
+          "turnoutMid": 98.3
+        },
+        "firstName": "Tony",
+        "id": 23329,
+        "lastName": "Randolph",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T16:50:49.586Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 14191,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3239,
+          "estimatedVotesLow": 2645,
+          "estimatedVotesMid": 2939,
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.53,
+          "turnoutMid": 99
+        },
+        "firstName": "William",
+        "id": 98442,
+        "lastName": "Lafferty",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3239,
+          "estimatedVotesLow": 2645,
+          "estimatedVotesMid": 2939,
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.53,
+          "turnoutMid": 99
+        },
+        "firstName": "Eric",
+        "id": 23245,
+        "lastName": "Emery",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3239,
+          "estimatedVotesLow": 2645,
+          "estimatedVotesMid": 2939,
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.53,
+          "turnoutMid": 99
+        },
+        "firstName": "Ron",
+        "id": 23303,
+        "lastName": "Frederick",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:41:34.460Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 2950,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4777,
+          "estimatedVotesLow": 3906,
+          "estimatedVotesMid": 4341,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.42,
+          "turnoutMid": 99
+        },
+        "firstName": "Carl",
+        "id": 75953,
+        "lastName": "Petersen",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4777,
+          "estimatedVotesLow": 3906,
+          "estimatedVotesMid": 4341,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.42,
+          "turnoutMid": 99
+        },
+        "firstName": "Jana",
+        "id": 71744,
+        "lastName": "Hunt",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28A",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:51:51.934Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 4352,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Travis",
+        "id": 71745,
+        "lastName": "Ismay",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:12:36.172Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "SD",
+    "stateName": "South Dakota",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

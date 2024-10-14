@@ -1,1 +1,4096 @@
-[{"calledCandidate":{"cand_id":1074,"first_name":"Ruben","incumbent":false,"last_name":"Gallego","party_id":1,"party_name":"Democratic"},"candidatesWithVotes":[{"elected":true,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":90.88,"turnoutLow":111.07,"turnoutMid":99},"firstName":"Ruben","id":1074,"lastName":"Gallego","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":90.88,"turnoutLow":111.07,"turnoutMid":99},"firstName":"Kari","id":26347,"lastName":"Lake","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":90.88,"turnoutLow":111.07,"turnoutMid":99},"firstName":"Eduardo","id":102113,"lastName":"Quintana","partyName":"Green","votes":0}],"district":"","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:44:48.281Z","office":{"officeId":"4","officeName":"US Senate","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":2899980,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":422860,"estimatedVotesLow":346076,"estimatedVotesMid":384529,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"David","id":751,"lastName":"Schweikert","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":422860,"estimatedVotesLow":346076,"estimatedVotesMid":384529,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Amish","id":26436,"lastName":"Shah","partyName":"Democratic","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:42:43.050Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":384054,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":393077,"estimatedVotesLow":321704,"estimatedVotesMid":357450,"turnoutHigh":90.66,"turnoutLow":110.77,"turnoutMid":99},"firstName":"Eli","id":79253,"lastName":"Crane","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":393077,"estimatedVotesLow":321704,"estimatedVotesMid":357450,"turnoutHigh":90.66,"turnoutLow":110.77,"turnoutMid":99},"firstName":"Jonathan","id":79255,"lastName":"Nez","partyName":"Democratic","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:19:47.381Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":356352,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":208469,"estimatedVotesLow":170501,"estimatedVotesMid":189445,"turnoutHigh":91.08,"turnoutLow":111.36,"turnoutMid":99},"firstName":"Yassamin","id":79256,"lastName":"Ansari","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":208469,"estimatedVotesLow":170501,"estimatedVotesMid":189445,"turnoutHigh":91.08,"turnoutLow":111.36,"turnoutMid":99},"firstName":"Jeffrey","id":84979,"lastName":"Zink","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":208469,"estimatedVotesLow":170501,"estimatedVotesMid":189445,"turnoutHigh":91.08,"turnoutLow":111.36,"turnoutMid":99},"firstName":"Alan","id":105876,"lastName":"Aversa","partyName":"Green","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:56:35.374Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":189876,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":333158,"estimatedVotesLow":272512,"estimatedVotesMid":302791,"turnoutHigh":90.77,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Greg","id":10940,"lastName":"Stanton","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":333158,"estimatedVotesLow":272512,"estimatedVotesMid":302791,"turnoutHigh":90.77,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Vincent","id":105877,"lastName":"Beck-Jones","partyName":"Green","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":333158,"estimatedVotesLow":272512,"estimatedVotesMid":302791,"turnoutHigh":90.77,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Kelly","id":26327,"lastName":"Cooper","partyName":"Republican","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:44:56.374Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":302402,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":410098,"estimatedVotesLow":335590,"estimatedVotesMid":372879,"turnoutHigh":90.58,"turnoutLow":110.69,"turnoutMid":99},"firstName":"Andy","id":745,"lastName":"Biggs","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":410098,"estimatedVotesLow":335590,"estimatedVotesMid":372879,"turnoutHigh":90.58,"turnoutLow":110.69,"turnoutMid":99},"firstName":"Katrina","id":79262,"lastName":"Schaffner","partyName":"Democratic","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:39:40.565Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":371455,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":413638,"estimatedVotesLow":338256,"estimatedVotesMid":375841,"turnoutHigh":91.1,"turnoutLow":111.41,"turnoutMid":99},"firstName":"Juan","id":26331,"lastName":"Ciscomani","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":413638,"estimatedVotesLow":338256,"estimatedVotesMid":375841,"turnoutHigh":91.1,"turnoutLow":111.41,"turnoutMid":99},"firstName":"Kristen","id":26316,"lastName":"Engel","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":413638,"estimatedVotesLow":338256,"estimatedVotesMid":375841,"turnoutHigh":91.1,"turnoutLow":111.41,"turnoutMid":99},"firstName":"Athena","id":102114,"lastName":"Eastwood","partyName":"Green","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:59:39.978Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":376842,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":281461,"estimatedVotesLow":230288,"estimatedVotesMid":255875,"turnoutHigh":91.21,"turnoutLow":111.48,"turnoutMid":99},"firstName":"Raul","id":1071,"lastName":"Grijalva","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":281461,"estimatedVotesLow":230288,"estimatedVotesMid":255875,"turnoutHigh":91.21,"turnoutLow":111.48,"turnoutMid":99},"firstName":"Daniel","id":84980,"lastName":"Butierez","partyName":"Republican","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:54:16.119Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":256728,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":376790,"estimatedVotesLow":308446,"estimatedVotesMid":342717,"turnoutHigh":90.91,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Gregory","id":79265,"lastName":"Whitten","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":376790,"estimatedVotesLow":308446,"estimatedVotesMid":342717,"turnoutHigh":90.91,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Abraham","id":26356,"lastName":"Hamadeh","partyName":"Republican","votes":0}],"district":"8","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:54:13.503Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":342532,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":351255,"estimatedVotesLow":287419,"estimatedVotesMid":319354,"turnoutHigh":90.71,"turnoutLow":110.85,"turnoutMid":99},"firstName":"Quacy","id":79267,"lastName":"Smith","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":351255,"estimatedVotesLow":287419,"estimatedVotesMid":319354,"turnoutHigh":90.71,"turnoutLow":110.85,"turnoutMid":99},"firstName":"Paul","id":741,"lastName":"Gosar","partyName":"Republican","votes":0}],"district":"9","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:27:36.597Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":318609,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":136846,"estimatedVotesLow":111972,"estimatedVotesMid":124413,"turnoutHigh":90.71,"turnoutLow":110.87,"turnoutMid":99},"firstName":"Marcia","id":79306,"lastName":"Smith","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":136846,"estimatedVotesLow":111972,"estimatedVotesMid":124413,"turnoutHigh":90.71,"turnoutLow":110.87,"turnoutMid":99},"firstName":"Selina","id":26492,"lastName":"Bliss","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":136846,"estimatedVotesLow":111972,"estimatedVotesMid":124413,"turnoutHigh":90.71,"turnoutLow":110.87,"turnoutMid":99},"firstName":"Jay","id":79305,"lastName":"Ruby","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":136846,"estimatedVotesLow":111972,"estimatedVotesMid":124413,"turnoutHigh":90.71,"turnoutLow":110.87,"turnoutMid":99},"firstName":"Quang","id":26491,"lastName":"Nguyen","partyName":"Republican","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:48:18.171Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":124139,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":104124,"estimatedVotesLow":85187,"estimatedVotesMid":94652,"turnoutHigh":91.05,"turnoutLow":111.3,"turnoutMid":99},"firstName":"Ari","id":79310,"lastName":"Bradshaw","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":104124,"estimatedVotesLow":85187,"estimatedVotesMid":94652,"turnoutHigh":91.05,"turnoutLow":111.3,"turnoutMid":99},"firstName":"Tom","id":101652,"lastName":"Simes","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":104124,"estimatedVotesLow":85187,"estimatedVotesMid":94652,"turnoutHigh":91.05,"turnoutLow":111.3,"turnoutMid":99},"firstName":"Justin","id":26494,"lastName":"Wilmeth","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":104124,"estimatedVotesLow":85187,"estimatedVotesMid":94652,"turnoutHigh":91.05,"turnoutLow":111.3,"turnoutMid":99},"firstName":"Stephanie","id":79308,"lastName":"Simacek","partyName":"Democratic","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:20:54.431Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":94809,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":149179,"estimatedVotesLow":122068,"estimatedVotesMid":135631,"turnoutHigh":90.99,"turnoutLow":111.2,"turnoutMid":99},"firstName":"Joseph","id":26497,"lastName":"Chaplik","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":149179,"estimatedVotesLow":122068,"estimatedVotesMid":135631,"turnoutHigh":90.99,"turnoutLow":111.2,"turnoutMid":99},"firstName":"Alexander","id":26500,"lastName":"Kolodin","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":149179,"estimatedVotesLow":122068,"estimatedVotesMid":135631,"turnoutHigh":90.99,"turnoutLow":111.2,"turnoutMid":99},"firstName":"Richard","id":79311,"lastName":"Corles","partyName":"Democratic","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:25:44.439Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":135743,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":143638,"estimatedVotesLow":117551,"estimatedVotesMid":130613,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Pamela","id":79312,"lastName":"Carter","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":143638,"estimatedVotesLow":117551,"estimatedVotesMid":130613,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Matt","id":26505,"lastName":"Gress","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":143638,"estimatedVotesLow":117551,"estimatedVotesMid":130613,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Kelli","id":79314,"lastName":"Butler","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":143638,"estimatedVotesLow":117551,"estimatedVotesMid":130613,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Karen","id":79313,"lastName":"Gresham","partyName":"Democratic","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:57:49.879Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":130451,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99184,"estimatedVotesLow":81174,"estimatedVotesMid":90194,"turnoutHigh":76.35,"turnoutLow":93.29,"turnoutMid":83.96},"firstName":"Reina","id":101654,"lastName":"Patocs","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99184,"estimatedVotesLow":81174,"estimatedVotesMid":90194,"turnoutHigh":76.35,"turnoutLow":93.29,"turnoutMid":83.96},"firstName":"Sarah","id":26434,"lastName":"Liguori","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99184,"estimatedVotesLow":81174,"estimatedVotesMid":90194,"turnoutHigh":76.35,"turnoutLow":93.29,"turnoutMid":83.96},"firstName":"Arthur","id":105875,"lastName":"Gonzales","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99184,"estimatedVotesLow":81174,"estimatedVotesMid":90194,"turnoutHigh":76.35,"turnoutLow":93.29,"turnoutMid":83.96},"firstName":"Aaron","id":26437,"lastName":"Marquez","partyName":"Democratic","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:23:33.971Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":75728,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":102099,"estimatedVotesLow":83571,"estimatedVotesMid":92859,"turnoutHigh":90.74,"turnoutLow":110.85,"turnoutMid":99},"firstName":"Richard","id":101655,"lastName":"King","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":102099,"estimatedVotesLow":83571,"estimatedVotesMid":92859,"turnoutHigh":90.74,"turnoutLow":110.85,"turnoutMid":99},"firstName":"Mae","id":26439,"lastName":"Peshlakai","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":102099,"estimatedVotesLow":83571,"estimatedVotesMid":92859,"turnoutHigh":90.74,"turnoutLow":110.85,"turnoutMid":99},"firstName":"Myron","id":26438,"lastName":"Tsosie","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":102099,"estimatedVotesLow":83571,"estimatedVotesMid":92859,"turnoutHigh":90.74,"turnoutLow":110.85,"turnoutMid":99},"firstName":"Lloyd","id":79317,"lastName":"Johnson","partyName":"Republican","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:36:01.848Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":92641,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":120215,"estimatedVotesLow":98366,"estimatedVotesMid":109295,"turnoutHigh":90.67,"turnoutLow":110.81,"turnoutMid":99},"firstName":"Nancy","id":79324,"lastName":"Hartl","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":120215,"estimatedVotesLow":98366,"estimatedVotesMid":109295,"turnoutHigh":90.67,"turnoutLow":110.81,"turnoutMid":99},"firstName":"David","id":26509,"lastName":"Marshall","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":120215,"estimatedVotesLow":98366,"estimatedVotesMid":109295,"turnoutHigh":90.67,"turnoutLow":110.81,"turnoutMid":99},"firstName":"Walter","id":26320,"lastName":"Blackman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":120215,"estimatedVotesLow":98366,"estimatedVotesMid":109295,"turnoutHigh":90.67,"turnoutLow":110.81,"turnoutMid":99},"firstName":"Kevin","id":79325,"lastName":"Chiquete","partyName":"Democratic","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:46:05.454Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":109001,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83017,"estimatedVotesLow":67947,"estimatedVotesMid":75496,"turnoutHigh":90.81,"turnoutLow":110.95,"turnoutMid":99},"firstName":"Caden","id":26510,"lastName":"Darrow","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83017,"estimatedVotesLow":67947,"estimatedVotesMid":75496,"turnoutHigh":90.81,"turnoutLow":110.95,"turnoutMid":99},"firstName":"Brian","id":79327,"lastName":"Garcia","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83017,"estimatedVotesLow":67947,"estimatedVotesMid":75496,"turnoutHigh":90.81,"turnoutLow":110.95,"turnoutMid":99},"firstName":"Janeen","id":79326,"lastName":"Connolly","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83017,"estimatedVotesLow":67947,"estimatedVotesMid":75496,"turnoutHigh":90.81,"turnoutLow":110.95,"turnoutMid":99},"firstName":"Tre","id":101656,"lastName":"Rook","partyName":"Green","votes":0}],"district":"8","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:58:12.205Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":75384,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83747,"estimatedVotesLow":68511,"estimatedVotesMid":76124,"turnoutHigh":90.77,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Seth","id":26444,"lastName":"Blattman","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83747,"estimatedVotesLow":68511,"estimatedVotesMid":76124,"turnoutHigh":90.77,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Lorena","id":26443,"lastName":"Austin","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83747,"estimatedVotesLow":68511,"estimatedVotesMid":76124,"turnoutHigh":90.77,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Mary Ann","id":101657,"lastName":"Mendoza","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83747,"estimatedVotesLow":68511,"estimatedVotesMid":76124,"turnoutHigh":90.77,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Kylie","id":79328,"lastName":"Barber","partyName":"Republican","votes":0}],"district":"9","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:42:48.845Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":76018,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":114991,"estimatedVotesLow":94117,"estimatedVotesMid":104574,"turnoutHigh":90.94,"turnoutLow":111.11,"turnoutMid":99},"firstName":"Stephanie","id":101658,"lastName":"Simmons","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":114991,"estimatedVotesLow":94117,"estimatedVotesMid":104574,"turnoutHigh":90.94,"turnoutLow":111.11,"turnoutMid":99},"firstName":"Ralph","id":79330,"lastName":"Heap","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":114991,"estimatedVotesLow":94117,"estimatedVotesMid":104574,"turnoutHigh":90.94,"turnoutLow":111.11,"turnoutMid":99},"firstName":"Helen","id":26445,"lastName":"Hunter","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":114991,"estimatedVotesLow":94117,"estimatedVotesMid":104574,"turnoutHigh":90.94,"turnoutLow":111.11,"turnoutMid":99},"firstName":"Justin","id":747,"lastName":"Olson","partyName":"Republican","votes":0}],"district":"10","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:32:10.600Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":104578,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":75458,"estimatedVotesLow":61722,"estimatedVotesMid":68579,"turnoutHigh":90.35,"turnoutLow":110.46,"turnoutMid":99},"firstName":"Joseph","id":79333,"lastName":"Dailey","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":75458,"estimatedVotesLow":61722,"estimatedVotesMid":68579,"turnoutHigh":90.35,"turnoutLow":110.46,"turnoutMid":99},"firstName":"Junelle","id":26381,"lastName":"Cavero","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":75458,"estimatedVotesLow":61722,"estimatedVotesMid":68579,"turnoutHigh":90.35,"turnoutLow":110.46,"turnoutMid":99},"firstName":"Cesar","id":79332,"lastName":"Aleman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":75458,"estimatedVotesLow":61722,"estimatedVotesMid":68579,"turnoutHigh":90.35,"turnoutLow":110.46,"turnoutMid":99},"firstName":"Oscar","id":26449,"lastName":"De Los Santos","partyName":"Democratic","votes":0}],"district":"11","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:28:48.262Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":68177,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123589,"estimatedVotesLow":101099,"estimatedVotesMid":112333,"turnoutHigh":91.05,"turnoutLow":111.31,"turnoutMid":99},"firstName":"Patricia","id":26452,"lastName":"Contreras","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123589,"estimatedVotesLow":101099,"estimatedVotesMid":112333,"turnoutHigh":91.05,"turnoutLow":111.31,"turnoutMid":99},"firstName":"Lawrence","id":79334,"lastName":"Hudson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123589,"estimatedVotesLow":101099,"estimatedVotesMid":112333,"turnoutHigh":91.05,"turnoutLow":111.31,"turnoutMid":99},"firstName":"Anastasia","id":26455,"lastName":"Travers","partyName":"Democratic","votes":0}],"district":"12","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:23:35.865Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":112529,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":116306,"estimatedVotesLow":95171,"estimatedVotesMid":105745,"turnoutHigh":90.87,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Nicholas","id":79336,"lastName":"Gonzales","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":116306,"estimatedVotesLow":95171,"estimatedVotesMid":105745,"turnoutHigh":90.87,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Jeff","id":26363,"lastName":"Weninger","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":116306,"estimatedVotesLow":95171,"estimatedVotesMid":105745,"turnoutHigh":90.87,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Cody","id":101659,"lastName":"Hannah","partyName":"Green","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":116306,"estimatedVotesLow":95171,"estimatedVotesMid":105745,"turnoutHigh":90.87,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Brandy","id":26458,"lastName":"Reese","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":116306,"estimatedVotesLow":95171,"estimatedVotesMid":105745,"turnoutHigh":90.87,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Julie","id":26523,"lastName":"Willoughby","partyName":"Republican","votes":0}],"district":"13","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:31:25.823Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":105684,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123851,"estimatedVotesLow":101304,"estimatedVotesMid":112560,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Scott","id":101660,"lastName":"Menor","partyName":"Green","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123851,"estimatedVotesLow":101304,"estimatedVotesMid":112560,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Khyl","id":79339,"lastName":"Powell","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123851,"estimatedVotesLow":101304,"estimatedVotesMid":112560,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Laurin","id":26526,"lastName":"Hendrix","partyName":"Republican","votes":0}],"district":"14","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:26:23.138Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":112681,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":127569,"estimatedVotesLow":104370,"estimatedVotesMid":115967,"turnoutHigh":90.65,"turnoutLow":110.8,"turnoutMid":99},"firstName":"Barbara","id":79344,"lastName":"Beneitone","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":127569,"estimatedVotesLow":104370,"estimatedVotesMid":115967,"turnoutHigh":90.65,"turnoutLow":110.8,"turnoutMid":99},"firstName":"Neal","id":26528,"lastName":"Carter","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":127569,"estimatedVotesLow":104370,"estimatedVotesMid":115967,"turnoutHigh":90.65,"turnoutLow":110.8,"turnoutMid":99},"firstName":"Michael","id":79342,"lastName":"Way","partyName":"Republican","votes":0}],"district":"15","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:36:02.771Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":115643,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99188,"estimatedVotesLow":81133,"estimatedVotesMid":90148,"turnoutHigh":90.61,"turnoutLow":110.77,"turnoutMid":99},"firstName":"Chris","id":79346,"lastName":"Lopez","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99188,"estimatedVotesLow":81133,"estimatedVotesMid":90148,"turnoutHigh":90.61,"turnoutLow":110.77,"turnoutMid":99},"firstName":"Keith","id":26459,"lastName":"Seaman","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99188,"estimatedVotesLow":81133,"estimatedVotesMid":90148,"turnoutHigh":90.61,"turnoutLow":110.77,"turnoutMid":99},"firstName":"Teresa","id":26530,"lastName":"Martinez","partyName":"Republican","votes":0}],"district":"16","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:54:05.132Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":89872,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":145533,"estimatedVotesLow":119048,"estimatedVotesMid":132277,"turnoutHigh":91.09,"turnoutLow":111.35,"turnoutMid":99},"firstName":"Cory","id":26534,"lastName":"McGarr","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":145533,"estimatedVotesLow":119048,"estimatedVotesMid":132277,"turnoutHigh":91.09,"turnoutLow":111.35,"turnoutMid":99},"firstName":"Rachel","id":26533,"lastName":"Jones","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":145533,"estimatedVotesLow":119048,"estimatedVotesMid":132277,"turnoutHigh":91.09,"turnoutLow":111.35,"turnoutMid":99},"firstName":"Kevin","id":79347,"lastName":"Volk","partyName":"Democratic","votes":0}],"district":"17","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:36:03.796Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":132563,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":128764,"estimatedVotesLow":105383,"estimatedVotesMid":117092,"turnoutHigh":91.25,"turnoutLow":111.5,"turnoutMid":99},"firstName":"Christopher","id":46292,"lastName":"Mathis","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":128764,"estimatedVotesLow":105383,"estimatedVotesMid":117092,"turnoutHigh":91.25,"turnoutLow":111.5,"turnoutMid":99},"firstName":"Nancy","id":26464,"lastName":"Gutierrez","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":128764,"estimatedVotesLow":105383,"estimatedVotesMid":117092,"turnoutHigh":91.25,"turnoutLow":111.5,"turnoutMid":99},"firstName":"Leonard","id":79348,"lastName":"Rosenblum","partyName":"Republican","votes":0}],"district":"18","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:37:56.880Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":117502,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":110705,"estimatedVotesLow":90587,"estimatedVotesMid":100652,"turnoutHigh":90.8,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Lupe","id":26538,"lastName":"Diaz","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":110705,"estimatedVotesLow":90587,"estimatedVotesMid":100652,"turnoutHigh":90.8,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Gail","id":26539,"lastName":"Griffin","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":110705,"estimatedVotesLow":90587,"estimatedVotesMid":100652,"turnoutHigh":90.8,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Gregg","id":79349,"lastName":"Frostrom Jr.","partyName":"Democratic","votes":0}],"district":"19","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T23:01:59.756Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":100515,"year":2024},{"calledCandidate":{"cand_id":26469,"first_name":"Alma","incumbent":true,"last_name":"Hernandez","party_id":1,"party_name":"Democratic"},"candidatesWithVotes":[{"elected":true,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Alma","id":26469,"lastName":"Hernandez","partyName":"Democratic","votes":0},{"elected":true,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Betty","id":79350,"lastName":"Villegas","partyName":"Democratic","votes":0}],"district":"20","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-10T17:02:57.407Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":90718,"estimatedVotesLow":74237,"estimatedVotesMid":82485,"turnoutHigh":91.05,"turnoutLow":111.26,"turnoutMid":99},"firstName":"Christopher","id":79352,"lastName":"Kibbey","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":90718,"estimatedVotesLow":74237,"estimatedVotesMid":82485,"turnoutHigh":91.05,"turnoutLow":111.26,"turnoutMid":99},"firstName":"Consuelo","id":26470,"lastName":"Hernandez","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":90718,"estimatedVotesLow":74237,"estimatedVotesMid":82485,"turnoutHigh":91.05,"turnoutLow":111.26,"turnoutMid":99},"firstName":"Stephanie","id":26472,"lastName":"Hamilton","partyName":"Democratic","votes":0}],"district":"21","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:27:13.530Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":82598,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72163,"estimatedVotesLow":59027,"estimatedVotesMid":65585,"turnoutHigh":92.1,"turnoutLow":112.59,"turnoutMid":99},"firstName":"Blaine","id":79357,"lastName":"Griffin","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72163,"estimatedVotesLow":59027,"estimatedVotesMid":65585,"turnoutHigh":92.1,"turnoutLow":112.59,"turnoutMid":99},"firstName":"Diana","id":79356,"lastName":"Jones","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72163,"estimatedVotesLow":59027,"estimatedVotesMid":65585,"turnoutHigh":92.1,"turnoutLow":112.59,"turnoutMid":99},"firstName":"Lupe","id":26475,"lastName":"Contreras","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72163,"estimatedVotesLow":59027,"estimatedVotesMid":65585,"turnoutHigh":92.1,"turnoutLow":112.59,"turnoutMid":99},"firstName":"Elda","id":101661,"lastName":"Luna-Nájera","partyName":"Democratic","votes":0}],"district":"22","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T18:00:28.507Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":66460,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":80720,"estimatedVotesLow":66018,"estimatedVotesMid":73354,"turnoutHigh":90.82,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Mariana","id":26478,"lastName":"Sandoval","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":80720,"estimatedVotesLow":66018,"estimatedVotesMid":73354,"turnoutHigh":90.82,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Michele","id":46296,"lastName":"Pena","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":80720,"estimatedVotesLow":66018,"estimatedVotesMid":73354,"turnoutHigh":90.82,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Matias","id":79358,"lastName":"Rosales","partyName":"Democratic","votes":0}],"district":"23","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:25:45.497Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":73311,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lydia","id":26480,"lastName":"Hernandez","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Anna","id":26479,"lastName":"Abeytia","partyName":"Democratic","votes":0}],"district":"24","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":106940,"estimatedVotesLow":87489,"estimatedVotesMid":97211,"turnoutHigh":90.79,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Nick","id":101662,"lastName":"Kupper","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":106940,"estimatedVotesLow":87489,"estimatedVotesMid":97211,"turnoutHigh":90.79,"turnoutLow":110.97,"turnoutMid":99},"firstName":"William","id":79361,"lastName":"Olear","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":106940,"estimatedVotesLow":87489,"estimatedVotesMid":97211,"turnoutHigh":90.79,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Michael","id":26542,"lastName":"Carbone","partyName":"Republican","votes":0}],"district":"25","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:36:05.675Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":97088,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":50510,"estimatedVotesLow":41281,"estimatedVotesMid":45868,"turnoutHigh":90.91,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Quantá","id":101663,"lastName":"Crews","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":50510,"estimatedVotesLow":41281,"estimatedVotesMid":45868,"turnoutHigh":90.91,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Skyla","id":79364,"lastName":"Edwards","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":50510,"estimatedVotesLow":41281,"estimatedVotesMid":45868,"turnoutHigh":90.91,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Frank","id":46297,"lastName":"Roberts","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":50510,"estimatedVotesLow":41281,"estimatedVotesMid":45868,"turnoutHigh":90.91,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Cesar","id":26485,"lastName":"Aguilar","partyName":"Democratic","votes":0}],"district":"26","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:41:52.199Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":45917,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":106078,"estimatedVotesLow":86781,"estimatedVotesMid":96424,"turnoutHigh":91.02,"turnoutLow":111.27,"turnoutMid":99},"firstName":"Lisa","id":79368,"lastName":"Fink","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":106078,"estimatedVotesLow":86781,"estimatedVotesMid":96424,"turnoutHigh":91.02,"turnoutLow":111.27,"turnoutMid":99},"firstName":"Tony","id":79367,"lastName":"Rivero","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":106078,"estimatedVotesLow":86781,"estimatedVotesMid":96424,"turnoutHigh":91.02,"turnoutLow":111.27,"turnoutMid":99},"firstName":"Deborah","id":79366,"lastName":"Howard","partyName":"Democratic","votes":0}],"district":"27","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:38:46.316Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":96557,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":137389,"estimatedVotesLow":112422,"estimatedVotesMid":124913,"turnoutHigh":91.12,"turnoutLow":111.35,"turnoutMid":99},"firstName":"Beverly","id":26547,"lastName":"Pingerelli","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":137389,"estimatedVotesLow":112422,"estimatedVotesMid":124913,"turnoutHigh":91.12,"turnoutLow":111.35,"turnoutMid":99},"firstName":"Barbara","id":79369,"lastName":"Fike","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":137389,"estimatedVotesLow":112422,"estimatedVotesMid":124913,"turnoutHigh":91.12,"turnoutLow":111.35,"turnoutMid":99},"firstName":"David","id":26549,"lastName":"Livingston","partyName":"Republican","votes":0}],"district":"28","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:33:44.503Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":125183,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":113610,"estimatedVotesLow":92945,"estimatedVotesMid":103272,"turnoutHigh":90.58,"turnoutLow":110.72,"turnoutMid":99},"firstName":"Thomas","id":101664,"lastName":"Tzitzura","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":113610,"estimatedVotesLow":92945,"estimatedVotesMid":103272,"turnoutHigh":90.58,"turnoutLow":110.72,"turnoutMid":99},"firstName":"Steve","id":8344,"lastName":"Montenegro","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":113610,"estimatedVotesLow":92945,"estimatedVotesMid":103272,"turnoutHigh":90.58,"turnoutLow":110.72,"turnoutMid":99},"firstName":"Tanairi","id":79371,"lastName":"Ochoa-Martinez","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":113610,"estimatedVotesLow":92945,"estimatedVotesMid":103272,"turnoutHigh":90.58,"turnoutLow":110.72,"turnoutMid":99},"firstName":"James","id":9942,"lastName":"Taylor","partyName":"Republican","votes":0}],"district":"29","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:40:58.130Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":102909,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":105152,"estimatedVotesLow":86005,"estimatedVotesMid":95561,"turnoutHigh":90.9,"turnoutLow":111.13,"turnoutMid":99},"firstName":"Monica","id":79372,"lastName":"Timberlake","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":105152,"estimatedVotesLow":86005,"estimatedVotesMid":95561,"turnoutHigh":90.9,"turnoutLow":111.13,"turnoutMid":99},"firstName":"John","id":26554,"lastName":"Gillette","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":105152,"estimatedVotesLow":86005,"estimatedVotesMid":95561,"turnoutHigh":90.9,"turnoutLow":111.13,"turnoutMid":99},"firstName":"Leo","id":26553,"lastName":"Biasiucci","partyName":"Republican","votes":0}],"district":"30","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:49:33.793Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":95579,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":136846,"estimatedVotesLow":111972,"estimatedVotesMid":124413,"turnoutHigh":90.43,"turnoutLow":110.52,"turnoutMid":99},"firstName":"Mike","id":26370,"lastName":"Fogel","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":136846,"estimatedVotesLow":111972,"estimatedVotesMid":124413,"turnoutHigh":90.43,"turnoutLow":110.52,"turnoutMid":99},"firstName":"Mark","id":26358,"lastName":"Finchem","partyName":"Republican","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:19:05.206Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":123749,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":104124,"estimatedVotesLow":85187,"estimatedVotesMid":94652,"turnoutHigh":91.05,"turnoutLow":111.3,"turnoutMid":99},"firstName":"Judy","id":26432,"lastName":"Schwiebert","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":104124,"estimatedVotesLow":85187,"estimatedVotesMid":94652,"turnoutHigh":91.05,"turnoutLow":111.3,"turnoutMid":99},"firstName":"Dennis","id":101665,"lastName":"Pugsley","partyName":"Green","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":104124,"estimatedVotesLow":85187,"estimatedVotesMid":94652,"turnoutHigh":91.05,"turnoutLow":111.3,"turnoutMid":99},"firstName":"Shawnna","id":26357,"lastName":"Bolick","partyName":"Republican","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T17:42:48.845Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":94809,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":26402,"lastName":"Kavanagh","partyName":"Republican","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":143638,"estimatedVotesLow":117551,"estimatedVotesMid":130613,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Christine","id":26373,"lastName":"Marsh","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":143638,"estimatedVotesLow":117551,"estimatedVotesMid":130613,"turnoutHigh":90.82,"turnoutLow":110.97,"turnoutMid":99},"firstName":"Carine","id":79275,"lastName":"Werner","partyName":"Republican","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:45:37.785Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":130450,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99184,"estimatedVotesLow":81174,"estimatedVotesMid":90194,"turnoutHigh":90.06,"turnoutLow":110.04,"turnoutMid":99},"firstName":"Lela","id":26374,"lastName":"Alston","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99184,"estimatedVotesLow":81174,"estimatedVotesMid":90194,"turnoutHigh":90.06,"turnoutLow":110.04,"turnoutMid":99},"firstName":"Joshua","id":79276,"lastName":"Ortega","partyName":"Republican","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:28:51.128Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":89325,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Theresa","id":26377,"lastName":"Hatathlie","partyName":"Democratic","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":120215,"estimatedVotesLow":98366,"estimatedVotesMid":109295,"turnoutHigh":87.49,"turnoutLow":106.92,"turnoutMid":96.23},"firstName":"Wendy","id":732,"lastName":"Rogers","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":120215,"estimatedVotesLow":98366,"estimatedVotesMid":109295,"turnoutHigh":87.49,"turnoutLow":106.92,"turnoutMid":96.23},"firstName":"Haley","id":79277,"lastName":"Creighton","partyName":"Democratic","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:17:24.737Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":105174,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83017,"estimatedVotesLow":67947,"estimatedVotesMid":75496,"turnoutHigh":90.81,"turnoutLow":110.95,"turnoutMid":99},"firstName":"Roxana","id":26405,"lastName":"Holzapfel","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83017,"estimatedVotesLow":67947,"estimatedVotesMid":75496,"turnoutHigh":90.81,"turnoutLow":110.95,"turnoutMid":99},"firstName":"Lauren","id":26346,"lastName":"Kuby","partyName":"Democratic","votes":0}],"district":"8","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:09:14.284Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":75385,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83747,"estimatedVotesLow":68511,"estimatedVotesMid":76124,"turnoutHigh":90.77,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Robert","id":26407,"lastName":"Scantlebury","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":83747,"estimatedVotesLow":68511,"estimatedVotesMid":76124,"turnoutHigh":90.77,"turnoutLow":110.96,"turnoutMid":99},"firstName":"Eva","id":26380,"lastName":"Burch","partyName":"Democratic","votes":0}],"district":"9","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:01:49.610Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":76018,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":114991,"estimatedVotesLow":94117,"estimatedVotesMid":104574,"turnoutHigh":90.91,"turnoutLow":111.08,"turnoutMid":99},"firstName":"David","id":26409,"lastName":"Farnsworth","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":114991,"estimatedVotesLow":94117,"estimatedVotesMid":104574,"turnoutHigh":90.91,"turnoutLow":111.08,"turnoutMid":99},"firstName":"Robert","id":79280,"lastName":"Doyle","partyName":"Democratic","votes":0}],"district":"10","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:09:15.759Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":104544,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":75458,"estimatedVotesLow":61722,"estimatedVotesMid":68579,"turnoutHigh":90.35,"turnoutLow":110.46,"turnoutMid":99},"firstName":"Joshua","id":79281,"lastName":"Ayala","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":75458,"estimatedVotesLow":61722,"estimatedVotesMid":68579,"turnoutHigh":90.35,"turnoutLow":110.46,"turnoutMid":99},"firstName":"Catherine","id":10731,"lastName":"Miranda","partyName":"Democratic","votes":0}],"district":"11","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:28:52.003Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":68177,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123589,"estimatedVotesLow":101099,"estimatedVotesMid":112333,"turnoutHigh":91.05,"turnoutLow":111.31,"turnoutMid":99},"firstName":"Cara","id":79282,"lastName":"Vicini","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123589,"estimatedVotesLow":101099,"estimatedVotesMid":112333,"turnoutHigh":91.05,"turnoutLow":111.31,"turnoutMid":99},"firstName":"Denise","id":26383,"lastName":"Epstein","partyName":"Democratic","votes":0}],"district":"12","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:36:07.490Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":112529,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":116306,"estimatedVotesLow":95171,"estimatedVotesMid":105745,"turnoutHigh":90.87,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Javan","id":101666,"lastName":"Mesnard","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":116306,"estimatedVotesLow":95171,"estimatedVotesMid":105745,"turnoutHigh":90.87,"turnoutLow":111.05,"turnoutMid":99},"firstName":"Sharon","id":79283,"lastName":"Winters","partyName":"Democratic","votes":0}],"district":"13","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:36:27.529Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":105684,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123851,"estimatedVotesLow":101304,"estimatedVotesMid":112560,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Elizabeth","id":79284,"lastName":"Brown","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":123851,"estimatedVotesLow":101304,"estimatedVotesMid":112560,"turnoutHigh":90.98,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Warren","id":26414,"lastName":"Petersen","partyName":"Republican","votes":0}],"district":"14","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:26:27.211Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":112680,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":127569,"estimatedVotesLow":104370,"estimatedVotesMid":115967,"turnoutHigh":89.25,"turnoutLow":109.09,"turnoutMid":98.18},"firstName":"Evan","id":101667,"lastName":"Olson","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":127569,"estimatedVotesLow":104370,"estimatedVotesMid":115967,"turnoutHigh":89.25,"turnoutLow":109.09,"turnoutMid":98.18},"firstName":"Jake","id":26415,"lastName":"Hoffman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":127569,"estimatedVotesLow":104370,"estimatedVotesMid":115967,"turnoutHigh":89.25,"turnoutLow":109.09,"turnoutMid":98.18},"firstName":"Alan","id":44606,"lastName":"Smith","partyName":"Democratic","votes":0}],"district":"15","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:36:08.455Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":113861,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99188,"estimatedVotesLow":81133,"estimatedVotesMid":90148,"turnoutHigh":90.61,"turnoutLow":110.77,"turnoutMid":99},"firstName":"Stacey","id":79286,"lastName":"Seaman","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":99188,"estimatedVotesLow":81133,"estimatedVotesMid":90148,"turnoutHigh":90.61,"turnoutLow":110.77,"turnoutMid":99},"firstName":"Thomas","id":101668,"lastName":"Shope","partyName":"Republican","votes":0}],"district":"16","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:32:11.528Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":89873,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":145533,"estimatedVotesLow":119048,"estimatedVotesMid":132277,"turnoutHigh":90.51,"turnoutLow":110.64,"turnoutMid":99},"firstName":"Vince","id":26417,"lastName":"Leach","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":145533,"estimatedVotesLow":119048,"estimatedVotesMid":132277,"turnoutHigh":90.51,"turnoutLow":110.64,"turnoutMid":99},"firstName":"John","id":79287,"lastName":"McLean","partyName":"Democratic","votes":0}],"district":"17","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:40:46.057Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":131717,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Priya","id":26389,"lastName":"Sundareshan","partyName":"Democratic","votes":0}],"district":"18","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":110705,"estimatedVotesLow":90587,"estimatedVotesMid":100652,"turnoutHigh":86.29,"turnoutLow":105.46,"turnoutMid":94.91},"firstName":"Bob","id":79290,"lastName":"Karp","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":110705,"estimatedVotesLow":90587,"estimatedVotesMid":100652,"turnoutHigh":86.29,"turnoutLow":105.46,"turnoutMid":94.91},"firstName":"David","id":735,"lastName":"Gowan","partyName":"Republican","votes":0}],"district":"19","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:46:06.394Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":95531,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sally","id":26390,"lastName":"Gonzales","partyName":"Democratic","votes":0}],"district":"20","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Rosanna","id":101669,"lastName":"Gabaldón","partyName":"Democratic","votes":0}],"district":"21","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72163,"estimatedVotesLow":59027,"estimatedVotesMid":65585,"turnoutHigh":90.55,"turnoutLow":110.7,"turnoutMid":99},"firstName":"Steve","id":79291,"lastName":"Robinson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72163,"estimatedVotesLow":59027,"estimatedVotesMid":65585,"turnoutHigh":90.55,"turnoutLow":110.7,"turnoutMid":99},"firstName":"Eva","id":79292,"lastName":"Diaz","partyName":"Democratic","votes":0}],"district":"22","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:51:29.889Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":65340,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":80720,"estimatedVotesLow":66018,"estimatedVotesMid":73354,"turnoutHigh":89.65,"turnoutLow":109.62,"turnoutMid":98.66},"firstName":"Michelle","id":79293,"lastName":"Altherr","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":80720,"estimatedVotesLow":66018,"estimatedVotesMid":73354,"turnoutHigh":89.65,"turnoutLow":109.62,"turnoutMid":98.66},"firstName":"Brian","id":26394,"lastName":"Fernandez","partyName":"Democratic","votes":0}],"district":"23","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:55:38.703Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":72368,"year":2024},{"calledCandidate":{"cand_id":26483,"first_name":"Analise","incumbent":false,"last_name":"Ortiz","party_id":1,"party_name":"Democratic"},"candidatesWithVotes":[{"elected":true,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Analise","id":26483,"lastName":"Ortiz","partyName":"Democratic","votes":0}],"district":"24","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-10T17:02:57.407Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tim","id":26540,"lastName":"Dunn","partyName":"Republican","votes":0}],"district":"25","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":50510,"estimatedVotesLow":41281,"estimatedVotesMid":45868,"turnoutHigh":90.91,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Victor","id":79298,"lastName":"Harris","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":50510,"estimatedVotesLow":41281,"estimatedVotesMid":45868,"turnoutHigh":90.91,"turnoutLow":111.23,"turnoutMid":99},"firstName":"Flavio","id":26486,"lastName":"Bravo","partyName":"Democratic","votes":0}],"district":"26","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:51:34.409Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":45917,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kevin","id":26543,"lastName":"Payne","partyName":"Republican","votes":0}],"district":"27","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Frank","id":26425,"lastName":"Carroll","partyName":"Republican","votes":0}],"district":"28","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:35:23.918Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":113610,"estimatedVotesLow":92945,"estimatedVotesMid":103272,"turnoutHigh":90.58,"turnoutLow":110.72,"turnoutMid":99},"firstName":"Eric","id":79300,"lastName":"Stafford","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":113610,"estimatedVotesLow":92945,"estimatedVotesMid":103272,"turnoutHigh":90.58,"turnoutLow":110.72,"turnoutMid":99},"firstName":"Janae","id":26428,"lastName":"Shamp","partyName":"Republican","votes":0}],"district":"29","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T21:38:47.261Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":102909,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":105152,"estimatedVotesLow":86005,"estimatedVotesMid":95561,"turnoutHigh":88.81,"turnoutLow":108.58,"turnoutMid":97.72},"firstName":"Hildy","id":79301,"lastName":"Angius","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":105152,"estimatedVotesLow":86005,"estimatedVotesMid":95561,"turnoutHigh":88.81,"turnoutLow":108.58,"turnoutMid":97.72},"firstName":"J'aime","id":79303,"lastName":"Morgaine","partyName":"Democratic","votes":0}],"district":"30","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:39:13.452Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":93381,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Nina","id":102077,"lastName":"Luxenberg","partyName":"Green","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Lea","id":79268,"lastName":"Marquez-Peterson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Rachel","id":79273,"lastName":"Walden","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Mike","id":102076,"lastName":"Cease","partyName":"Green","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Rene","id":26329,"lastName":"Lopez","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Ylenia","id":79269,"lastName":"Aguilar","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Joshua","id":79270,"lastName":"Polacheck","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3191063,"estimatedVotesLow":2611018,"estimatedVotesMid":2901132,"turnoutHigh":319.32,"turnoutLow":390.26,"turnoutMid":99},"firstName":"Jonathon","id":79272,"lastName":"Hill","partyName":"Democratic","votes":0}],"district":"","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-13T22:47:19.318Z","office":{"officeId":"137","officeName":"Corporation Commissioner","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"AZ","stateName":"Arizona","totalVotes":10189763,"year":2024}]
+[
+  {
+    "calledCandidate": {
+      "cand_id": 1074,
+      "first_name": "Ruben",
+      "incumbent": false,
+      "last_name": "Gallego",
+      "party_id": 1,
+      "party_name": "Democratic"
+    },
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.07,
+          "turnoutMid": 99
+        },
+        "firstName": "Ruben",
+        "id": 1074,
+        "lastName": "Gallego",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.07,
+          "turnoutMid": 99
+        },
+        "firstName": "Kari",
+        "id": 26347,
+        "lastName": "Lake",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 90.88,
+          "turnoutLow": 111.07,
+          "turnoutMid": 99
+        },
+        "firstName": "Eduardo",
+        "id": 102113,
+        "lastName": "Quintana",
+        "partyName": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:44:48.281Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 2899980,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 422860,
+          "estimatedVotesLow": 346076,
+          "estimatedVotesMid": 384529,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "David",
+        "id": 751,
+        "lastName": "Schweikert",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 422860,
+          "estimatedVotesLow": 346076,
+          "estimatedVotesMid": 384529,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Amish",
+        "id": 26436,
+        "lastName": "Shah",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:42:43.050Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 384054,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 393077,
+          "estimatedVotesLow": 321704,
+          "estimatedVotesMid": 357450,
+          "turnoutHigh": 90.66,
+          "turnoutLow": 110.77,
+          "turnoutMid": 99
+        },
+        "firstName": "Eli",
+        "id": 79253,
+        "lastName": "Crane",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 393077,
+          "estimatedVotesLow": 321704,
+          "estimatedVotesMid": 357450,
+          "turnoutHigh": 90.66,
+          "turnoutLow": 110.77,
+          "turnoutMid": 99
+        },
+        "firstName": "Jonathan",
+        "id": 79255,
+        "lastName": "Nez",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:19:47.381Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 356352,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 208469,
+          "estimatedVotesLow": 170501,
+          "estimatedVotesMid": 189445,
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
+        },
+        "firstName": "Yassamin",
+        "id": 79256,
+        "lastName": "Ansari",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 208469,
+          "estimatedVotesLow": 170501,
+          "estimatedVotesMid": 189445,
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
+        },
+        "firstName": "Jeffrey",
+        "id": 84979,
+        "lastName": "Zink",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 208469,
+          "estimatedVotesLow": 170501,
+          "estimatedVotesMid": 189445,
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
+        },
+        "firstName": "Alan",
+        "id": 105876,
+        "lastName": "Aversa",
+        "partyName": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:56:35.374Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 189876,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 333158,
+          "estimatedVotesLow": 272512,
+          "estimatedVotesMid": 302791,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Greg",
+        "id": 10940,
+        "lastName": "Stanton",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 333158,
+          "estimatedVotesLow": 272512,
+          "estimatedVotesMid": 302791,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Vincent",
+        "id": 105877,
+        "lastName": "Beck-Jones",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 333158,
+          "estimatedVotesLow": 272512,
+          "estimatedVotesMid": 302791,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Kelly",
+        "id": 26327,
+        "lastName": "Cooper",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:44:56.374Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 302402,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 410098,
+          "estimatedVotesLow": 335590,
+          "estimatedVotesMid": 372879,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.69,
+          "turnoutMid": 99
+        },
+        "firstName": "Andy",
+        "id": 745,
+        "lastName": "Biggs",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 410098,
+          "estimatedVotesLow": 335590,
+          "estimatedVotesMid": 372879,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.69,
+          "turnoutMid": 99
+        },
+        "firstName": "Katrina",
+        "id": 79262,
+        "lastName": "Schaffner",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:39:40.565Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 371455,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 413638,
+          "estimatedVotesLow": 338256,
+          "estimatedVotesMid": 375841,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.41,
+          "turnoutMid": 99
+        },
+        "firstName": "Juan",
+        "id": 26331,
+        "lastName": "Ciscomani",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 413638,
+          "estimatedVotesLow": 338256,
+          "estimatedVotesMid": 375841,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.41,
+          "turnoutMid": 99
+        },
+        "firstName": "Kristen",
+        "id": 26316,
+        "lastName": "Engel",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 413638,
+          "estimatedVotesLow": 338256,
+          "estimatedVotesMid": 375841,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.41,
+          "turnoutMid": 99
+        },
+        "firstName": "Athena",
+        "id": 102114,
+        "lastName": "Eastwood",
+        "partyName": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:59:39.978Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 376842,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 281461,
+          "estimatedVotesLow": 230288,
+          "estimatedVotesMid": 255875,
+          "turnoutHigh": 91.21,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Raul",
+        "id": 1071,
+        "lastName": "Grijalva",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 281461,
+          "estimatedVotesLow": 230288,
+          "estimatedVotesMid": 255875,
+          "turnoutHigh": 91.21,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Daniel",
+        "id": 84980,
+        "lastName": "Butierez",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:54:16.119Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 256728,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 376790,
+          "estimatedVotesLow": 308446,
+          "estimatedVotesMid": 342717,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Gregory",
+        "id": 79265,
+        "lastName": "Whitten",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 376790,
+          "estimatedVotesLow": 308446,
+          "estimatedVotesMid": 342717,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Abraham",
+        "id": 26356,
+        "lastName": "Hamadeh",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:54:13.503Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 342532,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 351255,
+          "estimatedVotesLow": 287419,
+          "estimatedVotesMid": 319354,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "Quacy",
+        "id": 79267,
+        "lastName": "Smith",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 351255,
+          "estimatedVotesLow": 287419,
+          "estimatedVotesMid": 319354,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "Paul",
+        "id": 741,
+        "lastName": "Gosar",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:27:36.597Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 318609,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 136846,
+          "estimatedVotesLow": 111972,
+          "estimatedVotesMid": 124413,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.87,
+          "turnoutMid": 99
+        },
+        "firstName": "Marcia",
+        "id": 79306,
+        "lastName": "Smith",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 136846,
+          "estimatedVotesLow": 111972,
+          "estimatedVotesMid": 124413,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.87,
+          "turnoutMid": 99
+        },
+        "firstName": "Selina",
+        "id": 26492,
+        "lastName": "Bliss",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 136846,
+          "estimatedVotesLow": 111972,
+          "estimatedVotesMid": 124413,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.87,
+          "turnoutMid": 99
+        },
+        "firstName": "Jay",
+        "id": 79305,
+        "lastName": "Ruby",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 136846,
+          "estimatedVotesLow": 111972,
+          "estimatedVotesMid": 124413,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.87,
+          "turnoutMid": 99
+        },
+        "firstName": "Quang",
+        "id": 26491,
+        "lastName": "Nguyen",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:48:18.171Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 124139,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 104124,
+          "estimatedVotesLow": 85187,
+          "estimatedVotesMid": 94652,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
+        },
+        "firstName": "Ari",
+        "id": 79310,
+        "lastName": "Bradshaw",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 104124,
+          "estimatedVotesLow": 85187,
+          "estimatedVotesMid": 94652,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
+        },
+        "firstName": "Tom",
+        "id": 101652,
+        "lastName": "Simes",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 104124,
+          "estimatedVotesLow": 85187,
+          "estimatedVotesMid": 94652,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
+        },
+        "firstName": "Justin",
+        "id": 26494,
+        "lastName": "Wilmeth",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 104124,
+          "estimatedVotesLow": 85187,
+          "estimatedVotesMid": 94652,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
+        },
+        "firstName": "Stephanie",
+        "id": 79308,
+        "lastName": "Simacek",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:20:54.431Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 94809,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 149179,
+          "estimatedVotesLow": 122068,
+          "estimatedVotesMid": 135631,
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.2,
+          "turnoutMid": 99
+        },
+        "firstName": "Joseph",
+        "id": 26497,
+        "lastName": "Chaplik",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 149179,
+          "estimatedVotesLow": 122068,
+          "estimatedVotesMid": 135631,
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.2,
+          "turnoutMid": 99
+        },
+        "firstName": "Alexander",
+        "id": 26500,
+        "lastName": "Kolodin",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 149179,
+          "estimatedVotesLow": 122068,
+          "estimatedVotesMid": 135631,
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.2,
+          "turnoutMid": 99
+        },
+        "firstName": "Richard",
+        "id": 79311,
+        "lastName": "Corles",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:25:44.439Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 135743,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 143638,
+          "estimatedVotesLow": 117551,
+          "estimatedVotesMid": 130613,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Pamela",
+        "id": 79312,
+        "lastName": "Carter",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 143638,
+          "estimatedVotesLow": 117551,
+          "estimatedVotesMid": 130613,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Matt",
+        "id": 26505,
+        "lastName": "Gress",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 143638,
+          "estimatedVotesLow": 117551,
+          "estimatedVotesMid": 130613,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Kelli",
+        "id": 79314,
+        "lastName": "Butler",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 143638,
+          "estimatedVotesLow": 117551,
+          "estimatedVotesMid": 130613,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Karen",
+        "id": 79313,
+        "lastName": "Gresham",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:57:49.879Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 130451,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99184,
+          "estimatedVotesLow": 81174,
+          "estimatedVotesMid": 90194,
+          "turnoutHigh": 76.35,
+          "turnoutLow": 93.29,
+          "turnoutMid": 83.96
+        },
+        "firstName": "Reina",
+        "id": 101654,
+        "lastName": "Patocs",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99184,
+          "estimatedVotesLow": 81174,
+          "estimatedVotesMid": 90194,
+          "turnoutHigh": 76.35,
+          "turnoutLow": 93.29,
+          "turnoutMid": 83.96
+        },
+        "firstName": "Sarah",
+        "id": 26434,
+        "lastName": "Liguori",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99184,
+          "estimatedVotesLow": 81174,
+          "estimatedVotesMid": 90194,
+          "turnoutHigh": 76.35,
+          "turnoutLow": 93.29,
+          "turnoutMid": 83.96
+        },
+        "firstName": "Arthur",
+        "id": 105875,
+        "lastName": "Gonzales",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99184,
+          "estimatedVotesLow": 81174,
+          "estimatedVotesMid": 90194,
+          "turnoutHigh": 76.35,
+          "turnoutLow": 93.29,
+          "turnoutMid": 83.96
+        },
+        "firstName": "Aaron",
+        "id": 26437,
+        "lastName": "Marquez",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:23:33.971Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 75728,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 102099,
+          "estimatedVotesLow": 83571,
+          "estimatedVotesMid": 92859,
+          "turnoutHigh": 90.74,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "Richard",
+        "id": 101655,
+        "lastName": "King",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 102099,
+          "estimatedVotesLow": 83571,
+          "estimatedVotesMid": 92859,
+          "turnoutHigh": 90.74,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "Mae",
+        "id": 26439,
+        "lastName": "Peshlakai",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 102099,
+          "estimatedVotesLow": 83571,
+          "estimatedVotesMid": 92859,
+          "turnoutHigh": 90.74,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "Myron",
+        "id": 26438,
+        "lastName": "Tsosie",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 102099,
+          "estimatedVotesLow": 83571,
+          "estimatedVotesMid": 92859,
+          "turnoutHigh": 90.74,
+          "turnoutLow": 110.85,
+          "turnoutMid": 99
+        },
+        "firstName": "Lloyd",
+        "id": 79317,
+        "lastName": "Johnson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:36:01.848Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 92641,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 120215,
+          "estimatedVotesLow": 98366,
+          "estimatedVotesMid": 109295,
+          "turnoutHigh": 90.67,
+          "turnoutLow": 110.81,
+          "turnoutMid": 99
+        },
+        "firstName": "Nancy",
+        "id": 79324,
+        "lastName": "Hartl",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 120215,
+          "estimatedVotesLow": 98366,
+          "estimatedVotesMid": 109295,
+          "turnoutHigh": 90.67,
+          "turnoutLow": 110.81,
+          "turnoutMid": 99
+        },
+        "firstName": "David",
+        "id": 26509,
+        "lastName": "Marshall",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 120215,
+          "estimatedVotesLow": 98366,
+          "estimatedVotesMid": 109295,
+          "turnoutHigh": 90.67,
+          "turnoutLow": 110.81,
+          "turnoutMid": 99
+        },
+        "firstName": "Walter",
+        "id": 26320,
+        "lastName": "Blackman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 120215,
+          "estimatedVotesLow": 98366,
+          "estimatedVotesMid": 109295,
+          "turnoutHigh": 90.67,
+          "turnoutLow": 110.81,
+          "turnoutMid": 99
+        },
+        "firstName": "Kevin",
+        "id": 79325,
+        "lastName": "Chiquete",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:46:05.454Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 109001,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83017,
+          "estimatedVotesLow": 67947,
+          "estimatedVotesMid": 75496,
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.95,
+          "turnoutMid": 99
+        },
+        "firstName": "Caden",
+        "id": 26510,
+        "lastName": "Darrow",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83017,
+          "estimatedVotesLow": 67947,
+          "estimatedVotesMid": 75496,
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.95,
+          "turnoutMid": 99
+        },
+        "firstName": "Brian",
+        "id": 79327,
+        "lastName": "Garcia",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83017,
+          "estimatedVotesLow": 67947,
+          "estimatedVotesMid": 75496,
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.95,
+          "turnoutMid": 99
+        },
+        "firstName": "Janeen",
+        "id": 79326,
+        "lastName": "Connolly",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83017,
+          "estimatedVotesLow": 67947,
+          "estimatedVotesMid": 75496,
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.95,
+          "turnoutMid": 99
+        },
+        "firstName": "Tre",
+        "id": 101656,
+        "lastName": "Rook",
+        "partyName": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:58:12.205Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 75384,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83747,
+          "estimatedVotesLow": 68511,
+          "estimatedVotesMid": 76124,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Seth",
+        "id": 26444,
+        "lastName": "Blattman",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83747,
+          "estimatedVotesLow": 68511,
+          "estimatedVotesMid": 76124,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Lorena",
+        "id": 26443,
+        "lastName": "Austin",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83747,
+          "estimatedVotesLow": 68511,
+          "estimatedVotesMid": 76124,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Mary Ann",
+        "id": 101657,
+        "lastName": "Mendoza",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83747,
+          "estimatedVotesLow": 68511,
+          "estimatedVotesMid": 76124,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Kylie",
+        "id": 79328,
+        "lastName": "Barber",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:42:48.845Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 76018,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 114991,
+          "estimatedVotesLow": 94117,
+          "estimatedVotesMid": 104574,
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
+        },
+        "firstName": "Stephanie",
+        "id": 101658,
+        "lastName": "Simmons",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 114991,
+          "estimatedVotesLow": 94117,
+          "estimatedVotesMid": 104574,
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
+        },
+        "firstName": "Ralph",
+        "id": 79330,
+        "lastName": "Heap",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 114991,
+          "estimatedVotesLow": 94117,
+          "estimatedVotesMid": 104574,
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
+        },
+        "firstName": "Helen",
+        "id": 26445,
+        "lastName": "Hunter",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 114991,
+          "estimatedVotesLow": 94117,
+          "estimatedVotesMid": 104574,
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
+        },
+        "firstName": "Justin",
+        "id": 747,
+        "lastName": "Olson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:32:10.600Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 104578,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 75458,
+          "estimatedVotesLow": 61722,
+          "estimatedVotesMid": 68579,
+          "turnoutHigh": 90.35,
+          "turnoutLow": 110.46,
+          "turnoutMid": 99
+        },
+        "firstName": "Joseph",
+        "id": 79333,
+        "lastName": "Dailey",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 75458,
+          "estimatedVotesLow": 61722,
+          "estimatedVotesMid": 68579,
+          "turnoutHigh": 90.35,
+          "turnoutLow": 110.46,
+          "turnoutMid": 99
+        },
+        "firstName": "Junelle",
+        "id": 26381,
+        "lastName": "Cavero",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 75458,
+          "estimatedVotesLow": 61722,
+          "estimatedVotesMid": 68579,
+          "turnoutHigh": 90.35,
+          "turnoutLow": 110.46,
+          "turnoutMid": 99
+        },
+        "firstName": "Cesar",
+        "id": 79332,
+        "lastName": "Aleman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 75458,
+          "estimatedVotesLow": 61722,
+          "estimatedVotesMid": 68579,
+          "turnoutHigh": 90.35,
+          "turnoutLow": 110.46,
+          "turnoutMid": 99
+        },
+        "firstName": "Oscar",
+        "id": 26449,
+        "lastName": "De Los Santos",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:28:48.262Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 68177,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123589,
+          "estimatedVotesLow": 101099,
+          "estimatedVotesMid": 112333,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.31,
+          "turnoutMid": 99
+        },
+        "firstName": "Patricia",
+        "id": 26452,
+        "lastName": "Contreras",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123589,
+          "estimatedVotesLow": 101099,
+          "estimatedVotesMid": 112333,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.31,
+          "turnoutMid": 99
+        },
+        "firstName": "Lawrence",
+        "id": 79334,
+        "lastName": "Hudson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123589,
+          "estimatedVotesLow": 101099,
+          "estimatedVotesMid": 112333,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.31,
+          "turnoutMid": 99
+        },
+        "firstName": "Anastasia",
+        "id": 26455,
+        "lastName": "Travers",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:23:35.865Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 112529,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 116306,
+          "estimatedVotesLow": 95171,
+          "estimatedVotesMid": 105745,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Nicholas",
+        "id": 79336,
+        "lastName": "Gonzales",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 116306,
+          "estimatedVotesLow": 95171,
+          "estimatedVotesMid": 105745,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Jeff",
+        "id": 26363,
+        "lastName": "Weninger",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 116306,
+          "estimatedVotesLow": 95171,
+          "estimatedVotesMid": 105745,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Cody",
+        "id": 101659,
+        "lastName": "Hannah",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 116306,
+          "estimatedVotesLow": 95171,
+          "estimatedVotesMid": 105745,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Brandy",
+        "id": 26458,
+        "lastName": "Reese",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 116306,
+          "estimatedVotesLow": 95171,
+          "estimatedVotesMid": 105745,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Julie",
+        "id": 26523,
+        "lastName": "Willoughby",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:31:25.823Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 105684,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123851,
+          "estimatedVotesLow": 101304,
+          "estimatedVotesMid": 112560,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Scott",
+        "id": 101660,
+        "lastName": "Menor",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123851,
+          "estimatedVotesLow": 101304,
+          "estimatedVotesMid": 112560,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Khyl",
+        "id": 79339,
+        "lastName": "Powell",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123851,
+          "estimatedVotesLow": 101304,
+          "estimatedVotesMid": 112560,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Laurin",
+        "id": 26526,
+        "lastName": "Hendrix",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:26:23.138Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 112681,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 127569,
+          "estimatedVotesLow": 104370,
+          "estimatedVotesMid": 115967,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.8,
+          "turnoutMid": 99
+        },
+        "firstName": "Barbara",
+        "id": 79344,
+        "lastName": "Beneitone",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 127569,
+          "estimatedVotesLow": 104370,
+          "estimatedVotesMid": 115967,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.8,
+          "turnoutMid": 99
+        },
+        "firstName": "Neal",
+        "id": 26528,
+        "lastName": "Carter",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 127569,
+          "estimatedVotesLow": 104370,
+          "estimatedVotesMid": 115967,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.8,
+          "turnoutMid": 99
+        },
+        "firstName": "Michael",
+        "id": 79342,
+        "lastName": "Way",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:36:02.771Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 115643,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99188,
+          "estimatedVotesLow": 81133,
+          "estimatedVotesMid": 90148,
+          "turnoutHigh": 90.61,
+          "turnoutLow": 110.77,
+          "turnoutMid": 99
+        },
+        "firstName": "Chris",
+        "id": 79346,
+        "lastName": "Lopez",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99188,
+          "estimatedVotesLow": 81133,
+          "estimatedVotesMid": 90148,
+          "turnoutHigh": 90.61,
+          "turnoutLow": 110.77,
+          "turnoutMid": 99
+        },
+        "firstName": "Keith",
+        "id": 26459,
+        "lastName": "Seaman",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99188,
+          "estimatedVotesLow": 81133,
+          "estimatedVotesMid": 90148,
+          "turnoutHigh": 90.61,
+          "turnoutLow": 110.77,
+          "turnoutMid": 99
+        },
+        "firstName": "Teresa",
+        "id": 26530,
+        "lastName": "Martinez",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:54:05.132Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 89872,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 145533,
+          "estimatedVotesLow": 119048,
+          "estimatedVotesMid": 132277,
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
+        },
+        "firstName": "Cory",
+        "id": 26534,
+        "lastName": "McGarr",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 145533,
+          "estimatedVotesLow": 119048,
+          "estimatedVotesMid": 132277,
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
+        },
+        "firstName": "Rachel",
+        "id": 26533,
+        "lastName": "Jones",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 145533,
+          "estimatedVotesLow": 119048,
+          "estimatedVotesMid": 132277,
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
+        },
+        "firstName": "Kevin",
+        "id": 79347,
+        "lastName": "Volk",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:36:03.796Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 132563,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 128764,
+          "estimatedVotesLow": 105383,
+          "estimatedVotesMid": 117092,
+          "turnoutHigh": 91.25,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
+        },
+        "firstName": "Christopher",
+        "id": 46292,
+        "lastName": "Mathis",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 128764,
+          "estimatedVotesLow": 105383,
+          "estimatedVotesMid": 117092,
+          "turnoutHigh": 91.25,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
+        },
+        "firstName": "Nancy",
+        "id": 26464,
+        "lastName": "Gutierrez",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 128764,
+          "estimatedVotesLow": 105383,
+          "estimatedVotesMid": 117092,
+          "turnoutHigh": 91.25,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
+        },
+        "firstName": "Leonard",
+        "id": 79348,
+        "lastName": "Rosenblum",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:37:56.880Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 117502,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 110705,
+          "estimatedVotesLow": 90587,
+          "estimatedVotesMid": 100652,
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Lupe",
+        "id": 26538,
+        "lastName": "Diaz",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 110705,
+          "estimatedVotesLow": 90587,
+          "estimatedVotesMid": 100652,
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Gail",
+        "id": 26539,
+        "lastName": "Griffin",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 110705,
+          "estimatedVotesLow": 90587,
+          "estimatedVotesMid": 100652,
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Gregg",
+        "id": 79349,
+        "lastName": "Frostrom Jr.",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T23:01:59.756Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 100515,
+    "year": 2024
+  },
+  {
+    "calledCandidate": {
+      "cand_id": 26469,
+      "first_name": "Alma",
+      "incumbent": true,
+      "last_name": "Hernandez",
+      "party_id": 1,
+      "party_name": "Democratic"
+    },
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Alma",
+        "id": 26469,
+        "lastName": "Hernandez",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Betty",
+        "id": 79350,
+        "lastName": "Villegas",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-10T17:02:57.407Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 90718,
+          "estimatedVotesLow": 74237,
+          "estimatedVotesMid": 82485,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Christopher",
+        "id": 79352,
+        "lastName": "Kibbey",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 90718,
+          "estimatedVotesLow": 74237,
+          "estimatedVotesMid": 82485,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Consuelo",
+        "id": 26470,
+        "lastName": "Hernandez",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 90718,
+          "estimatedVotesLow": 74237,
+          "estimatedVotesMid": 82485,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Stephanie",
+        "id": 26472,
+        "lastName": "Hamilton",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:27:13.530Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 82598,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72163,
+          "estimatedVotesLow": 59027,
+          "estimatedVotesMid": 65585,
+          "turnoutHigh": 92.1,
+          "turnoutLow": 112.59,
+          "turnoutMid": 99
+        },
+        "firstName": "Blaine",
+        "id": 79357,
+        "lastName": "Griffin",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72163,
+          "estimatedVotesLow": 59027,
+          "estimatedVotesMid": 65585,
+          "turnoutHigh": 92.1,
+          "turnoutLow": 112.59,
+          "turnoutMid": 99
+        },
+        "firstName": "Diana",
+        "id": 79356,
+        "lastName": "Jones",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72163,
+          "estimatedVotesLow": 59027,
+          "estimatedVotesMid": 65585,
+          "turnoutHigh": 92.1,
+          "turnoutLow": 112.59,
+          "turnoutMid": 99
+        },
+        "firstName": "Lupe",
+        "id": 26475,
+        "lastName": "Contreras",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72163,
+          "estimatedVotesLow": 59027,
+          "estimatedVotesMid": 65585,
+          "turnoutHigh": 92.1,
+          "turnoutLow": 112.59,
+          "turnoutMid": 99
+        },
+        "firstName": "Elda",
+        "id": 101661,
+        "lastName": "Luna-Nájera",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T18:00:28.507Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 66460,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 80720,
+          "estimatedVotesLow": 66018,
+          "estimatedVotesMid": 73354,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Mariana",
+        "id": 26478,
+        "lastName": "Sandoval",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 80720,
+          "estimatedVotesLow": 66018,
+          "estimatedVotesMid": 73354,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Michele",
+        "id": 46296,
+        "lastName": "Pena",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 80720,
+          "estimatedVotesLow": 66018,
+          "estimatedVotesMid": 73354,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Matias",
+        "id": 79358,
+        "lastName": "Rosales",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:25:45.497Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 73311,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lydia",
+        "id": 26480,
+        "lastName": "Hernandez",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Anna",
+        "id": 26479,
+        "lastName": "Abeytia",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 106940,
+          "estimatedVotesLow": 87489,
+          "estimatedVotesMid": 97211,
+          "turnoutHigh": 90.79,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Nick",
+        "id": 101662,
+        "lastName": "Kupper",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 106940,
+          "estimatedVotesLow": 87489,
+          "estimatedVotesMid": 97211,
+          "turnoutHigh": 90.79,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "William",
+        "id": 79361,
+        "lastName": "Olear",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 106940,
+          "estimatedVotesLow": 87489,
+          "estimatedVotesMid": 97211,
+          "turnoutHigh": 90.79,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Michael",
+        "id": 26542,
+        "lastName": "Carbone",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:36:05.675Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 97088,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 50510,
+          "estimatedVotesLow": 41281,
+          "estimatedVotesMid": 45868,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Quantá",
+        "id": 101663,
+        "lastName": "Crews",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 50510,
+          "estimatedVotesLow": 41281,
+          "estimatedVotesMid": 45868,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Skyla",
+        "id": 79364,
+        "lastName": "Edwards",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 50510,
+          "estimatedVotesLow": 41281,
+          "estimatedVotesMid": 45868,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Frank",
+        "id": 46297,
+        "lastName": "Roberts",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 50510,
+          "estimatedVotesLow": 41281,
+          "estimatedVotesMid": 45868,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Cesar",
+        "id": 26485,
+        "lastName": "Aguilar",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:41:52.199Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 45917,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 106078,
+          "estimatedVotesLow": 86781,
+          "estimatedVotesMid": 96424,
+          "turnoutHigh": 91.02,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
+        },
+        "firstName": "Lisa",
+        "id": 79368,
+        "lastName": "Fink",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 106078,
+          "estimatedVotesLow": 86781,
+          "estimatedVotesMid": 96424,
+          "turnoutHigh": 91.02,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
+        },
+        "firstName": "Tony",
+        "id": 79367,
+        "lastName": "Rivero",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 106078,
+          "estimatedVotesLow": 86781,
+          "estimatedVotesMid": 96424,
+          "turnoutHigh": 91.02,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
+        },
+        "firstName": "Deborah",
+        "id": 79366,
+        "lastName": "Howard",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:38:46.316Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 96557,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 137389,
+          "estimatedVotesLow": 112422,
+          "estimatedVotesMid": 124913,
+          "turnoutHigh": 91.12,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
+        },
+        "firstName": "Beverly",
+        "id": 26547,
+        "lastName": "Pingerelli",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 137389,
+          "estimatedVotesLow": 112422,
+          "estimatedVotesMid": 124913,
+          "turnoutHigh": 91.12,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
+        },
+        "firstName": "Barbara",
+        "id": 79369,
+        "lastName": "Fike",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 137389,
+          "estimatedVotesLow": 112422,
+          "estimatedVotesMid": 124913,
+          "turnoutHigh": 91.12,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
+        },
+        "firstName": "David",
+        "id": 26549,
+        "lastName": "Livingston",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:33:44.503Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 125183,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 113610,
+          "estimatedVotesLow": 92945,
+          "estimatedVotesMid": 103272,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.72,
+          "turnoutMid": 99
+        },
+        "firstName": "Thomas",
+        "id": 101664,
+        "lastName": "Tzitzura",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 113610,
+          "estimatedVotesLow": 92945,
+          "estimatedVotesMid": 103272,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.72,
+          "turnoutMid": 99
+        },
+        "firstName": "Steve",
+        "id": 8344,
+        "lastName": "Montenegro",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 113610,
+          "estimatedVotesLow": 92945,
+          "estimatedVotesMid": 103272,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.72,
+          "turnoutMid": 99
+        },
+        "firstName": "Tanairi",
+        "id": 79371,
+        "lastName": "Ochoa-Martinez",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 113610,
+          "estimatedVotesLow": 92945,
+          "estimatedVotesMid": 103272,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.72,
+          "turnoutMid": 99
+        },
+        "firstName": "James",
+        "id": 9942,
+        "lastName": "Taylor",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:40:58.130Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 102909,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 105152,
+          "estimatedVotesLow": 86005,
+          "estimatedVotesMid": 95561,
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
+        },
+        "firstName": "Monica",
+        "id": 79372,
+        "lastName": "Timberlake",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 105152,
+          "estimatedVotesLow": 86005,
+          "estimatedVotesMid": 95561,
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
+        },
+        "firstName": "John",
+        "id": 26554,
+        "lastName": "Gillette",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 105152,
+          "estimatedVotesLow": 86005,
+          "estimatedVotesMid": 95561,
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
+        },
+        "firstName": "Leo",
+        "id": 26553,
+        "lastName": "Biasiucci",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:49:33.793Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 95579,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 136846,
+          "estimatedVotesLow": 111972,
+          "estimatedVotesMid": 124413,
+          "turnoutHigh": 90.43,
+          "turnoutLow": 110.52,
+          "turnoutMid": 99
+        },
+        "firstName": "Mike",
+        "id": 26370,
+        "lastName": "Fogel",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 136846,
+          "estimatedVotesLow": 111972,
+          "estimatedVotesMid": 124413,
+          "turnoutHigh": 90.43,
+          "turnoutLow": 110.52,
+          "turnoutMid": 99
+        },
+        "firstName": "Mark",
+        "id": 26358,
+        "lastName": "Finchem",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:19:05.206Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 123749,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 104124,
+          "estimatedVotesLow": 85187,
+          "estimatedVotesMid": 94652,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
+        },
+        "firstName": "Judy",
+        "id": 26432,
+        "lastName": "Schwiebert",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 104124,
+          "estimatedVotesLow": 85187,
+          "estimatedVotesMid": 94652,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
+        },
+        "firstName": "Dennis",
+        "id": 101665,
+        "lastName": "Pugsley",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 104124,
+          "estimatedVotesLow": 85187,
+          "estimatedVotesMid": 94652,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
+        },
+        "firstName": "Shawnna",
+        "id": 26357,
+        "lastName": "Bolick",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T17:42:48.845Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 94809,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 26402,
+        "lastName": "Kavanagh",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 143638,
+          "estimatedVotesLow": 117551,
+          "estimatedVotesMid": 130613,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Christine",
+        "id": 26373,
+        "lastName": "Marsh",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 143638,
+          "estimatedVotesLow": 117551,
+          "estimatedVotesMid": 130613,
+          "turnoutHigh": 90.82,
+          "turnoutLow": 110.97,
+          "turnoutMid": 99
+        },
+        "firstName": "Carine",
+        "id": 79275,
+        "lastName": "Werner",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:45:37.785Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 130450,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99184,
+          "estimatedVotesLow": 81174,
+          "estimatedVotesMid": 90194,
+          "turnoutHigh": 90.06,
+          "turnoutLow": 110.04,
+          "turnoutMid": 99
+        },
+        "firstName": "Lela",
+        "id": 26374,
+        "lastName": "Alston",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99184,
+          "estimatedVotesLow": 81174,
+          "estimatedVotesMid": 90194,
+          "turnoutHigh": 90.06,
+          "turnoutLow": 110.04,
+          "turnoutMid": 99
+        },
+        "firstName": "Joshua",
+        "id": 79276,
+        "lastName": "Ortega",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:28:51.128Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 89325,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Theresa",
+        "id": 26377,
+        "lastName": "Hatathlie",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 120215,
+          "estimatedVotesLow": 98366,
+          "estimatedVotesMid": 109295,
+          "turnoutHigh": 87.49,
+          "turnoutLow": 106.92,
+          "turnoutMid": 96.23
+        },
+        "firstName": "Wendy",
+        "id": 732,
+        "lastName": "Rogers",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 120215,
+          "estimatedVotesLow": 98366,
+          "estimatedVotesMid": 109295,
+          "turnoutHigh": 87.49,
+          "turnoutLow": 106.92,
+          "turnoutMid": 96.23
+        },
+        "firstName": "Haley",
+        "id": 79277,
+        "lastName": "Creighton",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:17:24.737Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 105174,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83017,
+          "estimatedVotesLow": 67947,
+          "estimatedVotesMid": 75496,
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.95,
+          "turnoutMid": 99
+        },
+        "firstName": "Roxana",
+        "id": 26405,
+        "lastName": "Holzapfel",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83017,
+          "estimatedVotesLow": 67947,
+          "estimatedVotesMid": 75496,
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.95,
+          "turnoutMid": 99
+        },
+        "firstName": "Lauren",
+        "id": 26346,
+        "lastName": "Kuby",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:09:14.284Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 75385,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83747,
+          "estimatedVotesLow": 68511,
+          "estimatedVotesMid": 76124,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Robert",
+        "id": 26407,
+        "lastName": "Scantlebury",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 83747,
+          "estimatedVotesLow": 68511,
+          "estimatedVotesMid": 76124,
+          "turnoutHigh": 90.77,
+          "turnoutLow": 110.96,
+          "turnoutMid": 99
+        },
+        "firstName": "Eva",
+        "id": 26380,
+        "lastName": "Burch",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:01:49.610Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 76018,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 114991,
+          "estimatedVotesLow": 94117,
+          "estimatedVotesMid": 104574,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "David",
+        "id": 26409,
+        "lastName": "Farnsworth",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 114991,
+          "estimatedVotesLow": 94117,
+          "estimatedVotesMid": 104574,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.08,
+          "turnoutMid": 99
+        },
+        "firstName": "Robert",
+        "id": 79280,
+        "lastName": "Doyle",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:09:15.759Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 104544,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 75458,
+          "estimatedVotesLow": 61722,
+          "estimatedVotesMid": 68579,
+          "turnoutHigh": 90.35,
+          "turnoutLow": 110.46,
+          "turnoutMid": 99
+        },
+        "firstName": "Joshua",
+        "id": 79281,
+        "lastName": "Ayala",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 75458,
+          "estimatedVotesLow": 61722,
+          "estimatedVotesMid": 68579,
+          "turnoutHigh": 90.35,
+          "turnoutLow": 110.46,
+          "turnoutMid": 99
+        },
+        "firstName": "Catherine",
+        "id": 10731,
+        "lastName": "Miranda",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:28:52.003Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 68177,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123589,
+          "estimatedVotesLow": 101099,
+          "estimatedVotesMid": 112333,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.31,
+          "turnoutMid": 99
+        },
+        "firstName": "Cara",
+        "id": 79282,
+        "lastName": "Vicini",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123589,
+          "estimatedVotesLow": 101099,
+          "estimatedVotesMid": 112333,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.31,
+          "turnoutMid": 99
+        },
+        "firstName": "Denise",
+        "id": 26383,
+        "lastName": "Epstein",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:36:07.490Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 112529,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 116306,
+          "estimatedVotesLow": 95171,
+          "estimatedVotesMid": 105745,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Javan",
+        "id": 101666,
+        "lastName": "Mesnard",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 116306,
+          "estimatedVotesLow": 95171,
+          "estimatedVotesMid": 105745,
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.05,
+          "turnoutMid": 99
+        },
+        "firstName": "Sharon",
+        "id": 79283,
+        "lastName": "Winters",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:36:27.529Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 105684,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123851,
+          "estimatedVotesLow": 101304,
+          "estimatedVotesMid": 112560,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Elizabeth",
+        "id": 79284,
+        "lastName": "Brown",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 123851,
+          "estimatedVotesLow": 101304,
+          "estimatedVotesMid": 112560,
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Warren",
+        "id": 26414,
+        "lastName": "Petersen",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:26:27.211Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 112680,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 127569,
+          "estimatedVotesLow": 104370,
+          "estimatedVotesMid": 115967,
+          "turnoutHigh": 89.25,
+          "turnoutLow": 109.09,
+          "turnoutMid": 98.18
+        },
+        "firstName": "Evan",
+        "id": 101667,
+        "lastName": "Olson",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 127569,
+          "estimatedVotesLow": 104370,
+          "estimatedVotesMid": 115967,
+          "turnoutHigh": 89.25,
+          "turnoutLow": 109.09,
+          "turnoutMid": 98.18
+        },
+        "firstName": "Jake",
+        "id": 26415,
+        "lastName": "Hoffman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 127569,
+          "estimatedVotesLow": 104370,
+          "estimatedVotesMid": 115967,
+          "turnoutHigh": 89.25,
+          "turnoutLow": 109.09,
+          "turnoutMid": 98.18
+        },
+        "firstName": "Alan",
+        "id": 44606,
+        "lastName": "Smith",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:36:08.455Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 113861,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99188,
+          "estimatedVotesLow": 81133,
+          "estimatedVotesMid": 90148,
+          "turnoutHigh": 90.61,
+          "turnoutLow": 110.77,
+          "turnoutMid": 99
+        },
+        "firstName": "Stacey",
+        "id": 79286,
+        "lastName": "Seaman",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 99188,
+          "estimatedVotesLow": 81133,
+          "estimatedVotesMid": 90148,
+          "turnoutHigh": 90.61,
+          "turnoutLow": 110.77,
+          "turnoutMid": 99
+        },
+        "firstName": "Thomas",
+        "id": 101668,
+        "lastName": "Shope",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:32:11.528Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 89873,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 145533,
+          "estimatedVotesLow": 119048,
+          "estimatedVotesMid": 132277,
+          "turnoutHigh": 90.51,
+          "turnoutLow": 110.64,
+          "turnoutMid": 99
+        },
+        "firstName": "Vince",
+        "id": 26417,
+        "lastName": "Leach",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 145533,
+          "estimatedVotesLow": 119048,
+          "estimatedVotesMid": 132277,
+          "turnoutHigh": 90.51,
+          "turnoutLow": 110.64,
+          "turnoutMid": 99
+        },
+        "firstName": "John",
+        "id": 79287,
+        "lastName": "McLean",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:40:46.057Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 131717,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Priya",
+        "id": 26389,
+        "lastName": "Sundareshan",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 110705,
+          "estimatedVotesLow": 90587,
+          "estimatedVotesMid": 100652,
+          "turnoutHigh": 86.29,
+          "turnoutLow": 105.46,
+          "turnoutMid": 94.91
+        },
+        "firstName": "Bob",
+        "id": 79290,
+        "lastName": "Karp",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 110705,
+          "estimatedVotesLow": 90587,
+          "estimatedVotesMid": 100652,
+          "turnoutHigh": 86.29,
+          "turnoutLow": 105.46,
+          "turnoutMid": 94.91
+        },
+        "firstName": "David",
+        "id": 735,
+        "lastName": "Gowan",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:46:06.394Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 95531,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sally",
+        "id": 26390,
+        "lastName": "Gonzales",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Rosanna",
+        "id": 101669,
+        "lastName": "Gabaldón",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72163,
+          "estimatedVotesLow": 59027,
+          "estimatedVotesMid": 65585,
+          "turnoutHigh": 90.55,
+          "turnoutLow": 110.7,
+          "turnoutMid": 99
+        },
+        "firstName": "Steve",
+        "id": 79291,
+        "lastName": "Robinson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72163,
+          "estimatedVotesLow": 59027,
+          "estimatedVotesMid": 65585,
+          "turnoutHigh": 90.55,
+          "turnoutLow": 110.7,
+          "turnoutMid": 99
+        },
+        "firstName": "Eva",
+        "id": 79292,
+        "lastName": "Diaz",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:51:29.889Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 65340,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 80720,
+          "estimatedVotesLow": 66018,
+          "estimatedVotesMid": 73354,
+          "turnoutHigh": 89.65,
+          "turnoutLow": 109.62,
+          "turnoutMid": 98.66
+        },
+        "firstName": "Michelle",
+        "id": 79293,
+        "lastName": "Altherr",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 80720,
+          "estimatedVotesLow": 66018,
+          "estimatedVotesMid": 73354,
+          "turnoutHigh": 89.65,
+          "turnoutLow": 109.62,
+          "turnoutMid": 98.66
+        },
+        "firstName": "Brian",
+        "id": 26394,
+        "lastName": "Fernandez",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:55:38.703Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 72368,
+    "year": 2024
+  },
+  {
+    "calledCandidate": {
+      "cand_id": 26483,
+      "first_name": "Analise",
+      "incumbent": false,
+      "last_name": "Ortiz",
+      "party_id": 1,
+      "party_name": "Democratic"
+    },
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Analise",
+        "id": 26483,
+        "lastName": "Ortiz",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-10T17:02:57.407Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tim",
+        "id": 26540,
+        "lastName": "Dunn",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 50510,
+          "estimatedVotesLow": 41281,
+          "estimatedVotesMid": 45868,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Victor",
+        "id": 79298,
+        "lastName": "Harris",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 50510,
+          "estimatedVotesLow": 41281,
+          "estimatedVotesMid": 45868,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Flavio",
+        "id": 26486,
+        "lastName": "Bravo",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:51:34.409Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 45917,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kevin",
+        "id": 26543,
+        "lastName": "Payne",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Frank",
+        "id": 26425,
+        "lastName": "Carroll",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:35:23.918Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 113610,
+          "estimatedVotesLow": 92945,
+          "estimatedVotesMid": 103272,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.72,
+          "turnoutMid": 99
+        },
+        "firstName": "Eric",
+        "id": 79300,
+        "lastName": "Stafford",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 113610,
+          "estimatedVotesLow": 92945,
+          "estimatedVotesMid": 103272,
+          "turnoutHigh": 90.58,
+          "turnoutLow": 110.72,
+          "turnoutMid": 99
+        },
+        "firstName": "Janae",
+        "id": 26428,
+        "lastName": "Shamp",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T21:38:47.261Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 102909,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 105152,
+          "estimatedVotesLow": 86005,
+          "estimatedVotesMid": 95561,
+          "turnoutHigh": 88.81,
+          "turnoutLow": 108.58,
+          "turnoutMid": 97.72
+        },
+        "firstName": "Hildy",
+        "id": 79301,
+        "lastName": "Angius",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 105152,
+          "estimatedVotesLow": 86005,
+          "estimatedVotesMid": 95561,
+          "turnoutHigh": 88.81,
+          "turnoutLow": 108.58,
+          "turnoutMid": 97.72
+        },
+        "firstName": "J'aime",
+        "id": 79303,
+        "lastName": "Morgaine",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:39:13.452Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 93381,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Nina",
+        "id": 102077,
+        "lastName": "Luxenberg",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Lea",
+        "id": 79268,
+        "lastName": "Marquez-Peterson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Rachel",
+        "id": 79273,
+        "lastName": "Walden",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Mike",
+        "id": 102076,
+        "lastName": "Cease",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Rene",
+        "id": 26329,
+        "lastName": "Lopez",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Ylenia",
+        "id": 79269,
+        "lastName": "Aguilar",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Joshua",
+        "id": 79270,
+        "lastName": "Polacheck",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3191063,
+          "estimatedVotesLow": 2611018,
+          "estimatedVotesMid": 2901132,
+          "turnoutHigh": 319.32,
+          "turnoutLow": 390.26,
+          "turnoutMid": 99
+        },
+        "firstName": "Jonathon",
+        "id": 79272,
+        "lastName": "Hill",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-13T22:47:19.318Z",
+    "office": { "officeId": "137", "officeName": "Corporation Commissioner", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AZ",
+    "stateName": "Arizona",
+    "totalVotes": 10189763,
+    "year": 2024
+  }
+]
