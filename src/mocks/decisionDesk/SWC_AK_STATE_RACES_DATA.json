@@ -1,1 +1,2495 @@
-[{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":350126,"estimatedVotesLow":286176,"estimatedVotesMid":317973,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mary","id":23403,"lastName":"Peltola","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":350126,"estimatedVotesLow":286176,"estimatedVotesMid":317973,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Nick","id":23370,"lastName":"Begich","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":350126,"estimatedVotesLow":286176,"estimatedVotesMid":317973,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":23389,"lastName":"Howe","partyName":"Alaska Independence Party","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":350126,"estimatedVotesLow":286176,"estimatedVotesMid":317973,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Eric","id":9117,"lastName":"Hafner","partyName":"Democratic","votes":0}],"district":"At-Large","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:37:06.590Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jesse","id":29713,"lastName":"Kiehl","partyName":"Democratic","votes":0}],"district":"B","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19730,"estimatedVotesLow":16138,"estimatedVotesMid":17931,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jesse","id":29718,"lastName":"Bjorkman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19730,"estimatedVotesLow":16138,"estimatedVotesMid":17931,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ben","id":29770,"lastName":"Carpenter","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19730,"estimatedVotesLow":16138,"estimatedVotesMid":17931,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tina","id":83306,"lastName":"Wegener","partyName":"Democratic","votes":0}],"district":"D","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18966,"estimatedVotesLow":15515,"estimatedVotesMid":17239,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"James","id":29724,"lastName":"Kaufman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18966,"estimatedVotesLow":15515,"estimatedVotesMid":17239,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Harold","id":83307,"lastName":"Borbridge","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18966,"estimatedVotesLow":15515,"estimatedVotesMid":17239,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Janice","id":29723,"lastName":"Park","partyName":"Democratic","votes":0}],"district":"F","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19341,"estimatedVotesLow":15822,"estimatedVotesMid":17580,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Liz","id":29790,"lastName":"Vazquez","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19341,"estimatedVotesLow":15822,"estimatedVotesMid":17580,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Matt","id":29727,"lastName":"Claman","partyName":"Democratic","votes":0}],"district":"H","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13158,"estimatedVotesLow":10774,"estimatedVotesMid":11972,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Forrest","id":29732,"lastName":"Dunbar","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":13158,"estimatedVotesLow":10774,"estimatedVotesMid":11972,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Cheronda","id":83308,"lastName":"Smith","partyName":"Independent","votes":0}],"district":"J","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19311,"estimatedVotesLow":15799,"estimatedVotesMid":17555,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kelly","id":29737,"lastName":"Merrick","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19311,"estimatedVotesLow":15799,"estimatedVotesMid":17555,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jared","id":83309,"lastName":"Goecker","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":19311,"estimatedVotesLow":15799,"estimatedVotesMid":17555,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lee","id":83310,"lastName":"Hammermeister","partyName":"Democratic","votes":0}],"district":"L","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":20088,"estimatedVotesLow":16440,"estimatedVotesMid":18267,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Stephen","id":23414,"lastName":"Wright","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":20088,"estimatedVotesLow":16440,"estimatedVotesMid":18267,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Robert","id":83312,"lastName":"Yundt","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":20088,"estimatedVotesLow":16440,"estimatedVotesMid":18267,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":83311,"lastName":"Wilson","partyName":"Republican","votes":0}],"district":"N","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11658,"estimatedVotesLow":9545,"estimatedVotesMid":10606,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Scott","id":29744,"lastName":"Kawasaki","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11658,"estimatedVotesLow":9545,"estimatedVotesMid":10606,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Leslie","id":83313,"lastName":"Hajdukovich","partyName":"Republican","votes":0}],"district":"P","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18275,"estimatedVotesLow":14963,"estimatedVotesMid":16625,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Savannah","id":83314,"lastName":"Fletcher","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18275,"estimatedVotesLow":14963,"estimatedVotesMid":16625,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Robert","id":29752,"lastName":"Williams","partyName":"Alaska Independence Party","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18275,"estimatedVotesLow":14963,"estimatedVotesMid":16625,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mike","id":29846,"lastName":"Cronk","partyName":"Republican","votes":0}],"district":"R","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Donald","id":83316,"lastName":"Olson","partyName":"Democratic","votes":0}],"district":"T","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9224,"estimatedVotesLow":7551,"estimatedVotesMid":8390,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Agnes","id":83318,"lastName":"Moran","partyName":"Nonpartisan","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9224,"estimatedVotesLow":7551,"estimatedVotesMid":8390,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jeremy","id":29755,"lastName":"Bynum","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9224,"estimatedVotesLow":7551,"estimatedVotesMid":8390,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Grant","id":83317,"lastName":"Echohawk","partyName":"Nonpartisan","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Rebecca","id":83319,"lastName":"Himschoot","partyName":"Nonpartisan","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Andi","id":29760,"lastName":"Story","partyName":"Democratic","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sara","id":29761,"lastName":"Hannan","partyName":"Democratic","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5898,"estimatedVotesLow":4827,"estimatedVotesMid":5363,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Louise","id":29763,"lastName":"Stutes","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5898,"estimatedVotesLow":4827,"estimatedVotesMid":5363,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Leighton","id":83321,"lastName":"Radner","partyName":"Libertarian","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12070,"estimatedVotesLow":9875,"estimatedVotesMid":10973,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brent","id":83323,"lastName":"Johnson","partyName":"Nonpartisan","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12070,"estimatedVotesLow":9875,"estimatedVotesMid":10973,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sarah","id":29765,"lastName":"Vance","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":12070,"estimatedVotesLow":9875,"estimatedVotesMid":10973,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Dawson","id":83324,"lastName":"Slaughter","partyName":"Republican","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10451,"estimatedVotesLow":8555,"estimatedVotesMid":9505,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Justin","id":29769,"lastName":"Ruffridge","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10451,"estimatedVotesLow":8555,"estimatedVotesMid":9505,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ron","id":29768,"lastName":"Gillham","partyName":"Republican","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9211,"estimatedVotesLow":7533,"estimatedVotesMid":8370,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":83327,"lastName":"Hillyer","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9211,"estimatedVotesLow":7533,"estimatedVotesMid":8370,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Bill","id":83326,"lastName":"Elam","partyName":"Republican","votes":0}],"district":"8","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11557,"estimatedVotesLow":9448,"estimatedVotesMid":10498,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lucy","id":83328,"lastName":"Bauer","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11557,"estimatedVotesLow":9448,"estimatedVotesMid":10498,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ky","id":83329,"lastName":"Holland","partyName":"Nonpartisan","votes":0}],"district":"9","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9264,"estimatedVotesLow":7567,"estimatedVotesMid":8408,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Charles","id":83331,"lastName":"Kopp","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9264,"estimatedVotesLow":7567,"estimatedVotesMid":8408,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Craig","id":22940,"lastName":"Johnson","partyName":"Republican","votes":0}],"district":"10","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9926,"estimatedVotesLow":8122,"estimatedVotesMid":9025,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Julie","id":29777,"lastName":"Coulombe","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9926,"estimatedVotesLow":8122,"estimatedVotesMid":9025,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Walter","id":83332,"lastName":"Featherly","partyName":"Nonpartisan","votes":0}],"district":"11","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9027,"estimatedVotesLow":7384,"estimatedVotesMid":8204,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Joseph","id":83333,"lastName":"Lurtsema","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9027,"estimatedVotesLow":7384,"estimatedVotesMid":8204,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Calvin","id":83334,"lastName":"Schrage","partyName":"Nonpartisan","votes":0}],"district":"12","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8263,"estimatedVotesLow":6754,"estimatedVotesMid":7505,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Heather","id":83335,"lastName":"Gottshall","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8263,"estimatedVotesLow":6754,"estimatedVotesMid":7505,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Andrew","id":46879,"lastName":"Josephson","partyName":"Democratic","votes":0}],"district":"13","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8295,"estimatedVotesLow":6780,"estimatedVotesMid":7534,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Alyse","id":83336,"lastName":"Galvin","partyName":"Nonpartisan","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8295,"estimatedVotesLow":6780,"estimatedVotesMid":7534,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Harry","id":83337,"lastName":"Kamdem","partyName":"Democratic","votes":0}],"district":"14","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9616,"estimatedVotesLow":7867,"estimatedVotesMid":8741,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Denny","id":29785,"lastName":"Wells","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9616,"estimatedVotesLow":7867,"estimatedVotesMid":8741,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mia","id":29728,"lastName":"Costello","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9616,"estimatedVotesLow":7867,"estimatedVotesMid":8741,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Dustin","id":83338,"lastName":"Darden","partyName":"Democratic","votes":0}],"district":"15","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9724,"estimatedVotesLow":7955,"estimatedVotesMid":8838,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Carolyn","id":83339,"lastName":"Hall","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9724,"estimatedVotesLow":7955,"estimatedVotesMid":8838,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Nick","id":83340,"lastName":"Moe","partyName":"Nonpartisan","votes":0}],"district":"16","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Zack","id":29793,"lastName":"Fields","partyName":"Democratic","votes":0}],"district":"17","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":4200,"estimatedVotesLow":3449,"estimatedVotesMid":3833,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":29796,"lastName":"Nelson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":4200,"estimatedVotesLow":3449,"estimatedVotesMid":3833,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Cliff","id":29795,"lastName":"Groh","partyName":"Democratic","votes":0}],"district":"18","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5516,"estimatedVotesLow":4530,"estimatedVotesMid":5034,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Russell","id":83343,"lastName":"Wyatt","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5516,"estimatedVotesLow":4530,"estimatedVotesMid":5034,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Genevieve","id":29797,"lastName":"Mina","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5516,"estimatedVotesLow":4530,"estimatedVotesMid":5034,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kaylee","id":83342,"lastName":"Anderson","partyName":"Republican","votes":0}],"district":"19","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":7383,"estimatedVotesLow":6035,"estimatedVotesMid":6705,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Andrew","id":29799,"lastName":"Gray","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":7383,"estimatedVotesLow":6035,"estimatedVotesMid":6705,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Scott","id":29802,"lastName":"Kohlhaas","partyName":"Libertarian","votes":0}],"district":"20","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9123,"estimatedVotesLow":7474,"estimatedVotesMid":8304,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Donna","id":29803,"lastName":"Mears","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9123,"estimatedVotesLow":7474,"estimatedVotesMid":8304,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Aimee","id":101858,"lastName":"Sims","partyName":"Republican","votes":0}],"district":"21","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5544,"estimatedVotesLow":4553,"estimatedVotesMid":5059,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ted","id":29806,"lastName":"Eischeid","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5544,"estimatedVotesLow":4553,"estimatedVotesMid":5059,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Stanley","id":29808,"lastName":"Wright","partyName":"Republican","votes":0}],"district":"22","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9555,"estimatedVotesLow":7820,"estimatedVotesMid":8689,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jamie","id":29809,"lastName":"Allard","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":9555,"estimatedVotesLow":7820,"estimatedVotesMid":8689,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jim","id":83345,"lastName":"Arlington","partyName":"Democratic","votes":0}],"district":"23","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Dan","id":29813,"lastName":"Saddler","partyName":"Republican","votes":0}],"district":"24","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Delena","id":29814,"lastName":"Johnson","partyName":"Republican","votes":0}],"district":"25","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Cathy","id":29816,"lastName":"Tilton","partyName":"Republican","votes":0}],"district":"26","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11525,"estimatedVotesLow":9432,"estimatedVotesMid":10480,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":29818,"lastName":"Eastman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":11525,"estimatedVotesLow":9432,"estimatedVotesMid":10480,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jubilee","id":83346,"lastName":"Underwood","partyName":"Republican","votes":0}],"district":"27","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8619,"estimatedVotesLow":7045,"estimatedVotesMid":7828,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jessica","id":29824,"lastName":"Wright","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8619,"estimatedVotesLow":7045,"estimatedVotesMid":7828,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Steve","id":29822,"lastName":"Menard","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8619,"estimatedVotesLow":7045,"estimatedVotesMid":7828,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Elexie","id":83347,"lastName":"Moore","partyName":"Republican","votes":0}],"district":"28","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"George","id":29825,"lastName":"Rauscher","partyName":"Republican","votes":0}],"district":"29","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8203,"estimatedVotesLow":6710,"estimatedVotesMid":7455,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Doyle","id":29829,"lastName":"Holmes","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8203,"estimatedVotesLow":6710,"estimatedVotesMid":7455,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kevin","id":29828,"lastName":"McCabe","partyName":"Republican","votes":0}],"district":"30","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":6733,"estimatedVotesLow":5513,"estimatedVotesMid":6125,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Bart","id":29831,"lastName":"LeBon","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":6733,"estimatedVotesLow":5513,"estimatedVotesMid":6125,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Maxine","id":29830,"lastName":"Dibert","partyName":"Democratic","votes":0}],"district":"31","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":4129,"estimatedVotesLow":3391,"estimatedVotesMid":3768,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Will","id":29835,"lastName":"Stapp","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":4129,"estimatedVotesLow":3391,"estimatedVotesMid":3768,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Gary","id":83349,"lastName":"Damron","partyName":"Democratic","votes":0}],"district":"32","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Glenn","id":29836,"lastName":"Prax","partyName":"Republican","votes":0}],"district":"33","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T14:32:22.336Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8158,"estimatedVotesLow":6673,"estimatedVotesMid":7414,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Frank","id":29839,"lastName":"Tomaszewski","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8158,"estimatedVotesLow":6673,"estimatedVotesMid":7414,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Joy","id":83350,"lastName":"Cottle","partyName":"Republican","votes":0}],"district":"34","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10144,"estimatedVotesLow":8296,"estimatedVotesMid":9218,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ashley","id":29840,"lastName":"Carrick","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":10144,"estimatedVotesLow":8296,"estimatedVotesMid":9218,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ruben","id":29842,"lastName":"McNeill","partyName":"Republican","votes":0}],"district":"35","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8166,"estimatedVotesLow":6679,"estimatedVotesMid":7421,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"James","id":83352,"lastName":"Fields","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8166,"estimatedVotesLow":6679,"estimatedVotesMid":7421,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brandon","id":83354,"lastName":"Kowalski","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8166,"estimatedVotesLow":6679,"estimatedVotesMid":7421,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Becky","id":101859,"lastName":"Schwanke","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":8166,"estimatedVotesLow":6679,"estimatedVotesMid":7421,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Pamela","id":83353,"lastName":"Goode","partyName":"Republican","votes":0}],"district":"36","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5386,"estimatedVotesLow":4410,"estimatedVotesMid":4900,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Darren","id":83358,"lastName":"Deacon","partyName":"Nonpartisan","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":5386,"estimatedVotesLow":4410,"estimatedVotesMid":4900,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Bryce","id":29847,"lastName":"Edgmon","partyName":"Independent","votes":0}],"district":"37","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3795,"estimatedVotesLow":3117,"estimatedVotesMid":3463,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Victoria","id":83362,"lastName":"Sosa","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3795,"estimatedVotesLow":3117,"estimatedVotesMid":3463,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Willy","id":101860,"lastName":"Keppel","partyName":"Veterans","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3795,"estimatedVotesLow":3117,"estimatedVotesMid":3463,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Nellie","id":83359,"lastName":"Jimmie","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3795,"estimatedVotesLow":3117,"estimatedVotesMid":3463,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Conrad","id":29848,"lastName":"McCormick","partyName":"Democratic","votes":0}],"district":"38","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3847,"estimatedVotesLow":3146,"estimatedVotesMid":3496,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Neal","id":29849,"lastName":"Foster","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3847,"estimatedVotesLow":3146,"estimatedVotesMid":3496,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tyler","id":29850,"lastName":"Ivanoff","partyName":"Alaska Independence Party","votes":0}],"district":"39","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3913,"estimatedVotesLow":3214,"estimatedVotesMid":3571,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Robyn","id":83364,"lastName":"Burke","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3913,"estimatedVotesLow":3214,"estimatedVotesMid":3571,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Thomas","id":83363,"lastName":"Baker","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":3913,"estimatedVotesLow":3214,"estimatedVotesMid":3571,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Saima","id":83365,"lastName":"Chase","partyName":"Democratic","votes":0}],"district":"40","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T17:58:43.978Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"AK","stateName":"Alaska","totalVotes":0,"year":2024}]
+[
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350126,
+          "estimatedVotesLow": 286176,
+          "estimatedVotesMid": 317973,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mary",
+        "id": 23403,
+        "lastName": "Peltola",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350126,
+          "estimatedVotesLow": 286176,
+          "estimatedVotesMid": 317973,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nick",
+        "id": 23370,
+        "lastName": "Begich",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350126,
+          "estimatedVotesLow": 286176,
+          "estimatedVotesMid": 317973,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 23389,
+        "lastName": "Howe",
+        "partyName": "Alaska Independence Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350126,
+          "estimatedVotesLow": 286176,
+          "estimatedVotesMid": 317973,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Eric",
+        "id": 9117,
+        "lastName": "Hafner",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "At-Large",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:37:06.590Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jesse",
+        "id": 29713,
+        "lastName": "Kiehl",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "B",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19730,
+          "estimatedVotesLow": 16138,
+          "estimatedVotesMid": 17931,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jesse",
+        "id": 29718,
+        "lastName": "Bjorkman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19730,
+          "estimatedVotesLow": 16138,
+          "estimatedVotesMid": 17931,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ben",
+        "id": 29770,
+        "lastName": "Carpenter",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19730,
+          "estimatedVotesLow": 16138,
+          "estimatedVotesMid": 17931,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tina",
+        "id": 83306,
+        "lastName": "Wegener",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "D",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18966,
+          "estimatedVotesLow": 15515,
+          "estimatedVotesMid": 17239,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "James",
+        "id": 29724,
+        "lastName": "Kaufman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18966,
+          "estimatedVotesLow": 15515,
+          "estimatedVotesMid": 17239,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Harold",
+        "id": 83307,
+        "lastName": "Borbridge",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18966,
+          "estimatedVotesLow": 15515,
+          "estimatedVotesMid": 17239,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Janice",
+        "id": 29723,
+        "lastName": "Park",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "F",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19341,
+          "estimatedVotesLow": 15822,
+          "estimatedVotesMid": 17580,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Liz",
+        "id": 29790,
+        "lastName": "Vazquez",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19341,
+          "estimatedVotesLow": 15822,
+          "estimatedVotesMid": 17580,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Matt",
+        "id": 29727,
+        "lastName": "Claman",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "H",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13158,
+          "estimatedVotesLow": 10774,
+          "estimatedVotesMid": 11972,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Forrest",
+        "id": 29732,
+        "lastName": "Dunbar",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13158,
+          "estimatedVotesLow": 10774,
+          "estimatedVotesMid": 11972,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cheronda",
+        "id": 83308,
+        "lastName": "Smith",
+        "partyName": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "J",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19311,
+          "estimatedVotesLow": 15799,
+          "estimatedVotesMid": 17555,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kelly",
+        "id": 29737,
+        "lastName": "Merrick",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19311,
+          "estimatedVotesLow": 15799,
+          "estimatedVotesMid": 17555,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jared",
+        "id": 83309,
+        "lastName": "Goecker",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19311,
+          "estimatedVotesLow": 15799,
+          "estimatedVotesMid": 17555,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lee",
+        "id": 83310,
+        "lastName": "Hammermeister",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "L",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20088,
+          "estimatedVotesLow": 16440,
+          "estimatedVotesMid": 18267,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Stephen",
+        "id": 23414,
+        "lastName": "Wright",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20088,
+          "estimatedVotesLow": 16440,
+          "estimatedVotesMid": 18267,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert",
+        "id": 83312,
+        "lastName": "Yundt",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20088,
+          "estimatedVotesLow": 16440,
+          "estimatedVotesMid": 18267,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 83311,
+        "lastName": "Wilson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "N",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11658,
+          "estimatedVotesLow": 9545,
+          "estimatedVotesMid": 10606,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Scott",
+        "id": 29744,
+        "lastName": "Kawasaki",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11658,
+          "estimatedVotesLow": 9545,
+          "estimatedVotesMid": 10606,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Leslie",
+        "id": 83313,
+        "lastName": "Hajdukovich",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "P",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18275,
+          "estimatedVotesLow": 14963,
+          "estimatedVotesMid": 16625,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Savannah",
+        "id": 83314,
+        "lastName": "Fletcher",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18275,
+          "estimatedVotesLow": 14963,
+          "estimatedVotesMid": 16625,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert",
+        "id": 29752,
+        "lastName": "Williams",
+        "partyName": "Alaska Independence Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18275,
+          "estimatedVotesLow": 14963,
+          "estimatedVotesMid": 16625,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mike",
+        "id": 29846,
+        "lastName": "Cronk",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "R",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Donald",
+        "id": 83316,
+        "lastName": "Olson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "T",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9224,
+          "estimatedVotesLow": 7551,
+          "estimatedVotesMid": 8390,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Agnes",
+        "id": 83318,
+        "lastName": "Moran",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9224,
+          "estimatedVotesLow": 7551,
+          "estimatedVotesMid": 8390,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jeremy",
+        "id": 29755,
+        "lastName": "Bynum",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9224,
+          "estimatedVotesLow": 7551,
+          "estimatedVotesMid": 8390,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Grant",
+        "id": 83317,
+        "lastName": "Echohawk",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Rebecca",
+        "id": 83319,
+        "lastName": "Himschoot",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Andi",
+        "id": 29760,
+        "lastName": "Story",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sara",
+        "id": 29761,
+        "lastName": "Hannan",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5898,
+          "estimatedVotesLow": 4827,
+          "estimatedVotesMid": 5363,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Louise",
+        "id": 29763,
+        "lastName": "Stutes",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5898,
+          "estimatedVotesLow": 4827,
+          "estimatedVotesMid": 5363,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Leighton",
+        "id": 83321,
+        "lastName": "Radner",
+        "partyName": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12070,
+          "estimatedVotesLow": 9875,
+          "estimatedVotesMid": 10973,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brent",
+        "id": 83323,
+        "lastName": "Johnson",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12070,
+          "estimatedVotesLow": 9875,
+          "estimatedVotesMid": 10973,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sarah",
+        "id": 29765,
+        "lastName": "Vance",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12070,
+          "estimatedVotesLow": 9875,
+          "estimatedVotesMid": 10973,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Dawson",
+        "id": 83324,
+        "lastName": "Slaughter",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10451,
+          "estimatedVotesLow": 8555,
+          "estimatedVotesMid": 9505,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Justin",
+        "id": 29769,
+        "lastName": "Ruffridge",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10451,
+          "estimatedVotesLow": 8555,
+          "estimatedVotesMid": 9505,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ron",
+        "id": 29768,
+        "lastName": "Gillham",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9211,
+          "estimatedVotesLow": 7533,
+          "estimatedVotesMid": 8370,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 83327,
+        "lastName": "Hillyer",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9211,
+          "estimatedVotesLow": 7533,
+          "estimatedVotesMid": 8370,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bill",
+        "id": 83326,
+        "lastName": "Elam",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11557,
+          "estimatedVotesLow": 9448,
+          "estimatedVotesMid": 10498,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lucy",
+        "id": 83328,
+        "lastName": "Bauer",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11557,
+          "estimatedVotesLow": 9448,
+          "estimatedVotesMid": 10498,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ky",
+        "id": 83329,
+        "lastName": "Holland",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9264,
+          "estimatedVotesLow": 7567,
+          "estimatedVotesMid": 8408,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Charles",
+        "id": 83331,
+        "lastName": "Kopp",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9264,
+          "estimatedVotesLow": 7567,
+          "estimatedVotesMid": 8408,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Craig",
+        "id": 22940,
+        "lastName": "Johnson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9926,
+          "estimatedVotesLow": 8122,
+          "estimatedVotesMid": 9025,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Julie",
+        "id": 29777,
+        "lastName": "Coulombe",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9926,
+          "estimatedVotesLow": 8122,
+          "estimatedVotesMid": 9025,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Walter",
+        "id": 83332,
+        "lastName": "Featherly",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9027,
+          "estimatedVotesLow": 7384,
+          "estimatedVotesMid": 8204,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joseph",
+        "id": 83333,
+        "lastName": "Lurtsema",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9027,
+          "estimatedVotesLow": 7384,
+          "estimatedVotesMid": 8204,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Calvin",
+        "id": 83334,
+        "lastName": "Schrage",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8263,
+          "estimatedVotesLow": 6754,
+          "estimatedVotesMid": 7505,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Heather",
+        "id": 83335,
+        "lastName": "Gottshall",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8263,
+          "estimatedVotesLow": 6754,
+          "estimatedVotesMid": 7505,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Andrew",
+        "id": 46879,
+        "lastName": "Josephson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8295,
+          "estimatedVotesLow": 6780,
+          "estimatedVotesMid": 7534,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Alyse",
+        "id": 83336,
+        "lastName": "Galvin",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8295,
+          "estimatedVotesLow": 6780,
+          "estimatedVotesMid": 7534,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Harry",
+        "id": 83337,
+        "lastName": "Kamdem",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9616,
+          "estimatedVotesLow": 7867,
+          "estimatedVotesMid": 8741,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Denny",
+        "id": 29785,
+        "lastName": "Wells",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9616,
+          "estimatedVotesLow": 7867,
+          "estimatedVotesMid": 8741,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mia",
+        "id": 29728,
+        "lastName": "Costello",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9616,
+          "estimatedVotesLow": 7867,
+          "estimatedVotesMid": 8741,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Dustin",
+        "id": 83338,
+        "lastName": "Darden",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9724,
+          "estimatedVotesLow": 7955,
+          "estimatedVotesMid": 8838,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Carolyn",
+        "id": 83339,
+        "lastName": "Hall",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9724,
+          "estimatedVotesLow": 7955,
+          "estimatedVotesMid": 8838,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nick",
+        "id": 83340,
+        "lastName": "Moe",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Zack",
+        "id": 29793,
+        "lastName": "Fields",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4200,
+          "estimatedVotesLow": 3449,
+          "estimatedVotesMid": 3833,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 29796,
+        "lastName": "Nelson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4200,
+          "estimatedVotesLow": 3449,
+          "estimatedVotesMid": 3833,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cliff",
+        "id": 29795,
+        "lastName": "Groh",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5516,
+          "estimatedVotesLow": 4530,
+          "estimatedVotesMid": 5034,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Russell",
+        "id": 83343,
+        "lastName": "Wyatt",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5516,
+          "estimatedVotesLow": 4530,
+          "estimatedVotesMid": 5034,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Genevieve",
+        "id": 29797,
+        "lastName": "Mina",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5516,
+          "estimatedVotesLow": 4530,
+          "estimatedVotesMid": 5034,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kaylee",
+        "id": 83342,
+        "lastName": "Anderson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7383,
+          "estimatedVotesLow": 6035,
+          "estimatedVotesMid": 6705,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Andrew",
+        "id": 29799,
+        "lastName": "Gray",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7383,
+          "estimatedVotesLow": 6035,
+          "estimatedVotesMid": 6705,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Scott",
+        "id": 29802,
+        "lastName": "Kohlhaas",
+        "partyName": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9123,
+          "estimatedVotesLow": 7474,
+          "estimatedVotesMid": 8304,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Donna",
+        "id": 29803,
+        "lastName": "Mears",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9123,
+          "estimatedVotesLow": 7474,
+          "estimatedVotesMid": 8304,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Aimee",
+        "id": 101858,
+        "lastName": "Sims",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5544,
+          "estimatedVotesLow": 4553,
+          "estimatedVotesMid": 5059,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ted",
+        "id": 29806,
+        "lastName": "Eischeid",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5544,
+          "estimatedVotesLow": 4553,
+          "estimatedVotesMid": 5059,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Stanley",
+        "id": 29808,
+        "lastName": "Wright",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9555,
+          "estimatedVotesLow": 7820,
+          "estimatedVotesMid": 8689,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jamie",
+        "id": 29809,
+        "lastName": "Allard",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9555,
+          "estimatedVotesLow": 7820,
+          "estimatedVotesMid": 8689,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jim",
+        "id": 83345,
+        "lastName": "Arlington",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Dan",
+        "id": 29813,
+        "lastName": "Saddler",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Delena",
+        "id": 29814,
+        "lastName": "Johnson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cathy",
+        "id": 29816,
+        "lastName": "Tilton",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11525,
+          "estimatedVotesLow": 9432,
+          "estimatedVotesMid": 10480,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 29818,
+        "lastName": "Eastman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11525,
+          "estimatedVotesLow": 9432,
+          "estimatedVotesMid": 10480,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jubilee",
+        "id": 83346,
+        "lastName": "Underwood",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8619,
+          "estimatedVotesLow": 7045,
+          "estimatedVotesMid": 7828,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jessica",
+        "id": 29824,
+        "lastName": "Wright",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8619,
+          "estimatedVotesLow": 7045,
+          "estimatedVotesMid": 7828,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Steve",
+        "id": 29822,
+        "lastName": "Menard",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8619,
+          "estimatedVotesLow": 7045,
+          "estimatedVotesMid": 7828,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Elexie",
+        "id": 83347,
+        "lastName": "Moore",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "George",
+        "id": 29825,
+        "lastName": "Rauscher",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8203,
+          "estimatedVotesLow": 6710,
+          "estimatedVotesMid": 7455,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Doyle",
+        "id": 29829,
+        "lastName": "Holmes",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8203,
+          "estimatedVotesLow": 6710,
+          "estimatedVotesMid": 7455,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kevin",
+        "id": 29828,
+        "lastName": "McCabe",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6733,
+          "estimatedVotesLow": 5513,
+          "estimatedVotesMid": 6125,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bart",
+        "id": 29831,
+        "lastName": "LeBon",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6733,
+          "estimatedVotesLow": 5513,
+          "estimatedVotesMid": 6125,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Maxine",
+        "id": 29830,
+        "lastName": "Dibert",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4129,
+          "estimatedVotesLow": 3391,
+          "estimatedVotesMid": 3768,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Will",
+        "id": 29835,
+        "lastName": "Stapp",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4129,
+          "estimatedVotesLow": 3391,
+          "estimatedVotesMid": 3768,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Gary",
+        "id": 83349,
+        "lastName": "Damron",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Glenn",
+        "id": 29836,
+        "lastName": "Prax",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T14:32:22.336Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8158,
+          "estimatedVotesLow": 6673,
+          "estimatedVotesMid": 7414,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Frank",
+        "id": 29839,
+        "lastName": "Tomaszewski",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8158,
+          "estimatedVotesLow": 6673,
+          "estimatedVotesMid": 7414,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joy",
+        "id": 83350,
+        "lastName": "Cottle",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10144,
+          "estimatedVotesLow": 8296,
+          "estimatedVotesMid": 9218,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ashley",
+        "id": 29840,
+        "lastName": "Carrick",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10144,
+          "estimatedVotesLow": 8296,
+          "estimatedVotesMid": 9218,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ruben",
+        "id": 29842,
+        "lastName": "McNeill",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8166,
+          "estimatedVotesLow": 6679,
+          "estimatedVotesMid": 7421,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "James",
+        "id": 83352,
+        "lastName": "Fields",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8166,
+          "estimatedVotesLow": 6679,
+          "estimatedVotesMid": 7421,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brandon",
+        "id": 83354,
+        "lastName": "Kowalski",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8166,
+          "estimatedVotesLow": 6679,
+          "estimatedVotesMid": 7421,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Becky",
+        "id": 101859,
+        "lastName": "Schwanke",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8166,
+          "estimatedVotesLow": 6679,
+          "estimatedVotesMid": 7421,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Pamela",
+        "id": 83353,
+        "lastName": "Goode",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "36",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5386,
+          "estimatedVotesLow": 4410,
+          "estimatedVotesMid": 4900,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Darren",
+        "id": 83358,
+        "lastName": "Deacon",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5386,
+          "estimatedVotesLow": 4410,
+          "estimatedVotesMid": 4900,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bryce",
+        "id": 29847,
+        "lastName": "Edgmon",
+        "partyName": "Independent",
+        "votes": 0
+      }
+    ],
+    "district": "37",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3795,
+          "estimatedVotesLow": 3117,
+          "estimatedVotesMid": 3463,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Victoria",
+        "id": 83362,
+        "lastName": "Sosa",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3795,
+          "estimatedVotesLow": 3117,
+          "estimatedVotesMid": 3463,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Willy",
+        "id": 101860,
+        "lastName": "Keppel",
+        "partyName": "Veterans",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3795,
+          "estimatedVotesLow": 3117,
+          "estimatedVotesMid": 3463,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nellie",
+        "id": 83359,
+        "lastName": "Jimmie",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3795,
+          "estimatedVotesLow": 3117,
+          "estimatedVotesMid": 3463,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Conrad",
+        "id": 29848,
+        "lastName": "McCormick",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "38",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3847,
+          "estimatedVotesLow": 3146,
+          "estimatedVotesMid": 3496,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Neal",
+        "id": 29849,
+        "lastName": "Foster",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3847,
+          "estimatedVotesLow": 3146,
+          "estimatedVotesMid": 3496,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tyler",
+        "id": 29850,
+        "lastName": "Ivanoff",
+        "partyName": "Alaska Independence Party",
+        "votes": 0
+      }
+    ],
+    "district": "39",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3913,
+          "estimatedVotesLow": 3214,
+          "estimatedVotesMid": 3571,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robyn",
+        "id": 83364,
+        "lastName": "Burke",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3913,
+          "estimatedVotesLow": 3214,
+          "estimatedVotesMid": 3571,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Thomas",
+        "id": 83363,
+        "lastName": "Baker",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3913,
+          "estimatedVotesLow": 3214,
+          "estimatedVotesMid": 3571,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Saima",
+        "id": 83365,
+        "lastName": "Chase",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "40",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T17:58:43.978Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

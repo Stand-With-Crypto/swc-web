@@ -1,1 +1,3042 @@
-[{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":1319687,"estimatedVotesLow":1079794,"estimatedVotesMid":1199577,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Chris","id":44716,"lastName":"Cunningham","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":1319687,"estimatedVotesLow":1079794,"estimatedVotesMid":1199577,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Janine","id":84952,"lastName":"Hansen","partyName":"American Independent Party","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":1319687,"estimatedVotesLow":1079794,"estimatedVotesMid":1199577,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jacky","id":1463,"lastName":"Rosen","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":1319687,"estimatedVotesLow":1079794,"estimatedVotesMid":1199577,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sam","id":23446,"lastName":"Brown","partyName":"Republican","votes":0}],"district":"","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:33:53.667Z","office":{"officeId":"4","officeName":"US Senate","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":300920,"estimatedVotesLow":245829,"estimatedVotesMid":273120,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":85051,"lastName":"Havlicek","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":300920,"estimatedVotesLow":245829,"estimatedVotesMid":273120,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Dina","id":1459,"lastName":"Titus","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":300920,"estimatedVotesLow":245829,"estimatedVotesMid":273120,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ron","id":85054,"lastName":"Quince","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":300920,"estimatedVotesLow":245829,"estimatedVotesMid":273120,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":85053,"lastName":"Goossen","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":300920,"estimatedVotesLow":245829,"estimatedVotesMid":273120,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mark","id":23463,"lastName":"Robertson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":300920,"estimatedVotesLow":245829,"estimatedVotesMid":273120,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Bill","id":85050,"lastName":"Hoge","partyName":"Independent American","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":377114,"estimatedVotesLow":308488,"estimatedVotesMid":342750,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Greg","id":85057,"lastName":"Kidd","partyName":"Independent","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":377114,"estimatedVotesLow":308488,"estimatedVotesMid":342750,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Javi","id":47451,"lastName":"Tachiquin","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":377114,"estimatedVotesLow":308488,"estimatedVotesMid":342750,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lynn","id":85056,"lastName":"Chapman","partyName":"Independent American","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":377114,"estimatedVotesLow":308488,"estimatedVotesMid":342750,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Mark","id":1462,"lastName":"Amodei","partyName":"Republican","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":340974,"estimatedVotesLow":279091,"estimatedVotesMid":309964,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Susie","id":112,"lastName":"Lee","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":340974,"estimatedVotesLow":279091,"estimatedVotesMid":309964,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Drew","id":85058,"lastName":"Johnson","partyName":"Republican","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":307755,"estimatedVotesLow":251415,"estimatedVotesMid":279328,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Steven","id":9763,"lastName":"Horsford","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":307755,"estimatedVotesLow":251415,"estimatedVotesMid":279328,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":18953,"lastName":"Lee","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":307755,"estimatedVotesLow":251415,"estimatedVotesMid":279328,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Timothy","id":85059,"lastName":"Ferreira","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":307755,"estimatedVotesLow":251415,"estimatedVotesMid":279328,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Russell","id":10837,"lastName":"Best","partyName":"Independent American","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"3","officeName":"US House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":60457,"estimatedVotesLow":49389,"estimatedVotesMid":54872,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Michelee","id":75504,"lastName":"Crawford","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":60457,"estimatedVotesLow":49389,"estimatedVotesMid":54872,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Patricia","id":75505,"lastName":"Brinkley","partyName":"Republican","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":51318,"estimatedVotesLow":41940,"estimatedVotesMid":46596,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Keya","id":102043,"lastName":"Jones","partyName":"No Party Affiliation","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":51318,"estimatedVotesLow":41940,"estimatedVotesMid":46596,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brent","id":75507,"lastName":"Howard","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":51318,"estimatedVotesLow":41940,"estimatedVotesMid":46596,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Rochelle","id":45980,"lastName":"Nguyen","partyName":"Democratic","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:16.520Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Dina","id":75508,"lastName":"Neal","partyName":"Democratic","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72053,"estimatedVotesLow":58943,"estimatedVotesMid":65457,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jennifer","id":75510,"lastName":"Atlas","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":72053,"estimatedVotesLow":58943,"estimatedVotesMid":65457,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Carrie","id":75513,"lastName":"Buck","partyName":"Republican","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":67327,"estimatedVotesLow":55077,"estimatedVotesMid":61222,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jill","id":75515,"lastName":"Douglass","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":67327,"estimatedVotesLow":55077,"estimatedVotesMid":61222,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brad","id":102044,"lastName":"Barnhill","partyName":"American Independent Party","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":67327,"estimatedVotesLow":55077,"estimatedVotesMid":61222,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Nicole","id":75514,"lastName":"Cannizzaro","partyName":"Democratic","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":48744,"estimatedVotesLow":39872,"estimatedVotesMid":44338,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Leo","id":23524,"lastName":"Henderson","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":48744,"estimatedVotesLow":39872,"estimatedVotesMid":44338,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Roberta","id":75517,"lastName":"Lange","partyName":"Democratic","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":67958,"estimatedVotesLow":55624,"estimatedVotesMid":61829,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lori","id":75520,"lastName":"Rogich","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":67958,"estimatedVotesLow":55624,"estimatedVotesMid":61829,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Dallas","id":75518,"lastName":"Harris","partyName":"Democratic","votes":0}],"district":"11","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":66954,"estimatedVotesLow":54812,"estimatedVotesMid":60858,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Michael","id":75523,"lastName":"Ginsburg","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":66954,"estimatedVotesLow":54812,"estimatedVotesMid":60858,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Angie","id":45997,"lastName":"Taylor","partyName":"Democratic","votes":0}],"district":"15","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":74712,"estimatedVotesLow":61104,"estimatedVotesMid":67905,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":75529,"lastName":"Steinbeck","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":74712,"estimatedVotesLow":61104,"estimatedVotesMid":67905,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ronald","id":75525,"lastName":"Bilodeau","partyName":"Democratic","votes":0}],"district":"18","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:35:56.946Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"John","id":75530,"lastName":"Ellison","partyName":"Republican","votes":0}],"district":"19","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-09T19:16:43.249Z","office":{"officeId":"10","officeName":"State Senate","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":34571,"estimatedVotesLow":28280,"estimatedVotesMid":31436,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Garland","id":23572,"lastName":"Brinkley","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":34571,"estimatedVotesLow":28280,"estimatedVotesMid":31436,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Daniele","id":45965,"lastName":"Monroe-Moreno","partyName":"Democratic","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":36351,"estimatedVotesLow":29753,"estimatedVotesMid":33034,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ron","id":75532,"lastName":"Nelsen","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":36351,"estimatedVotesLow":29753,"estimatedVotesMid":33034,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Heidi","id":23575,"lastName":"Kasama","partyName":"Republican","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:16.520Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":26539,"estimatedVotesLow":21680,"estimatedVotesMid":24087,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Michele","id":102045,"lastName":"Rizza","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":26539,"estimatedVotesLow":21680,"estimatedVotesMid":24087,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Selena","id":23543,"lastName":"Torres","partyName":"Democratic","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":36893,"estimatedVotesLow":30173,"estimatedVotesMid":33531,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lisa","id":75535,"lastName":"Cole","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":36893,"estimatedVotesLow":30173,"estimatedVotesMid":33531,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ryan","id":75534,"lastName":"Hampton","partyName":"Democratic","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:34:00.457Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":30565,"estimatedVotesLow":24980,"estimatedVotesMid":27766,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kelly","id":23578,"lastName":"Quinn","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":30565,"estimatedVotesLow":24980,"estimatedVotesMid":27766,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brittney","id":45972,"lastName":"Miller","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":30565,"estimatedVotesLow":24980,"estimatedVotesMid":27766,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ronald","id":45973,"lastName":"Morgan","partyName":"Libertarian","votes":0}],"district":"5","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":16835,"estimatedVotesLow":13693,"estimatedVotesMid":15211,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jovan","id":75537,"lastName":"Jackson","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":16835,"estimatedVotesLow":13693,"estimatedVotesMid":15211,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Nephi","id":75539,"lastName":"Oliva","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":16835,"estimatedVotesLow":13693,"estimatedVotesMid":15211,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Walter","id":102046,"lastName":"Jones III","partyName":"No Party Affiliation","votes":0}],"district":"6","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:16.520Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tanya","id":75540,"lastName":"Flanagan","partyName":"Democratic","votes":0}],"district":"7","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":31594,"estimatedVotesLow":25810,"estimatedVotesMid":28675,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kelly","id":75541,"lastName":"Chapman","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":31594,"estimatedVotesLow":25810,"estimatedVotesMid":28675,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Duy","id":45978,"lastName":"Nguyen","partyName":"Democratic","votes":0}],"district":"8","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:08.423Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":31894,"estimatedVotesLow":26106,"estimatedVotesMid":28994,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Steve","id":45979,"lastName":"Yeager","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":31894,"estimatedVotesLow":26106,"estimatedVotesMid":28994,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Erica","id":75544,"lastName":"Neely","partyName":"Republican","votes":0}],"district":"9","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":24435,"estimatedVotesLow":20009,"estimatedVotesMid":22249,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sean","id":102047,"lastName":"Moore","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":24435,"estimatedVotesLow":20009,"estimatedVotesMid":22249,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Venise","id":75545,"lastName":"Karris","partyName":"Democratic","votes":0}],"district":"10","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:35:56.946Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15335,"estimatedVotesLow":12473,"estimatedVotesMid":13856,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Cinthia","id":75548,"lastName":"Moore","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":15335,"estimatedVotesLow":12473,"estimatedVotesMid":13856,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jeffrey","id":75549,"lastName":"Lustick","partyName":"Republican","votes":0}],"district":"11","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":28909,"estimatedVotesLow":23658,"estimatedVotesMid":26281,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Nancy","id":75552,"lastName":"Roecker","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":28909,"estimatedVotesLow":23658,"estimatedVotesMid":26281,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Max","id":75551,"lastName":"Carter II","partyName":"Democratic","votes":0}],"district":"12","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:05.780Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":37872,"estimatedVotesLow":30974,"estimatedVotesMid":34421,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brian","id":23592,"lastName":"Hibbetts","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":37872,"estimatedVotesLow":30974,"estimatedVotesMid":34421,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Daniel","id":23548,"lastName":"Andrews","partyName":"Democratic","votes":0}],"district":"13","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:35:56.946Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Erica","id":23552,"lastName":"Mosca","partyName":"Democratic","votes":0}],"district":"14","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-09T19:16:43.249Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18238,"estimatedVotesLow":14834,"estimatedVotesMid":16479,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jordy","id":102048,"lastName":"de la Caridad Viciedo Prado","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18238,"estimatedVotesLow":14834,"estimatedVotesMid":16479,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Melissa","id":75555,"lastName":"Spence","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":18238,"estimatedVotesLow":14834,"estimatedVotesMid":16479,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Howard","id":75554,"lastName":"Watts III","partyName":"Democratic","votes":0}],"district":"15","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":25968,"estimatedVotesLow":21265,"estimatedVotesMid":23645,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jose","id":102049,"lastName":"Pena","partyName":"Libertarian","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":25968,"estimatedVotesLow":21265,"estimatedVotesMid":23645,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"James","id":75556,"lastName":"Neville","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":25968,"estimatedVotesLow":21265,"estimatedVotesMid":23645,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Cecelia","id":23555,"lastName":"González","partyName":"Democratic","votes":0}],"district":"16","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:35:56.946Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":27147,"estimatedVotesLow":22221,"estimatedVotesMid":24689,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Linda","id":75557,"lastName":"Hunt","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":27147,"estimatedVotesLow":22221,"estimatedVotesMid":24689,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Robert","id":27343,"lastName":"Olson","partyName":"Republican","votes":0}],"district":"17","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:35:56.946Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":25730,"estimatedVotesLow":21061,"estimatedVotesMid":23401,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Antario","id":75560,"lastName":"Brown","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":25730,"estimatedVotesLow":21061,"estimatedVotesMid":23401,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Venicia","id":45987,"lastName":"Considine","partyName":"Democratic","votes":0}],"district":"18","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:05.780Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Thaddeus","id":23601,"lastName":"Yurek","partyName":"Republican","votes":0}],"district":"19","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-09T19:16:43.249Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":24313,"estimatedVotesLow":19888,"estimatedVotesMid":22116,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Stan","id":45989,"lastName":"Vaughan","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":24313,"estimatedVotesLow":19888,"estimatedVotesMid":22116,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":23557,"lastName":"Orentlicher","partyName":"Democratic","votes":0}],"district":"20","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":33836,"estimatedVotesLow":27640,"estimatedVotesMid":30703,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Elaine","id":45991,"lastName":"Marzola","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":33836,"estimatedVotesLow":27640,"estimatedVotesMid":30703,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"April","id":23535,"lastName":"Arndt","partyName":"Republican","votes":0}],"district":"21","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:00.047Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Melissa","id":45993,"lastName":"Hardy","partyName":"Republican","votes":0}],"district":"22","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Danielle","id":23606,"lastName":"Gallant","partyName":"Republican","votes":0}],"district":"23","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":24114,"estimatedVotesLow":19734,"estimatedVotesMid":21925,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Terisia","id":75562,"lastName":"Kolesnick","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":24114,"estimatedVotesLow":19734,"estimatedVotesMid":21925,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Erica","id":75561,"lastName":"Roth","partyName":"Democratic","votes":0}],"district":"24","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:34:00.457Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":37764,"estimatedVotesLow":30894,"estimatedVotesMid":34336,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Diana","id":102050,"lastName":"Sande","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":37764,"estimatedVotesLow":30894,"estimatedVotesMid":34336,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Selena","id":23562,"lastName":"La Rue Hatch","partyName":"Democratic","votes":0}],"district":"25","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:35:56.946Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":44057,"estimatedVotesLow":36047,"estimatedVotesMid":40063,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Rich","id":23612,"lastName":"DeLong","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":44057,"estimatedVotesLow":36047,"estimatedVotesMid":40063,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Diane","id":75566,"lastName":"Sullivan","partyName":"Democratic","votes":0}],"district":"26","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:16.520Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":29587,"estimatedVotesLow":24219,"estimatedVotesMid":26922,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Carmen","id":45998,"lastName":"Ortiz","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":29587,"estimatedVotesLow":24219,"estimatedVotesMid":26922,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Heather","id":75567,"lastName":"Goulding","partyName":"Democratic","votes":0}],"district":"27","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:34:00.457Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Reuben","id":9810,"lastName":"D'Silva","partyName":"Democratic","votes":0}],"district":"28","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":31695,"estimatedVotesLow":25944,"estimatedVotesMid":28850,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Joe","id":23569,"lastName":"Dalia","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":31695,"estimatedVotesLow":25944,"estimatedVotesMid":28850,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Annette","id":75569,"lastName":"Owens","partyName":"Republican","votes":0}],"district":"29","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Natha","id":46000,"lastName":"Anderson","partyName":"Democratic","votes":0}],"district":"30","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-09T19:16:43.249Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":41095,"estimatedVotesLow":33607,"estimatedVotesMid":37356,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Stuart","id":23484,"lastName":"MacKie","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":41095,"estimatedVotesLow":33607,"estimatedVotesMid":37356,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Jill","id":46003,"lastName":"Dickman","partyName":"Republican","votes":0}],"district":"31","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:16.520Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":34612,"estimatedVotesLow":28301,"estimatedVotesMid":31462,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Arnold","id":75572,"lastName":"Thomas","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":34612,"estimatedVotesLow":28301,"estimatedVotesMid":31462,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Alexis","id":46004,"lastName":"Hansen","partyName":"Republican","votes":0}],"district":"32","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:05.780Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":32929,"estimatedVotesLow":26940,"estimatedVotesMid":29927,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Bert","id":23618,"lastName":"Gurr","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":32929,"estimatedVotesLow":26940,"estimatedVotesMid":29927,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Darryl","id":44357,"lastName":"Baber","partyName":"Libertarian","votes":0}],"district":"33","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":29970,"estimatedVotesLow":24532,"estimatedVotesMid":27280,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Hanadi","id":75574,"lastName":"Nadeem","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":29970,"estimatedVotesLow":24532,"estimatedVotesMid":27280,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Brandon","id":75575,"lastName":"Davis","partyName":"Republican","votes":0}],"district":"34","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:35:56.946Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":35548,"estimatedVotesLow":29066,"estimatedVotesMid":32313,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sharifa","id":75577,"lastName":"Wahab","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":35548,"estimatedVotesLow":29066,"estimatedVotesMid":32313,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Rebecca","id":75578,"lastName":"Edgeworth","partyName":"Republican","votes":0}],"district":"35","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:05.780Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":39871,"estimatedVotesLow":32629,"estimatedVotesMid":36253,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Marlene","id":75579,"lastName":"Drake","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":39871,"estimatedVotesLow":32629,"estimatedVotesMid":36253,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Gregory","id":23625,"lastName":"Hafen","partyName":"Republican","votes":0}],"district":"36","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":37865,"estimatedVotesLow":30992,"estimatedVotesMid":34416,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"David","id":23462,"lastName":"Brog","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":37865,"estimatedVotesLow":30992,"estimatedVotesMid":34416,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Shea","id":46009,"lastName":"Backus","partyName":"Democratic","votes":0}],"district":"37","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:01.593Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Gregory","id":23631,"lastName":"Koenig","partyName":"Republican","votes":0}],"district":"38","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-09T19:16:43.249Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":43967,"estimatedVotesLow":35973,"estimatedVotesMid":39967,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Erich","id":75580,"lastName":"Obermayr","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":43967,"estimatedVotesLow":35973,"estimatedVotesMid":39967,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Ken","id":23632,"lastName":"Gray","partyName":"Republican","votes":0}],"district":"39","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:16.520Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":38167,"estimatedVotesLow":31229,"estimatedVotesMid":34700,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Philip","id":23634,"lastName":"O'Neill","partyName":"Republican","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":38167,"estimatedVotesLow":31229,"estimatedVotesMid":34700,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Katherine","id":75581,"lastName":"Ramsey","partyName":"Democratic","votes":0}],"district":"40","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":33970,"estimatedVotesLow":27805,"estimatedVotesMid":30906,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Sandra","id":46014,"lastName":"Jauregui","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":33970,"estimatedVotesLow":27805,"estimatedVotesMid":30906,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Rafael","id":75584,"lastName":"Arroyo-Montalvo","partyName":"Republican","votes":0}],"district":"41","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":29025,"estimatedVotesLow":23752,"estimatedVotesMid":26386,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tracy","id":23570,"lastName":"Brown-May","partyName":"Democratic","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":29025,"estimatedVotesLow":23752,"estimatedVotesMid":26386,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Kevin","id":75585,"lastName":"Child","partyName":"Republican","votes":0}],"district":"42","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:03.109Z","office":{"officeId":"9","officeName":"State House","officeTypeId":"2"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Elissa","id":102107,"lastName":"Cadish","partyName":"Nonpartisan","votes":0}],"district":"Seat C","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"30","officeName":"State Supreme Court","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Patricia","id":102108,"lastName":"Lee","partyName":"Nonpartisan","votes":0}],"district":"Seat F","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"30","officeName":"State Supreme Court","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Lidia","id":102109,"lastName":"Stiglich","partyName":"Nonpartisan","votes":0}],"district":"Seat G","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"30","officeName":"State Supreme Court","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":913541,"estimatedVotesLow":747590,"estimatedVotesMid":830476,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tricia","id":77887,"lastName":"Braxton","partyName":"Nonpartisan","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":913541,"estimatedVotesLow":747590,"estimatedVotesMid":830476,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Timothy","id":77888,"lastName":"Underwood Jr.","partyName":"Nonpartisan","votes":0}],"district":"1","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:12.088Z","office":{"officeId":"151","officeName":"State Board of Education","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":376188,"estimatedVotesLow":307729,"estimatedVotesMid":341907,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Paul","id":77890,"lastName":"Davis","partyName":"Nonpartisan","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":376188,"estimatedVotesLow":307729,"estimatedVotesMid":341907,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Angela","id":77892,"lastName":"Orr","partyName":"Nonpartisan","votes":0}],"district":"2","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:34:00.457Z","office":{"officeId":"151","officeName":"State Board of Education","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":913541,"estimatedVotesLow":747590,"estimatedVotesMid":830476,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Rene","id":77893,"lastName":"Cantu","partyName":"Nonpartisan","votes":0},{"elected":false,"estimatedVotes":{"estimatedVotesHigh":913541,"estimatedVotesLow":747590,"estimatedVotesMid":830476,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Danielle","id":77894,"lastName":"Ford","partyName":"Nonpartisan","votes":0}],"district":"3","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-14T18:36:05.780Z","office":{"officeId":"151","officeName":"State Board of Education","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024},{"calledCandidate":null,"candidatesWithVotes":[{"elected":false,"estimatedVotes":{"estimatedVotesHigh":0,"estimatedVotesLow":0,"estimatedVotesMid":0,"turnoutHigh":0,"turnoutLow":0,"turnoutMid":0},"firstName":"Tim","id":102110,"lastName":"Hughes","partyName":"Nonpartisan","votes":0}],"district":"4","electionType":{"electionType":"General Election","electionTypeId":"1"},"lastUpdated":"2024-10-03T15:01:52.670Z","office":{"officeId":"151","officeName":"State Board of Education","officeTypeId":"1"},"partyName":null,"raceDate":"2024-11-05","state":"NV","stateName":"Nevada","totalVotes":0,"year":2024}]
+[
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1319687,
+          "estimatedVotesLow": 1079794,
+          "estimatedVotesMid": 1199577,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Chris",
+        "id": 44716,
+        "lastName": "Cunningham",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1319687,
+          "estimatedVotesLow": 1079794,
+          "estimatedVotesMid": 1199577,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Janine",
+        "id": 84952,
+        "lastName": "Hansen",
+        "partyName": "American Independent Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1319687,
+          "estimatedVotesLow": 1079794,
+          "estimatedVotesMid": 1199577,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jacky",
+        "id": 1463,
+        "lastName": "Rosen",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1319687,
+          "estimatedVotesLow": 1079794,
+          "estimatedVotesMid": 1199577,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sam",
+        "id": 23446,
+        "lastName": "Brown",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:33:53.667Z",
+    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 300920,
+          "estimatedVotesLow": 245829,
+          "estimatedVotesMid": 273120,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 85051,
+        "lastName": "Havlicek",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 300920,
+          "estimatedVotesLow": 245829,
+          "estimatedVotesMid": 273120,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Dina",
+        "id": 1459,
+        "lastName": "Titus",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 300920,
+          "estimatedVotesLow": 245829,
+          "estimatedVotesMid": 273120,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ron",
+        "id": 85054,
+        "lastName": "Quince",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 300920,
+          "estimatedVotesLow": 245829,
+          "estimatedVotesMid": 273120,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 85053,
+        "lastName": "Goossen",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 300920,
+          "estimatedVotesLow": 245829,
+          "estimatedVotesMid": 273120,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mark",
+        "id": 23463,
+        "lastName": "Robertson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 300920,
+          "estimatedVotesLow": 245829,
+          "estimatedVotesMid": 273120,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bill",
+        "id": 85050,
+        "lastName": "Hoge",
+        "partyName": "Independent American",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 377114,
+          "estimatedVotesLow": 308488,
+          "estimatedVotesMid": 342750,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Greg",
+        "id": 85057,
+        "lastName": "Kidd",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 377114,
+          "estimatedVotesLow": 308488,
+          "estimatedVotesMid": 342750,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Javi",
+        "id": 47451,
+        "lastName": "Tachiquin",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 377114,
+          "estimatedVotesLow": 308488,
+          "estimatedVotesMid": 342750,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lynn",
+        "id": 85056,
+        "lastName": "Chapman",
+        "partyName": "Independent American",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 377114,
+          "estimatedVotesLow": 308488,
+          "estimatedVotesMid": 342750,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mark",
+        "id": 1462,
+        "lastName": "Amodei",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 340974,
+          "estimatedVotesLow": 279091,
+          "estimatedVotesMid": 309964,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Susie",
+        "id": 112,
+        "lastName": "Lee",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 340974,
+          "estimatedVotesLow": 279091,
+          "estimatedVotesMid": 309964,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Drew",
+        "id": 85058,
+        "lastName": "Johnson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 307755,
+          "estimatedVotesLow": 251415,
+          "estimatedVotesMid": 279328,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Steven",
+        "id": 9763,
+        "lastName": "Horsford",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 307755,
+          "estimatedVotesLow": 251415,
+          "estimatedVotesMid": 279328,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 18953,
+        "lastName": "Lee",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 307755,
+          "estimatedVotesLow": 251415,
+          "estimatedVotesMid": 279328,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Timothy",
+        "id": 85059,
+        "lastName": "Ferreira",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 307755,
+          "estimatedVotesLow": 251415,
+          "estimatedVotesMid": 279328,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Russell",
+        "id": 10837,
+        "lastName": "Best",
+        "partyName": "Independent American",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 60457,
+          "estimatedVotesLow": 49389,
+          "estimatedVotesMid": 54872,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Michelee",
+        "id": 75504,
+        "lastName": "Crawford",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 60457,
+          "estimatedVotesLow": 49389,
+          "estimatedVotesMid": 54872,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Patricia",
+        "id": 75505,
+        "lastName": "Brinkley",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 51318,
+          "estimatedVotesLow": 41940,
+          "estimatedVotesMid": 46596,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Keya",
+        "id": 102043,
+        "lastName": "Jones",
+        "partyName": "No Party Affiliation",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 51318,
+          "estimatedVotesLow": 41940,
+          "estimatedVotesMid": 46596,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brent",
+        "id": 75507,
+        "lastName": "Howard",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 51318,
+          "estimatedVotesLow": 41940,
+          "estimatedVotesMid": 46596,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Rochelle",
+        "id": 45980,
+        "lastName": "Nguyen",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:16.520Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Dina",
+        "id": 75508,
+        "lastName": "Neal",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72053,
+          "estimatedVotesLow": 58943,
+          "estimatedVotesMid": 65457,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jennifer",
+        "id": 75510,
+        "lastName": "Atlas",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 72053,
+          "estimatedVotesLow": 58943,
+          "estimatedVotesMid": 65457,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Carrie",
+        "id": 75513,
+        "lastName": "Buck",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 67327,
+          "estimatedVotesLow": 55077,
+          "estimatedVotesMid": 61222,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jill",
+        "id": 75515,
+        "lastName": "Douglass",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 67327,
+          "estimatedVotesLow": 55077,
+          "estimatedVotesMid": 61222,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brad",
+        "id": 102044,
+        "lastName": "Barnhill",
+        "partyName": "American Independent Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 67327,
+          "estimatedVotesLow": 55077,
+          "estimatedVotesMid": 61222,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nicole",
+        "id": 75514,
+        "lastName": "Cannizzaro",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 48744,
+          "estimatedVotesLow": 39872,
+          "estimatedVotesMid": 44338,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Leo",
+        "id": 23524,
+        "lastName": "Henderson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 48744,
+          "estimatedVotesLow": 39872,
+          "estimatedVotesMid": 44338,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Roberta",
+        "id": 75517,
+        "lastName": "Lange",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 67958,
+          "estimatedVotesLow": 55624,
+          "estimatedVotesMid": 61829,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lori",
+        "id": 75520,
+        "lastName": "Rogich",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 67958,
+          "estimatedVotesLow": 55624,
+          "estimatedVotesMid": 61829,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Dallas",
+        "id": 75518,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 66954,
+          "estimatedVotesLow": 54812,
+          "estimatedVotesMid": 60858,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Michael",
+        "id": 75523,
+        "lastName": "Ginsburg",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 66954,
+          "estimatedVotesLow": 54812,
+          "estimatedVotesMid": 60858,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Angie",
+        "id": 45997,
+        "lastName": "Taylor",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 74712,
+          "estimatedVotesLow": 61104,
+          "estimatedVotesMid": 67905,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 75529,
+        "lastName": "Steinbeck",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 74712,
+          "estimatedVotesLow": 61104,
+          "estimatedVotesMid": 67905,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ronald",
+        "id": 75525,
+        "lastName": "Bilodeau",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:35:56.946Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 75530,
+        "lastName": "Ellison",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:16:43.249Z",
+    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 34571,
+          "estimatedVotesLow": 28280,
+          "estimatedVotesMid": 31436,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Garland",
+        "id": 23572,
+        "lastName": "Brinkley",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 34571,
+          "estimatedVotesLow": 28280,
+          "estimatedVotesMid": 31436,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Daniele",
+        "id": 45965,
+        "lastName": "Monroe-Moreno",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 36351,
+          "estimatedVotesLow": 29753,
+          "estimatedVotesMid": 33034,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ron",
+        "id": 75532,
+        "lastName": "Nelsen",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 36351,
+          "estimatedVotesLow": 29753,
+          "estimatedVotesMid": 33034,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Heidi",
+        "id": 23575,
+        "lastName": "Kasama",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:16.520Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 26539,
+          "estimatedVotesLow": 21680,
+          "estimatedVotesMid": 24087,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Michele",
+        "id": 102045,
+        "lastName": "Rizza",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 26539,
+          "estimatedVotesLow": 21680,
+          "estimatedVotesMid": 24087,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Selena",
+        "id": 23543,
+        "lastName": "Torres",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 36893,
+          "estimatedVotesLow": 30173,
+          "estimatedVotesMid": 33531,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lisa",
+        "id": 75535,
+        "lastName": "Cole",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 36893,
+          "estimatedVotesLow": 30173,
+          "estimatedVotesMid": 33531,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ryan",
+        "id": 75534,
+        "lastName": "Hampton",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:34:00.457Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 30565,
+          "estimatedVotesLow": 24980,
+          "estimatedVotesMid": 27766,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kelly",
+        "id": 23578,
+        "lastName": "Quinn",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 30565,
+          "estimatedVotesLow": 24980,
+          "estimatedVotesMid": 27766,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brittney",
+        "id": 45972,
+        "lastName": "Miller",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 30565,
+          "estimatedVotesLow": 24980,
+          "estimatedVotesMid": 27766,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ronald",
+        "id": 45973,
+        "lastName": "Morgan",
+        "partyName": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16835,
+          "estimatedVotesLow": 13693,
+          "estimatedVotesMid": 15211,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jovan",
+        "id": 75537,
+        "lastName": "Jackson",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16835,
+          "estimatedVotesLow": 13693,
+          "estimatedVotesMid": 15211,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nephi",
+        "id": 75539,
+        "lastName": "Oliva",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16835,
+          "estimatedVotesLow": 13693,
+          "estimatedVotesMid": 15211,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Walter",
+        "id": 102046,
+        "lastName": "Jones III",
+        "partyName": "No Party Affiliation",
+        "votes": 0
+      }
+    ],
+    "district": "6",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:16.520Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tanya",
+        "id": 75540,
+        "lastName": "Flanagan",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 31594,
+          "estimatedVotesLow": 25810,
+          "estimatedVotesMid": 28675,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kelly",
+        "id": 75541,
+        "lastName": "Chapman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 31594,
+          "estimatedVotesLow": 25810,
+          "estimatedVotesMid": 28675,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Duy",
+        "id": 45978,
+        "lastName": "Nguyen",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "8",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:08.423Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 31894,
+          "estimatedVotesLow": 26106,
+          "estimatedVotesMid": 28994,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Steve",
+        "id": 45979,
+        "lastName": "Yeager",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 31894,
+          "estimatedVotesLow": 26106,
+          "estimatedVotesMid": 28994,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Erica",
+        "id": 75544,
+        "lastName": "Neely",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "9",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 24435,
+          "estimatedVotesLow": 20009,
+          "estimatedVotesMid": 22249,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sean",
+        "id": 102047,
+        "lastName": "Moore",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 24435,
+          "estimatedVotesLow": 20009,
+          "estimatedVotesMid": 22249,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Venise",
+        "id": 75545,
+        "lastName": "Karris",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "10",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:35:56.946Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15335,
+          "estimatedVotesLow": 12473,
+          "estimatedVotesMid": 13856,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cinthia",
+        "id": 75548,
+        "lastName": "Moore",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15335,
+          "estimatedVotesLow": 12473,
+          "estimatedVotesMid": 13856,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jeffrey",
+        "id": 75549,
+        "lastName": "Lustick",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "11",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 28909,
+          "estimatedVotesLow": 23658,
+          "estimatedVotesMid": 26281,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nancy",
+        "id": 75552,
+        "lastName": "Roecker",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 28909,
+          "estimatedVotesLow": 23658,
+          "estimatedVotesMid": 26281,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Max",
+        "id": 75551,
+        "lastName": "Carter II",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "12",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:05.780Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 37872,
+          "estimatedVotesLow": 30974,
+          "estimatedVotesMid": 34421,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brian",
+        "id": 23592,
+        "lastName": "Hibbetts",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 37872,
+          "estimatedVotesLow": 30974,
+          "estimatedVotesMid": 34421,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Daniel",
+        "id": 23548,
+        "lastName": "Andrews",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "13",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:35:56.946Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Erica",
+        "id": 23552,
+        "lastName": "Mosca",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "14",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:16:43.249Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18238,
+          "estimatedVotesLow": 14834,
+          "estimatedVotesMid": 16479,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jordy",
+        "id": 102048,
+        "lastName": "de la Caridad Viciedo Prado",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18238,
+          "estimatedVotesLow": 14834,
+          "estimatedVotesMid": 16479,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Melissa",
+        "id": 75555,
+        "lastName": "Spence",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18238,
+          "estimatedVotesLow": 14834,
+          "estimatedVotesMid": 16479,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Howard",
+        "id": 75554,
+        "lastName": "Watts III",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 25968,
+          "estimatedVotesLow": 21265,
+          "estimatedVotesMid": 23645,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jose",
+        "id": 102049,
+        "lastName": "Pena",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 25968,
+          "estimatedVotesLow": 21265,
+          "estimatedVotesMid": 23645,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "James",
+        "id": 75556,
+        "lastName": "Neville",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 25968,
+          "estimatedVotesLow": 21265,
+          "estimatedVotesMid": 23645,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cecelia",
+        "id": 23555,
+        "lastName": "González",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:35:56.946Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 27147,
+          "estimatedVotesLow": 22221,
+          "estimatedVotesMid": 24689,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Linda",
+        "id": 75557,
+        "lastName": "Hunt",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 27147,
+          "estimatedVotesLow": 22221,
+          "estimatedVotesMid": 24689,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert",
+        "id": 27343,
+        "lastName": "Olson",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "17",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:35:56.946Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 25730,
+          "estimatedVotesLow": 21061,
+          "estimatedVotesMid": 23401,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Antario",
+        "id": 75560,
+        "lastName": "Brown",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 25730,
+          "estimatedVotesLow": 21061,
+          "estimatedVotesMid": 23401,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Venicia",
+        "id": 45987,
+        "lastName": "Considine",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "18",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:05.780Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Thaddeus",
+        "id": 23601,
+        "lastName": "Yurek",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "19",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:16:43.249Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 24313,
+          "estimatedVotesLow": 19888,
+          "estimatedVotesMid": 22116,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Stan",
+        "id": 45989,
+        "lastName": "Vaughan",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 24313,
+          "estimatedVotesLow": 19888,
+          "estimatedVotesMid": 22116,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 23557,
+        "lastName": "Orentlicher",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "20",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 33836,
+          "estimatedVotesLow": 27640,
+          "estimatedVotesMid": 30703,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Elaine",
+        "id": 45991,
+        "lastName": "Marzola",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 33836,
+          "estimatedVotesLow": 27640,
+          "estimatedVotesMid": 30703,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "April",
+        "id": 23535,
+        "lastName": "Arndt",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "21",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:00.047Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Melissa",
+        "id": 45993,
+        "lastName": "Hardy",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "22",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Danielle",
+        "id": 23606,
+        "lastName": "Gallant",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "23",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 24114,
+          "estimatedVotesLow": 19734,
+          "estimatedVotesMid": 21925,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Terisia",
+        "id": 75562,
+        "lastName": "Kolesnick",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 24114,
+          "estimatedVotesLow": 19734,
+          "estimatedVotesMid": 21925,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Erica",
+        "id": 75561,
+        "lastName": "Roth",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "24",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:34:00.457Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 37764,
+          "estimatedVotesLow": 30894,
+          "estimatedVotesMid": 34336,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Diana",
+        "id": 102050,
+        "lastName": "Sande",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 37764,
+          "estimatedVotesLow": 30894,
+          "estimatedVotesMid": 34336,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Selena",
+        "id": 23562,
+        "lastName": "La Rue Hatch",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "25",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:35:56.946Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 44057,
+          "estimatedVotesLow": 36047,
+          "estimatedVotesMid": 40063,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Rich",
+        "id": 23612,
+        "lastName": "DeLong",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 44057,
+          "estimatedVotesLow": 36047,
+          "estimatedVotesMid": 40063,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Diane",
+        "id": 75566,
+        "lastName": "Sullivan",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "26",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:16.520Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 29587,
+          "estimatedVotesLow": 24219,
+          "estimatedVotesMid": 26922,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Carmen",
+        "id": 45998,
+        "lastName": "Ortiz",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 29587,
+          "estimatedVotesLow": 24219,
+          "estimatedVotesMid": 26922,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Heather",
+        "id": 75567,
+        "lastName": "Goulding",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "27",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:34:00.457Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Reuben",
+        "id": 9810,
+        "lastName": "D'Silva",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "28",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 31695,
+          "estimatedVotesLow": 25944,
+          "estimatedVotesMid": 28850,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joe",
+        "id": 23569,
+        "lastName": "Dalia",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 31695,
+          "estimatedVotesLow": 25944,
+          "estimatedVotesMid": 28850,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Annette",
+        "id": 75569,
+        "lastName": "Owens",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "29",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Natha",
+        "id": 46000,
+        "lastName": "Anderson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "30",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:16:43.249Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 41095,
+          "estimatedVotesLow": 33607,
+          "estimatedVotesMid": 37356,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Stuart",
+        "id": 23484,
+        "lastName": "MacKie",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 41095,
+          "estimatedVotesLow": 33607,
+          "estimatedVotesMid": 37356,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jill",
+        "id": 46003,
+        "lastName": "Dickman",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "31",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:16.520Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 34612,
+          "estimatedVotesLow": 28301,
+          "estimatedVotesMid": 31462,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Arnold",
+        "id": 75572,
+        "lastName": "Thomas",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 34612,
+          "estimatedVotesLow": 28301,
+          "estimatedVotesMid": 31462,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Alexis",
+        "id": 46004,
+        "lastName": "Hansen",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "32",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:05.780Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 32929,
+          "estimatedVotesLow": 26940,
+          "estimatedVotesMid": 29927,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bert",
+        "id": 23618,
+        "lastName": "Gurr",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 32929,
+          "estimatedVotesLow": 26940,
+          "estimatedVotesMid": 29927,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Darryl",
+        "id": 44357,
+        "lastName": "Baber",
+        "partyName": "Libertarian",
+        "votes": 0
+      }
+    ],
+    "district": "33",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 29970,
+          "estimatedVotesLow": 24532,
+          "estimatedVotesMid": 27280,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Hanadi",
+        "id": 75574,
+        "lastName": "Nadeem",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 29970,
+          "estimatedVotesLow": 24532,
+          "estimatedVotesMid": 27280,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brandon",
+        "id": 75575,
+        "lastName": "Davis",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "34",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:35:56.946Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 35548,
+          "estimatedVotesLow": 29066,
+          "estimatedVotesMid": 32313,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sharifa",
+        "id": 75577,
+        "lastName": "Wahab",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 35548,
+          "estimatedVotesLow": 29066,
+          "estimatedVotesMid": 32313,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Rebecca",
+        "id": 75578,
+        "lastName": "Edgeworth",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "35",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:05.780Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 39871,
+          "estimatedVotesLow": 32629,
+          "estimatedVotesMid": 36253,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Marlene",
+        "id": 75579,
+        "lastName": "Drake",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 39871,
+          "estimatedVotesLow": 32629,
+          "estimatedVotesMid": 36253,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Gregory",
+        "id": 23625,
+        "lastName": "Hafen",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "36",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 37865,
+          "estimatedVotesLow": 30992,
+          "estimatedVotesMid": 34416,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 23462,
+        "lastName": "Brog",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 37865,
+          "estimatedVotesLow": 30992,
+          "estimatedVotesMid": 34416,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Shea",
+        "id": 46009,
+        "lastName": "Backus",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "37",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:01.593Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Gregory",
+        "id": 23631,
+        "lastName": "Koenig",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "38",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-09T19:16:43.249Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 43967,
+          "estimatedVotesLow": 35973,
+          "estimatedVotesMid": 39967,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Erich",
+        "id": 75580,
+        "lastName": "Obermayr",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 43967,
+          "estimatedVotesLow": 35973,
+          "estimatedVotesMid": 39967,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ken",
+        "id": 23632,
+        "lastName": "Gray",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "39",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:16.520Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 38167,
+          "estimatedVotesLow": 31229,
+          "estimatedVotesMid": 34700,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Philip",
+        "id": 23634,
+        "lastName": "O'Neill",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 38167,
+          "estimatedVotesLow": 31229,
+          "estimatedVotesMid": 34700,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Katherine",
+        "id": 75581,
+        "lastName": "Ramsey",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "40",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 33970,
+          "estimatedVotesLow": 27805,
+          "estimatedVotesMid": 30906,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sandra",
+        "id": 46014,
+        "lastName": "Jauregui",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 33970,
+          "estimatedVotesLow": 27805,
+          "estimatedVotesMid": 30906,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Rafael",
+        "id": 75584,
+        "lastName": "Arroyo-Montalvo",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "41",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 29025,
+          "estimatedVotesLow": 23752,
+          "estimatedVotesMid": 26386,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tracy",
+        "id": 23570,
+        "lastName": "Brown-May",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 29025,
+          "estimatedVotesLow": 23752,
+          "estimatedVotesMid": 26386,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kevin",
+        "id": 75585,
+        "lastName": "Child",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "42",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:03.109Z",
+    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Elissa",
+        "id": 102107,
+        "lastName": "Cadish",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "Seat C",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Patricia",
+        "id": 102108,
+        "lastName": "Lee",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "Seat F",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lidia",
+        "id": 102109,
+        "lastName": "Stiglich",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "Seat G",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 913541,
+          "estimatedVotesLow": 747590,
+          "estimatedVotesMid": 830476,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tricia",
+        "id": 77887,
+        "lastName": "Braxton",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 913541,
+          "estimatedVotesLow": 747590,
+          "estimatedVotesMid": 830476,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Timothy",
+        "id": 77888,
+        "lastName": "Underwood Jr.",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 376188,
+          "estimatedVotesLow": 307729,
+          "estimatedVotesMid": 341907,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Paul",
+        "id": 77890,
+        "lastName": "Davis",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 376188,
+          "estimatedVotesLow": 307729,
+          "estimatedVotesMid": 341907,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Angela",
+        "id": 77892,
+        "lastName": "Orr",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:34:00.457Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 913541,
+          "estimatedVotesLow": 747590,
+          "estimatedVotesMid": 830476,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Rene",
+        "id": 77893,
+        "lastName": "Cantu",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 913541,
+          "estimatedVotesLow": 747590,
+          "estimatedVotesMid": 830476,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Danielle",
+        "id": 77894,
+        "lastName": "Ford",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-14T18:36:05.780Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tim",
+        "id": 102110,
+        "lastName": "Hughes",
+        "partyName": "Nonpartisan",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
+    "lastUpdated": "2024-10-03T15:01:52.670Z",
+    "office": { "officeId": "151", "officeName": "State Board of Education", "officeTypeId": "1" },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NV",
+    "stateName": "Nevada",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]
