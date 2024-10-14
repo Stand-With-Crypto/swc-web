@@ -50,5 +50,3 @@ export const getPoliticianFindMatch = (
 export const normalizeName = (name: string) => {
   return deburr(toLower(trim(name))).replace(/[.-\s]/g, '')
 }
-
-window.normalizeName = normalizeName
