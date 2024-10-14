@@ -15,6 +15,7 @@ export const getPoliticianFindMatch = (
   ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'] | undefined,
 ) => {
   if (!ddhqCandidate) return false
+  if (!dtsiPerson) return false
 
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
   const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)

@@ -114,14 +114,14 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     district: primaryDistrict?.toString(),
   })
 
-  console.log('DecisionDesk Data: ', {
-    stateName,
-    primaryDistrict,
-    liveResultData,
-    initialRaceData,
-    isLoading,
-    isValidating,
-  })
+  // console.log('DecisionDesk Data: ', {
+  //   stateName,
+  //   primaryDistrict,
+  //   liveResultData,
+  //   initialRaceData,
+  //   isLoading,
+  //   isValidating,
+  // })
 
   const raceData = useMemo(() => {
     if (!liveResultData) return null
@@ -164,7 +164,15 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       getPoliticianFindMatch(candidateA, _candidate),
     )
 
-    if (!candidate) return null
+    if (!candidate) {
+      console.log('No match for candidates between decisionDesk and DTSI ddhqCandidateA.', {
+        candidate,
+        candidateA,
+        raceData,
+      })
+
+      return null
+    }
 
     return candidate
   }, [candidateA, raceData])
@@ -176,7 +184,15 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       getPoliticianFindMatch(candidateB, _candidate),
     )
 
-    if (!candidate) return null
+    if (!candidate) {
+      console.log('No match for candidates between decisionDesk and DTSI ddhqCandidateB.', {
+        candidate,
+        candidateB,
+        raceData,
+      })
+
+      return null
+    }
 
     return candidate
   }, [candidateB, raceData])
@@ -216,6 +232,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   )
 
   const canShowProgress = Boolean(liveResultData)
+
+  if (!candidateA || !candidateB) {
+    return null
+  }
 
   return (
     <div className={cn('flex w-full max-w-xl flex-col gap-6', className)}>
