@@ -12,4 +12,5 @@ export type DTSI_Candidate = DTSIAvatarProps['person'] &
     | 'firstName'
     | 'lastName'
     | 'firstNickname'
+    | 'politicalAffiliationCategory'
   >

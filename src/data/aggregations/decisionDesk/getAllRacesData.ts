@@ -40,7 +40,7 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
           currentElection => +currentElection.electionTypeId === currentData.election_type_id,
         ) ?? null,
       year: currentData.year,
-      party: currentData.party,
+      partyName: currentData.party,
       totalVotes: currentData.topline_results.total_votes,
       raceDate: currentData.race_date,
       lastUpdated: currentData.last_updated,
@@ -49,7 +49,7 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
         id: candidate.cand_id,
         firstName: candidate.first_name,
         lastName: candidate.last_name,
-        party: candidate.party_name,
+        partyName: candidate.party_name,
         elected: currentData.topline_results.called_candidates.includes(candidate.cand_id),
         estimatedVotes: {
           estimatedVotesLow: currentData.topline_results.estimated_votes.estimated_votes_low,

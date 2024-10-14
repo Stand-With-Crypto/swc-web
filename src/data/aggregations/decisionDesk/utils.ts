@@ -11,10 +11,18 @@ export const getPoliticianFindMatch = (
 ) => {
   if (!ddhqCandidate) return false
 
+  const normalizedDTSIParty = normalizeName(dtsiPerson.politicalAffiliationCategory ?? '').slice(
+    0,
+    8,
+  ) // slicing up to 8 to match democrat with democratic
+  const normalizedDDHQParty = normalizeName(ddhqCandidate.partyName ?? '').slice(0, 8) // slicing up to 8 to match democrat with democratic
+
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
   const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
 
+  const normalizedDTSIFirstName = normalizeName(dtsiPerson.firstName)
+  const normalizedDDHQFirstName = normalizeName(ddhqCandidate.firstName)
   const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
 
@@ -41,6 +49,13 @@ export const getPoliticianFindMatch = (
   if (normalizedDTSILastName === normalizedDDHQLastName) {
     return true
   }
+
+  // if (
+  //   normalizedDTSIParty === normalizedDDHQParty &&
+  //   normalizedDTSIFirstName === normalizedDDHQFirstName
+  // ) {
+  //   return true
+  // }
 
   return false
 }

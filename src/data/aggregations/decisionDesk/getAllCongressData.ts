@@ -10,6 +10,9 @@ import {
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_AllPeopleQuery } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
+import { getLogger } from '@/utils/shared/logger'
+
+const logger = getLogger('aggregations/decisionDesk/getAllCongressData')
 
 const reduceCongressData = (congressData: RacesVotingDataResponse[]) =>
   congressData.reduce(
@@ -53,6 +56,11 @@ const enhanceCongressData = (
       }) ?? null
 
     if (!dtsiData) {
+      logger.info('No match for candidates between decisionDesk and DTSI.', {
+        domain: 'aggregations/decisionDesk/getAllCongressData',
+        candidateName: `${currentCandidate.firstName} ${currentCandidate.lastName}`,
+      })
+
       Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
         extra: {
           domain: 'aggregations/decisionDesk/getAllCongressData',

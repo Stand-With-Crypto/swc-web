@@ -9,7 +9,7 @@ export interface RacesVotingDataResponse {
   office: (typeof OFFICES)[0] | null
   electionType: (typeof ELECTION_TYPES)[0] | null
   year: number
-  party: string | null
+  partyName: string | null
   totalVotes: number
   raceDate: string
   lastUpdated: string
@@ -27,7 +27,7 @@ export interface CandidatesWithVote {
   id: number
   firstName: string
   lastName: string
-  party: string
+  partyName: string
   votes: number
   elected: boolean
   estimatedVotes: {
@@ -52,9 +52,7 @@ interface VotingData {
 }
 
 export type PresidentialDataWithVotingResponse = DTSI_UnitedStatesPresidentialQuery['people'][0] & {
-  votingData?: VotingData & {
-    called: boolean
-  }
+  votingData?: VotingData
 }
 
 export interface GetAllCongressDataProps {

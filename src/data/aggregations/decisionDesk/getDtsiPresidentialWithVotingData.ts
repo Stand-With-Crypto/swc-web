@@ -4,6 +4,9 @@ import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decision
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { fetchElectoralCollege } from '@/utils/server/decisionDesk/services'
+import { getLogger } from '@/utils/shared/logger'
+
+const logger = getLogger('aggregations/decisionDesk/getDtsiPresidentialWithVotingData')
 
 async function getPresidentialData(year = '2024') {
   const { candidates } = await fetchElectoralCollege(year)
@@ -51,6 +54,11 @@ export async function getDtsiPresidentialWithVotingData(
     const candidateNames = notFoundVotingData.map(
       currentCandidate => `${currentCandidate.firstName} ${currentCandidate.lastName}`,
     )
+
+    logger.info('No match for candidates between decisionDesk and DTSI.', {
+      domain: 'aggregations/decisionDesk/getDtsiPresidentialWithVotingData',
+      candidateNames,
+    })
 
     Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
       extra: {
