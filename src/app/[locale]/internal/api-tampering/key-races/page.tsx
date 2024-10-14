@@ -44,16 +44,16 @@ export default function ApiTamperingPage() {
         <h2 className="mb-4 text-xl font-bold">Select percentage coverage</h2>
         <div className="space-y-4">
           <div className="mb-4">
-            <label htmlFor="estimatedVotesMid" className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700" htmlFor="estimatedVotesMid">
               Enter Estimated Votes (Mid)
             </label>
             <input
-              type="number"
-              id="estimatedVotesMid"
-              value={keyRacesEstimatedVotesMid}
-              onChange={handleEstimatedVotesChange}
               className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              id="estimatedVotesMid"
+              onChange={handleEstimatedVotesChange}
               placeholder="Enter estimated number of votes (mid)"
+              type="number"
+              value={keyRacesEstimatedVotesMid}
             />
           </div>
         </div>

@@ -1,9 +1,14 @@
+import levenshtein from 'js-levenshtein'
+import { deburr, toLower, trim } from 'lodash-es'
+
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import {
   CandidatesWithVote,
   PresidentialDataWithVotingResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
+import { getLogger } from '@/utils/shared/logger'
+
+const logger = getLogger('aggregations/decisionDesk/utils')
 
 export const getPoliticianFindMatch = (
   dtsiPerson: DTSI_Candidate,
@@ -11,49 +16,31 @@ export const getPoliticianFindMatch = (
 ) => {
   if (!ddhqCandidate) return false
 
-  const normalizedDTSIParty = normalizeName(dtsiPerson.politicalAffiliationCategory ?? '').slice(
-    0,
-    8,
-  ) // slicing up to 8 to match democrat with democratic
-  const normalizedDDHQParty = normalizeName(ddhqCandidate.partyName ?? '').slice(0, 8) // slicing up to 8 to match democrat with democratic
-
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
   const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
 
-  const normalizedDTSIFirstName = normalizeName(dtsiPerson.firstName)
-  const normalizedDDHQFirstName = normalizeName(ddhqCandidate.firstName)
   const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
 
-  if (normalizedDTSIName === normalizedDDHQName) {
-    return true
-  }
+  // Allow up to 2 edits for names, e.g. Sapriacone vs Sapraicone, with a threshold of 2
+  const nameThreshold = 2
 
-  if (normalizedDTSINickname === normalizedDDHQName) {
-    return true
-  }
+  const hasPassedWithName = levenshtein(normalizedDTSIName, normalizedDDHQName) <= nameThreshold
+  const hasPassedWithNickname =
+    levenshtein(normalizedDTSINickname, normalizedDDHQName) <= nameThreshold
+  const hasPassedWithLastName =
+    levenshtein(normalizedDTSILastName, normalizedDDHQLastName) <= nameThreshold
 
-  if (normalizedDDHQName.startsWith(normalizedDTSIName)) {
-    return true
-  }
-
-  if (normalizedDDHQName.startsWith(normalizedDTSINickname)) {
-    return true
-  }
-
-  if (normalizedDTSIName.startsWith(normalizedDDHQName)) {
-    return true
-  }
-
-  if (normalizedDTSILastName === normalizedDDHQLastName) {
-    return true
-  }
-
-  if (
-    normalizedDTSIParty === normalizedDDHQParty &&
-    normalizedDTSIFirstName === normalizedDDHQFirstName
-  ) {
+  if (hasPassedWithName || hasPassedWithNickname || hasPassedWithLastName) {
+    logger.info('Matched politician with voting data.', {
+      domain: 'aggregations/decisionDesk/utils',
+      hasPassedWithName,
+      hasPassedWithNickname,
+      hasPassedWithLastName,
+      dtsiPerson,
+      ddhqCandidate,
+    })
     return true
   }
 
@@ -61,5 +48,7 @@ export const getPoliticianFindMatch = (
 }
 
 export const normalizeName = (name: string) => {
-  return convertToOnlyEnglishCharacters(name.toLowerCase().trim()).replace(/[.-\s]/g, '')
+  return deburr(toLower(trim(name))).replace(/[.-\s]/g, '')
 }
+
+window.normalizeName = normalizeName
