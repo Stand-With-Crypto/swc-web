@@ -514,6 +514,12 @@ const nextConfig = {
         destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=0820&utm_content=v2',
         permanent: false,
       },
+      {
+        source: '/oh/1',
+        destination:
+          'https://americalovescryptooh.splashthat.com?utm_source=swc&utm_medium=sms&utm_campaign=oh_1&utm_id=ss',
+        permanent: true,
+      },
 
       // Vanity Links
       {
