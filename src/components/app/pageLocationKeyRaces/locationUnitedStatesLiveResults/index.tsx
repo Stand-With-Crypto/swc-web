@@ -62,7 +62,7 @@ export function LocationUnitedStatesLiveResults({
   return (
     <div className="space-y-20">
       <DarkHeroSection className="py-8 lg:px-28 lg:py-20">
-        <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
+        <div className="mx-auto flex w-full max-w-[1800px] flex-col items-center justify-between gap-10 md:px-8 lg:flex-row">
           <div className="space-y-6 text-center">
             <NextImage
               alt="SWC shield"
