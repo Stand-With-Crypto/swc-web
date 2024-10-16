@@ -5,32 +5,44 @@ import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
 export const useCandidateSelection = (candidates: DTSI_Candidate[]) => {
   return useMemo(() => {
-    const recommendedCandidate = candidates.find(c => c.isRecommended)
+    let recommended: DTSI_Candidate | undefined
+    let democrat: DTSI_Candidate | undefined
+    let republican: DTSI_Candidate | undefined
+    let other: DTSI_Candidate | undefined
 
-    function findPartyCandidate(party: DTSI_PersonPoliticalAffiliationCategory) {
-      return candidates.find(
-        c => c.politicalAffiliationCategory === party && c.id !== recommendedCandidate?.id,
-      )
+    for (const candidate of candidates) {
+      if (candidate.isRecommended && !recommended) {
+        recommended = candidate
+      }
+
+      switch (candidate.politicalAffiliationCategory) {
+        case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
+          if (!democrat) democrat = candidate
+          break
+        case DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN:
+          if (!republican) republican = candidate
+          break
+        default:
+          if (!other) other = candidate
+      }
+
+      if (recommended && democrat && republican) break
     }
 
-    const democratCandidate = findPartyCandidate(DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT)
-    const republicanCandidate = findPartyCandidate(
-      DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-    )
+    const firstChoice = recommended || democrat || republican || other
+    let secondChoice: DTSI_Candidate | undefined
 
-    const fallbackCandidate = candidates.find(
-      c =>
-        c.id !== recommendedCandidate?.id &&
-        c.id !== democratCandidate?.id &&
-        c.id !== republicanCandidate?.id,
-    )
+    if (firstChoice) {
+      secondChoice =
+        democrat && democrat.id !== firstChoice.id
+          ? democrat
+          : republican && republican.id !== firstChoice.id
+            ? republican
+            : other && other.id !== firstChoice.id
+              ? other
+              : undefined
+    }
 
-    const selectedCandidates: (DTSI_Candidate | undefined)[] = [
-      recommendedCandidate,
-      democratCandidate || republicanCandidate || fallbackCandidate,
-    ]
-
-    // Filter out undefined values and ensure we have at most 2 candidates
-    return selectedCandidates.filter((c): c is DTSI_Candidate => !!c).slice(0, 2)
+    return [firstChoice, secondChoice].filter((c): c is DTSI_Candidate => !!c)
   }, [candidates])
 }
