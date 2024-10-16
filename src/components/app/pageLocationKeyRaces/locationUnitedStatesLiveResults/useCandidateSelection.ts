@@ -9,7 +9,7 @@ export const useCandidateSelection = (candidates: DTSI_Candidate[]) => {
 
     function findPartyCandidate(party: DTSI_PersonPoliticalAffiliationCategory) {
       return candidates.find(
-        c => c.politicalAffiliationCategory === party && c !== recommendedCandidate,
+        c => c.politicalAffiliationCategory === party && c.id !== recommendedCandidate?.id,
       )
     }
 
@@ -19,7 +19,10 @@ export const useCandidateSelection = (candidates: DTSI_Candidate[]) => {
     )
 
     const fallbackCandidate = candidates.find(
-      c => c !== recommendedCandidate && c !== democratCandidate && c !== republicanCandidate,
+      c =>
+        c.id !== recommendedCandidate?.id &&
+        c.id !== democratCandidate?.id &&
+        c.id !== republicanCandidate?.id,
     )
 
     const selectedCandidates: (DTSI_Candidate | undefined)[] = [
