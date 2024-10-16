@@ -172,8 +172,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         )
 
         if (stateRacesDataOnly.length === 0) {
-          logger.error(`No valid state race data fetched for ${currentStateKey}.`)
-          continue
+          logger.info(`No valid state race data fetched for ${currentStateKey}.`)
         }
 
         if (!persist) {
@@ -185,7 +184,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
         const persistedState = await setDecisionDataOnRedis(
           `SWC_${currentStateKey}_STATE_RACES_DATA`,
-          JSON.stringify(stateRacesDataOnly),
+          JSON.stringify(stateRacesDataOnly.length > 0 ? stateRacesDataOnly : stateRacesData),
         )
 
         persistedStates.push({
