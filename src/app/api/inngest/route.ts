@@ -63,7 +63,8 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
-    backfillCongressionalDistrictCronJob,
+    // TODO: turn this back on when we have the api quota sorted out
+    // backfillCongressionalDistrictCronJob,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
     backfillReactivationWithInngest,
