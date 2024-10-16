@@ -62,7 +62,7 @@ export function LocationUnitedStatesLiveResults({
   return (
     <div className="space-y-20">
       <DarkHeroSection className="py-8 lg:px-28 lg:py-20">
-        <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
+        <div className="mx-auto flex w-full max-w-[1800px] flex-col items-center justify-between gap-10 md:px-8 lg:flex-row">
           <div className="space-y-6 text-center">
             <NextImage
               alt="SWC shield"
@@ -157,7 +157,6 @@ export function LocationUnitedStatesLiveResults({
                       candidates={candidates}
                       className="flex-1"
                       initialRaceData={ddhqResults[key] || undefined}
-                      key={key + primaryDistrict}
                       locale={locale}
                       primaryDistrict={primaryDistrict}
                       stateCode={stateCode as USStateCode}
@@ -168,7 +167,7 @@ export function LocationUnitedStatesLiveResults({
             )}
 
             <LiveResultsGrid.GridItem>
-              <div className="mx-auto flex flex-col items-center justify-center gap-8 text-center">
+              <div className="flex w-full max-w-xl flex-col items-center justify-center gap-8 text-center">
                 <NextImage
                   alt="SWC shield"
                   height={120}

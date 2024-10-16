@@ -43,6 +43,7 @@ export function useApiDecisionDeskPresidentialData(
             percentage,
             votes,
             called,
+            electoralVotes: Math.round(Math.random() * 200),
           },
         }
       }

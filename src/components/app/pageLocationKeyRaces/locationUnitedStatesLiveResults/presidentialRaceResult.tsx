@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Progress } from '@/components/ui/progress'
@@ -10,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
@@ -76,18 +78,13 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   return (
     <div className="flex w-full flex-col gap-4">
       <div className="flex justify-between">
-        <AvatarBox
-          candidate={candidateA}
-          className={cn(getOpacity(candidateA, liveResultData))}
-          electoralVotes={ddhqCandidateA?.votingData?.electoralVotes}
-        />
+        <AvatarBox candidate={candidateA} className={cn(getOpacity(candidateA, liveResultData))} />
         <AvatarBox
           candidate={candidateB}
           className={cn(
             'flex flex-col items-end text-right',
             getOpacity(candidateB, liveResultData),
           )}
-          electoralVotes={ddhqCandidateB?.votingData?.electoralVotes}
         />
       </div>
 
@@ -125,8 +122,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
       <div className="relative flex items-center justify-between text-sm">
         <div className={cn('flex items-center gap-2', getOpacity(candidateA, liveResultData))}>
-          <p className="font-bold">{ddhqCandidateA?.votingData?.percentage?.toFixed(2)}%</p>{' '}
-          <span className="text-fontcolor-muted">{ddhqCandidateA?.votingData?.votes}</span>
+          <p className="font-bold">{ddhqCandidateA?.votingData?.electoralVotes}</p>
         </div>
 
         <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
@@ -134,8 +130,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         </p>
 
         <div className={cn('flex items-center gap-2', getOpacity(candidateB, liveResultData))}>
-          <p className="font-bold">{ddhqCandidateB?.votingData?.percentage?.toFixed(2)}%</p>{' '}
-          <span className="text-fontcolor-muted">{ddhqCandidateB?.votingData?.votes}</span>
+          <p className="font-bold">{ddhqCandidateB?.votingData?.electoralVotes}</p>
         </div>
       </div>
     </div>
@@ -144,17 +139,24 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
 interface AvatarBoxProps {
   candidate: DTSI_Candidate
-  electoralVotes: number | undefined
   className?: string
 }
 
 function AvatarBox(props: AvatarBoxProps) {
-  const { candidate, electoralVotes, className } = props
+  const { candidate, className } = props
 
   return (
     <div className={className}>
-      <DTSIAvatar className="rounded-full" person={candidate} size={135} />
-      {electoralVotes ? <p className="text-lg font-bold">{electoralVotes}</p> : null}
+      <div className="relative w-fit">
+        <DTSIAvatar className="rounded-full" person={candidate} size={125} />
+        <DTSIFormattedLetterGrade
+          className="absolute bottom-0 right-0 h-10 w-10 rounded-full shadow-md"
+          person={candidate}
+        />
+      </div>
+      <div className="mt-2">
+        <p className="text-lg font-bold">{dtsiPersonFullName(candidate)}</p>
+      </div>
     </div>
   )
 }

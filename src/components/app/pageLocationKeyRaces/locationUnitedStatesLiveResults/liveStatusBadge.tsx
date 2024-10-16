@@ -1,5 +1,3 @@
-import { DotFilledIcon } from '@radix-ui/react-icons'
-
 import { Badge, BadgeProps } from '@/components/ui/badge'
 import { cn } from '@/utils/web/cn'
 
@@ -27,8 +25,11 @@ export function LiveStatusBadge(props: LiveStatusBadgeProps) {
 
 function LiveBadge({ className, ...props }: BadgeProps) {
   return (
-    <Badge className={cn('px-2 py-1 pr-5 text-base', className)} variant="green-subtle" {...props}>
-      <DotFilledIcon className="h-[30px] w-[30px]" />
+    <Badge className={cn('py-1 text-base', className)} variant="green-subtle" {...props}>
+      <span className="relative mr-2 flex h-2.5 w-2.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-700 opacity-75"></span>
+        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-700"></span>
+      </span>
       Live
     </Badge>
   )
