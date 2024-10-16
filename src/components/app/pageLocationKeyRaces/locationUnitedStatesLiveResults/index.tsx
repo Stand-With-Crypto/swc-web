@@ -168,7 +168,7 @@ export function LocationUnitedStatesLiveResults({
             )}
 
             <LiveResultsGrid.GridItem>
-              <div className="mx-auto flex flex-col items-center justify-center gap-8 text-center">
+              <div className="flex w-full max-w-xl flex-col items-center justify-center gap-8 text-center">
                 <NextImage
                   alt="SWC shield"
                   height={120}
