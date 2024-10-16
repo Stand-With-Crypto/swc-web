@@ -17,6 +17,7 @@ import {
   getVotePercentage,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
+import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -104,24 +105,11 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     : urls.locationStateSpecificSenateRace(stateCode)
   const showLink = !isDistrictPage && !isSenatePage && !isPresidentialPage
 
-  const {
-    data: liveResultData,
-    isLoading,
-    isValidating,
-  } = useApiDecisionDeskData({
+  const { data: liveResultData } = useApiDecisionDeskData({
     initialRaceData,
     stateCode,
     district: primaryDistrict?.toString(),
   })
-
-  // console.log('DecisionDesk Data: ', {
-  //   stateName,
-  //   primaryDistrict,
-  //   liveResultData,
-  //   initialRaceData,
-  //   isLoading,
-  //   isValidating,
-  // })
 
   const raceData = useMemo(() => {
     if (!liveResultData) return null
@@ -318,12 +306,18 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         <div className="relative flex items-center justify-between text-sm">
           <div className={cn('flex items-center gap-2', getOpacity(ddhqCandidateA, raceData))}>
             <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
-            <span className="text-fontcolor-muted">{ddhqCandidateA?.votes || 0} votes</span>
+            <span className="text-fontcolor-muted">
+              {FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })} votes votes
+            </span>
           </div>
 
           {totalVotes && (
             <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
-              {Math.ceil(totalVotes / 2) + 1} to win
+              {FormattedNumber({
+                amount: Math.ceil(totalVotes / 2) + 1,
+                locale,
+              })}{' '}
+              to win
             </p>
           )}
 
@@ -334,7 +328,9 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             )}
           >
             <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
-            <span className="text-fontcolor-muted">{ddhqCandidateB?.votes || 0} votes</span>
+            <span className="text-fontcolor-muted">
+              {FormattedNumber({ amount: ddhqCandidateB?.votes || 0, locale })} votes
+            </span>
           </div>
         </div>
       </div>
