@@ -162,7 +162,7 @@ export function LocationRaceSpecific({
       </DarkHeroSection>
 
       <div className="divide-y-2">
-        <div className="mx-auto mb-20 mt-20 flex w-full max-w-2xl justify-center">
+        <div className="mx-auto mb-20 mt-20 flex w-full max-w-2xl justify-center px-6">
           {isPresidentialData(initialLiveResultData) ? (
             <PresidentialRaceResult
               candidates={candidates.map(({ person }) => person)}
