@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { usePathname } from 'next/navigation'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
@@ -10,6 +11,7 @@ import {
   Status,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
+import { useCandidateSelection } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/useCandidateSelection'
 import {
   convertDTSIStanceScoreToBgColorClass,
   getOpacity,
@@ -23,7 +25,6 @@ import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
-import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -59,37 +60,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     getIntlUrls(locale).locationUnitedStatesPresidential(),
   )
 
-  const [candidateA, candidateB] = useMemo(() => {
-    let democrat: DTSI_Candidate | null = null
-    let republican: DTSI_Candidate | null = null
-    let independent: DTSI_Candidate | null = null
-    const otherCandidates: DTSI_Candidate[] = []
-
-    candidates.forEach(candidate => {
-      switch (candidate.politicalAffiliationCategory) {
-        case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
-          democrat = democrat || candidate
-          break
-        case DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN:
-          republican = republican || candidate
-          break
-        case DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT:
-          independent = independent || candidate
-          break
-        default:
-          otherCandidates.push(candidate)
-      }
-    })
-
-    if (democrat && republican) {
-      return [democrat, republican]
-    }
-
-    const candidateA = democrat || republican || independent || otherCandidates[0]
-    const candidateB = republican || independent || otherCandidates[1] || otherCandidates[0]
-
-    return [candidateA, candidateB]
-  }, [candidates])
+  const [candidateA, candidateB] = useCandidateSelection(candidates)
 
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const raceName = primaryDistrict
@@ -153,6 +124,9 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     )
 
     if (!candidate) {
+      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
+        extra: { candidate, candidateA, raceData },
+      })
       console.log('No match for candidates between decisionDesk and DTSI ddhqCandidateA.', {
         candidate,
         candidateA,
@@ -173,6 +147,9 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     )
 
     if (!candidate) {
+      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
+        extra: { candidate, candidateB, raceData },
+      })
       console.log('No match for candidates between decisionDesk and DTSI ddhqCandidateB.', {
         candidate,
         candidateB,
