@@ -288,7 +288,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             </span>
           </div>
 
-          {totalVotes && (
+          {totalVotes ? (
             <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
               {FormattedNumber({
                 amount: Math.ceil(totalVotes / 2) + 1,
@@ -296,7 +296,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               })}{' '}
               to win
             </p>
-          )}
+          ) : null}
 
           <div
             className={cn(
