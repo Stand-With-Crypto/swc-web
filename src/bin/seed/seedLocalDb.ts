@@ -35,6 +35,7 @@ import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 } from '@/utils/shared/userActionCampaigns'
+import { mockCreateUserActionVotingDayInput } from '@/mocks/models/mockUserActionVotingDay'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
   requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),
@@ -584,6 +585,24 @@ async function seed() {
   const userActionVotingInformationResearched =
     await prismaClient.userActionVotingInformationResearched.findMany()
   logEntity({ userActionVotingInformationResearched })
+
+  /*
+  userActionVotingDay
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.VOTING_DAY].map(action => {
+      return {
+        ...mockCreateUserActionVotingDayInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionVotingDay.createMany({
+        data,
+      }),
+  )
+  const userActionVotingDay = await prismaClient.userActionVotingDay.findMany()
+  logEntity({ userActionVotingDay })
 }
 
 void runBin(seed)
