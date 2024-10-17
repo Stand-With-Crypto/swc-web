@@ -53,6 +53,7 @@ export async function getAuthenticatedData() {
               address: true,
             },
           },
+          userActionVotingDay: true,
         },
       },
     },

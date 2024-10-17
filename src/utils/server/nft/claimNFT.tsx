@@ -39,6 +39,7 @@ import {
   UserActionViewKeyRacesCampaignName,
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
+  UserActionVotingDayCampaignName,
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
@@ -90,6 +91,9 @@ export const ACTION_NFT_SLUG: Record<
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
     [UserActionVotingInformationResearchedCampaignName['2024_ELECTION']]: null,
   },
+  [UserActionType.VOTING_DAY]: {
+    [UserActionVotingDayCampaignName['2024_ELECTION']]: NFTSlug.I_VOTED,
+  },
 }
 
 const logger = getLogger('claimNft')
@@ -134,6 +138,7 @@ export async function claimNFT(
   }
 
   const nftSlug = ACTION_NFT_SLUG[activeClientUserActionTypeWithCampaign][campaignName]
+
   if (nftSlug === null) {
     throw Error(`Action ${actionType} for campaign ${campaignName} doesn't have an NFT slug.`)
   }
