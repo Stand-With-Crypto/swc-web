@@ -29,7 +29,7 @@ export function UserActionVotingDay({ onClose }: { onClose: () => void }) {
         )
       case SectionNames.SUCCESS:
         return (
-          <UserActionFormSuccessScreen onClose={onClose} skipNextActions>
+          <UserActionFormSuccessScreen isVotingDay onClose={onClose}>
             <UserActionIVotedSuccess />
           </UserActionFormSuccessScreen>
         )
