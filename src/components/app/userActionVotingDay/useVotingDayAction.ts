@@ -1,12 +1,12 @@
+import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 
 import { actionCreateUserActionVotingDay } from '@/actions/actionCreateUserActionVotingDay'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
-import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { toastGenericError } from '@/utils/web/toastUtils'
 import { UserActionVotingDayCampaignName } from '@/utils/shared/userActionCampaigns'
-import { UserActionType } from '@prisma/client'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function useVotingDayAction() {
   const router = useRouter()
@@ -20,7 +20,7 @@ export function useVotingDayAction() {
           analyticsProps: {
             'Campaign Name': UserActionVotingDayCampaignName['2024_ELECTION'],
             'User Action Type': UserActionType.VOTING_DAY,
-            votingYear: '2024',
+            votingYear: new Date().getFullYear().toString(),
           },
           payload: null,
         },

@@ -428,6 +428,7 @@ model UserActionVotingDay {
   id         String     @id @default(uuid())
   userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   votingYear String     @map("voting_year")
+  usaState   String?    @map("usa_state")
 
   @@map("user_action_voting_day")
 }

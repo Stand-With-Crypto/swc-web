@@ -81,6 +81,7 @@ async function _actionCreateUserActionVotingDay() {
   const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentUserAction = await getRecentUserActionByUserId(user.id)
+  const userAddress = await getUserAddress(user.id)
 
   if (recentUserAction) {
     logSpamActionSubmissions({
@@ -93,6 +94,7 @@ async function _actionCreateUserActionVotingDay() {
   await triggerRateLimiterAtMostOnce()
   const { userAction } = await createAction({
     user,
+    userAddress,
     isNewUser: !userMatch.user,
     userMatch,
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
@@ -146,7 +148,7 @@ async function getRecentUserActionByUserId(userId: User['id']) {
       actionType: UserActionType.VOTING_DAY,
       userId: userId,
       userActionVotingDay: {
-        votingYear: '2024',
+        votingYear: new Date().getFullYear().toString(),
       },
     },
   })
@@ -161,18 +163,27 @@ function logSpamActionSubmissions({
     actionType: UserActionType.VOTING_DAY,
     campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
     reason: 'Too Many Recent',
-    votingYear: '2024',
+    votingYear: new Date().getFullYear().toString(),
     userState: 'Existing',
   })
 }
 
 async function createAction<U extends User>({
   user,
+  userAddress,
   userMatch,
   sharedDependencies,
   isNewUser,
 }: {
   user: U
+  userAddress: {
+    address: {
+      formattedDescription: string
+      administrativeAreaLevel1: string
+      countryCode: string
+      usCongressionalDistrict: string | null
+    } | null
+  } | null
   isNewUser: boolean
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
@@ -189,7 +200,8 @@ async function createAction<U extends User>({
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionVotingDay: {
         create: {
-          votingYear: '2024',
+          votingYear: new Date().getFullYear().toString(),
+          usaState: userAddress?.address?.administrativeAreaLevel1 ?? null,
         },
       },
     },
@@ -203,9 +215,31 @@ async function createAction<U extends User>({
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.VOTING_DAY,
     campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
-    votingYear: '2024',
+    votingYear: userAction.userActionVotingDay?.votingYear,
+    usaState: userAction.userActionVotingDay?.usaState,
     userState: isNewUser ? 'New' : 'Existing',
   })
 
   return { userAction }
+}
+
+async function getUserAddress(userId: string) {
+  return prismaClient.user.findFirst({
+    where: {
+      id: userId,
+      address: {
+        countryCode: 'US',
+      },
+    },
+    select: {
+      address: {
+        select: {
+          administrativeAreaLevel1: true,
+          usCongressionalDistrict: true,
+          formattedDescription: true,
+          countryCode: true,
+        },
+      },
+    },
+  })
 }
