@@ -1,6 +1,7 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
+import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
@@ -62,8 +63,7 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
-    // TODO: turn this back on when we have the api quota sorted out
-    // backfillCongressionalDistrictCronJob,
+    backfillCongressionalDistrictCronJob,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
     backfillReactivationWithInngest,
