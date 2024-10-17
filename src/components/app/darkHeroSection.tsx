@@ -10,7 +10,7 @@ export const DarkHeroSection = React.forwardRef<
     <section
       ref={ref}
       {...props}
-      className={cn('relative bg-[#0D1B39] px-4 py-24 text-white antialiased', className)}
+      className={cn('relative bg-black px-4 py-24 text-white antialiased', className)}
     >
       {children}
     </section>

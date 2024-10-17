@@ -1,4 +1,4 @@
-import { INTERNAL_BASE_URL } from '@/utils/server/email/constants'
+import { INTERNAL_BASE_URL } from '@/utils/shared/urls'
 
 export function buildTemplateInternalUrl(path: string, params: Record<string, unknown> = {}) {
   if (!path.startsWith('/')) {
