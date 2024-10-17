@@ -21,6 +21,7 @@ import { mockUserActionTweetAtPersonInput } from '@/mocks/models/mockUserActionT
 import { mockCreateUserActionViewKeyRacesInput } from '@/mocks/models/mockUserActionViewKeyRaces'
 import { mockCreateUserActionVoterAttestationInput } from '@/mocks/models/mockUserActionVoterAttestation'
 import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
+import { mockCreateUserActionVotingDayInput } from '@/mocks/models/mockUserActionVotingDay'
 import { mockCreateUserActionVotingInformationResearchedInput } from '@/mocks/models/mockUserActionVotingInformationResearched'
 import {
   mockCreateUserCryptoAddressInput,
@@ -35,7 +36,6 @@ import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 } from '@/utils/shared/userActionCampaigns'
-import { mockCreateUserActionVotingDayInput } from '@/mocks/models/mockUserActionVotingDay'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
   requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),

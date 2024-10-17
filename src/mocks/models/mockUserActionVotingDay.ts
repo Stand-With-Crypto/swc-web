@@ -1,9 +1,11 @@
-import { fakerFields } from '@/mocks/fakerUtils'
 import { Prisma, UserActionVotingDay } from '@prisma/client'
+
+import { fakerFields } from '@/mocks/fakerUtils'
 
 export function mockCreateUserActionVotingDayInput() {
   return {
-    votingYear: '2024',
+    usaState: fakerFields.stateCode({ abbreviated: true }),
+    votingYear: new Date().getFullYear().toString(),
   } satisfies Prisma.UserActionVotingDayCreateInput
 }
 
