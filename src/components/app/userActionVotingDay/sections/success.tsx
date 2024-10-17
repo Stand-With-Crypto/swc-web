@@ -21,6 +21,7 @@ export const UserActionIVotedSuccess = () => {
             width={120}
           />
         }
+        isVotingDay
         {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.VOTING_DAY}
       />
       <Button asChild className="w-full md:w-[250px]" size="lg" variant="default">
