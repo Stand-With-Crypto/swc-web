@@ -98,8 +98,6 @@ async function _actionCreateUserActionVotingDay() {
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
   })
 
-  debugger
-
   if (user.primaryUserCryptoAddress !== null) {
     await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
