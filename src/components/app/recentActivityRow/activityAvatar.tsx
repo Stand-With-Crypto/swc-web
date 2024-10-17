@@ -18,6 +18,7 @@ const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.TWEET_AT_PERSON]: '/activityFeedIcons/pizza-day.svg',
   [UserActionType.RSVP_EVENT]: '/activityFeedIcons/event-rsvp.svg',
   [UserActionType.VIEW_KEY_RACES]: '/activityFeedIcons/join.svg',
+  [UserActionType.VOTING_DAY]: '/activityFeedIcons/vote.svg',
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: '/activityFeedIcons/pledge.svg',
 }
 
