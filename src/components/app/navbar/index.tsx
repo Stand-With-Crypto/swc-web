@@ -40,7 +40,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 
   const leftLinks = [
-    { href: urls.locationUnitedStates(), text: 'Key Races' },
     {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
@@ -128,7 +127,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     </LoginDialogWrapper>
   )
 
-  const VoterGuideButton = () => (
+  const KeyRacesButton = () => (
     <Button
       asChild
       className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
@@ -136,7 +135,16 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       onClick={maybeCloseAfterNavigating}
       variant="default"
     >
-      <InternalLink href={urls.voterGuide()}>Voter guide</InternalLink>
+      <InternalLink
+        className="text-base font-bold leading-4 md:font-normal"
+        href={urls.locationUnitedStates()}
+      >
+        <span className="relative mr-2 flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500"></span>
+        </span>
+        Live election results
+      </InternalLink>
     </Button>
   )
 
@@ -264,7 +272,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               ))}
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
-              <VoterGuideButton />
+              <KeyRacesButton />
               <LoginButton />
             </div>
           </div>
@@ -363,7 +371,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 <LoginButton />
               </div>
               <div className="mt-4 px-6">
-                <VoterGuideButton />
+                <KeyRacesButton />
               </div>
             </div>
           </DrawerContent>
