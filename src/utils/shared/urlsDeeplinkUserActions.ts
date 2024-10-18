@@ -72,6 +72,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(locale)}/action/voting-information`
     },
   },
+  [UserActionType.VOTING_DAY]: {
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/voting-day`
+    },
+  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
