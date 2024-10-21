@@ -31,18 +31,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     [candidates],
   )
 
-  const {
-    data: liveResultData,
-    isLoading,
-    isValidating,
-  } = useApiDecisionDeskPresidentialData(initialRaceData)
-
-  console.log('PRESIDENTIAL: ', {
-    initialRaceData,
-    liveResultData,
-    isLoading,
-    isValidating,
-  })
+  const { data: liveResultData } = useApiDecisionDeskPresidentialData(initialRaceData)
 
   const ddhqCandidateA = useMemo(() => {
     if (!liveResultData) return null
