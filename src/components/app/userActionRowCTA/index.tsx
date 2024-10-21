@@ -118,6 +118,10 @@ export function UserActionRowCTAButtonSkeleton() {
 }
 
 export function UserActionRowCTA({ WrapperComponent, ...props }: UserActionRowCTAProps) {
+  if (!WrapperComponent) {
+    return <UserActionRowCTAButton {...props} />
+  }
+
   return (
     <WrapperComponent>
       <UserActionRowCTAButton {...props} />
