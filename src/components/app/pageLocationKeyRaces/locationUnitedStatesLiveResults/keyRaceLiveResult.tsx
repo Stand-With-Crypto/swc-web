@@ -94,12 +94,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
           return (
             race.district.toString() === primaryDistrict.toString() &&
             race.office?.officeId?.toString() === '3' &&
-            Boolean(
-              race.candidatesWithVotes.find(
-                _candidate =>
-                  getPoliticianFindMatch(candidateA, _candidate) ||
-                  getPoliticianFindMatch(candidateB, _candidate),
-              ),
+            race.candidatesWithVotes.some(
+              _candidate =>
+                getPoliticianFindMatch(candidateA, _candidate) ||
+                getPoliticianFindMatch(candidateB, _candidate),
             )
           )
         }) ?? null
@@ -108,12 +106,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
     return (
       liveResultData?.find?.(race =>
-        Boolean(
-          race.candidatesWithVotes.find(
-            _candidate =>
-              getPoliticianFindMatch(candidateA, _candidate) ||
-              getPoliticianFindMatch(candidateB, _candidate),
-          ),
+        race.candidatesWithVotes.some(
+          _candidate =>
+            getPoliticianFindMatch(candidateA, _candidate) ||
+            getPoliticianFindMatch(candidateB, _candidate),
         ),
       ) ?? null
     )

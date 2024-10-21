@@ -53,27 +53,51 @@ export const useInitialCandidateSelection = (candidates: DTSI_Candidate[]) => {
 }
 
 export const useLiveCandidateSelection = (
-  candidates: DTSI_Candidate[],
+  dtsiCandidates: DTSI_Candidate[],
   liveResultData: RacesVotingDataResponse | null,
 ) => {
+  const fallback = useInitialCandidateSelection(dtsiCandidates)
+
   if (!liveResultData) return []
 
   const sortedCandidates = liveResultData?.candidatesWithVotes
-    .sort((a, b) => b.votes - a.votes)
+    ?.sort((a, b) => b.votes - a.votes)
     .slice(0, 2)
 
   if (!sortedCandidates || !sortedCandidates.length) return []
 
-  return sortedCandidates.map(candidate => {
-    const matchedCandidate = candidates.find(c => getPoliticianFindMatch(c, candidate))
+  let shouldFallback = false
+  const candidatesToShow = sortedCandidates.map(ddhqCandidate => {
+    const matchedCandidate = dtsiCandidates.find(dtsiCandidate =>
+      getPoliticianFindMatch(dtsiCandidate, ddhqCandidate),
+    )
 
     if (!matchedCandidate) {
       Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
-        extra: { DDHQ_Candidate: candidate, liveResultData },
+        extra: { DDHQ_Candidate: ddhqCandidate, liveResultData },
       })
+      shouldFallback = true
       return null
     }
 
-    return { ...matchedCandidate, ...candidate }
+    return {
+      ...matchedCandidate,
+      ...ddhqCandidate,
+    }
   })
+
+  if (shouldFallback) {
+    const enchancedFallback = fallback.map(dtsiCandidate => {
+      const matchedCandidate = liveResultData.candidatesWithVotes.find(ddhqCandidate =>
+        getPoliticianFindMatch(dtsiCandidate, ddhqCandidate),
+      )
+      if (!matchedCandidate) return null
+
+      return { ...dtsiCandidate, ...matchedCandidate }
+    })
+
+    return enchancedFallback.filter(c => !!c)
+  }
+
+  return candidatesToShow
 }
