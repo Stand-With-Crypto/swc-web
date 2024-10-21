@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import * as Sentry from '@sentry/nextjs'
 import { usePathname } from 'next/navigation'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
@@ -11,7 +10,10 @@ import {
   Status,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
-import { useCandidateSelection } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/useCandidateSelection'
+import {
+  useInitialCandidateSelection,
+  useLiveCandidateSelection,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/useCandidateSelection'
 import {
   convertDTSIStanceScoreToBgColorClass,
   getOpacity,
@@ -60,7 +62,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     getIntlUrls(locale).locationUnitedStatesPresidential(),
   )
 
-  const [candidateA, candidateB] = useCandidateSelection(candidates)
+  const [candidateA, candidateB] = useInitialCandidateSelection(candidates)
 
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const raceName = primaryDistrict
@@ -116,51 +118,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     )
   }, [candidateA, candidateB, liveResultData, primaryDistrict])
 
-  const ddhqCandidateA = useMemo(() => {
-    if (!raceData) return null
-
-    const candidate = raceData?.candidatesWithVotes?.find(_candidate =>
-      getPoliticianFindMatch(candidateA, _candidate),
-    )
-
-    if (!candidate) {
-      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
-        extra: { candidate, candidateA, raceData },
-      })
-      console.log('No match for candidates between decisionDesk and DTSI ddhqCandidateA.', {
-        candidate,
-        candidateA,
-        raceData,
-      })
-
-      return null
-    }
-
-    return candidate
-  }, [candidateA, raceData])
-
-  const ddhqCandidateB = useMemo(() => {
-    if (!raceData) return null
-
-    const candidate = raceData?.candidatesWithVotes?.find(_candidate =>
-      getPoliticianFindMatch(candidateB, _candidate),
-    )
-
-    if (!candidate) {
-      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
-        extra: { candidate, candidateB, raceData },
-      })
-      console.log('No match for candidates between decisionDesk and DTSI ddhqCandidateB.', {
-        candidate,
-        candidateB,
-        raceData,
-      })
-
-      return null
-    }
-
-    return candidate
-  }, [candidateB, raceData])
+  const [ddhqCandidateA, ddhqCandidateB] = useLiveCandidateSelection(candidates, raceData)
 
   const lastUpdated = useMemo(() => {
     if (!raceData?.lastUpdated) return
@@ -282,10 +240,14 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
         <div className="relative flex items-center justify-between text-sm">
           <div className={cn('flex items-center gap-2', getOpacity(ddhqCandidateA, raceData))}>
-            <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
-            <span className="text-fontcolor-muted">
-              {FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })} votes votes
-            </span>
+            {ddhqCandidateA?.votes ? (
+              <>
+                <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
+                <span className="text-fontcolor-muted">
+                  {FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })} votes
+                </span>{' '}
+              </>
+            ) : null}
           </div>
 
           {totalVotes ? (
@@ -304,10 +266,14 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               getOpacity(ddhqCandidateB, raceData),
             )}
           >
-            <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
-            <span className="text-fontcolor-muted">
-              {FormattedNumber({ amount: ddhqCandidateB?.votes || 0, locale })} votes
-            </span>
+            {ddhqCandidateB?.votes ? (
+              <>
+                <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
+                <span className="text-fontcolor-muted">
+                  {FormattedNumber({ amount: ddhqCandidateB?.votes || 0, locale })} votes
+                </span>
+              </>
+            ) : null}
           </div>
         </div>
       </div>
