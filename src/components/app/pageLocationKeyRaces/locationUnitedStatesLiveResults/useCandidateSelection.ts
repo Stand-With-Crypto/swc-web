@@ -56,26 +56,24 @@ export const useLiveCandidateSelection = (
   candidates: DTSI_Candidate[],
   liveResultData: RacesVotingDataResponse | null,
 ) => {
-  return useMemo(() => {
-    if (!liveResultData) return []
+  if (!liveResultData) return []
 
-    const sortedCandidates = liveResultData?.candidatesWithVotes
-      .sort((a, b) => b.votes - a.votes)
-      .slice(0, 2)
+  const sortedCandidates = liveResultData?.candidatesWithVotes
+    .sort((a, b) => b.votes - a.votes)
+    .slice(0, 2)
 
-    if (!sortedCandidates || !sortedCandidates.length) return []
+  if (!sortedCandidates || !sortedCandidates.length) return []
 
-    return sortedCandidates.map(candidate => {
-      const matchedCandidate = candidates.find(c => getPoliticianFindMatch(c, candidate))
+  return sortedCandidates.map(candidate => {
+    const matchedCandidate = candidates.find(c => getPoliticianFindMatch(c, candidate))
 
-      if (!matchedCandidate) {
-        Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
-          extra: { DDHQ_Candidate: candidate, liveResultData },
-        })
-        return null
-      }
+    if (!matchedCandidate) {
+      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
+        extra: { DDHQ_Candidate: candidate, liveResultData },
+      })
+      return null
+    }
 
-      return { ...matchedCandidate, ...candidate }
-    })
-  }, [candidates, liveResultData])
+    return { ...matchedCandidate, ...candidate }
+  })
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
+import { isNil } from 'lodash-es'
 import { usePathname } from 'next/navigation'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
@@ -163,18 +164,32 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   return (
     <div className={cn('flex w-full max-w-xl flex-col gap-6', className)}>
       {showLink ? (
-        <div className="flex items-start justify-between">
+        <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-2">
             <p className="text-lg font-semibold">{raceName}</p>
             {lastUpdated && (
               <p className="text-sm text-fontcolor-muted">Data updated {lastUpdated}</p>
             )}
           </div>
-          <LiveStatusBadge status={raceStatus} />
+          <LiveStatusBadge
+            status={raceStatus}
+            winnerName={
+              raceData?.calledCandidate
+                ? `${raceData?.calledCandidate?.first_name} ${raceData?.calledCandidate?.last_name}`
+                : ''
+            }
+          />
         </div>
       ) : (
         <div className="mb-4 flex flex-col items-center gap-6">
-          <LiveStatusBadge status={raceStatus} />
+          <LiveStatusBadge
+            status={raceStatus}
+            winnerName={
+              raceData?.calledCandidate
+                ? `${raceData?.calledCandidate?.first_name} ${raceData?.calledCandidate?.last_name}`
+                : ''
+            }
+          />
           {lastUpdated && (
             <p className="text-center text-base text-fontcolor-muted">Data updated {lastUpdated}</p>
           )}
@@ -240,7 +255,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
         <div className="relative flex items-center justify-between text-sm">
           <div className={cn('flex items-center gap-2', getOpacity(ddhqCandidateA, raceData))}>
-            {ddhqCandidateA?.votes ? (
+            {!isNil(ddhqCandidateA?.votes) ? (
               <>
                 <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
                 <span className="text-fontcolor-muted">
@@ -266,7 +281,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               getOpacity(ddhqCandidateB, raceData),
             )}
           >
-            {ddhqCandidateB?.votes ? (
+            {!isNil(ddhqCandidateB?.votes) ? (
               <>
                 <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
                 <span className="text-fontcolor-muted">

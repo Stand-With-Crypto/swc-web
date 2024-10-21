@@ -60,8 +60,8 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
           turnoutHigh: currentData.topline_results.estimated_votes.turnout_high,
         },
         votes:
-          currentData.topline_results.voting_data[candidate.cand_id]?.election_day_votes ??
-          currentData.topline_results.votes[candidate.cand_id] ??
+          currentData.topline_results.voting_data[candidate.cand_id]?.election_day_votes ||
+          currentData.topline_results.votes[candidate.cand_id] ||
           0,
       })),
     }

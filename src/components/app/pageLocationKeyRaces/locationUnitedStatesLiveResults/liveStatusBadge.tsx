@@ -5,17 +5,18 @@ export type Status = 'live' | 'not-started' | 'called' | 'unknown'
 
 interface LiveStatusBadgeProps {
   status: Status
+  winnerName?: string
   className?: string
 }
 
 export function LiveStatusBadge(props: LiveStatusBadgeProps) {
-  const { status, className } = props
+  const { status, winnerName, className } = props
 
   switch (status) {
     case 'live':
       return <LiveBadge className={className} />
     case 'called':
-      return <CalledBadge className={className} />
+      return <CalledBadge className={className} winnerName={winnerName} />
     case 'not-started':
       return <NotStartedBadge className={className} />
     default:
@@ -43,10 +44,10 @@ function NotStartedBadge({ className, ...props }: BadgeProps) {
   )
 }
 
-function CalledBadge({ className, ...props }: BadgeProps) {
+function CalledBadge({ className, winnerName, ...props }: BadgeProps & { winnerName?: string }) {
   return (
     <Badge className={cn('py-1 text-base', className)} variant="primary-cta-subtle" {...props}>
-      Final
+      {winnerName ? `Winner: ${winnerName}` : 'Final'}
     </Badge>
   )
 }
