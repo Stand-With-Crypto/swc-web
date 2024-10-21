@@ -115,7 +115,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
         title: 'Join Stand With Crypto',
-        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
+        // description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`, // TODO: RETURN TO THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
+        description: `Joined over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -135,7 +136,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
         isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
         title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        description: 'Make your voice heard. We make it easy.',
+        // description: 'Make your voice heard. We make it easy.', // TODO: RETURN THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
+        description: 'You emailed your representative about FIT21.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
@@ -189,7 +191,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionCallCampaignName.FIT21_2024_04,
         isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
         title: `Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`,
-        description: "The most effective way to make your voice heard. We'll show you how.",
+        // description: "The most effective way to make your voice heard. We'll show you how.", // TODO: RETURN TO THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
+        description: `You called your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })} about FIT21`,
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormCallCongresspersonDialog,
       },
