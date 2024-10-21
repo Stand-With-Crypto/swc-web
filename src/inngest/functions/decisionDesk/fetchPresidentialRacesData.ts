@@ -18,7 +18,7 @@ export interface FetchPresidentialRacesInngestEventSchema {
 }
 
 const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-cron-job'
-const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York 0 12 * * *' // Every day - 12PM EST
+const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York */30 * * * *' // Every 30 minutes
 
 const DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE = 40
 
@@ -146,18 +146,33 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         `Fetching ${stateKey} races data from Decision Desk API. Current request count: ${requestsMade}.`,
       )
 
+      const isLAState = stateKey === 'LA'
       const currentStateKey = stateKey as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+
+      // Louisiana is somewhat different in that their elections on November 5th are technically primaries even
+      // though they are treated like the General Election. Recommendation here would be to adjust the query to use Election Type of 1
+      const getAllRacesPerStateParams = isLAState
+        ? {
+            year,
+            limit,
+            race_date,
+            state: currentStateKey,
+            election_type: '1',
+          }
+        : {
+            year,
+            limit,
+            name,
+            race_date,
+            state: currentStateKey,
+          }
 
       try {
         const stateRacesData = await step.run(
           `fetch-${currentStateKey}-and-persist-races-data`,
           async () => {
             return getAllRacesData({
-              year,
-              limit,
-              name,
-              race_date,
-              state: currentStateKey,
+              ...getAllRacesPerStateParams,
               ...rest,
             })
           },
