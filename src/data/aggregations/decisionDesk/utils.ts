@@ -33,19 +33,7 @@ export const getPoliticianFindMatch = (
   const hasPassedWithLastName =
     levenshtein(normalizedDTSILastName, normalizedDDHQLastName) <= nameThreshold
 
-  if (hasPassedWithName || hasPassedWithNickname || hasPassedWithLastName) {
-    logger.info('Matched politician with voting data.', {
-      domain: 'aggregations/decisionDesk/utils',
-      hasPassedWithName,
-      hasPassedWithNickname,
-      hasPassedWithLastName,
-      dtsiPerson,
-      ddhqCandidate,
-    })
-    return true
-  }
-
-  return false
+  return hasPassedWithName || hasPassedWithNickname || hasPassedWithLastName
 }
 
 export const normalizeName = (name: string) => {
