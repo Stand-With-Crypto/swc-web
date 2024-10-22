@@ -3,8 +3,9 @@
 import { useCookie } from 'react-use'
 import useSWR, { SWRResponse } from 'swr'
 
-import { CandidatesWithVote, RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import * as stateRacesMockData from '@/mocks/decisionDesk'
+import { Candidate } from '@/utils/server/decisionDesk/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
   INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID,
@@ -50,7 +51,7 @@ export function useApiDecisionDeskData({
     ] as RacesVotingDataResponse[]
 
     const mockedData = stateRacesData.map(currentStateRaceData => {
-      let mockedCalledCandidate: CandidatesWithVote | null = null
+      let mockedCalledCandidate: Candidate | null = null
 
       const rawVotes = currentStateRaceData.candidatesWithVotes.map(currentCandidate => {
         const votes = Math.min(
@@ -67,7 +68,11 @@ export function useApiDecisionDeskData({
       const updatedVotes = rawVotes.map(candidate => {
         const elected = candidate.id === highestVoteCandidate.id && raceStatus === 'finished'
         if (elected) {
-          mockedCalledCandidate = candidate
+          mockedCalledCandidate = {
+            cand_id: candidate.id,
+            first_name: candidate.firstName,
+            last_name: candidate.lastName,
+          } as Candidate
         }
         return {
           ...candidate,

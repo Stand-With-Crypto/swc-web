@@ -32,15 +32,16 @@ export function useApiDecisionDeskPresidentialData(
   )
 
   if (mockedRaceCookieData) {
-    const { estimatedVotes } = mockedRaceCookieData
+    const { estimatedVotes, raceStatus } = mockedRaceCookieData
 
     const mockedData = SWC_PRESIDENTIAL_RACES_DATA.map(currentPresidentialData => {
       const currentVotingData = currentPresidentialData.votingData
 
       if (currentVotingData) {
         const votes = Math.min(Math.round(+estimatedVotes * Math.random()), +estimatedVotes)
-        const called = votes > +estimatedVotes / 2
-        const percentage = (votes / +estimatedVotes) * 100
+        const electoralVotes = Math.min(Math.round(Math.abs((Math.random() - 0.5) * 538)), 538)
+        const called = electoralVotes >= 270 && raceStatus === 'finished'
+        const percentage = (electoralVotes / 538) * 100
 
         return {
           ...currentPresidentialData,
@@ -49,7 +50,7 @@ export function useApiDecisionDeskPresidentialData(
             percentage,
             votes,
             called,
-            electoralVotes: Math.round(Math.random() * 200),
+            electoralVotes,
           },
         }
       }

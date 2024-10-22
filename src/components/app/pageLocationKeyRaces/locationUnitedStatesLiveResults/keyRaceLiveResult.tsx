@@ -12,6 +12,7 @@ import {
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import {
+  DTSI_DDHQ_Candidate,
   useInitialCandidateSelection,
   useLiveCandidateSelection,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/useCandidateSelection'
@@ -194,19 +195,21 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
       <div className="flex justify-between">
         <AvatarBox
-          candidate={candidateA}
           className={cn(
             getOpacity(ddhqCandidateA, raceData),
             ddhqCandidateA ? 'border-2 border-green-500' : 'border-2 border-red-500',
           )}
+          ddhqCandidate={ddhqCandidateA}
+          dtsiCandidate={candidateA}
         />
         <AvatarBox
-          candidate={candidateB}
           className={cn(
             'flex flex-col items-end text-right',
             getOpacity(ddhqCandidateB, raceData),
             ddhqCandidateB ? 'border-2 border-green-500' : 'border-2 border-red-500',
           )}
+          ddhqCandidate={ddhqCandidateB}
+          dtsiCandidate={candidateB}
         />
       </div>
 
@@ -299,12 +302,14 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 }
 
 interface AvatarBoxProps {
-  candidate: DTSI_Candidate
+  dtsiCandidate: DTSI_Candidate
+  ddhqCandidate: DTSI_DDHQ_Candidate | undefined
   className?: string
 }
 
 function AvatarBox(props: AvatarBoxProps) {
-  const { candidate, className } = props
+  const { dtsiCandidate, ddhqCandidate, className } = props
+  const candidate = ddhqCandidate || dtsiCandidate
 
   return (
     <div className={className}>

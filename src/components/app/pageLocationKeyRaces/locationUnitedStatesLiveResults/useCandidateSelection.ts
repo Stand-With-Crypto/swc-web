@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import * as Sentry from '@sentry/nextjs'
 
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import { CandidatesWithVote, RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
@@ -52,10 +52,12 @@ export const useInitialCandidateSelection = (candidates: DTSI_Candidate[]) => {
   }, [candidates])
 }
 
+export type DTSI_DDHQ_Candidate = (Omit<DTSI_Candidate, 'id'> & CandidatesWithVote) | null
+
 export const useLiveCandidateSelection = (
   dtsiCandidates: DTSI_Candidate[],
   liveResultData: RacesVotingDataResponse | null,
-) => {
+): DTSI_DDHQ_Candidate[] => {
   const fallback = useInitialCandidateSelection(dtsiCandidates)
 
   if (!liveResultData) return []
