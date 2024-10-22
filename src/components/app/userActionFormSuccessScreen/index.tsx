@@ -42,7 +42,16 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   })
 
   if (!isLoggedIn || !user) {
-    return <JoinSWC onClose={onClose} />
+    return (
+      <JoinSWC
+        isVotingDay={isVotingDay}
+        onClose={onClose}
+        {...(isVotingDay && {
+          title: 'Nice work! Claim your free NFT.',
+          description: 'Join Stand With Crypto or sign in to claim your free “I Voted” NFT.',
+        })}
+      />
+    )
   }
 
   if (!isVotingDay && (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN)) {

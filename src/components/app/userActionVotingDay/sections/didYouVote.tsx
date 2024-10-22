@@ -2,34 +2,13 @@
 import { useCallback } from 'react'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
+import { DidYouVoteVideo } from '@/components/app/userActionVotingDay/didYouVoteVideo'
 import { useVotingDayAction } from '@/components/app/userActionVotingDay/useVotingDayAction'
 import { Button } from '@/components/ui/button'
 import { DialogBody } from '@/components/ui/dialog'
-import { NextImage } from '@/components/ui/image'
-import { Video } from '@/components/ui/video'
 
 interface DidYouVoteProps {
   onAnswer: () => void
-}
-
-function DidYouVoteVideo() {
-  const imageFallback = (
-    <NextImage
-      alt="Did you vote?"
-      fill
-      sizes="(max-width: 345px) 100vw, 50vw"
-      src="/actionTypeIcons/iVoted.png"
-      style={{ objectFit: 'cover' }}
-    />
-  )
-
-  return (
-    <Video
-      className={'h-[250px] w-[345px] overflow-hidden rounded-xl object-cover'}
-      fallback={imageFallback}
-      src="/actionTypeVideos/iVoted.mp4"
-    />
-  )
 }
 
 export function DidYouVote({ onAnswer }: DidYouVoteProps) {
