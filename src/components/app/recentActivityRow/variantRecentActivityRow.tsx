@@ -31,6 +31,7 @@ import {
 } from '@/utils/shared/userActionCampaigns'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { listOfThings } from '@/utils/web/listOfThings'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
@@ -282,6 +283,16 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: undefined,
           children: <MainText>Voter plan researched {voterStateOrEmpty}</MainText>,
+        }
+      }
+      case UserActionType.VOTING_DAY: {
+        return {
+          onFocusContent: () => (
+            <UserActionVotingDayDialog>
+              <Button>I voted!</Button>
+            </UserActionVotingDayDialog>
+          ),
+          children: <MainText>Someone voted</MainText>,
         }
       }
     }
