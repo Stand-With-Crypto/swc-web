@@ -23,13 +23,12 @@ export async function generateOgImage({
   console.log('params', params)
 
   const presidentialRaceData = await queryDTSILocationUnitedStatesPresidential()
-
-  const shieldData = await fetch(new URL('./images/shield.png', import.meta.url)).then(res =>
-    res.arrayBuffer(),
-  )
-  const placeholderData = await fetch(new URL('./images/profile.png', import.meta.url)).then(res =>
-    res.arrayBuffer(),
-  )
+  const shieldData = await fetch(
+    new URL('../../pagePoliticianDetails/images/shield.png', import.meta.url),
+  ).then(res => res.arrayBuffer())
+  const placeholderData = await fetch(
+    new URL('../../pagePoliticianDetails/images/profile.png', import.meta.url),
+  ).then(res => res.arrayBuffer())
 
   if (!presidentialRaceData) {
     return new ImageResponse(
@@ -79,29 +78,29 @@ export async function generateOgImage({
     const letterGrade = convertDTSIPersonStanceScoreToLetterGrade(candidate) ?? '?'
     switch (letterGrade) {
       case 'A':
-        return await fetch(new URL('./images/A.png', import.meta.url)).then(res =>
-          res.arrayBuffer(),
-        )
+        return await fetch(
+          new URL('../../pagePoliticianDetails/images/A.png', import.meta.url),
+        ).then(res => res.arrayBuffer())
       case 'B':
-        return await fetch(new URL('./images/B-light.png', import.meta.url)).then(res =>
-          res.arrayBuffer(),
-        )
+        return await fetch(
+          new URL('../../pagePoliticianDetails/images/B-light.png', import.meta.url),
+        ).then(res => res.arrayBuffer())
       case 'C':
-        return await fetch(new URL('./images/C.png', import.meta.url)).then(res =>
-          res.arrayBuffer(),
-        )
+        return await fetch(
+          new URL('../../pagePoliticianDetails/images/C.png', import.meta.url),
+        ).then(res => res.arrayBuffer())
       case 'D':
-        return await fetch(new URL('./images/D-light.png', import.meta.url)).then(res =>
-          res.arrayBuffer(),
-        )
+        return await fetch(
+          new URL('../../pagePoliticianDetails/images/D-light.png', import.meta.url),
+        ).then(res => res.arrayBuffer())
       case 'F':
-        return await fetch(new URL('./images/F.png', import.meta.url)).then(res =>
-          res.arrayBuffer(),
-        )
+        return await fetch(
+          new URL('../../pagePoliticianDetails/images/F.png', import.meta.url),
+        ).then(res => res.arrayBuffer())
       case '?':
-        return await fetch(new URL('./images/no-grade.png', import.meta.url)).then(res =>
-          res.arrayBuffer(),
-        )
+        return await fetch(
+          new URL('../../pagePoliticianDetails/images/no-grade.png', import.meta.url),
+        ).then(res => res.arrayBuffer())
     }
   }
 

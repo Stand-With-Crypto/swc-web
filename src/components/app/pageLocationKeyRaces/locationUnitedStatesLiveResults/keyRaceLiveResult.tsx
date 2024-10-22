@@ -80,7 +80,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     : urls.locationStateSpecificSenateRace(stateCode)
   const showLink = !isDistrictPage && !isSenatePage && !isPresidentialPage
 
-  const { data: liveResultData } = useApiDecisionDeskData({
+  const { data: liveResultData, isLoading } = useApiDecisionDeskData({
     initialRaceData,
     stateCode,
     district: primaryDistrict?.toString(),
@@ -154,7 +154,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
   const canShowProgress = Boolean(liveResultData)
 
-  if (!candidateA || !candidateB) {
+  const shouldHideCard =
+    (!candidateA || !candidateB || !ddhqCandidateA || !ddhqCandidateB) && !isLoading
+
+  if (shouldHideCard) {
     return null
   }
 

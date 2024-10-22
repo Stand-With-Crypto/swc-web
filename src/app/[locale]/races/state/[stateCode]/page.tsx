@@ -75,6 +75,7 @@ export default async function LocationStateSpecificPage({
   } catch (error) {
     Sentry.captureException(error, {
       extra: { key: 'SWC_ALL_CONGRESS_DATA' },
+      tags: { domain: 'liveResult' },
     })
     throw error
   }

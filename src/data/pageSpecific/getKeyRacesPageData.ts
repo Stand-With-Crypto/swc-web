@@ -38,6 +38,7 @@ export const getKeyRacesPageData = async () => {
   } catch (error) {
     Sentry.captureException(error, {
       extra: { key: 'SWC_PRESIDENTIAL_RACES_DATA' },
+      tags: { domain: 'liveResult' },
     })
     throw error
   }
@@ -49,6 +50,7 @@ export const getKeyRacesPageData = async () => {
   } catch (error) {
     Sentry.captureException(error, {
       extra: { key: 'SWC_ALL_CONGRESS_DATA' },
+      tags: { domain: 'liveResult' },
     })
     throw error
   }
