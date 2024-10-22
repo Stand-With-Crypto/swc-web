@@ -40,7 +40,7 @@ const contentSecurityPolicy = {
     'https://www.googletagmanager.com/',
     'https://static.ads-twitter.com/',
   ],
-  'img-src': ["'self'", 'https:', 'data:', 'blob:', 'https://cnv.event.prod.bidr.io/log/cnv'],
+  'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
     "'self'",
     'ws: wss:',
