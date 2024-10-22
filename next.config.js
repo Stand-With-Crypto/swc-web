@@ -28,7 +28,7 @@ const contentSecurityPolicy = {
     'https://*.gstatic.com',
     '*.google.com',
     'https://www.googletagmanager.com',
-    'https://static.ads-twitter.com/uwt.js',
+    'https://static.ads-twitter.com/uwt.js', // Twitter Pixel
     'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
     'https://va.vercel-scripts.com/v1/script.debug.js',
     'https://www.youtube.com/',
@@ -37,14 +37,23 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
+    'https://c.amazon-adsystem.com/', // Amazon ads
+    'https://www.googletagmanager.com/gtm.js', // Google Tag Manager
   ],
-  'img-src': ["'self'", 'https: data:', 'blob: data:'],
+  'img-src': [
+    "'self'",
+    'https:',
+    'data:',
+    'blob:',
+    'https://cnv.event.prod.bidr.io/log/cnv', // Beeswax image
+  ],
   'connect-src': [
     "'self'",
     'ws: wss:',
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
     'https://cloudflare-eth.com',
     'https://c.thirdweb.com/',
+    'https://c.amazon-adsystem.com/', // Amazon ads
     // ENS
     'https://euc.li/',
     // Thirdweb contract metadata
