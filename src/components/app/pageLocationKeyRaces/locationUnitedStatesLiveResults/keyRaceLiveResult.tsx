@@ -224,7 +224,8 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               indicatorClassName={cn(
                 'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
+                  ddhqCandidateA?.manuallyOverriddenStanceScore ||
+                    ddhqCandidateA?.computedStanceScore,
                 ),
               )}
               value={+getVotePercentage(ddhqCandidateA, raceData).toFixed(2) * 2}
@@ -241,7 +242,8 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               indicatorClassName={cn(
                 'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
+                  ddhqCandidateB?.manuallyOverriddenStanceScore ||
+                    ddhqCandidateB?.computedStanceScore,
                 ),
               )}
               inverted
