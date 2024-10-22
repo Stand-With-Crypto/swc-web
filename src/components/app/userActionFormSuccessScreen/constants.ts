@@ -55,6 +55,6 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
   [UserActionType.VOTING_DAY]: {
     title: 'Thanks for doing your part!',
     description:
-      'We sent you a free "proof-of-vote" NFT. Share on X to show that you did your part to save crypto.',
+      "Thanks for doing your part to save crypto this year. We'll send a free NFT to your profile soon. Spread the word and urge others to vote by sharing on X.",
   },
 }
