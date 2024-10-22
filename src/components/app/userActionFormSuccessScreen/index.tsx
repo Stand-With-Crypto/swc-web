@@ -48,7 +48,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
         onClose={onClose}
         {...(isVotingDay && {
           title: 'Nice work! Claim your free NFT.',
-          description: 'Join Stand With Crypto or sign in to claim your free “I Voted” NFT.',
+          description: 'Join Stand With Crypto or sign in to claim your free “I voted” NFT.',
         })}
       />
     )

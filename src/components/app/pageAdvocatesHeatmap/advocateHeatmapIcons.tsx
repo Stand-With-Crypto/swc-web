@@ -391,3 +391,241 @@ export function VoterAttestationIcon({
     </svg>
   )
 }
+
+export function ViewKeyRacesIcon({
+  isPulsing = false,
+  height = 40,
+  width = 40,
+  ...rest
+}: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect width="40" height="40" rx="20" fill="#003049" />
+      <g clip-path="url(#clip0_5259_17615)">
+        <path
+          opacity="0.3"
+          d="M13 14.2999V18.9999C13 23.5199 15.98 27.6899 20 28.9299C21.74 28.3999 23.28 27.3099 24.47 25.8899L22.75 24.1699C20.81 25.4599 18.17 25.2399 16.46 23.5299C14.51 21.5799 14.51 18.4099 16.46 16.4599C18.41 14.5099 21.58 14.5099 23.53 16.4599C25.24 18.1699 25.45 20.8099 24.17 22.7499L25.62 24.1999C26.49 22.6499 27 20.8499 27 18.9999V14.2999L20 11.1899L13 14.2999Z"
+          fill="white"
+        />
+        <path
+          d="M20 9L11 13V19C11 24.55 14.84 29.74 20 31C20.65 30.84 21.27 30.62 21.87 30.35C23.67 29.53 25.23 28.22 26.44 26.61C28.04 24.46 29 21.77 29 19V13L20 9ZM27 19C27 20.85 26.49 22.65 25.62 24.21L24.17 22.76C25.46 20.82 25.24 18.18 23.53 16.47C21.58 14.52 18.41 14.52 16.46 16.47C14.51 18.42 14.51 21.59 16.46 23.54C18.17 25.25 20.81 25.46 22.75 24.18L24.47 25.9C23.28 27.32 21.74 28.41 20 28.94C15.98 27.69 13 23.52 13 19V14.3L20 11.19L27 14.3V19ZM23 20C23 21.66 21.66 23 20 23C18.34 23 17 21.66 17 20C17 18.34 18.34 17 20 17C21.66 17 23 18.34 23 20Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_5259_17615">
+          <rect width="24" height="24" fill="white" transform="translate(8 8)" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#003049"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#003049"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}
+
+export function VotedIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect width="40" height="40" rx="20" fill="#FFF2B2" />
+      <g clip-path="url(#clip0_5232_17227)">
+        <path
+          opacity="0.3"
+          d="M15.8333 21.6667H18.3333V24.1667H15.8333V21.6667ZM15.8333 15.8334H18.3333V18.3334H15.8333V15.8334ZM14.1666 25.8334H25.8333V14.1667H14.1666V25.8334ZM20.8333 16.2501H25V17.9167H20.8333V16.2501ZM20.8333 22.0834H25V23.7501H20.8333V22.0834ZM15 15.0001H19.1666V19.1667H15V15.0001ZM15 20.8334H19.1666V25.0001H15V20.8334Z"
+          fill="#4A2100"
+        />
+        <path
+          d="M20.8333 16.25H25V17.9167H20.8333V16.25ZM20.8333 22.0833H25V23.75H20.8333V22.0833ZM25.8333 12.5H14.1667C13.25 12.5 12.5 13.25 12.5 14.1667V25.8333C12.5 26.75 13.25 27.5 14.1667 27.5H25.8333C26.75 27.5 27.5 26.75 27.5 25.8333V14.1667C27.5 13.25 26.75 12.5 25.8333 12.5ZM25.8333 25.8333H14.1667V14.1667H25.8333V25.8333ZM19.1667 15H15V19.1667H19.1667V15ZM18.3333 18.3333H15.8333V15.8333H18.3333V18.3333ZM19.1667 20.8333H15V25H19.1667V20.8333ZM18.3333 24.1667H15.8333V21.6667H18.3333V24.1667Z"
+          fill="#4A2100"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_5232_17227">
+          <rect width="20" height="20" fill="white" transform="translate(10 10)" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#FFF2B2"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#FFF2B2"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}
+
+export function PrepareToVoteIcon({
+  isPulsing = false,
+  height = 40,
+  width = 40,
+  ...rest
+}: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect width="40.0007" height="40" rx="20" fill="#D62828" />
+      <g clip-path="url(#clip0_5259_17626)">
+        <path
+          opacity="0.3"
+          d="M20 11C16.69 11 14 13.69 14 17C14 20.54 17.82 25.86 20 28.47C21.75 26.36 26 20.84 26 17C26 13.69 23.31 11 20 11ZM18.47 22L15.29 18.82L16.71 17.4L18.48 19.17L23.08 14.57L24.49 15.98L18.47 22Z"
+          fill="white"
+        />
+        <path
+          d="M20 9C15.59 9 12 12.59 12 17C12 22.57 18.96 30.34 19.26 30.67L20 31.49L20.74 30.67C21.04 30.34 28 22.57 28 17C28 12.59 24.41 9 20 9ZM20 28.47C17.82 25.86 14 20.54 14 17C14 13.69 16.69 11 20 11C23.31 11 26 13.69 26 17C26 20.83 21.75 26.36 20 28.47ZM23.07 14.57L18.47 19.17L16.71 17.4L15.29 18.82L18.47 22L24.48 15.99L23.07 14.57Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_5259_17626">
+          <rect width="24" height="24" fill="white" transform="translate(8 8)" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#D62828"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#D62828"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}

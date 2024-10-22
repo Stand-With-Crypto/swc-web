@@ -1,12 +1,11 @@
 import { UserActionType } from '@prisma/client'
 
 import {
-  CallIcon,
-  EmailIcon,
   IconProps,
   JoinIcon,
-  VoterAttestationIcon,
-  VoterRegIcon,
+  ViewKeyRacesIcon,
+  VotedIcon,
+  PrepareToVoteIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 
 export const STATE_COORDS: Record<string, [number, number]> = {
@@ -77,34 +76,54 @@ export const ADVOCATES_ACTIONS: Partial<
     }
   >
 > = {
-  CALL: {
-    icon: CallIcon,
-    label: 'Call made to congress',
-    labelMobile: 'called',
-    labelActionTooltip: 'called their rep',
-  },
-  EMAIL: {
-    icon: EmailIcon,
-    label: 'Email sent to congress',
-    labelMobile: 'emailed',
-    labelActionTooltip: 'emailed their rep',
-  },
+  // removed call and email for the voting day
+  // CALL: {
+  //   icon: CallIcon,
+  //   label: 'Call made to congress',
+  //   labelMobile: 'called',
+  //   labelActionTooltip: 'called their rep',
+  // },
+  // EMAIL: {
+  //   icon: EmailIcon,
+  //   label: 'Email sent to congress',
+  //   labelMobile: 'emailed',
+  //   labelActionTooltip: 'emailed their rep',
+  // },
   OPT_IN: {
     icon: JoinIcon,
     label: 'New member joined',
     labelMobile: 'joined',
     labelActionTooltip: 'joined SWC',
   },
-  VOTER_REGISTRATION: {
-    icon: VoterRegIcon,
-    label: 'Registered to vote',
-    labelMobile: 'reg. to vote',
-    labelActionTooltip: 'registered to vote',
+  // removed call and email for the voting day
+  // VOTER_REGISTRATION: {
+  //   icon: VoterRegIcon,
+  //   label: 'Checked voter registration',
+  //   labelMobile: 'checked voter reg.',
+  //   labelActionTooltip: 'checked voter registration',
+  // },
+  // VOTER_ATTESTATION: {
+  //   icon: VoterAttestationIcon,
+  //   label: 'Pledged to vote',
+  //   labelMobile: 'pledged to vote',
+  //   labelActionTooltip: 'pledged to vote',
+  // },
+  VIEW_KEY_RACES: {
+    icon: ViewKeyRacesIcon,
+    label: 'Researched politician scores',
+    labelMobile: 'researched',
+    labelActionTooltip: 'researched politician scores',
   },
-  VOTER_ATTESTATION: {
-    icon: VoterAttestationIcon,
-    label: 'Pledged to vote',
-    labelMobile: 'pledged to vote',
-    labelActionTooltip: 'pledged to vote',
+  VOTING_INFORMATION_RESEARCHED: {
+    icon: PrepareToVoteIcon,
+    label: 'Prepared to vote',
+    labelMobile: 'prepared',
+    labelActionTooltip: 'prepared to vote',
+  },
+  VOTING_DAY: {
+    icon: VotedIcon,
+    label: 'I voted',
+    labelMobile: 'I voted',
+    labelActionTooltip: 'I voted',
   },
 }

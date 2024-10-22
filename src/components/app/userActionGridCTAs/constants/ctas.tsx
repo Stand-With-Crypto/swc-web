@@ -265,7 +265,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         isCampaignActive: true,
         title: 'I voted!',
         description: 'Claim your "proof-of-vote" NFT.',
-        canBeTriggeredMultipleTimes: false,
+        canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <Suspense fallback={children}>
             <UserActionVotingDayDialog>{children}</UserActionVotingDayDialog>
