@@ -3,9 +3,9 @@ import { UserActionType } from '@prisma/client'
 import {
   IconProps,
   JoinIcon,
+  PrepareToVoteIcon,
   ViewKeyRacesIcon,
   VotedIcon,
-  PrepareToVoteIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 
 export const STATE_COORDS: Record<string, [number, number]> = {

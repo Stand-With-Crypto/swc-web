@@ -13,6 +13,7 @@ import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userAc
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { InternalLink } from '@/components/ui/link'
@@ -31,7 +32,6 @@ import {
 } from '@/utils/shared/userActionCampaigns'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { listOfThings } from '@/utils/web/listOfThings'
-import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
