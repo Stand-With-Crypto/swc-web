@@ -68,6 +68,17 @@ export function UserActionGridCampaignsDialogContent({
             const campaignKey = `${campaign.actionType}-${campaign.campaignName}`
             const isCompleted = !!performedUserActions[campaignKey]
 
+            if (!WrapperComponent) {
+              return (
+                <CampaignCard
+                  description={campaign.description}
+                  isCompleted={isCompleted}
+                  key={campaignKey}
+                  title={campaign.title}
+                />
+              )
+            }
+
             return (
               <WrapperComponent key={campaignKey}>
                 <CampaignCard
@@ -114,6 +125,18 @@ export function UserActionGridCampaignsDialogContent({
                         title={campaign.title}
                       />
                     </Link>
+                  )
+                }
+
+                if (!WrapperComponent) {
+                  return (
+                    <CampaignCard
+                      description={campaign.description}
+                      isCompleted={isCompleted}
+                      isReadOnly
+                      key={campaignKey}
+                      title={campaign.title}
+                    />
                   )
                 }
 
