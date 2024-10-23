@@ -19,20 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    // openGraph: {
-    //   title,
-    //   description,
-    //   siteName: 'Stand With Crypto',
-    //   locale: 'en_US',
-    //   type: 'website',
-    // },
-    twitter: {
-      title,
-      description,
-      card: 'summary_large_image',
-      creator: '@standwithcrypto',
-    },
-  } satisfies Metadata
+  }
 }
 
 export default async function LocationUnitedStatesPage({ params }: LocationUnitedStatesPageProps) {

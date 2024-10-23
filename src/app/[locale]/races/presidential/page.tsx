@@ -6,7 +6,6 @@ import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decision
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { PageProps } from '@/types'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
@@ -17,10 +16,10 @@ type LocationPresidentialRaceSpecificPageProps = PageProps
 export async function generateMetadata(): Promise<Metadata> {
   const title = `US Presidential Race`
   const description = `See where politicians running for the US presidency stand on crypto.`
-  return generateMetadataDetails({
+  return {
     title,
     description,
-  })
+  }
 }
 
 export default async function LocationPresidentialSpecificPage({
