@@ -27,7 +27,6 @@ const contentSecurityPolicy = {
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
-    'https://www.googletagmanager.com',
     'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
     'https://va.vercel-scripts.com/v1/script.debug.js',
     'https://www.youtube.com/',
@@ -36,9 +35,11 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
-    'https://c.amazon-adsystem.com/',
     'https://www.googletagmanager.com/',
-    'https://static.ads-twitter.com/',
+    'https://*.amazon-adsystem.com/',
+    'https://*.paa-reporting-advertising.amazon/',
+    'https://*.ads-twitter.com/',
+    'https://*.google-analytics.com/',
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
@@ -49,7 +50,10 @@ const contentSecurityPolicy = {
     'https://c.thirdweb.com/',
     'https://c.amazon-adsystem.com/',
     'https://www.googletagmanager.com/',
-    'https://static.ads-twitter.com/',
+    'https://*.amazon-adsystem.com/',
+    'https://*.paa-reporting-advertising.amazon/',
+    'https://*.ads-twitter.com/',
+    'https://*.google-analytics.com/',
     // ENS
     'https://euc.li/',
     // Thirdweb contract metadata
