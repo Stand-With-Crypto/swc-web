@@ -2,7 +2,9 @@
 // the above eslint rule is disabled because the img elements are required for the og image to work
 import { ImageResponse } from 'next/og'
 
-import { DTSI_Person } from '@/data/dtsi/generated'
+import { organizeStateSpecificPeople } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/organizeStateSpecificPeople'
+import { DTSI_Person, DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
+import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import {
   dtsiPersonFullName,
@@ -13,16 +15,27 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export async function generateOgImage({
   params,
 }: {
   params: { stateCode?: string; district?: string }
 }) {
-  // const { stateCode, district } = params
-  console.log('params', params)
+  const { stateCode } = params
 
-  const presidentialRaceData = await queryDTSILocationUnitedStatesPresidential()
+  let presidentialRaceData: DTSI_UnitedStatesPresidentialQuery | null = null
+  let stateRaceData: ReturnType<typeof organizeStateSpecificPeople> | null = null
+
+  if (stateCode) {
+    const data = await queryDTSILocationStateSpecificInformation({
+      stateCode: stateCode as USStateCode,
+    })
+    stateRaceData = organizeStateSpecificPeople(data.people)
+  } else {
+    presidentialRaceData = await queryDTSILocationUnitedStatesPresidential()
+  }
+
   const shieldData = await fetch(
     new URL('../../pagePoliticianDetails/images/shield.png', import.meta.url),
   ).then(res => res.arrayBuffer())
@@ -30,7 +43,7 @@ export async function generateOgImage({
     new URL('../../pagePoliticianDetails/images/profile.png', import.meta.url),
   ).then(res => res.arrayBuffer())
 
-  if (!presidentialRaceData) {
+  if (!presidentialRaceData && !stateRaceData) {
     return new ImageResponse(
       (
         <div tw="flex bg-black text-white p-8 w-full h-full flex-col items-center gap-8">
@@ -53,12 +66,14 @@ export async function generateOgImage({
     )
   }
 
-  const candidateA =
-    presidentialRaceData.people.find(candidate => candidate.lastName === 'Trump') ||
-    presidentialRaceData.people[0]
-  const candidateB =
-    presidentialRaceData.people.find(candidate => candidate.lastName === 'Harris') ||
-    presidentialRaceData.people[1]
+  const candidateA = stateRaceData
+    ? stateRaceData.senators[0]
+    : presidentialRaceData!.people.find(candidate => candidate.lastName === 'Trump') ||
+      presidentialRaceData!.people[0]
+  const candidateB = stateRaceData
+    ? stateRaceData.senators[1]
+    : presidentialRaceData!.people.find(candidate => candidate.lastName === 'Harris') ||
+      presidentialRaceData!.people[1]
 
   function getScoreLanguage(
     candidate: Pick<
