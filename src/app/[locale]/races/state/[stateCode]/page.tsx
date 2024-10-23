@@ -39,10 +39,10 @@ export async function generateMetadata({
 
   const title = `Key Races in ${stateName}`
   const description = `View the races critical to keeping crypto in ${stateName}.`
-  return generateMetadataDetails({
+  return {
     title,
     description,
-  })
+  }
 }
 
 export async function generateStaticParams() {
