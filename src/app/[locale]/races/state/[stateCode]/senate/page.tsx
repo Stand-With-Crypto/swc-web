@@ -8,7 +8,6 @@ import {
   DecisionDeskRedisKeys,
   getDecisionDataFromRedis,
 } from '@/utils/server/decisionDesk/cachedData'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
@@ -27,10 +26,10 @@ export async function generateMetadata({
   const stateName = getUSStateNameFromStateCode(stateCode)
   const title = `${stateName} US Senate Race`
   const description = `See where politicians running for the US Senate in ${stateName} stand on crypto.`
-  return generateMetadataDetails({
+  return {
     title,
     description,
-  })
+  }
 }
 
 export default async function LocationSenateSpecificPage({

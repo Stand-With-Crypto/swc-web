@@ -12,7 +12,6 @@ import {
   DecisionDeskRedisKeys,
   getDecisionDataFromRedis,
 } from '@/utils/server/decisionDesk/cachedData'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'

@@ -2,10 +2,13 @@
 // the above eslint rule is disabled because the img elements are required for the og image to work
 import { ImageResponse } from 'next/og'
 
+import { organizeRaceSpecificPeople } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific/organizeRaceSpecificPeople'
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/organizeStateSpecificPeople'
 import { DTSI_Person, DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
-import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
+import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
+import { queryDTSILocationSenateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationSenateSpecificInformation'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
+import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
@@ -22,13 +25,23 @@ export async function generateOgImage({
 }: {
   params: { stateCode?: string; district?: string }
 }) {
-  const { stateCode } = params
+  const { stateCode, district } = params
 
   let presidentialRaceData: DTSI_UnitedStatesPresidentialQuery | null = null
   let stateRaceData: ReturnType<typeof organizeStateSpecificPeople> | null = null
+  let districtRaceData: ReturnType<typeof organizeRaceSpecificPeople> | null = null
 
-  if (stateCode) {
-    const data = await queryDTSILocationStateSpecificInformation({
+  if (stateCode && district) {
+    const data = await queryDTSILocationDistrictSpecificInformation({
+      stateCode: stateCode as USStateCode,
+      district: district as NormalizedDTSIDistrictId,
+    })
+    districtRaceData = organizeRaceSpecificPeople(data.people, {
+      stateCode: stateCode as USStateCode,
+      district: district as NormalizedDTSIDistrictId,
+    })
+  } else if (stateCode) {
+    const data = await queryDTSILocationSenateSpecificInformation({
       stateCode: stateCode as USStateCode,
     })
     stateRaceData = organizeStateSpecificPeople(data.people)
@@ -58,7 +71,7 @@ export async function generateOgImage({
 
           <div tw="flex flex-col items-center justify-center text-center gap-2">
             <div tw="text-5xl">Who will defend crypto in America?</div>
-            <div tw="text-gray-400">View live election results on Stand With Crypto.</div>
+            <div tw="text-gray-400 text-lg">View live election results on Stand With Crypto.</div>
           </div>
         </div>
       ),
@@ -66,14 +79,16 @@ export async function generateOgImage({
     )
   }
 
-  const candidateA = stateRaceData
-    ? stateRaceData.senators[0]
-    : presidentialRaceData!.people.find(candidate => candidate.lastName === 'Trump') ||
-      presidentialRaceData!.people[0]
-  const candidateB = stateRaceData
-    ? stateRaceData.senators[1]
-    : presidentialRaceData!.people.find(candidate => candidate.lastName === 'Harris') ||
-      presidentialRaceData!.people[1]
+  const candidateA =
+    districtRaceData?.[0] ||
+    stateRaceData?.senators[0] ||
+    presidentialRaceData!.people.find(candidate => candidate.lastName === 'Trump') ||
+    presidentialRaceData!.people[0]
+  const candidateB =
+    districtRaceData?.[1] ||
+    stateRaceData?.senators[1] ||
+    presidentialRaceData!.people.find(candidate => candidate.lastName === 'Harris') ||
+    presidentialRaceData!.people[1]
 
   function getScoreLanguage(
     candidate: Pick<
@@ -132,7 +147,7 @@ export async function generateOgImage({
 
         <div tw="flex flex-col items-center text-center">
           <p tw="text-5xl font-bold mb-0">Who will defend crypto in America?</p>
-          <p tw="text-xl text-gray-400">View live election results on Stand With Crypto.</p>
+          <p tw="text-2xl text-gray-400">View live election results on Stand With Crypto.</p>
         </div>
 
         <div style={{ gap: '4rem' }} tw="flex justify-center w-full mt-4">

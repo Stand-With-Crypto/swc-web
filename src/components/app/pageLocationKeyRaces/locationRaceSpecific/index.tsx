@@ -8,6 +8,7 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
+import { organizeRaceSpecificPeople } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific/organizeRaceSpecificPeople'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { isPresidentialData } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
@@ -19,15 +20,10 @@ import {
   PresidentialDataWithVotingResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import {
-  DTSI_DistrictSpecificInformationQuery,
-  DTSI_PersonPoliticalAffiliationCategory,
-  DTSI_PersonRoleCategory,
-} from '@/data/dtsi/generated'
+import { DTSI_DistrictSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
@@ -37,49 +33,6 @@ interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuer
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
   initialLiveResultData: RacesVotingDataResponse[] | PresidentialDataWithVotingResponse[] | null
-}
-
-function organizeRaceSpecificPeople(
-  people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
-) {
-  const targetedRoleCategory = district
-    ? DTSI_PersonRoleCategory.CONGRESS
-    : stateCode
-      ? DTSI_PersonRoleCategory.SENATE
-      : DTSI_PersonRoleCategory.PRESIDENT
-
-  const formatted = people.map(x =>
-    formatSpecificRoleDTSIPerson(x, {
-      specificRole: targetedRoleCategory,
-    }),
-  )
-
-  const partyOrder = [
-    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-    DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-    DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
-  ]
-
-  formatted.sort((a, b) => {
-    const aPartyIndex = a.politicalAffiliationCategory
-      ? partyOrder.indexOf(a.politicalAffiliationCategory)
-      : -1
-    const bPartyIndex = b.politicalAffiliationCategory
-      ? partyOrder.indexOf(b.politicalAffiliationCategory)
-      : -1
-    if (aPartyIndex !== bPartyIndex) {
-      return aPartyIndex - bPartyIndex
-    }
-
-    if (a.primaryRole?.roleCategory !== b.primaryRole?.roleCategory) {
-      return a.primaryRole?.roleCategory === DTSI_PersonRoleCategory.PRESIDENT ? -1 : 1
-    }
-
-    return 0
-  })
-
-  return formatted
 }
 
 export function LocationRaceSpecific({
