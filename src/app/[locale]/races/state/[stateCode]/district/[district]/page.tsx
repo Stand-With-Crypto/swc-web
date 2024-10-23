@@ -43,13 +43,14 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   return flatten(
     Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(stateCode =>
-      times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode]).map(districtIndex => ({
-        stateCode: stateCode.toLowerCase(),
-        district:
-          US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode] === 1
+      times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode] || 1).map(
+        districtIndex => ({
+          stateCode: stateCode.toLowerCase(),
+          district: [0, 1].includes(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode])
             ? 'at-large'
             : `${districtIndex + 1}`,
-      })),
+        }),
+      ),
     ),
   ).slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 9999999)
 }
