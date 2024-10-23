@@ -17,7 +17,7 @@ export interface FetchPresidentialRacesInngestEventSchema {
   }
 }
 
-const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-cron-job'
+const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_ID = 'script.fetch-presidential-races-cron-job'
 const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York */1 * * * *' // Every 1 minute
 
 const DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE = 40
