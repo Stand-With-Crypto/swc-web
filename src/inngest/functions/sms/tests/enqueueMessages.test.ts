@@ -7,7 +7,6 @@ import {
   enqueueMessages,
   persistEnqueueMessagesResults,
 } from '@/inngest/functions/sms/enqueueMessages'
-import { bulkCreateCommunicationJourney } from '@/inngest/functions/sms/utils/communicationJourney'
 import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { fakerFields } from '@/mocks/fakerUtils'
@@ -20,14 +19,10 @@ import {
   TOO_MANY_REQUESTS_CODE,
 } from '@/utils/server/sms/SendSMSError'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
-import { fullUrl } from '@/utils/shared/urls'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 jest.mock('@/inngest/functions/sms/utils/flagInvalidPhoneNumbers', () => ({
   flagInvalidPhoneNumbers: jest.fn(),
-}))
-
-jest.mock('@/inngest/functions/sms/utils/communicationJourney', () => ({
-  bulkCreateCommunicationJourney: jest.fn(),
 }))
 
 jest.mock('@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers', () => ({
@@ -91,8 +86,18 @@ describe('enqueueMessages', () => {
 
     expect(sendSMS).toBeCalledTimes(totalMessages)
     mockedPayload.forEach(({ messages, phoneNumber }) =>
-      messages.forEach(({ body, media }) =>
-        expect(sendSMS).toBeCalledWith({ to: phoneNumber, body, media }),
+      messages.forEach(({ body, media, campaignName, journeyType }) =>
+        expect(sendSMS).toBeCalledWith({
+          to: phoneNumber,
+          body,
+          media,
+          statusCallbackUrl: fullUrl(
+            apiUrls.smsStatusCallback({
+              journeyType,
+              campaignName,
+            }),
+          ),
+        }),
       ),
     )
   })
@@ -156,10 +161,13 @@ describe('enqueueMessages', () => {
   ])('should correctly parse the sms body with custom variables', async (input, output) => {
     const phoneNumber = fakerFields.phoneNumber()
 
+    const journeyType = 'BULK_SMS'
+    const campaignName = 'unit-tests'
+
     await enqueueMessages(
       [
         {
-          messages: [{ body: input, journeyType: 'BULK_SMS', campaignName: 'unit-tests' }],
+          messages: [{ body: input, journeyType, campaignName }],
           phoneNumber,
         },
       ],
@@ -168,7 +176,16 @@ describe('enqueueMessages', () => {
       },
     )
 
-    expect(sendSMS).toHaveBeenCalledWith({ body: output, to: phoneNumber })
+    expect(sendSMS).toBeCalledWith({
+      body: output,
+      to: phoneNumber,
+      statusCallbackUrl: fullUrl(
+        apiUrls.smsStatusCallback({
+          journeyType,
+          campaignName,
+        }),
+      ),
+    })
   })
 })
 
@@ -180,7 +197,6 @@ describe('persistEnqueueMessagesResults', () => {
   const mockedPayload: Parameters<typeof persistEnqueueMessagesResults>['0'] = {
     failedPhoneNumbers: {},
     invalidPhoneNumbers: [],
-    messagesSentByJourneyType: {},
     queuedMessages: 0,
     segmentsSent: 0,
     unsubscribedUsers: [],
@@ -203,28 +219,5 @@ describe('persistEnqueueMessagesResults', () => {
     await persistEnqueueMessagesResults({ ...mockedPayload, unsubscribedUsers })
 
     expect(optOutUser).toBeCalledTimes(unsubscribedUsers.length)
-  })
-
-  it('Should create user communication journey and user communication ', async () => {
-    const messagesSentByJourneyType: (typeof mockedPayload)['messagesSentByJourneyType'] = {
-      BULK_SMS: {
-        [faker.string.alpha()]: randomArray(() => ({
-          messageId: faker.string.uuid(),
-          phoneNumber: fakerFields.phoneNumber(),
-        })),
-      },
-      WELCOME_SMS: {
-        [faker.string.alpha()]: randomArray(() => ({
-          messageId: faker.string.uuid(),
-          phoneNumber: fakerFields.phoneNumber(),
-        })),
-      },
-    }
-
-    await persistEnqueueMessagesResults({ ...mockedPayload, messagesSentByJourneyType })
-
-    expect(bulkCreateCommunicationJourney).toBeCalledTimes(
-      Object.keys(messagesSentByJourneyType).length,
-    )
   })
 })
