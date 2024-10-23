@@ -6,7 +6,7 @@ import { organizeRaceSpecificPeople } from '@/components/app/pageLocationKeyRace
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/organizeStateSpecificPeople'
 import { DTSI_Person, DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
-import { queryDTSILocationSenateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationSenateSpecificInformation'
+import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
@@ -41,7 +41,7 @@ export async function generateOgImage({
       district: district as NormalizedDTSIDistrictId,
     })
   } else if (stateCode) {
-    const data = await queryDTSILocationSenateSpecificInformation({
+    const data = await queryDTSILocationStateSpecificInformation({
       stateCode: stateCode as USStateCode,
     })
     stateRaceData = organizeStateSpecificPeople(data.people)

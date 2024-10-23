@@ -12,7 +12,7 @@ export function ResultsOverviewCard(props: ResultsOverviewCardProps) {
   return (
     <Card className="max-w-xl p-8">
       <p className="text-lg font-bold">{title}</p>
-      <div className="flex flex-col gap-4 text-primary-foreground md:flex-row ">
+      <div className="flex flex-col items-center justify-center gap-4 text-primary-foreground md:flex-row ">
         <div className="max-w-60 space-y-1 rounded-xl bg-green-700 p-4">
           <p className="text-3xl font-bold">{proCryptoCandidatesElected}</p>
           <p>Pro-crypto candidates elected</p>

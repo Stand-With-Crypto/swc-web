@@ -60,7 +60,7 @@ export function useApiDecisionDeskData({
       key as keyof typeof stateRacesMockData
     ] as RacesVotingDataResponse[]
 
-    const mockedData = stateRacesData.map(currentStateRaceData => {
+    const mockedData = stateRacesData?.map?.(currentStateRaceData => {
       let mockedCalledCandidate: Candidate | null = null
 
       const rawVotes = currentStateRaceData.candidatesWithVotes.map(currentCandidate => {

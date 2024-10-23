@@ -126,7 +126,7 @@ export function LocationUnitedStatesLiveResults({
         </ContentSection>
 
         <ContentSection
-          className="container"
+          className="container hidden lg:block"
           subtitle="When a state turns purple, it means a pro-crypto candidate has been elected. Follow along to see which states vote pro-crypto."
           title="Map view"
           titleProps={{ size: 'xs' }}
@@ -178,7 +178,7 @@ export function LocationUnitedStatesLiveResults({
                   <p className="text-xl font-semibold">Did you vote in this year's election?</p>
                   <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
                 </div>
-                <Button className="w-fit">I voted!</Button>
+                <Button className="w-fit">Claim I Voted NFT</Button>
               </div>
             </LiveResultsGrid.GridItem>
           </LiveResultsGrid>

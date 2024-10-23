@@ -17,10 +17,11 @@ import { cn } from '@/utils/web/cn'
 interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
   initialRaceData: PresidentialDataWithVotingResponse[] | null
+  progressBarBackground?: string
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
-  const { candidates, initialRaceData = null } = props
+  const { candidates, initialRaceData = null, progressBarBackground } = props
 
   const candidateA = useMemo(
     () => candidates?.find(_candidate => _candidate.lastName === 'Trump') || candidates?.[0],
@@ -81,7 +82,10 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         {canShowProgress ? (
           <>
             <Progress
-              className="h-6 rounded-l-full rounded-r-none bg-[#23262B]"
+              className={cn(
+                'h-6 rounded-l-full rounded-r-none bg-[#23262B]',
+                progressBarBackground,
+              )}
               indicatorClassName={cn(
                 'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
@@ -92,7 +96,10 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
               value={Math.min(+(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2) * 2, 100)}
             />
             <Progress
-              className="h-6 rounded-l-none rounded-r-full border-l bg-[#23262B]"
+              className={cn(
+                'h-6 rounded-l-none rounded-r-full border-l bg-[#23262B]',
+                progressBarBackground,
+              )}
               indicatorClassName={cn(
                 'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(

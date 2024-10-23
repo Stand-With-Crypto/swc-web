@@ -112,7 +112,7 @@ export function LocationStateSpecific({
             </Button>
           ) : (
             <Button className="mt-6 w-full max-w-xs md:w-fit" variant="secondary">
-              I voted
+              Claim I Voted NFT
             </Button>
           )}
         </div>

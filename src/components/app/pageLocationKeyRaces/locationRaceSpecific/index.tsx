@@ -113,6 +113,7 @@ export function LocationRaceSpecific({
             <PresidentialRaceResult
               candidates={candidates.map(({ person }) => person)}
               initialRaceData={initialLiveResultData}
+              progressBarBackground="bg-secondary"
             />
           ) : (
             <KeyRaceLiveResult
