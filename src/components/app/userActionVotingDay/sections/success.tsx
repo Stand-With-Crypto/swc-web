@@ -17,7 +17,7 @@ export const UserActionIVotedSuccess = () => {
         <ExternalLink
           href={createTweetLink({
             message: `Thanks to @StandWithCrypto for helping me cast an informed vote in this year's election!`,
-            url: 'www.standwithcrypto.org/i-voted',
+            url: 'www.standwithcrypto.org/vote',
           })}
         >
           Share on X
