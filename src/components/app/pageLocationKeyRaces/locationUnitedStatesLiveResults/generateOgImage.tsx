@@ -116,8 +116,8 @@ export async function generateOgImage({
         <img alt="stand with crypto shield logo" src={shieldData as any} width="48px" />
 
         <div tw="flex flex-col items-center text-center">
-          <p tw="text-3xl font-semibold mb-0">Who will defend crypto in America?</p>
-          <p tw="text-xl text-gray-400">View live election results on Stand With Crypto.</p>
+          <p tw="text-3xl font-bold mb-0">Who will defend crypto in America?</p>
+          <p tw="text-lg text-gray-400">View live election results on Stand With Crypto.</p>
         </div>
 
         <div style={{ gap: '4rem' }} tw="flex justify-center w-full">
@@ -146,10 +146,10 @@ export async function generateOgImage({
             </div>
 
             <div tw="flex-col mt-8 flex items-start">
-              <span tw="text-2xl mb-2 ">
+              <span tw="text-2xl mb-2">
                 {dtsiPersonFullName(candidateA)}
                 {candidateA.politicalAffiliationCategory
-                  ? `(${
+                  ? ` (${
                       dtsiPersonPoliticalAffiliationCategoryAbbreviation(
                         candidateA.politicalAffiliationCategory,
                       ) ?? ''
@@ -190,7 +190,7 @@ export async function generateOgImage({
               <span tw="text-2xl mb-2">
                 {dtsiPersonFullName(candidateB)}
                 {candidateB.politicalAffiliationCategory
-                  ? `(${
+                  ? ` (${
                       dtsiPersonPoliticalAffiliationCategoryAbbreviation(
                         candidateB.politicalAffiliationCategory,
                       ) ?? ''
