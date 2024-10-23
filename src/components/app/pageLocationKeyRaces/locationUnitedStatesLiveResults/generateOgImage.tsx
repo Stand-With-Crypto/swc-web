@@ -105,7 +105,7 @@ export async function generateOgImage({
       'computedStanceScore' | 'manuallyOverriddenStanceScore' | 'computedSumStanceScoreWeight'
     >,
   ) {
-    const letterGrade = convertDTSIPersonStanceScoreToLetterGrade(candidate) ?? '?'
+    const letterGrade = candidate ? convertDTSIPersonStanceScoreToLetterGrade(candidate) : '?'
     switch (letterGrade) {
       case 'A':
         return await fetch(
