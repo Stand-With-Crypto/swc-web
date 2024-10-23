@@ -93,7 +93,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
                 ),
                 getOpacity(candidateA, liveResultData),
               )}
-              value={Math.min(+(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2) * 2, 100)}
+              value={+(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2) * 2}
             />
             <Progress
               className={cn(
@@ -108,7 +108,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
                 getOpacity(candidateB, liveResultData),
               )}
               inverted
-              value={Math.min(+(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2) * 2, 100)}
+              value={+(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2) * 2}
             />
           </>
         ) : (

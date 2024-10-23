@@ -103,7 +103,7 @@ export function LocationStateSpecific({
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in {stateName}
           </PageTitle>
-          <h3 className="mt-4 text-xl text-fontcolor-muted">
+          <h3 className="mt-4 text-xl text-gray-400">
             View the races critical to keeping crypto in {stateName}.
           </h3>
           {countAdvocates > 1000 && (
