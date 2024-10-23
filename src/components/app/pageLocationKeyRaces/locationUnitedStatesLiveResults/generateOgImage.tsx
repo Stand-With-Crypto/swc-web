@@ -71,7 +71,7 @@ export async function generateOgImage({
 
           <div tw="flex flex-col items-center justify-center text-center gap-2">
             <div tw="text-5xl">Who will defend crypto in America?</div>
-            <div tw="text-gray-400 text-lg">View live election results on Stand With Crypto.</div>
+            <div tw="text-gray-400 text-2xl">View live election results on Stand With Crypto.</div>
           </div>
         </div>
       ),
@@ -154,7 +154,7 @@ export async function generateOgImage({
 
         <div tw="flex flex-col items-center text-center">
           <p tw="text-5xl font-bold mb-0">Who will defend crypto in America?</p>
-          <p tw="text-2xl text-gray-400">
+          <p tw="text-3xl text-gray-400">
             View live election results {description} on Stand With Crypto.
           </p>
         </div>
