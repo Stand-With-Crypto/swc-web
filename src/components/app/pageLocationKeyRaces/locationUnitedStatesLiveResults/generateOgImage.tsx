@@ -160,85 +160,89 @@ export async function generateOgImage({
         </div>
 
         <div style={{ gap: '4rem' }} tw="flex justify-center w-full mt-4">
-          <div tw="flex flex-col items-start text-left">
-            <div tw="flex w-[175px]">
-              <img
-                alt={dtsiPersonFullName(candidateA)}
-                src={candidateA.profilePictureUrl || (placeholderData as any)}
-                style={{
-                  display: 'flex',
-                  backgroundColor: 'gray',
-                  overflow: 'hidden',
-                  objectFit: 'cover',
-                  width: '175px',
-                  height: '175px',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                tw="rounded-md"
-              />
-              <img
-                alt="politician stance on crypto"
-                src={candidateALetterImage as any}
-                tw="-bottom-4 -right-4 absolute h-10 w-10 rounded-full"
-              />
-            </div>
+          {candidateA ? (
+            <div tw="flex flex-col items-start text-left">
+              <div tw="flex w-[175px]">
+                <img
+                  alt={dtsiPersonFullName(candidateA)}
+                  src={candidateA.profilePictureUrl || (placeholderData as any)}
+                  style={{
+                    display: 'flex',
+                    backgroundColor: 'gray',
+                    overflow: 'hidden',
+                    objectFit: 'cover',
+                    width: '175px',
+                    height: '175px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  tw="rounded-md"
+                />
+                <img
+                  alt="politician stance on crypto"
+                  src={candidateALetterImage as any}
+                  tw="-bottom-4 -right-4 absolute h-10 w-10 rounded-full"
+                />
+              </div>
 
-            <div tw="flex-col mt-8 flex items-start">
-              <span tw="text-2xl mb-2">
-                {dtsiPersonFullName(candidateA)}
-                {candidateA.politicalAffiliationCategory
-                  ? ` (${
-                      dtsiPersonPoliticalAffiliationCategoryAbbreviation(
-                        candidateA.politicalAffiliationCategory,
-                      ) ?? ''
-                    })`
-                  : ''}
-              </span>
-              <span tw="text-gray-400">{getScoreLanguage(candidateA)}</span>
+              <div tw="flex-col mt-8 flex items-start">
+                <span tw="text-2xl mb-2">
+                  {dtsiPersonFullName(candidateA)}
+                  {candidateA.politicalAffiliationCategory
+                    ? ` (${
+                        dtsiPersonPoliticalAffiliationCategoryAbbreviation(
+                          candidateA.politicalAffiliationCategory,
+                        ) ?? ''
+                      })`
+                    : ''}
+                </span>
+                <span tw="text-gray-400">{getScoreLanguage(candidateA)}</span>
+              </div>
             </div>
-          </div>
+          ) : null}
 
-          <div tw="flex flex-col items-end text-right">
-            <div tw="flex w-[175px]">
-              <img
-                alt={dtsiPersonFullName(candidateB)}
-                src={candidateB.profilePictureUrl || (placeholderData as any)}
-                style={{
-                  display: 'flex',
-                  backgroundColor: 'gray',
-                  overflow: 'hidden',
-                  objectFit: 'cover',
-                  width: '175px',
-                  height: '175px',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                tw="rounded-md"
-              />
-              <img
-                alt="politician stance on crypto"
-                src={candidateBLetterImage as any}
-                style={{
-                  background: 'red',
-                }}
-                tw="-bottom-4 -right-4 absolute h-10 w-10 rounded-full"
-              />
+          {candidateB ? (
+            <div tw="flex flex-col items-end text-right">
+              <div tw="flex w-[175px]">
+                <img
+                  alt={dtsiPersonFullName(candidateB)}
+                  src={candidateB.profilePictureUrl || (placeholderData as any)}
+                  style={{
+                    display: 'flex',
+                    backgroundColor: 'gray',
+                    overflow: 'hidden',
+                    objectFit: 'cover',
+                    width: '175px',
+                    height: '175px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  tw="rounded-md"
+                />
+                <img
+                  alt="politician stance on crypto"
+                  src={candidateBLetterImage as any}
+                  style={{
+                    background: 'red',
+                  }}
+                  tw="-bottom-4 -right-4 absolute h-10 w-10 rounded-full"
+                />
+              </div>
+              <div tw="flex-col mt-8 flex items-end">
+                <span tw="text-2xl mb-2">
+                  {dtsiPersonFullName(candidateB)}
+                  {candidateB.politicalAffiliationCategory
+                    ? ` (${
+                        dtsiPersonPoliticalAffiliationCategoryAbbreviation(
+                          candidateB.politicalAffiliationCategory,
+                        ) ?? ''
+                      })`
+                    : ''}
+                </span>
+                <span tw="text-gray-400">{getScoreLanguage(candidateB)}</span>
+              </div>
             </div>
-            <div tw="flex-col mt-8 flex items-end">
-              <span tw="text-2xl mb-2">
-                {dtsiPersonFullName(candidateB)}
-                {candidateB.politicalAffiliationCategory
-                  ? ` (${
-                      dtsiPersonPoliticalAffiliationCategoryAbbreviation(
-                        candidateB.politicalAffiliationCategory,
-                      ) ?? ''
-                    })`
-                  : ''}
-              </span>
-              <span tw="text-gray-400">{getScoreLanguage(candidateB)}</span>
-            </div>
-          </div>
+          ) : null}
         </div>
       </div>
     ),

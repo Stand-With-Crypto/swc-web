@@ -87,7 +87,7 @@ export default async function LocationStateSpecificPage({
     <LocationStateSpecific
       countAdvocates={countAdvocates}
       initialCongressLiveResultData={congressRaceLiveResult}
-      initialRaceData={liveResultdata}
+      initialRaceData={liveResultdata || undefined}
       {...dtsiResults}
       {...{ stateCode, locale }}
     />
