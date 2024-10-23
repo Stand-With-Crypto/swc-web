@@ -43,7 +43,7 @@ interface KeyRaceLiveResultProps {
   candidates: DTSI_Candidate[]
   initialRaceData: RacesVotingDataResponse[] | undefined
   stateCode: USStateCode
-  primaryDistrict?: NormalizedDTSIDistrictId
+  primaryDistrict: NormalizedDTSIDistrictId | undefined
   className?: string
 }
 
@@ -54,7 +54,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   const isDistrictPage = pathname?.includes(
     getIntlUrls(locale).locationDistrictSpecific({
       stateCode,
-      district: primaryDistrict || ('' as NormalizedDTSIDistrictId),
+      district: primaryDistrict ?? ('' as NormalizedDTSIDistrictId),
     }),
   )
   const isSenatePage = pathname?.includes(
@@ -93,7 +93,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       return (
         liveResultData?.find?.(race => {
           return (
-            race.district.toString() === primaryDistrict.toString() &&
+            race.district.toString().toLowerCase() === primaryDistrict.toString().toLowerCase() &&
             race.office?.officeId?.toString() === '3' &&
             race.candidatesWithVotes.some(
               _candidate =>
@@ -294,6 +294,10 @@ interface AvatarBoxProps {
 function AvatarBox(props: AvatarBoxProps) {
   const { dtsiCandidate, ddhqCandidate, className } = props
   const candidate = ddhqCandidate || dtsiCandidate
+
+  if (!candidate) {
+    return null
+  }
 
   return (
     <div className={className}>
