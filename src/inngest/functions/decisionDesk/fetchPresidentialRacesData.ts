@@ -22,7 +22,7 @@ const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York 
 
 const DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE = 40
 
-export const backfillReactivationCron = inngest.createFunction(
+export const fetchPresidentialRacesDataCron = inngest.createFunction(
   { id: FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_ID },
   { cron: FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE },
   async ({ step }) => {

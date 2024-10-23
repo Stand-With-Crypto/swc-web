@@ -72,6 +72,7 @@ export const { GET, POST, PUT } = serve({
     sendEventNotificationWithInngest,
     deleteUserActions,
     fetchPresidentialRacesData,
+    fetchPresidentialRacesDataCron,
     enqueueSMS,
   ],
 })
