@@ -141,17 +141,6 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     return 'live'
   }, [raceData])
 
-  const totalVotes = useMemo(
-    () =>
-      Number(
-        Math.max(
-          (ddhqCandidateA || ddhqCandidateB)?.estimatedVotes?.estimatedVotesMid || 0,
-          raceData?.totalVotes || 0,
-        ),
-      ),
-    [ddhqCandidateA, ddhqCandidateB, raceData?.totalVotes],
-  )
-
   const canShowProgress = Boolean(liveResultData)
 
   const shouldHideCard =
@@ -268,16 +257,6 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               </>
             ) : null}
           </div>
-
-          {totalVotes ? (
-            <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
-              {FormattedNumber({
-                amount: Math.ceil(totalVotes / 2) + 1,
-                locale,
-              })}{' '}
-              to win
-            </p>
-          ) : null}
 
           <div
             className={cn(

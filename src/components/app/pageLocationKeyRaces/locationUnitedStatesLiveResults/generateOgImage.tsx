@@ -8,7 +8,7 @@ import { DTSI_Person, DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/gen
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { queryDTSILocationSenateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationSenateSpecificInformation'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
-import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
@@ -56,7 +56,7 @@ export async function generateOgImage({
     new URL('../../pagePoliticianDetails/images/profile.png', import.meta.url),
   ).then(res => res.arrayBuffer())
 
-  if (!presidentialRaceData && !stateRaceData) {
+  if (!presidentialRaceData && !stateRaceData && !districtRaceData) {
     return new ImageResponse(
       (
         <div tw="flex bg-black text-white p-8 w-full h-full flex-col items-center gap-8">
@@ -137,6 +137,13 @@ export async function generateOgImage({
   const candidateALetterImage = await getLetterImage(candidateA)
   const candidateBLetterImage = await getLetterImage(candidateB)
 
+  const description =
+    stateCode && district
+      ? `for ${stateCode} ${formatDTSIDistrictId(district as NormalizedDTSIDistrictId)} District Congressional Race`
+      : stateCode
+        ? `for U.S. Senate Race (${stateCode})`
+        : 'for U.S. Presidential Race'
+
   return new ImageResponse(
     (
       <div
@@ -147,7 +154,9 @@ export async function generateOgImage({
 
         <div tw="flex flex-col items-center text-center">
           <p tw="text-5xl font-bold mb-0">Who will defend crypto in America?</p>
-          <p tw="text-2xl text-gray-400">View live election results on Stand With Crypto.</p>
+          <p tw="text-2xl text-gray-400">
+            View live election results {description} on Stand With Crypto.
+          </p>
         </div>
 
         <div style={{ gap: '4rem' }} tw="flex justify-center w-full mt-4">
