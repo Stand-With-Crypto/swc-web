@@ -19,7 +19,10 @@ import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCan
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
-import { fetchPresidentialRacesData } from '@/inngest/functions/decisionDesk/fetchPresidentialRacesData'
+import {
+  fetchPresidentialRacesData,
+  fetchPresidentialRacesDataCron,
+} from '@/inngest/functions/decisionDesk/fetchPresidentialRacesData'
 import { sendEventNotificationWithInngest } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'

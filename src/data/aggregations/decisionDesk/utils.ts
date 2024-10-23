@@ -6,9 +6,6 @@ import {
   CandidatesWithVote,
   PresidentialDataWithVotingResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { getLogger } from '@/utils/shared/logger'
-
-const logger = getLogger('aggregations/decisionDesk/utils')
 
 export const getPoliticianFindMatch = (
   dtsiPerson: DTSI_Candidate,
