@@ -24,6 +24,7 @@ import {
 } from '@/data/aggregations/decisionDesk/types'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
+import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -37,7 +38,7 @@ interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery 
   stateCode: USStateCode
   locale: SupportedLocale
   countAdvocates: number
-  initialRaceData: RacesVotingDataResponse[] | null
+  initialRaceData: RacesVotingDataResponse[] | undefined
   initialCongressLiveResultData: GetAllCongressDataResponse | null
 }
 
@@ -63,6 +64,12 @@ export function LocationStateSpecific({
       return district
     }),
   )
+
+  const { data: stateRaceData } = useApiDecisionDeskData({
+    initialRaceData,
+    stateCode,
+    district: undefined,
+  })
 
   const { data: congressRaceLiveResult } = useApiDecisionDeskCongressData(
     initialCongressLiveResultData,
@@ -118,31 +125,33 @@ export function LocationStateSpecific({
         </div>
       </DarkHeroSection>
 
-      <div className="mt-20 space-y-20">
-        <ContentSection
-          className="container"
-          subtitle={`Follow our tracker to see how many pro-crypto candidates get elected in ${stateName}.`}
-          title="Live election results"
-          titleProps={{ size: 'xs' }}
-        >
-          <div className="flex justify-center">
-            <LiveStatusBadge status="live" />
-          </div>
+      {stateRaceData ? (
+        <div className="mt-20 space-y-20">
+          <ContentSection
+            className="container"
+            subtitle={`Follow our tracker to see how many pro-crypto candidates get elected in ${stateName}.`}
+            title="Live election results"
+            titleProps={{ size: 'xs' }}
+          >
+            <div className="flex justify-center">
+              <LiveStatusBadge status="live" />
+            </div>
 
-          <div className="flex flex-wrap gap-4">
-            <ResultsOverviewCard
-              antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
-              proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}
-              title="House of Representatives"
-            />
-            <ResultsOverviewCard
-              antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected}
-              proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected}
-              title="Senate"
-            />
-          </div>
-        </ContentSection>
-      </div>
+            <div className="flex flex-wrap gap-4">
+              <ResultsOverviewCard
+                antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
+                proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}
+                title="House of Representatives"
+              />
+              <ResultsOverviewCard
+                antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected}
+                proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected}
+                title="Senate"
+              />
+            </div>
+          </ContentSection>
+        </div>
+      ) : null}
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
         <PageTitle as="h3" className="mt-20" size="sm">
@@ -150,53 +159,61 @@ export function LocationStateSpecific({
         </PageTitle>
       ) : (
         <div className="mt-20 space-y-20">
-          <ContentSection
-            subtitle="These elections are critical to the future of crypto in America. View live updates below."
-            title={`Critical elections in ${stateName}`}
-            titleProps={{ size: 'xs' }}
-          >
-            <LiveResultsGrid>
-              {!!groups.senators.length && (
-                <LiveResultsGrid.GridItem>
-                  <KeyRaceLiveResult
-                    candidates={groups.senators}
-                    initialRaceData={initialRaceData || undefined}
-                    locale={locale}
-                    stateCode={stateCode}
-                  />
-                </LiveResultsGrid.GridItem>
-              )}
-
-              {!!groups.congresspeople['at-large']?.people.length && (
-                <LiveResultsGrid.GridItem>
-                  <KeyRaceLiveResult
-                    candidates={groups.congresspeople['at-large'].people}
-                    initialRaceData={initialRaceData || undefined}
-                    locale={locale}
-                    stateCode={stateCode}
-                  />
-                </LiveResultsGrid.GridItem>
-              )}
-
-              {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
-                const districtPeople = groups.congresspeople[district]?.people
-                if (!districtPeople) {
-                  return null
-                }
-                return (
-                  <LiveResultsGrid.GridItem key={district}>
+          {stateRaceData ? (
+            <ContentSection
+              subtitle="These elections are critical to the future of crypto in America. View live updates below."
+              title={`Critical elections in ${stateName}`}
+              titleProps={{ size: 'xs' }}
+            >
+              <LiveResultsGrid>
+                {groups.senators.length > 1 && (
+                  <LiveResultsGrid.GridItem>
                     <KeyRaceLiveResult
-                      candidates={districtPeople}
+                      candidates={groups.senators}
                       initialRaceData={initialRaceData || undefined}
                       locale={locale}
-                      primaryDistrict={district}
+                      primaryDistrict={undefined}
                       stateCode={stateCode}
                     />
                   </LiveResultsGrid.GridItem>
-                )
-              })}
-            </LiveResultsGrid>
-          </ContentSection>
+                )}
+
+                {!!groups.congresspeople['at-large']?.people.length && (
+                  <LiveResultsGrid.GridItem>
+                    <KeyRaceLiveResult
+                      candidates={groups.congresspeople['at-large'].people}
+                      initialRaceData={initialRaceData || undefined}
+                      locale={locale}
+                      primaryDistrict="at-large"
+                      stateCode={stateCode}
+                    />
+                  </LiveResultsGrid.GridItem>
+                )}
+
+                {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
+                  const districtPeople = groups.congresspeople[district]?.people
+                  if (!districtPeople) {
+                    return null
+                  }
+                  return (
+                    <LiveResultsGrid.GridItem key={district}>
+                      <KeyRaceLiveResult
+                        candidates={districtPeople}
+                        initialRaceData={initialRaceData || undefined}
+                        locale={locale}
+                        primaryDistrict={district}
+                        stateCode={stateCode}
+                      />
+                    </LiveResultsGrid.GridItem>
+                  )
+                })}
+              </LiveResultsGrid>
+            </ContentSection>
+          ) : (
+            <PageTitle as="h3" className="mt-20" size="sm">
+              There's no critical elections in {stateName}
+            </PageTitle>
+          )}
 
           {!!stances.length && (
             <ContentSection
