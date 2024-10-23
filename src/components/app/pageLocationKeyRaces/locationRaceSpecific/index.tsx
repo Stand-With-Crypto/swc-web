@@ -147,7 +147,7 @@ export function LocationRaceSpecific({
                   {person.stances.length ? (
                     <>
                       <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
-                        {dtsiPersonFullName(person)} statements on crypto
+                        "{dtsiPersonFullName(person)} statements on crypto"
                       </PageTitle>
                       <MaybeOverflowedStances
                         locale={locale}
