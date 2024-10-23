@@ -126,18 +126,18 @@ export async function generateOgImage({
     (
       <div
         style={{ background: '#000', gap: '2rem' }}
-        tw="flex text-white p-8 w-full h-full flex-col items-center justify-around"
+        tw="flex text-white p-8 w-full h-full flex-col items-center justify-center"
       >
         <img alt="stand with crypto shield logo" src={shieldData as any} width="48px" />
 
         <div tw="flex flex-col items-center text-center">
-          <p tw="text-3xl font-bold mb-0">Who will defend crypto in America?</p>
-          <p tw="text-lg text-gray-400">View live election results on Stand With Crypto.</p>
+          <p tw="text-5xl font-bold mb-0">Who will defend crypto in America?</p>
+          <p tw="text-xl text-gray-400">View live election results on Stand With Crypto.</p>
         </div>
 
-        <div style={{ gap: '4rem' }} tw="flex justify-center w-full">
+        <div style={{ gap: '4rem' }} tw="flex justify-center w-full mt-4">
           <div tw="flex flex-col items-start text-left">
-            <div tw="flex w-[125px]">
+            <div tw="flex w-[175px]">
               <img
                 alt={dtsiPersonFullName(candidateA)}
                 src={candidateA.profilePictureUrl || (placeholderData as any)}
@@ -146,8 +146,8 @@ export async function generateOgImage({
                   backgroundColor: 'gray',
                   overflow: 'hidden',
                   objectFit: 'cover',
-                  width: '125px',
-                  height: '125px',
+                  width: '175px',
+                  height: '175px',
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
@@ -176,7 +176,7 @@ export async function generateOgImage({
           </div>
 
           <div tw="flex flex-col items-end text-right">
-            <div tw="flex w-[125px]">
+            <div tw="flex w-[175px]">
               <img
                 alt={dtsiPersonFullName(candidateB)}
                 src={candidateB.profilePictureUrl || (placeholderData as any)}
@@ -185,8 +185,8 @@ export async function generateOgImage({
                   backgroundColor: 'gray',
                   overflow: 'hidden',
                   objectFit: 'cover',
-                  width: '125px',
-                  height: '125px',
+                  width: '175px',
+                  height: '175px',
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
