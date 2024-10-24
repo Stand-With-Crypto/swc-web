@@ -112,9 +112,9 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         />
       </div>
 
-      <div className="relative flex items-center justify-between text-sm text-gray-400">
+      <div className="relative flex items-center justify-between text-gray-400">
         <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateA, liveResultData))}>
-          <p>{ddhqCandidateA?.votingData?.electoralVotes}</p>
+          <p className="font-bold">{ddhqCandidateA?.votingData?.electoralVotes}</p>
         </div>
 
         <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
@@ -122,7 +122,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         </p>
 
         <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateB, liveResultData))}>
-          <p>{ddhqCandidateB?.votingData?.electoralVotes}</p>
+          <p className="font-bold">{ddhqCandidateB?.votingData?.electoralVotes}</p>
         </div>
       </div>
 
@@ -167,17 +167,23 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       </div>
 
       <div className="relative flex items-center justify-between text-sm text-gray-400">
-        <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateA, liveResultData))}>
+        <div
+          className={cn(
+            'flex items-center gap-2 md:gap-3',
+            getOpacity(dtsiCandidateA, liveResultData),
+          )}
+        >
           {!isNil(ddhqCandidateA?.votingData?.votes) && (
             <>
               <p className="font-bold">
-                {(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2)}
+                {(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2)}%
               </p>
               <p>
                 {FormattedNumber({
                   amount: ddhqCandidateA?.votingData?.votes || 0,
                   locale,
-                })}
+                })}{' '}
+                votes
               </p>
             </>
           )}
@@ -187,13 +193,14 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           {!isNil(ddhqCandidateB?.votingData?.votes) && (
             <>
               <p className="font-bold">
-                {(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2)}
+                {(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2)}%
               </p>
-              <p className="font-bold">
+              <p>
                 {FormattedNumber({
                   amount: ddhqCandidateB?.votingData?.votes || 0,
                   locale,
-                })}
+                })}{' '}
+                votes
               </p>
             </>
           )}

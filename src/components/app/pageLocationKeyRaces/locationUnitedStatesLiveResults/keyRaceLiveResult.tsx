@@ -208,7 +208,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
                     ddhqCandidateA?.computedStanceScore,
                 ),
               )}
-              value={+getVotePercentage(ddhqCandidateA, raceData).toFixed(2) * 2}
+              value={Math.min(+getVotePercentage(ddhqCandidateA, raceData).toFixed(2) * 2, 100)}
             />
           ) : (
             <Skeleton className="h-4 w-full rounded-full" />
@@ -227,7 +227,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
                 ),
               )}
               inverted
-              value={+getVotePercentage(ddhqCandidateB, raceData).toFixed(2) * 2}
+              value={Math.min(+getVotePercentage(ddhqCandidateB, raceData).toFixed(2) * 2, 100)}
             />
           ) : (
             <Skeleton className="h-4 w-full rounded-full" />
