@@ -1,17 +1,23 @@
 import React from 'react'
 import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
+import Link from 'next/link'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
-import { ExternalLink } from '@/components/ui/link'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
+import {
+  DTSI_PersonRoleCategory,
+  DTSI_PersonRoleStatus,
+  DTSI_PersonStanceType,
+} from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { SupportedLocale } from '@/intl/locales'
 import {
@@ -27,6 +33,8 @@ import {
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SWCQuestionnaireAnswers } from '@/utils/shared/getSWCQuestionnaire'
+
+import { RaceBadge } from './raceBadge'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
@@ -47,6 +55,7 @@ export function PagePoliticianDetails({
   return (
     <div className="standard-spacing-from-navbar container max-w-3xl">
       <section>
+        <RaceBadge locale={locale} person={person} />
         {person.profilePictureUrl ? (
           <div
             className="mx-auto mb-6 overflow-hidden rounded-xl"
