@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { isBefore, startOfDay } from 'date-fns'
 import { isNil } from 'lodash-es'
 
@@ -85,6 +85,10 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       ? 'called'
       : 'live'
 
+  const getPercentage = useCallback((electoralVotes: number) => {
+    return (electoralVotes / 538) * 100
+  }, [])
+
   return (
     <div className="relative flex w-full flex-col gap-4">
       <div className="mt-4 flex items-center justify-between md:mt-0">
@@ -138,7 +142,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
                 ),
                 getOpacity(dtsiCandidateA, liveResultData),
               )}
-              value={+(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2) * 2}
+              value={getPercentage(ddhqCandidateA?.votingData?.electoralVotes || 0) * 2}
             />
             <Progress
               className={cn(
@@ -154,7 +158,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
                 getOpacity(dtsiCandidateB, liveResultData),
               )}
               inverted
-              value={+(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2) * 2}
+              value={getPercentage(ddhqCandidateB?.votingData?.electoralVotes || 0) * 2}
             />
           </>
         ) : (
