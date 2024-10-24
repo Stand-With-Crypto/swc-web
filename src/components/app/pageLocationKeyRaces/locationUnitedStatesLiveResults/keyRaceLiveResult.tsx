@@ -175,19 +175,12 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
       <div className="flex justify-between">
         <AvatarBox
-          className={cn(
-            getOpacity(ddhqCandidateA, raceData),
-            ddhqCandidateA ? 'border-2 border-green-500' : 'border-2 border-red-500',
-          )}
+          className={cn(getOpacity(ddhqCandidateA, raceData))}
           ddhqCandidate={ddhqCandidateA}
           dtsiCandidate={candidateA}
         />
         <AvatarBox
-          className={cn(
-            'flex flex-col items-end text-right',
-            getOpacity(ddhqCandidateB, raceData),
-            ddhqCandidateB ? 'border-2 border-green-500' : 'border-2 border-red-500',
-          )}
+          className={cn('flex flex-col items-end text-right', getOpacity(ddhqCandidateB, raceData))}
           ddhqCandidate={ddhqCandidateB}
           dtsiCandidate={candidateB}
         />

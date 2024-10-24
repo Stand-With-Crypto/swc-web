@@ -37,10 +37,6 @@ export function LocationUnitedStates({
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces()
-  }, [])
-
   return (
     <div className="space-y-20">
       <DarkHeroSection>

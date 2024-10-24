@@ -90,12 +90,6 @@ export function LocationStateSpecific({
     stateCode,
   )
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
-    })
-  }, [stateCode])
-
   const raceStatus = useMemo<Status>(() => {
     return getRaceStatus(stateRaceData?.[0] || null)
   }, [stateRaceData])

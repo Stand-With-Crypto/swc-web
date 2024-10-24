@@ -56,13 +56,6 @@ export function LocationRaceSpecific({
     [others, recommended],
   )
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
-      usCongressionalDistrict: district?.toString(),
-    })
-  }, [district, stateCode])
-
   return (
     <div>
       <DarkHeroSection className="text-center">
