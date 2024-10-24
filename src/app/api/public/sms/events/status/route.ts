@@ -11,6 +11,7 @@ import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMidd
 import { bulkCreateCommunicationJourney } from '@/utils/server/sms/communicationJourney'
 import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 import { getLogger } from '@/utils/shared/logger'
+import { toBool } from '@/utils/shared/toBool'
 
 interface SMSStatusEvent {
   ErrorCode?: string
@@ -44,7 +45,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   const journeyType = params.get('journeyType') as UserCommunicationJourneyType | null
   const campaignName = params.get('campaignName')
-  const hasWelcomeMessageInBody = params.has('hasWelcomeMessageInBody')
+  const hasWelcomeMessageInBody = toBool(params.get('hasWelcomeMessageInBody'))
 
   const messageId = body.MessageSid
   const messageStatus = body.MessageStatus

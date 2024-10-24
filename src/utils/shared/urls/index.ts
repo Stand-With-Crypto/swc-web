@@ -150,5 +150,5 @@ export const apiUrls = {
     journeyType: string
     hasWelcomeMessageInBody?: boolean
   }) =>
-    `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}${hasWelcomeMessageInBody ? '&hasWelcomeMessageInBody' : ''}`,
+    `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
 }
