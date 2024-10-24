@@ -73,12 +73,11 @@ export function RaceBadge({
   return (
     <Link href={getRacePageUrl()}>
       <Badge
-        className="mb-6 w-full rounded-2xl p-6 text-sm font-bold md:text-base"
+        className="mb-14 flex w-full items-center justify-between gap-8 rounded-2xl p-6 text-sm md:text-base"
         variant="primary-cta-subtle"
       >
-        <p>
-          {getBadgeText()}. <span className="underline">View race</span>
-        </p>
+        <p className="font-normal">{getBadgeText()}.</p>
+        <p className="min-w-max">View race</p>
       </Badge>
     </Link>
   )
