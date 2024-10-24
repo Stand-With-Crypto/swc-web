@@ -201,7 +201,9 @@ function Tooltip({
   const totalElectedCandidates = getTotalElectedCandidatesByState(hoveredStateName)
   if (!totalElectedCandidates) return null
 
-  const formattedNumber = `${FormattedNumber({ amount: totalElectedCandidates, locale })} pro-crypto politicians elected in ${hoveredStateName}`
+  const proCryptoPoliticianText = totalElectedCandidates === 1 ? 'politician' : 'politicians'
+
+  const formattedNumber = `${FormattedNumber({ amount: totalElectedCandidates, locale })} pro-crypto ${proCryptoPoliticianText} elected in ${hoveredStateName}`
 
   const tooltipWidth = formattedNumber.length * 8
   const offsetX = tooltipWidth / 2
