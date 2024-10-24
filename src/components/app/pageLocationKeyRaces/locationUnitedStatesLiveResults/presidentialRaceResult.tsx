@@ -1,16 +1,21 @@
 'use client'
 
 import { useMemo } from 'react'
+import { isBefore, startOfDay } from 'date-fns'
+import { isNil } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
+import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { cn } from '@/utils/web/cn'
 
@@ -18,16 +23,17 @@ interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
   initialRaceData: PresidentialDataWithVotingResponse[] | null
   progressBarBackground?: string
+  locale: SupportedLocale
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
-  const { candidates, initialRaceData = null, progressBarBackground } = props
+  const { candidates, initialRaceData = null, progressBarBackground, locale } = props
 
-  const candidateA = useMemo(
+  const dtsiCandidateA = useMemo(
     () => candidates?.find(_candidate => _candidate.lastName === 'Trump') || candidates?.[0],
     [candidates],
   )
-  const candidateB = useMemo(
+  const dtsiCandidateB = useMemo(
     () => candidates?.find(_candidate => _candidate.lastName === 'Harris') || candidates?.[1],
     [candidates],
   )
@@ -36,46 +42,84 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
   const ddhqCandidateA = useMemo(() => {
     if (!liveResultData) return null
-    if (!candidateA) return null
+    if (!dtsiCandidateA) return null
 
     const candidate = liveResultData?.find(_candidate =>
-      getPoliticianFindMatch(candidateA, _candidate.votingData),
-    )
-
-    if (!candidate) return null
-
-    return candidate
-  }, [candidateA, liveResultData])
-
-  const ddhqCandidateB = useMemo(() => {
-    if (!liveResultData) return null
-    if (!candidateB) return null
-
-    const candidate = liveResultData?.find(_candidate =>
-      getPoliticianFindMatch(candidateB, _candidate.votingData),
+      getPoliticianFindMatch(dtsiCandidateA, _candidate.votingData),
     )
 
     if (!candidate) return null
 
     return {
-      ...candidateB,
+      ...dtsiCandidateA,
       ...candidate,
     }
-  }, [candidateB, liveResultData])
+  }, [dtsiCandidateA, liveResultData])
+
+  const ddhqCandidateB = useMemo(() => {
+    if (!liveResultData) return null
+    if (!dtsiCandidateB) return null
+
+    const candidate = liveResultData?.find(_candidate =>
+      getPoliticianFindMatch(dtsiCandidateB, _candidate.votingData),
+    )
+
+    if (!candidate) return null
+
+    return {
+      ...dtsiCandidateB,
+      ...candidate,
+    }
+  }, [dtsiCandidateB, liveResultData])
 
   const canShowProgress = Boolean(liveResultData)
+  const calledCandidate = useMemo(() => {
+    if (!liveResultData) return null
+
+    return liveResultData.find(candidate => candidate.votingData?.called)
+  }, [liveResultData])
+
+  const raceStatus = isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
+    ? 'not-started'
+    : calledCandidate
+      ? 'called'
+      : 'live'
 
   return (
-    <div className="flex w-full flex-col gap-4">
-      <div className="flex justify-between">
-        <AvatarBox candidate={candidateA} className={cn(getOpacity(candidateA, liveResultData))} />
+    <div className="relative flex w-full flex-col gap-4">
+      <div className="flex items-center justify-between">
         <AvatarBox
-          candidate={candidateB}
+          candidate={dtsiCandidateA}
+          className={cn(getOpacity(dtsiCandidateA, liveResultData))}
+        />
+
+        <LiveStatusBadge
+          className="absolute left-1/2 right-1/2 top-6 mb-6 w-fit -translate-x-1/2 whitespace-nowrap md:static"
+          status={raceStatus}
+          winnerName={calledCandidate ? dtsiPersonFullName(calledCandidate) : undefined}
+        />
+
+        <AvatarBox
+          candidate={dtsiCandidateB}
           className={cn(
             'flex flex-col items-end text-right',
-            getOpacity(candidateB, liveResultData),
+            getOpacity(dtsiCandidateB, liveResultData),
           )}
         />
+      </div>
+
+      <div className="relative flex items-center justify-between text-sm text-gray-400">
+        <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateA, liveResultData))}>
+          <p>{ddhqCandidateA?.votingData?.electoralVotes}</p>
+        </div>
+
+        <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
+          270 to win
+        </p>
+
+        <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateB, liveResultData))}>
+          <p>{ddhqCandidateB?.votingData?.electoralVotes}</p>
+        </div>
       </div>
 
       <div className="flex">
@@ -89,9 +133,10 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
               indicatorClassName={cn(
                 'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  candidateA.manuallyOverriddenStanceScore || candidateA.computedStanceScore,
+                  dtsiCandidateA.manuallyOverriddenStanceScore ||
+                    dtsiCandidateA.computedStanceScore,
                 ),
-                getOpacity(candidateA, liveResultData),
+                getOpacity(dtsiCandidateA, liveResultData),
               )}
               value={+(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2) * 2}
             />
@@ -103,9 +148,10 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
               indicatorClassName={cn(
                 'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  candidateB.manuallyOverriddenStanceScore || candidateB.computedStanceScore,
+                  dtsiCandidateB.manuallyOverriddenStanceScore ||
+                    dtsiCandidateB.computedStanceScore,
                 ),
-                getOpacity(candidateB, liveResultData),
+                getOpacity(dtsiCandidateB, liveResultData),
               )}
               inverted
               value={+(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2) * 2}
@@ -116,17 +162,37 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         )}
       </div>
 
-      <div className="relative flex items-center justify-between text-sm">
-        <div className={cn('flex items-center gap-2', getOpacity(candidateA, liveResultData))}>
-          <p className="font-bold">{ddhqCandidateA?.votingData?.electoralVotes}</p>
+      <div className="relative flex items-center justify-between text-sm text-gray-400">
+        <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateA, liveResultData))}>
+          {!isNil(ddhqCandidateA?.votingData?.votes) && (
+            <>
+              <p className="font-bold">
+                {(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2)}
+              </p>
+              <p>
+                {FormattedNumber({
+                  amount: ddhqCandidateA?.votingData?.votes || 0,
+                  locale,
+                })}
+              </p>
+            </>
+          )}
         </div>
 
-        <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
-          270 to win
-        </p>
-
-        <div className={cn('flex items-center gap-2', getOpacity(candidateB, liveResultData))}>
-          <p className="font-bold">{ddhqCandidateB?.votingData?.electoralVotes}</p>
+        <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateB, liveResultData))}>
+          {!isNil(ddhqCandidateB?.votingData?.votes) && (
+            <>
+              <p className="font-bold">
+                {(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2)}
+              </p>
+              <p className="font-bold">
+                {FormattedNumber({
+                  amount: ddhqCandidateB?.votingData?.votes || 0,
+                  locale,
+                })}
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

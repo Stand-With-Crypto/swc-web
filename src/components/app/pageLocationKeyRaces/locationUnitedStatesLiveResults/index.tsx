@@ -89,6 +89,7 @@ export function LocationUnitedStatesLiveResults({
             <PresidentialRaceResult
               candidates={dtsiResults.president}
               initialRaceData={presidentialRaceLiveResult}
+              locale={locale}
             />
           </div>
 
