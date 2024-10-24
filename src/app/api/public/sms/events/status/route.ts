@@ -55,7 +55,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const phoneNumber = body.To
 
   if (!journeyType || !campaignName) {
-    return new NextResponse('missing url params', {
+    return new NextResponse('missing search params', {
       status: 400,
     })
   }
