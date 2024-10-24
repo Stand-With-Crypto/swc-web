@@ -28,6 +28,8 @@ import {
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SWCQuestionnaireAnswers } from '@/utils/shared/getSWCQuestionnaire'
 
+import { RaceBadge } from './raceBadge'
+
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
 export function PagePoliticianDetails({
@@ -47,6 +49,7 @@ export function PagePoliticianDetails({
   return (
     <div className="standard-spacing-from-navbar container max-w-3xl">
       <section>
+        <RaceBadge locale={locale} person={person} />
         {person.profilePictureUrl ? (
           <div
             className="mx-auto mb-6 overflow-hidden rounded-xl"
