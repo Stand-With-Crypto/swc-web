@@ -1,6 +1,7 @@
 'use client'
 
 import { useCookie } from 'react-use'
+import * as Sentry from '@sentry/nextjs'
 import useSWR, { SWRResponse } from 'swr'
 
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
@@ -28,6 +29,12 @@ export function useApiDecisionDeskPresidentialData(
       fallbackData: fallbackData ?? undefined,
       refreshInterval: 60 * 1000,
       errorRetryInterval: 30 * 1000,
+      refreshWhenHidden: true,
+      onError: error => {
+        Sentry.captureException(error, {
+          tags: { domain: 'liveResult' },
+        })
+      },
     },
   )
 

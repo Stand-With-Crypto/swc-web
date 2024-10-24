@@ -21,6 +21,7 @@ export function useApiDecisionDeskCongressData(fallbackData: GetAllCongressDataR
       fallbackData: fallbackData ?? undefined,
       refreshInterval: 60 * 1000,
       errorRetryInterval: 30 * 1000,
+      refreshWhenHidden: true,
     },
   )
 

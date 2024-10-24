@@ -40,6 +40,7 @@ export function useApiDecisionDeskData({
       fallbackData: initialRaceData ?? undefined,
       refreshInterval: 60 * 1000,
       errorRetryInterval: 30 * 1000,
+      refreshWhenHidden: true,
       onError: error => {
         Sentry.captureException(error, {
           extra: {
