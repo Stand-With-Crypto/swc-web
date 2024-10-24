@@ -246,33 +246,17 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
           )}
         </div>
 
-        <div className="relative flex items-center justify-between text-sm">
-          <div className={cn('flex items-center gap-2', getOpacity(ddhqCandidateA, raceData))}>
-            {!isNil(ddhqCandidateA?.votes) ? (
-              <>
-                <p className="font-bold">{getVotePercentage(ddhqCandidateA, raceData)}%</p>
-                <span className="text-fontcolor-muted">
-                  {FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })} votes
-                </span>{' '}
-              </>
-            ) : null}
-          </div>
-
-          <div
-            className={cn(
-              'flex items-center gap-2 text-right',
-              getOpacity(ddhqCandidateB, raceData),
-            )}
-          >
-            {!isNil(ddhqCandidateB?.votes) ? (
-              <>
-                <p className="font-bold">{getVotePercentage(ddhqCandidateB, raceData)}%</p>
-                <span className="text-fontcolor-muted">
-                  {FormattedNumber({ amount: ddhqCandidateB?.votes || 0, locale })} votes
-                </span>
-              </>
-            ) : null}
-          </div>
+        <div className="flex items-center justify-between gap-2">
+          <VoteCount
+            className={cn(getOpacity(ddhqCandidateA, raceData))}
+            percentage={getVotePercentage(ddhqCandidateA, raceData)}
+            votes={FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })}
+          />
+          <VoteCount
+            className={cn('text-right', getOpacity(ddhqCandidateB, raceData))}
+            percentage={getVotePercentage(ddhqCandidateB, raceData)}
+            votes={FormattedNumber({ amount: ddhqCandidateB?.votes || 0, locale })}
+          />
         </div>
       </div>
 
@@ -318,6 +302,27 @@ function AvatarBox(props: AvatarBoxProps) {
           {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(candidate)}
         </p>
       </div>
+    </div>
+  )
+}
+
+interface VoteCountProps {
+  votes: string | undefined
+  percentage: number | undefined
+  className?: string
+}
+
+function VoteCount(props: VoteCountProps) {
+  const { votes, percentage, className } = props
+
+  return (
+    <div className={cn('flex items-center text-sm', className)}>
+      {!isNil(votes) ? (
+        <span>
+          {!!percentage && <span className="mr-1 font-bold">{percentage.toFixed(2)}%</span>}
+          <span className="font-normal text-fontcolor-muted">{votes} votes</span>
+        </span>
+      ) : null}
     </div>
   )
 }
