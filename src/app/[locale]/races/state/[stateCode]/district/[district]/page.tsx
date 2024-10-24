@@ -2,10 +2,14 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import {
+  DecisionDeskRedisKeys,
+  getDecisionDataFromRedis,
+} from '@/utils/server/decisionDesk/cachedData'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
@@ -19,7 +23,7 @@ import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['10_MINUTES']
+export const revalidate = SECONDS_DURATION['MINUTE']
 
 type LocationDistrictSpecificPageProps = PageProps<{
   stateCode: string
@@ -34,10 +38,10 @@ export async function generateMetadata({
   const stateName = getUSStateNameFromStateCode(stateCode)
   const title = `${stateCode} ${formatDTSIDistrictId(district)} District Congressional Race`
   const description = `See where politicians running for in the ${formatDTSIDistrictId(district)} district of ${stateName} stand on crypto.`
-  return generateMetadataDetails({
+  return {
     title,
     description,
-  })
+  }
 }
 
 export async function generateStaticParams() {
@@ -62,14 +66,25 @@ export default async function LocationDistrictSpecificPage({
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
 
-  const data = await queryDTSILocationDistrictSpecificInformation({
+  const dtsiResults = await queryDTSILocationDistrictSpecificInformation({
     stateCode,
     district,
   })
 
-  if (!data) {
+  const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
+  const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
+  const dataByDistrict =
+    liveResultdata?.filter?.(data => data.district?.toLowerCase() === district.toString()) ?? null
+
+  if (!dtsiResults) {
     throw new Error(`Invalid params for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return <LocationRaceSpecific {...data} {...{ stateCode, district, locale }} />
+  return (
+    <LocationRaceSpecific
+      initialLiveResultData={dataByDistrict}
+      {...dtsiResults}
+      {...{ stateCode, district, locale }}
+    />
+  )
 }

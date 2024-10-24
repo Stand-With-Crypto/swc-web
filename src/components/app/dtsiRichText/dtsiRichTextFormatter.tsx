@@ -50,7 +50,9 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         return (
           <h3 className="pb-2 text-4xl">
             {node.children.map((child, index) => (
-              <React.Fragment key={index}>{getInlineDescendantComponent(child)}</React.Fragment>
+              <React.Fragment key={`h1-child-${index}`}>
+                {getInlineDescendantComponent(child)}
+              </React.Fragment>
             ))}
           </h3>
         )
@@ -58,7 +60,9 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         return (
           <h4 className="pb-2 text-3xl">
             {node.children.map((child, index) => (
-              <React.Fragment key={index}>{getInlineDescendantComponent(child)}</React.Fragment>
+              <React.Fragment key={`h2-child-${index}`}>
+                {getInlineDescendantComponent(child)}
+              </React.Fragment>
             ))}
           </h4>
         )
@@ -66,7 +70,9 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         return (
           <h5 className="pb-2 text-2xl">
             {node.children.map((child, index) => (
-              <React.Fragment key={index}>{getInlineDescendantComponent(child)}</React.Fragment>
+              <React.Fragment key={`h3-child-${index}`}>
+                {getInlineDescendantComponent(child)}
+              </React.Fragment>
             ))}
           </h5>
         )
@@ -74,7 +80,9 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         return (
           <h6 className="pb-2 text-xl">
             {node.children.map((child, index) => (
-              <React.Fragment key={index}>{getInlineDescendantComponent(child)}</React.Fragment>
+              <React.Fragment key={`h4-child-${index}`}>
+                {getInlineDescendantComponent(child)}
+              </React.Fragment>
             ))}
           </h6>
         )
@@ -82,9 +90,15 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         return (
           <ul className="list-disc space-y-3 pb-2 ps-6">
             {node.children.map((child, index) => (
-              <React.Fragment key={index}>
+              <React.Fragment key={`ul-child-${index}`}>
                 {child.children.map((x, i) => (
-                  <li key={i}>{x.children.map(getInlineDescendantComponent)}</li>
+                  <li key={`ul-item-${i}`}>
+                    {x.children.map((descendant, j) => (
+                      <React.Fragment key={`ul-item-descendant-${j}`}>
+                        {getInlineDescendantComponent(descendant)}
+                      </React.Fragment>
+                    ))}
+                  </li>
                 ))}
               </React.Fragment>
             ))}
@@ -94,9 +108,15 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         return (
           <ol className="list-decimal space-y-3 pb-2 ps-6">
             {node.children.map((child, index) => (
-              <React.Fragment key={index}>
+              <React.Fragment key={`ol-child-${index}`}>
                 {child.children.map((x, i) => (
-                  <li key={i}>{x.children.map(getInlineDescendantComponent)}</li>
+                  <li key={`ol-item-${i}`}>
+                    {x.children.map((descendant, j) => (
+                      <React.Fragment key={`ol-item-descendant-${j}`}>
+                        {getInlineDescendantComponent(descendant)}
+                      </React.Fragment>
+                    ))}
+                  </li>
                 ))}
               </React.Fragment>
             ))}
@@ -106,7 +126,9 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         return (
           <p className="pb-2">
             {node.children.map((child, index) => (
-              <React.Fragment key={index}>{getInlineDescendantComponent(child)}</React.Fragment>
+              <React.Fragment key={`p-child-${index}`}>
+                {getInlineDescendantComponent(child)}
+              </React.Fragment>
             ))}
           </p>
         )

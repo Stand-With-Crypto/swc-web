@@ -1,9 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
 import Balancer from 'react-wrap-balancer'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
@@ -37,10 +35,6 @@ export function LocationUnitedStates({
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces()
-  }, [])
-
   return (
     <div className="space-y-20">
       <DarkHeroSection>
@@ -70,7 +64,7 @@ export function LocationUnitedStates({
         {!!groups.president.length && (
           <DTSIPersonHeroCardSection
             cta={
-              <InternalLink href={urls.locationUnitedStatesPresidential()}>View Race</InternalLink>
+              <InternalLink href={urls.locationUnitedStatesPresidential()}>View race</InternalLink>
             }
             locale={locale}
             people={groups.president}
@@ -136,7 +130,7 @@ export function LocationUnitedStates({
                             : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
                         }
                       >
-                        View Race
+                        View race
                       </InternalLink>
                     }
                     key={`${stateCode}-${primaryDistrict}`}
