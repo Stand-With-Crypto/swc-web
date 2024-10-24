@@ -1,23 +1,17 @@
 import React from 'react'
 import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
-import Link from 'next/link'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import {
-  DTSI_PersonRoleCategory,
-  DTSI_PersonRoleStatus,
-  DTSI_PersonStanceType,
-} from '@/data/dtsi/generated'
+import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { SupportedLocale } from '@/intl/locales'
 import {
