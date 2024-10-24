@@ -234,7 +234,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex items-center justify-between gap-4">
           <VoteCount
             className={cn(getOpacity(ddhqCandidateA, raceData))}
             percentage={getVotePercentage(ddhqCandidateA, raceData)}
@@ -304,10 +304,10 @@ function VoteCount(props: VoteCountProps) {
   const { votes, percentage, className } = props
 
   return (
-    <div className={cn('flex items-center text-sm', className)}>
+    <div className={cn('flex items-center text-xs md:text-sm', className)}>
       {!isNil(votes) ? (
         <span>
-          {!!percentage && <span className="mr-1 font-bold">{percentage.toFixed(2)}%</span>}
+          {!!percentage && <span className="mr-2 font-bold">{percentage.toFixed(2)}%</span>}
           <span className="font-normal text-fontcolor-muted">{votes} votes</span>
         </span>
       ) : null}

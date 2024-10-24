@@ -113,15 +113,15 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       </div>
 
       <div className="relative flex items-center justify-between text-gray-400">
-        <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateA, liveResultData))}>
+        <div className={cn(getOpacity(dtsiCandidateA, liveResultData))}>
           <p className="font-bold">{ddhqCandidateA?.votingData?.electoralVotes}</p>
         </div>
 
         <p className="absolute left-1/2 right-1/2 w-fit -translate-x-1/2 text-nowrap text-sm">
-          270 to win
+          270 electoral votes to win
         </p>
 
-        <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateB, liveResultData))}>
+        <div className={cn(getOpacity(dtsiCandidateB, liveResultData))}>
           <p className="font-bold">{ddhqCandidateB?.votingData?.electoralVotes}</p>
         </div>
       </div>
@@ -175,9 +175,9 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         >
           {!isNil(ddhqCandidateA?.votingData?.votes) && (
             <>
-              <p className="font-bold">
+              {/* <p className="font-bold">
                 {(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2)}%
-              </p>
+              </p> */}
               <p>
                 {FormattedNumber({
                   amount: ddhqCandidateA?.votingData?.votes || 0,
@@ -192,9 +192,9 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateB, liveResultData))}>
           {!isNil(ddhqCandidateB?.votingData?.votes) && (
             <>
-              <p className="font-bold">
+              {/* <p className="font-bold">
                 {(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2)}%
-              </p>
+              </p> */}
               <p>
                 {FormattedNumber({
                   amount: ddhqCandidateB?.votingData?.votes || 0,
