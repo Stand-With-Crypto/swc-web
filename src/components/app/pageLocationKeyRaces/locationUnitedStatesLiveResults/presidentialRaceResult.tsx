@@ -137,7 +137,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
               indicatorClassName={cn(
                 'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  dtsiCandidateA.manuallyOverriddenStanceScore ||
+                  dtsiCandidateA.manuallyOverriddenStanceScore ??
                     dtsiCandidateA.computedStanceScore,
                 ),
                 getOpacity(dtsiCandidateA, liveResultData),
@@ -152,7 +152,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
               indicatorClassName={cn(
                 'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  dtsiCandidateB.manuallyOverriddenStanceScore ||
+                  dtsiCandidateB.manuallyOverriddenStanceScore ??
                     dtsiCandidateB.computedStanceScore,
                 ),
                 getOpacity(dtsiCandidateB, liveResultData),

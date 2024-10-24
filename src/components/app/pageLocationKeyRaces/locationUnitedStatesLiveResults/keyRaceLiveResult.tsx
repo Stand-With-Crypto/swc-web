@@ -204,7 +204,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               indicatorClassName={cn(
                 'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  ddhqCandidateA?.manuallyOverriddenStanceScore ||
+                  ddhqCandidateA?.manuallyOverriddenStanceScore ??
                     ddhqCandidateA?.computedStanceScore,
                 ),
               )}
@@ -222,7 +222,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               indicatorClassName={cn(
                 'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  ddhqCandidateB?.manuallyOverriddenStanceScore ||
+                  ddhqCandidateB?.manuallyOverriddenStanceScore ??
                     ddhqCandidateB?.computedStanceScore,
                 ),
               )}
@@ -234,7 +234,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-6">
           <VoteCount
             className={cn(getOpacity(ddhqCandidateA, raceData))}
             percentage={getVotePercentage(ddhqCandidateA, raceData)}
