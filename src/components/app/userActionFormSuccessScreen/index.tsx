@@ -20,10 +20,11 @@ interface UserActionFormSuccessScreenProps {
   children: React.ReactNode
   onClose: () => void
   onLoad?: () => void
+  isVotingDay?: boolean
 }
 
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
-  const { children, onClose } = props
+  const { children, onClose, isVotingDay } = props
 
   const { user, isLoggedIn, isLoading } = useSession()
   const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
@@ -41,10 +42,19 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   })
 
   if (!isLoggedIn || !user) {
-    return <JoinSWC onClose={onClose} />
+    return (
+      <JoinSWC
+        isVotingDay={isVotingDay}
+        onClose={onClose}
+        {...(isVotingDay && {
+          title: 'Nice work! Claim your free NFT.',
+          description: 'Join Stand With Crypto or sign in to claim your free “I voted” NFT.',
+        })}
+      />
+    )
   }
 
-  if (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) {
+  if (!isVotingDay && (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN)) {
     if (isLoading) {
       return <SMSOptInContent.Skeleton />
     }
@@ -67,15 +77,18 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     <div className={cn('flex h-full flex-col gap-8 p-0 md:p-8')}>
       {children}
 
-      {isLoading || performedActionsResponse.isLoading ? (
+      {(!isVotingDay && isLoading) || performedActionsResponse.isLoading ? (
         <UserActionFormSuccessScreenNextActionSkeleton />
       ) : (
-        <UserActionFormSuccessScreenNextAction
-          data={{
-            userHasEmbeddedWallet: user.hasEmbeddedWallet,
-            performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes || [],
-          }}
-        />
+        !isVotingDay && (
+          <UserActionFormSuccessScreenNextAction
+            data={{
+              userHasEmbeddedWallet: user.hasEmbeddedWallet,
+              performedUserActionTypes:
+                performedActionsResponse.data?.performedUserActionTypes || [],
+            }}
+          />
+        )
       )}
     </div>
   )
