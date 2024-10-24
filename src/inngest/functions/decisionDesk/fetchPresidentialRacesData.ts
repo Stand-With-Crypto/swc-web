@@ -47,7 +47,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
     const {
       race_date = '2024-11-05',
       office_id = '1',
-      limit = '50',
+      limit = '150',
       name = 'General Election',
       year = '2024',
       persist,
