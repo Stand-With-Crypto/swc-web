@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
@@ -10,9 +10,15 @@ import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
-import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
+import {
+  LiveStatusBadge,
+  Status,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
-import { congressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import {
+  congressLiveResultOverview,
+  getRaceStatus,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -90,6 +96,10 @@ export function LocationStateSpecific({
     })
   }, [stateCode])
 
+  const raceStatus = useMemo<Status>(() => {
+    return getRaceStatus(stateRaceData?.[0] || null)
+  }, [stateRaceData])
+
   return (
     <div>
       <DarkHeroSection>
@@ -134,7 +144,7 @@ export function LocationStateSpecific({
             titleProps={{ size: 'xs' }}
           >
             <div className="flex justify-center">
-              <LiveStatusBadge status="live" />
+              <LiveStatusBadge status={raceStatus} />
             </div>
 
             <div className="flex flex-wrap gap-4">

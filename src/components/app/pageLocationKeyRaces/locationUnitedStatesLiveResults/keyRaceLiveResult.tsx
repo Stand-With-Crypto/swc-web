@@ -20,6 +20,7 @@ import {
   convertDTSIStanceScoreToBgColorClass,
   getOpacity,
   getPoliticalCategoryAbbr,
+  getRaceStatus,
   getVotePercentage,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
@@ -125,20 +126,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   }, [raceData])
 
   const raceStatus = useMemo<Status>(() => {
-    if (!raceData) return 'unknown'
-
-    if (raceData.calledCandidate) {
-      return 'called'
-    }
-
-    const now = new Date()
-    const raceDate = new Date(raceData.raceDate || '2024-11-05')
-
-    if (now < raceDate) {
-      return 'not-started'
-    }
-
-    return 'live'
+    return getRaceStatus(raceData)
   }, [raceData])
 
   const canShowProgress = Boolean(liveResultData)

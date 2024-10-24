@@ -46,6 +46,23 @@ export const getVotePercentage = (
   return candidate.votes ? +((candidate.votes / totalVotes) * 100).toFixed(2) : 0
 }
 
+export const getRaceStatus = (raceData: RacesVotingDataResponse | null) => {
+  if (!raceData) return 'unknown'
+
+  if (raceData.calledCandidate) {
+    return 'called'
+  }
+
+  const now = new Date()
+  const raceDate = new Date(raceData.raceDate || '2024-11-05')
+
+  if (now < raceDate) {
+    return 'not-started'
+  }
+
+  return 'live'
+}
+
 export const getOpacity = (
   candidate: CandidatesWithVote | null,
   raceData: RacesVotingDataResponse | null,
