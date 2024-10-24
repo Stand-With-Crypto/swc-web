@@ -87,14 +87,14 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
   return (
     <div className="relative flex w-full flex-col gap-4">
-      <div className="flex items-center justify-between">
+      <div className="mt-4 flex items-center justify-between md:mt-0">
         <AvatarBox
           candidate={dtsiCandidateA}
           className={cn(getOpacity(dtsiCandidateA, liveResultData))}
         />
 
         <LiveStatusBadge
-          className="absolute left-1/2 right-1/2 top-6 mb-6 w-fit -translate-x-1/2 whitespace-nowrap md:static"
+          className="absolute -top-4 left-1/2 right-1/2 w-fit -translate-x-1/2 whitespace-nowrap md:top-12"
           status={raceStatus}
           winnerName={calledCandidate ? dtsiPersonFullName(calledCandidate) : undefined}
         />
