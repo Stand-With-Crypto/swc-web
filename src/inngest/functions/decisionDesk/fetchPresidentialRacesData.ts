@@ -58,8 +58,9 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
     let requestsMade = 0
 
-    const presidentialRacesData = await step.run('fetch-presidential-races-data', async () =>
-      getDtsiPresidentialWithVotingData(year),
+    const presidentialRacesData = await step.run(
+      `fetch-presidential-races-data-requests-${requestsMade}`,
+      async () => getDtsiPresidentialWithVotingData(year),
     )
 
     requestsMade += 1
@@ -68,7 +69,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       logger.error('Presidential data not fetched.')
     }
 
-    const allRacesData = await step.run('fetch-all-races-data', async () =>
+    const allRacesData = await step.run(`fetch-all-races-data-requests-${requestsMade}`, async () =>
       getAllRacesData({
         year,
         limit,
@@ -85,7 +86,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       logger.error('All races data not fetched.')
     }
 
-    const senateData = await step.run('fetch-senate-data', async () =>
+    const senateData = await step.run(`fetch-senate-data-requests-${requestsMade}`, async () =>
       getAllRacesData({
         year,
         limit,
@@ -102,7 +103,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       logger.error('Senate data not fetched.')
     }
 
-    const houseData = await step.run('fetch-house-data', async () =>
+    const houseData = await step.run(`fetch-house-data-requests-${requestsMade}`, async () =>
       getAllRacesData({
         year,
         limit,
@@ -119,8 +120,9 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       logger.error('House data not fetched.')
     }
 
-    const allCongressData = await step.run('fetch-all-congress-data', async () =>
-      getAllCongressData({ senateData, houseData }),
+    const allCongressData = await step.run(
+      `fetch-all-congress-data-requests-${requestsMade}`,
+      async () => getAllCongressData({ senateData, houseData }),
     )
 
     const stateKeys = Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)
