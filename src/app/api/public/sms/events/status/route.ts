@@ -1,7 +1,6 @@
 import 'server-only'
 
-import { User, UserCommunication, UserCommunicationJourney } from '@prisma/client'
-// import * as Sentry from '@sentry/nextjs'
+import { UserCommunicationJourneyType } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -9,8 +8,10 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
-import { verifySignature } from '@/utils/server/sms/utils'
-import { sleep } from '@/utils/shared/sleep'
+import { bulkCreateCommunicationJourney } from '@/utils/server/sms/communicationJourney'
+import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
+import { getLogger } from '@/utils/shared/logger'
+import { toBool } from '@/utils/shared/toBool'
 
 interface SMSStatusEvent {
   ErrorCode?: string
@@ -25,17 +26,7 @@ interface SMSStatusEvent {
   AccountSid: string
 }
 
-export const maxDuration = 30
-
-const MAX_RETRY_COUNT = 3
-
-type UserCommunicationWithRelations =
-  | (UserCommunication & {
-      userCommunicationJourney: UserCommunicationJourney & {
-        user: User
-      }
-    })
-  | null
+const logger = getLogger('smsStatus')
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SMSStatusEvent>(request)
@@ -46,48 +37,69 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  let userCommunication: UserCommunicationWithRelations = null
+  logger.info('Request URL:', request.url)
 
-  for (let i = 1; i <= MAX_RETRY_COUNT; i += 1) {
-    userCommunication = await prismaClient.userCommunication.findFirst({
-      where: {
-        messageId: body.MessageSid,
-      },
-      orderBy: {
-        userCommunicationJourney: {
-          user: {
-            datetimeUpdated: 'desc',
-          },
-        },
-      },
-      include: {
-        userCommunicationJourney: {
-          include: {
-            user: true,
-          },
-        },
-      },
+  const [_, searchParams] = request.url.split('?')
+
+  const params = new URLSearchParams(searchParams)
+
+  const journeyType = params.get('journeyType') as UserCommunicationJourneyType | null
+  const campaignName = params.get('campaignName')
+  const hasWelcomeMessageInBody = toBool(params.get('hasWelcomeMessageInBody'))
+
+  const messageId = body.MessageSid
+  const messageStatus = body.MessageStatus
+
+  const errorCode = body.ErrorCode
+  const from = body.From
+  const phoneNumber = body.To
+
+  if (!journeyType || !campaignName) {
+    return new NextResponse('missing search params', {
+      status: 400,
+    })
+  }
+
+  logger.info(`Searching user with phone number ${phoneNumber}`)
+
+  const user = await getUserByPhoneNumber(phoneNumber)
+
+  if (!user) {
+    return new NextResponse('success', {
+      status: 200,
+    })
+  }
+
+  const existingMessage = await prismaClient.userCommunication.findFirst({
+    where: {
+      messageId,
+    },
+  })
+
+  if (existingMessage) {
+    logger.info(`Found existing message with id ${messageId}`)
+    // TODO: update message status
+  } else {
+    logger.info(
+      `Creating communication journey of type ${journeyType} for campaign ${campaignName} and user communication with message ${messageId}`,
+    )
+    await bulkCreateCommunicationJourney({
+      campaignName,
+      journeyType,
+      messageId,
+      phoneNumber,
     })
 
-    // Calls to this webhook are being received before the messages are registered in our database. Therefore, we need to implement a retry mechanism for fetching the messages.
-    if (!userCommunication) {
-      await sleep(1000 * (i * i))
+    if (hasWelcomeMessageInBody) {
+      logger.info(`Creating bulk-welcome communication journey`)
+
+      await bulkCreateCommunicationJourney({
+        campaignName: 'bulk-welcome',
+        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+        phoneNumber,
+      })
     }
   }
-
-  if (!userCommunication) {
-    // TODO: Uncomment this when we fix this problem https://github.com/Stand-With-Crypto/swc-internal/issues/260
-    // Sentry.captureMessage(`Received message status update but couldn't find user_communication`, {
-    //   extra: { body },
-    //   tags: {
-    //     domain: 'smsMessageStatusWebhook',
-    //   },
-    // })
-    // If we return 4xx or 5xx Twilio will trigger our fails webhook with this warning -> https://www.twilio.com/docs/api/errors/11200 and it's flooding Sentry
-    return new NextResponse('success', { status: 200 })
-  }
-
-  const user = userCommunication?.userCommunicationJourney.user
 
   waitUntil(
     Promise.all([
@@ -104,13 +116,13 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         userId: user.id,
       })
         .track('SMS Communication Event', {
-          'Message Status': body.MessageStatus,
-          'Message Id': body.MessageSid,
-          From: body.From,
-          To: body.To,
-          'Campaign Name': userCommunication.userCommunicationJourney.campaignName,
-          'Journey Type': userCommunication.userCommunicationJourney.journeyType,
-          Error: body.ErrorCode,
+          'Message Status': messageStatus,
+          'Message Id': messageId,
+          From: from,
+          To: phoneNumber,
+          'Campaign Name': campaignName,
+          'Journey Type': journeyType,
+          Error: errorCode,
         })
         .flush(),
     ]),
