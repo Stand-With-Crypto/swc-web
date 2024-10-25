@@ -128,6 +128,18 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     return getRaceStatus(raceData)
   }, [raceData])
 
+  const winnerName = useMemo(() => {
+    if (!raceData) return ''
+    if (!raceData.calledCandidate) return ''
+    // @ts-expect-error
+    const firstName = raceData.calledCandidate?.first_name || raceData.calledCandidate?.firstName
+    // @ts-expect-error
+    const lastName = raceData.calledCandidate?.last_name || raceData.calledCandidate?.lastName
+    const fullName = `${firstName} ${lastName}`
+    if (fullName.includes('undefined')) return ''
+    return fullName
+  }, [raceData])
+
   const canShowProgress = Boolean(liveResultData)
 
   const isUncontested = useMemo(() => {
@@ -151,22 +163,14 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
           </div>
           <LiveStatusBadge
             status={raceStatus}
-            winnerName={
-              raceData?.calledCandidate
-                ? `${raceData?.calledCandidate?.first_name} ${raceData?.calledCandidate?.last_name}`
-                : ''
-            }
+            winnerName={raceData?.calledCandidate ? winnerName : ''}
           />
         </div>
       ) : (
         <div className="mb-4 flex flex-col items-center gap-6">
           <LiveStatusBadge
             status={raceStatus}
-            winnerName={
-              raceData?.calledCandidate
-                ? `${raceData?.calledCandidate?.first_name} ${raceData?.calledCandidate?.last_name}`
-                : ''
-            }
+            winnerName={raceData?.calledCandidate ? winnerName : ''}
           />
           {lastUpdated && (
             <p className="text-center text-base text-fontcolor-muted">Data updated {lastUpdated}</p>

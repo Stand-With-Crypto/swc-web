@@ -141,7 +141,7 @@ export function LocationUnitedStatesLiveResults({
                 const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
 
                 return (
-                  <LiveResultsGrid.GridItem key={key}>
+                  <LiveResultsGrid.GridItem key={key + primaryDistrict}>
                     <KeyRaceLiveResult
                       candidates={candidates}
                       className="flex-1"
