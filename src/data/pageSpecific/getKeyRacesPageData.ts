@@ -22,14 +22,23 @@ export const getKeyRacesPageData = async () => {
   const racesDataMap: Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null> =
     {} as Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null>
 
-  const racesPromises = Object.entries(races.keyRaces).flatMap(async ([stateCode]) => {
+  const racesPromises = Object.entries(races.keyRaces).flatMap(([stateCode]) => {
     const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
 
-    const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
-    racesDataMap[key] = data
+    return getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
+      .then(data => {
+        racesDataMap[key] = data
+      })
+      .catch(error => {
+        Sentry.captureException(error, {
+          extra: { key },
+          tags: { domain: 'liveResult' },
+        })
+        racesDataMap[key] = null
+      })
   })
 
-  await Promise.all(racesPromises)
+  await Promise.allSettled(racesPromises)
 
   let presidentialRaceLiveResult: PresidentialDataWithVotingResponse[] | null = null
   try {
