@@ -8,7 +8,7 @@ import { toBool } from '@/utils/shared/toBool'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['MINUTE']
+export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 type LocationUnitedStatesPageProps = PageProps
 

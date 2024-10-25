@@ -38,7 +38,7 @@ export function useApiDecisionDeskData({
         .then(data => data as RacesVotingDataResponse[]),
     {
       fallbackData: initialRaceData ?? undefined,
-      refreshInterval: 60 * 1000,
+      refreshInterval: 30 * 1000,
       errorRetryInterval: 30 * 1000,
       refreshWhenHidden: true,
       onError: error => {

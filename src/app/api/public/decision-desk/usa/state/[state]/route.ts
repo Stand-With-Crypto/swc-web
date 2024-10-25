@@ -9,7 +9,7 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.MINUTE
+export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 export async function GET(_request: NextRequest, { params }: { params: { state: string } }) {
   const { state } = GetRacesParamsSchema.parse(params)

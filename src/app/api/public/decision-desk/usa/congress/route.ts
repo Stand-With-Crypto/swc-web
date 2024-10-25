@@ -10,7 +10,7 @@ import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.MINUTE
+export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 export async function GET() {
   const [allSenateData, allHouseData] = await Promise.allSettled([

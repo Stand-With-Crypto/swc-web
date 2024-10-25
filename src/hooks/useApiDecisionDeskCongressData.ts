@@ -21,7 +21,7 @@ export function useApiDecisionDeskCongressData(
         .then(data => data as GetAllCongressDataResponse),
     {
       fallbackData,
-      refreshInterval: 60 * 1000,
+      refreshInterval: 30 * 1000,
       errorRetryInterval: 30 * 1000,
       refreshWhenHidden: true,
     },
