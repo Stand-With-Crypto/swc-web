@@ -1489,13 +1489,13 @@
     ],
     "votingData": {
       "called": false,
-      "electoralVotes": 214,
+      "electoralVotes": 79,
       "firstName": "Donald J.",
       "id": 5,
       "lastName": "Trump",
       "partyName": "Republican",
-      "percentage": 44.1,
-      "votes": 62378703
+      "percentage": 49.95,
+      "votes": 24944085
     }
   },
   {
@@ -1799,14 +1799,14 @@
       }
     ],
     "votingData": {
-      "called": true,
-      "electoralVotes": 294,
+      "called": false,
+      "electoralVotes": 20,
       "firstName": "Kamala",
       "id": 988,
       "lastName": "Harris",
       "partyName": "Democratic",
-      "percentage": 48.8,
-      "votes": 69028739
+      "percentage": 46.45,
+      "votes": 23194147
     }
   },
   {

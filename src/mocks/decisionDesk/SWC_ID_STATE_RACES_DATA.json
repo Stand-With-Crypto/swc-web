@@ -1,13 +1,6 @@
 [
   {
-    "calledCandidate": {
-      "cand_id": 85003,
-      "first_name": "Ross",
-      "incumbent": true,
-      "last_name": "Fulcher",
-      "party_id": 2,
-      "party_name": "Republican"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -15,31 +8,15 @@
           "estimatedVotesHigh": 452185,
           "estimatedVotesLow": 369972,
           "estimatedVotesMid": 411077,
-          "turnoutHigh": 86.35,
-          "turnoutLow": 105.54,
-          "turnoutMid": 94.98
-        },
-        "firstName": "Matt",
-        "id": 85004,
-        "lastName": "Loesby",
-        "partyName": "Libertarian",
-        "votes": 7485
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 452185,
-          "estimatedVotesLow": 369972,
-          "estimatedVotesMid": 411077,
-          "turnoutHigh": 86.35,
-          "turnoutLow": 105.54,
-          "turnoutMid": 94.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ross",
         "id": 85003,
         "lastName": "Fulcher",
         "partyName": "Republican",
-        "votes": 243674
+        "votes": 0
       },
       {
         "elected": false,
@@ -47,15 +24,15 @@
           "estimatedVotesHigh": 452185,
           "estimatedVotesLow": 369972,
           "estimatedVotesMid": 411077,
-          "turnoutHigh": 86.35,
-          "turnoutLow": 105.54,
-          "turnoutMid": 94.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brendan",
         "id": 44635,
         "lastName": "Gomez",
         "partyName": "Constitution",
-        "votes": 6217
+        "votes": 0
       },
       {
         "elected": false,
@@ -63,15 +40,31 @@
           "estimatedVotesHigh": 452185,
           "estimatedVotesLow": 369972,
           "estimatedVotesMid": 411077,
-          "turnoutHigh": 86.35,
-          "turnoutLow": 105.54,
-          "turnoutMid": 94.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Matt",
+        "id": 85004,
+        "lastName": "Loesby",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 452185,
+          "estimatedVotesLow": 369972,
+          "estimatedVotesMid": 411077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kaylee",
         "id": 19690,
         "lastName": "Peterson",
         "partyName": "Democratic",
-        "votes": 133082
+        "votes": 0
       }
     ],
     "district": "1",
@@ -79,7 +72,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:26.712Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -89,7 +83,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 390458,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -101,15 +95,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 86.56,
-          "turnoutLow": 105.79,
-          "turnoutMid": 95.21
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Idaho",
         "id": 85005,
         "lastName": "Law",
         "partyName": "Constitution",
-        "votes": 6563
+        "votes": 0
       },
       {
         "elected": false,
@@ -117,15 +111,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 86.56,
-          "turnoutLow": 105.79,
-          "turnoutMid": 95.21
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 1226,
         "lastName": "Simpson",
         "partyName": "Republican",
-        "votes": 227652
+        "votes": 0
       },
       {
         "elected": false,
@@ -133,15 +127,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 86.56,
-          "turnoutLow": 105.79,
-          "turnoutMid": 95.21
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 19689,
         "lastName": "Roth",
         "partyName": "Democratic",
-        "votes": 115752
+        "votes": 0
       },
       {
         "elected": false,
@@ -149,15 +143,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 86.56,
-          "turnoutLow": 105.79,
-          "turnoutMid": 95.21
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Todd",
         "id": 85006,
         "lastName": "Corsetti",
         "partyName": "Libertarian",
-        "votes": 7339
+        "votes": 0
       }
     ],
     "district": "2",
@@ -165,7 +159,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:26.712Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -175,7 +170,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 357306,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -187,15 +182,15 @@
           "estimatedVotesHigh": 30265,
           "estimatedVotesLow": 24763,
           "estimatedVotesMid": 27514,
-          "turnoutHigh": 78.85,
-          "turnoutLow": 96.37,
-          "turnoutMid": 86.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 85184,
         "lastName": "Rose",
         "partyName": "Independent",
-        "votes": 495
+        "votes": 0
       },
       {
         "elected": false,
@@ -203,15 +198,15 @@
           "estimatedVotesHigh": 30265,
           "estimatedVotesLow": 24763,
           "estimatedVotesMid": 27514,
-          "turnoutHigh": 78.85,
-          "turnoutLow": 96.37,
-          "turnoutMid": 86.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 19742,
         "lastName": "Woodward",
         "partyName": "Republican",
-        "votes": 23368
+        "votes": 0
       }
     ],
     "district": "1",
@@ -219,7 +214,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -229,7 +225,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 23863,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -241,15 +237,15 @@
           "estimatedVotesHigh": 28264,
           "estimatedVotesLow": 23127,
           "estimatedVotesMid": 25695,
-          "turnoutHigh": 72.7,
-          "turnoutLow": 88.85,
-          "turnoutMid": 79.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 67897,
         "lastName": "Hearn",
         "partyName": "Democratic",
-        "votes": 692
+        "votes": 0
       },
       {
         "elected": false,
@@ -257,15 +253,15 @@
           "estimatedVotesHigh": 28264,
           "estimatedVotesLow": 23127,
           "estimatedVotesMid": 25695,
-          "turnoutHigh": 72.7,
-          "turnoutLow": 88.85,
-          "turnoutMid": 79.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Phil",
         "id": 19743,
         "lastName": "Hart",
         "partyName": "Republican",
-        "votes": 19857
+        "votes": 0
       }
     ],
     "district": "2",
@@ -273,7 +269,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -283,7 +280,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20549,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -295,15 +292,15 @@
           "estimatedVotesHigh": 29414,
           "estimatedVotesLow": 24066,
           "estimatedVotesMid": 26740,
-          "turnoutHigh": 70.99,
-          "turnoutLow": 86.77,
-          "turnoutMid": 78.09
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Doug",
         "id": 19746,
         "lastName": "Okuniewicz",
         "partyName": "Republican",
-        "votes": 20472
+        "votes": 0
       },
       {
         "elected": false,
@@ -311,15 +308,15 @@
           "estimatedVotesHigh": 29414,
           "estimatedVotesLow": 24066,
           "estimatedVotesMid": 26740,
-          "turnoutHigh": 70.99,
-          "turnoutLow": 86.77,
-          "turnoutMid": 78.09
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 67898,
         "lastName": "Seguin",
         "partyName": "Democratic",
-        "votes": 410
+        "votes": 0
       }
     ],
     "district": "3",
@@ -327,7 +324,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -337,7 +335,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20882,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -349,15 +347,15 @@
           "estimatedVotesHigh": 23782,
           "estimatedVotesLow": 19458,
           "estimatedVotesMid": 21620,
-          "turnoutHigh": 72.12,
-          "turnoutLow": 88.14,
-          "turnoutMid": 79.33
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carissa",
         "id": 67899,
         "lastName": "Hober",
         "partyName": "Democratic",
-        "votes": 566
+        "votes": 0
       },
       {
         "elected": false,
@@ -365,15 +363,15 @@
           "estimatedVotesHigh": 23782,
           "estimatedVotesLow": 19458,
           "estimatedVotesMid": 21620,
-          "turnoutHigh": 72.12,
-          "turnoutLow": 88.14,
-          "turnoutMid": 79.33
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ben",
         "id": 19748,
         "lastName": "Toews",
         "partyName": "Republican",
-        "votes": 16585
+        "votes": 0
       }
     ],
     "district": "4",
@@ -381,7 +379,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -391,7 +390,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 17151,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -403,15 +402,15 @@
           "estimatedVotesHigh": 24862,
           "estimatedVotesLow": 20342,
           "estimatedVotesMid": 22602,
-          "turnoutHigh": 84.51,
-          "turnoutLow": 103.28,
-          "turnoutMid": 92.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carl",
         "id": 19750,
         "lastName": "Bjerke",
         "partyName": "Republican",
-        "votes": 20170
+        "votes": 0
       },
       {
         "elected": false,
@@ -419,15 +418,15 @@
           "estimatedVotesHigh": 24862,
           "estimatedVotesLow": 20342,
           "estimatedVotesMid": 22602,
-          "turnoutHigh": 84.51,
-          "turnoutLow": 103.28,
-          "turnoutMid": 92.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adam",
         "id": 67900,
         "lastName": "Chapman",
         "partyName": "Democratic",
-        "votes": 840
+        "votes": 0
       }
     ],
     "district": "5",
@@ -435,7 +434,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -445,7 +445,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21010,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -457,15 +457,15 @@
           "estimatedVotesHigh": 27155,
           "estimatedVotesLow": 22218,
           "estimatedVotesMid": 24686,
-          "turnoutHigh": 70.11,
-          "turnoutLow": 85.69,
-          "turnoutMid": 77.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 19753,
         "lastName": "Foreman",
         "partyName": "Republican",
-        "votes": 9215
+        "votes": 0
       },
       {
         "elected": false,
@@ -473,15 +473,15 @@
           "estimatedVotesHigh": 27155,
           "estimatedVotesLow": 22218,
           "estimatedVotesMid": 24686,
-          "turnoutHigh": 70.11,
-          "turnoutLow": 85.69,
-          "turnoutMid": 77.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julia",
         "id": 67901,
         "lastName": "Parker",
         "partyName": "Democratic",
-        "votes": 9823
+        "votes": 0
       }
     ],
     "district": "6",
@@ -489,7 +489,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -499,7 +500,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 19038,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -511,15 +512,15 @@
           "estimatedVotesHigh": 27133,
           "estimatedVotesLow": 22199,
           "estimatedVotesMid": 24666,
-          "turnoutHigh": 81.82,
-          "turnoutLow": 100,
-          "turnoutMid": 90
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cindy",
         "id": 19755,
         "lastName": "Carlson",
         "partyName": "Republican",
-        "votes": 21539
+        "votes": 0
       },
       {
         "elected": false,
@@ -527,15 +528,15 @@
           "estimatedVotesHigh": 27133,
           "estimatedVotesLow": 22199,
           "estimatedVotesMid": 24666,
-          "turnoutHigh": 81.82,
-          "turnoutLow": 100,
-          "turnoutMid": 90
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bill",
         "id": 67902,
         "lastName": "Farmer",
         "partyName": "Democratic",
-        "votes": 661
+        "votes": 0
       }
     ],
     "district": "7",
@@ -543,7 +544,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:14.462Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -553,7 +555,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 22200,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -565,15 +567,15 @@
           "estimatedVotesHigh": 25013,
           "estimatedVotesLow": 20466,
           "estimatedVotesMid": 22739,
-          "turnoutHigh": 86.96,
-          "turnoutLow": 106.28,
-          "turnoutMid": 95.66
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 67903,
         "lastName": "Hoag",
         "partyName": "Democratic",
-        "votes": 2168
+        "votes": 0
       },
       {
         "elected": false,
@@ -581,15 +583,15 @@
           "estimatedVotesHigh": 25013,
           "estimatedVotesLow": 20466,
           "estimatedVotesMid": 22739,
-          "turnoutHigh": 86.96,
-          "turnoutLow": 106.28,
-          "turnoutMid": 95.66
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christy",
         "id": 67904,
         "lastName": "Zito",
         "partyName": "Republican",
-        "votes": 19584
+        "votes": 0
       }
     ],
     "district": "8",
@@ -597,7 +599,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -607,7 +610,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21752,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -619,15 +622,15 @@
           "estimatedVotesHigh": 25457,
           "estimatedVotesLow": 20829,
           "estimatedVotesMid": 23143,
-          "turnoutHigh": 83.64,
-          "turnoutLow": 102.22,
-          "turnoutMid": 92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rachel",
         "id": 67905,
         "lastName": "Buck",
         "partyName": "Democratic",
-        "votes": 682
+        "votes": 0
       },
       {
         "elected": false,
@@ -635,15 +638,15 @@
           "estimatedVotesHigh": 25457,
           "estimatedVotesLow": 20829,
           "estimatedVotesMid": 23143,
-          "turnoutHigh": 83.64,
-          "turnoutLow": 102.22,
-          "turnoutMid": 92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brandon",
         "id": 67906,
         "lastName": "Shippy",
         "partyName": "Republican",
-        "votes": 20610
+        "votes": 0
       }
     ],
     "district": "9",
@@ -651,7 +654,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -661,7 +665,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21292,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -673,15 +677,15 @@
           "estimatedVotesHigh": 28106,
           "estimatedVotesLow": 22996,
           "estimatedVotesMid": 25551,
-          "turnoutHigh": 85.44,
-          "turnoutLow": 104.43,
-          "turnoutMid": 93.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Letishia",
         "id": 67907,
         "lastName": "Silva",
         "partyName": "Democratic",
-        "votes": 1206
+        "votes": 0
       },
       {
         "elected": false,
@@ -689,15 +693,15 @@
           "estimatedVotesHigh": 28106,
           "estimatedVotesLow": 22996,
           "estimatedVotesMid": 25551,
-          "turnoutHigh": 85.44,
-          "turnoutLow": 104.43,
-          "turnoutMid": 93.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tammy",
         "id": 19767,
         "lastName": "Nichols",
         "partyName": "Republican",
-        "votes": 22808
+        "votes": 0
       }
     ],
     "district": "10",
@@ -705,7 +709,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -715,7 +720,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 24014,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -727,15 +732,15 @@
           "estimatedVotesHigh": 16915,
           "estimatedVotesLow": 13839,
           "estimatedVotesMid": 15377,
-          "turnoutHigh": 87.24,
-          "turnoutLow": 106.63,
-          "turnoutMid": 95.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Toni",
         "id": 19731,
         "lastName": "Ferro",
         "partyName": "Democratic",
-        "votes": 595
+        "votes": 0
       },
       {
         "elected": false,
@@ -743,15 +748,15 @@
           "estimatedVotesHigh": 16915,
           "estimatedVotesLow": 13839,
           "estimatedVotesMid": 15377,
-          "turnoutHigh": 87.24,
-          "turnoutLow": 106.63,
-          "turnoutMid": 95.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Camille",
         "id": 67909,
         "lastName": "Blaylock",
         "partyName": "Republican",
-        "votes": 14161
+        "votes": 0
       }
     ],
     "district": "11",
@@ -759,7 +764,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -769,7 +775,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 14756,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -797,6 +803,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -819,15 +826,15 @@
           "estimatedVotesHigh": 21637,
           "estimatedVotesLow": 17703,
           "estimatedVotesMid": 19670,
-          "turnoutHigh": 86.22,
-          "turnoutLow": 105.38,
-          "turnoutMid": 94.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 19773,
         "lastName": "Lenney",
         "partyName": "Republican",
-        "votes": 18097
+        "votes": 0
       },
       {
         "elected": false,
@@ -835,15 +842,15 @@
           "estimatedVotesHigh": 21637,
           "estimatedVotesLow": 17703,
           "estimatedVotesMid": 19670,
-          "turnoutHigh": 86.22,
-          "turnoutLow": 105.38,
-          "turnoutMid": 94.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sarah",
         "id": 67911,
         "lastName": "Butler",
         "partyName": "Democratic",
-        "votes": 558
+        "votes": 0
       }
     ],
     "district": "13",
@@ -851,7 +858,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -861,34 +869,27 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18655,
+    "totalVotes": 0,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "cand_id": 85185,
-      "first_name": "C. Scott",
-      "incumbent": true,
-      "last_name": "Grow",
-      "party_id": 2,
-      "party_name": "Republican"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 32054,
           "estimatedVotesLow": 26226,
           "estimatedVotesMid": 29140,
-          "turnoutHigh": 84.22,
-          "turnoutLow": 102.93,
-          "turnoutMid": 92.64
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "C. Scott",
         "id": 85185,
         "lastName": "Grow",
         "partyName": "Republican",
-        "votes": 26275
+        "votes": 0
       },
       {
         "elected": false,
@@ -896,15 +897,15 @@
           "estimatedVotesHigh": 32054,
           "estimatedVotesLow": 26226,
           "estimatedVotesMid": 29140,
-          "turnoutHigh": 84.22,
-          "turnoutLow": 102.93,
-          "turnoutMid": 92.64
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kirsten",
         "id": 44631,
         "lastName": "Richardson",
         "partyName": "Constitution",
-        "votes": 720
+        "votes": 0
       }
     ],
     "district": "14",
@@ -912,7 +913,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -922,7 +924,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 26995,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -934,15 +936,15 @@
           "estimatedVotesHigh": 26187,
           "estimatedVotesLow": 21425,
           "estimatedVotesMid": 23806,
-          "turnoutHigh": 86.02,
-          "turnoutLow": 105.14,
-          "turnoutMid": 94.63
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Codi",
         "id": 19779,
         "lastName": "Galloway",
         "partyName": "Republican",
-        "votes": 20504
+        "votes": 0
       },
       {
         "elected": false,
@@ -950,15 +952,15 @@
           "estimatedVotesHigh": 26187,
           "estimatedVotesLow": 21425,
           "estimatedVotesMid": 23806,
-          "turnoutHigh": 86.02,
-          "turnoutLow": 105.14,
-          "turnoutMid": 94.63
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rick",
         "id": 19732,
         "lastName": "Just",
         "partyName": "Democratic",
-        "votes": 2023
+        "votes": 0
       }
     ],
     "district": "15",
@@ -966,7 +968,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -976,7 +979,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 22527,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -988,15 +991,15 @@
           "estimatedVotesHigh": 25535,
           "estimatedVotesLow": 20893,
           "estimatedVotesMid": 23214,
-          "turnoutHigh": 81.6,
-          "turnoutLow": 99.73,
-          "turnoutMid": 89.76
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Doug",
         "id": 122870,
         "lastName": "Rich",
         "partyName": "Republican",
-        "votes": 19796
+        "votes": 0
       },
       {
         "elected": false,
@@ -1004,15 +1007,15 @@
           "estimatedVotesHigh": 25535,
           "estimatedVotesLow": 20893,
           "estimatedVotesMid": 23214,
-          "turnoutHigh": 81.6,
-          "turnoutLow": 99.73,
-          "turnoutMid": 89.76
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ali",
         "id": 67913,
         "lastName": "Rabe",
         "partyName": "Democratic",
-        "votes": 1041
+        "votes": 0
       }
     ],
     "district": "16",
@@ -1020,7 +1023,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1030,7 +1034,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20837,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1042,15 +1046,15 @@
           "estimatedVotesHigh": 24926,
           "estimatedVotesLow": 20394,
           "estimatedVotesMid": 22660,
-          "turnoutHigh": 87.02,
-          "turnoutLow": 106.36,
-          "turnoutMid": 95.72
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Benjamin",
         "id": 19781,
         "lastName": "Chafetz",
         "partyName": "Republican",
-        "votes": 3458
+        "votes": 0
       },
       {
         "elected": false,
@@ -1058,15 +1062,15 @@
           "estimatedVotesHigh": 24926,
           "estimatedVotesLow": 20394,
           "estimatedVotesMid": 22660,
-          "turnoutHigh": 87.02,
-          "turnoutLow": 106.36,
-          "turnoutMid": 95.72
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carrie",
         "id": 19734,
         "lastName": "Semmelroth",
         "partyName": "Democratic",
-        "votes": 18233
+        "votes": 0
       }
     ],
     "district": "17",
@@ -1074,7 +1078,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.089Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:39:27.503Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1084,7 +1089,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21691,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1096,15 +1101,15 @@
           "estimatedVotesHigh": 24967,
           "estimatedVotesLow": 20427,
           "estimatedVotesMid": 22697,
-          "turnoutHigh": 82.63,
-          "turnoutLow": 101,
-          "turnoutMid": 90.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Janie",
         "id": 19735,
         "lastName": "Ward-Engelking",
         "partyName": "Democratic",
-        "votes": 6597
+        "votes": 0
       },
       {
         "elected": false,
@@ -1112,15 +1117,15 @@
           "estimatedVotesHigh": 24967,
           "estimatedVotesLow": 20427,
           "estimatedVotesMid": 22697,
-          "turnoutHigh": 82.63,
-          "turnoutLow": 101,
-          "turnoutMid": 90.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 19782,
         "lastName": "Bridges",
         "partyName": "Republican",
-        "votes": 14034
+        "votes": 0
       }
     ],
     "district": "18",
@@ -1128,7 +1133,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1138,7 +1144,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20631,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1166,6 +1172,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1188,15 +1195,15 @@
           "estimatedVotesHigh": 26363,
           "estimatedVotesLow": 21569,
           "estimatedVotesMid": 23966,
-          "turnoutHigh": 89.12,
-          "turnoutLow": 108.93,
-          "turnoutMid": 98.03
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 67916,
         "lastName": "Keyser",
         "partyName": "Republican",
-        "votes": 21144
+        "votes": 0
       },
       {
         "elected": false,
@@ -1204,15 +1211,15 @@
           "estimatedVotesHigh": 26363,
           "estimatedVotesLow": 21569,
           "estimatedVotesMid": 23966,
-          "turnoutHigh": 89.12,
-          "turnoutLow": 108.93,
-          "turnoutMid": 98.03
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andy",
         "id": 67915,
         "lastName": "Arriaga",
         "partyName": "Democratic",
-        "votes": 2351
+        "votes": 0
       }
     ],
     "district": "20",
@@ -1220,7 +1227,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1230,7 +1238,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 23495,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1242,15 +1250,15 @@
           "estimatedVotesHigh": 25947,
           "estimatedVotesLow": 21229,
           "estimatedVotesMid": 23588,
-          "turnoutHigh": 82.5,
-          "turnoutLow": 100.83,
-          "turnoutMid": 90.75
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 45590,
         "lastName": "Long",
         "partyName": "Libertarian",
-        "votes": 855
+        "votes": 0
       },
       {
         "elected": false,
@@ -1258,15 +1266,15 @@
           "estimatedVotesHigh": 25947,
           "estimatedVotesLow": 21229,
           "estimatedVotesMid": 23588,
-          "turnoutHigh": 82.5,
-          "turnoutLow": 100.83,
-          "turnoutMid": 90.75
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Treg",
         "id": 19786,
         "lastName": "Bernt",
         "partyName": "Republican",
-        "votes": 20550
+        "votes": 0
       }
     ],
     "district": "21",
@@ -1274,7 +1282,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:14.462Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1284,7 +1293,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21405,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1296,15 +1305,15 @@
           "estimatedVotesHigh": 28510,
           "estimatedVotesLow": 23326,
           "estimatedVotesMid": 25918,
-          "turnoutHigh": 86.87,
-          "turnoutLow": 106.17,
-          "turnoutMid": 95.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lori",
         "id": 19788,
         "lastName": "Hartog",
         "partyName": "Republican",
-        "votes": 19359
+        "votes": 0
       },
       {
         "elected": false,
@@ -1312,15 +1321,15 @@
           "estimatedVotesHigh": 28510,
           "estimatedVotesLow": 23326,
           "estimatedVotesMid": 25918,
-          "turnoutHigh": 86.87,
-          "turnoutLow": 106.17,
-          "turnoutMid": 95.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dawn",
         "id": 19838,
         "lastName": "Pierce",
         "partyName": "Democratic",
-        "votes": 5407
+        "votes": 0
       }
     ],
     "district": "22",
@@ -1328,7 +1337,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1338,7 +1348,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 24766,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1350,15 +1360,15 @@
           "estimatedVotesHigh": 24450,
           "estimatedVotesLow": 20005,
           "estimatedVotesMid": 22227,
-          "turnoutHigh": 87.79,
-          "turnoutLow": 107.3,
-          "turnoutMid": 96.57
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Todd",
         "id": 19790,
         "lastName": "Lakey",
         "partyName": "Republican",
-        "votes": 12081
+        "votes": 0
       },
       {
         "elected": false,
@@ -1366,15 +1376,15 @@
           "estimatedVotesHigh": 24450,
           "estimatedVotesLow": 20005,
           "estimatedVotesMid": 22227,
-          "turnoutHigh": 87.79,
-          "turnoutLow": 107.3,
-          "turnoutMid": 96.57
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 85186,
         "lastName": "Smith",
         "partyName": "Constitution",
-        "votes": 422
+        "votes": 0
       },
       {
         "elected": false,
@@ -1382,15 +1392,15 @@
           "estimatedVotesHigh": 24450,
           "estimatedVotesLow": 20005,
           "estimatedVotesMid": 22227,
-          "turnoutHigh": 87.79,
-          "turnoutLow": 107.3,
-          "turnoutMid": 96.57
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 67917,
         "lastName": "Morgan",
         "partyName": "Democratic",
-        "votes": 8962
+        "votes": 0
       }
     ],
     "district": "23",
@@ -1398,7 +1408,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1408,7 +1419,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21465,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1420,15 +1431,15 @@
           "estimatedVotesHigh": 23756,
           "estimatedVotesLow": 19438,
           "estimatedVotesMid": 21597,
-          "turnoutHigh": 84.22,
-          "turnoutLow": 102.93,
-          "turnoutMid": 92.64
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Glenneda",
         "id": 19793,
         "lastName": "Zuiderveld",
         "partyName": "Republican",
-        "votes": 19304
+        "votes": 0
       },
       {
         "elected": false,
@@ -1436,15 +1447,15 @@
           "estimatedVotesHigh": 23756,
           "estimatedVotesLow": 19438,
           "estimatedVotesMid": 21597,
-          "turnoutHigh": 84.22,
-          "turnoutLow": 102.93,
-          "turnoutMid": 92.64
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Edward",
         "id": 67918,
         "lastName": "Easterling",
         "partyName": "Democratic",
-        "votes": 704
+        "votes": 0
       }
     ],
     "district": "24",
@@ -1452,7 +1463,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1462,7 +1474,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20008,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1490,6 +1502,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1512,47 +1525,47 @@
           "estimatedVotesHigh": 23192,
           "estimatedVotesLow": 18974,
           "estimatedVotesMid": 21083,
-          "turnoutHigh": 86.59,
-          "turnoutLow": 105.84,
-          "turnoutMid": 95.25
-        },
-        "firstName": "Laurie",
-        "id": 19795,
-        "lastName": "Lickley",
-        "partyName": "Republican",
-        "votes": 9886
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 23192,
-          "estimatedVotesLow": 18974,
-          "estimatedVotesMid": 21083,
-          "turnoutHigh": 86.59,
-          "turnoutLow": 105.84,
-          "turnoutMid": 95.25
-        },
-        "firstName": "Ron",
-        "id": 821,
-        "lastName": "Taylor",
-        "partyName": "Democratic",
-        "votes": 9816
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 23192,
-          "estimatedVotesLow": 18974,
-          "estimatedVotesMid": 21083,
-          "turnoutHigh": 86.59,
-          "turnoutLow": 105.84,
-          "turnoutMid": 95.25
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kala",
         "id": 85187,
         "lastName": "Tate",
         "partyName": "Independent",
-        "votes": 380
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 23192,
+          "estimatedVotesLow": 18974,
+          "estimatedVotesMid": 21083,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Laurie",
+        "id": 19795,
+        "lastName": "Lickley",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 23192,
+          "estimatedVotesLow": 18974,
+          "estimatedVotesMid": 21083,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ron",
+        "id": 821,
+        "lastName": "Taylor",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "26",
@@ -1560,7 +1573,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1570,7 +1584,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20082,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1598,6 +1612,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1620,15 +1635,15 @@
           "estimatedVotesHigh": 24509,
           "estimatedVotesLow": 20053,
           "estimatedVotesMid": 22281,
-          "turnoutHigh": 82.25,
-          "turnoutLow": 100.52,
-          "turnoutMid": 90.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 19799,
         "lastName": "Guthrie",
         "partyName": "Republican",
-        "votes": 19019
+        "votes": 0
       },
       {
         "elected": false,
@@ -1636,15 +1651,15 @@
           "estimatedVotesHigh": 24509,
           "estimatedVotesLow": 20053,
           "estimatedVotesMid": 22281,
-          "turnoutHigh": 82.25,
-          "turnoutLow": 100.52,
-          "turnoutMid": 90.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Russell",
         "id": 67921,
         "lastName": "Matter",
         "partyName": "Democratic",
-        "votes": 1139
+        "votes": 0
       }
     ],
     "district": "28",
@@ -1652,7 +1667,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1662,7 +1678,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20158,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1690,6 +1706,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1712,15 +1729,15 @@
           "estimatedVotesHigh": 22249,
           "estimatedVotesLow": 18203,
           "estimatedVotesMid": 20226,
-          "turnoutHigh": 85.1,
-          "turnoutLow": 104.01,
-          "turnoutMid": 93.61
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karen",
         "id": 67922,
         "lastName": "Keith",
         "partyName": "Democratic",
-        "votes": 369
+        "votes": 0
       },
       {
         "elected": false,
@@ -1728,15 +1745,15 @@
           "estimatedVotesHigh": 22249,
           "estimatedVotesLow": 18203,
           "estimatedVotesMid": 20226,
-          "turnoutHigh": 85.1,
-          "turnoutLow": 104.01,
-          "turnoutMid": 93.61
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julie",
         "id": 19805,
         "lastName": "VanOrden",
         "partyName": "Republican",
-        "votes": 18564
+        "votes": 0
       }
     ],
     "district": "30",
@@ -1744,7 +1761,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1754,7 +1772,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18933,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1766,15 +1784,15 @@
           "estimatedVotesHigh": 26338,
           "estimatedVotesLow": 21549,
           "estimatedVotesMid": 23943,
-          "turnoutHigh": 84.77,
-          "turnoutLow": 103.61,
-          "turnoutMid": 93.25
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Van",
         "id": 19806,
         "lastName": "Burtenshaw",
         "partyName": "Republican",
-        "votes": 21891
+        "votes": 0
       },
       {
         "elected": false,
@@ -1782,15 +1800,15 @@
           "estimatedVotesHigh": 26338,
           "estimatedVotesLow": 21549,
           "estimatedVotesMid": 23943,
-          "turnoutHigh": 84.77,
-          "turnoutLow": 103.61,
-          "turnoutMid": 93.25
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dean",
         "id": 67923,
         "lastName": "Martonen",
         "partyName": "Democratic",
-        "votes": 435
+        "votes": 0
       }
     ],
     "district": "31",
@@ -1798,7 +1816,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1808,7 +1827,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 22326,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1836,6 +1855,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1874,6 +1894,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1896,15 +1917,15 @@
           "estimatedVotesHigh": 14879,
           "estimatedVotesLow": 12173,
           "estimatedVotesMid": 13526,
-          "turnoutHigh": 88.39,
-          "turnoutLow": 108.04,
-          "turnoutMid": 97.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Doug",
-        "id": 19812,
-        "lastName": "Ricks",
-        "partyName": "Republican",
-        "votes": 12891
+        "firstName": "Marsha",
+        "id": 67924,
+        "lastName": "Craner",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1912,15 +1933,15 @@
           "estimatedVotesHigh": 14879,
           "estimatedVotesLow": 12173,
           "estimatedVotesMid": 13526,
-          "turnoutHigh": 88.39,
-          "turnoutLow": 108.04,
-          "turnoutMid": 97.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Marsha",
-        "id": 67924,
-        "lastName": "Craner",
-        "partyName": "Democratic",
-        "votes": 261
+        "firstName": "Doug",
+        "id": 19812,
+        "lastName": "Ricks",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "34",
@@ -1928,7 +1949,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.089Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1938,7 +1960,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 13152,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1950,15 +1972,15 @@
           "estimatedVotesHigh": 26015,
           "estimatedVotesLow": 21285,
           "estimatedVotesMid": 23650,
-          "turnoutHigh": 86.82,
-          "turnoutLow": 106.12,
-          "turnoutMid": 95.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 67925,
         "lastName": "Riley",
         "partyName": "Democratic",
-        "votes": 4894
+        "votes": 0
       },
       {
         "elected": false,
@@ -1966,15 +1988,15 @@
           "estimatedVotesHigh": 26015,
           "estimatedVotesLow": 21285,
           "estimatedVotesMid": 23650,
-          "turnoutHigh": 86.82,
-          "turnoutLow": 106.12,
-          "turnoutMid": 95.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 8772,
         "lastName": "Harris",
         "partyName": "Republican",
-        "votes": 17693
+        "votes": 0
       }
     ],
     "district": "35",
@@ -1982,7 +2004,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1992,7 +2015,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 22587,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2004,15 +2027,15 @@
           "estimatedVotesHigh": 30265,
           "estimatedVotesLow": 24763,
           "estimatedVotesMid": 27514,
-          "turnoutHigh": 82.41,
-          "turnoutLow": 100.72,
-          "turnoutMid": 90.65
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 19850,
         "lastName": "Sauter",
         "partyName": "Republican",
-        "votes": 24034
+        "votes": 0
       },
       {
         "elected": false,
@@ -2020,15 +2043,15 @@
           "estimatedVotesHigh": 30265,
           "estimatedVotesLow": 24763,
           "estimatedVotesMid": 27514,
-          "turnoutHigh": 82.41,
-          "turnoutLow": 100.72,
-          "turnoutMid": 90.65
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karen",
         "id": 67926,
         "lastName": "Matthee",
         "partyName": "Democratic",
-        "votes": 908
+        "votes": 0
       }
     ],
     "district": "1A",
@@ -2036,7 +2059,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2046,7 +2070,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 24942,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2058,15 +2082,15 @@
           "estimatedVotesHigh": 30265,
           "estimatedVotesLow": 24763,
           "estimatedVotesMid": 27514,
-          "turnoutHigh": 80.83,
-          "turnoutLow": 98.79,
-          "turnoutMid": 88.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cornel",
         "id": 67930,
         "lastName": "Rasor",
         "partyName": "Republican",
-        "votes": 23956
+        "votes": 0
       },
       {
         "elected": false,
@@ -2074,15 +2098,15 @@
           "estimatedVotesHigh": 30265,
           "estimatedVotesLow": 24763,
           "estimatedVotesMid": 27514,
-          "turnoutHigh": 80.83,
-          "turnoutLow": 98.79,
-          "turnoutMid": 88.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kathryn",
         "id": 67929,
         "lastName": "Larson",
         "partyName": "Democratic",
-        "votes": 508
+        "votes": 0
       }
     ],
     "district": "1B",
@@ -2090,7 +2114,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2100,7 +2125,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 24464,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2112,15 +2137,15 @@
           "estimatedVotesHigh": 28264,
           "estimatedVotesLow": 23127,
           "estimatedVotesMid": 25695,
-          "turnoutHigh": 75.2,
-          "turnoutLow": 91.9,
-          "turnoutMid": 82.72
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Loree",
         "id": 67932,
         "lastName": "Peery",
         "partyName": "Democratic",
-        "votes": 613
+        "votes": 0
       },
       {
         "elected": false,
@@ -2128,15 +2153,15 @@
           "estimatedVotesHigh": 28264,
           "estimatedVotesLow": 23127,
           "estimatedVotesMid": 25695,
-          "turnoutHigh": 75.2,
-          "turnoutLow": 91.9,
-          "turnoutMid": 82.72
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Heather",
         "id": 19855,
         "lastName": "Scott",
         "partyName": "Republican",
-        "votes": 20641
+        "votes": 0
       }
     ],
     "district": "2A",
@@ -2144,7 +2169,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2154,7 +2180,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21254,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2166,15 +2192,15 @@
           "estimatedVotesHigh": 28264,
           "estimatedVotesLow": 23127,
           "estimatedVotesMid": 25695,
-          "turnoutHigh": 67.38,
-          "turnoutLow": 82.35,
-          "turnoutMid": 74.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tami",
         "id": 85188,
         "lastName": "Holdahl",
         "partyName": "Independent",
-        "votes": 548
+        "votes": 0
       },
       {
         "elected": false,
@@ -2182,15 +2208,15 @@
           "estimatedVotesHigh": 28264,
           "estimatedVotesLow": 23127,
           "estimatedVotesMid": 25695,
-          "turnoutHigh": 67.38,
-          "turnoutLow": 82.35,
-          "turnoutMid": 74.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jennifer",
         "id": 45592,
         "lastName": "Luoma",
         "partyName": "Libertarian",
-        "votes": 531
+        "votes": 0
       },
       {
         "elected": false,
@@ -2198,15 +2224,15 @@
           "estimatedVotesHigh": 28264,
           "estimatedVotesLow": 23127,
           "estimatedVotesMid": 25695,
-          "turnoutHigh": 67.38,
-          "turnoutLow": 82.35,
-          "turnoutMid": 74.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dale",
         "id": 19856,
         "lastName": "Hawkins",
         "partyName": "Republican",
-        "votes": 17966
+        "votes": 0
       }
     ],
     "district": "2B",
@@ -2214,7 +2240,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2224,7 +2251,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 19045,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2236,15 +2263,15 @@
           "estimatedVotesHigh": 29414,
           "estimatedVotesLow": 24066,
           "estimatedVotesMid": 26740,
-          "turnoutHigh": 80.94,
-          "turnoutLow": 98.93,
-          "turnoutMid": 89.04
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dale",
         "id": 67933,
         "lastName": "Broadsword",
         "partyName": "Democratic",
-        "votes": 915
+        "votes": 0
       },
       {
         "elected": false,
@@ -2252,15 +2279,15 @@
           "estimatedVotesHigh": 29414,
           "estimatedVotesLow": 24066,
           "estimatedVotesMid": 26740,
-          "turnoutHigh": 80.94,
-          "turnoutLow": 98.93,
-          "turnoutMid": 89.04
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vito",
         "id": 19857,
         "lastName": "Barbieri",
         "partyName": "Republican",
-        "votes": 22894
+        "votes": 0
       }
     ],
     "district": "3A",
@@ -2268,7 +2295,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2278,7 +2306,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 23809,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2290,15 +2318,15 @@
           "estimatedVotesHigh": 29414,
           "estimatedVotesLow": 24066,
           "estimatedVotesMid": 26740,
-          "turnoutHigh": 72.99,
-          "turnoutLow": 89.2,
-          "turnoutMid": 80.28
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 67934,
         "lastName": "Bruno",
         "partyName": "Democratic",
-        "votes": 944
+        "votes": 0
       },
       {
         "elected": false,
@@ -2306,15 +2334,15 @@
           "estimatedVotesHigh": 29414,
           "estimatedVotesLow": 24066,
           "estimatedVotesMid": 26740,
-          "turnoutHigh": 72.99,
-          "turnoutLow": 89.2,
-          "turnoutMid": 80.28
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jordan",
         "id": 19859,
         "lastName": "Redman",
         "partyName": "Republican",
-        "votes": 20524
+        "votes": 0
       }
     ],
     "district": "3B",
@@ -2322,7 +2350,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2332,7 +2361,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21468,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2344,15 +2373,15 @@
           "estimatedVotesHigh": 23782,
           "estimatedVotesLow": 19458,
           "estimatedVotesMid": 21620,
-          "turnoutHigh": 77.66,
-          "turnoutLow": 94.92,
-          "turnoutMid": 85.43
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 19861,
         "lastName": "Alfieri",
         "partyName": "Republican",
-        "votes": 18057
+        "votes": 0
       },
       {
         "elected": false,
@@ -2360,15 +2389,15 @@
           "estimatedVotesHigh": 23782,
           "estimatedVotesLow": 19458,
           "estimatedVotesMid": 21620,
-          "turnoutHigh": 77.66,
-          "turnoutLow": 94.92,
-          "turnoutMid": 85.43
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Angela",
         "id": 67935,
         "lastName": "Chandler",
         "partyName": "Democratic",
-        "votes": 412
+        "votes": 0
       }
     ],
     "district": "4A",
@@ -2376,7 +2405,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2386,7 +2416,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18469,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2398,15 +2428,15 @@
           "estimatedVotesHigh": 23782,
           "estimatedVotesLow": 19458,
           "estimatedVotesMid": 21620,
-          "turnoutHigh": 72.71,
-          "turnoutLow": 88.87,
-          "turnoutMid": 79.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Elaine",
-        "id": 19864,
-        "lastName": "Price",
-        "partyName": "Republican",
-        "votes": 16589
+        "firstName": "Paula",
+        "id": 67936,
+        "lastName": "Marano",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2414,15 +2444,15 @@
           "estimatedVotesHigh": 23782,
           "estimatedVotesLow": 19458,
           "estimatedVotesMid": 21620,
-          "turnoutHigh": 72.71,
-          "turnoutLow": 88.87,
-          "turnoutMid": 79.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Paula",
-        "id": 67936,
-        "lastName": "Marano",
-        "partyName": "Democratic",
-        "votes": 704
+        "firstName": "Elaine",
+        "id": 19864,
+        "lastName": "Price",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "4B",
@@ -2430,7 +2460,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2440,7 +2471,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 17293,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2452,15 +2483,15 @@
           "estimatedVotesHigh": 24862,
           "estimatedVotesLow": 20342,
           "estimatedVotesMid": 22602,
-          "turnoutHigh": 73.32,
-          "turnoutLow": 89.62,
-          "turnoutMid": 80.66
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kristy",
         "id": 19818,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 3952
+        "votes": 0
       },
       {
         "elected": false,
@@ -2468,15 +2499,15 @@
           "estimatedVotesHigh": 24862,
           "estimatedVotesLow": 20342,
           "estimatedVotesMid": 22602,
-          "turnoutHigh": 73.32,
-          "turnoutLow": 89.62,
-          "turnoutMid": 80.66
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 85189,
         "lastName": "Nonini",
         "partyName": "Independent",
-        "votes": 409
+        "votes": 0
       },
       {
         "elected": false,
@@ -2484,15 +2515,15 @@
           "estimatedVotesHigh": 24862,
           "estimatedVotesLow": 20342,
           "estimatedVotesMid": 22602,
-          "turnoutHigh": 73.32,
-          "turnoutLow": 89.62,
-          "turnoutMid": 80.66
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ron",
         "id": 19865,
         "lastName": "Mendive",
         "partyName": "Republican",
-        "votes": 13869
+        "votes": 0
       }
     ],
     "district": "5A",
@@ -2500,7 +2531,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2510,7 +2542,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18230,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2522,15 +2554,15 @@
           "estimatedVotesHigh": 24862,
           "estimatedVotesLow": 20342,
           "estimatedVotesMid": 22602,
-          "turnoutHigh": 82,
-          "turnoutLow": 100.22,
-          "turnoutMid": 90.2
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Teresa",
         "id": 19819,
         "lastName": "Borrenpohl",
         "partyName": "Democratic",
-        "votes": 597
+        "votes": 0
       },
       {
         "elected": false,
@@ -2538,15 +2570,15 @@
           "estimatedVotesHigh": 24862,
           "estimatedVotesLow": 20342,
           "estimatedVotesMid": 22602,
-          "turnoutHigh": 82,
-          "turnoutLow": 100.22,
-          "turnoutMid": 90.2
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tony",
         "id": 19867,
         "lastName": "Wisniewski",
         "partyName": "Republican",
-        "votes": 19789
+        "votes": 0
       }
     ],
     "district": "5B",
@@ -2554,7 +2586,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2564,7 +2597,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20386,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2576,15 +2609,15 @@
           "estimatedVotesHigh": 27155,
           "estimatedVotesLow": 22218,
           "estimatedVotesMid": 24686,
-          "turnoutHigh": 69.41,
-          "turnoutLow": 84.84,
-          "turnoutMid": 76.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lori",
         "id": 19868,
         "lastName": "McCann",
         "partyName": "Republican",
-        "votes": 9418
+        "votes": 0
       },
       {
         "elected": false,
@@ -2592,15 +2625,15 @@
           "estimatedVotesHigh": 27155,
           "estimatedVotesLow": 22218,
           "estimatedVotesMid": 24686,
-          "turnoutHigh": 69.41,
-          "turnoutLow": 84.84,
-          "turnoutMid": 76.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Trish",
         "id": 45593,
         "lastName": "Carter-Goodheart",
         "partyName": "Democratic",
-        "votes": 9431
+        "votes": 0
       }
     ],
     "district": "6A",
@@ -2608,7 +2641,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2618,7 +2652,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18849,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2630,15 +2664,15 @@
           "estimatedVotesHigh": 27155,
           "estimatedVotesLow": 22218,
           "estimatedVotesMid": 24686,
-          "turnoutHigh": 74.1,
-          "turnoutLow": 90.57,
-          "turnoutMid": 81.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brandon",
         "id": 19870,
         "lastName": "Mitchell",
         "partyName": "Republican",
-        "votes": 15216
+        "votes": 0
       },
       {
         "elected": false,
@@ -2646,15 +2680,15 @@
           "estimatedVotesHigh": 27155,
           "estimatedVotesLow": 22218,
           "estimatedVotesMid": 24686,
-          "turnoutHigh": 74.1,
-          "turnoutLow": 90.57,
-          "turnoutMid": 81.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kathy",
         "id": 67940,
         "lastName": "Dawes",
         "partyName": "Democratic",
-        "votes": 4906
+        "votes": 0
       }
     ],
     "district": "6B",
@@ -2662,7 +2696,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2672,7 +2707,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20122,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2684,15 +2719,15 @@
           "estimatedVotesHigh": 27133,
           "estimatedVotesLow": 22199,
           "estimatedVotesMid": 24666,
-          "turnoutHigh": 81.16,
-          "turnoutLow": 99.19,
-          "turnoutMid": 89.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kyle",
         "id": 67943,
         "lastName": "Harris",
         "partyName": "Republican",
-        "votes": 21270
+        "votes": 0
       },
       {
         "elected": false,
@@ -2700,15 +2735,15 @@
           "estimatedVotesHigh": 27133,
           "estimatedVotesLow": 22199,
           "estimatedVotesMid": 24666,
-          "turnoutHigh": 81.16,
-          "turnoutLow": 99.19,
-          "turnoutMid": 89.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vickie",
         "id": 67941,
         "lastName": "Nostrant",
         "partyName": "Democratic",
-        "votes": 750
+        "votes": 0
       }
     ],
     "district": "7A",
@@ -2716,7 +2751,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2726,7 +2762,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 22020,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2738,15 +2774,15 @@
           "estimatedVotesHigh": 27133,
           "estimatedVotesLow": 22199,
           "estimatedVotesMid": 24666,
-          "turnoutHigh": 81.15,
-          "turnoutLow": 99.19,
-          "turnoutMid": 89.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Charlie",
         "id": 19873,
         "lastName": "Shepherd",
         "partyName": "Republican",
-        "votes": 21234
+        "votes": 0
       },
       {
         "elected": false,
@@ -2754,15 +2790,15 @@
           "estimatedVotesHigh": 27133,
           "estimatedVotesLow": 22199,
           "estimatedVotesMid": 24666,
-          "turnoutHigh": 81.15,
-          "turnoutLow": 99.19,
-          "turnoutMid": 89.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dustin",
         "id": 67944,
         "lastName": "Hardisty",
         "partyName": "Democratic",
-        "votes": 785
+        "votes": 0
       }
     ],
     "district": "7B",
@@ -2770,7 +2806,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2780,7 +2817,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 22019,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2808,6 +2845,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2830,47 +2868,47 @@
           "estimatedVotesHigh": 25013,
           "estimatedVotesLow": 20466,
           "estimatedVotesMid": 22739,
-          "turnoutHigh": 82.47,
-          "turnoutLow": 100.79,
-          "turnoutMid": 90.71
-        },
-        "firstName": "Tony",
-        "id": 45595,
-        "lastName": "Ullrich",
-        "partyName": "Constitution",
-        "votes": 405
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 25013,
-          "estimatedVotesLow": 20466,
-          "estimatedVotesMid": 22739,
-          "turnoutHigh": 82.47,
-          "turnoutLow": 100.79,
-          "turnoutMid": 90.71
-        },
-        "firstName": "Faye",
-        "id": 67947,
-        "lastName": "Thompson",
-        "partyName": "Republican",
-        "votes": 13163
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 25013,
-          "estimatedVotesLow": 20466,
-          "estimatedVotesMid": 22739,
-          "turnoutHigh": 82.47,
-          "turnoutLow": 100.79,
-          "turnoutMid": 90.71
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jared",
         "id": 67946,
         "lastName": "Dawson",
         "partyName": "Democratic",
-        "votes": 7059
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 25013,
+          "estimatedVotesLow": 20466,
+          "estimatedVotesMid": 22739,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tony",
+        "id": 45595,
+        "lastName": "Ullrich",
+        "partyName": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 25013,
+          "estimatedVotesLow": 20466,
+          "estimatedVotesMid": 22739,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Faye",
+        "id": 67947,
+        "lastName": "Thompson",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "8B",
@@ -2878,7 +2916,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2888,7 +2927,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20627,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2900,15 +2939,15 @@
           "estimatedVotesHigh": 25457,
           "estimatedVotesLow": 20829,
           "estimatedVotesMid": 23143,
-          "turnoutHigh": 81.73,
-          "turnoutLow": 99.89,
-          "turnoutMid": 89.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Thomas",
-        "id": 67948,
-        "lastName": "Albritton",
-        "partyName": "Democratic",
-        "votes": 689
+        "firstName": "John",
+        "id": 67949,
+        "lastName": "Shirts",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2916,15 +2955,15 @@
           "estimatedVotesHigh": 25457,
           "estimatedVotesLow": 20829,
           "estimatedVotesMid": 23143,
-          "turnoutHigh": 81.73,
-          "turnoutLow": 99.89,
-          "turnoutMid": 89.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "John",
-        "id": 67949,
-        "lastName": "Shirts",
-        "partyName": "Republican",
-        "votes": 20118
+        "firstName": "Thomas",
+        "id": 67948,
+        "lastName": "Albritton",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "9A",
@@ -2932,7 +2971,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2942,7 +2982,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20807,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2954,15 +2994,15 @@
           "estimatedVotesHigh": 25457,
           "estimatedVotesLow": 20829,
           "estimatedVotesMid": 23143,
-          "turnoutHigh": 81.65,
-          "turnoutLow": 99.79,
-          "turnoutMid": 89.81
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Judy",
         "id": 19879,
         "lastName": "Boyle",
         "partyName": "Republican",
-        "votes": 20051
+        "votes": 0
       },
       {
         "elected": false,
@@ -2970,15 +3010,15 @@
           "estimatedVotesHigh": 25457,
           "estimatedVotesLow": 20829,
           "estimatedVotesMid": 23143,
-          "turnoutHigh": 81.65,
-          "turnoutLow": 99.79,
-          "turnoutMid": 89.81
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jody",
         "id": 67950,
         "lastName": "Keeler",
         "partyName": "Democratic",
-        "votes": 734
+        "votes": 0
       }
     ],
     "district": "9B",
@@ -2986,7 +3026,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2996,7 +3037,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20785,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3008,15 +3049,15 @@
           "estimatedVotesHigh": 28106,
           "estimatedVotesLow": 22996,
           "estimatedVotesMid": 25551,
-          "turnoutHigh": 85.54,
-          "turnoutLow": 104.55,
-          "turnoutMid": 94.09
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Nancy",
-        "id": 67951,
-        "lastName": "Parker",
-        "partyName": "Democratic",
-        "votes": 5172
+        "firstName": "Mike",
+        "id": 19881,
+        "lastName": "Moyle",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3024,15 +3065,15 @@
           "estimatedVotesHigh": 28106,
           "estimatedVotesLow": 22996,
           "estimatedVotesMid": 25551,
-          "turnoutHigh": 85.54,
-          "turnoutLow": 104.55,
-          "turnoutMid": 94.09
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Mike",
-        "id": 19881,
-        "lastName": "Moyle",
-        "partyName": "Republican",
-        "votes": 18870
+        "firstName": "Nancy",
+        "id": 67951,
+        "lastName": "Parker",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "10A",
@@ -3040,7 +3081,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3050,7 +3092,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 24042,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3062,15 +3104,15 @@
           "estimatedVotesHigh": 28106,
           "estimatedVotesLow": 22996,
           "estimatedVotesMid": 25551,
-          "turnoutHigh": 84.16,
-          "turnoutLow": 102.87,
-          "turnoutMid": 92.58
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bruce",
         "id": 19885,
         "lastName": "Skaug",
         "partyName": "Republican",
-        "votes": 16826
+        "votes": 0
       },
       {
         "elected": false,
@@ -3078,15 +3120,15 @@
           "estimatedVotesHigh": 28106,
           "estimatedVotesLow": 22996,
           "estimatedVotesMid": 25551,
-          "turnoutHigh": 84.16,
-          "turnoutLow": 102.87,
-          "turnoutMid": 92.58
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shana",
         "id": 67952,
         "lastName": "Tremaine",
         "partyName": "Democratic",
-        "votes": 6829
+        "votes": 0
       }
     ],
     "district": "10B",
@@ -3094,7 +3136,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3104,7 +3147,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 23655,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3116,15 +3159,15 @@
           "estimatedVotesHigh": 16915,
           "estimatedVotesLow": 13839,
           "estimatedVotesMid": 15377,
-          "turnoutHigh": 82.84,
-          "turnoutLow": 101.25,
-          "turnoutMid": 91.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 67953,
         "lastName": "Porto",
         "partyName": "Democratic",
-        "votes": 564
+        "votes": 0
       },
       {
         "elected": false,
@@ -3132,15 +3175,15 @@
           "estimatedVotesHigh": 16915,
           "estimatedVotesLow": 13839,
           "estimatedVotesMid": 15377,
-          "turnoutHigh": 82.84,
-          "turnoutLow": 101.25,
-          "turnoutMid": 91.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kent",
         "id": 19888,
         "lastName": "Marmon",
         "partyName": "Republican",
-        "votes": 13448
+        "votes": 0
       }
     ],
     "district": "11A",
@@ -3148,7 +3191,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3158,7 +3202,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 14012,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3170,15 +3214,15 @@
           "estimatedVotesHigh": 16915,
           "estimatedVotesLow": 13839,
           "estimatedVotesMid": 15377,
-          "turnoutHigh": 83.49,
-          "turnoutLow": 102.05,
-          "turnoutMid": 91.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lucas",
         "id": 67954,
         "lastName": "Cayler",
         "partyName": "Republican",
-        "votes": 13567
+        "votes": 0
       },
       {
         "elected": false,
@@ -3186,15 +3230,15 @@
           "estimatedVotesHigh": 16915,
           "estimatedVotesLow": 13839,
           "estimatedVotesMid": 15377,
-          "turnoutHigh": 83.49,
-          "turnoutLow": 102.05,
-          "turnoutMid": 91.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marisela",
         "id": 19823,
         "lastName": "Pesina",
         "partyName": "Democratic",
-        "votes": 556
+        "votes": 0
       }
     ],
     "district": "11B",
@@ -3202,7 +3246,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3212,7 +3257,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 14123,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3240,6 +3285,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3262,15 +3308,15 @@
           "estimatedVotesHigh": 21188,
           "estimatedVotesLow": 17336,
           "estimatedVotesMid": 19262,
-          "turnoutHigh": 82.77,
-          "turnoutLow": 101.16,
-          "turnoutMid": 91.04
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Don",
-        "id": 67956,
-        "lastName": "Benson",
-        "partyName": "Democratic",
-        "votes": 704
+        "firstName": "Jaron",
+        "id": 19892,
+        "lastName": "Crane",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3278,15 +3324,15 @@
           "estimatedVotesHigh": 21188,
           "estimatedVotesLow": 17336,
           "estimatedVotesMid": 19262,
-          "turnoutHigh": 82.77,
-          "turnoutLow": 101.16,
-          "turnoutMid": 91.04
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jaron",
-        "id": 19892,
-        "lastName": "Crane",
-        "partyName": "Republican",
-        "votes": 16833
+        "firstName": "Don",
+        "id": 67956,
+        "lastName": "Benson",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "12B",
@@ -3294,7 +3340,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3304,7 +3351,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 17537,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3316,15 +3363,15 @@
           "estimatedVotesHigh": 21637,
           "estimatedVotesLow": 17703,
           "estimatedVotesMid": 19670,
-          "turnoutHigh": 82.74,
-          "turnoutLow": 101.13,
-          "turnoutMid": 91.02
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brent",
         "id": 19894,
         "lastName": "Crane",
         "partyName": "Republican",
-        "votes": 17190
+        "votes": 0
       },
       {
         "elected": false,
@@ -3332,15 +3379,15 @@
           "estimatedVotesHigh": 21637,
           "estimatedVotesLow": 17703,
           "estimatedVotesMid": 19670,
-          "turnoutHigh": 82.74,
-          "turnoutLow": 101.13,
-          "turnoutMid": 91.02
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cliff",
         "id": 67958,
         "lastName": "Hohman",
         "partyName": "Democratic",
-        "votes": 713
+        "votes": 0
       }
     ],
     "district": "13A",
@@ -3348,7 +3395,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3358,7 +3406,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 17903,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3386,6 +3434,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3424,6 +3473,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3446,15 +3496,15 @@
           "estimatedVotesHigh": 32054,
           "estimatedVotesLow": 26226,
           "estimatedVotesMid": 29140,
-          "turnoutHigh": 84.17,
-          "turnoutLow": 102.88,
-          "turnoutMid": 92.59
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 19903,
         "lastName": "Tanner",
         "partyName": "Republican",
-        "votes": 9471
+        "votes": 0
       },
       {
         "elected": false,
@@ -3462,15 +3512,15 @@
           "estimatedVotesHigh": 32054,
           "estimatedVotesLow": 26226,
           "estimatedVotesMid": 29140,
-          "turnoutHigh": 84.17,
-          "turnoutLow": 102.88,
-          "turnoutMid": 92.59
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jo",
         "id": 67961,
         "lastName": "Daly",
         "partyName": "Democratic",
-        "votes": 17510
+        "votes": 0
       }
     ],
     "district": "14B",
@@ -3478,7 +3528,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3488,7 +3539,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 26981,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3500,15 +3551,15 @@
           "estimatedVotesHigh": 26187,
           "estimatedVotesLow": 21425,
           "estimatedVotesMid": 23806,
-          "turnoutHigh": 81.3,
-          "turnoutLow": 99.37,
-          "turnoutMid": 89.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 19826,
         "lastName": "Berch",
         "partyName": "Democratic",
-        "votes": 1702
+        "votes": 0
       },
       {
         "elected": false,
@@ -3516,15 +3567,15 @@
           "estimatedVotesHigh": 26187,
           "estimatedVotesLow": 21425,
           "estimatedVotesMid": 23806,
-          "turnoutHigh": 81.3,
-          "turnoutLow": 99.37,
-          "turnoutMid": 89.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Annette",
         "id": 67962,
         "lastName": "Tipton",
         "partyName": "Republican",
-        "votes": 19589
+        "votes": 0
       }
     ],
     "district": "15A",
@@ -3532,7 +3583,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:14.462Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3542,7 +3594,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21291,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3554,15 +3606,15 @@
           "estimatedVotesHigh": 26187,
           "estimatedVotesLow": 21425,
           "estimatedVotesMid": 23806,
-          "turnoutHigh": 80.9,
-          "turnoutLow": 98.88,
-          "turnoutMid": 88.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dori",
         "id": 19905,
         "lastName": "Healey",
         "partyName": "Republican",
-        "votes": 3405
+        "votes": 0
       },
       {
         "elected": false,
@@ -3570,15 +3622,15 @@
           "estimatedVotesHigh": 26187,
           "estimatedVotesLow": 21425,
           "estimatedVotesMid": 23806,
-          "turnoutHigh": 80.9,
-          "turnoutLow": 98.88,
-          "turnoutMid": 88.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shari",
         "id": 67964,
         "lastName": "Baber",
         "partyName": "Democratic",
-        "votes": 17779
+        "votes": 0
       }
     ],
     "district": "15B",
@@ -3586,7 +3638,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3596,7 +3649,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21184,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3608,15 +3661,15 @@
           "estimatedVotesHigh": 25535,
           "estimatedVotesLow": 20893,
           "estimatedVotesMid": 23214,
-          "turnoutHigh": 81.36,
-          "turnoutLow": 99.43,
-          "turnoutMid": 89.49
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chandler",
         "id": 67966,
         "lastName": "Hadraba",
         "partyName": "Republican",
-        "votes": 15155
+        "votes": 0
       },
       {
         "elected": false,
@@ -3624,15 +3677,15 @@
           "estimatedVotesHigh": 25535,
           "estimatedVotesLow": 20893,
           "estimatedVotesMid": 23214,
-          "turnoutHigh": 81.36,
-          "turnoutLow": 99.43,
-          "turnoutMid": 89.49
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sonia",
         "id": 67965,
         "lastName": "Galaviz",
         "partyName": "Democratic",
-        "votes": 5619
+        "votes": 0
       }
     ],
     "district": "16A",
@@ -3640,7 +3693,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3650,7 +3704,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20774,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3662,15 +3716,15 @@
           "estimatedVotesHigh": 25535,
           "estimatedVotesLow": 20893,
           "estimatedVotesMid": 23214,
-          "turnoutHigh": 81.34,
-          "turnoutLow": 99.41,
-          "turnoutMid": 89.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Todd",
         "id": 67970,
         "lastName": "Achilles",
         "partyName": "Democratic",
-        "votes": 1456
+        "votes": 0
       },
       {
         "elected": false,
@@ -3678,15 +3732,15 @@
           "estimatedVotesHigh": 25535,
           "estimatedVotesLow": 20893,
           "estimatedVotesMid": 23214,
-          "turnoutHigh": 81.34,
-          "turnoutLow": 99.41,
-          "turnoutMid": 89.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jackie",
         "id": 19907,
         "lastName": "Davidson",
         "partyName": "Republican",
-        "votes": 19313
+        "votes": 0
       }
     ],
     "district": "16B",
@@ -3694,7 +3748,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3704,7 +3759,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20769,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3732,6 +3787,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3754,15 +3810,15 @@
           "estimatedVotesHigh": 24926,
           "estimatedVotesLow": 20394,
           "estimatedVotesMid": 22660,
-          "turnoutHigh": 80.11,
-          "turnoutLow": 97.91,
-          "turnoutMid": 88.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Megan",
         "id": 67971,
         "lastName": "Egbert",
         "partyName": "Democratic",
-        "votes": 17770
+        "votes": 0
       },
       {
         "elected": false,
@@ -3770,15 +3826,15 @@
           "estimatedVotesHigh": 24926,
           "estimatedVotesLow": 20394,
           "estimatedVotesMid": 22660,
-          "turnoutHigh": 80.11,
-          "turnoutLow": 97.91,
-          "turnoutMid": 88.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jazz",
         "id": 67972,
         "lastName": "Alexis",
         "partyName": "Republican",
-        "votes": 2197
+        "votes": 0
       }
     ],
     "district": "17B",
@@ -3786,7 +3842,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3796,7 +3853,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 19967,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3824,6 +3881,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3862,6 +3920,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3884,15 +3943,15 @@
           "estimatedVotesHigh": 32072,
           "estimatedVotesLow": 26240,
           "estimatedVotesMid": 29156,
-          "turnoutHigh": 83.58,
-          "turnoutLow": 102.15,
-          "turnoutMid": 91.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 67974,
         "lastName": "Feederle",
         "partyName": "Republican",
-        "votes": 25465
+        "votes": 0
       },
       {
         "elected": false,
@@ -3900,15 +3959,15 @@
           "estimatedVotesHigh": 32072,
           "estimatedVotesLow": 26240,
           "estimatedVotesMid": 29156,
-          "turnoutHigh": 83.58,
-          "turnoutLow": 102.15,
-          "turnoutMid": 91.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Monica",
         "id": 67973,
         "lastName": "Church",
         "partyName": "Democratic",
-        "votes": 1340
+        "votes": 0
       }
     ],
     "district": "19A",
@@ -3916,7 +3975,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3926,7 +3986,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 26805,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3954,6 +4014,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3968,30 +4029,23 @@
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "cand_id": 19916,
-      "first_name": "Joe",
-      "incumbent": true,
-      "last_name": "Palmer",
-      "party_id": 2,
-      "party_name": "Republican"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 26363,
           "estimatedVotesLow": 21569,
           "estimatedVotesMid": 23966,
-          "turnoutHigh": 82.7,
-          "turnoutLow": 101.08,
-          "turnoutMid": 90.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 19916,
         "lastName": "Palmer",
         "partyName": "Republican",
-        "votes": 14768
+        "votes": 0
       },
       {
         "elected": false,
@@ -3999,15 +4053,15 @@
           "estimatedVotesHigh": 26363,
           "estimatedVotesLow": 21569,
           "estimatedVotesMid": 23966,
-          "turnoutHigh": 82.7,
-          "turnoutLow": 101.08,
-          "turnoutMid": 90.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Isaiah",
         "id": 67975,
         "lastName": "Navarro",
         "partyName": "Democratic",
-        "votes": 7035
+        "votes": 0
       }
     ],
     "district": "20A",
@@ -4015,7 +4069,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4025,7 +4080,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21803,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4053,6 +4108,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4075,15 +4131,15 @@
           "estimatedVotesHigh": 25947,
           "estimatedVotesLow": 21229,
           "estimatedVotesMid": 23588,
-          "turnoutHigh": 82.48,
-          "turnoutLow": 100.81,
-          "turnoutMid": 90.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 19921,
         "lastName": "Petzke",
         "partyName": "Republican",
-        "votes": 14549
+        "votes": 0
       },
       {
         "elected": false,
@@ -4091,15 +4147,15 @@
           "estimatedVotesHigh": 25947,
           "estimatedVotesLow": 21229,
           "estimatedVotesMid": 23588,
-          "turnoutHigh": 82.48,
-          "turnoutLow": 100.81,
-          "turnoutMid": 90.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Casey",
         "id": 67976,
         "lastName": "Hess",
         "partyName": "Democratic",
-        "votes": 6852
+        "votes": 0
       }
     ],
     "district": "21A",
@@ -4107,7 +4163,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4117,7 +4174,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21401,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4129,15 +4186,15 @@
           "estimatedVotesHigh": 25947,
           "estimatedVotesLow": 21229,
           "estimatedVotesMid": 23588,
-          "turnoutHigh": 82.36,
-          "turnoutLow": 100.67,
-          "turnoutMid": 90.6
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Becky",
         "id": 67979,
         "lastName": "McKinstry",
         "partyName": "Democratic",
-        "votes": 11343
+        "votes": 0
       },
       {
         "elected": false,
@@ -4145,15 +4202,15 @@
           "estimatedVotesHigh": 25947,
           "estimatedVotesLow": 21229,
           "estimatedVotesMid": 23588,
-          "turnoutHigh": 82.36,
-          "turnoutLow": 100.67,
-          "turnoutMid": 90.6
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 45589,
         "lastName": "Weston",
         "partyName": "Constitution",
-        "votes": 421
+        "votes": 0
       },
       {
         "elected": false,
@@ -4161,15 +4218,15 @@
           "estimatedVotesHigh": 25947,
           "estimatedVotesLow": 21229,
           "estimatedVotesMid": 23588,
-          "turnoutHigh": 82.36,
-          "turnoutLow": 100.67,
-          "turnoutMid": 90.6
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 19925,
         "lastName": "Ehlers",
         "partyName": "Republican",
-        "votes": 9607
+        "votes": 0
       }
     ],
     "district": "21B",
@@ -4177,7 +4234,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4187,7 +4245,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21371,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4199,15 +4257,15 @@
           "estimatedVotesHigh": 28510,
           "estimatedVotesLow": 23326,
           "estimatedVotesMid": 25918,
-          "turnoutHigh": 83.37,
-          "turnoutLow": 101.9,
-          "turnoutMid": 91.71
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Loren",
-        "id": 67980,
-        "lastName": "Petty",
-        "partyName": "Democratic",
-        "votes": 9978
+        "firstName": "John",
+        "id": 19928,
+        "lastName": "Vander Woude",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4215,15 +4273,15 @@
           "estimatedVotesHigh": 28510,
           "estimatedVotesLow": 23326,
           "estimatedVotesMid": 25918,
-          "turnoutHigh": 83.37,
-          "turnoutLow": 101.9,
-          "turnoutMid": 91.71
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "John",
-        "id": 19928,
-        "lastName": "Vander Woude",
-        "partyName": "Republican",
-        "votes": 13791
+        "firstName": "Loren",
+        "id": 67980,
+        "lastName": "Petty",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "22A",
@@ -4231,7 +4289,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4241,7 +4300,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 23769,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4253,15 +4312,15 @@
           "estimatedVotesHigh": 28510,
           "estimatedVotesLow": 23326,
           "estimatedVotesMid": 25918,
-          "turnoutHigh": 83.43,
-          "turnoutLow": 101.97,
-          "turnoutMid": 91.77
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Glida",
         "id": 67981,
         "lastName": "Bothwell",
         "partyName": "Democratic",
-        "votes": 3327
+        "votes": 0
       },
       {
         "elected": false,
@@ -4269,15 +4328,15 @@
           "estimatedVotesHigh": 28510,
           "estimatedVotesLow": 23326,
           "estimatedVotesMid": 25918,
-          "turnoutHigh": 83.43,
-          "turnoutLow": 101.97,
-          "turnoutMid": 91.77
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jason",
         "id": 19929,
         "lastName": "Monks",
         "partyName": "Republican",
-        "votes": 20459
+        "votes": 0
       }
     ],
     "district": "22B",
@@ -4285,7 +4344,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:14.462Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4295,7 +4355,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 23786,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4307,15 +4367,15 @@
           "estimatedVotesHigh": 24450,
           "estimatedVotesLow": 20005,
           "estimatedVotesMid": 22227,
-          "turnoutHigh": 82.83,
-          "turnoutLow": 101.23,
-          "turnoutMid": 91.11
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Wendy",
         "id": 122871,
         "lastName": "Coome",
         "partyName": "Democratic",
-        "votes": 2855
+        "votes": 0
       },
       {
         "elected": false,
@@ -4323,15 +4383,15 @@
           "estimatedVotesHigh": 24450,
           "estimatedVotesLow": 20005,
           "estimatedVotesMid": 22227,
-          "turnoutHigh": 82.83,
-          "turnoutLow": 101.23,
-          "turnoutMid": 91.11
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 19935,
         "lastName": "Bruce",
         "partyName": "Republican",
-        "votes": 17397
+        "votes": 0
       }
     ],
     "district": "23A",
@@ -4339,7 +4399,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4349,7 +4410,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20252,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4361,15 +4422,15 @@
           "estimatedVotesHigh": 24450,
           "estimatedVotesLow": 20005,
           "estimatedVotesMid": 22227,
-          "turnoutHigh": 83.16,
-          "turnoutLow": 101.63,
-          "turnoutMid": 91.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shawn",
         "id": 67985,
         "lastName": "Dygert",
         "partyName": "Republican",
-        "votes": 18820
+        "votes": 0
       },
       {
         "elected": false,
@@ -4377,15 +4438,15 @@
           "estimatedVotesHigh": 24450,
           "estimatedVotesLow": 20005,
           "estimatedVotesMid": 22227,
-          "turnoutHigh": 83.16,
-          "turnoutLow": 101.63,
-          "turnoutMid": 91.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julissa",
         "id": 67984,
         "lastName": "Castellanos",
         "partyName": "Democratic",
-        "votes": 1512
+        "votes": 0
       }
     ],
     "district": "23B",
@@ -4393,7 +4454,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4403,7 +4465,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 20332,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4431,6 +4493,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4469,6 +4532,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4491,15 +4555,15 @@
           "estimatedVotesHigh": 19405,
           "estimatedVotesLow": 15877,
           "estimatedVotesMid": 17641,
-          "turnoutHigh": 81.99,
-          "turnoutLow": 100.21,
-          "turnoutMid": 90.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lance",
         "id": 19943,
         "lastName": "Clow",
         "partyName": "Republican",
-        "votes": 15433
+        "votes": 0
       },
       {
         "elected": false,
@@ -4507,15 +4571,15 @@
           "estimatedVotesHigh": 19405,
           "estimatedVotesLow": 15877,
           "estimatedVotesMid": 17641,
-          "turnoutHigh": 81.99,
-          "turnoutLow": 100.21,
-          "turnoutMid": 90.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "W. Lane",
         "id": 67988,
         "lastName": "Startin",
         "partyName": "Democratic",
-        "votes": 477
+        "votes": 0
       }
     ],
     "district": "25A",
@@ -4523,7 +4587,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4533,7 +4598,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 15910,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4561,6 +4626,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4583,15 +4649,15 @@
           "estimatedVotesHigh": 23192,
           "estimatedVotesLow": 18974,
           "estimatedVotesMid": 21083,
-          "turnoutHigh": 82.22,
-          "turnoutLow": 100.5,
-          "turnoutMid": 90.45
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 19946,
         "lastName": "Pohanka",
         "partyName": "Republican",
-        "votes": 8537
+        "votes": 0
       },
       {
         "elected": false,
@@ -4599,15 +4665,15 @@
           "estimatedVotesHigh": 23192,
           "estimatedVotesLow": 18974,
           "estimatedVotesMid": 21083,
-          "turnoutHigh": 82.22,
-          "turnoutLow": 100.5,
-          "turnoutMid": 90.45
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ned",
         "id": 19839,
         "lastName": "Burns",
         "partyName": "Democratic",
-        "votes": 10532
+        "votes": 0
       }
     ],
     "district": "26A",
@@ -4615,7 +4681,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4625,7 +4692,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 19069,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4637,15 +4704,15 @@
           "estimatedVotesHigh": 23192,
           "estimatedVotesLow": 18974,
           "estimatedVotesMid": 21083,
-          "turnoutHigh": 81.86,
-          "turnoutLow": 100.06,
-          "turnoutMid": 90.05
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jack",
         "id": 19948,
         "lastName": "Nelsen",
         "partyName": "Republican",
-        "votes": 8354
+        "votes": 0
       },
       {
         "elected": false,
@@ -4653,15 +4720,15 @@
           "estimatedVotesHigh": 23192,
           "estimatedVotesLow": 18974,
           "estimatedVotesMid": 21083,
-          "turnoutHigh": 81.86,
-          "turnoutLow": 100.06,
-          "turnoutMid": 90.05
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 67991,
         "lastName": "Hansen",
         "partyName": "Democratic",
-        "votes": 10632
+        "votes": 0
       }
     ],
     "district": "26B",
@@ -4669,7 +4736,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4679,7 +4747,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18986,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4691,15 +4759,15 @@
           "estimatedVotesHigh": 19832,
           "estimatedVotesLow": 16227,
           "estimatedVotesMid": 18029,
-          "turnoutHigh": 79.08,
-          "turnoutLow": 96.65,
-          "turnoutMid": 86.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Douglas",
         "id": 19949,
         "lastName": "Pickett",
         "partyName": "Republican",
-        "votes": 15171
+        "votes": 0
       },
       {
         "elected": false,
@@ -4707,15 +4775,15 @@
           "estimatedVotesHigh": 19832,
           "estimatedVotesLow": 16227,
           "estimatedVotesMid": 18029,
-          "turnoutHigh": 79.08,
-          "turnoutLow": 96.65,
-          "turnoutMid": 86.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Damian",
         "id": 67992,
         "lastName": "Rodriguez",
         "partyName": "Democratic",
-        "votes": 513
+        "votes": 0
       }
     ],
     "district": "27A",
@@ -4723,7 +4791,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4733,7 +4802,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 15684,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4761,6 +4830,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4799,6 +4869,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4821,15 +4892,15 @@
           "estimatedVotesHigh": 24509,
           "estimatedVotesLow": 20053,
           "estimatedVotesMid": 22281,
-          "turnoutHigh": 81.45,
-          "turnoutLow": 99.55,
-          "turnoutMid": 89.6
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jayson",
         "id": 67995,
         "lastName": "Meline",
         "partyName": "Democratic",
-        "votes": 1007
+        "votes": 0
       },
       {
         "elected": false,
@@ -4837,15 +4908,15 @@
           "estimatedVotesHigh": 24509,
           "estimatedVotesLow": 20053,
           "estimatedVotesMid": 22281,
-          "turnoutHigh": 81.45,
-          "turnoutLow": 99.55,
-          "turnoutMid": 89.6
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 19958,
         "lastName": "Garner",
         "partyName": "Republican",
-        "votes": 18956
+        "votes": 0
       }
     ],
     "district": "28B",
@@ -4853,7 +4924,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4863,7 +4935,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 19963,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4875,15 +4947,15 @@
           "estimatedVotesHigh": 22212,
           "estimatedVotesLow": 18174,
           "estimatedVotesMid": 20193,
-          "turnoutHigh": 82.55,
-          "turnoutLow": 100.89,
-          "turnoutMid": 90.8
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dustin",
         "id": 19960,
         "lastName": "Manwaring",
         "partyName": "Republican",
-        "votes": 17603
+        "votes": 0
       },
       {
         "elected": false,
@@ -4891,15 +4963,15 @@
           "estimatedVotesHigh": 22212,
           "estimatedVotesLow": 18174,
           "estimatedVotesMid": 20193,
-          "turnoutHigh": 82.55,
-          "turnoutLow": 100.89,
-          "turnoutMid": 90.8
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mary",
         "id": 19841,
         "lastName": "Shea",
         "partyName": "Democratic",
-        "votes": 732
+        "votes": 0
       }
     ],
     "district": "29A",
@@ -4907,7 +4979,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4917,7 +4990,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18335,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4929,15 +5002,15 @@
           "estimatedVotesHigh": 22212,
           "estimatedVotesLow": 18174,
           "estimatedVotesMid": 20193,
-          "turnoutHigh": 82.59,
-          "turnoutLow": 100.94,
-          "turnoutMid": 90.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nate",
         "id": 19843,
         "lastName": "Roberts",
         "partyName": "Democratic",
-        "votes": 1650
+        "votes": 0
       },
       {
         "elected": false,
@@ -4945,15 +5018,15 @@
           "estimatedVotesHigh": 22212,
           "estimatedVotesLow": 18174,
           "estimatedVotesMid": 20193,
-          "turnoutHigh": 82.59,
-          "turnoutLow": 100.94,
-          "turnoutMid": 90.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tanya",
         "id": 67997,
         "lastName": "Burgoyne",
         "partyName": "Republican",
-        "votes": 16695
+        "votes": 0
       }
     ],
     "district": "29B",
@@ -4961,7 +5034,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4971,7 +5045,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18345,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4999,6 +5073,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5021,15 +5096,15 @@
           "estimatedVotesHigh": 22249,
           "estimatedVotesLow": 18203,
           "estimatedVotesMid": 20226,
-          "turnoutHigh": 80.96,
-          "turnoutLow": 98.96,
-          "turnoutMid": 89.06
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ben",
         "id": 68000,
         "lastName": "Fuhriman",
         "partyName": "Republican",
-        "votes": 17493
+        "votes": 0
       },
       {
         "elected": false,
@@ -5037,15 +5112,15 @@
           "estimatedVotesHigh": 22249,
           "estimatedVotesLow": 18203,
           "estimatedVotesMid": 20226,
-          "turnoutHigh": 80.96,
-          "turnoutLow": 98.96,
-          "turnoutMid": 89.06
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Breane",
         "id": 67999,
         "lastName": "Buckingham",
         "partyName": "Democratic",
-        "votes": 520
+        "votes": 0
       }
     ],
     "district": "30B",
@@ -5053,7 +5128,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5063,7 +5139,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 18013,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5075,15 +5151,15 @@
           "estimatedVotesHigh": 26338,
           "estimatedVotesLow": 21549,
           "estimatedVotesMid": 23943,
-          "turnoutHigh": 81.95,
-          "turnoutLow": 100.16,
-          "turnoutMid": 90.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jerald",
         "id": 19967,
         "lastName": "Raymond",
         "partyName": "Republican",
-        "votes": 21103
+        "votes": 0
       },
       {
         "elected": false,
@@ -5091,15 +5167,15 @@
           "estimatedVotesHigh": 26338,
           "estimatedVotesLow": 21549,
           "estimatedVotesMid": 23943,
-          "turnoutHigh": 81.95,
-          "turnoutLow": 100.16,
-          "turnoutMid": 90.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Connie",
         "id": 19845,
         "lastName": "Delaney",
         "partyName": "Democratic",
-        "votes": 481
+        "votes": 0
       }
     ],
     "district": "31A",
@@ -5107,7 +5183,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5117,7 +5194,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21584,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5129,15 +5206,15 @@
           "estimatedVotesHigh": 26338,
           "estimatedVotesLow": 21549,
           "estimatedVotesMid": 23943,
-          "turnoutHigh": 81.33,
-          "turnoutLow": 99.41,
-          "turnoutMid": 89.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Wayne",
         "id": 19846,
         "lastName": "Talmadge",
         "partyName": "Democratic",
-        "votes": 545
+        "votes": 0
       },
       {
         "elected": false,
@@ -5145,15 +5222,15 @@
           "estimatedVotesHigh": 26338,
           "estimatedVotesLow": 21549,
           "estimatedVotesMid": 23943,
-          "turnoutHigh": 81.33,
-          "turnoutLow": 99.41,
-          "turnoutMid": 89.47
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rod",
         "id": 19968,
         "lastName": "Furniss",
         "partyName": "Republican",
-        "votes": 20877
+        "votes": 0
       }
     ],
     "district": "31B",
@@ -5161,7 +5238,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5171,7 +5249,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21422,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5199,6 +5277,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5221,15 +5300,15 @@
           "estimatedVotesHigh": 21885,
           "estimatedVotesLow": 17906,
           "estimatedVotesMid": 19895,
-          "turnoutHigh": 81.66,
-          "turnoutLow": 99.81,
-          "turnoutMid": 89.83
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cecile",
         "id": 122872,
         "lastName": "Perez",
         "partyName": "Democratic",
-        "votes": 711
+        "votes": 0
       },
       {
         "elected": false,
@@ -5237,15 +5316,15 @@
           "estimatedVotesHigh": 21885,
           "estimatedVotesLow": 17906,
           "estimatedVotesMid": 19895,
-          "turnoutHigh": 81.66,
-          "turnoutLow": 99.81,
-          "turnoutMid": 89.83
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Wendy",
         "id": 19972,
         "lastName": "Horman",
         "partyName": "Republican",
-        "votes": 17161
+        "votes": 0
       }
     ],
     "district": "32B",
@@ -5253,7 +5332,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5263,7 +5343,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 17872,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5275,15 +5355,15 @@
           "estimatedVotesHigh": 19498,
           "estimatedVotesLow": 15953,
           "estimatedVotesMid": 17725,
-          "turnoutHigh": 82.04,
-          "turnoutLow": 100.28,
-          "turnoutMid": 90.25
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Miranda",
         "id": 19847,
         "lastName": "Marquit",
         "partyName": "Democratic",
-        "votes": 639
+        "votes": 0
       },
       {
         "elected": false,
@@ -5291,15 +5371,15 @@
           "estimatedVotesHigh": 19498,
           "estimatedVotesLow": 15953,
           "estimatedVotesMid": 17725,
-          "turnoutHigh": 82.04,
-          "turnoutLow": 100.28,
-          "turnoutMid": 90.25
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Barbara",
         "id": 19973,
         "lastName": "Ehardt",
         "partyName": "Republican",
-        "votes": 15358
+        "votes": 0
       }
     ],
     "district": "33A",
@@ -5307,7 +5387,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5317,7 +5398,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 15997,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5345,6 +5426,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5383,6 +5465,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5421,6 +5504,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5443,15 +5527,15 @@
           "estimatedVotesHigh": 26015,
           "estimatedVotesLow": 21285,
           "estimatedVotesMid": 23650,
-          "turnoutHigh": 82.51,
-          "turnoutLow": 100.85,
-          "turnoutMid": 90.77
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 19980,
         "lastName": "Andrus",
         "partyName": "Republican",
-        "votes": 16209
+        "votes": 0
       },
       {
         "elected": false,
@@ -5459,15 +5543,15 @@
           "estimatedVotesHigh": 26015,
           "estimatedVotesLow": 21285,
           "estimatedVotesMid": 23650,
-          "turnoutHigh": 82.51,
-          "turnoutLow": 100.85,
-          "turnoutMid": 90.77
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joseph",
         "id": 68007,
         "lastName": "Messerly",
         "partyName": "Democratic",
-        "votes": 5257
+        "votes": 0
       }
     ],
     "district": "35A",
@@ -5475,7 +5559,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5485,7 +5570,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21466,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5497,15 +5582,15 @@
           "estimatedVotesHigh": 26015,
           "estimatedVotesLow": 21285,
           "estimatedVotesMid": 23650,
-          "turnoutHigh": 82.43,
-          "turnoutLow": 100.75,
-          "turnoutMid": 90.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maggie",
         "id": 68008,
         "lastName": "Shaw",
         "partyName": "Democratic",
-        "votes": 1879
+        "votes": 0
       },
       {
         "elected": false,
@@ -5513,15 +5598,15 @@
           "estimatedVotesHigh": 26015,
           "estimatedVotesLow": 21285,
           "estimatedVotesMid": 23650,
-          "turnoutHigh": 82.43,
-          "turnoutLow": 100.75,
-          "turnoutMid": 90.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joshua",
         "id": 14396,
         "lastName": "Wheeler",
         "partyName": "Republican",
-        "votes": 19565
+        "votes": 0
       }
     ],
     "district": "35B",
@@ -5529,7 +5614,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5539,7 +5625,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 21444,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

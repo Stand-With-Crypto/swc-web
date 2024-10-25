@@ -1,12 +1,11 @@
 [
   {
     "calledCandidate": {
-      "cand_id": 988,
-      "first_name": "Kamala",
+      "firstName": "Kamala",
+      "id": 988,
       "incumbent": false,
-      "last_name": "Harris",
-      "party_id": 1,
-      "party_name": "Democratic"
+      "lastName": "Harris",
+      "partyName": "Democratic"
     },
     "candidatesWithVotes": [
       {
@@ -15,15 +14,15 @@
           "estimatedVotesHigh": 304553,
           "estimatedVotesLow": 249178,
           "estimatedVotesMid": 276865,
-          "turnoutHigh": 98.98,
-          "turnoutLow": 120.98,
-          "turnoutMid": 99
+          "turnoutHigh": 80.3,
+          "turnoutLow": 98.15,
+          "turnoutMid": 88.33
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 109340
+        "votes": 204554
       },
       {
         "elected": false,
@@ -31,31 +30,31 @@
           "estimatedVotesHigh": 304553,
           "estimatedVotesLow": 249178,
           "estimatedVotesMid": 276865,
-          "turnoutHigh": 98.98,
-          "turnoutLow": 120.98,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 107728
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 304553,
-          "estimatedVotesLow": 249178,
-          "estimatedVotesMid": 276865,
-          "turnoutHigh": 98.98,
-          "turnoutLow": 120.98,
-          "turnoutMid": 99
+          "turnoutHigh": 80.3,
+          "turnoutLow": 98.15,
+          "turnoutMid": 88.33
         },
         "firstName": "Robert F.",
         "id": 69575,
         "lastName": "Kennedy Jr.",
         "partyName": "Independent",
-        "votes": 84377
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 304553,
+          "estimatedVotesLow": 249178,
+          "estimatedVotesMid": 276865,
+          "turnoutHigh": 80.3,
+          "turnoutLow": 98.15,
+          "turnoutMid": 88.33
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 40007
       }
     ],
     "district": "",
@@ -63,7 +62,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:53:18.852Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T19:42:26.339Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -73,7 +73,7 @@
     "raceDate": "2024-11-05",
     "state": "DC",
     "stateName": "District of Columbia",
-    "totalVotes": 301445,
+    "totalVotes": 244561,
     "year": 2024
   }
 ]

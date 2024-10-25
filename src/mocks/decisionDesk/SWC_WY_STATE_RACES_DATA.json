@@ -1,13 +1,6 @@
 [
   {
-    "calledCandidate": {
-      "cand_id": 8241,
-      "first_name": "John",
-      "incumbent": true,
-      "last_name": "Barrasso",
-      "party_id": 2,
-      "party_name": "Republican"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -15,31 +8,31 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 87.11,
-          "turnoutLow": 106.46,
-          "turnoutMid": 95.82
+          "turnoutHigh": 12.51,
+          "turnoutLow": 15.28,
+          "turnoutMid": 13.76
         },
         "firstName": "Scott",
         "id": 84151,
         "lastName": "Morrow",
         "partyName": "Democratic",
-        "votes": 19769
+        "votes": 10058
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 87.11,
-          "turnoutLow": 106.46,
-          "turnoutMid": 95.82
+          "turnoutHigh": 12.51,
+          "turnoutLow": 15.28,
+          "turnoutMid": 13.76
         },
         "firstName": "John",
         "id": 8241,
         "lastName": "Barrasso",
         "partyName": "Republican",
-        "votes": 214150
+        "votes": 23525
       }
     ],
     "district": "",
@@ -47,7 +40,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:13.629Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:40:36.574Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -57,7 +51,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 233919,
+    "totalVotes": 33583,
     "year": 2024
   },
   {
@@ -69,31 +63,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 87.04,
-          "turnoutLow": 106.38,
-          "turnoutMid": 95.74
-        },
-        "firstName": "Richard",
-        "id": 14707,
-        "lastName": "Brubaker",
-        "partyName": "Libertarian",
-        "votes": 4798
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 268545,
-          "estimatedVotesLow": 219720,
-          "estimatedVotesMid": 244131,
-          "turnoutHigh": 87.04,
-          "turnoutLow": 106.38,
-          "turnoutMid": 95.74
+          "turnoutHigh": 10.36,
+          "turnoutLow": 12.66,
+          "turnoutMid": 11.4
         },
         "firstName": "Harriet",
         "id": 10529,
         "lastName": "Hageman",
         "partyName": "Republican",
-        "votes": 160441
+        "votes": 17793
       },
       {
         "elected": false,
@@ -101,15 +79,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 87.04,
-          "turnoutLow": 106.38,
-          "turnoutMid": 95.74
+          "turnoutHigh": 10.36,
+          "turnoutLow": 12.66,
+          "turnoutMid": 11.4
         },
         "firstName": "Jeff",
         "id": 102233,
         "lastName": "Haggit",
         "partyName": "Constitution",
-        "votes": 4893
+        "votes": 540
       },
       {
         "elected": false,
@@ -117,15 +95,31 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 87.04,
-          "turnoutLow": 106.38,
-          "turnoutMid": 95.74
+          "turnoutHigh": 10.36,
+          "turnoutLow": 12.66,
+          "turnoutMid": 11.4
         },
         "firstName": "Kyle",
         "id": 84153,
         "lastName": "Cameron",
         "partyName": "Democratic",
-        "votes": 63610
+        "votes": 8940
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 10.36,
+          "turnoutLow": 12.66,
+          "turnoutMid": 11.4
+        },
+        "firstName": "Richard",
+        "id": 14707,
+        "lastName": "Brubaker",
+        "partyName": "Libertarian",
+        "votes": 552
       }
     ],
     "district": "At-Large",
@@ -133,7 +127,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:40:23.926Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -143,7 +138,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 233742,
+    "totalVotes": 27825,
     "year": 2024
   },
   {
@@ -171,6 +166,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -209,6 +205,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -247,6 +244,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -269,15 +267,15 @@
           "estimatedVotesHigh": 5874,
           "estimatedVotesLow": 4806,
           "estimatedVotesMid": 5340,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marguerite",
         "id": 29910,
         "lastName": "Herman",
         "partyName": "Democratic",
-        "votes": 258
+        "votes": 0
       },
       {
         "elected": false,
@@ -285,15 +283,15 @@
           "estimatedVotesHigh": 5874,
           "estimatedVotesLow": 4806,
           "estimatedVotesMid": 5340,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jared",
         "id": 29947,
         "lastName": "Olsen",
         "partyName": "Republican",
-        "votes": 4919
+        "votes": 0
       }
     ],
     "district": "8",
@@ -301,7 +299,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:15.224Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -311,7 +310,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 5177,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -323,15 +322,15 @@
           "estimatedVotesHigh": 9677,
           "estimatedVotesLow": 7917,
           "estimatedVotesMid": 8797,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 101886,
         "lastName": "Selmer Jr.",
         "partyName": "Democratic",
-        "votes": 851
+        "votes": 0
       },
       {
         "elected": false,
@@ -339,15 +338,15 @@
           "estimatedVotesHigh": 9677,
           "estimatedVotesLow": 7917,
           "estimatedVotesMid": 8797,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gary",
         "id": 84160,
         "lastName": "Crum",
         "partyName": "Republican",
-        "votes": 7678
+        "votes": 0
       }
     ],
     "district": "10",
@@ -355,7 +354,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:45:15.690Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -365,7 +365,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 8529,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -377,15 +377,15 @@
           "estimatedVotesHigh": 6200,
           "estimatedVotesLow": 5072,
           "estimatedVotesMid": 5636,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "John",
-        "id": 84163,
-        "lastName": "Kolb",
-        "partyName": "Republican",
-        "votes": 5246
+        "firstName": "Kenilynn",
+        "id": 84165,
+        "lastName": "Zanetti",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -393,15 +393,15 @@
           "estimatedVotesHigh": 6200,
           "estimatedVotesLow": 5072,
           "estimatedVotesMid": 5636,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Kenilynn",
-        "id": 84165,
-        "lastName": "Zanetti",
-        "partyName": "Democratic",
-        "votes": 217
+        "firstName": "John",
+        "id": 84163,
+        "lastName": "Kolb",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "12",
@@ -409,7 +409,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:56:18.271Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -419,7 +420,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 5463,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -447,6 +448,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -485,6 +487,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -523,6 +526,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -561,6 +565,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -599,6 +604,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -637,6 +643,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -675,6 +682,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -713,6 +721,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -751,6 +760,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -789,6 +799,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -827,6 +838,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -865,6 +877,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -887,15 +900,15 @@
           "estimatedVotesHigh": 4803,
           "estimatedVotesLow": 3931,
           "estimatedVotesMid": 4367,
-          "turnoutHigh": 87.97,
-          "turnoutLow": 107.48,
-          "turnoutMid": 96.75
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeremy",
         "id": 29930,
         "lastName": "Haroldson",
         "partyName": "Republican",
-        "votes": 4141
+        "votes": 0
       },
       {
         "elected": false,
@@ -903,15 +916,15 @@
           "estimatedVotesHigh": 4803,
           "estimatedVotesLow": 3931,
           "estimatedVotesMid": 4367,
-          "turnoutHigh": 87.97,
-          "turnoutLow": 107.48,
-          "turnoutMid": 96.75
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Charles",
         "id": 84183,
         "lastName": "Randolph",
         "partyName": "Democratic",
-        "votes": 84
+        "votes": 0
       }
     ],
     "district": "4",
@@ -919,7 +932,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:15.416Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -929,7 +943,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 4225,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -957,6 +971,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -995,6 +1010,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1017,15 +1033,15 @@
           "estimatedVotesHigh": 4644,
           "estimatedVotesLow": 3800,
           "estimatedVotesMid": 4222,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jordan",
         "id": 29907,
         "lastName": "Evans",
         "partyName": "Democratic",
-        "votes": 285
+        "votes": 0
       },
       {
         "elected": false,
@@ -1033,15 +1049,15 @@
           "estimatedVotesHigh": 4644,
           "estimatedVotesLow": 3800,
           "estimatedVotesMid": 4222,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bob",
         "id": 29935,
         "lastName": "Nicholas",
         "partyName": "Republican",
-        "votes": 3807
+        "votes": 0
       }
     ],
     "district": "7",
@@ -1049,7 +1065,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:43:14.338Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1059,7 +1076,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 4092,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1087,6 +1104,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1125,6 +1143,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1147,15 +1166,15 @@
           "estimatedVotesHigh": 4887,
           "estimatedVotesLow": 3999,
           "estimatedVotesMid": 4443,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 101889,
         "lastName": "Eklund Jr.",
         "partyName": "Republican",
-        "votes": 4222
+        "votes": 0
       },
       {
         "elected": false,
@@ -1163,15 +1182,15 @@
           "estimatedVotesHigh": 4887,
           "estimatedVotesLow": 3999,
           "estimatedVotesMid": 4443,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Timothy",
         "id": 101888,
         "lastName": "Forbis",
         "partyName": "Independent",
-        "votes": 84
+        "votes": 0
       }
     ],
     "district": "10",
@@ -1179,7 +1198,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:19:15.468Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1189,7 +1209,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 4306,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1201,15 +1221,15 @@
           "estimatedVotesHigh": 3325,
           "estimatedVotesLow": 2721,
           "estimatedVotesMid": 3023,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jacob",
         "id": 84190,
         "lastName": "Wasserburger",
         "partyName": "Republican",
-        "votes": 2783
+        "votes": 0
       },
       {
         "elected": false,
@@ -1217,15 +1237,15 @@
           "estimatedVotesHigh": 3325,
           "estimatedVotesLow": 2721,
           "estimatedVotesMid": 3023,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sara",
         "id": 29921,
         "lastName": "Burlingame",
         "partyName": "Democratic",
-        "votes": 145
+        "votes": 0
       }
     ],
     "district": "11",
@@ -1233,7 +1253,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:58:17.901Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1243,7 +1264,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 2928,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1271,6 +1292,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1293,15 +1315,15 @@
           "estimatedVotesHigh": 3363,
           "estimatedVotesLow": 2751,
           "estimatedVotesMid": 3057,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ken",
         "id": 29911,
         "lastName": "Chestek",
         "partyName": "Democratic",
-        "votes": 2222
+        "votes": 0
       },
       {
         "elected": false,
@@ -1309,15 +1331,15 @@
           "estimatedVotesHigh": 3363,
           "estimatedVotesLow": 2751,
           "estimatedVotesMid": 3057,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shane",
         "id": 84192,
         "lastName": "Swett",
         "partyName": "Republican",
-        "votes": 740
+        "votes": 0
       }
     ],
     "district": "13",
@@ -1325,7 +1347,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:05:14.728Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1335,7 +1358,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 2962,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1347,15 +1370,15 @@
           "estimatedVotesHigh": 4709,
           "estimatedVotesLow": 3853,
           "estimatedVotesMid": 4281,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 37.88,
+          "turnoutLow": 46.3,
+          "turnoutMid": 41.67
         },
         "firstName": "Joe",
         "id": 101890,
         "lastName": "Giustozzi",
         "partyName": "Republican",
-        "votes": 580
+        "votes": 916
       },
       {
         "elected": false,
@@ -1363,15 +1386,15 @@
           "estimatedVotesHigh": 4709,
           "estimatedVotesLow": 3853,
           "estimatedVotesMid": 4281,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 37.88,
+          "turnoutLow": 46.3,
+          "turnoutMid": 41.67
         },
         "firstName": "Trey",
         "id": 29912,
         "lastName": "Sherwood",
         "partyName": "Democratic",
-        "votes": 3569
+        "votes": 868
       }
     ],
     "district": "14",
@@ -1379,7 +1402,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:15:16.422Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:42:09.181Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1389,7 +1413,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 4149,
+    "totalVotes": 1784,
     "year": 2024
   },
   {
@@ -1417,6 +1441,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1455,6 +1480,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1493,6 +1519,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1531,6 +1558,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1569,6 +1597,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1607,6 +1636,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1645,6 +1675,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1683,6 +1714,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1721,6 +1753,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1759,6 +1792,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1797,6 +1831,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1835,6 +1870,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1873,6 +1909,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1911,6 +1948,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1949,6 +1987,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1987,6 +2026,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2025,6 +2065,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2063,6 +2104,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2085,15 +2127,15 @@
           "estimatedVotesHigh": 3113,
           "estimatedVotesLow": 2547,
           "estimatedVotesMid": 2830,
-          "turnoutHigh": 88.05,
-          "turnoutLow": 107.62,
-          "turnoutMid": 96.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sarah",
         "id": 29986,
         "lastName": "Penn",
         "partyName": "Republican",
-        "votes": 2606
+        "votes": 0
       },
       {
         "elected": false,
@@ -2101,15 +2143,15 @@
           "estimatedVotesHigh": 3113,
           "estimatedVotesLow": 2547,
           "estimatedVotesMid": 2830,
-          "turnoutHigh": 88.05,
-          "turnoutLow": 107.62,
-          "turnoutMid": 96.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ivan",
         "id": 84214,
         "lastName": "Posey",
         "partyName": "Democratic",
-        "votes": 135
+        "votes": 0
       }
     ],
     "district": "33",
@@ -2117,7 +2159,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:01:14.663Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2127,7 +2170,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 2741,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2155,6 +2198,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2193,6 +2237,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2231,6 +2276,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2269,6 +2315,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2307,6 +2354,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2345,6 +2393,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2383,6 +2432,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2405,15 +2455,15 @@
           "estimatedVotesHigh": 3986,
           "estimatedVotesLow": 3262,
           "estimatedVotesMid": 3624,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gary",
         "id": 84224,
         "lastName": "Brown",
         "partyName": "Republican",
-        "votes": 3302
+        "votes": 0
       },
       {
         "elected": false,
@@ -2421,15 +2471,15 @@
           "estimatedVotesHigh": 3986,
           "estimatedVotesLow": 3262,
           "estimatedVotesMid": 3624,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jen",
         "id": 48306,
         "lastName": "Solis",
         "partyName": "Democratic",
-        "votes": 209
+        "votes": 0
       }
     ],
     "district": "41",
@@ -2437,7 +2487,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:26:15.689Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2447,7 +2498,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 3511,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2459,15 +2510,15 @@
           "estimatedVotesHigh": 3925,
           "estimatedVotesLow": 3211,
           "estimatedVotesMid": 3568,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.66,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bob",
         "id": 101893,
         "lastName": "Ray",
         "partyName": "Democratic",
-        "votes": 171
+        "votes": 0
       },
       {
         "elected": false,
@@ -2475,15 +2526,15 @@
           "estimatedVotesHigh": 3925,
           "estimatedVotesLow": 3211,
           "estimatedVotesMid": 3568,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.66,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rob",
         "id": 101894,
         "lastName": "Geringer",
         "partyName": "Republican",
-        "votes": 3286
+        "votes": 0
       }
     ],
     "district": "42",
@@ -2491,7 +2542,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:11:16.080Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2501,7 +2553,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 3457,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2529,6 +2581,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2567,6 +2620,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2589,15 +2643,15 @@
           "estimatedVotesHigh": 3791,
           "estimatedVotesLow": 3101,
           "estimatedVotesMid": 3446,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 84232,
         "lastName": "Crouch",
         "partyName": "Republican",
-        "votes": 366
+        "votes": 0
       },
       {
         "elected": false,
@@ -2605,15 +2659,15 @@
           "estimatedVotesHigh": 3791,
           "estimatedVotesLow": 3101,
           "estimatedVotesMid": 3446,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karlee",
         "id": 29922,
         "lastName": "Provenza",
         "partyName": "Democratic",
-        "votes": 2973
+        "votes": 0
       }
     ],
     "district": "45",
@@ -2621,7 +2675,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:46:18.512Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2631,7 +2686,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 3339,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2643,15 +2698,15 @@
           "estimatedVotesHigh": 4962,
           "estimatedVotesLow": 4060,
           "estimatedVotesMid": 4511,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 84233,
         "lastName": "Lowry",
         "partyName": "Democratic",
-        "votes": 3674
+        "votes": 0
       },
       {
         "elected": false,
@@ -2659,15 +2714,15 @@
           "estimatedVotesHigh": 4962,
           "estimatedVotesLow": 4060,
           "estimatedVotesMid": 4511,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ocean",
         "id": 30008,
         "lastName": "Andrew",
         "partyName": "Republican",
-        "votes": 698
+        "votes": 0
       }
     ],
     "district": "46",
@@ -2675,7 +2730,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:35:15.270Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2685,7 +2741,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 4372,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2697,15 +2753,15 @@
           "estimatedVotesHigh": 4281,
           "estimatedVotesLow": 3502,
           "estimatedVotesMid": 3891,
-          "turnoutHigh": 87.99,
-          "turnoutLow": 107.57,
-          "turnoutMid": 96.81
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 84235,
         "lastName": "Wilson",
         "partyName": "Democratic",
-        "votes": 109
+        "votes": 0
       },
       {
         "elected": false,
@@ -2713,15 +2769,15 @@
           "estimatedVotesHigh": 4281,
           "estimatedVotesLow": 3502,
           "estimatedVotesMid": 3891,
-          "turnoutHigh": 87.99,
-          "turnoutLow": 107.57,
-          "turnoutMid": 96.81
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 30010,
         "lastName": "Davis",
         "partyName": "Republican",
-        "votes": 3658
+        "votes": 0
       }
     ],
     "district": "47",
@@ -2729,7 +2785,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:21:15.347Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2739,7 +2796,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 3767,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2767,6 +2824,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2805,6 +2863,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2843,6 +2902,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2881,6 +2941,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2919,6 +2980,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2957,6 +3019,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2995,6 +3058,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3033,6 +3097,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3071,6 +3136,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3093,15 +3159,15 @@
           "estimatedVotesHigh": 3169,
           "estimatedVotesLow": 2593,
           "estimatedVotesMid": 2881,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.6,
-          "turnoutMid": 96.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tyler",
         "id": 101896,
         "lastName": "Cessor",
         "partyName": "Independent",
-        "votes": 54
+        "votes": 0
       },
       {
         "elected": false,
@@ -3109,15 +3175,15 @@
           "estimatedVotesHigh": 3169,
           "estimatedVotesLow": 2593,
           "estimatedVotesMid": 2881,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.6,
-          "turnoutMid": 96.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julie",
         "id": 84243,
         "lastName": "Jarvis",
         "partyName": "Republican",
-        "votes": 2736
+        "votes": 0
       }
     ],
     "district": "57",
@@ -3125,7 +3191,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.553Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3135,7 +3202,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 2790,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3163,6 +3230,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3201,6 +3269,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3239,6 +3308,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3277,6 +3347,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3315,6 +3386,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3337,15 +3409,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 91.46,
-          "turnoutLow": 111.78,
-          "turnoutMid": 99
+          "turnoutHigh": 23.11,
+          "turnoutLow": 28.25,
+          "turnoutMid": 25.42
         },
         "firstName": "John",
         "id": 102097,
         "lastName": "Fenn",
         "partyName": "Nonpartisan",
-        "votes": 124941
+        "votes": 30321
       },
       {
         "elected": false,
@@ -3353,15 +3425,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 91.46,
-          "turnoutLow": 111.78,
-          "turnoutMid": 99
+          "turnoutHigh": 23.11,
+          "turnoutLow": 28.25,
+          "turnoutMid": 25.42
         },
         "firstName": "Kate",
         "id": 102098,
         "lastName": "Fox",
         "partyName": "Nonpartisan",
-        "votes": 120657
+        "votes": 31740
       }
     ],
     "district": "",
@@ -3369,7 +3441,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:56:38.145Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:42:12.313Z",
     "office": {
       "officeId": "30",
       "officeName": "State Supreme Court",
@@ -3379,7 +3452,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 245598,
+    "totalVotes": 62061,
     "year": 2024
   }
 ]

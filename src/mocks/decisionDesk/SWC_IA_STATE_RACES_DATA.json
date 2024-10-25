@@ -8,15 +8,15 @@
           "estimatedVotesHigh": 426267,
           "estimatedVotesLow": 348761,
           "estimatedVotesMid": 387514,
-          "turnoutHigh": 90.41,
-          "turnoutLow": 110.51,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Christina",
-        "id": 22709,
-        "lastName": "Bohannan",
-        "partyName": "Democratic",
-        "votes": 191517
+        "firstName": "Mariannette",
+        "id": 12881,
+        "lastName": "Miller-Meeks",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -24,15 +24,15 @@
           "estimatedVotesHigh": 426267,
           "estimatedVotesLow": 348761,
           "estimatedVotesMid": 387514,
-          "turnoutHigh": 90.41,
-          "turnoutLow": 110.51,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Mariannette",
-        "id": 12881,
-        "lastName": "Miller-Meeks",
-        "partyName": "Republican",
-        "votes": 193891
+        "firstName": "Christina",
+        "id": 22709,
+        "lastName": "Bohannan",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "1",
@@ -40,7 +40,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:27.781Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -50,7 +51,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 385408,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -62,15 +63,15 @@
           "estimatedVotesHigh": 435780,
           "estimatedVotesLow": 356544,
           "estimatedVotesMid": 396161,
-          "turnoutHigh": 88.96,
-          "turnoutLow": 108.72,
-          "turnoutMid": 97.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jody",
         "id": 102139,
         "lastName": "Puffett",
         "partyName": "Independent",
-        "votes": 6517
+        "votes": 0
       },
       {
         "elected": false,
@@ -78,15 +79,15 @@
           "estimatedVotesHigh": 435780,
           "estimatedVotesLow": 356544,
           "estimatedVotesMid": 396161,
-          "turnoutHigh": 88.96,
-          "turnoutLow": 108.72,
-          "turnoutMid": 97.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ashley",
         "id": 12916,
         "lastName": "Hinson",
         "partyName": "Republican",
-        "votes": 198792
+        "votes": 0
       },
       {
         "elected": false,
@@ -94,15 +95,15 @@
           "estimatedVotesHigh": 435780,
           "estimatedVotesLow": 356544,
           "estimatedVotesMid": 396161,
-          "turnoutHigh": 88.96,
-          "turnoutLow": 108.72,
-          "turnoutMid": 97.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sarah",
         "id": 71193,
         "lastName": "Corkery",
         "partyName": "Democratic",
-        "votes": 182340
+        "votes": 0
       }
     ],
     "district": "2",
@@ -110,7 +111,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:27.781Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -120,7 +122,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 387649,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -132,15 +134,15 @@
           "estimatedVotesHigh": 428590,
           "estimatedVotesLow": 350666,
           "estimatedVotesMid": 389628,
-          "turnoutHigh": 89.56,
-          "turnoutLow": 109.46,
-          "turnoutMid": 98.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lanon",
         "id": 71194,
         "lastName": "Baccam",
         "partyName": "Democratic",
-        "votes": 189525
+        "votes": 0
       },
       {
         "elected": false,
@@ -148,15 +150,15 @@
           "estimatedVotesHigh": 428590,
           "estimatedVotesLow": 350666,
           "estimatedVotesMid": 389628,
-          "turnoutHigh": 89.56,
-          "turnoutLow": 109.46,
-          "turnoutMid": 98.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Zach",
         "id": 22715,
         "lastName": "Nunn",
         "partyName": "Republican",
-        "votes": 194306
+        "votes": 0
       }
     ],
     "district": "3",
@@ -164,7 +166,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:28.953Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -174,7 +177,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 383831,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -186,15 +189,15 @@
           "estimatedVotesHigh": 401302,
           "estimatedVotesLow": 328338,
           "estimatedVotesMid": 364818,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Randy",
         "id": 12911,
         "lastName": "Feenstra",
         "partyName": "Republican",
-        "votes": 298520
+        "votes": 0
       },
       {
         "elected": false,
@@ -202,15 +205,15 @@
           "estimatedVotesHigh": 401302,
           "estimatedVotesLow": 328338,
           "estimatedVotesMid": 364818,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 22711,
         "lastName": "Melton",
         "partyName": "Democratic",
-        "votes": 67814
+        "votes": 0
       }
     ],
     "district": "4",
@@ -218,7 +221,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:28.953Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -228,7 +232,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 366334,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -256,6 +260,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -294,6 +299,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -316,15 +322,15 @@
           "estimatedVotesHigh": 33819,
           "estimatedVotesLow": 27668,
           "estimatedVotesMid": 30743,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "David",
-        "id": 44653,
-        "lastName": "Davis",
-        "partyName": "Libertarian",
-        "votes": 698
+        "firstName": "Jason",
+        "id": 22765,
+        "lastName": "Schultz",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -332,15 +338,15 @@
           "estimatedVotesHigh": 33819,
           "estimatedVotesLow": 27668,
           "estimatedVotesMid": 30743,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jason",
-        "id": 22765,
-        "lastName": "Schultz",
-        "partyName": "Republican",
-        "votes": 29097
+        "firstName": "David",
+        "id": 44653,
+        "lastName": "Davis",
+        "partyName": "Libertarian",
+        "votes": 0
       }
     ],
     "district": "6",
@@ -348,7 +354,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:13.654Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -358,7 +365,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 29795,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -370,15 +377,15 @@
           "estimatedVotesHigh": 37771,
           "estimatedVotesLow": 30903,
           "estimatedVotesMid": 34337,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 71199,
         "lastName": "Roenfeld",
         "partyName": "Democratic",
-        "votes": 1553
+        "votes": 0
       },
       {
         "elected": false,
@@ -386,15 +393,15 @@
           "estimatedVotesHigh": 37771,
           "estimatedVotesLow": 30903,
           "estimatedVotesMid": 34337,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 71198,
         "lastName": "Costello",
         "partyName": "Republican",
-        "votes": 31739
+        "votes": 0
       }
     ],
     "district": "8",
@@ -402,7 +409,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:22:31.793Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -412,7 +420,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 33292,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -424,15 +432,15 @@
           "estimatedVotesHigh": 25001,
           "estimatedVotesLow": 20455,
           "estimatedVotesMid": 22728,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 71200,
         "lastName": "Dawson",
         "partyName": "Republican",
-        "votes": 19397
+        "votes": 0
       },
       {
         "elected": false,
@@ -440,15 +448,15 @@
           "estimatedVotesHigh": 25001,
           "estimatedVotesLow": 20455,
           "estimatedVotesMid": 22728,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 71201,
         "lastName": "Gorman",
         "partyName": "Democratic",
-        "votes": 2644
+        "votes": 0
       }
     ],
     "district": "10",
@@ -456,7 +464,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:13.751Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -466,7 +475,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 22041,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -478,15 +487,15 @@
           "estimatedVotesHigh": 34546,
           "estimatedVotesLow": 28266,
           "estimatedVotesMid": 31406,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Nicole",
-        "id": 71203,
-        "lastName": "Loew",
-        "partyName": "Democratic",
-        "votes": 1349
+        "firstName": "Amy",
+        "id": 71202,
+        "lastName": "Sinclair",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -494,15 +503,15 @@
           "estimatedVotesHigh": 34546,
           "estimatedVotesLow": 28266,
           "estimatedVotesMid": 31406,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Amy",
-        "id": 71202,
-        "lastName": "Sinclair",
-        "partyName": "Republican",
-        "votes": 29076
+        "firstName": "Nicole",
+        "id": 71203,
+        "lastName": "Loew",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "12",
@@ -510,7 +519,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:13.751Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -520,7 +530,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 30425,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -532,15 +542,15 @@
           "estimatedVotesHigh": 40004,
           "estimatedVotesLow": 32730,
           "estimatedVotesMid": 36367,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 71204,
         "lastName": "Hanson",
         "partyName": "Republican",
-        "votes": 22573
+        "votes": 0
       },
       {
         "elected": false,
@@ -548,15 +558,15 @@
           "estimatedVotesHigh": 40004,
           "estimatedVotesLow": 32730,
           "estimatedVotesMid": 36367,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sarah",
         "id": 22732,
         "lastName": "Garriott",
         "partyName": "Democratic",
-        "votes": 12698
+        "votes": 0
       }
     ],
     "district": "14",
@@ -564,7 +574,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:14.442Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -574,7 +585,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 35271,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -586,15 +597,15 @@
           "estimatedVotesHigh": 37649,
           "estimatedVotesLow": 30804,
           "estimatedVotesMid": 34226,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joshua",
         "id": 100094,
         "lastName": "Smith",
         "partyName": "Libertarian",
-        "votes": 993
+        "votes": 0
       },
       {
         "elected": false,
@@ -602,15 +613,15 @@
           "estimatedVotesHigh": 37649,
           "estimatedVotesLow": 30804,
           "estimatedVotesMid": 34226,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Claire",
         "id": 22734,
         "lastName": "Celsi",
         "partyName": "Democratic",
-        "votes": 32200
+        "votes": 0
       }
     ],
     "district": "16",
@@ -618,7 +629,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.674Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -628,7 +640,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 33193,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -656,6 +668,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -678,15 +691,15 @@
           "estimatedVotesHigh": 33409,
           "estimatedVotesLow": 27335,
           "estimatedVotesMid": 30372,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Nate",
-        "id": 9574,
-        "lastName": "Boulton",
-        "partyName": "Democratic",
-        "votes": 27396
+        "firstName": "Mike",
+        "id": 71207,
+        "lastName": "Pike",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -694,15 +707,15 @@
           "estimatedVotesHigh": 33409,
           "estimatedVotesLow": 27335,
           "estimatedVotesMid": 30372,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Mike",
-        "id": 71207,
-        "lastName": "Pike",
-        "partyName": "Republican",
-        "votes": 2061
+        "firstName": "Nate",
+        "id": 9574,
+        "lastName": "Boulton",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "20",
@@ -710,7 +723,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:45:13.811Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -720,7 +734,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 29457,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -732,15 +746,15 @@
           "estimatedVotesHigh": 38302,
           "estimatedVotesLow": 31338,
           "estimatedVotesMid": 34820,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.77,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 71209,
         "lastName": "Blake",
         "partyName": "Democratic",
-        "votes": 31747
+        "votes": 0
       },
       {
         "elected": false,
@@ -748,15 +762,15 @@
           "estimatedVotesHigh": 38302,
           "estimatedVotesLow": 31338,
           "estimatedVotesMid": 34820,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.77,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brad",
         "id": 71208,
         "lastName": "Zaun",
         "partyName": "Republican",
-        "votes": 2025
+        "votes": 0
       }
     ],
     "district": "22",
@@ -764,7 +778,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:48:18.539Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -774,7 +789,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 33772,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -786,15 +801,15 @@
           "estimatedVotesHigh": 35877,
           "estimatedVotesLow": 29355,
           "estimatedVotesMid": 32616,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jesse",
         "id": 71210,
         "lastName": "Green",
         "partyName": "Republican",
-        "votes": 23321
+        "votes": 0
       },
       {
         "elected": false,
@@ -802,15 +817,15 @@
           "estimatedVotesHigh": 35877,
           "estimatedVotesLow": 29355,
           "estimatedVotesMid": 32616,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Margaret",
         "id": 71211,
         "lastName": "Liston",
         "partyName": "Democratic",
-        "votes": 8295
+        "votes": 0
       }
     ],
     "district": "24",
@@ -818,7 +833,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:14.767Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -828,7 +844,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 31616,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -840,15 +856,15 @@
           "estimatedVotesHigh": 32620,
           "estimatedVotesLow": 26688,
           "estimatedVotesMid": 29654,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kara",
         "id": 71213,
         "lastName": "Warme",
         "partyName": "Republican",
-        "votes": 14607
+        "votes": 0
       },
       {
         "elected": false,
@@ -856,15 +872,15 @@
           "estimatedVotesHigh": 32620,
           "estimatedVotesLow": 26688,
           "estimatedVotesMid": 29654,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 71214,
         "lastName": "Wolfe",
         "partyName": "Democratic",
-        "votes": 14150
+        "votes": 0
       }
     ],
     "district": "26",
@@ -872,7 +888,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:50:15.731Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -882,7 +899,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 28757,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -894,15 +911,15 @@
           "estimatedVotesHigh": 34215,
           "estimatedVotesLow": 27994,
           "estimatedVotesMid": 31104,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dennis",
         "id": 71215,
         "lastName": "Guth",
         "partyName": "Republican",
-        "votes": 25699
+        "votes": 0
       },
       {
         "elected": false,
@@ -910,15 +927,15 @@
           "estimatedVotesHigh": 34215,
           "estimatedVotesLow": 27994,
           "estimatedVotesMid": 31104,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cynthia",
         "id": 71216,
         "lastName": "Paschen",
         "partyName": "Democratic",
-        "votes": 4450
+        "votes": 0
       }
     ],
     "district": "28",
@@ -926,7 +943,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:30:14.402Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -936,7 +954,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 30149,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -948,15 +966,15 @@
           "estimatedVotesHigh": 35589,
           "estimatedVotesLow": 29117,
           "estimatedVotesMid": 32353,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Doug",
         "id": 22932,
         "lastName": "Campbell",
         "partyName": "Republican",
-        "votes": 30154
+        "votes": 0
       },
       {
         "elected": false,
@@ -964,15 +982,15 @@
           "estimatedVotesHigh": 35589,
           "estimatedVotesLow": 29117,
           "estimatedVotesMid": 32353,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Richard",
         "id": 71217,
         "lastName": "Lorence",
         "partyName": "Democratic",
-        "votes": 1213
+        "votes": 0
       }
     ],
     "district": "30",
@@ -980,7 +998,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:42:13.850Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -990,7 +1009,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 31367,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1002,15 +1021,15 @@
           "estimatedVotesHigh": 36223,
           "estimatedVotesLow": 29635,
           "estimatedVotesMid": 32929,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 47676,
         "lastName": "Bruening",
         "partyName": "Democratic",
-        "votes": 11231
+        "votes": 0
       },
       {
         "elected": false,
@@ -1018,15 +1037,15 @@
           "estimatedVotesHigh": 36223,
           "estimatedVotesLow": 29635,
           "estimatedVotesMid": 32929,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 71218,
         "lastName": "Klimesh",
         "partyName": "Republican",
-        "votes": 20688
+        "votes": 0
       }
     ],
     "district": "32",
@@ -1034,7 +1053,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:41:13.903Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1044,7 +1064,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 31919,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1056,15 +1076,15 @@
           "estimatedVotesHigh": 35045,
           "estimatedVotesLow": 28673,
           "estimatedVotesMid": 31859,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 71219,
         "lastName": "Zumbach",
         "partyName": "Republican",
-        "votes": 29183
+        "votes": 0
       },
       {
         "elected": false,
@@ -1072,15 +1092,15 @@
           "estimatedVotesHigh": 35045,
           "estimatedVotesLow": 28673,
           "estimatedVotesMid": 31859,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 100095,
         "lastName": "Hegland",
         "partyName": "Democratic",
-        "votes": 1700
+        "votes": 0
       }
     ],
     "district": "34",
@@ -1088,7 +1108,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:14.836Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1098,7 +1119,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 30883,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1110,15 +1131,15 @@
           "estimatedVotesHigh": 32252,
           "estimatedVotesLow": 26388,
           "estimatedVotesMid": 29320,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Thomas",
-        "id": 71221,
-        "lastName": "Townsend",
-        "partyName": "Democratic",
-        "votes": 19622
+        "firstName": "Nicholas",
+        "id": 71220,
+        "lastName": "Molo",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1126,15 +1147,15 @@
           "estimatedVotesHigh": 32252,
           "estimatedVotesLow": 26388,
           "estimatedVotesMid": 29320,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Nicholas",
-        "id": 71220,
-        "lastName": "Molo",
-        "partyName": "Republican",
-        "votes": 8815
+        "firstName": "Thomas",
+        "id": 71221,
+        "lastName": "Townsend",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "36",
@@ -1142,7 +1163,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:03:14.113Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1152,7 +1174,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 28437,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1164,15 +1186,15 @@
           "estimatedVotesHigh": 35997,
           "estimatedVotesLow": 29452,
           "estimatedVotesMid": 32724,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 71225,
         "lastName": "Giddens",
         "partyName": "Democratic",
-        "votes": 8010
+        "votes": 0
       },
       {
         "elected": false,
@@ -1180,15 +1202,15 @@
           "estimatedVotesHigh": 35997,
           "estimatedVotesLow": 29452,
           "estimatedVotesMid": 32724,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dave",
         "id": 71224,
         "lastName": "Sires",
         "partyName": "Republican",
-        "votes": 23721
+        "votes": 0
       }
     ],
     "district": "38",
@@ -1196,7 +1218,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:45:13.811Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1206,7 +1229,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 31731,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1218,15 +1241,15 @@
           "estimatedVotesHigh": 35654,
           "estimatedVotesLow": 29172,
           "estimatedVotesMid": 32413,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kris",
         "id": 22780,
         "lastName": "Gulick",
         "partyName": "Republican",
-        "votes": 5972
+        "votes": 0
       },
       {
         "elected": false,
@@ -1234,15 +1257,15 @@
           "estimatedVotesHigh": 35654,
           "estimatedVotesLow": 29172,
           "estimatedVotesMid": 32413,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Art",
         "id": 22845,
         "lastName": "Staed",
         "partyName": "Democratic",
-        "votes": 25465
+        "votes": 0
       }
     ],
     "district": "40",
@@ -1250,7 +1273,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:54:14.376Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1260,7 +1284,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 31437,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1288,6 +1312,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1310,15 +1335,15 @@
           "estimatedVotesHigh": 32254,
           "estimatedVotesLow": 26390,
           "estimatedVotesMid": 29322,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lisa",
         "id": 100096,
         "lastName": "Ossian",
         "partyName": "No Party Affiliation",
-        "votes": 728
+        "votes": 0
       },
       {
         "elected": false,
@@ -1326,15 +1351,15 @@
           "estimatedVotesHigh": 32254,
           "estimatedVotesLow": 26390,
           "estimatedVotesMid": 29322,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adrian",
         "id": 22786,
         "lastName": "Dickey",
         "partyName": "Republican",
-        "votes": 27695
+        "votes": 0
       }
     ],
     "district": "44",
@@ -1342,7 +1367,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:14.836Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1352,7 +1378,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 28423,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1364,15 +1390,15 @@
           "estimatedVotesHigh": 37215,
           "estimatedVotesLow": 30447,
           "estimatedVotesMid": 33831,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Dawn",
-        "id": 22787,
-        "lastName": "Driscoll",
-        "partyName": "Republican",
-        "votes": 18238
+        "firstName": "Ed",
+        "id": 71226,
+        "lastName": "Chabal",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1380,15 +1406,15 @@
           "estimatedVotesHigh": 37215,
           "estimatedVotesLow": 30447,
           "estimatedVotesMid": 33831,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Ed",
-        "id": 71226,
-        "lastName": "Chabal",
-        "partyName": "Democratic",
-        "votes": 14566
+        "firstName": "Dawn",
+        "id": 22787,
+        "lastName": "Driscoll",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "46",
@@ -1396,7 +1422,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:14.442Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1406,7 +1433,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 32804,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1418,15 +1445,15 @@
           "estimatedVotesHigh": 32571,
           "estimatedVotesLow": 26647,
           "estimatedVotesMid": 29609,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 71228,
         "lastName": "Dabeet",
         "partyName": "Democratic",
-        "votes": 8362
+        "votes": 0
       },
       {
         "elected": false,
@@ -1434,15 +1461,15 @@
           "estimatedVotesHigh": 32571,
           "estimatedVotesLow": 26647,
           "estimatedVotesMid": 29609,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 71227,
         "lastName": "Lofgren",
         "partyName": "Republican",
-        "votes": 20342
+        "votes": 0
       }
     ],
     "district": "48",
@@ -1450,7 +1477,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:33:14.246Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1460,7 +1488,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 28704,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1472,15 +1500,15 @@
           "estimatedVotesHigh": 30761,
           "estimatedVotesLow": 25169,
           "estimatedVotesMid": 27965,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nannette",
         "id": 71230,
         "lastName": "Griffin",
         "partyName": "Democratic",
-        "votes": 2326
+        "votes": 0
       },
       {
         "elected": false,
@@ -1488,15 +1516,15 @@
           "estimatedVotesHigh": 30761,
           "estimatedVotesLow": 25169,
           "estimatedVotesMid": 27965,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 71229,
         "lastName": "Reichman",
         "partyName": "Republican",
-        "votes": 24786
+        "votes": 0
       }
     ],
     "district": "50",
@@ -1504,7 +1532,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:13.751Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1514,7 +1543,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 27112,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1526,15 +1555,15 @@
           "estimatedVotesHigh": 9840,
           "estimatedVotesLow": 8051,
           "estimatedVotesMid": 8945,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "J.D.",
         "id": 9573,
         "lastName": "Scholten",
         "partyName": "Democratic",
-        "votes": 1473
+        "votes": 0
       },
       {
         "elected": false,
@@ -1542,15 +1571,15 @@
           "estimatedVotesHigh": 9840,
           "estimatedVotesLow": 8051,
           "estimatedVotesMid": 8945,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 71231,
         "lastName": "Steinhoff",
         "partyName": "Republican",
-        "votes": 7200
+        "votes": 0
       }
     ],
     "district": "1",
@@ -1558,7 +1587,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:34:13.840Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:54.753Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1568,7 +1598,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 8673,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1580,15 +1610,15 @@
           "estimatedVotesHigh": 13039,
           "estimatedVotesLow": 10669,
           "estimatedVotesMid": 11854,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jessica",
         "id": 71232,
         "lastName": "Lopez-Walker",
         "partyName": "Democratic",
-        "votes": 1262
+        "votes": 0
       },
       {
         "elected": false,
@@ -1596,15 +1626,15 @@
           "estimatedVotesHigh": 13039,
           "estimatedVotesLow": 10669,
           "estimatedVotesMid": 11854,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 22866,
         "lastName": "Henderson",
         "partyName": "Republican",
-        "votes": 10232
+        "votes": 0
       }
     ],
     "district": "2",
@@ -1612,7 +1642,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:35:14.216Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1622,7 +1653,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 11494,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1634,15 +1665,15 @@
           "estimatedVotesHigh": 16935,
           "estimatedVotesLow": 13856,
           "estimatedVotesMid": 15395,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 22867,
         "lastName": "Jeneary",
         "partyName": "Republican",
-        "votes": 14481
+        "votes": 0
       },
       {
         "elected": false,
@@ -1650,15 +1681,15 @@
           "estimatedVotesHigh": 16935,
           "estimatedVotesLow": 13856,
           "estimatedVotesMid": 15395,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Emma",
         "id": 71233,
         "lastName": "Bouza",
         "partyName": "Democratic",
-        "votes": 444
+        "votes": 0
       }
     ],
     "district": "3",
@@ -1666,7 +1697,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.679Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1676,7 +1708,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14925,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1704,6 +1736,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1726,15 +1759,15 @@
           "estimatedVotesHigh": 16834,
           "estimatedVotesLow": 13773,
           "estimatedVotesMid": 15303,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.66,
-          "turnoutMid": 96.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Zachary",
         "id": 71234,
         "lastName": "Dieken",
         "partyName": "Republican",
-        "votes": 14298
+        "votes": 0
       },
       {
         "elected": false,
@@ -1742,15 +1775,15 @@
           "estimatedVotesHigh": 16834,
           "estimatedVotesLow": 13773,
           "estimatedVotesMid": 15303,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.66,
-          "turnoutMid": 96.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 100097,
         "lastName": "Schnoes",
         "partyName": "No Party Affiliation",
-        "votes": 530
+        "votes": 0
       }
     ],
     "district": "5",
@@ -1758,7 +1791,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:09:13.616Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1768,7 +1802,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14828,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1796,6 +1830,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1818,15 +1853,15 @@
           "estimatedVotesHigh": 17422,
           "estimatedVotesLow": 14255,
           "estimatedVotesMid": 15838,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Martin",
         "id": 100098,
         "lastName": "Podraza",
         "partyName": "No Party Affiliation",
-        "votes": 328
+        "votes": 0
       },
       {
         "elected": false,
@@ -1834,15 +1869,15 @@
           "estimatedVotesHigh": 17422,
           "estimatedVotesLow": 14255,
           "estimatedVotesMid": 15838,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 22874,
         "lastName": "Sexton",
         "partyName": "Republican",
-        "votes": 15021
+        "votes": 0
       }
     ],
     "district": "7",
@@ -1850,7 +1885,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:30:14.402Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1860,7 +1896,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15349,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1888,6 +1924,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1910,15 +1947,15 @@
           "estimatedVotesHigh": 17676,
           "estimatedVotesLow": 14462,
           "estimatedVotesMid": 16069,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Henry",
         "id": 22876,
         "lastName": "Stone",
         "partyName": "Republican",
-        "votes": 14793
+        "votes": 0
       },
       {
         "elected": false,
@@ -1926,15 +1963,15 @@
           "estimatedVotesHigh": 17676,
           "estimatedVotesLow": 14462,
           "estimatedVotesMid": 16069,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christian",
         "id": 71236,
         "lastName": "Schlaerth",
         "partyName": "Democratic",
-        "votes": 783
+        "votes": 0
       }
     ],
     "district": "9",
@@ -1942,7 +1979,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:14.442Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1952,7 +1990,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15576,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1980,6 +2018,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2002,15 +2041,15 @@
           "estimatedVotesHigh": 18301,
           "estimatedVotesLow": 14972,
           "estimatedVotesMid": 16636,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 71237,
         "lastName": "Rich",
         "partyName": "Democratic",
-        "votes": 715
+        "votes": 0
       },
       {
         "elected": false,
@@ -2018,15 +2057,15 @@
           "estimatedVotesHigh": 18301,
           "estimatedVotesLow": 14972,
           "estimatedVotesMid": 16636,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Craig",
         "id": 21026,
         "lastName": "Williams",
         "partyName": "Republican",
-        "votes": 15403
+        "votes": 0
       }
     ],
     "district": "11",
@@ -2034,7 +2073,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:13.654Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2044,7 +2084,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16118,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2056,15 +2096,15 @@
           "estimatedVotesHigh": 15515,
           "estimatedVotesLow": 12693,
           "estimatedVotesMid": 14104,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steven",
         "id": 22880,
         "lastName": "Holt",
         "partyName": "Republican",
-        "votes": 13060
+        "votes": 0
       },
       {
         "elected": false,
@@ -2072,15 +2112,15 @@
           "estimatedVotesHigh": 15515,
           "estimatedVotesLow": 12693,
           "estimatedVotesMid": 14104,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dustin",
         "id": 71238,
         "lastName": "Durbin",
         "partyName": "Democratic",
-        "votes": 602
+        "votes": 0
       }
     ],
     "district": "12",
@@ -2088,7 +2128,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.674Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2098,7 +2139,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13662,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2110,47 +2151,47 @@
           "estimatedVotesHigh": 18105,
           "estimatedVotesLow": 14813,
           "estimatedVotesMid": 16459,
-          "turnoutHigh": 88.27,
-          "turnoutLow": 107.89,
-          "turnoutMid": 97.1
-        },
-        "firstName": "Travis",
-        "id": 71239,
-        "lastName": "Sitzmann",
-        "partyName": "Republican",
-        "votes": 11376
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 18105,
-          "estimatedVotesLow": 14813,
-          "estimatedVotesMid": 16459,
-          "turnoutHigh": 88.27,
-          "turnoutLow": 107.89,
-          "turnoutMid": 97.1
-        },
-        "firstName": "Parker",
-        "id": 100100,
-        "lastName": "Hansen",
-        "partyName": "No Party Affiliation",
-        "votes": 260
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 18105,
-          "estimatedVotesLow": 14813,
-          "estimatedVotesMid": 16459,
-          "turnoutHigh": 88.27,
-          "turnoutLow": 107.89,
-          "turnoutMid": 97.1
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rosanne",
         "id": 100099,
         "lastName": "Plante",
         "partyName": "Democratic",
-        "votes": 4346
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18105,
+          "estimatedVotesLow": 14813,
+          "estimatedVotesMid": 16459,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Travis",
+        "id": 71239,
+        "lastName": "Sitzmann",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18105,
+          "estimatedVotesLow": 14813,
+          "estimatedVotesMid": 16459,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Parker",
+        "id": 100100,
+        "lastName": "Hansen",
+        "partyName": "No Party Affiliation",
+        "votes": 0
       }
     ],
     "district": "13",
@@ -2158,7 +2199,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.679Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2168,7 +2210,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15982,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2196,6 +2238,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2218,15 +2261,15 @@
           "estimatedVotesHigh": 19716,
           "estimatedVotesLow": 16130,
           "estimatedVotesMid": 17923,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Benjamin",
         "id": 71241,
         "lastName": "Schauer",
         "partyName": "Democratic",
-        "votes": 1279
+        "votes": 0
       },
       {
         "elected": false,
@@ -2234,15 +2277,15 @@
           "estimatedVotesHigh": 19716,
           "estimatedVotesLow": 16130,
           "estimatedVotesMid": 17923,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 22884,
         "lastName": "Windschitl",
         "partyName": "Republican",
-        "votes": 16094
+        "votes": 0
       }
     ],
     "district": "15",
@@ -2250,7 +2293,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:13.751Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2260,7 +2304,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 17373,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2272,15 +2316,15 @@
           "estimatedVotesHigh": 18048,
           "estimatedVotesLow": 14768,
           "estimatedVotesMid": 16408,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Candella",
         "id": 71242,
         "lastName": "Foley-Finchem",
         "partyName": "Democratic",
-        "votes": 4733
+        "votes": 0
       },
       {
         "elected": false,
@@ -2288,15 +2332,15 @@
           "estimatedVotesHigh": 18048,
           "estimatedVotesLow": 14768,
           "estimatedVotesMid": 16408,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 22886,
         "lastName": "Sieck",
         "partyName": "Republican",
-        "votes": 11171
+        "votes": 0
       }
     ],
     "district": "16",
@@ -2304,7 +2348,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:33:14.246Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2314,7 +2359,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15904,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2342,6 +2387,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2364,15 +2410,15 @@
           "estimatedVotesHigh": 16674,
           "estimatedVotesLow": 13642,
           "estimatedVotesMid": 15158,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 22889,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 14043
+        "votes": 0
       },
       {
         "elected": false,
@@ -2380,15 +2426,15 @@
           "estimatedVotesHigh": 16674,
           "estimatedVotesLow": 13642,
           "estimatedVotesMid": 15158,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tripp",
         "id": 47680,
         "lastName": "Narup",
         "partyName": "Democratic",
-        "votes": 649
+        "votes": 0
       }
     ],
     "district": "18",
@@ -2396,7 +2442,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2406,7 +2453,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14692,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2418,15 +2465,15 @@
           "estimatedVotesHigh": 13911,
           "estimatedVotesLow": 11381,
           "estimatedVotesMid": 12646,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Roger",
         "id": 71243,
         "lastName": "Petersen",
         "partyName": "Democratic",
-        "votes": 857
+        "votes": 0
       },
       {
         "elected": false,
@@ -2434,15 +2481,15 @@
           "estimatedVotesHigh": 13911,
           "estimatedVotesLow": 11381,
           "estimatedVotesMid": 12646,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brent",
         "id": 45827,
         "lastName": "Siegrist",
         "partyName": "Republican",
-        "votes": 11406
+        "votes": 0
       }
     ],
     "district": "19",
@@ -2450,7 +2497,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:32:13.788Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2460,7 +2508,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 12263,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2472,15 +2520,15 @@
           "estimatedVotesHigh": 11083,
           "estimatedVotesLow": 9068,
           "estimatedVotesMid": 10075,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 22795,
         "lastName": "Turek",
         "partyName": "Democratic",
-        "votes": 291
+        "votes": 0
       },
       {
         "elected": false,
@@ -2488,15 +2536,15 @@
           "estimatedVotesHigh": 11083,
           "estimatedVotesLow": 9068,
           "estimatedVotesMid": 10075,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 71245,
         "lastName": "Wassell",
         "partyName": "Republican",
-        "votes": 9469
+        "votes": 0
       }
     ],
     "district": "20",
@@ -2504,7 +2552,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:13.751Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2514,7 +2563,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 9760,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2526,15 +2575,15 @@
           "estimatedVotesHigh": 18083,
           "estimatedVotesLow": 14795,
           "estimatedVotesMid": 16439,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brooke",
         "id": 22892,
         "lastName": "Boden",
         "partyName": "Republican",
-        "votes": 14193
+        "votes": 0
       },
       {
         "elected": false,
@@ -2542,15 +2591,15 @@
           "estimatedVotesHigh": 18083,
           "estimatedVotesLow": 14795,
           "estimatedVotesMid": 16439,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Spencer",
         "id": 71246,
         "lastName": "Waugh",
         "partyName": "Democratic",
-        "votes": 1745
+        "votes": 0
       }
     ],
     "district": "21",
@@ -2558,7 +2607,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:19:14.923Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2568,7 +2618,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15938,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2580,15 +2630,15 @@
           "estimatedVotesHigh": 21155,
           "estimatedVotesLow": 17309,
           "estimatedVotesMid": 19232,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Rory",
-        "id": 71248,
-        "lastName": "Taylor",
-        "partyName": "Democratic",
-        "votes": 2796
+        "firstName": "Samantha",
+        "id": 71247,
+        "lastName": "Fett",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2596,15 +2646,15 @@
           "estimatedVotesHigh": 21155,
           "estimatedVotesLow": 17309,
           "estimatedVotesMid": 19232,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Samantha",
-        "id": 71247,
-        "lastName": "Fett",
-        "partyName": "Republican",
-        "votes": 15855
+        "firstName": "Rory",
+        "id": 71248,
+        "lastName": "Taylor",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "22",
@@ -2612,7 +2662,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:14.460Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2622,7 +2673,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 18651,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2634,15 +2685,15 @@
           "estimatedVotesHigh": 18681,
           "estimatedVotesLow": 15285,
           "estimatedVotesMid": 16983,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karen",
         "id": 71249,
         "lastName": "Varley",
         "partyName": "Democratic",
-        "votes": 1031
+        "votes": 0
       },
       {
         "elected": false,
@@ -2650,15 +2701,15 @@
           "estimatedVotesHigh": 18681,
           "estimatedVotesLow": 15285,
           "estimatedVotesMid": 16983,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ray",
         "id": 22894,
         "lastName": "Sorensen",
         "partyName": "Republican",
-        "votes": 15423
+        "votes": 0
       }
     ],
     "district": "23",
@@ -2666,7 +2717,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:22:31.793Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2676,7 +2728,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16454,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2688,15 +2740,15 @@
           "estimatedVotesHigh": 15863,
           "estimatedVotesLow": 12979,
           "estimatedVotesMid": 14421,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sam",
         "id": 71251,
         "lastName": "Wengryn",
         "partyName": "Republican",
-        "votes": 13518
+        "votes": 0
       },
       {
         "elected": false,
@@ -2704,15 +2756,15 @@
           "estimatedVotesHigh": 15863,
           "estimatedVotesLow": 12979,
           "estimatedVotesMid": 14421,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.63,
-          "turnoutMid": 96.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sonya",
         "id": 71252,
         "lastName": "Hicks",
         "partyName": "Democratic",
-        "votes": 451
+        "votes": 0
       }
     ],
     "district": "24",
@@ -2720,7 +2772,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:36:14.735Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2730,7 +2783,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13969,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2742,15 +2795,15 @@
           "estimatedVotesHigh": 13296,
           "estimatedVotesLow": 10878,
           "estimatedVotesMid": 12087,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brenda",
         "id": 71253,
         "lastName": "Curran",
         "partyName": "Democratic",
-        "votes": 467
+        "votes": 0
       },
       {
         "elected": false,
@@ -2758,15 +2811,15 @@
           "estimatedVotesHigh": 13296,
           "estimatedVotesLow": 10878,
           "estimatedVotesMid": 12087,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hans",
         "id": 22897,
         "lastName": "Wilz",
         "partyName": "Republican",
-        "votes": 11252
+        "votes": 0
       }
     ],
     "district": "25",
@@ -2774,7 +2827,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:34:13.840Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:54.753Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2784,7 +2838,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 11719,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2796,15 +2850,15 @@
           "estimatedVotesHigh": 16251,
           "estimatedVotesLow": 13295,
           "estimatedVotesMid": 14773,
-          "turnoutHigh": 87.79,
-          "turnoutLow": 107.31,
-          "turnoutMid": 96.57
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Donald",
         "id": 100102,
         "lastName": "Gier",
         "partyName": "Libertarian",
-        "votes": 205
+        "votes": 0
       },
       {
         "elected": false,
@@ -2812,31 +2866,31 @@
           "estimatedVotesHigh": 16251,
           "estimatedVotesLow": 13295,
           "estimatedVotesMid": 14773,
-          "turnoutHigh": 87.79,
-          "turnoutLow": 107.31,
-          "turnoutMid": 96.57
-        },
-        "firstName": "Austin",
-        "id": 22899,
-        "lastName": "Harris",
-        "partyName": "Republican",
-        "votes": 10172
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16251,
-          "estimatedVotesLow": 13295,
-          "estimatedVotesMid": 14773,
-          "turnoutHigh": 87.79,
-          "turnoutLow": 107.31,
-          "turnoutMid": 96.57
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Darcie",
         "id": 100101,
         "lastName": "Whitlow",
         "partyName": "Democratic",
-        "votes": 3890
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16251,
+          "estimatedVotesLow": 13295,
+          "estimatedVotesMid": 14773,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Austin",
+        "id": 22899,
+        "lastName": "Harris",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "26",
@@ -2844,7 +2898,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.679Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2854,7 +2909,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14267,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2866,15 +2921,15 @@
           "estimatedVotesHigh": 20746,
           "estimatedVotesLow": 16974,
           "estimatedVotesMid": 18860,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Oliver",
         "id": 71254,
         "lastName": "Bardwell",
         "partyName": "Republican",
-        "votes": 16822
+        "votes": 0
       },
       {
         "elected": false,
@@ -2882,15 +2937,15 @@
           "estimatedVotesHigh": 20746,
           "estimatedVotesLow": 16974,
           "estimatedVotesMid": 18860,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kenan",
         "id": 22798,
         "lastName": "Judge",
         "partyName": "Democratic",
-        "votes": 1461
+        "votes": 0
       }
     ],
     "district": "27",
@@ -2898,7 +2953,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:14.767Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2908,7 +2964,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 18283,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2920,15 +2976,15 @@
           "estimatedVotesHigh": 19256,
           "estimatedVotesLow": 15755,
           "estimatedVotesMid": 17505,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Laura",
         "id": 71256,
         "lastName": "Snider",
         "partyName": "Democratic",
-        "votes": 13412
+        "votes": 0
       },
       {
         "elected": false,
@@ -2936,15 +2992,15 @@
           "estimatedVotesHigh": 19256,
           "estimatedVotesLow": 15755,
           "estimatedVotesMid": 17505,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 1220,
         "lastName": "Young",
         "partyName": "Republican",
-        "votes": 3564
+        "votes": 0
       }
     ],
     "district": "28",
@@ -2952,7 +3008,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:14.836Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2962,7 +3019,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16976,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2990,6 +3047,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3012,15 +3070,15 @@
           "estimatedVotesHigh": 13879,
           "estimatedVotesLow": 11355,
           "estimatedVotesMid": 12617,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jerry",
         "id": 22901,
         "lastName": "Cheevers",
         "partyName": "Republican",
-        "votes": 2936
+        "votes": 0
       },
       {
         "elected": false,
@@ -3028,15 +3086,15 @@
           "estimatedVotesHigh": 13879,
           "estimatedVotesLow": 11355,
           "estimatedVotesMid": 12617,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Megan",
         "id": 22802,
         "lastName": "Srinivas",
         "partyName": "Democratic",
-        "votes": 9299
+        "votes": 0
       }
     ],
     "district": "30",
@@ -3044,7 +3102,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:25:13.860Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3054,7 +3113,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 12235,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3082,6 +3141,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3120,6 +3180,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3142,15 +3203,15 @@
           "estimatedVotesHigh": 11539,
           "estimatedVotesLow": 9441,
           "estimatedVotesMid": 10490,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ruth",
         "id": 22806,
         "lastName": "Gaines",
         "partyName": "Democratic",
-        "votes": 9970
+        "votes": 0
       },
       {
         "elected": false,
@@ -3158,15 +3219,15 @@
           "estimatedVotesHigh": 11539,
           "estimatedVotesLow": 9441,
           "estimatedVotesMid": 10490,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "ToyA",
         "id": 44656,
         "lastName": "Johnson",
         "partyName": "Libertarian",
-        "votes": 201
+        "votes": 0
       }
     ],
     "district": "33",
@@ -3174,7 +3235,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:50:21.119Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3184,7 +3246,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 10171,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3196,15 +3258,15 @@
           "estimatedVotesHigh": 11598,
           "estimatedVotesLow": 9490,
           "estimatedVotesMid": 10544,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rob",
         "id": 71260,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 9713
+        "votes": 0
       },
       {
         "elected": false,
@@ -3212,15 +3274,15 @@
           "estimatedVotesHigh": 11598,
           "estimatedVotesLow": 9490,
           "estimatedVotesMid": 10544,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Danielle",
         "id": 71257,
         "lastName": "Duggan",
         "partyName": "Republican",
-        "votes": 510
+        "votes": 0
       }
     ],
     "district": "34",
@@ -3228,7 +3290,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.679Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3238,7 +3301,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 10223,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3250,15 +3313,15 @@
           "estimatedVotesHigh": 17846,
           "estimatedVotesLow": 14602,
           "estimatedVotesMid": 16224,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sean",
         "id": 22808,
         "lastName": "Bagniewski",
         "partyName": "Democratic",
-        "votes": 8339
+        "votes": 0
       },
       {
         "elected": false,
@@ -3266,15 +3329,15 @@
           "estimatedVotesHigh": 17846,
           "estimatedVotesLow": 14602,
           "estimatedVotesMid": 16224,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Angela",
         "id": 71263,
         "lastName": "Schreader",
         "partyName": "Republican",
-        "votes": 7080
+        "votes": 0
       },
       {
         "elected": false,
@@ -3282,15 +3345,15 @@
           "estimatedVotesHigh": 17846,
           "estimatedVotesLow": 14602,
           "estimatedVotesMid": 16224,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 100103,
         "lastName": "Green",
         "partyName": "Libertarian",
-        "votes": 313
+        "votes": 0
       }
     ],
     "district": "35",
@@ -3298,7 +3361,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:26:14.417Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3308,7 +3372,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15732,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3336,6 +3400,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3374,6 +3439,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3396,15 +3462,15 @@
           "estimatedVotesHigh": 17040,
           "estimatedVotesLow": 13942,
           "estimatedVotesMid": 15491,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jon",
         "id": 17462,
         "lastName": "Dunwell",
         "partyName": "Republican",
-        "votes": 14423
+        "votes": 0
       },
       {
         "elected": false,
@@ -3412,15 +3478,15 @@
           "estimatedVotesHigh": 17040,
           "estimatedVotesLow": 13942,
           "estimatedVotesMid": 15491,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brad",
         "id": 71264,
         "lastName": "Magg",
         "partyName": "Democratic",
-        "votes": 599
+        "votes": 0
       }
     ],
     "district": "38",
@@ -3428,7 +3494,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:42:13.850Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3438,7 +3505,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15022,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3450,15 +3517,15 @@
           "estimatedVotesHigh": 15403,
           "estimatedVotesLow": 12603,
           "estimatedVotesMid": 14003,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rick",
         "id": 22817,
         "lastName": "Olson",
         "partyName": "Democratic",
-        "votes": 12766
+        "votes": 0
       },
       {
         "elected": false,
@@ -3466,15 +3533,15 @@
           "estimatedVotesHigh": 15403,
           "estimatedVotesLow": 12603,
           "estimatedVotesMid": 14003,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Troy",
         "id": 100104,
         "lastName": "Clark",
         "partyName": "Republican",
-        "votes": 813
+        "votes": 0
       }
     ],
     "district": "39",
@@ -3482,7 +3549,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:30:14.402Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3492,7 +3560,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13579,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3504,15 +3572,15 @@
           "estimatedVotesHigh": 17998,
           "estimatedVotesLow": 14726,
           "estimatedVotesMid": 16362,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Heather",
         "id": 71265,
         "lastName": "Sievers",
         "partyName": "Democratic",
-        "votes": 14117
+        "votes": 0
       },
       {
         "elected": false,
@@ -3520,15 +3588,15 @@
           "estimatedVotesHigh": 17998,
           "estimatedVotesLow": 14726,
           "estimatedVotesMid": 16362,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bill",
         "id": 22907,
         "lastName": "Gustoff",
         "partyName": "Republican",
-        "votes": 1744
+        "votes": 0
       }
     ],
     "district": "40",
@@ -3536,7 +3604,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.674Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3546,7 +3615,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15861,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3558,15 +3627,15 @@
           "estimatedVotesHigh": 21063,
           "estimatedVotesLow": 17233,
           "estimatedVotesMid": 19148,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Ryan",
-        "id": 71266,
-        "lastName": "Weldon",
-        "partyName": "Republican",
-        "votes": 927
+        "firstName": "Molly",
+        "id": 22819,
+        "lastName": "Buck",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3574,15 +3643,15 @@
           "estimatedVotesHigh": 21063,
           "estimatedVotesLow": 17233,
           "estimatedVotesMid": 19148,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Molly",
-        "id": 22819,
-        "lastName": "Buck",
-        "partyName": "Democratic",
-        "votes": 17643
+        "firstName": "Ryan",
+        "id": 71266,
+        "lastName": "Weldon",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "41",
@@ -3590,7 +3659,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:11:14.560Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3600,7 +3670,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 18570,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3612,15 +3682,15 @@
           "estimatedVotesHigh": 18512,
           "estimatedVotesLow": 15146,
           "estimatedVotesMid": 16829,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Heather",
         "id": 71267,
         "lastName": "Stephenson",
         "partyName": "Republican",
-        "votes": 651
+        "votes": 0
       },
       {
         "elected": false,
@@ -3628,15 +3698,15 @@
           "estimatedVotesHigh": 18512,
           "estimatedVotesLow": 15146,
           "estimatedVotesMid": 16829,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Heather",
         "id": 22820,
         "lastName": "Matson",
         "partyName": "Democratic",
-        "votes": 15669
+        "votes": 0
       }
     ],
     "district": "42",
@@ -3644,7 +3714,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:15:14.550Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3654,7 +3725,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16320,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3666,15 +3737,15 @@
           "estimatedVotesHigh": 19527,
           "estimatedVotesLow": 15977,
           "estimatedVotesMid": 17752,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brett",
         "id": 100105,
         "lastName": "Nelson",
         "partyName": "No Party Affiliation",
-        "votes": 343
+        "votes": 0
       },
       {
         "elected": false,
@@ -3682,15 +3753,15 @@
           "estimatedVotesHigh": 19527,
           "estimatedVotesLow": 15977,
           "estimatedVotesMid": 17752,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eddie",
         "id": 22910,
         "lastName": "Andrews",
         "partyName": "Republican",
-        "votes": 8090
+        "votes": 0
       },
       {
         "elected": false,
@@ -3698,15 +3769,15 @@
           "estimatedVotesHigh": 19527,
           "estimatedVotesLow": 15977,
           "estimatedVotesMid": 17752,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tiara",
         "id": 71268,
         "lastName": "Mays-Sims",
         "partyName": "Democratic",
-        "votes": 8953
+        "votes": 0
       }
     ],
     "district": "43",
@@ -3714,7 +3785,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.674Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3724,7 +3796,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 17386,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3736,15 +3808,15 @@
           "estimatedVotesHigh": 18774,
           "estimatedVotesLow": 15360,
           "estimatedVotesMid": 17067,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jake",
         "id": 71271,
         "lastName": "Heard",
         "partyName": "Libertarian",
-        "votes": 495
+        "votes": 0
       },
       {
         "elected": false,
@@ -3752,15 +3824,15 @@
           "estimatedVotesHigh": 18774,
           "estimatedVotesLow": 15360,
           "estimatedVotesMid": 17067,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Larry",
         "id": 71269,
         "lastName": "McBurney",
         "partyName": "Democratic",
-        "votes": 16056
+        "votes": 0
       }
     ],
     "district": "44",
@@ -3768,7 +3840,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:27:14.216Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3778,7 +3851,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16551,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3790,15 +3863,15 @@
           "estimatedVotesHigh": 20832,
           "estimatedVotesLow": 17044,
           "estimatedVotesMid": 18938,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 22912,
         "lastName": "Lohse",
         "partyName": "Republican",
-        "votes": 1835
+        "votes": 0
       },
       {
         "elected": false,
@@ -3806,15 +3879,15 @@
           "estimatedVotesHigh": 20832,
           "estimatedVotesLow": 17044,
           "estimatedVotesMid": 18938,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 71272,
         "lastName": "Thompson",
         "partyName": "Democratic",
-        "votes": 16529
+        "votes": 0
       }
     ],
     "district": "45",
@@ -3822,7 +3895,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:54:14.376Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3832,7 +3906,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 18364,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3844,15 +3918,15 @@
           "estimatedVotesHigh": 20159,
           "estimatedVotesLow": 16495,
           "estimatedVotesMid": 18327,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lynne",
         "id": 71273,
         "lastName": "Campbell",
         "partyName": "Democratic",
-        "votes": 14999
+        "votes": 0
       },
       {
         "elected": false,
@@ -3860,15 +3934,15 @@
           "estimatedVotesHigh": 20159,
           "estimatedVotesLow": 16495,
           "estimatedVotesMid": 18327,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 22915,
         "lastName": "Gehlbach",
         "partyName": "Republican",
-        "votes": 2770
+        "votes": 0
       }
     ],
     "district": "46",
@@ -3876,7 +3950,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:30:14.402Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3886,7 +3961,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 17769,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3898,15 +3973,15 @@
           "estimatedVotesHigh": 17130,
           "estimatedVotesLow": 14016,
           "estimatedVotesMid": 15573,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 100106,
         "lastName": "Shelly",
         "partyName": "Democratic",
-        "votes": 692
+        "votes": 0
       },
       {
         "elected": false,
@@ -3914,15 +3989,15 @@
           "estimatedVotesHigh": 17130,
           "estimatedVotesLow": 14016,
           "estimatedVotesMid": 15573,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carter",
         "id": 22918,
         "lastName": "Nordman",
         "partyName": "Republican",
-        "votes": 14402
+        "votes": 0
       }
     ],
     "district": "47",
@@ -3930,7 +4005,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:33:14.246Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3940,7 +4016,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15094,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3952,15 +4028,15 @@
           "estimatedVotesHigh": 18747,
           "estimatedVotesLow": 15339,
           "estimatedVotesMid": 17043,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Chad",
-        "id": 71274,
-        "lastName": "Behn",
-        "partyName": "Republican",
-        "votes": 13532
+        "firstName": "Penny",
+        "id": 22826,
+        "lastName": "Vossler",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3968,15 +4044,15 @@
           "estimatedVotesHigh": 18747,
           "estimatedVotesLow": 15339,
           "estimatedVotesMid": 17043,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Penny",
-        "id": 22826,
-        "lastName": "Vossler",
-        "partyName": "Democratic",
-        "votes": 2992
+        "firstName": "Chad",
+        "id": 71274,
+        "lastName": "Behn",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "48",
@@ -3984,7 +4060,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:12:13.812Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3994,7 +4071,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16524,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4006,15 +4083,15 @@
           "estimatedVotesHigh": 11471,
           "estimatedVotesLow": 9385,
           "estimatedVotesMid": 10428,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 100107,
         "lastName": "Cooper",
         "partyName": "Libertarian",
-        "votes": 301
+        "votes": 0
       },
       {
         "elected": false,
@@ -4022,15 +4099,15 @@
           "estimatedVotesHigh": 11471,
           "estimatedVotesLow": 9385,
           "estimatedVotesMid": 10428,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Beth",
         "id": 22827,
         "lastName": "Wessel-Kroeschell",
         "partyName": "Democratic",
-        "votes": 9810
+        "votes": 0
       }
     ],
     "district": "49",
@@ -4038,7 +4115,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:09:13.616Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4048,7 +4126,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 10111,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4076,6 +4154,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4098,15 +4177,15 @@
           "estimatedVotesHigh": 19408,
           "estimatedVotesLow": 15878,
           "estimatedVotesMid": 17643,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 71277,
         "lastName": "Condon",
         "partyName": "Democratic",
-        "votes": 12339
+        "votes": 0
       },
       {
         "elected": false,
@@ -4114,15 +4193,15 @@
           "estimatedVotesHigh": 19408,
           "estimatedVotesLow": 15878,
           "estimatedVotesMid": 17643,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brett",
         "id": 71275,
         "lastName": "Barker",
         "partyName": "Republican",
-        "votes": 4768
+        "votes": 0
       }
     ],
     "district": "51",
@@ -4130,7 +4209,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4140,7 +4220,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 17107,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4152,15 +4232,15 @@
           "estimatedVotesHigh": 13212,
           "estimatedVotesLow": 10810,
           "estimatedVotesMid": 12011,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sue",
         "id": 22828,
         "lastName": "Cahill",
         "partyName": "Democratic",
-        "votes": 696
+        "votes": 0
       },
       {
         "elected": false,
@@ -4168,15 +4248,15 @@
           "estimatedVotesHigh": 13212,
           "estimatedVotesLow": 10810,
           "estimatedVotesMid": 12011,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 100108,
         "lastName": "Blom",
         "partyName": "Republican",
-        "votes": 10950
+        "votes": 0
       }
     ],
     "district": "52",
@@ -4184,7 +4264,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:42:13.850Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4194,7 +4275,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 11646,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4206,15 +4287,15 @@
           "estimatedVotesHigh": 16904,
           "estimatedVotesLow": 13830,
           "estimatedVotesMid": 15367,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dean",
         "id": 22921,
         "lastName": "Fisher",
         "partyName": "Republican",
-        "votes": 12697
+        "votes": 0
       },
       {
         "elected": false,
@@ -4222,15 +4303,15 @@
           "estimatedVotesHigh": 16904,
           "estimatedVotesLow": 13830,
           "estimatedVotesMid": 15367,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tommy",
         "id": 71279,
         "lastName": "Hexter",
         "partyName": "Democratic",
-        "votes": 2200
+        "votes": 0
       }
     ],
     "district": "53",
@@ -4238,7 +4319,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:39:14.126Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4248,7 +4330,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14897,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4276,6 +4358,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4314,6 +4397,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4336,15 +4420,15 @@
           "estimatedVotesHigh": 16914,
           "estimatedVotesLow": 13838,
           "estimatedVotesMid": 15376,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 22927,
         "lastName": "Thompson",
         "partyName": "Republican",
-        "votes": 14414
+        "votes": 0
       },
       {
         "elected": false,
@@ -4352,15 +4436,15 @@
           "estimatedVotesHigh": 16914,
           "estimatedVotesLow": 13838,
           "estimatedVotesMid": 15376,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kyle",
         "id": 71282,
         "lastName": "Kruse",
         "partyName": "Democratic",
-        "votes": 490
+        "votes": 0
       }
     ],
     "district": "56",
@@ -4368,7 +4452,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:14.767Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4378,7 +4463,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14904,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4390,15 +4475,15 @@
           "estimatedVotesHigh": 18538,
           "estimatedVotesLow": 15168,
           "estimatedVotesMid": 16853,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shawn",
         "id": 71283,
         "lastName": "Ellerbroek",
         "partyName": "Democratic",
-        "votes": 7414
+        "votes": 0
       },
       {
         "elected": false,
@@ -4406,15 +4491,15 @@
           "estimatedVotesHigh": 18538,
           "estimatedVotesLow": 15168,
           "estimatedVotesMid": 16853,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pat",
         "id": 22928,
         "lastName": "Grassley",
         "partyName": "Republican",
-        "votes": 8926
+        "votes": 0
       }
     ],
     "district": "57",
@@ -4422,7 +4507,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:01:13.857Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4432,7 +4518,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16340,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4444,15 +4530,15 @@
           "estimatedVotesHigh": 17237,
           "estimatedVotesLow": 14103,
           "estimatedVotesMid": 15670,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gail",
         "id": 71284,
         "lastName": "Allison",
         "partyName": "Democratic",
-        "votes": 1154
+        "votes": 0
       },
       {
         "elected": false,
@@ -4460,15 +4546,15 @@
           "estimatedVotesHigh": 17237,
           "estimatedVotesLow": 14103,
           "estimatedVotesMid": 15670,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Charley",
         "id": 22930,
         "lastName": "Thomson",
         "partyName": "Republican",
-        "votes": 14031
+        "votes": 0
       }
     ],
     "district": "58",
@@ -4476,7 +4562,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.593Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4486,7 +4573,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15185,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4498,15 +4585,15 @@
           "estimatedVotesHigh": 16860,
           "estimatedVotesLow": 13794,
           "estimatedVotesMid": 15327,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeremy",
         "id": 71286,
         "lastName": "True",
         "partyName": "Democratic",
-        "votes": 13825
+        "votes": 0
       },
       {
         "elected": false,
@@ -4514,15 +4601,15 @@
           "estimatedVotesHigh": 16860,
           "estimatedVotesLow": 13794,
           "estimatedVotesMid": 15327,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christian",
         "id": 71285,
         "lastName": "Hermanson",
         "partyName": "Republican",
-        "votes": 1038
+        "votes": 0
       }
     ],
     "district": "59",
@@ -4530,7 +4617,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:10:14.461Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4540,7 +4628,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14863,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4568,6 +4656,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4606,6 +4695,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4628,15 +4718,15 @@
           "estimatedVotesHigh": 12474,
           "estimatedVotesLow": 10206,
           "estimatedVotesMid": 11340,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ervin",
         "id": 100109,
         "lastName": "Sabic",
         "partyName": "Libertarian",
-        "votes": 438
+        "votes": 0
       },
       {
         "elected": false,
@@ -4644,15 +4734,15 @@
           "estimatedVotesHigh": 12474,
           "estimatedVotesLow": 10206,
           "estimatedVotesMid": 11340,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jerome",
         "id": 22831,
         "lastName": "Amos Jr.",
         "partyName": "Democratic",
-        "votes": 10558
+        "votes": 0
       }
     ],
     "district": "62",
@@ -4660,7 +4750,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:48:14.252Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4670,7 +4761,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 10996,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4698,6 +4789,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4720,15 +4812,15 @@
           "estimatedVotesHigh": 17660,
           "estimatedVotesLow": 14448,
           "estimatedVotesMid": 16054,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ian",
         "id": 100110,
         "lastName": "Zahren",
         "partyName": "No Party Affiliation",
-        "votes": 375
+        "votes": 0
       },
       {
         "elected": false,
@@ -4736,15 +4828,15 @@
           "estimatedVotesHigh": 17660,
           "estimatedVotesLow": 14448,
           "estimatedVotesMid": 16054,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jason",
         "id": 71288,
         "lastName": "Gearhart",
         "partyName": "Republican",
-        "votes": 15184
+        "votes": 0
       }
     ],
     "district": "64",
@@ -4752,7 +4844,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:19:14.923Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4762,7 +4855,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15559,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4774,15 +4867,15 @@
           "estimatedVotesHigh": 19799,
           "estimatedVotesLow": 16199,
           "estimatedVotesMid": 17999,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shannon",
         "id": 22937,
         "lastName": "Lundgren",
         "partyName": "Republican",
-        "votes": 13441
+        "votes": 0
       },
       {
         "elected": false,
@@ -4790,15 +4883,15 @@
           "estimatedVotesHigh": 19799,
           "estimatedVotesLow": 16199,
           "estimatedVotesMid": 17999,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carolyn",
         "id": 71290,
         "lastName": "Wiezorek",
         "partyName": "Democratic",
-        "votes": 4013
+        "votes": 0
       }
     ],
     "district": "65",
@@ -4806,7 +4899,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:50:16.173Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4816,7 +4910,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 17454,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4828,15 +4922,15 @@
           "estimatedVotesHigh": 18448,
           "estimatedVotesLow": 15094,
           "estimatedVotesMid": 16771,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andy",
         "id": 71291,
         "lastName": "McKean",
         "partyName": "Democratic",
-        "votes": 3039
+        "votes": 0
       },
       {
         "elected": false,
@@ -4844,15 +4938,15 @@
           "estimatedVotesHigh": 18448,
           "estimatedVotesLow": 15094,
           "estimatedVotesMid": 16771,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steven",
         "id": 22938,
         "lastName": "Bradley",
         "partyName": "Republican",
-        "votes": 13217
+        "votes": 0
       }
     ],
     "district": "66",
@@ -4860,7 +4954,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.583Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4870,7 +4965,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16256,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4898,6 +4993,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4920,15 +5016,15 @@
           "estimatedVotesHigh": 16598,
           "estimatedVotesLow": 13580,
           "estimatedVotesMid": 15089,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chad",
         "id": 22941,
         "lastName": "Ingels",
         "partyName": "Republican",
-        "votes": 10984
+        "votes": 0
       },
       {
         "elected": false,
@@ -4936,15 +5032,15 @@
           "estimatedVotesHigh": 16598,
           "estimatedVotesLow": 13580,
           "estimatedVotesMid": 15089,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tim",
         "id": 100111,
         "lastName": "O'brien",
         "partyName": "Democratic",
-        "votes": 3641
+        "votes": 0
       }
     ],
     "district": "68",
@@ -4952,7 +5048,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:36:16.076Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4962,7 +5059,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14625,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4974,15 +5071,15 @@
           "estimatedVotesHigh": 15648,
           "estimatedVotesLow": 12803,
           "estimatedVotesMid": 14225,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Randy",
         "id": 71292,
         "lastName": "Meier",
         "partyName": "Democratic",
-        "votes": 3034
+        "votes": 0
       },
       {
         "elected": false,
@@ -4990,15 +5087,15 @@
           "estimatedVotesHigh": 15648,
           "estimatedVotesLow": 12803,
           "estimatedVotesMid": 14225,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 22942,
         "lastName": "Determann",
         "partyName": "Republican",
-        "votes": 10761
+        "votes": 0
       }
     ],
     "district": "69",
@@ -5006,7 +5103,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:22:31.793Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5016,7 +5114,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13795,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5028,15 +5126,15 @@
           "estimatedVotesHigh": 18567,
           "estimatedVotesLow": 15191,
           "estimatedVotesMid": 16879,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kay",
         "id": 22835,
         "lastName": "Pence",
         "partyName": "Democratic",
-        "votes": 1789
+        "votes": 0
       },
       {
         "elected": false,
@@ -5044,15 +5142,15 @@
           "estimatedVotesHigh": 18567,
           "estimatedVotesLow": 15191,
           "estimatedVotesMid": 16879,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Norlin",
         "id": 22943,
         "lastName": "Mommsen",
         "partyName": "Republican",
-        "votes": 14571
+        "votes": 0
       }
     ],
     "district": "70",
@@ -5060,7 +5158,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:39:15.596Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:54.753Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5070,7 +5169,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16360,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5082,15 +5181,15 @@
           "estimatedVotesHigh": 15004,
           "estimatedVotesLow": 12276,
           "estimatedVotesMid": 13640,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lindsay",
         "id": 22836,
         "lastName": "James",
         "partyName": "Democratic",
-        "votes": 1718
+        "votes": 0
       },
       {
         "elected": false,
@@ -5098,15 +5197,15 @@
           "estimatedVotesHigh": 15004,
           "estimatedVotesLow": 12276,
           "estimatedVotesMid": 13640,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 100112,
         "lastName": "McClain",
         "partyName": "Republican",
-        "votes": 11509
+        "votes": 0
       }
     ],
     "district": "71",
@@ -5114,7 +5213,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:15:14.550Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5124,7 +5224,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13227,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5136,15 +5236,15 @@
           "estimatedVotesHigh": 17243,
           "estimatedVotesLow": 14108,
           "estimatedVotesMid": 15675,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jennifer",
         "id": 22945,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 12618
+        "votes": 0
       },
       {
         "elected": false,
@@ -5152,15 +5252,15 @@
           "estimatedVotesHigh": 17243,
           "estimatedVotesLow": 14108,
           "estimatedVotesMid": 15675,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Charles",
         "id": 22837,
         "lastName": "Isenhart",
         "partyName": "Democratic",
-        "votes": 2583
+        "votes": 0
       }
     ],
     "district": "72",
@@ -5168,7 +5268,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:22:31.793Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5178,7 +5279,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15201,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5206,6 +5307,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5244,6 +5346,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5282,6 +5385,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5304,15 +5408,15 @@
           "estimatedVotesHigh": 18931,
           "estimatedVotesLow": 15489,
           "estimatedVotesMid": 17210,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jarred",
         "id": 71294,
         "lastName": "Johnston",
         "partyName": "Democratic",
-        "votes": 7571
+        "votes": 0
       },
       {
         "elected": false,
@@ -5320,15 +5424,15 @@
           "estimatedVotesHigh": 18931,
           "estimatedVotesLow": 15489,
           "estimatedVotesMid": 17210,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Derek",
         "id": 22948,
         "lastName": "Wulf",
         "partyName": "Republican",
-        "votes": 9111
+        "votes": 0
       }
     ],
     "district": "76",
@@ -5336,7 +5440,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:39:15.596Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5346,7 +5451,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16682,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5374,6 +5479,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5412,6 +5518,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5434,15 +5541,15 @@
           "estimatedVotesHigh": 16778,
           "estimatedVotesLow": 13728,
           "estimatedVotesMid": 15253,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Barclay",
         "id": 100113,
         "lastName": "Woerner",
         "partyName": "Republican",
-        "votes": 886
+        "votes": 0
       },
       {
         "elected": false,
@@ -5450,15 +5557,15 @@
           "estimatedVotesHigh": 16778,
           "estimatedVotesLow": 13728,
           "estimatedVotesMid": 15253,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tracy",
         "id": 22844,
         "lastName": "Ehlert",
         "partyName": "Democratic",
-        "votes": 13904
+        "votes": 0
       }
     ],
     "district": "79",
@@ -5466,7 +5573,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:42:14.746Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5476,7 +5584,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14790,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5488,15 +5596,15 @@
           "estimatedVotesHigh": 18876,
           "estimatedVotesLow": 15444,
           "estimatedVotesMid": 17160,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Aime",
         "id": 71296,
         "lastName": "Wichtendahl",
         "partyName": "Democratic",
-        "votes": 15478
+        "votes": 0
       },
       {
         "elected": false,
@@ -5504,15 +5612,15 @@
           "estimatedVotesHigh": 18876,
           "estimatedVotesLow": 15444,
           "estimatedVotesMid": 17160,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 71295,
         "lastName": "Thompson",
         "partyName": "Republican",
-        "votes": 1164
+        "votes": 0
       }
     ],
     "district": "80",
@@ -5520,7 +5628,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:14.460Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:54.753Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5530,7 +5639,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16642,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5558,6 +5667,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5580,15 +5690,15 @@
           "estimatedVotesHigh": 17940,
           "estimatedVotesLow": 14678,
           "estimatedVotesMid": 16309,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bobby",
         "id": 22952,
         "lastName": "Kaufmann",
         "partyName": "Republican",
-        "votes": 11624
+        "votes": 0
       },
       {
         "elected": false,
@@ -5596,15 +5706,15 @@
           "estimatedVotesHigh": 17940,
           "estimatedVotesLow": 14678,
           "estimatedVotesMid": 16309,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Phil",
         "id": 100114,
         "lastName": "Wiese",
         "partyName": "Democratic",
-        "votes": 4184
+        "votes": 0
       }
     ],
     "district": "82",
@@ -5612,7 +5722,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:15.075Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5622,7 +5733,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15808,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5634,15 +5745,15 @@
           "estimatedVotesHigh": 20935,
           "estimatedVotesLow": 17129,
           "estimatedVotesMid": 19032,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kent",
         "id": 71298,
         "lastName": "McNally",
         "partyName": "Democratic",
-        "votes": 13467
+        "votes": 0
       },
       {
         "elected": false,
@@ -5650,15 +5761,15 @@
           "estimatedVotesHigh": 20935,
           "estimatedVotesLow": 17129,
           "estimatedVotesMid": 19032,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cindy",
         "id": 22953,
         "lastName": "Golding",
         "partyName": "Republican",
-        "votes": 4982
+        "votes": 0
       }
     ],
     "district": "83",
@@ -5666,7 +5777,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:15.075Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5676,7 +5788,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 18449,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5688,15 +5800,15 @@
           "estimatedVotesHigh": 19067,
           "estimatedVotesLow": 15599,
           "estimatedVotesMid": 17333,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Ashley",
-        "id": 71299,
-        "lastName": "Meredith",
-        "partyName": "Libertarian",
-        "votes": 668
+        "firstName": "Thomas",
+        "id": 22954,
+        "lastName": "Gerhold",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -5704,15 +5816,15 @@
           "estimatedVotesHigh": 19067,
           "estimatedVotesLow": 15599,
           "estimatedVotesMid": 17333,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Thomas",
-        "id": 22954,
-        "lastName": "Gerhold",
-        "partyName": "Republican",
-        "votes": 16136
+        "firstName": "Ashley",
+        "id": 71299,
+        "lastName": "Meredith",
+        "partyName": "Libertarian",
+        "votes": 0
       }
     ],
     "district": "84",
@@ -5720,7 +5832,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:51:14.512Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5730,7 +5843,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 16804,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5758,6 +5871,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5780,15 +5894,15 @@
           "estimatedVotesHigh": 16244,
           "estimatedVotesLow": 13290,
           "estimatedVotesMid": 14767,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dave",
         "id": 22850,
         "lastName": "Jacoby",
         "partyName": "Democratic",
-        "votes": 13892
+        "votes": 0
       },
       {
         "elected": false,
@@ -5796,15 +5910,15 @@
           "estimatedVotesHigh": 16244,
           "estimatedVotesLow": 13290,
           "estimatedVotesMid": 14767,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Stephen",
         "id": 100115,
         "lastName": "Knoner",
         "partyName": "Republican",
-        "votes": 428
+        "votes": 0
       }
     ],
     "district": "86",
@@ -5812,7 +5926,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:19:14.923Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5822,7 +5937,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14320,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5834,15 +5949,15 @@
           "estimatedVotesHigh": 15816,
           "estimatedVotesLow": 12941,
           "estimatedVotesMid": 14378,
-          "turnoutHigh": 88.46,
-          "turnoutLow": 108.11,
-          "turnoutMid": 97.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Curtis",
         "id": 100117,
         "lastName": "Oliver",
         "partyName": "No Party Affiliation",
-        "votes": 241
+        "votes": 0
       },
       {
         "elected": false,
@@ -5850,15 +5965,15 @@
           "estimatedVotesHigh": 15816,
           "estimatedVotesLow": 12941,
           "estimatedVotesMid": 14378,
-          "turnoutHigh": 88.46,
-          "turnoutLow": 108.11,
-          "turnoutMid": 97.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 100116,
         "lastName": "O'Donnell",
         "partyName": "Democratic",
-        "votes": 4674
+        "votes": 0
       },
       {
         "elected": false,
@@ -5866,15 +5981,15 @@
           "estimatedVotesHigh": 15816,
           "estimatedVotesLow": 12941,
           "estimatedVotesMid": 14378,
-          "turnoutHigh": 88.46,
-          "turnoutLow": 108.11,
-          "turnoutMid": 97.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 22956,
         "lastName": "Shipley",
         "partyName": "Republican",
-        "votes": 9076
+        "votes": 0
       }
     ],
     "district": "87",
@@ -5882,7 +5997,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:15.066Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5892,7 +6008,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13991,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5920,6 +6036,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5958,6 +6075,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5996,6 +6114,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -6018,15 +6137,15 @@
           "estimatedVotesHigh": 20578,
           "estimatedVotesLow": 16836,
           "estimatedVotesMid": 18707,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Judd",
         "id": 71300,
         "lastName": "Lawler",
         "partyName": "Republican",
-        "votes": 8801
+        "votes": 0
       },
       {
         "elected": false,
@@ -6034,15 +6153,15 @@
           "estimatedVotesHigh": 20578,
           "estimatedVotesLow": 16836,
           "estimatedVotesMid": 18707,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jay",
         "id": 71301,
         "lastName": "Gorsh",
         "partyName": "Democratic",
-        "votes": 9338
+        "votes": 0
       }
     ],
     "district": "91",
@@ -6050,7 +6169,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:37:15.716Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6060,7 +6180,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 18139,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6072,15 +6192,15 @@
           "estimatedVotesHigh": 16631,
           "estimatedVotesLow": 13607,
           "estimatedVotesMid": 15119,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Heather",
         "id": 22965,
         "lastName": "Hora",
         "partyName": "Republican",
-        "votes": 9946
+        "votes": 0
       },
       {
         "elected": false,
@@ -6088,15 +6208,15 @@
           "estimatedVotesHigh": 16631,
           "estimatedVotesLow": 13607,
           "estimatedVotesMid": 15119,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anna",
         "id": 71302,
         "lastName": "Banowsky",
         "partyName": "Democratic",
-        "votes": 4709
+        "votes": 0
       }
     ],
     "district": "92",
@@ -6104,7 +6224,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.660Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6114,7 +6235,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 14655,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6126,15 +6247,15 @@
           "estimatedVotesHigh": 19322,
           "estimatedVotesLow": 15809,
           "estimatedVotesMid": 17565,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mindy",
         "id": 71303,
         "lastName": "Smith-Pace",
         "partyName": "Democratic",
-        "votes": 14989
+        "votes": 0
       },
       {
         "elected": false,
@@ -6142,15 +6263,15 @@
           "estimatedVotesHigh": 19322,
           "estimatedVotesLow": 15809,
           "estimatedVotesMid": 17565,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gary",
         "id": 22967,
         "lastName": "Mohr",
         "partyName": "Republican",
-        "votes": 2042
+        "votes": 0
       }
     ],
     "district": "93",
@@ -6158,7 +6279,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:15.075Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6168,7 +6290,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 17031,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6180,15 +6302,15 @@
           "estimatedVotesHigh": 18025,
           "estimatedVotesLow": 14747,
           "estimatedVotesMid": 16386,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tracy",
         "id": 71304,
         "lastName": "Jones",
         "partyName": "Democratic",
-        "votes": 14917
+        "votes": 0
       },
       {
         "elected": false,
@@ -6196,15 +6318,15 @@
           "estimatedVotesHigh": 18025,
           "estimatedVotesLow": 14747,
           "estimatedVotesMid": 16386,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 22968,
         "lastName": "Vondran",
         "partyName": "Republican",
-        "votes": 952
+        "votes": 0
       }
     ],
     "district": "94",
@@ -6212,7 +6334,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.583Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6222,7 +6345,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15869,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6234,15 +6357,15 @@
           "estimatedVotesHigh": 17630,
           "estimatedVotesLow": 14423,
           "estimatedVotesMid": 16026,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Taylor",
         "id": 22969,
         "lastName": "Collins",
         "partyName": "Republican",
-        "votes": 14738
+        "votes": 0
       },
       {
         "elected": false,
@@ -6250,15 +6373,15 @@
           "estimatedVotesHigh": 17630,
           "estimatedVotesLow": 14423,
           "estimatedVotesMid": 16026,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 71305,
         "lastName": "Poulter",
         "partyName": "Democratic",
-        "votes": 791
+        "votes": 0
       }
     ],
     "district": "95",
@@ -6266,7 +6389,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:50:16.173Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6276,7 +6400,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 15529,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6288,15 +6412,15 @@
           "estimatedVotesHigh": 14941,
           "estimatedVotesLow": 12225,
           "estimatedVotesMid": 13583,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 22970,
         "lastName": "Cisneros",
         "partyName": "Republican",
-        "votes": 12119
+        "votes": 0
       },
       {
         "elected": false,
@@ -6304,15 +6428,15 @@
           "estimatedVotesHigh": 14941,
           "estimatedVotesLow": 12225,
           "estimatedVotesMid": 13583,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mandy",
         "id": 71306,
         "lastName": "Moody",
         "partyName": "Democratic",
-        "votes": 1052
+        "votes": 0
       }
     ],
     "district": "96",
@@ -6320,7 +6444,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:15.167Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6330,7 +6455,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13171,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6342,15 +6467,15 @@
           "estimatedVotesHigh": 13435,
           "estimatedVotesLow": 10993,
           "estimatedVotesMid": 12214,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josue",
         "id": 71307,
         "lastName": "Rodriguez",
         "partyName": "Republican",
-        "votes": 7096
+        "votes": 0
       },
       {
         "elected": false,
@@ -6358,15 +6483,15 @@
           "estimatedVotesHigh": 13435,
           "estimatedVotesLow": 10993,
           "estimatedVotesMid": 12214,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ken",
         "id": 22863,
         "lastName": "Croken",
         "partyName": "Democratic",
-        "votes": 4737
+        "votes": 0
       }
     ],
     "district": "97",
@@ -6374,7 +6499,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.660Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6384,7 +6510,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 11833,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6396,15 +6522,15 @@
           "estimatedVotesHigh": 13927,
           "estimatedVotesLow": 11395,
           "estimatedVotesMid": 12661,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Monica",
         "id": 22864,
         "lastName": "Kurth",
         "partyName": "Democratic",
-        "votes": 4910
+        "votes": 0
       },
       {
         "elected": false,
@@ -6412,15 +6538,15 @@
           "estimatedVotesHigh": 13927,
           "estimatedVotesLow": 11395,
           "estimatedVotesMid": 12661,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nathan",
         "id": 100118,
         "lastName": "Ramker",
         "partyName": "Republican",
-        "votes": 7367
+        "votes": 0
       }
     ],
     "district": "98",
@@ -6428,7 +6554,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:50:16.173Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6438,7 +6565,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 12277,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6450,15 +6577,15 @@
           "estimatedVotesHigh": 15532,
           "estimatedVotesLow": 12708,
           "estimatedVotesMid": 14120,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jim",
-        "id": 71308,
-        "lastName": "Beres",
-        "partyName": "Democratic",
-        "votes": 955
+        "firstName": "Matthew",
+        "id": 22971,
+        "lastName": "Rinker",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -6466,15 +6593,15 @@
           "estimatedVotesHigh": 15532,
           "estimatedVotesLow": 12708,
           "estimatedVotesMid": 14120,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Matthew",
-        "id": 22971,
-        "lastName": "Rinker",
-        "partyName": "Republican",
-        "votes": 12735
+        "firstName": "Jim",
+        "id": 71308,
+        "lastName": "Beres",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "99",
@@ -6482,7 +6609,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:35:14.818Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6492,7 +6620,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13690,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6504,15 +6632,15 @@
           "estimatedVotesHigh": 15227,
           "estimatedVotesLow": 12459,
           "estimatedVotesMid": 13843,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Martin",
         "id": 23046,
         "lastName": "Graber",
         "partyName": "Republican",
-        "votes": 13023
+        "votes": 0
       },
       {
         "elected": false,
@@ -6520,15 +6648,15 @@
           "estimatedVotesHigh": 15227,
           "estimatedVotesLow": 12459,
           "estimatedVotesMid": 13843,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nicolas",
         "id": 100119,
         "lastName": "Atwood",
         "partyName": "No Party Affiliation",
-        "votes": 401
+        "votes": 0
       }
     ],
     "district": "100",
@@ -6536,7 +6664,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:37:15.716Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6546,7 +6675,7 @@
     "raceDate": "2024-11-05",
     "state": "IA",
     "stateName": "Iowa",
-    "totalVotes": 13424,
+    "totalVotes": 0,
     "year": 2024
   }
 ]
