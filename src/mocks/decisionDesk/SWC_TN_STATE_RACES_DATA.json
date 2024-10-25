@@ -7,64 +7,24 @@
       "lastName": "Blackburn",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Marsha",
+        "id": 1631,
+        "lastName": "Blackburn",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3012772,
-          "estimatedVotesLow": 2464997,
-          "estimatedVotesMid": 2738880,
-          "turnoutHigh": 5.51,
-          "turnoutLow": 6.73,
-          "turnoutMid": 6.06
-        },
-        "firstName": "Hastina",
-        "id": 44845,
-        "lastName": "Robinson",
-        "partyName": "Independent",
-        "votes": 55159
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3012772,
-          "estimatedVotesLow": 2464997,
-          "estimatedVotesMid": 2738880,
-          "turnoutHigh": 5.51,
-          "turnoutLow": 6.73,
-          "turnoutMid": 6.06
-        },
-        "firstName": "Tharon",
-        "id": 44417,
-        "lastName": "Chandler",
-        "partyName": "Independent",
-        "votes": 55326
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3012772,
-          "estimatedVotesLow": 2464997,
-          "estimatedVotesMid": 2738880,
-          "turnoutHigh": 5.51,
-          "turnoutLow": 6.73,
-          "turnoutMid": 6.06
-        },
-        "firstName": "Gloria",
-        "id": 28431,
-        "lastName": "Johnson",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 3012772,
           "estimatedVotesLow": 2464997,
           "estimatedVotesMid": 2738880,
-          "turnoutHigh": 5.51,
-          "turnoutLow": 6.73,
-          "turnoutMid": 6.06
+          "turnoutHigh": 7.12,
+          "turnoutLow": 8.7,
+          "turnoutMid": 7.83
         },
         "firstName": "Marsha",
         "id": 1631,
@@ -78,15 +38,63 @@
           "estimatedVotesHigh": 3012772,
           "estimatedVotesLow": 2464997,
           "estimatedVotesMid": 2738880,
-          "turnoutHigh": 5.51,
-          "turnoutLow": 6.73,
-          "turnoutMid": 6.06
+          "turnoutHigh": 7.12,
+          "turnoutLow": 8.7,
+          "turnoutMid": 7.83
+        },
+        "firstName": "Hastina",
+        "id": 44845,
+        "lastName": "Robinson",
+        "partyName": "Independent",
+        "votes": 70978
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3012772,
+          "estimatedVotesLow": 2464997,
+          "estimatedVotesMid": 2738880,
+          "turnoutHigh": 7.12,
+          "turnoutLow": 8.7,
+          "turnoutMid": 7.83
+        },
+        "firstName": "Tharon",
+        "id": 44417,
+        "lastName": "Chandler",
+        "partyName": "Independent",
+        "votes": 71611
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3012772,
+          "estimatedVotesLow": 2464997,
+          "estimatedVotesMid": 2738880,
+          "turnoutHigh": 7.12,
+          "turnoutLow": 8.7,
+          "turnoutMid": 7.83
+        },
+        "firstName": "Gloria",
+        "id": 28431,
+        "lastName": "Johnson",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3012772,
+          "estimatedVotesLow": 2464997,
+          "estimatedVotesMid": 2738880,
+          "turnoutHigh": 7.12,
+          "turnoutLow": 8.7,
+          "turnoutMid": 7.83
         },
         "firstName": "Pamela Jeanine",
         "id": 84966,
         "lastName": "Moses",
         "partyName": "Independent",
-        "votes": 55510
+        "votes": 71956
       }
     ],
     "district": "",
@@ -95,7 +103,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:57.147Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -105,7 +113,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 165995,
+    "totalVotes": 214545,
     "year": 2024
   },
   {
@@ -116,6 +124,14 @@
       "lastName": "Harshbarger",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Diana",
+        "id": 14177,
+        "lastName": "Harshbarger",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -123,31 +139,15 @@
           "estimatedVotesHigh": 332767,
           "estimatedVotesLow": 272265,
           "estimatedVotesMid": 302515,
-          "turnoutHigh": 71.3,
-          "turnoutLow": 87.15,
-          "turnoutMid": 78.43
-        },
-        "firstName": "Kevin",
-        "id": 82107,
-        "lastName": "Jenkins",
-        "partyName": "Democratic",
-        "votes": 47998
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 332767,
-          "estimatedVotesLow": 272265,
-          "estimatedVotesMid": 302515,
-          "turnoutHigh": 71.3,
-          "turnoutLow": 87.15,
-          "turnoutMid": 78.43
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
+          "turnoutMid": 99
         },
         "firstName": "Levi",
         "id": 102214,
         "lastName": "Brake",
         "partyName": "Independent",
-        "votes": 4890
+        "votes": 6330
       },
       {
         "elected": false,
@@ -155,15 +155,31 @@
           "estimatedVotesHigh": 332767,
           "estimatedVotesLow": 272265,
           "estimatedVotesMid": 302515,
-          "turnoutHigh": 71.3,
-          "turnoutLow": 87.15,
-          "turnoutMid": 78.43
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
+          "turnoutMid": 99
         },
         "firstName": "Richard",
         "id": 44413,
         "lastName": "Baker",
         "partyName": "Independent",
-        "votes": 4577
+        "votes": 5813
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 332767,
+          "estimatedVotesLow": 272265,
+          "estimatedVotesMid": 302515,
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
+          "turnoutMid": 99
+        },
+        "firstName": "Kevin",
+        "id": 82107,
+        "lastName": "Jenkins",
+        "partyName": "Democratic",
+        "votes": 62916
       },
       {
         "elected": true,
@@ -171,15 +187,15 @@
           "estimatedVotesHigh": 332767,
           "estimatedVotesLow": 272265,
           "estimatedVotesMid": 302515,
-          "turnoutHigh": 71.3,
-          "turnoutLow": 87.15,
-          "turnoutMid": 78.43
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
+          "turnoutMid": 99
         },
         "firstName": "Diana",
         "id": 14177,
         "lastName": "Harshbarger",
         "partyName": "Republican",
-        "votes": 179809
+        "votes": 229286
       }
     ],
     "district": "1",
@@ -188,7 +204,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:40.429Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -198,7 +214,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 237274,
+    "totalVotes": 304345,
     "year": 2024
   },
   {
@@ -209,6 +225,14 @@
       "lastName": "Burchett",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Tim",
+        "id": 10188,
+        "lastName": "Burchett",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -216,15 +240,15 @@
           "estimatedVotesHigh": 353218,
           "estimatedVotesLow": 288996,
           "estimatedVotesMid": 321106,
-          "turnoutHigh": 67.79,
-          "turnoutLow": 82.85,
-          "turnoutMid": 74.57
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.32,
+          "turnoutMid": 99
         },
         "firstName": "Jane",
         "id": 82109,
         "lastName": "George",
         "partyName": "Democratic",
-        "votes": 78596
+        "votes": 108995
       },
       {
         "elected": true,
@@ -232,15 +256,15 @@
           "estimatedVotesHigh": 353218,
           "estimatedVotesLow": 288996,
           "estimatedVotesMid": 321106,
-          "turnoutHigh": 67.79,
-          "turnoutLow": 82.85,
-          "turnoutMid": 74.57
+          "turnoutHigh": 91.08,
+          "turnoutLow": 111.32,
+          "turnoutMid": 99
         },
         "firstName": "Tim",
         "id": 10188,
         "lastName": "Burchett",
         "partyName": "Republican",
-        "votes": 160837
+        "votes": 212721
       }
     ],
     "district": "2",
@@ -249,7 +273,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:19.762Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -259,7 +283,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 239433,
+    "totalVotes": 321716,
     "year": 2024
   },
   {
@@ -270,6 +294,14 @@
       "lastName": "Fleischmann",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Charles",
+        "id": 10195,
+        "lastName": "Fleischmann",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -277,15 +309,15 @@
           "estimatedVotesHigh": 348061,
           "estimatedVotesLow": 284775,
           "estimatedVotesMid": 316418,
-          "turnoutHigh": 70.85,
-          "turnoutLow": 86.59,
-          "turnoutMid": 77.93
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
         },
         "firstName": "Charles",
         "id": 10195,
         "lastName": "Fleischmann",
         "partyName": "Republican",
-        "votes": 148319
+        "votes": 202019
       },
       {
         "elected": false,
@@ -293,15 +325,15 @@
           "estimatedVotesHigh": 348061,
           "estimatedVotesLow": 284775,
           "estimatedVotesMid": 316418,
-          "turnoutHigh": 70.85,
-          "turnoutLow": 86.59,
-          "turnoutMid": 77.93
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
         },
         "firstName": "Stephen",
         "id": 102216,
         "lastName": "King",
         "partyName": "Independent",
-        "votes": 4790
+        "votes": 6159
       },
       {
         "elected": false,
@@ -309,15 +341,15 @@
           "estimatedVotesHigh": 348061,
           "estimatedVotesLow": 284775,
           "estimatedVotesMid": 316418,
-          "turnoutHigh": 70.85,
-          "turnoutLow": 86.59,
-          "turnoutMid": 77.93
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
         },
         "firstName": "Jack",
         "id": 82110,
         "lastName": "Allen",
         "partyName": "Democratic",
-        "votes": 88704
+        "votes": 102530
       },
       {
         "elected": false,
@@ -325,15 +357,15 @@
           "estimatedVotesHigh": 348061,
           "estimatedVotesLow": 284775,
           "estimatedVotesMid": 316418,
-          "turnoutHigh": 70.85,
-          "turnoutLow": 86.59,
-          "turnoutMid": 77.93
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
         },
         "firstName": "Jean",
         "id": 102215,
         "lastName": "Howard-Hill",
         "partyName": "Independent",
-        "votes": 4781
+        "votes": 6186
       }
     ],
     "district": "3",
@@ -342,7 +374,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -352,7 +384,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 246594,
+    "totalVotes": 316894,
     "year": 2024
   },
   {
@@ -363,6 +395,14 @@
       "lastName": "DesJarlais",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Scott",
+        "id": 367,
+        "lastName": "DesJarlais",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -370,15 +410,15 @@
           "estimatedVotesHigh": 326029,
           "estimatedVotesLow": 266752,
           "estimatedVotesMid": 296390,
-          "turnoutHigh": 62.46,
-          "turnoutLow": 76.34,
-          "turnoutMid": 68.71
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Keith",
         "id": 102218,
         "lastName": "Nolan",
         "partyName": "Independent",
-        "votes": 3835
+        "votes": 5704
       },
       {
         "elected": false,
@@ -386,15 +426,15 @@
           "estimatedVotesHigh": 326029,
           "estimatedVotesLow": 266752,
           "estimatedVotesMid": 296390,
-          "turnoutHigh": 62.46,
-          "turnoutLow": 76.34,
-          "turnoutMid": 68.71
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Earnest",
         "id": 102217,
         "lastName": "Ensley",
         "partyName": "Independent",
-        "votes": 3749
+        "votes": 5389
       },
       {
         "elected": false,
@@ -402,15 +442,15 @@
           "estimatedVotesHigh": 326029,
           "estimatedVotesLow": 266752,
           "estimatedVotesMid": 296390,
-          "turnoutHigh": 62.46,
-          "turnoutLow": 76.34,
-          "turnoutMid": 68.71
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Victoria",
         "id": 82113,
         "lastName": "Broderick",
         "partyName": "Democratic",
-        "votes": 59736
+        "votes": 90147
       },
       {
         "elected": true,
@@ -418,15 +458,15 @@
           "estimatedVotesHigh": 326029,
           "estimatedVotesLow": 266752,
           "estimatedVotesMid": 296390,
-          "turnoutHigh": 62.46,
-          "turnoutLow": 76.34,
-          "turnoutMid": 68.71
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 367,
         "lastName": "DesJarlais",
         "partyName": "Republican",
-        "votes": 136315
+        "votes": 197343
       }
     ],
     "district": "4",
@@ -435,7 +475,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:38:10.043Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -445,11 +485,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 203635,
+    "totalVotes": 298583,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -457,79 +498,79 @@
           "estimatedVotesHigh": 359743,
           "estimatedVotesLow": 294335,
           "estimatedVotesMid": 327038,
-          "turnoutHigh": 58.68,
-          "turnoutLow": 71.72,
-          "turnoutMid": 64.55
-        },
-        "firstName": "Jim",
-        "id": 102220,
-        "lastName": "Larkin",
-        "partyName": "Independent",
-        "votes": 4188
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359743,
-          "estimatedVotesLow": 294335,
-          "estimatedVotesMid": 327038,
-          "turnoutHigh": 58.68,
-          "turnoutLow": 71.72,
-          "turnoutMid": 64.55
-        },
-        "firstName": "Bob",
-        "id": 102221,
-        "lastName": "Titley",
-        "partyName": "Independent",
-        "votes": 4004
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359743,
-          "estimatedVotesLow": 294335,
-          "estimatedVotesMid": 327038,
-          "turnoutHigh": 58.68,
-          "turnoutLow": 71.72,
-          "turnoutMid": 64.55
-        },
-        "firstName": "Maryam",
-        "id": 82115,
-        "lastName": "Abolfazli",
-        "partyName": "Democratic",
-        "votes": 85540
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359743,
-          "estimatedVotesLow": 294335,
-          "estimatedVotesMid": 327038,
-          "turnoutHigh": 58.68,
-          "turnoutLow": 71.72,
-          "turnoutMid": 64.55
-        },
-        "firstName": "Yomi",
-        "id": 14837,
-        "lastName": "Faparusi",
-        "partyName": "Independent",
-        "votes": 3932
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359743,
-          "estimatedVotesLow": 294335,
-          "estimatedVotesMid": 327038,
-          "turnoutHigh": 58.68,
-          "turnoutLow": 71.72,
-          "turnoutMid": 64.55
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.88,
+          "turnoutMid": 99
         },
         "firstName": "Andy",
         "id": 28334,
         "lastName": "Ogles",
         "partyName": "Republican",
-        "votes": 113447
+        "votes": 178067
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359743,
+          "estimatedVotesLow": 294335,
+          "estimatedVotesMid": 327038,
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.88,
+          "turnoutMid": 99
+        },
+        "firstName": "Jim",
+        "id": 102220,
+        "lastName": "Larkin",
+        "partyName": "Independent",
+        "votes": 6340
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359743,
+          "estimatedVotesLow": 294335,
+          "estimatedVotesMid": 327038,
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.88,
+          "turnoutMid": 99
+        },
+        "firstName": "Bob",
+        "id": 102221,
+        "lastName": "Titley",
+        "partyName": "Independent",
+        "votes": 6058
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359743,
+          "estimatedVotesLow": 294335,
+          "estimatedVotesMid": 327038,
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.88,
+          "turnoutMid": 99
+        },
+        "firstName": "Maryam",
+        "id": 82115,
+        "lastName": "Abolfazli",
+        "partyName": "Democratic",
+        "votes": 132679
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359743,
+          "estimatedVotesLow": 294335,
+          "estimatedVotesMid": 327038,
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.88,
+          "turnoutMid": 99
+        },
+        "firstName": "Yomi",
+        "id": 14837,
+        "lastName": "Faparusi",
+        "partyName": "Independent",
+        "votes": 6160
       }
     ],
     "district": "5",
@@ -538,7 +579,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:36:25.452Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -548,7 +589,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 211111,
+    "totalVotes": 329304,
     "year": 2024
   },
   {
@@ -559,6 +600,14 @@
       "lastName": "Rose",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "John",
+        "id": 10206,
+        "lastName": "Rose",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -566,15 +615,15 @@
           "estimatedVotesHigh": 342747,
           "estimatedVotesLow": 280431,
           "estimatedVotesMid": 311588,
-          "turnoutHigh": 78.68,
-          "turnoutLow": 96.17,
-          "turnoutMid": 86.55
+          "turnoutHigh": 91.3,
+          "turnoutLow": 111.59,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 10206,
         "lastName": "Rose",
         "partyName": "Republican",
-        "votes": 170837
+        "votes": 201729
       },
       {
         "elected": false,
@@ -582,15 +631,15 @@
           "estimatedVotesHigh": 342747,
           "estimatedVotesLow": 280431,
           "estimatedVotesMid": 311588,
-          "turnoutHigh": 78.68,
-          "turnoutLow": 96.17,
-          "turnoutMid": 86.55
+          "turnoutHigh": 91.3,
+          "turnoutLow": 111.59,
+          "turnoutMid": 99
         },
         "firstName": "Lore",
         "id": 82116,
         "lastName": "Bergman",
         "partyName": "Democratic",
-        "votes": 98849
+        "votes": 111197
       }
     ],
     "district": "6",
@@ -599,7 +648,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:40.429Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -609,11 +658,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 269686,
+    "totalVotes": 312926,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -621,31 +671,15 @@
           "estimatedVotesHigh": 313900,
           "estimatedVotesLow": 256831,
           "estimatedVotesMid": 285365,
-          "turnoutHigh": 85.16,
-          "turnoutLow": 104.08,
-          "turnoutMid": 93.68
-        },
-        "firstName": "Shaun",
-        "id": 102222,
-        "lastName": "Greene",
-        "partyName": "Independent",
-        "votes": 5382
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 313900,
-          "estimatedVotesLow": 256831,
-          "estimatedVotesMid": 285365,
-          "turnoutHigh": 85.16,
-          "turnoutLow": 104.08,
-          "turnoutMid": 93.68
+          "turnoutHigh": 91.79,
+          "turnoutLow": 112.18,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 10924,
         "lastName": "Green",
         "partyName": "Republican",
-        "votes": 148595
+        "votes": 163303
       },
       {
         "elected": false,
@@ -653,15 +687,31 @@
           "estimatedVotesHigh": 313900,
           "estimatedVotesLow": 256831,
           "estimatedVotesMid": 285365,
-          "turnoutHigh": 85.16,
-          "turnoutLow": 104.08,
-          "turnoutMid": 93.68
+          "turnoutHigh": 91.79,
+          "turnoutLow": 112.18,
+          "turnoutMid": 99
+        },
+        "firstName": "Shaun",
+        "id": 102222,
+        "lastName": "Greene",
+        "partyName": "Independent",
+        "votes": 5763
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 313900,
+          "estimatedVotesLow": 256831,
+          "estimatedVotesMid": 285365,
+          "turnoutHigh": 91.79,
+          "turnoutLow": 112.18,
+          "turnoutMid": 99
         },
         "firstName": "Megan",
         "id": 82118,
         "lastName": "Barry",
         "partyName": "Democratic",
-        "votes": 113345
+        "votes": 119059
       }
     ],
     "district": "7",
@@ -670,7 +720,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:40.429Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -680,7 +730,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 267322,
+    "totalVotes": 288125,
     "year": 2024
   },
   {
@@ -691,6 +741,14 @@
       "lastName": "Kustoff",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "David",
+        "id": 383,
+        "lastName": "Kustoff",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -698,15 +756,15 @@
           "estimatedVotesHigh": 363395,
           "estimatedVotesLow": 297324,
           "estimatedVotesMid": 330359,
-          "turnoutHigh": 75.59,
-          "turnoutLow": 92.38,
-          "turnoutMid": 83.14
+          "turnoutHigh": 91.19,
+          "turnoutLow": 111.45,
+          "turnoutMid": 99
         },
         "firstName": "Sarah",
         "id": 82119,
         "lastName": "Freeman",
         "partyName": "Democratic",
-        "votes": 86153
+        "votes": 104633
       },
       {
         "elected": false,
@@ -714,15 +772,15 @@
           "estimatedVotesHigh": 363395,
           "estimatedVotesLow": 297324,
           "estimatedVotesMid": 330359,
-          "turnoutHigh": 75.59,
-          "turnoutLow": 92.38,
-          "turnoutMid": 83.14
+          "turnoutHigh": 91.19,
+          "turnoutLow": 111.45,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 2096,
         "lastName": "Hart",
         "partyName": "Independent",
-        "votes": 5661
+        "votes": 6726
       },
       {
         "elected": true,
@@ -730,15 +788,15 @@
           "estimatedVotesHigh": 363395,
           "estimatedVotesLow": 297324,
           "estimatedVotesMid": 330359,
-          "turnoutHigh": 75.59,
-          "turnoutLow": 92.38,
-          "turnoutMid": 83.14
+          "turnoutHigh": 91.19,
+          "turnoutLow": 111.45,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 383,
         "lastName": "Kustoff",
         "partyName": "Republican",
-        "votes": 182859
+        "votes": 220014
       }
     ],
     "district": "8",
@@ -747,7 +805,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:40.429Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -757,7 +815,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 274673,
+    "totalVotes": 331373,
     "year": 2024
   },
   {
@@ -768,6 +826,14 @@
       "lastName": "Cohen",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Steve",
+        "id": 1633,
+        "lastName": "Cohen",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -775,15 +841,15 @@
           "estimatedVotesHigh": 272532,
           "estimatedVotesLow": 222981,
           "estimatedVotesMid": 247756,
-          "turnoutHigh": 38.81,
-          "turnoutLow": 47.43,
-          "turnoutMid": 42.69
+          "turnoutHigh": 91.55,
+          "turnoutLow": 111.89,
+          "turnoutMid": 99
         },
         "firstName": "Wendell",
         "id": 102224,
         "lastName": "Wells",
         "partyName": "Independent",
-        "votes": 2189
+        "votes": 4875
       },
       {
         "elected": true,
@@ -791,15 +857,15 @@
           "estimatedVotesHigh": 272532,
           "estimatedVotesLow": 222981,
           "estimatedVotesMid": 247756,
-          "turnoutHigh": 38.81,
-          "turnoutLow": 47.43,
-          "turnoutMid": 42.69
+          "turnoutHigh": 91.55,
+          "turnoutLow": 111.89,
+          "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 1633,
         "lastName": "Cohen",
         "partyName": "Democratic",
-        "votes": 75569
+        "votes": 172911
       },
       {
         "elected": false,
@@ -807,15 +873,15 @@
           "estimatedVotesHigh": 272532,
           "estimatedVotesLow": 222981,
           "estimatedVotesMid": 247756,
-          "turnoutHigh": 38.81,
-          "turnoutLow": 47.43,
-          "turnoutMid": 42.69
+          "turnoutHigh": 91.55,
+          "turnoutLow": 111.89,
+          "turnoutMid": 99
         },
         "firstName": "Charlotte",
         "id": 10923,
         "lastName": "Bergmann",
         "partyName": "Republican",
-        "votes": 25790
+        "votes": 66738
       },
       {
         "elected": false,
@@ -823,15 +889,15 @@
           "estimatedVotesHigh": 272532,
           "estimatedVotesLow": 222981,
           "estimatedVotesMid": 247756,
-          "turnoutHigh": 38.81,
-          "turnoutLow": 47.43,
-          "turnoutMid": 42.69
+          "turnoutHigh": 91.55,
+          "turnoutLow": 111.89,
+          "turnoutMid": 99
         },
         "firstName": "Dennis",
         "id": 14864,
         "lastName": "Clark",
         "partyName": "Independent",
-        "votes": 2214
+        "votes": 4967
       }
     ],
     "district": "9",
@@ -840,7 +906,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -850,11 +916,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 105762,
+    "totalVotes": 249491,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -862,15 +929,15 @@
           "estimatedVotesHigh": 97101,
           "estimatedVotesLow": 79446,
           "estimatedVotesMid": 88273,
-          "turnoutHigh": 62.36,
-          "turnoutLow": 76.22,
-          "turnoutMid": 68.6
+          "turnoutHigh": 90.33,
+          "turnoutLow": 110.4,
+          "turnoutMid": 99
         },
-        "firstName": "Tom",
-        "id": 82123,
-        "lastName": "Hatcher",
-        "partyName": "Republican",
-        "votes": 44341
+        "firstName": "Patti",
+        "id": 82125,
+        "lastName": "Young",
+        "partyName": "Democratic",
+        "votes": 22090
       },
       {
         "elected": false,
@@ -878,15 +945,15 @@
           "estimatedVotesHigh": 97101,
           "estimatedVotesLow": 79446,
           "estimatedVotesMid": 88273,
-          "turnoutHigh": 62.36,
-          "turnoutLow": 76.22,
-          "turnoutMid": 68.6
+          "turnoutHigh": 90.33,
+          "turnoutLow": 110.4,
+          "turnoutMid": 99
         },
-        "firstName": "Patti",
-        "id": 82125,
-        "lastName": "Young",
-        "partyName": "Democratic",
-        "votes": 16210
+        "firstName": "Tom",
+        "id": 82123,
+        "lastName": "Hatcher",
+        "partyName": "Republican",
+        "votes": 65617
       }
     ],
     "district": "2",
@@ -895,7 +962,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -905,11 +972,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 60551,
+    "totalVotes": 87707,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -917,15 +985,15 @@
           "estimatedVotesHigh": 98852,
           "estimatedVotesLow": 80880,
           "estimatedVotesMid": 89866,
-          "turnoutHigh": 57.96,
-          "turnoutLow": 70.84,
-          "turnoutMid": 63.76
+          "turnoutHigh": 91.13,
+          "turnoutLow": 111.38,
+          "turnoutMid": 99
         },
-        "firstName": "Dalia",
-        "id": 101670,
-        "lastName": "Price",
-        "partyName": "Independent",
-        "votes": 1423
+        "firstName": "Bobby",
+        "id": 82126,
+        "lastName": "Harshbarger",
+        "partyName": "Republican",
+        "votes": 87859
       },
       {
         "elected": false,
@@ -933,15 +1001,15 @@
           "estimatedVotesHigh": 98852,
           "estimatedVotesLow": 80880,
           "estimatedVotesMid": 89866,
-          "turnoutHigh": 57.96,
-          "turnoutLow": 70.84,
-          "turnoutMid": 63.76
+          "turnoutHigh": 91.13,
+          "turnoutLow": 111.38,
+          "turnoutMid": 99
         },
-        "firstName": "Bobby",
-        "id": 82126,
-        "lastName": "Harshbarger",
-        "partyName": "Republican",
-        "votes": 55876
+        "firstName": "Dalia",
+        "id": 101670,
+        "lastName": "Price",
+        "partyName": "Independent",
+        "votes": 2228
       }
     ],
     "district": "4",
@@ -950,7 +1018,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:36:34.690Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -960,11 +1028,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 57299,
+    "totalVotes": 90087,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1005,7 +1074,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:21.603Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1020,6 +1089,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1027,15 +1097,15 @@
           "estimatedVotesHigh": 89240,
           "estimatedVotesLow": 73014,
           "estimatedVotesMid": 81127,
-          "turnoutHigh": 76.47,
-          "turnoutLow": 93.47,
-          "turnoutMid": 84.12
+          "turnoutHigh": 91.76,
+          "turnoutLow": 112.15,
+          "turnoutMid": 99
         },
-        "firstName": "Jessie",
-        "id": 82132,
-        "lastName": "Seal",
-        "partyName": "Republican",
-        "votes": 55217
+        "firstName": "R.E.",
+        "id": 82133,
+        "lastName": "Ellison",
+        "partyName": "Democratic",
+        "votes": 15416
       },
       {
         "elected": false,
@@ -1043,15 +1113,15 @@
           "estimatedVotesHigh": 89240,
           "estimatedVotesLow": 73014,
           "estimatedVotesMid": 81127,
-          "turnoutHigh": 76.47,
-          "turnoutLow": 93.47,
-          "turnoutMid": 84.12
+          "turnoutHigh": 91.76,
+          "turnoutLow": 112.15,
+          "turnoutMid": 99
         },
-        "firstName": "R.E.",
-        "id": 82133,
-        "lastName": "Ellison",
-        "partyName": "Democratic",
-        "votes": 13026
+        "firstName": "Jessie",
+        "id": 82132,
+        "lastName": "Seal",
+        "partyName": "Republican",
+        "votes": 66467
       }
     ],
     "district": "8",
@@ -1060,7 +1130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:00.961Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1070,11 +1140,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 68243,
+    "totalVotes": 81883,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1082,15 +1153,15 @@
           "estimatedVotesHigh": 88255,
           "estimatedVotesLow": 72208,
           "estimatedVotesMid": 80231,
-          "turnoutHigh": 47.04,
-          "turnoutLow": 57.49,
-          "turnoutMid": 51.74
+          "turnoutHigh": 91.47,
+          "turnoutLow": 111.8,
+          "turnoutMid": 99
         },
         "firstName": "Missy",
         "id": 82136,
         "lastName": "Crutchfield",
         "partyName": "Democratic",
-        "votes": 16710
+        "votes": 33793
       },
       {
         "elected": false,
@@ -1098,15 +1169,15 @@
           "estimatedVotesHigh": 88255,
           "estimatedVotesLow": 72208,
           "estimatedVotesMid": 80231,
-          "turnoutHigh": 47.04,
-          "turnoutLow": 57.49,
-          "turnoutMid": 51.74
+          "turnoutHigh": 91.47,
+          "turnoutLow": 111.8,
+          "turnoutMid": 99
         },
         "firstName": "Todd",
         "id": 82134,
         "lastName": "Gardenhire",
         "partyName": "Republican",
-        "votes": 24803
+        "votes": 46938
       }
     ],
     "district": "10",
@@ -1115,7 +1186,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:34:53.223Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1125,11 +1196,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 41513,
+    "totalVotes": 80731,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1137,15 +1209,15 @@
           "estimatedVotesHigh": 93603,
           "estimatedVotesLow": 76583,
           "estimatedVotesMid": 85093,
-          "turnoutHigh": 45.08,
-          "turnoutLow": 55.1,
-          "turnoutMid": 49.59
+          "turnoutHigh": 75.91,
+          "turnoutLow": 92.78,
+          "turnoutMid": 83.5
         },
         "firstName": "Ken",
         "id": 82138,
         "lastName": "Yager",
         "partyName": "Republican",
-        "votes": 41183
+        "votes": 69327
       },
       {
         "elected": false,
@@ -1153,15 +1225,15 @@
           "estimatedVotesHigh": 93603,
           "estimatedVotesLow": 76583,
           "estimatedVotesMid": 85093,
-          "turnoutHigh": 45.08,
-          "turnoutLow": 55.1,
-          "turnoutMid": 49.59
+          "turnoutHigh": 75.91,
+          "turnoutLow": 92.78,
+          "turnoutMid": 83.5
         },
         "firstName": "Charles",
         "id": 101671,
         "lastName": "Hutson II",
         "partyName": "Independent",
-        "votes": 1015
+        "votes": 1723
       }
     ],
     "district": "12",
@@ -1170,7 +1242,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:10.043Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1180,11 +1252,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 42198,
+    "totalVotes": 71050,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1192,15 +1265,15 @@
           "estimatedVotesHigh": 78433,
           "estimatedVotesLow": 64173,
           "estimatedVotesMid": 71303,
-          "turnoutHigh": 72.38,
-          "turnoutLow": 88.46,
-          "turnoutMid": 79.61
+          "turnoutHigh": 91.19,
+          "turnoutLow": 111.45,
+          "turnoutMid": 99
         },
         "firstName": "E.R.",
         "id": 82141,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 22714
+        "votes": 27065
       },
       {
         "elected": false,
@@ -1208,15 +1281,15 @@
           "estimatedVotesHigh": 78433,
           "estimatedVotesLow": 64173,
           "estimatedVotesMid": 71303,
-          "turnoutHigh": 72.38,
-          "turnoutLow": 88.46,
-          "turnoutMid": 79.61
+          "turnoutHigh": 91.19,
+          "turnoutLow": 111.45,
+          "turnoutMid": 99
         },
         "firstName": "Shane",
         "id": 82140,
         "lastName": "Reeves",
         "partyName": "Republican",
-        "votes": 34052
+        "votes": 44459
       }
     ],
     "district": "14",
@@ -1225,7 +1298,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:39.348Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1235,11 +1308,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 56766,
+    "totalVotes": 71524,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1247,15 +1321,15 @@
           "estimatedVotesHigh": 90531,
           "estimatedVotesLow": 74071,
           "estimatedVotesMid": 82301,
-          "turnoutHigh": 57.78,
-          "turnoutLow": 70.61,
-          "turnoutMid": 63.55
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Janice",
         "id": 82142,
         "lastName": "Bowling",
         "partyName": "Republican",
-        "votes": 38651
+        "votes": 62060
       },
       {
         "elected": false,
@@ -1263,15 +1337,15 @@
           "estimatedVotesHigh": 90531,
           "estimatedVotesLow": 74071,
           "estimatedVotesMid": 82301,
-          "turnoutHigh": 57.78,
-          "turnoutLow": 70.61,
-          "turnoutMid": 63.55
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Wayne",
         "id": 28321,
         "lastName": "Steele",
         "partyName": "Democratic",
-        "votes": 12679
+        "votes": 18770
       },
       {
         "elected": false,
@@ -1279,15 +1353,15 @@
           "estimatedVotesHigh": 90531,
           "estimatedVotesLow": 74071,
           "estimatedVotesMid": 82301,
-          "turnoutHigh": 57.78,
-          "turnoutLow": 70.61,
-          "turnoutMid": 63.55
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 101672,
         "lastName": "Bean",
         "partyName": "Independent",
-        "votes": 975
+        "votes": 1586
       }
     ],
     "district": "16",
@@ -1296,7 +1370,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:15.072Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1306,11 +1380,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 52305,
+    "totalVotes": 82416,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1318,8 +1393,8 @@
           "estimatedVotesHigh": 97571,
           "estimatedVotesLow": 79831,
           "estimatedVotesMid": 88701,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.14,
+          "turnoutHigh": 90.95,
+          "turnoutLow": 111.16,
           "turnoutMid": 99
         },
         "firstName": "Ferrell",
@@ -1334,8 +1409,8 @@
           "estimatedVotesHigh": 97571,
           "estimatedVotesLow": 79831,
           "estimatedVotesMid": 88701,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.14,
+          "turnoutHigh": 90.95,
+          "turnoutLow": 111.16,
           "turnoutMid": 99
         },
         "firstName": "Laura",
@@ -1350,15 +1425,15 @@
           "estimatedVotesHigh": 97571,
           "estimatedVotesLow": 79831,
           "estimatedVotesMid": 88701,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.14,
+          "turnoutHigh": 90.95,
+          "turnoutLow": 111.16,
           "turnoutMid": 99
         },
         "firstName": "Walter",
         "id": 82144,
         "lastName": "Chandler",
         "partyName": "Democratic",
-        "votes": 26645
+        "votes": 26656
       },
       {
         "elected": false,
@@ -1366,15 +1441,15 @@
           "estimatedVotesHigh": 97571,
           "estimatedVotesLow": 79831,
           "estimatedVotesMid": 88701,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.14,
+          "turnoutHigh": 90.95,
+          "turnoutLow": 111.16,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 47511,
         "lastName": "Gentry",
         "partyName": "Independent",
-        "votes": 1684
+        "votes": 1686
       }
     ],
     "district": "18",
@@ -1383,7 +1458,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:36:34.690Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1393,11 +1468,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 88728,
+    "totalVotes": 88741,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1405,15 +1481,15 @@
           "estimatedVotesHigh": 114927,
           "estimatedVotesLow": 94031,
           "estimatedVotesMid": 104479,
-          "turnoutHigh": 37.64,
-          "turnoutLow": 46.01,
-          "turnoutMid": 41.4
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Wyatt",
         "id": 28505,
         "lastName": "Rampy",
         "partyName": "Republican",
-        "votes": 19048
+        "votes": 44950
       },
       {
         "elected": false,
@@ -1421,15 +1497,15 @@
           "estimatedVotesHigh": 114927,
           "estimatedVotesLow": 94031,
           "estimatedVotesMid": 104479,
-          "turnoutHigh": 37.64,
-          "turnoutLow": 46.01,
-          "turnoutMid": 41.4
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Heidi",
         "id": 28323,
         "lastName": "Campbell",
         "partyName": "Democratic",
-        "votes": 24211
+        "votes": 59529
       }
     ],
     "district": "20",
@@ -1438,7 +1514,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1448,11 +1524,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 43259,
+    "totalVotes": 104479,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1460,15 +1537,15 @@
           "estimatedVotesHigh": 70849,
           "estimatedVotesLow": 57967,
           "estimatedVotesMid": 64408,
-          "turnoutHigh": 65.05,
-          "turnoutLow": 79.51,
-          "turnoutMid": 71.56
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Karen",
         "id": 82146,
         "lastName": "Reynolds",
         "partyName": "Democratic",
-        "votes": 20413
+        "votes": 27744
       },
       {
         "elected": false,
@@ -1476,15 +1553,15 @@
           "estimatedVotesHigh": 70849,
           "estimatedVotesLow": 57967,
           "estimatedVotesMid": 64408,
-          "turnoutHigh": 65.05,
-          "turnoutLow": 79.51,
-          "turnoutMid": 71.56
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Bill",
         "id": 82145,
         "lastName": "Powers",
         "partyName": "Republican",
-        "votes": 25676
+        "votes": 36664
       }
     ],
     "district": "22",
@@ -1493,7 +1570,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:28.570Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1503,7 +1580,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 46089,
+    "totalVotes": 64408,
     "year": 2024
   },
   {
@@ -1514,6 +1591,14 @@
       "lastName": "Stevens",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "John",
+        "id": 82148,
+        "lastName": "Stevens",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -1553,6 +1638,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1592,6 +1678,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1599,15 +1686,15 @@
           "estimatedVotesHigh": 96306,
           "estimatedVotesLow": 78795,
           "estimatedVotesMid": 87550,
-          "turnoutHigh": 62.2,
-          "turnoutLow": 76.02,
-          "turnoutMid": 68.42
+          "turnoutHigh": 91.27,
+          "turnoutLow": 111.55,
+          "turnoutMid": 99
         },
         "firstName": "Joey",
         "id": 82150,
         "lastName": "Hensley",
         "partyName": "Republican",
-        "votes": 41496
+        "votes": 61285
       },
       {
         "elected": false,
@@ -1615,15 +1702,15 @@
           "estimatedVotesHigh": 96306,
           "estimatedVotesLow": 78795,
           "estimatedVotesMid": 87550,
-          "turnoutHigh": 62.2,
-          "turnoutLow": 76.02,
-          "turnoutMid": 68.42
+          "turnoutHigh": 91.27,
+          "turnoutLow": 111.55,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 82151,
         "lastName": "Dallas",
         "partyName": "Democratic",
-        "votes": 18406
+        "votes": 26613
       }
     ],
     "district": "28",
@@ -1632,7 +1719,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:35:46.567Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1642,11 +1729,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 59902,
+    "totalVotes": 87898,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1654,15 +1742,15 @@
           "estimatedVotesHigh": 66057,
           "estimatedVotesLow": 54047,
           "estimatedVotesMid": 60052,
-          "turnoutHigh": 25.77,
-          "turnoutLow": 31.5,
-          "turnoutMid": 28.35
+          "turnoutHigh": 89.68,
+          "turnoutLow": 109.61,
+          "turnoutMid": 98.65
         },
         "firstName": "Mitchell",
         "id": 101674,
         "lastName": "Morrison",
         "partyName": "Independent",
-        "votes": 1047
+        "votes": 1199
       },
       {
         "elected": false,
@@ -1670,15 +1758,15 @@
           "estimatedVotesHigh": 66057,
           "estimatedVotesLow": 54047,
           "estimatedVotesMid": 60052,
-          "turnoutHigh": 25.77,
-          "turnoutLow": 31.5,
-          "turnoutMid": 28.35
+          "turnoutHigh": 89.68,
+          "turnoutLow": 109.61,
+          "turnoutMid": 98.65
         },
         "firstName": "Sara",
         "id": 82152,
         "lastName": "Kyle",
         "partyName": "Democratic",
-        "votes": 15978
+        "votes": 58043
       }
     ],
     "district": "30",
@@ -1687,7 +1775,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:03.497Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1697,11 +1785,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 17025,
+    "totalVotes": 59242,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1741,6 +1830,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1786,6 +1876,14 @@
       "lastName": "Hulsey",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Bud",
+        "id": 28442,
+        "lastName": "Hulsey",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -1825,6 +1923,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1832,15 +1931,15 @@
           "estimatedVotesHigh": 31252,
           "estimatedVotesLow": 25570,
           "estimatedVotesMid": 28411,
-          "turnoutHigh": 67.16,
-          "turnoutLow": 82.09,
-          "turnoutMid": 73.88
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.21,
+          "turnoutMid": 99
         },
         "firstName": "Timothy",
         "id": 14172,
         "lastName": "Hill",
         "partyName": "Republican",
-        "votes": 17011
+        "votes": 23358
       },
       {
         "elected": false,
@@ -1848,15 +1947,15 @@
           "estimatedVotesHigh": 31252,
           "estimatedVotesLow": 25570,
           "estimatedVotesMid": 28411,
-          "turnoutHigh": 67.16,
-          "turnoutLow": 82.09,
-          "turnoutMid": 73.88
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.21,
+          "turnoutMid": 99
         },
         "firstName": "Lori",
         "id": 50270,
         "lastName": "Love",
         "partyName": "Democratic",
-        "votes": 3979
+        "votes": 5078
       }
     ],
     "district": "3",
@@ -1865,7 +1964,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1875,11 +1974,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 20990,
+    "totalVotes": 28436,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1919,6 +2019,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1926,15 +2027,15 @@
           "estimatedVotesHigh": 28299,
           "estimatedVotesLow": 23153,
           "estimatedVotesMid": 25726,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 14178,
         "lastName": "Hawk",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 25094
       },
       {
         "elected": false,
@@ -1942,15 +2043,15 @@
           "estimatedVotesHigh": 28299,
           "estimatedVotesLow": 23153,
           "estimatedVotesMid": 25726,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Rebecca",
         "id": 101675,
         "lastName": "Anderson",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 632
       }
     ],
     "district": "5",
@@ -1959,7 +2060,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1969,11 +2070,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 0,
+    "totalVotes": 25726,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1981,15 +2083,15 @@
           "estimatedVotesHigh": 32291,
           "estimatedVotesLow": 26420,
           "estimatedVotesMid": 29355,
-          "turnoutHigh": 56.8,
-          "turnoutLow": 69.42,
-          "turnoutMid": 62.48
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tim",
         "id": 28445,
         "lastName": "Hicks",
         "partyName": "Republican",
-        "votes": 12885
+        "votes": 20746
       },
       {
         "elected": false,
@@ -1997,15 +2099,15 @@
           "estimatedVotesHigh": 32291,
           "estimatedVotesLow": 26420,
           "estimatedVotesMid": 29355,
-          "turnoutHigh": 56.8,
-          "turnoutLow": 69.42,
-          "turnoutMid": 62.48
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Brad",
         "id": 82157,
         "lastName": "Batt",
         "partyName": "Democratic",
-        "votes": 5455
+        "votes": 8609
       }
     ],
     "district": "6",
@@ -2014,7 +2116,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:35:18.127Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2024,11 +2126,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 18340,
+    "totalVotes": 29355,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2036,15 +2139,15 @@
           "estimatedVotesHigh": 27214,
           "estimatedVotesLow": 22266,
           "estimatedVotesMid": 24740,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Sylvain",
         "id": 82158,
         "lastName": "Bruni",
         "partyName": "Democratic",
-        "votes": 8035
+        "votes": 8116
       },
       {
         "elected": false,
@@ -2052,15 +2155,15 @@
           "estimatedVotesHigh": 27214,
           "estimatedVotesLow": 22266,
           "estimatedVotesMid": 24740,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Rebecca",
         "id": 28446,
         "lastName": "Alexander",
         "partyName": "Republican",
-        "votes": 16705
+        "votes": 16873
       }
     ],
     "district": "7",
@@ -2069,7 +2172,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2079,11 +2182,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 24740,
+    "totalVotes": 24989,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2091,15 +2195,15 @@
           "estimatedVotesHigh": 33509,
           "estimatedVotesLow": 27417,
           "estimatedVotesMid": 30463,
-          "turnoutHigh": 86.6,
-          "turnoutLow": 105.84,
-          "turnoutMid": 95.26
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Sue",
         "id": 82159,
         "lastName": "DuBois",
         "partyName": "Democratic",
-        "votes": 7486
+        "votes": 7986
       },
       {
         "elected": false,
@@ -2107,15 +2211,15 @@
           "estimatedVotesHigh": 33509,
           "estimatedVotesLow": 27417,
           "estimatedVotesMid": 30463,
-          "turnoutHigh": 86.6,
-          "turnoutLow": 105.84,
-          "turnoutMid": 95.26
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Jerome",
         "id": 28447,
         "lastName": "Moon",
         "partyName": "Republican",
-        "votes": 21532
+        "votes": 22703
       }
     ],
     "district": "8",
@@ -2124,7 +2228,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2134,11 +2238,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 29018,
+    "totalVotes": 30689,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2178,6 +2283,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2217,6 +2323,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2224,15 +2331,15 @@
           "estimatedVotesHigh": 29807,
           "estimatedVotesLow": 24389,
           "estimatedVotesMid": 27098,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
+          "turnoutHigh": 91.37,
+          "turnoutLow": 111.67,
           "turnoutMid": 99
         },
         "firstName": "Jeremy",
         "id": 28451,
         "lastName": "Faison",
         "partyName": "Republican",
-        "votes": 22175
+        "votes": 22228
       },
       {
         "elected": false,
@@ -2240,15 +2347,15 @@
           "estimatedVotesHigh": 29807,
           "estimatedVotesLow": 24389,
           "estimatedVotesMid": 27098,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
+          "turnoutHigh": 91.37,
+          "turnoutLow": 111.67,
           "turnoutMid": 99
         },
         "firstName": "Justin",
         "id": 82162,
         "lastName": "Gross",
         "partyName": "Democratic",
-        "votes": 4994
+        "votes": 5007
       }
     ],
     "district": "11",
@@ -2257,7 +2364,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:39.348Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2267,11 +2374,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 27169,
+    "totalVotes": 27235,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2279,15 +2387,15 @@
           "estimatedVotesHigh": 28766,
           "estimatedVotesLow": 23536,
           "estimatedVotesMid": 26151,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Fred",
         "id": 82163,
         "lastName": "Atchley",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 20746
       },
       {
         "elected": false,
@@ -2295,15 +2403,15 @@
           "estimatedVotesHigh": 28766,
           "estimatedVotesLow": 23536,
           "estimatedVotesMid": 26151,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Leslie",
         "id": 82166,
         "lastName": "Braddock",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5405
       }
     ],
     "district": "12",
@@ -2312,7 +2420,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2322,11 +2430,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 0,
+    "totalVotes": 26151,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2334,15 +2443,15 @@
           "estimatedVotesHigh": 27931,
           "estimatedVotesLow": 22853,
           "estimatedVotesMid": 25392,
-          "turnoutHigh": 91.31,
-          "turnoutLow": 111.6,
+          "turnoutHigh": 92.23,
+          "turnoutLow": 112.72,
           "turnoutMid": 99
         },
         "firstName": "Jonathan",
         "id": 82168,
         "lastName": "Yancey",
         "partyName": "Democratic",
-        "votes": 11147
+        "votes": 11259
       },
       {
         "elected": false,
@@ -2350,15 +2459,15 @@
           "estimatedVotesHigh": 27931,
           "estimatedVotesLow": 22853,
           "estimatedVotesMid": 25392,
-          "turnoutHigh": 91.31,
-          "turnoutLow": 111.6,
+          "turnoutHigh": 92.23,
+          "turnoutLow": 112.72,
           "turnoutMid": 99
         },
         "firstName": "Robert",
         "id": 25195,
         "lastName": "Stevens",
         "partyName": "Republican",
-        "votes": 14356
+        "votes": 14501
       }
     ],
     "district": "13",
@@ -2367,7 +2476,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:31.205Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2377,11 +2486,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 25503,
+    "totalVotes": 25760,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2389,15 +2499,15 @@
           "estimatedVotesHigh": 41489,
           "estimatedVotesLow": 33945,
           "estimatedVotesMid": 37717,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Jason",
-        "id": 28454,
-        "lastName": "Zachary",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Amanda",
+        "id": 28381,
+        "lastName": "Collins",
+        "partyName": "Democratic",
+        "votes": 15746
       },
       {
         "elected": false,
@@ -2405,15 +2515,15 @@
           "estimatedVotesHigh": 41489,
           "estimatedVotesLow": 33945,
           "estimatedVotesMid": 37717,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Amanda",
-        "id": 28381,
-        "lastName": "Collins",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Jason",
+        "id": 28454,
+        "lastName": "Zachary",
+        "partyName": "Republican",
+        "votes": 21971
       }
     ],
     "district": "14",
@@ -2422,7 +2532,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2432,11 +2542,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 0,
+    "totalVotes": 37717,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2444,15 +2555,15 @@
           "estimatedVotesHigh": 18844,
           "estimatedVotesLow": 15418,
           "estimatedVotesMid": 17131,
-          "turnoutHigh": 77.84,
-          "turnoutLow": 95.14,
-          "turnoutMid": 85.63
+          "turnoutHigh": 91.19,
+          "turnoutLow": 111.45,
+          "turnoutMid": 99
         },
         "firstName": "Sam",
         "id": 28382,
         "lastName": "McKenzie",
         "partyName": "Democratic",
-        "votes": 10198
+        "votes": 11920
       },
       {
         "elected": false,
@@ -2460,15 +2571,15 @@
           "estimatedVotesHigh": 18844,
           "estimatedVotesLow": 15418,
           "estimatedVotesMid": 17131,
-          "turnoutHigh": 77.84,
-          "turnoutLow": 95.14,
-          "turnoutMid": 85.63
+          "turnoutHigh": 91.19,
+          "turnoutLow": 111.45,
+          "turnoutMid": 99
         },
         "firstName": "Justin",
         "id": 82169,
         "lastName": "Hirst",
         "partyName": "Republican",
-        "votes": 4471
+        "votes": 5264
       }
     ],
     "district": "15",
@@ -2477,7 +2588,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:55.822Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2487,11 +2598,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 14669,
+    "totalVotes": 17184,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2499,15 +2611,15 @@
           "estimatedVotesHigh": 32429,
           "estimatedVotesLow": 26533,
           "estimatedVotesMid": 29481,
-          "turnoutHigh": 41.69,
-          "turnoutLow": 50.96,
-          "turnoutMid": 45.86
+          "turnoutHigh": 91.52,
+          "turnoutLow": 111.85,
+          "turnoutMid": 99
         },
         "firstName": "Lauren",
         "id": 82171,
         "lastName": "Carver",
         "partyName": "Democratic",
-        "votes": 4314
+        "votes": 9293
       },
       {
         "elected": false,
@@ -2515,15 +2627,15 @@
           "estimatedVotesHigh": 32429,
           "estimatedVotesLow": 26533,
           "estimatedVotesMid": 29481,
-          "turnoutHigh": 41.69,
-          "turnoutLow": 50.96,
-          "turnoutMid": 45.86
+          "turnoutHigh": 91.52,
+          "turnoutLow": 111.85,
+          "turnoutMid": 99
         },
         "firstName": "Michele",
         "id": 28456,
         "lastName": "Carringer",
         "partyName": "Republican",
-        "votes": 8931
+        "votes": 19802
       },
       {
         "elected": false,
@@ -2531,15 +2643,15 @@
           "estimatedVotesHigh": 32429,
           "estimatedVotesLow": 26533,
           "estimatedVotesMid": 29481,
-          "turnoutHigh": 41.69,
-          "turnoutLow": 50.96,
-          "turnoutMid": 45.86
+          "turnoutHigh": 91.52,
+          "turnoutLow": 111.85,
+          "turnoutMid": 99
         },
         "firstName": "Sean",
         "id": 101676,
         "lastName": "Eastham",
         "partyName": "Independent",
-        "votes": 275
+        "votes": 583
       }
     ],
     "district": "16",
@@ -2548,7 +2660,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:21:18.089Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2558,11 +2670,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 13520,
+    "totalVotes": 29678,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2602,6 +2715,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2609,15 +2723,15 @@
           "estimatedVotesHigh": 34766,
           "estimatedVotesLow": 28445,
           "estimatedVotesMid": 31605,
-          "turnoutHigh": 77.88,
-          "turnoutLow": 95.19,
-          "turnoutMid": 85.67
+          "turnoutHigh": 92.26,
+          "turnoutLow": 112.76,
+          "turnoutMid": 99
         },
         "firstName": "Elaine",
         "id": 28458,
         "lastName": "Davis",
         "partyName": "Republican",
-        "votes": 14500
+        "votes": 16806
       },
       {
         "elected": false,
@@ -2625,15 +2739,15 @@
           "estimatedVotesHigh": 34766,
           "estimatedVotesLow": 28445,
           "estimatedVotesMid": 31605,
-          "turnoutHigh": 77.88,
-          "turnoutLow": 95.19,
-          "turnoutMid": 85.67
+          "turnoutHigh": 92.26,
+          "turnoutLow": 112.76,
+          "turnoutMid": 99
         },
         "firstName": "Bryan",
         "id": 82172,
         "lastName": "Goldberg",
         "partyName": "Democratic",
-        "votes": 12576
+        "votes": 15269
       }
     ],
     "district": "18",
@@ -2642,7 +2756,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:29:20.412Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2652,11 +2766,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 27076,
+    "totalVotes": 32075,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2696,6 +2811,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2703,15 +2819,15 @@
           "estimatedVotesHigh": 32742,
           "estimatedVotesLow": 26789,
           "estimatedVotesMid": 29765,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.07,
+          "turnoutLow": 112.53,
           "turnoutMid": 99
         },
         "firstName": "Karen",
         "id": 82175,
         "lastName": "Gertz",
         "partyName": "Democratic",
-        "votes": 9316
+        "votes": 9698
       },
       {
         "elected": false,
@@ -2719,8 +2835,8 @@
           "estimatedVotesHigh": 32742,
           "estimatedVotesLow": 26789,
           "estimatedVotesMid": 29765,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.07,
+          "turnoutLow": 112.53,
           "turnoutMid": 99
         },
         "firstName": "Tom",
@@ -2736,7 +2852,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:21.603Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2746,11 +2862,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 29765,
+    "totalVotes": 30147,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2791,7 +2908,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2806,6 +2923,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2813,15 +2931,15 @@
           "estimatedVotesHigh": 33288,
           "estimatedVotesLow": 27236,
           "estimatedVotesMid": 30262,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.12,
+          "turnoutLow": 111.37,
           "turnoutMid": 99
         },
         "firstName": "Anna",
         "id": 82176,
         "lastName": "Grabowski",
         "partyName": "Democratic",
-        "votes": 5013
+        "votes": 5041
       },
       {
         "elected": false,
@@ -2829,15 +2947,15 @@
           "estimatedVotesHigh": 33288,
           "estimatedVotesLow": 27236,
           "estimatedVotesMid": 30262,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.12,
+          "turnoutLow": 111.37,
           "turnoutMid": 99
         },
         "firstName": "Dan",
         "id": 28464,
         "lastName": "Howell",
         "partyName": "Republican",
-        "votes": 25249
+        "votes": 25292
       }
     ],
     "district": "22",
@@ -2846,7 +2964,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2856,11 +2974,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 30262,
+    "totalVotes": 30333,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2868,15 +2987,15 @@
           "estimatedVotesHigh": 29122,
           "estimatedVotesLow": 23828,
           "estimatedVotesMid": 26475,
-          "turnoutHigh": 18.99,
-          "turnoutLow": 23.21,
-          "turnoutMid": 20.89
+          "turnoutHigh": 91.26,
+          "turnoutLow": 111.53,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 28465,
         "lastName": "Cochran",
         "partyName": "Republican",
-        "votes": 4743
+        "votes": 21467
       },
       {
         "elected": false,
@@ -2884,15 +3003,15 @@
           "estimatedVotesHigh": 29122,
           "estimatedVotesLow": 23828,
           "estimatedVotesMid": 26475,
-          "turnoutHigh": 18.99,
-          "turnoutLow": 23.21,
-          "turnoutMid": 20.89
+          "turnoutHigh": 91.26,
+          "turnoutLow": 111.53,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 82178,
         "lastName": "Thomforde",
         "partyName": "Democratic",
-        "votes": 787
+        "votes": 5109
       }
     ],
     "district": "23",
@@ -2901,7 +3020,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:44.360Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2911,11 +3030,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 5530,
+    "totalVotes": 26576,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2923,15 +3043,15 @@
           "estimatedVotesHigh": 28229,
           "estimatedVotesLow": 23097,
           "estimatedVotesMid": 25663,
-          "turnoutHigh": 73.99,
-          "turnoutLow": 90.43,
-          "turnoutMid": 81.39
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Kevin",
         "id": 28467,
         "lastName": "Raper",
         "partyName": "Republican",
-        "votes": 15312
+        "votes": 19007
       },
       {
         "elected": false,
@@ -2939,15 +3059,15 @@
           "estimatedVotesHigh": 28229,
           "estimatedVotesLow": 23097,
           "estimatedVotesMid": 25663,
-          "turnoutHigh": 73.99,
-          "turnoutLow": 90.43,
-          "turnoutMid": 81.39
+          "turnoutHigh": 91.58,
+          "turnoutLow": 111.93,
+          "turnoutMid": 99
         },
         "firstName": "Andrea",
         "id": 82179,
         "lastName": "Chase",
         "partyName": "Democratic",
-        "votes": 5575
+        "votes": 6845
       }
     ],
     "district": "24",
@@ -2956,7 +3076,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:55.822Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2966,11 +3086,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 20887,
+    "totalVotes": 25852,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2978,15 +3099,15 @@
           "estimatedVotesHigh": 35089,
           "estimatedVotesLow": 28710,
           "estimatedVotesMid": 31899,
-          "turnoutHigh": 10.09,
-          "turnoutLow": 12.34,
-          "turnoutMid": 11.1
+          "turnoutHigh": 92.3,
+          "turnoutLow": 112.81,
+          "turnoutMid": 99
         },
         "firstName": "Cameron",
         "id": 28470,
         "lastName": "Sexton",
         "partyName": "Republican",
-        "votes": 2846
+        "votes": 25685
       },
       {
         "elected": false,
@@ -2994,15 +3115,15 @@
           "estimatedVotesHigh": 35089,
           "estimatedVotesLow": 28710,
           "estimatedVotesMid": 31899,
-          "turnoutHigh": 10.09,
-          "turnoutLow": 12.34,
-          "turnoutMid": 11.1
+          "turnoutHigh": 92.3,
+          "turnoutLow": 112.81,
+          "turnoutMid": 99
         },
         "firstName": "Wesley",
         "id": 82180,
         "lastName": "Adkins",
         "partyName": "Democratic",
-        "votes": 696
+        "votes": 6703
       }
     ],
     "district": "25",
@@ -3011,7 +3132,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:37.731Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3021,11 +3142,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 3542,
+    "totalVotes": 32388,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3033,15 +3155,15 @@
           "estimatedVotesHigh": 38415,
           "estimatedVotesLow": 31431,
           "estimatedVotesMid": 34923,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Greg",
         "id": 28471,
         "lastName": "Martin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 20728
       },
       {
         "elected": false,
@@ -3049,15 +3171,15 @@
           "estimatedVotesHigh": 38415,
           "estimatedVotesLow": 31431,
           "estimatedVotesMid": 34923,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Allison",
         "id": 28386,
         "lastName": "Gorman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 14195
       }
     ],
     "district": "26",
@@ -3066,7 +3188,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3076,11 +3198,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 0,
+    "totalVotes": 34923,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3121,7 +3244,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:43.926Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3136,6 +3259,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3143,15 +3267,15 @@
           "estimatedVotesHigh": 26128,
           "estimatedVotesLow": 21378,
           "estimatedVotesMid": 23753,
-          "turnoutHigh": 44.66,
-          "turnoutLow": 54.59,
-          "turnoutMid": 49.13
+          "turnoutHigh": 89.72,
+          "turnoutLow": 109.65,
+          "turnoutMid": 98.69
         },
         "firstName": "Thomas",
         "id": 101677,
         "lastName": "Brooks",
         "partyName": "Independent",
-        "votes": 292
+        "votes": 591
       },
       {
         "elected": false,
@@ -3159,15 +3283,15 @@
           "estimatedVotesHigh": 26128,
           "estimatedVotesLow": 21378,
           "estimatedVotesMid": 23753,
-          "turnoutHigh": 44.66,
-          "turnoutLow": 54.59,
-          "turnoutMid": 49.13
+          "turnoutHigh": 89.72,
+          "turnoutLow": 109.65,
+          "turnoutMid": 98.69
         },
         "firstName": "Yusuf",
         "id": 28388,
         "lastName": "Hakeem",
         "partyName": "Democratic",
-        "votes": 11378
+        "votes": 22851
       }
     ],
     "district": "28",
@@ -3176,7 +3300,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:43.515Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3186,11 +3310,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 11670,
+    "totalVotes": 23442,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3231,7 +3356,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:32:34.101Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3246,6 +3371,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3253,15 +3379,15 @@
           "estimatedVotesHigh": 32071,
           "estimatedVotesLow": 26240,
           "estimatedVotesMid": 29155,
-          "turnoutHigh": 63.3,
-          "turnoutLow": 77.37,
-          "turnoutMid": 69.63
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Heather",
         "id": 82186,
         "lastName": "McClendon",
         "partyName": "Democratic",
-        "votes": 9176
+        "votes": 13047
       },
       {
         "elected": false,
@@ -3269,15 +3395,15 @@
           "estimatedVotesHigh": 32071,
           "estimatedVotesLow": 26240,
           "estimatedVotesMid": 29155,
-          "turnoutHigh": 63.3,
-          "turnoutLow": 77.37,
-          "turnoutMid": 69.63
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Esther",
         "id": 28473,
         "lastName": "Helton",
         "partyName": "Republican",
-        "votes": 11125
+        "votes": 16108
       }
     ],
     "district": "30",
@@ -3286,7 +3412,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:43.926Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3296,11 +3422,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 20301,
+    "totalVotes": 29155,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3308,15 +3435,15 @@
           "estimatedVotesHigh": 29904,
           "estimatedVotesLow": 24466,
           "estimatedVotesMid": 27185,
-          "turnoutHigh": 38.15,
-          "turnoutLow": 46.62,
-          "turnoutMid": 41.96
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
         },
         "firstName": "William",
         "id": 101678,
         "lastName": "Jenkins",
         "partyName": "Independent",
-        "votes": 228
+        "votes": 553
       },
       {
         "elected": false,
@@ -3324,15 +3451,15 @@
           "estimatedVotesHigh": 29904,
           "estimatedVotesLow": 24466,
           "estimatedVotesMid": 27185,
-          "turnoutHigh": 38.15,
-          "turnoutLow": 46.62,
-          "turnoutMid": 41.96
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
         },
         "firstName": "Brittany",
         "id": 82187,
         "lastName": "Warfel",
         "partyName": "Democratic",
-        "votes": 2030
+        "votes": 4908
       },
       {
         "elected": false,
@@ -3340,15 +3467,15 @@
           "estimatedVotesHigh": 29904,
           "estimatedVotesLow": 24466,
           "estimatedVotesMid": 27185,
-          "turnoutHigh": 38.15,
-          "turnoutLow": 46.62,
-          "turnoutMid": 41.96
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
         },
         "firstName": "Ron",
         "id": 28474,
         "lastName": "Travis",
         "partyName": "Republican",
-        "votes": 9149
+        "votes": 21765
       }
     ],
     "district": "31",
@@ -3357,7 +3484,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3367,11 +3494,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 11407,
+    "totalVotes": 27226,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3411,6 +3539,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3418,15 +3547,15 @@
           "estimatedVotesHigh": 30220,
           "estimatedVotesLow": 24726,
           "estimatedVotesMid": 27473,
-          "turnoutHigh": 40.08,
-          "turnoutLow": 48.99,
-          "turnoutMid": 44.09
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Anne",
         "id": 82189,
         "lastName": "Backus",
         "partyName": "Democratic",
-        "votes": 4529
+        "votes": 10121
       },
       {
         "elected": false,
@@ -3434,15 +3563,15 @@
           "estimatedVotesHigh": 30220,
           "estimatedVotesLow": 24726,
           "estimatedVotesMid": 27473,
-          "turnoutHigh": 40.08,
-          "turnoutLow": 48.99,
-          "turnoutMid": 44.09
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Richard",
         "id": 101679,
         "lastName": "Scarbrough",
         "partyName": "Republican",
-        "votes": 7584
+        "votes": 17352
       }
     ],
     "district": "33",
@@ -3451,7 +3580,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:21.603Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3461,11 +3590,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 12113,
+    "totalVotes": 27473,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3473,15 +3603,15 @@
           "estimatedVotesHigh": 29107,
           "estimatedVotesLow": 23815,
           "estimatedVotesMid": 26461,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tim",
         "id": 28481,
         "lastName": "Rudd",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 16070
       },
       {
         "elected": false,
@@ -3489,15 +3619,15 @@
           "estimatedVotesHigh": 29107,
           "estimatedVotesLow": 23815,
           "estimatedVotesMid": 26461,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Amelia",
         "id": 82191,
         "lastName": "Pant",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10391
       }
     ],
     "district": "34",
@@ -3506,7 +3636,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3516,11 +3646,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 0,
+    "totalVotes": 26461,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3528,15 +3659,15 @@
           "estimatedVotesHigh": 30192,
           "estimatedVotesLow": 24704,
           "estimatedVotesMid": 27448,
-          "turnoutHigh": 89.31,
-          "turnoutLow": 109.15,
-          "turnoutMid": 98.24
+          "turnoutHigh": 91.44,
+          "turnoutLow": 111.75,
+          "turnoutMid": 99
         },
         "firstName": "William",
         "id": 28484,
         "lastName": "Slater",
         "partyName": "Republican",
-        "votes": 18657
+        "votes": 19130
       },
       {
         "elected": false,
@@ -3544,15 +3675,15 @@
           "estimatedVotesHigh": 30192,
           "estimatedVotesLow": 24704,
           "estimatedVotesMid": 27448,
-          "turnoutHigh": 89.31,
-          "turnoutLow": 109.15,
-          "turnoutMid": 98.24
+          "turnoutHigh": 91.44,
+          "turnoutLow": 111.75,
+          "turnoutMid": 99
         },
         "firstName": "Lexi",
         "id": 82192,
         "lastName": "Melton",
         "partyName": "Democratic",
-        "votes": 8308
+        "votes": 8477
       }
     ],
     "district": "35",
@@ -3561,7 +3692,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:34:58.148Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3571,7 +3702,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 26965,
+    "totalVotes": 27607,
     "year": 2024
   },
   {
@@ -3582,6 +3713,14 @@
       "lastName": "Powers",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Dennis",
+        "id": 28485,
+        "lastName": "Powers",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -3621,6 +3760,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3628,15 +3768,15 @@
           "estimatedVotesHigh": 27591,
           "estimatedVotesLow": 22575,
           "estimatedVotesMid": 25083,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.27,
+          "turnoutLow": 111.55,
           "turnoutMid": 99
         },
         "firstName": "Cheri",
         "id": 82193,
         "lastName": "Brown",
         "partyName": "Democratic",
-        "votes": 9788
+        "votes": 9887
       },
       {
         "elected": false,
@@ -3644,8 +3784,8 @@
           "estimatedVotesHigh": 27591,
           "estimatedVotesLow": 22575,
           "estimatedVotesMid": 25083,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.27,
+          "turnoutLow": 111.55,
           "turnoutMid": 99
         },
         "firstName": "Charlie",
@@ -3661,7 +3801,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:31.205Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3671,11 +3811,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 25083,
+    "totalVotes": 25182,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3683,15 +3824,15 @@
           "estimatedVotesHigh": 29645,
           "estimatedVotesLow": 24253,
           "estimatedVotesMid": 26949,
-          "turnoutHigh": 86.07,
-          "turnoutLow": 105.2,
-          "turnoutMid": 94.68
+          "turnoutHigh": 91.15,
+          "turnoutLow": 111.41,
+          "turnoutMid": 99
         },
-        "firstName": "Alexander",
-        "id": 101680,
-        "lastName": "Armor",
-        "partyName": "Independent",
-        "votes": 564
+        "firstName": "Kelly",
+        "id": 28487,
+        "lastName": "Keisling",
+        "partyName": "Republican",
+        "votes": 26426
       },
       {
         "elected": false,
@@ -3699,15 +3840,15 @@
           "estimatedVotesHigh": 29645,
           "estimatedVotesLow": 24253,
           "estimatedVotesMid": 26949,
-          "turnoutHigh": 86.07,
-          "turnoutLow": 105.2,
-          "turnoutMid": 94.68
+          "turnoutHigh": 91.15,
+          "turnoutLow": 111.41,
+          "turnoutMid": 99
         },
-        "firstName": "Kelly",
-        "id": 28487,
-        "lastName": "Keisling",
-        "partyName": "Republican",
-        "votes": 24951
+        "firstName": "Alexander",
+        "id": 101680,
+        "lastName": "Armor",
+        "partyName": "Independent",
+        "votes": 594
       }
     ],
     "district": "38",
@@ -3716,7 +3857,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:39.920Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3726,11 +3867,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 25515,
+    "totalVotes": 27020,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3738,15 +3880,15 @@
           "estimatedVotesHigh": 32530,
           "estimatedVotesLow": 26615,
           "estimatedVotesMid": 29572,
-          "turnoutHigh": 44.63,
-          "turnoutLow": 54.55,
-          "turnoutMid": 49.1
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Iris",
         "id": 28488,
         "lastName": "Rudder",
         "partyName": "Republican",
-        "votes": 10835
+        "votes": 22011
       },
       {
         "elected": false,
@@ -3754,15 +3896,15 @@
           "estimatedVotesHigh": 32530,
           "estimatedVotesLow": 26615,
           "estimatedVotesMid": 29572,
-          "turnoutHigh": 44.63,
-          "turnoutLow": 54.55,
-          "turnoutMid": 49.1
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Rose",
         "id": 82194,
         "lastName": "Drake",
         "partyName": "Democratic",
-        "votes": 3684
+        "votes": 7561
       }
     ],
     "district": "39",
@@ -3771,7 +3913,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:21.603Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3781,11 +3923,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 14519,
+    "totalVotes": 29572,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3793,15 +3936,15 @@
           "estimatedVotesHigh": 31707,
           "estimatedVotesLow": 25941,
           "estimatedVotesMid": 28824,
-          "turnoutHigh": 63.14,
-          "turnoutLow": 77.17,
-          "turnoutMid": 69.45
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.71,
+          "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 28490,
         "lastName": "Hale",
         "partyName": "Republican",
-        "votes": 15876
+        "votes": 22926
       },
       {
         "elected": false,
@@ -3809,15 +3952,15 @@
           "estimatedVotesHigh": 31707,
           "estimatedVotesLow": 25941,
           "estimatedVotesMid": 28824,
-          "turnoutHigh": 63.14,
-          "turnoutLow": 77.17,
-          "turnoutMid": 69.45
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.71,
+          "turnoutMid": 99
         },
         "firstName": "Daniel",
         "id": 82195,
         "lastName": "Hawthorne",
         "partyName": "Democratic",
-        "votes": 4143
+        "votes": 6053
       }
     ],
     "district": "40",
@@ -3826,7 +3969,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:40.328Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3836,11 +3979,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 20019,
+    "totalVotes": 28979,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3848,15 +3992,15 @@
           "estimatedVotesHigh": 29907,
           "estimatedVotesLow": 24469,
           "estimatedVotesMid": 27188,
-          "turnoutHigh": 74.58,
-          "turnoutLow": 91.16,
-          "turnoutMid": 82.04
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.21,
+          "turnoutMid": 99
         },
         "firstName": "Derek",
         "id": 101681,
         "lastName": "Hawn",
         "partyName": "Democratic",
-        "votes": 4125
+        "votes": 4779
       },
       {
         "elected": false,
@@ -3864,15 +4008,15 @@
           "estimatedVotesHigh": 29907,
           "estimatedVotesLow": 24469,
           "estimatedVotesMid": 27188,
-          "turnoutHigh": 74.58,
-          "turnoutLow": 91.16,
-          "turnoutMid": 82.04
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.21,
+          "turnoutMid": 99
         },
         "firstName": "Ed",
         "id": 28491,
         "lastName": "Butler",
         "partyName": "Republican",
-        "votes": 18180
+        "votes": 22432
       }
     ],
     "district": "41",
@@ -3881,7 +4025,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:34:11.117Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3891,11 +4035,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 22305,
+    "totalVotes": 27211,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3936,7 +4081,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:10.043Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3951,6 +4096,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3990,6 +4136,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3997,15 +4144,15 @@
           "estimatedVotesHigh": 33768,
           "estimatedVotesLow": 27628,
           "estimatedVotesMid": 30698,
-          "turnoutHigh": 64.02,
-          "turnoutLow": 78.25,
-          "turnoutMid": 70.42
+          "turnoutHigh": 91.57,
+          "turnoutLow": 111.92,
+          "turnoutMid": 99
         },
-        "firstName": "William",
-        "id": 28496,
-        "lastName": "Lamberth",
-        "partyName": "Republican",
-        "votes": 15590
+        "firstName": "Brian",
+        "id": 82200,
+        "lastName": "Robertson",
+        "partyName": "Democratic",
+        "votes": 8500
       },
       {
         "elected": false,
@@ -4013,15 +4160,15 @@
           "estimatedVotesHigh": 33768,
           "estimatedVotesLow": 27628,
           "estimatedVotesMid": 30698,
-          "turnoutHigh": 64.02,
-          "turnoutLow": 78.25,
-          "turnoutMid": 70.42
+          "turnoutHigh": 91.57,
+          "turnoutLow": 111.92,
+          "turnoutMid": 99
         },
-        "firstName": "Brian",
-        "id": 82200,
-        "lastName": "Robertson",
-        "partyName": "Democratic",
-        "votes": 6029
+        "firstName": "William",
+        "id": 28496,
+        "lastName": "Lamberth",
+        "partyName": "Republican",
+        "votes": 22421
       }
     ],
     "district": "44",
@@ -4030,7 +4177,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:35:46.567Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4040,11 +4187,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 21619,
+    "totalVotes": 30921,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4085,7 +4233,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:36:34.690Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4100,6 +4248,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4107,8 +4256,8 @@
           "estimatedVotesHigh": 36124,
           "estimatedVotesLow": 29556,
           "estimatedVotesMid": 32840,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.55,
+          "turnoutLow": 111.9,
           "turnoutMid": 99
         },
         "firstName": "Joni",
@@ -4123,15 +4272,15 @@
           "estimatedVotesHigh": 36124,
           "estimatedVotesLow": 29556,
           "estimatedVotesMid": 32840,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.55,
+          "turnoutLow": 111.9,
           "turnoutMid": 99
         },
         "firstName": "Clark",
         "id": 28498,
         "lastName": "Boyd",
         "partyName": "Republican",
-        "votes": 23169
+        "votes": 23402
       }
     ],
     "district": "46",
@@ -4140,7 +4289,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:55.822Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4150,11 +4299,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 32840,
+    "totalVotes": 33073,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4162,15 +4312,15 @@
           "estimatedVotesHigh": 30469,
           "estimatedVotesLow": 24929,
           "estimatedVotesMid": 27699,
-          "turnoutHigh": 53.28,
-          "turnoutLow": 65.12,
-          "turnoutMid": 58.61
+          "turnoutHigh": 87.77,
+          "turnoutLow": 107.28,
+          "turnoutMid": 96.55
         },
         "firstName": "Rush",
         "id": 28499,
         "lastName": "Bricken",
         "partyName": "Republican",
-        "votes": 15831
+        "votes": 26049
       },
       {
         "elected": false,
@@ -4178,15 +4328,15 @@
           "estimatedVotesHigh": 30469,
           "estimatedVotesLow": 24929,
           "estimatedVotesMid": 27699,
-          "turnoutHigh": 53.28,
-          "turnoutLow": 65.12,
-          "turnoutMid": 58.61
+          "turnoutHigh": 87.77,
+          "turnoutLow": 107.28,
+          "turnoutMid": 96.55
         },
         "firstName": "Veronica",
         "id": 46349,
         "lastName": "Owens",
         "partyName": "Independent",
-        "votes": 404
+        "votes": 695
       }
     ],
     "district": "47",
@@ -4195,7 +4345,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:44.360Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4205,11 +4355,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 16235,
+    "totalVotes": 26744,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4217,8 +4368,8 @@
           "estimatedVotesHigh": 32107,
           "estimatedVotesLow": 26269,
           "estimatedVotesMid": 29188,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.47,
+          "turnoutLow": 111.8,
           "turnoutMid": 99
         },
         "firstName": "Matt",
@@ -4233,15 +4384,15 @@
           "estimatedVotesHigh": 32107,
           "estimatedVotesLow": 26269,
           "estimatedVotesMid": 29188,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.47,
+          "turnoutLow": 111.8,
           "turnoutMid": 99
         },
         "firstName": "Bryan",
         "id": 28500,
         "lastName": "Terry",
         "partyName": "Republican",
-        "votes": 18038
+        "votes": 18219
       }
     ],
     "district": "48",
@@ -4250,7 +4401,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:21.603Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4260,11 +4411,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 29188,
+    "totalVotes": 29369,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4272,15 +4424,15 @@
           "estimatedVotesHigh": 26443,
           "estimatedVotesLow": 21635,
           "estimatedVotesMid": 24039,
-          "turnoutHigh": 37.55,
-          "turnoutLow": 45.9,
-          "turnoutMid": 41.31
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Luis",
         "id": 82203,
         "lastName": "Mata",
         "partyName": "Democratic",
-        "votes": 4389
+        "votes": 10380
       },
       {
         "elected": false,
@@ -4288,15 +4440,15 @@
           "estimatedVotesHigh": 26443,
           "estimatedVotesLow": 21635,
           "estimatedVotesMid": 24039,
-          "turnoutHigh": 37.55,
-          "turnoutLow": 45.9,
-          "turnoutMid": 41.31
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 28501,
         "lastName": "Sparks",
         "partyName": "Republican",
-        "votes": 5541
+        "votes": 13659
       }
     ],
     "district": "49",
@@ -4305,7 +4457,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:35:46.567Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4315,11 +4467,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 9930,
+    "totalVotes": 24039,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4327,15 +4480,15 @@
           "estimatedVotesHigh": 31198,
           "estimatedVotesLow": 25526,
           "estimatedVotesMid": 28362,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 82204,
         "lastName": "Webb",
         "partyName": "Republican",
-        "votes": 12665
+        "votes": 12793
       },
       {
         "elected": false,
@@ -4343,15 +4496,15 @@
           "estimatedVotesHigh": 31198,
           "estimatedVotesLow": 25526,
           "estimatedVotesMid": 28362,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Bo",
         "id": 28400,
         "lastName": "Mitchell",
         "partyName": "Democratic",
-        "votes": 15697
+        "votes": 15855
       }
     ],
     "district": "50",
@@ -4360,7 +4513,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4370,11 +4523,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 28362,
+    "totalVotes": 28648,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4382,15 +4536,15 @@
           "estimatedVotesHigh": 32316,
           "estimatedVotesLow": 26440,
           "estimatedVotesMid": 29378,
-          "turnoutHigh": 51.42,
-          "turnoutLow": 62.84,
-          "turnoutMid": 56.56
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jeffry",
         "id": 101682,
         "lastName": "Ketelsen",
         "partyName": "Independent",
-        "votes": 430
+        "votes": 744
       },
       {
         "elected": false,
@@ -4398,15 +4552,15 @@
           "estimatedVotesHigh": 32316,
           "estimatedVotesLow": 26440,
           "estimatedVotesMid": 29378,
-          "turnoutHigh": 51.42,
-          "turnoutLow": 62.84,
-          "turnoutMid": 56.56
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Aftyn",
         "id": 50560,
         "lastName": "Behn",
         "partyName": "Democratic",
-        "votes": 16186
+        "votes": 28634
       }
     ],
     "district": "51",
@@ -4415,7 +4569,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:23:34.632Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4425,11 +4579,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 16616,
+    "totalVotes": 29378,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4437,8 +4592,8 @@
           "estimatedVotesHigh": 21405,
           "estimatedVotesLow": 17513,
           "estimatedVotesMid": 19459,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.25,
+          "turnoutLow": 112.75,
           "turnoutMid": 99
         },
         "firstName": "Laura",
@@ -4453,15 +4608,15 @@
           "estimatedVotesHigh": 21405,
           "estimatedVotesLow": 17513,
           "estimatedVotesMid": 19459,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.25,
+          "turnoutLow": 112.75,
           "turnoutMid": 99
         },
         "firstName": "Justin",
         "id": 28402,
         "lastName": "Jones",
         "partyName": "Democratic",
-        "votes": 14153
+        "votes": 14440
       }
     ],
     "district": "52",
@@ -4470,7 +4625,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:43.926Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4480,11 +4635,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 19459,
+    "totalVotes": 19746,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4492,15 +4648,15 @@
           "estimatedVotesHigh": 23694,
           "estimatedVotesLow": 19386,
           "estimatedVotesMid": 21540,
-          "turnoutHigh": 69.4,
-          "turnoutLow": 84.82,
-          "turnoutMid": 76.34
+          "turnoutHigh": 91.21,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
         },
         "firstName": "Jason",
         "id": 28404,
         "lastName": "Powell",
         "partyName": "Democratic",
-        "votes": 11339
+        "votes": 14578
       },
       {
         "elected": false,
@@ -4508,15 +4664,15 @@
           "estimatedVotesHigh": 23694,
           "estimatedVotesLow": 19386,
           "estimatedVotesMid": 21540,
-          "turnoutHigh": 69.4,
-          "turnoutLow": 84.82,
-          "turnoutMid": 76.34
+          "turnoutHigh": 91.21,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
         },
         "firstName": "Rueben",
         "id": 44844,
         "lastName": "Dockery",
         "partyName": "Independent",
-        "votes": 325
+        "votes": 445
       },
       {
         "elected": false,
@@ -4524,15 +4680,15 @@
           "estimatedVotesHigh": 23694,
           "estimatedVotesLow": 19386,
           "estimatedVotesMid": 21540,
-          "turnoutHigh": 69.4,
-          "turnoutLow": 84.82,
-          "turnoutMid": 76.34
+          "turnoutHigh": 91.21,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
         },
         "firstName": "Yog",
         "id": 82205,
         "lastName": "Nepal",
         "partyName": "Republican",
-        "votes": 4780
+        "votes": 6588
       }
     ],
     "district": "53",
@@ -4541,7 +4697,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:31.205Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4551,11 +4707,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 16444,
+    "totalVotes": 21611,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4595,6 +4752,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4640,6 +4798,14 @@
       "lastName": "Freeman",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Bob",
+        "id": 28407,
+        "lastName": "Freeman",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -4679,6 +4845,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4719,7 +4886,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:25:26.391Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4734,6 +4901,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4773,6 +4941,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4812,6 +4981,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4852,7 +5022,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:44.360Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4867,6 +5037,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4874,15 +5045,15 @@
           "estimatedVotesHigh": 41451,
           "estimatedVotesLow": 33915,
           "estimatedVotesMid": 37683,
-          "turnoutHigh": 92.02,
-          "turnoutLow": 112.47,
+          "turnoutHigh": 92.04,
+          "turnoutLow": 112.49,
           "turnoutMid": 99
         },
         "firstName": "Alana",
         "id": 101684,
         "lastName": "LeBlanc",
         "partyName": "Independent",
-        "votes": 701
+        "votes": 709
       },
       {
         "elected": false,
@@ -4890,8 +5061,8 @@
           "estimatedVotesHigh": 41451,
           "estimatedVotesLow": 33915,
           "estimatedVotesMid": 37683,
-          "turnoutHigh": 92.02,
-          "turnoutLow": 112.47,
+          "turnoutHigh": 92.04,
+          "turnoutLow": 112.49,
           "turnoutMid": 99
         },
         "firstName": "Gino",
@@ -4906,8 +5077,8 @@
           "estimatedVotesHigh": 41451,
           "estimatedVotesLow": 33915,
           "estimatedVotesMid": 37683,
-          "turnoutHigh": 92.02,
-          "turnoutLow": 112.47,
+          "turnoutHigh": 92.04,
+          "turnoutLow": 112.49,
           "turnoutMid": 99
         },
         "firstName": "Claire",
@@ -4923,7 +5094,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4933,11 +5104,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 38144,
+    "totalVotes": 38152,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4977,6 +5149,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4984,15 +5157,15 @@
           "estimatedVotesHigh": 38840,
           "estimatedVotesLow": 31778,
           "estimatedVotesMid": 35309,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.08,
+          "turnoutLow": 112.54,
+          "turnoutMid": 99
         },
         "firstName": "Laura",
         "id": 82215,
         "lastName": "Andreson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 12839
       },
       {
         "elected": false,
@@ -5000,15 +5173,15 @@
           "estimatedVotesHigh": 38840,
           "estimatedVotesLow": 31778,
           "estimatedVotesMid": 35309,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.08,
+          "turnoutLow": 112.54,
+          "turnoutMid": 99
         },
         "firstName": "Jake",
         "id": 28511,
         "lastName": "McCalmon",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 22924
       }
     ],
     "district": "63",
@@ -5017,7 +5190,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5027,11 +5200,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 0,
+    "totalVotes": 35763,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5039,8 +5213,8 @@
           "estimatedVotesHigh": 33088,
           "estimatedVotesLow": 27072,
           "estimatedVotesMid": 30080,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.52,
+          "turnoutLow": 111.85,
           "turnoutMid": 99
         },
         "firstName": "Eileen",
@@ -5055,15 +5229,15 @@
           "estimatedVotesHigh": 33088,
           "estimatedVotesLow": 27072,
           "estimatedVotesMid": 30080,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.52,
+          "turnoutLow": 111.85,
           "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 28513,
         "lastName": "Cepicky",
         "partyName": "Republican",
-        "votes": 19985
+        "votes": 20186
       }
     ],
     "district": "64",
@@ -5072,7 +5246,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:21:18.089Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5082,11 +5256,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 30080,
+    "totalVotes": 30281,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5094,15 +5269,15 @@
           "estimatedVotesHigh": 38975,
           "estimatedVotesLow": 31889,
           "estimatedVotesMid": 35432,
-          "turnoutHigh": 91.52,
-          "turnoutLow": 111.86,
+          "turnoutHigh": 92.13,
+          "turnoutLow": 112.61,
           "turnoutMid": 99
         },
         "firstName": "LaRhonda",
         "id": 82221,
         "lastName": "Williams",
         "partyName": "Democratic",
-        "votes": 11768
+        "votes": 12007
       },
       {
         "elected": false,
@@ -5110,8 +5285,8 @@
           "estimatedVotesHigh": 38975,
           "estimatedVotesLow": 31889,
           "estimatedVotesMid": 35432,
-          "turnoutHigh": 91.52,
-          "turnoutLow": 111.86,
+          "turnoutHigh": 92.13,
+          "turnoutLow": 112.61,
           "turnoutMid": 99
         },
         "firstName": "Lee",
@@ -5127,7 +5302,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:32:34.101Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5137,11 +5312,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 35670,
+    "totalVotes": 35909,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5198,7 +5374,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:31.205Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5213,6 +5389,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5220,15 +5397,15 @@
           "estimatedVotesHigh": 20845,
           "estimatedVotesLow": 17055,
           "estimatedVotesMid": 18950,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.34,
+          "turnoutLow": 111.64,
           "turnoutMid": 99
         },
         "firstName": "Jamie",
         "id": 82223,
         "lastName": "Peltz",
         "partyName": "Republican",
-        "votes": 8901
+        "votes": 8991
       },
       {
         "elected": false,
@@ -5236,8 +5413,8 @@
           "estimatedVotesHigh": 20845,
           "estimatedVotesLow": 17055,
           "estimatedVotesMid": 18950,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.34,
+          "turnoutLow": 111.64,
           "turnoutMid": 99
         },
         "firstName": "Ronnie",
@@ -5253,7 +5430,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:34:58.148Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5263,11 +5440,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 18950,
+    "totalVotes": 19040,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5275,8 +5453,8 @@
           "estimatedVotesHigh": 32806,
           "estimatedVotesLow": 26842,
           "estimatedVotesMid": 29824,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.22,
+          "turnoutLow": 111.49,
           "turnoutMid": 99
         },
         "firstName": "Aron",
@@ -5291,15 +5469,15 @@
           "estimatedVotesHigh": 32806,
           "estimatedVotesLow": 26842,
           "estimatedVotesMid": 29824,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.22,
+          "turnoutLow": 111.49,
           "turnoutMid": 99
         },
         "firstName": "Garfield",
         "id": 82227,
         "lastName": "Scott",
         "partyName": "Democratic",
-        "votes": 10073
+        "votes": 10175
       }
     ],
     "district": "68",
@@ -5308,7 +5486,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:35:46.567Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5318,11 +5496,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 29824,
+    "totalVotes": 29926,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5362,6 +5541,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5369,15 +5549,15 @@
           "estimatedVotesHigh": 31230,
           "estimatedVotesLow": 25552,
           "estimatedVotesMid": 28391,
-          "turnoutHigh": 66.92,
-          "turnoutLow": 81.79,
-          "turnoutMid": 73.61
+          "turnoutHigh": 91.15,
+          "turnoutLow": 111.4,
+          "turnoutMid": 99
         },
         "firstName": "Jason",
         "id": 82230,
         "lastName": "Luttrell",
         "partyName": "Democratic",
-        "votes": 4524
+        "votes": 5835
       },
       {
         "elected": false,
@@ -5385,15 +5565,15 @@
           "estimatedVotesHigh": 31230,
           "estimatedVotesLow": 25552,
           "estimatedVotesMid": 28391,
-          "turnoutHigh": 66.92,
-          "turnoutLow": 81.79,
-          "turnoutMid": 73.61
+          "turnoutHigh": 91.15,
+          "turnoutLow": 111.4,
+          "turnoutMid": 99
         },
         "firstName": "Clay",
         "id": 28524,
         "lastName": "Doggett",
         "partyName": "Republican",
-        "votes": 16375
+        "votes": 22631
       }
     ],
     "district": "70",
@@ -5402,7 +5582,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:36:34.690Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5412,11 +5592,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 20899,
+    "totalVotes": 28466,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5424,15 +5605,15 @@
           "estimatedVotesHigh": 31693,
           "estimatedVotesLow": 25933,
           "estimatedVotesMid": 28813,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.3,
+          "turnoutLow": 111.58,
           "turnoutMid": 99
         },
         "firstName": "Timothy",
         "id": 101686,
         "lastName": "Coy",
         "partyName": "Democratic",
-        "votes": 6101
+        "votes": 6115
       },
       {
         "elected": false,
@@ -5440,15 +5621,15 @@
           "estimatedVotesHigh": 31693,
           "estimatedVotesLow": 25933,
           "estimatedVotesMid": 28813,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.3,
+          "turnoutLow": 111.58,
           "turnoutMid": 99
         },
         "firstName": "Kip",
         "id": 28525,
         "lastName": "Capley",
         "partyName": "Republican",
-        "votes": 22712
+        "votes": 22821
       }
     ],
     "district": "71",
@@ -5457,7 +5638,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:00.961Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5467,11 +5648,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 28813,
+    "totalVotes": 28936,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5511,6 +5693,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5550,6 +5733,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5589,6 +5773,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5596,15 +5781,15 @@
           "estimatedVotesHigh": 18601,
           "estimatedVotesLow": 15219,
           "estimatedVotesMid": 16910,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.73,
+          "turnoutHigh": 91.93,
+          "turnoutLow": 112.35,
           "turnoutMid": 99
         },
         "firstName": "Jeff",
         "id": 28531,
         "lastName": "Burkhart",
         "partyName": "Republican",
-        "votes": 9370
+        "votes": 9465
       },
       {
         "elected": false,
@@ -5612,8 +5797,8 @@
           "estimatedVotesHigh": 18601,
           "estimatedVotesLow": 15219,
           "estimatedVotesMid": 16910,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.73,
+          "turnoutHigh": 91.93,
+          "turnoutLow": 112.35,
           "turnoutMid": 99
         },
         "firstName": "Allie",
@@ -5629,7 +5814,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:55.822Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5639,11 +5824,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 17004,
+    "totalVotes": 17099,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5651,15 +5837,15 @@
           "estimatedVotesHigh": 28574,
           "estimatedVotesLow": 23378,
           "estimatedVotesMid": 25976,
-          "turnoutHigh": 50.87,
-          "turnoutLow": 62.17,
-          "turnoutMid": 55.96
+          "turnoutHigh": 90.03,
+          "turnoutLow": 110.04,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 2096,
         "lastName": "Hart",
         "partyName": "Independent",
-        "votes": 367
+        "votes": 652
       },
       {
         "elected": false,
@@ -5667,15 +5853,15 @@
           "estimatedVotesHigh": 28574,
           "estimatedVotesLow": 23378,
           "estimatedVotesMid": 25976,
-          "turnoutHigh": 50.87,
-          "turnoutLow": 62.17,
-          "turnoutMid": 55.96
+          "turnoutHigh": 90.03,
+          "turnoutLow": 110.04,
+          "turnoutMid": 99
         },
         "firstName": "Tandy",
         "id": 28534,
         "lastName": "Darby",
         "partyName": "Republican",
-        "votes": 14168
+        "votes": 25074
       }
     ],
     "district": "76",
@@ -5684,7 +5870,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:10.043Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5694,11 +5880,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 14535,
+    "totalVotes": 25726,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5738,6 +5925,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5745,15 +5933,15 @@
           "estimatedVotesHigh": 32296,
           "estimatedVotesLow": 26424,
           "estimatedVotesMid": 29360,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.5,
+          "turnoutHigh": 92.06,
+          "turnoutLow": 112.52,
           "turnoutMid": 99
         },
         "firstName": "Deborah",
         "id": 82236,
         "lastName": "Doyle",
         "partyName": "Democratic",
-        "votes": 8058
+        "votes": 8193
       },
       {
         "elected": false,
@@ -5761,15 +5949,15 @@
           "estimatedVotesHigh": 32296,
           "estimatedVotesLow": 26424,
           "estimatedVotesMid": 29360,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.5,
+          "turnoutHigh": 92.06,
+          "turnoutLow": 112.52,
           "turnoutMid": 99
         },
         "firstName": "Mary",
         "id": 28536,
         "lastName": "Littleton",
         "partyName": "Republican",
-        "votes": 21404
+        "votes": 21540
       }
     ],
     "district": "78",
@@ -5778,7 +5966,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:40.328Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5788,11 +5976,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 29462,
+    "totalVotes": 29733,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5832,6 +6021,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5839,15 +6029,15 @@
           "estimatedVotesHigh": 22959,
           "estimatedVotesLow": 18784,
           "estimatedVotesMid": 20871,
-          "turnoutHigh": 90.48,
-          "turnoutLow": 110.59,
+          "turnoutHigh": 91.28,
+          "turnoutLow": 111.56,
           "turnoutMid": 99
         },
-        "firstName": "Johnny",
-        "id": 28421,
-        "lastName": "Shaw",
-        "partyName": "Democratic",
-        "votes": 11062
+        "firstName": "Brad",
+        "id": 82237,
+        "lastName": "Grantham",
+        "partyName": "Republican",
+        "votes": 9838
       },
       {
         "elected": false,
@@ -5855,15 +6045,15 @@
           "estimatedVotesHigh": 22959,
           "estimatedVotesLow": 18784,
           "estimatedVotesMid": 20871,
-          "turnoutHigh": 90.48,
-          "turnoutLow": 110.59,
+          "turnoutHigh": 91.28,
+          "turnoutLow": 111.56,
           "turnoutMid": 99
         },
-        "firstName": "Brad",
-        "id": 82237,
-        "lastName": "Grantham",
-        "partyName": "Republican",
-        "votes": 9711
+        "firstName": "Johnny",
+        "id": 28421,
+        "lastName": "Shaw",
+        "partyName": "Democratic",
+        "votes": 11118
       }
     ],
     "district": "80",
@@ -5872,7 +6062,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:10.043Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5882,11 +6072,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 20773,
+    "totalVotes": 20956,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5926,6 +6117,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5965,6 +6157,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6005,7 +6198,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:10.043Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6020,6 +6213,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6059,6 +6253,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6098,6 +6293,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6105,15 +6301,15 @@
           "estimatedVotesHigh": 25147,
           "estimatedVotesLow": 20575,
           "estimatedVotesMid": 22861,
-          "turnoutHigh": 31.43,
-          "turnoutLow": 38.42,
-          "turnoutMid": 34.57
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
+          "turnoutMid": 99
         },
         "firstName": "Jeff",
         "id": 50558,
         "lastName": "Johnston",
         "partyName": "Independent",
-        "votes": 205
+        "votes": 574
       },
       {
         "elected": false,
@@ -6121,15 +6317,15 @@
           "estimatedVotesHigh": 25147,
           "estimatedVotesLow": 20575,
           "estimatedVotesMid": 22861,
-          "turnoutHigh": 31.43,
-          "turnoutLow": 38.42,
-          "turnoutMid": 34.57
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
+          "turnoutMid": 99
         },
         "firstName": "Justin",
         "id": 48423,
         "lastName": "Pearson",
         "partyName": "Democratic",
-        "votes": 7699
+        "votes": 22518
       }
     ],
     "district": "86",
@@ -6138,7 +6334,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:55.822Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6148,11 +6344,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 7904,
+    "totalVotes": 23092,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6192,6 +6389,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6199,15 +6397,15 @@
           "estimatedVotesHigh": 25912,
           "estimatedVotesLow": 21200,
           "estimatedVotesMid": 23556,
-          "turnoutHigh": 44.32,
-          "turnoutLow": 54.17,
-          "turnoutMid": 48.75
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Larry",
         "id": 82243,
         "lastName": "Hunter",
         "partyName": "Republican",
-        "votes": 3225
+        "votes": 6739
       },
       {
         "elected": false,
@@ -6215,15 +6413,15 @@
           "estimatedVotesHigh": 25912,
           "estimatedVotesLow": 21200,
           "estimatedVotesMid": 23556,
-          "turnoutHigh": 44.32,
-          "turnoutLow": 54.17,
-          "turnoutMid": 48.75
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Larry",
         "id": 28429,
         "lastName": "Miller",
         "partyName": "Democratic",
-        "votes": 8259
+        "votes": 16817
       }
     ],
     "district": "88",
@@ -6232,7 +6430,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6242,11 +6440,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 11484,
+    "totalVotes": 23556,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6254,15 +6453,15 @@
           "estimatedVotesHigh": 33609,
           "estimatedVotesLow": 27499,
           "estimatedVotesMid": 30554,
-          "turnoutHigh": 66.83,
-          "turnoutLow": 81.68,
-          "turnoutMid": 73.52
+          "turnoutHigh": 91.24,
+          "turnoutLow": 111.52,
+          "turnoutMid": 99
         },
         "firstName": "Cary",
         "id": 82244,
         "lastName": "Hammond",
         "partyName": "Democratic",
-        "votes": 8288
+        "votes": 11193
       },
       {
         "elected": false,
@@ -6270,15 +6469,15 @@
           "estimatedVotesHigh": 33609,
           "estimatedVotesLow": 27499,
           "estimatedVotesMid": 30554,
-          "turnoutHigh": 66.83,
-          "turnoutLow": 81.68,
-          "turnoutMid": 73.52
+          "turnoutHigh": 91.24,
+          "turnoutLow": 111.52,
+          "turnoutMid": 99
         },
         "firstName": "Justin",
         "id": 28542,
         "lastName": "Lafferty",
         "partyName": "Republican",
-        "votes": 14174
+        "votes": 19473
       }
     ],
     "district": "89",
@@ -6287,7 +6486,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:27.799Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6297,11 +6496,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 22462,
+    "totalVotes": 30666,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6347,6 +6547,14 @@
       "lastName": "Harris",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Torrey",
+        "id": 28432,
+        "lastName": "Harris",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -6386,6 +6594,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6393,15 +6602,15 @@
           "estimatedVotesHigh": 32300,
           "estimatedVotesLow": 26426,
           "estimatedVotesMid": 29363,
-          "turnoutHigh": 74.03,
-          "turnoutLow": 90.49,
-          "turnoutMid": 81.44
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Todd",
         "id": 28544,
         "lastName": "Warner",
         "partyName": "Republican",
-        "votes": 16529
+        "votes": 20496
       },
       {
         "elected": false,
@@ -6409,15 +6618,15 @@
           "estimatedVotesHigh": 32300,
           "estimatedVotesLow": 26426,
           "estimatedVotesMid": 29363,
-          "turnoutHigh": 74.03,
-          "turnoutLow": 90.49,
-          "turnoutMid": 81.44
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Teri",
         "id": 82245,
         "lastName": "Mai",
         "partyName": "Democratic",
-        "votes": 7384
+        "votes": 8970
       }
     ],
     "district": "92",
@@ -6426,7 +6635,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:44.360Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6436,11 +6645,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 23913,
+    "totalVotes": 29466,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6448,15 +6658,15 @@
           "estimatedVotesHigh": 19572,
           "estimatedVotesLow": 16014,
           "estimatedVotesMid": 17793,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.64,
+          "turnoutLow": 112,
           "turnoutMid": 99
         },
         "firstName": "G.A.",
         "id": 28435,
         "lastName": "Hardaway",
         "partyName": "Democratic",
-        "votes": 14125
+        "votes": 14267
       },
       {
         "elected": false,
@@ -6464,8 +6674,8 @@
           "estimatedVotesHigh": 19572,
           "estimatedVotesLow": 16014,
           "estimatedVotesMid": 17793,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.64,
+          "turnoutLow": 112,
           "turnoutMid": 99
         },
         "firstName": "Renarda",
@@ -6481,7 +6691,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:21.603Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6491,11 +6701,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 17793,
+    "totalVotes": 17935,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6503,15 +6714,15 @@
           "estimatedVotesHigh": 36949,
           "estimatedVotesLow": 30231,
           "estimatedVotesMid": 33590,
-          "turnoutHigh": 68.19,
-          "turnoutLow": 83.34,
-          "turnoutMid": 75.01
+          "turnoutHigh": 91.36,
+          "turnoutLow": 111.66,
+          "turnoutMid": 99
         },
         "firstName": "Terry",
         "id": 82249,
         "lastName": "Saine",
         "partyName": "Democratic",
-        "votes": 6769
+        "votes": 9158
       },
       {
         "elected": false,
@@ -6519,15 +6730,15 @@
           "estimatedVotesHigh": 36949,
           "estimatedVotesLow": 30231,
           "estimatedVotesMid": 33590,
-          "turnoutHigh": 68.19,
-          "turnoutLow": 83.34,
-          "turnoutMid": 75.01
+          "turnoutHigh": 91.36,
+          "turnoutLow": 111.66,
+          "turnoutMid": 99
         },
         "firstName": "Ron",
         "id": 28547,
         "lastName": "Gant",
         "partyName": "Republican",
-        "votes": 18427
+        "votes": 24599
       }
     ],
     "district": "94",
@@ -6536,7 +6747,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:31.205Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6546,11 +6757,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 25196,
+    "totalVotes": 33757,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6590,6 +6802,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6629,6 +6842,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6636,15 +6850,15 @@
           "estimatedVotesHigh": 35063,
           "estimatedVotesLow": 28688,
           "estimatedVotesMid": 31875,
-          "turnoutHigh": 37.89,
-          "turnoutLow": 46.31,
-          "turnoutMid": 41.68
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 28549,
         "lastName": "Gillespie",
         "partyName": "Republican",
-        "votes": 6291
+        "votes": 14576
       },
       {
         "elected": false,
@@ -6652,15 +6866,15 @@
           "estimatedVotesHigh": 35063,
           "estimatedVotesLow": 28688,
           "estimatedVotesMid": 31875,
-          "turnoutHigh": 37.89,
-          "turnoutLow": 46.31,
-          "turnoutMid": 41.68
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jesse",
         "id": 82256,
         "lastName": "Huseth",
         "partyName": "Democratic",
-        "votes": 6994
+        "votes": 17299
       }
     ],
     "district": "97",
@@ -6669,7 +6883,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6679,11 +6893,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 13285,
+    "totalVotes": 31875,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6724,7 +6939,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:55.822Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6739,6 +6954,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6746,15 +6962,15 @@
           "estimatedVotesHigh": 39042,
           "estimatedVotesLow": 31944,
           "estimatedVotesMid": 35493,
-          "turnoutHigh": 34.72,
-          "turnoutLow": 42.43,
-          "turnoutMid": 38.19
+          "turnoutHigh": 70.37,
+          "turnoutLow": 86.01,
+          "turnoutMid": 77.41
         },
         "firstName": "William",
         "id": 101687,
         "lastName": "Mouzon",
         "partyName": "Independent",
-        "votes": 420
+        "votes": 870
       },
       {
         "elected": false,
@@ -6762,15 +6978,15 @@
           "estimatedVotesHigh": 39042,
           "estimatedVotesLow": 31944,
           "estimatedVotesMid": 35493,
-          "turnoutHigh": 34.72,
-          "turnoutLow": 42.43,
-          "turnoutMid": 38.19
+          "turnoutHigh": 70.37,
+          "turnoutLow": 86.01,
+          "turnoutMid": 77.41
         },
         "firstName": "Tom",
         "id": 384,
         "lastName": "Leatherwood",
         "partyName": "Republican",
-        "votes": 13135
+        "votes": 26604
       }
     ],
     "district": "99",
@@ -6779,7 +6995,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:44.360Z",
+    "lastUpdated": "2024-10-25T20:52:47.783Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6789,7 +7005,7 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 13555,
+    "totalVotes": 27474,
     "year": 2024
   }
 ]

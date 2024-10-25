@@ -1,6 +1,20 @@
 [
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "John",
+      "id": 8307,
+      "incumbent": false,
+      "lastName": "Curtis",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "John",
+        "id": 8307,
+        "lastName": "Curtis",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8,47 +22,47 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 8307,
-        "lastName": "Curtis",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Carlton E.",
-        "id": 84967,
-        "lastName": "Bowen",
-        "partyName": "American Independent Party",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.34,
+          "turnoutMid": 99
         },
         "firstName": "Caroline",
         "id": 76175,
         "lastName": "Gleich",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 437851
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.34,
+          "turnoutMid": 99
+        },
+        "firstName": "John",
+        "id": 8307,
+        "lastName": "Curtis",
+        "partyName": "Republican",
+        "votes": 670124
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.34,
+          "turnoutMid": 99
+        },
+        "firstName": "Carlton E.",
+        "id": 84967,
+        "lastName": "Bowen",
+        "partyName": "American Independent Party",
+        "votes": 22059
       }
     ],
     "district": "",
@@ -56,8 +70,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T20:53:39.317Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -67,11 +81,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 1130034,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -79,31 +94,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Tom",
-        "id": 84969,
-        "lastName": "Tomeny",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.17,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
         },
         "firstName": "Spencer",
         "id": 13810,
         "lastName": "Cox",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 649220
       },
       {
         "elected": false,
@@ -111,15 +110,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.17,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
         },
         "firstName": "J. Robert",
         "id": 14660,
         "lastName": "Latham",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 22317
       },
       {
         "elected": false,
@@ -127,15 +126,31 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.17,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
+        },
+        "firstName": "Tom",
+        "id": 84969,
+        "lastName": "Tomeny",
+        "partyName": "Independent",
+        "votes": 22099
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 91.17,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
         },
         "firstName": "Brian",
         "id": 46198,
         "lastName": "King",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 415635
       },
       {
         "elected": false,
@@ -143,15 +158,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.17,
+          "turnoutLow": 111.44,
+          "turnoutMid": 99
         },
         "firstName": "Tommy",
         "id": 84968,
         "lastName": "Williams",
         "partyName": "American Independent Party",
-        "votes": 0
+        "votes": 21742
       }
     ],
     "district": "",
@@ -160,7 +175,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:53:39.317Z",
     "office": {
       "officeId": "2",
       "officeName": "Governor",
@@ -170,59 +185,73 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 1131013,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Blake",
+      "id": 13823,
+      "incumbent": true,
+      "lastName": "Moore",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Blake",
+        "id": 13823,
+        "lastName": "Moore",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 308016,
           "estimatedVotesLow": 252012,
           "estimatedVotesMid": 280014,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bill",
-        "id": 76178,
-        "lastName": "Campbell",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 308016,
-          "estimatedVotesLow": 252012,
-          "estimatedVotesMid": 280014,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Daniel",
-        "id": 15072,
-        "lastName": "Cottam",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 308016,
-          "estimatedVotesLow": 252012,
-          "estimatedVotesMid": 280014,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.74,
+          "turnoutMid": 99
         },
         "firstName": "Blake",
         "id": 13823,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 171922
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 308016,
+          "estimatedVotesLow": 252012,
+          "estimatedVotesMid": 280014,
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.74,
+          "turnoutMid": 99
+        },
+        "firstName": "Bill",
+        "id": 76178,
+        "lastName": "Campbell",
+        "partyName": "Democratic",
+        "votes": 104367
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 308016,
+          "estimatedVotesLow": 252012,
+          "estimatedVotesMid": 280014,
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.74,
+          "turnoutMid": 99
+        },
+        "firstName": "Daniel",
+        "id": 15072,
+        "lastName": "Cottam",
+        "partyName": "Libertarian",
+        "votes": 5304
       }
     ],
     "district": "1",
@@ -230,8 +259,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T20:53:35.817Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -241,11 +270,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 281593,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -253,15 +283,15 @@
           "estimatedVotesHigh": 296259,
           "estimatedVotesLow": 242394,
           "estimatedVotesMid": 269326,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Celeste",
         "id": 50723,
         "lastName": "Maloy",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 154484
       },
       {
         "elected": false,
@@ -269,15 +299,15 @@
           "estimatedVotesHigh": 296259,
           "estimatedVotesLow": 242394,
           "estimatedVotesMid": 269326,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Tyler",
         "id": 85151,
         "lastName": "Murset",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 5251
       },
       {
         "elected": false,
@@ -285,15 +315,15 @@
           "estimatedVotesHigh": 296259,
           "estimatedVotesLow": 242394,
           "estimatedVotesMid": 269326,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Nathaniel",
         "id": 85150,
         "lastName": "Woodward",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 104843
       },
       {
         "elected": false,
@@ -301,15 +331,15 @@
           "estimatedVotesHigh": 296259,
           "estimatedVotesLow": 242394,
           "estimatedVotesMid": 269326,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Cassie",
         "id": 44437,
         "lastName": "Easley",
         "partyName": "Constitution",
-        "votes": 0
+        "votes": 5122
       }
     ],
     "district": "2",
@@ -318,7 +348,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -328,11 +358,25 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 269700,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Mike",
+      "id": 44870,
+      "incumbent": false,
+      "lastName": "Kennedy",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Mike",
+        "id": 44870,
+        "lastName": "Kennedy",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -340,31 +384,31 @@
           "estimatedVotesHigh": 321400,
           "estimatedVotesLow": 262963,
           "estimatedVotesMid": 292181,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.93,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
         },
         "firstName": "Glenn",
         "id": 44439,
         "lastName": "Wright",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 115545
       },
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 321400,
           "estimatedVotesLow": 262963,
           "estimatedVotesMid": 292181,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.93,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 44870,
         "lastName": "Kennedy",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 176690
       }
     ],
     "district": "3",
@@ -372,8 +416,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -383,11 +427,25 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 292235,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Burgess",
+      "id": 13822,
+      "incumbent": true,
+      "lastName": "Owens",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Burgess",
+        "id": 13822,
+        "lastName": "Owens",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -395,15 +453,15 @@
           "estimatedVotesHigh": 314680,
           "estimatedVotesLow": 257466,
           "estimatedVotesMid": 286073,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
         },
         "firstName": "M. Evan",
         "id": 85152,
         "lastName": "Bullard",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 5721
       },
       {
         "elected": false,
@@ -411,31 +469,15 @@
           "estimatedVotesHigh": 314680,
           "estimatedVotesLow": 257466,
           "estimatedVotesMid": 286073,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Burgess",
-        "id": 13822,
-        "lastName": "Owens",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 314680,
-          "estimatedVotesLow": 257466,
-          "estimatedVotesMid": 286073,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
         },
         "firstName": "Katrina",
         "id": 76184,
         "lastName": "Fallick-Wang",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 94121
       },
       {
         "elected": false,
@@ -443,15 +485,31 @@
           "estimatedVotesHigh": 314680,
           "estimatedVotesLow": 257466,
           "estimatedVotesMid": 286073,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
         },
         "firstName": "Vaughn",
         "id": 85153,
         "lastName": "Cook",
         "partyName": "United Utah",
-        "votes": 0
+        "votes": 5718
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 314680,
+          "estimatedVotesLow": 257466,
+          "estimatedVotesMid": 286073,
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
+        },
+        "firstName": "Burgess",
+        "id": 13822,
+        "lastName": "Owens",
+        "partyName": "Republican",
+        "votes": 181120
       }
     ],
     "district": "4",
@@ -459,8 +517,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -470,11 +528,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 286680,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -482,63 +541,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Rudy",
-        "id": 76185,
-        "lastName": "Bautista",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Michelle",
-        "id": 95843,
-        "lastName": "Quist",
-        "partyName": "United Utah",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Andrew",
-        "id": 95844,
-        "lastName": "McCullough",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 87.15,
+          "turnoutLow": 106.51,
+          "turnoutMid": 95.86
         },
         "firstName": "Derek",
         "id": 76188,
         "lastName": "Brown",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 633718
       },
       {
         "elected": false,
@@ -546,15 +557,63 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 87.15,
+          "turnoutLow": 106.51,
+          "turnoutMid": 95.86
         },
         "firstName": "Austin",
         "id": 95845,
         "lastName": "Hepworth",
         "partyName": "Unaffiliated",
-        "votes": 0
+        "votes": 19901
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 87.15,
+          "turnoutLow": 106.51,
+          "turnoutMid": 95.86
+        },
+        "firstName": "Andrew",
+        "id": 95844,
+        "lastName": "McCullough",
+        "partyName": "Libertarian",
+        "votes": 20192
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 87.15,
+          "turnoutLow": 106.51,
+          "turnoutMid": 95.86
+        },
+        "firstName": "Michelle",
+        "id": 95843,
+        "lastName": "Quist",
+        "partyName": "United Utah",
+        "votes": 19841
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 87.15,
+          "turnoutLow": 106.51,
+          "turnoutMid": 95.86
+        },
+        "firstName": "Rudy",
+        "id": 76185,
+        "lastName": "Bautista",
+        "partyName": "Democratic",
+        "votes": 387405
       }
     ],
     "district": "",
@@ -563,7 +622,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "27",
       "officeName": "Attorney General",
@@ -573,11 +632,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 1081057,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -585,31 +645,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Tina",
-        "id": 25575,
-        "lastName": "Cannon",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.21,
+          "turnoutMid": 99
         },
         "firstName": "Catherine",
         "id": 44862,
         "lastName": "Voutaz",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 436887
       },
       {
         "elected": false,
@@ -617,15 +661,31 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.21,
+          "turnoutMid": 99
+        },
+        "firstName": "Tina",
+        "id": 25575,
+        "lastName": "Cannon",
+        "partyName": "Republican",
+        "votes": 668922
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.21,
+          "turnoutMid": 99
         },
         "firstName": "Jeffrey",
         "id": 95846,
         "lastName": "Ostler",
         "partyName": "Constitution",
-        "votes": 0
+        "votes": 22880
       }
     ],
     "district": "",
@@ -634,7 +694,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "135",
       "officeName": "Auditor",
@@ -644,11 +704,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 1128689,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -656,15 +717,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.16,
+          "turnoutLow": 111.42,
+          "turnoutMid": 99
         },
         "firstName": "Marlo",
         "id": 47506,
         "lastName": "Oaks",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 665193
       },
       {
         "elected": false,
@@ -672,15 +733,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.16,
+          "turnoutLow": 111.42,
+          "turnoutMid": 99
         },
         "firstName": "Miles",
         "id": 95847,
         "lastName": "Pomeroy",
         "partyName": "Utah Forward",
-        "votes": 0
+        "votes": 22345
       },
       {
         "elected": false,
@@ -688,15 +749,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.16,
+          "turnoutLow": 111.42,
+          "turnoutMid": 99
         },
         "firstName": "Neil",
         "id": 46181,
         "lastName": "Hansen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 443274
       }
     ],
     "district": "",
@@ -705,7 +766,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "146",
       "officeName": "Treasurer",
@@ -715,11 +776,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 1130812,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -727,15 +789,15 @@
           "estimatedVotesHigh": 39288,
           "estimatedVotesLow": 32144,
           "estimatedVotesMid": 35716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.15,
+          "turnoutMid": 99
         },
         "firstName": "Chris",
         "id": 50429,
         "lastName": "Wilson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 24217
       },
       {
         "elected": false,
@@ -743,15 +805,15 @@
           "estimatedVotesHigh": 39288,
           "estimatedVotesLow": 32144,
           "estimatedVotesMid": 35716,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.15,
+          "turnoutMid": 99
         },
         "firstName": "Nancy",
         "id": 76197,
         "lastName": "Huntly",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11510
       }
     ],
     "district": "2",
@@ -760,7 +822,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:52:02.472Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -770,11 +832,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 35727,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -782,15 +845,15 @@
           "estimatedVotesHigh": 41578,
           "estimatedVotesLow": 34017,
           "estimatedVotesMid": 37797,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.06,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
         },
         "firstName": "Stacy",
         "id": 76209,
         "lastName": "Bernal",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 16695
       },
       {
         "elected": false,
@@ -798,15 +861,15 @@
           "estimatedVotesHigh": 41578,
           "estimatedVotesLow": 34017,
           "estimatedVotesMid": 37797,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.06,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 73298,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 21167
       }
     ],
     "district": "3",
@@ -815,7 +878,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -825,11 +888,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 37862,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -869,6 +933,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -876,15 +941,15 @@
           "estimatedVotesHigh": 44495,
           "estimatedVotesLow": 36405,
           "estimatedVotesMid": 40450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Laren",
         "id": 95848,
         "lastName": "Livingston",
         "partyName": "Constitution",
-        "votes": 0
+        "votes": 762
       },
       {
         "elected": false,
@@ -892,15 +957,15 @@
           "estimatedVotesHigh": 44495,
           "estimatedVotesLow": 36405,
           "estimatedVotesMid": 40450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Aaron",
         "id": 76211,
         "lastName": "Wiley",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 20029
       },
       {
         "elected": false,
@@ -908,15 +973,15 @@
           "estimatedVotesHigh": 44495,
           "estimatedVotesLow": 36405,
           "estimatedVotesMid": 40450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Todd",
         "id": 76212,
         "lastName": "Weiler",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 19016
       },
       {
         "elected": false,
@@ -924,15 +989,15 @@
           "estimatedVotesHigh": 44495,
           "estimatedVotesLow": 36405,
           "estimatedVotesMid": 40450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Alisa",
         "id": 95849,
         "lastName": "Van Langeveld",
         "partyName": "Unaffiliated",
-        "votes": 0
+        "votes": 784
       }
     ],
     "district": "8",
@@ -941,7 +1006,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -951,11 +1016,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 40591,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -963,15 +1029,15 @@
           "estimatedVotesHigh": 27154,
           "estimatedVotesLow": 22217,
           "estimatedVotesMid": 24685,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
+          "turnoutMid": 99
         },
         "firstName": "Luz",
         "id": 76191,
         "lastName": "Escamilla",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 14859
       },
       {
         "elected": false,
@@ -979,15 +1045,15 @@
           "estimatedVotesHigh": 27154,
           "estimatedVotesLow": 22217,
           "estimatedVotesMid": 24685,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
+          "turnoutMid": 99
         },
         "firstName": "Kyle",
         "id": 76190,
         "lastName": "Erb",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10075
       }
     ],
     "district": "10",
@@ -996,7 +1062,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:21:55.051Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1006,11 +1072,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 24934,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1018,15 +1085,15 @@
           "estimatedVotesHigh": 43185,
           "estimatedVotesLow": 35333,
           "estimatedVotesMid": 39259,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.27,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
         },
         "firstName": "Kathleen",
         "id": 50726,
         "lastName": "Riebe",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 23587
       },
       {
         "elected": false,
@@ -1034,15 +1101,15 @@
           "estimatedVotesHigh": 43185,
           "estimatedVotesLow": 35333,
           "estimatedVotesMid": 39259,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.27,
+          "turnoutLow": 111.56,
+          "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 76192,
         "lastName": "Cuthbertson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15830
       }
     ],
     "district": "15",
@@ -1051,7 +1118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:10:55.976Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1061,11 +1128,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 39417,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1073,15 +1141,15 @@
           "estimatedVotesHigh": 42633,
           "estimatedVotesLow": 34881,
           "estimatedVotesMid": 38757,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 73.79,
+          "turnoutLow": 90.19,
+          "turnoutMid": 81.17
         },
-        "firstName": "Monnica",
-        "id": 95850,
-        "lastName": "Manuel",
-        "partyName": "Unaffiliated",
-        "votes": 0
+        "firstName": "Wayne",
+        "id": 76194,
+        "lastName": "Harper",
+        "partyName": "Republican",
+        "votes": 30265
       },
       {
         "elected": false,
@@ -1089,15 +1157,15 @@
           "estimatedVotesHigh": 42633,
           "estimatedVotesLow": 34881,
           "estimatedVotesMid": 38757,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 73.79,
+          "turnoutLow": 90.19,
+          "turnoutMid": 81.17
         },
-        "firstName": "Wayne",
-        "id": 76194,
-        "lastName": "Harper",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Monnica",
+        "id": 95850,
+        "lastName": "Manuel",
+        "partyName": "Unaffiliated",
+        "votes": 1195
       }
     ],
     "district": "16",
@@ -1106,7 +1174,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:17:33.138Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1116,11 +1184,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 31460,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1128,15 +1197,15 @@
           "estimatedVotesHigh": 49388,
           "estimatedVotesLow": 40408,
           "estimatedVotesMid": 44898,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 79.63,
+          "turnoutLow": 97.32,
+          "turnoutMid": 87.59
         },
         "firstName": "Pamela",
         "id": 95851,
         "lastName": "Bloom",
         "partyName": "Unaffiliated",
-        "votes": 0
+        "votes": 1265
       },
       {
         "elected": false,
@@ -1144,15 +1213,15 @@
           "estimatedVotesHigh": 49388,
           "estimatedVotesLow": 40408,
           "estimatedVotesMid": 44898,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 79.63,
+          "turnoutLow": 97.32,
+          "turnoutMid": 87.59
         },
         "firstName": "Lincoln",
         "id": 76196,
         "lastName": "Fillmore",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 38061
       }
     ],
     "district": "17",
@@ -1161,7 +1230,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:40:02.568Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1171,11 +1240,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 39326,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1215,6 +1285,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1222,15 +1293,15 @@
           "estimatedVotesHigh": 31096,
           "estimatedVotesLow": 25442,
           "estimatedVotesMid": 28269,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.03,
+          "turnoutLow": 107.6,
+          "turnoutMid": 96.84
         },
         "firstName": "Lori",
         "id": 95853,
         "lastName": "Spruance",
         "partyName": "Unaffiliated",
-        "votes": 0
+        "votes": 809
       },
       {
         "elected": false,
@@ -1238,15 +1309,15 @@
           "estimatedVotesHigh": 31096,
           "estimatedVotesLow": 25442,
           "estimatedVotesMid": 28269,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.03,
+          "turnoutLow": 107.6,
+          "turnoutMid": 96.84
         },
         "firstName": "Keven",
         "id": 46263,
         "lastName": "Stratton",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 26566
       }
     ],
     "district": "24",
@@ -1255,7 +1326,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:52:02.472Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1265,11 +1336,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 27375,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1277,15 +1349,15 @@
           "estimatedVotesHigh": 41556,
           "estimatedVotesLow": 34000,
           "estimatedVotesMid": 37778,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 76202,
         "lastName": "Mckell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 29238
       },
       {
         "elected": false,
@@ -1293,15 +1365,15 @@
           "estimatedVotesHigh": 41556,
           "estimatedVotesLow": 34000,
           "estimatedVotesMid": 37778,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Alan",
         "id": 76201,
         "lastName": "Hansen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8540
       }
     ],
     "district": "25",
@@ -1310,7 +1382,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:52:02.472Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1320,11 +1392,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 37778,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1332,15 +1405,15 @@
           "estimatedVotesHigh": 48480,
           "estimatedVotesLow": 39666,
           "estimatedVotesMid": 44073,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.06,
+          "turnoutLow": 111.29,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 76203,
         "lastName": "Hinkins",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 30042
       },
       {
         "elected": false,
@@ -1348,15 +1421,15 @@
           "estimatedVotesHigh": 48480,
           "estimatedVotesLow": 39666,
           "estimatedVotesMid": 44073,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.06,
+          "turnoutLow": 111.29,
+          "turnoutMid": 99
         },
         "firstName": "Oran",
         "id": 95854,
         "lastName": "Stainbrook",
         "partyName": "Unaffiliated",
-        "votes": 0
+        "votes": 909
       },
       {
         "elected": false,
@@ -1364,15 +1437,15 @@
           "estimatedVotesHigh": 48480,
           "estimatedVotesLow": 39666,
           "estimatedVotesMid": 44073,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.06,
+          "turnoutLow": 111.29,
+          "turnoutMid": 99
         },
         "firstName": "Corbin",
         "id": 76204,
         "lastName": "Frost",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 13195
       }
     ],
     "district": "26",
@@ -1381,7 +1454,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1391,11 +1464,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 44146,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1435,6 +1509,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1442,15 +1517,15 @@
           "estimatedVotesHigh": 45916,
           "estimatedVotesLow": 37568,
           "estimatedVotesMid": 41742,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.6,
+          "turnoutLow": 111.95,
+          "turnoutMid": 99
         },
         "firstName": "Deidra",
         "id": 76206,
         "lastName": "Ritchhart",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10181
       },
       {
         "elected": false,
@@ -1458,15 +1533,15 @@
           "estimatedVotesHigh": 45916,
           "estimatedVotesLow": 37568,
           "estimatedVotesMid": 41742,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.6,
+          "turnoutLow": 111.95,
+          "turnoutMid": 99
         },
         "firstName": "Don",
         "id": 76207,
         "lastName": "Ipson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 31878
       }
     ],
     "district": "29",
@@ -1475,7 +1550,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1485,11 +1560,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 42059,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1497,15 +1573,15 @@
           "estimatedVotesHigh": 18571,
           "estimatedVotesLow": 15195,
           "estimatedVotesMid": 16883,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Claudia",
         "id": 76214,
         "lastName": "Bigler",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2681
       },
       {
         "elected": false,
@@ -1513,15 +1589,15 @@
           "estimatedVotesHigh": 18571,
           "estimatedVotesLow": 15195,
           "estimatedVotesMid": 16883,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Thomas",
         "id": 76213,
         "lastName": "Peterson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 14202
       }
     ],
     "district": "1",
@@ -1530,7 +1606,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1540,11 +1616,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16883,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1552,15 +1629,15 @@
           "estimatedVotesHigh": 16512,
           "estimatedVotesLow": 13510,
           "estimatedVotesMid": 15011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tom",
         "id": 76224,
         "lastName": "Liljegren",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4485
       },
       {
         "elected": false,
@@ -1568,15 +1645,15 @@
           "estimatedVotesHigh": 16512,
           "estimatedVotesLow": 13510,
           "estimatedVotesMid": 15011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 76225,
         "lastName": "Petersen",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10526
       }
     ],
     "district": "2",
@@ -1585,7 +1662,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:52:02.472Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1595,11 +1672,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15011,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1607,15 +1685,15 @@
           "estimatedVotesHigh": 12266,
           "estimatedVotesLow": 10036,
           "estimatedVotesMid": 11151,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.1,
+          "turnoutLow": 110.12,
+          "turnoutMid": 99
         },
         "firstName": "Patrick",
         "id": 95858,
         "lastName": "Belmont",
         "partyName": "Unaffiliated",
-        "votes": 0
+        "votes": 386
       },
       {
         "elected": false,
@@ -1623,15 +1701,15 @@
           "estimatedVotesHigh": 12266,
           "estimatedVotesLow": 10036,
           "estimatedVotesMid": 11151,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.1,
+          "turnoutLow": 110.12,
+          "turnoutMid": 99
         },
         "firstName": "Jason",
         "id": 65943,
         "lastName": "Thompson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10666
       }
     ],
     "district": "3",
@@ -1640,7 +1718,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:52:02.472Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1650,11 +1728,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 11052,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1662,15 +1741,15 @@
           "estimatedVotesHigh": 21066,
           "estimatedVotesLow": 17236,
           "estimatedVotesMid": 19151,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Kera",
-        "id": 25595,
-        "lastName": "Birkeland",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Kris",
+        "id": 46176,
+        "lastName": "Campbell",
+        "partyName": "Democratic",
+        "votes": 7619
       },
       {
         "elected": false,
@@ -1678,15 +1757,15 @@
           "estimatedVotesHigh": 21066,
           "estimatedVotesLow": 17236,
           "estimatedVotesMid": 19151,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Kris",
-        "id": 46176,
-        "lastName": "Campbell",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Kera",
+        "id": 25595,
+        "lastName": "Birkeland",
+        "partyName": "Republican",
+        "votes": 11532
       }
     ],
     "district": "4",
@@ -1695,7 +1774,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1705,11 +1784,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 19151,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1749,6 +1829,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1756,15 +1837,15 @@
           "estimatedVotesHigh": 18386,
           "estimatedVotesLow": 15044,
           "estimatedVotesMid": 16715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Matthew",
         "id": 76277,
         "lastName": "Gwynn",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 12955
       },
       {
         "elected": false,
@@ -1772,15 +1853,15 @@
           "estimatedVotesHigh": 18386,
           "estimatedVotesLow": 15044,
           "estimatedVotesMid": 16715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Amber",
         "id": 76276,
         "lastName": "Hardy",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3760
       }
     ],
     "district": "6",
@@ -1789,7 +1870,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1799,11 +1880,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16715,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1843,6 +1925,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1882,6 +1965,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1889,15 +1973,15 @@
           "estimatedVotesHigh": 13454,
           "estimatedVotesLow": 11008,
           "estimatedVotesMid": 12231,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.97,
+          "turnoutLow": 111.18,
+          "turnoutMid": 99
         },
         "firstName": "Jake",
         "id": 76296,
         "lastName": "Sawyer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7527
       },
       {
         "elected": false,
@@ -1905,15 +1989,15 @@
           "estimatedVotesHigh": 13454,
           "estimatedVotesLow": 11008,
           "estimatedVotesMid": 12231,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.97,
+          "turnoutLow": 111.18,
+          "turnoutMid": 99
         },
         "firstName": "Jacob",
         "id": 46183,
         "lastName": "Johnson",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 251
       },
       {
         "elected": false,
@@ -1921,15 +2005,15 @@
           "estimatedVotesHigh": 13454,
           "estimatedVotesLow": 11008,
           "estimatedVotesMid": 12231,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.97,
+          "turnoutLow": 111.18,
+          "turnoutMid": 99
         },
         "firstName": "Angela",
         "id": 76295,
         "lastName": "Choberka",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4461
       }
     ],
     "district": "9",
@@ -1938,7 +2022,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1948,11 +2032,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 12239,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1960,15 +2045,15 @@
           "estimatedVotesHigh": 13131,
           "estimatedVotesLow": 10743,
           "estimatedVotesMid": 11937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jill",
         "id": 25600,
         "lastName": "Koford",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6110
       },
       {
         "elected": false,
@@ -1976,15 +2061,15 @@
           "estimatedVotesHigh": 13131,
           "estimatedVotesLow": 10743,
           "estimatedVotesMid": 11937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Rosemary",
         "id": 46184,
         "lastName": "Lesser",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5827
       }
     ],
     "district": "10",
@@ -1993,7 +2078,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2003,11 +2088,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 11937,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2047,6 +2133,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2054,15 +2141,15 @@
           "estimatedVotesHigh": 16704,
           "estimatedVotesLow": 13666,
           "estimatedVotesMid": 15185,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.15,
+          "turnoutMid": 99
         },
-        "firstName": "Sharon",
-        "id": 76215,
-        "lastName": "Hilton",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Mike",
+        "id": 46185,
+        "lastName": "Schultz",
+        "partyName": "Republican",
+        "votes": 10965
       },
       {
         "elected": false,
@@ -2070,15 +2157,15 @@
           "estimatedVotesHigh": 16704,
           "estimatedVotesLow": 13666,
           "estimatedVotesMid": 15185,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.15,
+          "turnoutMid": 99
         },
-        "firstName": "Mike",
-        "id": 46185,
-        "lastName": "Schultz",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Sharon",
+        "id": 76215,
+        "lastName": "Hilton",
+        "partyName": "Democratic",
+        "votes": 4225
       }
     ],
     "district": "12",
@@ -2087,7 +2174,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2097,11 +2184,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15190,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2109,15 +2197,15 @@
           "estimatedVotesHigh": 14873,
           "estimatedVotesLow": 12169,
           "estimatedVotesMid": 13521,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Karen",
         "id": 46187,
         "lastName": "Peterson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9158
       },
       {
         "elected": false,
@@ -2125,15 +2213,15 @@
           "estimatedVotesHigh": 14873,
           "estimatedVotesLow": 12169,
           "estimatedVotesMid": 13521,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Lorri",
         "id": 76216,
         "lastName": "Rogers",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4363
       }
     ],
     "district": "13",
@@ -2142,7 +2230,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2152,11 +2240,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 13521,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2196,6 +2285,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2203,15 +2293,15 @@
           "estimatedVotesHigh": 17496,
           "estimatedVotesLow": 14315,
           "estimatedVotesMid": 15905,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Josh",
         "id": 95855,
         "lastName": "Smith",
         "partyName": "Utah Forward",
-        "votes": 0
+        "votes": 429
       },
       {
         "elected": false,
@@ -2219,15 +2309,15 @@
           "estimatedVotesHigh": 17496,
           "estimatedVotesLow": 14315,
           "estimatedVotesMid": 15905,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ariel",
         "id": 76217,
         "lastName": "Defay",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15476
       }
     ],
     "district": "15",
@@ -2236,7 +2326,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2246,11 +2336,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15905,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2258,15 +2349,15 @@
           "estimatedVotesHigh": 15244,
           "estimatedVotesLow": 12472,
           "estimatedVotesMid": 13858,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Trevor",
         "id": 46191,
         "lastName": "Lee",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9182
       },
       {
         "elected": false,
@@ -2274,15 +2365,15 @@
           "estimatedVotesHigh": 15244,
           "estimatedVotesLow": 12472,
           "estimatedVotesMid": 13858,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Zeaid",
         "id": 76218,
         "lastName": "Hasan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4676
       }
     ],
     "district": "16",
@@ -2291,7 +2382,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2301,11 +2392,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 13858,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2313,15 +2405,15 @@
           "estimatedVotesHigh": 17923,
           "estimatedVotesLow": 14665,
           "estimatedVotesMid": 16294,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.09,
+          "turnoutLow": 110.11,
+          "turnoutMid": 99
         },
         "firstName": "Stewart",
         "id": 46193,
         "lastName": "Barlow",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15669
       },
       {
         "elected": false,
@@ -2329,15 +2421,15 @@
           "estimatedVotesHigh": 17923,
           "estimatedVotesLow": 14665,
           "estimatedVotesMid": 16294,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.09,
+          "turnoutLow": 110.11,
+          "turnoutMid": 99
         },
         "firstName": "Adam",
         "id": 44853,
         "lastName": "Feller",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 478
       }
     ],
     "district": "17",
@@ -2346,7 +2438,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2356,11 +2448,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16147,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2368,15 +2461,15 @@
           "estimatedVotesHigh": 18042,
           "estimatedVotesLow": 14762,
           "estimatedVotesMid": 16402,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 76221,
         "lastName": "Hartwick",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5355
       },
       {
         "elected": false,
@@ -2384,15 +2477,15 @@
           "estimatedVotesHigh": 18042,
           "estimatedVotesLow": 14762,
           "estimatedVotesMid": 16402,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Paul",
         "id": 25603,
         "lastName": "Cutler",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 11047
       }
     ],
     "district": "18",
@@ -2401,7 +2494,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:53:34.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2411,11 +2504,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16402,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2423,15 +2517,15 @@
           "estimatedVotesHigh": 18731,
           "estimatedVotesLow": 15325,
           "estimatedVotesMid": 17028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Raymond",
         "id": 25605,
         "lastName": "Ward",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10246
       },
       {
         "elected": false,
@@ -2439,15 +2533,15 @@
           "estimatedVotesHigh": 18731,
           "estimatedVotesLow": 15325,
           "estimatedVotesMid": 17028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Cameron",
         "id": 95856,
         "lastName": "Dransfield",
         "partyName": "Constitution",
-        "votes": 0
+        "votes": 309
       },
       {
         "elected": false,
@@ -2455,15 +2549,15 @@
           "estimatedVotesHigh": 18731,
           "estimatedVotesLow": 15325,
           "estimatedVotesMid": 17028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Nick",
         "id": 76222,
         "lastName": "Wadsworth",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6473
       }
     ],
     "district": "19",
@@ -2472,7 +2566,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2482,11 +2576,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 17028,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2494,15 +2589,15 @@
           "estimatedVotesHigh": 15302,
           "estimatedVotesLow": 12520,
           "estimatedVotesMid": 13911,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Melissa",
         "id": 25607,
         "lastName": "Ballard",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7384
       },
       {
         "elected": false,
@@ -2510,15 +2605,15 @@
           "estimatedVotesHigh": 15302,
           "estimatedVotesLow": 12520,
           "estimatedVotesMid": 13911,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Lew",
         "id": 76227,
         "lastName": "Jeppson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6527
       }
     ],
     "district": "20",
@@ -2527,7 +2622,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2537,11 +2632,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 13911,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2549,15 +2645,15 @@
           "estimatedVotesHigh": 10599,
           "estimatedVotesLow": 8672,
           "estimatedVotesMid": 9635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.6,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 46196,
         "lastName": "Atkin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2816
       },
       {
         "elected": false,
@@ -2565,15 +2661,15 @@
           "estimatedVotesHigh": 10599,
           "estimatedVotesLow": 8672,
           "estimatedVotesMid": 9635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.6,
+          "turnoutMid": 99
         },
         "firstName": "Sandra",
         "id": 46195,
         "lastName": "Hollins",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6862
       }
     ],
     "district": "21",
@@ -2582,7 +2678,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:27:21.615Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2592,11 +2688,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 9678,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2604,15 +2701,15 @@
           "estimatedVotesHigh": 15431,
           "estimatedVotesLow": 12625,
           "estimatedVotesMid": 14028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.5,
+          "turnoutLow": 111.84,
+          "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 76229,
         "lastName": "Dailey-Provost",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11557
       },
       {
         "elected": false,
@@ -2620,15 +2717,15 @@
           "estimatedVotesHigh": 15431,
           "estimatedVotesLow": 12625,
           "estimatedVotesMid": 14028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.5,
+          "turnoutLow": 111.84,
+          "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 76230,
         "lastName": "Harmsen",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2563
       }
     ],
     "district": "22",
@@ -2637,7 +2734,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:16:43.153Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2647,11 +2744,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 14120,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2659,15 +2757,15 @@
           "estimatedVotesHigh": 20290,
           "estimatedVotesLow": 16602,
           "estimatedVotesMid": 18446,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.93,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
         },
         "firstName": "Cabot",
         "id": 46200,
         "lastName": "Nelson",
         "partyName": "United Utah",
-        "votes": 0
+        "votes": 367
       },
       {
         "elected": false,
@@ -2675,15 +2773,15 @@
           "estimatedVotesHigh": 20290,
           "estimatedVotesLow": 16602,
           "estimatedVotesMid": 18446,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.93,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
         },
         "firstName": "Hoang",
         "id": 76232,
         "lastName": "Nguyen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 14490
       },
       {
         "elected": false,
@@ -2691,15 +2789,15 @@
           "estimatedVotesHigh": 20290,
           "estimatedVotesLow": 16602,
           "estimatedVotesMid": 18446,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.93,
+          "turnoutLow": 111.13,
+          "turnoutMid": 99
         },
         "firstName": "M. Scott",
         "id": 95857,
         "lastName": "Romney",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3592
       }
     ],
     "district": "23",
@@ -2708,7 +2806,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:52:02.472Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2718,11 +2816,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 18449,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2762,6 +2861,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2769,15 +2869,15 @@
           "estimatedVotesHigh": 8454,
           "estimatedVotesLow": 6917,
           "estimatedVotesMid": 7685,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.52,
+          "turnoutLow": 111.85,
+          "turnoutMid": 99
         },
         "firstName": "Richard",
         "id": 76236,
         "lastName": "Nowak",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2603
       },
       {
         "elected": false,
@@ -2785,15 +2885,15 @@
           "estimatedVotesHigh": 8454,
           "estimatedVotesLow": 6917,
           "estimatedVotesMid": 7685,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.52,
+          "turnoutLow": 111.85,
+          "turnoutMid": 99
         },
         "firstName": "Angela",
         "id": 46202,
         "lastName": "Romero",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5134
       }
     ],
     "district": "25",
@@ -2802,7 +2902,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:20:43.160Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2812,11 +2912,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 7737,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2824,15 +2925,15 @@
           "estimatedVotesHigh": 13050,
           "estimatedVotesLow": 10678,
           "estimatedVotesMid": 11864,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jeanetta",
         "id": 76237,
         "lastName": "Williams",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6261
       },
       {
         "elected": false,
@@ -2840,15 +2941,15 @@
           "estimatedVotesHigh": 13050,
           "estimatedVotesLow": 10678,
           "estimatedVotesMid": 11864,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Matt",
         "id": 76238,
         "lastName": "Macpherson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5603
       }
     ],
     "district": "26",
@@ -2857,7 +2958,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:22:27.598Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2867,11 +2968,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 11864,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2879,15 +2981,15 @@
           "estimatedVotesHigh": 13595,
           "estimatedVotesLow": 11123,
           "estimatedVotesMid": 12359,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Anthony",
         "id": 46207,
         "lastName": "Loubet",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6363
       },
       {
         "elected": false,
@@ -2895,15 +2997,15 @@
           "estimatedVotesHigh": 13595,
           "estimatedVotesLow": 11123,
           "estimatedVotesMid": 12359,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Dawn",
         "id": 76239,
         "lastName": "Stevenson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5996
       }
     ],
     "district": "27",
@@ -2912,7 +3014,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:20:00.249Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2922,11 +3024,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 12359,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2934,15 +3037,15 @@
           "estimatedVotesHigh": 15239,
           "estimatedVotesLow": 12469,
           "estimatedVotesMid": 13854,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Nicholeen",
         "id": 76241,
         "lastName": "Peck",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9086
       },
       {
         "elected": false,
@@ -2950,15 +3053,15 @@
           "estimatedVotesHigh": 15239,
           "estimatedVotesLow": 12469,
           "estimatedVotesMid": 13854,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Fred",
         "id": 76240,
         "lastName": "Baker",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4768
       }
     ],
     "district": "28",
@@ -2967,7 +3070,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2977,11 +3080,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 13854,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2989,15 +3093,15 @@
           "estimatedVotesHigh": 18510,
           "estimatedVotesLow": 15145,
           "estimatedVotesMid": 16827,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Bridger",
         "id": 25609,
         "lastName": "Bolinder",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 13256
       },
       {
         "elected": false,
@@ -3005,15 +3109,15 @@
           "estimatedVotesHigh": 18510,
           "estimatedVotesLow": 15145,
           "estimatedVotesMid": 16827,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ron",
         "id": 76242,
         "lastName": "Draper",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3572
       }
     ],
     "district": "29",
@@ -3022,7 +3126,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3032,11 +3136,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16828,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3044,15 +3149,15 @@
           "estimatedVotesHigh": 13508,
           "estimatedVotesLow": 11052,
           "estimatedVotesMid": 12280,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Fred",
         "id": 76244,
         "lastName": "Cox",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5724
       },
       {
         "elected": false,
@@ -3060,15 +3165,15 @@
           "estimatedVotesHigh": 13508,
           "estimatedVotesLow": 11052,
           "estimatedVotesMid": 12280,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jake",
         "id": 76243,
         "lastName": "Fitisemanu",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6556
       }
     ],
     "district": "30",
@@ -3077,7 +3182,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:10:58.941Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3087,11 +3192,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 12280,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3099,15 +3205,15 @@
           "estimatedVotesHigh": 11667,
           "estimatedVotesLow": 9545,
           "estimatedVotesMid": 10606,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Bill",
         "id": 122873,
         "lastName": "Swann",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4335
       },
       {
         "elected": false,
@@ -3115,15 +3221,15 @@
           "estimatedVotesHigh": 11667,
           "estimatedVotesLow": 9545,
           "estimatedVotesMid": 10606,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Verona",
         "id": 76246,
         "lastName": "Mauga",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6271
       }
     ],
     "district": "31",
@@ -3132,7 +3238,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:13:07.299Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3142,11 +3248,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 10606,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3154,15 +3261,15 @@
           "estimatedVotesHigh": 13990,
           "estimatedVotesLow": 11446,
           "estimatedVotesMid": 12718,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.41,
+          "turnoutLow": 109.28,
+          "turnoutMid": 98.35
         },
         "firstName": "Sahara",
         "id": 46216,
         "lastName": "Hayes",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 9363
       },
       {
         "elected": false,
@@ -3170,15 +3277,15 @@
           "estimatedVotesHigh": 13990,
           "estimatedVotesLow": 11446,
           "estimatedVotesMid": 12718,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.41,
+          "turnoutLow": 109.28,
+          "turnoutMid": 98.35
         },
         "firstName": "Sarah",
         "id": 76247,
         "lastName": "Montes",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3145
       }
     ],
     "district": "32",
@@ -3187,7 +3294,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:32:44.414Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3197,11 +3304,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 12508,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3209,15 +3317,15 @@
           "estimatedVotesHigh": 22701,
           "estimatedVotesLow": 18573,
           "estimatedVotesMid": 20637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Doug",
         "id": 1703,
         "lastName": "Owens",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 13257
       },
       {
         "elected": false,
@@ -3225,15 +3333,15 @@
           "estimatedVotesHigh": 22701,
           "estimatedVotesLow": 18573,
           "estimatedVotesMid": 20637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Sheryl",
         "id": 76248,
         "lastName": "Fraser",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7380
       }
     ],
     "district": "33",
@@ -3242,7 +3350,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:22:27.598Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3252,11 +3360,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 20637,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3264,15 +3373,15 @@
           "estimatedVotesHigh": 18827,
           "estimatedVotesLow": 15404,
           "estimatedVotesMid": 17115,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Karl",
         "id": 76249,
         "lastName": "Jurek",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6417
       },
       {
         "elected": false,
@@ -3280,15 +3389,15 @@
           "estimatedVotesHigh": 18827,
           "estimatedVotesLow": 15404,
           "estimatedVotesMid": 17115,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Dennis",
         "id": 44861,
         "lastName": "Roach",
         "partyName": "United Utah",
-        "votes": 0
+        "votes": 366
       },
       {
         "elected": false,
@@ -3296,15 +3405,15 @@
           "estimatedVotesHigh": 18827,
           "estimatedVotesLow": 15404,
           "estimatedVotesMid": 17115,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Carol",
         "id": 46220,
         "lastName": "Moss",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10332
       }
     ],
     "district": "34",
@@ -3313,7 +3422,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:03:35.292Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3323,11 +3432,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 17115,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3335,15 +3445,15 @@
           "estimatedVotesHigh": 15736,
           "estimatedVotesLow": 12875,
           "estimatedVotesMid": 14305,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 76250,
         "lastName": "Bird",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5666
       },
       {
         "elected": false,
@@ -3351,15 +3461,15 @@
           "estimatedVotesHigh": 15736,
           "estimatedVotesLow": 12875,
           "estimatedVotesMid": 14305,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Rosalba",
         "id": 76251,
         "lastName": "Dominguez",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8639
       }
     ],
     "district": "35",
@@ -3368,7 +3478,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:07:40.847Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3378,11 +3488,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 14305,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3422,6 +3533,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3429,15 +3541,15 @@
           "estimatedVotesHigh": 11477,
           "estimatedVotesLow": 9391,
           "estimatedVotesMid": 10434,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ashlee",
         "id": 46226,
         "lastName": "Matthews",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5421
       },
       {
         "elected": false,
@@ -3445,15 +3557,15 @@
           "estimatedVotesHigh": 11477,
           "estimatedVotesLow": 9391,
           "estimatedVotesMid": 10434,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Paul",
         "id": 74088,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5013
       }
     ],
     "district": "37",
@@ -3462,7 +3574,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:11:46.539Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3472,11 +3584,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 10434,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3484,15 +3597,15 @@
           "estimatedVotesHigh": 15046,
           "estimatedVotesLow": 12310,
           "estimatedVotesMid": 13678,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.06,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
         },
         "firstName": "Steven",
         "id": 76252,
         "lastName": "Laude",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6737
       },
       {
         "elected": false,
@@ -3500,15 +3613,15 @@
           "estimatedVotesHigh": 15046,
           "estimatedVotesLow": 12310,
           "estimatedVotesMid": 13678,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.06,
+          "turnoutLow": 111.3,
+          "turnoutMid": 99
         },
         "firstName": "Cheryl",
         "id": 46228,
         "lastName": "Acton",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6964
       }
     ],
     "district": "38",
@@ -3517,7 +3630,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:20:00.249Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3527,11 +3640,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 13701,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3539,15 +3653,15 @@
           "estimatedVotesHigh": 15451,
           "estimatedVotesLow": 12641,
           "estimatedVotesMid": 14046,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.4,
+          "turnoutLow": 61.6,
+          "turnoutMid": 55.44
         },
         "firstName": "Jessica",
         "id": 95859,
         "lastName": "Wignall",
         "partyName": "Unaffiliated",
-        "votes": 0
+        "votes": 287
       },
       {
         "elected": false,
@@ -3555,15 +3669,15 @@
           "estimatedVotesHigh": 15451,
           "estimatedVotesLow": 12641,
           "estimatedVotesMid": 14046,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.4,
+          "turnoutLow": 61.6,
+          "turnoutMid": 55.44
         },
         "firstName": "Ken",
         "id": 46230,
         "lastName": "Ivory",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7500
       }
     ],
     "district": "39",
@@ -3572,7 +3686,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:45:26.011Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3582,11 +3696,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 7787,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3594,15 +3709,15 @@
           "estimatedVotesHigh": 13978,
           "estimatedVotesLow": 11436,
           "estimatedVotesMid": 12707,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.64,
+          "turnoutLow": 112.01,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 95860,
         "lastName": "Jackson",
         "partyName": "United Utah",
-        "votes": 0
+        "votes": 244
       },
       {
         "elected": false,
@@ -3610,15 +3725,15 @@
           "estimatedVotesHigh": 13978,
           "estimatedVotesLow": 11436,
           "estimatedVotesMid": 12707,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.64,
+          "turnoutLow": 112.01,
+          "turnoutMid": 99
         },
         "firstName": "Andrew",
         "id": 46231,
         "lastName": "Stoddard",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 7644
       },
       {
         "elected": false,
@@ -3626,15 +3741,15 @@
           "estimatedVotesHigh": 13978,
           "estimatedVotesLow": 11436,
           "estimatedVotesMid": 12707,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.64,
+          "turnoutLow": 112.01,
+          "turnoutMid": 99
         },
         "firstName": "Tyler",
         "id": 76255,
         "lastName": "Glaittli",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4922
       }
     ],
     "district": "40",
@@ -3643,7 +3758,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:24:54.136Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3653,11 +3768,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 12810,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3665,15 +3781,15 @@
           "estimatedVotesHigh": 21901,
           "estimatedVotesLow": 17919,
           "estimatedVotesMid": 19910,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Roy",
         "id": 76257,
         "lastName": "Piskadlo",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7459
       },
       {
         "elected": false,
@@ -3681,15 +3797,15 @@
           "estimatedVotesHigh": 21901,
           "estimatedVotesLow": 17919,
           "estimatedVotesMid": 19910,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Gay Lynn",
         "id": 76256,
         "lastName": "Bennion",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 12451
       }
     ],
     "district": "41",
@@ -3698,7 +3814,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:21:37.727Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3708,11 +3824,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 19910,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3720,15 +3837,15 @@
           "estimatedVotesHigh": 23500,
           "estimatedVotesLow": 19228,
           "estimatedVotesMid": 21364,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Travis",
-        "id": 76258,
-        "lastName": "Smith",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Clint",
+        "id": 76260,
+        "lastName": "Okerlund",
+        "partyName": "Republican",
+        "votes": 10695
       },
       {
         "elected": false,
@@ -3736,15 +3853,15 @@
           "estimatedVotesHigh": 23500,
           "estimatedVotesLow": 19228,
           "estimatedVotesMid": 21364,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Clint",
-        "id": 76260,
-        "lastName": "Okerlund",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Travis",
+        "id": 76258,
+        "lastName": "Smith",
+        "partyName": "Democratic",
+        "votes": 10669
       }
     ],
     "district": "42",
@@ -3753,7 +3870,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:03:35.292Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3763,11 +3880,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 21364,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3823,6 +3941,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3830,15 +3949,15 @@
           "estimatedVotesHigh": 19864,
           "estimatedVotesLow": 16252,
           "estimatedVotesMid": 18058,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.43,
+          "turnoutLow": 111.75,
+          "turnoutMid": 99
         },
         "firstName": "Jordan",
         "id": 46241,
         "lastName": "Teuscher",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10355
       },
       {
         "elected": false,
@@ -3846,15 +3965,15 @@
           "estimatedVotesHigh": 19864,
           "estimatedVotesLow": 16252,
           "estimatedVotesMid": 18058,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.43,
+          "turnoutLow": 111.75,
+          "turnoutMid": 99
         },
         "firstName": "Greg",
         "id": 76263,
         "lastName": "Green",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 7807
       }
     ],
     "district": "44",
@@ -3863,7 +3982,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:22:40.805Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3873,11 +3992,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 18162,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3885,15 +4005,15 @@
           "estimatedVotesHigh": 19691,
           "estimatedVotesLow": 16111,
           "estimatedVotesMid": 17901,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tracy",
         "id": 76265,
         "lastName": "Miller",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10577
       },
       {
         "elected": false,
@@ -3901,15 +4021,15 @@
           "estimatedVotesHigh": 19691,
           "estimatedVotesLow": 16111,
           "estimatedVotesMid": 17901,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Sara",
         "id": 76264,
         "lastName": "Cimmers",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 7324
       }
     ],
     "district": "45",
@@ -3918,7 +4038,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:19:10.792Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3928,11 +4048,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 17901,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3972,6 +4093,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3979,15 +4101,15 @@
           "estimatedVotesHigh": 19509,
           "estimatedVotesLow": 15962,
           "estimatedVotesMid": 17735,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.03,
+          "turnoutLow": 108.81,
+          "turnoutMid": 97.93
         },
         "firstName": "David",
         "id": 95861,
         "lastName": "Lundgren",
         "partyName": "United Utah",
-        "votes": 0
+        "votes": 522
       },
       {
         "elected": false,
@@ -3995,15 +4117,15 @@
           "estimatedVotesHigh": 19509,
           "estimatedVotesLow": 15962,
           "estimatedVotesMid": 17735,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.03,
+          "turnoutLow": 108.81,
+          "turnoutMid": 97.93
         },
         "firstName": "Mark",
         "id": 46243,
         "lastName": "Strong",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 16846
       }
     ],
     "district": "47",
@@ -4012,7 +4134,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:14:13.805Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4022,11 +4144,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 17368,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4034,15 +4157,15 @@
           "estimatedVotesHigh": 17533,
           "estimatedVotesLow": 14345,
           "estimatedVotesMid": 15939,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Doug",
         "id": 76267,
         "lastName": "Fiefia",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9958
       },
       {
         "elected": false,
@@ -4050,15 +4173,15 @@
           "estimatedVotesHigh": 17533,
           "estimatedVotesLow": 14345,
           "estimatedVotesMid": 15939,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Stephen",
         "id": 76268,
         "lastName": "Middleton",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5981
       }
     ],
     "district": "48",
@@ -4067,7 +4190,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:43:30.583Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4077,11 +4200,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15939,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4089,15 +4213,15 @@
           "estimatedVotesHigh": 17650,
           "estimatedVotesLow": 14441,
           "estimatedVotesMid": 16045,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Samuel",
         "id": 76269,
         "lastName": "Winkler",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5140
       },
       {
         "elected": false,
@@ -4105,15 +4229,15 @@
           "estimatedVotesHigh": 17650,
           "estimatedVotesLow": 14441,
           "estimatedVotesMid": 16045,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Candice",
         "id": 46248,
         "lastName": "Pierucci",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10905
       }
     ],
     "district": "49",
@@ -4122,7 +4246,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:21:37.727Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4132,11 +4256,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16045,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4176,6 +4301,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4215,6 +4341,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4222,15 +4349,15 @@
           "estimatedVotesHigh": 16997,
           "estimatedVotesLow": 13907,
           "estimatedVotesMid": 15452,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Cory",
         "id": 46252,
         "lastName": "Maloy",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 11193
       },
       {
         "elected": false,
@@ -4238,15 +4365,15 @@
           "estimatedVotesHigh": 16997,
           "estimatedVotesLow": 13907,
           "estimatedVotesMid": 15452,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 76270,
         "lastName": "Keller",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4259
       }
     ],
     "district": "52",
@@ -4255,7 +4382,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:52:02.472Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4265,11 +4392,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15452,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4277,15 +4405,15 @@
           "estimatedVotesHigh": 17413,
           "estimatedVotesLow": 14247,
           "estimatedVotesMid": 15830,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Kay",
         "id": 46254,
         "lastName": "Christofferson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15417
       },
       {
         "elected": false,
@@ -4293,15 +4421,15 @@
           "estimatedVotesHigh": 17413,
           "estimatedVotesLow": 14247,
           "estimatedVotesMid": 15830,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Alex",
         "id": 95862,
         "lastName": "Day",
         "partyName": "United Utah",
-        "votes": 0
+        "votes": 413
       }
     ],
     "district": "53",
@@ -4310,7 +4438,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4320,11 +4448,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15830,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4364,6 +4493,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4403,6 +4533,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4442,6 +4573,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4449,15 +4581,15 @@
           "estimatedVotesHigh": 14442,
           "estimatedVotesLow": 11816,
           "estimatedVotesMid": 13129,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.11,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
         },
         "firstName": "Alan",
         "id": 76271,
         "lastName": "Keele",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4353
       },
       {
         "elected": false,
@@ -4465,15 +4597,15 @@
           "estimatedVotesHigh": 14442,
           "estimatedVotesLow": 11816,
           "estimatedVotesMid": 13129,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.11,
+          "turnoutLow": 111.36,
+          "turnoutMid": 99
         },
         "firstName": "Nelson",
         "id": 46261,
         "lastName": "Abbott",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 8805
       }
     ],
     "district": "57",
@@ -4482,7 +4614,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4492,11 +4624,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 13158,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4504,15 +4637,15 @@
           "estimatedVotesHigh": 19279,
           "estimatedVotesLow": 15773,
           "estimatedVotesMid": 17526,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 76273,
         "lastName": "Shallenberger",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 12116
       },
       {
         "elected": false,
@@ -4520,15 +4653,15 @@
           "estimatedVotesHigh": 19279,
           "estimatedVotesLow": 15773,
           "estimatedVotesMid": 17526,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Joshua",
         "id": 76272,
         "lastName": "Sorensen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5410
       }
     ],
     "district": "58",
@@ -4537,7 +4670,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4547,11 +4680,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 17526,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4559,15 +4693,15 @@
           "estimatedVotesHigh": 19857,
           "estimatedVotesLow": 16247,
           "estimatedVotesMid": 18052,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 46265,
         "lastName": "Kohler",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9593
       },
       {
         "elected": false,
@@ -4575,15 +4709,15 @@
           "estimatedVotesHigh": 19857,
           "estimatedVotesLow": 16247,
           "estimatedVotesMid": 18052,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Julie",
         "id": 76275,
         "lastName": "Monahan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8459
       }
     ],
     "district": "59",
@@ -4592,7 +4726,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4602,11 +4736,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 18052,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4646,6 +4781,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4685,6 +4821,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4692,15 +4829,15 @@
           "estimatedVotesHigh": 11591,
           "estimatedVotesLow": 9483,
           "estimatedVotesMid": 10537,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Kevin",
         "id": 76281,
         "lastName": "Slater",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4333
       },
       {
         "elected": false,
@@ -4708,15 +4845,15 @@
           "estimatedVotesHigh": 11591,
           "estimatedVotesLow": 9483,
           "estimatedVotesMid": 10537,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Norm",
         "id": 46270,
         "lastName": "Thurston",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6204
       }
     ],
     "district": "62",
@@ -4725,7 +4862,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4735,11 +4872,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 10537,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4747,15 +4885,15 @@
           "estimatedVotesHigh": 19137,
           "estimatedVotesLow": 15657,
           "estimatedVotesMid": 17397,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Stephen",
         "id": 46271,
         "lastName": "Whyte",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 13277
       },
       {
         "elected": false,
@@ -4763,15 +4901,15 @@
           "estimatedVotesHigh": 19137,
           "estimatedVotesLow": 15657,
           "estimatedVotesMid": 17397,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 76282,
         "lastName": "Youngquist",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4120
       }
     ],
     "district": "63",
@@ -4780,7 +4918,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4790,11 +4928,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 17397,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4802,15 +4941,15 @@
           "estimatedVotesHigh": 17521,
           "estimatedVotesLow": 14335,
           "estimatedVotesMid": 15928,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Rick",
         "id": 76283,
         "lastName": "Dougan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3663
       },
       {
         "elected": false,
@@ -4818,15 +4957,15 @@
           "estimatedVotesHigh": 17521,
           "estimatedVotesLow": 14335,
           "estimatedVotesMid": 15928,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jeff",
         "id": 76284,
         "lastName": "Burton",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 12265
       }
     ],
     "district": "64",
@@ -4835,7 +4974,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:40.911Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4845,11 +4984,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15928,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4857,15 +4997,15 @@
           "estimatedVotesHigh": 17406,
           "estimatedVotesLow": 14242,
           "estimatedVotesMid": 15824,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.03,
+          "turnoutLow": 111.25,
+          "turnoutMid": 99
         },
         "firstName": "Douglas",
         "id": 76286,
         "lastName": "Welton",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 13080
       },
       {
         "elected": false,
@@ -4873,15 +5013,15 @@
           "estimatedVotesHigh": 17406,
           "estimatedVotesLow": 14242,
           "estimatedVotesMid": 15824,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.03,
+          "turnoutLow": 111.25,
+          "turnoutMid": 99
         },
         "firstName": "Joseph",
         "id": 76285,
         "lastName": "Hansen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2764
       }
     ],
     "district": "65",
@@ -4890,7 +5030,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:40.911Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4900,11 +5040,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15844,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4944,6 +5085,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4951,15 +5093,15 @@
           "estimatedVotesHigh": 18128,
           "estimatedVotesLow": 14830,
           "estimatedVotesMid": 16479,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Christine",
         "id": 95863,
         "lastName": "Facer Watkins",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 13571
       },
       {
         "elected": false,
@@ -4967,15 +5109,15 @@
           "estimatedVotesHigh": 18128,
           "estimatedVotesLow": 14830,
           "estimatedVotesMid": 16479,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Joe",
         "id": 76289,
         "lastName": "Christman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2908
       }
     ],
     "district": "67",
@@ -4984,7 +5126,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4994,11 +5136,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16479,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5038,6 +5181,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5045,15 +5189,15 @@
           "estimatedVotesHigh": 19286,
           "estimatedVotesLow": 15780,
           "estimatedVotesMid": 17533,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Logan James",
         "id": 95864,
         "lastName": "Monson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10918
       },
       {
         "elected": false,
@@ -5061,15 +5205,15 @@
           "estimatedVotesHigh": 19286,
           "estimatedVotesLow": 15780,
           "estimatedVotesMid": 17533,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Davina",
         "id": 46278,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6677
       }
     ],
     "district": "69",
@@ -5078,7 +5222,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5088,11 +5232,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 17595,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5100,15 +5245,15 @@
           "estimatedVotesHigh": 18187,
           "estimatedVotesLow": 14882,
           "estimatedVotesMid": 16534,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Carl",
         "id": 46280,
         "lastName": "Albrecht",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 16179
       },
       {
         "elected": false,
@@ -5116,15 +5261,15 @@
           "estimatedVotesHigh": 18187,
           "estimatedVotesLow": 14882,
           "estimatedVotesMid": 16534,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Zeno",
         "id": 46281,
         "lastName": "Parry",
         "partyName": "United Utah",
-        "votes": 0
+        "votes": 355
       }
     ],
     "district": "70",
@@ -5133,7 +5278,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5143,11 +5288,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 16534,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5155,15 +5301,15 @@
           "estimatedVotesHigh": 15129,
           "estimatedVotesLow": 12379,
           "estimatedVotesMid": 13754,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Rex",
-        "id": 46283,
-        "lastName": "Shipp",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Steve",
+        "id": 76292,
+        "lastName": "Merrill",
+        "partyName": "Democratic",
+        "votes": 3152
       },
       {
         "elected": false,
@@ -5171,15 +5317,15 @@
           "estimatedVotesHigh": 15129,
           "estimatedVotesLow": 12379,
           "estimatedVotesMid": 13754,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Steve",
-        "id": 76292,
-        "lastName": "Merrill",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Rex",
+        "id": 46283,
+        "lastName": "Shipp",
+        "partyName": "Republican",
+        "votes": 10602
       }
     ],
     "district": "71",
@@ -5188,7 +5334,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5198,11 +5344,12 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 13754,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5242,6 +5389,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5281,6 +5429,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5320,6 +5469,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5327,15 +5477,15 @@
           "estimatedVotesHigh": 16613,
           "estimatedVotesLow": 13593,
           "estimatedVotesMid": 15103,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Joshua",
         "id": 76294,
         "lastName": "Dutson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3542
       },
       {
         "elected": false,
@@ -5343,15 +5493,15 @@
           "estimatedVotesHigh": 16613,
           "estimatedVotesLow": 13593,
           "estimatedVotesMid": 15103,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Walt",
         "id": 46286,
         "lastName": "Brooks",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 11561
       }
     ],
     "district": "75",
@@ -5360,7 +5510,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:40.911Z",
+    "lastUpdated": "2024-10-25T20:53:39.512Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5370,7 +5520,7 @@
     "raceDate": "2024-11-05",
     "state": "UT",
     "stateName": "Utah",
-    "totalVotes": 0,
+    "totalVotes": 15103,
     "year": 2024
   }
 ]

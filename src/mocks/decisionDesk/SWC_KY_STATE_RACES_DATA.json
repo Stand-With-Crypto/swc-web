@@ -7,6 +7,14 @@
       "lastName": "Comer",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "James",
+        "id": 1284,
+        "lastName": "Comer",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -14,15 +22,15 @@
           "estimatedVotesHigh": 354022,
           "estimatedVotesLow": 289655,
           "estimatedVotesMid": 321836,
-          "turnoutHigh": 89.33,
-          "turnoutLow": 109.18,
-          "turnoutMid": 98.27
+          "turnoutHigh": 91.99,
+          "turnoutLow": 112.43,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 1284,
         "lastName": "Comer",
         "partyName": "Republican",
-        "votes": 224844
+        "votes": 232312
       },
       {
         "elected": false,
@@ -30,15 +38,15 @@
           "estimatedVotesHigh": 354022,
           "estimatedVotesLow": 289655,
           "estimatedVotesMid": 321836,
-          "turnoutHigh": 89.33,
-          "turnoutLow": 109.18,
-          "turnoutMid": 98.27
+          "turnoutHigh": 91.99,
+          "turnoutLow": 112.43,
+          "turnoutMid": 99
         },
         "firstName": "Erin",
         "id": 67737,
         "lastName": "Marshall",
         "partyName": "Democratic",
-        "votes": 91415
+        "votes": 93356
       }
     ],
     "district": "1",
@@ -47,7 +55,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:31:13.640Z",
+    "lastUpdated": "2024-10-25T20:43:54.732Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -57,7 +65,7 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 316259,
+    "totalVotes": 325668,
     "year": 2024
   },
   {
@@ -68,6 +76,14 @@
       "lastName": "Guthrie",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Brett ",
+        "id": 1285,
+        "lastName": "Guthrie",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -75,15 +91,15 @@
           "estimatedVotesHigh": 361899,
           "estimatedVotesLow": 296100,
           "estimatedVotesMid": 328999,
-          "turnoutHigh": 90.41,
-          "turnoutLow": 110.5,
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.21,
           "turnoutMid": 99
         },
         "firstName": "Hank",
         "id": 9171,
         "lastName": "Linderman",
         "partyName": "Democratic",
-        "votes": 103525
+        "votes": 104666
       },
       {
         "elected": true,
@@ -91,15 +107,15 @@
           "estimatedVotesHigh": 361899,
           "estimatedVotesLow": 296100,
           "estimatedVotesMid": 328999,
-          "turnoutHigh": 90.41,
-          "turnoutLow": 110.5,
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.21,
           "turnoutMid": 99
         },
         "firstName": "Brett ",
         "id": 1285,
         "lastName": "Guthrie",
         "partyName": "Republican",
-        "votes": 223671
+        "votes": 227589
       }
     ],
     "district": "2",
@@ -108,7 +124,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:31:03.515Z",
+    "lastUpdated": "2024-10-25T20:43:54.732Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -118,11 +134,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 327196,
+    "totalVotes": 332255,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -163,7 +180,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:05:42.113Z",
+    "lastUpdated": "2024-10-25T20:43:40.529Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -184,6 +201,14 @@
       "lastName": "Massie",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Thomas",
+        "id": 1289,
+        "lastName": "Massie",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -229,6 +254,14 @@
       "lastName": "Rogers",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Hal",
+        "id": 67743,
+        "lastName": "Rogers",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -268,6 +301,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -275,15 +309,15 @@
           "estimatedVotesHigh": 369908,
           "estimatedVotesLow": 302653,
           "estimatedVotesMid": 336280,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.33,
+          "turnoutHigh": 93.08,
+          "turnoutLow": 113.77,
           "turnoutMid": 99
         },
         "firstName": "Andy",
         "id": 1292,
         "lastName": "Barr",
         "partyName": "Republican",
-        "votes": 187795
+        "votes": 188964
       },
       {
         "elected": false,
@@ -291,15 +325,15 @@
           "estimatedVotesHigh": 369908,
           "estimatedVotesLow": 302653,
           "estimatedVotesMid": 336280,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.33,
+          "turnoutHigh": 93.08,
+          "turnoutLow": 113.77,
           "turnoutMid": 99
         },
         "firstName": "Randy",
         "id": 67744,
         "lastName": "Cravens",
         "partyName": "Democratic",
-        "votes": 155187
+        "votes": 155360
       }
     ],
     "district": "6",
@@ -308,7 +342,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:03.515Z",
+    "lastUpdated": "2024-10-25T20:43:54.732Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -318,11 +352,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 342982,
+    "totalVotes": 344324,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -330,15 +365,15 @@
           "estimatedVotesHigh": 326644,
           "estimatedVotesLow": 267257,
           "estimatedVotesMid": 296950,
-          "turnoutHigh": 92.27,
-          "turnoutLow": 112.78,
+          "turnoutHigh": 93.02,
+          "turnoutLow": 113.69,
           "turnoutMid": 99
         },
         "firstName": "Erin",
         "id": 67866,
         "lastName": "Izzo",
         "partyName": "Nonpartisan",
-        "votes": 148297
+        "votes": 149586
       },
       {
         "elected": false,
@@ -346,15 +381,15 @@
           "estimatedVotesHigh": 326644,
           "estimatedVotesLow": 267257,
           "estimatedVotesMid": 296950,
-          "turnoutHigh": 92.27,
-          "turnoutLow": 112.78,
+          "turnoutHigh": 93.02,
+          "turnoutLow": 113.69,
           "turnoutMid": 99
         },
         "firstName": "Pamela",
         "id": 67865,
         "lastName": "Goodwine",
         "partyName": "Nonpartisan",
-        "votes": 153112
+        "votes": 154256
       }
     ],
     "district": "5",
@@ -363,7 +398,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:12.048Z",
+    "lastUpdated": "2024-10-25T20:25:53.290Z",
     "office": {
       "officeId": "30",
       "officeName": "State Supreme Court",
@@ -373,11 +408,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 301409,
+    "totalVotes": 303842,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -417,6 +453,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -456,6 +493,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -463,15 +501,15 @@
           "estimatedVotesHigh": 54845,
           "estimatedVotesLow": 44873,
           "estimatedVotesMid": 49859,
-          "turnoutHigh": 85.4,
-          "turnoutLow": 104.38,
-          "turnoutMid": 93.94
+          "turnoutHigh": 91.45,
+          "turnoutLow": 111.77,
+          "turnoutMid": 99
         },
         "firstName": "Stephen",
         "id": 67753,
         "lastName": "Meredith",
         "partyName": "Republican",
-        "votes": 36372
+        "votes": 39042
       },
       {
         "elected": false,
@@ -479,15 +517,15 @@
           "estimatedVotesHigh": 54845,
           "estimatedVotesLow": 44873,
           "estimatedVotesMid": 49859,
-          "turnoutHigh": 85.4,
-          "turnoutLow": 104.38,
-          "turnoutMid": 93.94
+          "turnoutHigh": 91.45,
+          "turnoutLow": 111.77,
+          "turnoutMid": 99
         },
         "firstName": "Jamie",
         "id": 67751,
         "lastName": "Skudlarek",
         "partyName": "Democratic",
-        "votes": 10468
+        "votes": 11114
       }
     ],
     "district": "5",
@@ -496,7 +534,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -506,11 +544,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 46840,
+    "totalVotes": 50156,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -518,15 +557,15 @@
           "estimatedVotesHigh": 63294,
           "estimatedVotesLow": 51786,
           "estimatedVotesMid": 57540,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.83,
+          "turnoutHigh": 93.43,
+          "turnoutLow": 114.19,
           "turnoutMid": 99
         },
         "firstName": "Aaron",
         "id": 67755,
         "lastName": "Reed",
         "partyName": "Republican",
-        "votes": 37006
+        "votes": 37619
       },
       {
         "elected": false,
@@ -534,15 +573,15 @@
           "estimatedVotesHigh": 63294,
           "estimatedVotesLow": 51786,
           "estimatedVotesMid": 57540,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.83,
+          "turnoutHigh": 93.43,
+          "turnoutLow": 114.19,
           "turnoutMid": 99
         },
         "firstName": "Rhonda",
         "id": 58225,
         "lastName": "Davis",
         "partyName": "Democratic",
-        "votes": 21426
+        "votes": 21514
       }
     ],
     "district": "7",
@@ -551,7 +590,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.896Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -561,11 +600,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 58432,
+    "totalVotes": 59133,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -573,15 +613,15 @@
           "estimatedVotesHigh": 52572,
           "estimatedVotesLow": 43014,
           "estimatedVotesMid": 47793,
-          "turnoutHigh": 77.84,
-          "turnoutLow": 95.14,
-          "turnoutMid": 85.62
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 67758,
         "lastName": "Givens",
         "partyName": "Republican",
-        "votes": 29653
+        "votes": 33743
       },
       {
         "elected": false,
@@ -589,15 +629,15 @@
           "estimatedVotesHigh": 52572,
           "estimatedVotesLow": 43014,
           "estimatedVotesMid": 47793,
-          "turnoutHigh": 77.84,
-          "turnoutLow": 95.14,
-          "turnoutMid": 85.62
+          "turnoutHigh": 91.04,
+          "turnoutLow": 111.27,
+          "turnoutMid": 99
         },
         "firstName": "Karen",
         "id": 67757,
         "lastName": "Pennington",
         "partyName": "Democratic",
-        "votes": 11269
+        "votes": 14119
       }
     ],
     "district": "9",
@@ -606,7 +646,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -616,11 +656,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 40922,
+    "totalVotes": 47862,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -660,6 +701,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -699,6 +741,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -738,6 +781,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -745,15 +789,15 @@
           "estimatedVotesHigh": 63306,
           "estimatedVotesLow": 51796,
           "estimatedVotesMid": 57551,
-          "turnoutHigh": 92.79,
-          "turnoutLow": 113.4,
+          "turnoutHigh": 92.96,
+          "turnoutLow": 113.62,
           "turnoutMid": 99
         },
         "firstName": "Matt",
         "id": 67763,
         "lastName": "Nunn",
         "partyName": "Republican",
-        "votes": 39081
+        "votes": 39194
       },
       {
         "elected": false,
@@ -761,8 +805,8 @@
           "estimatedVotesHigh": 63306,
           "estimatedVotesLow": 51796,
           "estimatedVotesMid": 57551,
-          "turnoutHigh": 92.79,
-          "turnoutLow": 113.4,
+          "turnoutHigh": 92.96,
+          "turnoutLow": 113.62,
           "turnoutMid": 99
         },
         "firstName": "Kiana",
@@ -778,7 +822,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.896Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -788,11 +832,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 58739,
+    "totalVotes": 58852,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -832,6 +877,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -871,6 +917,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -878,15 +925,15 @@
           "estimatedVotesHigh": 60204,
           "estimatedVotesLow": 49258,
           "estimatedVotesMid": 54731,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
+          "turnoutHigh": 92.14,
+          "turnoutLow": 112.62,
           "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 67766,
         "lastName": "Sierra",
         "partyName": "Democratic",
-        "votes": 24656
+        "votes": 25154
       },
       {
         "elected": false,
@@ -894,8 +941,8 @@
           "estimatedVotesHigh": 60204,
           "estimatedVotesLow": 49258,
           "estimatedVotesMid": 54731,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
+          "turnoutHigh": 92.14,
+          "turnoutLow": 112.62,
           "turnoutMid": 99
         },
         "firstName": "Chris",
@@ -911,7 +958,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:13:43.557Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -921,11 +968,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 54976,
+    "totalVotes": 55474,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -965,6 +1013,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -972,15 +1021,15 @@
           "estimatedVotesHigh": 58496,
           "estimatedVotesLow": 47859,
           "estimatedVotesMid": 53177,
-          "turnoutHigh": 92.59,
-          "turnoutLow": 113.17,
+          "turnoutHigh": 92.87,
+          "turnoutLow": 113.52,
           "turnoutMid": 99
         },
         "firstName": "Molly",
         "id": 67768,
         "lastName": "Crain",
         "partyName": "Democratic",
-        "votes": 20747
+        "votes": 20805
       },
       {
         "elected": false,
@@ -988,15 +1037,15 @@
           "estimatedVotesHigh": 58496,
           "estimatedVotesLow": 47859,
           "estimatedVotesMid": 53177,
-          "turnoutHigh": 92.59,
-          "turnoutLow": 113.17,
+          "turnoutHigh": 92.87,
+          "turnoutLow": 113.52,
           "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 67769,
         "lastName": "West",
         "partyName": "Republican",
-        "votes": 33413
+        "votes": 33523
       }
     ],
     "district": "27",
@@ -1005,7 +1054,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.896Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1015,11 +1064,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 54160,
+    "totalVotes": 54328,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1027,15 +1077,15 @@
           "estimatedVotesHigh": 52945,
           "estimatedVotesLow": 43319,
           "estimatedVotesMid": 48131,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.83,
+          "turnoutHigh": 93.08,
+          "turnoutLow": 113.77,
           "turnoutMid": 99
         },
         "firstName": "Johnnie",
         "id": 67772,
         "lastName": "Turner",
         "partyName": "Republican",
-        "votes": 47742
+        "votes": 48135
       },
       {
         "elected": false,
@@ -1043,15 +1093,15 @@
           "estimatedVotesHigh": 52945,
           "estimatedVotesLow": 43319,
           "estimatedVotesMid": 48131,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.83,
+          "turnoutHigh": 93.08,
+          "turnoutLow": 113.77,
           "turnoutMid": 99
         },
         "firstName": "David",
         "id": 85220,
         "lastName": "Suhr",
         "partyName": "Independent",
-        "votes": 1136
+        "votes": 1147
       }
     ],
     "district": "29",
@@ -1060,7 +1110,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.896Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1070,11 +1120,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 48878,
+    "totalVotes": 49282,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1114,6 +1165,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1153,6 +1205,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1192,6 +1245,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1232,7 +1286,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:54:38.371Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1247,6 +1301,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1254,15 +1309,15 @@
           "estimatedVotesHigh": 22120,
           "estimatedVotesLow": 18098,
           "estimatedVotesMid": 20108,
-          "turnoutHigh": 91.09,
-          "turnoutLow": 111.34,
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.22,
           "turnoutMid": 99
         },
         "firstName": "Fredrick",
         "id": 67778,
         "lastName": "Fountain",
         "partyName": "Democratic",
-        "votes": 5740
+        "votes": 5791
       },
       {
         "elected": false,
@@ -1270,15 +1325,15 @@
           "estimatedVotesHigh": 22120,
           "estimatedVotesLow": 18098,
           "estimatedVotesMid": 20108,
-          "turnoutHigh": 91.09,
-          "turnoutLow": 111.34,
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.22,
           "turnoutMid": 99
         },
         "firstName": "Steven",
         "id": 19608,
         "lastName": "Rudy",
         "partyName": "Republican",
-        "votes": 14410
+        "votes": 14518
       }
     ],
     "district": "1",
@@ -1287,7 +1342,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1297,11 +1352,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 20150,
+    "totalVotes": 20309,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1341,6 +1397,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1348,15 +1405,15 @@
           "estimatedVotesHigh": 21276,
           "estimatedVotesLow": 17408,
           "estimatedVotesMid": 19342,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.69,
           "turnoutMid": 99
         },
         "firstName": "Randy",
         "id": 45324,
         "lastName": "Bridges",
         "partyName": "Republican",
-        "votes": 12183
+        "votes": 12220
       },
       {
         "elected": false,
@@ -1364,15 +1421,15 @@
           "estimatedVotesHigh": 21276,
           "estimatedVotesLow": 17408,
           "estimatedVotesMid": 19342,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.69,
           "turnoutMid": 99
         },
         "firstName": "Carrie",
         "id": 67779,
         "lastName": "Singler",
         "partyName": "Democratic",
-        "votes": 7159
+        "votes": 7223
       }
     ],
     "district": "3",
@@ -1381,7 +1438,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1391,11 +1448,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 19342,
+    "totalVotes": 19443,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1403,8 +1461,8 @@
           "estimatedVotesHigh": 21538,
           "estimatedVotesLow": 17622,
           "estimatedVotesMid": 19580,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.29,
+          "turnoutLow": 112.8,
           "turnoutMid": 99
         },
         "firstName": "Lloyd",
@@ -1419,15 +1477,15 @@
           "estimatedVotesHigh": 21538,
           "estimatedVotesLow": 17622,
           "estimatedVotesMid": 19580,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.29,
+          "turnoutLow": 112.8,
           "turnoutMid": 99
         },
         "firstName": "D. Wade",
         "id": 19614,
         "lastName": "Williams",
         "partyName": "Republican",
-        "votes": 14660
+        "votes": 14957
       }
     ],
     "district": "4",
@@ -1436,7 +1494,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1446,11 +1504,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 19580,
+    "totalVotes": 19877,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1458,15 +1517,15 @@
           "estimatedVotesHigh": 20806,
           "estimatedVotesLow": 17024,
           "estimatedVotesMid": 18915,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.68,
           "turnoutMid": 99
         },
         "firstName": "Lauren",
         "id": 67780,
         "lastName": "Hines",
         "partyName": "Democratic",
-        "votes": 5543
+        "votes": 5592
       },
       {
         "elected": false,
@@ -1474,8 +1533,8 @@
           "estimatedVotesHigh": 20806,
           "estimatedVotesLow": 17024,
           "estimatedVotesMid": 18915,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.68,
           "turnoutMid": 99
         },
         "firstName": "Mary",
@@ -1491,7 +1550,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1501,11 +1560,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 18964,
+    "totalVotes": 19013,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1513,15 +1573,15 @@
           "estimatedVotesHigh": 24023,
           "estimatedVotesLow": 19655,
           "estimatedVotesMid": 21839,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
+          "turnoutHigh": 91.37,
+          "turnoutLow": 111.68,
           "turnoutMid": 99
         },
         "firstName": "Linda",
         "id": 67781,
         "lastName": "Edwards",
         "partyName": "Democratic",
-        "votes": 5215
+        "votes": 5293
       },
       {
         "elected": false,
@@ -1529,8 +1589,8 @@
           "estimatedVotesHigh": 24023,
           "estimatedVotesLow": 19655,
           "estimatedVotesMid": 21839,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
+          "turnoutHigh": 91.37,
+          "turnoutLow": 111.68,
           "turnoutMid": 99
         },
         "firstName": "Chris",
@@ -1546,7 +1606,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1556,11 +1616,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21872,
+    "totalVotes": 21950,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1600,6 +1661,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1639,6 +1701,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1646,15 +1709,15 @@
           "estimatedVotesHigh": 11045,
           "estimatedVotesLow": 9037,
           "estimatedVotesMid": 10041,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.24,
           "turnoutMid": 99
         },
         "firstName": "Myron",
         "id": 45331,
         "lastName": "Dossett",
         "partyName": "Republican",
-        "votes": 6315
+        "votes": 6379
       },
       {
         "elected": false,
@@ -1662,15 +1725,15 @@
           "estimatedVotesHigh": 11045,
           "estimatedVotesLow": 9037,
           "estimatedVotesMid": 10041,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.24,
           "turnoutMid": 99
         },
         "firstName": "Twyla",
         "id": 67782,
         "lastName": "Dillard",
         "partyName": "Democratic",
-        "votes": 3726
+        "votes": 3764
       }
     ],
     "district": "9",
@@ -1679,7 +1742,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1689,11 +1752,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 10041,
+    "totalVotes": 10143,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1701,15 +1765,15 @@
           "estimatedVotesHigh": 23614,
           "estimatedVotesLow": 19320,
           "estimatedVotesMid": 21467,
-          "turnoutHigh": 93.33,
-          "turnoutLow": 114.07,
+          "turnoutHigh": 93.74,
+          "turnoutLow": 114.58,
           "turnoutMid": 99
         },
         "firstName": "Josh",
         "id": 45332,
         "lastName": "Calloway",
         "partyName": "Republican",
-        "votes": 15235
+        "votes": 15308
       },
       {
         "elected": false,
@@ -1717,15 +1781,15 @@
           "estimatedVotesHigh": 23614,
           "estimatedVotesLow": 19320,
           "estimatedVotesMid": 21467,
-          "turnoutHigh": 93.33,
-          "turnoutLow": 114.07,
+          "turnoutHigh": 93.74,
+          "turnoutLow": 114.58,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 67783,
         "lastName": "Whipple",
         "partyName": "Democratic",
-        "votes": 6803
+        "votes": 6828
       }
     ],
     "district": "10",
@@ -1734,7 +1798,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.058Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1744,11 +1808,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 22038,
+    "totalVotes": 22136,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1788,6 +1853,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1795,15 +1861,15 @@
           "estimatedVotesHigh": 21616,
           "estimatedVotesLow": 17685,
           "estimatedVotesMid": 19650,
-          "turnoutHigh": 70.58,
-          "turnoutLow": 86.27,
-          "turnoutMid": 77.64
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.61,
+          "turnoutMid": 99
         },
         "firstName": "Alton",
         "id": 67786,
         "lastName": "Ayer",
         "partyName": "Democratic",
-        "votes": 3373
+        "votes": 4390
       },
       {
         "elected": false,
@@ -1811,15 +1877,15 @@
           "estimatedVotesHigh": 21616,
           "estimatedVotesLow": 17685,
           "estimatedVotesMid": 19650,
-          "turnoutHigh": 70.58,
-          "turnoutLow": 86.27,
-          "turnoutMid": 77.64
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.61,
+          "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 45336,
         "lastName": "Gooch",
         "partyName": "Republican",
-        "votes": 11884
+        "votes": 15349
       }
     ],
     "district": "12",
@@ -1828,7 +1894,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1838,11 +1904,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 15257,
+    "totalVotes": 19739,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1882,6 +1949,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1889,15 +1957,15 @@
           "estimatedVotesHigh": 22512,
           "estimatedVotesLow": 18418,
           "estimatedVotesMid": 20465,
-          "turnoutHigh": 79.8,
-          "turnoutLow": 97.54,
-          "turnoutMid": 87.78
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.89,
+          "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 45338,
         "lastName": "Lewis",
         "partyName": "Republican",
-        "votes": 13581
+        "votes": 15385
       },
       {
         "elected": false,
@@ -1905,15 +1973,15 @@
           "estimatedVotesHigh": 22512,
           "estimatedVotesLow": 18418,
           "estimatedVotesMid": 20465,
-          "turnoutHigh": 79.8,
-          "turnoutLow": 97.54,
-          "turnoutMid": 87.78
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.89,
+          "turnoutMid": 99
         },
         "firstName": "Chanda",
         "id": 67788,
         "lastName": "Garner",
         "partyName": "Democratic",
-        "votes": 4383
+        "votes": 5222
       }
     ],
     "district": "14",
@@ -1922,7 +1990,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1932,11 +2000,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 17964,
+    "totalVotes": 20607,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1976,6 +2045,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2015,6 +2085,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2054,6 +2125,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2093,6 +2165,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2132,6 +2205,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2171,6 +2245,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2178,15 +2253,15 @@
           "estimatedVotesHigh": 22785,
           "estimatedVotesLow": 18641,
           "estimatedVotesMid": 20713,
-          "turnoutHigh": 91.5,
-          "turnoutLow": 111.84,
+          "turnoutHigh": 91.86,
+          "turnoutLow": 112.28,
           "turnoutMid": 99
         },
         "firstName": "Amy",
         "id": 19626,
         "lastName": "Neighbors",
         "partyName": "Republican",
-        "votes": 17565
+        "votes": 17648
       },
       {
         "elected": false,
@@ -2194,8 +2269,8 @@
           "estimatedVotesHigh": 22785,
           "estimatedVotesLow": 18641,
           "estimatedVotesMid": 20713,
-          "turnoutHigh": 91.5,
-          "turnoutLow": 111.84,
+          "turnoutHigh": 91.86,
+          "turnoutLow": 112.28,
           "turnoutMid": 99
         },
         "firstName": "Jeffery",
@@ -2211,7 +2286,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2221,11 +2296,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 20848,
+    "totalVotes": 20931,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2265,6 +2341,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2304,6 +2381,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2311,15 +2389,15 @@
           "estimatedVotesHigh": 22183,
           "estimatedVotesLow": 18151,
           "estimatedVotesMid": 20167,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.59,
           "turnoutMid": 99
         },
         "firstName": "Ryan",
         "id": 67791,
         "lastName": "Bivens",
         "partyName": "Republican",
-        "votes": 15997
+        "votes": 16059
       },
       {
         "elected": false,
@@ -2327,15 +2405,15 @@
           "estimatedVotesHigh": 22183,
           "estimatedVotesLow": 18151,
           "estimatedVotesMid": 20167,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.59,
           "turnoutMid": 99
         },
         "firstName": "Johnny",
         "id": 59058,
         "lastName": "Pennington",
         "partyName": "Democratic",
-        "votes": 4170
+        "votes": 4196
       }
     ],
     "district": "24",
@@ -2344,7 +2422,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2354,11 +2432,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 20167,
+    "totalVotes": 20255,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2366,15 +2445,15 @@
           "estimatedVotesHigh": 19698,
           "estimatedVotesLow": 16116,
           "estimatedVotesMid": 17907,
-          "turnoutHigh": 92.58,
-          "turnoutLow": 113.15,
+          "turnoutHigh": 93.52,
+          "turnoutLow": 114.31,
           "turnoutMid": 99
         },
         "firstName": "Eric",
         "id": 85222,
         "lastName": "Parrish",
         "partyName": "Independent",
-        "votes": 373
+        "votes": 378
       },
       {
         "elected": false,
@@ -2382,15 +2461,15 @@
           "estimatedVotesHigh": 19698,
           "estimatedVotesLow": 16116,
           "estimatedVotesMid": 17907,
-          "turnoutHigh": 92.58,
-          "turnoutLow": 113.15,
+          "turnoutHigh": 93.52,
+          "turnoutLow": 114.31,
           "turnoutMid": 99
         },
         "firstName": "Cherlyn",
         "id": 67793,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 7074
+        "votes": 7146
       },
       {
         "elected": false,
@@ -2398,15 +2477,15 @@
           "estimatedVotesHigh": 19698,
           "estimatedVotesLow": 16116,
           "estimatedVotesMid": 17907,
-          "turnoutHigh": 92.58,
-          "turnoutLow": 113.15,
+          "turnoutHigh": 93.52,
+          "turnoutLow": 114.31,
           "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 19633,
         "lastName": "Bratcher",
         "partyName": "Republican",
-        "votes": 10789
+        "votes": 10898
       }
     ],
     "district": "25",
@@ -2415,7 +2494,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2425,7 +2504,7 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 18236,
+    "totalVotes": 18422,
     "year": 2024
   },
   {
@@ -2436,6 +2515,14 @@
       "lastName": "Griffee",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Peyton",
+        "id": 59060,
+        "lastName": "Griffee",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -2475,6 +2562,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2482,8 +2570,8 @@
           "estimatedVotesHigh": 19639,
           "estimatedVotesLow": 16067,
           "estimatedVotesMid": 17853,
-          "turnoutHigh": 93.09,
-          "turnoutLow": 113.78,
+          "turnoutHigh": 93.4,
+          "turnoutLow": 114.16,
           "turnoutMid": 99
         },
         "firstName": "Nancy",
@@ -2498,15 +2586,15 @@
           "estimatedVotesHigh": 19639,
           "estimatedVotesLow": 16067,
           "estimatedVotesMid": 17853,
-          "turnoutHigh": 93.09,
-          "turnoutLow": 113.78,
+          "turnoutHigh": 93.4,
+          "turnoutLow": 114.16,
           "turnoutMid": 99
         },
         "firstName": "Tyler",
         "id": 67794,
         "lastName": "Chapman",
         "partyName": "Democratic",
-        "votes": 5953
+        "votes": 6014
       }
     ],
     "district": "27",
@@ -2515,7 +2603,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2525,11 +2613,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 18281,
+    "totalVotes": 18342,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2570,7 +2659,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:16:52.188Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2585,6 +2674,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2592,8 +2682,8 @@
           "estimatedVotesHigh": 26092,
           "estimatedVotesLow": 21348,
           "estimatedVotesMid": 23720,
-          "turnoutHigh": 95.16,
-          "turnoutLow": 116.3,
+          "turnoutHigh": 96.46,
+          "turnoutLow": 117.89,
           "turnoutMid": 99
         },
         "firstName": "Chris",
@@ -2608,15 +2698,15 @@
           "estimatedVotesHigh": 26092,
           "estimatedVotesLow": 21348,
           "estimatedVotesMid": 23720,
-          "turnoutHigh": 95.16,
-          "turnoutLow": 116.3,
+          "turnoutHigh": 96.46,
+          "turnoutLow": 117.89,
           "turnoutMid": 99
         },
         "firstName": "Timothy",
         "id": 85223,
         "lastName": "Findley",
         "partyName": "Democratic",
-        "votes": 11131
+        "votes": 11471
       }
     ],
     "district": "29",
@@ -2625,7 +2715,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:14:32.308Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2635,11 +2725,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 24828,
+    "totalVotes": 25168,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2679,6 +2770,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2686,15 +2778,15 @@
           "estimatedVotesHigh": 25753,
           "estimatedVotesLow": 21071,
           "estimatedVotesMid": 23412,
-          "turnoutHigh": 90.18,
-          "turnoutLow": 110.21,
+          "turnoutHigh": 90.63,
+          "turnoutLow": 110.77,
           "turnoutMid": 99
         },
         "firstName": "Colleen",
         "id": 44558,
         "lastName": "Davis",
         "partyName": "Democratic",
-        "votes": 11657
+        "votes": 11775
       },
       {
         "elected": false,
@@ -2702,8 +2794,8 @@
           "estimatedVotesHigh": 25753,
           "estimatedVotesLow": 21071,
           "estimatedVotesMid": 23412,
-          "turnoutHigh": 90.18,
-          "turnoutLow": 110.21,
+          "turnoutHigh": 90.63,
+          "turnoutLow": 110.77,
           "turnoutMid": 99
         },
         "firstName": "Susan",
@@ -2719,7 +2811,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:56.935Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2729,11 +2821,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 23223,
+    "totalVotes": 23341,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2773,6 +2866,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2780,15 +2874,15 @@
           "estimatedVotesHigh": 27003,
           "estimatedVotesLow": 22093,
           "estimatedVotesMid": 24548,
-          "turnoutHigh": 91.58,
-          "turnoutLow": 111.94,
+          "turnoutHigh": 91.93,
+          "turnoutLow": 112.36,
           "turnoutMid": 99
         },
         "firstName": "Taylor",
         "id": 67801,
         "lastName": "Jolly",
         "partyName": "Democratic",
-        "votes": 11462
+        "votes": 11555
       },
       {
         "elected": false,
@@ -2796,8 +2890,8 @@
           "estimatedVotesHigh": 27003,
           "estimatedVotesLow": 22093,
           "estimatedVotesMid": 24548,
-          "turnoutHigh": 91.58,
-          "turnoutLow": 111.94,
+          "turnoutHigh": 91.93,
+          "turnoutLow": 112.36,
           "turnoutMid": 99
         },
         "firstName": "Jason",
@@ -2813,7 +2907,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2823,11 +2917,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 24730,
+    "totalVotes": 24823,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2867,6 +2962,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2906,6 +3002,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2946,7 +3043,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:59:13.066Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2961,6 +3058,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2968,15 +3066,15 @@
           "estimatedVotesHigh": 19575,
           "estimatedVotesLow": 16015,
           "estimatedVotesMid": 17795,
-          "turnoutHigh": 93.08,
-          "turnoutLow": 113.77,
+          "turnoutHigh": 93.11,
+          "turnoutLow": 113.81,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 67804,
         "lastName": "Stovall",
         "partyName": "Democratic",
-        "votes": 8163
+        "votes": 8169
       },
       {
         "elected": false,
@@ -2984,8 +3082,8 @@
           "estimatedVotesHigh": 19575,
           "estimatedVotesLow": 16015,
           "estimatedVotesMid": 17795,
-          "turnoutHigh": 93.08,
-          "turnoutLow": 113.77,
+          "turnoutHigh": 93.11,
+          "turnoutLow": 113.81,
           "turnoutMid": 99
         },
         "firstName": "Emily",
@@ -3001,7 +3099,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3011,11 +3109,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 18221,
+    "totalVotes": 18227,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3023,15 +3122,15 @@
           "estimatedVotesHigh": 18679,
           "estimatedVotesLow": 15283,
           "estimatedVotesMid": 16981,
-          "turnoutHigh": 96.57,
-          "turnoutLow": 118.03,
+          "turnoutHigh": 99.03,
+          "turnoutLow": 121.03,
           "turnoutMid": 99
         },
         "firstName": "Rachel",
         "id": 45354,
         "lastName": "Roarx",
         "partyName": "Democratic",
-        "votes": 9264
+        "votes": 9453
       },
       {
         "elected": false,
@@ -3039,15 +3138,15 @@
           "estimatedVotesHigh": 18679,
           "estimatedVotesLow": 15283,
           "estimatedVotesMid": 16981,
-          "turnoutHigh": 96.57,
-          "turnoutLow": 118.03,
+          "turnoutHigh": 99.03,
+          "turnoutLow": 121.03,
           "turnoutMid": 99
         },
         "firstName": "Carrie",
         "id": 19648,
         "lastName": "McKeehan",
         "partyName": "Republican",
-        "votes": 8774
+        "votes": 9044
       }
     ],
     "district": "38",
@@ -3056,7 +3155,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:12:46.336Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3066,11 +3165,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 18038,
+    "totalVotes": 18497,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3078,15 +3178,15 @@
           "estimatedVotesHigh": 22373,
           "estimatedVotesLow": 18305,
           "estimatedVotesMid": 20339,
-          "turnoutHigh": 92.23,
-          "turnoutLow": 112.72,
+          "turnoutHigh": 93.98,
+          "turnoutLow": 114.87,
           "turnoutMid": 99
         },
         "firstName": "Ryan",
         "id": 67805,
         "lastName": "Stanford",
         "partyName": "Democratic",
-        "votes": 8852
+        "votes": 8950
       },
       {
         "elected": false,
@@ -3094,15 +3194,15 @@
           "estimatedVotesHigh": 22373,
           "estimatedVotesLow": 18305,
           "estimatedVotesMid": 20339,
-          "turnoutHigh": 92.23,
-          "turnoutLow": 112.72,
+          "turnoutHigh": 93.98,
+          "turnoutLow": 114.87,
           "turnoutMid": 99
         },
         "firstName": "Matt",
         "id": 45357,
         "lastName": "Lockett",
         "partyName": "Republican",
-        "votes": 11782
+        "votes": 12077
       }
     ],
     "district": "39",
@@ -3111,7 +3211,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3121,11 +3221,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 20634,
+    "totalVotes": 21027,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3133,15 +3234,15 @@
           "estimatedVotesHigh": 26989,
           "estimatedVotesLow": 22082,
           "estimatedVotesMid": 24535,
-          "turnoutHigh": 93.68,
-          "turnoutLow": 114.5,
+          "turnoutHigh": 94.41,
+          "turnoutLow": 115.38,
           "turnoutMid": 99
         },
         "firstName": "Mary",
         "id": 19593,
         "lastName": "Marzian",
         "partyName": "Democratic",
-        "votes": 19406
+        "votes": 19601
       },
       {
         "elected": false,
@@ -3149,8 +3250,8 @@
           "estimatedVotesHigh": 26989,
           "estimatedVotesLow": 22082,
           "estimatedVotesMid": 24535,
-          "turnoutHigh": 93.68,
-          "turnoutLow": 114.5,
+          "turnoutHigh": 94.41,
+          "turnoutLow": 115.38,
           "turnoutMid": 99
         },
         "firstName": "Sara-Elizabeth",
@@ -3166,7 +3267,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:59:47.252Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3176,11 +3277,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 25284,
+    "totalVotes": 25479,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3220,6 +3322,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3259,6 +3362,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3298,6 +3402,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3305,15 +3410,15 @@
           "estimatedVotesHigh": 27893,
           "estimatedVotesLow": 22821,
           "estimatedVotesMid": 25357,
-          "turnoutHigh": 93.36,
-          "turnoutLow": 114.11,
+          "turnoutHigh": 93.41,
+          "turnoutLow": 114.17,
           "turnoutMid": 99
         },
         "firstName": "Adam",
         "id": 67813,
         "lastName": "Moore",
         "partyName": "Democratic",
-        "votes": 12758
+        "votes": 12770
       },
       {
         "elected": false,
@@ -3321,8 +3426,8 @@
           "estimatedVotesHigh": 27893,
           "estimatedVotesLow": 22821,
           "estimatedVotesMid": 25357,
-          "turnoutHigh": 93.36,
-          "turnoutLow": 114.11,
+          "turnoutHigh": 93.41,
+          "turnoutLow": 114.17,
           "turnoutMid": 99
         },
         "firstName": "Thomas",
@@ -3338,7 +3443,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3348,11 +3453,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 26042,
+    "totalVotes": 26054,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3360,15 +3466,15 @@
           "estimatedVotesHigh": 23232,
           "estimatedVotesLow": 19008,
           "estimatedVotesMid": 21120,
-          "turnoutHigh": 92.24,
-          "turnoutLow": 112.74,
+          "turnoutHigh": 93.7,
+          "turnoutLow": 114.52,
           "turnoutMid": 99
         },
         "firstName": "Bob",
         "id": 49576,
         "lastName": "DeVore",
         "partyName": "Republican",
-        "votes": 9554
+        "votes": 9651
       },
       {
         "elected": false,
@@ -3376,15 +3482,15 @@
           "estimatedVotesHigh": 23232,
           "estimatedVotesLow": 19008,
           "estimatedVotesMid": 21120,
-          "turnoutHigh": 92.24,
-          "turnoutLow": 112.74,
+          "turnoutHigh": 93.7,
+          "turnoutLow": 114.52,
           "turnoutMid": 99
         },
         "firstName": "Alan",
         "id": 45361,
         "lastName": "Gentry",
         "partyName": "Democratic",
-        "votes": 11876
+        "votes": 12117
       }
     ],
     "district": "46",
@@ -3393,7 +3499,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:07:48.369Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3403,11 +3509,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21430,
+    "totalVotes": 21768,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3415,8 +3522,8 @@
           "estimatedVotesHigh": 22748,
           "estimatedVotesLow": 18611,
           "estimatedVotesMid": 20679,
-          "turnoutHigh": 92.77,
-          "turnoutLow": 113.39,
+          "turnoutHigh": 93.02,
+          "turnoutLow": 113.7,
           "turnoutMid": 99
         },
         "firstName": "Robb",
@@ -3431,15 +3538,15 @@
           "estimatedVotesHigh": 22748,
           "estimatedVotesLow": 18611,
           "estimatedVotesMid": 20679,
-          "turnoutHigh": 92.77,
-          "turnoutLow": 113.39,
+          "turnoutHigh": 93.02,
+          "turnoutLow": 113.7,
           "turnoutMid": 99
         },
         "firstName": "Felicia",
         "id": 45363,
         "lastName": "Rabourn",
         "partyName": "Republican",
-        "votes": 15908
+        "votes": 15965
       }
     ],
     "district": "47",
@@ -3448,7 +3555,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3458,11 +3565,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21103,
+    "totalVotes": 21160,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3470,8 +3578,8 @@
           "estimatedVotesHigh": 30604,
           "estimatedVotesLow": 25040,
           "estimatedVotesMid": 27822,
-          "turnoutHigh": 93.34,
-          "turnoutLow": 114.08,
+          "turnoutHigh": 93.82,
+          "turnoutLow": 114.66,
           "turnoutMid": 99
         },
         "firstName": "Ken",
@@ -3486,15 +3594,15 @@
           "estimatedVotesHigh": 30604,
           "estimatedVotesLow": 25040,
           "estimatedVotesMid": 27822,
-          "turnoutHigh": 93.34,
-          "turnoutLow": 114.08,
+          "turnoutHigh": 93.82,
+          "turnoutLow": 114.66,
           "turnoutMid": 99
         },
         "firstName": "Kate",
         "id": 67817,
         "lastName": "Farrow",
         "partyName": "Democratic",
-        "votes": 14378
+        "votes": 14524
       }
     ],
     "district": "48",
@@ -3503,7 +3611,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3513,11 +3621,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 28566,
+    "totalVotes": 28712,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3557,6 +3666,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3596,6 +3706,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3635,6 +3746,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3674,6 +3786,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3713,6 +3826,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3752,6 +3866,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3759,15 +3874,15 @@
           "estimatedVotesHigh": 23581,
           "estimatedVotesLow": 19293,
           "estimatedVotesMid": 21437,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.84,
+          "turnoutHigh": 92.57,
+          "turnoutLow": 113.14,
           "turnoutMid": 99
         },
         "firstName": "Katrina",
         "id": 67822,
         "lastName": "Sexton",
         "partyName": "Democratic",
-        "votes": 6147
+        "votes": 6161
       },
       {
         "elected": false,
@@ -3775,15 +3890,15 @@
           "estimatedVotesHigh": 23581,
           "estimatedVotesLow": 19293,
           "estimatedVotesMid": 21437,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.84,
+          "turnoutHigh": 92.57,
+          "turnoutLow": 113.14,
           "turnoutMid": 99
         },
         "firstName": "Kim",
         "id": 19655,
         "lastName": "King",
         "partyName": "Republican",
-        "votes": 15623
+        "votes": 15668
       }
     ],
     "district": "55",
@@ -3792,7 +3907,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3802,11 +3917,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21770,
+    "totalVotes": 21829,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3814,8 +3930,8 @@
           "estimatedVotesHigh": 24849,
           "estimatedVotesLow": 20331,
           "estimatedVotesMid": 22590,
-          "turnoutHigh": 92.42,
-          "turnoutLow": 112.96,
+          "turnoutHigh": 93,
+          "turnoutLow": 113.66,
           "turnoutMid": 99
         },
         "firstName": "Chantel",
@@ -3830,15 +3946,15 @@
           "estimatedVotesHigh": 24849,
           "estimatedVotesLow": 20331,
           "estimatedVotesMid": 22590,
-          "turnoutHigh": 92.42,
-          "turnoutLow": 112.96,
+          "turnoutHigh": 93,
+          "turnoutLow": 113.66,
           "turnoutMid": 99
         },
         "firstName": "Daniel",
         "id": 45371,
         "lastName": "Fister",
         "partyName": "Republican",
-        "votes": 13883
+        "votes": 14026
       }
     ],
     "district": "56",
@@ -3847,7 +3963,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3857,11 +3973,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 22966,
+    "totalVotes": 23109,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3869,8 +3986,8 @@
           "estimatedVotesHigh": 22542,
           "estimatedVotesLow": 18444,
           "estimatedVotesMid": 20493,
-          "turnoutHigh": 91.37,
-          "turnoutLow": 111.67,
+          "turnoutHigh": 92.29,
+          "turnoutLow": 112.8,
           "turnoutMid": 99
         },
         "firstName": "Kyle",
@@ -3885,15 +4002,15 @@
           "estimatedVotesHigh": 22542,
           "estimatedVotesLow": 18444,
           "estimatedVotesMid": 20493,
-          "turnoutHigh": 91.37,
-          "turnoutLow": 111.67,
+          "turnoutHigh": 92.29,
+          "turnoutLow": 112.8,
           "turnoutMid": 99
         },
         "firstName": "Erika",
         "id": 67826,
         "lastName": "Hancock",
         "partyName": "Democratic",
-        "votes": 10213
+        "votes": 10420
       }
     ],
     "district": "57",
@@ -3902,7 +4019,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3912,11 +4029,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 20597,
+    "totalVotes": 20804,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3941,7 +4059,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:14.461Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3956,6 +4074,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3995,6 +4114,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4002,15 +4122,15 @@
           "estimatedVotesHigh": 24562,
           "estimatedVotesLow": 20096,
           "estimatedVotesMid": 22329,
-          "turnoutHigh": 94.02,
-          "turnoutLow": 114.91,
+          "turnoutHigh": 95.59,
+          "turnoutLow": 116.83,
           "turnoutMid": 99
         },
         "firstName": "Deborah",
         "id": 67830,
         "lastName": "Flowers",
         "partyName": "Democratic",
-        "votes": 7462
+        "votes": 7691
       },
       {
         "elected": false,
@@ -4018,15 +4138,15 @@
           "estimatedVotesHigh": 24562,
           "estimatedVotesLow": 20096,
           "estimatedVotesMid": 22329,
-          "turnoutHigh": 94.02,
-          "turnoutLow": 114.91,
+          "turnoutHigh": 95.59,
+          "turnoutLow": 116.83,
           "turnoutMid": 99
         },
         "firstName": "Marianne",
         "id": 19659,
         "lastName": "Proctor",
         "partyName": "Republican",
-        "votes": 15630
+        "votes": 15787
       }
     ],
     "district": "60",
@@ -4035,7 +4155,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4045,11 +4165,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 23092,
+    "totalVotes": 23478,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4089,6 +4210,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4096,8 +4218,8 @@
           "estimatedVotesHigh": 23520,
           "estimatedVotesLow": 19244,
           "estimatedVotesMid": 21382,
-          "turnoutHigh": 92.74,
-          "turnoutLow": 113.34,
+          "turnoutHigh": 93.05,
+          "turnoutLow": 113.73,
           "turnoutMid": 99
         },
         "firstName": "Tony",
@@ -4112,15 +4234,15 @@
           "estimatedVotesHigh": 23520,
           "estimatedVotesLow": 19244,
           "estimatedVotesMid": 21382,
-          "turnoutHigh": 92.74,
-          "turnoutLow": 113.34,
+          "turnoutHigh": 93.05,
+          "turnoutLow": 113.73,
           "turnoutMid": 99
         },
         "firstName": "Kevin",
         "id": 67832,
         "lastName": "Kidwell",
         "partyName": "Democratic",
-        "votes": 7280
+        "votes": 7354
       }
     ],
     "district": "62",
@@ -4129,7 +4251,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.340Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4139,11 +4261,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21812,
+    "totalVotes": 21886,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4183,6 +4306,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4190,15 +4314,15 @@
           "estimatedVotesHigh": 22920,
           "estimatedVotesLow": 18752,
           "estimatedVotesMid": 20836,
-          "turnoutHigh": 92.18,
-          "turnoutLow": 112.67,
+          "turnoutHigh": 92.78,
+          "turnoutLow": 113.41,
           "turnoutMid": 99
         },
         "firstName": "Kimberly",
         "id": 19666,
         "lastName": "Moser",
         "partyName": "Republican",
-        "votes": 13764
+        "votes": 13903
       },
       {
         "elected": false,
@@ -4206,8 +4330,8 @@
           "estimatedVotesHigh": 22920,
           "estimatedVotesLow": 18752,
           "estimatedVotesMid": 20836,
-          "turnoutHigh": 92.18,
-          "turnoutLow": 112.67,
+          "turnoutHigh": 92.78,
+          "turnoutLow": 113.41,
           "turnoutMid": 99
         },
         "firstName": "Heather",
@@ -4223,7 +4347,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:23:58.231Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4233,11 +4357,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21127,
+    "totalVotes": 21266,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4245,8 +4370,8 @@
           "estimatedVotesHigh": 20786,
           "estimatedVotesLow": 17006,
           "estimatedVotesMid": 18896,
-          "turnoutHigh": 93.24,
-          "turnoutLow": 113.97,
+          "turnoutHigh": 93.7,
+          "turnoutLow": 114.53,
           "turnoutMid": 99
         },
         "firstName": "Stephanie",
@@ -4261,15 +4386,15 @@
           "estimatedVotesHigh": 20786,
           "estimatedVotesLow": 17006,
           "estimatedVotesMid": 18896,
-          "turnoutHigh": 93.24,
-          "turnoutLow": 113.97,
+          "turnoutHigh": 93.7,
+          "turnoutLow": 114.53,
           "turnoutMid": 99
         },
         "firstName": "Aaron",
         "id": 67838,
         "lastName": "Currin",
         "partyName": "Democratic",
-        "votes": 9523
+        "votes": 9619
       }
     ],
     "district": "65",
@@ -4278,7 +4403,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:08:51.196Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4288,11 +4413,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 19381,
+    "totalVotes": 19477,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4300,8 +4426,8 @@
           "estimatedVotesHigh": 23586,
           "estimatedVotesLow": 19298,
           "estimatedVotesMid": 21442,
-          "turnoutHigh": 93.03,
-          "turnoutLow": 113.71,
+          "turnoutHigh": 95.03,
+          "turnoutLow": 116.14,
           "turnoutMid": 99
         },
         "firstName": "Peggy",
@@ -4316,15 +4442,15 @@
           "estimatedVotesHigh": 23586,
           "estimatedVotesLow": 19298,
           "estimatedVotesMid": 21442,
-          "turnoutHigh": 93.03,
-          "turnoutLow": 113.71,
+          "turnoutHigh": 95.03,
+          "turnoutLow": 116.14,
           "turnoutMid": 99
         },
         "firstName": "T.J.",
         "id": 67840,
         "lastName": "Roberts",
         "partyName": "Republican",
-        "votes": 15413
+        "votes": 15883
       }
     ],
     "district": "66",
@@ -4333,7 +4459,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4343,11 +4469,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21943,
+    "totalVotes": 22413,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4355,15 +4482,15 @@
           "estimatedVotesHigh": 19149,
           "estimatedVotesLow": 15667,
           "estimatedVotesMid": 17408,
-          "turnoutHigh": 93.64,
-          "turnoutLow": 114.45,
+          "turnoutHigh": 94.54,
+          "turnoutLow": 115.55,
           "turnoutMid": 99
         },
         "firstName": "Matthew",
         "id": 44327,
         "lastName": "Lehman",
         "partyName": "Democratic",
-        "votes": 8477
+        "votes": 8650
       },
       {
         "elected": false,
@@ -4371,8 +4498,8 @@
           "estimatedVotesHigh": 19149,
           "estimatedVotesLow": 15667,
           "estimatedVotesMid": 17408,
-          "turnoutHigh": 93.64,
-          "turnoutLow": 114.45,
+          "turnoutHigh": 94.54,
+          "turnoutLow": 115.55,
           "turnoutMid": 99
         },
         "firstName": "Terry",
@@ -4388,7 +4515,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4398,11 +4525,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 17931,
+    "totalVotes": 18104,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4443,7 +4571,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4458,6 +4586,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4465,15 +4594,15 @@
           "estimatedVotesHigh": 18525,
           "estimatedVotesLow": 15157,
           "estimatedVotesMid": 16841,
-          "turnoutHigh": 92.92,
-          "turnoutLow": 113.56,
+          "turnoutHigh": 93.48,
+          "turnoutLow": 114.26,
           "turnoutMid": 99
         },
         "firstName": "Steven",
         "id": 19672,
         "lastName": "Doan",
         "partyName": "Republican",
-        "votes": 10386
+        "votes": 10421
       },
       {
         "elected": false,
@@ -4481,15 +4610,15 @@
           "estimatedVotesHigh": 18525,
           "estimatedVotesLow": 15157,
           "estimatedVotesMid": 16841,
-          "turnoutHigh": 92.92,
-          "turnoutLow": 113.56,
+          "turnoutHigh": 93.48,
+          "turnoutLow": 114.26,
           "turnoutMid": 99
         },
         "firstName": "Wilanne",
         "id": 67844,
         "lastName": "Stangel",
         "partyName": "Democratic",
-        "votes": 6827
+        "votes": 6897
       }
     ],
     "district": "69",
@@ -4498,7 +4627,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4508,11 +4637,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 17213,
+    "totalVotes": 17318,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4552,6 +4682,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4559,15 +4690,15 @@
           "estimatedVotesHigh": 20870,
           "estimatedVotesLow": 17075,
           "estimatedVotesMid": 18972,
-          "turnoutHigh": 92.82,
-          "turnoutLow": 113.45,
+          "turnoutHigh": 93.41,
+          "turnoutLow": 114.17,
           "turnoutMid": 99
         },
         "firstName": "Josh",
         "id": 45388,
         "lastName": "Bray",
         "partyName": "Republican",
-        "votes": 14579
+        "votes": 14689
       },
       {
         "elected": false,
@@ -4575,15 +4706,15 @@
           "estimatedVotesHigh": 20870,
           "estimatedVotesLow": 17075,
           "estimatedVotesMid": 18972,
-          "turnoutHigh": 92.82,
-          "turnoutLow": 113.45,
+          "turnoutHigh": 93.41,
+          "turnoutLow": 114.17,
           "turnoutMid": 99
         },
         "firstName": "Rachelle",
         "id": 67846,
         "lastName": "Riddle",
         "partyName": "Democratic",
-        "votes": 4793
+        "votes": 4805
       }
     ],
     "district": "71",
@@ -4592,7 +4723,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.484Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4602,11 +4733,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 19372,
+    "totalVotes": 19494,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4646,6 +4778,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4653,15 +4786,15 @@
           "estimatedVotesHigh": 23137,
           "estimatedVotesLow": 18931,
           "estimatedVotesMid": 21034,
-          "turnoutHigh": 92.86,
-          "turnoutLow": 113.5,
+          "turnoutHigh": 93.12,
+          "turnoutLow": 113.81,
           "turnoutMid": 99
         },
         "firstName": "Rory",
         "id": 19601,
         "lastName": "Houlihan",
         "partyName": "Democratic",
-        "votes": 7728
+        "votes": 7788
       },
       {
         "elected": false,
@@ -4669,8 +4802,8 @@
           "estimatedVotesHigh": 23137,
           "estimatedVotesLow": 18931,
           "estimatedVotesMid": 21034,
-          "turnoutHigh": 92.86,
-          "turnoutLow": 113.5,
+          "turnoutHigh": 93.12,
+          "turnoutLow": 113.81,
           "turnoutMid": 99
         },
         "firstName": "D. Ryan",
@@ -4686,7 +4819,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.484Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4696,11 +4829,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21486,
+    "totalVotes": 21546,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4740,6 +4874,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4779,6 +4914,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4818,6 +4954,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4825,8 +4962,8 @@
           "estimatedVotesHigh": 18695,
           "estimatedVotesLow": 15296,
           "estimatedVotesMid": 16995,
-          "turnoutHigh": 92.98,
-          "turnoutLow": 113.64,
+          "turnoutHigh": 95.12,
+          "turnoutLow": 116.26,
           "turnoutMid": 99
         },
         "firstName": "Jason",
@@ -4841,15 +4978,15 @@
           "estimatedVotesHigh": 18695,
           "estimatedVotesLow": 15296,
           "estimatedVotesMid": 16995,
-          "turnoutHigh": 92.98,
-          "turnoutLow": 113.64,
+          "turnoutHigh": 95.12,
+          "turnoutLow": 116.26,
           "turnoutMid": 99
         },
         "firstName": "George",
         "id": 45395,
         "lastName": "Brown",
         "partyName": "Democratic",
-        "votes": 13098
+        "votes": 13498
       }
     ],
     "district": "77",
@@ -4858,7 +4995,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:01.240Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4868,11 +5005,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 17383,
+    "totalVotes": 17783,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4880,9 +5018,9 @@
           "estimatedVotesHigh": 23280,
           "estimatedVotesLow": 19049,
           "estimatedVotesMid": 21164,
-          "turnoutHigh": 87.15,
-          "turnoutLow": 106.5,
-          "turnoutMid": 95.86
+          "turnoutHigh": 87.17,
+          "turnoutLow": 106.53,
+          "turnoutMid": 95.88
         },
         "firstName": "Mark",
         "id": 45397,
@@ -4896,15 +5034,15 @@
           "estimatedVotesHigh": 23280,
           "estimatedVotesLow": 19049,
           "estimatedVotesMid": 21164,
-          "turnoutHigh": 87.15,
-          "turnoutLow": 106.5,
-          "turnoutMid": 95.86
+          "turnoutHigh": 87.17,
+          "turnoutLow": 106.53,
+          "turnoutMid": 95.88
         },
         "firstName": "Timothy",
         "id": 85227,
         "lastName": "Johnson",
         "partyName": "Independent",
-        "votes": 529
+        "votes": 534
       }
     ],
     "district": "78",
@@ -4913,7 +5051,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.484Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4923,11 +5061,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 20288,
+    "totalVotes": 20293,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4967,6 +5106,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5012,6 +5152,14 @@
       "lastName": "Gordon",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Deanna",
+        "id": 67853,
+        "lastName": "Gordon",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -5051,6 +5199,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5090,6 +5239,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5129,6 +5279,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5136,15 +5287,15 @@
           "estimatedVotesHigh": 17780,
           "estimatedVotesLow": 14547,
           "estimatedVotesMid": 16163,
-          "turnoutHigh": 91.74,
-          "turnoutLow": 112.13,
+          "turnoutHigh": 92.17,
+          "turnoutLow": 112.65,
           "turnoutMid": 99
         },
         "firstName": "Chris",
         "id": 45403,
         "lastName": "Fugate",
         "partyName": "Republican",
-        "votes": 12854
+        "votes": 12892
       },
       {
         "elected": false,
@@ -5152,15 +5303,15 @@
           "estimatedVotesHigh": 17780,
           "estimatedVotesLow": 14547,
           "estimatedVotesMid": 16163,
-          "turnoutHigh": 91.74,
-          "turnoutLow": 112.13,
+          "turnoutHigh": 92.17,
+          "turnoutLow": 112.65,
           "turnoutMid": 99
         },
         "firstName": "Zackary",
         "id": 67854,
         "lastName": "Hall",
         "partyName": "Democratic",
-        "votes": 3457
+        "votes": 3495
       }
     ],
     "district": "84",
@@ -5169,7 +5320,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.484Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5179,11 +5330,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 16311,
+    "totalVotes": 16387,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5223,6 +5375,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5262,6 +5415,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5301,6 +5455,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5308,15 +5463,15 @@
           "estimatedVotesHigh": 24203,
           "estimatedVotesLow": 19803,
           "estimatedVotesMid": 22003,
-          "turnoutHigh": 91.71,
-          "turnoutLow": 112.09,
+          "turnoutHigh": 92.64,
+          "turnoutLow": 113.23,
           "turnoutMid": 99
         },
         "firstName": "Vanessa",
         "id": 67855,
         "lastName": "Grossl",
         "partyName": "Republican",
-        "votes": 11853
+        "votes": 11973
       },
       {
         "elected": false,
@@ -5324,15 +5479,15 @@
           "estimatedVotesHigh": 24203,
           "estimatedVotesLow": 19803,
           "estimatedVotesMid": 22003,
-          "turnoutHigh": 91.71,
-          "turnoutLow": 112.09,
+          "turnoutHigh": 92.64,
+          "turnoutLow": 113.23,
           "turnoutMid": 99
         },
         "firstName": "Cherlynn",
         "id": 45407,
         "lastName": "Stevenson",
         "partyName": "Democratic",
-        "votes": 10344
+        "votes": 10449
       }
     ],
     "district": "88",
@@ -5341,7 +5496,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.484Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5351,11 +5506,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 22197,
+    "totalVotes": 22422,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5395,6 +5551,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5434,6 +5591,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5473,6 +5631,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5512,6 +5671,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5551,6 +5711,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5590,6 +5751,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5597,15 +5759,15 @@
           "estimatedVotesHigh": 20907,
           "estimatedVotesLow": 17107,
           "estimatedVotesMid": 19007,
-          "turnoutHigh": 93.69,
-          "turnoutLow": 114.5,
+          "turnoutHigh": 94.44,
+          "turnoutLow": 115.42,
           "turnoutMid": 99
         },
         "firstName": "Brandon",
         "id": 19683,
         "lastName": "Spencer",
         "partyName": "Republican",
-        "votes": 14650
+        "votes": 14768
       },
       {
         "elected": false,
@@ -5613,15 +5775,15 @@
           "estimatedVotesHigh": 20907,
           "estimatedVotesLow": 17107,
           "estimatedVotesMid": 19007,
-          "turnoutHigh": 93.69,
-          "turnoutLow": 114.5,
+          "turnoutHigh": 94.44,
+          "turnoutLow": 115.42,
           "turnoutMid": 99
         },
         "firstName": "Ashley",
         "id": 45416,
         "lastName": "Laferty",
         "partyName": "Democratic",
-        "votes": 4937
+        "votes": 4977
       }
     ],
     "district": "95",
@@ -5630,7 +5792,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.484Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5640,11 +5802,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 19587,
+    "totalVotes": 19745,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5684,6 +5847,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5723,6 +5887,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5730,15 +5895,15 @@
           "estimatedVotesHigh": 23191,
           "estimatedVotesLow": 18975,
           "estimatedVotesMid": 21083,
-          "turnoutHigh": 93.12,
-          "turnoutLow": 113.81,
+          "turnoutHigh": 93.25,
+          "turnoutLow": 113.97,
           "turnoutMid": 99
         },
         "firstName": "Aaron",
         "id": 67864,
         "lastName": "Thompson",
         "partyName": "Republican",
-        "votes": 15161
+        "votes": 15191
       },
       {
         "elected": false,
@@ -5746,8 +5911,8 @@
           "estimatedVotesHigh": 23191,
           "estimatedVotesLow": 18975,
           "estimatedVotesMid": 21083,
-          "turnoutHigh": 93.12,
-          "turnoutLow": 113.81,
+          "turnoutHigh": 93.25,
+          "turnoutLow": 113.97,
           "turnoutMid": 99
         },
         "firstName": "Tammie",
@@ -5763,7 +5928,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:21.484Z",
+    "lastUpdated": "2024-10-25T20:44:15.176Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5773,11 +5938,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 21595,
+    "totalVotes": 21625,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5817,6 +5983,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,

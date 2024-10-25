@@ -20,6 +20,7 @@ export interface RacesVotingDataResponse {
   raceDate: string
   lastUpdated: string
   calledCandidate: Candidate | null
+  calledCandidates: Candidate[]
   candidatesWithVotes: CandidatesWithVote[]
   hasCalledCandidate: boolean
 }

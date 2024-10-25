@@ -7,54 +7,62 @@
       "lastName": "Banks",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Jim",
+        "id": 8888,
+        "lastName": "Banks",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3084673,
+          "estimatedVotesLow": 2523825,
+          "estimatedVotesMid": 2804245,
+          "turnoutHigh": 91.98,
+          "turnoutLow": 112.42,
+          "turnoutMid": 99
+        },
+        "firstName": "Valerie",
+        "id": 65448,
+        "lastName": "McCray",
+        "partyName": "Democratic",
+        "votes": 1155411
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3084673,
+          "estimatedVotesLow": 2523825,
+          "estimatedVotesMid": 2804245,
+          "turnoutHigh": 91.98,
+          "turnoutLow": 112.42,
+          "turnoutMid": 99
+        },
+        "firstName": "Andrew",
+        "id": 44322,
+        "lastName": "Horning",
+        "partyName": "Libertarian",
+        "votes": 40985
+      },
       {
         "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 85.98,
-          "turnoutLow": 105.08,
-          "turnoutMid": 94.57
+          "turnoutHigh": 91.98,
+          "turnoutLow": 112.42,
+          "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 8888,
         "lastName": "Banks",
         "partyName": "Republican",
-        "votes": 1536880
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3084673,
-          "estimatedVotesLow": 2523825,
-          "estimatedVotesMid": 2804245,
-          "turnoutHigh": 85.98,
-          "turnoutLow": 105.08,
-          "turnoutMid": 94.57
-        },
-        "firstName": "Andrew",
-        "id": 44322,
-        "lastName": "Horning",
-        "partyName": "Libertarian",
-        "votes": 38136
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3084673,
-          "estimatedVotesLow": 2523825,
-          "estimatedVotesMid": 2804245,
-          "turnoutHigh": 85.98,
-          "turnoutLow": 105.08,
-          "turnoutMid": 94.57
-        },
-        "firstName": "Valerie",
-        "id": 65448,
-        "lastName": "McCray",
-        "partyName": "Democratic",
-        "votes": 1077052
+        "votes": 1640990
       }
     ],
     "district": "",
@@ -63,7 +71,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:30:09.468Z",
+    "lastUpdated": "2024-10-25T20:43:15.204Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -73,11 +81,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 2652068,
+    "totalVotes": 2837386,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -85,15 +94,15 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 88.37,
-          "turnoutLow": 108.01,
-          "turnoutMid": 97.21
+          "turnoutHigh": 91.66,
+          "turnoutLow": 112.03,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 8668,
         "lastName": "Braun",
         "partyName": "Republican",
-        "votes": 1583436
+        "votes": 1630167
       },
       {
         "elected": false,
@@ -101,15 +110,15 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 88.37,
-          "turnoutLow": 108.01,
-          "turnoutMid": 97.21
+          "turnoutHigh": 91.66,
+          "turnoutLow": 112.03,
+          "turnoutMid": 99
         },
         "firstName": "Donald",
         "id": 15061,
         "lastName": "Rainwater",
         "partyName": "Libertarian",
-        "votes": 52378
+        "votes": 54556
       },
       {
         "elected": false,
@@ -117,15 +126,15 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 88.37,
-          "turnoutLow": 108.01,
-          "turnoutMid": 97.21
+          "turnoutHigh": 91.66,
+          "turnoutLow": 112.03,
+          "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 65449,
         "lastName": "McCormick",
         "partyName": "Democratic",
-        "votes": 1090068
+        "votes": 1142666
       }
     ],
     "district": "",
@@ -134,7 +143,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:09.092Z",
+    "lastUpdated": "2024-10-25T20:43:15.204Z",
     "office": {
       "officeId": "2",
       "officeName": "Governor",
@@ -144,11 +153,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 2725882,
+    "totalVotes": 2827389,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -156,9 +166,9 @@
           "estimatedVotesHigh": 343717,
           "estimatedVotesLow": 281222,
           "estimatedVotesMid": 312469,
-          "turnoutHigh": 88.46,
-          "turnoutLow": 108.12,
-          "turnoutMid": 97.31
+          "turnoutHigh": 92.57,
+          "turnoutLow": 113.14,
+          "turnoutMid": 99
         },
         "firstName": "Dakotah",
         "id": 85018,
@@ -172,15 +182,15 @@
           "estimatedVotesHigh": 343717,
           "estimatedVotesLow": 281222,
           "estimatedVotesMid": 312469,
-          "turnoutHigh": 88.46,
-          "turnoutLow": 108.12,
-          "turnoutMid": 97.31
+          "turnoutHigh": 92.57,
+          "turnoutLow": 113.14,
+          "turnoutMid": 99
         },
         "firstName": "Randall",
         "id": 85014,
         "lastName": "Niemeyer",
         "partyName": "Republican",
-        "votes": 138346
+        "votes": 142507
       },
       {
         "elected": false,
@@ -188,15 +198,15 @@
           "estimatedVotesHigh": 343717,
           "estimatedVotesLow": 281222,
           "estimatedVotesMid": 312469,
-          "turnoutHigh": 88.46,
-          "turnoutLow": 108.12,
-          "turnoutMid": 97.31
+          "turnoutHigh": 92.57,
+          "turnoutLow": 113.14,
+          "turnoutMid": 99
         },
         "firstName": "Frank",
         "id": 12879,
         "lastName": "Mrvan",
         "partyName": "Democratic",
-        "votes": 160061
+        "votes": 170015
       }
     ],
     "district": "1",
@@ -205,7 +215,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:23:05.294Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -215,7 +225,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 304055,
+    "totalVotes": 318170,
     "year": 2024
   },
   {
@@ -226,6 +236,14 @@
       "lastName": "Yakym",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Rudy",
+        "id": 44319,
+        "lastName": "Yakym",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -233,15 +251,15 @@
           "estimatedVotesHigh": 313770,
           "estimatedVotesLow": 256721,
           "estimatedVotesMid": 285245,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
+          "turnoutHigh": 92.01,
+          "turnoutLow": 112.46,
           "turnoutMid": 99
         },
         "firstName": "Lori",
         "id": 65450,
         "lastName": "Camp",
         "partyName": "Democratic",
-        "votes": 108724
+        "votes": 109762
       },
       {
         "elected": true,
@@ -249,15 +267,15 @@
           "estimatedVotesHigh": 313770,
           "estimatedVotesLow": 256721,
           "estimatedVotesMid": 285245,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
+          "turnoutHigh": 92.01,
+          "turnoutLow": 112.46,
           "turnoutMid": 99
         },
         "firstName": "Rudy",
         "id": 44319,
         "lastName": "Yakym",
         "partyName": "Republican",
-        "votes": 171725
+        "votes": 173429
       },
       {
         "elected": false,
@@ -265,15 +283,15 @@
           "estimatedVotesHigh": 313770,
           "estimatedVotesLow": 256721,
           "estimatedVotesMid": 285245,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
+          "turnoutHigh": 92.01,
+          "turnoutLow": 112.46,
           "turnoutMid": 99
         },
         "firstName": "William",
         "id": 44318,
         "lastName": "Henry",
         "partyName": "Libertarian",
-        "votes": 5440
+        "votes": 5511
       }
     ],
     "district": "2",
@@ -282,7 +300,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:30:25.656Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -292,7 +310,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 285889,
+    "totalVotes": 288702,
     "year": 2024
   },
   {
@@ -303,6 +321,14 @@
       "lastName": "Stutzman",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Marlin",
+        "id": 65802,
+        "lastName": "Stutzman",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -310,15 +336,15 @@
           "estimatedVotesHigh": 337279,
           "estimatedVotesLow": 275954,
           "estimatedVotesMid": 306616,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.73,
+          "turnoutHigh": 91.67,
+          "turnoutLow": 112.04,
           "turnoutMid": 99
         },
         "firstName": "Kiley",
         "id": 65451,
         "lastName": "Adolph",
         "partyName": "Democratic",
-        "votes": 110867
+        "votes": 111094
       },
       {
         "elected": true,
@@ -326,15 +352,15 @@
           "estimatedVotesHigh": 337279,
           "estimatedVotesLow": 275954,
           "estimatedVotesMid": 306616,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.73,
+          "turnoutHigh": 91.67,
+          "turnoutLow": 112.04,
           "turnoutMid": 99
         },
         "firstName": "Marlin",
         "id": 65802,
         "lastName": "Stutzman",
         "partyName": "Republican",
-        "votes": 191294
+        "votes": 191900
       },
       {
         "elected": false,
@@ -342,15 +368,15 @@
           "estimatedVotesHigh": 337279,
           "estimatedVotesLow": 275954,
           "estimatedVotesMid": 306616,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.73,
+          "turnoutHigh": 91.67,
+          "turnoutLow": 112.04,
           "turnoutMid": 99
         },
         "firstName": "Jarrad",
         "id": 85020,
         "lastName": "Lancaster",
         "partyName": "Libertarian",
-        "votes": 6158
+        "votes": 6177
       }
     ],
     "district": "3",
@@ -359,7 +385,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:30:25.656Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -369,7 +395,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 308319,
+    "totalVotes": 309171,
     "year": 2024
   },
   {
@@ -380,6 +406,14 @@
       "lastName": "Baird",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Jim",
+        "id": 8889,
+        "lastName": "Baird",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -387,15 +421,15 @@
           "estimatedVotesHigh": 356517,
           "estimatedVotesLow": 291697,
           "estimatedVotesMid": 324106,
-          "turnoutHigh": 89.92,
-          "turnoutLow": 109.9,
-          "turnoutMid": 98.91
+          "turnoutHigh": 92.11,
+          "turnoutLow": 112.58,
+          "turnoutMid": 99
         },
         "firstName": "Derrick",
         "id": 65454,
         "lastName": "Holder",
         "partyName": "Democratic",
-        "votes": 108212
+        "votes": 110461
       },
       {
         "elected": false,
@@ -403,15 +437,15 @@
           "estimatedVotesHigh": 356517,
           "estimatedVotesLow": 291697,
           "estimatedVotesMid": 324106,
-          "turnoutHigh": 89.92,
-          "turnoutLow": 109.9,
-          "turnoutMid": 98.91
+          "turnoutHigh": 92.11,
+          "turnoutLow": 112.58,
+          "turnoutMid": 99
         },
         "firstName": "Ashley",
         "id": 85021,
         "lastName": "Groff",
         "partyName": "Libertarian",
-        "votes": 6261
+        "votes": 6440
       },
       {
         "elected": true,
@@ -419,15 +453,15 @@
           "estimatedVotesHigh": 356517,
           "estimatedVotesLow": 291697,
           "estimatedVotesMid": 324106,
-          "turnoutHigh": 89.92,
-          "turnoutLow": 109.9,
-          "turnoutMid": 98.91
+          "turnoutHigh": 92.11,
+          "turnoutLow": 112.58,
+          "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 8889,
         "lastName": "Baird",
         "partyName": "Republican",
-        "votes": 206101
+        "votes": 211494
       }
     ],
     "district": "4",
@@ -436,7 +470,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:30:25.656Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -446,11 +480,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 320574,
+    "totalVotes": 328395,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -458,15 +493,15 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 92.03,
-          "turnoutLow": 112.49,
+          "turnoutHigh": 92.34,
+          "turnoutLow": 112.86,
           "turnoutMid": 99
         },
         "firstName": "Victoria",
         "id": 12929,
         "lastName": "Spartz",
         "partyName": "Republican",
-        "votes": 189122
+        "votes": 190201
       },
       {
         "elected": false,
@@ -474,15 +509,15 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 92.03,
-          "turnoutLow": 112.49,
+          "turnoutHigh": 92.34,
+          "turnoutLow": 112.86,
           "turnoutMid": 99
         },
         "firstName": "Robby",
         "id": 102140,
         "lastName": "Slaughter",
         "partyName": "Independent",
-        "votes": 6837
+        "votes": 6862
       },
       {
         "elected": false,
@@ -490,8 +525,8 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 92.03,
-          "turnoutLow": 112.49,
+          "turnoutHigh": 92.34,
+          "turnoutLow": 112.86,
           "turnoutMid": 99
         },
         "firstName": "Deborah",
@@ -506,15 +541,15 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 92.03,
-          "turnoutLow": 112.49,
+          "turnoutHigh": 92.34,
+          "turnoutLow": 112.86,
           "turnoutMid": 99
         },
         "firstName": "Lauri",
         "id": 85022,
         "lastName": "Shillings",
         "partyName": "Libertarian",
-        "votes": 6535
+        "votes": 6591
       }
     ],
     "district": "5",
@@ -523,7 +558,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.656Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -533,7 +568,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 352315,
+    "totalVotes": 353475,
     "year": 2024
   },
   {
@@ -544,6 +579,14 @@
       "lastName": "Shreve",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Jefferson",
+        "id": 49079,
+        "lastName": "Shreve",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -551,15 +594,15 @@
           "estimatedVotesHigh": 340275,
           "estimatedVotesLow": 278409,
           "estimatedVotesMid": 309342,
-          "turnoutHigh": 92.24,
-          "turnoutLow": 112.74,
+          "turnoutHigh": 92.62,
+          "turnoutLow": 113.2,
           "turnoutMid": 99
         },
         "firstName": "Jefferson",
         "id": 49079,
         "lastName": "Shreve",
         "partyName": "Republican",
-        "votes": 203432
+        "votes": 204572
       },
       {
         "elected": false,
@@ -567,15 +610,15 @@
           "estimatedVotesHigh": 340275,
           "estimatedVotesLow": 278409,
           "estimatedVotesMid": 309342,
-          "turnoutHigh": 92.24,
-          "turnoutLow": 112.74,
+          "turnoutHigh": 92.62,
+          "turnoutLow": 113.2,
           "turnoutMid": 99
         },
         "firstName": "Cynthia",
         "id": 18707,
         "lastName": "Wirth",
         "partyName": "Democratic",
-        "votes": 104275
+        "votes": 104409
       },
       {
         "elected": false,
@@ -583,15 +626,15 @@
           "estimatedVotesHigh": 340275,
           "estimatedVotesLow": 278409,
           "estimatedVotesMid": 309342,
-          "turnoutHigh": 92.24,
-          "turnoutLow": 112.74,
+          "turnoutHigh": 92.62,
+          "turnoutLow": 113.2,
           "turnoutMid": 99
         },
         "firstName": "James",
         "id": 44238,
         "lastName": "Sceniak",
         "partyName": "Libertarian",
-        "votes": 6170
+        "votes": 6185
       }
     ],
     "district": "6",
@@ -600,7 +643,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:30:25.656Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -610,7 +653,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 313877,
+    "totalVotes": 315166,
     "year": 2024
   },
   {
@@ -621,6 +664,14 @@
       "lastName": "Carson",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Andre",
+        "id": 85023,
+        "lastName": "Carson",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -628,15 +679,15 @@
           "estimatedVotesHigh": 298830,
           "estimatedVotesLow": 244498,
           "estimatedVotesMid": 271664,
-          "turnoutHigh": 94.59,
-          "turnoutLow": 115.61,
+          "turnoutHigh": 95.53,
+          "turnoutLow": 116.76,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 18994,
         "lastName": "Schmitz",
         "partyName": "Republican",
-        "votes": 78263
+        "votes": 79047
       },
       {
         "elected": false,
@@ -644,15 +695,15 @@
           "estimatedVotesHigh": 298830,
           "estimatedVotesLow": 244498,
           "estimatedVotesMid": 271664,
-          "turnoutHigh": 94.59,
-          "turnoutLow": 115.61,
+          "turnoutHigh": 95.53,
+          "turnoutLow": 116.76,
           "turnoutMid": 99
         },
         "firstName": "Rusty",
         "id": 85024,
         "lastName": "Johnson",
         "partyName": "Libertarian",
-        "votes": 5188
+        "votes": 5241
       },
       {
         "elected": true,
@@ -660,15 +711,15 @@
           "estimatedVotesHigh": 298830,
           "estimatedVotesLow": 244498,
           "estimatedVotesMid": 271664,
-          "turnoutHigh": 94.59,
-          "turnoutLow": 115.61,
+          "turnoutHigh": 95.53,
+          "turnoutLow": 116.76,
           "turnoutMid": 99
         },
         "firstName": "Andre",
         "id": 85023,
         "lastName": "Carson",
         "partyName": "Democratic",
-        "votes": 199202
+        "votes": 201195
       }
     ],
     "district": "7",
@@ -677,7 +728,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:15:01.002Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -687,7 +738,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 282653,
+    "totalVotes": 285483,
     "year": 2024
   },
   {
@@ -698,6 +749,14 @@
       "lastName": "Messmer",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Mark",
+        "id": 18856,
+        "lastName": "Messmer",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -705,15 +764,15 @@
           "estimatedVotesHigh": 351320,
           "estimatedVotesLow": 287445,
           "estimatedVotesMid": 319381,
-          "turnoutHigh": 83.33,
-          "turnoutLow": 101.85,
-          "turnoutMid": 91.66
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.22,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 18856,
         "lastName": "Messmer",
         "partyName": "Republican",
-        "votes": 193289
+        "votes": 209980
       },
       {
         "elected": false,
@@ -721,15 +780,15 @@
           "estimatedVotesHigh": 351320,
           "estimatedVotesLow": 287445,
           "estimatedVotesMid": 319381,
-          "turnoutHigh": 83.33,
-          "turnoutLow": 101.85,
-          "turnoutMid": 91.66
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.22,
+          "turnoutMid": 99
         },
         "firstName": "K. Richard",
         "id": 85025,
         "lastName": "Fitzlaff",
         "partyName": "Libertarian",
-        "votes": 5853
+        "votes": 6576
       },
       {
         "elected": false,
@@ -737,15 +796,15 @@
           "estimatedVotesHigh": 351320,
           "estimatedVotesLow": 287445,
           "estimatedVotesMid": 319381,
-          "turnoutHigh": 83.33,
-          "turnoutLow": 101.85,
-          "turnoutMid": 91.66
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.22,
+          "turnoutMid": 99
         },
         "firstName": "Erik",
         "id": 65457,
         "lastName": "Hurt",
         "partyName": "Democratic",
-        "votes": 93615
+        "votes": 106003
       }
     ],
     "district": "8",
@@ -754,7 +813,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:30:25.656Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -764,7 +823,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 292757,
+    "totalVotes": 322559,
     "year": 2024
   },
   {
@@ -775,6 +834,14 @@
       "lastName": "Houchin",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Erin",
+        "id": 18810,
+        "lastName": "Houchin",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -782,15 +849,15 @@
           "estimatedVotesHigh": 360017,
           "estimatedVotesLow": 294559,
           "estimatedVotesMid": 327288,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
+          "turnoutHigh": 92.49,
+          "turnoutLow": 113.04,
           "turnoutMid": 99
         },
         "firstName": "Russell",
         "id": 1928,
         "lastName": "Brooksbank",
         "partyName": "Libertarian",
-        "votes": 6636
+        "votes": 6750
       },
       {
         "elected": true,
@@ -798,15 +865,15 @@
           "estimatedVotesHigh": 360017,
           "estimatedVotesLow": 294559,
           "estimatedVotesMid": 327288,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
+          "turnoutHigh": 92.49,
+          "turnoutLow": 113.04,
           "turnoutMid": 99
         },
         "firstName": "Erin",
         "id": 18810,
         "lastName": "Houchin",
         "partyName": "Republican",
-        "votes": 210541
+        "votes": 214580
       },
       {
         "elected": false,
@@ -814,15 +881,15 @@
           "estimatedVotesHigh": 360017,
           "estimatedVotesLow": 294559,
           "estimatedVotesMid": 327288,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
+          "turnoutHigh": 92.49,
+          "turnoutLow": 113.04,
           "turnoutMid": 99
         },
         "firstName": "Timothy",
         "id": 65460,
         "lastName": "Peck",
         "partyName": "Democratic",
-        "votes": 110191
+        "votes": 111640
       }
     ],
     "district": "9",
@@ -831,7 +898,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:30:25.656Z",
+    "lastUpdated": "2024-10-25T20:43:12.882Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -841,11 +908,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 327368,
+    "totalVotes": 332970,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -853,15 +921,15 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 90.01,
-          "turnoutLow": 110.01,
+          "turnoutHigh": 91.8,
+          "turnoutLow": 112.2,
           "turnoutMid": 99
         },
         "firstName": "Todd",
         "id": 1265,
         "lastName": "Rokita",
         "partyName": "Republican",
-        "votes": 1597436
+        "votes": 1624305
       },
       {
         "elected": false,
@@ -869,15 +937,15 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 90.01,
-          "turnoutLow": 110.01,
+          "turnoutHigh": 91.8,
+          "turnoutLow": 112.2,
           "turnoutMid": 99
         },
         "firstName": "Destiny",
         "id": 47421,
         "lastName": "Wells",
         "partyName": "Democratic",
-        "votes": 1178933
+        "votes": 1207384
       }
     ],
     "district": "",
@@ -886,7 +954,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:26.574Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "27",
       "officeName": "Attorney General",
@@ -896,11 +964,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 2776369,
+    "totalVotes": 2831689,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -908,15 +977,15 @@
           "estimatedVotesHigh": 47940,
           "estimatedVotesLow": 39224,
           "estimatedVotesMid": 43582,
-          "turnoutHigh": 61.88,
-          "turnoutLow": 75.63,
-          "turnoutMid": 68.07
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Humberto",
         "id": 66479,
         "lastName": "Prado",
         "partyName": "Republican",
-        "votes": 9839
+        "votes": 14206
       },
       {
         "elected": false,
@@ -924,15 +993,15 @@
           "estimatedVotesHigh": 47940,
           "estimatedVotesLow": 39224,
           "estimatedVotesMid": 43582,
-          "turnoutHigh": 61.88,
-          "turnoutLow": 75.63,
-          "turnoutMid": 68.07
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Lonnie",
         "id": 65461,
         "lastName": "Randolph",
         "partyName": "Democratic",
-        "votes": 19827
+        "votes": 29376
       }
     ],
     "district": "2",
@@ -941,7 +1010,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:24:59.849Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -951,11 +1020,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 29666,
+    "totalVotes": 43582,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -963,15 +1033,15 @@
           "estimatedVotesHigh": 53150,
           "estimatedVotesLow": 43486,
           "estimatedVotesMid": 48318,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.53,
+          "turnoutHigh": 92.99,
+          "turnoutLow": 113.66,
           "turnoutMid": 99
         },
         "firstName": "Will",
         "id": 65825,
         "lastName": "Miller",
         "partyName": "Republican",
-        "votes": 13121
+        "votes": 13253
       },
       {
         "elected": false,
@@ -979,15 +1049,15 @@
           "estimatedVotesHigh": 53150,
           "estimatedVotesLow": 43486,
           "estimatedVotesMid": 48318,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.53,
+          "turnoutHigh": 92.99,
+          "turnoutLow": 113.66,
           "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 65462,
         "lastName": "Spencer",
         "partyName": "Democratic",
-        "votes": 35814
+        "votes": 36173
       }
     ],
     "district": "3",
@@ -996,7 +1066,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:20:41.036Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1006,11 +1076,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 48935,
+    "totalVotes": 49426,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1018,15 +1089,15 @@
           "estimatedVotesHigh": 69253,
           "estimatedVotesLow": 56661,
           "estimatedVotesMid": 62957,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.49,
+          "turnoutHigh": 91.87,
+          "turnoutLow": 112.29,
           "turnoutMid": 99
         },
         "firstName": "Leslie",
         "id": 65464,
         "lastName": "Bamesberger",
         "partyName": "Democratic",
-        "votes": 25384
+        "votes": 25610
       },
       {
         "elected": false,
@@ -1034,15 +1105,15 @@
           "estimatedVotesHigh": 69253,
           "estimatedVotesLow": 56661,
           "estimatedVotesMid": 62957,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.49,
+          "turnoutHigh": 91.87,
+          "turnoutLow": 112.29,
           "turnoutMid": 99
         },
         "firstName": "Ed",
         "id": 65826,
         "lastName": "Charbonneau",
         "partyName": "Republican",
-        "votes": 37786
+        "votes": 38013
       }
     ],
     "district": "5",
@@ -1051,7 +1122,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:26.574Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1061,7 +1132,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 63170,
+    "totalVotes": 63623,
     "year": 2024
   },
   {
@@ -1072,6 +1143,14 @@
       "lastName": "Buchanan",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Brian",
+        "id": 65828,
+        "lastName": "Buchanan",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -1111,6 +1190,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1118,15 +1198,15 @@
           "estimatedVotesHigh": 63822,
           "estimatedVotesLow": 52218,
           "estimatedVotesMid": 58020,
-          "turnoutHigh": 85.75,
-          "turnoutLow": 104.81,
-          "turnoutMid": 94.33
+          "turnoutHigh": 91.57,
+          "turnoutLow": 111.92,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 65829,
         "lastName": "Bohacek",
         "partyName": "Republican",
-        "votes": 35270
+        "votes": 37920
       },
       {
         "elected": false,
@@ -1134,15 +1214,15 @@
           "estimatedVotesHigh": 63822,
           "estimatedVotesLow": 52218,
           "estimatedVotesMid": 58020,
-          "turnoutHigh": 85.75,
-          "turnoutLow": 104.81,
-          "turnoutMid": 94.33
+          "turnoutHigh": 91.57,
+          "turnoutLow": 111.92,
+          "turnoutMid": 99
         },
         "firstName": "Leon",
         "id": 65465,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 19458
+        "votes": 20521
       }
     ],
     "district": "8",
@@ -1151,7 +1231,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:26.574Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1161,11 +1241,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 54728,
+    "totalVotes": 58441,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1205,6 +1286,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1212,15 +1294,15 @@
           "estimatedVotesHigh": 50931,
           "estimatedVotesLow": 41671,
           "estimatedVotesMid": 46301,
-          "turnoutHigh": 70.51,
-          "turnoutLow": 86.18,
-          "turnoutMid": 77.56
+          "turnoutHigh": 71.22,
+          "turnoutLow": 87.05,
+          "turnoutMid": 78.34
         },
         "firstName": "David",
         "id": 65466,
         "lastName": "Niezgodski",
         "partyName": "Democratic",
-        "votes": 34686
+        "votes": 35034
       },
       {
         "elected": false,
@@ -1228,15 +1310,15 @@
           "estimatedVotesHigh": 50931,
           "estimatedVotesLow": 41671,
           "estimatedVotesMid": 46301,
-          "turnoutHigh": 70.51,
-          "turnoutLow": 86.18,
-          "turnoutMid": 77.56
+          "turnoutHigh": 71.22,
+          "turnoutLow": 87.05,
+          "turnoutMid": 78.34
         },
         "firstName": "Tim",
         "id": 98858,
         "lastName": "Cotton",
         "partyName": "Libertarian",
-        "votes": 1227
+        "votes": 1240
       }
     ],
     "district": "10",
@@ -1245,7 +1327,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:11:23.706Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1255,11 +1337,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 35913,
+    "totalVotes": 36274,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1299,6 +1382,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1338,6 +1422,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1377,6 +1462,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1416,6 +1502,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1423,8 +1510,8 @@
           "estimatedVotesHigh": 79592,
           "estimatedVotesLow": 65120,
           "estimatedVotesMid": 72356,
-          "turnoutHigh": 96.95,
-          "turnoutLow": 118.5,
+          "turnoutHigh": 97.48,
+          "turnoutLow": 119.15,
           "turnoutMid": 99
         },
         "firstName": "Joel",
@@ -1439,15 +1526,15 @@
           "estimatedVotesHigh": 79592,
           "estimatedVotesLow": 65120,
           "estimatedVotesMid": 72356,
-          "turnoutHigh": 96.95,
-          "turnoutLow": 118.5,
+          "turnoutHigh": 97.48,
+          "turnoutLow": 119.15,
           "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 65838,
         "lastName": "Baldwin",
         "partyName": "Republican",
-        "votes": 42383
+        "votes": 42808
       }
     ],
     "district": "20",
@@ -1456,7 +1543,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:11.059Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1466,11 +1553,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 77164,
+    "totalVotes": 77589,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1478,15 +1566,15 @@
           "estimatedVotesHigh": 70042,
           "estimatedVotesLow": 57306,
           "estimatedVotesMid": 63674,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.53,
+          "turnoutHigh": 92.82,
+          "turnoutLow": 113.45,
           "turnoutMid": 99
         },
         "firstName": "Brett",
         "id": 65839,
         "lastName": "Clark",
         "partyName": "Republican",
-        "votes": 40645
+        "votes": 40967
       },
       {
         "elected": false,
@@ -1494,15 +1582,15 @@
           "estimatedVotesHigh": 70042,
           "estimatedVotesLow": 57306,
           "estimatedVotesMid": 63674,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.53,
+          "turnoutHigh": 92.82,
+          "turnoutLow": 113.45,
           "turnoutMid": 99
         },
         "firstName": "Veronica",
         "id": 65469,
         "lastName": "Pejril",
         "partyName": "Democratic",
-        "votes": 23840
+        "votes": 24048
       }
     ],
     "district": "24",
@@ -1511,7 +1599,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.653Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1521,11 +1609,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 64485,
+    "totalVotes": 65015,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1533,15 +1622,15 @@
           "estimatedVotesHigh": 70731,
           "estimatedVotesLow": 57872,
           "estimatedVotesMid": 64301,
-          "turnoutHigh": 78.93,
-          "turnoutLow": 96.47,
-          "turnoutMid": 86.82
+          "turnoutHigh": 79.21,
+          "turnoutLow": 96.82,
+          "turnoutMid": 87.14
         },
         "firstName": "Michael",
         "id": 65841,
         "lastName": "Crider",
         "partyName": "Republican",
-        "votes": 54183
+        "votes": 54352
       },
       {
         "elected": false,
@@ -1549,15 +1638,15 @@
           "estimatedVotesHigh": 70731,
           "estimatedVotesLow": 57872,
           "estimatedVotesMid": 64301,
-          "turnoutHigh": 78.93,
-          "turnoutLow": 96.47,
-          "turnoutMid": 86.82
+          "turnoutHigh": 79.21,
+          "turnoutLow": 96.82,
+          "turnoutMid": 87.14
         },
         "firstName": "Travis",
         "id": 98859,
         "lastName": "Chittum",
         "partyName": "Libertarian",
-        "votes": 1645
+        "votes": 1677
       }
     ],
     "district": "28",
@@ -1566,7 +1655,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:26.574Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1576,11 +1665,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 55828,
+    "totalVotes": 56029,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1620,6 +1710,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1627,15 +1718,15 @@
           "estimatedVotesHigh": 60794,
           "estimatedVotesLow": 49741,
           "estimatedVotesMid": 55267,
-          "turnoutHigh": 86.86,
-          "turnoutLow": 106.16,
-          "turnoutMid": 95.55
+          "turnoutHigh": 92.47,
+          "turnoutLow": 113.02,
+          "turnoutMid": 99
         },
         "firstName": "Katrina",
         "id": 65471,
         "lastName": "Owens",
         "partyName": "Democratic",
-        "votes": 22214
+        "votes": 23555
       },
       {
         "elected": false,
@@ -1643,15 +1734,15 @@
           "estimatedVotesHigh": 60794,
           "estimatedVotesLow": 49741,
           "estimatedVotesMid": 55267,
-          "turnoutHigh": 86.86,
-          "turnoutLow": 106.16,
-          "turnoutMid": 95.55
+          "turnoutHigh": 92.47,
+          "turnoutLow": 113.02,
+          "turnoutMid": 99
         },
         "firstName": "Aaron",
         "id": 65842,
         "lastName": "Freeman",
         "partyName": "Republican",
-        "votes": 30592
+        "votes": 32663
       }
     ],
     "district": "32",
@@ -1660,7 +1751,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:30.381Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1670,11 +1761,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 52806,
+    "totalVotes": 56218,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1714,6 +1806,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1753,6 +1846,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1760,8 +1854,8 @@
           "estimatedVotesHigh": 48160,
           "estimatedVotesLow": 39403,
           "estimatedVotesMid": 43781,
-          "turnoutHigh": 93.33,
-          "turnoutLow": 114.07,
+          "turnoutHigh": 93.88,
+          "turnoutLow": 114.74,
           "turnoutMid": 99
         },
         "firstName": "Michael",
@@ -1776,15 +1870,15 @@
           "estimatedVotesHigh": 48160,
           "estimatedVotesLow": 39403,
           "estimatedVotesMid": 43781,
-          "turnoutHigh": 93.33,
-          "turnoutLow": 114.07,
+          "turnoutHigh": 93.88,
+          "turnoutLow": 114.74,
           "turnoutMid": 99
         },
         "firstName": "Jessica",
         "id": 49670,
         "lastName": "McCormick",
         "partyName": "Democratic",
-        "votes": 19792
+        "votes": 20058
       }
     ],
     "district": "35",
@@ -1793,7 +1887,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:09:02.537Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1803,11 +1897,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 44946,
+    "totalVotes": 45212,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1815,15 +1910,15 @@
           "estimatedVotesHigh": 52271,
           "estimatedVotesLow": 42767,
           "estimatedVotesMid": 47519,
-          "turnoutHigh": 93.15,
-          "turnoutLow": 113.85,
+          "turnoutHigh": 93.7,
+          "turnoutLow": 114.53,
           "turnoutMid": 99
         },
         "firstName": "Cynthia",
         "id": 65844,
         "lastName": "Carrasco",
         "partyName": "Republican",
-        "votes": 28690
+        "votes": 28979
       },
       {
         "elected": false,
@@ -1831,8 +1926,8 @@
           "estimatedVotesHigh": 52271,
           "estimatedVotesLow": 42767,
           "estimatedVotesMid": 47519,
-          "turnoutHigh": 93.15,
-          "turnoutLow": 113.85,
+          "turnoutHigh": 93.7,
+          "turnoutLow": 114.53,
           "turnoutMid": 99
         },
         "firstName": "Suzanne",
@@ -1848,7 +1943,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:06:37.538Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1858,11 +1953,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 48691,
+    "totalVotes": 48980,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1870,15 +1966,15 @@
           "estimatedVotesHigh": 73803,
           "estimatedVotesLow": 60385,
           "estimatedVotesMid": 67094,
-          "turnoutHigh": 45.09,
-          "turnoutLow": 55.11,
-          "turnoutMid": 49.6
+          "turnoutHigh": 93.15,
+          "turnoutLow": 113.85,
+          "turnoutMid": 99
         },
         "firstName": "Kimberly",
         "id": 65475,
         "lastName": "Schofield",
         "partyName": "Democratic",
-        "votes": 9664
+        "votes": 17561
       },
       {
         "elected": false,
@@ -1886,15 +1982,15 @@
           "estimatedVotesHigh": 73803,
           "estimatedVotesLow": 60385,
           "estimatedVotesMid": 67094,
-          "turnoutHigh": 45.09,
-          "turnoutLow": 55.11,
-          "turnoutMid": 49.6
+          "turnoutHigh": 93.15,
+          "turnoutLow": 113.85,
+          "turnoutMid": 99
         },
         "firstName": "Rodric",
         "id": 65845,
         "lastName": "Bray",
         "partyName": "Republican",
-        "votes": 23617
+        "votes": 51188
       }
     ],
     "district": "37",
@@ -1903,7 +1999,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.653Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1913,7 +2009,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 33281,
+    "totalVotes": 68749,
     "year": 2024
   },
   {
@@ -1924,6 +2020,14 @@
       "lastName": "Yoder",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Shelli",
+        "id": 1274,
+        "lastName": "Yoder",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -1963,6 +2067,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2002,6 +2107,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2041,6 +2147,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2081,7 +2188,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:09.092Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2096,6 +2203,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2135,6 +2243,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2175,7 +2284,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:14:15.704Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2190,6 +2299,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2197,15 +2307,15 @@
           "estimatedVotesHigh": 26607,
           "estimatedVotesLow": 21769,
           "estimatedVotesMid": 24188,
-          "turnoutHigh": 91.53,
-          "turnoutLow": 111.87,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Leslie",
         "id": 98861,
         "lastName": "Dallner",
         "partyName": "Republican",
-        "votes": 7672
+        "votes": 7750
       },
       {
         "elected": false,
@@ -2213,8 +2323,8 @@
           "estimatedVotesHigh": 26607,
           "estimatedVotesLow": 21769,
           "estimatedVotesMid": 24188,
-          "turnoutHigh": 91.53,
-          "turnoutLow": 111.87,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Ragen",
@@ -2230,7 +2340,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:24:11.673Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2240,11 +2350,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 24354,
+    "totalVotes": 24432,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2252,15 +2363,15 @@
           "estimatedVotesHigh": 36196,
           "estimatedVotesLow": 29615,
           "estimatedVotesMid": 32905,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.6,
           "turnoutMid": 99
         },
         "firstName": "Erika",
         "id": 65478,
         "lastName": "Robinson-Watkins",
         "partyName": "Democratic",
-        "votes": 14334
+        "votes": 14478
       },
       {
         "elected": false,
@@ -2268,8 +2379,8 @@
           "estimatedVotesHigh": 36196,
           "estimatedVotesLow": 29615,
           "estimatedVotesMid": 32905,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.6,
           "turnoutMid": 99
         },
         "firstName": "Ed",
@@ -2285,7 +2396,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:12:33.454Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2295,11 +2406,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 32905,
+    "totalVotes": 33049,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2307,8 +2419,8 @@
           "estimatedVotesHigh": 31526,
           "estimatedVotesLow": 25794,
           "estimatedVotesMid": 28660,
-          "turnoutHigh": 93.61,
-          "turnoutLow": 114.42,
+          "turnoutHigh": 94.06,
+          "turnoutLow": 114.96,
           "turnoutMid": 99
         },
         "firstName": "Dale",
@@ -2323,15 +2435,15 @@
           "estimatedVotesHigh": 31526,
           "estimatedVotesLow": 25794,
           "estimatedVotesMid": 28660,
-          "turnoutHigh": 93.61,
-          "turnoutLow": 114.42,
+          "turnoutHigh": 94.06,
+          "turnoutLow": 114.96,
           "turnoutMid": 99
         },
         "firstName": "Heidi",
         "id": 45255,
         "lastName": "Beidinger",
         "partyName": "Democratic",
-        "votes": 13767
+        "votes": 13906
       }
     ],
     "district": "5",
@@ -2340,7 +2452,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:19:18.994Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2350,11 +2462,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 29513,
+    "totalVotes": 29652,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2395,7 +2508,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:10:35.952Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2410,6 +2523,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2449,6 +2563,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2488,6 +2603,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2495,15 +2611,15 @@
           "estimatedVotesHigh": 32409,
           "estimatedVotesLow": 26517,
           "estimatedVotesMid": 29463,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.49,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.24,
           "turnoutMid": 99
         },
         "firstName": "Joel",
         "id": 98863,
         "lastName": "Florek",
         "partyName": "Republican",
-        "votes": 14235
+        "votes": 14380
       },
       {
         "elected": false,
@@ -2511,15 +2627,15 @@
           "estimatedVotesHigh": 32409,
           "estimatedVotesLow": 26517,
           "estimatedVotesMid": 29463,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.49,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.24,
           "turnoutMid": 99
         },
         "firstName": "Patricia",
         "id": 18739,
         "lastName": "Boy",
         "partyName": "Democratic",
-        "votes": 15329
+        "votes": 15382
       }
     ],
     "district": "9",
@@ -2528,7 +2644,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:29:17.298Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2538,11 +2654,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 29564,
+    "totalVotes": 29762,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2550,15 +2667,15 @@
           "estimatedVotesHigh": 31280,
           "estimatedVotesLow": 25592,
           "estimatedVotesMid": 28436,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.37,
+          "turnoutLow": 111.67,
           "turnoutMid": 99
         },
         "firstName": "Charles",
         "id": 18740,
         "lastName": "Moseley",
         "partyName": "Democratic",
-        "votes": 14174
+        "votes": 14317
       },
       {
         "elected": false,
@@ -2566,8 +2683,8 @@
           "estimatedVotesHigh": 31280,
           "estimatedVotesLow": 25592,
           "estimatedVotesMid": 28436,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.37,
+          "turnoutLow": 111.67,
           "turnoutMid": 99
         },
         "firstName": "Jeff",
@@ -2583,7 +2700,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:15:10.823Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2593,11 +2710,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 28436,
+    "totalVotes": 28579,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2637,6 +2755,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2677,7 +2796,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:15:10.823Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2692,6 +2811,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2699,15 +2819,15 @@
           "estimatedVotesHigh": 34212,
           "estimatedVotesLow": 27992,
           "estimatedVotesMid": 31102,
-          "turnoutHigh": 85.51,
-          "turnoutLow": 104.52,
-          "turnoutMid": 94.06
+          "turnoutHigh": 86.23,
+          "turnoutLow": 105.39,
+          "turnoutMid": 94.85
         },
         "firstName": "Matthew",
         "id": 65850,
         "lastName": "Commons",
         "partyName": "Republican",
-        "votes": 19957
+        "votes": 20160
       },
       {
         "elected": false,
@@ -2715,15 +2835,15 @@
           "estimatedVotesHigh": 34212,
           "estimatedVotesLow": 27992,
           "estimatedVotesMid": 31102,
-          "turnoutHigh": 85.51,
-          "turnoutLow": 104.52,
-          "turnoutMid": 94.06
+          "turnoutHigh": 86.23,
+          "turnoutLow": 105.39,
+          "turnoutMid": 94.85
         },
         "firstName": "Edward",
         "id": 65479,
         "lastName": "Moyer Jr.",
         "partyName": "Democratic",
-        "votes": 9299
+        "votes": 9341
       }
     ],
     "district": "13",
@@ -2732,7 +2852,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2742,11 +2862,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 29256,
+    "totalVotes": 29501,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2754,15 +2875,15 @@
           "estimatedVotesHigh": 27882,
           "estimatedVotesLow": 22812,
           "estimatedVotesMid": 25347,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.13,
+          "turnoutLow": 111.39,
           "turnoutMid": 99
         },
         "firstName": "Ivan",
         "id": 65851,
         "lastName": "Ursery II",
         "partyName": "Republican",
-        "votes": 6214
+        "votes": 6277
       },
       {
         "elected": false,
@@ -2770,8 +2891,8 @@
           "estimatedVotesHigh": 27882,
           "estimatedVotesLow": 22812,
           "estimatedVotesMid": 25347,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.13,
+          "turnoutLow": 111.39,
           "turnoutMid": 99
         },
         "firstName": "Vernon",
@@ -2787,7 +2908,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:26:37.688Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2797,11 +2918,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 25347,
+    "totalVotes": 25410,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2842,7 +2964,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:15:10.823Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2857,6 +2979,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2864,15 +2987,15 @@
           "estimatedVotesHigh": 31518,
           "estimatedVotesLow": 25789,
           "estimatedVotesMid": 28653,
-          "turnoutHigh": 92.54,
-          "turnoutLow": 113.1,
+          "turnoutHigh": 93.23,
+          "turnoutLow": 113.94,
           "turnoutMid": 99
         },
         "firstName": "Dennis",
         "id": 98866,
         "lastName": "Collins",
         "partyName": "Democratic",
-        "votes": 7932
+        "votes": 7983
       },
       {
         "elected": false,
@@ -2880,15 +3003,15 @@
           "estimatedVotesHigh": 31518,
           "estimatedVotesLow": 25789,
           "estimatedVotesMid": 28653,
-          "turnoutHigh": 92.54,
-          "turnoutLow": 113.1,
+          "turnoutHigh": 93.23,
+          "turnoutLow": 113.94,
           "turnoutMid": 99
         },
         "firstName": "Kendell",
         "id": 18870,
         "lastName": "Culp",
         "partyName": "Republican",
-        "votes": 21236
+        "votes": 21400
       }
     ],
     "district": "16",
@@ -2897,7 +3020,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2907,11 +3030,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 29168,
+    "totalVotes": 29383,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2951,6 +3075,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2990,6 +3115,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3029,6 +3155,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3068,6 +3195,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3075,15 +3203,15 @@
           "estimatedVotesHigh": 22346,
           "estimatedVotesLow": 18284,
           "estimatedVotesMid": 20315,
-          "turnoutHigh": 84.49,
-          "turnoutLow": 103.27,
-          "turnoutMid": 92.94
+          "turnoutHigh": 84.61,
+          "turnoutLow": 103.41,
+          "turnoutMid": 93.07
         },
         "firstName": "Timothy",
         "id": 18879,
         "lastName": "Wesco",
         "partyName": "Republican",
-        "votes": 18280
+        "votes": 18300
       },
       {
         "elected": false,
@@ -3091,15 +3219,15 @@
           "estimatedVotesHigh": 22346,
           "estimatedVotesLow": 18284,
           "estimatedVotesMid": 20315,
-          "turnoutHigh": 84.49,
-          "turnoutLow": 103.27,
-          "turnoutMid": 92.94
+          "turnoutHigh": 84.61,
+          "turnoutLow": 103.41,
+          "turnoutMid": 93.07
         },
         "firstName": "Melissa",
         "id": 98867,
         "lastName": "Kauffman",
         "partyName": "Libertarian",
-        "votes": 601
+        "votes": 607
       }
     ],
     "district": "21",
@@ -3108,7 +3236,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.653Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3118,11 +3246,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 18881,
+    "totalVotes": 18907,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3130,8 +3259,8 @@
           "estimatedVotesHigh": 29993,
           "estimatedVotesLow": 24540,
           "estimatedVotesMid": 27266,
-          "turnoutHigh": 91.89,
-          "turnoutLow": 112.31,
+          "turnoutHigh": 91.91,
+          "turnoutLow": 112.33,
           "turnoutMid": 99
         },
         "firstName": "Craig",
@@ -3146,15 +3275,15 @@
           "estimatedVotesHigh": 29993,
           "estimatedVotesLow": 24540,
           "estimatedVotesMid": 27266,
-          "turnoutHigh": 91.89,
-          "turnoutLow": 112.31,
+          "turnoutHigh": 91.91,
+          "turnoutLow": 112.33,
           "turnoutMid": 99
         },
         "firstName": "Josh",
         "id": 45260,
         "lastName": "Vergiels",
         "partyName": "Libertarian",
-        "votes": 672
+        "votes": 679
       }
     ],
     "district": "22",
@@ -3163,7 +3292,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3173,11 +3302,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 27560,
+    "totalVotes": 27567,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3185,15 +3315,15 @@
           "estimatedVotesHigh": 26832,
           "estimatedVotesLow": 21954,
           "estimatedVotesMid": 24393,
-          "turnoutHigh": 94.99,
-          "turnoutLow": 116.09,
+          "turnoutHigh": 95.67,
+          "turnoutLow": 116.92,
           "turnoutMid": 99
         },
         "firstName": "Ethan",
         "id": 18882,
         "lastName": "Manning",
         "partyName": "Republican",
-        "votes": 18736
+        "votes": 18838
       },
       {
         "elected": false,
@@ -3201,15 +3331,15 @@
           "estimatedVotesHigh": 26832,
           "estimatedVotesLow": 21954,
           "estimatedVotesMid": 24393,
-          "turnoutHigh": 94.99,
-          "turnoutLow": 116.09,
+          "turnoutHigh": 95.67,
+          "turnoutLow": 116.92,
           "turnoutMid": 99
         },
         "firstName": "Richard",
         "id": 65480,
         "lastName": "Rouser",
         "partyName": "Democratic",
-        "votes": 6751
+        "votes": 6831
       }
     ],
     "district": "23",
@@ -3218,7 +3348,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3228,11 +3358,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 25487,
+    "totalVotes": 25669,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3240,15 +3371,15 @@
           "estimatedVotesHigh": 42088,
           "estimatedVotesLow": 34436,
           "estimatedVotesMid": 38262,
-          "turnoutHigh": 93.46,
-          "turnoutLow": 114.23,
+          "turnoutHigh": 94.38,
+          "turnoutLow": 115.35,
           "turnoutMid": 99
         },
         "firstName": "Hunter",
         "id": 65854,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 20914
+        "votes": 21125
       },
       {
         "elected": false,
@@ -3256,15 +3387,15 @@
           "estimatedVotesHigh": 42088,
           "estimatedVotesLow": 34436,
           "estimatedVotesMid": 38262,
-          "turnoutHigh": 93.46,
-          "turnoutLow": 114.23,
+          "turnoutHigh": 94.38,
+          "turnoutLow": 115.35,
           "turnoutMid": 99
         },
         "firstName": "Josh",
         "id": 44647,
         "lastName": "Lowry",
         "partyName": "Democratic",
-        "votes": 18421
+        "votes": 18597
       }
     ],
     "district": "24",
@@ -3273,7 +3404,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3283,11 +3414,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 39335,
+    "totalVotes": 39722,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3295,8 +3427,8 @@
           "estimatedVotesHigh": 40447,
           "estimatedVotesLow": 33093,
           "estimatedVotesMid": 36770,
-          "turnoutHigh": 92.27,
-          "turnoutLow": 112.77,
+          "turnoutHigh": 92.43,
+          "turnoutLow": 112.98,
           "turnoutMid": 99
         },
         "firstName": "Becky",
@@ -3311,15 +3443,15 @@
           "estimatedVotesHigh": 40447,
           "estimatedVotesLow": 33093,
           "estimatedVotesMid": 36770,
-          "turnoutHigh": 92.27,
-          "turnoutLow": 112.77,
+          "turnoutHigh": 92.43,
+          "turnoutLow": 112.98,
           "turnoutMid": 99
         },
         "firstName": "Tiffany",
         "id": 65481,
         "lastName": "Stoner",
         "partyName": "Democratic",
-        "votes": 18337
+        "votes": 18404
       }
     ],
     "district": "25",
@@ -3328,7 +3460,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3338,11 +3470,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 37320,
+    "totalVotes": 37387,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3350,15 +3483,15 @@
           "estimatedVotesHigh": 19335,
           "estimatedVotesLow": 15819,
           "estimatedVotesMid": 17577,
-          "turnoutHigh": 91.83,
-          "turnoutLow": 112.24,
+          "turnoutHigh": 92.41,
+          "turnoutLow": 112.95,
           "turnoutMid": 99
         },
         "firstName": "Chris",
         "id": 18747,
         "lastName": "Campbell",
         "partyName": "Democratic",
-        "votes": 11220
+        "votes": 11333
       },
       {
         "elected": false,
@@ -3366,8 +3499,8 @@
           "estimatedVotesHigh": 19335,
           "estimatedVotesLow": 15819,
           "estimatedVotesMid": 17577,
-          "turnoutHigh": 91.83,
-          "turnoutLow": 112.24,
+          "turnoutHigh": 92.41,
+          "turnoutLow": 112.95,
           "turnoutMid": 99
         },
         "firstName": "James",
@@ -3383,7 +3516,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3393,11 +3526,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 17755,
+    "totalVotes": 17868,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3405,15 +3539,15 @@
           "estimatedVotesHigh": 24175,
           "estimatedVotesLow": 19779,
           "estimatedVotesMid": 21977,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.84,
+          "turnoutHigh": 92.75,
+          "turnoutLow": 113.37,
           "turnoutMid": 99
         },
         "firstName": "Oscar",
         "id": 65856,
         "lastName": "Alvarez",
         "partyName": "Republican",
-        "votes": 10275
+        "votes": 10379
       },
       {
         "elected": false,
@@ -3421,8 +3555,8 @@
           "estimatedVotesHigh": 24175,
           "estimatedVotesLow": 19779,
           "estimatedVotesMid": 21977,
-          "turnoutHigh": 92.32,
-          "turnoutLow": 112.84,
+          "turnoutHigh": 92.75,
+          "turnoutLow": 113.37,
           "turnoutMid": 99
         },
         "firstName": "Sheila",
@@ -3438,7 +3572,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3448,11 +3582,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 22319,
+    "totalVotes": 22423,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3460,15 +3595,15 @@
           "estimatedVotesHigh": 38546,
           "estimatedVotesLow": 31539,
           "estimatedVotesMid": 35042,
-          "turnoutHigh": 91.73,
-          "turnoutLow": 112.11,
+          "turnoutHigh": 91.77,
+          "turnoutLow": 112.16,
           "turnoutMid": 99
         },
         "firstName": "Jeffrey",
         "id": 18890,
         "lastName": "Thompson",
         "partyName": "Republican",
-        "votes": 26230
+        "votes": 26245
       },
       {
         "elected": false,
@@ -3476,8 +3611,8 @@
           "estimatedVotesHigh": 38546,
           "estimatedVotesLow": 31539,
           "estimatedVotesMid": 35042,
-          "turnoutHigh": 91.73,
-          "turnoutLow": 112.11,
+          "turnoutHigh": 91.77,
+          "turnoutLow": 112.16,
           "turnoutMid": 99
         },
         "firstName": "Karen",
@@ -3493,7 +3628,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3503,11 +3638,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 35358,
+    "totalVotes": 35373,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3515,15 +3651,15 @@
           "estimatedVotesHigh": 38701,
           "estimatedVotesLow": 31665,
           "estimatedVotesMid": 35183,
-          "turnoutHigh": 91.82,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.75,
+          "turnoutLow": 113.36,
           "turnoutMid": 99
         },
         "firstName": "Alaina",
         "id": 65859,
         "lastName": "Shonkwiler",
         "partyName": "Republican",
-        "votes": 20889
+        "votes": 21099
       },
       {
         "elected": false,
@@ -3531,15 +3667,15 @@
           "estimatedVotesHigh": 38701,
           "estimatedVotesLow": 31665,
           "estimatedVotesMid": 35183,
-          "turnoutHigh": 91.82,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.75,
+          "turnoutLow": 113.36,
           "turnoutMid": 99
         },
         "firstName": "Christopher",
         "id": 65483,
         "lastName": "Hartig",
         "partyName": "Democratic",
-        "votes": 14648
+        "votes": 14795
       }
     ],
     "district": "29",
@@ -3548,7 +3684,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:59:24.806Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3558,11 +3694,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 35537,
+    "totalVotes": 35894,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3570,15 +3707,15 @@
           "estimatedVotesHigh": 30611,
           "estimatedVotesLow": 25045,
           "estimatedVotesMid": 27828,
-          "turnoutHigh": 91.54,
-          "turnoutLow": 111.88,
+          "turnoutHigh": 91.56,
+          "turnoutLow": 111.91,
           "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 18892,
         "lastName": "Karickhoff",
         "partyName": "Republican",
-        "votes": 17569
+        "votes": 17577
       },
       {
         "elected": false,
@@ -3586,8 +3723,8 @@
           "estimatedVotesHigh": 30611,
           "estimatedVotesLow": 25045,
           "estimatedVotesMid": 27828,
-          "turnoutHigh": 91.54,
-          "turnoutLow": 111.88,
+          "turnoutHigh": 91.56,
+          "turnoutLow": 111.91,
           "turnoutMid": 99
         },
         "firstName": "Michael",
@@ -3603,7 +3740,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3613,11 +3750,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 28020,
+    "totalVotes": 28028,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3657,6 +3795,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3664,8 +3803,8 @@
           "estimatedVotesHigh": 37932,
           "estimatedVotesLow": 31036,
           "estimatedVotesMid": 34484,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
+          "turnoutHigh": 91.63,
+          "turnoutLow": 111.99,
           "turnoutMid": 99
         },
         "firstName": "Patricia",
@@ -3680,15 +3819,15 @@
           "estimatedVotesHigh": 37932,
           "estimatedVotesLow": 31036,
           "estimatedVotesMid": 34484,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
+          "turnoutHigh": 91.63,
+          "turnoutLow": 111.99,
           "turnoutMid": 99
         },
         "firstName": "Victoria",
         "id": 18752,
         "lastName": "Wilburn",
         "partyName": "Democratic",
-        "votes": 18992
+        "votes": 19184
       }
     ],
     "district": "32",
@@ -3697,7 +3836,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:16:57.992Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3707,11 +3846,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 34564,
+    "totalVotes": 34756,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3719,15 +3859,15 @@
           "estimatedVotesHigh": 31668,
           "estimatedVotesLow": 25909,
           "estimatedVotesMid": 28788,
-          "turnoutHigh": 92.71,
-          "turnoutLow": 113.32,
+          "turnoutHigh": 93.11,
+          "turnoutLow": 113.8,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 18753,
         "lastName": "Bartlett",
         "partyName": "Democratic",
-        "votes": 7535
+        "votes": 7559
       },
       {
         "elected": false,
@@ -3735,15 +3875,15 @@
           "estimatedVotesHigh": 31668,
           "estimatedVotesLow": 25909,
           "estimatedVotesMid": 28788,
-          "turnoutHigh": 92.71,
-          "turnoutLow": 113.32,
+          "turnoutHigh": 93.11,
+          "turnoutLow": 113.8,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 18899,
         "lastName": "Prescott",
         "partyName": "Republican",
-        "votes": 21824
+        "votes": 21926
       }
     ],
     "district": "33",
@@ -3752,7 +3892,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3762,11 +3902,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 29359,
+    "totalVotes": 29485,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3774,15 +3915,15 @@
           "estimatedVotesHigh": 24253,
           "estimatedVotesLow": 19843,
           "estimatedVotesMid": 22048,
-          "turnoutHigh": 91.74,
-          "turnoutLow": 112.13,
+          "turnoutHigh": 93.09,
+          "turnoutLow": 113.78,
           "turnoutMid": 99
         },
         "firstName": "Sue",
         "id": 18754,
         "lastName": "Errington",
         "partyName": "Democratic",
-        "votes": 12179
+        "votes": 12302
       },
       {
         "elected": false,
@@ -3790,15 +3931,15 @@
           "estimatedVotesHigh": 24253,
           "estimatedVotesLow": 19843,
           "estimatedVotesMid": 22048,
-          "turnoutHigh": 91.74,
-          "turnoutLow": 112.13,
+          "turnoutHigh": 93.09,
+          "turnoutLow": 113.78,
           "turnoutMid": 99
         },
         "firstName": "Susan",
         "id": 18901,
         "lastName": "Dillon",
         "partyName": "Republican",
-        "votes": 10070
+        "votes": 10275
       }
     ],
     "district": "34",
@@ -3807,7 +3948,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3817,11 +3958,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 22249,
+    "totalVotes": 22577,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3829,15 +3971,15 @@
           "estimatedVotesHigh": 32949,
           "estimatedVotesLow": 26957,
           "estimatedVotesMid": 29953,
-          "turnoutHigh": 94.08,
-          "turnoutLow": 114.99,
+          "turnoutHigh": 94.86,
+          "turnoutLow": 115.95,
           "turnoutMid": 99
         },
         "firstName": "Philip",
         "id": 65486,
         "lastName": "Gift",
         "partyName": "Democratic",
-        "votes": 9871
+        "votes": 9920
       },
       {
         "elected": false,
@@ -3845,15 +3987,15 @@
           "estimatedVotesHigh": 32949,
           "estimatedVotesLow": 26957,
           "estimatedVotesMid": 29953,
-          "turnoutHigh": 94.08,
-          "turnoutLow": 114.99,
+          "turnoutHigh": 94.86,
+          "turnoutLow": 115.95,
           "turnoutMid": 99
         },
         "firstName": "Elizabeth",
         "id": 18902,
         "lastName": "Rowray",
         "partyName": "Republican",
-        "votes": 21128
+        "votes": 21336
       }
     ],
     "district": "35",
@@ -3862,7 +4004,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3872,11 +4014,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 30999,
+    "totalVotes": 31256,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3917,7 +4060,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:23:58.493Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3932,6 +4075,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3971,6 +4115,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3978,15 +4123,15 @@
           "estimatedVotesHigh": 36839,
           "estimatedVotesLow": 30140,
           "estimatedVotesMid": 33489,
-          "turnoutHigh": 92.54,
-          "turnoutLow": 113.11,
+          "turnoutHigh": 93.16,
+          "turnoutLow": 113.87,
           "turnoutMid": 99
         },
         "firstName": "Carl",
         "id": 65487,
         "lastName": "Seese",
         "partyName": "Democratic",
-        "votes": 8442
+        "votes": 8461
       },
       {
         "elected": false,
@@ -3994,15 +4139,15 @@
           "estimatedVotesHigh": 36839,
           "estimatedVotesLow": 30140,
           "estimatedVotesMid": 33489,
-          "turnoutHigh": 92.54,
-          "turnoutLow": 113.11,
+          "turnoutHigh": 93.16,
+          "turnoutLow": 113.87,
           "turnoutMid": 99
         },
         "firstName": "Heath",
         "id": 18905,
         "lastName": "VanNatter",
         "partyName": "Republican",
-        "votes": 25648
+        "votes": 25860
       }
     ],
     "district": "38",
@@ -4011,7 +4156,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4021,11 +4166,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 34090,
+    "totalVotes": 34321,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4033,15 +4179,15 @@
           "estimatedVotesHigh": 41627,
           "estimatedVotesLow": 34059,
           "estimatedVotesMid": 37843,
-          "turnoutHigh": 92.75,
-          "turnoutLow": 113.35,
+          "turnoutHigh": 93.65,
+          "turnoutLow": 114.46,
           "turnoutMid": 99
         },
         "firstName": "Daniel",
         "id": 65863,
         "lastName": "Lopez",
         "partyName": "Republican",
-        "votes": 18704
+        "votes": 19082
       },
       {
         "elected": false,
@@ -4049,8 +4195,8 @@
           "estimatedVotesHigh": 41627,
           "estimatedVotesLow": 34059,
           "estimatedVotesMid": 37843,
-          "turnoutHigh": 92.75,
-          "turnoutLow": 113.35,
+          "turnoutHigh": 93.65,
+          "turnoutLow": 114.46,
           "turnoutMid": 99
         },
         "firstName": "Matt",
@@ -4066,7 +4212,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:52:09.588Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4076,11 +4222,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 38607,
+    "totalVotes": 38985,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4088,15 +4235,15 @@
           "estimatedVotesHigh": 34953,
           "estimatedVotesLow": 28598,
           "estimatedVotesMid": 31775,
-          "turnoutHigh": 91.45,
-          "turnoutLow": 111.77,
+          "turnoutHigh": 91.99,
+          "turnoutLow": 112.44,
           "turnoutMid": 99
         },
         "firstName": "Gregory",
         "id": 18907,
         "lastName": "Steuerwald",
         "partyName": "Republican",
-        "votes": 18955
+        "votes": 19146
       },
       {
         "elected": false,
@@ -4104,8 +4251,8 @@
           "estimatedVotesHigh": 34953,
           "estimatedVotesLow": 28598,
           "estimatedVotesMid": 31775,
-          "turnoutHigh": 91.45,
-          "turnoutLow": 111.77,
+          "turnoutHigh": 91.99,
+          "turnoutLow": 112.44,
           "turnoutMid": 99
         },
         "firstName": "Robert",
@@ -4121,7 +4268,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:05:29.432Z",
+    "lastUpdated": "2024-10-25T20:42:53.780Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4131,11 +4278,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 31964,
+    "totalVotes": 32155,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4143,15 +4291,15 @@
           "estimatedVotesHigh": 31413,
           "estimatedVotesLow": 25703,
           "estimatedVotesMid": 28558,
-          "turnoutHigh": 92.01,
-          "turnoutLow": 112.45,
+          "turnoutHigh": 92.86,
+          "turnoutLow": 113.49,
           "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 18909,
         "lastName": "Genda",
         "partyName": "Republican",
-        "votes": 20864
+        "votes": 21025
       },
       {
         "elected": false,
@@ -4159,15 +4307,15 @@
           "estimatedVotesHigh": 31413,
           "estimatedVotesLow": 25703,
           "estimatedVotesMid": 28558,
-          "turnoutHigh": 92.01,
-          "turnoutLow": 112.45,
+          "turnoutHigh": 92.86,
+          "turnoutLow": 113.49,
           "turnoutMid": 99
         },
         "firstName": "Dan",
         "id": 65489,
         "lastName": "Sikes",
         "partyName": "Democratic",
-        "votes": 8040
+        "votes": 8145
       }
     ],
     "district": "41",
@@ -4176,7 +4324,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:02.275Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4186,11 +4334,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 28904,
+    "totalVotes": 29170,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4230,6 +4379,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4269,6 +4419,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4308,6 +4459,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4347,6 +4499,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4354,15 +4507,15 @@
           "estimatedVotesHigh": 33253,
           "estimatedVotesLow": 27207,
           "estimatedVotesMid": 30230,
-          "turnoutHigh": 92.73,
-          "turnoutLow": 113.34,
+          "turnoutHigh": 93.19,
+          "turnoutLow": 113.9,
           "turnoutMid": 99
         },
         "firstName": "Kurtis",
         "id": 18759,
         "lastName": "Cummings",
         "partyName": "Democratic",
-        "votes": 10352
+        "votes": 10377
       },
       {
         "elected": false,
@@ -4370,15 +4523,15 @@
           "estimatedVotesHigh": 33253,
           "estimatedVotesLow": 27207,
           "estimatedVotesMid": 30230,
-          "turnoutHigh": 92.73,
-          "turnoutLow": 113.34,
+          "turnoutHigh": 93.19,
+          "turnoutLow": 113.9,
           "turnoutMid": 99
         },
         "firstName": "Bob",
         "id": 18916,
         "lastName": "Heaton",
         "partyName": "Republican",
-        "votes": 20485
+        "votes": 20612
       }
     ],
     "district": "46",
@@ -4387,7 +4540,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4397,11 +4550,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 30837,
+    "totalVotes": 30989,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4409,15 +4563,15 @@
           "estimatedVotesHigh": 35687,
           "estimatedVotesLow": 29197,
           "estimatedVotesMid": 32442,
-          "turnoutHigh": 94.01,
-          "turnoutLow": 114.91,
+          "turnoutHigh": 94.58,
+          "turnoutLow": 115.61,
           "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 65490,
         "lastName": "Potter",
         "partyName": "Democratic",
-        "votes": 9223
+        "votes": 9239
       },
       {
         "elected": false,
@@ -4425,15 +4579,15 @@
           "estimatedVotesHigh": 35687,
           "estimatedVotesLow": 29197,
           "estimatedVotesMid": 32442,
-          "turnoutHigh": 94.01,
-          "turnoutLow": 114.91,
+          "turnoutHigh": 94.58,
+          "turnoutLow": 115.61,
           "turnoutMid": 99
         },
         "firstName": "Robb",
         "id": 18918,
         "lastName": "Greene",
         "partyName": "Republican",
-        "votes": 24328
+        "votes": 24515
       }
     ],
     "district": "47",
@@ -4442,7 +4596,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4452,7 +4606,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 33551,
+    "totalVotes": 33754,
     "year": 2024
   },
   {
@@ -4463,6 +4617,14 @@
       "lastName": "Miller",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Doug",
+        "id": 18921,
+        "lastName": "Miller",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -4502,6 +4664,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4541,6 +4704,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4548,15 +4712,15 @@
           "estimatedVotesHigh": 33709,
           "estimatedVotesLow": 27579,
           "estimatedVotesMid": 30644,
-          "turnoutHigh": 89.47,
-          "turnoutLow": 109.35,
-          "turnoutMid": 98.42
+          "turnoutHigh": 92.92,
+          "turnoutLow": 113.57,
+          "turnoutMid": 99
         },
         "firstName": "Joe",
         "id": 44646,
         "lastName": "Swisher",
         "partyName": "Democratic",
-        "votes": 7229
+        "votes": 7526
       },
       {
         "elected": false,
@@ -4564,15 +4728,15 @@
           "estimatedVotesHigh": 33709,
           "estimatedVotesLow": 27579,
           "estimatedVotesMid": 30644,
-          "turnoutHigh": 89.47,
-          "turnoutLow": 109.35,
-          "turnoutMid": 98.42
+          "turnoutHigh": 92.92,
+          "turnoutLow": 113.57,
+          "turnoutMid": 99
         },
         "firstName": "Lorissa",
         "id": 18924,
         "lastName": "Sweet",
         "partyName": "Republican",
-        "votes": 22930
+        "votes": 23795
       }
     ],
     "district": "50",
@@ -4581,7 +4745,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4591,11 +4755,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 30159,
+    "totalVotes": 31321,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4603,15 +4768,15 @@
           "estimatedVotesHigh": 23943,
           "estimatedVotesLow": 19589,
           "estimatedVotesMid": 21766,
-          "turnoutHigh": 91.99,
-          "turnoutLow": 112.43,
+          "turnoutHigh": 92.09,
+          "turnoutLow": 112.55,
           "turnoutMid": 99
         },
         "firstName": "Judy",
         "id": 65491,
         "lastName": "Rowe",
         "partyName": "Democratic",
-        "votes": 5762
+        "votes": 5786
       },
       {
         "elected": false,
@@ -4619,8 +4784,8 @@
           "estimatedVotesHigh": 23943,
           "estimatedVotesLow": 19589,
           "estimatedVotesMid": 21766,
-          "turnoutHigh": 91.99,
-          "turnoutLow": 112.43,
+          "turnoutHigh": 92.09,
+          "turnoutLow": 112.55,
           "turnoutMid": 99
         },
         "firstName": "Tony",
@@ -4636,7 +4801,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4646,11 +4811,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 22024,
+    "totalVotes": 22048,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4658,15 +4824,15 @@
           "estimatedVotesHigh": 31112,
           "estimatedVotesLow": 25454,
           "estimatedVotesMid": 28283,
-          "turnoutHigh": 94.54,
-          "turnoutLow": 115.55,
+          "turnoutHigh": 95.01,
+          "turnoutLow": 116.13,
           "turnoutMid": 99
         },
         "firstName": "Ben",
         "id": 18926,
         "lastName": "Smaltz",
         "partyName": "Republican",
-        "votes": 21174
+        "votes": 21314
       },
       {
         "elected": false,
@@ -4674,15 +4840,15 @@
           "estimatedVotesHigh": 31112,
           "estimatedVotesLow": 25454,
           "estimatedVotesMid": 28283,
-          "turnoutHigh": 94.54,
-          "turnoutLow": 115.55,
+          "turnoutHigh": 95.01,
+          "turnoutLow": 116.13,
           "turnoutMid": 99
         },
         "firstName": "Walt",
         "id": 65492,
         "lastName": "Sorg",
         "partyName": "Democratic",
-        "votes": 8238
+        "votes": 8247
       }
     ],
     "district": "52",
@@ -4691,7 +4857,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4701,11 +4867,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 29412,
+    "totalVotes": 29561,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4713,15 +4880,15 @@
           "estimatedVotesHigh": 36960,
           "estimatedVotesLow": 30240,
           "estimatedVotesMid": 33600,
-          "turnoutHigh": 92.17,
-          "turnoutLow": 112.65,
+          "turnoutHigh": 92.84,
+          "turnoutLow": 113.47,
           "turnoutMid": 99
         },
         "firstName": "Nate",
         "id": 65493,
         "lastName": "Anderson",
         "partyName": "Democratic",
-        "votes": 9961
+        "votes": 10210
       },
       {
         "elected": false,
@@ -4729,8 +4896,8 @@
           "estimatedVotesHigh": 36960,
           "estimatedVotesLow": 30240,
           "estimatedVotesMid": 33600,
-          "turnoutHigh": 92.17,
-          "turnoutLow": 112.65,
+          "turnoutHigh": 92.84,
+          "turnoutLow": 113.47,
           "turnoutMid": 99
         },
         "firstName": "Ethan",
@@ -4746,7 +4913,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4756,7 +4923,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 34065,
+    "totalVotes": 34314,
     "year": 2024
   },
   {
@@ -4767,6 +4934,14 @@
       "lastName": "Criswell",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Cory",
+        "id": 18929,
+        "lastName": "Criswell",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -4806,6 +4981,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4813,15 +4989,15 @@
           "estimatedVotesHigh": 33735,
           "estimatedVotesLow": 27603,
           "estimatedVotesMid": 30669,
-          "turnoutHigh": 93.16,
-          "turnoutLow": 113.85,
+          "turnoutHigh": 93.63,
+          "turnoutLow": 114.43,
           "turnoutMid": 99
         },
         "firstName": "Victoria",
         "id": 98869,
         "lastName": "Martz",
         "partyName": "Democratic",
-        "votes": 6915
+        "votes": 6964
       },
       {
         "elected": false,
@@ -4829,15 +5005,15 @@
           "estimatedVotesHigh": 33735,
           "estimatedVotesLow": 27603,
           "estimatedVotesMid": 30669,
-          "turnoutHigh": 93.16,
-          "turnoutLow": 113.85,
+          "turnoutHigh": 93.63,
+          "turnoutLow": 114.43,
           "turnoutMid": 99
         },
         "firstName": "Lindsay",
         "id": 18937,
         "lastName": "Patterson",
         "partyName": "Republican",
-        "votes": 24512
+        "votes": 24622
       }
     ],
     "district": "55",
@@ -4846,7 +5022,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4856,11 +5032,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 31427,
+    "totalVotes": 31586,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4900,6 +5077,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4939,6 +5117,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4946,15 +5125,15 @@
           "estimatedVotesHigh": 29563,
           "estimatedVotesLow": 24188,
           "estimatedVotesMid": 26875,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.15,
+          "turnoutLow": 112.62,
           "turnoutMid": 99
         },
         "firstName": "Sandy",
         "id": 65494,
         "lastName": "James",
         "partyName": "Democratic",
-        "votes": 9353
+        "votes": 9543
       },
       {
         "elected": false,
@@ -4962,15 +5141,15 @@
           "estimatedVotesHigh": 29563,
           "estimatedVotesLow": 24188,
           "estimatedVotesMid": 26875,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 92.15,
+          "turnoutLow": 112.62,
           "turnoutMid": 99
         },
         "firstName": "Michelle",
         "id": 18944,
         "lastName": "Davis",
         "partyName": "Republican",
-        "votes": 17522
+        "votes": 17698
       }
     ],
     "district": "58",
@@ -4979,7 +5158,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:30.381Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4989,11 +5168,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 26875,
+    "totalVotes": 27241,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5001,8 +5181,8 @@
           "estimatedVotesHigh": 29495,
           "estimatedVotesLow": 24133,
           "estimatedVotesMid": 26814,
-          "turnoutHigh": 92.98,
-          "turnoutLow": 113.63,
+          "turnoutHigh": 93.55,
+          "turnoutLow": 114.34,
           "turnoutMid": 99
         },
         "firstName": "Ross",
@@ -5017,15 +5197,15 @@
           "estimatedVotesHigh": 29495,
           "estimatedVotesLow": 24133,
           "estimatedVotesMid": 26814,
-          "turnoutHigh": 92.98,
-          "turnoutLow": 113.63,
+          "turnoutHigh": 93.55,
+          "turnoutLow": 114.34,
           "turnoutMid": 99
         },
         "firstName": "Ryan",
         "id": 18945,
         "lastName": "Lauer",
         "partyName": "Republican",
-        "votes": 16998
+        "votes": 17169
       }
     ],
     "district": "59",
@@ -5034,7 +5214,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5044,11 +5224,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 27423,
+    "totalVotes": 27594,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5056,15 +5237,15 @@
           "estimatedVotesHigh": 38194,
           "estimatedVotesLow": 31250,
           "estimatedVotesMid": 34722,
-          "turnoutHigh": 93.91,
-          "turnoutLow": 114.78,
+          "turnoutHigh": 94.01,
+          "turnoutLow": 114.9,
           "turnoutMid": 99
         },
         "firstName": "Michelle",
         "id": 65495,
         "lastName": "Higgs",
         "partyName": "Democratic",
-        "votes": 8395
+        "votes": 8431
       },
       {
         "elected": false,
@@ -5072,8 +5253,8 @@
           "estimatedVotesHigh": 38194,
           "estimatedVotesLow": 31250,
           "estimatedVotesMid": 34722,
-          "turnoutHigh": 93.91,
-          "turnoutLow": 114.78,
+          "turnoutHigh": 94.01,
+          "turnoutLow": 114.9,
           "turnoutMid": 99
         },
         "firstName": "Peggy",
@@ -5089,7 +5270,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5099,11 +5280,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 35869,
+    "totalVotes": 35905,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5143,6 +5325,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5150,15 +5333,15 @@
           "estimatedVotesHigh": 38045,
           "estimatedVotesLow": 31129,
           "estimatedVotesMid": 34587,
-          "turnoutHigh": 93.53,
-          "turnoutLow": 114.31,
+          "turnoutHigh": 93.67,
+          "turnoutLow": 114.48,
           "turnoutMid": 99
         },
         "firstName": "Thomas",
         "id": 65496,
         "lastName": "Horrocks",
         "partyName": "Democratic",
-        "votes": 18968
+        "votes": 19004
       },
       {
         "elected": false,
@@ -5166,15 +5349,15 @@
           "estimatedVotesHigh": 38045,
           "estimatedVotesLow": 31129,
           "estimatedVotesMid": 34587,
-          "turnoutHigh": 93.53,
-          "turnoutLow": 114.31,
+          "turnoutHigh": 93.67,
+          "turnoutLow": 114.48,
           "turnoutMid": 99
         },
         "firstName": "Dave",
         "id": 18949,
         "lastName": "Hall",
         "partyName": "Republican",
-        "votes": 16617
+        "votes": 16631
       }
     ],
     "district": "62",
@@ -5183,7 +5366,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5193,11 +5376,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 35585,
+    "totalVotes": 35635,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5205,15 +5389,15 @@
           "estimatedVotesHigh": 31252,
           "estimatedVotesLow": 25570,
           "estimatedVotesMid": 28411,
-          "turnoutHigh": 80.57,
-          "turnoutLow": 98.48,
-          "turnoutMid": 88.63
+          "turnoutHigh": 92.53,
+          "turnoutLow": 113.09,
+          "turnoutMid": 99
         },
         "firstName": "Teresa",
         "id": 18768,
         "lastName": "Kendall",
         "partyName": "Democratic",
-        "votes": 6430
+        "votes": 7165
       },
       {
         "elected": false,
@@ -5221,15 +5405,15 @@
           "estimatedVotesHigh": 31252,
           "estimatedVotesLow": 25570,
           "estimatedVotesMid": 28411,
-          "turnoutHigh": 80.57,
-          "turnoutLow": 98.48,
-          "turnoutMid": 88.63
+          "turnoutHigh": 92.53,
+          "turnoutLow": 113.09,
+          "turnoutMid": 99
         },
         "firstName": "Shane",
         "id": 18951,
         "lastName": "Lindauer",
         "partyName": "Republican",
-        "votes": 18751
+        "votes": 21753
       }
     ],
     "district": "63",
@@ -5238,7 +5422,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5248,11 +5432,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 25181,
+    "totalVotes": 28918,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5292,6 +5477,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5331,6 +5517,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5338,15 +5525,15 @@
           "estimatedVotesHigh": 33582,
           "estimatedVotesLow": 27476,
           "estimatedVotesMid": 30529,
-          "turnoutHigh": 93.36,
-          "turnoutLow": 114.11,
+          "turnoutHigh": 94.37,
+          "turnoutLow": 115.34,
           "turnoutMid": 99
         },
         "firstName": "Zach",
         "id": 18955,
         "lastName": "Payne",
         "partyName": "Republican",
-        "votes": 21740
+        "votes": 21935
       },
       {
         "elected": false,
@@ -5354,15 +5541,15 @@
           "estimatedVotesHigh": 33582,
           "estimatedVotesLow": 27476,
           "estimatedVotesMid": 30529,
-          "turnoutHigh": 93.36,
-          "turnoutLow": 114.11,
+          "turnoutHigh": 94.37,
+          "turnoutLow": 115.34,
           "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 65498,
         "lastName": "David",
         "partyName": "Democratic",
-        "votes": 9612
+        "votes": 9757
       }
     ],
     "district": "66",
@@ -5371,7 +5558,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5381,11 +5568,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 31352,
+    "totalVotes": 31692,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5425,6 +5613,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5432,15 +5621,15 @@
           "estimatedVotesHigh": 33799,
           "estimatedVotesLow": 27655,
           "estimatedVotesMid": 30727,
-          "turnoutHigh": 92.93,
-          "turnoutLow": 113.58,
+          "turnoutHigh": 93.59,
+          "turnoutLow": 114.38,
           "turnoutMid": 99
         },
         "firstName": "Garrett",
         "id": 65880,
         "lastName": "Bascom",
         "partyName": "Republican",
-        "votes": 24189
+        "votes": 24411
       },
       {
         "elected": false,
@@ -5448,8 +5637,8 @@
           "estimatedVotesHigh": 33799,
           "estimatedVotesLow": 27655,
           "estimatedVotesMid": 30727,
-          "turnoutHigh": 92.93,
-          "turnoutLow": 113.58,
+          "turnoutHigh": 93.59,
+          "turnoutLow": 114.38,
           "turnoutMid": 99
         },
         "firstName": "Lisa",
@@ -5465,7 +5654,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5475,11 +5664,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 31411,
+    "totalVotes": 31633,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5487,15 +5677,15 @@
           "estimatedVotesHigh": 28730,
           "estimatedVotesLow": 23505,
           "estimatedVotesMid": 26117,
-          "turnoutHigh": 91.95,
-          "turnoutLow": 112.38,
+          "turnoutHigh": 92.46,
+          "turnoutLow": 113.01,
           "turnoutMid": 99
         },
         "firstName": "Trish",
         "id": 65500,
         "lastName": "Whitcomb",
         "partyName": "Democratic",
-        "votes": 6023
+        "votes": 6138
       },
       {
         "elected": false,
@@ -5503,15 +5693,15 @@
           "estimatedVotesHigh": 28730,
           "estimatedVotesLow": 23505,
           "estimatedVotesMid": 26117,
-          "turnoutHigh": 91.95,
-          "turnoutLow": 112.38,
+          "turnoutHigh": 92.46,
+          "turnoutLow": 113.01,
           "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 18958,
         "lastName": "Lucas",
         "partyName": "Republican",
-        "votes": 20393
+        "votes": 20425
       }
     ],
     "district": "69",
@@ -5520,7 +5710,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5530,11 +5720,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 26416,
+    "totalVotes": 26563,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5542,15 +5733,15 @@
           "estimatedVotesHigh": 36308,
           "estimatedVotesLow": 29704,
           "estimatedVotesMid": 33006,
-          "turnoutHigh": 92.85,
-          "turnoutLow": 113.49,
+          "turnoutHigh": 93.41,
+          "turnoutLow": 114.18,
           "turnoutMid": 99
         },
         "firstName": "Karen",
         "id": 18959,
         "lastName": "Engleman",
         "partyName": "Republican",
-        "votes": 24239
+        "votes": 24345
       },
       {
         "elected": false,
@@ -5558,15 +5749,15 @@
           "estimatedVotesHigh": 36308,
           "estimatedVotesLow": 29704,
           "estimatedVotesMid": 33006,
-          "turnoutHigh": 92.85,
-          "turnoutLow": 113.49,
+          "turnoutHigh": 93.41,
+          "turnoutLow": 114.18,
           "turnoutMid": 99
         },
         "firstName": "Sarah",
         "id": 98870,
         "lastName": "Blessing",
         "partyName": "Democratic",
-        "votes": 9473
+        "votes": 9571
       }
     ],
     "district": "70",
@@ -5575,7 +5766,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5585,11 +5776,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 33712,
+    "totalVotes": 33916,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5597,8 +5789,8 @@
           "estimatedVotesHigh": 29604,
           "estimatedVotesLow": 24221,
           "estimatedVotesMid": 26912,
-          "turnoutHigh": 91.52,
-          "turnoutLow": 111.87,
+          "turnoutHigh": 92.44,
+          "turnoutLow": 112.99,
           "turnoutMid": 99
         },
         "firstName": "Gregory",
@@ -5613,15 +5805,15 @@
           "estimatedVotesHigh": 29604,
           "estimatedVotesLow": 24221,
           "estimatedVotesMid": 26912,
-          "turnoutHigh": 91.52,
-          "turnoutLow": 111.87,
+          "turnoutHigh": 92.44,
+          "turnoutLow": 112.99,
           "turnoutMid": 99
         },
         "firstName": "Wendy",
         "id": 98871,
         "lastName": "Chesser",
         "partyName": "Democratic",
-        "votes": 13527
+        "votes": 13796
       },
       {
         "elected": false,
@@ -5629,15 +5821,15 @@
           "estimatedVotesHigh": 29604,
           "estimatedVotesLow": 24221,
           "estimatedVotesMid": 26912,
-          "turnoutHigh": 91.52,
-          "turnoutLow": 111.87,
+          "turnoutHigh": 92.44,
+          "turnoutLow": 112.99,
           "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 18960,
         "lastName": "Hawkins",
         "partyName": "Republican",
-        "votes": 12998
+        "votes": 13001
       }
     ],
     "district": "71",
@@ -5646,7 +5838,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5656,11 +5848,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 27095,
+    "totalVotes": 27367,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5668,8 +5861,8 @@
           "estimatedVotesHigh": 34943,
           "estimatedVotesLow": 28589,
           "estimatedVotesMid": 31766,
-          "turnoutHigh": 91.82,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.9,
+          "turnoutLow": 113.55,
           "turnoutMid": 99
         },
         "firstName": "Jason",
@@ -5684,15 +5877,15 @@
           "estimatedVotesHigh": 34943,
           "estimatedVotesLow": 28589,
           "estimatedVotesMid": 31766,
-          "turnoutHigh": 91.82,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.9,
+          "turnoutLow": 113.55,
           "turnoutMid": 99
         },
         "firstName": "Edward",
         "id": 18961,
         "lastName": "Clere",
         "partyName": "Republican",
-        "votes": 18571
+        "votes": 18947
       }
     ],
     "district": "72",
@@ -5701,7 +5894,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:21.633Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5711,11 +5904,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 32086,
+    "totalVotes": 32462,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5723,15 +5917,15 @@
           "estimatedVotesHigh": 29948,
           "estimatedVotesLow": 24503,
           "estimatedVotesMid": 27225,
-          "turnoutHigh": 91.97,
-          "turnoutLow": 112.41,
+          "turnoutHigh": 92.13,
+          "turnoutLow": 112.6,
           "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 18966,
         "lastName": "Meltzer",
         "partyName": "Republican",
-        "votes": 20487
+        "votes": 20534
       },
       {
         "elected": false,
@@ -5739,8 +5933,8 @@
           "estimatedVotesHigh": 29948,
           "estimatedVotesLow": 24503,
           "estimatedVotesMid": 27225,
-          "turnoutHigh": 91.97,
-          "turnoutLow": 112.41,
+          "turnoutHigh": 92.13,
+          "turnoutLow": 112.6,
           "turnoutMid": 99
         },
         "firstName": "Hollie",
@@ -5756,7 +5950,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5766,11 +5960,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 27543,
+    "totalVotes": 27590,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5778,15 +5973,15 @@
           "estimatedVotesHigh": 34564,
           "estimatedVotesLow": 28279,
           "estimatedVotesMid": 31421,
-          "turnoutHigh": 91.77,
-          "turnoutLow": 112.16,
+          "turnoutHigh": 91.9,
+          "turnoutLow": 112.33,
           "turnoutMid": 99
         },
         "firstName": "Bob",
         "id": 65503,
         "lastName": "Compton",
         "partyName": "Democratic",
-        "votes": 10850
+        "votes": 10897
       },
       {
         "elected": false,
@@ -5794,8 +5989,8 @@
           "estimatedVotesHigh": 34564,
           "estimatedVotesLow": 28279,
           "estimatedVotesMid": 31421,
-          "turnoutHigh": 91.77,
-          "turnoutLow": 112.16,
+          "turnoutHigh": 91.9,
+          "turnoutLow": 112.33,
           "turnoutMid": 99
         },
         "firstName": "Stephen",
@@ -5811,7 +6006,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5821,11 +6016,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 31719,
+    "totalVotes": 31766,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5865,6 +6061,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5904,6 +6101,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5943,6 +6141,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5982,6 +6181,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6021,6 +6221,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6060,6 +6261,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6067,15 +6269,15 @@
           "estimatedVotesHigh": 34506,
           "estimatedVotesLow": 28232,
           "estimatedVotesMid": 31369,
-          "turnoutHigh": 93.53,
-          "turnoutLow": 114.32,
+          "turnoutHigh": 94.71,
+          "turnoutLow": 115.76,
           "turnoutMid": 99
         },
         "firstName": "Martin",
         "id": 18974,
         "lastName": "Carbaugh",
         "partyName": "Republican",
-        "votes": 20230
+        "votes": 20638
       },
       {
         "elected": false,
@@ -6083,8 +6285,8 @@
           "estimatedVotesHigh": 34506,
           "estimatedVotesLow": 28232,
           "estimatedVotesMid": 31369,
-          "turnoutHigh": 93.53,
-          "turnoutLow": 114.32,
+          "turnoutHigh": 94.71,
+          "turnoutLow": 115.76,
           "turnoutMid": 99
         },
         "firstName": "Abby",
@@ -6100,7 +6302,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:05:55.868Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6110,11 +6312,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 32274,
+    "totalVotes": 32682,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6154,6 +6357,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6161,15 +6365,15 @@
           "estimatedVotesHigh": 37178,
           "estimatedVotesLow": 30418,
           "estimatedVotesMid": 33798,
-          "turnoutHigh": 91.64,
-          "turnoutLow": 112,
+          "turnoutHigh": 91.92,
+          "turnoutLow": 112.35,
           "turnoutMid": 99
         },
         "firstName": "Kyle",
         "id": 65506,
         "lastName": "Thele",
         "partyName": "Democratic",
-        "votes": 12828
+        "votes": 12934
       },
       {
         "elected": false,
@@ -6177,8 +6381,8 @@
           "estimatedVotesHigh": 37178,
           "estimatedVotesLow": 30418,
           "estimatedVotesMid": 33798,
-          "turnoutHigh": 91.64,
-          "turnoutLow": 112,
+          "turnoutHigh": 91.92,
+          "turnoutLow": 112.35,
           "turnoutMid": 99
         },
         "firstName": "Christopher",
@@ -6194,7 +6398,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6204,11 +6408,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 34069,
+    "totalVotes": 34175,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6248,6 +6453,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6255,15 +6461,15 @@
           "estimatedVotesHigh": 33908,
           "estimatedVotesLow": 27743,
           "estimatedVotesMid": 30825,
-          "turnoutHigh": 91.54,
-          "turnoutLow": 111.88,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Phil",
         "id": 65452,
         "lastName": "Goss",
         "partyName": "Democratic",
-        "votes": 9461
+        "votes": 9557
       },
       {
         "elected": false,
@@ -6271,8 +6477,8 @@
           "estimatedVotesHigh": 33908,
           "estimatedVotesLow": 27743,
           "estimatedVotesMid": 30825,
-          "turnoutHigh": 91.54,
-          "turnoutLow": 111.88,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Dave",
@@ -6288,7 +6494,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:12:34.779Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6298,11 +6504,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 31040,
+    "totalVotes": 31136,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6342,6 +6549,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6381,6 +6589,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6388,8 +6597,8 @@
           "estimatedVotesHigh": 42398,
           "estimatedVotesLow": 34690,
           "estimatedVotesMid": 38544,
-          "turnoutHigh": 92.62,
-          "turnoutLow": 113.19,
+          "turnoutHigh": 92.73,
+          "turnoutLow": 113.34,
           "turnoutMid": 99
         },
         "firstName": "Stephanie",
@@ -6404,15 +6613,15 @@
           "estimatedVotesHigh": 42398,
           "estimatedVotesLow": 34690,
           "estimatedVotesMid": 38544,
-          "turnoutHigh": 92.62,
-          "turnoutLow": 113.19,
+          "turnoutHigh": 92.73,
+          "turnoutLow": 113.34,
           "turnoutMid": 99
         },
         "firstName": "Chris",
         "id": 18984,
         "lastName": "Jeter",
         "partyName": "Republican",
-        "votes": 22094
+        "votes": 22144
       }
     ],
     "district": "88",
@@ -6421,7 +6630,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:25.238Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6431,11 +6640,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 39267,
+    "totalVotes": 39317,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6476,7 +6686,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:09:48.485Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6491,6 +6701,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6498,15 +6709,15 @@
           "estimatedVotesHigh": 32342,
           "estimatedVotesLow": 26462,
           "estimatedVotesMid": 29402,
-          "turnoutHigh": 93.31,
-          "turnoutLow": 114.04,
+          "turnoutHigh": 94.82,
+          "turnoutLow": 115.89,
           "turnoutMid": 99
         },
         "firstName": "Dominique",
         "id": 49674,
         "lastName": "Davie",
         "partyName": "Democratic",
-        "votes": 12001
+        "votes": 12122
       },
       {
         "elected": false,
@@ -6514,15 +6725,15 @@
           "estimatedVotesHigh": 32342,
           "estimatedVotesLow": 26462,
           "estimatedVotesMid": 29402,
-          "turnoutHigh": 93.31,
-          "turnoutLow": 114.04,
+          "turnoutHigh": 94.82,
+          "turnoutLow": 115.89,
           "turnoutMid": 99
         },
         "firstName": "Andrew",
         "id": 65885,
         "lastName": "Ireland",
         "partyName": "Republican",
-        "votes": 18177
+        "votes": 18545
       }
     ],
     "district": "90",
@@ -6531,7 +6742,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:06:59.318Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6541,11 +6752,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 30178,
+    "totalVotes": 30667,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6586,7 +6798,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:12:25.010Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6601,6 +6813,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6608,15 +6821,15 @@
           "estimatedVotesHigh": 24796,
           "estimatedVotesLow": 20288,
           "estimatedVotesMid": 22542,
-          "turnoutHigh": 93.69,
-          "turnoutLow": 114.51,
+          "turnoutHigh": 94.64,
+          "turnoutLow": 115.66,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 8902,
         "lastName": "Couch",
         "partyName": "Republican",
-        "votes": 9042
+        "votes": 9133
       },
       {
         "elected": false,
@@ -6624,15 +6837,15 @@
           "estimatedVotesHigh": 24796,
           "estimatedVotesLow": 20288,
           "estimatedVotesMid": 22542,
-          "turnoutHigh": 93.69,
-          "turnoutLow": 114.51,
+          "turnoutHigh": 94.64,
+          "turnoutLow": 115.66,
           "turnoutMid": 99
         },
         "firstName": "Reneé",
         "id": 65509,
         "lastName": "Pack",
         "partyName": "Democratic",
-        "votes": 14190
+        "votes": 14333
       }
     ],
     "district": "92",
@@ -6641,7 +6854,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:12:34.772Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6651,11 +6864,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 23232,
+    "totalVotes": 23466,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6696,7 +6910,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:11:12.546Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6711,6 +6925,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6750,6 +6965,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6789,6 +7005,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6828,6 +7045,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6884,7 +7102,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:05:04.304Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6899,6 +7117,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6939,7 +7158,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:12:11.201Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6954,6 +7173,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6994,7 +7214,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:14:43.790Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7009,6 +7229,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7049,7 +7270,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:22.577Z",
+    "lastUpdated": "2024-10-25T20:43:08.804Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",

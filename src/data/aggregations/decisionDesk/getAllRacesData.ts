@@ -54,6 +54,24 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
           }
         : null,
       hasCalledCandidate: !!calledCandidate,
+      calledCandidates: currentData.candidates
+        .map(candidate => {
+          const hasBeenCalled = currentData.topline_results.called_candidates.includes(
+            candidate.cand_id,
+          )
+
+          if (hasBeenCalled) {
+            return {
+              id: candidate.cand_id,
+              firstName: candidate.first_name,
+              lastName: candidate.last_name,
+              partyName: candidate.party_name,
+            }
+          }
+
+          return false
+        })
+        .filter(Boolean),
       candidatesWithVotes: currentData.candidates.map(candidate => ({
         id: candidate.cand_id,
         firstName: candidate.first_name,

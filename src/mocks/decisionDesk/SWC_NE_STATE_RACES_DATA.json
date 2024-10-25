@@ -1,22 +1,36 @@
 [
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Deb",
+      "id": 8288,
+      "incumbent": true,
+      "lastName": "Fischer",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Deb",
+        "id": 8288,
+        "lastName": "Fischer",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 67.97,
+          "turnoutLow": 83.07,
+          "turnoutMid": 74.76
         },
         "firstName": "Deb",
         "id": 8288,
         "lastName": "Fischer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 650436
       },
       {
         "elected": false,
@@ -24,9 +38,9 @@
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 67.97,
+          "turnoutLow": 83.07,
+          "turnoutMid": 74.76
         },
         "firstName": "Dan",
         "id": 101441,
@@ -40,8 +54,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T20:46:35.154Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -51,11 +65,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 650436,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -63,15 +78,15 @@
           "estimatedVotesHigh": 320145,
           "estimatedVotesLow": 261938,
           "estimatedVotesMid": 291041,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.07,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 19037,
         "lastName": "Flood",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 162329
       },
       {
         "elected": false,
@@ -79,15 +94,15 @@
           "estimatedVotesHigh": 320145,
           "estimatedVotesLow": 261938,
           "estimatedVotesMid": 291041,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.87,
+          "turnoutLow": 111.07,
+          "turnoutMid": 99
         },
         "firstName": "Carol",
         "id": 19057,
         "lastName": "Blood",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 128594
       }
     ],
     "district": "1",
@@ -96,7 +111,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:54.355Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -106,11 +121,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 290923,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -118,15 +134,15 @@
           "estimatedVotesHigh": 313528,
           "estimatedVotesLow": 256523,
           "estimatedVotesMid": 285025,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Don",
         "id": 1427,
         "lastName": "Bacon",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 129100
       },
       {
         "elected": false,
@@ -134,15 +150,15 @@
           "estimatedVotesHigh": 313528,
           "estimatedVotesLow": 256523,
           "estimatedVotesMid": 285025,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tony",
         "id": 19043,
         "lastName": "Vargas",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 155925
       }
     ],
     "district": "2",
@@ -151,7 +167,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:54.355Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -161,27 +177,41 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 285025,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Adrian",
+      "id": 1428,
+      "incumbent": true,
+      "lastName": "Smith",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Adrian",
+        "id": 1428,
+        "lastName": "Smith",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 323309,
           "estimatedVotesLow": 264526,
           "estimatedVotesMid": 293912,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.03,
+          "turnoutLow": 111.25,
+          "turnoutMid": 99
         },
         "firstName": "Adrian",
         "id": 1428,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 228431
       },
       {
         "elected": false,
@@ -189,15 +219,15 @@
           "estimatedVotesHigh": 323309,
           "estimatedVotesLow": 264526,
           "estimatedVotesMid": 293912,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.03,
+          "turnoutLow": 111.25,
+          "turnoutMid": 99
         },
         "firstName": "Daniel",
         "id": 67652,
         "lastName": "Ebers",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 65862
       }
     ],
     "district": "3",
@@ -205,8 +235,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T20:46:54.355Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -216,11 +246,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 294293,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -260,6 +291,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -299,6 +331,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -306,15 +339,15 @@
           "estimatedVotesHigh": 19714,
           "estimatedVotesLow": 16130,
           "estimatedVotesMid": 17922,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.7,
+          "turnoutLow": 5.75,
+          "turnoutMid": 5.17
         },
         "firstName": "Dennis",
         "id": 67655,
         "lastName": "Schaardt",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 472
       },
       {
         "elected": false,
@@ -322,15 +355,15 @@
           "estimatedVotesHigh": 19714,
           "estimatedVotesLow": 16130,
           "estimatedVotesMid": 17922,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.7,
+          "turnoutLow": 5.75,
+          "turnoutMid": 5.17
         },
         "firstName": "Robert",
         "id": 67658,
         "lastName": "Hallstrom",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 455
       }
     ],
     "district": "1",
@@ -339,7 +372,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -349,11 +382,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 927,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -361,15 +395,15 @@
           "estimatedVotesHigh": 17179,
           "estimatedVotesLow": 14055,
           "estimatedVotesMid": 15617,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.76,
+          "turnoutLow": 5.81,
+          "turnoutMid": 5.23
         },
-        "firstName": "Victor",
-        "id": 67660,
-        "lastName": "Rountree",
+        "firstName": "Felix",
+        "id": 67659,
+        "lastName": "Ungerman",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 412
       },
       {
         "elected": false,
@@ -377,15 +411,15 @@
           "estimatedVotesHigh": 17179,
           "estimatedVotesLow": 14055,
           "estimatedVotesMid": 15617,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.76,
+          "turnoutLow": 5.81,
+          "turnoutMid": 5.23
         },
-        "firstName": "Felix",
-        "id": 67659,
-        "lastName": "Ungerman",
+        "firstName": "Victor",
+        "id": 67660,
+        "lastName": "Rountree",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 405
       }
     ],
     "district": "3",
@@ -394,7 +428,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -404,11 +438,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 817,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -416,15 +451,15 @@
           "estimatedVotesHigh": 13064,
           "estimatedVotesLow": 10688,
           "estimatedVotesMid": 11876,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.35,
+          "turnoutLow": 5.31,
+          "turnoutMid": 4.78
         },
         "firstName": "Gilbert",
         "id": 67663,
         "lastName": "Ayala",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 280
       },
       {
         "elected": false,
@@ -432,15 +467,15 @@
           "estimatedVotesHigh": 13064,
           "estimatedVotesLow": 10688,
           "estimatedVotesMid": 11876,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.35,
+          "turnoutLow": 5.31,
+          "turnoutMid": 4.78
         },
         "firstName": "Margo",
         "id": 67662,
         "lastName": "Juarez",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 288
       }
     ],
     "district": "5",
@@ -449,7 +484,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:43.515Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -459,11 +494,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 568,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -471,15 +507,15 @@
           "estimatedVotesHigh": 9169,
           "estimatedVotesLow": 7502,
           "estimatedVotesMid": 8335,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.42,
+          "turnoutLow": 7.85,
+          "turnoutMid": 7.07
         },
         "firstName": "Tim",
         "id": 67666,
         "lastName": "Pendrell",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 311
       },
       {
         "elected": false,
@@ -487,15 +523,15 @@
           "estimatedVotesHigh": 9169,
           "estimatedVotesLow": 7502,
           "estimatedVotesMid": 8335,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.42,
+          "turnoutLow": 7.85,
+          "turnoutMid": 7.07
         },
         "firstName": "Dunixi",
         "id": 67665,
         "lastName": "Guereca",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 278
       }
     ],
     "district": "7",
@@ -504,7 +540,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -514,11 +550,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 589,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -526,15 +563,15 @@
           "estimatedVotesHigh": 15521,
           "estimatedVotesLow": 12699,
           "estimatedVotesMid": 14110,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.33,
+          "turnoutLow": 6.51,
+          "turnoutMid": 5.86
         },
         "firstName": "Julia",
         "id": 67668,
         "lastName": "Palzer",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 408
       },
       {
         "elected": false,
@@ -542,15 +579,15 @@
           "estimatedVotesHigh": 15521,
           "estimatedVotesLow": 12699,
           "estimatedVotesMid": 14110,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.33,
+          "turnoutLow": 6.51,
+          "turnoutMid": 5.86
         },
         "firstName": "John",
         "id": 67669,
         "lastName": "Cavanaugh Jr.",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 419
       }
     ],
     "district": "9",
@@ -559,7 +596,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -569,11 +606,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 827,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -613,6 +651,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -620,15 +659,15 @@
           "estimatedVotesHigh": 16292,
           "estimatedVotesLow": 13330,
           "estimatedVotesMid": 14811,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.92,
+          "turnoutLow": 6.02,
+          "turnoutMid": 5.41
         },
         "firstName": "Nick",
         "id": 67674,
         "lastName": "Batter",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 406
       },
       {
         "elected": false,
@@ -636,15 +675,15 @@
           "estimatedVotesHigh": 16292,
           "estimatedVotesLow": 13330,
           "estimatedVotesMid": 14811,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.92,
+          "turnoutLow": 6.02,
+          "turnoutMid": 5.41
         },
         "firstName": "Ashlei",
         "id": 67675,
         "lastName": "Spivey",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 396
       }
     ],
     "district": "13",
@@ -653,7 +692,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -663,11 +702,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 802,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -675,15 +715,15 @@
           "estimatedVotesHigh": 20136,
           "estimatedVotesLow": 16474,
           "estimatedVotesMid": 18305,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.77,
+          "turnoutLow": 5.83,
+          "turnoutMid": 5.24
         },
         "firstName": "Roxie",
         "id": 67679,
         "lastName": "Kracl",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 486
       },
       {
         "elected": false,
@@ -691,15 +731,15 @@
           "estimatedVotesHigh": 20136,
           "estimatedVotesLow": 16474,
           "estimatedVotesMid": 18305,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.77,
+          "turnoutLow": 5.83,
+          "turnoutMid": 5.24
         },
         "firstName": "Dave",
         "id": 67677,
         "lastName": "Wordekemper",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 474
       }
     ],
     "district": "15",
@@ -708,7 +748,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -718,11 +758,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 960,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -730,15 +771,15 @@
           "estimatedVotesHigh": 13835,
           "estimatedVotesLow": 11320,
           "estimatedVotesMid": 12577,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.75,
+          "turnoutLow": 5.8,
+          "turnoutMid": 5.22
         },
-        "firstName": "Glen",
-        "id": 67682,
-        "lastName": "Meyer",
+        "firstName": "Mike",
+        "id": 67684,
+        "lastName": "Albrecht",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 304
       },
       {
         "elected": false,
@@ -746,15 +787,15 @@
           "estimatedVotesHigh": 13835,
           "estimatedVotesLow": 11320,
           "estimatedVotesMid": 12577,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.75,
+          "turnoutLow": 5.8,
+          "turnoutMid": 5.22
         },
-        "firstName": "Mike",
-        "id": 67684,
-        "lastName": "Albrecht",
+        "firstName": "Glen",
+        "id": 67682,
+        "lastName": "Meyer",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 353
       }
     ],
     "district": "17",
@@ -763,7 +804,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -773,11 +814,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 657,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -785,15 +827,15 @@
           "estimatedVotesHigh": 18155,
           "estimatedVotesLow": 14855,
           "estimatedVotesMid": 16505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.38,
+          "turnoutLow": 5.35,
+          "turnoutMid": 4.82
         },
         "firstName": "Rob",
         "id": 67685,
         "lastName": "Dover",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 404
       },
       {
         "elected": false,
@@ -801,15 +843,15 @@
           "estimatedVotesHigh": 18155,
           "estimatedVotesLow": 14855,
           "estimatedVotesMid": 16505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.38,
+          "turnoutLow": 5.35,
+          "turnoutMid": 4.82
         },
         "firstName": "Jeanne",
         "id": 67686,
         "lastName": "Reigle",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 391
       }
     ],
     "district": "19",
@@ -818,7 +860,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -828,11 +870,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 795,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -840,15 +883,15 @@
           "estimatedVotesHigh": 19812,
           "estimatedVotesLow": 16210,
           "estimatedVotesMid": 18011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.1,
+          "turnoutLow": 6.24,
+          "turnoutMid": 5.61
         },
         "firstName": "Beau",
         "id": 67689,
         "lastName": "Ballard",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 512
       },
       {
         "elected": false,
@@ -856,15 +899,15 @@
           "estimatedVotesHigh": 19812,
           "estimatedVotesLow": 16210,
           "estimatedVotesMid": 18011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.1,
+          "turnoutLow": 6.24,
+          "turnoutMid": 5.61
         },
         "firstName": "Seth",
         "id": 67688,
         "lastName": "Derner",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 499
       }
     ],
     "district": "21",
@@ -873,7 +916,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -883,11 +926,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 1011,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -895,15 +939,15 @@
           "estimatedVotesHigh": 21225,
           "estimatedVotesLow": 17366,
           "estimatedVotesMid": 19295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.54,
+          "turnoutLow": 5.55,
+          "turnoutMid": 5
         },
         "firstName": "Dennis",
         "id": 67691,
         "lastName": "Fujan",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 494
       },
       {
         "elected": false,
@@ -911,15 +955,15 @@
           "estimatedVotesHigh": 21225,
           "estimatedVotesLow": 17366,
           "estimatedVotesMid": 19295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.54,
+          "turnoutLow": 5.55,
+          "turnoutMid": 5
         },
         "firstName": "Jared",
         "id": 67694,
         "lastName": "Storm",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 470
       }
     ],
     "district": "23",
@@ -928,7 +972,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -938,11 +982,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 964,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -950,15 +995,15 @@
           "estimatedVotesHigh": 27224,
           "estimatedVotesLow": 22274,
           "estimatedVotesMid": 24749,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.21,
+          "turnoutLow": 5.14,
+          "turnoutMid": 4.63
         },
         "firstName": "Nicki",
         "id": 67698,
         "lastName": "Popp",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 580
       },
       {
         "elected": false,
@@ -966,15 +1011,15 @@
           "estimatedVotesHigh": 27224,
           "estimatedVotesLow": 22274,
           "estimatedVotesMid": 24749,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.21,
+          "turnoutLow": 5.14,
+          "turnoutMid": 4.63
         },
         "firstName": "Carolyn",
         "id": 67697,
         "lastName": "Bosn",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 565
       }
     ],
     "district": "25",
@@ -983,7 +1028,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -993,11 +1038,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 1145,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1005,15 +1051,15 @@
           "estimatedVotesHigh": 15875,
           "estimatedVotesLow": 12989,
           "estimatedVotesMid": 14432,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.5,
+          "turnoutLow": 5.5,
+          "turnoutMid": 4.95
         },
         "firstName": "Dawn",
         "id": 67701,
         "lastName": "Liphardt",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 354
       },
       {
         "elected": false,
@@ -1021,15 +1067,15 @@
           "estimatedVotesHigh": 15875,
           "estimatedVotesLow": 12989,
           "estimatedVotesMid": 14432,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.5,
+          "turnoutLow": 5.5,
+          "turnoutMid": 4.95
         },
         "firstName": "Jason",
         "id": 67700,
         "lastName": "Prokop",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 361
       }
     ],
     "district": "27",
@@ -1038,7 +1084,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1048,11 +1094,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 715,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1092,6 +1139,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1099,15 +1147,15 @@
           "estimatedVotesHigh": 23137,
           "estimatedVotesLow": 18931,
           "estimatedVotesMid": 21034,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.62,
+          "turnoutLow": 5.65,
+          "turnoutMid": 5.08
         },
         "firstName": "Kathleen",
         "id": 47628,
         "lastName": "Kauth",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 535
       },
       {
         "elected": false,
@@ -1115,15 +1163,15 @@
           "estimatedVotesHigh": 23137,
           "estimatedVotesLow": 18931,
           "estimatedVotesMid": 21034,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.62,
+          "turnoutLow": 5.65,
+          "turnoutMid": 5.08
         },
         "firstName": "Mary",
         "id": 67703,
         "lastName": "Folchert",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 534
       }
     ],
     "district": "31",
@@ -1132,7 +1180,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1142,11 +1190,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 1069,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1154,15 +1203,15 @@
           "estimatedVotesHigh": 20125,
           "estimatedVotesLow": 16465,
           "estimatedVotesMid": 18295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.86,
+          "turnoutLow": 5.94,
+          "turnoutMid": 5.35
         },
         "firstName": "Dan",
         "id": 67705,
         "lastName": "Lonowski",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 485
       },
       {
         "elected": false,
@@ -1170,15 +1219,15 @@
           "estimatedVotesHigh": 20125,
           "estimatedVotesLow": 16465,
           "estimatedVotesMid": 18295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.86,
+          "turnoutLow": 5.94,
+          "turnoutMid": 5.35
         },
         "firstName": "Michelle",
         "id": 67704,
         "lastName": "Smith",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 493
       }
     ],
     "district": "33",
@@ -1187,7 +1236,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1197,11 +1246,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 978,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1209,15 +1259,15 @@
           "estimatedVotesHigh": 11219,
           "estimatedVotesLow": 9179,
           "estimatedVotesMid": 10199,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.44,
+          "turnoutLow": 6.65,
+          "turnoutMid": 5.98
         },
         "firstName": "Ray",
         "id": 67709,
         "lastName": "Aguilar",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 305
       },
       {
         "elected": false,
@@ -1225,15 +1275,15 @@
           "estimatedVotesHigh": 11219,
           "estimatedVotesLow": 9179,
           "estimatedVotesMid": 10199,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.44,
+          "turnoutLow": 6.65,
+          "turnoutMid": 5.98
         },
         "firstName": "Dan",
         "id": 67708,
         "lastName": "Quick",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 305
       }
     ],
     "district": "35",
@@ -1242,7 +1292,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:35.154Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1252,11 +1302,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 610,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1264,15 +1315,15 @@
           "estimatedVotesHigh": 18585,
           "estimatedVotesLow": 15206,
           "estimatedVotesMid": 16895,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.83,
+          "turnoutLow": 5.9,
+          "turnoutMid": 5.31
         },
         "firstName": "Stanley",
         "id": 67710,
         "lastName": "Clouse",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 456
       },
       {
         "elected": false,
@@ -1280,15 +1331,15 @@
           "estimatedVotesHigh": 18585,
           "estimatedVotesLow": 15206,
           "estimatedVotesMid": 16895,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.83,
+          "turnoutLow": 5.9,
+          "turnoutMid": 5.31
         },
         "firstName": "Lana",
         "id": 67711,
         "lastName": "Peister",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 441
       }
     ],
     "district": "37",
@@ -1297,7 +1348,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1307,11 +1358,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 897,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1319,15 +1371,15 @@
           "estimatedVotesHigh": 26027,
           "estimatedVotesLow": 21295,
           "estimatedVotesMid": 23661,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 3.79,
+          "turnoutLow": 4.63,
+          "turnoutMid": 4.17
         },
         "firstName": "Allison",
         "id": 67714,
         "lastName": "Heimes",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 514
       },
       {
         "elected": false,
@@ -1335,15 +1387,15 @@
           "estimatedVotesHigh": 26027,
           "estimatedVotesLow": 21295,
           "estimatedVotesMid": 23661,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 3.79,
+          "turnoutLow": 4.63,
+          "turnoutMid": 4.17
         },
         "firstName": "Tony",
         "id": 67713,
         "lastName": "Sorrentino",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 472
       }
     ],
     "district": "39",
@@ -1352,7 +1404,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1362,11 +1414,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 986,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1374,15 +1427,15 @@
           "estimatedVotesHigh": 22260,
           "estimatedVotesLow": 18212,
           "estimatedVotesMid": 20236,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5,
+          "turnoutLow": 6.11,
+          "turnoutMid": 5.5
         },
         "firstName": "Daniel",
         "id": 67715,
         "lastName": "McKeon",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 538
       },
       {
         "elected": false,
@@ -1390,15 +1443,15 @@
           "estimatedVotesHigh": 22260,
           "estimatedVotesLow": 18212,
           "estimatedVotesMid": 20236,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5,
+          "turnoutLow": 6.11,
+          "turnoutMid": 5.5
         },
         "firstName": "Ethan",
         "id": 67717,
         "lastName": "Clark",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 574
       }
     ],
     "district": "41",
@@ -1407,7 +1460,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1417,11 +1470,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 1112,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1429,15 +1483,15 @@
           "estimatedVotesHigh": 21851,
           "estimatedVotesLow": 17880,
           "estimatedVotesMid": 19864,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.76,
+          "turnoutLow": 5.82,
+          "turnoutMid": 5.24
         },
         "firstName": "Tanya",
         "id": 67718,
         "lastName": "Storer",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 523
       },
       {
         "elected": false,
@@ -1445,15 +1499,15 @@
           "estimatedVotesHigh": 21851,
           "estimatedVotesLow": 17880,
           "estimatedVotesMid": 19864,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.76,
+          "turnoutLow": 5.82,
+          "turnoutMid": 5.24
         },
         "firstName": "Tony",
         "id": 67719,
         "lastName": "Tangwall",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 518
       }
     ],
     "district": "43",
@@ -1462,7 +1516,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1472,11 +1526,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 1041,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1484,15 +1539,15 @@
           "estimatedVotesHigh": 17079,
           "estimatedVotesLow": 13973,
           "estimatedVotesMid": 15526,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.7,
+          "turnoutLow": 5.75,
+          "turnoutMid": 5.17
         },
-        "firstName": "Sarah",
-        "id": 67721,
-        "lastName": "Centineo",
+        "firstName": "Rita",
+        "id": 67720,
+        "lastName": "Sanders",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 368
       },
       {
         "elected": false,
@@ -1500,15 +1555,15 @@
           "estimatedVotesHigh": 17079,
           "estimatedVotesLow": 13973,
           "estimatedVotesMid": 15526,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.7,
+          "turnoutLow": 5.75,
+          "turnoutMid": 5.17
         },
-        "firstName": "Rita",
-        "id": 67720,
-        "lastName": "Sanders",
+        "firstName": "Sarah",
+        "id": 67721,
+        "lastName": "Centineo",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 435
       }
     ],
     "district": "45",
@@ -1517,7 +1572,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1527,11 +1582,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 803,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1539,15 +1595,15 @@
           "estimatedVotesHigh": 19869,
           "estimatedVotesLow": 16256,
           "estimatedVotesMid": 18062,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.85,
+          "turnoutLow": 5.93,
+          "turnoutMid": 5.34
         },
         "firstName": "Larry",
         "id": 67723,
         "lastName": "Bolinger",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 474
       },
       {
         "elected": false,
@@ -1555,15 +1611,15 @@
           "estimatedVotesHigh": 19869,
           "estimatedVotesLow": 16256,
           "estimatedVotesMid": 18062,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.85,
+          "turnoutLow": 5.93,
+          "turnoutMid": 5.34
         },
         "firstName": "Paul",
         "id": 67722,
         "lastName": "Strommen",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 490
       }
     ],
     "district": "47",
@@ -1572,7 +1628,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1582,11 +1638,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 964,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1594,15 +1651,15 @@
           "estimatedVotesHigh": 22713,
           "estimatedVotesLow": 18583,
           "estimatedVotesMid": 20648,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.43,
+          "turnoutLow": 5.41,
+          "turnoutMid": 4.87
         },
         "firstName": "Jen",
         "id": 67726,
         "lastName": "Day",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 508
       },
       {
         "elected": false,
@@ -1610,15 +1667,15 @@
           "estimatedVotesHigh": 22713,
           "estimatedVotesLow": 18583,
           "estimatedVotesMid": 20648,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.43,
+          "turnoutLow": 5.41,
+          "turnoutMid": 4.87
         },
         "firstName": "Bob",
         "id": 67724,
         "lastName": "Andersen",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 498
       }
     ],
     "district": "49",
@@ -1627,7 +1684,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:46:51.637Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1637,11 +1694,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 1006,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1649,15 +1707,15 @@
           "estimatedVotesHigh": 158447,
           "estimatedVotesLow": 129639,
           "estimatedVotesMid": 144043,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.19,
+          "turnoutLow": 57.67,
+          "turnoutMid": 51.9
         },
         "firstName": "Liz",
         "id": 67727,
         "lastName": "Davids",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 48856
       },
       {
         "elected": false,
@@ -1665,15 +1723,15 @@
           "estimatedVotesHigh": 158447,
           "estimatedVotesLow": 129639,
           "estimatedVotesMid": 144043,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.19,
+          "turnoutLow": 57.67,
+          "turnoutMid": 51.9
         },
         "firstName": "Kristin",
         "id": 67728,
         "lastName": "Christensen",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 25909
       }
     ],
     "district": "1",
@@ -1682,7 +1740,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:44:37.279Z",
     "office": {
       "officeId": "151",
       "officeName": "State Board of Education",
@@ -1692,11 +1750,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 74765,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1704,15 +1763,15 @@
           "estimatedVotesHigh": 128557,
           "estimatedVotesLow": 105185,
           "estimatedVotesMid": 116871,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 71.98,
+          "turnoutLow": 87.98,
+          "turnoutMid": 79.18
         },
-        "firstName": "Maggie",
-        "id": 67729,
-        "lastName": "Douglas",
+        "firstName": "Linda",
+        "id": 67730,
+        "lastName": "Vermooten",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 37117
       },
       {
         "elected": false,
@@ -1720,15 +1779,15 @@
           "estimatedVotesHigh": 128557,
           "estimatedVotesLow": 105185,
           "estimatedVotesMid": 116871,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 71.98,
+          "turnoutLow": 87.98,
+          "turnoutMid": 79.18
         },
-        "firstName": "Linda",
-        "id": 67730,
-        "lastName": "Vermooten",
+        "firstName": "Maggie",
+        "id": 67729,
+        "lastName": "Douglas",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 55423
       }
     ],
     "district": "2",
@@ -1737,7 +1796,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:44:37.279Z",
     "office": {
       "officeId": "151",
       "officeName": "State Board of Education",
@@ -1747,11 +1806,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 92540,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1759,15 +1819,15 @@
           "estimatedVotesHigh": 348465,
           "estimatedVotesLow": 285107,
           "estimatedVotesMid": 316786,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 67.68,
+          "turnoutLow": 82.72,
+          "turnoutMid": 74.45
         },
         "firstName": "Bill",
         "id": 67733,
         "lastName": "McAllister",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 95174
       },
       {
         "elected": false,
@@ -1775,15 +1835,15 @@
           "estimatedVotesHigh": 348465,
           "estimatedVotesLow": 285107,
           "estimatedVotesMid": 316786,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 67.68,
+          "turnoutLow": 82.72,
+          "turnoutMid": 74.45
         },
         "firstName": "Lisa",
         "id": 67732,
         "lastName": "Schonhoff",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 140668
       }
     ],
     "district": "3",
@@ -1792,7 +1852,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:44:37.279Z",
     "office": {
       "officeId": "151",
       "officeName": "State Board of Education",
@@ -1802,11 +1862,12 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 235842,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1814,15 +1875,15 @@
           "estimatedVotesHigh": 271714,
           "estimatedVotesLow": 222312,
           "estimatedVotesMid": 247013,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 39.25,
+          "turnoutLow": 47.97,
+          "turnoutMid": 43.18
         },
         "firstName": "LeDonna",
         "id": 67736,
         "lastName": "Griffin",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 75039
       },
       {
         "elected": false,
@@ -1830,15 +1891,15 @@
           "estimatedVotesHigh": 271714,
           "estimatedVotesLow": 222312,
           "estimatedVotesMid": 247013,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 39.25,
+          "turnoutLow": 47.97,
+          "turnoutMid": 43.18
         },
         "firstName": "Liz",
         "id": 67735,
         "lastName": "Renner",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 31611
       }
     ],
     "district": "4",
@@ -1847,7 +1908,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:44:37.279Z",
     "office": {
       "officeId": "151",
       "officeName": "State Board of Education",
@@ -1857,7 +1918,7 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 0,
+    "totalVotes": 106650,
     "year": 2024
   }
 ]

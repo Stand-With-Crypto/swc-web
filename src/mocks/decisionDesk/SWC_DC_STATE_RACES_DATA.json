@@ -7,6 +7,14 @@
       "lastName": "Harris",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -14,15 +22,15 @@
           "estimatedVotesHigh": 304553,
           "estimatedVotesLow": 249178,
           "estimatedVotesMid": 276865,
-          "turnoutHigh": 80.3,
-          "turnoutLow": 98.15,
-          "turnoutMid": 88.33
+          "turnoutHigh": 89.59,
+          "turnoutLow": 109.5,
+          "turnoutMid": 98.55
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 204554
+        "votes": 228648
       },
       {
         "elected": false,
@@ -30,9 +38,9 @@
           "estimatedVotesHigh": 304553,
           "estimatedVotesLow": 249178,
           "estimatedVotesMid": 276865,
-          "turnoutHigh": 80.3,
-          "turnoutLow": 98.15,
-          "turnoutMid": 88.33
+          "turnoutHigh": 89.59,
+          "turnoutLow": 109.5,
+          "turnoutMid": 98.55
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -46,15 +54,15 @@
           "estimatedVotesHigh": 304553,
           "estimatedVotesLow": 249178,
           "estimatedVotesMid": 276865,
-          "turnoutHigh": 80.3,
-          "turnoutLow": 98.15,
-          "turnoutMid": 88.33
+          "turnoutHigh": 89.59,
+          "turnoutLow": 109.5,
+          "turnoutMid": 98.55
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 40007
+        "votes": 44198
       }
     ],
     "district": "",
@@ -63,7 +71,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:42:26.339Z",
+    "lastUpdated": "2024-10-25T20:31:02.520Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -73,7 +81,7 @@
     "raceDate": "2024-11-05",
     "state": "DC",
     "stateName": "District of Columbia",
-    "totalVotes": 244561,
+    "totalVotes": 272846,
     "year": 2024
   }
 ]
