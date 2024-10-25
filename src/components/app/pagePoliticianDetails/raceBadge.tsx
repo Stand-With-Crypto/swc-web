@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { Badge } from '@/components/ui/badge'
-import { DTSI_PersonRoleCategory, DTSI_PersonRoleStatus } from '@/data/dtsi/generated'
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
