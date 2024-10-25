@@ -11,7 +11,7 @@ export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.MINUTE
 
 export async function GET() {
-  let statesFinished = [] as USStateCode[]
+  const statesFinished = [] as USStateCode[]
   const stateKeys = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
   const allCompletedRaces: {
     statesFinished: USStateCode[] | []
