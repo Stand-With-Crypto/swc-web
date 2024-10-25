@@ -44,22 +44,35 @@ export const getKeyRacesPageData = async () => {
     throw error
   }
 
+  const congressRaceLiveResult: GetAllCongressDataResponse = await getCongressLiveResultData()
+
+  return {
+    dtsiResults: races,
+    ddhqResults: racesDataMap,
+    presidentialRaceLiveResult,
+    congressRaceLiveResult,
+  }
+}
+
+export async function getCongressLiveResultData(): Promise<GetAllCongressDataResponse> {
   let congressRaceLiveResult: GetAllCongressDataResponse = {
     senateDataWithDtsi: null,
     houseDataWithDtsi: null,
   }
   try {
-    const [senateRaceLiveResult, houseRaceLiveResult] = await Promise.all([
+    const [senateRaceLiveResult, houseRaceLiveResult] = await Promise.allSettled([
       getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_SENATE_DATA'),
       getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_HOUSE_DATA'),
     ])
 
     congressRaceLiveResult = {
-      senateDataWithDtsi: senateRaceLiveResult,
-      houseDataWithDtsi: houseRaceLiveResult,
+      senateDataWithDtsi:
+        senateRaceLiveResult.status === 'fulfilled' ? senateRaceLiveResult.value : null,
+      houseDataWithDtsi:
+        houseRaceLiveResult.status === 'fulfilled' ? houseRaceLiveResult.value : null,
     }
 
-    if (!senateRaceLiveResult || !houseRaceLiveResult) {
+    if (!congressRaceLiveResult.senateDataWithDtsi || !congressRaceLiveResult.houseDataWithDtsi) {
       throw new Error('Failed to get live congress data')
     }
   } catch (error) {
@@ -70,10 +83,5 @@ export const getKeyRacesPageData = async () => {
     throw error
   }
 
-  return {
-    dtsiResults: races,
-    ddhqResults: racesDataMap,
-    presidentialRaceLiveResult,
-    congressRaceLiveResult,
-  }
+  return congressRaceLiveResult
 }

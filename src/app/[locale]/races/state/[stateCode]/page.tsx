@@ -1,13 +1,12 @@
-import * as Sentry from '@sentry/nextjs'
 import { Metadata } from 'next'
 
 import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/locationStateSpecific'
 import {
-  CongressDataResponse,
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
+import { getCongressLiveResultData } from '@/data/pageSpecific/getKeyRacesPageData'
 import { PageProps } from '@/types'
 import {
   DecisionDeskRedisKeys,
@@ -67,32 +66,7 @@ export default async function LocationStateSpecificPage({
 
   const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
   const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
-
-  let congressRaceLiveResult: GetAllCongressDataResponse = {
-    senateDataWithDtsi: null,
-    houseDataWithDtsi: null,
-  }
-  try {
-    const [senateRaceLiveResult, houseRaceLiveResult] = await Promise.all([
-      getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_SENATE_DATA'),
-      getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_HOUSE_DATA'),
-    ])
-
-    congressRaceLiveResult = {
-      senateDataWithDtsi: senateRaceLiveResult,
-      houseDataWithDtsi: houseRaceLiveResult,
-    }
-
-    if (!senateRaceLiveResult || !houseRaceLiveResult) {
-      throw new Error('Failed to get live congress data')
-    }
-  } catch (error) {
-    Sentry.captureException(error, {
-      extra: { keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'] },
-      tags: { domain: 'liveResult' },
-    })
-    throw error
-  }
+  const congressRaceLiveResult: GetAllCongressDataResponse = await getCongressLiveResultData()
 
   if (!dtsiResults) {
     throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)

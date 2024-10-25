@@ -13,14 +13,14 @@ export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.MINUTE
 
 export async function GET() {
-  const [allSenateData, allHouseData] = await Promise.all([
+  const [allSenateData, allHouseData] = await Promise.allSettled([
     getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_SENATE_DATA'),
     getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_HOUSE_DATA'),
   ])
 
   const congressRaceLiveResult: GetAllCongressDataResponse = {
-    senateDataWithDtsi: allSenateData,
-    houseDataWithDtsi: allHouseData,
+    senateDataWithDtsi: allSenateData.status === 'fulfilled' ? allSenateData.value : null,
+    houseDataWithDtsi: allHouseData.status === 'fulfilled' ? allHouseData.value : null,
   }
 
   return NextResponse.json(congressRaceLiveResult)
