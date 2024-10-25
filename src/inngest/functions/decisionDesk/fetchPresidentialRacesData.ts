@@ -1,3 +1,6 @@
+import fs from 'fs'
+import path from 'path'
+
 import { getAllCongressData } from '@/data/aggregations/decisionDesk/getAllCongressData'
 import { getAllRacesData } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { getDtsiPresidentialWithVotingData } from '@/data/aggregations/decisionDesk/getDtsiPresidentialWithVotingData'
@@ -5,7 +8,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { setDecisionDataOnRedis } from '@/utils/server/decisionDesk/cachedData'
 import { GetRacesParams } from '@/utils/server/decisionDesk/schemas'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 const FETCH_PRESIDENTIAL_RACES_INNGEST_EVENT_NAME = 'script/fetch-presidential-races-data'
 const FETCH_PRESIDENTIAL_RACES_INNGEST_FUNCTION_ID = 'script.fetch-presidential-races-data'
@@ -35,6 +38,15 @@ export const fetchPresidentialRacesDataCron = inngest.createFunction(
     })
   },
 )
+
+const persistFile = false
+const rootDir = path.join(__dirname, 'raceWinners')
+
+if (persistFile) {
+  if (!fs.existsSync(rootDir)) {
+    fs.mkdirSync(rootDir, { recursive: true })
+  }
+}
 
 export const fetchPresidentialRacesData = inngest.createFunction(
   {
@@ -125,7 +137,85 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       async () => getAllCongressData({ senateData, houseData }),
     )
 
-    const stateKeys = Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)
+    if (!persist) {
+      return {
+        message: 'Dry run. Races data not persisted on Redis.',
+        allRacesData,
+        allCongressData,
+        presidentialRacesData,
+      }
+    }
+
+    const persistedAllRacesData = await step.run('persist-all-races-data-on-redis', async () => {
+      logger.info('Persisting all races data')
+
+      if (persistFile) {
+        fs.writeFileSync(
+          path.join(rootDir, 'SWC_ALL_RACES_DATA.json'),
+          JSON.stringify(allRacesData, null, 2),
+        )
+      }
+
+      return await setDecisionDataOnRedis('SWC_ALL_RACES_DATA', JSON.stringify(allRacesData), {
+        ex: undefined,
+      })
+    })
+
+    const persistedAllSenateData = await step.run('persist-all-senate-data-on-redis', async () => {
+      logger.info('Persisting all senate data')
+
+      if (persistFile) {
+        fs.writeFileSync(
+          path.join(rootDir, 'SWC_ALL_SENATE_DATA.json'),
+          JSON.stringify(allCongressData.senateDataWithDtsi, null, 2),
+        )
+      }
+
+      return await setDecisionDataOnRedis(
+        'SWC_ALL_SENATE_DATA',
+        JSON.stringify(allCongressData.senateDataWithDtsi),
+        { ex: undefined },
+      )
+    })
+
+    const persistedAllHouseData = await step.run('persist-all-house-data-on-redis', async () => {
+      logger.info('Persisting all house data')
+
+      if (persistFile) {
+        fs.writeFileSync(
+          path.join(rootDir, 'SWC_ALL_HOUSE_DATA.json'),
+          JSON.stringify(allCongressData.houseDataWithDtsi, null, 2),
+        )
+      }
+
+      return await setDecisionDataOnRedis(
+        'SWC_ALL_HOUSE_DATA',
+        JSON.stringify(allCongressData.houseDataWithDtsi),
+        { ex: undefined },
+      )
+    })
+
+    const persistedPresidentialRacesData = await step.run(
+      'persist-presidential-races-data-on-redis',
+      async () => {
+        logger.info('Persisting presidential races data')
+
+        if (persistFile) {
+          fs.writeFileSync(
+            path.join(rootDir, 'SWC_PRESIDENTIAL_RACES_DATA.json'),
+            JSON.stringify(presidentialRacesData, null, 2),
+          )
+        }
+
+        return await setDecisionDataOnRedis(
+          'SWC_PRESIDENTIAL_RACES_DATA',
+          JSON.stringify(presidentialRacesData),
+          { ex: undefined },
+        )
+      },
+    )
+
+    const stateKeys = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
     const persistedStates = []
 
     let startDate: Date
@@ -149,7 +239,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       )
 
       const isLAState = stateKey === 'LA'
-      const currentStateKey = stateKey as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+      const currentStateKey = stateKey as USStateCode
 
       // Louisiana is somewhat different in that their elections on November 5th are technically primaries even
       // though they are treated like the General Election. Recommendation here would be to adjust the query to use Election Type of 1
@@ -199,6 +289,17 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
         logger.info(`Persisting SWC_${currentStateKey}_STATE_RACES_DATA on Redis.`)
 
+        if (persistFile) {
+          fs.writeFileSync(
+            path.join(rootDir, `SWC_${currentStateKey}_STATE_RACES_DATA.json`),
+            JSON.stringify(
+              stateRacesDataOnly.length > 0 ? stateRacesDataOnly : stateRacesData,
+              null,
+              2,
+            ),
+          )
+        }
+
         const persistedState = await setDecisionDataOnRedis(
           `SWC_${currentStateKey}_STATE_RACES_DATA`,
           JSON.stringify(stateRacesDataOnly.length > 0 ? stateRacesDataOnly : stateRacesData),
@@ -215,53 +316,11 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       }
     }
 
-    if (!persist) {
-      return {
-        message: 'Dry run. Races data not persisted on Redis.',
-        presidentialRacesData,
-        allRacesData,
-        allCongressData,
-      }
-    }
-
-    const persistedAllRacesData = await step.run('persist-all-races-data-on-redis', async () => {
-      logger.info('Persisting all races data')
-
-      return await setDecisionDataOnRedis('SWC_ALL_RACES_DATA', JSON.stringify(allRacesData), {
-        ex: undefined,
-      })
-    })
-
-    const persistedAllCongressData = await step.run(
-      'persist-all-congress-data-on-redis',
-      async () => {
-        logger.info('Persisting congress data')
-
-        return await setDecisionDataOnRedis(
-          'SWC_ALL_CONGRESS_DATA',
-          JSON.stringify(allCongressData),
-          { ex: undefined },
-        )
-      },
-    )
-
-    const persistedPresidentialRacesData = await step.run(
-      'persist-presidential-races-data-on-redis',
-      async () => {
-        logger.info('Persisting presidential races data')
-
-        return await setDecisionDataOnRedis(
-          'SWC_PRESIDENTIAL_RACES_DATA',
-          JSON.stringify(presidentialRacesData),
-          { ex: undefined },
-        )
-      },
-    )
-
     return {
       message: 'Presidential data persisted on Redis.',
       persistedPresidentialRacesData,
-      persistedAllCongressData,
+      persistedAllSenateData,
+      persistedAllHouseData,
       persistedAllRacesData,
       persistedStates,
     }

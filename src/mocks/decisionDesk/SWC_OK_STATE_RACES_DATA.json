@@ -1,65 +1,79 @@
 [
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 9929,
+      "first_name": "Kevin",
+      "incumbent": true,
+      "last_name": "Hern",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
     "candidatesWithVotes": [
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 343399,
-          "estimatedVotesLow": 280801,
-          "estimatedVotesMid": 312001,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kevin",
-        "id": 9929,
-        "lastName": "Hern",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 343399,
-          "estimatedVotesLow": 280801,
-          "estimatedVotesMid": 312001,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 317396,
+          "estimatedVotesLow": 259687,
+          "estimatedVotesMid": 288541,
+          "turnoutHigh": 89.91,
+          "turnoutLow": 109.89,
+          "turnoutMid": 98.9
         },
         "firstName": "Mark",
         "id": 85117,
         "lastName": "Sanders",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 5626
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 343399,
-          "estimatedVotesLow": 280801,
-          "estimatedVotesMid": 312001,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 317396,
+          "estimatedVotesLow": 259687,
+          "estimatedVotesMid": 288541,
+          "turnoutHigh": 89.91,
+          "turnoutLow": 109.89,
+          "turnoutMid": 98.9
         },
         "firstName": "Dennis",
         "id": 25402,
         "lastName": "Baker",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 96832
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 317396,
+          "estimatedVotesLow": 259687,
+          "estimatedVotesMid": 288541,
+          "turnoutHigh": 89.91,
+          "turnoutLow": 109.89,
+          "turnoutMid": 98.9
+        },
+        "firstName": "Kevin",
+        "id": 9929,
+        "lastName": "Hern",
+        "partyName": "Republican",
+        "votes": 182906
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:08.423Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:53:15.428Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 285364,
     "year": 2024
   },
   {
@@ -68,61 +82,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 339231,
-          "estimatedVotesLow": 277546,
-          "estimatedVotesMid": 308385,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Josh",
-        "id": 25413,
-        "lastName": "Brecheen",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 339231,
-          "estimatedVotesLow": 277546,
-          "estimatedVotesMid": 308385,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 318509,
+          "estimatedVotesLow": 260604,
+          "estimatedVotesMid": 289555,
+          "turnoutHigh": 88.97,
+          "turnoutLow": 108.74,
+          "turnoutMid": 97.87
         },
         "firstName": "Brandon",
         "id": 25406,
         "lastName": "Wade",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 69342
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 339231,
-          "estimatedVotesLow": 277546,
-          "estimatedVotesMid": 308385,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 318509,
+          "estimatedVotesLow": 260604,
+          "estimatedVotesMid": 289555,
+          "turnoutHigh": 88.97,
+          "turnoutLow": 108.74,
+          "turnoutMid": 97.87
+        },
+        "firstName": "Josh",
+        "id": 25413,
+        "lastName": "Brecheen",
+        "partyName": "Republican",
+        "votes": 209157
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 318509,
+          "estimatedVotesLow": 260604,
+          "estimatedVotesMid": 289555,
+          "turnoutHigh": 88.97,
+          "turnoutLow": 108.74,
+          "turnoutMid": 97.87
         },
         "firstName": "Ronnie",
         "id": 85118,
         "lastName": "Hopkins",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 4893
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:15.678Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 283392,
     "year": 2024
   },
   {
@@ -153,9 +174,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-11T19:45:06.010Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T16:08:02.583Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -169,61 +197,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 326088,
-          "estimatedVotesLow": 266875,
-          "estimatedVotesMid": 296527,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 303789,
+          "estimatedVotesLow": 248556,
+          "estimatedVotesMid": 276171,
+          "turnoutHigh": 89.43,
+          "turnoutLow": 109.31,
+          "turnoutMid": 98.38
         },
         "firstName": "James",
         "id": 85119,
         "lastName": "Stacy",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 4980
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 326088,
-          "estimatedVotesLow": 266875,
-          "estimatedVotesMid": 296527,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mary",
-        "id": 10030,
-        "lastName": "Brannon",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 326088,
-          "estimatedVotesLow": 266875,
-          "estimatedVotesMid": 296527,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 303789,
+          "estimatedVotesLow": 248556,
+          "estimatedVotesMid": 276171,
+          "turnoutHigh": 89.43,
+          "turnoutLow": 109.31,
+          "turnoutMid": 98.38
         },
         "firstName": "Tom",
         "id": 13842,
         "lastName": "Cole",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 187247
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 303789,
+          "estimatedVotesLow": 248556,
+          "estimatedVotesMid": 276171,
+          "turnoutHigh": 89.43,
+          "turnoutLow": 109.31,
+          "turnoutMid": 98.38
+        },
+        "firstName": "Mary",
+        "id": 10030,
+        "lastName": "Brannon",
+        "partyName": "Democratic",
+        "votes": 79461
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:20.411Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:15.678Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 271688,
     "year": 2024
   },
   {
@@ -232,45 +267,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 344737,
-          "estimatedVotesLow": 282081,
-          "estimatedVotesMid": 313424,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 340098,
+          "estimatedVotesLow": 278260,
+          "estimatedVotesMid": 309179,
+          "turnoutHigh": 88.56,
+          "turnoutLow": 108.24,
+          "turnoutMid": 97.41
         },
         "firstName": "Madison",
         "id": 25405,
         "lastName": "Horn",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 147154
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 344737,
-          "estimatedVotesLow": 282081,
-          "estimatedVotesMid": 313424,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 340098,
+          "estimatedVotesLow": 278260,
+          "estimatedVotesMid": 309179,
+          "turnoutHigh": 88.56,
+          "turnoutLow": 108.24,
+          "turnoutMid": 97.41
         },
         "firstName": "Stephanie",
         "id": 13850,
         "lastName": "Bice",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 154032
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:08.423Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:15.622Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 301186,
     "year": 2024
   },
   {
@@ -301,9 +343,16 @@
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-11T19:45:06.010Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T16:08:02.583Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -317,45 +366,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 37440,
-          "estimatedVotesLow": 30625,
-          "estimatedVotesMid": 34027,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Julie",
-        "id": 76000,
-        "lastName": "McIntosh",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 37440,
-          "estimatedVotesLow": 30625,
-          "estimatedVotesMid": 34027,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 36904,
+          "estimatedVotesLow": 30195,
+          "estimatedVotesMid": 33549,
+          "turnoutHigh": 68.56,
+          "turnoutLow": 83.79,
+          "turnoutMid": 75.42
         },
         "firstName": "Margaret",
         "id": 102052,
         "lastName": "Cook",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 639
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 36904,
+          "estimatedVotesLow": 30195,
+          "estimatedVotesMid": 33549,
+          "turnoutHigh": 68.56,
+          "turnoutLow": 83.79,
+          "turnoutMid": 75.42
+        },
+        "firstName": "Julie",
+        "id": 76000,
+        "lastName": "McIntosh",
+        "partyName": "Republican",
+        "votes": 24662
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 25301,
     "year": 2024
   },
   {
@@ -379,9 +435,16 @@
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -395,45 +458,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 34019,
-          "estimatedVotesLow": 27840,
-          "estimatedVotesMid": 30933,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 33592,
+          "estimatedVotesLow": 27483,
+          "estimatedVotesMid": 30537,
+          "turnoutHigh": 88.61,
+          "turnoutLow": 108.31,
+          "turnoutMid": 97.48
         },
         "firstName": "Warren",
         "id": 76002,
         "lastName": "Hamilton",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 28963
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 34019,
-          "estimatedVotesLow": 27840,
-          "estimatedVotesMid": 30933,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 33592,
+          "estimatedVotesLow": 27483,
+          "estimatedVotesMid": 30537,
+          "turnoutHigh": 88.61,
+          "turnoutLow": 108.31,
+          "turnoutMid": 97.48
         },
         "firstName": "Jerry",
         "id": 76003,
         "lastName": "Donathan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 804
       }
     ],
     "district": "7",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 29767,
     "year": 2024
   },
   {
@@ -457,9 +527,16 @@
       }
     ],
     "district": "9",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -488,9 +565,16 @@
       }
     ],
     "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -519,9 +603,16 @@
       }
     ],
     "district": "13",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -535,45 +626,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 43676,
-          "estimatedVotesLow": 35727,
-          "estimatedVotesMid": 39697,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 39785,
+          "estimatedVotesLow": 32551,
+          "estimatedVotesMid": 36168,
+          "turnoutHigh": 89.06,
+          "turnoutLow": 108.85,
+          "turnoutMid": 97.97
         },
         "firstName": "Elizabeth",
         "id": 76015,
         "lastName": "Foreman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3187
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 43676,
-          "estimatedVotesLow": 35727,
-          "estimatedVotesMid": 39697,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 39785,
+          "estimatedVotesLow": 32551,
+          "estimatedVotesMid": 36168,
+          "turnoutHigh": 89.06,
+          "turnoutLow": 108.85,
+          "turnoutMid": 97.97
         },
         "firstName": "Lisa",
         "id": 76009,
         "lastName": "Standridge",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 32246
       }
     ],
     "district": "15",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 35433,
     "year": 2024
   },
   {
@@ -597,9 +695,16 @@
       }
     ],
     "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -628,9 +733,16 @@
       }
     ],
     "district": "19",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -644,45 +756,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 30232,
-          "estimatedVotesLow": 24714,
-          "estimatedVotesMid": 27460,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 27914,
+          "estimatedVotesLow": 22838,
+          "estimatedVotesMid": 25376,
+          "turnoutHigh": 89.51,
+          "turnoutLow": 109.41,
+          "turnoutMid": 98.46
         },
         "firstName": "Robin",
         "id": 76023,
         "lastName": "Fuxa",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1167
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 30232,
-          "estimatedVotesLow": 24714,
-          "estimatedVotesMid": 27460,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 27914,
+          "estimatedVotesLow": 22838,
+          "estimatedVotesMid": 25376,
+          "turnoutHigh": 89.51,
+          "turnoutLow": 109.41,
+          "turnoutMid": 98.46
         },
         "firstName": "Randy",
         "id": 25632,
         "lastName": "Grellner",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 23819
       }
     ],
     "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 24986,
     "year": 2024
   },
   {
@@ -706,9 +825,16 @@
       }
     ],
     "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -722,45 +848,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 41400,
-          "estimatedVotesLow": 33887,
-          "estimatedVotesMid": 37653,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Karen",
-        "id": 76027,
-        "lastName": "Gaddis",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 41400,
-          "estimatedVotesLow": 33887,
-          "estimatedVotesMid": 37653,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 38788,
+          "estimatedVotesLow": 31736,
+          "estimatedVotesMid": 35262,
+          "turnoutHigh": 87.48,
+          "turnoutLow": 106.92,
+          "turnoutMid": 96.23
         },
         "firstName": "Brian",
         "id": 76026,
         "lastName": "Guthrie",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 32577
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 38788,
+          "estimatedVotesLow": 31736,
+          "estimatedVotesMid": 35262,
+          "turnoutHigh": 87.48,
+          "turnoutLow": 106.92,
+          "turnoutMid": 96.23
+        },
+        "firstName": "Karen",
+        "id": 76027,
+        "lastName": "Gaddis",
+        "partyName": "Democratic",
+        "votes": 1356
       }
     ],
     "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 33933,
     "year": 2024
   },
   {
@@ -784,9 +917,16 @@
       }
     ],
     "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -815,9 +955,16 @@
       }
     ],
     "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -846,9 +993,16 @@
       }
     ],
     "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -862,45 +1016,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 35452,
-          "estimatedVotesLow": 29014,
-          "estimatedVotesMid": 32238,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 35419,
+          "estimatedVotesLow": 28979,
+          "estimatedVotesMid": 32199,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.86,
+          "turnoutMid": 99
         },
         "firstName": "Christi",
         "id": 76035,
         "lastName": "Gillespie",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 30201
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 35452,
-          "estimatedVotesLow": 29014,
-          "estimatedVotesMid": 32238,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 35419,
+          "estimatedVotesLow": 28979,
+          "estimatedVotesMid": 32199,
+          "turnoutHigh": 90.71,
+          "turnoutLow": 110.86,
+          "turnoutMid": 99
         },
         "firstName": "Bob",
         "id": 76039,
         "lastName": "Willis",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1926
       }
     ],
     "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 32127,
     "year": 2024
   },
   {
@@ -909,45 +1070,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 40387,
-          "estimatedVotesLow": 33051,
-          "estimatedVotesMid": 36723,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jo",
-        "id": 76041,
-        "lastName": "Dossett",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40387,
-          "estimatedVotesLow": 33051,
-          "estimatedVotesMid": 36723,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 40346,
+          "estimatedVotesLow": 33010,
+          "estimatedVotesMid": 36678,
+          "turnoutHigh": 86.92,
+          "turnoutLow": 106.23,
+          "turnoutMid": 95.61
         },
         "firstName": "Dean",
         "id": 76040,
         "lastName": "Martin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 29458
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 40346,
+          "estimatedVotesLow": 33010,
+          "estimatedVotesMid": 36678,
+          "turnoutHigh": 86.92,
+          "turnoutLow": 106.23,
+          "turnoutMid": 95.61
+        },
+        "firstName": "Jo",
+        "id": 76041,
+        "lastName": "Dossett",
+        "partyName": "Democratic",
+        "votes": 5609
       }
     ],
     "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:01.593Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 35067,
     "year": 2024
   },
   {
@@ -956,92 +1124,113 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 28945,
-          "estimatedVotesLow": 23657,
-          "estimatedVotesMid": 26285,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 28964,
+          "estimatedVotesLow": 23698,
+          "estimatedVotesMid": 26331,
+          "turnoutHigh": 68.7,
+          "turnoutLow": 83.96,
+          "turnoutMid": 75.56
         },
         "firstName": "Aaron",
         "id": 76043,
         "lastName": "Reinhardt",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 19302
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 28945,
-          "estimatedVotesLow": 23657,
-          "estimatedVotesMid": 26285,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 28964,
+          "estimatedVotesLow": 23698,
+          "estimatedVotesMid": 26331,
+          "turnoutHigh": 68.7,
+          "turnoutLow": 83.96,
+          "turnoutMid": 75.56
         },
         "firstName": "Andrew",
         "id": 102053,
         "lastName": "Nutter",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 595
       }
     ],
     "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 19897,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 76044,
+      "first_name": "Dave",
+      "incumbent": true,
+      "last_name": "Rader",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
-          "estimatedVotesHigh": 38124,
-          "estimatedVotesLow": 31189,
-          "estimatedVotesMid": 34655,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 38089,
+          "estimatedVotesLow": 31163,
+          "estimatedVotesMid": 34626,
+          "turnoutHigh": 83.57,
+          "turnoutLow": 102.14,
+          "turnoutMid": 91.93
         },
         "firstName": "Dave",
         "id": 76044,
         "lastName": "Rader",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 27692
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 38124,
-          "estimatedVotesLow": 31189,
-          "estimatedVotesMid": 34655,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 38089,
+          "estimatedVotesLow": 31163,
+          "estimatedVotesMid": 34626,
+          "turnoutHigh": 83.57,
+          "turnoutLow": 102.14,
+          "turnoutMid": 91.93
         },
         "firstName": "Melissa",
         "id": 76045,
         "lastName": "Bryce",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4138
       }
     ],
     "district": "39",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 31830,
     "year": 2024
   },
   {
@@ -1065,9 +1254,16 @@
       }
     ],
     "district": "41",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1081,45 +1277,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 38705,
-          "estimatedVotesLow": 31635,
-          "estimatedVotesMid": 35150,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Sam",
-        "id": 76049,
-        "lastName": "Graefe",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 38705,
-          "estimatedVotesLow": 31635,
-          "estimatedVotesMid": 35150,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 36115,
+          "estimatedVotesLow": 29548,
+          "estimatedVotesMid": 32831,
+          "turnoutHigh": 84.45,
+          "turnoutLow": 103.22,
+          "turnoutMid": 92.9
         },
         "firstName": "Kendal",
         "id": 76048,
         "lastName": "Sacchieri",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 29689
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 36115,
+          "estimatedVotesLow": 29548,
+          "estimatedVotesMid": 32831,
+          "turnoutHigh": 84.45,
+          "turnoutLow": 103.22,
+          "turnoutMid": 92.9
+        },
+        "firstName": "Sam",
+        "id": 76049,
+        "lastName": "Graefe",
+        "partyName": "Democratic",
+        "votes": 811
       }
     ],
     "district": "43",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:03.109Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:55:59.326Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 30500,
     "year": 2024
   },
   {
@@ -1150,9 +1353,16 @@
       }
     ],
     "district": "45",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-11T19:45:06.010Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T16:08:02.583Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1166,45 +1376,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 38957,
-          "estimatedVotesLow": 31876,
-          "estimatedVotesMid": 35418,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 39001,
+          "estimatedVotesLow": 31910,
+          "estimatedVotesMid": 35455,
+          "turnoutHigh": 73.7,
+          "turnoutLow": 90.08,
+          "turnoutMid": 81.07
         },
         "firstName": "Kelly",
         "id": 76054,
         "lastName": "Hines",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4305
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 38957,
-          "estimatedVotesLow": 31876,
-          "estimatedVotesMid": 35418,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 39001,
+          "estimatedVotesLow": 31910,
+          "estimatedVotesMid": 35455,
+          "turnoutHigh": 73.7,
+          "turnoutLow": 90.08,
+          "turnoutMid": 81.07
         },
         "firstName": "Erin",
         "id": 76057,
         "lastName": "Brewer",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 24440
       }
     ],
     "district": "47",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:18.760Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 28745,
     "year": 2024
   },
   {
@@ -1213,45 +1430,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14440,
-          "estimatedVotesLow": 11811,
-          "estimatedVotesMid": 13124,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Eddy",
-        "id": 25497,
-        "lastName": "Dempsey",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14440,
-          "estimatedVotesLow": 11811,
-          "estimatedVotesMid": 13124,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14449,
+          "estimatedVotesLow": 11823,
+          "estimatedVotesMid": 13136,
+          "turnoutHigh": 74.46,
+          "turnoutLow": 91,
+          "turnoutMid": 81.9
         },
         "firstName": "Victoria",
         "id": 102054,
         "lastName": "Lawhorn",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 211
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14449,
+          "estimatedVotesLow": 11823,
+          "estimatedVotesMid": 13136,
+          "turnoutHigh": 74.46,
+          "turnoutLow": 91,
+          "turnoutMid": 81.9
+        },
+        "firstName": "Eddy",
+        "id": 25497,
+        "lastName": "Dempsey",
+        "partyName": "Republican",
+        "votes": 10548
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:38:19.071Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 10759,
     "year": 2024
   },
   {
@@ -1275,9 +1499,16 @@
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1306,9 +1537,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1322,45 +1560,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14488,
-          "estimatedVotesLow": 11853,
-          "estimatedVotesMid": 13170,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bob",
-        "id": 47194,
-        "lastName": "Culver",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14488,
-          "estimatedVotesLow": 11853,
-          "estimatedVotesMid": 13170,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14527,
+          "estimatedVotesLow": 11885,
+          "estimatedVotesMid": 13206,
+          "turnoutHigh": 85.79,
+          "turnoutLow": 104.86,
+          "turnoutMid": 94.37
         },
         "firstName": "Christopher",
         "id": 76062,
         "lastName": "Wier",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 487
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14527,
+          "estimatedVotesLow": 11885,
+          "estimatedVotesMid": 13206,
+          "turnoutHigh": 85.79,
+          "turnoutLow": 104.86,
+          "turnoutMid": 94.37
+        },
+        "firstName": "Bob",
+        "id": 47194,
+        "lastName": "Culver",
+        "partyName": "Republican",
+        "votes": 11976
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:17:19.920Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 12463,
     "year": 2024
   },
   {
@@ -1384,9 +1629,16 @@
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1415,9 +1667,16 @@
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1446,9 +1705,16 @@
       }
     ],
     "district": "7",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1477,9 +1743,16 @@
       }
     ],
     "district": "8",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1508,9 +1781,16 @@
       }
     ],
     "district": "9",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1539,9 +1819,16 @@
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1570,9 +1857,16 @@
       }
     ],
     "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1586,45 +1880,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 21881,
-          "estimatedVotesLow": 17903,
-          "estimatedVotesMid": 19892,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Crystal",
-        "id": 47199,
-        "lastName": "LaGrone",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 21881,
-          "estimatedVotesLow": 17903,
-          "estimatedVotesMid": 19892,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19891,
+          "estimatedVotesLow": 16275,
+          "estimatedVotesMid": 18083,
+          "turnoutHigh": 89.05,
+          "turnoutLow": 108.84,
+          "turnoutMid": 97.95
         },
         "firstName": "Mark",
         "id": 76067,
         "lastName": "Chapman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 16829
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19891,
+          "estimatedVotesLow": 16275,
+          "estimatedVotesMid": 18083,
+          "turnoutHigh": 89.05,
+          "turnoutLow": 108.84,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Crystal",
+        "id": 47199,
+        "lastName": "LaGrone",
+        "partyName": "Democratic",
+        "votes": 884
       }
     ],
     "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:30:19.701Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 17713,
     "year": 2024
   },
   {
@@ -1648,9 +1949,16 @@
       }
     ],
     "district": "13",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1679,9 +1987,16 @@
       }
     ],
     "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1710,9 +2025,16 @@
       }
     ],
     "district": "15",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1726,45 +2048,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15695,
-          "estimatedVotesLow": 12833,
-          "estimatedVotesMid": 14260,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15403,
+          "estimatedVotesLow": 12603,
+          "estimatedVotesMid": 14003,
+          "turnoutHigh": 88.57,
+          "turnoutLow": 108.25,
+          "turnoutMid": 97.43
         },
         "firstName": "Scott",
         "id": 76074,
         "lastName": "Fetgatter",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10467
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15695,
-          "estimatedVotesLow": 12833,
-          "estimatedVotesMid": 14260,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15403,
+          "estimatedVotesLow": 12603,
+          "estimatedVotesMid": 14003,
+          "turnoutHigh": 88.57,
+          "turnoutLow": 108.25,
+          "turnoutMid": 97.43
         },
         "firstName": "Rosie",
         "id": 76075,
         "lastName": "Lynch",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3176
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:49:18.797Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 13643,
     "year": 2024
   },
   {
@@ -1788,9 +2117,16 @@
       }
     ],
     "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1819,9 +2155,16 @@
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1850,9 +2193,16 @@
       }
     ],
     "district": "19",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1866,45 +2216,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 17387,
-          "estimatedVotesLow": 14217,
-          "estimatedVotesMid": 15796,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mitchell",
-        "id": 76083,
-        "lastName": "Jacob",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17387,
-          "estimatedVotesLow": 14217,
-          "estimatedVotesMid": 15796,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 17373,
+          "estimatedVotesLow": 14215,
+          "estimatedVotesMid": 15794,
+          "turnoutHigh": 81.68,
+          "turnoutLow": 99.83,
+          "turnoutMid": 89.85
         },
         "firstName": "Jonathan",
         "id": 76078,
         "lastName": "Wilk",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 13555
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 17373,
+          "estimatedVotesLow": 14215,
+          "estimatedVotesMid": 15794,
+          "turnoutHigh": 81.68,
+          "turnoutLow": 99.83,
+          "turnoutMid": 89.85
+        },
+        "firstName": "Mitchell",
+        "id": 76083,
+        "lastName": "Jacob",
+        "partyName": "Democratic",
+        "votes": 636
       }
     ],
     "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:39:19.218Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 14191,
     "year": 2024
   },
   {
@@ -1928,9 +2285,16 @@
       }
     ],
     "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1959,9 +2323,16 @@
       }
     ],
     "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -1990,9 +2361,16 @@
       }
     ],
     "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2021,9 +2399,16 @@
       }
     ],
     "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2052,9 +2437,16 @@
       }
     ],
     "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2068,45 +2460,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15679,
-          "estimatedVotesLow": 12819,
-          "estimatedVotesMid": 14243,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Dell",
-        "id": 47205,
-        "lastName": "Kerbs",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 15679,
-          "estimatedVotesLow": 12819,
-          "estimatedVotesMid": 14243,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14299,
+          "estimatedVotesLow": 11699,
+          "estimatedVotesMid": 12999,
+          "turnoutHigh": 89.04,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
         },
         "firstName": "Kerri",
         "id": 76090,
         "lastName": "Keck",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 635
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14299,
+          "estimatedVotesLow": 11699,
+          "estimatedVotesMid": 12999,
+          "turnoutHigh": 89.04,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Dell",
+        "id": 47205,
+        "lastName": "Kerbs",
+        "partyName": "Republican",
+        "votes": 12097
       }
     ],
     "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:29:20.227Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 12732,
     "year": 2024
   },
   {
@@ -2130,9 +2529,16 @@
       }
     ],
     "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2161,9 +2567,16 @@
       }
     ],
     "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2192,9 +2605,16 @@
       }
     ],
     "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2223,9 +2643,16 @@
       }
     ],
     "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2254,9 +2681,16 @@
       }
     ],
     "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2285,9 +2719,16 @@
       }
     ],
     "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2316,9 +2757,16 @@
       }
     ],
     "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2332,45 +2780,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11359,
-          "estimatedVotesLow": 9286,
-          "estimatedVotesMid": 10318,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Andrew",
-        "id": 25527,
-        "lastName": "Muchmore",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11359,
-          "estimatedVotesLow": 9286,
-          "estimatedVotesMid": 10318,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10327,
+          "estimatedVotesLow": 8449,
+          "estimatedVotesMid": 9388,
+          "turnoutHigh": 89.02,
+          "turnoutLow": 108.81,
+          "turnoutMid": 97.92
         },
         "firstName": "Trish",
         "id": 47206,
         "lastName": "Ranson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 366
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10327,
+          "estimatedVotesLow": 8449,
+          "estimatedVotesMid": 9388,
+          "turnoutHigh": 89.02,
+          "turnoutLow": 108.81,
+          "turnoutMid": 97.92
+        },
+        "firstName": "Andrew",
+        "id": 25527,
+        "lastName": "Muchmore",
+        "partyName": "Republican",
+        "votes": 8827
       }
     ],
     "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:30:19.701Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 9193,
     "year": 2024
   },
   {
@@ -2394,9 +2849,16 @@
       }
     ],
     "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2425,9 +2887,16 @@
       }
     ],
     "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2441,45 +2910,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14791,
-          "estimatedVotesLow": 12106,
-          "estimatedVotesMid": 13450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ken",
-        "id": 25534,
-        "lastName": "Luttrell",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14791,
-          "estimatedVotesLow": 12106,
-          "estimatedVotesMid": 13450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14835,
+          "estimatedVotesLow": 12137,
+          "estimatedVotesMid": 13486,
+          "turnoutHigh": 72.02,
+          "turnoutLow": 88.03,
+          "turnoutMid": 79.22
         },
         "firstName": "Carter",
         "id": 102055,
         "lastName": "Rogers",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 210
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14835,
+          "estimatedVotesLow": 12137,
+          "estimatedVotesMid": 13486,
+          "turnoutHigh": 72.02,
+          "turnoutLow": 88.03,
+          "turnoutMid": 79.22
+        },
+        "firstName": "Ken",
+        "id": 25534,
+        "lastName": "Luttrell",
+        "partyName": "Republican",
+        "votes": 10474
       }
     ],
     "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:46:18.663Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 10684,
     "year": 2024
   },
   {
@@ -2488,45 +2964,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18168,
-          "estimatedVotesLow": 14862,
-          "estimatedVotesMid": 16514,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Doyle",
-        "id": 76100,
-        "lastName": "Lewis",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 18168,
-          "estimatedVotesLow": 14862,
-          "estimatedVotesMid": 16514,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 17672,
+          "estimatedVotesLow": 14459,
+          "estimatedVotesMid": 16065,
+          "turnoutHigh": 88.94,
+          "turnoutLow": 108.7,
+          "turnoutMid": 97.83
         },
         "firstName": "John",
         "id": 76098,
         "lastName": "Pfeiffer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15235
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 17672,
+          "estimatedVotesLow": 14459,
+          "estimatedVotesMid": 16065,
+          "turnoutHigh": 88.94,
+          "turnoutLow": 108.7,
+          "turnoutMid": 97.83
+        },
+        "firstName": "Doyle",
+        "id": 76100,
+        "lastName": "Lewis",
+        "partyName": "Democratic",
+        "votes": 482
       }
     ],
     "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:56:18.307Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 15717,
     "year": 2024
   },
   {
@@ -2535,45 +3018,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19772,
-          "estimatedVotesLow": 16176,
-          "estimatedVotesMid": 17973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Richard",
-        "id": 52527,
-        "lastName": "Prawdzienski",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19772,
-          "estimatedVotesLow": 16176,
-          "estimatedVotesMid": 17973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19798,
+          "estimatedVotesLow": 16198,
+          "estimatedVotesMid": 17998,
+          "turnoutHigh": 54.54,
+          "turnoutLow": 66.66,
+          "turnoutMid": 59.99
         },
         "firstName": "Erick",
         "id": 52467,
         "lastName": "Harris",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10474
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19798,
+          "estimatedVotesLow": 16198,
+          "estimatedVotesMid": 17998,
+          "turnoutHigh": 54.54,
+          "turnoutLow": 66.66,
+          "turnoutMid": 59.99
+        },
+        "firstName": "Richard",
+        "id": 52527,
+        "lastName": "Prawdzienski",
+        "partyName": "Libertarian",
+        "votes": 323
       }
     ],
     "district": "39",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:45:18.636Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 10797,
     "year": 2024
   },
   {
@@ -2597,9 +3087,16 @@
       }
     ],
     "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2613,45 +3110,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19805,
-          "estimatedVotesLow": 16215,
-          "estimatedVotesMid": 18018,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19492,
+          "estimatedVotesLow": 15948,
+          "estimatedVotesMid": 17720,
+          "turnoutHigh": 79.12,
+          "turnoutLow": 96.7,
+          "turnoutMid": 87.03
         },
         "firstName": "Denise",
         "id": 47211,
         "lastName": "Hader",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 8569
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19805,
-          "estimatedVotesLow": 16215,
-          "estimatedVotesMid": 18018,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19492,
+          "estimatedVotesLow": 15948,
+          "estimatedVotesMid": 17720,
+          "turnoutHigh": 79.12,
+          "turnoutLow": 96.7,
+          "turnoutMid": 87.03
         },
         "firstName": "Mike",
         "id": 47210,
         "lastName": "Bockus",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6853
       }
     ],
     "district": "41",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:39:19.218Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 15422,
     "year": 2024
   },
   {
@@ -2675,9 +3179,16 @@
       }
     ],
     "district": "42",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2691,45 +3202,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15791,
-          "estimatedVotesLow": 12919,
-          "estimatedVotesMid": 14354,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15773,
+          "estimatedVotesLow": 12905,
+          "estimatedVotesMid": 14339,
+          "turnoutHigh": 64.12,
+          "turnoutLow": 78.37,
+          "turnoutMid": 70.53
         },
         "firstName": "Cassie",
         "id": 47215,
         "lastName": "Kinet",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 301
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15791,
-          "estimatedVotesLow": 12919,
-          "estimatedVotesMid": 14354,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15773,
+          "estimatedVotesLow": 12905,
+          "estimatedVotesMid": 14339,
+          "turnoutHigh": 64.12,
+          "turnoutLow": 78.37,
+          "turnoutMid": 70.53
         },
         "firstName": "Jay",
         "id": 47214,
         "lastName": "Steagall",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9813
       }
     ],
     "district": "43",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:39:21.243Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 10114,
     "year": 2024
   },
   {
@@ -2753,9 +3271,16 @@
       }
     ],
     "district": "44",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2769,61 +3294,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16053,
-          "estimatedVotesLow": 13133,
-          "estimatedVotesMid": 14592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Matt",
-        "id": 76104,
-        "lastName": "Watson",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16053,
-          "estimatedVotesLow": 13133,
-          "estimatedVotesMid": 14592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Annie",
-        "id": 47217,
-        "lastName": "Menz",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16053,
-          "estimatedVotesLow": 13133,
-          "estimatedVotesMid": 14592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16019,
+          "estimatedVotesLow": 13107,
+          "estimatedVotesMid": 14563,
+          "turnoutHigh": 89.95,
+          "turnoutLow": 109.93,
+          "turnoutMid": 98.94
         },
         "firstName": "Robert",
         "id": 15041,
         "lastName": "Murphy",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 287
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16019,
+          "estimatedVotesLow": 13107,
+          "estimatedVotesMid": 14563,
+          "turnoutHigh": 89.95,
+          "turnoutLow": 109.93,
+          "turnoutMid": 98.94
+        },
+        "firstName": "Matt",
+        "id": 76104,
+        "lastName": "Watson",
+        "partyName": "Republican",
+        "votes": 8935
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16019,
+          "estimatedVotesLow": 13107,
+          "estimatedVotesMid": 14563,
+          "turnoutHigh": 89.95,
+          "turnoutLow": 109.93,
+          "turnoutMid": 98.94
+        },
+        "firstName": "Annie",
+        "id": 47217,
+        "lastName": "Menz",
+        "partyName": "Democratic",
+        "votes": 5187
       }
     ],
     "district": "45",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:39:19.218Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 14409,
     "year": 2024
   },
   {
@@ -2832,45 +3364,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19951,
-          "estimatedVotesLow": 16326,
-          "estimatedVotesMid": 18140,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19930,
+          "estimatedVotesLow": 16306,
+          "estimatedVotesMid": 18118,
+          "turnoutHigh": 81.78,
+          "turnoutLow": 99.95,
+          "turnoutMid": 89.95
         },
         "firstName": "Jacob",
         "id": 47218,
         "lastName": "Rosecrants",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1139
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19951,
-          "estimatedVotesLow": 16326,
-          "estimatedVotesMid": 18140,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19930,
+          "estimatedVotesLow": 16306,
+          "estimatedVotesMid": 18118,
+          "turnoutHigh": 81.78,
+          "turnoutLow": 99.95,
+          "turnoutMid": 89.95
         },
         "firstName": "Alexander",
         "id": 76105,
         "lastName": "Torvi",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15159
       }
     ],
     "district": "46",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:55:19.037Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 16298,
     "year": 2024
   },
   {
@@ -2894,9 +3433,16 @@
       }
     ],
     "district": "47",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2925,9 +3471,16 @@
       }
     ],
     "district": "48",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2956,9 +3509,16 @@
       }
     ],
     "district": "49",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -2987,9 +3547,16 @@
       }
     ],
     "district": "50",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3018,9 +3585,16 @@
       }
     ],
     "district": "51",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3049,9 +3623,16 @@
       }
     ],
     "district": "52",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-09-30T20:04:09.744Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3080,9 +3661,16 @@
       }
     ],
     "district": "53",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3111,9 +3699,16 @@
       }
     ],
     "district": "54",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3142,9 +3737,16 @@
       }
     ],
     "district": "55",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3173,9 +3775,16 @@
       }
     ],
     "district": "56",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3204,9 +3813,16 @@
       }
     ],
     "district": "57",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3235,9 +3851,16 @@
       }
     ],
     "district": "58",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3266,9 +3889,16 @@
       }
     ],
     "district": "59",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3297,9 +3927,16 @@
       }
     ],
     "district": "60",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3328,9 +3965,16 @@
       }
     ],
     "district": "61",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-09-30T20:04:09.744Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3339,50 +3983,64 @@
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 76123,
+      "first_name": "Daniel",
+      "incumbent": true,
+      "last_name": "Pae",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11856,
-          "estimatedVotesLow": 9699,
-          "estimatedVotesMid": 10777,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11283,
+          "estimatedVotesLow": 9231,
+          "estimatedVotesMid": 10257,
+          "turnoutHigh": 85.85,
+          "turnoutLow": 104.93,
+          "turnoutMid": 94.43
         },
         "firstName": "Daniel",
         "id": 76123,
         "lastName": "Pae",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9009
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11856,
-          "estimatedVotesLow": 9699,
-          "estimatedVotesMid": 10777,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11283,
+          "estimatedVotesLow": 9231,
+          "estimatedVotesMid": 10257,
+          "turnoutHigh": 85.85,
+          "turnoutLow": 104.93,
+          "turnoutMid": 94.43
         },
         "firstName": "Allison",
         "id": 76124,
         "lastName": "Offield",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 677
       }
     ],
     "district": "62",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:57:17.798Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 9686,
     "year": 2024
   },
   {
@@ -3391,45 +4049,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 12348,
-          "estimatedVotesLow": 10104,
-          "estimatedVotesMid": 11226,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Shykira",
-        "id": 47219,
-        "lastName": "Smith",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 12348,
-          "estimatedVotesLow": 10104,
-          "estimatedVotesMid": 11226,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12354,
+          "estimatedVotesLow": 10108,
+          "estimatedVotesMid": 11230,
+          "turnoutHigh": 88.93,
+          "turnoutLow": 108.69,
+          "turnoutMid": 97.83
         },
         "firstName": "Hurchel",
         "id": 102056,
         "lastName": "Caldwell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10607
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12354,
+          "estimatedVotesLow": 10108,
+          "estimatedVotesMid": 11230,
+          "turnoutHigh": 88.93,
+          "turnoutLow": 108.69,
+          "turnoutMid": 97.83
+        },
+        "firstName": "Shykira",
+        "id": 47219,
+        "lastName": "Smith",
+        "partyName": "Democratic",
+        "votes": 379
       }
     ],
     "district": "63",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:18:20.178Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 10986,
     "year": 2024
   },
   {
@@ -3438,45 +4103,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11223,
-          "estimatedVotesLow": 9184,
-          "estimatedVotesMid": 10204,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10234,
+          "estimatedVotesLow": 8374,
+          "estimatedVotesMid": 9304,
+          "turnoutHigh": 89.03,
+          "turnoutLow": 108.8,
+          "turnoutMid": 97.93
         },
         "firstName": "Tom",
         "id": 76125,
         "lastName": "Sutherlin",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 453
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11223,
-          "estimatedVotesLow": 9184,
-          "estimatedVotesMid": 10204,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10234,
+          "estimatedVotesLow": 8374,
+          "estimatedVotesMid": 9304,
+          "turnoutHigh": 89.03,
+          "turnoutLow": 108.8,
+          "turnoutMid": 97.93
         },
         "firstName": "Rande",
         "id": 47222,
         "lastName": "Worthen",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 8658
       }
     ],
     "district": "64",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:51:19.903Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 9111,
     "year": 2024
   },
   {
@@ -3500,9 +4172,16 @@
       }
     ],
     "district": "65",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3516,45 +4195,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 17484,
-          "estimatedVotesLow": 14306,
-          "estimatedVotesMid": 15896,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Clay",
-        "id": 25561,
-        "lastName": "Staires",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17484,
-          "estimatedVotesLow": 14306,
-          "estimatedVotesMid": 15896,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 17497,
+          "estimatedVotesLow": 14316,
+          "estimatedVotesMid": 15906,
+          "turnoutHigh": 58.31,
+          "turnoutLow": 71.27,
+          "turnoutMid": 64.15
         },
         "firstName": "Kenneth",
         "id": 44280,
         "lastName": "Blevins",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 201
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 17497,
+          "estimatedVotesLow": 14316,
+          "estimatedVotesMid": 15906,
+          "turnoutHigh": 58.31,
+          "turnoutLow": 71.27,
+          "turnoutMid": 64.15
+        },
+        "firstName": "Clay",
+        "id": 25561,
+        "lastName": "Staires",
+        "partyName": "Republican",
+        "votes": 10002
       }
     ],
     "district": "66",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:56:18.307Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 10203,
     "year": 2024
   },
   {
@@ -3585,9 +4271,16 @@
       }
     ],
     "district": "67",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-11T19:45:06.010Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T16:08:02.583Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3616,9 +4309,16 @@
       }
     ],
     "district": "68",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3647,9 +4347,16 @@
       }
     ],
     "district": "69",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3663,40 +4370,92 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 23028,
-          "estimatedVotesLow": 18853,
-          "estimatedVotesMid": 20948,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brad",
-        "id": 47226,
-        "lastName": "Banks",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 23028,
-          "estimatedVotesLow": 18853,
-          "estimatedVotesMid": 20948,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 21039,
+          "estimatedVotesLow": 17213,
+          "estimatedVotesMid": 19126,
+          "turnoutHigh": 88.73,
+          "turnoutLow": 108.45,
+          "turnoutMid": 97.61
         },
         "firstName": "Suzanne",
         "id": 47225,
         "lastName": "Schreiber",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1679
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 21039,
+          "estimatedVotesLow": 17213,
+          "estimatedVotesMid": 19126,
+          "turnoutHigh": 88.73,
+          "turnoutLow": 108.45,
+          "turnoutMid": 97.61
+        },
+        "firstName": "Brad",
+        "id": 47226,
+        "lastName": "Banks",
+        "partyName": "Republican",
+        "votes": 16989
       }
     ],
     "district": "70",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:20:20.466Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 18668,
+    "year": 2024
+  },
+  {
+    "calledCandidate": {
+      "cand_id": 47227,
+      "first_name": "Amanda",
+      "incumbent": true,
+      "last_name": "Swope",
+      "party_id": 1,
+      "party_name": "Democratic"
+    },
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Amanda",
+        "id": 47227,
+        "lastName": "Swope",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "71",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T16:08:02.583Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3717,17 +4476,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Cody",
-        "id": 25512,
-        "lastName": "Maynard",
-        "partyName": "Republican",
+        "firstName": "Michelle",
+        "id": 76136,
+        "lastName": "McCane",
+        "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "72",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3748,17 +4514,116 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Ryan",
-        "id": 76084,
-        "lastName": "Eaves",
+        "firstName": "Ron",
+        "id": 76137,
+        "lastName": "Stewart",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "73",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 17995,
+          "estimatedVotesLow": 14723,
+          "estimatedVotesMid": 16359,
+          "turnoutHigh": 71.11,
+          "turnoutLow": 86.92,
+          "turnoutMid": 78.23
+        },
+        "firstName": "Aaron",
+        "id": 102057,
+        "lastName": "Brent",
+        "partyName": "Independent",
+        "votes": 338
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 17995,
+          "estimatedVotesLow": 14723,
+          "estimatedVotesMid": 16359,
+          "turnoutHigh": 71.11,
+          "turnoutLow": 86.92,
+          "turnoutMid": 78.23
+        },
+        "firstName": "Mark",
+        "id": 76139,
+        "lastName": "Vancuren",
+        "partyName": "Republican",
+        "votes": 12459
+      }
+    ],
+    "district": "74",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:53:18.972Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 12797,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "T.",
+        "id": 76140,
+        "lastName": "Marti",
         "partyName": "Republican",
         "votes": 0
       }
     ],
-    "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "75",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3779,22 +4644,689 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Derrick",
-        "id": 76086,
-        "lastName": "Hildebrant",
+        "firstName": "Ross",
+        "id": 25562,
+        "lastName": "Ford",
         "partyName": "Republican",
         "votes": 0
       }
     ],
-    "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "76",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
     "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 76141,
+        "lastName": "Waldron",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "77",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Meloyde",
+        "id": 76142,
+        "lastName": "Blancett",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "78",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14188,
+          "estimatedVotesLow": 11608,
+          "estimatedVotesMid": 12898,
+          "turnoutHigh": 89.04,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Melissa",
+        "id": 47229,
+        "lastName": "Provenzano",
+        "partyName": "Democratic",
+        "votes": 1515
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14188,
+          "estimatedVotesLow": 11608,
+          "estimatedVotesMid": 12898,
+          "turnoutHigh": 89.04,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Paul",
+        "id": 25565,
+        "lastName": "Hassink",
+        "partyName": "Republican",
+        "votes": 11118
+      }
+    ],
+    "district": "79",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:54:18.264Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 12633,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Stan",
+        "id": 76144,
+        "lastName": "May",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "80",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mike",
+        "id": 76145,
+        "lastName": "Osburn",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "81",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nicole",
+        "id": 76146,
+        "lastName": "Miller",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "82",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20043,
+          "estimatedVotesLow": 16399,
+          "estimatedVotesMid": 18221,
+          "turnoutHigh": 62.54,
+          "turnoutLow": 76.43,
+          "turnoutMid": 68.79
+        },
+        "firstName": "Eric",
+        "id": 47231,
+        "lastName": "Roberts",
+        "partyName": "Republican",
+        "votes": 11407
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20043,
+          "estimatedVotesLow": 16399,
+          "estimatedVotesMid": 18221,
+          "turnoutHigh": 62.54,
+          "turnoutLow": 76.43,
+          "turnoutMid": 68.79
+        },
+        "firstName": "Jimmy",
+        "id": 76147,
+        "lastName": "Lawson",
+        "partyName": "Democratic",
+        "votes": 1127
+      }
+    ],
+    "district": "83",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:25:19.824Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 12534,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12707,
+          "estimatedVotesLow": 10397,
+          "estimatedVotesMid": 11552,
+          "turnoutHigh": 89.05,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Jeremy",
+        "id": 47232,
+        "lastName": "Lamb",
+        "partyName": "Democratic",
+        "votes": 904
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12707,
+          "estimatedVotesLow": 10397,
+          "estimatedVotesMid": 11552,
+          "turnoutHigh": 89.05,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Tammy",
+        "id": 47233,
+        "lastName": "West",
+        "partyName": "Republican",
+        "votes": 10411
+      }
+    ],
+    "district": "84",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:30:19.701Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 11315,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20747,
+          "estimatedVotesLow": 16975,
+          "estimatedVotesMid": 18861,
+          "turnoutHigh": 81.92,
+          "turnoutLow": 100.12,
+          "turnoutMid": 90.11
+        },
+        "firstName": "Cyndi",
+        "id": 47234,
+        "lastName": "Munson",
+        "partyName": "Democratic",
+        "votes": 13768
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20747,
+          "estimatedVotesLow": 16975,
+          "estimatedVotesMid": 18861,
+          "turnoutHigh": 81.92,
+          "turnoutLow": 100.12,
+          "turnoutMid": 90.11
+        },
+        "firstName": "David",
+        "id": 25440,
+        "lastName": "Hooten",
+        "partyName": "Republican",
+        "votes": 3228
+      }
+    ],
+    "district": "85",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:14:20.506Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 16996,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14397,
+          "estimatedVotesLow": 11779,
+          "estimatedVotesMid": 13088,
+          "turnoutHigh": 85.34,
+          "turnoutLow": 104.31,
+          "turnoutMid": 93.88
+        },
+        "firstName": "David",
+        "id": 16873,
+        "lastName": "Hardin",
+        "partyName": "Republican",
+        "votes": 11996
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14397,
+          "estimatedVotesLow": 11779,
+          "estimatedVotesMid": 13088,
+          "turnoutHigh": 85.34,
+          "turnoutLow": 104.31,
+          "turnoutMid": 93.88
+        },
+        "firstName": "Anne",
+        "id": 76148,
+        "lastName": "Fite",
+        "partyName": "Democratic",
+        "votes": 291
+      }
+    ],
+    "district": "86",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:18.760Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 12287,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11782,
+          "estimatedVotesLow": 9640,
+          "estimatedVotesMid": 10711,
+          "turnoutHigh": 89.04,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Ellyn",
+        "id": 47235,
+        "lastName": "Hefner",
+        "partyName": "Democratic",
+        "votes": 1258
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11782,
+          "estimatedVotesLow": 9640,
+          "estimatedVotesMid": 10711,
+          "turnoutHigh": 89.04,
+          "turnoutLow": 108.83,
+          "turnoutMid": 97.95
+        },
+        "firstName": "Dave",
+        "id": 76149,
+        "lastName": "Schnittger",
+        "partyName": "Republican",
+        "votes": 9233
+      }
+    ],
+    "district": "87",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:49:18.797Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 10491,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13479,
+          "estimatedVotesLow": 11029,
+          "estimatedVotesMid": 12254,
+          "turnoutHigh": 68.6,
+          "turnoutLow": 83.83,
+          "turnoutMid": 75.45
+        },
+        "firstName": "Ellen",
+        "id": 76151,
+        "lastName": "Pogemiller",
+        "partyName": "Democratic",
+        "votes": 8878
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13479,
+          "estimatedVotesLow": 11029,
+          "estimatedVotesMid": 12254,
+          "turnoutHigh": 68.6,
+          "turnoutLow": 83.83,
+          "turnoutMid": 75.45
+        },
+        "firstName": "Bobby",
+        "id": 102058,
+        "lastName": "McCollum",
+        "partyName": "Independent",
+        "votes": 368
+      }
+    ],
+    "district": "88",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:18.760Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 9246,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Arturo",
+        "id": 102059,
+        "lastName": "Alonso-Sandoval",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "89",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10471,
+          "estimatedVotesLow": 8567,
+          "estimatedVotesMid": 9519,
+          "turnoutHigh": 87.27,
+          "turnoutLow": 106.67,
+          "turnoutMid": 96
+        },
+        "firstName": "Nana",
+        "id": 25495,
+        "lastName": "Dankwa",
+        "partyName": "Democratic",
+        "votes": 7567
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10471,
+          "estimatedVotesLow": 8567,
+          "estimatedVotesMid": 9519,
+          "turnoutHigh": 87.27,
+          "turnoutLow": 106.67,
+          "turnoutMid": 96
+        },
+        "firstName": "Emily",
+        "id": 76154,
+        "lastName": "Gise",
+        "partyName": "Republican",
+        "votes": 1571
+      }
+    ],
+    "district": "90",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:44:19.289Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 9138,
     "year": 2024
   },
   {
@@ -3811,16 +5343,23 @@
           "turnoutMid": 0
         },
         "firstName": "Chris",
-        "id": 25515,
-        "lastName": "Banning",
+        "id": 76155,
+        "lastName": "Kannady",
         "partyName": "Republican",
         "votes": 0
       }
     ],
-    "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "91",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3841,64 +5380,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Ronny",
-        "id": 76088,
-        "lastName": "Johns",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 15679,
-          "estimatedVotesLow": 12819,
-          "estimatedVotesMid": 14243,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Dell",
-        "id": 47205,
-        "lastName": "Kerbs",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 15679,
-          "estimatedVotesLow": 12819,
-          "estimatedVotesMid": 14243,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kerri",
-        "id": 76090,
-        "lastName": "Keck",
+        "firstName": "Forrest",
+        "id": 76157,
+        "lastName": "Bennett",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "92",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -3919,250 +5418,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Danny",
-        "id": 76091,
-        "lastName": "Sterling",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Danny",
-        "id": 76093,
-        "lastName": "Williams",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kyle",
-        "id": 25517,
-        "lastName": "Hilbert",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mark",
-        "id": 76094,
-        "lastName": "Lawson",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Collin",
-        "id": 25519,
-        "lastName": "Duel",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jim",
-        "id": 76096,
-        "lastName": "Shaw",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Molly",
-        "id": 76097,
-        "lastName": "Jenkins",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11359,
-          "estimatedVotesLow": 9286,
-          "estimatedVotesMid": 10318,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Andrew",
-        "id": 25527,
-        "lastName": "Muchmore",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11359,
-          "estimatedVotesLow": 9286,
-          "estimatedVotesMid": 10318,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Trish",
-        "id": 47206,
-        "lastName": "Ranson",
+        "firstName": "Mickey",
+        "id": 76158,
+        "lastName": "Dollens",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "93",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -4176,154 +5449,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11727,
+          "estimatedVotesLow": 9595,
+          "estimatedVotesMid": 10661,
+          "turnoutHigh": 89.91,
+          "turnoutLow": 109.89,
+          "turnoutMid": 98.9
         },
-        "firstName": "Ty",
-        "id": 25528,
-        "lastName": "Burns",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 22959,
-        "lastName": "George",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14791,
-          "estimatedVotesLow": 12106,
-          "estimatedVotesMid": 13450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ken",
-        "id": 25534,
-        "lastName": "Luttrell",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14791,
-          "estimatedVotesLow": 12106,
-          "estimatedVotesMid": 13450,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Carter",
-        "id": 102055,
-        "lastName": "Rogers",
-        "partyName": "Independent",
-        "votes": 0
-      }
-    ],
-    "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 18168,
-          "estimatedVotesLow": 14862,
-          "estimatedVotesMid": 16514,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Doyle",
-        "id": 76100,
-        "lastName": "Lewis",
+        "firstName": "Andy",
+        "id": 76160,
+        "lastName": "Fugate",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8436
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18168,
-          "estimatedVotesLow": 14862,
-          "estimatedVotesMid": 16514,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11727,
+          "estimatedVotesLow": 9595,
+          "estimatedVotesMid": 10661,
+          "turnoutHigh": 89.91,
+          "turnoutLow": 109.89,
+          "turnoutMid": 98.9
         },
-        "firstName": "John",
-        "id": 76098,
-        "lastName": "Pfeiffer",
+        "firstName": "Suzanne",
+        "id": 76159,
+        "lastName": "Jobe",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2108
       }
     ],
-    "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "94",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:57:17.798Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 10544,
     "year": 2024
   },
   {
@@ -4332,123 +5503,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19772,
-          "estimatedVotesLow": 16176,
-          "estimatedVotesMid": 17973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13239,
+          "estimatedVotesLow": 10833,
+          "estimatedVotesMid": 12036,
+          "turnoutHigh": 87.29,
+          "turnoutLow": 106.67,
+          "turnoutMid": 96.01
         },
-        "firstName": "Richard",
-        "id": 52527,
-        "lastName": "Prawdzienski",
-        "partyName": "Libertarian",
-        "votes": 0
+        "firstName": "Max",
+        "id": 47239,
+        "lastName": "Wolfley",
+        "partyName": "Republican",
+        "votes": 6832
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19772,
-          "estimatedVotesLow": 16176,
-          "estimatedVotesMid": 17973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13239,
+          "estimatedVotesLow": 10833,
+          "estimatedVotesMid": 12036,
+          "turnoutHigh": 87.29,
+          "turnoutLow": 106.67,
+          "turnoutMid": 96.01
         },
-        "firstName": "Erick",
-        "id": 52467,
-        "lastName": "Harris",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "39",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chad",
-        "id": 47209,
-        "lastName": "Caldwell",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19805,
-          "estimatedVotesLow": 16215,
-          "estimatedVotesMid": 18018,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Denise",
-        "id": 47211,
-        "lastName": "Hader",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19805,
-          "estimatedVotesLow": 16215,
-          "estimatedVotesMid": 18018,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mike",
-        "id": 47210,
-        "lastName": "Bockus",
+        "firstName": "Tegan",
+        "id": 47238,
+        "lastName": "Malone",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4724
       }
     ],
-    "district": "41",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "95",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:35:18.297Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 11556,
     "year": 2024
   },
   {
@@ -4464,391 +5564,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Cynthia",
-        "id": 47213,
-        "lastName": "Roe",
+        "firstName": "Preston",
+        "id": 76162,
+        "lastName": "Stinson",
         "partyName": "Republican",
         "votes": 0
       }
     ],
-    "district": "42",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 15791,
-          "estimatedVotesLow": 12919,
-          "estimatedVotesMid": 14354,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cassie",
-        "id": 47215,
-        "lastName": "Kinet",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 15791,
-          "estimatedVotesLow": 12919,
-          "estimatedVotesMid": 14354,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jay",
-        "id": 47214,
-        "lastName": "Steagall",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "43",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jared",
-        "id": 25489,
-        "lastName": "Deck",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "44",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16053,
-          "estimatedVotesLow": 13133,
-          "estimatedVotesMid": 14592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Matt",
-        "id": 76104,
-        "lastName": "Watson",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16053,
-          "estimatedVotesLow": 13133,
-          "estimatedVotesMid": 14592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Annie",
-        "id": 47217,
-        "lastName": "Menz",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16053,
-          "estimatedVotesLow": 13133,
-          "estimatedVotesMid": 14592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert",
-        "id": 15041,
-        "lastName": "Murphy",
-        "partyName": "Libertarian",
-        "votes": 0
-      }
-    ],
-    "district": "45",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19951,
-          "estimatedVotesLow": 16326,
-          "estimatedVotesMid": 18140,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jacob",
-        "id": 47218,
-        "lastName": "Rosecrants",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19951,
-          "estimatedVotesLow": 16326,
-          "estimatedVotesMid": 18140,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Alexander",
-        "id": 76105,
-        "lastName": "Torvi",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "46",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brian",
-        "id": 65936,
-        "lastName": "Hill",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "47",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Tammy",
-        "id": 25543,
-        "lastName": "Townley",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "48",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Josh",
-        "id": 25545,
-        "lastName": "Cantrell",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "49",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Stacy",
-        "id": 56156,
-        "lastName": "Adams",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "50",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brad",
-        "id": 76109,
-        "lastName": "Boles",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "51",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Gerrid",
-        "id": 76110,
-        "lastName": "Kendrix",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "52",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-09-30T20:04:09.744Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "96",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -4870,521 +5603,23 @@
           "turnoutMid": 0
         },
         "firstName": "Jason",
-        "id": 76111,
-        "lastName": "Blair",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "53",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kevin",
-        "id": 76114,
-        "lastName": "West",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "54",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Nick",
-        "id": 25551,
-        "lastName": "Archer",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "55",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Dick",
-        "id": 76115,
+        "id": 47240,
         "lastName": "Lowe",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "56",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Anthony",
-        "id": 25554,
-        "lastName": "Moore",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "57",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Carl",
-        "id": 76117,
-        "lastName": "Newton",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "58",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T14:44:01.452Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mike",
-        "id": 76118,
-        "lastName": "Dobrinski",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "59",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mike",
-        "id": 76120,
-        "lastName": "Kelley",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "60",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kenton",
-        "id": 76122,
-        "lastName": "Patzkowsky",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "61",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-09-30T20:04:09.744Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11856,
-          "estimatedVotesLow": 9699,
-          "estimatedVotesMid": 10777,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Daniel",
-        "id": 76123,
-        "lastName": "Pae",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11856,
-          "estimatedVotesLow": 9699,
-          "estimatedVotesMid": 10777,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Allison",
-        "id": 76124,
-        "lastName": "Offield",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "62",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 12348,
-          "estimatedVotesLow": 10104,
-          "estimatedVotesMid": 11226,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Shykira",
-        "id": 47219,
-        "lastName": "Smith",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 12348,
-          "estimatedVotesLow": 10104,
-          "estimatedVotesMid": 11226,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Hurchel",
-        "id": 102056,
-        "lastName": "Caldwell",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "63",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11223,
-          "estimatedVotesLow": 9184,
-          "estimatedVotesMid": 10204,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Tom",
-        "id": 76125,
-        "lastName": "Sutherlin",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11223,
-          "estimatedVotesLow": 9184,
-          "estimatedVotesMid": 10204,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Rande",
-        "id": 47222,
-        "lastName": "Worthen",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "64",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Toni",
-        "id": 76126,
-        "lastName": "Hasenbeck",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "65",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17484,
-          "estimatedVotesLow": 14306,
-          "estimatedVotesMid": 15896,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Clay",
-        "id": 25561,
-        "lastName": "Staires",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17484,
-          "estimatedVotesLow": 14306,
-          "estimatedVotesMid": 15896,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kenneth",
-        "id": 44280,
-        "lastName": "Blevins",
-        "partyName": "Libertarian",
-        "votes": 0
-      }
-    ],
-    "district": "66",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "cand_id": 76131,
-      "first_name": "Rob",
-      "incumbent": false,
-      "last_name": "Hall",
-      "party_id": 2,
-      "party_name": "Republican"
+    "district": "97",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
     },
-    "candidatesWithVotes": [
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Rob",
-        "id": 76131,
-        "lastName": "Hall",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "67",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-11T19:45:06.010Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
@@ -5398,107 +5633,252 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16057,
+          "estimatedVotesLow": 13137,
+          "estimatedVotesMid": 14597,
+          "turnoutHigh": 82.69,
+          "turnoutLow": 101.07,
+          "turnoutMid": 90.96
         },
-        "firstName": "Mike",
-        "id": 76132,
-        "lastName": "Lay",
+        "firstName": "Gabe",
+        "id": 76164,
+        "lastName": "Woolley",
         "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "68",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mark",
-        "id": 76134,
-        "lastName": "Tedford",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "69",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T18:58:51.292Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "OK",
-    "stateName": "Oklahoma",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 23028,
-          "estimatedVotesLow": 18853,
-          "estimatedVotesMid": 20948,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brad",
-        "id": 47226,
-        "lastName": "Banks",
-        "partyName": "Republican",
-        "votes": 0
+        "votes": 12643
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 23028,
-          "estimatedVotesLow": 18853,
-          "estimatedVotesMid": 20948,
+          "estimatedVotesHigh": 16057,
+          "estimatedVotesLow": 13137,
+          "estimatedVotesMid": 14597,
+          "turnoutHigh": 82.69,
+          "turnoutLow": 101.07,
+          "turnoutMid": 90.96
+        },
+        "firstName": "Cathy",
+        "id": 76167,
+        "lastName": "Smythe",
+        "partyName": "Democratic",
+        "votes": 634
+      }
+    ],
+    "district": "98",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:47:19.007Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 13277,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Suzanne",
-        "id": 47225,
-        "lastName": "Schreiber",
+        "firstName": "Ajay",
+        "id": 76169,
+        "lastName": "Pittman",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "70",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "99",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
     "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15869,
+          "estimatedVotesLow": 12983,
+          "estimatedVotesMid": 14426,
+          "turnoutHigh": 87.03,
+          "turnoutLow": 106.37,
+          "turnoutMid": 95.73
+        },
+        "firstName": "Chaunté",
+        "id": 47242,
+        "lastName": "Gilmore",
+        "partyName": "Democratic",
+        "votes": 1103
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15869,
+          "estimatedVotesLow": 12983,
+          "estimatedVotesMid": 14426,
+          "turnoutHigh": 87.03,
+          "turnoutLow": 106.37,
+          "turnoutMid": 95.73
+        },
+        "firstName": "Marilyn",
+        "id": 47243,
+        "lastName": "Stark",
+        "partyName": "Republican",
+        "votes": 12707
+      }
+    ],
+    "district": "100",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:09:18.990Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 13810,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert",
+        "id": 76173,
+        "lastName": "Manger",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "101",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1548417,
+          "estimatedVotesLow": 1266898,
+          "estimatedVotesMid": 1407653,
+          "turnoutHigh": 97.67,
+          "turnoutLow": 119.38,
+          "turnoutMid": 99
+        },
+        "firstName": "Chad",
+        "id": 102112,
+        "lastName": "Williams",
+        "partyName": "Libertarian",
+        "votes": 27065
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1548417,
+          "estimatedVotesLow": 1266898,
+          "estimatedVotesMid": 1407653,
+          "turnoutHigh": 97.67,
+          "turnoutLow": 119.38,
+          "turnoutMid": 99
+        },
+        "firstName": "Brian",
+        "id": 102111,
+        "lastName": "Bingman",
+        "partyName": "Republican",
+        "votes": 1000831
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1548417,
+          "estimatedVotesLow": 1266898,
+          "estimatedVotesMid": 1407653,
+          "turnoutHigh": 97.67,
+          "turnoutLow": 119.38,
+          "turnoutMid": 99
+        },
+        "firstName": "Harold",
+        "id": 75997,
+        "lastName": "Spradling",
+        "partyName": "Democratic",
+        "votes": 484475
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:46.319Z",
+    "office": {
+      "officeId": "137",
+      "officeName": "Corporation Commissioner",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "OK",
+    "stateName": "Oklahoma",
+    "totalVotes": 1512371,
     "year": 2024
   }
 ]

@@ -5,45 +5,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 350660,
-          "estimatedVotesLow": 286977,
-          "estimatedVotesMid": 318863,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Barry",
-        "id": 9657,
-        "lastName": "Moore",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 350660,
-          "estimatedVotesLow": 286977,
-          "estimatedVotesMid": 318863,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 330183,
+          "estimatedVotesLow": 270149,
+          "estimatedVotesMid": 300165,
+          "turnoutHigh": 95.86,
+          "turnoutLow": 117.16,
+          "turnoutMid": 99
         },
         "firstName": "Tom",
         "id": 52629,
         "lastName": "Holmes",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 21908
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 330183,
+          "estimatedVotesLow": 270149,
+          "estimatedVotesMid": 300165,
+          "turnoutHigh": 95.86,
+          "turnoutLow": 117.16,
+          "turnoutMid": 99
+        },
+        "firstName": "Barry",
+        "id": 9657,
+        "lastName": "Moore",
+        "partyName": "Republican",
+        "votes": 294603
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:53:47.381Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:14.387Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 0,
+    "totalVotes": 316511,
     "year": 2024
   },
   {
@@ -52,52 +59,66 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 324603,
-          "estimatedVotesLow": 265613,
-          "estimatedVotesMid": 295126,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 308599,
+          "estimatedVotesLow": 252491,
+          "estimatedVotesMid": 280544,
+          "turnoutHigh": 100.1,
+          "turnoutLow": 122.35,
+          "turnoutMid": 99
         },
         "firstName": "Caroleene",
         "id": 52637,
         "lastName": "Dobson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 167671
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 324603,
-          "estimatedVotesLow": 265613,
-          "estimatedVotesMid": 295126,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 308599,
+          "estimatedVotesLow": 252491,
+          "estimatedVotesMid": 280544,
+          "turnoutHigh": 100.1,
+          "turnoutLow": 122.35,
+          "turnoutMid": 99
         },
         "firstName": "Shomari",
         "id": 52631,
         "lastName": "Figures",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 141240
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:37:08.502Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:14.387Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 0,
+    "totalVotes": 308911,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 8219,
+      "first_name": "Mike",
+      "incumbent": true,
+      "last_name": "Rogers",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 0,
           "estimatedVotesLow": 0,
@@ -114,9 +135,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T16:23:46.083Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -125,10 +153,17 @@
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 9636,
+      "first_name": "Robert",
+      "incumbent": true,
+      "last_name": "Aderholt",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 0,
           "estimatedVotesLow": 0,
@@ -145,9 +180,16 @@
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T16:23:46.083Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -156,10 +198,17 @@
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 21069,
+      "first_name": "Dale",
+      "incumbent": true,
+      "last_name": "Strong",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 0,
           "estimatedVotesLow": 0,
@@ -176,9 +225,16 @@
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T16:23:46.083Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -192,45 +248,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 373997,
-          "estimatedVotesLow": 306044,
-          "estimatedVotesMid": 340048,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Elizabeth",
-        "id": 52647,
-        "lastName": "Anderson",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 373997,
-          "estimatedVotesLow": 306044,
-          "estimatedVotesMid": 340048,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 368267,
+          "estimatedVotesLow": 301308,
+          "estimatedVotesMid": 334787,
+          "turnoutHigh": 94.9,
+          "turnoutLow": 115.99,
+          "turnoutMid": 99
         },
         "firstName": "Gary",
         "id": 1061,
         "lastName": "Palmer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 218279
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 368267,
+          "estimatedVotesLow": 301308,
+          "estimatedVotesMid": 334787,
+          "turnoutHigh": 94.9,
+          "turnoutLow": 115.99,
+          "turnoutMid": 99
+        },
+        "firstName": "Elizabeth",
+        "id": 52647,
+        "lastName": "Anderson",
+        "partyName": "Democratic",
+        "votes": 131204
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:36:50.972Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:14.387Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 0,
+    "totalVotes": 349483,
     "year": 2024
   },
   {
@@ -239,45 +302,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 350199,
-          "estimatedVotesLow": 286178,
-          "estimatedVotesMid": 317977,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robin",
-        "id": 21099,
-        "lastName": "Litaker",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 350199,
-          "estimatedVotesLow": 286178,
-          "estimatedVotesMid": 317977,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 327610,
+          "estimatedVotesLow": 268043,
+          "estimatedVotesMid": 297826,
+          "turnoutHigh": 97.2,
+          "turnoutLow": 118.81,
+          "turnoutMid": 99
         },
         "firstName": "Terri",
         "id": 84978,
         "lastName": "Sewall",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 231769
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 327610,
+          "estimatedVotesLow": 268043,
+          "estimatedVotesMid": 297826,
+          "turnoutHigh": 97.2,
+          "turnoutLow": 118.81,
+          "turnoutMid": 99
+        },
+        "firstName": "Robin",
+        "id": 21099,
+        "lastName": "Litaker",
+        "partyName": "Republican",
+        "votes": 86681
       }
     ],
     "district": "7",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:36:58.924Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:14.387Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 0,
+    "totalVotes": 318450,
     "year": 2024
   },
   {
@@ -286,45 +356,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 2528381,
-          "estimatedVotesLow": 2067686,
-          "estimatedVotesMid": 2297436,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Sarah",
-        "id": 52654,
-        "lastName": "Stewart",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2528381,
-          "estimatedVotesLow": 2067686,
-          "estimatedVotesMid": 2297436,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 2353142,
+          "estimatedVotesLow": 1925300,
+          "estimatedVotesMid": 2139218,
+          "turnoutHigh": 99.39,
+          "turnoutLow": 121.47,
+          "turnoutMid": 99
         },
         "firstName": "Greg",
         "id": 52652,
         "lastName": "Griffin",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 564759
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2353142,
+          "estimatedVotesLow": 1925300,
+          "estimatedVotesMid": 2139218,
+          "turnoutHigh": 99.39,
+          "turnoutLow": 121.47,
+          "turnoutMid": 99
+        },
+        "firstName": "Sarah",
+        "id": 52654,
+        "lastName": "Stewart",
+        "partyName": "Republican",
+        "votes": 1773977
       }
     ],
     "district": "Chief Justice",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:49.263Z",
-    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:46.214Z",
+    "office": {
+      "officeId": "30",
+      "officeName": "State Supreme Court",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 0,
+    "totalVotes": 2338736,
     "year": 2024
   },
   {
@@ -348,9 +425,16 @@
       }
     ],
     "district": "Place 1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "30",
+      "officeName": "State Supreme Court",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -379,9 +463,16 @@
       }
     ],
     "district": "Place 2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "30",
+      "officeName": "State Supreme Court",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -410,9 +501,16 @@
       }
     ],
     "district": "Place 3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "30",
+      "officeName": "State Supreme Court",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -441,9 +539,16 @@
       }
     ],
     "district": "Place 4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "30", "officeName": "State Supreme Court", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "30",
+      "officeName": "State Supreme Court",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -472,9 +577,16 @@
       }
     ],
     "district": "Place 1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "152", "officeName": "Court of Civil Appeals", "officeTypeId": "5" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "152",
+      "officeName": "Court of Civil Appeals",
+      "officeTypeId": "5"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -503,9 +615,16 @@
       }
     ],
     "district": "Place 2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "152", "officeName": "Court of Civil Appeals", "officeTypeId": "5" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "152",
+      "officeName": "Court of Civil Appeals",
+      "officeTypeId": "5"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -534,9 +653,16 @@
       }
     ],
     "district": "Place 3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "152", "officeName": "Court of Civil Appeals", "officeTypeId": "5" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "152",
+      "officeName": "Court of Civil Appeals",
+      "officeTypeId": "5"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -565,9 +691,16 @@
       }
     ],
     "district": "Place 1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "153", "officeName": "Court of Criminal Appeals", "officeTypeId": "5" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "153",
+      "officeName": "Court of Criminal Appeals",
+      "officeTypeId": "5"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -596,9 +729,16 @@
       }
     ],
     "district": "Place 2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "153", "officeName": "Court of Criminal Appeals", "officeTypeId": "5" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "153",
+      "officeName": "Court of Criminal Appeals",
+      "officeTypeId": "5"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",
@@ -627,9 +767,16 @@
       }
     ],
     "district": "Place 3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-09T19:11:04.304Z",
-    "office": { "officeId": "153", "officeName": "Court of Criminal Appeals", "officeTypeId": "5" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "153",
+      "officeName": "Court of Criminal Appeals",
+      "officeTypeId": "5"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AL",

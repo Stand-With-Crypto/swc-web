@@ -1,49 +1,63 @@
 [
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 8240,
+      "first_name": "Sheldon",
+      "incumbent": true,
+      "last_name": "Whitehouse",
+      "party_id": 1,
+      "party_name": "Democratic"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
-          "estimatedVotesHigh": 526984,
-          "estimatedVotesLow": 431013,
-          "estimatedVotesMid": 478905,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 519796,
+          "estimatedVotesLow": 425288,
+          "estimatedVotesMid": 472539,
+          "turnoutHigh": 92.72,
+          "turnoutLow": 113.33,
+          "turnoutMid": 99
         },
         "firstName": "Sheldon",
         "id": 8240,
         "lastName": "Whitehouse",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 353279
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 526984,
-          "estimatedVotesLow": 431013,
-          "estimatedVotesMid": 478905,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 519796,
+          "estimatedVotesLow": 425288,
+          "estimatedVotesMid": 472539,
+          "turnoutHigh": 92.72,
+          "turnoutLow": 113.33,
+          "turnoutMid": 99
         },
         "firstName": "Patricia",
         "id": 10790,
         "lastName": "Morgan",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 128685
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:02.073Z",
+    "office": {
+      "officeId": "4",
+      "officeName": "US Senate",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 481964,
     "year": 2024
   },
   {
@@ -52,61 +66,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 250163,
-          "estimatedVotesLow": 204548,
-          "estimatedVotesMid": 227280,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 237663,
+          "estimatedVotesLow": 194450,
+          "estimatedVotesMid": 216055,
+          "turnoutHigh": 97.4,
+          "turnoutLow": 119.04,
+          "turnoutMid": 99
         },
         "firstName": "Christopher",
         "id": 102212,
         "lastName": "Reynolds",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 3587
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 250163,
-          "estimatedVotesLow": 204548,
-          "estimatedVotesMid": 227280,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 237663,
+          "estimatedVotesLow": 194450,
+          "estimatedVotesMid": 216055,
+          "turnoutHigh": 97.4,
+          "turnoutLow": 119.04,
+          "turnoutMid": 99
         },
         "firstName": "Gabe",
         "id": 50693,
         "lastName": "Amo",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 142987
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 250163,
-          "estimatedVotesLow": 204548,
-          "estimatedVotesMid": 227280,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 237663,
+          "estimatedVotesLow": 194450,
+          "estimatedVotesMid": 216055,
+          "turnoutHigh": 97.4,
+          "turnoutLow": 119.04,
+          "turnoutMid": 99
         },
         "firstName": "Allen",
         "id": 14728,
         "lastName": "Waters",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 84901
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:54.501Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:15.678Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 231475,
     "year": 2024
   },
   {
@@ -115,45 +136,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 298211,
-          "estimatedVotesLow": 244137,
-          "estimatedVotesMid": 271267,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 282128,
+          "estimatedVotesLow": 230833,
+          "estimatedVotesMid": 256479,
+          "turnoutHigh": 95.18,
+          "turnoutLow": 116.33,
+          "turnoutMid": 99
         },
         "firstName": "Steven",
         "id": 84412,
         "lastName": "Corvi",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 51743
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 298211,
-          "estimatedVotesLow": 244137,
-          "estimatedVotesMid": 271267,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 282128,
+          "estimatedVotesLow": 230833,
+          "estimatedVotesMid": 256479,
+          "turnoutHigh": 95.18,
+          "turnoutLow": 116.33,
+          "turnoutMid": 99
         },
         "firstName": "Seth",
         "id": 32146,
         "lastName": "Magaziner",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 216774
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:15.678Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 268517,
     "year": 2024
   },
   {
@@ -177,9 +205,16 @@
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -208,9 +243,16 @@
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -239,9 +281,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -270,9 +319,16 @@
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -286,45 +342,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 10198,
-          "estimatedVotesLow": 8340,
-          "estimatedVotesMid": 9266,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10155,
+          "estimatedVotesLow": 8309,
+          "estimatedVotesMid": 9232,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "William",
         "id": 84415,
         "lastName": "Connell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 266
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 10198,
-          "estimatedVotesLow": 8340,
-          "estimatedVotesMid": 9266,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10155,
+          "estimatedVotesLow": 8309,
+          "estimatedVotesMid": 9232,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Sam",
         "id": 32179,
         "lastName": "Bell",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8685
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:21:20.305Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8951,
     "year": 2024
   },
   {
@@ -348,9 +411,16 @@
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -379,9 +449,16 @@
       }
     ],
     "district": "7",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -410,9 +487,16 @@
       }
     ],
     "district": "8",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -441,9 +525,16 @@
       }
     ],
     "district": "9",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -457,45 +548,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16054,
-          "estimatedVotesLow": 13138,
-          "estimatedVotesMid": 14598,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Walter",
-        "id": 32187,
-        "lastName": "Felag",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16054,
-          "estimatedVotesLow": 13138,
-          "estimatedVotesMid": 14598,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16038,
+          "estimatedVotesLow": 13121,
+          "estimatedVotesMid": 14579,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.91
         },
         "firstName": "Allyn",
         "id": 32226,
         "lastName": "Meyers",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 900
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16038,
+          "estimatedVotesLow": 13121,
+          "estimatedVotesMid": 14579,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.91
+        },
+        "firstName": "Walter",
+        "id": 32187,
+        "lastName": "Felag",
+        "partyName": "Democratic",
+        "votes": 13229
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:34:19.656Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 14129,
     "year": 2024
   },
   {
@@ -519,9 +617,16 @@
       }
     ],
     "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -550,9 +655,16 @@
       }
     ],
     "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -566,45 +678,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 12727,
-          "estimatedVotesLow": 10408,
-          "estimatedVotesMid": 11565,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Dawn",
-        "id": 32190,
-        "lastName": "Euer",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 12727,
-          "estimatedVotesLow": 10408,
-          "estimatedVotesMid": 11565,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12709,
+          "estimatedVotesLow": 10398,
+          "estimatedVotesMid": 11553,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
         },
         "firstName": "David",
         "id": 101950,
         "lastName": "Quiroa Sr.",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 404
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12709,
+          "estimatedVotesLow": 10398,
+          "estimatedVotesMid": 11553,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Dawn",
+        "id": 32190,
+        "lastName": "Euer",
+        "partyName": "Democratic",
+        "votes": 10795
       }
     ],
     "district": "13",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:16:21.962Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 11199,
     "year": 2024
   },
   {
@@ -628,9 +747,16 @@
       }
     ],
     "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -659,9 +785,16 @@
       }
     ],
     "district": "15",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -690,9 +823,16 @@
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -706,45 +846,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16201,
-          "estimatedVotesLow": 13254,
-          "estimatedVotesMid": 14726,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16207,
+          "estimatedVotesLow": 13260,
+          "estimatedVotesMid": 14733,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.92
         },
         "firstName": "Thomas",
         "id": 32232,
         "lastName": "Paolino",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1137
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16201,
-          "estimatedVotesLow": 13254,
-          "estimatedVotesMid": 14726,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16207,
+          "estimatedVotesLow": 13260,
+          "estimatedVotesMid": 14733,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.92
         },
         "firstName": "Cameron",
         "id": 32196,
         "lastName": "Deutsch",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 13142
       }
     ],
     "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:03.109Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:40:18.400Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 14279,
     "year": 2024
   },
   {
@@ -768,9 +915,16 @@
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -799,9 +953,16 @@
       }
     ],
     "district": "19",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -830,9 +991,16 @@
       }
     ],
     "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -861,9 +1029,16 @@
       }
     ],
     "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -892,9 +1067,16 @@
       }
     ],
     "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -908,45 +1090,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 17110,
-          "estimatedVotesLow": 13990,
-          "estimatedVotesMid": 15545,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lewis",
-        "id": 84421,
-        "lastName": "Pryeor",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17110,
-          "estimatedVotesLow": 13990,
-          "estimatedVotesMid": 15545,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 17117,
+          "estimatedVotesLow": 14003,
+          "estimatedVotesMid": 15560,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.92
         },
         "firstName": "Jessica",
         "id": 32238,
         "lastName": "de la Cruz",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 12580
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 17117,
+          "estimatedVotesLow": 14003,
+          "estimatedVotesMid": 15560,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Lewis",
+        "id": 84421,
+        "lastName": "Pryeor",
+        "partyName": "Democratic",
+        "votes": 2501
       }
     ],
     "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:19.279Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 15081,
     "year": 2024
   },
   {
@@ -955,45 +1144,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8528,
-          "estimatedVotesLow": 6977,
-          "estimatedVotesMid": 7752,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Melissa",
-        "id": 32203,
-        "lastName": "Murray",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8528,
-          "estimatedVotesLow": 6977,
-          "estimatedVotesMid": 7752,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8566,
+          "estimatedVotesLow": 7009,
+          "estimatedVotesMid": 7787,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.92
         },
         "firstName": "Craig",
         "id": 32239,
         "lastName": "Lacouture",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 800
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8566,
+          "estimatedVotesLow": 7009,
+          "estimatedVotesMid": 7787,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Melissa",
+        "id": 32203,
+        "lastName": "Murray",
+        "partyName": "Democratic",
+        "votes": 6747
       }
     ],
     "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:11:19.677Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 7547,
     "year": 2024
   },
   {
@@ -1002,45 +1198,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15108,
-          "estimatedVotesLow": 12352,
-          "estimatedVotesMid": 13725,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15083,
+          "estimatedVotesLow": 12341,
+          "estimatedVotesMid": 13712,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
         },
         "firstName": "Andrew",
         "id": 84423,
         "lastName": "Dimitri",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 7048
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15108,
-          "estimatedVotesLow": 12352,
-          "estimatedVotesMid": 13725,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15083,
+          "estimatedVotesLow": 12341,
+          "estimatedVotesMid": 13712,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
         },
         "firstName": "Karin",
         "id": 84425,
         "lastName": "Gorman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6243
       }
     ],
     "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:01.593Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:19.279Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 13291,
     "year": 2024
   },
   {
@@ -1049,45 +1252,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14742,
-          "estimatedVotesLow": 12059,
-          "estimatedVotesMid": 13399,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jenn",
-        "id": 101952,
-        "lastName": "Caputi",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14742,
-          "estimatedVotesLow": 12059,
-          "estimatedVotesMid": 13399,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14763,
+          "estimatedVotesLow": 12079,
+          "estimatedVotesMid": 13421,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
         },
         "firstName": "Todd",
         "id": 84426,
         "lastName": "Patalano",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11975
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14763,
+          "estimatedVotesLow": 12079,
+          "estimatedVotesMid": 13421,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
+        },
+        "firstName": "Jenn",
+        "id": 101952,
+        "lastName": "Caputi",
+        "partyName": "Republican",
+        "votes": 1039
       }
     ],
     "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:22:20.083Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 13014,
     "year": 2024
   },
   {
@@ -1111,9 +1321,16 @@
       }
     ],
     "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1142,9 +1359,16 @@
       }
     ],
     "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1158,45 +1382,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14875,
-          "estimatedVotesLow": 12163,
-          "estimatedVotesMid": 13514,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Anthony",
-        "id": 32242,
-        "lastName": "DeLuca",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14875,
-          "estimatedVotesLow": 12163,
-          "estimatedVotesMid": 13514,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14879,
+          "estimatedVotesLow": 12173,
+          "estimatedVotesMid": 13526,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
         },
         "firstName": "Peter",
         "id": 101953,
         "lastName": "Appollonio Jr.",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4983
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14879,
+          "estimatedVotesLow": 12173,
+          "estimatedVotesMid": 13526,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
+        },
+        "firstName": "Anthony",
+        "id": 32242,
+        "lastName": "DeLuca",
+        "partyName": "Republican",
+        "votes": 8133
       }
     ],
     "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:35:19.269Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 13116,
     "year": 2024
   },
   {
@@ -1220,9 +1451,16 @@
       }
     ],
     "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1236,45 +1474,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16112,
-          "estimatedVotesLow": 13179,
-          "estimatedVotesMid": 14644,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lisa",
-        "id": 32244,
-        "lastName": "Morse",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16112,
-          "estimatedVotesLow": 13179,
-          "estimatedVotesMid": 14644,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16137,
+          "estimatedVotesLow": 13203,
+          "estimatedVotesMid": 14670,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
         },
         "firstName": "Matthew",
         "id": 32212,
         "lastName": "LaMountain",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11897
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16137,
+          "estimatedVotesLow": 13203,
+          "estimatedVotesMid": 14670,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
+        },
+        "firstName": "Lisa",
+        "id": 32244,
+        "lastName": "Morse",
+        "partyName": "Republican",
+        "votes": 2325
       }
     ],
     "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:44:18.776Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 14222,
     "year": 2024
   },
   {
@@ -1298,9 +1543,16 @@
       }
     ],
     "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1314,45 +1566,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15924,
-          "estimatedVotesLow": 13025,
-          "estimatedVotesMid": 14472,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Leonidas",
-        "id": 32216,
-        "lastName": "Raptakis",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 15924,
-          "estimatedVotesLow": 13025,
-          "estimatedVotesMid": 14472,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15912,
+          "estimatedVotesLow": 13020,
+          "estimatedVotesMid": 14466,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.94
         },
         "firstName": "James",
         "id": 84435,
         "lastName": "Pierson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 12446
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15912,
+          "estimatedVotesLow": 13020,
+          "estimatedVotesMid": 14466,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Leonidas",
+        "id": 32216,
+        "lastName": "Raptakis",
+        "partyName": "Democratic",
+        "votes": 1578
       }
     ],
     "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:11:19.677Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 14024,
     "year": 2024
   },
   {
@@ -1361,45 +1620,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 17981,
+          "estimatedVotesHigh": 17980,
           "estimatedVotesLow": 14712,
-          "estimatedVotesMid": 16347,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesMid": 16346,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.64,
+          "turnoutMid": 96.88
         },
         "firstName": "Elaine",
         "id": 32247,
         "lastName": "Morgan",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5441
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 17981,
+          "estimatedVotesHigh": 17980,
           "estimatedVotesLow": 14712,
-          "estimatedVotesMid": 16347,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesMid": 16346,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.64,
+          "turnoutMid": 96.88
         },
         "firstName": "Stephen",
         "id": 84436,
         "lastName": "Moffitt",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10395
       }
     ],
     "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:51:18.229Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 15836,
     "year": 2024
   },
   {
@@ -1423,9 +1689,16 @@
       }
     ],
     "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1454,9 +1727,16 @@
       }
     ],
     "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1470,45 +1750,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13784,
-          "estimatedVotesLow": 11277,
-          "estimatedVotesMid": 12531,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Raymond",
-        "id": 32250,
-        "lastName": "Gardner",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 13784,
-          "estimatedVotesLow": 11277,
-          "estimatedVotesMid": 12531,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13770,
+          "estimatedVotesLow": 11266,
+          "estimatedVotesMid": 12518,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
         },
         "firstName": "V. Susan",
         "id": 101954,
         "lastName": "Sosnowski",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11655
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13770,
+          "estimatedVotesLow": 11266,
+          "estimatedVotesMid": 12518,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
+        },
+        "firstName": "Raymond",
+        "id": 32250,
+        "lastName": "Gardner",
+        "partyName": "Republican",
+        "votes": 484
       }
     ],
     "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:21:20.305Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 12139,
     "year": 2024
   },
   {
@@ -1517,45 +1804,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16684,
-          "estimatedVotesLow": 13646,
-          "estimatedVotesMid": 15162,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Westin",
-        "id": 32251,
-        "lastName": "Place",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 16684,
-          "estimatedVotesLow": 13646,
-          "estimatedVotesMid": 15162,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16724,
+          "estimatedVotesLow": 13684,
+          "estimatedVotesMid": 15204,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
         },
         "firstName": "Victoria",
         "id": 32221,
         "lastName": "Gu",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 13866
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16724,
+          "estimatedVotesLow": 13684,
+          "estimatedVotesMid": 15204,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
+        },
+        "firstName": "Westin",
+        "id": 32251,
+        "lastName": "Place",
+        "partyName": "Republican",
+        "votes": 865
       }
     ],
     "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:01.593Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:57:17.861Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 14731,
     "year": 2024
   },
   {
@@ -1579,9 +1873,16 @@
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1610,9 +1911,16 @@
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1641,9 +1949,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1672,9 +1987,16 @@
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1703,9 +2025,16 @@
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1734,9 +2063,16 @@
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1765,9 +2101,16 @@
       }
     ],
     "district": "7",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1796,9 +2139,16 @@
       }
     ],
     "district": "8",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1827,9 +2177,16 @@
       }
     ],
     "district": "9",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1858,9 +2215,16 @@
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1889,9 +2253,16 @@
       }
     ],
     "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1920,9 +2291,16 @@
       }
     ],
     "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1951,9 +2329,16 @@
       }
     ],
     "district": "13",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1982,9 +2367,16 @@
       }
     ],
     "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -1998,45 +2390,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9468,
-          "estimatedVotesLow": 7752,
-          "estimatedVotesMid": 8613,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9461,
+          "estimatedVotesLow": 7741,
+          "estimatedVotesMid": 8601,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
         },
         "firstName": "Maria",
         "id": 84442,
         "lastName": "Bucci",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 7921
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9468,
-          "estimatedVotesLow": 7752,
-          "estimatedVotesMid": 8613,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9461,
+          "estimatedVotesLow": 7741,
+          "estimatedVotesMid": 8601,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
         },
         "firstName": "Chris",
         "id": 101955,
         "lastName": "Paplauskas",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 416
       }
     ],
     "district": "15",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:46:18.509Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8337,
     "year": 2024
   },
   {
@@ -2045,45 +2444,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7205,
-          "estimatedVotesLow": 5894,
-          "estimatedVotesMid": 6549,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7224,
+          "estimatedVotesLow": 5910,
+          "estimatedVotesMid": 6567,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.92
         },
         "firstName": "Brandon",
         "id": 32277,
         "lastName": "Potter",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5921
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7205,
-          "estimatedVotesLow": 5894,
-          "estimatedVotesMid": 6549,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7224,
+          "estimatedVotesLow": 5910,
+          "estimatedVotesMid": 6567,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.92
         },
         "firstName": "Deborah",
         "id": 84445,
         "lastName": "Leong",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 444
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:19.279Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 6365,
     "year": 2024
   },
   {
@@ -2107,9 +2513,16 @@
       }
     ],
     "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2138,9 +2551,16 @@
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2169,9 +2589,16 @@
       }
     ],
     "district": "19",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2200,9 +2627,16 @@
       }
     ],
     "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2216,45 +2650,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7667,
-          "estimatedVotesLow": 6279,
-          "estimatedVotesMid": 6977,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7659,
+          "estimatedVotesLow": 6267,
+          "estimatedVotesMid": 6963,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.94
         },
         "firstName": "James",
         "id": 84446,
         "lastName": "Mcelroy",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4050
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7667,
-          "estimatedVotesLow": 6279,
-          "estimatedVotesMid": 6977,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7659,
+          "estimatedVotesLow": 6267,
+          "estimatedVotesMid": 6963,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.94
         },
         "firstName": "Marie",
         "id": 32366,
         "lastName": "Hopkins",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2700
       }
     ],
     "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:53:18.320Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 6750,
     "year": 2024
   },
   {
@@ -2263,45 +2704,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7853,
-          "estimatedVotesLow": 6431,
-          "estimatedVotesMid": 7146,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7838,
+          "estimatedVotesLow": 6413,
+          "estimatedVotesMid": 7125,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
         },
         "firstName": "Joseph",
         "id": 32286,
         "lastName": "Solomon Jr",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6357
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7853,
-          "estimatedVotesLow": 6431,
-          "estimatedVotesMid": 7146,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7838,
+          "estimatedVotesLow": 6413,
+          "estimatedVotesMid": 7125,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
         },
         "firstName": "David",
         "id": 32367,
         "lastName": "Stone",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 551
       }
     ],
     "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:57:20.519Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 6908,
     "year": 2024
   },
   {
@@ -2325,9 +2773,16 @@
       }
     ],
     "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2356,9 +2811,16 @@
       }
     ],
     "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2387,9 +2849,16 @@
       }
     ],
     "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2403,45 +2872,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7257,
-          "estimatedVotesLow": 5935,
-          "estimatedVotesMid": 6595,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7262,
+          "estimatedVotesLow": 5941,
+          "estimatedVotesMid": 6601,
+          "turnoutHigh": 87.99,
+          "turnoutLow": 107.56,
+          "turnoutMid": 96.8
         },
         "firstName": "Jeffrey",
         "id": 72908,
         "lastName": "Fisher",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5166
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7257,
-          "estimatedVotesLow": 5935,
-          "estimatedVotesMid": 6595,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7262,
+          "estimatedVotesLow": 5941,
+          "estimatedVotesMid": 6601,
+          "turnoutHigh": 87.99,
+          "turnoutLow": 107.56,
+          "turnoutMid": 96.8
         },
         "firstName": "Earl",
         "id": 101957,
         "lastName": "Read III",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1224
       }
     ],
     "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:25:19.668Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 6390,
     "year": 2024
   },
   {
@@ -2450,45 +2926,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8139,
-          "estimatedVotesLow": 6659,
-          "estimatedVotesMid": 7398,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8142,
+          "estimatedVotesLow": 6662,
+          "estimatedVotesMid": 7402,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.66,
+          "turnoutMid": 96.89
         },
         "firstName": "Andrew",
         "id": 32370,
         "lastName": "Kowalski",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1947
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8139,
-          "estimatedVotesLow": 6659,
-          "estimatedVotesMid": 7398,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8142,
+          "estimatedVotesLow": 6662,
+          "estimatedVotesMid": 7402,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.66,
+          "turnoutMid": 96.89
         },
         "firstName": "Patricia",
         "id": 32293,
         "lastName": "Serpa",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5225
       }
     ],
     "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:16:21.962Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 7172,
     "year": 2024
   },
   {
@@ -2497,45 +2980,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8755,
-          "estimatedVotesLow": 7163,
-          "estimatedVotesMid": 7958,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Scott",
-        "id": 32294,
-        "lastName": "Guthrie",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8755,
-          "estimatedVotesLow": 7163,
-          "estimatedVotesMid": 7958,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8744,
+          "estimatedVotesLow": 7154,
+          "estimatedVotesMid": 7949,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
         },
         "firstName": "George",
         "id": 32371,
         "lastName": "Nardone",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6088
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8744,
+          "estimatedVotesLow": 7154,
+          "estimatedVotesMid": 7949,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
+        },
+        "firstName": "Scott",
+        "id": 32294,
+        "lastName": "Guthrie",
+        "partyName": "Democratic",
+        "votes": 1617
       }
     ],
     "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:51:18.950Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 7705,
     "year": 2024
   },
   {
@@ -2559,9 +3049,16 @@
       }
     ],
     "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2590,9 +3087,16 @@
       }
     ],
     "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2606,45 +3110,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9347,
-          "estimatedVotesLow": 7650,
-          "estimatedVotesMid": 8500,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lisa",
-        "id": 32374,
-        "lastName": "Leavitt",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9347,
-          "estimatedVotesLow": 7650,
-          "estimatedVotesMid": 8500,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9343,
+          "estimatedVotesLow": 7645,
+          "estimatedVotesMid": 8494,
+          "turnoutHigh": 88.07,
+          "turnoutLow": 107.63,
+          "turnoutMid": 96.87
         },
         "firstName": "Julie",
         "id": 32296,
         "lastName": "Casimiro",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 7196
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9343,
+          "estimatedVotesLow": 7645,
+          "estimatedVotesMid": 8494,
+          "turnoutHigh": 88.07,
+          "turnoutLow": 107.63,
+          "turnoutMid": 96.87
+        },
+        "firstName": "Lisa",
+        "id": 32374,
+        "lastName": "Leavitt",
+        "partyName": "Republican",
+        "votes": 1032
       }
     ],
     "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:57:18.174Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8228,
     "year": 2024
   },
   {
@@ -2668,9 +3179,16 @@
       }
     ],
     "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2684,45 +3202,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9125,
-          "estimatedVotesLow": 7468,
-          "estimatedVotesMid": 8297,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Carol",
-        "id": 47323,
-        "lastName": "McEntee",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9125,
-          "estimatedVotesLow": 7468,
-          "estimatedVotesMid": 8297,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9118,
+          "estimatedVotesLow": 7461,
+          "estimatedVotesMid": 8289,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.9
         },
         "firstName": "Jessica",
         "id": 32376,
         "lastName": "Drew-Day",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 769
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9118,
+          "estimatedVotesLow": 7461,
+          "estimatedVotesMid": 8289,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.9
+        },
+        "firstName": "Carol",
+        "id": 47323,
+        "lastName": "McEntee",
+        "partyName": "Democratic",
+        "votes": 7263
       }
     ],
     "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:08.423Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:10:20.240Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8032,
     "year": 2024
   },
   {
@@ -2732,44 +3257,51 @@
         "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 8170,
-          "estimatedVotesLow": 6683,
-          "estimatedVotesMid": 7426,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Teresa",
-        "id": 32301,
-        "lastName": "Tanzi",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8170,
-          "estimatedVotesLow": 6683,
-          "estimatedVotesMid": 7426,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesLow": 6684,
+          "estimatedVotesMid": 7427,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.66,
+          "turnoutMid": 96.89
         },
         "firstName": "Joanne",
         "id": 84449,
         "lastName": "Forti",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 404
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8170,
+          "estimatedVotesLow": 6684,
+          "estimatedVotesMid": 7427,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.66,
+          "turnoutMid": 96.89
+        },
+        "firstName": "Teresa",
+        "id": 32301,
+        "lastName": "Tanzi",
+        "partyName": "Democratic",
+        "votes": 6792
       }
     ],
     "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:53:18.986Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 7196,
     "year": 2024
   },
   {
@@ -2778,45 +3310,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5936,
-          "estimatedVotesLow": 4859,
-          "estimatedVotesMid": 5399,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kathleen",
-        "id": 32302,
-        "lastName": "Fogarty",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5936,
-          "estimatedVotesLow": 4859,
-          "estimatedVotesMid": 5399,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5943,
+          "estimatedVotesLow": 4863,
+          "estimatedVotesMid": 5403,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.93
         },
         "firstName": "Jennifer",
         "id": 84450,
         "lastName": "Nerbonne",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 208
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5943,
+          "estimatedVotesLow": 4863,
+          "estimatedVotesMid": 5403,
+          "turnoutHigh": 88.12,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.93
+        },
+        "firstName": "Kathleen",
+        "id": 32302,
+        "lastName": "Fogarty",
+        "partyName": "Democratic",
+        "votes": 5029
       }
     ],
     "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:45:19.028Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 5237,
     "year": 2024
   },
   {
@@ -2840,9 +3379,16 @@
       }
     ],
     "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2871,9 +3417,16 @@
       }
     ],
     "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2902,9 +3455,16 @@
       }
     ],
     "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -2918,45 +3478,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9164,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8327,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9169,
+          "estimatedVotesLow": 7503,
+          "estimatedVotesMid": 8336,
+          "turnoutHigh": 88.07,
+          "turnoutLow": 107.62,
+          "turnoutMid": 96.87
         },
         "firstName": "Megan",
         "id": 32306,
         "lastName": "Cotter",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2197
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9164,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8327,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9169,
+          "estimatedVotesLow": 7503,
+          "estimatedVotesMid": 8336,
+          "turnoutHigh": 88.07,
+          "turnoutLow": 107.62,
+          "turnoutMid": 96.87
         },
         "firstName": "Justin",
         "id": 32381,
         "lastName": "Price",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5878
       }
     ],
     "district": "39",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:03.109Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:56:21.085Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8075,
     "year": 2024
   },
   {
@@ -2966,44 +3533,51 @@
         "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 9163,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8328,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesLow": 7497,
+          "estimatedVotesMid": 8330,
+          "turnoutHigh": 88.04,
+          "turnoutLow": 107.6,
+          "turnoutMid": 96.84
         },
         "firstName": "Michael",
         "id": 32383,
         "lastName": "Chippendale",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4211
       },
       {
         "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 9163,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8328,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesLow": 7497,
+          "estimatedVotesMid": 8330,
+          "turnoutHigh": 88.04,
+          "turnoutLow": 107.6,
+          "turnoutMid": 96.84
         },
         "firstName": "Linda",
         "id": 32307,
         "lastName": "Nichols",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3856
       }
     ],
     "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:55:18.814Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8067,
     "year": 2024
   },
   {
@@ -3012,45 +3586,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9815,
-          "estimatedVotesLow": 8032,
-          "estimatedVotesMid": 8925,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9825,
+          "estimatedVotesLow": 8039,
+          "estimatedVotesMid": 8932,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.66,
+          "turnoutMid": 96.9
         },
         "firstName": "Robert",
         "id": 32384,
         "lastName": "Quattrocchi",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6244
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9815,
-          "estimatedVotesLow": 8032,
-          "estimatedVotesMid": 8925,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9825,
+          "estimatedVotesLow": 8039,
+          "estimatedVotesMid": 8932,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.66,
+          "turnoutMid": 96.9
         },
         "firstName": "Shaina",
         "id": 84452,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2411
       }
     ],
     "district": "41",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:34:21.350Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8655,
     "year": 2024
   },
   {
@@ -3074,9 +3655,16 @@
       }
     ],
     "district": "42",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3090,45 +3678,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7825,
+          "estimatedVotesHigh": 7824,
           "estimatedVotesLow": 6402,
           "estimatedVotesMid": 7113,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Nicola",
-        "id": 32386,
-        "lastName": "Grasso",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7825,
-          "estimatedVotesLow": 6402,
-          "estimatedVotesMid": 7113,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
         },
         "firstName": "Deborah",
         "id": 32312,
         "lastName": "Fellela",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 757
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7824,
+          "estimatedVotesLow": 6402,
+          "estimatedVotesMid": 7113,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
+        },
+        "firstName": "Nicola",
+        "id": 32386,
+        "lastName": "Grasso",
+        "partyName": "Republican",
+        "votes": 6139
       }
     ],
     "district": "43",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:58:20.094Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 6896,
     "year": 2024
   },
   {
@@ -3137,45 +3732,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9925,
+          "estimatedVotesHigh": 9923,
           "estimatedVotesLow": 8120,
-          "estimatedVotesMid": 9022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Peter",
-        "id": 32387,
-        "lastName": "Trementozzi",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9925,
-          "estimatedVotesLow": 8120,
-          "estimatedVotesMid": 9022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesMid": 9021,
+          "turnoutHigh": 88.06,
+          "turnoutLow": 107.61,
+          "turnoutMid": 96.86
         },
         "firstName": "Gregory",
         "id": 32313,
         "lastName": "Costantino",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2732
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9923,
+          "estimatedVotesLow": 8120,
+          "estimatedVotesMid": 9021,
+          "turnoutHigh": 88.06,
+          "turnoutLow": 107.61,
+          "turnoutMid": 96.86
+        },
+        "firstName": "Peter",
+        "id": 32387,
+        "lastName": "Trementozzi",
+        "partyName": "Republican",
+        "votes": 6006
       }
     ],
     "district": "44",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:39:18.754Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 8738,
     "year": 2024
   },
   {
@@ -3199,9 +3801,16 @@
       }
     ],
     "district": "45",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3215,45 +3824,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8463,
-          "estimatedVotesLow": 6921,
-          "estimatedVotesMid": 7690,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mary",
-        "id": 47326,
-        "lastName": "Shallcross-Smith",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8463,
-          "estimatedVotesLow": 6921,
-          "estimatedVotesMid": 7690,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8468,
+          "estimatedVotesLow": 6928,
+          "estimatedVotesMid": 7698,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.91
         },
         "firstName": "Angelo",
         "id": 84457,
         "lastName": "Kapsimalis",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 370
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8468,
+          "estimatedVotesLow": 6928,
+          "estimatedVotesMid": 7698,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.68,
+          "turnoutMid": 96.91
+        },
+        "firstName": "Mary",
+        "id": 47326,
+        "lastName": "Shallcross-Smith",
+        "partyName": "Democratic",
+        "votes": 7090
       }
     ],
     "district": "46",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:52:21.083Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 7460,
     "year": 2024
   },
   {
@@ -3262,45 +3878,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7519,
-          "estimatedVotesLow": 6157,
-          "estimatedVotesMid": 6841,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7555,
+          "estimatedVotesLow": 6181,
+          "estimatedVotesMid": 6868,
+          "turnoutHigh": 88.07,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.88
         },
         "firstName": "Paul",
         "id": 32318,
         "lastName": "Roselli",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 849
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7519,
-          "estimatedVotesLow": 6157,
-          "estimatedVotesMid": 6841,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7555,
+          "estimatedVotesLow": 6181,
+          "estimatedVotesMid": 6868,
+          "turnoutHigh": 88.07,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.88
         },
         "firstName": "David",
         "id": 32389,
         "lastName": "Place",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5805
       }
     ],
     "district": "47",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:58.429Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:47:19.148Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 6654,
     "year": 2024
   },
   {
@@ -3324,9 +3947,16 @@
       }
     ],
     "district": "48",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3340,45 +3970,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4460,
-          "estimatedVotesLow": 3649,
-          "estimatedVotesMid": 4055,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4357,
+          "estimatedVotesLow": 3565,
+          "estimatedVotesMid": 3961,
+          "turnoutHigh": 88,
+          "turnoutLow": 107.55,
+          "turnoutMid": 96.79
         },
         "firstName": "Michael",
         "id": 101958,
         "lastName": "Disney",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 1955
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4460,
-          "estimatedVotesLow": 3649,
-          "estimatedVotesMid": 4055,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4357,
+          "estimatedVotesLow": 3565,
+          "estimatedVotesMid": 3961,
+          "turnoutHigh": 88,
+          "turnoutLow": 107.55,
+          "turnoutMid": 96.79
         },
         "firstName": "Jon",
         "id": 48347,
         "lastName": "Brien",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 1879
       }
     ],
     "district": "49",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:16:21.962Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 3834,
     "year": 2024
   },
   {
@@ -3402,9 +4039,16 @@
       }
     ],
     "district": "50",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3433,9 +4077,16 @@
       }
     ],
     "district": "51",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3464,9 +4115,16 @@
       }
     ],
     "district": "52",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3480,45 +4138,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7089,
-          "estimatedVotesLow": 5801,
-          "estimatedVotesMid": 6445,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bernard",
-        "id": 32326,
-        "lastName": "Hawkins",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7089,
-          "estimatedVotesLow": 5801,
-          "estimatedVotesMid": 6445,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7097,
+          "estimatedVotesLow": 5807,
+          "estimatedVotesMid": 6452,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.88
         },
         "firstName": "Paul",
         "id": 25039,
         "lastName": "Santucci",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5656
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7097,
+          "estimatedVotesLow": 5807,
+          "estimatedVotesMid": 6452,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.88
+        },
+        "firstName": "Bernard",
+        "id": 32326,
+        "lastName": "Hawkins",
+        "partyName": "Democratic",
+        "votes": 595
       }
     ],
     "district": "53",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:52:19.364Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 6251,
     "year": 2024
   },
   {
@@ -3542,9 +4207,16 @@
       }
     ],
     "district": "54",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3573,9 +4245,16 @@
       }
     ],
     "district": "55",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3604,9 +4283,16 @@
       }
     ],
     "district": "56",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3620,45 +4306,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5448,
-          "estimatedVotesLow": 4454,
-          "estimatedVotesMid": 4949,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brandon",
-        "id": 32332,
-        "lastName": "Voas",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5448,
-          "estimatedVotesLow": 4454,
-          "estimatedVotesMid": 4949,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5435,
+          "estimatedVotesLow": 4447,
+          "estimatedVotesMid": 4941,
+          "turnoutHigh": 88.04,
+          "turnoutLow": 107.6,
+          "turnoutMid": 96.84
         },
         "firstName": "James",
         "id": 101959,
         "lastName": "McLaughlin",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 172
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5435,
+          "estimatedVotesLow": 4447,
+          "estimatedVotesMid": 4941,
+          "turnoutHigh": 88.04,
+          "turnoutLow": 107.6,
+          "turnoutMid": 96.84
+        },
+        "firstName": "Brandon",
+        "id": 32332,
+        "lastName": "Voas",
+        "partyName": "Democratic",
+        "votes": 4613
       }
     ],
     "district": "57",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:47:20.424Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 4785,
     "year": 2024
   },
   {
@@ -3682,9 +4375,16 @@
       }
     ],
     "district": "58",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -3701,1003 +4401,28 @@
           "estimatedVotesHigh": 0,
           "estimatedVotesLow": 0,
           "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Enrique",
-        "id": 32268,
-        "lastName": "Sanchez",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "9",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Scott",
-        "id": 32269,
-        "lastName": "Slater",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Grace",
-        "id": 32270,
-        "lastName": "Diaz",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jose",
-        "id": 32272,
-        "lastName": "Batista",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ramon",
-        "id": 32273,
-        "lastName": "Perez",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "13",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Charlene",
-        "id": 32274,
-        "lastName": "Lima",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9468,
-          "estimatedVotesLow": 7752,
-          "estimatedVotesMid": 8613,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Maria",
-        "id": 84442,
-        "lastName": "Bucci",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9468,
-          "estimatedVotesLow": 7752,
-          "estimatedVotesMid": 8613,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chris",
-        "id": 101955,
-        "lastName": "Paplauskas",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "15",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7205,
-          "estimatedVotesLow": 5894,
-          "estimatedVotesMid": 6549,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brandon",
-        "id": 32277,
-        "lastName": "Potter",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7205,
-          "estimatedVotesLow": 5894,
-          "estimatedVotesMid": 6549,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Deborah",
-        "id": 84445,
-        "lastName": "Leong",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jacquelyn",
-        "id": 32279,
-        "lastName": "Baginski",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Arthur",
-        "id": 32280,
-        "lastName": "Handy",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Joseph",
-        "id": 32281,
-        "lastName": "McNamara",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "19",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "David",
-        "id": 32283,
-        "lastName": "Bennett",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7667,
-          "estimatedVotesLow": 6279,
-          "estimatedVotesMid": 6977,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "James",
-        "id": 84446,
-        "lastName": "Mcelroy",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7667,
-          "estimatedVotesLow": 6279,
-          "estimatedVotesMid": 6977,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Marie",
-        "id": 32366,
-        "lastName": "Hopkins",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7853,
-          "estimatedVotesLow": 6431,
-          "estimatedVotesMid": 7146,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Joseph",
-        "id": 32286,
-        "lastName": "Solomon Jr",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7853,
-          "estimatedVotesLow": 6431,
-          "estimatedVotesMid": 7146,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "David",
-        "id": 32367,
-        "lastName": "Stone",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "K. Joseph",
-        "id": 101956,
-        "lastName": "Shekarchi",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Evan",
-        "id": 32290,
-        "lastName": "Shanley",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Thomas",
-        "id": 32291,
-        "lastName": "Noret",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7257,
-          "estimatedVotesLow": 5935,
-          "estimatedVotesMid": 6595,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jeffrey",
-        "id": 72908,
-        "lastName": "Fisher",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7257,
-          "estimatedVotesLow": 5935,
-          "estimatedVotesMid": 6595,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Earl",
-        "id": 101957,
-        "lastName": "Read III",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8139,
-          "estimatedVotesLow": 6659,
-          "estimatedVotesMid": 7398,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Andrew",
-        "id": 32370,
-        "lastName": "Kowalski",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8139,
-          "estimatedVotesLow": 6659,
-          "estimatedVotesMid": 7398,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Patricia",
-        "id": 32293,
-        "lastName": "Serpa",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8755,
-          "estimatedVotesLow": 7163,
-          "estimatedVotesMid": 7958,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Scott",
-        "id": 32294,
-        "lastName": "Guthrie",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8755,
-          "estimatedVotesLow": 7163,
-          "estimatedVotesMid": 7958,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "George",
-        "id": 32371,
-        "lastName": "Nardone",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Sherry",
-        "id": 32372,
-        "lastName": "Roberts",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Justine",
-        "id": 32295,
-        "lastName": "Caldwell",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9347,
-          "estimatedVotesLow": 7650,
-          "estimatedVotesMid": 8500,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lisa",
-        "id": 32374,
-        "lastName": "Leavitt",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9347,
-          "estimatedVotesLow": 7650,
-          "estimatedVotesMid": 8500,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Julie",
-        "id": 32296,
-        "lastName": "Casimiro",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:16.520Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert",
-        "id": 32298,
-        "lastName": "Craven",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9125,
-          "estimatedVotesLow": 7468,
-          "estimatedVotesMid": 8297,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Carol",
-        "id": 47323,
-        "lastName": "McEntee",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9125,
-          "estimatedVotesLow": 7468,
-          "estimatedVotesMid": 8297,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jessica",
-        "id": 32376,
-        "lastName": "Drew-Day",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:08.423Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8170,
-          "estimatedVotesLow": 6683,
-          "estimatedVotesMid": 7426,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Teresa",
-        "id": 32301,
-        "lastName": "Tanzi",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8170,
-          "estimatedVotesLow": 6683,
-          "estimatedVotesMid": 7426,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Joanne",
-        "id": 84449,
-        "lastName": "Forti",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5936,
-          "estimatedVotesLow": 4859,
-          "estimatedVotesMid": 5399,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kathleen",
-        "id": 32302,
-        "lastName": "Fogarty",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5936,
-          "estimatedVotesLow": 4859,
-          "estimatedVotesMid": 5399,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
         "firstName": "Jennifer",
-        "id": 84450,
-        "lastName": "Nerbonne",
-        "partyName": "Republican",
+        "id": 32338,
+        "lastName": "Stewart",
+        "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "59",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -4718,22 +4443,83 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Tina",
-        "id": 32303,
-        "lastName": "Spears",
+        "firstName": "Karen",
+        "id": 32339,
+        "lastName": "Alzate",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "60",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
     "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6179,
+          "estimatedVotesLow": 5055,
+          "estimatedVotesMid": 5617,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Kevin",
+        "id": 84461,
+        "lastName": "Whalen",
+        "partyName": "Republican",
+        "votes": 107
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6179,
+          "estimatedVotesLow": 5055,
+          "estimatedVotesMid": 5617,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Leonela",
+        "id": 32340,
+        "lastName": "Felix",
+        "partyName": "Democratic",
+        "votes": 5337
+      }
+    ],
+    "district": "61",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:03:21.167Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 5444,
     "year": 2024
   },
   {
@@ -4745,443 +4531,28 @@
           "estimatedVotesHigh": 0,
           "estimatedVotesLow": 0,
           "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Samuel",
-        "id": 32304,
-        "lastName": "Azzinaro",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brian",
-        "id": 32305,
-        "lastName": "Kennedy",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9164,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8327,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Megan",
-        "id": 32306,
-        "lastName": "Cotter",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9164,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8327,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Justin",
-        "id": 32381,
-        "lastName": "Price",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "39",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:03.109Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9163,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8328,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Michael",
-        "id": 32383,
-        "lastName": "Chippendale",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9163,
-          "estimatedVotesLow": 7495,
-          "estimatedVotesMid": 8328,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Linda",
-        "id": 32307,
-        "lastName": "Nichols",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9815,
-          "estimatedVotesLow": 8032,
-          "estimatedVotesMid": 8925,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert",
-        "id": 32384,
-        "lastName": "Quattrocchi",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9815,
-          "estimatedVotesLow": 8032,
-          "estimatedVotesMid": 8925,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Shaina",
-        "id": 84452,
-        "lastName": "Smith",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "41",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Richard",
-        "id": 84454,
-        "lastName": "Fascia",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "42",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7825,
-          "estimatedVotesLow": 6402,
-          "estimatedVotesMid": 7113,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Nicola",
-        "id": 32386,
-        "lastName": "Grasso",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7825,
-          "estimatedVotesLow": 6402,
-          "estimatedVotesMid": 7113,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Deborah",
-        "id": 32312,
-        "lastName": "Fellela",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "43",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9925,
-          "estimatedVotesLow": 8120,
-          "estimatedVotesMid": 9022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Peter",
-        "id": 32387,
-        "lastName": "Trementozzi",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9925,
-          "estimatedVotesLow": 8120,
-          "estimatedVotesMid": 9022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Gregory",
-        "id": 32313,
-        "lastName": "Costantino",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "44",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mia",
-        "id": 32316,
-        "lastName": "Ackerman",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "45",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8463,
-          "estimatedVotesLow": 6921,
-          "estimatedVotesMid": 7690,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
         "firstName": "Mary",
-        "id": 47326,
-        "lastName": "Shallcross-Smith",
+        "id": 32341,
+        "lastName": "Messier",
         "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8463,
-          "estimatedVotesLow": 6921,
-          "estimatedVotesMid": 7690,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Angelo",
-        "id": 84457,
-        "lastName": "Kapsimalis",
-        "partyName": "Republican",
         "votes": 0
       }
     ],
-    "district": "46",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7519,
-          "estimatedVotesLow": 6157,
-          "estimatedVotesMid": 6841,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Paul",
-        "id": 32318,
-        "lastName": "Roselli",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7519,
-          "estimatedVotesLow": 6157,
-          "estimatedVotesMid": 6841,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "David",
-        "id": 32389,
-        "lastName": "Place",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "47",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:58.429Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "62",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -5202,17 +4573,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Brian",
-        "id": 32390,
-        "lastName": "Newberry",
-        "partyName": "Republican",
+        "firstName": "Katherine",
+        "id": 32343,
+        "lastName": "Kazarian",
+        "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "48",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "63",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -5226,40 +4604,361 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4460,
-          "estimatedVotesLow": 3649,
-          "estimatedVotesMid": 4055,
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Michael",
-        "id": 101958,
-        "lastName": "Disney",
+        "firstName": "Jenni",
+        "id": 84462,
+        "lastName": "Furtado",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "64",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Matthew",
+        "id": 26887,
+        "lastName": "Dawson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "65",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8947,
+          "estimatedVotesLow": 7321,
+          "estimatedVotesMid": 8134,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
+        },
+        "firstName": "Janine",
+        "id": 84463,
+        "lastName": "Wolf",
+        "partyName": "Republican",
+        "votes": 409
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8947,
+          "estimatedVotesLow": 7321,
+          "estimatedVotesMid": 8134,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
+        },
+        "firstName": "Jennifer",
+        "id": 32348,
+        "lastName": "Boylan",
+        "partyName": "Democratic",
+        "votes": 7472
+      }
+    ],
+    "district": "66",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:00:20.112Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 7881,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jason",
+        "id": 32349,
+        "lastName": "Knight",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "67",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8246,
+          "estimatedVotesLow": 6748,
+          "estimatedVotesMid": 7497,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
+        },
+        "firstName": "John",
+        "id": 101960,
+        "lastName": "Hanley",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 189
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4460,
-          "estimatedVotesLow": 3649,
-          "estimatedVotesMid": 4055,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8246,
+          "estimatedVotesLow": 6748,
+          "estimatedVotesMid": 7497,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
         },
-        "firstName": "Jon",
-        "id": 48347,
-        "lastName": "Brien",
+        "firstName": "June",
+        "id": 32350,
+        "lastName": "Speakman",
+        "partyName": "Democratic",
+        "votes": 7075
+      }
+    ],
+    "district": "68",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:21:20.305Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 7264,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6559,
+          "estimatedVotesLow": 5365,
+          "estimatedVotesMid": 5962,
+          "turnoutHigh": 88.05,
+          "turnoutLow": 107.64,
+          "turnoutMid": 96.86
+        },
+        "firstName": "Susan",
+        "id": 32351,
+        "lastName": "Donovan",
+        "partyName": "Democratic",
+        "votes": 5664
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6559,
+          "estimatedVotesLow": 5365,
+          "estimatedVotesMid": 5962,
+          "turnoutHigh": 88.05,
+          "turnoutLow": 107.64,
+          "turnoutMid": 96.86
+        },
+        "firstName": "Sergei",
+        "id": 101961,
+        "lastName": "Sharenko",
         "partyName": "Independent",
+        "votes": 111
+      }
+    ],
+    "district": "69",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:00:20.112Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 5775,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8169,
+          "estimatedVotesLow": 6683,
+          "estimatedVotesMid": 7426,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Christopher",
+        "id": 32404,
+        "lastName": "Borden",
+        "partyName": "Republican",
+        "votes": 1583
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8169,
+          "estimatedVotesLow": 6683,
+          "estimatedVotesMid": 7426,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
+        },
+        "firstName": "John",
+        "id": 32352,
+        "lastName": "Edwards",
+        "partyName": "Democratic",
+        "votes": 5617
+      }
+    ],
+    "district": "70",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:49:19.296Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "totalVotes": 7200,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Michelle",
+        "id": 32353,
+        "lastName": "McGaw",
+        "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "49",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "71",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -5280,17 +4979,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Stephen",
-        "id": 32322,
-        "lastName": "Casey",
+        "firstName": "Terri-Denise",
+        "id": 32354,
+        "lastName": "Cortvriend",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "50",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "72",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -5311,17 +5017,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Robert",
-        "id": 17669,
-        "lastName": "Phillips",
+        "firstName": "Marvin",
+        "id": 32355,
+        "lastName": "Abney",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "51",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "73",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -5343,63 +5056,23 @@
           "turnoutMid": 0
         },
         "firstName": "Alex",
-        "id": 32325,
-        "lastName": "Marszalkowski",
+        "id": 32356,
+        "lastName": "Finkelman",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "52",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7089,
-          "estimatedVotesLow": 5801,
-          "estimatedVotesMid": 6445,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bernard",
-        "id": 32326,
-        "lastName": "Hawkins",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7089,
-          "estimatedVotesLow": 5801,
-          "estimatedVotesMid": 6445,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Paul",
-        "id": 25039,
-        "lastName": "Santucci",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "53",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "74",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",
@@ -5420,157 +5093,24 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "William",
-        "id": 32327,
-        "lastName": "O'Brien",
+        "firstName": "Lauren",
+        "id": 32357,
+        "lastName": "Carson",
         "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "54",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Arthur",
-        "id": 32328,
-        "lastName": "Corvese",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "55",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Joshua",
-        "id": 32330,
-        "lastName": "Giraldo",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "56",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5448,
-          "estimatedVotesLow": 4454,
-          "estimatedVotesMid": 4949,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brandon",
-        "id": 32332,
-        "lastName": "Voas",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5448,
-          "estimatedVotesLow": 4454,
-          "estimatedVotesMid": 4949,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "James",
-        "id": 101959,
-        "lastName": "McLaughlin",
-        "partyName": "Independent",
-        "votes": 0
-      }
-    ],
-    "district": "57",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "RI",
-    "stateName": "Rhode Island",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cherie",
-        "id": 32334,
-        "lastName": "Cruz",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "58",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:13:33.353Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "district": "75",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "RI",

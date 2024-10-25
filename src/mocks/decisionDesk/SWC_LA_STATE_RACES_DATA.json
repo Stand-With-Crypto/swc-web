@@ -1,1 +1,1107 @@
-[]
+[
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 397111,
+          "estimatedVotesLow": 324909,
+          "estimatedVotesMid": 361010,
+          "turnoutHigh": 89.7,
+          "turnoutLow": 109.63,
+          "turnoutMid": 98.67
+        },
+        "firstName": "Mel",
+        "id": 85028,
+        "lastName": "Manuel",
+        "partyName": "Democratic",
+        "votes": 141405
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 397111,
+          "estimatedVotesLow": 324909,
+          "estimatedVotesMid": 361010,
+          "turnoutHigh": 89.7,
+          "turnoutLow": 109.63,
+          "turnoutMid": 98.67
+        },
+        "firstName": "Randall",
+        "id": 102142,
+        "lastName": "Arrington",
+        "partyName": "Republican",
+        "votes": 16300
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 397111,
+          "estimatedVotesLow": 324909,
+          "estimatedVotesMid": 361010,
+          "turnoutHigh": 89.7,
+          "turnoutLow": 109.63,
+          "turnoutMid": 98.67
+        },
+        "firstName": "Ross",
+        "id": 102144,
+        "lastName": "Shales",
+        "partyName": "Republican",
+        "votes": 6136
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 397111,
+          "estimatedVotesLow": 324909,
+          "estimatedVotesMid": 361010,
+          "turnoutHigh": 89.7,
+          "turnoutLow": 109.63,
+          "turnoutMid": 98.67
+        },
+        "firstName": "Frankie",
+        "id": 102143,
+        "lastName": "Hyers",
+        "partyName": "Unaffiliated",
+        "votes": 10632
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 397111,
+          "estimatedVotesLow": 324909,
+          "estimatedVotesMid": 361010,
+          "turnoutHigh": 89.7,
+          "turnoutLow": 109.63,
+          "turnoutMid": 98.67
+        },
+        "firstName": "Steve",
+        "id": 1769,
+        "lastName": "Scalise",
+        "partyName": "Republican",
+        "votes": 181723
+      }
+    ],
+    "district": "1",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:30.451Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 356196,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350829,
+          "estimatedVotesLow": 287043,
+          "estimatedVotesMid": 318936,
+          "turnoutHigh": 88.92,
+          "turnoutLow": 108.68,
+          "turnoutMid": 97.81
+        },
+        "firstName": "Troy",
+        "id": 15957,
+        "lastName": "Carter",
+        "partyName": "Democratic",
+        "votes": 171491
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350829,
+          "estimatedVotesLow": 287043,
+          "estimatedVotesMid": 318936,
+          "turnoutHigh": 88.92,
+          "turnoutLow": 108.68,
+          "turnoutMid": 97.81
+        },
+        "firstName": "Devin",
+        "id": 85029,
+        "lastName": "Davis",
+        "partyName": "Democratic",
+        "votes": 8607
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350829,
+          "estimatedVotesLow": 287043,
+          "estimatedVotesMid": 318936,
+          "turnoutHigh": 88.92,
+          "turnoutLow": 108.68,
+          "turnoutMid": 97.81
+        },
+        "firstName": "Shondrell",
+        "id": 50991,
+        "lastName": "Perrilloux",
+        "partyName": "Republican",
+        "votes": 16009
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350829,
+          "estimatedVotesLow": 287043,
+          "estimatedVotesMid": 318936,
+          "turnoutHigh": 88.92,
+          "turnoutLow": 108.68,
+          "turnoutMid": 97.81
+        },
+        "firstName": "Devin",
+        "id": 47518,
+        "lastName": "Graham",
+        "partyName": "Republican",
+        "votes": 111722
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350829,
+          "estimatedVotesLow": 287043,
+          "estimatedVotesMid": 318936,
+          "turnoutHigh": 88.92,
+          "turnoutLow": 108.68,
+          "turnoutMid": 97.81
+        },
+        "firstName": "Christy",
+        "id": 102146,
+        "lastName": "Lynch",
+        "partyName": "Republican",
+        "votes": 4124
+      }
+    ],
+    "district": "2",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:30.451Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 311953,
+    "year": 2024
+  },
+  {
+    "calledCandidate": {
+      "cand_id": 1778,
+      "first_name": "Clay",
+      "incumbent": true,
+      "last_name": "Higgins",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 364161,
+          "estimatedVotesLow": 297950,
+          "estimatedVotesMid": 331055,
+          "turnoutHigh": 89.8,
+          "turnoutLow": 109.76,
+          "turnoutMid": 98.79
+        },
+        "firstName": "Clay",
+        "id": 1778,
+        "lastName": "Higgins",
+        "partyName": "Republican",
+        "votes": 212524
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 364161,
+          "estimatedVotesLow": 297950,
+          "estimatedVotesMid": 331055,
+          "turnoutHigh": 89.8,
+          "turnoutLow": 109.76,
+          "turnoutMid": 98.79
+        },
+        "firstName": "Sadi",
+        "id": 102147,
+        "lastName": "Summerlin",
+        "partyName": "Democratic",
+        "votes": 6526
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 364161,
+          "estimatedVotesLow": 297950,
+          "estimatedVotesMid": 331055,
+          "turnoutHigh": 89.8,
+          "turnoutLow": 109.76,
+          "turnoutMid": 98.79
+        },
+        "firstName": "Xan",
+        "id": 50804,
+        "lastName": "John",
+        "partyName": "Republican",
+        "votes": 12057
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 364161,
+          "estimatedVotesLow": 297950,
+          "estimatedVotesMid": 331055,
+          "turnoutHigh": 89.8,
+          "turnoutLow": 109.76,
+          "turnoutMid": 98.79
+        },
+        "firstName": "Priscilla",
+        "id": 85030,
+        "lastName": "Gonzalez",
+        "partyName": "Democratic",
+        "votes": 95926
+      }
+    ],
+    "district": "3",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:30.451Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 327033,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 358160,
+          "estimatedVotesLow": 293042,
+          "estimatedVotesMid": 325600,
+          "turnoutHigh": 88.01,
+          "turnoutLow": 107.57,
+          "turnoutMid": 96.81
+        },
+        "firstName": "Joshua",
+        "id": 85031,
+        "lastName": "Morott",
+        "partyName": "Republican",
+        "votes": 8672
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 358160,
+          "estimatedVotesLow": 293042,
+          "estimatedVotesMid": 325600,
+          "turnoutHigh": 88.01,
+          "turnoutLow": 107.57,
+          "turnoutMid": 96.81
+        },
+        "firstName": "Mike",
+        "id": 1785,
+        "lastName": "Johnson",
+        "partyName": "Republican",
+        "votes": 306540
+      }
+    ],
+    "district": "4",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:30.454Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 315212,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 364385,
+          "estimatedVotesLow": 298130,
+          "estimatedVotesMid": 331257,
+          "turnoutHigh": 88.71,
+          "turnoutLow": 108.42,
+          "turnoutMid": 97.58
+        },
+        "firstName": "M.V.",
+        "id": 102148,
+        "lastName": "Mendoza",
+        "partyName": "Republican",
+        "votes": 5389
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 364385,
+          "estimatedVotesLow": 298130,
+          "estimatedVotesMid": 331257,
+          "turnoutHigh": 88.71,
+          "turnoutLow": 108.42,
+          "turnoutMid": 97.58
+        },
+        "firstName": "Julia",
+        "id": 15974,
+        "lastName": "Letlow",
+        "partyName": "Republican",
+        "votes": 195239
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 364385,
+          "estimatedVotesLow": 298130,
+          "estimatedVotesMid": 331257,
+          "turnoutHigh": 88.71,
+          "turnoutLow": 108.42,
+          "turnoutMid": 97.58
+        },
+        "firstName": "Michael",
+        "id": 102149,
+        "lastName": "Vallien Jr.",
+        "partyName": "Democratic",
+        "votes": 122601
+      }
+    ],
+    "district": "5",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:30.454Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 323229,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 342275,
+          "estimatedVotesLow": 280043,
+          "estimatedVotesMid": 311159,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.79,
+          "turnoutMid": 99
+        },
+        "firstName": "Peter",
+        "id": 2020,
+        "lastName": "Williams",
+        "partyName": "Democratic",
+        "votes": 65687
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 342275,
+          "estimatedVotesLow": 280043,
+          "estimatedVotesMid": 311159,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.79,
+          "turnoutMid": 99
+        },
+        "firstName": "Wilken",
+        "id": 102151,
+        "lastName": "Jones Jr.",
+        "partyName": "Democratic",
+        "votes": 5339
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 342275,
+          "estimatedVotesLow": 280043,
+          "estimatedVotesMid": 311159,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.79,
+          "turnoutMid": 99
+        },
+        "firstName": "Cleo",
+        "id": 50852,
+        "lastName": "Fields",
+        "partyName": "Democratic",
+        "votes": 55374
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 342275,
+          "estimatedVotesLow": 280043,
+          "estimatedVotesMid": 311159,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.79,
+          "turnoutMid": 99
+        },
+        "firstName": "Quentin",
+        "id": 85034,
+        "lastName": "Anderson",
+        "partyName": "Democratic",
+        "votes": 15040
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 342275,
+          "estimatedVotesLow": 280043,
+          "estimatedVotesMid": 311159,
+          "turnoutHigh": 90.65,
+          "turnoutLow": 110.79,
+          "turnoutMid": 99
+        },
+        "firstName": "Elbert",
+        "id": 1783,
+        "lastName": "Guillory",
+        "partyName": "Republican",
+        "votes": 168825
+      }
+    ],
+    "district": "6",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:30.454Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 310265,
+    "year": 2024
+  },
+  {
+    "calledCandidate": {
+      "cand_id": 15988,
+      "first_name": "Marcus",
+      "incumbent": false,
+      "last_name": "Hunter",
+      "party_id": 1,
+      "party_name": "Democratic"
+    },
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 615622,
+          "estimatedVotesLow": 503689,
+          "estimatedVotesMid": 559655,
+          "turnoutHigh": 59.51,
+          "turnoutLow": 72.73,
+          "turnoutMid": 65.46
+        },
+        "firstName": "John",
+        "id": 97754,
+        "lastName": "Guidry",
+        "partyName": "Democratic",
+        "votes": 14385
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 615622,
+          "estimatedVotesLow": 503689,
+          "estimatedVotesMid": 559655,
+          "turnoutHigh": 59.51,
+          "turnoutLow": 72.73,
+          "turnoutMid": 65.46
+        },
+        "firstName": "Leslie",
+        "id": 97753,
+        "lastName": "Chambers",
+        "partyName": "Democratic",
+        "votes": 92439
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 615622,
+          "estimatedVotesLow": 503689,
+          "estimatedVotesMid": 559655,
+          "turnoutHigh": 59.51,
+          "turnoutLow": 72.73,
+          "turnoutMid": 65.46
+        },
+        "firstName": "Marcus",
+        "id": 15988,
+        "lastName": "Hunter",
+        "partyName": "Democratic",
+        "votes": 259520
+      }
+    ],
+    "district": "2",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-24T20:55:44.354Z",
+    "office": {
+      "officeId": "30",
+      "officeName": "State Supreme Court",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 366344,
+    "year": 2024
+  },
+  {
+    "calledCandidate": {
+      "cand_id": 97755,
+      "first_name": "Tess Percy",
+      "incumbent": true,
+      "last_name": "Stromberg",
+      "party_id": 2,
+      "party_name": "Republican"
+    },
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tess Percy",
+        "id": 97755,
+        "lastName": "Stromberg",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Circuit, 1st Dist., Elec. Sec. 1, Division C",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-24T17:03:43.263Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kelly",
+        "id": 97756,
+        "lastName": "Balfour",
+        "partyName": "Republican",
+        "votes": 21087
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Eboni",
+        "id": 97757,
+        "lastName": "Rose",
+        "partyName": "Democratic",
+        "votes": 119432
+      }
+    ],
+    "district": "1st Circuit, 2nd Dist., Subdist. 1, Div. C",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-24T19:59:13.826Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 140519,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Blair",
+        "id": 97758,
+        "lastName": "Edwards",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Circuit, 3rd Dist., Division A",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Allison",
+        "id": 97759,
+        "lastName": "Penzato",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "1st Circuit, 3rd Dist., Division C",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Shonda",
+        "id": 97760,
+        "lastName": "Stone",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2nd Circuit, 3rd Dist., Elec. Sec. 1A",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Anthony",
+        "id": 97762,
+        "lastName": "Eaves",
+        "partyName": "Republican",
+        "votes": 1835
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Clayton",
+        "id": 97761,
+        "lastName": "Davis",
+        "partyName": "Republican",
+        "votes": 90410
+      }
+    ],
+    "district": "3rd Circuit, 2nd Dist., Elec. Sec. 2A",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-24T19:59:13.826Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 92245,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Candyce",
+        "id": 97763,
+        "lastName": "Perret",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "3rd Circuit, 3rd District, Division B",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Monique",
+        "id": 97764,
+        "lastName": "Morial",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "4th Circuit, 1st District, Division E",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Marc",
+        "id": 97765,
+        "lastName": "Johnson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "5th Circuit, 1st Dist., Elec. Sec. 2, Division C",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "154",
+      "officeName": "Court of Appeals",
+      "officeTypeId": "5"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 658159,
+          "estimatedVotesLow": 538496,
+          "estimatedVotesMid": 598327,
+          "turnoutHigh": 65.25,
+          "turnoutLow": 79.74,
+          "turnoutMid": 71.77
+        },
+        "firstName": "Jean-Paul",
+        "id": 50868,
+        "lastName": "Coussan",
+        "partyName": "Republican",
+        "votes": 253347
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 658159,
+          "estimatedVotesLow": 538496,
+          "estimatedVotesMid": 598327,
+          "turnoutHigh": 65.25,
+          "turnoutLow": 79.74,
+          "turnoutMid": 71.77
+        },
+        "firstName": "Julie",
+        "id": 97767,
+        "lastName": "Quinn",
+        "partyName": "Republican",
+        "votes": 7984
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 658159,
+          "estimatedVotesLow": 538496,
+          "estimatedVotesMid": 598327,
+          "turnoutHigh": 65.25,
+          "turnoutLow": 79.74,
+          "turnoutMid": 71.77
+        },
+        "firstName": "Nick",
+        "id": 97766,
+        "lastName": "Laborde",
+        "partyName": "Democratic",
+        "votes": 168092
+      }
+    ],
+    "district": "2",
+    "electionType": {
+      "electionType": "Primary",
+      "electionTypeId": "2"
+    },
+    "lastUpdated": "2024-10-24T20:55:44.354Z",
+    "office": {
+      "officeId": "140",
+      "officeName": "Public Service Commissioner",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 429423,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2178353,
+          "estimatedVotesLow": 1782292,
+          "estimatedVotesMid": 1980320,
+          "turnoutHigh": 67.28,
+          "turnoutLow": 82.23,
+          "turnoutMid": 74.01
+        },
+        "firstName": "No",
+        "id": 16650,
+        "lastName": "",
+        "partyName": "Nonpartisan",
+        "votes": 741591
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2178353,
+          "estimatedVotesLow": 1782292,
+          "estimatedVotesMid": 1980320,
+          "turnoutHigh": 67.28,
+          "turnoutLow": 82.23,
+          "turnoutMid": 74.01
+        },
+        "firstName": "Yes",
+        "id": 16649,
+        "lastName": "",
+        "partyName": "Nonpartisan",
+        "votes": 724040
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "Ballot Question",
+      "electionTypeId": "7"
+    },
+    "lastUpdated": "2024-10-24T20:57:10.353Z",
+    "office": {
+      "officeId": "33",
+      "officeName": "State Referendum",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "totalVotes": 1465631,
+    "year": 2024
+  }
+]

@@ -1,65 +1,79 @@
 [
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "cand_id": 1147,
+      "first_name": "Lisa Blunt",
+      "incumbent": false,
+      "last_name": "Rochester",
+      "party_id": 1,
+      "party_name": "Democratic"
+    },
     "candidatesWithVotes": [
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 496907,
-          "estimatedVotesLow": 406396,
-          "estimatedVotesMid": 451552,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Michael",
-        "id": 84943,
-        "lastName": "Katz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 496907,
-          "estimatedVotesLow": 406396,
-          "estimatedVotesMid": 451552,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lisa Blunt",
-        "id": 1147,
-        "lastName": "Rochester",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 496907,
-          "estimatedVotesLow": 406396,
-          "estimatedVotesMid": 451552,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 94.48,
+          "turnoutLow": 115.48,
+          "turnoutMid": 99
         },
         "firstName": "Eric",
         "id": 77458,
         "lastName": "Hansen",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 184549
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 94.48,
+          "turnoutLow": 115.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Lisa Blunt",
+        "id": 1147,
+        "lastName": "Rochester",
+        "partyName": "Democratic",
+        "votes": 277479
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 94.48,
+          "turnoutLow": 115.48,
+          "turnoutMid": 99
+        },
+        "firstName": "Michael",
+        "id": 84943,
+        "lastName": "Katz",
+        "partyName": "Independent",
+        "votes": 6743
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:53:48.726Z",
-    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:35.127Z",
+    "office": {
+      "officeId": "4",
+      "officeName": "US Senate",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 468771,
     "year": 2024
   },
   {
@@ -68,45 +82,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 545687,
-          "estimatedVotesLow": 446850,
-          "estimatedVotesMid": 496500,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 84468,
-        "lastName": "Whalen III",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 545687,
-          "estimatedVotesLow": 446850,
-          "estimatedVotesMid": 496500,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 97.1,
+          "turnoutLow": 118.67,
+          "turnoutMid": 99
         },
         "firstName": "Sarah",
         "id": 15816,
         "lastName": "McBride",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 293156
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 97.1,
+          "turnoutLow": 118.67,
+          "turnoutMid": 99
+        },
+        "firstName": "John",
+        "id": 84468,
+        "lastName": "Whalen III",
+        "partyName": "Republican",
+        "votes": 188599
       }
     ],
     "district": "At-Large",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:36:54.605Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:20.614Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 481755,
     "year": 2024
   },
   {
@@ -115,45 +136,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 20019,
-          "estimatedVotesLow": 16277,
-          "estimatedVotesMid": 18085,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jon",
-        "id": 101916,
-        "lastName": "Roe",
-        "partyName": "Conservative",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 20019,
-          "estimatedVotesLow": 16277,
-          "estimatedVotesMid": 18085,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19095,
+          "estimatedVotesLow": 15623,
+          "estimatedVotesMid": 17359,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.98
         },
         "firstName": "Darius",
         "id": 45198,
         "lastName": "Brown",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 16499
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19095,
+          "estimatedVotesLow": 15623,
+          "estimatedVotesMid": 17359,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.98
+        },
+        "firstName": "Jon",
+        "id": 101916,
+        "lastName": "Roe",
+        "partyName": "Conservative",
+        "votes": 335
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:09:19.501Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 16834,
     "year": 2024
   },
   {
@@ -177,9 +205,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -208,9 +243,16 @@
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -224,45 +266,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 35322,
-          "estimatedVotesLow": 28879,
-          "estimatedVotesMid": 32088,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Russ",
-        "id": 31028,
-        "lastName": "Huxtable",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 35322,
-          "estimatedVotesLow": 28879,
-          "estimatedVotesMid": 32088,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 32162,
+          "estimatedVotesLow": 26314,
+          "estimatedVotesMid": 29238,
+          "turnoutHigh": 88.17,
+          "turnoutLow": 107.76,
+          "turnoutMid": 96.98
         },
         "firstName": "Kimberly",
         "id": 101917,
         "lastName": "Stevenson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 23253
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 32162,
+          "estimatedVotesLow": 26314,
+          "estimatedVotesMid": 29238,
+          "turnoutHigh": 88.17,
+          "turnoutLow": 107.76,
+          "turnoutMid": 96.98
+        },
+        "firstName": "Russ",
+        "id": 31028,
+        "lastName": "Huxtable",
+        "partyName": "Democratic",
+        "votes": 5103
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:49:18.654Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 28356,
     "year": 2024
   },
   {
@@ -286,9 +335,16 @@
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -317,9 +373,16 @@
       }
     ],
     "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -348,9 +411,16 @@
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -379,9 +449,16 @@
       }
     ],
     "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -410,9 +487,16 @@
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -441,9 +525,16 @@
       }
     ],
     "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -472,9 +563,16 @@
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -503,9 +601,16 @@
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -534,9 +639,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -550,45 +662,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14044,
-          "estimatedVotesLow": 11496,
-          "estimatedVotesMid": 12774,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jeff",
-        "id": 31054,
-        "lastName": "Hilovsky",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 14044,
-          "estimatedVotesLow": 11496,
-          "estimatedVotesMid": 12774,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14111,
+          "estimatedVotesLow": 11545,
+          "estimatedVotesMid": 12828,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Gregg",
         "id": 84485,
         "lastName": "Lindner",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1242
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14111,
+          "estimatedVotesLow": 11545,
+          "estimatedVotesMid": 12828,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Jeff",
+        "id": 31054,
+        "lastName": "Hilovsky",
+        "partyName": "Republican",
+        "votes": 11196
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:54:17.837Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 12438,
     "year": 2024
   },
   {
@@ -612,9 +731,16 @@
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -628,45 +754,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15191,
-          "estimatedVotesLow": 12423,
-          "estimatedVotesMid": 13803,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13822,
+          "estimatedVotesLow": 11309,
+          "estimatedVotesMid": 12565,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
         },
         "firstName": "Debra",
         "id": 31041,
         "lastName": "Heffernan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11699
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15191,
-          "estimatedVotesLow": 12423,
-          "estimatedVotesMid": 13803,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13822,
+          "estimatedVotesLow": 11309,
+          "estimatedVotesMid": 12565,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
         },
         "firstName": "Michael",
         "id": 47255,
         "lastName": "Krawczuk",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 485
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:28:20.658Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 12184,
     "year": 2024
   },
   {
@@ -675,45 +808,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11600,
-          "estimatedVotesLow": 9507,
-          "estimatedVotesMid": 10563,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10553,
+          "estimatedVotesLow": 8635,
+          "estimatedVotesMid": 9594,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.96
         },
         "firstName": "Larry",
         "id": 47256,
         "lastName": "Lambert",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8932
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11600,
-          "estimatedVotesLow": 9507,
-          "estimatedVotesMid": 10563,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10553,
+          "estimatedVotesLow": 8635,
+          "estimatedVotesMid": 9594,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.96
         },
         "firstName": "Shane",
         "id": 48173,
         "lastName": "Stoneman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 370
       }
     ],
     "district": "7",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:57:21.080Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 9302,
     "year": 2024
   },
   {
@@ -722,45 +862,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13428,
-          "estimatedVotesLow": 10990,
-          "estimatedVotesMid": 12211,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Sherae'A",
-        "id": 47257,
-        "lastName": "Moore",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 13428,
-          "estimatedVotesLow": 10990,
-          "estimatedVotesMid": 12211,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13448,
+          "estimatedVotesLow": 11003,
+          "estimatedVotesMid": 12225,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
         },
         "firstName": "Chris",
         "id": 84486,
         "lastName": "Beronio",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 473
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13448,
+          "estimatedVotesLow": 11003,
+          "estimatedVotesMid": 12225,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
+        },
+        "firstName": "Sherae'A",
+        "id": 47257,
+        "lastName": "Moore",
+        "partyName": "Democratic",
+        "votes": 11382
       }
     ],
     "district": "8",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:23:21.098Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 11855,
     "year": 2024
   },
   {
@@ -769,45 +916,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 15460,
-          "estimatedVotesLow": 12648,
-          "estimatedVotesMid": 14053,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Terrell",
-        "id": 47259,
-        "lastName": "Williams",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 15460,
-          "estimatedVotesLow": 12648,
-          "estimatedVotesMid": 14053,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15469,
+          "estimatedVotesLow": 12657,
+          "estimatedVotesMid": 14063,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Kevin",
         "id": 47260,
         "lastName": "Hensley",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 407
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15469,
+          "estimatedVotesLow": 12657,
+          "estimatedVotesMid": 14063,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Terrell",
+        "id": 47259,
+        "lastName": "Williams",
+        "partyName": "Democratic",
+        "votes": 13229
       }
     ],
     "district": "9",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:21:20.101Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 13636,
     "year": 2024
   },
   {
@@ -816,45 +970,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13611,
-          "estimatedVotesLow": 11135,
-          "estimatedVotesMid": 12373,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Melanie",
-        "id": 84488,
-        "lastName": "Levin",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 13611,
-          "estimatedVotesLow": 11135,
-          "estimatedVotesMid": 12373,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13627,
+          "estimatedVotesLow": 11149,
+          "estimatedVotesMid": 12388,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
         },
         "firstName": "Brent",
         "id": 48174,
         "lastName": "Burdge",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 358
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13627,
+          "estimatedVotesLow": 11149,
+          "estimatedVotesMid": 12388,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Melanie",
+        "id": 84488,
+        "lastName": "Levin",
+        "partyName": "Democratic",
+        "votes": 11654
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:20:20.755Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 12012,
     "year": 2024
   },
   {
@@ -878,9 +1039,16 @@
       }
     ],
     "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -894,45 +1062,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16994,
-          "estimatedVotesLow": 13894,
-          "estimatedVotesMid": 15438,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 17005,
+          "estimatedVotesLow": 13913,
+          "estimatedVotesMid": 15459,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.76,
+          "turnoutMid": 96.98
         },
         "firstName": "Steve",
         "id": 101918,
         "lastName": "Pickering",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 448
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16994,
-          "estimatedVotesLow": 13894,
-          "estimatedVotesMid": 15438,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 17005,
+          "estimatedVotesLow": 13913,
+          "estimatedVotesMid": 15459,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.76,
+          "turnoutMid": 96.98
         },
         "firstName": "Krista",
         "id": 47263,
         "lastName": "Griffith",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 14544
       }
     ],
     "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:24:19.097Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 14992,
     "year": 2024
   },
   {
@@ -941,45 +1116,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 10693,
-          "estimatedVotesLow": 8746,
-          "estimatedVotesMid": 9718,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Danny",
-        "id": 84491,
-        "lastName": "Rappa",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10693,
-          "estimatedVotesLow": 8746,
-          "estimatedVotesMid": 9718,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10662,
+          "estimatedVotesLow": 8724,
+          "estimatedVotesMid": 9693,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.95
         },
         "firstName": "DeShanna",
         "id": 31042,
         "lastName": "Neal",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 9023
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10662,
+          "estimatedVotesLow": 8724,
+          "estimatedVotesMid": 9693,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.95
+        },
+        "firstName": "Danny",
+        "id": 84491,
+        "lastName": "Rappa",
+        "partyName": "Republican",
+        "votes": 374
       }
     ],
     "district": "13",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:49:18.654Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 9397,
     "year": 2024
   },
   {
@@ -988,45 +1170,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16865,
-          "estimatedVotesLow": 13794,
-          "estimatedVotesMid": 15327,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15370,
+          "estimatedVotesLow": 12576,
+          "estimatedVotesMid": 13973,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
         },
         "firstName": "Mike",
         "id": 84494,
         "lastName": "Simpler",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 12468
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16865,
-          "estimatedVotesLow": 13794,
-          "estimatedVotesMid": 15327,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15370,
+          "estimatedVotesLow": 12576,
+          "estimatedVotesMid": 13973,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.97
         },
         "firstName": "Claire",
         "id": 84493,
         "lastName": "Snyder-Hall",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1082
       }
     ],
     "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:33:19.176Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 13550,
     "year": 2024
   },
   {
@@ -1050,9 +1239,16 @@
       }
     ],
     "district": "15",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1081,9 +1277,16 @@
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1112,9 +1315,16 @@
       }
     ],
     "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1143,9 +1353,16 @@
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1159,45 +1376,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13415,
-          "estimatedVotesLow": 10967,
-          "estimatedVotesMid": 12186,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12228,
+          "estimatedVotesLow": 10004,
+          "estimatedVotesMid": 11116,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
         },
         "firstName": "Kimberly",
         "id": 12144,
         "lastName": "Williams",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10242
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13415,
-          "estimatedVotesLow": 10967,
-          "estimatedVotesMid": 12186,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12228,
+          "estimatedVotesLow": 10004,
+          "estimatedVotesMid": 11116,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
         },
         "firstName": "Alexander",
         "id": 48172,
         "lastName": "Homich",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 537
       }
     ],
     "district": "19",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:11:21.447Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 10779,
     "year": 2024
   },
   {
@@ -1206,45 +1430,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16730,
-          "estimatedVotesLow": 13684,
-          "estimatedVotesMid": 15205,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15250,
+          "estimatedVotesLow": 12478,
+          "estimatedVotesMid": 13864,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.98
         },
         "firstName": "Stell",
         "id": 47272,
         "lastName": "Selby",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5916
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 16730,
-          "estimatedVotesLow": 13684,
-          "estimatedVotesMid": 15205,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15250,
+          "estimatedVotesLow": 12478,
+          "estimatedVotesMid": 13864,
+          "turnoutHigh": 88.16,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.98
         },
         "firstName": "Nikki",
         "id": 84499,
         "lastName": "Miller",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7529
       }
     ],
     "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:14:20.111Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 13445,
     "year": 2024
   },
   {
@@ -1253,45 +1484,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13457,
-          "estimatedVotesLow": 11009,
-          "estimatedVotesMid": 12232,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Frank",
-        "id": 20723,
-        "lastName": "Burns",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 13457,
-          "estimatedVotesLow": 11009,
-          "estimatedVotesMid": 12232,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13446,
+          "estimatedVotesLow": 11002,
+          "estimatedVotesMid": 12224,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Brenda",
         "id": 45210,
         "lastName": "Mennella",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 472
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13446,
+          "estimatedVotesLow": 11002,
+          "estimatedVotesMid": 12224,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Frank",
+        "id": 20723,
+        "lastName": "Burns",
+        "partyName": "Democratic",
+        "votes": 11381
       }
     ],
     "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:14:20.111Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 11853,
     "year": 2024
   },
   {
@@ -1300,45 +1538,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18127,
-          "estimatedVotesLow": 14841,
-          "estimatedVotesMid": 16490,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16529,
+          "estimatedVotesLow": 13523,
+          "estimatedVotesMid": 15026,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
         },
         "firstName": "Monica",
         "id": 84500,
         "lastName": "Beard",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 13844
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18127,
-          "estimatedVotesLow": 14841,
-          "estimatedVotesMid": 16490,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16529,
+          "estimatedVotesLow": 13523,
+          "estimatedVotesMid": 15026,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.75,
+          "turnoutMid": 96.97
         },
         "firstName": "Michael",
         "id": 47275,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 727
       }
     ],
     "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:59:20.104Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 14571,
     "year": 2024
   },
   {
@@ -1362,9 +1607,16 @@
       }
     ],
     "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1378,45 +1630,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11557,
-          "estimatedVotesLow": 9453,
-          "estimatedVotesMid": 10504,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Edward",
-        "id": 47277,
-        "lastName": "Osienski",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11557,
-          "estimatedVotesLow": 9453,
-          "estimatedVotesMid": 10504,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10545,
+          "estimatedVotesLow": 8627,
+          "estimatedVotesMid": 9586,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.67,
+          "turnoutMid": 96.9
         },
         "firstName": "Joan",
         "id": 48177,
         "lastName": "Godwin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 370
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10545,
+          "estimatedVotesLow": 8627,
+          "estimatedVotesMid": 9586,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.67,
+          "turnoutMid": 96.9
+        },
+        "firstName": "Edward",
+        "id": 47277,
+        "lastName": "Osienski",
+        "partyName": "Democratic",
+        "votes": 8919
       }
     ],
     "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:17.681Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 9289,
     "year": 2024
   },
   {
@@ -1425,45 +1684,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9463,
-          "estimatedVotesLow": 7744,
-          "estimatedVotesMid": 8605,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "David",
-        "id": 84503,
-        "lastName": "Hansberger",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9463,
-          "estimatedVotesLow": 7744,
-          "estimatedVotesMid": 8605,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9470,
+          "estimatedVotesLow": 7748,
+          "estimatedVotesMid": 8609,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Cyndie",
         "id": 31046,
         "lastName": "Romer",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8098
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9470,
+          "estimatedVotesLow": 7748,
+          "estimatedVotesMid": 8609,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
+        },
+        "firstName": "David",
+        "id": 84503,
+        "lastName": "Hansberger",
+        "partyName": "Republican",
+        "votes": 249
       }
     ],
     "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:18:20.002Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 8347,
     "year": 2024
   },
   {
@@ -1487,9 +1753,16 @@
       }
     ],
     "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1503,45 +1776,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14050,
-          "estimatedVotesLow": 11482,
-          "estimatedVotesMid": 12758,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14058,
+          "estimatedVotesLow": 11502,
+          "estimatedVotesMid": 12780,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
         },
         "firstName": "Eric",
         "id": 13996,
         "lastName": "Morrison",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11898
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14050,
-          "estimatedVotesLow": 11482,
-          "estimatedVotesMid": 12758,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14058,
+          "estimatedVotesLow": 11502,
+          "estimatedVotesMid": 12780,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
         },
         "firstName": "Kristina",
         "id": 84505,
         "lastName": "Griffing",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 494
       }
     ],
     "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:41:19.570Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 12392,
     "year": 2024
   },
   {
@@ -1565,9 +1845,16 @@
       }
     ],
     "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1581,45 +1868,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14852,
-          "estimatedVotesLow": 12133,
-          "estimatedVotesMid": 13482,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13537,
+          "estimatedVotesLow": 11075,
+          "estimatedVotesMid": 12306,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.94
         },
         "firstName": "Anthony",
         "id": 101921,
         "lastName": "Egipciaco Jr.",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1072
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 14852,
-          "estimatedVotesLow": 12133,
-          "estimatedVotesMid": 13482,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13537,
+          "estimatedVotesLow": 11075,
+          "estimatedVotesMid": 12306,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.94
         },
         "firstName": "William",
         "id": 47282,
         "lastName": "Bush",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10858
       }
     ],
     "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:51:18.278Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 11930,
     "year": 2024
   },
   {
@@ -1643,9 +1937,16 @@
       }
     ],
     "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1674,9 +1975,16 @@
       }
     ],
     "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1690,45 +1998,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7876,
-          "estimatedVotesLow": 6441,
-          "estimatedVotesMid": 7157,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7955,
+          "estimatedVotesLow": 6509,
+          "estimatedVotesMid": 7232,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.94
         },
         "firstName": "Amy",
         "id": 101922,
         "lastName": "Spampinato",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2664
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7876,
-          "estimatedVotesLow": 6441,
-          "estimatedVotesMid": 7157,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7955,
+          "estimatedVotesLow": 6509,
+          "estimatedVotesMid": 7232,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.71,
+          "turnoutMid": 96.94
         },
         "firstName": "Kerri",
         "id": 10742,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4347
       }
     ],
     "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:43:17.911Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 7011,
     "year": 2024
   },
   {
@@ -1752,9 +2067,16 @@
       }
     ],
     "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1768,45 +2090,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13369,
-          "estimatedVotesLow": 11022,
-          "estimatedVotesMid": 12247,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12990,
+          "estimatedVotesLow": 10628,
+          "estimatedVotesMid": 11809,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
         },
         "firstName": "Lyndon",
         "id": 47289,
         "lastName": "Yearick",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6523
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13369,
-          "estimatedVotesLow": 11022,
-          "estimatedVotesMid": 12247,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12990,
+          "estimatedVotesLow": 10628,
+          "estimatedVotesMid": 11809,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.93
         },
         "firstName": "Tracey",
         "id": 84511,
         "lastName": "Miller",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4923
       }
     ],
     "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:56:18.271Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 11446,
     "year": 2024
   },
   {
@@ -1830,9 +2159,16 @@
       }
     ],
     "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1846,45 +2182,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 12351,
-          "estimatedVotesLow": 10096,
-          "estimatedVotesMid": 11218,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11510,
+          "estimatedVotesLow": 9418,
+          "estimatedVotesMid": 10464,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Rony",
         "id": 84512,
         "lastName": "Baltazar-Lopez",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8219
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 12351,
-          "estimatedVotesLow": 10096,
-          "estimatedVotesMid": 11218,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11510,
+          "estimatedVotesLow": 9418,
+          "estimatedVotesMid": 10464,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Bryan",
         "id": 31056,
         "lastName": "Shupe",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1927
       }
     ],
     "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:27:19.326Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 10146,
     "year": 2024
   },
   {
@@ -1908,9 +2251,16 @@
       }
     ],
     "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1939,9 +2289,16 @@
       }
     ],
     "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -1970,9 +2327,16 @@
       }
     ],
     "district": "39",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -2001,9 +2365,16 @@
       }
     ],
     "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:45:40.297Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
@@ -2017,45 +2388,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13380,
-          "estimatedVotesLow": 10943,
-          "estimatedVotesMid": 12159,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Tom",
-        "id": 84513,
-        "lastName": "Brett",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 13380,
-          "estimatedVotesLow": 10943,
-          "estimatedVotesMid": 12159,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13411,
+          "estimatedVotesLow": 10973,
+          "estimatedVotesMid": 12192,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
         },
         "firstName": "Richard",
         "id": 101923,
         "lastName": "Collins",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9809
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13411,
+          "estimatedVotesLow": 10973,
+          "estimatedVotesMid": 12192,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Tom",
+        "id": 84513,
+        "lastName": "Brett",
+        "partyName": "Democratic",
+        "votes": 2008
       }
     ],
     "district": "41",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:55:18.736Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 11817,
     "year": 2024
   },
   {
@@ -2064,45 +2442,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 532510,
-          "estimatedVotesLow": 435967,
-          "estimatedVotesMid": 484409,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 100.11,
+          "turnoutLow": 122.36,
+          "turnoutMid": 99
         },
         "firstName": "Matt",
         "id": 84470,
         "lastName": "Meyer",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 379906
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 532510,
-          "estimatedVotesLow": 435967,
-          "estimatedVotesMid": 484409,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 100.11,
+          "turnoutLow": 122.36,
+          "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 47274,
         "lastName": "Ramone",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 116801
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:49.263Z",
-    "office": { "officeId": "2", "officeName": "Governor", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:38.145Z",
+    "office": {
+      "officeId": "2",
+      "officeName": "Governor",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 496707,
     "year": 2024
   },
   {
@@ -2111,45 +2496,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 496806,
-          "estimatedVotesLow": 406313,
-          "estimatedVotesMid": 451460,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 99.8,
+          "turnoutLow": 121.97,
+          "turnoutMid": 99
         },
         "firstName": "Kyle",
         "id": 45202,
         "lastName": "Gay",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 342054
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 496806,
-          "estimatedVotesLow": 406313,
-          "estimatedVotesMid": 451460,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 99.8,
+          "turnoutLow": 121.97,
+          "turnoutMid": 99
         },
         "firstName": "Ruth",
         "id": 47292,
         "lastName": "King",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 153089
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:49.263Z",
-    "office": { "officeId": "8", "officeName": "Lt Governor", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:38.145Z",
+    "office": {
+      "officeId": "8",
+      "officeName": "Lt Governor",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 495143,
     "year": 2024
   },
   {
@@ -2158,45 +2550,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 511278,
-          "estimatedVotesLow": 417997,
-          "estimatedVotesMid": 464442,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Trinidad",
-        "id": 84477,
-        "lastName": "Navarro",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 511278,
-          "estimatedVotesLow": 417997,
-          "estimatedVotesMid": 464442,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 101.12,
+          "turnoutLow": 123.59,
+          "turnoutMid": 99
         },
         "firstName": "Ralph",
         "id": 84478,
         "lastName": "Taylor",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 54210
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 496159,
+          "estimatedVotesLow": 405949,
+          "estimatedVotesMid": 451054,
+          "turnoutHigh": 101.12,
+          "turnoutLow": 123.59,
+          "turnoutMid": 99
+        },
+        "firstName": "Trinidad",
+        "id": 84477,
+        "lastName": "Navarro",
+        "partyName": "Democratic",
+        "votes": 447519
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:49.263Z",
-    "office": { "officeId": "144", "officeName": "Insurance Commissioner", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:38.145Z",
+    "office": {
+      "officeId": "144",
+      "officeName": "Insurance Commissioner",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 501729,
     "year": 2024
   }
 ]

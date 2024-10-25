@@ -10,7 +10,17 @@ export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.MINUTE
 
 export async function GET() {
-  const data = await getDecisionDataFromRedis<GetAllCongressDataResponse>('SWC_ALL_CONGRESS_DATA')
+  const allSenateData =
+    await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'senateDataWithDtsi'>>(
+      'SWC_ALL_SENATE_DATA',
+    )
+  const allHouseData =
+    await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'houseDataWithDtsi'>>(
+      'SWC_ALL_HOUSE_DATA',
+    )
 
-  return NextResponse.json(data)
+  return NextResponse.json({
+    ...allSenateData,
+    ...allHouseData,
+  })
 }

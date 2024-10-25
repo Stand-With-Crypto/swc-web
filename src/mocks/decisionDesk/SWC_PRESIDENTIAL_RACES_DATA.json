@@ -22,7 +22,10 @@
       "title": "45th President of the United States"
     },
     "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20241008-013933-trump-3.jpg",
-    "profilePictureUrlDimensions": { "height": 557, "width": 440 },
+    "profilePictureUrlDimensions": {
+      "height": 557,
+      "width": 440
+    },
     "promotedPositioning": 5,
     "roles": [
       {
@@ -80,7 +83,13 @@
                 "type": "Place"
               }
             ],
-            "hashtags": [{ "end": 84, "start": 76, "tag": "Bitcoin" }],
+            "hashtags": [
+              {
+                "end": 84,
+                "start": 76,
+                "tag": "Bitcoin"
+              }
+            ],
             "urls": [
               {
                 "display_url": "pic.twitter.com/OSfUL91McJ",
@@ -152,7 +161,13 @@
                 "type": "Place"
               }
             ],
-            "hashtags": [{ "end": 133, "start": 125, "tag": "Bitcoin" }],
+            "hashtags": [
+              {
+                "end": 133,
+                "start": 125,
+                "tag": "Bitcoin"
+              }
+            ],
             "urls": [
               {
                 "display_url": "pic.twitter.com/UdQBzXJOGZ",
@@ -204,7 +219,12 @@
               }
             ],
             "mentions": [
-              { "end": 78, "id": "1816138985342705664", "start": 63, "username": "worldlibertyfi" }
+              {
+                "end": 78,
+                "id": "1816138985342705664",
+                "start": 63,
+                "username": "worldlibertyfi"
+              }
             ],
             "urls": [
               {
@@ -405,14 +425,24 @@
                   "text": "The former president and leading Republican candidate for next year’s election held $2.8 million in a cryptocurrency wallet as of early August, according to "
                 },
                 {
-                  "children": [{ "text": "official" }],
+                  "children": [
+                    {
+                      "text": "official"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.citizensforethics.org/wp-content/uploads/2023/08/Disclosure-Report-Part-1-8-14-23.pdf"
                 },
-                { "text": " " },
                 {
-                  "children": [{ "text": "documents" }],
+                  "text": " "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "documents"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.citizensforethics.org/wp-content/uploads/2023/08/Disclosure-Report-Part-38-14-23.pdf"
@@ -421,21 +451,37 @@
                   "text": " governmental ethics watchdog Citizens for Responsibility and Ethics in Washington received Monday. He also earned $4.87 million in licensing fees from his non-fungible token collection, per the filing. Trump, despite being a "
                 },
                 {
-                  "children": [{ "text": "crypto skeptic when he was president" }],
+                  "children": [
+                    {
+                      "text": "crypto skeptic when he was president"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.coindesk.com/markets/2019/07/12/us-president-donald-trump-says-hes-not-a-fan-of-bitcoin/"
                 },
-                { "text": ", last year debuted a non-fungible token (" },
                 {
-                  "children": [{ "text": "NFT" }],
+                  "text": ", last year debuted a non-fungible token ("
+                },
+                {
+                  "children": [
+                    {
+                      "text": "NFT"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.coindesk.com/learn/what-are-nfts-and-how-do-they-work/"
                 },
-                { "text": ") project called " },
                 {
-                  "children": [{ "text": "Trump Digital Collectible Cards" }],
+                  "text": ") project called "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "Trump Digital Collectible Cards"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://opensea.io/collection/trump-digital-trading-cards"
@@ -444,12 +490,18 @@
                   "text": " sporting images of himself. He released a second series of collectibles this April. Both collections "
                 },
                 {
-                  "children": [{ "text": "sold" }],
+                  "children": [
+                    {
+                      "text": "sold"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.coindesk.com/web3/2022/12/16/trump-nft-collection-sells-out-price-surges/"
                 },
-                { "text": " out." }
+                {
+                  "text": " out."
+                }
               ],
               "type": "p"
             }
@@ -702,9 +754,15 @@
           "richTextDescription": [
             {
               "children": [
-                { "text": "Although Trump said he was " },
                 {
-                  "children": [{ "text": "\"not a fan\" of cryptocurrency in July 2019" }],
+                  "text": "Although Trump said he was "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "\"not a fan\" of cryptocurrency in July 2019"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.coindesk.com/markets/2019/07/12/us-president-donald-trump-says-hes-not-a-fan-of-bitcoin/"
@@ -825,7 +883,13 @@
                 "type": "Place"
               }
             ],
-            "hashtags": [{ "end": 38, "start": 30, "tag": "Bitcoin" }],
+            "hashtags": [
+              {
+                "end": 38,
+                "start": 30,
+                "tag": "Bitcoin"
+              }
+            ],
             "urls": [
               {
                 "display_url": "pic.x.com/zakew5ah5g",
@@ -878,12 +942,18 @@
                   "text": "\"Back by popular demand, my TRUMP DIGITAL TRADING CARDS, Series 4: The America First Collection, is available RIGHT NOW, and I think you’ll love it! For some, there’ll be an Invite to a Gala Dinner at my beautiful private Club in Jupiter, Florida. Don’t wait, have fun - The Cards will go FAST! Go to "
                 },
                 {
-                  "children": [{ "text": "collecttrumpcards.com/" }],
+                  "children": [
+                    {
+                      "text": "collecttrumpcards.com/"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://links.truthsocial.com/link/110220692067776235"
                 },
-                { "text": ". ENJOY!\"\n" }
+                {
+                  "text": ". ENJOY!\"\n"
+                }
               ],
               "type": "p"
             }
@@ -927,11 +997,24 @@
               }
             ],
             "hashtags": [
-              { "end": 64, "start": 56, "tag": "bitcoin" },
-              { "end": 72, "start": 66, "tag": "ether" }
+              {
+                "end": 64,
+                "start": 56,
+                "tag": "bitcoin"
+              },
+              {
+                "end": 72,
+                "start": 66,
+                "tag": "ether"
+              }
             ],
             "mentions": [
-              { "end": 109, "id": "799069847254683648", "start": 93, "username": "realDannyNelson" }
+              {
+                "end": 109,
+                "id": "799069847254683648",
+                "start": 93,
+                "username": "realDannyNelson"
+              }
             ],
             "urls": [
               {
@@ -1133,7 +1216,12 @@
               }
             ],
             "mentions": [
-              { "end": 47, "id": "25073877", "start": 31, "username": "realDonaldTrump" }
+              {
+                "end": 47,
+                "id": "25073877",
+                "start": 31,
+                "username": "realDonaldTrump"
+              }
             ],
             "urls": [
               {
@@ -1192,7 +1280,13 @@
                 "type": "Other"
               }
             ],
-            "hashtags": [{ "end": 48, "start": 40, "tag": "Bitcoin" }],
+            "hashtags": [
+              {
+                "end": 48,
+                "start": 40,
+                "tag": "Bitcoin"
+              }
+            ],
             "urls": [
               {
                 "display_url": "pic.twitter.com/jJEYmHJy04",
@@ -1395,18 +1489,18 @@
     ],
     "votingData": {
       "called": false,
-      "electoralVotes": 0,
+      "electoralVotes": 214,
       "firstName": "Donald J.",
       "id": 5,
       "lastName": "Trump",
       "partyName": "Republican",
-      "percentage": 57.79,
-      "votes": 929375
+      "percentage": 44.1,
+      "votes": 62378703
     }
   },
   {
     "computedStanceScore": null,
-    "computedSumStanceScoreWeight": 1,
+    "computedSumStanceScoreWeight": 3,
     "firstName": "Kamala",
     "firstNickname": "",
     "id": "987d36bc-bf88-4e10-b463-cae641ed43dd",
@@ -1427,7 +1521,10 @@
       "title": ""
     },
     "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20241008-013548-20240722-173240-kamalaharris-2.png",
-    "profilePictureUrlDimensions": { "height": 1962, "width": 1962 },
+    "profilePictureUrlDimensions": {
+      "height": 1962,
+      "width": 1962
+    },
     "promotedPositioning": null,
     "roles": [
       {
@@ -1567,8 +1664,109 @@
       }
     ],
     "slug": "kamala---harris",
-    "stanceCount": 1,
+    "stanceCount": 3,
     "stances": [
+      {
+        "billRelationship": null,
+        "computedStanceScore": 50,
+        "dateStanceMade": "2024-10-14T00:00:00.000Z",
+        "id": "4c839c8f-a1a8-4506-933d-db132cb9c19f",
+        "quote": {
+          "richTextDescription": [
+            {
+              "children": [
+                {
+                  "text": "Supporting a regulatory framework for cryptocurrency and other digital assets so Black men who invest in and own these assets are protected."
+                }
+              ],
+              "type": "p"
+            },
+            {
+              "children": [
+                {
+                  "text": "\n"
+                }
+              ],
+              "type": "p"
+            },
+            {
+              "children": [
+                {
+                  "text": "\n"
+                }
+              ],
+              "type": "p"
+            }
+          ],
+          "sourceUrl": "https://kamalaharris.com/agenda/"
+        },
+        "stanceType": "QUOTE",
+        "tweet": null
+      },
+      {
+        "billRelationship": null,
+        "computedStanceScore": 75,
+        "dateStanceMade": "2024-09-25T00:00:00.000Z",
+        "id": "9b8a49df-66a8-496c-85c3-451e0d7f42ab",
+        "quote": null,
+        "stanceType": "TWEET",
+        "tweet": {
+          "datetimeCreatedOnTwitter": "2024-09-25T22:25:02.000Z",
+          "entities": {
+            "annotations": [
+              {
+                "end": 14,
+                "normalized_text": "KAMALA HARRIS",
+                "probability": 0.973,
+                "start": 2,
+                "type": "Person"
+              },
+              {
+                "end": 50,
+                "normalized_text": "AI",
+                "probability": 0.5566,
+                "start": 49,
+                "type": "Organization"
+              }
+            ],
+            "urls": [
+              {
+                "display_url": "x.com/i/web/status/1…",
+                "end": 141,
+                "expanded_url": "https://x.com/i/web/status/1839068621030748335",
+                "start": 118,
+                "url": "https://t.co/dgxfnH6L9h"
+              },
+              {
+                "display_url": "pic.x.com/ayBTGQedZE",
+                "end": 165,
+                "expanded_url": "https://x.com/Cointelegraph/status/1839068621030748335/video/1",
+                "media_key": "7_1839068390553694212",
+                "start": 142,
+                "url": "https://t.co/ayBTGQedZE"
+              }
+            ]
+          },
+          "id": "1839068621030748335",
+          "text": "🚨 KAMALA HARRIS: \"We will ... remain dominant in AI, quantum computing, blockchain, and other emerging technologies.\" https://t.co/dgxfnH6L9h https://t.co/ayBTGQedZE",
+          "tweetMedia": [
+            {
+              "height": 1080,
+              "id": "7_1839068390553694212",
+              "originalUrl": "https://pbs.twimg.com/ext_tw_video_thumb/1839068390553694212/pu/img/mw9OuqeSH7wsyecr.jpg",
+              "url": "https://db0prh5pvbqwd.cloudfront.net/all/images/c56acb90-b1cb-4b7e-9f88-ddb85d078ccd.jpg",
+              "width": 1920
+            }
+          ],
+          "twitterAccount": {
+            "datetimeCreated": "2024-07-27T23:38:20.939Z",
+            "id": "760211fb-3395-4c5b-a098-0aa7dd072f81",
+            "personId": null,
+            "state": "VISIBLE_DONT_QUERY",
+            "username": "Cointelegraph"
+          }
+        }
+      },
       {
         "billRelationship": null,
         "computedStanceScore": 75,
@@ -1601,14 +1799,14 @@
       }
     ],
     "votingData": {
-      "called": false,
-      "electoralVotes": 0,
+      "called": true,
+      "electoralVotes": 294,
       "firstName": "Kamala",
       "id": 988,
       "lastName": "Harris",
       "partyName": "Democratic",
-      "percentage": 41.24,
-      "votes": 663199
+      "percentage": 48.8,
+      "votes": 69028739
     }
   },
   {
@@ -1634,7 +1832,10 @@
       "title": ""
     },
     "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20241008-013637-20240806-130130-Governor_Tim_Walz_at_Bemidji_Steel_cropped-2.jpg",
-    "profilePictureUrlDimensions": { "height": 1627, "width": 1219 },
+    "profilePictureUrlDimensions": {
+      "height": 1627,
+      "width": 1219
+    },
     "promotedPositioning": null,
     "roles": [
       {
@@ -1699,7 +1900,10 @@
       "title": ""
     },
     "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20241008-013721-20240910-225614-jdvanceprofilepicture-2.png",
-    "profilePictureUrlDimensions": { "height": 1500, "width": 1200 },
+    "profilePictureUrlDimensions": {
+      "height": 1500,
+      "width": 1200
+    },
     "promotedPositioning": null,
     "roles": [
       {
@@ -1871,7 +2075,11 @@
                   "text": "Vance has disclosed Bitcoin  holdings valued at up to $250,000, which at the time of writing is around 6.5 BTC, "
                 },
                 {
-                  "children": [{ "text": "according" }],
+                  "children": [
+                    {
+                      "text": "according"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.coingecko.com/en/coins/bitcoin"
@@ -1880,7 +2088,11 @@
                   "text": " to CoinGecko. He was also backed by Bitcoin proponent and billionaire investor Peter Thiel through a Super PAC. Bloomberg "
                 },
                 {
-                  "children": [{ "text": "reported" }],
+                  "children": [
+                    {
+                      "text": "reported"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://www.bloomberg.com/news/articles/2022-04-20/thiel-deepens-jd-vance-bet-with-3-5-million-after-trump-backing"
@@ -1914,42 +2126,74 @@
             },
             {
               "children": [
-                { "text": "In a letter to SEC Chair " },
                 {
-                  "children": [{ "text": "Gary Gensler " }],
+                  "text": "In a letter to SEC Chair "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "Gary Gensler "
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://thehill.com/people/gary-gensler/"
                 },
-                { "text": "on Wednesday, Sens. JD Vance (R-Ohio), " },
                 {
-                  "children": [{ "text": "Thom Tillis " }],
+                  "text": "on Wednesday, Sens. JD Vance (R-Ohio), "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "Thom Tillis "
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://thehill.com/people/thom-tillis/"
                 },
-                { "text": "(R-N.C.), " },
                 {
-                  "children": [{ "text": "Bill Hagerty " }],
+                  "text": "(R-N.C.), "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "Bill Hagerty "
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://thehill.com/people/bill-hagerty/"
                 },
-                { "text": "(R-Tenn.), " },
                 {
-                  "children": [{ "text": "Cynthia Lummis " }],
+                  "text": "(R-Tenn.), "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "Cynthia Lummis "
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://thehill.com/people/cynthia-lummis/"
                 },
-                { "text": "(R-Wyo.) and " },
                 {
-                  "children": [{ "text": "Katie Britt " }],
+                  "text": "(R-Wyo.) and "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "Katie Britt "
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://thehill.com/people/katie-britt/"
                 },
-                { "text": "(R-Ala.) expressed concerns about the agency’s conduct." }
+                {
+                  "text": "(R-Ala.) expressed concerns about the agency’s conduct."
+                }
               ],
               "type": "p"
             },
@@ -1987,8 +2231,18 @@
               }
             ],
             "mentions": [
-              { "end": 11, "id": "250980843", "start": 3, "username": "cameron" },
-              { "end": 86, "id": "25073877", "start": 70, "username": "realDonaldTrump" }
+              {
+                "end": 11,
+                "id": "250980843",
+                "start": 3,
+                "username": "cameron"
+              },
+              {
+                "end": 86,
+                "id": "25073877",
+                "start": 70,
+                "username": "realDonaldTrump"
+              }
             ]
           },
           "id": "1803878569451622495",
@@ -2023,8 +2277,18 @@
               }
             ],
             "mentions": [
-              { "end": 11, "id": "2178012643", "start": 3, "username": "balajis" },
-              { "end": 22, "id": "1542228578", "start": 13, "username": "JDVance1" }
+              {
+                "end": 11,
+                "id": "2178012643",
+                "start": 3,
+                "username": "balajis"
+              },
+              {
+                "end": 22,
+                "id": "1542228578",
+                "start": 13,
+                "username": "JDVance1"
+              }
             ],
             "urls": [
               {
@@ -2098,9 +2362,15 @@
           "richTextDescription": [
             {
               "children": [
-                { "text": "Sen. " },
                 {
-                  "children": [{ "text": "J.D. Vance" }],
+                  "text": "Sen. "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "J.D. Vance"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://subscriber.politicopro.com/article/2023/07/vance-bill-would-shield-crypto-energy-firms-from-bank-regulators-00106094#preview-not-authorized"
@@ -2113,10 +2383,14 @@
             },
             {
               "children": [
-                { "text": "The Ohio Republican, " },
+                {
+                  "text": "The Ohio Republican, "
+                },
                 {
                   "children": [
-                    { "text": "in his latest attempt to put his stamp on banking policy" }
+                    {
+                      "text": "in his latest attempt to put his stamp on banking policy"
+                    }
                   ],
                   "target": "_blank",
                   "type": "a",
@@ -2126,19 +2400,31 @@
                   "text": ", told POLITICO in a statement that the legislation aims to ensure the banking system is governed by \"apolitical oversight.\" Republican Sens. "
                 },
                 {
-                  "children": [{ "text": "Cynthia Lummis" }],
+                  "children": [
+                    {
+                      "text": "Cynthia Lummis"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://subscriber.politicopro.com/article/2023/07/vance-bill-would-shield-crypto-energy-firms-from-bank-regulators-00106094#preview-not-authorized"
                 },
-                { "text": " of Wyoming and " },
                 {
-                  "children": [{ "text": "Roger Marshall" }],
+                  "text": " of Wyoming and "
+                },
+                {
+                  "children": [
+                    {
+                      "text": "Roger Marshall"
+                    }
+                  ],
                   "target": "_blank",
                   "type": "a",
                   "url": "https://subscriber.politicopro.com/article/2023/07/vance-bill-would-shield-crypto-energy-firms-from-bank-regulators-00106094#preview-not-authorized"
                 },
-                { "text": " of Kansas are co-sponsors." }
+                {
+                  "text": " of Kansas are co-sponsors."
+                }
               ],
               "type": "p"
             },
@@ -2199,8 +2485,18 @@
               }
             ],
             "mentions": [
-              { "end": 9, "id": "24222556", "start": 3, "username": "tyler" },
-              { "end": 79, "id": "25073877", "start": 63, "username": "realDonaldTrump" }
+              {
+                "end": 9,
+                "id": "24222556",
+                "start": 3,
+                "username": "tyler"
+              },
+              {
+                "end": 79,
+                "id": "25073877",
+                "start": 63,
+                "username": "realDonaldTrump"
+              }
             ]
           },
           "id": "1803878530977308675",

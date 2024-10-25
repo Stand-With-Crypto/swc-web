@@ -1,0 +1,5858 @@
+{
+  "candidatesWithVotes": [
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Michelle",
+        "firstNickname": "",
+        "id": "549fb852-72ce-4a71-a696-0a7b6e80e4fc",
+        "lastName": "Vallejo",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "948e4606-483d-497c-9e6b-2543c2d7cf2f",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "15",
+          "primaryState": "TX",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Michelle_Vallejo.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "michelle---vallejo",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "5be346aa-989e-4cd2-aedb-2957869e3d72",
+            "personId": "549fb852-72ce-4a71-a696-0a7b6e80e4fc",
+            "state": "VISIBLE",
+            "username": "MichelleVforTX"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3191025,
+        "estimatedVotesLow": 2610835,
+        "estimatedVotesMid": 2900929,
+        "turnoutHigh": 94.94,
+        "turnoutLow": 116.04,
+        "turnoutMid": 99
+      },
+      "firstName": "Ruben",
+      "id": 1074,
+      "lastName": "Gallego",
+      "partyName": "Democratic",
+      "votes": 1116272
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Eduardo",
+        "firstNickname": "",
+        "id": "fd6bf06a-1c5b-434b-a9f9-593cd1b960d6",
+        "lastName": "Quintana",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "INDEPENDENT",
+        "primaryRole": {
+          "dateEnd": "2031-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "6da54fe1-c412-4799-8589-99330f9863cb",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "AZ",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240913-162150-eduardo.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "eduardo---quintana",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "759623db-ec97-4114-838b-e7eac2271021",
+            "personId": "fd6bf06a-1c5b-434b-a9f9-593cd1b960d6",
+            "state": "VISIBLE",
+            "username": "Quintana4Senate"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3191025,
+        "estimatedVotesLow": 2610835,
+        "estimatedVotesMid": 2900929,
+        "turnoutHigh": 94.94,
+        "turnoutLow": 116.04,
+        "turnoutMid": 99
+      },
+      "firstName": "Eduardo",
+      "id": 102113,
+      "lastName": "Quintana",
+      "partyName": "Green",
+      "votes": 57645
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Preston",
+        "firstNickname": "",
+        "id": "ae642373-0655-4fbf-a9d0-b6dbf6e56939",
+        "lastName": "Love",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "Jr",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "19aec05d-d26f-4c8d-9c0e-5efb2a965a20",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NE",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240911-204055-Screenshot2024-09-11at4.40.44PM.png",
+        "profilePictureUrlDimensions": {
+          "height": 944,
+          "width": 624
+        },
+        "promotedPositioning": null,
+        "slug": "preston---love",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "e5a7be03-6321-4b37-87ba-cbeaf32576a6",
+            "personId": "ae642373-0655-4fbf-a9d0-b6dbf6e56939",
+            "state": "VISIBLE",
+            "username": "Love4Senate"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3191025,
+        "estimatedVotesLow": 2610835,
+        "estimatedVotesMid": 2900929,
+        "turnoutHigh": 94.94,
+        "turnoutLow": 116.04,
+        "turnoutMid": 99
+      },
+      "firstName": "Kari",
+      "id": 26347,
+      "lastName": "Lake",
+      "partyName": "Republican",
+      "votes": 1855775
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 90.625,
+        "computedSumStanceScoreWeight": 24,
+        "firstName": "Adam",
+        "firstNickname": "",
+        "id": "f816c6b9-b19d-48bc-bfa8-ea456fc12f88",
+        "lastName": "Schiff",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "1c9f7f67-086b-4995-a8cb-6c13e02f080a",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "30",
+          "primaryState": "CA",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/7875ec89-a7a5-410f-a1af-343b51fe142a.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3593,
+          "type": "jpg",
+          "width": 2866
+        },
+        "promotedPositioning": null,
+        "slug": "adam---schiff",
+        "stanceCount": 5,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "164bc625-3de1-49f9-9694-235e3fad6907",
+            "personId": "f816c6b9-b19d-48bc-bfa8-ea456fc12f88",
+            "state": "VISIBLE",
+            "username": "RepAdamSchiff"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 17594830,
+        "estimatedVotesLow": 14395769,
+        "estimatedVotesMid": 15995298,
+        "turnoutHigh": 81.56,
+        "turnoutLow": 99.68,
+        "turnoutMid": 89.71
+      },
+      "firstName": "Adam",
+      "id": 216,
+      "lastName": "Schiff",
+      "partyName": "Democratic",
+      "votes": 12412560
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Steve",
+        "firstNickname": "",
+        "id": "d154db75-d67a-40fa-8378-c6288dff27c5",
+        "lastName": "Garvey",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2029-01-20T00:00:00.000Z",
+          "dateStart": "2025-01-20T00:00:00.000Z",
+          "id": "2cc4482d-103e-4889-a4a0-d9b6ed0e6398",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "CA",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senator"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/SteveGarvey.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "steve--garvey",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "d3a3930b-90e5-4dd2-95c3-bc8de5e237e7",
+            "personId": "d154db75-d67a-40fa-8378-c6288dff27c5",
+            "state": "VISIBLE",
+            "username": "SteveyGarvey6"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 17594830,
+        "estimatedVotesLow": 14395769,
+        "estimatedVotesMid": 15995298,
+        "turnoutHigh": 81.56,
+        "turnoutLow": 99.68,
+        "turnoutMid": 89.71
+      },
+      "firstName": "Steve",
+      "id": 53071,
+      "lastName": "Garvey",
+      "partyName": "Republican",
+      "votes": 1936940
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "River",
+        "firstNickname": "",
+        "id": "b02cf735-7952-43b1-a307-bd1c0c200201",
+        "lastName": "Gassen",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "ff560b4b-2377-4b1a-b739-70f0ac966c39",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "5",
+          "primaryState": "CO",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240911-173612-RiverGassen2024.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "river---gassen",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "45f9e9d6-cdd7-4025-a932-89e91850bbf3",
+            "personId": "b02cf735-7952-43b1-a307-bd1c0c200201",
+            "state": "VISIBLE",
+            "username": "RiverGassen"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 496159,
+        "estimatedVotesLow": 405949,
+        "estimatedVotesMid": 451054,
+        "turnoutHigh": 94.48,
+        "turnoutLow": 115.48,
+        "turnoutMid": 99
+      },
+      "firstName": "Eric",
+      "id": 77458,
+      "lastName": "Hansen",
+      "partyName": "Republican",
+      "votes": 184549
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 7.291666666666667,
+        "computedSumStanceScoreWeight": 24,
+        "firstName": "Lisa",
+        "firstNickname": "",
+        "id": "926d7bf1-d378-4b27-8106-741c3d02329c",
+        "lastName": "Blunt Rochester",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "eeaba567-f850-49d4-bd2f-c6e68703bd21",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "At-Large",
+          "primaryState": "DE",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/8ccb5217-b6ed-4c52-927c-cd9e85f279d0.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3839,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 3071
+        },
+        "promotedPositioning": null,
+        "slug": "lisa---bluntrochester",
+        "stanceCount": 6,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "14f83b91-3d38-45b8-81f3-15f9cc7afa03",
+            "personId": "926d7bf1-d378-4b27-8106-741c3d02329c",
+            "state": "VISIBLE",
+            "username": "RepLBR"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 496159,
+        "estimatedVotesLow": 405949,
+        "estimatedVotesMid": 451054,
+        "turnoutHigh": 94.48,
+        "turnoutLow": 115.48,
+        "turnoutMid": 99
+      },
+      "firstName": "Lisa Blunt",
+      "id": 1147,
+      "lastName": "Rochester",
+      "partyName": "Democratic",
+      "votes": 277479
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Michael",
+        "firstNickname": "",
+        "id": "d21834bb-116a-4628-b2e2-f6fb98d9a7be",
+        "lastName": "Katz",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "INDEPENDENT",
+        "primaryRole": {
+          "dateEnd": "2031-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "737a3c69-890e-4b5e-87a7-84b7680369e9",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "DE",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240911-193439-Michael-Katz.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "michael---katz",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "164fa4b7-1098-4d64-8703-8733b632c5d6",
+            "personId": "d21834bb-116a-4628-b2e2-f6fb98d9a7be",
+            "state": "VISIBLE",
+            "username": "drmikekatz"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 496159,
+        "estimatedVotesLow": 405949,
+        "estimatedVotesMid": 451054,
+        "turnoutHigh": 94.48,
+        "turnoutLow": 115.48,
+        "turnoutMid": 99
+      },
+      "firstName": "Michael",
+      "id": 84943,
+      "lastName": "Katz",
+      "partyName": "Independent",
+      "votes": 6743
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Peter",
+        "firstNickname": "",
+        "id": "fed125a0-9407-4cc0-9373-98cb6c5e6811",
+        "lastName": "Bono",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "f7a287cf-929b-4285-8a6b-1039fbb9be1c",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "50",
+          "primaryState": "CA",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240405-022559-PeterBono.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "peter--bono",
+        "stanceCount": 0,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 10821376,
+        "estimatedVotesLow": 8853856,
+        "estimatedVotesMid": 9837612,
+        "turnoutHigh": 86.7,
+        "turnoutLow": 105.97,
+        "turnoutMid": 95.37
+      },
+      "firstName": "Feena",
+      "id": 44277,
+      "lastName": "Bonoan",
+      "partyName": "Libertarian",
+      "votes": 160752
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 75,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Debbie",
+        "firstNickname": "",
+        "id": "5c9da179-d8c6-4dd5-b25c-8094ef315c3f",
+        "lastName": "Mucarsel-Powell",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2021-01-03T00:00:00.000Z",
+          "dateStart": "2019-01-03T00:00:00.000Z",
+          "id": "bd260d6f-51e9-400c-8c33-17c9d1d1a8a2",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "26",
+          "primaryState": "FL",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/DMP_RESIZE.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "debbie---mucarsel-powell",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "2c83db54-0e4d-4755-a984-bd5836d78b4b",
+            "personId": "5c9da179-d8c6-4dd5-b25c-8094ef315c3f",
+            "state": "VISIBLE",
+            "username": "RepDMP"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 10821376,
+        "estimatedVotesLow": 8853856,
+        "estimatedVotesMid": 9837612,
+        "turnoutHigh": 86.7,
+        "turnoutLow": 105.97,
+        "turnoutMid": 95.37
+      },
+      "firstName": "Debbie",
+      "id": 10660,
+      "lastName": "Mucarsel-Powell",
+      "partyName": "Democratic",
+      "votes": 4265294
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 47,
+        "firstName": "Darren",
+        "firstNickname": "",
+        "id": "dc3d19d2-70fd-4f2a-b4bf-4fe9f7359d1c",
+        "lastName": "Soto",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "9a02a486-4066-4dd8-b9e9-d06834dafb9b",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "9",
+          "primaryState": "FL",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/4aeaa957-5f3c-4381-9935-7e06c4c7e80b.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 2723,
+          "type": "jpg",
+          "width": 1816
+        },
+        "promotedPositioning": null,
+        "slug": "darren---soto",
+        "stanceCount": 23,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "79c70c3f-7ba6-4454-8207-7e6fa5a84347",
+            "personId": "dc3d19d2-70fd-4f2a-b4bf-4fe9f7359d1c",
+            "state": "VISIBLE",
+            "username": "RepDarrenSoto"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 10821376,
+        "estimatedVotesLow": 8853856,
+        "estimatedVotesMid": 9837612,
+        "turnoutHigh": 86.7,
+        "turnoutLow": 105.97,
+        "turnoutMid": 95.37
+      },
+      "firstName": "Rick",
+      "id": 10591,
+      "lastName": "Scott",
+      "partyName": "Republican",
+      "votes": 4633079
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 10821376,
+        "estimatedVotesLow": 8853856,
+        "estimatedVotesMid": 9837612,
+        "turnoutHigh": 86.7,
+        "turnoutLow": 105.97,
+        "turnoutMid": 95.37
+      },
+      "firstName": "Ben",
+      "id": 84944,
+      "lastName": "Everidge",
+      "partyName": "Independent",
+      "votes": 162447
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 10821376,
+        "estimatedVotesLow": 8853856,
+        "estimatedVotesMid": 9837612,
+        "turnoutHigh": 86.7,
+        "turnoutLow": 105.97,
+        "turnoutMid": 95.37
+      },
+      "firstName": "Tuan",
+      "id": 84945,
+      "lastName": "Nguyen",
+      "partyName": "Independent",
+      "votes": 160427
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Rachel",
+        "firstNickname": "",
+        "id": "93c759de-2011-4237-b45c-86840c4f4883",
+        "lastName": "Bohman",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "5b4e6be2-cf76-4e12-a150-fddbf3fa8dc6",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "1",
+          "primaryState": "MN",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240918-132112-RachelBohman24.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "rachel---bohman",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "27ac261b-7b57-4123-b537-c6ca77f8d29d",
+            "personId": "93c759de-2011-4237-b45c-86840c4f4883",
+            "state": "VISIBLE",
+            "username": "Bohman4Congress"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 575671,
+        "estimatedVotesLow": 471003,
+        "estimatedVotesMid": 523337,
+        "turnoutHigh": 78.36,
+        "turnoutLow": 95.78,
+        "turnoutMid": 86.2
+      },
+      "firstName": "Emma",
+      "id": 44276,
+      "lastName": "Pohlman",
+      "partyName": "Green",
+      "votes": 4392
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 575671,
+        "estimatedVotesLow": 471003,
+        "estimatedVotesMid": 523337,
+        "turnoutHigh": 78.36,
+        "turnoutLow": 95.78,
+        "turnoutMid": 86.2
+      },
+      "firstName": "Shelby",
+      "id": 102136,
+      "lastName": "Billionaire",
+      "partyName": "We The People",
+      "votes": 4042
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Mazie",
+        "firstNickname": "",
+        "id": "e1f7d9a7-1231-44f4-b713-66eaaef9e14c",
+        "lastName": "Hirono",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "a0056ff0-1327-48d6-8215-6539e76cc90c",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "HI",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/c6e0a4d4-75ab-45fe-9a59-30db46b050d7.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3200,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2560
+        },
+        "promotedPositioning": null,
+        "slug": "mazie---hirono",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "0ca78544-4192-4a08-821c-8eae99188767",
+            "personId": "e1f7d9a7-1231-44f4-b713-66eaaef9e14c",
+            "state": "VISIBLE",
+            "username": "MazieHirono"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 575671,
+        "estimatedVotesLow": 471003,
+        "estimatedVotesMid": 523337,
+        "turnoutHigh": 78.36,
+        "turnoutLow": 95.78,
+        "turnoutMid": 86.2
+      },
+      "firstName": "Mazie",
+      "id": 8272,
+      "lastName": "Hirono",
+      "partyName": "Democratic",
+      "votes": 265869
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "George",
+        "firstNickname": "",
+        "id": "3b9ce190-f9b3-4628-a7d9-a84123eb11ba",
+        "lastName": "McDermott",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "c81c0771-ca32-4b12-95de-60304cf385f2",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "4",
+          "primaryState": "MD",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240405-023712-George_McDermott.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "george--mcdermott",
+        "stanceCount": 0,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 575671,
+        "estimatedVotesLow": 471003,
+        "estimatedVotesMid": 523337,
+        "turnoutHigh": 78.36,
+        "turnoutLow": 95.78,
+        "turnoutMid": 86.2
+      },
+      "firstName": "Bob",
+      "id": 29426,
+      "lastName": "McDermott",
+      "partyName": "Republican",
+      "votes": 176804
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Valerie",
+        "firstNickname": "",
+        "id": "c164e708-9e59-41b8-8ac9-6404d6613a39",
+        "lastName": "McCray",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "DR",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "a87b672b-729e-4624-a3ad-22fa20716b63",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "IN",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/vlmccray.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "valerie---l---mccray",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "b07ed6cc-5405-4f87-a47c-13c8cd20b410",
+            "personId": "c164e708-9e59-41b8-8ac9-6404d6613a39",
+            "state": "VISIBLE",
+            "username": "DrVMcCray2022"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3084673,
+        "estimatedVotesLow": 2523825,
+        "estimatedVotesMid": 2804245,
+        "turnoutHigh": 93.16,
+        "turnoutLow": 113.86,
+        "turnoutMid": 99
+      },
+      "firstName": "Valerie",
+      "id": 65448,
+      "lastName": "McCray",
+      "partyName": "Democratic",
+      "votes": 1249193
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 30,
+        "firstName": "James",
+        "firstNickname": "Jim",
+        "id": "d8abb489-7765-4d6a-8ae6-09b32926488e",
+        "lastName": "Banks",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "a358c445-a269-4812-80d7-397c3297b314",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "3",
+          "primaryState": "IN",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/7983ef68-9eb0-419b-9cb8-c67ff9b5de2e.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4200,
+          "type": "jpg",
+          "width": 2795
+        },
+        "promotedPositioning": null,
+        "slug": "jim---banks",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "02c74a29-5e2c-4b0a-ad53-d1f6af9476ea",
+            "personId": "d8abb489-7765-4d6a-8ae6-09b32926488e",
+            "state": "VISIBLE",
+            "username": "RepJimBanks"
+          },
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "e533b27a-1a80-4684-9266-ca9885639ec5",
+            "personId": "d8abb489-7765-4d6a-8ae6-09b32926488e",
+            "state": "VISIBLE",
+            "username": "Jim_Banks"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3084673,
+        "estimatedVotesLow": 2523825,
+        "estimatedVotesMid": 2804245,
+        "turnoutHigh": 93.16,
+        "turnoutLow": 113.86,
+        "turnoutMid": 99
+      },
+      "firstName": "Jim",
+      "id": 8888,
+      "lastName": "Banks",
+      "partyName": "Republican",
+      "votes": 1571605
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 4,
+        "firstName": "Troy",
+        "firstNickname": "",
+        "id": "10dac56a-c487-4435-be7c-5836dce34c5e",
+        "lastName": "Downing",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "ca768f8e-fb55-4323-865c-08d3d3a34a78",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "2",
+          "primaryState": "MT",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240502-005603-troydowning.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "troy---downing",
+        "stanceCount": 10,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "529c1a13-c450-47b9-b2cf-dbb003b41173",
+            "personId": "10dac56a-c487-4435-be7c-5836dce34c5e",
+            "state": "VISIBLE",
+            "username": "DowningForMT"
+          },
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "846c868f-0194-4e91-9a86-268868040001",
+            "personId": "10dac56a-c487-4435-be7c-5836dce34c5e",
+            "state": "VISIBLE",
+            "username": "DowningCSIMT"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3084673,
+        "estimatedVotesLow": 2523825,
+        "estimatedVotesMid": 2804245,
+        "turnoutHigh": 93.16,
+        "turnoutLow": 113.86,
+        "turnoutMid": 99
+      },
+      "firstName": "Andrew",
+      "id": 44322,
+      "lastName": "Horning",
+      "partyName": "Libertarian",
+      "votes": 52785
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Demi",
+        "firstNickname": "",
+        "id": "8b04ba4d-5dff-4e07-a68f-9ca1ec12aa5d",
+        "lastName": "Kouzounas",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": null,
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "01094592-7831-4158-be02-b497d7869f42",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "ME",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240911-195734-ObCOS_lB_400x400.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 400,
+          "width": 400
+        },
+        "promotedPositioning": null,
+        "slug": "demitroula--kouzounas",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "353abd72-f1cb-4967-88bb-75ba739210e5",
+            "personId": "8b04ba4d-5dff-4e07-a68f-9ca1ec12aa5d",
+            "state": "VISIBLE",
+            "username": "DemiforSenate"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 813373,
+        "estimatedVotesLow": 665472,
+        "estimatedVotesMid": 739395,
+        "turnoutHigh": 89.34,
+        "turnoutLow": 109.2,
+        "turnoutMid": 98.28
+      },
+      "firstName": "Demi",
+      "id": 75258,
+      "lastName": "Kouzounas",
+      "partyName": "Republican",
+      "votes": 316991
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Lupe",
+        "firstNickname": "",
+        "id": "d70a71b9-ee69-462a-a340-5c05940235c1",
+        "lastName": "Castillo",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "15b96ca2-3b6d-4cee-b669-fb6e9b6904b6",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "4",
+          "primaryState": "IL",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240827-142514-Lupe_Castillo_20240826_050308.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "lupe---castillo",
+        "stanceCount": 0,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 813373,
+        "estimatedVotesLow": 665472,
+        "estimatedVotesMid": 739395,
+        "turnoutHigh": 89.34,
+        "turnoutLow": 109.2,
+        "turnoutMid": 98.28
+      },
+      "firstName": "David",
+      "id": 75257,
+      "lastName": "Costello",
+      "partyName": "Democratic",
+      "votes": 12017
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 90,
+        "firstName": "Patrick",
+        "firstNickname": "",
+        "id": "df84172f-42d1-47d0-9a2c-8499eb86e74c",
+        "lastName": "McHenry",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "e9686e26-aeb2-4dbf-9d41-43671672a3e0",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "10",
+          "primaryState": "NC",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-014633-McHenry.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "patrick---mchenry",
+        "stanceCount": 61,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "4dd2ca4f-7d3c-477f-a08f-6e6b665df5cb",
+            "personId": "df84172f-42d1-47d0-9a2c-8499eb86e74c",
+            "state": "VISIBLE",
+            "username": "PatrickMcHenry"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 813373,
+        "estimatedVotesLow": 665472,
+        "estimatedVotesMid": 739395,
+        "turnoutHigh": 89.34,
+        "turnoutLow": 109.2,
+        "turnoutMid": 98.28
+      },
+      "firstName": "Jason",
+      "id": 84946,
+      "lastName": "Cherry",
+      "partyName": "Independent",
+      "votes": 12073
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Grace",
+        "firstNickname": "",
+        "id": "b86c3124-f14c-4a2c-9169-9e7dd60753c1",
+        "lastName": "Meng",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "d0f151b1-8221-4bec-89e3-62169541cc54",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "6",
+          "primaryState": "NY",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/523aa6b9-8173-4ad2-ae3b-90e475744126.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4256,
+          "type": "jpg",
+          "width": 2832
+        },
+        "promotedPositioning": null,
+        "slug": "grace---meng",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "2973b116-0c35-43cd-b651-bf857400c30e",
+            "personId": "b86c3124-f14c-4a2c-9169-9e7dd60753c1",
+            "state": "VISIBLE",
+            "username": "RepGraceMeng"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 813373,
+        "estimatedVotesLow": 665472,
+        "estimatedVotesMid": 739395,
+        "turnoutHigh": 89.34,
+        "turnoutLow": 109.2,
+        "turnoutMid": 98.28
+      },
+      "firstName": "Angus",
+      "id": 8285,
+      "lastName": "King",
+      "partyName": "Independent",
+      "votes": 385586
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Patricia",
+        "firstNickname": "",
+        "id": "b79d250c-869b-47e4-b709-f04922cefd2c",
+        "lastName": "Morgan",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "5f89cfec-bacc-4f4c-98ad-ddcc79148335",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "RI",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Patricia-Morgan.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "patricia---l---morgan",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "478af234-9a84-43d2-9d3a-f12a5c3d582e",
+            "personId": "b79d250c-869b-47e4-b709-f04922cefd2c",
+            "state": "VISIBLE",
+            "username": "repmorgan"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040430,
+        "estimatedVotesLow": 2487627,
+        "estimatedVotesMid": 2764028,
+        "turnoutHigh": 88.64,
+        "turnoutLow": 108.33,
+        "turnoutMid": 97.5
+      },
+      "firstName": "Larry",
+      "id": 10832,
+      "lastName": "Hogan",
+      "partyName": "Republican",
+      "votes": 932841
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 47,
+        "firstName": "Darren",
+        "firstNickname": "",
+        "id": "dc3d19d2-70fd-4f2a-b4bf-4fe9f7359d1c",
+        "lastName": "Soto",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "9a02a486-4066-4dd8-b9e9-d06834dafb9b",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "9",
+          "primaryState": "FL",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/4aeaa957-5f3c-4381-9935-7e06c4c7e80b.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 2723,
+          "type": "jpg",
+          "width": 1816
+        },
+        "promotedPositioning": null,
+        "slug": "darren---soto",
+        "stanceCount": 23,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "79c70c3f-7ba6-4454-8207-7e6fa5a84347",
+            "personId": "dc3d19d2-70fd-4f2a-b4bf-4fe9f7359d1c",
+            "state": "VISIBLE",
+            "username": "RepDarrenSoto"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040430,
+        "estimatedVotesLow": 2487627,
+        "estimatedVotesMid": 2764028,
+        "turnoutHigh": 88.64,
+        "turnoutLow": 108.33,
+        "turnoutMid": 97.5
+      },
+      "firstName": "Mike",
+      "id": 84947,
+      "lastName": "Scott",
+      "partyName": "Libertarian",
+      "votes": 48222
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 75,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Angela",
+        "firstNickname": "",
+        "id": "7343d00f-f202-4470-a788-29911dcba198",
+        "lastName": "Alsobrooks",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "3160c580-2e10-40e2-96c7-731b120b39f6",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "MD",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/AngelaA_1.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 400,
+          "width": 400
+        },
+        "promotedPositioning": null,
+        "slug": "angela---alsobrooks",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "5d6bf6c3-85f3-4581-a5f2-7528b6b66b75",
+            "personId": "7343d00f-f202-4470-a788-29911dcba198",
+            "state": "VISIBLE",
+            "username": "AlsobrooksForMD"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040430,
+        "estimatedVotesLow": 2487627,
+        "estimatedVotesMid": 2764028,
+        "turnoutHigh": 88.64,
+        "turnoutLow": 108.33,
+        "turnoutMid": 97.5
+      },
+      "firstName": "Angela",
+      "id": 67193,
+      "lastName": "Alsobrooks",
+      "partyName": "Democratic",
+      "votes": 1713838
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 36.84210526315789,
+        "computedSumStanceScoreWeight": 19,
+        "firstName": "Mark",
+        "firstNickname": "",
+        "id": "dad7c5c3-c9b1-4503-9630-fd876546581c",
+        "lastName": "Warner",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "cb5c044f-fe71-4b41-98f7-44c495b38f6e",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "VA",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/f4283653-7506-4dca-b787-86f2f23ffdc0.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 1019,
+          "type": "jpg",
+          "width": 727
+        },
+        "promotedPositioning": 7,
+        "slug": "mark---warner",
+        "stanceCount": 18,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "894fa43b-7211-436f-9c4b-166f44c88ff1",
+            "personId": "dad7c5c3-c9b1-4503-9630-fd876546581c",
+            "state": "VISIBLE",
+            "username": "MarkWarner"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3625935,
+        "estimatedVotesLow": 2966685,
+        "estimatedVotesMid": 3296293,
+        "turnoutHigh": 89.19,
+        "turnoutLow": 109.01,
+        "turnoutMid": 98.11
+      },
+      "firstName": "Elizabeth",
+      "id": 8284,
+      "lastName": "Warren",
+      "partyName": "Democratic",
+      "votes": 1940866
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3625935,
+        "estimatedVotesLow": 2966685,
+        "estimatedVotesMid": 3296293,
+        "turnoutHigh": 89.19,
+        "turnoutLow": 109.01,
+        "turnoutMid": 98.11
+      },
+      "firstName": "Shiva",
+      "id": 11165,
+      "lastName": "Ayyadurai",
+      "partyName": "Independent",
+      "votes": 102999
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Cornelius",
+        "firstNickname": "",
+        "id": "18969ae1-358a-4689-963d-e158e4c479ca",
+        "lastName": "Shea",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "INDEPENDENT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "b4f08f0b-a4cf-405b-8b33-deff14842a74",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "2",
+          "primaryState": "MA",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240913-140439-Screenshot2024-09-13at10.04.28AM.png",
+        "profilePictureUrlDimensions": {
+          "height": 346,
+          "width": 294
+        },
+        "promotedPositioning": null,
+        "slug": "cornelius---shea",
+        "stanceCount": 0,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3625935,
+        "estimatedVotesLow": 2966685,
+        "estimatedVotesMid": 3296293,
+        "turnoutHigh": 89.19,
+        "turnoutLow": 109.01,
+        "turnoutMid": 98.11
+      },
+      "firstName": "Joseph",
+      "id": 102154,
+      "lastName": "Schena",
+      "partyName": "Independent",
+      "votes": 101834
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 7,
+        "firstName": "John",
+        "firstNickname": "",
+        "id": "f931ee9c-8ea0-4671-8a44-e829f5b1f570",
+        "lastName": "Deaton",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2029-01-20T00:00:00.000Z",
+          "dateStart": "2025-01-20T00:00:00.000Z",
+          "id": "62fd0733-c328-489b-ad19-9bfea4ac569d",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "MA",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senator"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-014457-johndeaton.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "john--deaton",
+        "stanceCount": 7,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "5a0ca226-bf1c-4a36-8aa5-5ca0d60077f1",
+            "personId": "f931ee9c-8ea0-4671-8a44-e829f5b1f570",
+            "state": "VISIBLE",
+            "username": "DeatonforSenate"
+          },
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "dbb8da6b-a43b-4da3-861f-c078853eea1f",
+            "personId": "f931ee9c-8ea0-4671-8a44-e829f5b1f570",
+            "state": "INACTIVE",
+            "username": "JohnEDeaton1"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3625935,
+        "estimatedVotesLow": 2966685,
+        "estimatedVotesMid": 3296293,
+        "turnoutHigh": 89.19,
+        "turnoutLow": 109.01,
+        "turnoutMid": 98.11
+      },
+      "firstName": "John",
+      "id": 84377,
+      "lastName": "Deaton",
+      "partyName": "Republican",
+      "votes": 983746
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 98.91304347826086,
+        "computedSumStanceScoreWeight": 23,
+        "firstName": "Howard",
+        "firstNickname": "Morgan",
+        "id": "d384de76-144c-46ec-b8dd-6bb435ca67ef",
+        "lastName": "Griffith",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "9498b83e-8cf9-4275-948d-ce8a41429bd8",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "9",
+          "primaryState": "VA",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/4cf8e635-1a93-46f6-b2fc-6e41bf81ed2c.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 2241,
+          "width": 1494
+        },
+        "promotedPositioning": null,
+        "slug": "morgan---griffith",
+        "stanceCount": 4,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "8f4d0bfb-9c0a-4cce-8d60-6090ca2ae9ce",
+            "personId": "d384de76-144c-46ec-b8dd-6bb435ca67ef",
+            "state": "VISIBLE",
+            "username": "RepMGriffith"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3625935,
+        "estimatedVotesLow": 2966685,
+        "estimatedVotesMid": 3296293,
+        "turnoutHigh": 89.19,
+        "turnoutLow": 109.01,
+        "turnoutMid": 98.11
+      },
+      "firstName": "Brandon",
+      "id": 102155,
+      "lastName": "Griffin",
+      "partyName": "Workers Party",
+      "votes": 104517
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 98.91304347826086,
+        "computedSumStanceScoreWeight": 23,
+        "firstName": "Michelle",
+        "firstNickname": "",
+        "id": "12868a61-c13b-4ac1-a625-054d37ac9e99",
+        "lastName": "Steel",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "43f9c86c-44d6-4f7b-9de4-331931d9f840",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "45",
+          "primaryState": "CA",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/bc1fd83a-6e8c-4b94-88b6-3e0761e14c87.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 1039,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 828
+        },
+        "promotedPositioning": null,
+        "slug": "michelle---steel",
+        "stanceCount": 4,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "48df9527-61fd-4a92-a293-eca306a8bb38",
+            "personId": "12868a61-c13b-4ac1-a625-054d37ac9e99",
+            "state": "VISIBLE",
+            "username": "RepSteel"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 5578833,
+        "estimatedVotesLow": 4564498,
+        "estimatedVotesMid": 5071660,
+        "turnoutHigh": 95.89,
+        "turnoutLow": 117.2,
+        "turnoutMid": 99
+      },
+      "firstName": "Dave",
+      "id": 102162,
+      "lastName": "Stein",
+      "partyName": "US Taxpayers",
+      "votes": 108691
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 93.75,
+        "computedSumStanceScoreWeight": 4,
+        "firstName": "Mike",
+        "firstNickname": "",
+        "id": "ca3cc0db-f3c8-4a80-a532-15a1f55f4b20",
+        "lastName": "Rogers",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2029-01-20T00:00:00.000Z",
+          "dateStart": "2025-01-20T00:00:00.000Z",
+          "id": "1abf5c6a-cecc-49f7-829e-039c5bead07a",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "MI",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senator"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-014659-mikerogers.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "mike--rogers",
+        "stanceCount": 4,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "eeb137ab-4c02-457d-a468-6e701d3c65a0",
+            "personId": "ca3cc0db-f3c8-4a80-a532-15a1f55f4b20",
+            "state": "VISIBLE",
+            "username": "MikeRogersForMI"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 5578833,
+        "estimatedVotesLow": 4564498,
+        "estimatedVotesMid": 5071660,
+        "turnoutHigh": 95.89,
+        "turnoutLow": 117.2,
+        "turnoutMid": 99
+      },
+      "firstName": "Mike",
+      "id": 8219,
+      "lastName": "Rogers",
+      "partyName": "Republican",
+      "votes": 2308341
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Neal",
+        "firstNickname": "",
+        "id": "b7752e28-f52e-4cb7-adbd-edbdab9b939e",
+        "lastName": "Dunn",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "0bc9107a-16eb-4bb7-be21-18a800b7fc99",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "2",
+          "primaryState": "FL",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/3374d474-70a7-4488-a8bc-3bd53f74096b.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4200,
+          "type": "jpg",
+          "width": 2795
+        },
+        "promotedPositioning": null,
+        "slug": "neal---dunn",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "cdce6ac2-64b8-497f-8f8a-87e6a2325315",
+            "personId": "b7752e28-f52e-4cb7-adbd-edbdab9b939e",
+            "state": "VISIBLE",
+            "username": "drnealdunnfl2"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 5578833,
+        "estimatedVotesLow": 4564498,
+        "estimatedVotesMid": 5071660,
+        "turnoutHigh": 95.89,
+        "turnoutLow": 117.2,
+        "turnoutMid": 99
+      },
+      "firstName": "Doug",
+      "id": 14712,
+      "lastName": "Dern",
+      "partyName": "Natural Law",
+      "votes": 78948
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 5578833,
+        "estimatedVotesLow": 4564498,
+        "estimatedVotesMid": 5071660,
+        "turnoutHigh": 95.89,
+        "turnoutLow": 117.2,
+        "turnoutMid": 99
+      },
+      "firstName": "Joseph",
+      "id": 102160,
+      "lastName": "Solis-Mullen",
+      "partyName": "Libertarian",
+      "votes": 81973
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Brian",
+        "firstNickname": "",
+        "id": "e3037b42-a731-46ab-976b-61830e760ae8",
+        "lastName": "Mast",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "e3f2c7ad-ff39-4c39-8543-43b2e40b98c5",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "21",
+          "primaryState": "FL",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/99daa9fc-b07e-4f21-8187-320bc7cd543e.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 2959,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2288
+        },
+        "promotedPositioning": null,
+        "slug": "brian---mast",
+        "stanceCount": 4,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "e52bdd48-6aea-4cfa-843d-ff45c897d568",
+            "personId": "e3037b42-a731-46ab-976b-61830e760ae8",
+            "state": "VISIBLE",
+            "username": "repbrianmast"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 5578833,
+        "estimatedVotesLow": 4564498,
+        "estimatedVotesMid": 5071660,
+        "turnoutHigh": 95.89,
+        "turnoutLow": 117.2,
+        "turnoutMid": 99
+      },
+      "firstName": "Douglas",
+      "id": 102159,
+      "lastName": "Marsh",
+      "partyName": "Green",
+      "votes": 80349
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 92.85714285714286,
+        "computedSumStanceScoreWeight": 28,
+        "firstName": "Elissa",
+        "firstNickname": "",
+        "id": "f85e4b4f-c4ce-472f-bd8b-3ead02d0b448",
+        "lastName": "Slotkin",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "e6931531-bb1d-4f60-90bf-f3271658da1d",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "7",
+          "primaryState": "MI",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-013351-elissaslotkin.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "elissa---slotkin",
+        "stanceCount": 10,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "105085e2-0332-43c7-bc05-58da3fe90e56",
+            "personId": "f85e4b4f-c4ce-472f-bd8b-3ead02d0b448",
+            "state": "VISIBLE",
+            "username": "RepSlotkin"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 5578833,
+        "estimatedVotesLow": 4564498,
+        "estimatedVotesMid": 5071660,
+        "turnoutHigh": 95.89,
+        "turnoutLow": 117.2,
+        "turnoutMid": 99
+      },
+      "firstName": "Elissa",
+      "id": 10364,
+      "lastName": "Slotkin",
+      "partyName": "Democratic",
+      "votes": 2691195
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "John",
+        "firstNickname": "",
+        "id": "c00a3aea-891f-48f9-98fd-dbb0827ceaf2",
+        "lastName": "White",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "INDEPENDENT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "887d01d3-8ae0-49be-a6b1-e8c255c7a0ef",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "4",
+          "primaryState": "AR",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240917-164625-John_WhiteAK2022.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "john---white",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "6a96cd81-5b6f-47a8-84bf-15ab733d11a6",
+            "personId": "c00a3aea-891f-48f9-98fd-dbb0827ceaf2",
+            "state": "VISIBLE",
+            "username": "WhiteCongressAR"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3289032,
+        "estimatedVotesLow": 2691028,
+        "estimatedVotesMid": 2990027,
+        "turnoutHigh": 83.04,
+        "turnoutLow": 101.5,
+        "turnoutMid": 91.35
+      },
+      "firstName": "Royce",
+      "id": 28730,
+      "lastName": "White",
+      "partyName": "Republican",
+      "votes": 1209114
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Amy",
+        "firstNickname": "",
+        "id": "45a93880-0954-474f-a192-310d1b9a4b05",
+        "lastName": "Klobuchar",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "7a45f88b-d129-47fb-bd5a-96dfed6fe07a",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "MN",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/214d79b0-132b-4ae9-8ab9-8c03c37aae85.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4800,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 3840
+        },
+        "promotedPositioning": null,
+        "slug": "amy---klobuchar",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "10c9fd56-fb94-4aa3-a75d-045e4df105a0",
+            "personId": "45a93880-0954-474f-a192-310d1b9a4b05",
+            "state": "VISIBLE",
+            "username": "SenAmyKlobuchar"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3289032,
+        "estimatedVotesLow": 2691028,
+        "estimatedVotesMid": 2990027,
+        "turnoutHigh": 83.04,
+        "turnoutLow": 101.5,
+        "turnoutMid": 91.35
+      },
+      "firstName": "Amy",
+      "id": 8233,
+      "lastName": "Klobuchar",
+      "partyName": "Democratic",
+      "votes": 1425978
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 13.0952380952381,
+        "computedSumStanceScoreWeight": 21,
+        "firstName": "Robert",
+        "firstNickname": "Bob",
+        "id": "db312245-4247-4720-a719-ebfceed6bb7f",
+        "lastName": "Casey",
+        "manuallyOverriddenStanceScore": 50,
+        "nameSuffix": "Jr.",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "747b73da-d70e-43e7-a99a-fbdae33fd5a1",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "PA",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-012845-bobcasey.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "robert---casey",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "33950402-4ae9-4aab-9f2a-ca21b918033b",
+            "personId": "db312245-4247-4720-a719-ebfceed6bb7f",
+            "state": "VISIBLE",
+            "username": "bob_casey"
+          },
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "58a9c788-8117-4144-b541-a47f932159ef",
+            "personId": "db312245-4247-4720-a719-ebfceed6bb7f",
+            "state": "VISIBLE",
+            "username": "SenBobCasey"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3289032,
+        "estimatedVotesLow": 2691028,
+        "estimatedVotesMid": 2990027,
+        "turnoutHigh": 83.04,
+        "turnoutLow": 101.5,
+        "turnoutMid": 91.35
+      },
+      "firstName": "Joyce",
+      "id": 102177,
+      "lastName": "Lacey",
+      "partyName": "Independence-Alliance Party of Minnesota",
+      "votes": 52030
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3289032,
+        "estimatedVotesLow": 2691028,
+        "estimatedVotesMid": 2990027,
+        "turnoutHigh": 83.04,
+        "turnoutLow": 101.5,
+        "turnoutMid": 91.35
+      },
+      "firstName": "Rebecca",
+      "id": 102178,
+      "lastName": "Whiting",
+      "partyName": "Libertarian",
+      "votes": 44167
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Kevin",
+        "firstNickname": "",
+        "id": "bff93eb1-2430-4e66-a4d5-a99f10ca202a",
+        "lastName": "Jenkins",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "2afaff23-3552-4296-9ef4-f002db6e4fe3",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "1",
+          "primaryState": "TN",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240913-142704-KevinJenkins.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "kevin---jenkins",
+        "stanceCount": 0,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1317049,
+        "estimatedVotesLow": 1077582,
+        "estimatedVotesMid": 1197312,
+        "turnoutHigh": 96.06,
+        "turnoutLow": 117.41,
+        "turnoutMid": 99
+      },
+      "firstName": "Ty",
+      "id": 52370,
+      "lastName": "Pinkins",
+      "partyName": "Democratic",
+      "votes": 357910
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 76,
+        "firstName": "Wiley",
+        "firstNickname": "",
+        "id": "3c298c02-d713-4a76-9d24-62be4876f46b",
+        "lastName": "Nickel",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "3d96d681-123d-4d52-866b-2b4eabc06b76",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "13",
+          "primaryState": "NC",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240516-132302-Rep._Wiley_Nickel_118th_Congress_1.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 566,
+          "width": 440
+        },
+        "promotedPositioning": null,
+        "slug": "wiley---nickel",
+        "stanceCount": 51,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "a94816b5-21e8-4069-bd32-4a7ab4128b33",
+            "personId": "3c298c02-d713-4a76-9d24-62be4876f46b",
+            "state": "VISIBLE",
+            "username": "WileyNickel"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1317049,
+        "estimatedVotesLow": 1077582,
+        "estimatedVotesMid": 1197312,
+        "turnoutHigh": 96.06,
+        "turnoutLow": 117.41,
+        "turnoutMid": 99
+      },
+      "firstName": "Roger",
+      "id": 8242,
+      "lastName": "Wicker",
+      "partyName": "Republican",
+      "votes": 907232
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 98.91304347826086,
+        "computedSumStanceScoreWeight": 23,
+        "firstName": "Benjamin",
+        "firstNickname": "Ben",
+        "id": "d2256f36-3a95-4136-bc8b-bb18cdf8b6b5",
+        "lastName": "Cline",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "4947904d-bca2-4acd-b1ec-838f08b5cbd7",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "6",
+          "primaryState": "VA",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/708096d4-60f3-4db3-a45f-c5eeda4f98b1.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 2500,
+          "type": "jpg",
+          "width": 1667
+        },
+        "promotedPositioning": null,
+        "slug": "ben---cline",
+        "stanceCount": 4,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "ad699c3a-688a-4cf5-9aaa-e34a64eb0bed",
+            "personId": "d2256f36-3a95-4136-bc8b-bb18cdf8b6b5",
+            "state": "VISIBLE",
+            "username": "RepBenCline"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040461,
+        "estimatedVotesLow": 2487647,
+        "estimatedVotesMid": 2764049,
+        "turnoutHigh": 89.33,
+        "turnoutLow": 109.19,
+        "turnoutMid": 98.27
+      },
+      "firstName": "Nathan",
+      "id": 102180,
+      "lastName": "Kline",
+      "partyName": "Green",
+      "votes": 81244
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 3,
+        "firstName": "Todd",
+        "firstNickname": "",
+        "id": "280c96f3-2717-4065-831b-2988e7561941",
+        "lastName": "Young",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "8df04adc-810b-4b2c-b937-7fc2ea9d745f",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "IN",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/96a441c1-8a62-4b80-a5d5-48827af25ab4.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3000,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2400
+        },
+        "promotedPositioning": null,
+        "slug": "todd---young",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "3f7b092f-9f82-4d15-a7ca-3bbc8a6fb279",
+            "personId": "280c96f3-2717-4065-831b-2988e7561941",
+            "state": "VISIBLE",
+            "username": "SenToddYoung"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040461,
+        "estimatedVotesLow": 2487647,
+        "estimatedVotesMid": 2764049,
+        "turnoutHigh": 89.33,
+        "turnoutLow": 109.19,
+        "turnoutMid": 98.27
+      },
+      "firstName": "W.C.",
+      "id": 84948,
+      "lastName": "Young",
+      "partyName": "Libertarian",
+      "votes": 161848
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 3,
+        "firstName": "Todd",
+        "firstNickname": "",
+        "id": "280c96f3-2717-4065-831b-2988e7561941",
+        "lastName": "Young",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "8df04adc-810b-4b2c-b937-7fc2ea9d745f",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "IN",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/96a441c1-8a62-4b80-a5d5-48827af25ab4.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3000,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2400
+        },
+        "promotedPositioning": null,
+        "slug": "todd---young",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "3f7b092f-9f82-4d15-a7ca-3bbc8a6fb279",
+            "personId": "280c96f3-2717-4065-831b-2988e7561941",
+            "state": "VISIBLE",
+            "username": "SenToddYoung"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040461,
+        "estimatedVotesLow": 2487647,
+        "estimatedVotesMid": 2764049,
+        "turnoutHigh": 89.33,
+        "turnoutLow": 109.19,
+        "turnoutMid": 98.27
+      },
+      "firstName": "Jared",
+      "id": 102179,
+      "lastName": "Young",
+      "partyName": "Better Party",
+      "votes": 112880
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Paul",
+        "firstNickname": "",
+        "id": "c0aeab62-3e72-4349-825c-9baa1c62cd06",
+        "lastName": "Junge",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "763b5dfc-b07e-4e78-821d-bc2019d964f8",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "8",
+          "primaryState": "MI",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/PaulJunge.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "paul---junge",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "ffac14dd-5131-43b4-8fcd-6e8e531ac4fc",
+            "personId": "c0aeab62-3e72-4349-825c-9baa1c62cd06",
+            "state": "VISIBLE",
+            "username": "VotePaulJunge"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040461,
+        "estimatedVotesLow": 2487647,
+        "estimatedVotesMid": 2764049,
+        "turnoutHigh": 89.33,
+        "turnoutLow": 109.19,
+        "turnoutMid": 98.27
+      },
+      "firstName": "Lucas",
+      "id": 27330,
+      "lastName": "Kunce",
+      "partyName": "Democratic",
+      "votes": 966177
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 99.03846153846155,
+        "computedSumStanceScoreWeight": 26,
+        "firstName": "Michael",
+        "firstNickname": "Mike",
+        "id": "f0b468ef-27a5-4e59-b5be-658126ce81e4",
+        "lastName": "Lawler",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "284a992b-4cb5-4855-a55a-b6c750af95ab",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "17",
+          "primaryState": "NY",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/cd87ee10-122b-4108-8755-3f387ae553ea.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 1024,
+          "type": "jpg",
+          "width": 819
+        },
+        "promotedPositioning": null,
+        "slug": "michael---lawler",
+        "stanceCount": 7,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "6b0cbe43-2269-4b97-ac89-212b90751585",
+            "personId": "f0b468ef-27a5-4e59-b5be-658126ce81e4",
+            "state": "VISIBLE",
+            "username": "RepMikeLawler"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3040461,
+        "estimatedVotesLow": 2487647,
+        "estimatedVotesMid": 2764049,
+        "turnoutHigh": 89.33,
+        "turnoutLow": 109.19,
+        "turnoutMid": 98.27
+      },
+      "firstName": "Josh",
+      "id": 2069,
+      "lastName": "Hawley",
+      "partyName": "Republican",
+      "votes": 1393997
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 8.928571428571429,
+        "computedSumStanceScoreWeight": 28,
+        "firstName": "George",
+        "firstNickname": "Bill",
+        "id": "e502591f-d56d-4397-bb0c-07a1e7071520",
+        "lastName": "Foster",
+        "manuallyOverriddenStanceScore": 45,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "abf8685c-e153-4ed1-ab6b-38f5afdc1e8a",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "11",
+          "primaryState": "IL",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/a3ddd982-b013-4333-9c9f-fb9a978211b5.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4256,
+          "type": "jpg",
+          "width": 2832
+        },
+        "promotedPositioning": null,
+        "slug": "bill---foster",
+        "stanceCount": 10,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "41ec3408-16c5-4cf9-ae47-de4213414eab",
+            "personId": "e502591f-d56d-4397-bb0c-07a1e7071520",
+            "state": "VISIBLE",
+            "username": "RepBillFoster"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 599037,
+        "estimatedVotesLow": 490118,
+        "estimatedVotesMid": 544574,
+        "turnoutHigh": 97.68,
+        "turnoutLow": 119.38,
+        "turnoutMid": 99
+      },
+      "firstName": "Jon",
+      "id": 8239,
+      "lastName": "Tester",
+      "partyName": "Democratic",
+      "votes": 240403
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Nirav",
+        "firstNickname": "",
+        "id": "16ea8db8-ebc0-47f9-a17d-12e0655162a9",
+        "lastName": "Sheth",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "f07e2848-39d7-4358-9c02-707d533701ad",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "10",
+          "primaryState": "WA",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/NiravSheth2.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "nirav---sheth",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "8616ff92-1c83-4f95-a230-d431629e7791",
+            "personId": "16ea8db8-ebc0-47f9-a17d-12e0655162a9",
+            "state": "VISIBLE",
+            "username": "_NiravSheth_"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 599037,
+        "estimatedVotesLow": 490118,
+        "estimatedVotesMid": 544574,
+        "turnoutHigh": 97.68,
+        "turnoutLow": 119.38,
+        "turnoutMid": 99
+      },
+      "firstName": "Tim",
+      "id": 71312,
+      "lastName": "Sheehy",
+      "partyName": "Republican",
+      "votes": 318572
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Michael",
+        "firstNickname": "",
+        "id": "9e283177-9b72-4f02-8ccb-c484690f6ea4",
+        "lastName": "Cloud",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "3ef8ec5d-66de-4bae-9f6e-d96d3d332f78",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "27",
+          "primaryState": "TX",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/2d7d3adf-8754-468a-a37e-7fcd157d24ef.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4200,
+          "type": "jpg",
+          "width": 2800
+        },
+        "promotedPositioning": null,
+        "slug": "michael---cloud",
+        "stanceCount": 4,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "1ba92042-292d-4681-b1bd-2d7f1353ae51",
+            "personId": "9e283177-9b72-4f02-8ccb-c484690f6ea4",
+            "state": "VISIBLE",
+            "username": "RepCloudTX"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 599037,
+        "estimatedVotesLow": 490118,
+        "estimatedVotesMid": 544574,
+        "turnoutHigh": 97.68,
+        "turnoutLow": 119.38,
+        "turnoutMid": 99
+      },
+      "firstName": "Sid",
+      "id": 45844,
+      "lastName": "Daoud",
+      "partyName": "Libertarian",
+      "votes": 14856
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Peter",
+        "firstNickname": "",
+        "id": "b9e50eb8-4bf9-4537-a740-faf9e8d086b9",
+        "lastName": "Barca",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "9131108f-4a42-45f3-8b26-f261f959b816",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "1",
+          "primaryState": "WI",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240826-182938-Barca_Peter.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "peter---barca",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "0f500cdc-e882-4b29-b9fb-2f6e09042e76",
+            "personId": "b9e50eb8-4bf9-4537-a740-faf9e8d086b9",
+            "state": "VISIBLE",
+            "username": "PeterWBarca"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 599037,
+        "estimatedVotesLow": 490118,
+        "estimatedVotesMid": 544574,
+        "turnoutHigh": 97.68,
+        "turnoutLow": 119.38,
+        "turnoutMid": 99
+      },
+      "firstName": "Robert",
+      "id": 102192,
+      "lastName": "Barb",
+      "partyName": "Green",
+      "votes": 11281
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Russell",
+        "firstNickname": "Russ",
+        "id": "badf84e1-f6d2-41e7-855e-3bd45f919a93",
+        "lastName": "Fulcher",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "bf7063d3-e42b-4282-8504-04ba3b1661ec",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "1",
+          "primaryState": "ID",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/7579d48e-2617-4378-bb85-a7df24bd1595.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4500,
+          "type": "jpg",
+          "width": 3600
+        },
+        "promotedPositioning": null,
+        "slug": "russ---fulcher",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "8b79bbb0-3d35-4663-ba51-0943d7e1b483",
+            "personId": "badf84e1-f6d2-41e7-855e-3bd45f919a93",
+            "state": "VISIBLE",
+            "username": "RepRussFulcher"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 956991,
+        "estimatedVotesLow": 782995,
+        "estimatedVotesMid": 869987,
+        "turnoutHigh": 55.41,
+        "turnoutLow": 67.72,
+        "turnoutMid": 60.95
+      },
+      "firstName": "Deb",
+      "id": 8288,
+      "lastName": "Fischer",
+      "partyName": "Republican",
+      "votes": 516480
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 75,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Dan",
+        "firstNickname": "",
+        "id": "354f31f2-2839-4975-b701-2fd26966d0b8",
+        "lastName": "Osborn",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "INDEPENDENT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "e264bf0b-e228-449f-a4a1-701aefe94d9b",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NE",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/dan-square-portrait.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 1024,
+          "width": 1024
+        },
+        "promotedPositioning": null,
+        "slug": "dan---osborn",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "dff5ffb6-4381-4339-a9e1-b1186d52a4a3",
+            "personId": "354f31f2-2839-4975-b701-2fd26966d0b8",
+            "state": "VISIBLE",
+            "username": "OsbornForSenate"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 956991,
+        "estimatedVotesLow": 782995,
+        "estimatedVotesMid": 869987,
+        "turnoutHigh": 55.41,
+        "turnoutLow": 67.72,
+        "turnoutMid": 60.95
+      },
+      "firstName": "Dan",
+      "id": 101441,
+      "lastName": "Osborn",
+      "partyName": "Independent",
+      "votes": 13797
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Jason",
+        "firstNickname": "",
+        "id": "fe3d8a5a-82fc-45c7-9990-2330610fcf34",
+        "lastName": "Crow",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "3801007c-4fd9-4aed-bf61-59f1090f2730",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "6",
+          "primaryState": "CO",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/ea1e711b-ebd5-4b97-b552-7de89624db4e.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 999,
+          "type": "jpg",
+          "width": 800
+        },
+        "promotedPositioning": null,
+        "slug": "jason---crow",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "2551829b-13f9-4a03-b587-32028910593e",
+            "personId": "fe3d8a5a-82fc-45c7-9990-2330610fcf34",
+            "state": "VISIBLE",
+            "username": "RepJasonCrow"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1323302,
+        "estimatedVotesLow": 1082703,
+        "estimatedVotesMid": 1203002,
+        "turnoutHigh": 98.26,
+        "turnoutLow": 120.09,
+        "turnoutMid": 99
+      },
+      "firstName": "Sam",
+      "id": 23446,
+      "lastName": "Brown",
+      "partyName": "Republican",
+      "votes": 611079
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "River",
+        "firstNickname": "",
+        "id": "b02cf735-7952-43b1-a307-bd1c0c200201",
+        "lastName": "Gassen",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "ff560b4b-2377-4b1a-b739-70f0ac966c39",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "5",
+          "primaryState": "CO",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240911-173612-RiverGassen2024.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "river---gassen",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "45f9e9d6-cdd7-4025-a932-89e91850bbf3",
+            "personId": "b02cf735-7952-43b1-a307-bd1c0c200201",
+            "state": "VISIBLE",
+            "username": "RiverGassen"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1323302,
+        "estimatedVotesLow": 1082703,
+        "estimatedVotesMid": 1203002,
+        "turnoutHigh": 98.26,
+        "turnoutLow": 120.09,
+        "turnoutMid": 99
+      },
+      "firstName": "Janine",
+      "id": 84952,
+      "lastName": "Hansen",
+      "partyName": "American Independent Party",
+      "votes": 27446
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Andrew",
+        "firstNickname": "",
+        "id": "bf3f92b0-62ec-414d-bcaf-17b0cd73dd29",
+        "lastName": "Aasen",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": null,
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "79c4a168-be5a-4594-9296-6882d142c3e3",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "5",
+          "primaryState": "OR",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240919-204725-Andrew_Aasen1.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "andrew---j---aasen",
+        "stanceCount": 0,
+        "twitterAccounts": []
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1323302,
+        "estimatedVotesLow": 1082703,
+        "estimatedVotesMid": 1203002,
+        "turnoutHigh": 98.26,
+        "turnoutLow": 120.09,
+        "turnoutMid": 99
+      },
+      "firstName": "Jacky",
+      "id": 1463,
+      "lastName": "Rosen",
+      "partyName": "Democratic",
+      "votes": 645409
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1323302,
+        "estimatedVotesLow": 1082703,
+        "estimatedVotesMid": 1203002,
+        "turnoutHigh": 98.26,
+        "turnoutLow": 120.09,
+        "turnoutMid": 99
+      },
+      "firstName": "Chris",
+      "id": 44716,
+      "lastName": "Cunningham",
+      "partyName": "Libertarian",
+      "votes": 16332
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Gregorio",
+        "firstNickname": "",
+        "id": "e9c20390-d9a8-479d-a2f2-6f0ad9a0cd9d",
+        "lastName": "Sablan",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "b4b53f36-e47b-415f-8f95-9ae90df51f40",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "At-Large",
+          "primaryState": "MP",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "",
+        "profilePictureUrlDimensions": null,
+        "promotedPositioning": null,
+        "slug": "gregorio---sablan",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "f944b539-b043-40c1-a38d-00cf0a056fa5",
+            "personId": "e9c20390-d9a8-479d-a2f2-6f0ad9a0cd9d",
+            "state": "VISIBLE",
+            "username": "Kilili_Sablan"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4687094,
+        "estimatedVotesLow": 3834894,
+        "estimatedVotesMid": 4260993,
+        "turnoutHigh": 87.5,
+        "turnoutLow": 106.94,
+        "turnoutMid": 96.25
+      },
+      "firstName": "Kenneth",
+      "id": 84958,
+      "lastName": "Kaplan",
+      "partyName": "Libertarian",
+      "votes": 69984
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4687094,
+        "estimatedVotesLow": 3834894,
+        "estimatedVotesMid": 4260993,
+        "turnoutHigh": 87.5,
+        "turnoutLow": 106.94,
+        "turnoutMid": 96.25
+      },
+      "firstName": "Christina",
+      "id": 84957,
+      "lastName": "Khalil",
+      "partyName": "Green",
+      "votes": 72454
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 97.32142857142857,
+        "computedSumStanceScoreWeight": 28,
+        "firstName": "Young",
+        "firstNickname": "",
+        "id": "ec4a36a8-0e2f-4c6a-b572-a4348014154e",
+        "lastName": "Kim",
+        "manuallyOverriddenStanceScore": 95,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "3c468b38-7674-4bb8-9a15-8326281a910c",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "40",
+          "primaryState": "CA",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/77c8dcea-c4ef-4f63-bee8-52dceed0fa3d.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3021,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2497
+        },
+        "promotedPositioning": null,
+        "slug": "young---kim",
+        "stanceCount": 9,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "a5b5d11d-8f1d-4c0a-8475-5d453a211fd7",
+            "personId": "ec4a36a8-0e2f-4c6a-b572-a4348014154e",
+            "state": "VISIBLE",
+            "username": "RepYoungKim"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4687094,
+        "estimatedVotesLow": 3834894,
+        "estimatedVotesMid": 4260993,
+        "turnoutHigh": 87.5,
+        "turnoutLow": 106.94,
+        "turnoutMid": 96.25
+      },
+      "firstName": "Andy",
+      "id": 9523,
+      "lastName": "Kim",
+      "partyName": "Democratic",
+      "votes": 2144361
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4687094,
+        "estimatedVotesLow": 3834894,
+        "estimatedVotesMid": 4260993,
+        "turnoutHigh": 87.5,
+        "turnoutLow": 106.94,
+        "turnoutMid": 96.25
+      },
+      "firstName": "Patricia",
+      "id": 84960,
+      "lastName": "Mooneyham",
+      "partyName": "Independent",
+      "votes": 70391
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4687094,
+        "estimatedVotesLow": 3834894,
+        "estimatedVotesMid": 4260993,
+        "turnoutHigh": 87.5,
+        "turnoutLow": 106.94,
+        "turnoutMid": 96.25
+      },
+      "firstName": "Joanne",
+      "id": 44376,
+      "lastName": "Kuniansky",
+      "partyName": "Socialist Workers",
+      "votes": 84199
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 93.75,
+        "computedSumStanceScoreWeight": 4,
+        "firstName": "Curtis",
+        "firstNickname": "",
+        "id": "4b73b6d3-6fcf-4f3b-a9ad-58330d670826",
+        "lastName": "Bashaw",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2031-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "031316c3-f5fb-4451-9ca9-fbafc3888b7f",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NJ",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240830-175943-CurtisBashaw24.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "curtis---bashaw",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "4534e29b-abac-4ea6-bb98-9e26e16f6e50",
+            "personId": "4b73b6d3-6fcf-4f3b-a9ad-58330d670826",
+            "state": "VISIBLE",
+            "username": "Bashawforsenate"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4687094,
+        "estimatedVotesLow": 3834894,
+        "estimatedVotesMid": 4260993,
+        "turnoutHigh": 87.5,
+        "turnoutLow": 106.94,
+        "turnoutMid": 96.25
+      },
+      "firstName": "Curtis",
+      "id": 75425,
+      "lastName": "Bashaw",
+      "partyName": "Republican",
+      "votes": 1659776
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Martin",
+        "firstNickname": "",
+        "id": "70eae00f-999f-4932-9834-30bf35050eab",
+        "lastName": "Heinrich",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "5375b167-26eb-425f-af48-bbed355bc191",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NM",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/9f441072-7ff5-4176-b8c1-c0a0a9d497b6.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 2280,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 1800
+        },
+        "promotedPositioning": null,
+        "slug": "martin---heinrich",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "a1c01f21-3d6c-4624-80f8-ddcbbd6ea55b",
+            "personId": "70eae00f-999f-4932-9834-30bf35050eab",
+            "state": "VISIBLE",
+            "username": "MartinHeinrich"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 902128,
+        "estimatedVotesLow": 738105,
+        "estimatedVotesMid": 820114,
+        "turnoutHigh": 93.7,
+        "turnoutLow": 114.52,
+        "turnoutMid": 99
+      },
+      "firstName": "Martin",
+      "id": 8271,
+      "lastName": "Heinrich",
+      "partyName": "Democratic",
+      "votes": 602543
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Nella",
+        "firstNickname": "",
+        "id": "8c24b173-ba07-424d-8f75-d7ce875f61b9",
+        "lastName": "Domenici",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "ee9b8505-a460-4e00-bfa6-6fe2bab2723e",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NM",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/nella.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 400,
+          "width": 400
+        },
+        "promotedPositioning": null,
+        "slug": "nella-domenici",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "b10ce0e4-026b-4cec-8e7b-4eed4dbb507a",
+            "personId": "8c24b173-ba07-424d-8f75-d7ce875f61b9",
+            "state": "VISIBLE",
+            "username": "NellaforSenate"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 902128,
+        "estimatedVotesLow": 738105,
+        "estimatedVotesMid": 820114,
+        "turnoutHigh": 93.7,
+        "turnoutLow": 114.52,
+        "turnoutMid": 99
+      },
+      "firstName": "Nella",
+      "id": 71578,
+      "lastName": "Domenici",
+      "partyName": "Republican",
+      "votes": 242769
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 75,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Mike",
+        "firstNickname": "",
+        "id": "64f70d4a-2648-4e81-8c08-8e4670e94d40",
+        "lastName": "Sapriacone",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "fd29ddec-77c7-4c90-b8ab-5ec031d04969",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NY",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/msapraicone.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "mike--sapriacone",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "757c5955-1822-46db-86e5-a99fdbc8daeb",
+            "personId": "64f70d4a-2648-4e81-8c08-8e4670e94d40",
+            "state": "VISIBLE",
+            "username": "MikeSapraicone"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 8625403,
+        "estimatedVotesLow": 7057149,
+        "estimatedVotesMid": 7841271,
+        "turnoutHigh": 94,
+        "turnoutLow": 114.89,
+        "turnoutMid": 99
+      },
+      "firstName": "Mike",
+      "id": 77535,
+      "lastName": "Sapraicone",
+      "partyName": "Republican",
+      "votes": 2840724
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "John",
+        "firstNickname": "",
+        "id": "e8377aac-a1c3-4b1a-9e23-055b0b77f855",
+        "lastName": "James",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "2aba38bc-5be2-47ed-8956-08dfe4eeca20",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "10",
+          "primaryState": "MI",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/2450ba97-0c3c-4b42-8307-2571c2a83c31.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4200,
+          "type": "jpg",
+          "width": 3360
+        },
+        "promotedPositioning": null,
+        "slug": "john---james",
+        "stanceCount": 3,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 8625403,
+        "estimatedVotesLow": 7057149,
+        "estimatedVotesMid": 7841271,
+        "turnoutHigh": 94,
+        "turnoutLow": 114.89,
+        "turnoutMid": 99
+      },
+      "firstName": "Jonathan",
+      "id": 84962,
+      "lastName": "Ramos",
+      "partyName": "Independent",
+      "votes": 134482
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 97.36842105263158,
+        "computedSumStanceScoreWeight": 19,
+        "firstName": "Kirsten",
+        "firstNickname": "",
+        "id": "d5ab74bf-127b-4c25-974d-6254a999976c",
+        "lastName": "Gillibrand",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "e4ad0384-ffcd-4008-ae08-1a2092fd55f1",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NY",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/c748972e-26bd-4c18-91e4-375c2f49a168.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 938,
+          "type": "jpg",
+          "width": 750
+        },
+        "promotedPositioning": null,
+        "slug": "kirsten---gillibrand",
+        "stanceCount": 18,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "2bfa4411-fab5-4c9a-9cc7-3943def8ce6b",
+            "personId": "d5ab74bf-127b-4c25-974d-6254a999976c",
+            "state": "VISIBLE",
+            "username": "GillibrandNY"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 8625403,
+        "estimatedVotesLow": 7057149,
+        "estimatedVotesMid": 7841271,
+        "turnoutHigh": 94,
+        "turnoutLow": 114.89,
+        "turnoutMid": 99
+      },
+      "firstName": "Kirsten",
+      "id": 8259,
+      "lastName": "Gillibrand",
+      "partyName": "Democratic",
+      "votes": 4689667
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Benjamin",
+        "firstNickname": "Ben",
+        "id": "ca3bac14-c3f1-48ce-8d82-2b52690444f7",
+        "lastName": "Sasse",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "aced39a2-712c-4bdd-81d1-388564ddb44e",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NE",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/5302f1ed-6f25-4e22-af98-de5a0848cc58.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3420,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2700
+        },
+        "promotedPositioning": null,
+        "slug": "benjamin---sasse",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "b72e7b46-4a88-4b0e-8450-309615b7ffae",
+            "personId": "ca3bac14-c3f1-48ce-8d82-2b52690444f7",
+            "state": "VISIBLE",
+            "username": "SenSasse"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 8625403,
+        "estimatedVotesLow": 7057149,
+        "estimatedVotesMid": 7841271,
+        "turnoutHigh": 94,
+        "turnoutLow": 114.89,
+        "turnoutMid": 99
+      },
+      "firstName": "Diane",
+      "id": 44279,
+      "lastName": "Sare",
+      "partyName": "LaRouche",
+      "votes": 244805
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Adam",
+        "firstNickname": "",
+        "id": "bc0a657b-f8b7-455c-a05e-283ce7f4e540",
+        "lastName": "Miller",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "272caafb-cba8-4e54-b37b-041f19793d1c",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "15",
+          "primaryState": "OH",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240404-020348-Adam_Miller.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "adam---clay---miller",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "d6440bfe-0547-4c54-be21-154b6ddaa115",
+            "personId": "bc0a657b-f8b7-455c-a05e-283ce7f4e540",
+            "state": "VISIBLE",
+            "username": "Miller4Ohio"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 8625403,
+        "estimatedVotesLow": 7057149,
+        "estimatedVotesMid": 7841271,
+        "turnoutHigh": 94,
+        "turnoutLow": 114.89,
+        "turnoutMid": 99
+      },
+      "firstName": "YueXin",
+      "id": 84961,
+      "lastName": "Miller",
+      "partyName": "American Independent Party",
+      "votes": 198180
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Kevin",
+        "firstNickname": "",
+        "id": "e8ab5997-164e-4af1-a86e-013bd15ca504",
+        "lastName": "Cramer",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "05c07411-abaa-41fc-a2ee-519b35a08791",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "ND",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/0a1517b4-ad6d-43d5-8f75-206c15bfae5a.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 7698,
+          "type": "jpg",
+          "width": 6158
+        },
+        "promotedPositioning": null,
+        "slug": "kevin---cramer",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "59ec47f6-cdd0-48f5-acef-c1ebccc131ea",
+            "personId": "e8ab5997-164e-4af1-a86e-013bd15ca504",
+            "state": "VISIBLE",
+            "username": "SenKevinCramer"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 371432,
+        "estimatedVotesLow": 303899,
+        "estimatedVotesMid": 337662,
+        "turnoutHigh": 10.51,
+        "turnoutLow": 12.85,
+        "turnoutMid": 11.56
+      },
+      "firstName": "Kevin",
+      "id": 1423,
+      "lastName": "Cramer",
+      "partyName": "Republican",
+      "votes": 0
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Katrina",
+        "firstNickname": "",
+        "id": "5a8b86f8-7bda-4d75-bcc5-32b04d878c78",
+        "lastName": "Christiansen",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "d7e1b419-70cb-4928-9731-cfd85546c73e",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "ND",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/KatrinaChristiansen.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "katrina---christiansen",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "7e6fe683-89e8-40b0-a49e-c5ed6e565ef2",
+            "personId": "5a8b86f8-7bda-4d75-bcc5-32b04d878c78",
+            "state": "VISIBLE",
+            "username": "KatrinaforND"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 371432,
+        "estimatedVotesLow": 303899,
+        "estimatedVotesMid": 337662,
+        "turnoutHigh": 10.51,
+        "turnoutLow": 12.85,
+        "turnoutMid": 11.56
+      },
+      "firstName": "Katrina",
+      "id": 23642,
+      "lastName": "Christiansen",
+      "partyName": "Democratic",
+      "votes": 39050
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Jason",
+        "firstNickname": "",
+        "id": "fe3d8a5a-82fc-45c7-9990-2330610fcf34",
+        "lastName": "Crow",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "3801007c-4fd9-4aed-bf61-59f1090f2730",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "6",
+          "primaryState": "CO",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/ea1e711b-ebd5-4b97-b552-7de89624db4e.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 999,
+          "type": "jpg",
+          "width": 800
+        },
+        "promotedPositioning": null,
+        "slug": "jason---crow",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "2551829b-13f9-4a03-b587-32028910593e",
+            "personId": "fe3d8a5a-82fc-45c7-9990-2330610fcf34",
+            "state": "VISIBLE",
+            "username": "RepJasonCrow"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 6039891,
+        "estimatedVotesLow": 4941728,
+        "estimatedVotesMid": 5490807,
+        "turnoutHigh": 78.82,
+        "turnoutLow": 96.34,
+        "turnoutMid": 86.7
+      },
+      "firstName": "Sherrod",
+      "id": 8225,
+      "lastName": "Brown",
+      "partyName": "Democratic",
+      "votes": 2107458
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 6039891,
+        "estimatedVotesLow": 4941728,
+        "estimatedVotesMid": 5490807,
+        "turnoutHigh": 78.82,
+        "turnoutLow": 96.34,
+        "turnoutMid": 86.7
+      },
+      "firstName": "Don",
+      "id": 11348,
+      "lastName": "Kissick",
+      "partyName": "Libertarian",
+      "votes": 85310
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 10,
+        "firstName": "Bernie",
+        "firstNickname": "",
+        "id": "d4583063-7d32-4213-a16c-ca7957705153",
+        "lastName": "Moreno",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2029-01-20T00:00:00.000Z",
+          "dateStart": "2025-01-20T00:00:00.000Z",
+          "id": "7e90ea60-abb4-4825-a812-e16b99de3dc7",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "OH",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-012818-berniemoreno.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "bernie--moreno",
+        "stanceCount": 23,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "feafb11b-a2be-492a-b756-77c541253bab",
+            "personId": "d4583063-7d32-4213-a16c-ca7957705153",
+            "state": "VISIBLE",
+            "username": "berniemoreno"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 6039891,
+        "estimatedVotesLow": 4941728,
+        "estimatedVotesMid": 5490807,
+        "turnoutHigh": 78.82,
+        "turnoutLow": 96.34,
+        "turnoutMid": 86.7
+      },
+      "firstName": "Bernie",
+      "id": 53893,
+      "lastName": "Moreno",
+      "partyName": "Republican",
+      "votes": 2567994
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 14,
+        "firstName": "David",
+        "firstNickname": "Dave",
+        "id": "c49ac072-3d98-4878-8d2f-740900417cd5",
+        "lastName": "McCormick",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2029-01-20T00:00:00.000Z",
+          "dateStart": "2025-01-20T00:00:00.000Z",
+          "id": "74fdc3bd-9e8b-4731-96fc-4a50fd89ed44",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "PA",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senator"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-013331-davemccormick.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "david--mccormick",
+        "stanceCount": 14,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "bc9cce4d-f547-4bd7-9752-aecc248a27fc",
+            "personId": "c49ac072-3d98-4878-8d2f-740900417cd5",
+            "state": "VISIBLE",
+            "username": "DaveMcCormickPA"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 6945189,
+        "estimatedVotesLow": 5682427,
+        "estimatedVotesMid": 6313806,
+        "turnoutHigh": 86.2,
+        "turnoutLow": 105.35,
+        "turnoutMid": 94.82
+      },
+      "firstName": "David",
+      "id": 20590,
+      "lastName": "McCormick",
+      "partyName": "Republican",
+      "votes": 2845808
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 13.0952380952381,
+        "computedSumStanceScoreWeight": 21,
+        "firstName": "Robert",
+        "firstNickname": "Bob",
+        "id": "db312245-4247-4720-a719-ebfceed6bb7f",
+        "lastName": "Casey",
+        "manuallyOverriddenStanceScore": 50,
+        "nameSuffix": "Jr.",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "747b73da-d70e-43e7-a99a-fbdae33fd5a1",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "PA",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-012845-bobcasey.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "robert---casey",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "33950402-4ae9-4aab-9f2a-ca21b918033b",
+            "personId": "db312245-4247-4720-a719-ebfceed6bb7f",
+            "state": "VISIBLE",
+            "username": "bob_casey"
+          },
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "58a9c788-8117-4144-b541-a47f932159ef",
+            "personId": "db312245-4247-4720-a719-ebfceed6bb7f",
+            "state": "VISIBLE",
+            "username": "SenBobCasey"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 6945189,
+        "estimatedVotesLow": 5682427,
+        "estimatedVotesMid": 6313806,
+        "turnoutHigh": 86.2,
+        "turnoutLow": 105.35,
+        "turnoutMid": 94.82
+      },
+      "firstName": "Bob",
+      "id": 11349,
+      "lastName": "Casey Jr.",
+      "partyName": "Democratic",
+      "votes": 3140750
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 1.041666666666667,
+        "computedSumStanceScoreWeight": 24,
+        "firstName": "Sheldon",
+        "firstNickname": "",
+        "id": "bf026016-83c6-4162-98b4-3a20a00cbe56",
+        "lastName": "Whitehouse",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "f5728ac5-a6cb-427f-9a28-dddfccba2958",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "RI",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/87fb30bd-95a9-464c-9acb-7b09b98f9a40.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 6046,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 4837
+        },
+        "promotedPositioning": null,
+        "slug": "sheldon---whitehouse",
+        "stanceCount": 6,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "f03c624f-2cdb-408e-bd7c-4ffe236c9a71",
+            "personId": "bf026016-83c6-4162-98b4-3a20a00cbe56",
+            "state": "VISIBLE",
+            "username": "SenWhitehouse"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 519796,
+        "estimatedVotesLow": 425288,
+        "estimatedVotesMid": 472539,
+        "turnoutHigh": 92.72,
+        "turnoutLow": 113.33,
+        "turnoutMid": 99
+      },
+      "firstName": "Sheldon",
+      "id": 8240,
+      "lastName": "Whitehouse",
+      "partyName": "Democratic",
+      "votes": 353279
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Patricia",
+        "firstNickname": "",
+        "id": "b79d250c-869b-47e4-b709-f04922cefd2c",
+        "lastName": "Morgan",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "5f89cfec-bacc-4f4c-98ad-ddcc79148335",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "RI",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Patricia-Morgan.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "patricia---l---morgan",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "478af234-9a84-43d2-9d3a-f12a5c3d582e",
+            "personId": "b79d250c-869b-47e4-b709-f04922cefd2c",
+            "state": "VISIBLE",
+            "username": "repmorgan"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 519796,
+        "estimatedVotesLow": 425288,
+        "estimatedVotesMid": 472539,
+        "turnoutHigh": 92.72,
+        "turnoutLow": 113.33,
+        "turnoutMid": 99
+      },
+      "firstName": "Patricia",
+      "id": 10790,
+      "lastName": "Morgan",
+      "partyName": "Republican",
+      "votes": 128685
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Ron",
+        "firstNickname": "",
+        "id": "af4bd079-2413-4305-be39-501e9ad1a906",
+        "lastName": "Johnson",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "8fd6768a-3740-4eaf-9545-224865ed5156",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "WI",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/f24d8068-c6d8-4cd3-be5b-5c972cad4732.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4554,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 3643
+        },
+        "promotedPositioning": null,
+        "slug": "ron---johnson",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "231b3726-12e6-495a-b75b-20c76aa180c0",
+            "personId": "af4bd079-2413-4305-be39-501e9ad1a906",
+            "state": "VISIBLE",
+            "username": "SenRonJohnson"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3012772,
+        "estimatedVotesLow": 2464997,
+        "estimatedVotesMid": 2738880,
+        "turnoutHigh": 5.53,
+        "turnoutLow": 6.76,
+        "turnoutMid": 6.08
+      },
+      "firstName": "Gloria",
+      "id": 28431,
+      "lastName": "Johnson",
+      "partyName": "Democratic",
+      "votes": 58876
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Andrew",
+        "firstNickname": "",
+        "id": "bfd0cd2f-558d-4150-a139-00cd64bb943e",
+        "lastName": "Jones",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "b3a5f923-9b83-4009-b12f-4a337d1714aa",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "1",
+          "primaryState": "MO",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": "United States Congress"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/AndrewJones.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 400,
+          "width": 400
+        },
+        "promotedPositioning": null,
+        "slug": "andrew--jones",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "08ba7339-5a18-4438-99ad-56e92bdebd4a",
+            "personId": "bfd0cd2f-558d-4150-a139-00cd64bb943e",
+            "state": "VISIBLE",
+            "username": "AndrewJonesMO"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3012772,
+        "estimatedVotesLow": 2464997,
+        "estimatedVotesMid": 2738880,
+        "turnoutHigh": 5.53,
+        "turnoutLow": 6.76,
+        "turnoutMid": 6.08
+      },
+      "firstName": "Pamela Jeanine",
+      "id": 84966,
+      "lastName": "Moses",
+      "partyName": "Independent",
+      "votes": 2650
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "David",
+        "firstNickname": "",
+        "id": "a927a058-4a42-4ccf-b083-133d6ae67bc9",
+        "lastName": "Robinson II",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "b9413cf1-19a0-4206-aef4-7a88a7840e4f",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "2",
+          "primaryState": "SC",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": "United States Congress"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240910-231748-DavidRobinson2024.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "david---robinson",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "62a1dcee-d1e0-42b6-b29d-359c045f1956",
+            "personId": "a927a058-4a42-4ccf-b083-133d6ae67bc9",
+            "state": "VISIBLE",
+            "username": "VoteDavid2024"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3012772,
+        "estimatedVotesLow": 2464997,
+        "estimatedVotesMid": 2738880,
+        "turnoutHigh": 5.53,
+        "turnoutLow": 6.76,
+        "turnoutMid": 6.08
+      },
+      "firstName": "Hastina",
+      "id": 44845,
+      "lastName": "Robinson",
+      "partyName": "Independent",
+      "votes": 2603
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 91.66666666666666,
+        "computedSumStanceScoreWeight": 6,
+        "firstName": "Marsha",
+        "firstNickname": "",
+        "id": "787db618-2b1f-4e25-87b9-05acafd5a83d",
+        "lastName": "Blackburn",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "9f88e493-e530-4f60-a2b1-29ed38fbd277",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "TN",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/f7783332-4505-40dc-a367-838c7761f110.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 2850,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2250
+        },
+        "promotedPositioning": null,
+        "slug": "marsha---blackburn",
+        "stanceCount": 5,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "f94de5e0-9795-40db-93ca-778cb829748c",
+            "personId": "787db618-2b1f-4e25-87b9-05acafd5a83d",
+            "state": "VISIBLE",
+            "username": "MarshaBlackburn"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3012772,
+        "estimatedVotesLow": 2464997,
+        "estimatedVotesMid": 2738880,
+        "turnoutHigh": 5.53,
+        "turnoutLow": 6.76,
+        "turnoutMid": 6.08
+      },
+      "firstName": "Marsha",
+      "id": 1631,
+      "lastName": "Blackburn",
+      "partyName": "Republican",
+      "votes": 99838
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3012772,
+        "estimatedVotesLow": 2464997,
+        "estimatedVotesMid": 2738880,
+        "turnoutHigh": 5.53,
+        "turnoutLow": 6.76,
+        "turnoutMid": 6.08
+      },
+      "firstName": "Tharon",
+      "id": 44417,
+      "lastName": "Chandler",
+      "partyName": "Independent",
+      "votes": 2622
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 97.82608695652173,
+        "computedSumStanceScoreWeight": 23,
+        "firstName": "Richard",
+        "firstNickname": "Rick",
+        "id": "e4e9186a-341b-472f-a321-9b79e1f00edb",
+        "lastName": "Allen",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "37cd7d89-bcf4-4a02-831b-37fec50e6be8",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "12",
+          "primaryState": "GA",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/08e82142-be0b-41f7-a4cf-88a5c0ae3e18.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 2048,
+          "type": "jpg",
+          "width": 1607
+        },
+        "promotedPositioning": null,
+        "slug": "rick---allen",
+        "stanceCount": 4,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "90976ff5-666e-40bc-9bd4-7c9fc69e7d04",
+            "personId": "e4e9186a-341b-472f-a321-9b79e1f00edb",
+            "state": "VISIBLE",
+            "username": "reprickallen"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 11471348,
+        "estimatedVotesLow": 9385656,
+        "estimatedVotesMid": 10428487,
+        "turnoutHigh": 89.8,
+        "turnoutLow": 109.75,
+        "turnoutMid": 98.78
+      },
+      "firstName": "Colin",
+      "id": 8358,
+      "lastName": "Allred",
+      "partyName": "Democratic",
+      "votes": 4867238
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 58,
+        "firstName": "Ted",
+        "firstNickname": "",
+        "id": "b8499a18-14ee-4b34-9e2b-2b1b1c77a889",
+        "lastName": "Cruz",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "0e92edc0-4687-47da-9069-d454fe99a03a",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "TX",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/f1aac8b2-e559-4bf0-b6c8-ce8bac77d1f1.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3420,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 2700
+        },
+        "promotedPositioning": null,
+        "slug": "ted---cruz",
+        "stanceCount": 57,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "2bb4c564-d68e-46f2-af00-e99a906543d0",
+            "personId": "b8499a18-14ee-4b34-9e2b-2b1b1c77a889",
+            "state": "VISIBLE",
+            "username": "SenTedCruz"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 11471348,
+        "estimatedVotesLow": 9385656,
+        "estimatedVotesMid": 10428487,
+        "turnoutHigh": 89.8,
+        "turnoutLow": 109.75,
+        "turnoutMid": 98.78
+      },
+      "firstName": "Ted",
+      "id": 2,
+      "lastName": "Cruz",
+      "partyName": "Republican",
+      "votes": 5260910
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Jason",
+        "firstNickname": "",
+        "id": "fe3d8a5a-82fc-45c7-9990-2330610fcf34",
+        "lastName": "Crow",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "3801007c-4fd9-4aed-bf61-59f1090f2730",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "6",
+          "primaryState": "CO",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/ea1e711b-ebd5-4b97-b552-7de89624db4e.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 999,
+          "type": "jpg",
+          "width": 800
+        },
+        "promotedPositioning": null,
+        "slug": "jason---crow",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "2551829b-13f9-4a03-b587-32028910593e",
+            "personId": "fe3d8a5a-82fc-45c7-9990-2330610fcf34",
+            "state": "VISIBLE",
+            "username": "RepJasonCrow"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 11471348,
+        "estimatedVotesLow": 9385656,
+        "estimatedVotesMid": 10428487,
+        "turnoutHigh": 89.8,
+        "turnoutLow": 109.75,
+        "turnoutMid": 98.78
+      },
+      "firstName": "Ted",
+      "id": 14930,
+      "lastName": "Brown",
+      "partyName": "Libertarian",
+      "votes": 172932
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 35,
+        "firstName": "John",
+        "firstNickname": "",
+        "id": "b5795722-2972-454a-a414-841fcd6fd20c",
+        "lastName": "Curtis",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "b60b77e0-4565-417a-9cae-a753bc15b131",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "3",
+          "primaryState": "UT",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/adc68b0e-39e1-430d-8277-5ea91f483711.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3778,
+          "type": "jpg",
+          "width": 2800
+        },
+        "promotedPositioning": null,
+        "slug": "john---curtis",
+        "stanceCount": 8,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "249e46e1-ea90-49da-a6df-7d3cb47f239a",
+            "personId": "b5795722-2972-454a-a414-841fcd6fd20c",
+            "state": "VISIBLE",
+            "username": "RepJohnCurtis"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1240489,
+        "estimatedVotesLow": 1014945,
+        "estimatedVotesMid": 1127716,
+        "turnoutHigh": 92.2,
+        "turnoutLow": 112.68,
+        "turnoutMid": 99
+      },
+      "firstName": "John",
+      "id": 8307,
+      "lastName": "Curtis",
+      "partyName": "Republican",
+      "votes": 692699
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 47.91666666666667,
+        "computedSumStanceScoreWeight": 12,
+        "firstName": "Joseph",
+        "firstNickname": "Joe",
+        "id": "a0d96029-931c-404f-b918-21f696c26585",
+        "lastName": "Biden",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": null,
+          "dateStart": "2021-01-20T00:00:00.000Z",
+          "id": "c481cab7-2090-4272-9a2d-7ab65209f0ae",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "",
+          "roleCategory": "PRESIDENT",
+          "status": "HELD",
+          "title": "46th President of the United States"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240429-194219-biden.png",
+        "profilePictureUrlDimensions": {
+          "height": 2400,
+          "width": 2400
+        },
+        "promotedPositioning": 6,
+        "slug": "joseph---biden",
+        "stanceCount": 7,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "c3d48329-3fde-4719-bd7e-752bfa7d1bf7",
+            "personId": "a0d96029-931c-404f-b918-21f696c26585",
+            "state": "VISIBLE",
+            "username": "joebiden"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1240489,
+        "estimatedVotesLow": 1014945,
+        "estimatedVotesMid": 1127716,
+        "turnoutHigh": 92.2,
+        "turnoutLow": 112.68,
+        "turnoutMid": 99
+      },
+      "firstName": "Carlton E.",
+      "id": 84967,
+      "lastName": "Bowen",
+      "partyName": "American Independent Party",
+      "votes": 19448
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Caroline",
+        "firstNickname": "",
+        "id": "c2fa6be9-881f-407b-a7eb-6aaff19f9627",
+        "lastName": "Gleich",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "accf3633-1e7e-4158-b6ff-8a031c5f8e47",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "UT",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/CarolineGleich2024.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "caroline--gleich",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "b05def79-3358-4e48-96d5-6ca3c19d4a61",
+            "personId": "c2fa6be9-881f-407b-a7eb-6aaff19f9627",
+            "state": "VISIBLE",
+            "username": "carolineforutah"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1240489,
+        "estimatedVotesLow": 1014945,
+        "estimatedVotesMid": 1127716,
+        "turnoutHigh": 92.2,
+        "turnoutLow": 112.68,
+        "turnoutMid": 99
+      },
+      "firstName": "Caroline",
+      "id": 76175,
+      "lastName": "Gleich",
+      "partyName": "Democratic",
+      "votes": 431538
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 35,
+        "firstName": "Garland",
+        "firstNickname": "Andy",
+        "id": "d86e88dd-717a-40ca-99ea-351e8b39d7f1",
+        "lastName": "Barr",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "b98cd1c3-dcec-4741-97d9-d114f6d49a57",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "6",
+          "primaryState": "KY",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/2bcbf521-1947-415d-b635-62d42e338c75.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 768,
+          "width": 510
+        },
+        "promotedPositioning": null,
+        "slug": "garland---barr",
+        "stanceCount": 14,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "1673799c-310c-4cb9-8679-df9c0fe38496",
+            "personId": "d86e88dd-717a-40ca-99ea-351e8b39d7f1",
+            "state": "VISIBLE",
+            "username": "RepAndyBarr"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 359924,
+        "estimatedVotesLow": 294481,
+        "estimatedVotesMid": 327192,
+        "turnoutHigh": 91.06,
+        "turnoutLow": 111.3,
+        "turnoutMid": 99
+      },
+      "firstName": "Steve",
+      "id": 101849,
+      "lastName": "Berry",
+      "partyName": "Independent",
+      "votes": 14906
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Gerald",
+        "firstNickname": "",
+        "id": "c1291c9e-d66f-41b9-a0f9-bbb1c4be237b",
+        "lastName": "Malloy",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "92ebf069-df81-4976-bd63-b89268224785",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "VT",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Gerald_Malloy.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "gerald--malloy",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "0f38c04b-7016-41df-8407-3e31d0880b0f",
+            "personId": "c1291c9e-d66f-41b9-a0f9-bbb1c4be237b",
+            "state": "VISIBLE",
+            "username": "GeraldMalloyVT"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 359924,
+        "estimatedVotesLow": 294481,
+        "estimatedVotesMid": 327192,
+        "turnoutHigh": 91.06,
+        "turnoutLow": 111.3,
+        "turnoutMid": 99
+      },
+      "firstName": "Gerald",
+      "id": 28838,
+      "lastName": "Malloy",
+      "partyName": "Republican",
+      "votes": 244537
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Cory",
+        "firstNickname": "",
+        "id": "eaaba8d4-8459-4a99-af13-1efb52f668ee",
+        "lastName": "Mills",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "0674f27b-e8d8-456e-a9b6-c25d997d3dc1",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "7",
+          "primaryState": "FL",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/4d1e8b02-9aae-4b14-971b-575394eb9bb8.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 1054,
+          "type": "jpg",
+          "width": 700
+        },
+        "promotedPositioning": null,
+        "slug": "cory---mills",
+        "stanceCount": 3,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 359924,
+        "estimatedVotesLow": 294481,
+        "estimatedVotesMid": 327192,
+        "turnoutHigh": 91.06,
+        "turnoutLow": 111.3,
+        "turnoutMid": 99
+      },
+      "firstName": "Matt",
+      "id": 102228,
+      "lastName": "Hill",
+      "partyName": "Libertarian",
+      "votes": 15071
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Mark",
+        "firstNickname": "",
+        "id": "c473b9d5-6b86-470b-8dea-846f6d2b7e69",
+        "lastName": "Sanders",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "INDEPENDENT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "5e33d414-d403-4967-8ddc-e350c24bdf8b",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "1",
+          "primaryState": "OK",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240919-194508-MarkSanders2024.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "mark---sanders",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "8357c96f-3158-4652-991e-61680e8e893b",
+            "personId": "c473b9d5-6b86-470b-8dea-846f6d2b7e69",
+            "state": "VISIBLE",
+            "username": "Sanders4OK"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 359924,
+        "estimatedVotesLow": 294481,
+        "estimatedVotesMid": 327192,
+        "turnoutHigh": 91.06,
+        "turnoutLow": 111.3,
+        "turnoutMid": 99
+      },
+      "firstName": "Bernie",
+      "id": 113432,
+      "lastName": "Sanders",
+      "partyName": "Independent",
+      "votes": 15197
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 359924,
+        "estimatedVotesLow": 294481,
+        "estimatedVotesMid": 327192,
+        "turnoutHigh": 91.06,
+        "turnoutLow": 111.3,
+        "turnoutMid": 99
+      },
+      "firstName": "Justin",
+      "id": 85171,
+      "lastName": "Schoville",
+      "partyName": "Peace and Justice",
+      "votes": 17681
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 359924,
+        "estimatedVotesLow": 294481,
+        "estimatedVotesMid": 327192,
+        "turnoutHigh": 91.06,
+        "turnoutLow": 111.3,
+        "turnoutMid": 99
+      },
+      "firstName": "Mark",
+      "id": 102227,
+      "lastName": "Greenstein",
+      "partyName": "Epic Party",
+      "votes": 20369
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Luther",
+        "firstNickname": "",
+        "id": "c8aca691-5754-4ae1-8333-5ba305ce08ba",
+        "lastName": "Layne",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": null,
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "9da6fadb-f79b-41c2-b025-edcdc028be85",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "25",
+          "primaryState": "NY",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240912-183612-Screenshot2024-09-12at2.35.57PM.png",
+        "profilePictureUrlDimensions": {
+          "height": 694,
+          "width": 554
+        },
+        "promotedPositioning": null,
+        "slug": "luther---layne",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "b5b34778-dc50-4ba4-9f47-99f44f5fd294",
+            "personId": "c8aca691-5754-4ae1-8333-5ba305ce08ba",
+            "state": "VISIBLE",
+            "username": "LutherForNY25"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4429965,
+        "estimatedVotesLow": 3624517,
+        "estimatedVotesMid": 4027236,
+        "turnoutHigh": 90.63,
+        "turnoutLow": 110.77,
+        "turnoutMid": 99
+      },
+      "firstName": "Tim",
+      "id": 8289,
+      "lastName": "Kaine",
+      "partyName": "Democratic",
+      "votes": 2673931
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Jeanette",
+        "firstNickname": "",
+        "id": "be0835de-9aa4-48b4-a81d-4d164a5b9f21",
+        "lastName": "Cass",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "73e00b3b-870e-4caa-b756-def4ecc1a0ee",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "4",
+          "primaryState": "MO",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240918-183936-Jeanette_Cass_20240808_093515.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "jeanette---cass",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "cef9afe1-d687-4efc-8471-23e39412cfc4",
+            "personId": "be0835de-9aa4-48b4-a81d-4d164a5b9f21",
+            "state": "VISIBLE",
+            "username": "CassforCongress"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4429965,
+        "estimatedVotesLow": 3624517,
+        "estimatedVotesMid": 4027236,
+        "turnoutHigh": 90.63,
+        "turnoutLow": 110.77,
+        "turnoutMid": 99
+      },
+      "firstName": "Hung",
+      "id": 44452,
+      "lastName": "Cao",
+      "partyName": "Republican",
+      "votes": 1341073
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Maria",
+        "firstNickname": "",
+        "id": "29c5e050-16a6-4224-bad1-79f27298506a",
+        "lastName": "Cantwell",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "b0fde5cf-60a9-4ff4-a589-e414aaa814d3",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "WA",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/1c484e5a-58df-48b9-986d-c96ed5213d2c.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 648,
+          "type": "jpg",
+          "width": 638
+        },
+        "promotedPositioning": null,
+        "slug": "maria---cantwell",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "1d0aae6d-ff2a-4805-8bda-1cc8fd5e2cc4",
+            "personId": "29c5e050-16a6-4224-bad1-79f27298506a",
+            "state": "VISIBLE",
+            "username": "SenatorCantwell"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4035935,
+        "estimatedVotesLow": 3302130,
+        "estimatedVotesMid": 3669031,
+        "turnoutHigh": 74.02,
+        "turnoutLow": 90.47,
+        "turnoutMid": 81.42
+      },
+      "firstName": "Maria",
+      "id": 8226,
+      "lastName": "Cantwell",
+      "partyName": "Democratic",
+      "votes": 2175504
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Peter",
+        "firstNickname": "",
+        "id": "b9e50eb8-4bf9-4537-a740-faf9e8d086b9",
+        "lastName": "Barca",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "9131108f-4a42-45f3-8b26-f261f959b816",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "1",
+          "primaryState": "WI",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240826-182938-Barca_Peter.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "peter---barca",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "0f500cdc-e882-4b29-b9fb-2f6e09042e76",
+            "personId": "b9e50eb8-4bf9-4537-a740-faf9e8d086b9",
+            "state": "VISIBLE",
+            "username": "PeterWBarca"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4035935,
+        "estimatedVotesLow": 3302130,
+        "estimatedVotesMid": 3669031,
+        "turnoutHigh": 74.02,
+        "turnoutLow": 90.47,
+        "turnoutMid": 81.42
+      },
+      "firstName": "Raul",
+      "id": 14042,
+      "lastName": "Garcia",
+      "partyName": "Republican",
+      "votes": 811936
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Patricia",
+        "firstNickname": "",
+        "id": "b79d250c-869b-47e4-b709-f04922cefd2c",
+        "lastName": "Morgan",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "5f89cfec-bacc-4f4c-98ad-ddcc79148335",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "RI",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Patricia-Morgan.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "patricia---l---morgan",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "478af234-9a84-43d2-9d3a-f12a5c3d582e",
+            "personId": "b79d250c-869b-47e4-b709-f04922cefd2c",
+            "state": "VISIBLE",
+            "username": "repmorgan"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 796969,
+        "estimatedVotesLow": 652073,
+        "estimatedVotesMid": 724518,
+        "turnoutHigh": 89.29,
+        "turnoutLow": 109.13,
+        "turnoutMid": 98.22
+      },
+      "firstName": "David",
+      "id": 2108,
+      "lastName": "Moran",
+      "partyName": "Libertarian",
+      "votes": 12358
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Jim",
+        "firstNickname": "",
+        "id": "6fe39e4c-477c-421c-b2b6-73cb2076a40d",
+        "lastName": "Justice",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2029-01-20T00:00:00.000Z",
+          "dateStart": "2025-01-20T00:00:00.000Z",
+          "id": "82b4bb3c-098e-4ca9-958c-2013346c2a9c",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "WV",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senator"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240502-005525-jimjustice.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "jim--justice",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "65dea30e-1716-4ab3-ad72-6f2c038dfb6b",
+            "personId": "6fe39e4c-477c-421c-b2b6-73cb2076a40d",
+            "state": "VISIBLE",
+            "username": "JimJusticeWV"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 796969,
+        "estimatedVotesLow": 652073,
+        "estimatedVotesMid": 724518,
+        "turnoutHigh": 89.29,
+        "turnoutLow": 109.13,
+        "turnoutMid": 98.22
+      },
+      "firstName": "Jim",
+      "id": 13636,
+      "lastName": "Justice",
+      "partyName": "Republican",
+      "votes": 478945
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Glenn",
+        "firstNickname": "",
+        "id": "cb85edc9-0a46-41f0-8bbe-a8c119c116a9",
+        "lastName": "Elliott",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "7f9bc7e6-ac38-4ed2-97fe-a0411258a2ad",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "WV",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": "United States Senate"
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/GlennElliott.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "glenn--elliott",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "4ae51385-67c4-42c3-8a5b-a72ffc4c9f23",
+            "personId": "cb85edc9-0a46-41f0-8bbe-a8c119c116a9",
+            "state": "VISIBLE",
+            "username": "ElliottForWV"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 796969,
+        "estimatedVotesLow": 652073,
+        "estimatedVotesMid": 724518,
+        "turnoutHigh": 89.29,
+        "turnoutLow": 109.13,
+        "turnoutMid": 98.22
+      },
+      "firstName": "Glenn",
+      "id": 67484,
+      "lastName": "Elliott",
+      "partyName": "Democratic",
+      "votes": 220316
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Matt",
+        "firstNickname": "",
+        "id": "b8a17918-1c67-4a30-9ad3-2cace5ed8f74",
+        "lastName": "Gunderson",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "3f99a5f1-a18a-443b-a401-ddbf5cbf60ac",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "49",
+          "primaryState": "CA",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/MattGunderson.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "matt---gunderson",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "3b98489c-97a6-48ba-a238-9fb887efb6d3",
+            "personId": "b8a17918-1c67-4a30-9ad3-2cace5ed8f74",
+            "state": "VISIBLE",
+            "username": "GundersonForCA"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3569088,
+        "estimatedVotesLow": 2920535,
+        "estimatedVotesMid": 3244757,
+        "turnoutHigh": 90.6,
+        "turnoutLow": 110.72,
+        "turnoutMid": 99
+      },
+      "firstName": "Phillip",
+      "id": 85173,
+      "lastName": "Anderson",
+      "partyName": "Disrupt the Corruption",
+      "votes": 130256
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 22,
+        "firstName": "Emanuel",
+        "firstNickname": "",
+        "id": "843cd280-8fbc-4ed5-a5ef-300ecddd2d87",
+        "lastName": "Cleaver",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "II",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "ff1b2d31-b001-4112-ade4-4568555607d5",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "5",
+          "primaryState": "MO",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/3aa0a7bd-1e43-451c-8ed8-bb8308cb5e3a.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4200,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 3360
+        },
+        "promotedPositioning": null,
+        "slug": "emanuel---cleaver",
+        "stanceCount": 3,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "1ee86d5d-7b33-4f77-9f2e-9edc7d733345",
+            "personId": "843cd280-8fbc-4ed5-a5ef-300ecddd2d87",
+            "state": "VISIBLE",
+            "username": "RepCleaver"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3569088,
+        "estimatedVotesLow": 2920535,
+        "estimatedVotesMid": 3244757,
+        "turnoutHigh": 90.6,
+        "turnoutLow": 110.72,
+        "turnoutMid": 99
+      },
+      "firstName": "Thomas",
+      "id": 84975,
+      "lastName": "Leager",
+      "partyName": "America First Republican",
+      "votes": 96441
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 0,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Tammy",
+        "firstNickname": "",
+        "id": "f545a893-6176-4a71-b569-11f6f747094b",
+        "lastName": "Baldwin",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "4aa72584-6211-443c-beb2-bdd92e0c3b59",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "WI",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240501-014951-tammybaldwin.png",
+        "profilePictureUrlDimensions": {
+          "height": 1962,
+          "width": 1962
+        },
+        "promotedPositioning": null,
+        "slug": "tammy---baldwin",
+        "stanceCount": 1,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "06c2886b-8c99-403f-9ec2-5a7904e915dd",
+            "personId": "f545a893-6176-4a71-b569-11f6f747094b",
+            "state": "VISIBLE",
+            "username": "tammybaldwin"
+          },
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "7b68e9b6-73d7-48d7-b6f8-7b5be823e3af",
+            "personId": "f545a893-6176-4a71-b569-11f6f747094b",
+            "state": "VISIBLE",
+            "username": "SenatorBaldwin"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3569088,
+        "estimatedVotesLow": 2920535,
+        "estimatedVotesMid": 3244757,
+        "turnoutHigh": 90.6,
+        "turnoutLow": 110.72,
+        "turnoutMid": 99
+      },
+      "firstName": "Tammy",
+      "id": 8263,
+      "lastName": "Baldwin",
+      "partyName": "Democratic",
+      "votes": 1532436
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Preston",
+        "firstNickname": "",
+        "id": "ae642373-0655-4fbf-a9d0-b6dbf6e56939",
+        "lastName": "Love",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "Jr",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "19aec05d-d26f-4c8d-9c0e-5efb2a965a20",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "NE",
+          "roleCategory": "SENATE",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240911-204055-Screenshot2024-09-11at4.40.44PM.png",
+        "profilePictureUrlDimensions": {
+          "height": 944,
+          "width": 624
+        },
+        "promotedPositioning": null,
+        "slug": "preston---love",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "e5a7be03-6321-4b37-87ba-cbeaf32576a6",
+            "personId": "ae642373-0655-4fbf-a9d0-b6dbf6e56939",
+            "state": "VISIBLE",
+            "username": "Love4Senate"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 3569088,
+        "estimatedVotesLow": 2920535,
+        "estimatedVotesMid": 3244757,
+        "turnoutHigh": 90.6,
+        "turnoutLow": 110.72,
+        "turnoutMid": 99
+      },
+      "firstName": "Eric",
+      "id": 83597,
+      "lastName": "Hovde",
+      "partyName": "Republican",
+      "votes": 1474372
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 268545,
+        "estimatedVotesLow": 219720,
+        "estimatedVotesMid": 244131,
+        "turnoutHigh": 87.11,
+        "turnoutLow": 106.46,
+        "turnoutMid": 95.82
+      },
+      "firstName": "Scott",
+      "id": 84151,
+      "lastName": "Morrow",
+      "partyName": "Democratic",
+      "votes": 19769
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 91.66666666666666,
+        "computedSumStanceScoreWeight": 3,
+        "firstName": "John",
+        "firstNickname": "",
+        "id": "1bc4b7aa-a1bf-4f42-b81c-5d87528f13b1",
+        "lastName": "Barrasso",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "2e923128-6c43-4d1d-9304-98d8c9e970e7",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "WY",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/d52a2f10-6919-4882-9a28-46cb5bb7ed58.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 5525,
+          "type": "jpg",
+          "width": 4420
+        },
+        "promotedPositioning": null,
+        "slug": "john---barrasso",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "030421d3-d2b8-4562-b42c-eb5b4aecf1b6",
+            "personId": "1bc4b7aa-a1bf-4f42-b81c-5d87528f13b1",
+            "state": "VISIBLE",
+            "username": "SenJohnBarrasso"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 268545,
+        "estimatedVotesLow": 219720,
+        "estimatedVotesMid": 244131,
+        "turnoutHigh": 87.11,
+        "turnoutLow": 106.46,
+        "turnoutMid": 95.82
+      },
+      "firstName": "John",
+      "id": 8241,
+      "lastName": "Barrasso",
+      "partyName": "Republican",
+      "votes": 214150
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 95,
+        "computedSumStanceScoreWeight": 10,
+        "firstName": "John",
+        "firstNickname": "",
+        "id": "c0d2a574-db60-4f80-afaa-b8f3ab7f028d",
+        "lastName": "Cornyn",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "bb185ea6-eabf-4d43-a88a-18f81dd5633b",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "TX",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/83ba3462-bdde-4de2-a52e-b11a3c4bc1a7.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 3393,
+          "type": "jpg",
+          "width": 2549
+        },
+        "promotedPositioning": null,
+        "slug": "john---cornyn",
+        "stanceCount": 9,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "108a36b8-48d1-4e68-bec3-fa82b89a3298",
+            "personId": "c0d2a574-db60-4f80-afaa-b8f3ab7f028d",
+            "state": "VISIBLE",
+            "username": "JohnCornyn"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1804153,
+        "estimatedVotesLow": 1476136,
+        "estimatedVotesMid": 1640137,
+        "turnoutHigh": 92.84,
+        "turnoutLow": 113.47,
+        "turnoutMid": 99
+      },
+      "firstName": "Matthew",
+      "id": 105273,
+      "lastName": "Corey",
+      "partyName": "Republican",
+      "votes": 648204
+    },
+    {
+      "dtsiData": null,
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1804153,
+        "estimatedVotesLow": 1476136,
+        "estimatedVotesMid": 1640137,
+        "turnoutHigh": 92.84,
+        "turnoutLow": 113.47,
+        "turnoutMid": 99
+      },
+      "firstName": "Justin",
+      "id": 14653,
+      "lastName": "Paglino",
+      "partyName": "Green",
+      "votes": 28080
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 90.625,
+        "computedSumStanceScoreWeight": 8,
+        "firstName": "Ron",
+        "firstNickname": "",
+        "id": "e0aeba48-68fd-4b1f-90c2-2e1775d8387b",
+        "lastName": "Wyden",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "DEMOCRAT",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "06068c76-8cdb-4b84-aea4-78bb8fb77050",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "",
+          "primaryState": "OR",
+          "roleCategory": "SENATE",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/c763baad-3c0c-4c6f-80fa-6f5f15718d00.jpeg",
+        "profilePictureUrlDimensions": {
+          "height": 6203,
+          "orientation": 1,
+          "type": "jpg",
+          "width": 4962
+        },
+        "promotedPositioning": null,
+        "slug": "ron---wyden",
+        "stanceCount": 7,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "5590c6cb-f958-42a5-8adc-2c9bcabab93d",
+            "personId": "e0aeba48-68fd-4b1f-90c2-2e1775d8387b",
+            "state": "VISIBLE",
+            "username": "RonWyden"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1804153,
+        "estimatedVotesLow": 1476136,
+        "estimatedVotesMid": 1640137,
+        "turnoutHigh": 92.84,
+        "turnoutLow": 113.47,
+        "turnoutMid": 99
+      },
+      "firstName": "Robert",
+      "id": 105274,
+      "lastName": "Hyde",
+      "partyName": "Independent",
+      "votes": 59925
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": 100,
+        "computedSumStanceScoreWeight": 2,
+        "firstName": "Gregory",
+        "firstNickname": "Greg",
+        "id": "b62d9c45-71c3-4b73-86c4-e66205b85a0b",
+        "lastName": "Murphy",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "DR.",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2025-01-03T00:00:00.000Z",
+          "dateStart": "2023-01-03T00:00:00.000Z",
+          "id": "09d3c663-d825-4595-b1be-a324b903174c",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "3",
+          "primaryState": "NC",
+          "roleCategory": "CONGRESS",
+          "status": "HELD",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/all/images/2b727600-19c0-4bd4-80c6-7582e9aeea3a.jpg",
+        "profilePictureUrlDimensions": {
+          "height": 4200,
+          "type": "jpg",
+          "width": 3360
+        },
+        "promotedPositioning": null,
+        "slug": "gregory---murphy",
+        "stanceCount": 2,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "02ebcdf3-388f-4ddb-bcf6-6f56f3927c6a",
+            "personId": "b62d9c45-71c3-4b73-86c4-e66205b85a0b",
+            "state": "VISIBLE",
+            "username": "RepGregMurphy"
+          }
+        ]
+      },
+      "elected": true,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 1804153,
+        "estimatedVotesLow": 1476136,
+        "estimatedVotesMid": 1640137,
+        "turnoutHigh": 92.84,
+        "turnoutLow": 113.47,
+        "turnoutMid": 99
+      },
+      "firstName": "Chris",
+      "id": 105272,
+      "lastName": "Murphy",
+      "partyName": "Democratic",
+      "votes": 938791
+    }
+  ],
+  "office": {
+    "officeId": "4",
+    "officeName": "US Senate",
+    "officeTypeId": "1"
+  },
+  "year": 2024
+}

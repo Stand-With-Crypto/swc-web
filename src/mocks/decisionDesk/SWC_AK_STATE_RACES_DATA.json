@@ -5,77 +5,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 350126,
-          "estimatedVotesLow": 286176,
-          "estimatedVotesMid": 317973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mary",
-        "id": 23403,
-        "lastName": "Peltola",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 350126,
-          "estimatedVotesLow": 286176,
-          "estimatedVotesMid": 317973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Nick",
-        "id": 23370,
-        "lastName": "Begich",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 350126,
-          "estimatedVotesLow": 286176,
-          "estimatedVotesMid": 317973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 23389,
-        "lastName": "Howe",
-        "partyName": "Alaska Independence Party",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 350126,
-          "estimatedVotesLow": 286176,
-          "estimatedVotesMid": 317973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.69,
+          "turnoutMid": 99
         },
         "firstName": "Eric",
         "id": 9117,
         "lastName": "Hafner",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 126165
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.69,
+          "turnoutMid": 99
+        },
+        "firstName": "Mary",
+        "id": 23403,
+        "lastName": "Peltola",
+        "partyName": "Democratic",
+        "votes": 6766
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.69,
+          "turnoutMid": 99
+        },
+        "firstName": "John",
+        "id": 23389,
+        "lastName": "Howe",
+        "partyName": "Alaska Independence Party",
+        "votes": 6775
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.69,
+          "turnoutMid": 99
+        },
+        "firstName": "Nick",
+        "id": 23370,
+        "lastName": "Begich",
+        "partyName": "Republican",
+        "votes": 182288
       }
     ],
     "district": "At-Large",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:37:06.590Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:14.621Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 321994,
     "year": 2024
   },
   {
@@ -99,9 +106,16 @@
       }
     ],
     "district": "B",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -115,61 +129,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19730,
-          "estimatedVotesLow": 16138,
-          "estimatedVotesMid": 17931,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jesse",
-        "id": 29718,
-        "lastName": "Bjorkman",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19730,
-          "estimatedVotesLow": 16138,
-          "estimatedVotesMid": 17931,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ben",
-        "id": 29770,
-        "lastName": "Carpenter",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19730,
-          "estimatedVotesLow": 16138,
-          "estimatedVotesMid": 17931,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19704,
+          "estimatedVotesLow": 16122,
+          "estimatedVotesMid": 17913,
+          "turnoutHigh": 80.82,
+          "turnoutLow": 98.77,
+          "turnoutMid": 88.9
         },
         "firstName": "Tina",
         "id": 83306,
         "lastName": "Wegener",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5172
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19704,
+          "estimatedVotesLow": 16122,
+          "estimatedVotesMid": 17913,
+          "turnoutHigh": 80.82,
+          "turnoutLow": 98.77,
+          "turnoutMid": 88.9
+        },
+        "firstName": "Ben",
+        "id": 29770,
+        "lastName": "Carpenter",
+        "partyName": "Republican",
+        "votes": 290
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19704,
+          "estimatedVotesLow": 16122,
+          "estimatedVotesMid": 17913,
+          "turnoutHigh": 80.82,
+          "turnoutLow": 98.77,
+          "turnoutMid": 88.9
+        },
+        "firstName": "Jesse",
+        "id": 29718,
+        "lastName": "Bjorkman",
+        "partyName": "Republican",
+        "votes": 10462
       }
     ],
     "district": "D",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 15924,
     "year": 2024
   },
   {
@@ -178,61 +199,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18966,
-          "estimatedVotesLow": 15515,
-          "estimatedVotesMid": 17239,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "James",
-        "id": 29724,
-        "lastName": "Kaufman",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 18966,
-          "estimatedVotesLow": 15515,
-          "estimatedVotesMid": 17239,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 18939,
+          "estimatedVotesLow": 15495,
+          "estimatedVotesMid": 17217,
+          "turnoutHigh": 78.48,
+          "turnoutLow": 95.92,
+          "turnoutMid": 86.33
         },
         "firstName": "Harold",
         "id": 83307,
         "lastName": "Borbridge",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 324
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18966,
-          "estimatedVotesLow": 15515,
-          "estimatedVotesMid": 17239,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 18939,
+          "estimatedVotesLow": 15495,
+          "estimatedVotesMid": 17217,
+          "turnoutHigh": 78.48,
+          "turnoutLow": 95.92,
+          "turnoutMid": 86.33
         },
         "firstName": "Janice",
         "id": 29723,
         "lastName": "Park",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 7102
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18939,
+          "estimatedVotesLow": 15495,
+          "estimatedVotesMid": 17217,
+          "turnoutHigh": 78.48,
+          "turnoutLow": 95.92,
+          "turnoutMid": 86.33
+        },
+        "firstName": "James",
+        "id": 29724,
+        "lastName": "Kaufman",
+        "partyName": "Republican",
+        "votes": 7437
       }
     ],
     "district": "F",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 14863,
     "year": 2024
   },
   {
@@ -241,45 +269,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19341,
-          "estimatedVotesLow": 15822,
-          "estimatedVotesMid": 17580,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19316,
+          "estimatedVotesLow": 15804,
+          "estimatedVotesMid": 17560,
+          "turnoutHigh": 76.86,
+          "turnoutLow": 93.94,
+          "turnoutMid": 84.55
         },
         "firstName": "Liz",
         "id": 29790,
         "lastName": "Vazquez",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 13181
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19341,
-          "estimatedVotesLow": 15822,
-          "estimatedVotesMid": 17580,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19316,
+          "estimatedVotesLow": 15804,
+          "estimatedVotesMid": 17560,
+          "turnoutHigh": 76.86,
+          "turnoutLow": 93.94,
+          "turnoutMid": 84.55
         },
         "firstName": "Matt",
         "id": 29727,
         "lastName": "Claman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1666
       }
     ],
     "district": "H",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 14847,
     "year": 2024
   },
   {
@@ -288,45 +323,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13158,
-          "estimatedVotesLow": 10774,
-          "estimatedVotesMid": 11972,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12846,
+          "estimatedVotesLow": 10510,
+          "estimatedVotesMid": 11678,
+          "turnoutHigh": 83.57,
+          "turnoutLow": 102.14,
+          "turnoutMid": 91.92
         },
         "firstName": "Forrest",
         "id": 29732,
         "lastName": "Dunbar",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10422
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 13158,
-          "estimatedVotesLow": 10774,
-          "estimatedVotesMid": 11972,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12846,
+          "estimatedVotesLow": 10510,
+          "estimatedVotesMid": 11678,
+          "turnoutHigh": 83.57,
+          "turnoutLow": 102.14,
+          "turnoutMid": 91.92
         },
         "firstName": "Cheronda",
         "id": 83308,
         "lastName": "Smith",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 313
       }
     ],
     "district": "J",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 10735,
     "year": 2024
   },
   {
@@ -335,61 +377,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 19311,
-          "estimatedVotesLow": 15799,
-          "estimatedVotesMid": 17555,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kelly",
-        "id": 29737,
-        "lastName": "Merrick",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19311,
-          "estimatedVotesLow": 15799,
-          "estimatedVotesMid": 17555,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jared",
-        "id": 83309,
-        "lastName": "Goecker",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 19311,
-          "estimatedVotesLow": 15799,
-          "estimatedVotesMid": 17555,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19229,
+          "estimatedVotesLow": 15733,
+          "estimatedVotesMid": 17481,
+          "turnoutHigh": 86.75,
+          "turnoutLow": 106.03,
+          "turnoutMid": 95.43
         },
         "firstName": "Lee",
         "id": 83310,
         "lastName": "Hammermeister",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6156
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19229,
+          "estimatedVotesLow": 15733,
+          "estimatedVotesMid": 17481,
+          "turnoutHigh": 86.75,
+          "turnoutLow": 106.03,
+          "turnoutMid": 95.43
+        },
+        "firstName": "Kelly",
+        "id": 29737,
+        "lastName": "Merrick",
+        "partyName": "Republican",
+        "votes": 10196
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19229,
+          "estimatedVotesLow": 15733,
+          "estimatedVotesMid": 17481,
+          "turnoutHigh": 86.75,
+          "turnoutLow": 106.03,
+          "turnoutMid": 95.43
+        },
+        "firstName": "Jared",
+        "id": 83309,
+        "lastName": "Goecker",
+        "partyName": "Republican",
+        "votes": 330
       }
     ],
     "district": "L",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 16682,
     "year": 2024
   },
   {
@@ -398,61 +447,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 20088,
-          "estimatedVotesLow": 16440,
-          "estimatedVotesMid": 18267,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Stephen",
-        "id": 23414,
-        "lastName": "Wright",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 20088,
-          "estimatedVotesLow": 16440,
-          "estimatedVotesMid": 18267,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert",
-        "id": 83312,
-        "lastName": "Yundt",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 20088,
-          "estimatedVotesLow": 16440,
-          "estimatedVotesMid": 18267,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 20115,
+          "estimatedVotesLow": 16457,
+          "estimatedVotesMid": 18286,
+          "turnoutHigh": 79.36,
+          "turnoutLow": 97,
+          "turnoutMid": 87.3
         },
         "firstName": "David",
         "id": 83311,
         "lastName": "Wilson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2935
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20115,
+          "estimatedVotesLow": 16457,
+          "estimatedVotesMid": 18286,
+          "turnoutHigh": 79.36,
+          "turnoutLow": 97,
+          "turnoutMid": 87.3
+        },
+        "firstName": "Stephen",
+        "id": 23414,
+        "lastName": "Wright",
+        "partyName": "Republican",
+        "votes": 12676
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 20115,
+          "estimatedVotesLow": 16457,
+          "estimatedVotesMid": 18286,
+          "turnoutHigh": 79.36,
+          "turnoutLow": 97,
+          "turnoutMid": 87.3
+        },
+        "firstName": "Robert",
+        "id": 83312,
+        "lastName": "Yundt",
+        "partyName": "Republican",
+        "votes": 352
       }
     ],
     "district": "N",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 15963,
     "year": 2024
   },
   {
@@ -461,45 +517,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11658,
-          "estimatedVotesLow": 9545,
-          "estimatedVotesMid": 10606,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Scott",
-        "id": 29744,
-        "lastName": "Kawasaki",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11658,
-          "estimatedVotesLow": 9545,
-          "estimatedVotesMid": 10606,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11560,
+          "estimatedVotesLow": 9458,
+          "estimatedVotesMid": 10509,
+          "turnoutHigh": 86.96,
+          "turnoutLow": 106.29,
+          "turnoutMid": 95.66
         },
         "firstName": "Leslie",
         "id": 83313,
         "lastName": "Hajdukovich",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9069
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11560,
+          "estimatedVotesLow": 9458,
+          "estimatedVotesMid": 10509,
+          "turnoutHigh": 86.96,
+          "turnoutLow": 106.29,
+          "turnoutMid": 95.66
+        },
+        "firstName": "Scott",
+        "id": 29744,
+        "lastName": "Kawasaki",
+        "partyName": "Democratic",
+        "votes": 984
       }
     ],
     "district": "P",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 10053,
     "year": 2024
   },
   {
@@ -508,61 +571,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18275,
-          "estimatedVotesLow": 14963,
-          "estimatedVotesMid": 16625,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Savannah",
-        "id": 83314,
-        "lastName": "Fletcher",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 18275,
-          "estimatedVotesLow": 14963,
-          "estimatedVotesMid": 16625,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 18303,
+          "estimatedVotesLow": 14975,
+          "estimatedVotesMid": 16639,
+          "turnoutHigh": 85.14,
+          "turnoutLow": 104.07,
+          "turnoutMid": 93.66
         },
         "firstName": "Robert",
         "id": 29752,
         "lastName": "Williams",
         "partyName": "Alaska Independence Party",
-        "votes": 0
+        "votes": 480
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 18275,
-          "estimatedVotesLow": 14963,
-          "estimatedVotesMid": 16625,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 18303,
+          "estimatedVotesLow": 14975,
+          "estimatedVotesMid": 16639,
+          "turnoutHigh": 85.14,
+          "turnoutLow": 104.07,
+          "turnoutMid": 93.66
         },
         "firstName": "Mike",
         "id": 29846,
         "lastName": "Cronk",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 14663
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18303,
+          "estimatedVotesLow": 14975,
+          "estimatedVotesMid": 16639,
+          "turnoutHigh": 85.14,
+          "turnoutLow": 104.07,
+          "turnoutMid": 93.66
+        },
+        "firstName": "Savannah",
+        "id": 83314,
+        "lastName": "Fletcher",
+        "partyName": "Independent",
+        "votes": 441
       }
     ],
     "district": "R",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 15584,
     "year": 2024
   },
   {
@@ -586,9 +656,16 @@
       }
     ],
     "district": "T",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -602,61 +679,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9224,
-          "estimatedVotesLow": 7551,
-          "estimatedVotesMid": 8390,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Agnes",
-        "id": 83318,
-        "lastName": "Moran",
-        "partyName": "Nonpartisan",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9224,
-          "estimatedVotesLow": 7551,
-          "estimatedVotesMid": 8390,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9236,
+          "estimatedVotesLow": 7556,
+          "estimatedVotesMid": 8396,
+          "turnoutHigh": 83.86,
+          "turnoutLow": 102.5,
+          "turnoutMid": 92.25
         },
         "firstName": "Jeremy",
         "id": 29755,
         "lastName": "Bynum",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7243
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9224,
-          "estimatedVotesLow": 7551,
-          "estimatedVotesMid": 8390,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9236,
+          "estimatedVotesLow": 7556,
+          "estimatedVotesMid": 8396,
+          "turnoutHigh": 83.86,
+          "turnoutLow": 102.5,
+          "turnoutMid": 92.25
+        },
+        "firstName": "Agnes",
+        "id": 83318,
+        "lastName": "Moran",
+        "partyName": "Nonpartisan",
+        "votes": 166
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9236,
+          "estimatedVotesLow": 7556,
+          "estimatedVotesMid": 8396,
+          "turnoutHigh": 83.86,
+          "turnoutLow": 102.5,
+          "turnoutMid": 92.25
         },
         "firstName": "Grant",
         "id": 83317,
         "lastName": "Echohawk",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 336
       }
     ],
     "district": "1",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 7745,
     "year": 2024
   },
   {
@@ -680,9 +764,16 @@
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -711,9 +802,16 @@
       }
     ],
     "district": "3",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -742,9 +840,16 @@
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -758,45 +863,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5898,
-          "estimatedVotesLow": 4827,
-          "estimatedVotesMid": 5363,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5902,
+          "estimatedVotesLow": 4829,
+          "estimatedVotesMid": 5365,
+          "turnoutHigh": 81.36,
+          "turnoutLow": 99.44,
+          "turnoutMid": 89.51
         },
         "firstName": "Louise",
         "id": 29763,
         "lastName": "Stutes",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4659
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5898,
-          "estimatedVotesLow": 4827,
-          "estimatedVotesMid": 5363,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5902,
+          "estimatedVotesLow": 4829,
+          "estimatedVotesMid": 5365,
+          "turnoutHigh": 81.36,
+          "turnoutLow": 99.44,
+          "turnoutMid": 89.51
         },
         "firstName": "Leighton",
         "id": 83321,
         "lastName": "Radner",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 143
       }
     ],
     "district": "5",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 4802,
     "year": 2024
   },
   {
@@ -805,61 +917,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 12070,
-          "estimatedVotesLow": 9875,
-          "estimatedVotesMid": 10973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brent",
-        "id": 83323,
-        "lastName": "Johnson",
-        "partyName": "Nonpartisan",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 12070,
-          "estimatedVotesLow": 9875,
-          "estimatedVotesMid": 10973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12066,
+          "estimatedVotesLow": 9872,
+          "estimatedVotesMid": 10969,
+          "turnoutHigh": 82.35,
+          "turnoutLow": 100.65,
+          "turnoutMid": 90.58
         },
         "firstName": "Sarah",
         "id": 29765,
         "lastName": "Vance",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9199
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 12070,
-          "estimatedVotesLow": 9875,
-          "estimatedVotesMid": 10973,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 12066,
+          "estimatedVotesLow": 9872,
+          "estimatedVotesMid": 10969,
+          "turnoutHigh": 82.35,
+          "turnoutLow": 100.65,
+          "turnoutMid": 90.58
         },
         "firstName": "Dawson",
         "id": 83324,
         "lastName": "Slaughter",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 535
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 12066,
+          "estimatedVotesLow": 9872,
+          "estimatedVotesMid": 10969,
+          "turnoutHigh": 82.35,
+          "turnoutLow": 100.65,
+          "turnoutMid": 90.58
+        },
+        "firstName": "Brent",
+        "id": 83323,
+        "lastName": "Johnson",
+        "partyName": "Nonpartisan",
+        "votes": 202
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 9936,
     "year": 2024
   },
   {
@@ -868,45 +987,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 10451,
-          "estimatedVotesLow": 8555,
-          "estimatedVotesMid": 9505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Justin",
-        "id": 29769,
-        "lastName": "Ruffridge",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10451,
-          "estimatedVotesLow": 8555,
-          "estimatedVotesMid": 9505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10496,
+          "estimatedVotesLow": 8588,
+          "estimatedVotesMid": 9542,
+          "turnoutHigh": 59.73,
+          "turnoutLow": 73,
+          "turnoutMid": 65.7
         },
         "firstName": "Ron",
         "id": 29768,
         "lastName": "Gillham",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5936
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10496,
+          "estimatedVotesLow": 8588,
+          "estimatedVotesMid": 9542,
+          "turnoutHigh": 59.73,
+          "turnoutLow": 73,
+          "turnoutMid": 65.7
+        },
+        "firstName": "Justin",
+        "id": 29769,
+        "lastName": "Ruffridge",
+        "partyName": "Republican",
+        "votes": 333
       }
     ],
     "district": "7",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 6269,
     "year": 2024
   },
   {
@@ -915,45 +1041,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9211,
-          "estimatedVotesLow": 7533,
-          "estimatedVotesMid": 8370,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9208,
+          "estimatedVotesLow": 7534,
+          "estimatedVotesMid": 8371,
+          "turnoutHigh": 78.24,
+          "turnoutLow": 95.62,
+          "turnoutMid": 86.06
         },
         "firstName": "John",
         "id": 83327,
         "lastName": "Hillyer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 238
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9211,
-          "estimatedVotesLow": 7533,
-          "estimatedVotesMid": 8370,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9208,
+          "estimatedVotesLow": 7534,
+          "estimatedVotesMid": 8371,
+          "turnoutHigh": 78.24,
+          "turnoutLow": 95.62,
+          "turnoutMid": 86.06
         },
         "firstName": "Bill",
         "id": 83326,
         "lastName": "Elam",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6966
       }
     ],
     "district": "8",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 7204,
     "year": 2024
   },
   {
@@ -962,45 +1095,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11557,
-          "estimatedVotesLow": 9448,
-          "estimatedVotesMid": 10498,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11572,
+          "estimatedVotesLow": 9468,
+          "estimatedVotesMid": 10520,
+          "turnoutHigh": 56.97,
+          "turnoutLow": 69.62,
+          "turnoutMid": 62.66
         },
         "firstName": "Lucy",
         "id": 83328,
         "lastName": "Bauer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6224
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11557,
-          "estimatedVotesLow": 9448,
-          "estimatedVotesMid": 10498,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11572,
+          "estimatedVotesLow": 9468,
+          "estimatedVotesMid": 10520,
+          "turnoutHigh": 56.97,
+          "turnoutLow": 69.62,
+          "turnoutMid": 62.66
         },
         "firstName": "Ky",
         "id": 83329,
         "lastName": "Holland",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 368
       }
     ],
     "district": "9",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 6592,
     "year": 2024
   },
   {
@@ -1009,45 +1149,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9264,
-          "estimatedVotesLow": 7567,
-          "estimatedVotesMid": 8408,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Charles",
-        "id": 83331,
-        "lastName": "Kopp",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9264,
-          "estimatedVotesLow": 7567,
-          "estimatedVotesMid": 8408,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9235,
+          "estimatedVotesLow": 7556,
+          "estimatedVotesMid": 8395,
+          "turnoutHigh": 54.36,
+          "turnoutLow": 66.44,
+          "turnoutMid": 59.8
         },
         "firstName": "Craig",
         "id": 22940,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4788
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9235,
+          "estimatedVotesLow": 7556,
+          "estimatedVotesMid": 8395,
+          "turnoutHigh": 54.36,
+          "turnoutLow": 66.44,
+          "turnoutMid": 59.8
+        },
+        "firstName": "Charles",
+        "id": 83331,
+        "lastName": "Kopp",
+        "partyName": "Republican",
+        "votes": 232
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 5020,
     "year": 2024
   },
   {
@@ -1056,45 +1203,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9926,
-          "estimatedVotesLow": 8122,
-          "estimatedVotesMid": 9025,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Julie",
-        "id": 29777,
-        "lastName": "Coulombe",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9926,
-          "estimatedVotesLow": 8122,
-          "estimatedVotesMid": 9025,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9930,
+          "estimatedVotesLow": 8124,
+          "estimatedVotesMid": 9027,
+          "turnoutHigh": 80.86,
+          "turnoutLow": 98.83,
+          "turnoutMid": 88.94
         },
         "firstName": "Walter",
         "id": 83332,
         "lastName": "Featherly",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 250
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9930,
+          "estimatedVotesLow": 8124,
+          "estimatedVotesMid": 9027,
+          "turnoutHigh": 80.86,
+          "turnoutLow": 98.83,
+          "turnoutMid": 88.94
+        },
+        "firstName": "Julie",
+        "id": 29777,
+        "lastName": "Coulombe",
+        "partyName": "Republican",
+        "votes": 7779
       }
     ],
     "district": "11",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 8029,
     "year": 2024
   },
   {
@@ -1103,45 +1257,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9027,
-          "estimatedVotesLow": 7384,
-          "estimatedVotesMid": 8204,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9009,
+          "estimatedVotesLow": 7371,
+          "estimatedVotesMid": 8190,
+          "turnoutHigh": 69.62,
+          "turnoutLow": 85.09,
+          "turnoutMid": 76.58
         },
         "firstName": "Joseph",
         "id": 83333,
         "lastName": "Lurtsema",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6121
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9027,
-          "estimatedVotesLow": 7384,
-          "estimatedVotesMid": 8204,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9009,
+          "estimatedVotesLow": 7371,
+          "estimatedVotesMid": 8190,
+          "turnoutHigh": 69.62,
+          "turnoutLow": 85.09,
+          "turnoutMid": 76.58
         },
         "firstName": "Calvin",
         "id": 83334,
         "lastName": "Schrage",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 151
       }
     ],
     "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 6272,
     "year": 2024
   },
   {
@@ -1150,45 +1311,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8263,
-          "estimatedVotesLow": 6754,
-          "estimatedVotesMid": 7505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8229,
+          "estimatedVotesLow": 6733,
+          "estimatedVotesMid": 7481,
+          "turnoutHigh": 80.93,
+          "turnoutLow": 98.92,
+          "turnoutMid": 89.03
         },
         "firstName": "Heather",
         "id": 83335,
         "lastName": "Gottshall",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6160
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8263,
-          "estimatedVotesLow": 6754,
-          "estimatedVotesMid": 7505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8229,
+          "estimatedVotesLow": 6733,
+          "estimatedVotesMid": 7481,
+          "turnoutHigh": 80.93,
+          "turnoutLow": 98.92,
+          "turnoutMid": 89.03
         },
         "firstName": "Andrew",
         "id": 46879,
         "lastName": "Josephson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 500
       }
     ],
     "district": "13",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 6660,
     "year": 2024
   },
   {
@@ -1197,45 +1365,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8295,
-          "estimatedVotesLow": 6780,
-          "estimatedVotesMid": 7534,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8331,
+          "estimatedVotesLow": 6817,
+          "estimatedVotesMid": 7574,
+          "turnoutHigh": 52.92,
+          "turnoutLow": 64.68,
+          "turnoutMid": 58.21
         },
         "firstName": "Alyse",
         "id": 83336,
         "lastName": "Galvin",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 264
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8295,
-          "estimatedVotesLow": 6780,
-          "estimatedVotesMid": 7534,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8331,
+          "estimatedVotesLow": 6817,
+          "estimatedVotesMid": 7574,
+          "turnoutHigh": 52.92,
+          "turnoutLow": 64.68,
+          "turnoutMid": 58.21
         },
         "firstName": "Harry",
         "id": 83337,
         "lastName": "Kamdem",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4145
       }
     ],
     "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 4409,
     "year": 2024
   },
   {
@@ -1244,61 +1419,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9616,
-          "estimatedVotesLow": 7867,
-          "estimatedVotesMid": 8741,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Denny",
-        "id": 29785,
-        "lastName": "Wells",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9616,
-          "estimatedVotesLow": 7867,
-          "estimatedVotesMid": 8741,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mia",
-        "id": 29728,
-        "lastName": "Costello",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9616,
-          "estimatedVotesLow": 7867,
-          "estimatedVotesMid": 8741,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9595,
+          "estimatedVotesLow": 7851,
+          "estimatedVotesMid": 8723,
+          "turnoutHigh": 85.59,
+          "turnoutLow": 104.6,
+          "turnoutMid": 94.14
         },
         "firstName": "Dustin",
         "id": 83338,
         "lastName": "Darden",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 165
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9595,
+          "estimatedVotesLow": 7851,
+          "estimatedVotesMid": 8723,
+          "turnoutHigh": 85.59,
+          "turnoutLow": 104.6,
+          "turnoutMid": 94.14
+        },
+        "firstName": "Denny",
+        "id": 29785,
+        "lastName": "Wells",
+        "partyName": "Democratic",
+        "votes": 4599
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9595,
+          "estimatedVotesLow": 7851,
+          "estimatedVotesMid": 8723,
+          "turnoutHigh": 85.59,
+          "turnoutLow": 104.6,
+          "turnoutMid": 94.14
+        },
+        "firstName": "Mia",
+        "id": 29728,
+        "lastName": "Costello",
+        "partyName": "Republican",
+        "votes": 3448
       }
     ],
     "district": "15",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 8212,
     "year": 2024
   },
   {
@@ -1307,45 +1489,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9724,
-          "estimatedVotesLow": 7955,
-          "estimatedVotesMid": 8838,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Carolyn",
-        "id": 83339,
-        "lastName": "Hall",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9724,
-          "estimatedVotesLow": 7955,
-          "estimatedVotesMid": 8838,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9721,
+          "estimatedVotesLow": 7953,
+          "estimatedVotesMid": 8837,
+          "turnoutHigh": 80.9,
+          "turnoutLow": 98.88,
+          "turnoutMid": 88.99
         },
         "firstName": "Nick",
         "id": 83340,
         "lastName": "Moe",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 302
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9721,
+          "estimatedVotesLow": 7953,
+          "estimatedVotesMid": 8837,
+          "turnoutHigh": 80.9,
+          "turnoutLow": 98.88,
+          "turnoutMid": 88.99
+        },
+        "firstName": "Carolyn",
+        "id": 83339,
+        "lastName": "Hall",
+        "partyName": "Democratic",
+        "votes": 7562
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 7864,
     "year": 2024
   },
   {
@@ -1369,9 +1558,16 @@
       }
     ],
     "district": "17",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -1385,45 +1581,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4200,
-          "estimatedVotesLow": 3449,
-          "estimatedVotesMid": 3833,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "David",
-        "id": 29796,
-        "lastName": "Nelson",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4200,
-          "estimatedVotesLow": 3449,
-          "estimatedVotesMid": 3833,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 3633,
+          "estimatedVotesLow": 2973,
+          "estimatedVotesMid": 3303,
+          "turnoutHigh": 72.45,
+          "turnoutLow": 88.53,
+          "turnoutMid": 79.69
         },
         "firstName": "Cliff",
         "id": 29795,
         "lastName": "Groh",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2186
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3633,
+          "estimatedVotesLow": 2973,
+          "estimatedVotesMid": 3303,
+          "turnoutHigh": 72.45,
+          "turnoutLow": 88.53,
+          "turnoutMid": 79.69
+        },
+        "firstName": "David",
+        "id": 29796,
+        "lastName": "Nelson",
+        "partyName": "Republican",
+        "votes": 446
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 2632,
     "year": 2024
   },
   {
@@ -1432,61 +1635,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5516,
-          "estimatedVotesLow": 4530,
-          "estimatedVotesMid": 5034,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Russell",
-        "id": 83343,
-        "lastName": "Wyatt",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5516,
-          "estimatedVotesLow": 4530,
-          "estimatedVotesMid": 5034,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Genevieve",
-        "id": 29797,
-        "lastName": "Mina",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5516,
-          "estimatedVotesLow": 4530,
-          "estimatedVotesMid": 5034,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5481,
+          "estimatedVotesLow": 4485,
+          "estimatedVotesMid": 4983,
+          "turnoutHigh": 79.09,
+          "turnoutLow": 96.66,
+          "turnoutMid": 87
         },
         "firstName": "Kaylee",
         "id": 83342,
         "lastName": "Anderson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2190
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5481,
+          "estimatedVotesLow": 4485,
+          "estimatedVotesMid": 4983,
+          "turnoutHigh": 79.09,
+          "turnoutLow": 96.66,
+          "turnoutMid": 87
+        },
+        "firstName": "Russell",
+        "id": 83343,
+        "lastName": "Wyatt",
+        "partyName": "Independent",
+        "votes": 93
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5481,
+          "estimatedVotesLow": 4485,
+          "estimatedVotesMid": 4983,
+          "turnoutHigh": 79.09,
+          "turnoutLow": 96.66,
+          "turnoutMid": 87
+        },
+        "firstName": "Genevieve",
+        "id": 29797,
+        "lastName": "Mina",
+        "partyName": "Democratic",
+        "votes": 2052
       }
     ],
     "district": "19",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 4335,
     "year": 2024
   },
   {
@@ -1495,45 +1705,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7383,
-          "estimatedVotesLow": 6035,
-          "estimatedVotesMid": 6705,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Andrew",
-        "id": 29799,
-        "lastName": "Gray",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7383,
-          "estimatedVotesLow": 6035,
-          "estimatedVotesMid": 6705,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7365,
+          "estimatedVotesLow": 6026,
+          "estimatedVotesMid": 6695,
+          "turnoutHigh": 68.78,
+          "turnoutLow": 84.07,
+          "turnoutMid": 75.67
         },
         "firstName": "Scott",
         "id": 29802,
         "lastName": "Kohlhaas",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 304
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7365,
+          "estimatedVotesLow": 6026,
+          "estimatedVotesMid": 6695,
+          "turnoutHigh": 68.78,
+          "turnoutLow": 84.07,
+          "turnoutMid": 75.67
+        },
+        "firstName": "Andrew",
+        "id": 29799,
+        "lastName": "Gray",
+        "partyName": "Democratic",
+        "votes": 4762
       }
     ],
     "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 5066,
     "year": 2024
   },
   {
@@ -1542,45 +1759,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9123,
-          "estimatedVotesLow": 7474,
-          "estimatedVotesMid": 8304,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9138,
+          "estimatedVotesLow": 7476,
+          "estimatedVotesMid": 8307,
+          "turnoutHigh": 82.98,
+          "turnoutLow": 101.43,
+          "turnoutMid": 91.28
         },
         "firstName": "Donna",
         "id": 29803,
         "lastName": "Mears",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 873
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9123,
-          "estimatedVotesLow": 7474,
-          "estimatedVotesMid": 8304,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9138,
+          "estimatedVotesLow": 7476,
+          "estimatedVotesMid": 8307,
+          "turnoutHigh": 82.98,
+          "turnoutLow": 101.43,
+          "turnoutMid": 91.28
         },
         "firstName": "Aimee",
         "id": 101858,
         "lastName": "Sims",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6710
       }
     ],
     "district": "21",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 7583,
     "year": 2024
   },
   {
@@ -1589,45 +1813,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5544,
-          "estimatedVotesLow": 4553,
-          "estimatedVotesMid": 5059,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ted",
-        "id": 29806,
-        "lastName": "Eischeid",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5544,
-          "estimatedVotesLow": 4553,
-          "estimatedVotesMid": 5059,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5812,
+          "estimatedVotesLow": 4756,
+          "estimatedVotesMid": 5284,
+          "turnoutHigh": 74.05,
+          "turnoutLow": 90.5,
+          "turnoutMid": 81.45
         },
         "firstName": "Stanley",
         "id": 29808,
         "lastName": "Wright",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3192
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5812,
+          "estimatedVotesLow": 4756,
+          "estimatedVotesMid": 5284,
+          "turnoutHigh": 74.05,
+          "turnoutLow": 90.5,
+          "turnoutMid": 81.45
+        },
+        "firstName": "Ted",
+        "id": 29806,
+        "lastName": "Eischeid",
+        "partyName": "Democratic",
+        "votes": 1112
       }
     ],
     "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.858Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 4304,
     "year": 2024
   },
   {
@@ -1636,45 +1867,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9555,
-          "estimatedVotesLow": 7820,
-          "estimatedVotesMid": 8689,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jamie",
-        "id": 29809,
-        "lastName": "Allard",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9555,
-          "estimatedVotesLow": 7820,
-          "estimatedVotesMid": 8689,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9552,
+          "estimatedVotesLow": 7816,
+          "estimatedVotesMid": 8684,
+          "turnoutHigh": 81.9,
+          "turnoutLow": 100.09,
+          "turnoutMid": 90.09
         },
         "firstName": "Jim",
         "id": 83345,
         "lastName": "Arlington",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1836
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9552,
+          "estimatedVotesLow": 7816,
+          "estimatedVotesMid": 8684,
+          "turnoutHigh": 81.9,
+          "turnoutLow": 100.09,
+          "turnoutMid": 90.09
+        },
+        "firstName": "Jamie",
+        "id": 29809,
+        "lastName": "Allard",
+        "partyName": "Republican",
+        "votes": 5987
       }
     ],
     "district": "23",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 7823,
     "year": 2024
   },
   {
@@ -1698,9 +1936,16 @@
       }
     ],
     "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -1729,9 +1974,16 @@
       }
     ],
     "district": "25",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -1760,9 +2012,16 @@
       }
     ],
     "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -1776,45 +2035,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11525,
-          "estimatedVotesLow": 9432,
-          "estimatedVotesMid": 10480,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11498,
+          "estimatedVotesLow": 9408,
+          "estimatedVotesMid": 10453,
+          "turnoutHigh": 85.81,
+          "turnoutLow": 104.88,
+          "turnoutMid": 94.39
         },
         "firstName": "David",
         "id": 29818,
         "lastName": "Eastman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9467
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 11525,
-          "estimatedVotesLow": 9432,
-          "estimatedVotesMid": 10480,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11498,
+          "estimatedVotesLow": 9408,
+          "estimatedVotesMid": 10453,
+          "turnoutHigh": 85.81,
+          "turnoutLow": 104.88,
+          "turnoutMid": 94.39
         },
         "firstName": "Jubilee",
         "id": 83346,
         "lastName": "Underwood",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 400
       }
     ],
     "district": "27",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 9867,
     "year": 2024
   },
   {
@@ -1823,61 +2089,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8619,
-          "estimatedVotesLow": 7045,
-          "estimatedVotesMid": 7828,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jessica",
-        "id": 29824,
-        "lastName": "Wright",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8619,
-          "estimatedVotesLow": 7045,
-          "estimatedVotesMid": 7828,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8616,
+          "estimatedVotesLow": 7050,
+          "estimatedVotesMid": 7833,
+          "turnoutHigh": 69.66,
+          "turnoutLow": 85.13,
+          "turnoutMid": 76.62
         },
         "firstName": "Steve",
         "id": 29822,
         "lastName": "Menard",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3248
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8619,
-          "estimatedVotesLow": 7045,
-          "estimatedVotesMid": 7828,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8616,
+          "estimatedVotesLow": 7050,
+          "estimatedVotesMid": 7833,
+          "turnoutHigh": 69.66,
+          "turnoutLow": 85.13,
+          "turnoutMid": 76.62
         },
         "firstName": "Elexie",
         "id": 83347,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 296
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8616,
+          "estimatedVotesLow": 7050,
+          "estimatedVotesMid": 7833,
+          "turnoutHigh": 69.66,
+          "turnoutLow": 85.13,
+          "turnoutMid": 76.62
+        },
+        "firstName": "Jessica",
+        "id": 29824,
+        "lastName": "Wright",
+        "partyName": "Republican",
+        "votes": 2458
       }
     ],
     "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 6002,
     "year": 2024
   },
   {
@@ -1901,9 +2174,16 @@
       }
     ],
     "district": "29",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -1917,45 +2197,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8203,
-          "estimatedVotesLow": 6710,
-          "estimatedVotesMid": 7455,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Doyle",
-        "id": 29829,
-        "lastName": "Holmes",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8203,
-          "estimatedVotesLow": 6710,
-          "estimatedVotesMid": 7455,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8194,
+          "estimatedVotesLow": 6704,
+          "estimatedVotesMid": 7449,
+          "turnoutHigh": 84.35,
+          "turnoutLow": 103.1,
+          "turnoutMid": 92.79
         },
         "firstName": "Kevin",
         "id": 29828,
         "lastName": "McCabe",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6726
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8194,
+          "estimatedVotesLow": 6704,
+          "estimatedVotesMid": 7449,
+          "turnoutHigh": 84.35,
+          "turnoutLow": 103.1,
+          "turnoutMid": 92.79
+        },
+        "firstName": "Doyle",
+        "id": 29829,
+        "lastName": "Holmes",
+        "partyName": "Republican",
+        "votes": 186
       }
     ],
     "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 6912,
     "year": 2024
   },
   {
@@ -1964,45 +2251,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 6733,
-          "estimatedVotesLow": 5513,
-          "estimatedVotesMid": 6125,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bart",
-        "id": 29831,
-        "lastName": "LeBon",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6733,
-          "estimatedVotesLow": 5513,
-          "estimatedVotesMid": 6125,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7008,
+          "estimatedVotesLow": 5734,
+          "estimatedVotesMid": 6371,
+          "turnoutHigh": 68.88,
+          "turnoutLow": 84.18,
+          "turnoutMid": 75.77
         },
         "firstName": "Maxine",
         "id": 29830,
         "lastName": "Dibert",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 353
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7008,
+          "estimatedVotesLow": 5734,
+          "estimatedVotesMid": 6371,
+          "turnoutHigh": 68.88,
+          "turnoutLow": 84.18,
+          "turnoutMid": 75.77
+        },
+        "firstName": "Bart",
+        "id": 29831,
+        "lastName": "LeBon",
+        "partyName": "Republican",
+        "votes": 4474
       }
     ],
     "district": "31",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 4827,
     "year": 2024
   },
   {
@@ -2011,45 +2305,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4129,
-          "estimatedVotesLow": 3391,
-          "estimatedVotesMid": 3768,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Will",
-        "id": 29835,
-        "lastName": "Stapp",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4129,
-          "estimatedVotesLow": 3391,
-          "estimatedVotesMid": 3768,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4552,
+          "estimatedVotesLow": 3724,
+          "estimatedVotesMid": 4138,
+          "turnoutHigh": 83.22,
+          "turnoutLow": 101.72,
+          "turnoutMid": 91.54
         },
         "firstName": "Gary",
         "id": 83349,
         "lastName": "Damron",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 554
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4552,
+          "estimatedVotesLow": 3724,
+          "estimatedVotesMid": 4138,
+          "turnoutHigh": 83.22,
+          "turnoutLow": 101.72,
+          "turnoutMid": 91.54
+        },
+        "firstName": "Will",
+        "id": 29835,
+        "lastName": "Stapp",
+        "partyName": "Republican",
+        "votes": 3234
       }
     ],
     "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 3788,
     "year": 2024
   },
   {
@@ -2073,9 +2374,16 @@
       }
     ],
     "district": "33",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T14:32:22.336Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
@@ -2089,45 +2397,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8158,
-          "estimatedVotesLow": 6673,
-          "estimatedVotesMid": 7414,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Frank",
-        "id": 29839,
-        "lastName": "Tomaszewski",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8158,
-          "estimatedVotesLow": 6673,
-          "estimatedVotesMid": 7414,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8174,
+          "estimatedVotesLow": 6688,
+          "estimatedVotesMid": 7431,
+          "turnoutHigh": 78.76,
+          "turnoutLow": 96.26,
+          "turnoutMid": 86.64
         },
         "firstName": "Joy",
         "id": 83350,
         "lastName": "Cottle",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 149
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8174,
+          "estimatedVotesLow": 6688,
+          "estimatedVotesMid": 7431,
+          "turnoutHigh": 78.76,
+          "turnoutLow": 96.26,
+          "turnoutMid": 86.64
+        },
+        "firstName": "Frank",
+        "id": 29839,
+        "lastName": "Tomaszewski",
+        "partyName": "Republican",
+        "votes": 6289
       }
     ],
     "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 6438,
     "year": 2024
   },
   {
@@ -2136,45 +2451,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 10144,
-          "estimatedVotesLow": 8296,
-          "estimatedVotesMid": 9218,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10143,
+          "estimatedVotesLow": 8299,
+          "estimatedVotesMid": 9221,
+          "turnoutHigh": 78.44,
+          "turnoutLow": 95.87,
+          "turnoutMid": 86.28
         },
         "firstName": "Ashley",
         "id": 29840,
         "lastName": "Carrick",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2300
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 10144,
-          "estimatedVotesLow": 8296,
-          "estimatedVotesMid": 9218,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 10143,
+          "estimatedVotesLow": 8299,
+          "estimatedVotesMid": 9221,
+          "turnoutHigh": 78.44,
+          "turnoutLow": 95.87,
+          "turnoutMid": 86.28
         },
         "firstName": "Ruben",
         "id": 29842,
         "lastName": "McNeill",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5656
       }
     ],
     "district": "35",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 7956,
     "year": 2024
   },
   {
@@ -2183,77 +2505,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8166,
-          "estimatedVotesLow": 6679,
-          "estimatedVotesMid": 7421,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "James",
-        "id": 83352,
-        "lastName": "Fields",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8166,
-          "estimatedVotesLow": 6679,
-          "estimatedVotesMid": 7421,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brandon",
-        "id": 83354,
-        "lastName": "Kowalski",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8166,
-          "estimatedVotesLow": 6679,
-          "estimatedVotesMid": 7421,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Becky",
-        "id": 101859,
-        "lastName": "Schwanke",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8166,
-          "estimatedVotesLow": 6679,
-          "estimatedVotesMid": 7421,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8160,
+          "estimatedVotesLow": 6676,
+          "estimatedVotesMid": 7418,
+          "turnoutHigh": 86.41,
+          "turnoutLow": 105.62,
+          "turnoutMid": 95.05
         },
         "firstName": "Pamela",
         "id": 83353,
         "lastName": "Goode",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3974
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8160,
+          "estimatedVotesLow": 6676,
+          "estimatedVotesMid": 7418,
+          "turnoutHigh": 86.41,
+          "turnoutLow": 105.62,
+          "turnoutMid": 95.05
+        },
+        "firstName": "Becky",
+        "id": 101859,
+        "lastName": "Schwanke",
+        "partyName": "Republican",
+        "votes": 170
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8160,
+          "estimatedVotesLow": 6676,
+          "estimatedVotesMid": 7418,
+          "turnoutHigh": 86.41,
+          "turnoutLow": 105.62,
+          "turnoutMid": 95.05
+        },
+        "firstName": "Brandon",
+        "id": 83354,
+        "lastName": "Kowalski",
+        "partyName": "Democratic",
+        "votes": 2790
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8160,
+          "estimatedVotesLow": 6676,
+          "estimatedVotesMid": 7418,
+          "turnoutHigh": 86.41,
+          "turnoutLow": 105.62,
+          "turnoutMid": 95.05
+        },
+        "firstName": "James",
+        "id": 83352,
+        "lastName": "Fields",
+        "partyName": "Libertarian",
+        "votes": 117
       }
     ],
     "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 7051,
     "year": 2024
   },
   {
@@ -2262,45 +2591,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5386,
-          "estimatedVotesLow": 4410,
-          "estimatedVotesMid": 4900,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5114,
+          "estimatedVotesLow": 4184,
+          "estimatedVotesMid": 4649,
+          "turnoutHigh": 77.63,
+          "turnoutLow": 94.89,
+          "turnoutMid": 85.39
         },
         "firstName": "Darren",
         "id": 83358,
         "lastName": "Deacon",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 2102
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5386,
-          "estimatedVotesLow": 4410,
-          "estimatedVotesMid": 4900,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5114,
+          "estimatedVotesLow": 4184,
+          "estimatedVotesMid": 4649,
+          "turnoutHigh": 77.63,
+          "turnoutLow": 94.89,
+          "turnoutMid": 85.39
         },
         "firstName": "Bryce",
         "id": 29847,
         "lastName": "Edgmon",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 1868
       }
     ],
     "district": "37",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 3970,
     "year": 2024
   },
   {
@@ -2309,77 +2645,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 3795,
-          "estimatedVotesLow": 3117,
-          "estimatedVotesMid": 3463,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Victoria",
-        "id": 83362,
-        "lastName": "Sosa",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3795,
-          "estimatedVotesLow": 3117,
-          "estimatedVotesMid": 3463,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Willy",
-        "id": 101860,
-        "lastName": "Keppel",
-        "partyName": "Veterans",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3795,
-          "estimatedVotesLow": 3117,
-          "estimatedVotesMid": 3463,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Nellie",
-        "id": 83359,
-        "lastName": "Jimmie",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3795,
-          "estimatedVotesLow": 3117,
-          "estimatedVotesMid": 3463,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4028,
+          "estimatedVotesLow": 3296,
+          "estimatedVotesMid": 3662,
+          "turnoutHigh": 73.41,
+          "turnoutLow": 89.71,
+          "turnoutMid": 80.75
         },
         "firstName": "Conrad",
         "id": 29848,
         "lastName": "McCormick",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1905
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4028,
+          "estimatedVotesLow": 3296,
+          "estimatedVotesMid": 3662,
+          "turnoutHigh": 73.41,
+          "turnoutLow": 89.71,
+          "turnoutMid": 80.75
+        },
+        "firstName": "Victoria",
+        "id": 83362,
+        "lastName": "Sosa",
+        "partyName": "Democratic",
+        "votes": 136
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4028,
+          "estimatedVotesLow": 3296,
+          "estimatedVotesMid": 3662,
+          "turnoutHigh": 73.41,
+          "turnoutLow": 89.71,
+          "turnoutMid": 80.75
+        },
+        "firstName": "Willy",
+        "id": 101860,
+        "lastName": "Keppel",
+        "partyName": "Veterans",
+        "votes": 111
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4028,
+          "estimatedVotesLow": 3296,
+          "estimatedVotesMid": 3662,
+          "turnoutHigh": 73.41,
+          "turnoutLow": 89.71,
+          "turnoutMid": 80.75
+        },
+        "firstName": "Nellie",
+        "id": 83359,
+        "lastName": "Jimmie",
+        "partyName": "Democratic",
+        "votes": 805
       }
     ],
     "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 2957,
     "year": 2024
   },
   {
@@ -2388,45 +2731,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 3847,
-          "estimatedVotesLow": 3146,
-          "estimatedVotesMid": 3496,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 3854,
+          "estimatedVotesLow": 3154,
+          "estimatedVotesMid": 3504,
+          "turnoutHigh": 75.77,
+          "turnoutLow": 92.58,
+          "turnoutMid": 83.33
         },
         "firstName": "Neal",
         "id": 29849,
         "lastName": "Foster",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2788
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 3847,
-          "estimatedVotesLow": 3146,
-          "estimatedVotesMid": 3496,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 3854,
+          "estimatedVotesLow": 3154,
+          "estimatedVotesMid": 3504,
+          "turnoutHigh": 75.77,
+          "turnoutLow": 92.58,
+          "turnoutMid": 83.33
         },
         "firstName": "Tyler",
         "id": 29850,
         "lastName": "Ivanoff",
         "partyName": "Alaska Independence Party",
-        "votes": 0
+        "votes": 132
       }
     ],
     "district": "39",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 2920,
     "year": 2024
   },
   {
@@ -2435,61 +2785,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 3913,
-          "estimatedVotesLow": 3214,
-          "estimatedVotesMid": 3571,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robyn",
-        "id": 83364,
-        "lastName": "Burke",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3913,
-          "estimatedVotesLow": 3214,
-          "estimatedVotesMid": 3571,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4167,
+          "estimatedVotesLow": 3409,
+          "estimatedVotesMid": 3788,
+          "turnoutHigh": 83.61,
+          "turnoutLow": 102.2,
+          "turnoutMid": 91.97
         },
         "firstName": "Thomas",
         "id": 83363,
         "lastName": "Baker",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 104
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 3913,
-          "estimatedVotesLow": 3214,
-          "estimatedVotesMid": 3571,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4167,
+          "estimatedVotesLow": 3409,
+          "estimatedVotesMid": 3788,
+          "turnoutHigh": 83.61,
+          "turnoutLow": 102.2,
+          "turnoutMid": 91.97
         },
         "firstName": "Saima",
         "id": 83365,
         "lastName": "Chase",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 426
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4167,
+          "estimatedVotesLow": 3409,
+          "estimatedVotesMid": 3788,
+          "turnoutHigh": 83.61,
+          "turnoutLow": 102.2,
+          "turnoutMid": 91.97
+        },
+        "firstName": "Robyn",
+        "id": 83364,
+        "lastName": "Burke",
+        "partyName": "Democratic",
+        "votes": 2954
       }
     ],
     "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T17:58:43.978Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:59:15.502Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "AK",
     "stateName": "Alaska",
-    "totalVotes": 0,
+    "totalVotes": 3484,
     "year": 2024
   }
 ]

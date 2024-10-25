@@ -45,11 +45,28 @@ export const getKeyRacesPageData = async () => {
 
   let congressRaceLiveResult: GetAllCongressDataResponse | null = null
   try {
-    congressRaceLiveResult =
-      await getDecisionDataFromRedis<GetAllCongressDataResponse>('SWC_ALL_CONGRESS_DATA')
+    const senateRaceLiveResult =
+      await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'senateDataWithDtsi'>>(
+        'SWC_ALL_SENATE_DATA',
+      )
+    const houseRaceLiveResult =
+      await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'houseDataWithDtsi'>>(
+        'SWC_ALL_HOUSE_DATA',
+      )
+
+    if (senateRaceLiveResult && houseRaceLiveResult) {
+      congressRaceLiveResult = {
+        senateDataWithDtsi: senateRaceLiveResult.senateDataWithDtsi,
+        houseDataWithDtsi: houseRaceLiveResult.houseDataWithDtsi,
+      }
+    }
+
+    if (!congressRaceLiveResult) {
+      throw new Error('Failed to get live congress data')
+    }
   } catch (error) {
     Sentry.captureException(error, {
-      extra: { key: 'SWC_ALL_CONGRESS_DATA' },
+      extra: { keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'] },
       tags: { domain: 'liveResult' },
     })
     throw error

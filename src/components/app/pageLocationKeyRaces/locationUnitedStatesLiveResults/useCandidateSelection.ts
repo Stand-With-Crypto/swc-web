@@ -89,7 +89,7 @@ export const useLiveCandidateSelection = (
   })
 
   if (shouldFallback) {
-    const enchancedFallback = fallback.map(dtsiCandidate => {
+    const enhancedFallback = fallback.map(dtsiCandidate => {
       const matchedCandidate = liveResultData.candidatesWithVotes.find(ddhqCandidate =>
         getPoliticianFindMatch(dtsiCandidate, ddhqCandidate),
       )
@@ -98,7 +98,7 @@ export const useLiveCandidateSelection = (
       return { ...dtsiCandidate, ...matchedCandidate }
     })
 
-    return enchancedFallback.filter(c => !!c)
+    return enhancedFallback.filter(c => !!c)
   }
 
   return candidatesToShow

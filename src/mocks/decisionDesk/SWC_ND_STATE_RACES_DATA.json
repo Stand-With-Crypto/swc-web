@@ -5,45 +5,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371554,
-          "estimatedVotesLow": 303954,
-          "estimatedVotesMid": 337727,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 10.51,
+          "turnoutLow": 12.85,
+          "turnoutMid": 11.56
+        },
+        "firstName": "Kevin",
+        "id": 1423,
+        "lastName": "Cramer",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 10.51,
+          "turnoutLow": 12.85,
+          "turnoutMid": 11.56
         },
         "firstName": "Katrina",
         "id": 23642,
         "lastName": "Christiansen",
         "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 371554,
-          "estimatedVotesLow": 303954,
-          "estimatedVotesMid": 337727,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kevin",
-        "id": 84965,
-        "lastName": "Kramer",
-        "partyName": "Republican",
-        "votes": 0
+        "votes": 39050
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "4", "officeName": "US Senate", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-25T03:09:38.000Z",
+    "office": {
+      "officeId": "4",
+      "officeName": "US Senate",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 39050,
     "year": 2024
   },
   {
@@ -52,61 +59,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371557,
-          "estimatedVotesLow": 303956,
-          "estimatedVotesMid": 337730,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 88.34,
+          "turnoutLow": 107.97,
+          "turnoutMid": 97.18
         },
         "firstName": "Michael",
         "id": 106338,
         "lastName": "Coachman",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 6196
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371557,
-          "estimatedVotesLow": 303956,
-          "estimatedVotesMid": 337730,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kelly",
-        "id": 9673,
-        "lastName": "Armstrong",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 371557,
-          "estimatedVotesLow": 303956,
-          "estimatedVotesMid": 337730,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 88.34,
+          "turnoutLow": 107.97,
+          "turnoutMid": 97.18
         },
         "firstName": "Merrill",
         "id": 23672,
         "lastName": "Piepkorn",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 100370
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 88.34,
+          "turnoutLow": 107.97,
+          "turnoutMid": 97.18
+        },
+        "firstName": "Kelly",
+        "id": 9673,
+        "lastName": "Armstrong",
+        "partyName": "Republican",
+        "votes": 221564
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:03.109Z",
-    "office": { "officeId": "2", "officeName": "Governor", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:01.480Z",
+    "office": {
+      "officeId": "2",
+      "officeName": "Governor",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 328130,
     "year": 2024
   },
   {
@@ -115,45 +129,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371542,
-          "estimatedVotesLow": 303944,
-          "estimatedVotesMid": 337719,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Trygve",
-        "id": 23650,
-        "lastName": "Hammer",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 371542,
-          "estimatedVotesLow": 303944,
-          "estimatedVotesMid": 337719,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371427,
+          "estimatedVotesLow": 303896,
+          "estimatedVotesMid": 337657,
+          "turnoutHigh": 88.18,
+          "turnoutLow": 107.78,
+          "turnoutMid": 97
         },
         "firstName": "Julie",
         "id": 23655,
         "lastName": "Fedorchak",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 302240
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 371427,
+          "estimatedVotesLow": 303896,
+          "estimatedVotesMid": 337657,
+          "turnoutHigh": 88.18,
+          "turnoutLow": 107.78,
+          "turnoutMid": 97
+        },
+        "firstName": "Trygve",
+        "id": 23650,
+        "lastName": "Hammer",
+        "partyName": "Democratic",
+        "votes": 25290
       }
     ],
     "district": "At-Large",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "3", "officeName": "US House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:54:45.770Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 327530,
     "year": 2024
   },
   {
@@ -162,45 +183,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7789,
-          "estimatedVotesLow": 6370,
-          "estimatedVotesMid": 7078,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7792,
+          "estimatedVotesLow": 6374,
+          "estimatedVotesMid": 7083,
+          "turnoutHigh": 87.95,
+          "turnoutLow": 107.51,
+          "turnoutMid": 96.75
         },
         "firstName": "Rosemary",
         "id": 75602,
         "lastName": "Tanberg",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 199
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7789,
-          "estimatedVotesLow": 6370,
-          "estimatedVotesMid": 7078,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7792,
+          "estimatedVotesLow": 6374,
+          "estimatedVotesMid": 7083,
+          "turnoutHigh": 87.95,
+          "turnoutLow": 107.51,
+          "turnoutMid": 96.75
         },
         "firstName": "Mark",
         "id": 75603,
         "lastName": "Enget",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6654
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:41:19.730Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 6853,
     "year": 2024
   },
   {
@@ -224,9 +252,16 @@
       }
     ],
     "district": "4",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -255,9 +290,16 @@
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -286,9 +328,16 @@
       }
     ],
     "district": "8",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -302,45 +351,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5546,
-          "estimatedVotesLow": 4538,
-          "estimatedVotesMid": 5042,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ryan",
-        "id": 23661,
-        "lastName": "Braunberger",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5546,
-          "estimatedVotesLow": 4538,
-          "estimatedVotesMid": 5042,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 5548,
+          "estimatedVotesLow": 4540,
+          "estimatedVotesMid": 5044,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.64,
+          "turnoutMid": 96.89
         },
         "firstName": "George",
         "id": 75607,
         "lastName": "Roughead",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 536
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5548,
+          "estimatedVotesLow": 4540,
+          "estimatedVotesMid": 5044,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.64,
+          "turnoutMid": 96.89
+        },
+        "firstName": "Ryan",
+        "id": 23661,
+        "lastName": "Braunberger",
+        "partyName": "Democratic",
+        "votes": 4351
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:54:18.283Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 4887,
     "year": 2024
   },
   {
@@ -349,45 +405,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7051,
-          "estimatedVotesLow": 5768,
-          "estimatedVotesMid": 6409,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Olivia",
-        "id": 75608,
-        "lastName": "Schloegel",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7051,
-          "estimatedVotesLow": 5768,
-          "estimatedVotesMid": 6409,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7043,
+          "estimatedVotesLow": 5763,
+          "estimatedVotesMid": 6403,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
         },
         "firstName": "Cole",
         "id": 75609,
         "lastName": "Conley",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5898
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7043,
+          "estimatedVotesLow": 5763,
+          "estimatedVotesMid": 6403,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Olivia",
+        "id": 75608,
+        "lastName": "Schloegel",
+        "partyName": "Democratic",
+        "votes": 309
       }
     ],
     "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:49:18.707Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 6207,
     "year": 2024
   },
   {
@@ -396,45 +459,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9835,
-          "estimatedVotesLow": 8043,
-          "estimatedVotesMid": 8937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9830,
+          "estimatedVotesLow": 8044,
+          "estimatedVotesMid": 8936,
+          "turnoutHigh": 87.9,
+          "turnoutLow": 107.42,
+          "turnoutMid": 96.7
         },
         "firstName": "Jerry",
         "id": 75612,
         "lastName": "Klein",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 8324
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9835,
-          "estimatedVotesLow": 8043,
-          "estimatedVotesMid": 8937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9830,
+          "estimatedVotesLow": 8044,
+          "estimatedVotesMid": 8936,
+          "turnoutHigh": 87.9,
+          "turnoutLow": 107.42,
+          "turnoutMid": 96.7
         },
         "firstName": "Mark",
         "id": 75610,
         "lastName": "Nelson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 317
       }
     ],
     "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:57:17.672Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 8641,
     "year": 2024
   },
   {
@@ -443,45 +513,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7269,
-          "estimatedVotesLow": 5947,
-          "estimatedVotesMid": 6607,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Heather",
-        "id": 75613,
-        "lastName": "Tyulyandin",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7269,
-          "estimatedVotesLow": 5947,
-          "estimatedVotesMid": 6607,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7253,
+          "estimatedVotesLow": 5935,
+          "estimatedVotesMid": 6594,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
         },
         "firstName": "David",
         "id": 75614,
         "lastName": "Clemens",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4283
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7253,
+          "estimatedVotesLow": 5935,
+          "estimatedVotesMid": 6594,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Heather",
+        "id": 75613,
+        "lastName": "Tyulyandin",
+        "partyName": "Democratic",
+        "votes": 2109
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:03.109Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:29:20.227Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 6392,
     "year": 2024
   },
   {
@@ -490,45 +567,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 6713,
-          "estimatedVotesLow": 5492,
-          "estimatedVotesMid": 6102,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Scott",
-        "id": 75616,
-        "lastName": "Meyer",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6713,
-          "estimatedVotesLow": 5492,
-          "estimatedVotesMid": 6102,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 6714,
+          "estimatedVotesLow": 5494,
+          "estimatedVotesMid": 6104,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
         },
         "firstName": "Kyle",
         "id": 75615,
         "lastName": "Thorson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 294
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6714,
+          "estimatedVotesLow": 5494,
+          "estimatedVotesMid": 6104,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.7,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Scott",
+        "id": 75616,
+        "lastName": "Meyer",
+        "partyName": "Republican",
+        "votes": 5623
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:53:20.241Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 5917,
     "year": 2024
   },
   {
@@ -537,45 +621,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9051,
-          "estimatedVotesLow": 7406,
-          "estimatedVotesMid": 8229,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Randy",
-        "id": 23688,
-        "lastName": "Lemm",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9051,
-          "estimatedVotesLow": 7406,
-          "estimatedVotesMid": 8229,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9057,
+          "estimatedVotesLow": 7409,
+          "estimatedVotesMid": 8233,
+          "turnoutHigh": 88.04,
+          "turnoutLow": 107.63,
+          "turnoutMid": 96.85
         },
         "firstName": "John",
         "id": 75617,
         "lastName": "Pederson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 355
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9057,
+          "estimatedVotesLow": 7409,
+          "estimatedVotesMid": 8233,
+          "turnoutHigh": 88.04,
+          "turnoutLow": 107.63,
+          "turnoutMid": 96.85
+        },
+        "firstName": "Randy",
+        "id": 23688,
+        "lastName": "Lemm",
+        "partyName": "Republican",
+        "votes": 7619
       }
     ],
     "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:49:18.707Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 7974,
     "year": 2024
   },
   {
@@ -599,9 +690,16 @@
       }
     ],
     "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -615,45 +713,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8417,
-          "estimatedVotesLow": 6887,
-          "estimatedVotesMid": 7652,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mike",
-        "id": 75620,
-        "lastName": "Wobbema",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8417,
-          "estimatedVotesLow": 6887,
-          "estimatedVotesMid": 7652,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8421,
+          "estimatedVotesLow": 6890,
+          "estimatedVotesMid": 7655,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
         },
         "firstName": "Knut",
         "id": 75619,
         "lastName": "Gjovik",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 317
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8421,
+          "estimatedVotesLow": 6890,
+          "estimatedVotesMid": 7655,
+          "turnoutHigh": 88.08,
+          "turnoutLow": 107.65,
+          "turnoutMid": 96.89
+        },
+        "firstName": "Mike",
+        "id": 75620,
+        "lastName": "Wobbema",
+        "partyName": "Republican",
+        "votes": 7100
       }
     ],
     "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:48:18.979Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 7417,
     "year": 2024
   },
   {
@@ -677,9 +782,16 @@
       }
     ],
     "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -693,45 +805,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9757,
+          "estimatedVotesHigh": 9751,
           "estimatedVotesLow": 7979,
-          "estimatedVotesMid": 8867,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesMid": 8865,
+          "turnoutHigh": 88.01,
+          "turnoutLow": 107.56,
+          "turnoutMid": 96.81
         },
         "firstName": "Richard",
         "id": 75621,
         "lastName": "Schlosser",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 285
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9757,
+          "estimatedVotesHigh": 9751,
           "estimatedVotesLow": 7979,
-          "estimatedVotesMid": 8867,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesMid": 8865,
+          "turnoutHigh": 88.01,
+          "turnoutLow": 107.56,
+          "turnoutMid": 96.81
         },
         "firstName": "Robert",
         "id": 23694,
         "lastName": "Erbele",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 8297
       }
     ],
     "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:08.423Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:50:16.498Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 8582,
     "year": 2024
   },
   {
@@ -740,45 +859,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7844,
-          "estimatedVotesLow": 6417,
-          "estimatedVotesMid": 7130,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Matthew",
-        "id": 75622,
-        "lastName": "Zimny",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7844,
-          "estimatedVotesLow": 6417,
-          "estimatedVotesMid": 7130,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 7867,
+          "estimatedVotesLow": 6437,
+          "estimatedVotesMid": 7152,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
         },
         "firstName": "Diane",
         "id": 75623,
         "lastName": "Larson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6658
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 7867,
+          "estimatedVotesLow": 6437,
+          "estimatedVotesMid": 7152,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
+        },
+        "firstName": "Matthew",
+        "id": 75622,
+        "lastName": "Zimny",
+        "partyName": "Democratic",
+        "votes": 276
       }
     ],
     "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:43:17.812Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 6934,
     "year": 2024
   },
   {
@@ -802,9 +928,16 @@
       }
     ],
     "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -818,45 +951,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8471,
-          "estimatedVotesLow": 6934,
-          "estimatedVotesMid": 7704,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Justin",
-        "id": 75627,
-        "lastName": "Gerhardt",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8471,
-          "estimatedVotesLow": 6934,
-          "estimatedVotesMid": 7704,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8459,
+          "estimatedVotesLow": 6921,
+          "estimatedVotesMid": 7690,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Joshua",
         "id": 75626,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 222
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8459,
+          "estimatedVotesLow": 6921,
+          "estimatedVotesMid": 7690,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Justin",
+        "id": 75627,
+        "lastName": "Gerhardt",
+        "partyName": "Republican",
+        "votes": 7234
       }
     ],
     "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:02:19.906Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 7456,
     "year": 2024
   },
   {
@@ -880,9 +1020,16 @@
       }
     ],
     "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -911,9 +1058,16 @@
       }
     ],
     "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -942,9 +1096,16 @@
       }
     ],
     "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -958,45 +1119,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4311,
-          "estimatedVotesLow": 3528,
-          "estimatedVotesMid": 3920,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4308,
+          "estimatedVotesLow": 3524,
+          "estimatedVotesMid": 3916,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.91
         },
         "firstName": "Rodney",
         "id": 75631,
         "lastName": "Gigstad",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 188
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4311,
-          "estimatedVotesLow": 3528,
-          "estimatedVotesMid": 3920,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 4308,
+          "estimatedVotesLow": 3524,
+          "estimatedVotesMid": 3916,
+          "turnoutHigh": 88.09,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.91
         },
         "firstName": "Claire",
         "id": 75632,
         "lastName": "Cory",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3607
       }
     ],
     "district": "42",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:11:19.937Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 3795,
     "year": 2024
   },
   {
@@ -1020,9 +1188,16 @@
       }
     ],
     "district": "44",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -1036,45 +1211,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9585,
-          "estimatedVotesLow": 7843,
-          "estimatedVotesMid": 8715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9593,
+          "estimatedVotesLow": 7849,
+          "estimatedVotesMid": 8721,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
         },
         "firstName": "Michelle",
         "id": 75635,
         "lastName": "Powers",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7611
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9585,
-          "estimatedVotesLow": 7843,
-          "estimatedVotesMid": 8715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9593,
+          "estimatedVotesLow": 7849,
+          "estimatedVotesMid": 8721,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.95
         },
         "firstName": "Jessica",
         "id": 102035,
         "lastName": "Arneson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 844
       }
     ],
     "district": "46",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:05.780Z",
-    "office": { "officeId": "10", "officeName": "State Senate", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:10:20.854Z",
+    "office": {
+      "officeId": "10",
+      "officeName": "State Senate",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 8455,
     "year": 2024
   },
   {
@@ -1083,77 +1265,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8169,
-          "estimatedVotesLow": 6684,
-          "estimatedVotesMid": 7427,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald",
-        "id": 75640,
-        "lastName": "Longmuir",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8169,
-          "estimatedVotesLow": 6684,
-          "estimatedVotesMid": 7427,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Gene",
-        "id": 75637,
-        "lastName": "Nygaard",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8169,
-          "estimatedVotesLow": 6684,
-          "estimatedVotesMid": 7427,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bert",
-        "id": 75639,
-        "lastName": "Anderson",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8169,
-          "estimatedVotesLow": 6684,
-          "estimatedVotesMid": 7427,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15582,
+          "estimatedVotesLow": 12750,
+          "estimatedVotesMid": 14166,
+          "turnoutHigh": 87.84,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.63
         },
         "firstName": "Betty",
         "id": 75636,
         "lastName": "Dhuyvetter",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3065
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15582,
+          "estimatedVotesLow": 12750,
+          "estimatedVotesMid": 14166,
+          "turnoutHigh": 87.84,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.63
+        },
+        "firstName": "Bert",
+        "id": 75639,
+        "lastName": "Anderson",
+        "partyName": "Republican",
+        "votes": 9726
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15582,
+          "estimatedVotesLow": 12750,
+          "estimatedVotesMid": 14166,
+          "turnoutHigh": 87.84,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.63
+        },
+        "firstName": "Donald",
+        "id": 75640,
+        "lastName": "Longmuir",
+        "partyName": "Republican",
+        "votes": 650
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15582,
+          "estimatedVotesLow": 12750,
+          "estimatedVotesMid": 14166,
+          "turnoutHigh": 87.84,
+          "turnoutLow": 107.36,
+          "turnoutMid": 96.63
+        },
+        "firstName": "Gene",
+        "id": 75637,
+        "lastName": "Nygaard",
+        "partyName": "Democratic",
+        "votes": 247
       }
     ],
     "district": "2",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:08:19.638Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 13688,
     "year": 2024
   },
   {
@@ -1162,45 +1351,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 2794,
-          "estimatedVotesLow": 2286,
-          "estimatedVotesMid": 2539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lisa",
-        "id": 23712,
-        "lastName": "Finley-DeVille",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2794,
-          "estimatedVotesLow": 2286,
-          "estimatedVotesMid": 2539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 2798,
+          "estimatedVotesLow": 2290,
+          "estimatedVotesMid": 2544,
+          "turnoutHigh": 87.42,
+          "turnoutLow": 106.81,
+          "turnoutMid": 96.15
         },
         "firstName": "Ronald",
         "id": 75642,
         "lastName": "Brugh",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2358
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2798,
+          "estimatedVotesLow": 2290,
+          "estimatedVotesMid": 2544,
+          "turnoutHigh": 87.42,
+          "turnoutLow": 106.81,
+          "turnoutMid": 96.15
+        },
+        "firstName": "Lisa",
+        "id": 23712,
+        "lastName": "Finley-DeVille",
+        "partyName": "Democratic",
+        "votes": 88
       }
     ],
     "district": "4A",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:33:53.667Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:15:19.964Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 2446,
     "year": 2024
   },
   {
@@ -1224,9 +1420,16 @@
       }
     ],
     "district": "4B",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -1271,9 +1474,16 @@
       }
     ],
     "district": "6",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -1318,9 +1528,16 @@
       }
     ],
     "district": "8",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -1334,61 +1551,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5546,
-          "estimatedVotesLow": 4538,
-          "estimatedVotesMid": 5042,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11097,
+          "estimatedVotesLow": 9079,
+          "estimatedVotesMid": 10088,
+          "turnoutHigh": 89.01,
+          "turnoutLow": 108.79,
+          "turnoutMid": 97.91
         },
         "firstName": "Jared",
         "id": 75649,
         "lastName": "Hendrix",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 194
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5546,
-          "estimatedVotesLow": 4538,
-          "estimatedVotesMid": 5042,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11097,
+          "estimatedVotesLow": 9079,
+          "estimatedVotesMid": 10088,
+          "turnoutHigh": 89.01,
+          "turnoutLow": 108.79,
+          "turnoutMid": 97.91
         },
         "firstName": "Hamida",
         "id": 23716,
         "lastName": "Dakane",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5282
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5546,
-          "estimatedVotesLow": 4538,
-          "estimatedVotesMid": 5042,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 11097,
+          "estimatedVotesLow": 9079,
+          "estimatedVotesMid": 10088,
+          "turnoutHigh": 89.01,
+          "turnoutLow": 108.79,
+          "turnoutMid": 97.91
         },
         "firstName": "Steve",
         "id": 23759,
         "lastName": "Swiontek",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4401
       }
     ],
     "district": "10",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:20:20.466Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 9877,
     "year": 2024
   },
   {
@@ -1428,9 +1652,16 @@
       }
     ],
     "district": "12",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -1444,77 +1675,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9835,
-          "estimatedVotesLow": 8043,
-          "estimatedVotesMid": 8937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cathy",
-        "id": 75653,
-        "lastName": "Jelsing",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9835,
-          "estimatedVotesLow": 8043,
-          "estimatedVotesMid": 8937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robin",
-        "id": 75657,
-        "lastName": "Weisz",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9835,
-          "estimatedVotesLow": 8043,
-          "estimatedVotesMid": 8937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19659,
+          "estimatedVotesLow": 16085,
+          "estimatedVotesMid": 17872,
+          "turnoutHigh": 88.19,
+          "turnoutLow": 107.78,
+          "turnoutMid": 97.01
         },
         "firstName": "Jon",
         "id": 75655,
         "lastName": "Nelson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 12693
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9835,
-          "estimatedVotesLow": 8043,
-          "estimatedVotesMid": 8937,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19659,
+          "estimatedVotesLow": 16085,
+          "estimatedVotesMid": 17872,
+          "turnoutHigh": 88.19,
+          "turnoutLow": 107.78,
+          "turnoutMid": 97.01
         },
         "firstName": "Jessica",
         "id": 75652,
         "lastName": "Hawkes",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3727
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19659,
+          "estimatedVotesLow": 16085,
+          "estimatedVotesMid": 17872,
+          "turnoutHigh": 88.19,
+          "turnoutLow": 107.78,
+          "turnoutMid": 97.01
+        },
+        "firstName": "Cathy",
+        "id": 75653,
+        "lastName": "Jelsing",
+        "partyName": "Democratic",
+        "votes": 345
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19659,
+          "estimatedVotesLow": 16085,
+          "estimatedVotesMid": 17872,
+          "turnoutHigh": 88.19,
+          "turnoutLow": 107.78,
+          "turnoutMid": 97.01
+        },
+        "firstName": "Robin",
+        "id": 75657,
+        "lastName": "Weisz",
+        "partyName": "Republican",
+        "votes": 572
       }
     ],
     "district": "14",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:42:19.903Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 17337,
     "year": 2024
   },
   {
@@ -1523,77 +1761,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7269,
-          "estimatedVotesLow": 5947,
-          "estimatedVotesMid": 6607,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Julie",
-        "id": 75659,
-        "lastName": "West",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7269,
-          "estimatedVotesLow": 5947,
-          "estimatedVotesMid": 6607,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Phillip",
-        "id": 102036,
-        "lastName": "Weiss",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7269,
-          "estimatedVotesLow": 5947,
-          "estimatedVotesMid": 6607,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Andrew",
-        "id": 75661,
-        "lastName": "Marschall",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7269,
-          "estimatedVotesLow": 5947,
-          "estimatedVotesMid": 6607,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14507,
+          "estimatedVotesLow": 11869,
+          "estimatedVotesMid": 13188,
+          "turnoutHigh": 87.25,
+          "turnoutLow": 106.64,
+          "turnoutMid": 95.97
         },
         "firstName": "Ben",
         "id": 75660,
         "lastName": "Koppelman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7034
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14507,
+          "estimatedVotesLow": 11869,
+          "estimatedVotesMid": 13188,
+          "turnoutHigh": 87.25,
+          "turnoutLow": 106.64,
+          "turnoutMid": 95.97
+        },
+        "firstName": "Andrew",
+        "id": 75661,
+        "lastName": "Marschall",
+        "partyName": "Republican",
+        "votes": 254
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14507,
+          "estimatedVotesLow": 11869,
+          "estimatedVotesMid": 13188,
+          "turnoutHigh": 87.25,
+          "turnoutLow": 106.64,
+          "turnoutMid": 95.97
+        },
+        "firstName": "Julie",
+        "id": 75659,
+        "lastName": "West",
+        "partyName": "Democratic",
+        "votes": 5243
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14507,
+          "estimatedVotesLow": 11869,
+          "estimatedVotesMid": 13188,
+          "turnoutHigh": 87.25,
+          "turnoutLow": 106.64,
+          "turnoutMid": 95.97
+        },
+        "firstName": "Phillip",
+        "id": 102036,
+        "lastName": "Weiss",
+        "partyName": "Democratic",
+        "votes": 126
       }
     ],
     "district": "16",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:45:20.410Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 12657,
     "year": 2024
   },
   {
@@ -1602,77 +1847,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 6713,
-          "estimatedVotesLow": 5492,
-          "estimatedVotesMid": 6102,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Scott",
-        "id": 75662,
-        "lastName": "Nelson",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6713,
-          "estimatedVotesLow": 5492,
-          "estimatedVotesMid": 6102,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Steve",
-        "id": 75664,
-        "lastName": "Vetter",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6713,
-          "estimatedVotesLow": 5492,
-          "estimatedVotesMid": 6102,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mary",
-        "id": 23737,
-        "lastName": "Adams",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6713,
-          "estimatedVotesLow": 5492,
-          "estimatedVotesMid": 6102,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 13429,
+          "estimatedVotesLow": 10987,
+          "estimatedVotesMid": 12208,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.94
         },
         "firstName": "Nels",
         "id": 75663,
         "lastName": "Christianson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6748
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13429,
+          "estimatedVotesLow": 10987,
+          "estimatedVotesMid": 12208,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Steve",
+        "id": 75664,
+        "lastName": "Vetter",
+        "partyName": "Republican",
+        "votes": 354
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13429,
+          "estimatedVotesLow": 10987,
+          "estimatedVotesMid": 12208,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Scott",
+        "id": 75662,
+        "lastName": "Nelson",
+        "partyName": "Democratic",
+        "votes": 235
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 13429,
+          "estimatedVotesLow": 10987,
+          "estimatedVotesMid": 12208,
+          "turnoutHigh": 88.13,
+          "turnoutLow": 107.72,
+          "turnoutMid": 96.94
+        },
+        "firstName": "Mary",
+        "id": 23737,
+        "lastName": "Adams",
+        "partyName": "Democratic",
+        "votes": 4498
       }
     ],
     "district": "18",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:24:21.151Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 11835,
     "year": 2024
   },
   {
@@ -1712,9 +1964,16 @@
       }
     ],
     "district": "20",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -1728,61 +1987,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9498,
-          "estimatedVotesLow": 7773,
-          "estimatedVotesMid": 8637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jonathan",
-        "id": 75667,
-        "lastName": "Warrey",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9498,
-          "estimatedVotesLow": 7773,
-          "estimatedVotesMid": 8637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 18951,
+          "estimatedVotesLow": 15505,
+          "estimatedVotesMid": 17228,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
         },
         "firstName": "Darrell",
         "id": 75665,
         "lastName": "Hansen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5847
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9498,
-          "estimatedVotesLow": 7773,
-          "estimatedVotesMid": 8637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 18951,
+          "estimatedVotesLow": 15505,
+          "estimatedVotesMid": 17228,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Jonathan",
+        "id": 75667,
+        "lastName": "Warrey",
+        "partyName": "Republican",
+        "votes": 332
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 18951,
+          "estimatedVotesLow": 15505,
+          "estimatedVotesMid": 17228,
+          "turnoutHigh": 88.15,
+          "turnoutLow": 107.74,
+          "turnoutMid": 96.96
         },
         "firstName": "Brandy",
         "id": 75666,
         "lastName": "Pyle",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10526
       }
     ],
     "district": "22",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:29:20.227Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 16705,
     "year": 2024
   },
   {
@@ -1791,77 +2057,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 8417,
-          "estimatedVotesLow": 6887,
-          "estimatedVotesMid": 7652,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Nancy",
-        "id": 75668,
-        "lastName": "Farnham",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8417,
-          "estimatedVotesLow": 6887,
-          "estimatedVotesMid": 7652,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Shawn",
-        "id": 75669,
-        "lastName": "Olauson",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8417,
-          "estimatedVotesLow": 6887,
-          "estimatedVotesMid": 7652,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Dwight",
-        "id": 23778,
-        "lastName": "Kiefert",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8417,
-          "estimatedVotesLow": 6887,
-          "estimatedVotesMid": 7652,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 16841,
+          "estimatedVotesLow": 13779,
+          "estimatedVotesMid": 15310,
+          "turnoutHigh": 88.39,
+          "turnoutLow": 108.03,
+          "turnoutMid": 97.22
         },
         "firstName": "Daniel",
         "id": 75670,
         "lastName": "Johnston",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 294
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16841,
+          "estimatedVotesLow": 13779,
+          "estimatedVotesMid": 15310,
+          "turnoutHigh": 88.39,
+          "turnoutLow": 108.03,
+          "turnoutMid": 97.22
+        },
+        "firstName": "Shawn",
+        "id": 75669,
+        "lastName": "Olauson",
+        "partyName": "Democratic",
+        "votes": 340
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16841,
+          "estimatedVotesLow": 13779,
+          "estimatedVotesMid": 15310,
+          "turnoutHigh": 88.39,
+          "turnoutLow": 108.03,
+          "turnoutMid": 97.22
+        },
+        "firstName": "Nancy",
+        "id": 75668,
+        "lastName": "Farnham",
+        "partyName": "Democratic",
+        "votes": 5206
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 16841,
+          "estimatedVotesLow": 13779,
+          "estimatedVotesMid": 15310,
+          "turnoutHigh": 88.39,
+          "turnoutLow": 108.03,
+          "turnoutMid": 97.22
+        },
+        "firstName": "Dwight",
+        "id": 23778,
+        "lastName": "Kiefert",
+        "partyName": "Republican",
+        "votes": 9045
       }
     ],
     "district": "24",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:50:21.147Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 14885,
     "year": 2024
   },
   {
@@ -1901,9 +2174,16 @@
       }
     ],
     "district": "26",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -1917,77 +2197,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9757,
-          "estimatedVotesLow": 7979,
-          "estimatedVotesMid": 8867,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19503,
+          "estimatedVotesLow": 15957,
+          "estimatedVotesMid": 17730,
+          "turnoutHigh": 88.29,
+          "turnoutLow": 107.92,
+          "turnoutMid": 97.12
         },
         "firstName": "Mary",
         "id": 75673,
         "lastName": "Schlosser",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 373
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9757,
-          "estimatedVotesLow": 7979,
-          "estimatedVotesMid": 8867,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jim",
-        "id": 23788,
-        "lastName": "Grueneich",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9757,
-          "estimatedVotesLow": 7979,
-          "estimatedVotesMid": 8867,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Michael",
-        "id": 46019,
-        "lastName": "Brandenburg",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9757,
-          "estimatedVotesLow": 7979,
-          "estimatedVotesMid": 8867,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19503,
+          "estimatedVotesLow": 15957,
+          "estimatedVotesMid": 17730,
+          "turnoutHigh": 88.29,
+          "turnoutLow": 107.92,
+          "turnoutMid": 97.12
         },
         "firstName": "Sara",
         "id": 75672,
         "lastName": "Dux",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3975
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19503,
+          "estimatedVotesLow": 15957,
+          "estimatedVotesMid": 17730,
+          "turnoutHigh": 88.29,
+          "turnoutLow": 107.92,
+          "turnoutMid": 97.12
+        },
+        "firstName": "Michael",
+        "id": 46019,
+        "lastName": "Brandenburg",
+        "partyName": "Republican",
+        "votes": 382
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19503,
+          "estimatedVotesLow": 15957,
+          "estimatedVotesMid": 17730,
+          "turnoutHigh": 88.29,
+          "turnoutLow": 107.92,
+          "turnoutMid": 97.12
+        },
+        "firstName": "Jim",
+        "id": 23788,
+        "lastName": "Grueneich",
+        "partyName": "Republican",
+        "votes": 12490
       }
     ],
     "district": "28",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T19:44:17.494Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 17220,
     "year": 2024
   },
   {
@@ -2027,9 +2314,16 @@
       }
     ],
     "district": "30",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -2043,61 +2337,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7688,
-          "estimatedVotesLow": 6290,
-          "estimatedVotesMid": 6988,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Patrick",
-        "id": 102037,
-        "lastName": "Heinert",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7688,
-          "estimatedVotesLow": 6290,
-          "estimatedVotesMid": 6988,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lisa",
-        "id": 75681,
-        "lastName": "Meier",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7688,
-          "estimatedVotesLow": 6290,
-          "estimatedVotesMid": 6988,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 15367,
+          "estimatedVotesLow": 12573,
+          "estimatedVotesMid": 13970,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
         },
         "firstName": "Shari",
         "id": 75678,
         "lastName": "Orser",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3522
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15367,
+          "estimatedVotesLow": 12573,
+          "estimatedVotesMid": 13970,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Lisa",
+        "id": 75681,
+        "lastName": "Meier",
+        "partyName": "Republican",
+        "votes": 9749
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 15367,
+          "estimatedVotesLow": 12573,
+          "estimatedVotesMid": 13970,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Patrick",
+        "id": 102037,
+        "lastName": "Heinert",
+        "partyName": "Republican",
+        "votes": 269
       }
     ],
     "district": "32",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:58:19.281Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 13540,
     "year": 2024
   },
   {
@@ -2137,9 +2438,16 @@
       }
     ],
     "district": "34",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -2184,9 +2492,16 @@
       }
     ],
     "district": "36",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -2200,61 +2515,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7198,
-          "estimatedVotesLow": 5892,
-          "estimatedVotesMid": 6547,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Dan",
-        "id": 75688,
-        "lastName": "Ruby",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 7198,
-          "estimatedVotesLow": 5892,
-          "estimatedVotesMid": 6547,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14386,
+          "estimatedVotesLow": 11770,
+          "estimatedVotesMid": 13078,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
         },
         "firstName": "Christina",
         "id": 75689,
         "lastName": "Wolff",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 252
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 7198,
-          "estimatedVotesLow": 5892,
-          "estimatedVotesMid": 6547,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 14386,
+          "estimatedVotesLow": 11770,
+          "estimatedVotesMid": 13078,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
         },
         "firstName": "Lisa",
         "id": 75686,
         "lastName": "Hermosillo",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4055
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 14386,
+          "estimatedVotesLow": 11770,
+          "estimatedVotesMid": 13078,
+          "turnoutHigh": 88.11,
+          "turnoutLow": 107.69,
+          "turnoutMid": 96.92
+        },
+        "firstName": "Dan",
+        "id": 75688,
+        "lastName": "Ruby",
+        "partyName": "Republican",
+        "votes": 8368
       }
     ],
     "district": "38",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:18.206Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 12675,
     "year": 2024
   },
   {
@@ -2263,61 +2585,68 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4639,
-          "estimatedVotesLow": 3794,
-          "estimatedVotesMid": 4216,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Alexandra",
-        "id": 75690,
-        "lastName": "Deufel",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4639,
-          "estimatedVotesLow": 3794,
-          "estimatedVotesMid": 4216,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Macy",
-        "id": 75691,
-        "lastName": "Bolinske",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4639,
-          "estimatedVotesLow": 3794,
-          "estimatedVotesMid": 4216,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 9288,
+          "estimatedVotesLow": 7600,
+          "estimatedVotesMid": 8444,
+          "turnoutHigh": 88.02,
+          "turnoutLow": 107.57,
+          "turnoutMid": 96.81
         },
         "firstName": "Matthew",
         "id": 75692,
         "lastName": "Ruby",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 161
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9288,
+          "estimatedVotesLow": 7600,
+          "estimatedVotesMid": 8444,
+          "turnoutHigh": 88.02,
+          "turnoutLow": 107.57,
+          "turnoutMid": 96.81
+        },
+        "firstName": "Macy",
+        "id": 75691,
+        "lastName": "Bolinske",
+        "partyName": "Republican",
+        "votes": 5313
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 9288,
+          "estimatedVotesLow": 7600,
+          "estimatedVotesMid": 8444,
+          "turnoutHigh": 88.02,
+          "turnoutLow": 107.57,
+          "turnoutMid": 96.81
+        },
+        "firstName": "Alexandra",
+        "id": 75690,
+        "lastName": "Deufel",
+        "partyName": "Democratic",
+        "votes": 2701
       }
     ],
     "district": "40",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:59:18.206Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 8175,
     "year": 2024
   },
   {
@@ -2326,77 +2655,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4311,
-          "estimatedVotesLow": 3528,
-          "estimatedVotesMid": 3920,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Doug",
-        "id": 75697,
-        "lastName": "Osowski",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4311,
-          "estimatedVotesLow": 3528,
-          "estimatedVotesMid": 3920,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8615,
+          "estimatedVotesLow": 7049,
+          "estimatedVotesMid": 7832,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.67,
+          "turnoutMid": 96.91
         },
         "firstName": "Carol",
         "id": 75694,
         "lastName": "Hagen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 150
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4311,
-          "estimatedVotesLow": 3528,
-          "estimatedVotesMid": 3920,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8615,
+          "estimatedVotesLow": 7049,
+          "estimatedVotesMid": 7832,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.67,
+          "turnoutMid": 96.91
         },
-        "firstName": "Sarah",
-        "id": 75693,
-        "lastName": "Grossbauer",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Doug",
+        "id": 75697,
+        "lastName": "Osowski",
+        "partyName": "Republican",
+        "votes": 74
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4311,
-          "estimatedVotesLow": 3528,
-          "estimatedVotesMid": 3920,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 8615,
+          "estimatedVotesLow": 7049,
+          "estimatedVotesMid": 7832,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.67,
+          "turnoutMid": 96.91
         },
         "firstName": "Emily",
         "id": 75696,
         "lastName": "O'Brien",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4101
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 8615,
+          "estimatedVotesLow": 7049,
+          "estimatedVotesMid": 7832,
+          "turnoutHigh": 88.1,
+          "turnoutLow": 107.67,
+          "turnoutMid": 96.91
+        },
+        "firstName": "Sarah",
+        "id": 75693,
+        "lastName": "Grossbauer",
+        "partyName": "Democratic",
+        "votes": 3265
       }
     ],
     "district": "42",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T18:50:21.147Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 7590,
     "year": 2024
   },
   {
@@ -2436,9 +2772,16 @@
       }
     ],
     "district": "44",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -2452,77 +2795,84 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9585,
-          "estimatedVotesLow": 7843,
-          "estimatedVotesMid": 8715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Will",
-        "id": 75700,
-        "lastName": "Thompson",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9585,
-          "estimatedVotesLow": 7843,
-          "estimatedVotesMid": 8715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "James",
-        "id": 102038,
-        "lastName": "Kasper",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 9585,
-          "estimatedVotesLow": 7843,
-          "estimatedVotesMid": 8715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19186,
+          "estimatedVotesLow": 15698,
+          "estimatedVotesMid": 17442,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Desiree",
         "id": 75702,
         "lastName": "Morton",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9473
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9585,
-          "estimatedVotesLow": 7843,
-          "estimatedVotesMid": 8715,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 19186,
+          "estimatedVotesLow": 15698,
+          "estimatedVotesMid": 17442,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
+        },
+        "firstName": "James",
+        "id": 102038,
+        "lastName": "Kasper",
+        "partyName": "Republican",
+        "votes": 336
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19186,
+          "estimatedVotesLow": 15698,
+          "estimatedVotesMid": 17442,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
+        },
+        "firstName": "Will",
+        "id": 75700,
+        "lastName": "Thompson",
+        "partyName": "Democratic",
+        "votes": 506
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 19186,
+          "estimatedVotesLow": 15698,
+          "estimatedVotesMid": 17442,
+          "turnoutHigh": 88.14,
+          "turnoutLow": 107.73,
+          "turnoutMid": 96.96
         },
         "firstName": "Todd",
         "id": 75699,
         "lastName": "Reisenauer",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6596
       }
     ],
     "district": "46",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:35:56.946Z",
-    "office": { "officeId": "9", "officeName": "State House", "officeTypeId": "2" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T17:53:20.450Z",
+    "office": {
+      "officeId": "9",
+      "officeName": "State House",
+      "officeTypeId": "2"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 16911,
     "year": 2024
   },
   {
@@ -2531,45 +2881,52 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371543,
-          "estimatedVotesLow": 303945,
-          "estimatedVotesMid": 337720,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 88.88,
+          "turnoutLow": 108.63,
+          "turnoutMid": 97.77
         },
         "firstName": "Timothy",
         "id": 23646,
         "lastName": "Lamb",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 74867
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371543,
-          "estimatedVotesLow": 303945,
-          "estimatedVotesMid": 337720,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 88.88,
+          "turnoutLow": 108.63,
+          "turnoutMid": 97.77
         },
         "firstName": "Josh",
         "id": 102101,
         "lastName": "Gallion",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 255264
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:34:00.457Z",
-    "office": { "officeId": "135", "officeName": "Auditor", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:42.317Z",
+    "office": {
+      "officeId": "135",
+      "officeName": "Auditor",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 330131,
     "year": 2024
   },
   {
@@ -2593,9 +2950,16 @@
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "146", "officeName": "Treasurer", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "146",
+      "officeName": "Treasurer",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
@@ -2609,39 +2973,42 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371549,
-          "estimatedVotesLow": 303948,
-          "estimatedVotesMid": 337725,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 87,
+          "turnoutLow": 106.33,
+          "turnoutMid": 95.7
         },
         "firstName": "Jason",
         "id": 75601,
         "lastName": "Heitkamp",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 163407
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371549,
-          "estimatedVotesLow": 303948,
-          "estimatedVotesMid": 337725,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 87,
+          "turnoutLow": 106.33,
+          "turnoutMid": 95.7
         },
         "firstName": "Kirsten",
         "id": 75598,
         "lastName": "Baesler",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 159729
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:12.088Z",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:44.726Z",
     "office": {
       "officeId": "139",
       "officeName": "Superintendent of Public Instruction",
@@ -2651,7 +3018,7 @@
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 323136,
     "year": 2024
   },
   {
@@ -2660,39 +3027,42 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371552,
-          "estimatedVotesLow": 303952,
-          "estimatedVotesMid": 337728,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 86.64,
+          "turnoutLow": 105.9,
+          "turnoutMid": 95.31
         },
         "firstName": "Randel",
         "id": 102102,
         "lastName": "Christmann",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 281329
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 371552,
-          "estimatedVotesLow": 303952,
-          "estimatedVotesMid": 337728,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "estimatedVotesHigh": 371432,
+          "estimatedVotesLow": 303899,
+          "estimatedVotesMid": 337662,
+          "turnoutHigh": 86.64,
+          "turnoutLow": 105.9,
+          "turnoutMid": 95.31
         },
         "firstName": "Tracey",
         "id": 75596,
         "lastName": "Wilkie",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 40498
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-14T18:36:00.047Z",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-24T20:56:45.826Z",
     "office": {
       "officeId": "140",
       "officeName": "Public Service Commissioner",
@@ -2702,7 +3072,7 @@
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 0,
+    "totalVotes": 321827,
     "year": 2024
   },
   {
@@ -2726,9 +3096,16 @@
       }
     ],
     "district": "",
-    "electionType": { "electionType": "General Election", "electionTypeId": "1" },
-    "lastUpdated": "2024-10-03T15:19:38.318Z",
-    "office": { "officeId": "144", "officeName": "Insurance Commissioner", "officeTypeId": "1" },
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "office": {
+      "officeId": "144",
+      "officeName": "Insurance Commissioner",
+      "officeTypeId": "1"
+    },
     "partyName": null,
     "raceDate": "2024-11-05",
     "state": "ND",
