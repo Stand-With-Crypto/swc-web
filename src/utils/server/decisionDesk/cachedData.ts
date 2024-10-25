@@ -32,8 +32,6 @@ export async function setDecisionDataOnRedis(
 export async function getDecisionDataFromRedis<T>(key: DecisionDeskRedisKeys) {
   const data = await redisWithCache.get<string>(key)
 
-  console.log('data', data)
-
   if (data) {
     return JSON.parse(zlib.gunzipSync(Buffer.from(data, 'base64')).toString()) as T
   }

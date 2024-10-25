@@ -25,7 +25,7 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
     )
   }
 
-  const data = await getDecisionDataFromRedis<RacesVotingDataResponse>(
+  const data = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(
     `SWC_${state.toUpperCase() as USStateCode}_STATE_RACES_DATA`,
   )
 

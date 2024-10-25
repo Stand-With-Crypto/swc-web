@@ -3,8 +3,10 @@ import * as Sentry from '@sentry/nextjs'
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/organizePeople'
 import {
   GetAllCongressDataResponse,
+  HouseDataWithDTSI,
   PresidentialDataWithVotingResponse,
   RacesVotingDataResponse,
+  SenateDataWithDTSI,
 } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import {
@@ -46,18 +48,14 @@ export const getKeyRacesPageData = async () => {
   let congressRaceLiveResult: GetAllCongressDataResponse | null = null
   try {
     const senateRaceLiveResult =
-      await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'senateDataWithDtsi'>>(
-        'SWC_ALL_SENATE_DATA',
-      )
+      await getDecisionDataFromRedis<SenateDataWithDTSI>('SWC_ALL_SENATE_DATA')
     const houseRaceLiveResult =
-      await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'houseDataWithDtsi'>>(
-        'SWC_ALL_HOUSE_DATA',
-      )
+      await getDecisionDataFromRedis<HouseDataWithDTSI>('SWC_ALL_HOUSE_DATA')
 
     if (senateRaceLiveResult && houseRaceLiveResult) {
       congressRaceLiveResult = {
-        senateDataWithDtsi: senateRaceLiveResult.senateDataWithDtsi,
-        houseDataWithDtsi: houseRaceLiveResult.houseDataWithDtsi,
+        senateDataWithDtsi: senateRaceLiveResult,
+        houseDataWithDtsi: houseRaceLiveResult,
       }
     }
 
