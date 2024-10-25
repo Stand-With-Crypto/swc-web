@@ -1,4 +1,9 @@
-import { CommunicationType, Prisma, UserCommunicationJourneyType } from '@prisma/client'
+import {
+  CommunicationMessageStatus,
+  CommunicationType,
+  Prisma,
+  UserCommunicationJourneyType,
+} from '@prisma/client'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
@@ -11,14 +16,17 @@ const journeyTypesWithSingleJourney = [
 interface BulkCreateCommunicationJourneyPayload {
   journeyType: UserCommunicationJourneyType
   phoneNumber: string
-  messageId?: string
+  message?: {
+    id: string
+    status: CommunicationMessageStatus
+  }
   campaignName: string
 }
 
 export async function bulkCreateCommunicationJourney({
   campaignName,
   journeyType,
-  messageId,
+  message,
   phoneNumber,
 }: BulkCreateCommunicationJourneyPayload) {
   const users = await prismaClient.user.findMany({
@@ -74,7 +82,7 @@ export async function bulkCreateCommunicationJourney({
     },
   })
 
-  if (!messageId) return
+  if (!message) return
 
   const createCommunicationPayload = users
     .map<Prisma.UserCommunicationCreateManyInput>(user => {
@@ -87,7 +95,8 @@ export async function bulkCreateCommunicationJourney({
       }
 
       return {
-        messageId,
+        messageId: message.id,
+        status: message.status,
         userCommunicationJourneyId: communicationJourney.id,
         communicationType: CommunicationType.SMS,
       }

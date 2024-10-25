@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { UserCommunicationJourneyType } from '@prisma/client'
+import { CommunicationMessageStatus, UserCommunicationJourneyType } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -16,7 +16,7 @@ import { toBool } from '@/utils/shared/toBool'
 interface SMSStatusEvent {
   ErrorCode?: string
   ApiVersion: string
-  MessageStatus: string
+  MessageStatus: 'delivered' | 'sent' | 'queued' | 'undelivered' | 'failed'
   RawDlrDoneDate: string
   SmsSid: string
   SmsStatus: string
@@ -24,6 +24,17 @@ interface SMSStatusEvent {
   From: string
   MessageSid: string
   AccountSid: string
+}
+
+const eventMessageStatusToCommunicationStatus: Record<
+  SMSStatusEvent['MessageStatus'],
+  CommunicationMessageStatus
+> = {
+  delivered: CommunicationMessageStatus.DELIVERED,
+  failed: CommunicationMessageStatus.FAILED,
+  queued: CommunicationMessageStatus.PROCESSING,
+  sent: CommunicationMessageStatus.PROCESSING,
+  undelivered: CommunicationMessageStatus.FAILED,
 }
 
 const logger = getLogger('smsStatus')
@@ -76,9 +87,20 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     },
   })
 
+  const newMessageStatus = eventMessageStatusToCommunicationStatus[messageStatus]
+
   if (existingMessage) {
-    logger.info(`Found existing message with id ${messageId}`)
-    // TODO: update message status
+    logger.info(
+      `Found existing message with id ${messageId} and status ${String(existingMessage.status)}, updating it to ${newMessageStatus}`,
+    )
+    await prismaClient.userCommunication.updateMany({
+      where: {
+        messageId,
+      },
+      data: {
+        status: newMessageStatus,
+      },
+    })
   } else {
     logger.info(
       `Creating communication journey of type ${journeyType} for campaign ${campaignName} and user communication with message ${messageId}`,
@@ -86,7 +108,10 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     await bulkCreateCommunicationJourney({
       campaignName,
       journeyType,
-      messageId,
+      message: {
+        id: messageId,
+        status: newMessageStatus,
+      },
       phoneNumber,
     })
 
