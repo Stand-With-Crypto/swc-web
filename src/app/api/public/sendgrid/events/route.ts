@@ -12,6 +12,7 @@ import {
 import {
   EmailEvent,
   EmailEventName,
+  EVENT_NAME_TO_COMMUNICATION_STATUS,
   EVENT_NAME_TO_HUMAN_READABLE_STRING,
   parseEventsWebhookRequest,
   verifySignature,
@@ -66,6 +67,19 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       ...(eventEntry.category && { Category: eventEntry.category }),
       ...(eventEntry.campaign && { Campaign: eventEntry.campaign }),
     })
+
+    const messageStatus = EVENT_NAME_TO_COMMUNICATION_STATUS[eventEntry.event]
+
+    if (messageStatus) {
+      await prismaClient.userCommunication.updateMany({
+        where: {
+          messageId,
+        },
+        data: {
+          status: messageStatus,
+        },
+      })
+    }
 
     if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {
       await inngest.send({
