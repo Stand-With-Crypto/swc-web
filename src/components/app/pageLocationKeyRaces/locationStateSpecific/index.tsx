@@ -181,7 +181,7 @@ export function LocationStateSpecific({
               titleProps={{ size: 'xs' }}
             >
               <LiveResultsGrid>
-                {groups.senators.length && (
+                {!!groups.senators.length && (
                   <LiveResultsGrid.GridItem>
                     <KeyRaceLiveResult
                       candidates={groups.senators}

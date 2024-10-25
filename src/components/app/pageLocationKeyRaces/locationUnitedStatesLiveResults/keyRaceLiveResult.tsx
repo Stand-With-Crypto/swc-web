@@ -175,14 +175,14 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       )}
 
       <div className="flex justify-between">
-        {candidateA && (
+        {!!candidateA && (
           <AvatarBox
             className={cn(getOpacity(ddhqCandidateA, raceData))}
             ddhqCandidate={ddhqCandidateA}
             dtsiCandidate={candidateA}
           />
         )}
-        {candidateB && (
+        {!!candidateB && (
           <AvatarBox
             className={cn(
               'flex flex-col items-end text-right',
@@ -238,14 +238,14 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          {ddhqCandidateA && (
+          {!!ddhqCandidateA && (
             <VoteCount
               className={cn(getOpacity(ddhqCandidateA, raceData))}
               percentage={getVotePercentage(ddhqCandidateA, raceData)}
               votes={FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })}
             />
           )}
-          {ddhqCandidateB && (
+          {!!ddhqCandidateB && (
             <VoteCount
               className={cn('text-right', getOpacity(ddhqCandidateB, raceData))}
               percentage={getVotePercentage(ddhqCandidateB, raceData)}
