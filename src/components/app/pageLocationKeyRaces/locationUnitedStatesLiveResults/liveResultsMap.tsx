@@ -21,7 +21,7 @@ import {
 import { cn } from '@/utils/web/cn'
 
 interface LiveResultsMapProps {
-  initialRaceData: GetAllCongressDataResponse | null
+  initialRaceData: GetAllCongressDataResponse
   locale: SupportedLocale
 }
 
@@ -37,8 +37,8 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
     if (!liveResultData) return {}
 
     const candidates = [
-      ...(liveResultData.senateDataWithDtsi.candidatesWithVotes || []),
-      ...(liveResultData.houseDataWithDtsi.candidatesWithVotes || []),
+      ...(liveResultData.senateDataWithDtsi?.candidatesWithVotes || []),
+      ...(liveResultData.houseDataWithDtsi?.candidatesWithVotes || []),
     ]
 
     const statesMap = candidates.reduce(

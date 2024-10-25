@@ -32,7 +32,7 @@ interface LocationUnitedStatesLiveResultsProps {
   dtsiResults: ReturnType<typeof organizePeople>
   ddhqResults: Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null>
   presidentialRaceLiveResult: PresidentialDataWithVotingResponse[] | null
-  congressRaceLiveResult: GetAllCongressDataResponse | null
+  congressRaceLiveResult: GetAllCongressDataResponse
 }
 
 export function LocationUnitedStatesLiveResults({
@@ -44,10 +44,8 @@ export function LocationUnitedStatesLiveResults({
 }: LocationUnitedStatesLiveResultsProps) {
   const urls = getIntlUrls(locale)
 
-  const senateElectedData = getCongressLiveResultOverview(
-    congressRaceLiveResult?.senateDataWithDtsi,
-  )
-  const houseElectedData = getCongressLiveResultOverview(congressRaceLiveResult?.houseDataWithDtsi)
+  const senateElectedData = getCongressLiveResultOverview(congressRaceLiveResult.senateDataWithDtsi)
+  const houseElectedData = getCongressLiveResultOverview(congressRaceLiveResult.houseDataWithDtsi)
 
   return (
     <div className="space-y-20">

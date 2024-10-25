@@ -20,7 +20,9 @@ export interface RacesVotingDataResponse {
 export interface CongressDataResponse {
   office: (typeof OFFICES)[0] | null
   year: number
-  candidatesWithVotes: CandidatesWithVote[]
+  candidatesWithVotes: (CandidatesWithVote & {
+    dtsiData: DTSI_AllPeopleQuery['people'][number] | null
+  })[]
 }
 
 export interface CandidatesWithVote {
@@ -61,14 +63,6 @@ export interface GetAllCongressDataProps {
 }
 
 export interface GetAllCongressDataResponse {
-  senateDataWithDtsi: Omit<CongressDataResponse, 'candidatesWithVotes'> & {
-    candidatesWithVotes: (CandidatesWithVote & {
-      dtsiData: DTSI_AllPeopleQuery['people'][number] | null
-    })[]
-  }
-  houseDataWithDtsi: Omit<CongressDataResponse, 'candidatesWithVotes'> & {
-    candidatesWithVotes: (CandidatesWithVote & {
-      dtsiData: DTSI_AllPeopleQuery['people'][number] | null
-    })[]
-  }
+  senateDataWithDtsi: CongressDataResponse | null
+  houseDataWithDtsi: CongressDataResponse | null
 }

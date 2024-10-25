@@ -2,11 +2,10 @@ import * as Sentry from '@sentry/nextjs'
 
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/organizePeople'
 import {
+  CongressDataResponse,
   GetAllCongressDataResponse,
-  HouseDataWithDTSI,
   PresidentialDataWithVotingResponse,
   RacesVotingDataResponse,
-  SenateDataWithDTSI,
 } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import {
@@ -45,21 +44,22 @@ export const getKeyRacesPageData = async () => {
     throw error
   }
 
-  let congressRaceLiveResult: GetAllCongressDataResponse | null = null
+  let congressRaceLiveResult: GetAllCongressDataResponse = {
+    senateDataWithDtsi: null,
+    houseDataWithDtsi: null,
+  }
   try {
-    const senateRaceLiveResult =
-      await getDecisionDataFromRedis<SenateDataWithDTSI>('SWC_ALL_SENATE_DATA')
-    const houseRaceLiveResult =
-      await getDecisionDataFromRedis<HouseDataWithDTSI>('SWC_ALL_HOUSE_DATA')
+    const [senateRaceLiveResult, houseRaceLiveResult] = await Promise.all([
+      getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_SENATE_DATA'),
+      getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_HOUSE_DATA'),
+    ])
 
-    if (senateRaceLiveResult && houseRaceLiveResult) {
-      congressRaceLiveResult = {
-        senateDataWithDtsi: senateRaceLiveResult,
-        houseDataWithDtsi: houseRaceLiveResult,
-      }
+    congressRaceLiveResult = {
+      senateDataWithDtsi: senateRaceLiveResult,
+      houseDataWithDtsi: houseRaceLiveResult,
     }
 
-    if (!congressRaceLiveResult) {
+    if (!senateRaceLiveResult || !houseRaceLiveResult) {
       throw new Error('Failed to get live congress data')
     }
   } catch (error) {

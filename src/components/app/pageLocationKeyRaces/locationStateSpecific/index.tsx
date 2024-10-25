@@ -44,7 +44,7 @@ interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery 
   locale: SupportedLocale
   countAdvocates: number
   initialRaceData: RacesVotingDataResponse[] | undefined
-  initialCongressLiveResultData: GetAllCongressDataResponse | null
+  initialCongressLiveResultData: GetAllCongressDataResponse
 }
 
 export function LocationStateSpecific({

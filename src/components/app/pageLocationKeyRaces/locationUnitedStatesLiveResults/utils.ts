@@ -1,9 +1,10 @@
 import * as Sentry from '@sentry/nextjs'
+import { isBefore, startOfDay } from 'date-fns'
 import { isNil } from 'lodash-es'
 
 import {
   CandidatesWithVote,
-  GetAllCongressDataResponse,
+  CongressDataResponse,
   PresidentialDataWithVotingResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
@@ -76,7 +77,7 @@ export const getRaceStatus = (
     raceDate = new Date(raceData?.raceDate || '2024-11-05')
   }
 
-  if (now < raceDate) {
+  if (isBefore(startOfDay(now), startOfDay(raceDate))) {
     return 'not-started'
   }
 
@@ -97,7 +98,7 @@ export const getOpacity = (
 }
 
 export const getCongressLiveResultOverview = (
-  data: GetAllCongressDataResponse['senateDataWithDtsi'] | undefined,
+  data: CongressDataResponse | null | undefined,
   stateCode?: string,
 ) => {
   if (!data?.candidatesWithVotes?.length) {

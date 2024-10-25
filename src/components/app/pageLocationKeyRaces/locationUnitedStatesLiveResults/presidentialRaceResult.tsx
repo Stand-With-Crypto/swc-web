@@ -6,7 +6,10 @@ import { isNil } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
+import {
+  LiveStatusBadge,
+  Status,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -79,11 +82,13 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     return liveResultData.find(candidate => candidate.votingData?.called)
   }, [liveResultData])
 
-  const raceStatus = isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
-    ? 'not-started'
-    : calledCandidate
-      ? 'called'
-      : 'live'
+  const raceStatus = useMemo<Status>(() => {
+    if (!liveResultData) return 'unknown'
+    if (calledCandidate) return 'called'
+    if (isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))) return 'not-started'
+
+    return 'live'
+  }, [calledCandidate, liveResultData])
 
   const getPercentage = useCallback((electoralVotes: number) => {
     return (electoralVotes / 538) * 100

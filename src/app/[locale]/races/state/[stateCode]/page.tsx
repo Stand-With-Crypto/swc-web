@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 
 import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/locationStateSpecific'
 import {
+  CongressDataResponse,
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
@@ -67,25 +68,22 @@ export default async function LocationStateSpecificPage({
   const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
   const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
 
-  let congressRaceLiveResult: GetAllCongressDataResponse | null = null
+  let congressRaceLiveResult: GetAllCongressDataResponse = {
+    senateDataWithDtsi: null,
+    houseDataWithDtsi: null,
+  }
   try {
-    const senateRaceLiveResult =
-      await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'senateDataWithDtsi'>>(
-        'SWC_ALL_SENATE_DATA',
-      )
-    const houseRaceLiveResult =
-      await getDecisionDataFromRedis<Pick<GetAllCongressDataResponse, 'houseDataWithDtsi'>>(
-        'SWC_ALL_HOUSE_DATA',
-      )
+    const [senateRaceLiveResult, houseRaceLiveResult] = await Promise.all([
+      getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_SENATE_DATA'),
+      getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_HOUSE_DATA'),
+    ])
 
-    if (senateRaceLiveResult && houseRaceLiveResult) {
-      congressRaceLiveResult = {
-        senateDataWithDtsi: senateRaceLiveResult.senateDataWithDtsi,
-        houseDataWithDtsi: houseRaceLiveResult.houseDataWithDtsi,
-      }
+    congressRaceLiveResult = {
+      senateDataWithDtsi: senateRaceLiveResult,
+      houseDataWithDtsi: houseRaceLiveResult,
     }
 
-    if (!congressRaceLiveResult) {
+    if (!senateRaceLiveResult || !houseRaceLiveResult) {
       throw new Error('Failed to get live congress data')
     }
   } catch (error) {
