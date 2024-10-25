@@ -13,10 +13,18 @@ import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 import { getLogger } from '@/utils/shared/logger'
 import { toBool } from '@/utils/shared/toBool'
 
+enum SMSEventMessageStatus {
+  DELIVERED = 'delivered',
+  QUEUED = 'queued',
+  SENT = 'sent',
+  UNDELIVERED = 'undelivered',
+  FAILED = 'failed',
+}
+
 interface SMSStatusEvent {
   ErrorCode?: string
   ApiVersion: string
-  MessageStatus: 'delivered' | 'sent' | 'queued' | 'undelivered' | 'failed'
+  MessageStatus: SMSEventMessageStatus
   RawDlrDoneDate: string
   SmsSid: string
   SmsStatus: string
@@ -26,15 +34,12 @@ interface SMSStatusEvent {
   AccountSid: string
 }
 
-const eventMessageStatusToCommunicationStatus: Record<
-  SMSStatusEvent['MessageStatus'],
-  CommunicationMessageStatus
+const EVENT_MESSAGE_STATUS_TO_COMMUNICATION_STATUS: Partial<
+  Record<SMSStatusEvent['MessageStatus'], CommunicationMessageStatus>
 > = {
-  delivered: CommunicationMessageStatus.DELIVERED,
-  failed: CommunicationMessageStatus.FAILED,
-  queued: CommunicationMessageStatus.PROCESSING,
-  sent: CommunicationMessageStatus.PROCESSING,
-  undelivered: CommunicationMessageStatus.FAILED,
+  [SMSEventMessageStatus.DELIVERED]: CommunicationMessageStatus.DELIVERED,
+  [SMSEventMessageStatus.FAILED]: CommunicationMessageStatus.FAILED,
+  [SMSEventMessageStatus.UNDELIVERED]: CommunicationMessageStatus.FAILED,
 }
 
 const logger = getLogger('smsStatus')
@@ -87,11 +92,11 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     },
   })
 
-  const newMessageStatus = eventMessageStatusToCommunicationStatus[messageStatus]
+  const newMessageStatus = EVENT_MESSAGE_STATUS_TO_COMMUNICATION_STATUS[messageStatus]
 
   if (existingMessage) {
     logger.info(
-      `Found existing message with id ${messageId} and status ${String(existingMessage.status)}, updating it to ${newMessageStatus}`,
+      `Found existing message with id ${messageId} and status ${String(existingMessage.status)}, updating it to ${String(newMessageStatus)}`,
     )
     await prismaClient.userCommunication.updateMany({
       where: {

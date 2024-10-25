@@ -18,7 +18,7 @@ interface BulkCreateCommunicationJourneyPayload {
   phoneNumber: string
   message?: {
     id: string
-    status: CommunicationMessageStatus
+    status?: CommunicationMessageStatus
   }
   campaignName: string
 }
