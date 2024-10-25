@@ -8,15 +8,15 @@
           "estimatedVotesHigh": 381962,
           "estimatedVotesLow": 312514,
           "estimatedVotesMid": 347238,
-          "turnoutHigh": 80.11,
-          "turnoutLow": 97.92,
-          "turnoutMid": 88.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Suzanne",
         "id": 1557,
         "lastName": "Bonamici",
         "partyName": "Democratic",
-        "votes": 193982
+        "votes": 0
       },
       {
         "elected": false,
@@ -24,15 +24,15 @@
           "estimatedVotesHigh": 381962,
           "estimatedVotesLow": 312514,
           "estimatedVotesMid": 347238,
-          "turnoutHigh": 80.11,
-          "turnoutLow": 97.92,
-          "turnoutMid": 88.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bob",
         "id": 85120,
         "lastName": "Todd",
         "partyName": "Republican",
-        "votes": 107961
+        "votes": 0
       },
       {
         "elected": false,
@@ -40,15 +40,15 @@
           "estimatedVotesHigh": 381962,
           "estimatedVotesLow": 312514,
           "estimatedVotesMid": 347238,
-          "turnoutHigh": 80.11,
-          "turnoutLow": 97.92,
-          "turnoutMid": 88.12
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joseph",
         "id": 102200,
         "lastName": "Christman",
         "partyName": "Libertarian",
-        "votes": 4057
+        "votes": 0
       }
     ],
     "district": "1",
@@ -56,7 +56,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -66,7 +67,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 306000,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -78,47 +79,47 @@
           "estimatedVotesHigh": 383297,
           "estimatedVotesLow": 313607,
           "estimatedVotesMid": 348451,
-          "turnoutHigh": 81.46,
-          "turnoutLow": 99.56,
-          "turnoutMid": 89.6
-        },
-        "firstName": "Michael",
-        "id": 44253,
-        "lastName": "Stettler",
-        "partyName": "Constitution",
-        "votes": 6001
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 383297,
-          "estimatedVotesLow": 313607,
-          "estimatedVotesMid": 348451,
-          "turnoutHigh": 81.46,
-          "turnoutLow": 99.56,
-          "turnoutMid": 89.6
-        },
-        "firstName": "Cliff",
-        "id": 12823,
-        "lastName": "Bentz",
-        "partyName": "Republican",
-        "votes": 180802
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 383297,
-          "estimatedVotesLow": 313607,
-          "estimatedVotesMid": 348451,
-          "turnoutHigh": 81.46,
-          "turnoutLow": 99.56,
-          "turnoutMid": 89.6
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 68254,
         "lastName": "Ruby",
         "partyName": "Democratic",
-        "votes": 125413
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 383297,
+          "estimatedVotesLow": 313607,
+          "estimatedVotesMid": 348451,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Michael",
+        "id": 44253,
+        "lastName": "Stettler",
+        "partyName": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 383297,
+          "estimatedVotesLow": 313607,
+          "estimatedVotesMid": 348451,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cliff",
+        "id": 12823,
+        "lastName": "Bentz",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "2",
@@ -126,7 +127,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -136,7 +138,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 312216,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -148,63 +150,15 @@
           "estimatedVotesHigh": 377060,
           "estimatedVotesLow": 308504,
           "estimatedVotesMid": 342782,
-          "turnoutHigh": 78.46,
-          "turnoutLow": 95.89,
-          "turnoutMid": 86.3
-        },
-        "firstName": "Joe",
-        "id": 102203,
-        "lastName": "Meyer",
-        "partyName": "Pacific Green",
-        "votes": 5754
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 377060,
-          "estimatedVotesLow": 308504,
-          "estimatedVotesMid": 342782,
-          "turnoutHigh": 78.46,
-          "turnoutLow": 95.89,
-          "turnoutMid": 86.3
-        },
-        "firstName": "Joanna",
-        "id": 12842,
-        "lastName": "Harbour",
-        "partyName": "Republican",
-        "votes": 67344
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 377060,
-          "estimatedVotesLow": 308504,
-          "estimatedVotesMid": 342782,
-          "turnoutHigh": 78.46,
-          "turnoutLow": 95.89,
-          "turnoutMid": 86.3
-        },
-        "firstName": "Maxine",
-        "id": 20143,
-        "lastName": "Dexter",
-        "partyName": "Democratic",
-        "votes": 210051
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 377060,
-          "estimatedVotesLow": 308504,
-          "estimatedVotesMid": 342782,
-          "turnoutHigh": 78.46,
-          "turnoutLow": 95.89,
-          "turnoutMid": 86.3
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 102202,
         "lastName": "Walker",
         "partyName": "Independent",
-        "votes": 6574
+        "votes": 0
       },
       {
         "elected": false,
@@ -212,15 +166,63 @@
           "estimatedVotesHigh": 377060,
           "estimatedVotesLow": 308504,
           "estimatedVotesMid": 342782,
-          "turnoutHigh": 78.46,
-          "turnoutLow": 95.89,
-          "turnoutMid": 86.3
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 86461,
         "lastName": "Frosch",
         "partyName": "Constitution",
-        "votes": 6109
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 377060,
+          "estimatedVotesLow": 308504,
+          "estimatedVotesMid": 342782,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joe",
+        "id": 102203,
+        "lastName": "Meyer",
+        "partyName": "Pacific Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 377060,
+          "estimatedVotesLow": 308504,
+          "estimatedVotesMid": 342782,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joanna",
+        "id": 12842,
+        "lastName": "Harbour",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 377060,
+          "estimatedVotesLow": 308504,
+          "estimatedVotesMid": 342782,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Maxine",
+        "id": 20143,
+        "lastName": "Dexter",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "3",
@@ -228,7 +230,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -238,7 +241,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 295832,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -250,47 +253,15 @@
           "estimatedVotesHigh": 403686,
           "estimatedVotesLow": 330287,
           "estimatedVotesMid": 366986,
-          "turnoutHigh": 75.81,
-          "turnoutLow": 92.65,
-          "turnoutMid": 83.39
-        },
-        "firstName": "Justin",
-        "id": 86463,
-        "lastName": "Filip",
-        "partyName": "Pacific Green",
-        "votes": 8692
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 403686,
-          "estimatedVotesLow": 330287,
-          "estimatedVotesMid": 366986,
-          "turnoutHigh": 75.81,
-          "turnoutLow": 92.65,
-          "turnoutMid": 83.39
-        },
-        "firstName": "Val",
-        "id": 19991,
-        "lastName": "Hoyle",
-        "partyName": "Democratic",
-        "votes": 168417
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 403686,
-          "estimatedVotesLow": 330287,
-          "estimatedVotesMid": 366986,
-          "turnoutHigh": 75.81,
-          "turnoutLow": 92.65,
-          "turnoutMid": 83.39
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 102204,
         "lastName": "Bahlen",
         "partyName": "Libertarian",
-        "votes": 6297
+        "votes": 0
       },
       {
         "elected": false,
@@ -298,15 +269,47 @@
           "estimatedVotesHigh": 403686,
           "estimatedVotesLow": 330287,
           "estimatedVotesMid": 366986,
-          "turnoutHigh": 75.81,
-          "turnoutLow": 92.65,
-          "turnoutMid": 83.39
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Monique",
         "id": 68263,
         "lastName": "DeSpain",
         "partyName": "Republican",
-        "votes": 122619
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 403686,
+          "estimatedVotesLow": 330287,
+          "estimatedVotesMid": 366986,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Justin",
+        "id": 86463,
+        "lastName": "Filip",
+        "partyName": "Pacific Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 403686,
+          "estimatedVotesLow": 330287,
+          "estimatedVotesMid": 366986,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Val",
+        "id": 19991,
+        "lastName": "Hoyle",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "4",
@@ -314,7 +317,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -324,7 +328,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 306025,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -336,15 +340,15 @@
           "estimatedVotesHigh": 431091,
           "estimatedVotesLow": 352710,
           "estimatedVotesMid": 391900,
-          "turnoutHigh": 78.58,
-          "turnoutLow": 96.04,
-          "turnoutMid": 86.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrew",
         "id": 85121,
         "lastName": "Aasen",
         "partyName": "Independent",
-        "votes": 5603
+        "votes": 0
       },
       {
         "elected": false,
@@ -352,15 +356,15 @@
           "estimatedVotesHigh": 431091,
           "estimatedVotesLow": 352710,
           "estimatedVotesMid": 391900,
-          "turnoutHigh": 78.58,
-          "turnoutLow": 96.04,
-          "turnoutMid": 86.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Janelle",
         "id": 20152,
         "lastName": "Bynum",
         "partyName": "Democratic",
-        "votes": 154449
+        "votes": 0
       },
       {
         "elected": false,
@@ -368,15 +372,15 @@
           "estimatedVotesHigh": 431091,
           "estimatedVotesLow": 352710,
           "estimatedVotesMid": 391900,
-          "turnoutHigh": 78.58,
-          "turnoutLow": 96.04,
-          "turnoutMid": 86.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sonja",
         "id": 102206,
         "lastName": "Feintech",
         "partyName": "Libertarian",
-        "votes": 6859
+        "votes": 0
       },
       {
         "elected": false,
@@ -384,15 +388,15 @@
           "estimatedVotesHigh": 431091,
           "estimatedVotesLow": 352710,
           "estimatedVotesMid": 391900,
-          "turnoutHigh": 78.58,
-          "turnoutLow": 96.04,
-          "turnoutMid": 86.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brett",
         "id": 102205,
         "lastName": "Smith",
         "partyName": "Independent",
-        "votes": 5798
+        "votes": 0
       },
       {
         "elected": false,
@@ -400,15 +404,15 @@
           "estimatedVotesHigh": 431091,
           "estimatedVotesLow": 352710,
           "estimatedVotesMid": 391900,
-          "turnoutHigh": 78.58,
-          "turnoutLow": 96.04,
-          "turnoutMid": 86.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lori",
         "id": 20015,
         "lastName": "Chavez-DeRemer",
         "partyName": "Republican",
-        "votes": 160112
+        "votes": 0
       },
       {
         "elected": false,
@@ -416,15 +420,15 @@
           "estimatedVotesHigh": 431091,
           "estimatedVotesLow": 352710,
           "estimatedVotesMid": 391900,
-          "turnoutHigh": 78.58,
-          "turnoutLow": 96.04,
-          "turnoutMid": 86.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrea",
         "id": 86466,
         "lastName": "Townsend",
         "partyName": "Pacific Green",
-        "votes": 5919
+        "votes": 0
       }
     ],
     "district": "5",
@@ -432,7 +436,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -442,7 +447,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 338740,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -454,15 +459,15 @@
           "estimatedVotesHigh": 371094,
           "estimatedVotesLow": 303623,
           "estimatedVotesMid": 337358,
-          "turnoutHigh": 79.23,
-          "turnoutLow": 96.83,
-          "turnoutMid": 87.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrea",
         "id": 20004,
         "lastName": "Salinas",
         "partyName": "Democratic",
-        "votes": 88826
+        "votes": 0
       },
       {
         "elected": false,
@@ -470,15 +475,15 @@
           "estimatedVotesHigh": 371094,
           "estimatedVotesLow": 303623,
           "estimatedVotesMid": 337358,
-          "turnoutHigh": 79.23,
-          "turnoutLow": 96.83,
-          "turnoutMid": 87.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 20020,
         "lastName": "Erickson",
         "partyName": "Republican",
-        "votes": 205185
+        "votes": 0
       }
     ],
     "district": "6",
@@ -486,7 +491,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -496,7 +502,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 294011,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -508,15 +514,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 83.76,
-          "turnoutLow": 102.37,
-          "turnoutMid": 92.13
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Will",
         "id": 68270,
         "lastName": "Lathrop",
         "partyName": "Republican",
-        "votes": 789318
+        "votes": 0
       },
       {
         "elected": false,
@@ -524,15 +530,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 83.76,
-          "turnoutLow": 102.37,
-          "turnoutMid": 92.13
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 20122,
         "lastName": "Rayfield",
         "partyName": "Democratic",
-        "votes": 1177552
+        "votes": 0
       }
     ],
     "district": "",
@@ -540,7 +546,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "27",
       "officeName": "Attorney General",
@@ -550,7 +557,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 1966870,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -578,6 +585,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "40",
@@ -616,6 +624,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "30",
@@ -654,6 +663,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "30",
@@ -692,6 +702,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "40",
@@ -714,15 +725,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 83.93,
-          "turnoutLow": 102.58,
-          "turnoutMid": 92.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dennis",
         "id": 68275,
         "lastName": "Linthicum",
         "partyName": "Republican",
-        "votes": 809286
+        "votes": 0
       },
       {
         "elected": false,
@@ -730,15 +741,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 83.93,
-          "turnoutLow": 102.58,
-          "turnoutMid": 92.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nathalie",
         "id": 86454,
         "lastName": "Paravicini",
         "partyName": "Pacific Green",
-        "votes": 31533
+        "votes": 0
       },
       {
         "elected": false,
@@ -746,15 +757,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 83.93,
-          "turnoutLow": 102.58,
-          "turnoutMid": 92.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tobias",
         "id": 20034,
         "lastName": "Read",
         "partyName": "Democratic",
-        "votes": 1130063
+        "votes": 0
       }
     ],
     "district": "",
@@ -762,7 +773,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "39",
       "officeName": "Secretary of State",
@@ -772,7 +784,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 1970882,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -784,15 +796,15 @@
           "estimatedVotesHigh": 42904,
           "estimatedVotesLow": 35104,
           "estimatedVotesMid": 39004,
-          "turnoutHigh": 69.24,
-          "turnoutLow": 84.63,
-          "turnoutMid": 76.17
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bret",
         "id": 20107,
         "lastName": "Cecil",
         "partyName": "Democratic",
-        "votes": 2198
+        "votes": 0
       },
       {
         "elected": false,
@@ -800,15 +812,15 @@
           "estimatedVotesHigh": 42904,
           "estimatedVotesLow": 35104,
           "estimatedVotesMid": 39004,
-          "turnoutHigh": 69.24,
-          "turnoutLow": 84.63,
-          "turnoutMid": 76.17
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Court",
         "id": 9024,
         "lastName": "Boice",
         "partyName": "Republican",
-        "votes": 27510
+        "votes": 0
       }
     ],
     "district": "1",
@@ -816,7 +828,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -826,7 +839,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 29708,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -838,15 +851,15 @@
           "estimatedVotesHigh": 41666,
           "estimatedVotesLow": 34090,
           "estimatedVotesMid": 37878,
-          "turnoutHigh": 90.3,
-          "turnoutLow": 110.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Virgle",
-        "id": 20489,
+        "id": 86455,
         "lastName": "Osborne",
-        "partyName": "Republican",
-        "votes": 37076
+        "partyName": "Constitution",
+        "votes": 0
       },
       {
         "elected": false,
@@ -854,15 +867,15 @@
           "estimatedVotesHigh": 41666,
           "estimatedVotesLow": 34090,
           "estimatedVotesMid": 37878,
-          "turnoutHigh": 90.3,
-          "turnoutLow": 110.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Virgle",
-        "id": 86455,
+        "id": 20489,
         "lastName": "Osborne",
-        "partyName": "Constitution",
-        "votes": 547
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "2",
@@ -870,7 +883,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -880,7 +894,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 37623,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -892,15 +906,15 @@
           "estimatedVotesHigh": 39721,
           "estimatedVotesLow": 32499,
           "estimatedVotesMid": 36110,
-          "turnoutHigh": 90.29,
-          "turnoutLow": 110.35,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dwayne",
         "id": 68319,
         "lastName": "Yunker",
         "partyName": "Republican",
-        "votes": 34755
+        "votes": 0
       },
       {
         "elected": false,
@@ -908,15 +922,15 @@
           "estimatedVotesHigh": 39721,
           "estimatedVotesLow": 32499,
           "estimatedVotesMid": 36110,
-          "turnoutHigh": 90.29,
-          "turnoutLow": 110.35,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 68317,
         "lastName": "Seligman",
         "partyName": "Democratic",
-        "votes": 1108
+        "votes": 0
       }
     ],
     "district": "3",
@@ -924,7 +938,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -934,7 +949,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 35863,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -946,15 +961,15 @@
           "estimatedVotesHigh": 43624,
           "estimatedVotesLow": 35692,
           "estimatedVotesMid": 39658,
-          "turnoutHigh": 77.07,
-          "turnoutLow": 94.19,
-          "turnoutMid": 84.77
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alek",
         "id": 12849,
         "lastName": "Skarlatos",
         "partyName": "Republican",
-        "votes": 31062
+        "votes": 0
       },
       {
         "elected": false,
@@ -962,15 +977,15 @@
           "estimatedVotesHigh": 43624,
           "estimatedVotesLow": 35692,
           "estimatedVotesMid": 39658,
-          "turnoutHigh": 77.07,
-          "turnoutLow": 94.19,
-          "turnoutMid": 84.77
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Richard",
         "id": 68320,
         "lastName": "Chasm",
         "partyName": "Democratic",
-        "votes": 2557
+        "votes": 0
       }
     ],
     "district": "4",
@@ -978,7 +993,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -988,7 +1004,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 33619,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1000,15 +1016,15 @@
           "estimatedVotesHigh": 42218,
           "estimatedVotesLow": 34542,
           "estimatedVotesMid": 38380,
-          "turnoutHigh": 74.84,
-          "turnoutLow": 91.47,
-          "turnoutMid": 82.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Katherine",
         "id": 68321,
         "lastName": "Green",
         "partyName": "Republican",
-        "votes": 3419
+        "votes": 0
       },
       {
         "elected": false,
@@ -1016,15 +1032,15 @@
           "estimatedVotesHigh": 42218,
           "estimatedVotesLow": 34542,
           "estimatedVotesMid": 38380,
-          "turnoutHigh": 74.84,
-          "turnoutLow": 91.47,
-          "turnoutMid": 82.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pam",
         "id": 20110,
         "lastName": "Marsh",
         "partyName": "Democratic",
-        "votes": 28177
+        "votes": 0
       }
     ],
     "district": "5",
@@ -1032,7 +1048,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1042,7 +1059,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 31596,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1054,15 +1071,15 @@
           "estimatedVotesHigh": 35125,
           "estimatedVotesLow": 28739,
           "estimatedVotesMid": 31932,
-          "turnoutHigh": 85.53,
-          "turnoutLow": 104.54,
-          "turnoutMid": 94.09
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kimberly",
         "id": 20493,
         "lastName": "Wallan",
         "partyName": "Republican",
-        "votes": 2013
+        "votes": 0
       },
       {
         "elected": false,
@@ -1070,15 +1087,15 @@
           "estimatedVotesHigh": 35125,
           "estimatedVotesLow": 28739,
           "estimatedVotesMid": 31932,
-          "turnoutHigh": 85.53,
-          "turnoutLow": 104.54,
-          "turnoutMid": 94.09
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lilia",
         "id": 68322,
         "lastName": "Caballero",
         "partyName": "Democratic",
-        "votes": 28031
+        "votes": 0
       }
     ],
     "district": "6",
@@ -1086,7 +1103,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1096,7 +1114,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 30044,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1108,15 +1126,15 @@
           "estimatedVotesHigh": 37675,
           "estimatedVotesLow": 30825,
           "estimatedVotesMid": 34250,
-          "turnoutHigh": 80.87,
-          "turnoutLow": 98.84,
-          "turnoutMid": 88.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cory",
         "id": 68324,
         "lastName": "Burket",
         "partyName": "Republican",
-        "votes": 2101
+        "votes": 0
       },
       {
         "elected": false,
@@ -1124,15 +1142,15 @@
           "estimatedVotesHigh": 37675,
           "estimatedVotesLow": 30825,
           "estimatedVotesMid": 34250,
-          "turnoutHigh": 80.87,
-          "turnoutLow": 98.84,
-          "turnoutMid": 88.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 20112,
         "lastName": "Lively",
         "partyName": "Democratic",
-        "votes": 28366
+        "votes": 0
       }
     ],
     "district": "7",
@@ -1140,7 +1158,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1150,7 +1169,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 30467,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1178,6 +1197,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1216,6 +1236,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1254,6 +1275,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1276,15 +1298,15 @@
           "estimatedVotesHigh": 41159,
           "estimatedVotesLow": 33675,
           "estimatedVotesMid": 37417,
-          "turnoutHigh": 85.85,
-          "turnoutLow": 104.94,
-          "turnoutMid": 94.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jami",
-        "id": 20499,
-        "lastName": "Cate",
-        "partyName": "Republican",
-        "votes": 29597
+        "firstName": "Nina",
+        "id": 20117,
+        "lastName": "Brenner",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1292,15 +1314,15 @@
           "estimatedVotesHigh": 41159,
           "estimatedVotesLow": 33675,
           "estimatedVotesMid": 37417,
-          "turnoutHigh": 85.85,
-          "turnoutLow": 104.94,
-          "turnoutMid": 94.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Nina",
-        "id": 20117,
-        "lastName": "Brenner",
-        "partyName": "Democratic",
-        "votes": 5740
+        "firstName": "Jami",
+        "id": 20499,
+        "lastName": "Cate",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "11",
@@ -1308,7 +1330,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1318,7 +1341,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 35337,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1346,6 +1369,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1368,15 +1392,15 @@
           "estimatedVotesHigh": 44821,
           "estimatedVotesLow": 36671,
           "estimatedVotesMid": 40746,
-          "turnoutHigh": 63.95,
-          "turnoutLow": 78.16,
-          "turnoutMid": 70.34
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Timothy",
         "id": 20505,
         "lastName": "Sutherland",
         "partyName": "Republican",
-        "votes": 2827
+        "votes": 0
       },
       {
         "elected": false,
@@ -1384,15 +1408,15 @@
           "estimatedVotesHigh": 44821,
           "estimatedVotesLow": 36671,
           "estimatedVotesMid": 40746,
-          "turnoutHigh": 63.95,
-          "turnoutLow": 78.16,
-          "turnoutMid": 70.34
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nancy",
         "id": 20119,
         "lastName": "Nathanson",
         "partyName": "Democratic",
-        "votes": 25834
+        "votes": 0
       }
     ],
     "district": "13",
@@ -1400,7 +1424,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1410,7 +1435,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 28661,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1438,6 +1463,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1460,15 +1486,15 @@
           "estimatedVotesHigh": 41903,
           "estimatedVotesLow": 34283,
           "estimatedVotesMid": 38093,
-          "turnoutHigh": 90.46,
-          "turnoutLow": 110.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shelly",
         "id": 20508,
         "lastName": "Davis",
         "partyName": "Republican",
-        "votes": 30952
+        "votes": 0
       },
       {
         "elected": false,
@@ -1476,15 +1502,15 @@
           "estimatedVotesHigh": 41903,
           "estimatedVotesLow": 34283,
           "estimatedVotesMid": 38093,
-          "turnoutHigh": 90.46,
-          "turnoutLow": 110.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Terrence",
         "id": 68329,
         "lastName": "Virnig",
         "partyName": "Democratic",
-        "votes": 6955
+        "votes": 0
       }
     ],
     "district": "15",
@@ -1492,7 +1518,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1502,7 +1529,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 37907,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1514,15 +1541,15 @@
           "estimatedVotesHigh": 34733,
           "estimatedVotesLow": 28418,
           "estimatedVotesMid": 31575,
-          "turnoutHigh": 51.17,
-          "turnoutLow": 62.54,
-          "turnoutMid": 56.29
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 86456,
         "lastName": "Beilstein",
         "partyName": "Pacific Green",
-        "votes": 554
+        "votes": 0
       },
       {
         "elected": false,
@@ -1530,15 +1557,15 @@
           "estimatedVotesHigh": 34733,
           "estimatedVotesLow": 28418,
           "estimatedVotesMid": 31575,
-          "turnoutHigh": 51.17,
-          "turnoutLow": 62.54,
-          "turnoutMid": 56.29
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sarah",
         "id": 68330,
         "lastName": "McDonald",
         "partyName": "Democratic",
-        "votes": 17219
+        "votes": 0
       }
     ],
     "district": "16",
@@ -1546,7 +1573,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1556,7 +1584,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 17773,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1568,15 +1596,15 @@
           "estimatedVotesHigh": 38509,
           "estimatedVotesLow": 31508,
           "estimatedVotesMid": 35008,
-          "turnoutHigh": 89.45,
-          "turnoutLow": 109.32,
-          "turnoutMid": 98.39
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 20025,
         "lastName": "Beem",
         "partyName": "Democratic",
-        "votes": 27819
+        "votes": 0
       },
       {
         "elected": false,
@@ -1584,15 +1612,15 @@
           "estimatedVotesHigh": 38509,
           "estimatedVotesLow": 31508,
           "estimatedVotesMid": 35008,
-          "turnoutHigh": 89.45,
-          "turnoutLow": 109.32,
-          "turnoutMid": 98.39
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Edwin",
         "id": 68331,
         "lastName": "Diehl III",
         "partyName": "Republican",
-        "votes": 6626
+        "votes": 0
       }
     ],
     "district": "17",
@@ -1600,7 +1628,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1610,7 +1639,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 34445,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1638,6 +1667,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1660,15 +1690,15 @@
           "estimatedVotesHigh": 35330,
           "estimatedVotesLow": 28906,
           "estimatedVotesMid": 32118,
-          "turnoutHigh": 86.22,
-          "turnoutLow": 105.38,
-          "turnoutMid": 94.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 48007,
         "lastName": "Brown",
         "partyName": "Republican",
-        "votes": 3588
+        "votes": 0
       },
       {
         "elected": false,
@@ -1676,15 +1706,15 @@
           "estimatedVotesHigh": 35330,
           "estimatedVotesLow": 28906,
           "estimatedVotesMid": 32118,
-          "turnoutHigh": 86.22,
-          "turnoutLow": 105.38,
-          "turnoutMid": 94.84
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "H. Tom",
         "id": 86457,
         "lastName": "Andersen",
         "partyName": "Democratic",
-        "votes": 26874
+        "votes": 0
       }
     ],
     "district": "19",
@@ -1692,7 +1722,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:14.615Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1702,7 +1733,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 30462,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1714,15 +1745,15 @@
           "estimatedVotesHigh": 38691,
           "estimatedVotesLow": 31655,
           "estimatedVotesMid": 35173,
-          "turnoutHigh": 80.83,
-          "turnoutLow": 98.8,
-          "turnoutMid": 88.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 20127,
         "lastName": "Evans",
         "partyName": "Democratic",
-        "votes": 22603
+        "votes": 0
       },
       {
         "elected": false,
@@ -1730,15 +1761,15 @@
           "estimatedVotesHigh": 38691,
           "estimatedVotesLow": 31655,
           "estimatedVotesMid": 35173,
-          "turnoutHigh": 80.83,
-          "turnoutLow": 98.8,
-          "turnoutMid": 88.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 68332,
         "lastName": "Chambers",
         "partyName": "Republican",
-        "votes": 8672
+        "votes": 0
       }
     ],
     "district": "20",
@@ -1746,7 +1777,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1756,7 +1788,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 31275,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1768,15 +1800,15 @@
           "estimatedVotesHigh": 32893,
           "estimatedVotesLow": 26913,
           "estimatedVotesMid": 29903,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Virginia",
         "id": 68334,
         "lastName": "Stapleton",
         "partyName": "Democratic",
-        "votes": 23551
+        "votes": 0
       },
       {
         "elected": false,
@@ -1784,15 +1816,15 @@
           "estimatedVotesHigh": 32893,
           "estimatedVotesLow": 26913,
           "estimatedVotesMid": 29903,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 20515,
         "lastName": "Mannix",
         "partyName": "Republican",
-        "votes": 6419
+        "votes": 0
       }
     ],
     "district": "21",
@@ -1800,7 +1832,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1810,7 +1843,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 29970,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1822,15 +1855,15 @@
           "estimatedVotesHigh": 23740,
           "estimatedVotesLow": 19424,
           "estimatedVotesMid": 21582,
-          "turnoutHigh": 94.51,
-          "turnoutLow": 115.51,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tracy",
         "id": 20517,
         "lastName": "Cramer",
         "partyName": "Republican",
-        "votes": 2215
+        "votes": 0
       },
       {
         "elected": false,
@@ -1838,15 +1871,15 @@
           "estimatedVotesHigh": 23740,
           "estimatedVotesLow": 19424,
           "estimatedVotesMid": 21582,
-          "turnoutHigh": 94.51,
-          "turnoutLow": 115.51,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lesly",
         "id": 68335,
         "lastName": "Munoz",
         "partyName": "Democratic",
-        "votes": 20221
+        "votes": 0
       }
     ],
     "district": "22",
@@ -1854,7 +1887,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1864,7 +1898,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 22436,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1876,15 +1910,15 @@
           "estimatedVotesHigh": 43416,
           "estimatedVotesLow": 35522,
           "estimatedVotesMid": 39469,
-          "turnoutHigh": 87.47,
-          "turnoutLow": 106.91,
-          "turnoutMid": 96.22
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anna",
         "id": 20519,
         "lastName": "Scharf",
         "partyName": "Republican",
-        "votes": 22031
+        "votes": 0
       },
       {
         "elected": false,
@@ -1892,15 +1926,15 @@
           "estimatedVotesHigh": 43416,
           "estimatedVotesLow": 35522,
           "estimatedVotesMid": 39469,
-          "turnoutHigh": 87.47,
-          "turnoutLow": 106.91,
-          "turnoutMid": 96.22
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Krisstina",
         "id": 68336,
         "lastName": "Wright",
         "partyName": "Democratic",
-        "votes": 15945
+        "votes": 0
       }
     ],
     "district": "23",
@@ -1908,7 +1942,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1918,7 +1953,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 37976,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1946,6 +1981,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1968,15 +2004,15 @@
           "estimatedVotesHigh": 40693,
           "estimatedVotesLow": 33295,
           "estimatedVotesMid": 36994,
-          "turnoutHigh": 86.87,
-          "turnoutLow": 106.18,
-          "turnoutMid": 95.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Benjamin",
         "id": 68337,
         "lastName": "Bowman",
         "partyName": "Democratic",
-        "votes": 33556
+        "votes": 0
       },
       {
         "elected": false,
@@ -1984,15 +2020,15 @@
           "estimatedVotesHigh": 40693,
           "estimatedVotesLow": 33295,
           "estimatedVotesMid": 36994,
-          "turnoutHigh": 86.87,
-          "turnoutLow": 106.18,
-          "turnoutMid": 95.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 68338,
         "lastName": "Niemeyer III",
         "partyName": "Republican",
-        "votes": 1796
+        "votes": 0
       }
     ],
     "district": "25",
@@ -2000,7 +2036,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2010,7 +2047,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 35352,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2022,15 +2059,15 @@
           "estimatedVotesHigh": 41134,
           "estimatedVotesLow": 33656,
           "estimatedVotesMid": 37395,
-          "turnoutHigh": 70.82,
-          "turnoutLow": 86.55,
-          "turnoutMid": 77.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Courtney",
-        "id": 20135,
-        "lastName": "Neron",
-        "partyName": "Democratic",
-        "votes": 26931
+        "firstName": "Jason",
+        "id": 20523,
+        "lastName": "Fields",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2038,15 +2075,15 @@
           "estimatedVotesHigh": 41134,
           "estimatedVotesLow": 33656,
           "estimatedVotesMid": 37395,
-          "turnoutHigh": 70.82,
-          "turnoutLow": 86.55,
-          "turnoutMid": 77.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jason",
-        "id": 20523,
-        "lastName": "Fields",
-        "partyName": "Republican",
-        "votes": 2199
+        "firstName": "Courtney",
+        "id": 20135,
+        "lastName": "Neron",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "26",
@@ -2054,7 +2091,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2064,7 +2102,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 29130,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2092,6 +2130,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2114,15 +2153,15 @@
           "estimatedVotesHigh": 43998,
           "estimatedVotesLow": 35998,
           "estimatedVotesMid": 39998,
-          "turnoutHigh": 80.24,
-          "turnoutLow": 98.07,
-          "turnoutMid": 88.26
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dacia",
         "id": 20138,
         "lastName": "Grayber",
         "partyName": "Democratic",
-        "votes": 33888
+        "votes": 0
       },
       {
         "elected": false,
@@ -2130,15 +2169,15 @@
           "estimatedVotesHigh": 43998,
           "estimatedVotesLow": 35998,
           "estimatedVotesMid": 39998,
-          "turnoutHigh": 80.24,
-          "turnoutLow": 98.07,
-          "turnoutMid": 88.26
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Charles",
         "id": 20527,
         "lastName": "Mengis",
         "partyName": "Republican",
-        "votes": 1414
+        "votes": 0
       }
     ],
     "district": "28",
@@ -2146,7 +2185,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2156,7 +2196,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 35302,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2184,6 +2224,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2222,6 +2263,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2244,15 +2286,15 @@
           "estimatedVotesHigh": 46451,
           "estimatedVotesLow": 38007,
           "estimatedVotesMid": 42229,
-          "turnoutHigh": 81.96,
-          "turnoutLow": 100.17,
-          "turnoutMid": 90.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jordan",
         "id": 68340,
         "lastName": "Gutierrez",
         "partyName": "Democratic",
-        "votes": 14044
+        "votes": 0
       },
       {
         "elected": false,
@@ -2260,15 +2302,15 @@
           "estimatedVotesHigh": 46451,
           "estimatedVotesLow": 38007,
           "estimatedVotesMid": 42229,
-          "turnoutHigh": 81.96,
-          "turnoutLow": 100.17,
-          "turnoutMid": 90.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Darcey",
         "id": 68341,
         "lastName": "Edwards",
         "partyName": "Republican",
-        "votes": 24027
+        "votes": 0
       }
     ],
     "district": "31",
@@ -2276,7 +2318,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2286,7 +2329,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 38071,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2314,6 +2357,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2336,15 +2380,15 @@
           "estimatedVotesHigh": 36344,
           "estimatedVotesLow": 29736,
           "estimatedVotesMid": 33040,
-          "turnoutHigh": 94.71,
-          "turnoutLow": 115.76,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Stan",
         "id": 20535,
         "lastName": "Baumhofer",
         "partyName": "Republican",
-        "votes": 1088
+        "votes": 0
       },
       {
         "elected": false,
@@ -2352,15 +2396,15 @@
           "estimatedVotesHigh": 36344,
           "estimatedVotesLow": 29736,
           "estimatedVotesMid": 33040,
-          "turnoutHigh": 94.71,
-          "turnoutLow": 115.76,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shannon Jones",
         "id": 68345,
         "lastName": "Isadore",
         "partyName": "Democratic",
-        "votes": 33335
+        "votes": 0
       }
     ],
     "district": "33",
@@ -2368,7 +2412,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2378,7 +2423,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 34423,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2390,15 +2435,15 @@
           "estimatedVotesHigh": 35409,
           "estimatedVotesLow": 28971,
           "estimatedVotesMid": 32190,
-          "turnoutHigh": 83.84,
-          "turnoutLow": 102.47,
-          "turnoutMid": 92.22
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jan",
         "id": 68347,
         "lastName": "Verbeek",
         "partyName": "Republican",
-        "votes": 1583
+        "votes": 0
       },
       {
         "elected": false,
@@ -2406,15 +2451,15 @@
           "estimatedVotesHigh": 35409,
           "estimatedVotesLow": 28971,
           "estimatedVotesMid": 32190,
-          "turnoutHigh": 83.84,
-          "turnoutLow": 102.47,
-          "turnoutMid": 92.22
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lisa",
         "id": 20144,
         "lastName": "Reynolds",
         "partyName": "Democratic",
-        "votes": 28103
+        "votes": 0
       }
     ],
     "district": "34",
@@ -2422,7 +2467,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2432,7 +2478,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 29686,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2444,15 +2490,15 @@
           "estimatedVotesHigh": 29275,
           "estimatedVotesLow": 23953,
           "estimatedVotesMid": 26614,
-          "turnoutHigh": 93.6,
-          "turnoutLow": 114.39,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 20537,
         "lastName": "Martin",
         "partyName": "Republican",
-        "votes": 1273
+        "votes": 0
       },
       {
         "elected": false,
@@ -2460,15 +2506,15 @@
           "estimatedVotesHigh": 29275,
           "estimatedVotesLow": 23953,
           "estimatedVotesMid": 26614,
-          "turnoutHigh": 93.6,
-          "turnoutLow": 114.39,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Farrah",
         "id": 20147,
         "lastName": "Chaichi",
         "partyName": "Democratic",
-        "votes": 26127
+        "votes": 0
       }
     ],
     "district": "35",
@@ -2476,7 +2522,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:48.027Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2486,7 +2533,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 27400,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2498,15 +2545,15 @@
           "estimatedVotesHigh": 41693,
           "estimatedVotesLow": 34113,
           "estimatedVotesMid": 37903,
-          "turnoutHigh": 79.99,
-          "turnoutLow": 97.77,
-          "turnoutMid": 87.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shawn",
         "id": 68349,
         "lastName": "Chummar",
         "partyName": "Republican",
-        "votes": 1027
+        "votes": 0
       },
       {
         "elected": false,
@@ -2514,15 +2561,15 @@
           "estimatedVotesHigh": 41693,
           "estimatedVotesLow": 34113,
           "estimatedVotesMid": 37903,
-          "turnoutHigh": 79.99,
-          "turnoutLow": 97.77,
-          "turnoutMid": 87.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hai",
         "id": 20148,
         "lastName": "Pham",
         "partyName": "Democratic",
-        "votes": 32325
+        "votes": 0
       }
     ],
     "district": "36",
@@ -2530,7 +2577,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2540,7 +2588,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 33352,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2552,15 +2600,15 @@
           "estimatedVotesHigh": 42538,
           "estimatedVotesLow": 34804,
           "estimatedVotesMid": 38671,
-          "turnoutHigh": 77.14,
-          "turnoutLow": 94.29,
-          "turnoutMid": 84.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Benjamin",
         "id": 68352,
         "lastName": "Edtl",
         "partyName": "Republican",
-        "votes": 4745
+        "votes": 0
       },
       {
         "elected": false,
@@ -2568,15 +2616,15 @@
           "estimatedVotesHigh": 42538,
           "estimatedVotesLow": 34804,
           "estimatedVotesMid": 38671,
-          "turnoutHigh": 77.14,
-          "turnoutLow": 94.29,
-          "turnoutMid": 84.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julianna",
         "id": 68351,
         "lastName": "Walters",
         "partyName": "Democratic",
-        "votes": 28070
+        "votes": 0
       }
     ],
     "district": "37",
@@ -2584,7 +2632,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2594,7 +2643,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 32815,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2622,6 +2671,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2644,15 +2694,15 @@
           "estimatedVotesHigh": 37991,
           "estimatedVotesLow": 31083,
           "estimatedVotesMid": 34537,
-          "turnoutHigh": 86.33,
-          "turnoutLow": 105.51,
-          "turnoutMid": 94.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "April",
         "id": 68353,
         "lastName": "Dobson",
         "partyName": "Democratic",
-        "votes": 30248
+        "votes": 0
       },
       {
         "elected": false,
@@ -2660,15 +2710,15 @@
           "estimatedVotesHigh": 37991,
           "estimatedVotesLow": 31083,
           "estimatedVotesMid": 34537,
-          "turnoutHigh": 86.33,
-          "turnoutLow": 105.51,
-          "turnoutMid": 94.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Aimee",
         "id": 68354,
         "lastName": "Reiner",
         "partyName": "Republican",
-        "votes": 2548
+        "votes": 0
       }
     ],
     "district": "39",
@@ -2676,7 +2726,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2686,7 +2737,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 32796,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2698,15 +2749,15 @@
           "estimatedVotesHigh": 42715,
           "estimatedVotesLow": 34949,
           "estimatedVotesMid": 38832,
-          "turnoutHigh": 82.75,
-          "turnoutLow": 101.13,
-          "turnoutMid": 91.02
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Annessa",
         "id": 20153,
         "lastName": "Hartman",
         "partyName": "Democratic",
-        "votes": 26332
+        "votes": 0
       },
       {
         "elected": false,
@@ -2714,15 +2765,15 @@
           "estimatedVotesHigh": 42715,
           "estimatedVotesLow": 34949,
           "estimatedVotesMid": 38832,
-          "turnoutHigh": 82.75,
-          "turnoutLow": 101.13,
-          "turnoutMid": 91.02
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 68356,
         "lastName": "Newgard",
         "partyName": "Republican",
-        "votes": 9013
+        "votes": 0
       }
     ],
     "district": "40",
@@ -2730,7 +2781,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2740,7 +2792,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 35345,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2752,15 +2804,15 @@
           "estimatedVotesHigh": 45867,
           "estimatedVotesLow": 37527,
           "estimatedVotesMid": 41697,
-          "turnoutHigh": 84.64,
-          "turnoutLow": 103.45,
-          "turnoutMid": 93.11
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 68357,
         "lastName": "Clark",
         "partyName": "Republican",
-        "votes": 16978
+        "votes": 0
       },
       {
         "elected": false,
@@ -2768,15 +2820,15 @@
           "estimatedVotesHigh": 45867,
           "estimatedVotesLow": 37527,
           "estimatedVotesMid": 41697,
-          "turnoutHigh": 84.64,
-          "turnoutLow": 103.45,
-          "turnoutMid": 93.11
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 12850,
         "lastName": "Gamba",
         "partyName": "Democratic",
-        "votes": 21845
+        "votes": 0
       }
     ],
     "district": "41",
@@ -2784,7 +2836,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2794,7 +2847,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 38823,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2822,6 +2875,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2844,15 +2898,15 @@
           "estimatedVotesHigh": 43316,
           "estimatedVotesLow": 35440,
           "estimatedVotesMid": 39378,
-          "turnoutHigh": 72.35,
-          "turnoutLow": 88.43,
-          "turnoutMid": 79.59
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "TImothy",
-        "id": 68359,
-        "lastName": "LeMaster",
-        "partyName": "Republican",
-        "votes": 738
+        "firstName": "Tawna",
+        "id": 20159,
+        "lastName": "Sanchez",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2860,15 +2914,15 @@
           "estimatedVotesHigh": 43316,
           "estimatedVotesLow": 35440,
           "estimatedVotesMid": 39378,
-          "turnoutHigh": 72.35,
-          "turnoutLow": 88.43,
-          "turnoutMid": 79.59
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Tawna",
-        "id": 20159,
-        "lastName": "Sanchez",
-        "partyName": "Democratic",
-        "votes": 30602
+        "firstName": "TImothy",
+        "id": 68359,
+        "lastName": "LeMaster",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "43",
@@ -2876,7 +2930,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2886,7 +2941,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 31340,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2914,6 +2969,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2952,6 +3008,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2990,6 +3047,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3028,6 +3086,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3050,15 +3109,15 @@
           "estimatedVotesHigh": 32902,
           "estimatedVotesLow": 26920,
           "estimatedVotesMid": 29911,
-          "turnoutHigh": 83.54,
-          "turnoutLow": 102.11,
-          "turnoutMid": 91.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hoa",
         "id": 20166,
         "lastName": "Nguyen",
         "partyName": "Democratic",
-        "votes": 26116
+        "votes": 0
       },
       {
         "elected": false,
@@ -3066,15 +3125,15 @@
           "estimatedVotesHigh": 32902,
           "estimatedVotesLow": 26920,
           "estimatedVotesMid": 29911,
-          "turnoutHigh": 83.54,
-          "turnoutLow": 102.11,
-          "turnoutMid": 91.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 20549,
         "lastName": "Masterman",
         "partyName": "Republican",
-        "votes": 1371
+        "votes": 0
       }
     ],
     "district": "48",
@@ -3082,7 +3141,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3092,7 +3152,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 27487,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3104,15 +3164,15 @@
           "estimatedVotesHigh": 29767,
           "estimatedVotesLow": 24355,
           "estimatedVotesMid": 27061,
-          "turnoutHigh": 84.09,
-          "turnoutLow": 102.78,
-          "turnoutMid": 92.5
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Terry",
-        "id": 68366,
-        "lastName": "Tipsord",
-        "partyName": "Republican",
-        "votes": 1143
+        "firstName": "Zachary",
+        "id": 68365,
+        "lastName": "Hudson",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3120,15 +3180,15 @@
           "estimatedVotesHigh": 29767,
           "estimatedVotesLow": 24355,
           "estimatedVotesMid": 27061,
-          "turnoutHigh": 84.09,
-          "turnoutLow": 102.78,
-          "turnoutMid": 92.5
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Zachary",
-        "id": 68365,
-        "lastName": "Hudson",
-        "partyName": "Democratic",
-        "votes": 23889
+        "firstName": "Terry",
+        "id": 68366,
+        "lastName": "Tipsord",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "49",
@@ -3136,7 +3196,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3146,7 +3207,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 25032,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3158,15 +3219,15 @@
           "estimatedVotesHigh": 32560,
           "estimatedVotesLow": 26640,
           "estimatedVotesMid": 29600,
-          "turnoutHigh": 94.98,
-          "turnoutLow": 116.09,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 68368,
         "lastName": "Drechsler",
         "partyName": "Republican",
-        "votes": 932
+        "votes": 0
       },
       {
         "elected": false,
@@ -3174,15 +3235,15 @@
           "estimatedVotesHigh": 32560,
           "estimatedVotesLow": 26640,
           "estimatedVotesMid": 29600,
-          "turnoutHigh": 94.98,
-          "turnoutLow": 116.09,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ricardo",
         "id": 68367,
         "lastName": "Ruiz",
         "partyName": "Democratic",
-        "votes": 29994
+        "votes": 0
       }
     ],
     "district": "50",
@@ -3190,7 +3251,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3200,7 +3262,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 30926,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3228,6 +3290,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3250,15 +3313,15 @@
           "estimatedVotesHigh": 40757,
           "estimatedVotesLow": 33347,
           "estimatedVotesMid": 37052,
-          "turnoutHigh": 73.53,
-          "turnoutLow": 89.87,
-          "turnoutMid": 80.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Nick",
-        "id": 68369,
-        "lastName": "Walden Poublon",
-        "partyName": "Democratic",
-        "votes": 22556
+        "firstName": "Jeff",
+        "id": 20555,
+        "lastName": "Helfrich",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3266,15 +3329,15 @@
           "estimatedVotesHigh": 40757,
           "estimatedVotesLow": 33347,
           "estimatedVotesMid": 37052,
-          "turnoutHigh": 73.53,
-          "turnoutLow": 89.87,
-          "turnoutMid": 80.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jeff",
-        "id": 20555,
-        "lastName": "Helfrich",
-        "partyName": "Republican",
-        "votes": 7414
+        "firstName": "Nick",
+        "id": 68369,
+        "lastName": "Walden Poublon",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "52",
@@ -3282,7 +3345,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3292,7 +3356,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 29970,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3304,15 +3368,15 @@
           "estimatedVotesHigh": 45520,
           "estimatedVotesLow": 37244,
           "estimatedVotesMid": 41382,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Keri",
         "id": 68370,
         "lastName": "Lopez",
         "partyName": "Republican",
-        "votes": 5419
+        "votes": 0
       },
       {
         "elected": false,
@@ -3320,15 +3384,15 @@
           "estimatedVotesHigh": 45520,
           "estimatedVotesLow": 37244,
           "estimatedVotesMid": 41382,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Emerson",
         "id": 20171,
         "lastName": "Levy",
         "partyName": "Democratic",
-        "votes": 34671
+        "votes": 0
       }
     ],
     "district": "53",
@@ -3336,7 +3400,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3346,7 +3411,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 40090,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3374,6 +3439,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3396,15 +3462,15 @@
           "estimatedVotesHigh": 43541,
           "estimatedVotesLow": 35623,
           "estimatedVotesMid": 39582,
-          "turnoutHigh": 90.06,
-          "turnoutLow": 110.07,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 68372,
         "lastName": "Reschke",
         "partyName": "Republican",
-        "votes": 20745
+        "votes": 0
       },
       {
         "elected": false,
@@ -3412,15 +3478,15 @@
           "estimatedVotesHigh": 43541,
           "estimatedVotesLow": 35623,
           "estimatedVotesMid": 39582,
-          "turnoutHigh": 90.06,
-          "turnoutLow": 110.07,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 68371,
         "lastName": "Williamson",
         "partyName": "Democratic",
-        "votes": 18467
+        "votes": 0
       }
     ],
     "district": "55",
@@ -3428,7 +3494,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3438,7 +3505,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 39212,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3466,6 +3533,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3504,6 +3572,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3542,6 +3611,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3564,15 +3634,15 @@
           "estimatedVotesHigh": 44987,
           "estimatedVotesLow": 36807,
           "estimatedVotesMid": 40897,
-          "turnoutHigh": 86.39,
-          "turnoutLow": 105.59,
-          "turnoutMid": 95.03
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vikki",
         "id": 86458,
         "lastName": "Iverson",
         "partyName": "Republican",
-        "votes": 24228
+        "votes": 0
       },
       {
         "elected": false,
@@ -3580,15 +3650,15 @@
           "estimatedVotesHigh": 44987,
           "estimatedVotesLow": 36807,
           "estimatedVotesMid": 40897,
-          "turnoutHigh": 86.39,
-          "turnoutLow": 105.59,
-          "turnoutMid": 95.03
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 68375,
         "lastName": "Samp",
         "partyName": "Democratic",
-        "votes": 14637
+        "votes": 0
       }
     ],
     "district": "59",
@@ -3596,7 +3666,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3606,7 +3677,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 38865,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3634,6 +3705,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3672,6 +3744,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -3694,15 +3767,15 @@
           "estimatedVotesHigh": 83361,
           "estimatedVotesLow": 68205,
           "estimatedVotesMid": 75783,
-          "turnoutHigh": 68.59,
-          "turnoutLow": 83.84,
-          "turnoutMid": 75.45
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tracy",
         "id": 68290,
         "lastName": "Thompson",
         "partyName": "Democratic",
-        "votes": 6537
+        "votes": 0
       },
       {
         "elected": false,
@@ -3710,15 +3783,15 @@
           "estimatedVotesHigh": 83361,
           "estimatedVotesLow": 68205,
           "estimatedVotesMid": 75783,
-          "turnoutHigh": 68.59,
-          "turnoutLow": 83.84,
-          "turnoutMid": 75.45
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Noah",
         "id": 68291,
         "lastName": "Robinson",
         "partyName": "Republican",
-        "votes": 50644
+        "votes": 0
       }
     ],
     "district": "2",
@@ -3726,7 +3799,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:15.845Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -3736,7 +3810,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 57181,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3748,15 +3822,15 @@
           "estimatedVotesHigh": 83929,
           "estimatedVotesLow": 68670,
           "estimatedVotesMid": 76299,
-          "turnoutHigh": 81.03,
-          "turnoutLow": 99.04,
-          "turnoutMid": 89.14
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jo",
         "id": 68292,
         "lastName": "Beaudreau",
         "partyName": "Democratic",
-        "votes": 46075
+        "votes": 0
       },
       {
         "elected": false,
@@ -3764,15 +3838,15 @@
           "estimatedVotesHigh": 83929,
           "estimatedVotesLow": 68670,
           "estimatedVotesMid": 76299,
-          "turnoutHigh": 81.03,
-          "turnoutLow": 99.04,
-          "turnoutMid": 89.14
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dick",
         "id": 68293,
         "lastName": "Anderson",
         "partyName": "Republican",
-        "votes": 21935
+        "votes": 0
       }
     ],
     "district": "5",
@@ -3780,7 +3854,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -3790,7 +3865,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 68010,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3818,6 +3893,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -3840,15 +3916,15 @@
           "estimatedVotesHigh": 81829,
           "estimatedVotesLow": 66951,
           "estimatedVotesMid": 74390,
-          "turnoutHigh": 79.31,
-          "turnoutLow": 96.94,
-          "turnoutMid": 87.24
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bruce",
         "id": 68296,
         "lastName": "Starr",
         "partyName": "Republican",
-        "votes": 51828
+        "votes": 0
       },
       {
         "elected": false,
@@ -3856,15 +3932,15 @@
           "estimatedVotesHigh": 81829,
           "estimatedVotesLow": 66951,
           "estimatedVotesMid": 74390,
-          "turnoutHigh": 79.31,
-          "turnoutLow": 96.94,
-          "turnoutMid": 87.24
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 68295,
         "lastName": "Hooper",
         "partyName": "Democratic",
-        "votes": 13072
+        "votes": 0
       }
     ],
     "district": "12",
@@ -3872,7 +3948,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -3882,7 +3959,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 64900,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3894,15 +3971,15 @@
           "estimatedVotesHigh": 83148,
           "estimatedVotesLow": 68030,
           "estimatedVotesMid": 75589,
-          "turnoutHigh": 65.34,
-          "turnoutLow": 79.86,
-          "turnoutMid": 71.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kate",
         "id": 68297,
         "lastName": "Lieber",
         "partyName": "Democratic",
-        "votes": 52196
+        "votes": 0
       },
       {
         "elected": false,
@@ -3910,15 +3987,15 @@
           "estimatedVotesHigh": 83148,
           "estimatedVotesLow": 68030,
           "estimatedVotesMid": 75589,
-          "turnoutHigh": 65.34,
-          "turnoutLow": 79.86,
-          "turnoutMid": 71.87
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shane",
         "id": 68298,
         "lastName": "Bolton",
         "partyName": "Republican",
-        "votes": 2130
+        "votes": 0
       }
     ],
     "district": "14",
@@ -3926,7 +4003,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -3936,7 +4014,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 54326,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3948,15 +4026,15 @@
           "estimatedVotesHigh": 70970,
           "estimatedVotesLow": 58066,
           "estimatedVotesMid": 64518,
-          "turnoutHigh": 89.13,
-          "turnoutLow": 108.94,
-          "turnoutMid": 98.04
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 68299,
         "lastName": "Pierson",
         "partyName": "Republican",
-        "votes": 2761
+        "votes": 0
       },
       {
         "elected": false,
@@ -3964,15 +4042,15 @@
           "estimatedVotesHigh": 70970,
           "estimatedVotesLow": 58066,
           "estimatedVotesMid": 64518,
-          "turnoutHigh": 89.13,
-          "turnoutLow": 108.94,
-          "turnoutMid": 98.04
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Wlnsvey",
         "id": 86459,
         "lastName": "Campos",
         "partyName": "Democratic",
-        "votes": 60494
+        "votes": 0
       }
     ],
     "district": "18",
@@ -3980,7 +4058,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -3990,7 +4069,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 63255,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4018,6 +4097,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -4040,15 +4120,15 @@
           "estimatedVotesHigh": 81206,
           "estimatedVotesLow": 66442,
           "estimatedVotesMid": 73824,
-          "turnoutHigh": 93.17,
-          "turnoutLow": 113.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Lewis",
-        "id": 68301,
-        "lastName": "Frederick",
-        "partyName": "Democratic",
-        "votes": 73680
+        "firstName": "Michael",
+        "id": 68302,
+        "lastName": "Saperstein",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4056,15 +4136,15 @@
           "estimatedVotesHigh": 81206,
           "estimatedVotesLow": 66442,
           "estimatedVotesMid": 73824,
-          "turnoutHigh": 93.17,
-          "turnoutLow": 113.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Michael",
-        "id": 68302,
-        "lastName": "Saperstein",
-        "partyName": "Republican",
-        "votes": 1979
+        "firstName": "Lewis",
+        "id": 68301,
+        "lastName": "Frederick",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "22",
@@ -4072,7 +4152,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -4082,7 +4163,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 75659,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4110,6 +4191,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -4132,15 +4214,15 @@
           "estimatedVotesHigh": 62329,
           "estimatedVotesLow": 50997,
           "estimatedVotesMid": 56663,
-          "turnoutHigh": 91.57,
-          "turnoutLow": 111.92,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Christopher",
-        "id": 68304,
-        "lastName": "Gorsek",
-        "partyName": "Democratic",
-        "votes": 56281
+        "firstName": "Raymond",
+        "id": 68305,
+        "lastName": "Love",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4148,15 +4230,15 @@
           "estimatedVotesHigh": 62329,
           "estimatedVotesLow": 50997,
           "estimatedVotesMid": 56663,
-          "turnoutHigh": 91.57,
-          "turnoutLow": 111.92,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Raymond",
-        "id": 68305,
-        "lastName": "Love",
-        "partyName": "Republican",
-        "votes": 795
+        "firstName": "Christopher",
+        "id": 68304,
+        "lastName": "Gorsek",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "25",
@@ -4164,7 +4246,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -4174,7 +4257,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 57076,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4186,15 +4269,15 @@
           "estimatedVotesHigh": 87044,
           "estimatedVotesLow": 71218,
           "estimatedVotesMid": 79131,
-          "turnoutHigh": 64.7,
-          "turnoutLow": 79.08,
-          "turnoutMid": 71.17
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 68306,
         "lastName": "Broadman",
         "partyName": "Democratic",
-        "votes": 51975
+        "votes": 0
       },
       {
         "elected": false,
@@ -4202,15 +4285,15 @@
           "estimatedVotesHigh": 87044,
           "estimatedVotesLow": 71218,
           "estimatedVotesMid": 79131,
-          "turnoutHigh": 64.7,
-          "turnoutLow": 79.08,
-          "turnoutMid": 71.17
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matthew",
         "id": 68307,
         "lastName": "Summers",
         "partyName": "Republican",
-        "votes": 4344
+        "votes": 0
       }
     ],
     "district": "27",
@@ -4218,7 +4301,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -4228,7 +4312,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 56319,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4256,6 +4340,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -4294,6 +4379,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -4332,6 +4418,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -4354,15 +4441,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 77.4,
-          "turnoutLow": 94.6,
-          "turnoutMid": 85.14
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 68278,
         "lastName": "Boquist",
         "partyName": "Republican",
-        "votes": 743199
+        "votes": 0
       },
       {
         "elected": false,
@@ -4370,15 +4457,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 77.4,
-          "turnoutLow": 94.6,
-          "turnoutMid": 85.14
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mary",
         "id": 107811,
         "lastName": "King",
         "partyName": "Pacific Green",
-        "votes": 35476
+        "votes": 0
       },
       {
         "elected": false,
@@ -4386,15 +4473,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 77.4,
-          "turnoutLow": 94.6,
-          "turnoutMid": 85.14
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Elizabeth",
         "id": 68277,
         "lastName": "Steiner",
         "partyName": "Democratic",
-        "votes": 1038966
+        "votes": 0
       }
     ],
     "district": "",
@@ -4402,7 +4489,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:55:16.473Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:39:27.503Z",
     "office": {
       "officeId": "146",
       "officeName": "Treasurer",
@@ -4412,7 +4500,7 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 1817641,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

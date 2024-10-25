@@ -44,7 +44,16 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
       totalVotes: currentData.topline_results.total_votes,
       raceDate: currentData.race_date,
       lastUpdated: currentData.last_updated,
-      calledCandidate,
+      calledCandidate: calledCandidate
+        ? {
+            id: calledCandidate?.cand_id ?? 0,
+            firstName: calledCandidate?.first_name ?? '',
+            lastName: calledCandidate?.last_name ?? '',
+            partyName: calledCandidate?.party_name ?? '',
+            incumbent: calledCandidate?.incumbent ?? false,
+          }
+        : null,
+      hasCalledCandidate: !!calledCandidate,
       candidatesWithVotes: currentData.candidates.map(candidate => ({
         id: candidate.cand_id,
         firstName: candidate.first_name,

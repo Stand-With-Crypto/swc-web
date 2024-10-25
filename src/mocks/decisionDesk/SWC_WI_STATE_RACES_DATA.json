@@ -1,77 +1,70 @@
 [
   {
-    "calledCandidate": {
-      "cand_id": 8263,
-      "first_name": "Tammy",
-      "incumbent": true,
-      "last_name": "Baldwin",
-      "party_id": 1,
-      "party_name": "Democratic"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 3569088,
-          "estimatedVotesLow": 2920535,
-          "estimatedVotesMid": 3244757,
-          "turnoutHigh": 90.6,
-          "turnoutLow": 110.72,
-          "turnoutMid": 99
-        },
-        "firstName": "Phillip",
-        "id": 85173,
-        "lastName": "Anderson",
-        "partyName": "Disrupt the Corruption",
-        "votes": 130256
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3569088,
-          "estimatedVotesLow": 2920535,
-          "estimatedVotesMid": 3244757,
-          "turnoutHigh": 90.6,
-          "turnoutLow": 110.72,
-          "turnoutMid": 99
-        },
-        "firstName": "Thomas",
-        "id": 84975,
-        "lastName": "Leager",
-        "partyName": "America First Republican",
-        "votes": 96441
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3569088,
-          "estimatedVotesLow": 2920535,
-          "estimatedVotesMid": 3244757,
-          "turnoutHigh": 90.6,
-          "turnoutLow": 110.72,
-          "turnoutMid": 99
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 19.31,
+          "turnoutLow": 23.6,
+          "turnoutMid": 21.24
         },
         "firstName": "Tammy",
         "id": 8263,
         "lastName": "Baldwin",
         "partyName": "Democratic",
-        "votes": 1532436
+        "votes": 368272
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 3569088,
-          "estimatedVotesLow": 2920535,
-          "estimatedVotesMid": 3244757,
-          "turnoutHigh": 90.6,
-          "turnoutLow": 110.72,
-          "turnoutMid": 99
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 19.31,
+          "turnoutLow": 23.6,
+          "turnoutMid": 21.24
+        },
+        "firstName": "Phillip",
+        "id": 85173,
+        "lastName": "Anderson",
+        "partyName": "Disrupt the Corruption",
+        "votes": 10599
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 19.31,
+          "turnoutLow": 23.6,
+          "turnoutMid": 21.24
+        },
+        "firstName": "Thomas",
+        "id": 84975,
+        "lastName": "Leager",
+        "partyName": "America First Republican",
+        "votes": 10721
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 19.31,
+          "turnoutLow": 23.6,
+          "turnoutMid": 21.24
         },
         "firstName": "Eric",
         "id": 83597,
         "lastName": "Hovde",
         "partyName": "Republican",
-        "votes": 1474372
+        "votes": 249360
       }
     ],
     "district": "",
@@ -79,7 +72,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:33.358Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:58.106Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -89,7 +83,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 3233505,
+    "totalVotes": 638952,
     "year": 2024
   },
   {
@@ -101,15 +95,15 @@
           "estimatedVotesHigh": 389701,
           "estimatedVotesLow": 318845,
           "estimatedVotesMid": 354273,
-          "turnoutHigh": 95.77,
-          "turnoutLow": 117.06,
-          "turnoutMid": 99
+          "turnoutHigh": 9.19,
+          "turnoutLow": 11.23,
+          "turnoutMid": 10.1
         },
         "firstName": "Chester",
         "id": 85170,
         "lastName": "Todd Jr.",
         "partyName": "Green",
-        "votes": 6841
+        "votes": 750
       },
       {
         "elected": false,
@@ -117,15 +111,15 @@
           "estimatedVotesHigh": 389701,
           "estimatedVotesLow": 318845,
           "estimatedVotesMid": 354273,
-          "turnoutHigh": 95.77,
-          "turnoutLow": 117.06,
-          "turnoutMid": 99
+          "turnoutHigh": 9.19,
+          "turnoutLow": 11.23,
+          "turnoutMid": 10.1
         },
         "firstName": "Bryan",
         "id": 10405,
         "lastName": "Steil",
         "partyName": "Republican",
-        "votes": 174705
+        "votes": 18200
       },
       {
         "elected": false,
@@ -133,15 +127,15 @@
           "estimatedVotesHigh": 389701,
           "estimatedVotesLow": 318845,
           "estimatedVotesMid": 354273,
-          "turnoutHigh": 95.77,
-          "turnoutLow": 117.06,
-          "turnoutMid": 99
+          "turnoutHigh": 9.19,
+          "turnoutLow": 11.23,
+          "turnoutMid": 10.1
         },
         "firstName": "Peter",
         "id": 83599,
         "lastName": "Barca",
         "partyName": "Democratic",
-        "votes": 191685
+        "votes": 16848
       }
     ],
     "district": "1",
@@ -149,7 +143,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:42:09.953Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -159,7 +154,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 373231,
+    "totalVotes": 35798,
     "year": 2024
   },
   {
@@ -171,15 +166,15 @@
           "estimatedVotesHigh": 440171,
           "estimatedVotesLow": 360140,
           "estimatedVotesMid": 400155,
-          "turnoutHigh": 103.1,
-          "turnoutLow": 126.01,
-          "turnoutMid": 99
+          "turnoutHigh": 78.03,
+          "turnoutLow": 95.37,
+          "turnoutMid": 85.83
         },
         "firstName": "Mark",
         "id": 1749,
         "lastName": "Pocan",
         "partyName": "Democratic",
-        "votes": 399380
+        "votes": 253664
       },
       {
         "elected": false,
@@ -187,15 +182,15 @@
           "estimatedVotesHigh": 440171,
           "estimatedVotesLow": 360140,
           "estimatedVotesMid": 400155,
-          "turnoutHigh": 103.1,
-          "turnoutLow": 126.01,
-          "turnoutMid": 99
+          "turnoutHigh": 78.03,
+          "turnoutLow": 95.37,
+          "turnoutMid": 85.83
         },
         "firstName": "Erik",
         "id": 29139,
         "lastName": "Olsen",
         "partyName": "Republican",
-        "votes": 54446
+        "votes": 89785
       }
     ],
     "district": "2",
@@ -203,7 +198,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:39:40.228Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -213,7 +209,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 453826,
+    "totalVotes": 343449,
     "year": 2024
   },
   {
@@ -225,15 +221,15 @@
           "estimatedVotesHigh": 398294,
           "estimatedVotesLow": 325877,
           "estimatedVotesMid": 362084,
-          "turnoutHigh": 97.3,
-          "turnoutLow": 118.93,
-          "turnoutMid": 99
+          "turnoutHigh": 14.29,
+          "turnoutLow": 17.46,
+          "turnoutMid": 15.72
         },
         "firstName": "Derrick",
         "id": 14467,
         "lastName": "Van Orden",
         "partyName": "Republican",
-        "votes": 203872
+        "votes": 29646
       },
       {
         "elected": false,
@@ -241,15 +237,15 @@
           "estimatedVotesHigh": 398294,
           "estimatedVotesLow": 325877,
           "estimatedVotesMid": 362084,
-          "turnoutHigh": 97.3,
-          "turnoutLow": 118.93,
-          "turnoutMid": 99
+          "turnoutHigh": 14.29,
+          "turnoutLow": 17.46,
+          "turnoutMid": 15.72
         },
         "firstName": "Rebecca",
         "id": 29133,
         "lastName": "Cooke",
         "partyName": "Democratic",
-        "votes": 183685
+        "votes": 27263
       }
     ],
     "district": "3",
@@ -257,7 +253,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:57.184Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -267,7 +264,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 387557,
+    "totalVotes": 56909,
     "year": 2024
   },
   {
@@ -279,31 +276,15 @@
           "estimatedVotesHigh": 329557,
           "estimatedVotesLow": 269637,
           "estimatedVotesMid": 299597,
-          "turnoutHigh": 118.31,
-          "turnoutLow": 144.61,
-          "turnoutMid": 99
-        },
-        "firstName": "Tim",
-        "id": 526,
-        "lastName": "Rogers",
-        "partyName": "Republican",
-        "votes": 114231
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 329557,
-          "estimatedVotesLow": 269637,
-          "estimatedVotesMid": 299597,
-          "turnoutHigh": 118.31,
-          "turnoutLow": 144.61,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert R.",
         "id": 1994,
         "lastName": "Raymond",
         "partyName": "Independent",
-        "votes": 3937
+        "votes": 0
       },
       {
         "elected": false,
@@ -311,15 +292,31 @@
           "estimatedVotesHigh": 329557,
           "estimatedVotesLow": 269637,
           "estimatedVotesMid": 299597,
-          "turnoutHigh": 118.31,
-          "turnoutLow": 144.61,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gwen S",
         "id": 1752,
         "lastName": "Moore",
         "partyName": "Democratic",
-        "votes": 271741
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 329557,
+          "estimatedVotesLow": 269637,
+          "estimatedVotesMid": 299597,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Tim",
+        "id": 526,
+        "lastName": "Rogers",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "4",
@@ -327,7 +324,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -337,7 +335,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 389909,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -349,15 +347,15 @@
           "estimatedVotesHigh": 480181,
           "estimatedVotesLow": 392874,
           "estimatedVotesMid": 436527,
-          "turnoutHigh": 91.76,
-          "turnoutLow": 112.15,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ben",
         "id": 83600,
         "lastName": "Steinhoff",
         "partyName": "Democratic",
-        "votes": 55773
+        "votes": 0
       },
       {
         "elected": false,
@@ -365,15 +363,15 @@
           "estimatedVotesHigh": 480181,
           "estimatedVotesLow": 392874,
           "estimatedVotesMid": 436527,
-          "turnoutHigh": 91.76,
-          "turnoutLow": 112.15,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 14287,
         "lastName": "Fitzgerald",
         "partyName": "Republican",
-        "votes": 384838
+        "votes": 0
       }
     ],
     "district": "5",
@@ -381,7 +379,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:19.347Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -391,34 +390,27 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 440611,
+    "totalVotes": 0,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "cand_id": 1756,
-      "first_name": "Glenn",
-      "incumbent": true,
-      "last_name": "Grothman",
-      "party_id": 2,
-      "party_name": "Republican"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 422484,
           "estimatedVotesLow": 345671,
           "estimatedVotesMid": 384076,
-          "turnoutHigh": 93.24,
-          "turnoutLow": 113.96,
-          "turnoutMid": 99
+          "turnoutHigh": 19.26,
+          "turnoutLow": 23.54,
+          "turnoutMid": 21.19
         },
         "firstName": "Glenn",
         "id": 1756,
         "lastName": "Grothman",
         "partyName": "Republican",
-        "votes": 317239
+        "votes": 44999
       },
       {
         "elected": false,
@@ -426,15 +418,15 @@
           "estimatedVotesHigh": 422484,
           "estimatedVotesLow": 345671,
           "estimatedVotesMid": 384076,
-          "turnoutHigh": 93.24,
-          "turnoutLow": 113.96,
-          "turnoutMid": 99
+          "turnoutHigh": 19.26,
+          "turnoutLow": 23.54,
+          "turnoutMid": 21.19
         },
         "firstName": "John",
         "id": 83601,
         "lastName": "Zarbano",
         "partyName": "Democratic",
-        "votes": 76682
+        "votes": 36374
       }
     ],
     "district": "6",
@@ -442,7 +434,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:41.780Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -452,7 +445,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 393921,
+    "totalVotes": 81373,
     "year": 2024
   },
   {
@@ -464,15 +457,15 @@
           "estimatedVotesHigh": 426765,
           "estimatedVotesLow": 349171,
           "estimatedVotesMid": 387966,
-          "turnoutHigh": 96.08,
-          "turnoutLow": 117.43,
-          "turnoutMid": 99
+          "turnoutHigh": 27.01,
+          "turnoutLow": 33.02,
+          "turnoutMid": 29.71
         },
         "firstName": "Kyle",
         "id": 83602,
         "lastName": "Kilbourn",
         "partyName": "Democratic",
-        "votes": 57349
+        "votes": 47745
       },
       {
         "elected": false,
@@ -480,15 +473,15 @@
           "estimatedVotesHigh": 426765,
           "estimatedVotesLow": 349171,
           "estimatedVotesMid": 387966,
-          "turnoutHigh": 96.08,
-          "turnoutLow": 117.43,
-          "turnoutMid": 99
+          "turnoutHigh": 27.01,
+          "turnoutLow": 33.02,
+          "turnoutMid": 29.71
         },
         "firstName": "Tom",
         "id": 11960,
         "lastName": "Tiffany",
         "partyName": "Republican",
-        "votes": 352698
+        "votes": 67539
       }
     ],
     "district": "7",
@@ -496,7 +489,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:25.853Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:40:21.195Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -506,7 +500,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 410047,
+    "totalVotes": 115284,
     "year": 2024
   },
   {
@@ -518,15 +512,15 @@
           "estimatedVotesHigh": 421764,
           "estimatedVotesLow": 345081,
           "estimatedVotesMid": 383422,
-          "turnoutHigh": 92.9,
-          "turnoutLow": 113.55,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tony",
         "id": 83605,
         "lastName": "Wied",
         "partyName": "Republican",
-        "votes": 249933
+        "votes": 0
       },
       {
         "elected": false,
@@ -534,15 +528,15 @@
           "estimatedVotesHigh": 421764,
           "estimatedVotesLow": 345081,
           "estimatedVotesMid": 383422,
-          "turnoutHigh": 92.9,
-          "turnoutLow": 113.55,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kristin",
         "id": 83604,
         "lastName": "Lyerly",
         "partyName": "Democratic",
-        "votes": 141892
+        "votes": 0
       }
     ],
     "district": "8",
@@ -550,7 +544,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:14.675Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -560,7 +555,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 391825,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -572,15 +567,15 @@
           "estimatedVotesHigh": 105064,
           "estimatedVotesLow": 85963,
           "estimatedVotesMid": 95513,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 83607,
         "lastName": "Wimberger",
         "partyName": "Republican",
-        "votes": 85115
+        "votes": 0
       },
       {
         "elected": false,
@@ -588,15 +583,15 @@
           "estimatedVotesHigh": 105064,
           "estimatedVotesLow": 85963,
           "estimatedVotesMid": 95513,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kelly",
         "id": 83606,
         "lastName": "Peterson",
         "partyName": "Democratic",
-        "votes": 7496
+        "votes": 0
       }
     ],
     "district": "2",
@@ -604,7 +599,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -614,7 +610,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 92611,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -642,6 +638,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -680,6 +677,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -702,15 +700,15 @@
           "estimatedVotesHigh": 121949,
           "estimatedVotesLow": 99777,
           "estimatedVotesMid": 110863,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Duey",
         "id": 83609,
         "lastName": "Stroebel",
         "partyName": "Republican",
-        "votes": 75283
+        "votes": 0
       },
       {
         "elected": false,
@@ -718,15 +716,15 @@
           "estimatedVotesHigh": 121949,
           "estimatedVotesLow": 99777,
           "estimatedVotesMid": 110863,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jodi",
         "id": 48468,
         "lastName": "Sinykin",
         "partyName": "Democratic",
-        "votes": 32236
+        "votes": 0
       }
     ],
     "district": "8",
@@ -734,7 +732,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -744,7 +743,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 107519,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -756,15 +755,15 @@
           "estimatedVotesHigh": 102213,
           "estimatedVotesLow": 83629,
           "estimatedVotesMid": 92921,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rob",
         "id": 83611,
         "lastName": "Stafsholt",
         "partyName": "Republican",
-        "votes": 78283
+        "votes": 0
       },
       {
         "elected": false,
@@ -772,15 +771,15 @@
           "estimatedVotesHigh": 102213,
           "estimatedVotesLow": 83629,
           "estimatedVotesMid": 92921,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 83610,
         "lastName": "Hambleton",
         "partyName": "Democratic",
-        "votes": 11825
+        "votes": 0
       }
     ],
     "district": "10",
@@ -788,7 +787,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -798,7 +798,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 90108,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -810,15 +810,15 @@
           "estimatedVotesHigh": 111289,
           "estimatedVotesLow": 91056,
           "estimatedVotesMid": 101172,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 15.6,
+          "turnoutLow": 19.06,
+          "turnoutMid": 17.16
         },
         "firstName": "Andi",
         "id": 83612,
         "lastName": "Rich",
         "partyName": "Democratic",
-        "votes": 16267
+        "votes": 5370
       },
       {
         "elected": false,
@@ -826,15 +826,15 @@
           "estimatedVotesHigh": 111289,
           "estimatedVotesLow": 91056,
           "estimatedVotesMid": 101172,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 15.6,
+          "turnoutLow": 19.06,
+          "turnoutMid": 17.16
         },
         "firstName": "Mary",
         "id": 83613,
         "lastName": "Felzkowski",
         "partyName": "Republican",
-        "votes": 81818
+        "votes": 11989
       }
     ],
     "district": "12",
@@ -842,7 +842,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:39:40.524Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -852,7 +853,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 98085,
+    "totalVotes": 17359,
     "year": 2024
   },
   {
@@ -864,15 +865,15 @@
           "estimatedVotesHigh": 103535,
           "estimatedVotesLow": 84710,
           "estimatedVotesMid": 94122,
-          "turnoutHigh": 88.61,
-          "turnoutLow": 108.3,
-          "turnoutMid": 97.47
+          "turnoutHigh": 9.32,
+          "turnoutLow": 11.39,
+          "turnoutMid": 10.25
         },
         "firstName": "Sarah",
         "id": 83614,
         "lastName": "Keyeski",
         "partyName": "Democratic",
-        "votes": 22036
+        "votes": 4436
       },
       {
         "elected": false,
@@ -880,15 +881,15 @@
           "estimatedVotesHigh": 103535,
           "estimatedVotesLow": 84710,
           "estimatedVotesMid": 94122,
-          "turnoutHigh": 88.61,
-          "turnoutLow": 108.3,
-          "turnoutMid": 97.47
+          "turnoutHigh": 9.32,
+          "turnoutLow": 11.39,
+          "turnoutMid": 10.25
         },
         "firstName": "Joan",
         "id": 83615,
         "lastName": "Ballweg",
         "partyName": "Republican",
-        "votes": 69708
+        "votes": 5209
       }
     ],
     "district": "14",
@@ -896,7 +897,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.331Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:38:46.334Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -906,7 +908,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 91744,
+    "totalVotes": 9645,
     "year": 2024
   },
   {
@@ -934,6 +936,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -956,15 +959,15 @@
           "estimatedVotesHigh": 89506,
           "estimatedVotesLow": 73232,
           "estimatedVotesMid": 81369,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 33.62,
+          "turnoutLow": 41.09,
+          "turnoutMid": 36.98
         },
         "firstName": "Kristin",
         "id": 29178,
         "lastName": "Alfheim",
         "partyName": "Democratic",
-        "votes": 15030
+        "votes": 14916
       },
       {
         "elected": false,
@@ -972,15 +975,15 @@
           "estimatedVotesHigh": 89506,
           "estimatedVotesLow": 73232,
           "estimatedVotesMid": 81369,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 33.62,
+          "turnoutLow": 41.09,
+          "turnoutMid": 36.98
         },
         "firstName": "Anthony",
         "id": 83616,
         "lastName": "Phillips",
         "partyName": "Republican",
-        "votes": 63886
+        "votes": 15172
       }
     ],
     "district": "18",
@@ -988,7 +991,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:54:14.371Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:36.200Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -998,34 +1002,27 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 78916,
+    "totalVotes": 30088,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "cand_id": 101781,
-      "first_name": "Dan",
-      "incumbent": true,
-      "last_name": "Feyen",
-      "party_id": 2,
-      "party_name": "Republican"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 107340,
           "estimatedVotesLow": 87825,
           "estimatedVotesMid": 97582,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 6.38,
+          "turnoutLow": 7.8,
+          "turnoutMid": 7.02
         },
         "firstName": "Dan",
         "id": 101781,
         "lastName": "Feyen",
         "partyName": "Republican",
-        "votes": 80718
+        "votes": 5071
       },
       {
         "elected": false,
@@ -1033,15 +1030,15 @@
           "estimatedVotesHigh": 107340,
           "estimatedVotesLow": 87825,
           "estimatedVotesMid": 97582,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 6.38,
+          "turnoutLow": 7.8,
+          "turnoutMid": 7.02
         },
         "firstName": "Michael",
         "id": 83618,
         "lastName": "Rapp",
         "partyName": "Democratic",
-        "votes": 13916
+        "votes": 1776
       }
     ],
     "district": "20",
@@ -1049,7 +1046,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:53:15.621Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:38:30.374Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1059,7 +1057,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 94634,
+    "totalVotes": 6847,
     "year": 2024
   },
   {
@@ -1087,6 +1085,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1109,15 +1108,15 @@
           "estimatedVotesHigh": 98006,
           "estimatedVotesLow": 80188,
           "estimatedVotesMid": 89097,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Collin",
         "id": 83621,
         "lastName": "McNamara",
         "partyName": "Democratic",
-        "votes": 22703
+        "votes": 0
       },
       {
         "elected": false,
@@ -1125,15 +1124,15 @@
           "estimatedVotesHigh": 98006,
           "estimatedVotesLow": 80188,
           "estimatedVotesMid": 89097,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patrick",
         "id": 29159,
         "lastName": "Testin",
         "partyName": "Republican",
-        "votes": 63691
+        "votes": 0
       }
     ],
     "district": "24",
@@ -1141,7 +1140,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:14.913Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1151,17 +1151,16 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 86394,
+    "totalVotes": 0,
     "year": 2024
   },
   {
     "calledCandidate": {
-      "cand_id": 10488,
-      "first_name": "Kelda",
+      "firstName": "Kelda",
+      "id": 10488,
       "incumbent": true,
-      "last_name": "Roys",
-      "party_id": 1,
-      "party_name": "Democratic"
+      "lastName": "Roys",
+      "partyName": "Democratic"
     },
     "candidatesWithVotes": [
       {
@@ -1186,6 +1185,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": true,
     "lastUpdated": "2024-10-24T17:03:43.263Z",
     "office": {
       "officeId": "10",
@@ -1208,15 +1208,15 @@
           "estimatedVotesHigh": 116086,
           "estimatedVotesLow": 94980,
           "estimatedVotesMid": 105533,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 19.79,
+          "turnoutLow": 24.19,
+          "turnoutMid": 21.77
         },
         "firstName": "Megan",
         "id": 83622,
         "lastName": "Lach",
         "partyName": "Democratic",
-        "votes": 15238
+        "votes": 6724
       },
       {
         "elected": false,
@@ -1224,15 +1224,15 @@
           "estimatedVotesHigh": 116086,
           "estimatedVotesLow": 94980,
           "estimatedVotesMid": 105533,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 19.79,
+          "turnoutLow": 24.19,
+          "turnoutMid": 21.77
         },
         "firstName": "Julian",
         "id": 83623,
         "lastName": "Bradley",
         "partyName": "Republican",
-        "votes": 87114
+        "votes": 16250
       }
     ],
     "district": "28",
@@ -1240,7 +1240,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:14.913Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:35:00.791Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1250,7 +1251,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 102352,
+    "totalVotes": 22974,
     "year": 2024
   },
   {
@@ -1262,15 +1263,15 @@
           "estimatedVotesHigh": 88010,
           "estimatedVotesLow": 72008,
           "estimatedVotesMid": 80009,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 83625,
         "lastName": "Rafter",
         "partyName": "Republican",
-        "votes": 63633
+        "votes": 0
       },
       {
         "elected": false,
@@ -1278,15 +1279,15 @@
           "estimatedVotesHigh": 88010,
           "estimatedVotesLow": 72008,
           "estimatedVotesMid": 80009,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jamie",
         "id": 83624,
         "lastName": "Wall",
         "partyName": "Democratic",
-        "votes": 13962
+        "votes": 0
       }
     ],
     "district": "30",
@@ -1294,7 +1295,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1304,7 +1306,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 77595,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1316,15 +1318,15 @@
           "estimatedVotesHigh": 96098,
           "estimatedVotesLow": 78626,
           "estimatedVotesMid": 87362,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 45.29,
+          "turnoutLow": 55.36,
+          "turnoutMid": 49.82
         },
-        "firstName": "Stacey",
-        "id": 83626,
-        "lastName": "Klein",
-        "partyName": "Republican",
-        "votes": 16770
+        "firstName": "Brad",
+        "id": 29135,
+        "lastName": "Pfaff",
+        "partyName": "Democratic",
+        "votes": 24254
       },
       {
         "elected": false,
@@ -1332,15 +1334,15 @@
           "estimatedVotesHigh": 96098,
           "estimatedVotesLow": 78626,
           "estimatedVotesMid": 87362,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 45.29,
+          "turnoutLow": 55.36,
+          "turnoutMid": 49.82
         },
-        "firstName": "Brad",
-        "id": 29135,
-        "lastName": "Pfaff",
-        "partyName": "Democratic",
-        "votes": 67956
+        "firstName": "Stacey",
+        "id": 83626,
+        "lastName": "Klein",
+        "partyName": "Republican",
+        "votes": 19271
       }
     ],
     "district": "32",
@@ -1348,7 +1350,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.331Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:39:01.507Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1358,7 +1361,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 84726,
+    "totalVotes": 43525,
     "year": 2024
   },
   {
@@ -1370,15 +1373,15 @@
           "estimatedVotesHigh": 39161,
           "estimatedVotesLow": 32041,
           "estimatedVotesMid": 35601,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Renee",
         "id": 83627,
         "lastName": "Paplham",
         "partyName": "Democratic",
-        "votes": 20220
+        "votes": 0
       },
       {
         "elected": false,
@@ -1386,15 +1389,15 @@
           "estimatedVotesHigh": 39161,
           "estimatedVotesLow": 32041,
           "estimatedVotesMid": 35601,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joel",
         "id": 29304,
         "lastName": "Kitchens",
         "partyName": "Republican",
-        "votes": 14299
+        "votes": 0
       }
     ],
     "district": "1",
@@ -1402,7 +1405,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.331Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1412,7 +1416,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 34519,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1424,15 +1428,15 @@
           "estimatedVotesHigh": 37578,
           "estimatedVotesLow": 30746,
           "estimatedVotesMid": 34162,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 50.98,
+          "turnoutLow": 62.3,
+          "turnoutMid": 56.07
         },
-        "firstName": "Shae",
-        "id": 29306,
-        "lastName": "Sortwell",
-        "partyName": "Republican",
-        "votes": 19947
+        "firstName": "Alicia",
+        "id": 83628,
+        "lastName": "Saunders",
+        "partyName": "Democratic",
+        "votes": 8289
       },
       {
         "elected": false,
@@ -1440,15 +1444,15 @@
           "estimatedVotesHigh": 37578,
           "estimatedVotesLow": 30746,
           "estimatedVotesMid": 34162,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 50.98,
+          "turnoutLow": 62.3,
+          "turnoutMid": 56.07
         },
-        "firstName": "Alicia",
-        "id": 83628,
-        "lastName": "Saunders",
-        "partyName": "Democratic",
-        "votes": 13179
+        "firstName": "Shae",
+        "id": 29306,
+        "lastName": "Sortwell",
+        "partyName": "Republican",
+        "votes": 10867
       }
     ],
     "district": "2",
@@ -1456,7 +1460,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:46:14.860Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.375Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1466,7 +1471,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 33126,
+    "totalVotes": 19156,
     "year": 2024
   },
   {
@@ -1478,15 +1483,15 @@
           "estimatedVotesHigh": 36474,
           "estimatedVotesLow": 29842,
           "estimatedVotesMid": 33158,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0.77,
+          "turnoutLow": 0.94,
+          "turnoutMid": 0.84
         },
-        "firstName": "Ron",
-        "id": 29307,
-        "lastName": "Tusler",
-        "partyName": "Republican",
-        "votes": 29383
+        "firstName": "Jason",
+        "id": 83629,
+        "lastName": "Schmitz",
+        "partyName": "Democratic",
+        "votes": 51
       },
       {
         "elected": false,
@@ -1494,15 +1499,15 @@
           "estimatedVotesHigh": 36474,
           "estimatedVotesLow": 29842,
           "estimatedVotesMid": 33158,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0.77,
+          "turnoutLow": 0.94,
+          "turnoutMid": 0.84
         },
-        "firstName": "Jason",
-        "id": 83629,
-        "lastName": "Schmitz",
-        "partyName": "Democratic",
-        "votes": 2772
+        "firstName": "Ron",
+        "id": 29307,
+        "lastName": "Tusler",
+        "partyName": "Republican",
+        "votes": 229
       }
     ],
     "district": "3",
@@ -1510,7 +1515,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:23:15.089Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:23.566Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1520,7 +1526,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 32155,
+    "totalVotes": 280,
     "year": 2024
   },
   {
@@ -1532,15 +1538,15 @@
           "estimatedVotesHigh": 37508,
           "estimatedVotesLow": 30688,
           "estimatedVotesMid": 34098,
-          "turnoutHigh": 89.44,
-          "turnoutLow": 109.32,
-          "turnoutMid": 98.39
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jane",
         "id": 29293,
         "lastName": "Benson",
         "partyName": "Democratic",
-        "votes": 6401
+        "votes": 0
       },
       {
         "elected": false,
@@ -1548,15 +1554,15 @@
           "estimatedVotesHigh": 37508,
           "estimatedVotesLow": 30688,
           "estimatedVotesMid": 34098,
-          "turnoutHigh": 89.44,
-          "turnoutLow": 109.32,
-          "turnoutMid": 98.39
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 29308,
         "lastName": "Steffen",
         "partyName": "Republican",
-        "votes": 27148
+        "votes": 0
       }
     ],
     "district": "4",
@@ -1564,7 +1570,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:53:15.621Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1574,7 +1581,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 33549,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1586,15 +1593,15 @@
           "estimatedVotesHigh": 34220,
           "estimatedVotesLow": 27998,
           "estimatedVotesMid": 31109,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 28.43,
+          "turnoutLow": 34.75,
+          "turnoutMid": 31.27
         },
         "firstName": "Joy",
         "id": 29309,
         "lastName": "Goeben",
         "partyName": "Republican",
-        "votes": 18740
+        "votes": 5871
       },
       {
         "elected": false,
@@ -1602,15 +1609,15 @@
           "estimatedVotesHigh": 34220,
           "estimatedVotesLow": 27998,
           "estimatedVotesMid": 31109,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 28.43,
+          "turnoutLow": 34.75,
+          "turnoutMid": 31.27
         },
         "firstName": "Greg",
         "id": 83632,
         "lastName": "Sampson",
         "partyName": "Democratic",
-        "votes": 11428
+        "votes": 3858
       }
     ],
     "district": "5",
@@ -1618,7 +1625,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.477Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:56.151Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1628,7 +1636,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30168,
+    "totalVotes": 9729,
     "year": 2024
   },
   {
@@ -1640,15 +1648,15 @@
           "estimatedVotesHigh": 33291,
           "estimatedVotesLow": 27239,
           "estimatedVotesMid": 30265,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shirley",
         "id": 83633,
         "lastName": "Hinze",
         "partyName": "Democratic",
-        "votes": 2638
+        "votes": 0
       },
       {
         "elected": false,
@@ -1656,15 +1664,15 @@
           "estimatedVotesHigh": 33291,
           "estimatedVotesLow": 27239,
           "estimatedVotesMid": 30265,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Elijah",
         "id": 15875,
         "lastName": "Behnke",
         "partyName": "Republican",
-        "votes": 26700
+        "votes": 0
       }
     ],
     "district": "6",
@@ -1672,7 +1680,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:13:15.459Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1682,7 +1691,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29338,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1694,15 +1703,15 @@
           "estimatedVotesHigh": 27601,
           "estimatedVotesLow": 22583,
           "estimatedVotesMid": 25092,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karen",
         "id": 83634,
         "lastName": "Kirsch",
         "partyName": "Democratic",
-        "votes": 23362
+        "votes": 0
       },
       {
         "elected": false,
@@ -1710,15 +1719,15 @@
           "estimatedVotesHigh": 27601,
           "estimatedVotesLow": 22583,
           "estimatedVotesMid": 25092,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lee",
         "id": 83635,
         "lastName": "Whiting",
         "partyName": "Republican",
-        "votes": 970
+        "votes": 0
       }
     ],
     "district": "7",
@@ -1726,7 +1735,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:53:15.621Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1736,7 +1746,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 24332,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1764,6 +1774,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1786,15 +1797,15 @@
           "estimatedVotesHigh": 17993,
           "estimatedVotesLow": 14721,
           "estimatedVotesMid": 16357,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 62.48,
+          "turnoutLow": 76.37,
+          "turnoutMid": 68.73
         },
         "firstName": "Ryan",
         "id": 29319,
         "lastName": "Antczak",
         "partyName": "Republican",
-        "votes": 1108
+        "votes": 3254
       },
       {
         "elected": false,
@@ -1802,15 +1813,15 @@
           "estimatedVotesHigh": 17993,
           "estimatedVotesLow": 14721,
           "estimatedVotesMid": 16357,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 62.48,
+          "turnoutLow": 76.37,
+          "turnoutMid": 68.73
         },
         "firstName": "Priscilla",
         "id": 83638,
         "lastName": "Prado",
         "partyName": "Democratic",
-        "votes": 14754
+        "votes": 7988
       }
     ],
     "district": "9",
@@ -1818,7 +1829,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:34:15.299Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:23.566Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1828,7 +1840,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 15862,
+    "totalVotes": 11242,
     "year": 2024
   },
   {
@@ -1856,6 +1868,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1894,6 +1907,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1916,15 +1930,15 @@
           "estimatedVotesHigh": 24976,
           "estimatedVotesLow": 20435,
           "estimatedVotesMid": 22705,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 33.64,
+          "turnoutLow": 41.11,
+          "turnoutMid": 37
         },
         "firstName": "Deanna",
         "id": 101784,
         "lastName": "Alexander",
         "partyName": "Independent",
-        "votes": 659
+        "votes": 206
       },
       {
         "elected": false,
@@ -1932,15 +1946,15 @@
           "estimatedVotesHigh": 24976,
           "estimatedVotesLow": 20435,
           "estimatedVotesMid": 22705,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 33.64,
+          "turnoutLow": 41.11,
+          "turnoutMid": 37
         },
         "firstName": "Russell",
         "id": 101783,
         "lastName": "Goodwin",
         "partyName": "Democratic",
-        "votes": 21361
+        "votes": 8195
       }
     ],
     "district": "12",
@@ -1948,7 +1962,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:50:18.418Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:49.682Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1958,7 +1973,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 22020,
+    "totalVotes": 8401,
     "year": 2024
   },
   {
@@ -1970,15 +1985,15 @@
           "estimatedVotesHigh": 39996,
           "estimatedVotesLow": 32724,
           "estimatedVotesMid": 36360,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 3.02,
+          "turnoutLow": 3.69,
+          "turnoutMid": 3.32
         },
         "firstName": "Robyn",
         "id": 29222,
         "lastName": "Vining",
         "partyName": "Democratic",
-        "votes": 19616
+        "votes": 758
       },
       {
         "elected": false,
@@ -1986,15 +2001,15 @@
           "estimatedVotesHigh": 39996,
           "estimatedVotesLow": 32724,
           "estimatedVotesMid": 36360,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 3.02,
+          "turnoutLow": 3.69,
+          "turnoutMid": 3.32
         },
         "firstName": "Tom",
         "id": 29321,
         "lastName": "Michalski",
         "partyName": "Republican",
-        "votes": 15646
+        "votes": 449
       }
     ],
     "district": "13",
@@ -2002,7 +2017,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:14:16.105Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:40:33.058Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2012,7 +2028,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 35262,
+    "totalVotes": 1207,
     "year": 2024
   },
   {
@@ -2024,15 +2040,15 @@
           "estimatedVotesHigh": 29511,
           "estimatedVotesLow": 24145,
           "estimatedVotesMid": 26828,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 83649,
         "lastName": "Engstrand",
         "partyName": "Republican",
-        "votes": 10402
+        "votes": 0
       },
       {
         "elected": false,
@@ -2040,15 +2056,15 @@
           "estimatedVotesHigh": 29511,
           "estimatedVotesLow": 24145,
           "estimatedVotesMid": 26828,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steven",
         "id": 101785,
         "lastName": "Shevey",
         "partyName": "Independent",
-        "votes": 518
+        "votes": 0
       },
       {
         "elected": false,
@@ -2056,15 +2072,15 @@
           "estimatedVotesHigh": 29511,
           "estimatedVotesLow": 24145,
           "estimatedVotesMid": 26828,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Angelito",
         "id": 29151,
         "lastName": "Tenorio",
         "partyName": "Democratic",
-        "votes": 15092
+        "votes": 0
       }
     ],
     "district": "14",
@@ -2072,7 +2088,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:14.055Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2082,7 +2099,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 26012,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2094,15 +2111,15 @@
           "estimatedVotesHigh": 38823,
           "estimatedVotesLow": 31765,
           "estimatedVotesMid": 35294,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 31.12,
+          "turnoutLow": 38.03,
+          "turnoutMid": 34.23
         },
-        "firstName": "Adam",
-        "id": 29420,
-        "lastName": "Neylon",
-        "partyName": "Republican",
-        "votes": 30807
+        "firstName": "Sarah",
+        "id": 29221,
+        "lastName": "Harrison",
+        "partyName": "Democratic",
+        "votes": 5021
       },
       {
         "elected": false,
@@ -2110,15 +2127,15 @@
           "estimatedVotesHigh": 38823,
           "estimatedVotesLow": 31765,
           "estimatedVotesMid": 35294,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 31.12,
+          "turnoutLow": 38.03,
+          "turnoutMid": 34.23
         },
-        "firstName": "Sarah",
-        "id": 29221,
-        "lastName": "Harrison",
-        "partyName": "Democratic",
-        "votes": 3422
+        "firstName": "Adam",
+        "id": 29420,
+        "lastName": "Neylon",
+        "partyName": "Republican",
+        "votes": 7059
       }
     ],
     "district": "15",
@@ -2126,7 +2143,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:53:15.621Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:34:06.093Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2136,7 +2154,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 34229,
+    "totalVotes": 12080,
     "year": 2024
   },
   {
@@ -2164,6 +2182,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2202,6 +2221,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2224,15 +2244,15 @@
           "estimatedVotesHigh": 26083,
           "estimatedVotesLow": 21341,
           "estimatedVotesMid": 23712,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 63.06,
+          "turnoutLow": 77.07,
+          "turnoutMid": 69.37
         },
         "firstName": "Kevin",
         "id": 83651,
         "lastName": "Anderson",
         "partyName": "Republican",
-        "votes": 688
+        "votes": 2506
       },
       {
         "elected": false,
@@ -2240,15 +2260,15 @@
           "estimatedVotesHigh": 26083,
           "estimatedVotesLow": 21341,
           "estimatedVotesMid": 23712,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 63.06,
+          "turnoutLow": 77.07,
+          "turnoutMid": 69.37
         },
         "firstName": "Margaret",
         "id": 83650,
         "lastName": "Arney",
         "partyName": "Democratic",
-        "votes": 22309
+        "votes": 13942
       }
     ],
     "district": "18",
@@ -2256,7 +2276,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:51:19.001Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:23.566Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2266,7 +2287,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 22997,
+    "totalVotes": 16448,
     "year": 2024
   },
   {
@@ -2294,6 +2315,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2316,15 +2338,15 @@
           "estimatedVotesHigh": 33846,
           "estimatedVotesLow": 27692,
           "estimatedVotesMid": 30769,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 83653,
         "lastName": "Moeller",
         "partyName": "Republican",
-        "votes": 894
+        "votes": 0
       },
       {
         "elected": false,
@@ -2332,15 +2354,15 @@
           "estimatedVotesHigh": 33846,
           "estimatedVotesLow": 27692,
           "estimatedVotesMid": 30769,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christine",
         "id": 29227,
         "lastName": "Sinicki",
         "partyName": "Democratic",
-        "votes": 28948
+        "votes": 0
       }
     ],
     "district": "20",
@@ -2348,7 +2370,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:38:15.792Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2358,7 +2381,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29842,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2370,15 +2393,15 @@
           "estimatedVotesHigh": 32761,
           "estimatedVotesLow": 26805,
           "estimatedVotesMid": 29783,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 101786,
         "lastName": "Marstellar",
         "partyName": "Democratic",
-        "votes": 27443
+        "votes": 0
       },
       {
         "elected": false,
@@ -2386,15 +2409,15 @@
           "estimatedVotesHigh": 32761,
           "estimatedVotesLow": 26805,
           "estimatedVotesMid": 29783,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jessie",
         "id": 29327,
         "lastName": "Rodriguez",
         "partyName": "Republican",
-        "votes": 1443
+        "votes": 0
       }
     ],
     "district": "21",
@@ -2402,7 +2425,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:27:15.885Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2412,7 +2436,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 28886,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2424,15 +2448,15 @@
           "estimatedVotesHigh": 41628,
           "estimatedVotesLow": 34060,
           "estimatedVotesMid": 37844,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 50190,
         "lastName": "Melotik",
         "partyName": "Republican",
-        "votes": 31375
+        "votes": 0
       },
       {
         "elected": false,
@@ -2440,15 +2464,15 @@
           "estimatedVotesHigh": 41628,
           "estimatedVotesLow": 34060,
           "estimatedVotesMid": 37844,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dana",
         "id": 83655,
         "lastName": "Glasstein",
         "partyName": "Democratic",
-        "votes": 5325
+        "votes": 0
       }
     ],
     "district": "22",
@@ -2456,7 +2480,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:50:15.077Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2466,7 +2491,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 36700,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2478,15 +2503,15 @@
           "estimatedVotesHigh": 39532,
           "estimatedVotesLow": 32344,
           "estimatedVotesMid": 35938,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 14.18,
+          "turnoutLow": 17.34,
+          "turnoutMid": 15.6
         },
         "firstName": "Deb",
         "id": 29229,
         "lastName": "Andraca",
         "partyName": "Democratic",
-        "votes": 23436
+        "votes": 2758
       },
       {
         "elected": false,
@@ -2494,15 +2519,15 @@
           "estimatedVotesHigh": 39532,
           "estimatedVotesLow": 32344,
           "estimatedVotesMid": 35938,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 14.18,
+          "turnoutLow": 17.34,
+          "turnoutMid": 15.6
         },
         "firstName": "Laurie",
         "id": 83656,
         "lastName": "Wolf",
         "partyName": "Republican",
-        "votes": 11415
+        "votes": 2849
       }
     ],
     "district": "23",
@@ -2510,7 +2535,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:47:15.458Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:39:01.507Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2520,7 +2546,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 34851,
+    "totalVotes": 5607,
     "year": 2024
   },
   {
@@ -2532,15 +2558,15 @@
           "estimatedVotesHigh": 40766,
           "estimatedVotesLow": 33354,
           "estimatedVotesMid": 37060,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "William",
-        "id": 83657,
-        "lastName": "Walter",
-        "partyName": "Democratic",
-        "votes": 1686
+        "firstName": "Daniel",
+        "id": 29330,
+        "lastName": "Knodl",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2548,15 +2574,15 @@
           "estimatedVotesHigh": 40766,
           "estimatedVotesLow": 33354,
           "estimatedVotesMid": 37060,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Daniel",
-        "id": 29330,
-        "lastName": "Knodl",
-        "partyName": "Republican",
-        "votes": 34255
+        "firstName": "William",
+        "id": 83657,
+        "lastName": "Walter",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "24",
@@ -2564,7 +2590,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:13:15.459Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2574,7 +2601,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 35941,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2586,15 +2613,15 @@
           "estimatedVotesHigh": 32032,
           "estimatedVotesLow": 26208,
           "estimatedVotesMid": 29120,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 36.55,
+          "turnoutLow": 44.68,
+          "turnoutMid": 40.21
         },
         "firstName": "Stephen",
         "id": 83658,
         "lastName": "Welch",
         "partyName": "Democratic",
-        "votes": 1841
+        "votes": 4705
       },
       {
         "elected": false,
@@ -2602,15 +2629,15 @@
           "estimatedVotesHigh": 32032,
           "estimatedVotesLow": 26208,
           "estimatedVotesMid": 29120,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 36.55,
+          "turnoutLow": 44.68,
+          "turnoutMid": 40.21
         },
         "firstName": "Paul",
         "id": 29331,
         "lastName": "Tittl",
         "partyName": "Republican",
-        "votes": 26398
+        "votes": 7004
       }
     ],
     "district": "25",
@@ -2618,7 +2645,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:15.504Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:27.015Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2628,7 +2656,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 28239,
+    "totalVotes": 11709,
     "year": 2024
   },
   {
@@ -2640,15 +2668,15 @@
           "estimatedVotesHigh": 28614,
           "estimatedVotesLow": 23412,
           "estimatedVotesMid": 26013,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Amy",
         "id": 29333,
         "lastName": "Binsfeld",
         "partyName": "Republican",
-        "votes": 23969
+        "votes": 0
       },
       {
         "elected": false,
@@ -2656,15 +2684,15 @@
           "estimatedVotesHigh": 28614,
           "estimatedVotesLow": 23412,
           "estimatedVotesMid": 26013,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 83660,
         "lastName": "Sheehan",
         "partyName": "Democratic",
-        "votes": 1260
+        "votes": 0
       }
     ],
     "district": "26",
@@ -2672,7 +2700,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:42:15.029Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2682,7 +2711,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 25229,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2694,15 +2723,15 @@
           "estimatedVotesHigh": 38932,
           "estimatedVotesLow": 31853,
           "estimatedVotesMid": 35392,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kay",
         "id": 83661,
         "lastName": "Ladson",
         "partyName": "Democratic",
-        "votes": 13866
+        "votes": 0
       },
       {
         "elected": false,
@@ -2710,15 +2739,15 @@
           "estimatedVotesHigh": 38932,
           "estimatedVotesLow": 31853,
           "estimatedVotesMid": 35392,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lindee",
         "id": 83663,
         "lastName": "Brill",
         "partyName": "Republican",
-        "votes": 20447
+        "votes": 0
       }
     ],
     "district": "27",
@@ -2726,7 +2755,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2736,7 +2766,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 34313,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2748,15 +2778,15 @@
           "estimatedVotesHigh": 34707,
           "estimatedVotesLow": 28395,
           "estimatedVotesMid": 31551,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Danielle",
         "id": 29233,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 2248
+        "votes": 0
       },
       {
         "elected": false,
@@ -2764,15 +2794,15 @@
           "estimatedVotesHigh": 34707,
           "estimatedVotesLow": 28395,
           "estimatedVotesMid": 31551,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rob",
         "id": 83664,
         "lastName": "Kreibich",
         "partyName": "Republican",
-        "votes": 28344
+        "votes": 0
       }
     ],
     "district": "28",
@@ -2780,7 +2810,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2790,7 +2821,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30592,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2802,15 +2833,15 @@
           "estimatedVotesHigh": 32627,
           "estimatedVotesLow": 26695,
           "estimatedVotesMid": 29661,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Treig",
         "id": 29412,
         "lastName": "Pronschinske",
         "partyName": "Republican",
-        "votes": 24388
+        "votes": 0
       },
       {
         "elected": false,
@@ -2818,15 +2849,15 @@
           "estimatedVotesHigh": 32627,
           "estimatedVotesLow": 26695,
           "estimatedVotesMid": 29661,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Terry",
         "id": 83666,
         "lastName": "Schoonover",
         "partyName": "Democratic",
-        "votes": 4364
+        "votes": 0
       }
     ],
     "district": "29",
@@ -2834,7 +2865,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2844,7 +2876,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 28752,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2856,15 +2888,15 @@
           "estimatedVotesHigh": 34791,
           "estimatedVotesLow": 28466,
           "estimatedVotesMid": 31628,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shannon",
         "id": 29336,
         "lastName": "Zimmerman",
         "partyName": "Republican",
-        "votes": 10769
+        "votes": 0
       },
       {
         "elected": false,
@@ -2872,15 +2904,15 @@
           "estimatedVotesHigh": 34791,
           "estimatedVotesLow": 28466,
           "estimatedVotesMid": 31628,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alison",
         "id": 29297,
         "lastName": "Page",
         "partyName": "Democratic",
-        "votes": 19902
+        "votes": 0
       }
     ],
     "district": "30",
@@ -2888,7 +2920,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.331Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2898,18 +2931,11 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30671,
+    "totalVotes": 0,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "cand_id": 29340,
-      "first_name": "Tyler",
-      "incumbent": true,
-      "last_name": "August",
-      "party_id": 2,
-      "party_name": "Republican"
-    },
+    "calledCandidate": null,
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2917,31 +2943,31 @@
           "estimatedVotesHigh": 31827,
           "estimatedVotesLow": 26041,
           "estimatedVotesMid": 28934,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 83667,
         "lastName": "Henderson",
         "partyName": "Democratic",
-        "votes": 5003
+        "votes": 0
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 31827,
           "estimatedVotesLow": 26041,
           "estimatedVotesMid": 28934,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tyler",
         "id": 29340,
         "lastName": "August",
         "partyName": "Republican",
-        "votes": 23056
+        "votes": 0
       }
     ],
     "district": "31",
@@ -2949,7 +2975,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:14.913Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2959,7 +2986,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 28059,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2971,15 +2998,15 @@
           "estimatedVotesHigh": 33928,
           "estimatedVotesLow": 27760,
           "estimatedVotesMid": 30844,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 2.6,
+          "turnoutLow": 3.17,
+          "turnoutMid": 2.86
         },
         "firstName": "Amanda",
         "id": 29373,
         "lastName": "Nedweski",
         "partyName": "Republican",
-        "votes": 27127
+        "votes": 589
       },
       {
         "elected": false,
@@ -2987,15 +3014,15 @@
           "estimatedVotesHigh": 33928,
           "estimatedVotesLow": 27760,
           "estimatedVotesMid": 30844,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 2.6,
+          "turnoutLow": 3.17,
+          "turnoutMid": 2.86
         },
         "firstName": "Michael",
         "id": 83668,
         "lastName": "Dhindsa",
         "partyName": "Democratic",
-        "votes": 2784
+        "votes": 292
       }
     ],
     "district": "32",
@@ -3003,7 +3030,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:40:14.519Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:41.514Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3013,7 +3041,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29911,
+    "totalVotes": 881,
     "year": 2024
   },
   {
@@ -3025,15 +3053,15 @@
           "estimatedVotesHigh": 36330,
           "estimatedVotesLow": 29724,
           "estimatedVotesMid": 33027,
-          "turnoutHigh": 88.5,
-          "turnoutLow": 108.17,
-          "turnoutMid": 97.35
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robin",
         "id": 29375,
         "lastName": "Vos",
         "partyName": "Republican",
-        "votes": 18728
+        "votes": 0
       },
       {
         "elected": false,
@@ -3041,15 +3069,15 @@
           "estimatedVotesHigh": 36330,
           "estimatedVotesLow": 29724,
           "estimatedVotesMid": 33027,
-          "turnoutHigh": 88.5,
-          "turnoutLow": 108.17,
-          "turnoutMid": 97.35
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kelly",
         "id": 101787,
         "lastName": "Clark",
         "partyName": "Independent",
-        "votes": 638
+        "votes": 0
       },
       {
         "elected": false,
@@ -3057,15 +3085,15 @@
           "estimatedVotesHigh": 36330,
           "estimatedVotesLow": 29724,
           "estimatedVotesMid": 33027,
-          "turnoutHigh": 88.5,
-          "turnoutLow": 108.17,
-          "turnoutMid": 97.35
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alan",
         "id": 83669,
         "lastName": "Kupsik",
         "partyName": "Democratic",
-        "votes": 12787
+        "votes": 0
       }
     ],
     "district": "33",
@@ -3073,7 +3101,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3083,7 +3112,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 32153,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3095,15 +3124,15 @@
           "estimatedVotesHigh": 39259,
           "estimatedVotesLow": 32121,
           "estimatedVotesMid": 35690,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 33.76,
+          "turnoutLow": 41.26,
+          "turnoutMid": 37.13
         },
         "firstName": "Dennis",
         "id": 83671,
         "lastName": "Nitzel Sr.",
         "partyName": "Democratic",
-        "votes": 4084
+        "votes": 5701
       },
       {
         "elected": false,
@@ -3111,15 +3140,15 @@
           "estimatedVotesHigh": 39259,
           "estimatedVotesLow": 32121,
           "estimatedVotesMid": 35690,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 33.76,
+          "turnoutLow": 41.26,
+          "turnoutMid": 37.13
         },
         "firstName": "Rob",
         "id": 29343,
         "lastName": "Swearingen",
         "partyName": "Republican",
-        "votes": 30526
+        "votes": 7552
       }
     ],
     "district": "34",
@@ -3127,7 +3156,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:38:30.374Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3137,7 +3167,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 34610,
+    "totalVotes": 13253,
     "year": 2024
   },
   {
@@ -3149,15 +3179,15 @@
           "estimatedVotesHigh": 36667,
           "estimatedVotesLow": 30000,
           "estimatedVotesMid": 33333,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 2.18,
+          "turnoutLow": 2.66,
+          "turnoutMid": 2.4
         },
-        "firstName": "Elizabeth",
-        "id": 83672,
-        "lastName": "McCrank",
-        "partyName": "Democratic",
-        "votes": 2016
+        "firstName": "Calvin",
+        "id": 29344,
+        "lastName": "Callahan",
+        "partyName": "Republican",
+        "votes": 525
       },
       {
         "elected": false,
@@ -3165,15 +3195,15 @@
           "estimatedVotesHigh": 36667,
           "estimatedVotesLow": 30000,
           "estimatedVotesMid": 33333,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 2.18,
+          "turnoutLow": 2.66,
+          "turnoutMid": 2.4
         },
-        "firstName": "Calvin",
-        "id": 29344,
-        "lastName": "Callahan",
-        "partyName": "Republican",
-        "votes": 30289
+        "firstName": "Elizabeth",
+        "id": 83672,
+        "lastName": "McCrank",
+        "partyName": "Democratic",
+        "votes": 274
       }
     ],
     "district": "35",
@@ -3181,7 +3211,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.331Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:56.877Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3191,7 +3222,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 32305,
+    "totalVotes": 799,
     "year": 2024
   },
   {
@@ -3203,15 +3234,15 @@
           "estimatedVotesHigh": 35375,
           "estimatedVotesLow": 28943,
           "estimatedVotesMid": 32159,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeffrey",
         "id": 29345,
         "lastName": "Mursau",
         "partyName": "Republican",
-        "votes": 29944
+        "votes": 0
       },
       {
         "elected": false,
@@ -3219,15 +3250,15 @@
           "estimatedVotesHigh": 35375,
           "estimatedVotesLow": 28943,
           "estimatedVotesMid": 32159,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ben",
         "id": 29239,
         "lastName": "Murray",
         "partyName": "Democratic",
-        "votes": 1229
+        "votes": 0
       }
     ],
     "district": "36",
@@ -3235,7 +3266,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:14.913Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3245,7 +3277,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 31173,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3257,15 +3289,15 @@
           "estimatedVotesHigh": 30915,
           "estimatedVotesLow": 25295,
           "estimatedVotesMid": 28105,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "LaToya",
         "id": 83674,
         "lastName": "Bates",
         "partyName": "Democratic",
-        "votes": 1746
+        "votes": 0
       },
       {
         "elected": false,
@@ -3273,15 +3305,15 @@
           "estimatedVotesHigh": 30915,
           "estimatedVotesLow": 25295,
           "estimatedVotesMid": 28105,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 29347,
         "lastName": "Born",
         "partyName": "Republican",
-        "votes": 25503
+        "votes": 0
       }
     ],
     "district": "37",
@@ -3289,7 +3321,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:45:14.548Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3299,7 +3332,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 27249,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3311,15 +3344,15 @@
           "estimatedVotesHigh": 33885,
           "estimatedVotesLow": 27723,
           "estimatedVotesMid": 30804,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Izzy",
         "id": 83676,
         "lastName": "Nevarez",
         "partyName": "Democratic",
-        "votes": 1944
+        "votes": 0
       },
       {
         "elected": false,
@@ -3327,15 +3360,15 @@
           "estimatedVotesHigh": 33885,
           "estimatedVotesLow": 27723,
           "estimatedVotesMid": 30804,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "William",
         "id": 16892,
         "lastName": "Penterman",
         "partyName": "Republican",
-        "votes": 27928
+        "votes": 0
       }
     ],
     "district": "38",
@@ -3343,7 +3376,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:39:14.533Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3353,7 +3387,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29872,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3365,15 +3399,15 @@
           "estimatedVotesHigh": 34184,
           "estimatedVotesLow": 27969,
           "estimatedVotesMid": 31076,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 83677,
         "lastName": "Gordon",
         "partyName": "Democratic",
-        "votes": 1615
+        "votes": 0
       },
       {
         "elected": false,
@@ -3381,15 +3415,15 @@
           "estimatedVotesHigh": 34184,
           "estimatedVotesLow": 27969,
           "estimatedVotesMid": 31076,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alex",
         "id": 29349,
         "lastName": "Dallman",
         "partyName": "Republican",
-        "votes": 28502
+        "votes": 0
       }
     ],
     "district": "39",
@@ -3397,7 +3431,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:15.504Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3407,7 +3442,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30117,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3419,15 +3454,15 @@
           "estimatedVotesHigh": 33985,
           "estimatedVotesLow": 27805,
           "estimatedVotesMid": 30895,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karen",
         "id": 83680,
         "lastName": "DeSanto",
         "partyName": "Democratic",
-        "votes": 6118
+        "votes": 0
       },
       {
         "elected": false,
@@ -3435,15 +3470,15 @@
           "estimatedVotesHigh": 33985,
           "estimatedVotesLow": 27805,
           "estimatedVotesMid": 30895,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jerry",
         "id": 83681,
         "lastName": "Helmer",
         "partyName": "Republican",
-        "votes": 23842
+        "votes": 0
       }
     ],
     "district": "40",
@@ -3451,7 +3486,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:46:14.860Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3461,7 +3497,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29960,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3473,15 +3509,15 @@
           "estimatedVotesHigh": 32072,
           "estimatedVotesLow": 26240,
           "estimatedVotesMid": 29156,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Tony",
-        "id": 29356,
-        "lastName": "Kurtz",
-        "partyName": "Republican",
-        "votes": 22445
+        "firstName": "Julia",
+        "id": 83682,
+        "lastName": "Henley",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3489,15 +3525,15 @@
           "estimatedVotesHigh": 32072,
           "estimatedVotesLow": 26240,
           "estimatedVotesMid": 29156,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Julia",
-        "id": 83682,
-        "lastName": "Henley",
-        "partyName": "Democratic",
-        "votes": 5813
+        "firstName": "Tony",
+        "id": 29356,
+        "lastName": "Kurtz",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "41",
@@ -3505,7 +3541,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:57:15.331Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3515,7 +3552,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 28258,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3527,15 +3564,15 @@
           "estimatedVotesHigh": 37443,
           "estimatedVotesLow": 30635,
           "estimatedVotesMid": 34039,
-          "turnoutHigh": 89.43,
-          "turnoutLow": 109.31,
-          "turnoutMid": 98.38
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maureen",
         "id": 29240,
         "lastName": "McCarville",
         "partyName": "Democratic",
-        "votes": 18568
+        "votes": 0
       },
       {
         "elected": false,
@@ -3543,15 +3580,15 @@
           "estimatedVotesHigh": 37443,
           "estimatedVotesLow": 30635,
           "estimatedVotesMid": 34039,
-          "turnoutHigh": 89.43,
-          "turnoutLow": 109.31,
-          "turnoutMid": 98.38
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rebecca",
         "id": 83683,
         "lastName": "Witherspoon",
         "partyName": "Republican",
-        "votes": 14919
+        "votes": 0
       }
     ],
     "district": "42",
@@ -3559,7 +3596,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3569,7 +3607,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 33487,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3581,15 +3619,15 @@
           "estimatedVotesHigh": 31569,
           "estimatedVotesLow": 25829,
           "estimatedVotesMid": 28699,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 14.41,
+          "turnoutLow": 17.62,
+          "turnoutMid": 15.85
         },
         "firstName": "Scott",
         "id": 21769,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 22163
+        "votes": 2218
       },
       {
         "elected": false,
@@ -3597,15 +3635,15 @@
           "estimatedVotesHigh": 31569,
           "estimatedVotesLow": 25829,
           "estimatedVotesMid": 28699,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 14.41,
+          "turnoutLow": 17.62,
+          "turnoutMid": 15.85
         },
         "firstName": "Brienne",
         "id": 29235,
         "lastName": "Brown",
         "partyName": "Democratic",
-        "votes": 5658
+        "votes": 2332
       }
     ],
     "district": "43",
@@ -3613,7 +3651,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:54:14.371Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:49.682Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3623,7 +3662,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 27821,
+    "totalVotes": 4550,
     "year": 2024
   },
   {
@@ -3635,15 +3674,15 @@
           "estimatedVotesHigh": 31030,
           "estimatedVotesLow": 25388,
           "estimatedVotesMid": 28209,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ann",
         "id": 29132,
         "lastName": "Roe",
         "partyName": "Democratic",
-        "votes": 23780
+        "votes": 0
       },
       {
         "elected": false,
@@ -3651,15 +3690,15 @@
           "estimatedVotesHigh": 31030,
           "estimatedVotesLow": 25388,
           "estimatedVotesMid": 28209,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bruce",
         "id": 83685,
         "lastName": "Danielson",
         "partyName": "Republican",
-        "votes": 3556
+        "votes": 0
       }
     ],
     "district": "44",
@@ -3667,7 +3706,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:16.037Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3677,17 +3717,16 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 27336,
+    "totalVotes": 0,
     "year": 2024
   },
   {
     "calledCandidate": {
-      "cand_id": 29245,
-      "first_name": "Clinton",
+      "firstName": "Clinton",
+      "id": 29245,
       "incumbent": true,
-      "last_name": "Anderson",
-      "party_id": 1,
-      "party_name": "Democratic"
+      "lastName": "Anderson",
+      "partyName": "Democratic"
     },
     "candidatesWithVotes": [
       {
@@ -3712,6 +3751,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": true,
     "lastUpdated": "2024-10-24T17:03:43.263Z",
     "office": {
       "officeId": "9",
@@ -3734,15 +3774,15 @@
           "estimatedVotesHigh": 36958,
           "estimatedVotesLow": 30238,
           "estimatedVotesMid": 33598,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jenifer",
         "id": 16897,
         "lastName": "Quimby",
         "partyName": "Republican",
-        "votes": 17639
+        "votes": 0
       },
       {
         "elected": false,
@@ -3750,15 +3790,15 @@
           "estimatedVotesHigh": 36958,
           "estimatedVotesLow": 30238,
           "estimatedVotesMid": 33598,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joan",
         "id": 83686,
         "lastName": "Fitzgerald",
         "partyName": "Democratic",
-        "votes": 14941
+        "votes": 0
       }
     ],
     "district": "46",
@@ -3766,7 +3806,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:53:15.538Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3776,7 +3817,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 32580,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3804,6 +3845,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3826,15 +3868,15 @@
           "estimatedVotesHigh": 34707,
           "estimatedVotesLow": 28397,
           "estimatedVotesMid": 31552,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lisa",
         "id": 83693,
         "lastName": "Rubrich",
         "partyName": "Republican",
-        "votes": 2068
+        "votes": 0
       },
       {
         "elected": false,
@@ -3842,15 +3884,15 @@
           "estimatedVotesHigh": 34707,
           "estimatedVotesLow": 28397,
           "estimatedVotesMid": 31552,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrew",
         "id": 29249,
         "lastName": "Hysell",
         "partyName": "Democratic",
-        "votes": 28515
+        "votes": 0
       }
     ],
     "district": "48",
@@ -3858,7 +3900,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:15.897Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3868,7 +3911,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30583,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3880,15 +3923,15 @@
           "estimatedVotesHigh": 30133,
           "estimatedVotesLow": 24655,
           "estimatedVotesMid": 27394,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Travis",
         "id": 29355,
         "lastName": "Tranel",
         "partyName": "Republican",
-        "votes": 22935
+        "votes": 0
       },
       {
         "elected": false,
@@ -3896,15 +3939,15 @@
           "estimatedVotesHigh": 30133,
           "estimatedVotesLow": 24655,
           "estimatedVotesMid": 27394,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 83694,
         "lastName": "Walker",
         "partyName": "Democratic",
-        "votes": 3625
+        "votes": 0
       }
     ],
     "district": "49",
@@ -3912,7 +3955,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.786Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3922,7 +3966,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 26560,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3934,15 +3978,15 @@
           "estimatedVotesHigh": 37130,
           "estimatedVotesLow": 30380,
           "estimatedVotesMid": 33755,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jenna",
         "id": 29242,
         "lastName": "Jacobson",
         "partyName": "Democratic",
-        "votes": 28102
+        "votes": 0
       },
       {
         "elected": false,
@@ -3950,15 +3994,15 @@
           "estimatedVotesHigh": 37130,
           "estimatedVotesLow": 30380,
           "estimatedVotesMid": 33755,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rich",
         "id": 83695,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 4624
+        "votes": 0
       }
     ],
     "district": "50",
@@ -3966,7 +4010,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:14.280Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3976,7 +4021,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 32726,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3988,15 +4033,15 @@
           "estimatedVotesHigh": 34089,
           "estimatedVotesLow": 27890,
           "estimatedVotesMid": 30989,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 24.81,
+          "turnoutLow": 30.33,
+          "turnoutMid": 27.29
         },
         "firstName": "Elizabeth",
         "id": 83696,
         "lastName": "Grabe",
         "partyName": "Democratic",
-        "votes": 18584
+        "votes": 4345
       },
       {
         "elected": false,
@@ -4004,15 +4049,15 @@
           "estimatedVotesHigh": 34089,
           "estimatedVotesLow": 27890,
           "estimatedVotesMid": 30989,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 24.81,
+          "turnoutLow": 30.33,
+          "turnoutMid": 27.29
         },
         "firstName": "Todd",
         "id": 29357,
         "lastName": "Novak",
         "partyName": "Republican",
-        "votes": 11458
+        "votes": 4113
       }
     ],
     "district": "51",
@@ -4020,7 +4065,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:15.171Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:40:33.058Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4030,7 +4076,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30042,
+    "totalVotes": 8458,
     "year": 2024
   },
   {
@@ -4042,15 +4088,15 @@
           "estimatedVotesHigh": 31160,
           "estimatedVotesLow": 25494,
           "estimatedVotesMid": 28327,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chad",
         "id": 83697,
         "lastName": "Cooke",
         "partyName": "Republican",
-        "votes": 3570
+        "votes": 0
       },
       {
         "elected": false,
@@ -4058,15 +4104,15 @@
           "estimatedVotesHigh": 31160,
           "estimatedVotesLow": 25494,
           "estimatedVotesMid": 28327,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lee",
         "id": 29261,
         "lastName": "Snodgrass",
         "partyName": "Democratic",
-        "votes": 23884
+        "votes": 0
       }
     ],
     "district": "52",
@@ -4074,7 +4120,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:15.897Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4084,7 +4131,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 27454,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4096,15 +4143,15 @@
           "estimatedVotesHigh": 31633,
           "estimatedVotesLow": 25881,
           "estimatedVotesMid": 28757,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dean",
         "id": 83699,
         "lastName": "Kaufert",
         "partyName": "Republican",
-        "votes": 4625
+        "votes": 0
       },
       {
         "elected": false,
@@ -4112,15 +4159,15 @@
           "estimatedVotesHigh": 31633,
           "estimatedVotesLow": 25881,
           "estimatedVotesMid": 28757,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Duane",
         "id": 83698,
         "lastName": "Shukoski",
         "partyName": "Democratic",
-        "votes": 23261
+        "votes": 0
       }
     ],
     "district": "53",
@@ -4128,7 +4175,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:25:15.843Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4138,7 +4186,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 27886,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4150,15 +4198,15 @@
           "estimatedVotesHigh": 26693,
           "estimatedVotesLow": 21839,
           "estimatedVotesMid": 24266,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 46.32,
+          "turnoutLow": 56.61,
+          "turnoutMid": 50.95
         },
         "firstName": "Lori",
         "id": 29258,
         "lastName": "Palmeri",
         "partyName": "Democratic",
-        "votes": 2352
+        "votes": 6500
       },
       {
         "elected": false,
@@ -4166,15 +4214,15 @@
           "estimatedVotesHigh": 26693,
           "estimatedVotesLow": 21839,
           "estimatedVotesMid": 24266,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 46.32,
+          "turnoutLow": 56.61,
+          "turnoutMid": 50.95
         },
         "firstName": "Tim",
         "id": 83700,
         "lastName": "Paterson",
         "partyName": "Republican",
-        "votes": 21182
+        "votes": 5864
       }
     ],
     "district": "54",
@@ -4182,7 +4230,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:57:18.150Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:40:33.058Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4192,7 +4241,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 23534,
+    "totalVotes": 12364,
     "year": 2024
   },
   {
@@ -4204,15 +4253,15 @@
           "estimatedVotesHigh": 38597,
           "estimatedVotesLow": 31579,
           "estimatedVotesMid": 35088,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nate",
         "id": 29364,
         "lastName": "Gustafson",
         "partyName": "Republican",
-        "votes": 9144
+        "votes": 0
       },
       {
         "elected": false,
@@ -4220,15 +4269,15 @@
           "estimatedVotesHigh": 38597,
           "estimatedVotesLow": 31579,
           "estimatedVotesMid": 35088,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kyle",
         "id": 83701,
         "lastName": "Kehoe",
         "partyName": "Democratic",
-        "votes": 24881
+        "votes": 0
       }
     ],
     "district": "55",
@@ -4236,7 +4285,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:15.171Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4246,7 +4296,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 34025,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4258,15 +4308,15 @@
           "estimatedVotesHigh": 37893,
           "estimatedVotesLow": 31003,
           "estimatedVotesMid": 34448,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 56.11,
+          "turnoutLow": 68.57,
+          "turnoutMid": 61.72
         },
         "firstName": "Emily",
         "id": 83702,
         "lastName": "Tseffos",
         "partyName": "Democratic",
-        "votes": 2733
+        "votes": 9434
       },
       {
         "elected": false,
@@ -4274,15 +4324,15 @@
           "estimatedVotesHigh": 37893,
           "estimatedVotesLow": 31003,
           "estimatedVotesMid": 34448,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 56.11,
+          "turnoutLow": 68.57,
+          "turnoutMid": 61.72
         },
         "firstName": "Dave",
         "id": 29365,
         "lastName": "Murphy",
         "partyName": "Republican",
-        "votes": 30667
+        "votes": 11826
       }
     ],
     "district": "56",
@@ -4290,7 +4340,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.127Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:49.682Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4300,7 +4351,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 33400,
+    "totalVotes": 21260,
     "year": 2024
   },
   {
@@ -4312,15 +4363,15 @@
           "estimatedVotesHigh": 35689,
           "estimatedVotesLow": 29203,
           "estimatedVotesMid": 32446,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dylan",
         "id": 101788,
         "lastName": "Testin",
         "partyName": "Independent",
-        "votes": 614
+        "votes": 0
       },
       {
         "elected": false,
@@ -4328,15 +4379,15 @@
           "estimatedVotesHigh": 35689,
           "estimatedVotesLow": 29203,
           "estimatedVotesMid": 32446,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 29348,
         "lastName": "Petersen",
         "partyName": "Republican",
-        "votes": 20277
+        "votes": 0
       },
       {
         "elected": false,
@@ -4344,15 +4395,15 @@
           "estimatedVotesHigh": 35689,
           "estimatedVotesLow": 29203,
           "estimatedVotesMid": 32446,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ruth",
         "id": 83703,
         "lastName": "Caves",
         "partyName": "Democratic",
-        "votes": 10562
+        "votes": 0
       }
     ],
     "district": "57",
@@ -4360,7 +4411,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:45:14.946Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4370,7 +4422,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 31453,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4382,15 +4434,15 @@
           "estimatedVotesHigh": 38248,
           "estimatedVotesLow": 31294,
           "estimatedVotesMid": 34771,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 38.09,
+          "turnoutLow": 46.55,
+          "turnoutMid": 41.89
         },
         "firstName": "Rick",
         "id": 29367,
         "lastName": "Gundrum",
         "partyName": "Republican",
-        "votes": 33049
+        "votes": 9771
       },
       {
         "elected": false,
@@ -4398,15 +4450,15 @@
           "estimatedVotesHigh": 38248,
           "estimatedVotesLow": 31294,
           "estimatedVotesMid": 34771,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 38.09,
+          "turnoutLow": 46.55,
+          "turnoutMid": 41.89
         },
         "firstName": "Deb",
         "id": 83705,
         "lastName": "Anderson",
         "partyName": "Democratic",
-        "votes": 672
+        "votes": 4796
       }
     ],
     "district": "58",
@@ -4414,7 +4466,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:12:15.787Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:40:19.493Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4424,7 +4477,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 33721,
+    "totalVotes": 14567,
     "year": 2024
   },
   {
@@ -4436,15 +4489,15 @@
           "estimatedVotesHigh": 40296,
           "estimatedVotesLow": 32970,
           "estimatedVotesMid": 36633,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jack",
-        "id": 83706,
-        "lastName": "Holzman",
-        "partyName": "Democratic",
-        "votes": 2961
+        "firstName": "Robert",
+        "id": 29370,
+        "lastName": "Brooks",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4452,15 +4505,15 @@
           "estimatedVotesHigh": 40296,
           "estimatedVotesLow": 32970,
           "estimatedVotesMid": 36633,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Robert",
-        "id": 29370,
-        "lastName": "Brooks",
-        "partyName": "Republican",
-        "votes": 32554
+        "firstName": "Jack",
+        "id": 83706,
+        "lastName": "Holzman",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "59",
@@ -4468,7 +4521,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:42:15.351Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:21.307Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4478,7 +4532,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 35515,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4490,15 +4544,15 @@
           "estimatedVotesHigh": 28753,
           "estimatedVotesLow": 23525,
           "estimatedVotesMid": 26139,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jerry",
         "id": 29360,
         "lastName": "O'Connor",
         "partyName": "Republican",
-        "votes": 22055
+        "votes": 0
       },
       {
         "elected": false,
@@ -4506,15 +4560,15 @@
           "estimatedVotesHigh": 28753,
           "estimatedVotesLow": 23525,
           "estimatedVotesMid": 26139,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 29257,
         "lastName": "Lavrenz",
         "partyName": "Democratic",
-        "votes": 3293
+        "votes": 0
       }
     ],
     "district": "60",
@@ -4522,7 +4576,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.127Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4532,7 +4587,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 25348,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4544,15 +4599,15 @@
           "estimatedVotesHigh": 34458,
           "estimatedVotesLow": 28193,
           "estimatedVotesMid": 31325,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 29403,
         "lastName": "Donovan",
         "partyName": "Republican",
-        "votes": 909
+        "votes": 0
       },
       {
         "elected": false,
@@ -4560,15 +4615,15 @@
           "estimatedVotesHigh": 34458,
           "estimatedVotesLow": 28193,
           "estimatedVotesMid": 31325,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "LuAnn",
         "id": 83707,
         "lastName": "Bird",
         "partyName": "Democratic",
-        "votes": 29469
+        "votes": 0
       }
     ],
     "district": "61",
@@ -4576,7 +4631,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:15.796Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4586,7 +4642,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30378,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4614,6 +4670,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4652,6 +4709,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4674,15 +4732,15 @@
           "estimatedVotesHigh": 27721,
           "estimatedVotesLow": 22681,
           "estimatedVotesMid": 25201,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 35.69,
+          "turnoutLow": 43.63,
+          "turnoutMid": 39.26
         },
         "firstName": "Ed",
         "id": 29377,
         "lastName": "Hibsch",
         "partyName": "Republican",
-        "votes": 17598
+        "votes": 4348
       },
       {
         "elected": false,
@@ -4690,15 +4748,15 @@
           "estimatedVotesHigh": 27721,
           "estimatedVotesLow": 22681,
           "estimatedVotesMid": 25201,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 35.69,
+          "turnoutLow": 43.63,
+          "turnoutMid": 39.26
         },
         "firstName": "Tip",
         "id": 29266,
         "lastName": "McGuire",
         "partyName": "Democratic",
-        "votes": 6843
+        "votes": 5547
       }
     ],
     "district": "64",
@@ -4706,7 +4764,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:23:15.089Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:37:44.836Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4716,7 +4775,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 24441,
+    "totalVotes": 9895,
     "year": 2024
   },
   {
@@ -4728,15 +4787,15 @@
           "estimatedVotesHigh": 27838,
           "estimatedVotesLow": 22776,
           "estimatedVotesMid": 25307,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Ben",
-        "id": 83711,
-        "lastName": "DeSmidt",
-        "partyName": "Democratic",
-        "votes": 2943
+        "firstName": "Brian",
+        "id": 83713,
+        "lastName": "Gonzales",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4744,15 +4803,15 @@
           "estimatedVotesHigh": 27838,
           "estimatedVotesLow": 22776,
           "estimatedVotesMid": 25307,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Brian",
-        "id": 83713,
-        "lastName": "Gonzales",
-        "partyName": "Republican",
-        "votes": 21593
+        "firstName": "Ben",
+        "id": 83711,
+        "lastName": "DeSmidt",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "65",
@@ -4760,7 +4819,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.127Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4770,7 +4830,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 24536,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4782,15 +4842,15 @@
           "estimatedVotesHigh": 30033,
           "estimatedVotesLow": 24573,
           "estimatedVotesMid": 27303,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Greta",
         "id": 29268,
         "lastName": "Neubauer",
         "partyName": "Democratic",
-        "votes": 8737
+        "votes": 0
       },
       {
         "elected": false,
@@ -4798,15 +4858,15 @@
           "estimatedVotesHigh": 30033,
           "estimatedVotesLow": 24573,
           "estimatedVotesMid": 27303,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 83714,
         "lastName": "DeGroot",
         "partyName": "Republican",
-        "votes": 17743
+        "votes": 0
       }
     ],
     "district": "66",
@@ -4814,7 +4874,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.786Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4824,7 +4885,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 26480,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4836,15 +4897,15 @@
           "estimatedVotesHigh": 33575,
           "estimatedVotesLow": 27470,
           "estimatedVotesMid": 30522,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 29392,
         "lastName": "Armstrong",
         "partyName": "Republican",
-        "votes": 27962
+        "votes": 0
       },
       {
         "elected": false,
@@ -4852,15 +4913,15 @@
           "estimatedVotesHigh": 33575,
           "estimatedVotesLow": 27470,
           "estimatedVotesMid": 30522,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 83715,
         "lastName": "Foster",
         "partyName": "Democratic",
-        "votes": 1633
+        "votes": 0
       }
     ],
     "district": "67",
@@ -4868,7 +4929,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:23:15.089Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4878,7 +4940,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29595,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4890,15 +4952,15 @@
           "estimatedVotesHigh": 35951,
           "estimatedVotesLow": 29414,
           "estimatedVotesMid": 32682,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rob",
         "id": 29379,
         "lastName": "Summerfield",
         "partyName": "Republican",
-        "votes": 29357
+        "votes": 0
       },
       {
         "elected": false,
@@ -4906,15 +4968,15 @@
           "estimatedVotesHigh": 35951,
           "estimatedVotesLow": 29414,
           "estimatedVotesMid": 32682,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Richard",
         "id": 83717,
         "lastName": "Pulcher",
         "partyName": "Democratic",
-        "votes": 2323
+        "votes": 0
       }
     ],
     "district": "68",
@@ -4922,7 +4984,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.127Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4932,7 +4995,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 31680,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4944,15 +5007,15 @@
           "estimatedVotesHigh": 27260,
           "estimatedVotesLow": 22304,
           "estimatedVotesMid": 24781,
-          "turnoutHigh": 88.64,
-          "turnoutLow": 108.33,
-          "turnoutMid": 97.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Roger",
         "id": 83719,
         "lastName": "Halls",
         "partyName": "Democratic",
-        "votes": 8334
+        "votes": 0
       },
       {
         "elected": false,
@@ -4960,15 +5023,15 @@
           "estimatedVotesHigh": 27260,
           "estimatedVotesLow": 22304,
           "estimatedVotesMid": 24781,
-          "turnoutHigh": 88.64,
-          "turnoutLow": 108.33,
-          "turnoutMid": 97.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joshua",
         "id": 101789,
         "lastName": "Kelley",
         "partyName": "Independent",
-        "votes": 473
+        "votes": 0
       },
       {
         "elected": false,
@@ -4976,15 +5039,15 @@
           "estimatedVotesHigh": 27260,
           "estimatedVotesLow": 22304,
           "estimatedVotesMid": 24781,
-          "turnoutHigh": 88.64,
-          "turnoutLow": 108.33,
-          "turnoutMid": 97.51
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karen",
         "id": 29381,
         "lastName": "Hurd",
         "partyName": "Republican",
-        "votes": 15356
+        "votes": 0
       }
     ],
     "district": "69",
@@ -4992,7 +5055,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:51:15.143Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5002,7 +5066,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 24163,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5014,15 +5078,15 @@
           "estimatedVotesHigh": 28847,
           "estimatedVotesLow": 23603,
           "estimatedVotesMid": 26225,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Remy",
         "id": 29272,
         "lastName": "Gomez",
         "partyName": "Democratic",
-        "votes": 1705
+        "votes": 0
       },
       {
         "elected": false,
@@ -5030,15 +5094,15 @@
           "estimatedVotesHigh": 28847,
           "estimatedVotesLow": 23603,
           "estimatedVotesMid": 26225,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nancy",
         "id": 29384,
         "lastName": "VanderMeer",
         "partyName": "Republican",
-        "votes": 23719
+        "votes": 0
       }
     ],
     "district": "70",
@@ -5046,7 +5110,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:15.171Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5056,7 +5121,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 25424,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5068,15 +5133,15 @@
           "estimatedVotesHigh": 34513,
           "estimatedVotesLow": 28237,
           "estimatedVotesMid": 31375,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bob",
         "id": 83722,
         "lastName": "Pahmeier",
         "partyName": "Republican",
-        "votes": 27084
+        "votes": 0
       },
       {
         "elected": false,
@@ -5084,15 +5149,15 @@
           "estimatedVotesHigh": 34513,
           "estimatedVotesLow": 28237,
           "estimatedVotesMid": 31375,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vinnie",
         "id": 83721,
         "lastName": "Miresse",
         "partyName": "Democratic",
-        "votes": 3342
+        "votes": 0
       }
     ],
     "district": "71",
@@ -5100,7 +5165,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:33:16.901Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5110,7 +5176,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30426,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5122,15 +5188,15 @@
           "estimatedVotesHigh": 34577,
           "estimatedVotesLow": 28289,
           "estimatedVotesMid": 31433,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 8.52,
+          "turnoutLow": 10.42,
+          "turnoutMid": 9.38
         },
-        "firstName": "Suzanne",
-        "id": 83723,
-        "lastName": "Campbell",
-        "partyName": "Democratic",
-        "votes": 13144
+        "firstName": "Scott",
+        "id": 29387,
+        "lastName": "Krug",
+        "partyName": "Republican",
+        "votes": 1799
       },
       {
         "elected": false,
@@ -5138,15 +5204,15 @@
           "estimatedVotesHigh": 34577,
           "estimatedVotesLow": 28289,
           "estimatedVotesMid": 31433,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 8.52,
+          "turnoutLow": 10.42,
+          "turnoutMid": 9.38
         },
-        "firstName": "Scott",
-        "id": 29387,
-        "lastName": "Krug",
-        "partyName": "Republican",
-        "votes": 17336
+        "firstName": "Suzanne",
+        "id": 83723,
+        "lastName": "Campbell",
+        "partyName": "Democratic",
+        "votes": 1148
       }
     ],
     "district": "72",
@@ -5154,7 +5220,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:13:15.459Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:41.624Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5164,7 +5231,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30480,
+    "totalVotes": 2947,
     "year": 2024
   },
   {
@@ -5176,15 +5243,15 @@
           "estimatedVotesHigh": 32694,
           "estimatedVotesLow": 26748,
           "estimatedVotesMid": 29721,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Frank",
-        "id": 83725,
-        "lastName": "Kostka",
-        "partyName": "Republican",
-        "votes": 2359
+        "firstName": "Angela",
+        "id": 83724,
+        "lastName": "Stroud",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -5192,15 +5259,15 @@
           "estimatedVotesHigh": 32694,
           "estimatedVotesLow": 26748,
           "estimatedVotesMid": 29721,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Angela",
-        "id": 83724,
-        "lastName": "Stroud",
-        "partyName": "Democratic",
-        "votes": 26451
+        "firstName": "Frank",
+        "id": 83725,
+        "lastName": "Kostka",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "73",
@@ -5208,7 +5275,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:58:14.127Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5218,7 +5286,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 28810,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5230,15 +5298,15 @@
           "estimatedVotesHigh": 37067,
           "estimatedVotesLow": 30329,
           "estimatedVotesMid": 33697,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 11.63,
+          "turnoutLow": 14.22,
+          "turnoutMid": 12.8
         },
         "firstName": "Chanz",
         "id": 29390,
         "lastName": "Green",
         "partyName": "Republican",
-        "votes": 20886
+        "votes": 2005
       },
       {
         "elected": false,
@@ -5246,15 +5314,15 @@
           "estimatedVotesHigh": 37067,
           "estimatedVotesLow": 30329,
           "estimatedVotesMid": 33697,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 11.63,
+          "turnoutLow": 14.22,
+          "turnoutMid": 12.8
         },
         "firstName": "Jeanne",
         "id": 83726,
         "lastName": "Bruce",
         "partyName": "Democratic",
-        "votes": 11762
+        "votes": 2307
       }
     ],
     "district": "74",
@@ -5262,7 +5330,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:15.897Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:41.624Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5272,7 +5341,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 32648,
+    "totalVotes": 4312,
     "year": 2024
   },
   {
@@ -5284,15 +5353,15 @@
           "estimatedVotesHigh": 35301,
           "estimatedVotesLow": 28883,
           "estimatedVotesMid": 32092,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Duke",
         "id": 83730,
         "lastName": "Tucker",
         "partyName": "Republican",
-        "votes": 29336
+        "votes": 0
       },
       {
         "elected": false,
@@ -5300,15 +5369,15 @@
           "estimatedVotesHigh": 35301,
           "estimatedVotesLow": 28883,
           "estimatedVotesMid": 32092,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jane",
         "id": 83728,
         "lastName": "Kleiss",
         "partyName": "Democratic",
-        "votes": 1785
+        "votes": 0
       }
     ],
     "district": "75",
@@ -5316,7 +5385,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:15.504Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5326,7 +5396,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 31121,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5354,6 +5424,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5392,6 +5463,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5430,6 +5502,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5468,6 +5541,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5490,15 +5564,15 @@
           "estimatedVotesHigh": 38950,
           "estimatedVotesLow": 31868,
           "estimatedVotesMid": 35409,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.77,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 29202,
         "lastName": "Relph",
         "partyName": "Republican",
-        "votes": 1372
+        "votes": 0
       },
       {
         "elected": false,
@@ -5506,15 +5580,15 @@
           "estimatedVotesHigh": 38950,
           "estimatedVotesLow": 31868,
           "estimatedVotesMid": 35409,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.77,
-          "turnoutMid": 96.99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 29282,
         "lastName": "Bare",
         "partyName": "Democratic",
-        "votes": 32971
+        "votes": 0
       }
     ],
     "district": "80",
@@ -5522,7 +5596,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:40:14.620Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5532,7 +5607,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 34343,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5560,6 +5635,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5582,15 +5658,15 @@
           "estimatedVotesHigh": 32919,
           "estimatedVotesLow": 26933,
           "estimatedVotesMid": 29926,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 83738,
         "lastName": "Reilly",
         "partyName": "Democratic",
-        "votes": 2030
+        "votes": 0
       },
       {
         "elected": false,
@@ -5598,15 +5674,15 @@
           "estimatedVotesHigh": 32919,
           "estimatedVotesLow": 26933,
           "estimatedVotesMid": 29926,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 29419,
         "lastName": "Allen",
         "partyName": "Republican",
-        "votes": 26992
+        "votes": 0
       }
     ],
     "district": "82",
@@ -5614,7 +5690,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:15.897Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5624,7 +5701,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29022,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5636,15 +5713,15 @@
           "estimatedVotesHigh": 41434,
           "estimatedVotesLow": 33900,
           "estimatedVotesMid": 37667,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dave",
         "id": 29324,
         "lastName": "Maxey",
         "partyName": "Republican",
-        "votes": 35425
+        "votes": 0
       },
       {
         "elected": false,
@@ -5652,15 +5729,15 @@
           "estimatedVotesHigh": 41434,
           "estimatedVotesLow": 33900,
           "estimatedVotesMid": 37667,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jill",
         "id": 83739,
         "lastName": "Schindler",
         "partyName": "Democratic",
-        "votes": 1095
+        "votes": 0
       }
     ],
     "district": "83",
@@ -5668,7 +5745,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:15.897Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5678,7 +5756,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 36520,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5690,15 +5768,15 @@
           "estimatedVotesHigh": 41696,
           "estimatedVotesLow": 34115,
           "estimatedVotesMid": 37905,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chuck",
         "id": 29399,
         "lastName": "Wichgers",
         "partyName": "Republican",
-        "votes": 35164
+        "votes": 0
       },
       {
         "elected": false,
@@ -5706,15 +5784,15 @@
           "estimatedVotesHigh": 41696,
           "estimatedVotesLow": 34115,
           "estimatedVotesMid": 37905,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Zachary",
         "id": 101790,
         "lastName": "Roper",
         "partyName": "Democratic",
-        "votes": 1592
+        "votes": 0
       }
     ],
     "district": "84",
@@ -5722,7 +5800,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:53:15.538Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5732,7 +5811,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 36756,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5744,15 +5823,15 @@
           "estimatedVotesHigh": 29653,
           "estimatedVotesLow": 24261,
           "estimatedVotesMid": 26957,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patrick",
         "id": 29405,
         "lastName": "Snyder",
         "partyName": "Republican",
-        "votes": 24577
+        "votes": 0
       },
       {
         "elected": false,
@@ -5760,15 +5839,15 @@
           "estimatedVotesHigh": 29653,
           "estimatedVotesLow": 24261,
           "estimatedVotesMid": 26957,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Yee",
         "id": 83741,
         "lastName": "Xiong",
         "partyName": "Democratic",
-        "votes": 1567
+        "votes": 0
       }
     ],
     "district": "85",
@@ -5776,7 +5855,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:53:15.538Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5786,7 +5866,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 26144,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5798,15 +5878,15 @@
           "estimatedVotesHigh": 35138,
           "estimatedVotesLow": 28750,
           "estimatedVotesMid": 31944,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 29406,
         "lastName": "Spiros",
         "partyName": "Republican",
-        "votes": 27247
+        "votes": 0
       },
       {
         "elected": false,
@@ -5814,15 +5894,15 @@
           "estimatedVotesHigh": 35138,
           "estimatedVotesLow": 28750,
           "estimatedVotesMid": 31944,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 83742,
         "lastName": "Small",
         "partyName": "Democratic",
-        "votes": 3727
+        "votes": 0
       }
     ],
     "district": "86",
@@ -5830,7 +5910,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:20:14.534Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5840,7 +5921,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30974,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5852,15 +5933,15 @@
           "estimatedVotesHigh": 37073,
           "estimatedVotesLow": 30332,
           "estimatedVotesMid": 33702,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "William",
         "id": 29213,
         "lastName": "Switalla",
         "partyName": "Democratic",
-        "votes": 1522
+        "votes": 0
       },
       {
         "elected": false,
@@ -5868,15 +5949,15 @@
           "estimatedVotesHigh": 37073,
           "estimatedVotesLow": 30332,
           "estimatedVotesMid": 33702,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brent",
         "id": 29203,
         "lastName": "Jacobson",
         "partyName": "Republican",
-        "votes": 31150
+        "votes": 0
       }
     ],
     "district": "87",
@@ -5884,7 +5965,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:49:14.786Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5894,7 +5976,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 32672,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5906,15 +5988,15 @@
           "estimatedVotesHigh": 34218,
           "estimatedVotesLow": 27996,
           "estimatedVotesMid": 31107,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 37.83,
+          "turnoutLow": 46.24,
+          "turnoutMid": 41.61
         },
         "firstName": "Benjamin",
         "id": 83746,
         "lastName": "Franklin",
         "partyName": "Republican",
-        "votes": 1806
+        "votes": 7109
       },
       {
         "elected": false,
@@ -5922,15 +6004,15 @@
           "estimatedVotesHigh": 34218,
           "estimatedVotesLow": 27996,
           "estimatedVotesMid": 31107,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 37.83,
+          "turnoutLow": 46.24,
+          "turnoutMid": 41.61
         },
         "firstName": "Christy",
         "id": 83745,
         "lastName": "Welch",
         "partyName": "Democratic",
-        "votes": 28361
+        "votes": 5835
       }
     ],
     "district": "88",
@@ -5938,7 +6020,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:54:15.288Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:42.409Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5948,7 +6031,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 30167,
+    "totalVotes": 12944,
     "year": 2024
   },
   {
@@ -5960,15 +6043,15 @@
           "estimatedVotesHigh": 29783,
           "estimatedVotesLow": 24368,
           "estimatedVotesMid": 27075,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 83748,
         "lastName": "Spaude",
         "partyName": "Democratic",
-        "votes": 3412
+        "votes": 0
       },
       {
         "elected": false,
@@ -5976,15 +6059,15 @@
           "estimatedVotesHigh": 29783,
           "estimatedVotesLow": 24368,
           "estimatedVotesMid": 27075,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patrick",
         "id": 83749,
         "lastName": "Buckley",
         "partyName": "Republican",
-        "votes": 22846
+        "votes": 0
       }
     ],
     "district": "89",
@@ -5992,7 +6075,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:15.796Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6002,7 +6086,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 26258,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6014,15 +6098,15 @@
           "estimatedVotesHigh": 24006,
           "estimatedVotesLow": 19642,
           "estimatedVotesMid": 21824,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 58.24,
+          "turnoutLow": 71.18,
+          "turnoutMid": 64.07
         },
         "firstName": "Amaad",
         "id": 101791,
         "lastName": "Rivera-Wagner",
         "partyName": "Democratic",
-        "votes": 17357
+        "votes": 8196
       },
       {
         "elected": false,
@@ -6030,15 +6114,15 @@
           "estimatedVotesHigh": 24006,
           "estimatedVotesLow": 19642,
           "estimatedVotesMid": 21824,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 58.24,
+          "turnoutLow": 71.18,
+          "turnoutMid": 64.07
         },
         "firstName": "Jessica",
         "id": 83751,
         "lastName": "Henderson",
         "partyName": "Republican",
-        "votes": 3809
+        "votes": 5786
       }
     ],
     "district": "90",
@@ -6046,7 +6130,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:16.074Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:42.409Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6056,7 +6141,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 21166,
+    "totalVotes": 13982,
     "year": 2024
   },
   {
@@ -6068,15 +6153,15 @@
           "estimatedVotesHigh": 33140,
           "estimatedVotesLow": 27114,
           "estimatedVotesMid": 30127,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 85.63,
+          "turnoutLow": 104.66,
+          "turnoutMid": 94.19
         },
         "firstName": "Michele",
         "id": 83752,
         "lastName": "Skinner",
         "partyName": "Republican",
-        "votes": 4534
+        "votes": 10322
       },
       {
         "elected": false,
@@ -6084,15 +6169,15 @@
           "estimatedVotesHigh": 33140,
           "estimatedVotesLow": 27114,
           "estimatedVotesMid": 30127,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 85.63,
+          "turnoutLow": 104.66,
+          "turnoutMid": 94.19
         },
         "firstName": "Jodi",
         "id": 29295,
         "lastName": "Emerson",
         "partyName": "Democratic",
-        "votes": 24682
+        "votes": 18056
       }
     ],
     "district": "91",
@@ -6100,7 +6185,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:55:14.280Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:42:08.941Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6110,7 +6196,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 29216,
+    "totalVotes": 28378,
     "year": 2024
   },
   {
@@ -6122,15 +6208,15 @@
           "estimatedVotesHigh": 30455,
           "estimatedVotesLow": 24917,
           "estimatedVotesMid": 27686,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Clint",
         "id": 29335,
         "lastName": "Moses",
         "partyName": "Republican",
-        "votes": 25026
+        "votes": 0
       },
       {
         "elected": false,
@@ -6138,15 +6224,15 @@
           "estimatedVotesHigh": 30455,
           "estimatedVotesLow": 24917,
           "estimatedVotesMid": 27686,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 83753,
         "lastName": "Plouff",
         "partyName": "Democratic",
-        "votes": 1816
+        "votes": 0
       }
     ],
     "district": "92",
@@ -6154,7 +6240,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:59:15.897Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6164,7 +6251,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 26842,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6176,15 +6263,15 @@
           "estimatedVotesHigh": 32469,
           "estimatedVotesLow": 26565,
           "estimatedVotesMid": 29517,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 83757,
         "lastName": "Rolbiecki",
         "partyName": "Republican",
-        "votes": 6906
+        "votes": 0
       },
       {
         "elected": false,
@@ -6192,15 +6279,15 @@
           "estimatedVotesHigh": 32469,
           "estimatedVotesLow": 26565,
           "estimatedVotesMid": 29517,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christian",
         "id": 83755,
         "lastName": "Phelps",
         "partyName": "Democratic",
-        "votes": 21714
+        "votes": 0
       }
     ],
     "district": "93",
@@ -6208,7 +6295,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:15.171Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:14.794Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6218,7 +6306,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 28620,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6230,15 +6318,15 @@
           "estimatedVotesHigh": 35485,
           "estimatedVotesLow": 29033,
           "estimatedVotesMid": 32259,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 29298,
         "lastName": "Doyle",
         "partyName": "Democratic",
-        "votes": 26060
+        "votes": 0
       },
       {
         "elected": false,
@@ -6246,15 +6334,15 @@
           "estimatedVotesHigh": 35485,
           "estimatedVotesLow": 29033,
           "estimatedVotesMid": 32259,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 29415,
         "lastName": "Huebsch",
         "partyName": "Republican",
-        "votes": 5223
+        "votes": 0
       }
     ],
     "district": "94",
@@ -6262,7 +6350,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:56:15.796Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:55.146Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6272,7 +6361,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 31283,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6284,15 +6373,15 @@
           "estimatedVotesHigh": 28928,
           "estimatedVotesLow": 23668,
           "estimatedVotesMid": 26298,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cedric",
         "id": 83758,
         "lastName": "Schnitzler",
         "partyName": "Republican",
-        "votes": 9160
+        "votes": 0
       },
       {
         "elected": false,
@@ -6300,15 +6389,15 @@
           "estimatedVotesHigh": 28928,
           "estimatedVotesLow": 23668,
           "estimatedVotesMid": 26298,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jill",
         "id": 29299,
         "lastName": "Billings",
         "partyName": "Democratic",
-        "votes": 16341
+        "votes": 0
       }
     ],
     "district": "95",
@@ -6316,7 +6405,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:51:15.143Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6326,7 +6416,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 25501,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6338,15 +6428,15 @@
           "estimatedVotesHigh": 31649,
           "estimatedVotesLow": 25895,
           "estimatedVotesMid": 28772,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tara",
         "id": 83760,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 13822
+        "votes": 0
       },
       {
         "elected": false,
@@ -6354,15 +6444,15 @@
           "estimatedVotesHigh": 31649,
           "estimatedVotesLow": 25895,
           "estimatedVotesMid": 28772,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Loren",
         "id": 29417,
         "lastName": "Oldenburg",
         "partyName": "Republican",
-        "votes": 14074
+        "votes": 0
       }
     ],
     "district": "96",
@@ -6370,7 +6460,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:52:15.171Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6380,7 +6471,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 27896,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6392,15 +6483,15 @@
           "estimatedVotesHigh": 43385,
           "estimatedVotesLow": 35497,
           "estimatedVotesMid": 39441,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Beth",
         "id": 83761,
         "lastName": "Leonard",
         "partyName": "Democratic",
-        "votes": 3664
+        "votes": 0
       },
       {
         "elected": false,
@@ -6408,15 +6499,15 @@
           "estimatedVotesHigh": 43385,
           "estimatedVotesLow": 35497,
           "estimatedVotesMid": 39441,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cindi",
         "id": 29421,
         "lastName": "Duchow",
         "partyName": "Republican",
-        "votes": 34586
+        "votes": 0
       }
     ],
     "district": "97",
@@ -6424,7 +6515,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:15.258Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6434,7 +6526,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 38250,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6446,15 +6538,15 @@
           "estimatedVotesHigh": 41932,
           "estimatedVotesLow": 34308,
           "estimatedVotesMid": 38120,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Del",
         "id": 83762,
         "lastName": "Schmechel",
         "partyName": "Democratic",
-        "votes": 3550
+        "votes": 0
       },
       {
         "elected": false,
@@ -6462,15 +6554,15 @@
           "estimatedVotesHigh": 41932,
           "estimatedVotesLow": 34308,
           "estimatedVotesMid": 38120,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 83763,
         "lastName": "Piwowarczyk",
         "partyName": "Republican",
-        "votes": 33418
+        "votes": 0
       }
     ],
     "district": "98",
@@ -6478,7 +6570,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:46:16.142Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6488,7 +6581,7 @@
     "raceDate": "2024-11-05",
     "state": "WI",
     "stateName": "Wisconsin",
-    "totalVotes": 36968,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -6516,6 +6609,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",

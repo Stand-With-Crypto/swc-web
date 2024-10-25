@@ -153,7 +153,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             status={raceStatus}
             winnerName={
               raceData?.calledCandidate
-                ? `${raceData?.calledCandidate?.first_name} ${raceData?.calledCandidate?.last_name}`
+                ? `${raceData?.calledCandidate?.firstName} ${raceData?.calledCandidate?.lastName}`
                 : ''
             }
           />
@@ -164,7 +164,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             status={raceStatus}
             winnerName={
               raceData?.calledCandidate
-                ? `${raceData?.calledCandidate?.first_name} ${raceData?.calledCandidate?.last_name}`
+                ? `${raceData?.calledCandidate?.firstName} ${raceData?.calledCandidate?.lastName}`
                 : ''
             }
           />

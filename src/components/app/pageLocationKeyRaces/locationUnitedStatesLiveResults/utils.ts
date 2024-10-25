@@ -94,7 +94,7 @@ export const getOpacity = (
   const calledCandidate = raceData?.calledCandidate
   if (!calledCandidate) return 'opacity-100'
 
-  return calledCandidate.cand_id === candidate.id ? 'opacity-100' : 'opacity-50'
+  return calledCandidate.id === candidate.id ? 'opacity-100' : 'opacity-50'
 }
 
 export const getCongressLiveResultOverview = (

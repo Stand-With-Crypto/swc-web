@@ -1,7 +1,13 @@
 import { DTSI_AllPeopleQuery, DTSI_UnitedStatesPresidentialQuery } from '@/data/dtsi/generated'
 import { ELECTION_TYPES, OFFICES } from '@/utils/server/decisionDesk/constants'
-import { Candidate } from '@/utils/server/decisionDesk/types'
 
+export interface Candidate {
+  id: number
+  firstName: string
+  lastName: string
+  partyName: string
+  incumbent?: boolean
+}
 export interface RacesVotingDataResponse {
   state: string
   stateName: string
@@ -15,6 +21,7 @@ export interface RacesVotingDataResponse {
   lastUpdated: string
   calledCandidate: Candidate | null
   candidatesWithVotes: CandidatesWithVote[]
+  hasCalledCandidate: boolean
 }
 
 export interface CongressDataResponse {
@@ -25,11 +32,7 @@ export interface CongressDataResponse {
   })[]
 }
 
-export interface CandidatesWithVote {
-  id: number
-  firstName: string
-  lastName: string
-  partyName: string
+export interface CandidatesWithVote extends Candidate {
   votes: number
   elected: boolean
   estimatedVotes: {

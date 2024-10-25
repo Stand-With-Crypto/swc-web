@@ -1,12 +1,11 @@
 [
   {
     "calledCandidate": {
-      "cand_id": 13636,
-      "first_name": "Jim",
+      "firstName": "Jim",
+      "id": 13636,
       "incumbent": false,
-      "last_name": "Justice",
-      "party_id": 2,
-      "party_name": "Republican"
+      "lastName": "Justice",
+      "partyName": "Republican"
     },
     "candidatesWithVotes": [
       {
@@ -15,31 +14,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 89.29,
-          "turnoutLow": 109.13,
-          "turnoutMid": 98.22
+          "turnoutHigh": 88.53,
+          "turnoutLow": 108.21,
+          "turnoutMid": 97.39
         },
-        "firstName": "David",
-        "id": 2108,
-        "lastName": "Moran",
-        "partyName": "Libertarian",
-        "votes": 12358
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 89.29,
-          "turnoutLow": 109.13,
-          "turnoutMid": 98.22
-        },
-        "firstName": "Jim",
-        "id": 13636,
-        "lastName": "Justice",
-        "partyName": "Republican",
-        "votes": 478945
+        "firstName": "Glenn",
+        "id": 67484,
+        "lastName": "Elliott",
+        "partyName": "Democratic",
+        "votes": 206798
       },
       {
         "elected": false,
@@ -47,15 +30,31 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 89.29,
-          "turnoutLow": 109.13,
-          "turnoutMid": 98.22
+          "turnoutHigh": 88.53,
+          "turnoutLow": 108.21,
+          "turnoutMid": 97.39
         },
-        "firstName": "Glenn",
-        "id": 67484,
-        "lastName": "Elliott",
-        "partyName": "Democratic",
-        "votes": 220316
+        "firstName": "David",
+        "id": 2108,
+        "lastName": "Moran",
+        "partyName": "Libertarian",
+        "votes": 13658
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 796969,
+          "estimatedVotesLow": 652073,
+          "estimatedVotesMid": 724518,
+          "turnoutHigh": 88.53,
+          "turnoutLow": 108.21,
+          "turnoutMid": 97.39
+        },
+        "firstName": "Jim",
+        "id": 13636,
+        "lastName": "Justice",
+        "partyName": "Republican",
+        "votes": 485131
       }
     ],
     "district": "",
@@ -63,7 +62,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:28:39.835Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T19:41:30.494Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -73,7 +73,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 711619,
+    "totalVotes": 705587,
     "year": 2024
   },
   {
@@ -85,15 +85,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 67.34,
-          "turnoutLow": 82.3,
-          "turnoutMid": 74.07
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Erika",
         "id": 15080,
         "lastName": "Kolenich",
         "partyName": "Libertarian",
-        "votes": 10122
+        "votes": 0
       },
       {
         "elected": false,
@@ -101,15 +101,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 67.34,
-          "turnoutLow": 82.3,
-          "turnoutMid": 74.07
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patrick",
         "id": 2102,
         "lastName": "Morrisey",
         "partyName": "Republican",
-        "votes": 336866
+        "votes": 0
       },
       {
         "elected": false,
@@ -117,15 +117,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 67.34,
-          "turnoutLow": 82.3,
-          "turnoutMid": 74.07
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 67500,
         "lastName": "Williams",
         "partyName": "Democratic",
-        "votes": 160130
+        "votes": 0
       },
       {
         "elected": false,
@@ -133,15 +133,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 67.34,
-          "turnoutLow": 82.3,
-          "turnoutMid": 74.07
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "S. Marshall",
         "id": 108217,
         "lastName": "Wilson",
         "partyName": "Constitution",
-        "votes": 17558
+        "votes": 0
       },
       {
         "elected": false,
@@ -149,15 +149,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 67.34,
-          "turnoutLow": 82.3,
-          "turnoutMid": 74.07
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chase",
         "id": 84974,
         "lastName": "Linko-Looper",
         "partyName": "Mountain",
-        "votes": 11974
+        "votes": 0
       }
     ],
     "district": "",
@@ -165,7 +165,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:28:39.835Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "2",
       "officeName": "Governor",
@@ -175,59 +176,65 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 536650,
+    "totalVotes": 0,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Carol",
+      "id": 8746,
+      "incumbent": true,
+      "lastName": "Miller",
+      "partyName": "Republican"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 393943,
           "estimatedVotesLow": 322322,
           "estimatedVotesMid": 358130,
-          "turnoutHigh": 89.38,
-          "turnoutLow": 109.24,
-          "turnoutMid": 98.31
-        },
-        "firstName": "Wes",
-        "id": 85169,
-        "lastName": "Holden",
-        "partyName": "Independent",
-        "votes": 6709
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 393943,
-          "estimatedVotesLow": 322322,
-          "estimatedVotesMid": 358130,
-          "turnoutHigh": 89.38,
-          "turnoutLow": 109.24,
-          "turnoutMid": 98.31
-        },
-        "firstName": "Chris",
-        "id": 67489,
-        "lastName": "Reed",
-        "partyName": "Democratic",
-        "votes": 93682
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 393943,
-          "estimatedVotesLow": 322322,
-          "estimatedVotesMid": 358130,
-          "turnoutHigh": 89.38,
-          "turnoutLow": 109.24,
-          "turnoutMid": 98.31
+          "turnoutHigh": 86.58,
+          "turnoutLow": 105.82,
+          "turnoutMid": 95.24
         },
         "firstName": "Carol",
         "id": 8746,
         "lastName": "Miller",
         "partyName": "Republican",
-        "votes": 251699
+        "votes": 233733
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 393943,
+          "estimatedVotesLow": 322322,
+          "estimatedVotesMid": 358130,
+          "turnoutHigh": 86.58,
+          "turnoutLow": 105.82,
+          "turnoutMid": 95.24
+        },
+        "firstName": "Wes",
+        "id": 85169,
+        "lastName": "Holden",
+        "partyName": "Independent",
+        "votes": 6766
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 393943,
+          "estimatedVotesLow": 322322,
+          "estimatedVotesMid": 358130,
+          "turnoutHigh": 86.58,
+          "turnoutLow": 105.82,
+          "turnoutMid": 95.24
+        },
+        "firstName": "Chris",
+        "id": 67489,
+        "lastName": "Reed",
+        "partyName": "Democratic",
+        "votes": 100568
       }
     ],
     "district": "1",
@@ -235,7 +242,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:15.255Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T19:41:41.780Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -245,27 +253,33 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 352090,
+    "totalVotes": 341067,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Riley",
+      "id": 67494,
+      "incumbent": false,
+      "lastName": "Moore",
+      "partyName": "Republican"
+    },
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 402938,
           "estimatedVotesLow": 329677,
           "estimatedVotesMid": 366307,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.83,
-          "turnoutMid": 97.94
+          "turnoutHigh": 89.28,
+          "turnoutLow": 109.12,
+          "turnoutMid": 98.2
         },
         "firstName": "Riley",
         "id": 67494,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 311938
+        "votes": 251319
       },
       {
         "elected": false,
@@ -273,15 +287,15 @@
           "estimatedVotesHigh": 402938,
           "estimatedVotesLow": 329677,
           "estimatedVotesMid": 366307,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.83,
-          "turnoutMid": 97.94
+          "turnoutHigh": 89.28,
+          "turnoutLow": 109.12,
+          "turnoutMid": 98.2
         },
         "firstName": "Steven",
         "id": 67496,
         "lastName": "Wendelin",
         "partyName": "Democratic",
-        "votes": 46834
+        "votes": 108411
       }
     ],
     "district": "2",
@@ -289,7 +303,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:28:15.830Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T19:41:41.780Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -299,7 +314,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 358772,
+    "totalVotes": 359730,
     "year": 2024
   },
   {
@@ -311,15 +326,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 81.16,
+          "turnoutLow": 99.19,
+          "turnoutMid": 89.28
         },
         "firstName": "Thornton",
         "id": 67501,
         "lastName": "Cooper",
         "partyName": "Democratic",
-        "votes": 61242
+        "votes": 194966
       },
       {
         "elected": false,
@@ -327,15 +342,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 81.16,
+          "turnoutLow": 99.19,
+          "turnoutMid": 89.28
         },
         "firstName": "Kris",
         "id": 67503,
         "lastName": "Warner",
         "partyName": "Republican",
-        "votes": 641285
+        "votes": 451852
       }
     ],
     "district": "",
@@ -343,7 +358,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "39",
       "officeName": "Secretary of State",
@@ -353,7 +369,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 702527,
+    "totalVotes": 646818,
     "year": 2024
   },
   {
@@ -365,15 +381,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 88.17,
+          "turnoutLow": 107.77,
+          "turnoutMid": 96.99
         },
-        "firstName": "Mark",
-        "id": 19262,
-        "lastName": "Hunt",
-        "partyName": "Republican",
-        "votes": 614498
+        "firstName": "Mary",
+        "id": 67505,
+        "lastName": "Claytor",
+        "partyName": "Democratic",
+        "votes": 217634
       },
       {
         "elected": false,
@@ -381,15 +397,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 88.17,
+          "turnoutLow": 107.77,
+          "turnoutMid": 96.99
         },
-        "firstName": "Mary",
-        "id": 67505,
-        "lastName": "Claytor",
-        "partyName": "Democratic",
-        "votes": 88062
+        "firstName": "Mark",
+        "id": 19262,
+        "lastName": "Hunt",
+        "partyName": "Republican",
+        "votes": 485076
       }
     ],
     "district": "",
@@ -397,7 +413,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "135",
       "officeName": "Auditor",
@@ -407,7 +424,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 702560,
+    "totalVotes": 702710,
     "year": 2024
   },
   {
@@ -435,6 +452,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "146",
@@ -457,15 +475,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 88.87,
+          "turnoutLow": 108.62,
+          "turnoutMid": 97.76
         },
         "firstName": "Deborah",
         "id": 67507,
         "lastName": "Stiles",
         "partyName": "Democratic",
-        "votes": 41897
+        "votes": 214318
       },
       {
         "elected": false,
@@ -473,15 +491,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 88.87,
+          "turnoutLow": 108.62,
+          "turnoutMid": 97.76
         },
         "firstName": "Kent",
         "id": 67506,
         "lastName": "Leonhardt",
         "partyName": "Republican",
-        "votes": 660623
+        "votes": 493954
       }
     ],
     "district": "",
@@ -489,7 +507,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "136",
       "officeName": "Agriculture Commissioner",
@@ -499,7 +518,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 702520,
+    "totalVotes": 708272,
     "year": 2024
   },
   {
@@ -511,15 +530,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 88.28,
+          "turnoutLow": 107.89,
+          "turnoutMid": 97.11
         },
         "firstName": "John",
         "id": 67508,
         "lastName": "Mccuskey",
         "partyName": "Republican",
-        "votes": 668094
+        "votes": 485693
       },
       {
         "elected": false,
@@ -527,15 +546,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.96
+          "turnoutHigh": 88.28,
+          "turnoutLow": 107.89,
+          "turnoutMid": 97.11
         },
         "firstName": "Teresa",
         "id": 19287,
         "lastName": "Toriseva",
         "partyName": "Democratic",
-        "votes": 34423
+        "votes": 217856
       }
     ],
     "district": "",
@@ -543,7 +562,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "27",
       "officeName": "Attorney General",
@@ -553,7 +573,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 702517,
+    "totalVotes": 703549,
     "year": 2024
   },
   {
@@ -581,6 +601,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -619,6 +640,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -657,6 +679,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -679,15 +702,15 @@
           "estimatedVotesHigh": 50299,
           "estimatedVotesLow": 41155,
           "estimatedVotesMid": 45727,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 81.46,
+          "turnoutLow": 99.56,
+          "turnoutMid": 89.61
         },
         "firstName": "Dwayne",
         "id": 67520,
         "lastName": "Russell",
         "partyName": "Democratic",
-        "votes": 1873
+        "votes": 11016
       },
       {
         "elected": false,
@@ -695,15 +718,15 @@
           "estimatedVotesHigh": 50299,
           "estimatedVotesLow": 41155,
           "estimatedVotesMid": 45727,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 81.46,
+          "turnoutLow": 99.56,
+          "turnoutMid": 89.61
         },
         "firstName": "Amy",
         "id": 67519,
         "lastName": "Grady",
         "partyName": "Republican",
-        "votes": 42451
+        "votes": 29959
       }
     ],
     "district": "4",
@@ -711,7 +734,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -721,7 +745,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 44324,
+    "totalVotes": 40975,
     "year": 2024
   },
   {
@@ -733,15 +757,15 @@
           "estimatedVotesHigh": 42624,
           "estimatedVotesLow": 34874,
           "estimatedVotesMid": 38749,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Scott",
         "id": 19232,
         "lastName": "Fuller",
         "partyName": "Republican",
-        "votes": 35044
+        "votes": 23708
       },
       {
         "elected": false,
@@ -749,15 +773,15 @@
           "estimatedVotesHigh": 42624,
           "estimatedVotesLow": 34874,
           "estimatedVotesMid": 38749,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ric",
         "id": 19305,
         "lastName": "Griffith",
         "partyName": "Democratic",
-        "votes": 2529
+        "votes": 15041
       }
     ],
     "district": "5",
@@ -765,7 +789,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -775,7 +800,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 37573,
+    "totalVotes": 38749,
     "year": 2024
   },
   {
@@ -803,6 +828,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -841,6 +867,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -879,6 +906,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -901,15 +929,15 @@
           "estimatedVotesHigh": 47422,
           "estimatedVotesLow": 38801,
           "estimatedVotesMid": 43111,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Brian",
         "id": 67529,
         "lastName": "Helton",
         "partyName": "Republican",
-        "votes": 40580
+        "votes": 32556
       },
       {
         "elected": false,
@@ -917,15 +945,15 @@
           "estimatedVotesHigh": 47422,
           "estimatedVotesLow": 38801,
           "estimatedVotesMid": 43111,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.97
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Christy",
         "id": 67528,
         "lastName": "Cardwell",
         "partyName": "Democratic",
-        "votes": 1224
+        "votes": 10555
       }
     ],
     "district": "9",
@@ -933,7 +961,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:21:17.856Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -943,7 +972,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 41804,
+    "totalVotes": 43111,
     "year": 2024
   },
   {
@@ -971,6 +1000,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -993,15 +1023,15 @@
           "estimatedVotesHigh": 46464,
           "estimatedVotesLow": 38018,
           "estimatedVotesMid": 42241,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 91.8,
+          "turnoutLow": 112.2,
+          "turnoutMid": 99
         },
         "firstName": "Mandy",
         "id": 67533,
         "lastName": "Weirich",
         "partyName": "Democratic",
-        "votes": 1542
+        "votes": 10985
       },
       {
         "elected": false,
@@ -1009,15 +1039,15 @@
           "estimatedVotesHigh": 46464,
           "estimatedVotesLow": 38018,
           "estimatedVotesMid": 42241,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 91.8,
+          "turnoutLow": 112.2,
+          "turnoutMid": 99
         },
         "firstName": "Robbie",
         "id": 67532,
         "lastName": "Morris",
         "partyName": "Republican",
-        "votes": 39405
+        "votes": 31671
       }
     ],
     "district": "11",
@@ -1025,7 +1055,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:12:16.924Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1035,7 +1066,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 40947,
+    "totalVotes": 42656,
     "year": 2024
   },
   {
@@ -1063,6 +1094,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1085,15 +1117,15 @@
           "estimatedVotesHigh": 43537,
           "estimatedVotesLow": 35621,
           "estimatedVotesMid": 39579,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 91.13,
+          "turnoutLow": 111.38,
+          "turnoutMid": 99
         },
         "firstName": "Joey",
         "id": 19355,
         "lastName": "Garcia",
         "partyName": "Democratic",
-        "votes": 2375
+        "votes": 18707
       },
       {
         "elected": false,
@@ -1101,15 +1133,15 @@
           "estimatedVotesHigh": 43537,
           "estimatedVotesLow": 35621,
           "estimatedVotesMid": 39579,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 91.13,
+          "turnoutLow": 111.38,
+          "turnoutMid": 99
         },
         "firstName": "Rebecca",
         "id": 98128,
         "lastName": "Polis",
         "partyName": "Republican",
-        "votes": 36009
+        "votes": 20969
       }
     ],
     "district": "13",
@@ -1117,7 +1149,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:22:17.641Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:36:21.274Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1127,7 +1160,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 38384,
+    "totalVotes": 39676,
     "year": 2024
   },
   {
@@ -1139,15 +1172,15 @@
           "estimatedVotesHigh": 47260,
           "estimatedVotesLow": 38666,
           "estimatedVotesMid": 42963,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 83.2,
+          "turnoutLow": 101.69,
+          "turnoutMid": 91.52
         },
-        "firstName": "Betsy",
-        "id": 98129,
-        "lastName": "Orndoff-Sayers",
-        "partyName": "Mountain",
-        "votes": 853
+        "firstName": "Randy",
+        "id": 57573,
+        "lastName": "Smith",
+        "partyName": "Republican",
+        "votes": 38211
       },
       {
         "elected": false,
@@ -1155,15 +1188,15 @@
           "estimatedVotesHigh": 47260,
           "estimatedVotesLow": 38666,
           "estimatedVotesMid": 42963,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 83.2,
+          "turnoutLow": 101.69,
+          "turnoutMid": 91.52
         },
-        "firstName": "Randy",
-        "id": 57573,
-        "lastName": "Smith",
-        "partyName": "Republican",
-        "votes": 40796
+        "firstName": "Betsy",
+        "id": 98129,
+        "lastName": "Orndoff-Sayers",
+        "partyName": "Mountain",
+        "votes": 1107
       }
     ],
     "district": "14",
@@ -1171,7 +1204,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:26:17.045Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1181,7 +1215,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 41649,
+    "totalVotes": 39318,
     "year": 2024
   },
   {
@@ -1193,15 +1227,15 @@
           "estimatedVotesHigh": 47649,
           "estimatedVotesLow": 38985,
           "estimatedVotesMid": 43317,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 91.44,
+          "turnoutLow": 111.77,
+          "turnoutMid": 99
         },
         "firstName": "Thomas",
         "id": 8731,
         "lastName": "Willis",
         "partyName": "Republican",
-        "votes": 40318
+        "votes": 31691
       },
       {
         "elected": false,
@@ -1209,15 +1243,15 @@
           "estimatedVotesHigh": 47649,
           "estimatedVotesLow": 38985,
           "estimatedVotesMid": 43317,
-          "turnoutHigh": 88.16,
-          "turnoutLow": 107.75,
-          "turnoutMid": 96.97
+          "turnoutHigh": 91.44,
+          "turnoutLow": 111.77,
+          "turnoutMid": 99
         },
         "firstName": "Anthony",
         "id": 67537,
         "lastName": "Murray",
         "partyName": "Democratic",
-        "votes": 1688
+        "votes": 11881
       }
     ],
     "district": "15",
@@ -1225,7 +1259,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:56:17.959Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:35:32.974Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1235,7 +1270,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 42006,
+    "totalVotes": 43572,
     "year": 2024
   },
   {
@@ -1247,15 +1282,15 @@
           "estimatedVotesHigh": 48707,
           "estimatedVotesLow": 39851,
           "estimatedVotesMid": 44279,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 91.21,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 67538,
         "lastName": "Doyle",
         "partyName": "Democratic",
-        "votes": 10594
+        "votes": 18429
       },
       {
         "elected": false,
@@ -1263,15 +1298,15 @@
           "estimatedVotesHigh": 48707,
           "estimatedVotesLow": 39851,
           "estimatedVotesMid": 44279,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.76,
-          "turnoutMid": 96.98
+          "turnoutHigh": 91.21,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
         },
         "firstName": "Patricia",
         "id": 67539,
         "lastName": "Rucker",
         "partyName": "Republican",
-        "votes": 32349
+        "votes": 25995
       }
     ],
     "district": "16",
@@ -1279,7 +1314,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:20:16.905Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1289,7 +1325,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 42943,
+    "totalVotes": 44424,
     "year": 2024
   },
   {
@@ -1301,15 +1337,15 @@
           "estimatedVotesHigh": 48365,
           "estimatedVotesLow": 39571,
           "estimatedVotesMid": 43968,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.77,
-          "turnoutMid": 96.99
+          "turnoutHigh": 77.67,
+          "turnoutLow": 94.93,
+          "turnoutMid": 85.44
         },
         "firstName": "Eric",
         "id": 20908,
         "lastName": "Nelson",
         "partyName": "Republican",
-        "votes": 29000
+        "votes": 22628
       },
       {
         "elected": false,
@@ -1317,15 +1353,15 @@
           "estimatedVotesHigh": 48365,
           "estimatedVotesLow": 39571,
           "estimatedVotesMid": 43968,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.77,
-          "turnoutMid": 96.99
+          "turnoutHigh": 77.67,
+          "turnoutLow": 94.93,
+          "turnoutMid": 85.44
         },
         "firstName": "Bil",
         "id": 67540,
         "lastName": "Lepp",
         "partyName": "Democratic",
-        "votes": 13644
+        "votes": 14938
       }
     ],
     "district": "17",
@@ -1333,7 +1369,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:28:13.139Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1343,7 +1380,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 42644,
+    "totalVotes": 37566,
     "year": 2024
   },
   {
@@ -1371,6 +1408,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1393,15 +1431,15 @@
           "estimatedVotesHigh": 8368,
           "estimatedVotesLow": 6848,
           "estimatedVotesMid": 7608,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 52.63,
+          "turnoutLow": 64.31,
+          "turnoutMid": 57.89
         },
         "firstName": "Mark",
         "id": 19371,
         "lastName": "Zatezalo",
         "partyName": "Republican",
-        "votes": 7119
+        "votes": 3041
       },
       {
         "elected": false,
@@ -1409,15 +1447,15 @@
           "estimatedVotesHigh": 8368,
           "estimatedVotesLow": 6848,
           "estimatedVotesMid": 7608,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 52.63,
+          "turnoutLow": 64.31,
+          "turnoutMid": 57.89
         },
         "firstName": "Olivia",
         "id": 67541,
         "lastName": "Dowler",
         "partyName": "Democratic",
-        "votes": 250
+        "votes": 1363
       }
     ],
     "district": "2",
@@ -1425,7 +1463,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:28:13.139Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1435,7 +1474,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7369,
+    "totalVotes": 4404,
     "year": 2024
   },
   {
@@ -1447,15 +1486,15 @@
           "estimatedVotesHigh": 8200,
           "estimatedVotesLow": 6709,
           "estimatedVotesMid": 7454,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 66.76,
+          "turnoutLow": 81.59,
+          "turnoutMid": 73.44
         },
         "firstName": "David",
         "id": 67543,
         "lastName": "Cantrell",
         "partyName": "Democratic",
-        "votes": 447
+        "votes": 1477
       },
       {
         "elected": false,
@@ -1463,15 +1502,15 @@
           "estimatedVotesHigh": 8200,
           "estimatedVotesLow": 6709,
           "estimatedVotesMid": 7454,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 66.76,
+          "turnoutLow": 81.59,
+          "turnoutMid": 73.44
         },
         "firstName": "Jimmy",
         "id": 19372,
         "lastName": "Willis",
         "partyName": "Republican",
-        "votes": 6775
+        "votes": 3997
       }
     ],
     "district": "3",
@@ -1479,7 +1518,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:30:18.425Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1489,7 +1529,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7222,
+    "totalVotes": 5474,
     "year": 2024
   },
   {
@@ -1501,15 +1541,15 @@
           "estimatedVotesHigh": 9979,
           "estimatedVotesLow": 8165,
           "estimatedVotesMid": 9072,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 91.68,
+          "turnoutLow": 112.05,
+          "turnoutMid": 99
         },
         "firstName": "Jonathan",
         "id": 67545,
         "lastName": "Haught",
         "partyName": "Democratic",
-        "votes": 2198
+        "votes": 3101
       },
       {
         "elected": false,
@@ -1517,15 +1557,15 @@
           "estimatedVotesHigh": 9979,
           "estimatedVotesLow": 8165,
           "estimatedVotesMid": 9072,
-          "turnoutHigh": 88.15,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 91.68,
+          "turnoutLow": 112.05,
+          "turnoutMid": 99
         },
         "firstName": "Bill",
         "id": 67544,
         "lastName": "Flanigan",
         "partyName": "Republican",
-        "votes": 6598
+        "votes": 6048
       }
     ],
     "district": "4",
@@ -1533,7 +1573,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:00:18.710Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1543,7 +1584,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8796,
+    "totalVotes": 9149,
     "year": 2024
   },
   {
@@ -1555,15 +1596,15 @@
           "estimatedVotesHigh": 8005,
           "estimatedVotesLow": 6549,
           "estimatedVotesMid": 7277,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
-        "firstName": "Shawn",
-        "id": 19288,
-        "lastName": "Fluharty",
-        "partyName": "Democratic",
-        "votes": 986
+        "firstName": "Thomas",
+        "id": 67547,
+        "lastName": "Salkovick",
+        "partyName": "Republican",
+        "votes": 4104
       },
       {
         "elected": false,
@@ -1571,15 +1612,15 @@
           "estimatedVotesHigh": 8005,
           "estimatedVotesLow": 6549,
           "estimatedVotesMid": 7277,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
-        "firstName": "Thomas",
-        "id": 67547,
-        "lastName": "Salkovick",
-        "partyName": "Republican",
-        "votes": 6069
+        "firstName": "Shawn",
+        "id": 19288,
+        "lastName": "Fluharty",
+        "partyName": "Democratic",
+        "votes": 3173
       }
     ],
     "district": "5",
@@ -1587,7 +1628,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:58:17.732Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:28.584Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1597,7 +1639,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7055,
+    "totalVotes": 7277,
     "year": 2024
   },
   {
@@ -1609,15 +1651,15 @@
           "estimatedVotesHigh": 9141,
           "estimatedVotesLow": 7479,
           "estimatedVotesMid": 8310,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Cody",
-        "id": 98130,
-        "lastName": "Cumpston",
-        "partyName": "Democratic",
-        "votes": 321
+        "firstName": "Jeff",
+        "id": 67549,
+        "lastName": "Stephens",
+        "partyName": "Republican",
+        "votes": 5800
       },
       {
         "elected": false,
@@ -1625,15 +1667,15 @@
           "estimatedVotesHigh": 9141,
           "estimatedVotesLow": 7479,
           "estimatedVotesMid": 8310,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Jeff",
-        "id": 67549,
-        "lastName": "Stephens",
-        "partyName": "Republican",
-        "votes": 7736
+        "firstName": "Cody",
+        "id": 98130,
+        "lastName": "Cumpston",
+        "partyName": "Democratic",
+        "votes": 2510
       }
     ],
     "district": "6",
@@ -1641,7 +1683,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:40:19.398Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1651,7 +1694,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8057,
+    "totalVotes": 8310,
     "year": 2024
   },
   {
@@ -1663,15 +1706,15 @@
           "estimatedVotesHigh": 8497,
           "estimatedVotesLow": 6951,
           "estimatedVotesMid": 7724,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.92
+          "turnoutHigh": 74.04,
+          "turnoutLow": 90.5,
+          "turnoutMid": 81.45
         },
         "firstName": "Charles",
         "id": 13625,
         "lastName": "Sheedy Sr.",
         "partyName": "Republican",
-        "votes": 7265
+        "votes": 4906
       },
       {
         "elected": false,
@@ -1679,15 +1722,15 @@
           "estimatedVotesHigh": 8497,
           "estimatedVotesLow": 6951,
           "estimatedVotesMid": 7724,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.92
+          "turnoutHigh": 74.04,
+          "turnoutLow": 90.5,
+          "turnoutMid": 81.45
         },
         "firstName": "Devon",
         "id": 67550,
         "lastName": "Tennant",
         "partyName": "Democratic",
-        "votes": 221
+        "votes": 1385
       }
     ],
     "district": "7",
@@ -1695,7 +1738,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:40:19.398Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1705,7 +1749,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7486,
+    "totalVotes": 6291,
     "year": 2024
   },
   {
@@ -1733,6 +1777,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1771,6 +1816,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1809,6 +1855,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1847,6 +1894,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1885,6 +1933,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1923,6 +1972,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1945,15 +1995,15 @@
           "estimatedVotesHigh": 8873,
           "estimatedVotesLow": 7259,
           "estimatedVotesMid": 8066,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 19294,
         "lastName": "Marion",
         "partyName": "Democratic",
-        "votes": 430
+        "votes": 1734
       },
       {
         "elected": false,
@@ -1961,15 +2011,15 @@
           "estimatedVotesHigh": 8873,
           "estimatedVotesLow": 7259,
           "estimatedVotesMid": 8066,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Dave",
         "id": 19384,
         "lastName": "Foggin",
         "partyName": "Republican",
-        "votes": 7386
+        "votes": 6332
       }
     ],
     "district": "14",
@@ -1977,7 +2027,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:42:16.761Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:25.382Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1987,7 +2038,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7816,
+    "totalVotes": 8066,
     "year": 2024
   },
   {
@@ -1999,15 +2050,15 @@
           "estimatedVotesHigh": 7187,
           "estimatedVotesLow": 5880,
           "estimatedVotesMid": 6533,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Erica",
         "id": 67551,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 6156
+        "votes": 5007
       },
       {
         "elected": false,
@@ -2015,15 +2066,15 @@
           "estimatedVotesHigh": 7187,
           "estimatedVotesLow": 5880,
           "estimatedVotesMid": 6533,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Julianna",
         "id": 67552,
         "lastName": "Penfold",
         "partyName": "Democratic",
-        "votes": 173
+        "votes": 1526
       }
     ],
     "district": "15",
@@ -2031,7 +2082,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:23:16.921Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2041,7 +2093,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6329,
+    "totalVotes": 6533,
     "year": 2024
   },
   {
@@ -2069,6 +2121,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2107,6 +2160,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2129,15 +2183,15 @@
           "estimatedVotesHigh": 8154,
           "estimatedVotesLow": 6672,
           "estimatedVotesMid": 7413,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 90.97,
+          "turnoutLow": 111.18,
+          "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 19393,
         "lastName": "Butler",
         "partyName": "Republican",
-        "votes": 6971
+        "votes": 5820
       },
       {
         "elected": false,
@@ -2145,15 +2199,15 @@
           "estimatedVotesHigh": 8154,
           "estimatedVotesLow": 6672,
           "estimatedVotesMid": 7413,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 90.97,
+          "turnoutLow": 111.18,
+          "turnoutMid": 99
         },
         "firstName": "Andrea",
         "id": 67557,
         "lastName": "Meadows",
         "partyName": "Democratic",
-        "votes": 211
+        "votes": 1598
       }
     ],
     "district": "18",
@@ -2161,7 +2215,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:01:16.804Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:34:45.333Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2171,7 +2226,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7182,
+    "totalVotes": 7418,
     "year": 2024
   },
   {
@@ -2199,6 +2254,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2221,15 +2277,15 @@
           "estimatedVotesHigh": 10382,
           "estimatedVotesLow": 8494,
           "estimatedVotesMid": 9438,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Sarah",
         "id": 67559,
         "lastName": "Drennan",
         "partyName": "Republican",
-        "votes": 8878
+        "votes": 6689
       },
       {
         "elected": false,
@@ -2237,15 +2293,15 @@
           "estimatedVotesHigh": 10382,
           "estimatedVotesLow": 8494,
           "estimatedVotesMid": 9438,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 67560,
         "lastName": "Patrick",
         "partyName": "Democratic",
-        "votes": 273
+        "votes": 2749
       }
     ],
     "district": "20",
@@ -2253,7 +2309,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:59:16.773Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:24:59.611Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2263,7 +2320,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 9151,
+    "totalVotes": 9438,
     "year": 2024
   },
   {
@@ -2275,15 +2332,15 @@
           "estimatedVotesHigh": 9203,
           "estimatedVotesLow": 7529,
           "estimatedVotesMid": 8366,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 67561,
         "lastName": "Mosteller II",
         "partyName": "Democratic",
-        "votes": 241
+        "votes": 0
       },
       {
         "elected": false,
@@ -2291,15 +2348,15 @@
           "estimatedVotesHigh": 9203,
           "estimatedVotesLow": 7529,
           "estimatedVotesMid": 8366,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jarred",
         "id": 19400,
         "lastName": "Cannon",
         "partyName": "Republican",
-        "votes": 7870
+        "votes": 0
       }
     ],
     "district": "21",
@@ -2307,7 +2364,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:05:17.477Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2317,7 +2375,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8111,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2345,6 +2403,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2367,15 +2426,15 @@
           "estimatedVotesHigh": 7459,
           "estimatedVotesLow": 6103,
           "estimatedVotesMid": 6781,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Amanda",
         "id": 67563,
         "lastName": "Beach-Burge",
         "partyName": "Democratic",
-        "votes": 524
+        "votes": 1900
       },
       {
         "elected": false,
@@ -2383,15 +2442,15 @@
           "estimatedVotesHigh": 7459,
           "estimatedVotesLow": 6103,
           "estimatedVotesMid": 6781,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Evan",
         "id": 19405,
         "lastName": "Worrell",
         "partyName": "Republican",
-        "votes": 6049
+        "votes": 4881
       }
     ],
     "district": "23",
@@ -2399,7 +2458,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:07:16.939Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2409,7 +2469,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6573,
+    "totalVotes": 6781,
     "year": 2024
   },
   {
@@ -2421,15 +2481,15 @@
           "estimatedVotesHigh": 5839,
           "estimatedVotesLow": 4777,
           "estimatedVotesMid": 5308,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.62,
+          "turnoutMid": 99
         },
         "firstName": "Patrick",
         "id": 19408,
         "lastName": "Lucas",
         "partyName": "Republican",
-        "votes": 4941
+        "votes": 3049
       },
       {
         "elected": false,
@@ -2437,15 +2497,15 @@
           "estimatedVotesHigh": 5839,
           "estimatedVotesLow": 4777,
           "estimatedVotesMid": 5308,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.62,
+          "turnoutMid": 99
         },
         "firstName": "Billy",
         "id": 67564,
         "lastName": "Wray",
         "partyName": "Democratic",
-        "votes": 204
+        "votes": 2283
       }
     ],
     "district": "24",
@@ -2453,7 +2513,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:40:19.398Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2463,7 +2524,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 5145,
+    "totalVotes": 5332,
     "year": 2024
   },
   {
@@ -2475,15 +2536,15 @@
           "estimatedVotesHigh": 5143,
           "estimatedVotesLow": 4208,
           "estimatedVotesMid": 4675,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Sean",
         "id": 19302,
         "lastName": "Hornbuckle",
         "partyName": "Democratic",
-        "votes": 270
+        "votes": 3021
       },
       {
         "elected": false,
@@ -2491,15 +2552,15 @@
           "estimatedVotesHigh": 5143,
           "estimatedVotesLow": 4208,
           "estimatedVotesMid": 4675,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.92
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Connie",
         "id": 67565,
         "lastName": "Beaty",
         "partyName": "Republican",
-        "votes": 4261
+        "votes": 1654
       }
     ],
     "district": "25",
@@ -2507,7 +2568,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:26:17.045Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2517,7 +2579,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 4531,
+    "totalVotes": 4675,
     "year": 2024
   },
   {
@@ -2545,6 +2607,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2567,15 +2630,15 @@
           "estimatedVotesHigh": 7136,
           "estimatedVotesLow": 5838,
           "estimatedVotesMid": 6487,
-          "turnoutHigh": 88,
-          "turnoutLow": 107.57,
-          "turnoutMid": 96.81
+          "turnoutHigh": 91.73,
+          "turnoutLow": 112.13,
+          "turnoutMid": 99
         },
         "firstName": "Craig",
         "id": 98131,
         "lastName": "Carpenter II",
         "partyName": "Libertarian",
-        "votes": 122
+        "votes": 130
       },
       {
         "elected": false,
@@ -2583,15 +2646,15 @@
           "estimatedVotesHigh": 7136,
           "estimatedVotesLow": 5838,
           "estimatedVotesMid": 6487,
-          "turnoutHigh": 88,
-          "turnoutLow": 107.57,
-          "turnoutMid": 96.81
+          "turnoutHigh": 91.73,
+          "turnoutLow": 112.13,
+          "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 67566,
         "lastName": "Amos",
         "partyName": "Republican",
-        "votes": 3980
+        "votes": 4273
       },
       {
         "elected": false,
@@ -2599,15 +2662,15 @@
           "estimatedVotesHigh": 7136,
           "estimatedVotesLow": 5838,
           "estimatedVotesMid": 6487,
-          "turnoutHigh": 88,
-          "turnoutLow": 107.57,
-          "turnoutMid": 96.81
+          "turnoutHigh": 91.73,
+          "turnoutLow": 112.13,
+          "turnoutMid": 99
         },
         "firstName": "Gina",
         "id": 67567,
         "lastName": "Milum",
         "partyName": "Democratic",
-        "votes": 2178
+        "votes": 2143
       }
     ],
     "district": "27",
@@ -2615,7 +2678,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:59:16.773Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2625,7 +2689,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6280,
+    "totalVotes": 6546,
     "year": 2024
   },
   {
@@ -2653,6 +2717,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2675,15 +2740,15 @@
           "estimatedVotesHigh": 6081,
           "estimatedVotesLow": 4976,
           "estimatedVotesMid": 5528,
-          "turnoutHigh": 88.03,
-          "turnoutLow": 107.58,
-          "turnoutMid": 96.83
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
         },
         "firstName": "Henry",
         "id": 19414,
         "lastName": "Dillon",
         "partyName": "Republican",
-        "votes": 5217
+        "votes": 4702
       },
       {
         "elected": false,
@@ -2691,15 +2756,15 @@
           "estimatedVotesHigh": 6081,
           "estimatedVotesLow": 4976,
           "estimatedVotesMid": 5528,
-          "turnoutHigh": 88.03,
-          "turnoutLow": 107.58,
-          "turnoutMid": 96.83
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
         },
         "firstName": "Wayne",
         "id": 67570,
         "lastName": "Williamson",
         "partyName": "Democratic",
-        "votes": 136
+        "votes": 826
       }
     ],
     "district": "29",
@@ -2707,7 +2772,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:25:16.448Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2717,7 +2783,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 5353,
+    "totalVotes": 5528,
     "year": 2024
   },
   {
@@ -2729,15 +2795,15 @@
           "estimatedVotesHigh": 7153,
           "estimatedVotesLow": 5853,
           "estimatedVotesMid": 6503,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 91.63,
+          "turnoutLow": 111.98,
+          "turnoutMid": 99
         },
-        "firstName": "Jeff",
-        "id": 67572,
-        "lastName": "Eldridge",
-        "partyName": "Republican",
-        "votes": 5990
+        "firstName": "Britney",
+        "id": 67571,
+        "lastName": "Brogan",
+        "partyName": "Democratic",
+        "votes": 1505
       },
       {
         "elected": false,
@@ -2745,15 +2811,15 @@
           "estimatedVotesHigh": 7153,
           "estimatedVotesLow": 5853,
           "estimatedVotesMid": 6503,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 91.63,
+          "turnoutLow": 111.98,
+          "turnoutMid": 99
         },
-        "firstName": "Britney",
-        "id": 67571,
-        "lastName": "Brogan",
-        "partyName": "Democratic",
-        "votes": 314
+        "firstName": "Jeff",
+        "id": 67572,
+        "lastName": "Eldridge",
+        "partyName": "Republican",
+        "votes": 5049
       }
     ],
     "district": "30",
@@ -2761,7 +2827,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:55:17.063Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2771,7 +2838,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6304,
+    "totalVotes": 6554,
     "year": 2024
   },
   {
@@ -2799,6 +2866,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2821,15 +2889,15 @@
           "estimatedVotesHigh": 7404,
           "estimatedVotesLow": 6058,
           "estimatedVotesMid": 6731,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "April",
         "id": 67573,
         "lastName": "Estep",
         "partyName": "Democratic",
-        "votes": 194
+        "votes": 1693
       },
       {
         "elected": false,
@@ -2837,15 +2905,15 @@
           "estimatedVotesHigh": 7404,
           "estimatedVotesLow": 6058,
           "estimatedVotesMid": 6731,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Josh",
         "id": 19421,
         "lastName": "Holstein",
         "partyName": "Republican",
-        "votes": 6332
+        "votes": 5038
       }
     ],
     "district": "32",
@@ -2853,7 +2921,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:26:17.425Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:13:39.469Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2863,7 +2932,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6526,
+    "totalVotes": 6731,
     "year": 2024
   },
   {
@@ -2875,15 +2944,15 @@
           "estimatedVotesHigh": 7858,
           "estimatedVotesLow": 6430,
           "estimatedVotesMid": 7144,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
-        "firstName": "Jordan",
-        "id": 19422,
-        "lastName": "Bridges",
-        "partyName": "Republican",
-        "votes": 6790
+        "firstName": "George",
+        "id": 19311,
+        "lastName": "Howes",
+        "partyName": "Democratic",
+        "votes": 1401
       },
       {
         "elected": false,
@@ -2891,15 +2960,15 @@
           "estimatedVotesHigh": 7858,
           "estimatedVotesLow": 6430,
           "estimatedVotesMid": 7144,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
-        "firstName": "George",
-        "id": 19311,
-        "lastName": "Howes",
-        "partyName": "Democratic",
-        "votes": 136
+        "firstName": "Jordan",
+        "id": 19422,
+        "lastName": "Bridges",
+        "partyName": "Republican",
+        "votes": 5743
       }
     ],
     "district": "33",
@@ -2907,7 +2976,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:08:16.320Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2917,7 +2987,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6926,
+    "totalVotes": 7144,
     "year": 2024
   },
   {
@@ -2945,6 +3015,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2983,6 +3054,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3005,15 +3077,15 @@
           "estimatedVotesHigh": 5963,
           "estimatedVotesLow": 4879,
           "estimatedVotesMid": 5421,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tiffany",
         "id": 19242,
         "lastName": "Clemins",
         "partyName": "Democratic",
-        "votes": 156
+        "votes": 1279
       },
       {
         "elected": false,
@@ -3021,15 +3093,15 @@
           "estimatedVotesHigh": 5963,
           "estimatedVotesLow": 4879,
           "estimatedVotesMid": 5421,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.92
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "S. David",
         "id": 98132,
         "lastName": "Green",
         "partyName": "Republican",
-        "votes": 5098
+        "votes": 4142
       }
     ],
     "district": "36",
@@ -3037,7 +3109,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:24:17.130Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:24:59.611Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3047,7 +3120,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 5254,
+    "totalVotes": 5421,
     "year": 2024
   },
   {
@@ -3059,15 +3132,15 @@
           "estimatedVotesHigh": 7459,
           "estimatedVotesLow": 6103,
           "estimatedVotesMid": 6781,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.85,
+          "turnoutLow": 112.26,
+          "turnoutMid": 99
         },
-        "firstName": "Marty",
-        "id": 8742,
-        "lastName": "Gearheart",
-        "partyName": "Republican",
-        "votes": 6444
+        "firstName": "Polla",
+        "id": 67576,
+        "lastName": "Rumberg",
+        "partyName": "Democratic",
+        "votes": 1770
       },
       {
         "elected": false,
@@ -3075,15 +3148,15 @@
           "estimatedVotesHigh": 7459,
           "estimatedVotesLow": 6103,
           "estimatedVotesMid": 6781,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.85,
+          "turnoutLow": 112.26,
+          "turnoutMid": 99
         },
-        "firstName": "Polla",
-        "id": 67576,
-        "lastName": "Rumberg",
-        "partyName": "Democratic",
-        "votes": 129
+        "firstName": "Marty",
+        "id": 8742,
+        "lastName": "Gearheart",
+        "partyName": "Republican",
+        "votes": 5081
       }
     ],
     "district": "37",
@@ -3091,7 +3164,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:16:17.338Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:39:07.646Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3101,7 +3175,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6573,
+    "totalVotes": 6851,
     "year": 2024
   },
   {
@@ -3113,15 +3187,15 @@
           "estimatedVotesHigh": 7305,
           "estimatedVotesLow": 5977,
           "estimatedVotesMid": 6641,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Joe",
         "id": 67577,
         "lastName": "Ellington Jr.",
         "partyName": "Republican",
-        "votes": 6245
+        "votes": 5198
       },
       {
         "elected": false,
@@ -3129,15 +3203,15 @@
           "estimatedVotesHigh": 7305,
           "estimatedVotesLow": 5977,
           "estimatedVotesMid": 6641,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Randa",
         "id": 67578,
         "lastName": "Faulkner",
         "partyName": "Democratic",
-        "votes": 192
+        "votes": 1443
       }
     ],
     "district": "38",
@@ -3145,7 +3219,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:39:17.361Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:32:18.280Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3155,7 +3230,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6437,
+    "totalVotes": 6641,
     "year": 2024
   },
   {
@@ -3167,15 +3242,15 @@
           "estimatedVotesHigh": 8403,
           "estimatedVotesLow": 6875,
           "estimatedVotesMid": 7639,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
         },
         "firstName": "Neal",
         "id": 67579,
         "lastName": "Vestal",
         "partyName": "Democratic",
-        "votes": 294
+        "votes": 1467
       },
       {
         "elected": false,
@@ -3183,15 +3258,15 @@
           "estimatedVotesHigh": 8403,
           "estimatedVotesLow": 6875,
           "estimatedVotesMid": 7639,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 91.1,
+          "turnoutLow": 111.35,
+          "turnoutMid": 99
         },
         "firstName": "Doug",
         "id": 789,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 7112
+        "votes": 6188
       }
     ],
     "district": "39",
@@ -3199,7 +3274,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:03:17.440Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:17:48.642Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3209,7 +3285,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7406,
+    "totalVotes": 7655,
     "year": 2024
   },
   {
@@ -3221,15 +3297,15 @@
           "estimatedVotesHigh": 9391,
           "estimatedVotesLow": 7684,
           "estimatedVotesMid": 8537,
-          "turnoutHigh": 88.05,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 92.32,
+          "turnoutLow": 112.83,
+          "turnoutMid": 99
         },
         "firstName": "Roy",
         "id": 19429,
         "lastName": "Cooper",
         "partyName": "Republican",
-        "votes": 7967
+        "votes": 6561
       },
       {
         "elected": false,
@@ -3237,15 +3313,15 @@
           "estimatedVotesHigh": 9391,
           "estimatedVotesLow": 7684,
           "estimatedVotesMid": 8537,
-          "turnoutHigh": 88.05,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 92.32,
+          "turnoutLow": 112.83,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 67581,
         "lastName": "Mcneely",
         "partyName": "Democratic",
-        "votes": 302
+        "votes": 2109
       }
     ],
     "district": "40",
@@ -3253,7 +3329,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:24:17.130Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3263,7 +3340,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8269,
+    "totalVotes": 8670,
     "year": 2024
   },
   {
@@ -3275,15 +3352,15 @@
           "estimatedVotesHigh": 9263,
           "estimatedVotesLow": 7580,
           "estimatedVotesMid": 8421,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.19,
+          "turnoutMid": 99
         },
         "firstName": "Jordan",
         "id": 19430,
         "lastName": "Maynor",
         "partyName": "Republican",
-        "votes": 7861
+        "votes": 6870
       },
       {
         "elected": false,
@@ -3291,15 +3368,15 @@
           "estimatedVotesHigh": 9263,
           "estimatedVotesLow": 7580,
           "estimatedVotesMid": 8421,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.86
+          "turnoutHigh": 90.99,
+          "turnoutLow": 111.19,
+          "turnoutMid": 99
         },
         "firstName": "Anna",
         "id": 67582,
         "lastName": "Ferraraccio",
         "partyName": "Democratic",
-        "votes": 296
+        "votes": 1558
       }
     ],
     "district": "41",
@@ -3307,7 +3384,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:22:17.641Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:06.673Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3317,7 +3395,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8157,
+    "totalVotes": 8428,
     "year": 2024
   },
   {
@@ -3345,6 +3423,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3383,6 +3462,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3405,15 +3485,15 @@
           "estimatedVotesHigh": 7873,
           "estimatedVotesLow": 6441,
           "estimatedVotesMid": 7157,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Tony",
         "id": 19319,
         "lastName": "Martin",
         "partyName": "Democratic",
-        "votes": 206
+        "votes": 3105
       },
       {
         "elected": false,
@@ -3421,15 +3501,15 @@
           "estimatedVotesHigh": 7873,
           "estimatedVotesLow": 6441,
           "estimatedVotesMid": 7157,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Carl",
         "id": 67584,
         "lastName": "Roop",
         "partyName": "Republican",
-        "votes": 6732
+        "votes": 4052
       }
     ],
     "district": "44",
@@ -3437,7 +3517,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:32:17.530Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3447,7 +3528,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6938,
+    "totalVotes": 7157,
     "year": 2024
   },
   {
@@ -3475,6 +3556,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3497,15 +3579,15 @@
           "estimatedVotesHigh": 8007,
           "estimatedVotesLow": 6551,
           "estimatedVotesMid": 7279,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.88
+          "turnoutHigh": 65.72,
+          "turnoutLow": 80.32,
+          "turnoutMid": 72.29
         },
         "firstName": "Paul",
         "id": 19325,
         "lastName": "Detch",
         "partyName": "Democratic",
-        "votes": 319
+        "votes": 1636
       },
       {
         "elected": false,
@@ -3513,15 +3595,15 @@
           "estimatedVotesHigh": 8007,
           "estimatedVotesLow": 6551,
           "estimatedVotesMid": 7279,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.88
+          "turnoutHigh": 65.72,
+          "turnoutLow": 80.32,
+          "turnoutMid": 72.29
         },
         "firstName": "Jeff",
         "id": 67585,
         "lastName": "Campbell",
         "partyName": "Republican",
-        "votes": 6733
+        "votes": 3626
       }
     ],
     "district": "46",
@@ -3529,7 +3611,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:20:16.905Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3539,7 +3622,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7052,
+    "totalVotes": 5262,
     "year": 2024
   },
   {
@@ -3551,15 +3634,15 @@
           "estimatedVotesHigh": 8801,
           "estimatedVotesLow": 7201,
           "estimatedVotesMid": 8001,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 88.54,
+          "turnoutLow": 108.21,
+          "turnoutMid": 97.39
         },
         "firstName": "Ray",
         "id": 67588,
         "lastName": "Canterbury",
         "partyName": "Republican",
-        "votes": 7371
+        "votes": 5632
       },
       {
         "elected": false,
@@ -3567,15 +3650,15 @@
           "estimatedVotesHigh": 8801,
           "estimatedVotesLow": 7201,
           "estimatedVotesMid": 8001,
-          "turnoutHigh": 88.07,
-          "turnoutLow": 107.64,
-          "turnoutMid": 96.88
+          "turnoutHigh": 88.54,
+          "turnoutLow": 108.21,
+          "turnoutMid": 97.39
         },
         "firstName": "Kayla",
         "id": 67589,
         "lastName": "Mccoy",
         "partyName": "Democratic",
-        "votes": 380
+        "votes": 2160
       }
     ],
     "district": "47",
@@ -3583,7 +3666,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:34:18.585Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3593,7 +3677,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7751,
+    "totalVotes": 7792,
     "year": 2024
   },
   {
@@ -3605,15 +3689,15 @@
           "estimatedVotesHigh": 6808,
           "estimatedVotesLow": 5572,
           "estimatedVotesMid": 6190,
-          "turnoutHigh": 88.01,
-          "turnoutLow": 107.54,
-          "turnoutMid": 96.8
+          "turnoutHigh": 91.36,
+          "turnoutLow": 111.63,
+          "turnoutMid": 99
         },
         "firstName": "Devin",
         "id": 67593,
         "lastName": "Spinks",
         "partyName": "Democratic",
-        "votes": 204
+        "votes": 1243
       },
       {
         "elected": false,
@@ -3621,15 +3705,15 @@
           "estimatedVotesHigh": 6808,
           "estimatedVotesLow": 5572,
           "estimatedVotesMid": 6190,
-          "turnoutHigh": 88.01,
-          "turnoutLow": 107.54,
-          "turnoutMid": 96.8
+          "turnoutHigh": 91.36,
+          "turnoutLow": 111.63,
+          "turnoutMid": 99
         },
         "firstName": "Thomas",
         "id": 67592,
         "lastName": "Clark",
         "partyName": "Republican",
-        "votes": 5788
+        "votes": 4977
       }
     ],
     "district": "48",
@@ -3637,7 +3721,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:08:18.425Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3647,7 +3732,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 5992,
+    "totalVotes": 6220,
     "year": 2024
   },
   {
@@ -3659,15 +3744,15 @@
           "estimatedVotesHigh": 7879,
           "estimatedVotesLow": 6447,
           "estimatedVotesMid": 7163,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.93
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jean",
         "id": 67595,
         "lastName": "Nutter",
         "partyName": "Democratic",
-        "votes": 206
+        "votes": 1354
       },
       {
         "elected": false,
@@ -3675,15 +3760,15 @@
           "estimatedVotesHigh": 7879,
           "estimatedVotesLow": 6447,
           "estimatedVotesMid": 7163,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.93
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Stanley",
         "id": 67594,
         "lastName": "Adkins",
         "partyName": "Republican",
-        "votes": 6737
+        "votes": 5809
       }
     ],
     "district": "49",
@@ -3691,7 +3776,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:29:17.855Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:26:35.925Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3701,7 +3787,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6943,
+    "totalVotes": 7163,
     "year": 2024
   },
   {
@@ -3713,31 +3799,15 @@
           "estimatedVotesHigh": 6321,
           "estimatedVotesLow": 5171,
           "estimatedVotesMid": 5746,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.9
-        },
-        "firstName": "Scotty",
-        "id": 98133,
-        "lastName": "Bowman",
-        "partyName": "No Party Affiliation",
-        "votes": 109
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6321,
-          "estimatedVotesLow": 5171,
-          "estimatedVotesMid": 5746,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.9
+          "turnoutHigh": 90.89,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Jerry",
         "id": 67596,
         "lastName": "Allen",
         "partyName": "Democratic",
-        "votes": 2228
+        "votes": 1887
       },
       {
         "elected": false,
@@ -3745,15 +3815,31 @@
           "estimatedVotesHigh": 6321,
           "estimatedVotesLow": 5171,
           "estimatedVotesMid": 5746,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.9
+          "turnoutHigh": 90.89,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 67597,
         "lastName": "Pritt",
         "partyName": "Republican",
-        "votes": 3231
+        "votes": 3751
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6321,
+          "estimatedVotesLow": 5171,
+          "estimatedVotesMid": 5746,
+          "turnoutHigh": 90.89,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
+        },
+        "firstName": "Scotty",
+        "id": 98133,
+        "lastName": "Bowman",
+        "partyName": "No Party Affiliation",
+        "votes": 107
       }
     ],
     "district": "50",
@@ -3761,7 +3847,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:54:16.951Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:31:29.553Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3771,7 +3858,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 5568,
+    "totalVotes": 5745,
     "year": 2024
   },
   {
@@ -3799,6 +3886,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3821,15 +3909,15 @@
           "estimatedVotesHigh": 7839,
           "estimatedVotesLow": 6414,
           "estimatedVotesMid": 7126,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.62,
-          "turnoutMid": 96.87
+          "turnoutHigh": 91.49,
+          "turnoutLow": 111.82,
+          "turnoutMid": 99
         },
-        "firstName": "Tresa",
-        "id": 67601,
-        "lastName": "Howell",
-        "partyName": "Republican",
-        "votes": 5428
+        "firstName": "Thomas",
+        "id": 67603,
+        "lastName": "Jones",
+        "partyName": "Democratic",
+        "votes": 2754
       },
       {
         "elected": false,
@@ -3837,15 +3925,15 @@
           "estimatedVotesHigh": 7839,
           "estimatedVotesLow": 6414,
           "estimatedVotesMid": 7126,
-          "turnoutHigh": 88.06,
-          "turnoutLow": 107.62,
-          "turnoutMid": 96.87
+          "turnoutHigh": 91.49,
+          "turnoutLow": 111.82,
+          "turnoutMid": 99
         },
-        "firstName": "Thomas",
-        "id": 67603,
-        "lastName": "Jones",
-        "partyName": "Democratic",
-        "votes": 1475
+        "firstName": "Tresa",
+        "id": 67601,
+        "lastName": "Howell",
+        "partyName": "Republican",
+        "votes": 4418
       }
     ],
     "district": "52",
@@ -3853,7 +3941,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:21:17.856Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:35:46.941Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3863,7 +3952,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6903,
+    "totalVotes": 7172,
     "year": 2024
   },
   {
@@ -3875,15 +3964,15 @@
           "estimatedVotesHigh": 7681,
           "estimatedVotesLow": 6285,
           "estimatedVotesMid": 6983,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tristan",
         "id": 67604,
         "lastName": "Leavitt",
         "partyName": "Republican",
-        "votes": 5891
+        "votes": 4053
       },
       {
         "elected": false,
@@ -3891,15 +3980,15 @@
           "estimatedVotesHigh": 7681,
           "estimatedVotesLow": 6285,
           "estimatedVotesMid": 6983,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Chris",
         "id": 10290,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 878
+        "votes": 2930
       }
     ],
     "district": "53",
@@ -3907,7 +3996,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:01:16.804Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:06.673Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3917,7 +4007,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6769,
+    "totalVotes": 6983,
     "year": 2024
   },
   {
@@ -3929,15 +4019,15 @@
           "estimatedVotesHigh": 7324,
           "estimatedVotesLow": 5992,
           "estimatedVotesMid": 6658,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 19334,
         "lastName": "Pushkin",
         "partyName": "Democratic",
-        "votes": 515
+        "votes": 4541
       },
       {
         "elected": false,
@@ -3945,15 +4035,15 @@
           "estimatedVotesHigh": 7324,
           "estimatedVotesLow": 5992,
           "estimatedVotesMid": 6658,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Julien",
         "id": 19452,
         "lastName": "Aklei",
         "partyName": "Republican",
-        "votes": 5940
+        "votes": 2117
       }
     ],
     "district": "54",
@@ -3961,7 +4051,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:08:18.425Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:56.347Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3971,7 +4062,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6455,
+    "totalVotes": 6658,
     "year": 2024
   },
   {
@@ -3983,15 +4074,15 @@
           "estimatedVotesHigh": 9153,
           "estimatedVotesLow": 7489,
           "estimatedVotesMid": 8321,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.66,
-          "turnoutMid": 96.9
+          "turnoutHigh": 91.84,
+          "turnoutLow": 112.24,
+          "turnoutMid": 99
         },
-        "firstName": "Linda",
-        "id": 67606,
-        "lastName": "Bodie",
-        "partyName": "Democratic",
-        "votes": 321
+        "firstName": "JB",
+        "id": 67605,
+        "lastName": "Akers",
+        "partyName": "Republican",
+        "votes": 4324
       },
       {
         "elected": false,
@@ -3999,15 +4090,15 @@
           "estimatedVotesHigh": 9153,
           "estimatedVotesLow": 7489,
           "estimatedVotesMid": 8321,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.66,
-          "turnoutMid": 96.9
+          "turnoutHigh": 91.84,
+          "turnoutLow": 112.24,
+          "turnoutMid": 99
         },
-        "firstName": "JB",
-        "id": 67605,
-        "lastName": "Akers",
-        "partyName": "Republican",
-        "votes": 7742
+        "firstName": "Linda",
+        "id": 67606,
+        "lastName": "Bodie",
+        "partyName": "Democratic",
+        "votes": 4082
       }
     ],
     "district": "55",
@@ -4015,7 +4106,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:28:17.014Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:33:55.227Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4025,7 +4117,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8063,
+    "totalVotes": 8406,
     "year": 2024
   },
   {
@@ -4037,15 +4129,15 @@
           "estimatedVotesHigh": 9182,
           "estimatedVotesLow": 7512,
           "estimatedVotesMid": 8347,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Andrew",
         "id": 45307,
         "lastName": "Anderson",
         "partyName": "Republican",
-        "votes": 7609
+        "votes": 4192
       },
       {
         "elected": false,
@@ -4053,15 +4145,15 @@
           "estimatedVotesHigh": 9182,
           "estimatedVotesLow": 7512,
           "estimatedVotesMid": 8347,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.96
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Kayla",
         "id": 19336,
         "lastName": "Young",
         "partyName": "Democratic",
-        "votes": 484
+        "votes": 4155
       }
     ],
     "district": "56",
@@ -4069,7 +4161,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:11:16.049Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:24:59.611Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4079,7 +4172,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8093,
+    "totalVotes": 8347,
     "year": 2024
   },
   {
@@ -4091,15 +4184,15 @@
           "estimatedVotesHigh": 8584,
           "estimatedVotesLow": 7024,
           "estimatedVotesMid": 7804,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 91.41,
+          "turnoutLow": 111.72,
+          "turnoutMid": 99
         },
         "firstName": "Hollis",
         "id": 67608,
         "lastName": "Lewis",
         "partyName": "Democratic",
-        "votes": 6811
+        "votes": 4216
       },
       {
         "elected": false,
@@ -4107,15 +4200,15 @@
           "estimatedVotesHigh": 8584,
           "estimatedVotesLow": 7024,
           "estimatedVotesMid": 7804,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 91.41,
+          "turnoutLow": 111.72,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 67607,
         "lastName": "Carter",
         "partyName": "Republican",
-        "votes": 755
+        "votes": 3631
       }
     ],
     "district": "57",
@@ -4123,7 +4216,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:55:17.063Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:29:50.837Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4133,7 +4227,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7566,
+    "totalVotes": 7847,
     "year": 2024
   },
   {
@@ -4161,6 +4255,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4199,6 +4294,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4237,6 +4333,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4275,6 +4372,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4313,6 +4411,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4351,6 +4450,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4389,6 +4489,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4411,15 +4512,15 @@
           "estimatedVotesHigh": 7874,
           "estimatedVotesLow": 6442,
           "estimatedVotesMid": 7158,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Carl",
         "id": 19469,
         "lastName": "Martin",
         "partyName": "Republican",
-        "votes": 6733
+        "votes": 5336
       },
       {
         "elected": false,
@@ -4427,15 +4528,15 @@
           "estimatedVotesHigh": 7874,
           "estimatedVotesLow": 6442,
           "estimatedVotesMid": 7158,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Matthew",
         "id": 67612,
         "lastName": "Kerner",
         "partyName": "Democratic",
-        "votes": 206
+        "votes": 1822
       }
     ],
     "district": "65",
@@ -4443,7 +4544,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:06:16.916Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:24:59.611Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4453,7 +4555,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6939,
+    "totalVotes": 7158,
     "year": 2024
   },
   {
@@ -4465,15 +4567,15 @@
           "estimatedVotesHigh": 7207,
           "estimatedVotesLow": 5897,
           "estimatedVotesMid": 6552,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jonathan",
         "id": 67613,
         "lastName": "Kyle",
         "partyName": "Republican",
-        "votes": 6054
+        "votes": 5037
       },
       {
         "elected": false,
@@ -4481,15 +4583,15 @@
           "estimatedVotesHigh": 7207,
           "estimatedVotesLow": 5897,
           "estimatedVotesMid": 6552,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.65,
-          "turnoutMid": 96.89
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Dama",
         "id": 67614,
         "lastName": "Nestor",
         "partyName": "Democratic",
-        "votes": 294
+        "votes": 1515
       }
     ],
     "district": "66",
@@ -4497,7 +4599,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:42:16.761Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4507,7 +4610,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6348,
+    "totalVotes": 6552,
     "year": 2024
   },
   {
@@ -4519,15 +4622,15 @@
           "estimatedVotesHigh": 9307,
           "estimatedVotesLow": 7615,
           "estimatedVotesMid": 8461,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 91.3,
+          "turnoutLow": 111.58,
+          "turnoutMid": 99
         },
-        "firstName": "Cody",
-        "id": 19345,
-        "lastName": "Thompson",
-        "partyName": "Democratic",
-        "votes": 283
+        "firstName": "Elias",
+        "id": 19471,
+        "lastName": "Coop-Gonzalez",
+        "partyName": "Republican",
+        "votes": 6230
       },
       {
         "elected": false,
@@ -4535,15 +4638,15 @@
           "estimatedVotesHigh": 9307,
           "estimatedVotesLow": 7615,
           "estimatedVotesMid": 8461,
-          "turnoutHigh": 88.09,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.9
+          "turnoutHigh": 91.3,
+          "turnoutLow": 111.58,
+          "turnoutMid": 99
         },
-        "firstName": "Elias",
-        "id": 19471,
-        "lastName": "Coop-Gonzalez",
-        "partyName": "Republican",
-        "votes": 7916
+        "firstName": "Cody",
+        "id": 19345,
+        "lastName": "Thompson",
+        "partyName": "Democratic",
+        "votes": 2267
       }
     ],
     "district": "67",
@@ -4551,7 +4654,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:44:16.057Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:55.368Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4561,7 +4665,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8199,
+    "totalVotes": 8497,
     "year": 2024
   },
   {
@@ -4589,6 +4693,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4627,6 +4732,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4649,15 +4755,15 @@
           "estimatedVotesHigh": 8152,
           "estimatedVotesLow": 6670,
           "estimatedVotesMid": 7411,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Mickey",
         "id": 19478,
         "lastName": "Petitto",
         "partyName": "Republican",
-        "votes": 6971
+        "votes": 4681
       },
       {
         "elected": false,
@@ -4665,15 +4771,15 @@
           "estimatedVotesHigh": 8152,
           "estimatedVotesLow": 6670,
           "estimatedVotesMid": 7411,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Shannon",
         "id": 98134,
         "lastName": "Welsh",
         "partyName": "Democratic",
-        "votes": 214
+        "votes": 2730
       }
     ],
     "district": "70",
@@ -4681,7 +4787,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:02:16.124Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4691,7 +4798,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7185,
+    "totalVotes": 7411,
     "year": 2024
   },
   {
@@ -4719,6 +4826,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4757,6 +4865,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4795,6 +4904,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4817,15 +4927,15 @@
           "estimatedVotesHigh": 8285,
           "estimatedVotesLow": 6779,
           "estimatedVotesMid": 7532,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 91.56,
+          "turnoutLow": 111.9,
+          "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 67620,
         "lastName": "Devault",
         "partyName": "Republican",
-        "votes": 6208
+        "votes": 5339
       },
       {
         "elected": false,
@@ -4833,15 +4943,15 @@
           "estimatedVotesHigh": 8285,
           "estimatedVotesLow": 6779,
           "estimatedVotesMid": 7532,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 91.56,
+          "turnoutLow": 111.9,
+          "turnoutMid": 99
         },
         "firstName": "Frankie",
         "id": 67619,
         "lastName": "Delapas",
         "partyName": "Democratic",
-        "votes": 1094
+        "votes": 2247
       }
     ],
     "district": "74",
@@ -4849,7 +4959,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:03:17.440Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:26:42.154Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4859,7 +4970,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7302,
+    "totalVotes": 7586,
     "year": 2024
   },
   {
@@ -4871,15 +4982,15 @@
           "estimatedVotesHigh": 8979,
           "estimatedVotesLow": 7347,
           "estimatedVotesMid": 8163,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 69.14,
+          "turnoutLow": 84.5,
+          "turnoutMid": 76.05
         },
         "firstName": "Phil",
         "id": 19485,
         "lastName": "Mallow",
         "partyName": "Republican",
-        "votes": 7599
+        "votes": 4036
       },
       {
         "elected": false,
@@ -4887,15 +4998,15 @@
           "estimatedVotesHigh": 8979,
           "estimatedVotesLow": 7347,
           "estimatedVotesMid": 8163,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 69.14,
+          "turnoutLow": 84.5,
+          "turnoutMid": 76.05
         },
         "firstName": "Stephanie",
         "id": 19354,
         "lastName": "Tomana",
         "partyName": "Democratic",
-        "votes": 315
+        "votes": 2172
       }
     ],
     "district": "75",
@@ -4903,7 +5014,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:44:16.057Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:16:52.156Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4913,7 +5025,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7914,
+    "totalVotes": 6208,
     "year": 2024
   },
   {
@@ -4925,15 +5037,15 @@
           "estimatedVotesHigh": 7972,
           "estimatedVotesLow": 6522,
           "estimatedVotesMid": 7247,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Jon",
         "id": 19486,
         "lastName": "Dodds",
         "partyName": "Republican",
-        "votes": 6676
+        "votes": 4354
       },
       {
         "elected": false,
@@ -4941,15 +5053,15 @@
           "estimatedVotesHigh": 7972,
           "estimatedVotesLow": 6522,
           "estimatedVotesMid": 7247,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Rick",
         "id": 25649,
         "lastName": "Garcia",
         "partyName": "Democratic",
-        "votes": 350
+        "votes": 2893
       }
     ],
     "district": "76",
@@ -4957,7 +5069,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:26:17.425Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:29:50.837Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4967,7 +5080,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7026,
+    "totalVotes": 7247,
     "year": 2024
   },
   {
@@ -4995,6 +5108,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5017,15 +5131,15 @@
           "estimatedVotesHigh": 9314,
           "estimatedVotesLow": 7620,
           "estimatedVotesMid": 8467,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Geno",
         "id": 19489,
         "lastName": "Chiarelli",
         "partyName": "Republican",
-        "votes": 1723
+        "votes": 5008
       },
       {
         "elected": false,
@@ -5033,15 +5147,15 @@
           "estimatedVotesHigh": 9314,
           "estimatedVotesLow": 7620,
           "estimatedVotesMid": 8467,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.73,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Diane",
         "id": 67622,
         "lastName": "Gaston",
         "partyName": "Democratic",
-        "votes": 6486
+        "votes": 3459
       }
     ],
     "district": "78",
@@ -5049,7 +5163,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:36:17.504Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5059,7 +5174,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 8209,
+    "totalVotes": 8467,
     "year": 2024
   },
   {
@@ -5087,6 +5202,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5109,15 +5225,15 @@
           "estimatedVotesHigh": 5874,
           "estimatedVotesLow": 4806,
           "estimatedVotesMid": 5340,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.74,
+          "turnoutMid": 99
         },
         "firstName": "Summer",
         "id": 67623,
         "lastName": "Hartley",
         "partyName": "Republican",
-        "votes": 4142
+        "votes": 2438
       },
       {
         "elected": false,
@@ -5125,15 +5241,15 @@
           "estimatedVotesHigh": 5874,
           "estimatedVotesLow": 4806,
           "estimatedVotesMid": 5340,
-          "turnoutHigh": 88.12,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.74,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 19360,
         "lastName": "Williams",
         "partyName": "Democratic",
-        "votes": 1034
+        "votes": 2932
       }
     ],
     "district": "80",
@@ -5141,7 +5257,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:32:17.530Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:17:36.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5151,7 +5268,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 5176,
+    "totalVotes": 5370,
     "year": 2024
   },
   {
@@ -5179,6 +5296,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5201,15 +5319,15 @@
           "estimatedVotesHigh": 8011,
           "estimatedVotesLow": 6555,
           "estimatedVotesMid": 7283,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 92.32,
+          "turnoutLow": 112.83,
+          "turnoutMid": 99
         },
-        "firstName": "David",
-        "id": 20590,
-        "lastName": "McCormick",
-        "partyName": "Republican",
-        "votes": 492
+        "firstName": "Bill",
+        "id": 67625,
+        "lastName": "Reger-Nash",
+        "partyName": "Democratic",
+        "votes": 3752
       },
       {
         "elected": false,
@@ -5217,15 +5335,15 @@
           "estimatedVotesHigh": 8011,
           "estimatedVotesLow": 6555,
           "estimatedVotesMid": 7283,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.7,
-          "turnoutMid": 96.94
+          "turnoutHigh": 92.32,
+          "turnoutLow": 112.83,
+          "turnoutMid": 99
         },
-        "firstName": "Bill",
-        "id": 67625,
-        "lastName": "Reger-Nash",
-        "partyName": "Democratic",
-        "votes": 6568
+        "firstName": "David",
+        "id": 20590,
+        "lastName": "McCormick",
+        "partyName": "Republican",
+        "votes": 3644
       }
     ],
     "district": "82",
@@ -5233,7 +5351,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:16:17.338Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:21:31.826Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5243,7 +5362,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7060,
+    "totalVotes": 7396,
     "year": 2024
   },
   {
@@ -5271,6 +5390,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5309,6 +5429,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5347,6 +5468,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5385,6 +5507,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5423,6 +5546,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5445,15 +5569,15 @@
           "estimatedVotesHigh": 7004,
           "estimatedVotesLow": 5730,
           "estimatedVotesMid": 6367,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.84
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
-        "firstName": "Rick",
-        "id": 19506,
-        "lastName": "Hillenbrand",
-        "partyName": "Republican",
-        "votes": 5923
+        "firstName": "Amanda",
+        "id": 67629,
+        "lastName": "Vincent",
+        "partyName": "Democratic",
+        "votes": 1211
       },
       {
         "elected": false,
@@ -5461,15 +5585,15 @@
           "estimatedVotesHigh": 7004,
           "estimatedVotesLow": 5730,
           "estimatedVotesMid": 6367,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.84
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
-        "firstName": "Amanda",
-        "id": 67629,
-        "lastName": "Vincent",
-        "partyName": "Democratic",
-        "votes": 243
+        "firstName": "Rick",
+        "id": 19506,
+        "lastName": "Hillenbrand",
+        "partyName": "Republican",
+        "votes": 5156
       }
     ],
     "district": "88",
@@ -5477,7 +5601,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:22:17.641Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:31:29.553Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5487,7 +5612,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6166,
+    "totalVotes": 6367,
     "year": 2024
   },
   {
@@ -5499,15 +5624,15 @@
           "estimatedVotesHigh": 8497,
           "estimatedVotesLow": 6951,
           "estimatedVotesMid": 7724,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.89
+          "turnoutHigh": 82.19,
+          "turnoutLow": 100.47,
+          "turnoutMid": 90.42
         },
         "firstName": "Alyson",
         "id": 67630,
         "lastName": "Reeves",
         "partyName": "Democratic",
-        "votes": 221
+        "votes": 1274
       },
       {
         "elected": false,
@@ -5515,15 +5640,15 @@
           "estimatedVotesHigh": 8497,
           "estimatedVotesLow": 6951,
           "estimatedVotesMid": 7724,
-          "turnoutHigh": 88.08,
-          "turnoutLow": 107.67,
-          "turnoutMid": 96.89
+          "turnoutHigh": 82.19,
+          "turnoutLow": 100.47,
+          "turnoutMid": 90.42
         },
         "firstName": "Darren",
         "id": 19508,
         "lastName": "Thorne",
         "partyName": "Republican",
-        "votes": 7263
+        "votes": 5710
       }
     ],
     "district": "89",
@@ -5531,7 +5656,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:16:17.338Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:41:10.459Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5541,7 +5667,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7484,
+    "totalVotes": 6984,
     "year": 2024
   },
   {
@@ -5569,6 +5695,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5607,6 +5734,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5645,6 +5773,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5683,6 +5812,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5721,6 +5851,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5743,15 +5874,15 @@
           "estimatedVotesHigh": 6771,
           "estimatedVotesLow": 5540,
           "estimatedVotesMid": 6155,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.22,
+          "turnoutMid": 99
         },
         "firstName": "Debi",
         "id": 19367,
         "lastName": "Carroll",
         "partyName": "Democratic",
-        "votes": 296
+        "votes": 2020
       },
       {
         "elected": false,
@@ -5759,15 +5890,15 @@
           "estimatedVotesHigh": 6771,
           "estimatedVotesLow": 5540,
           "estimatedVotesMid": 6155,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.69,
-          "turnoutMid": 96.93
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.22,
+          "turnoutMid": 99
         },
         "firstName": "Charles",
         "id": 45321,
         "lastName": "Horst",
         "partyName": "Republican",
-        "votes": 5670
+        "votes": 4197
       }
     ],
     "district": "95",
@@ -5775,7 +5906,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:59:16.773Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:26:35.925Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5785,7 +5917,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 5966,
+    "totalVotes": 6217,
     "year": 2024
   },
   {
@@ -5797,15 +5929,15 @@
           "estimatedVotesHigh": 7302,
           "estimatedVotesLow": 5974,
           "estimatedVotesMid": 6638,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Aniqua",
         "id": 67635,
         "lastName": "Lower",
         "partyName": "Democratic",
-        "votes": 449
+        "votes": 2041
       },
       {
         "elected": false,
@@ -5813,15 +5945,15 @@
           "estimatedVotesHigh": 7302,
           "estimatedVotesLow": 5974,
           "estimatedVotesMid": 6638,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.94
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Lisa",
         "id": 53892,
         "lastName": "White",
         "partyName": "Republican",
-        "votes": 5986
+        "votes": 4597
       }
     ],
     "district": "96",
@@ -5829,7 +5961,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:43:17.181Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:30:39.888Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5839,7 +5972,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6435,
+    "totalVotes": 6638,
     "year": 2024
   },
   {
@@ -5851,15 +5984,15 @@
           "estimatedVotesHigh": 7678,
           "estimatedVotesLow": 6282,
           "estimatedVotesMid": 6980,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.85
+          "turnoutHigh": 71.36,
+          "turnoutLow": 87.22,
+          "turnoutMid": 78.5
         },
         "firstName": "S.",
         "id": 98136,
         "lastName": "Anders",
         "partyName": "Republican",
-        "votes": 6308
+        "votes": 2918
       },
       {
         "elected": false,
@@ -5867,15 +6000,15 @@
           "estimatedVotesHigh": 7678,
           "estimatedVotesLow": 6282,
           "estimatedVotesMid": 6980,
-          "turnoutHigh": 88.04,
-          "turnoutLow": 107.61,
-          "turnoutMid": 96.85
+          "turnoutHigh": 71.36,
+          "turnoutLow": 87.22,
+          "turnoutMid": 78.5
         },
         "firstName": "Lucia",
         "id": 67639,
         "lastName": "Valentine",
         "partyName": "Democratic",
-        "votes": 452
+        "votes": 2561
       }
     ],
     "district": "97",
@@ -5883,7 +6016,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:25:16.448Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:32:18.280Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5893,7 +6027,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6760,
+    "totalVotes": 5479,
     "year": 2024
   },
   {
@@ -5905,15 +6039,15 @@
           "estimatedVotesHigh": 7345,
           "estimatedVotesLow": 6009,
           "estimatedVotesMid": 6677,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 92.78,
+          "turnoutLow": 113.41,
+          "turnoutMid": 99
         },
         "firstName": "Joe",
         "id": 67641,
         "lastName": "Funkhouser",
         "partyName": "Republican",
-        "votes": 2718
+        "votes": 4125
       },
       {
         "elected": false,
@@ -5921,15 +6055,15 @@
           "estimatedVotesHigh": 7345,
           "estimatedVotesLow": 6009,
           "estimatedVotesMid": 6677,
-          "turnoutHigh": 88.11,
-          "turnoutLow": 107.71,
-          "turnoutMid": 96.93
+          "turnoutHigh": 92.78,
+          "turnoutLow": 113.41,
+          "turnoutMid": 99
         },
         "firstName": "Troy",
         "id": 67642,
         "lastName": "Miller",
         "partyName": "Democratic",
-        "votes": 3754
+        "votes": 2690
       }
     ],
     "district": "98",
@@ -5937,7 +6071,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:53:16.484Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:34:09.842Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5947,7 +6082,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 6472,
+    "totalVotes": 6815,
     "year": 2024
   },
   {
@@ -5959,15 +6094,15 @@
           "estimatedVotesHigh": 8031,
           "estimatedVotesLow": 6571,
           "estimatedVotesMid": 7301,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Osmund",
-        "id": 67644,
-        "lastName": "Anderson",
-        "partyName": "Democratic",
-        "votes": 3610
+        "firstName": "Wayne",
+        "id": 19522,
+        "lastName": "Clark",
+        "partyName": "Republican",
+        "votes": 4101
       },
       {
         "elected": false,
@@ -5975,15 +6110,15 @@
           "estimatedVotesHigh": 8031,
           "estimatedVotesLow": 6571,
           "estimatedVotesMid": 7301,
-          "turnoutHigh": 88.13,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Wayne",
-        "id": 19522,
-        "lastName": "Clark",
-        "partyName": "Republican",
-        "votes": 3468
+        "firstName": "Osmund",
+        "id": 67644,
+        "lastName": "Anderson",
+        "partyName": "Democratic",
+        "votes": 3200
       }
     ],
     "district": "99",
@@ -5991,7 +6126,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:26:17.425Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:30:39.888Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6001,7 +6137,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7078,
+    "totalVotes": 7301,
     "year": 2024
   },
   {
@@ -6013,15 +6149,15 @@
           "estimatedVotesHigh": 8219,
           "estimatedVotesLow": 6725,
           "estimatedVotesMid": 7472,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "William",
         "id": 19524,
         "lastName": "Ridenour",
         "partyName": "Republican",
-        "votes": 6666
+        "votes": 4049
       },
       {
         "elected": false,
@@ -6029,15 +6165,15 @@
           "estimatedVotesHigh": 8219,
           "estimatedVotesLow": 6725,
           "estimatedVotesMid": 7472,
-          "turnoutHigh": 88.14,
-          "turnoutLow": 107.72,
-          "turnoutMid": 96.95
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Maria",
         "id": 67646,
         "lastName": "Russo",
         "partyName": "Democratic",
-        "votes": 578
+        "votes": 3423
       }
     ],
     "district": "100",
@@ -6045,7 +6181,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T17:55:17.063Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:23:22.619Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6055,7 +6192,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 7244,
+    "totalVotes": 7472,
     "year": 2024
   }
 ]

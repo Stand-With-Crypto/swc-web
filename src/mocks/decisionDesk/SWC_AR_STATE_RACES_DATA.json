@@ -8,15 +8,15 @@
           "estimatedVotesHigh": 279122,
           "estimatedVotesLow": 228373,
           "estimatedVotesMid": 253745,
-          "turnoutHigh": 89.1,
-          "turnoutLow": 108.9,
-          "turnoutMid": 98.01
+          "turnoutHigh": 6.57,
+          "turnoutLow": 8.03,
+          "turnoutMid": 7.22
         },
         "firstName": "Rick",
         "id": 10947,
         "lastName": "Crawford",
         "partyName": "Republican",
-        "votes": 168474
+        "votes": 14315
       },
       {
         "elected": false,
@@ -24,15 +24,15 @@
           "estimatedVotesHigh": 279122,
           "estimatedVotesLow": 228373,
           "estimatedVotesMid": 253745,
-          "turnoutHigh": 89.1,
-          "turnoutLow": 108.9,
-          "turnoutMid": 98.01
+          "turnoutHigh": 6.57,
+          "turnoutLow": 8.03,
+          "turnoutMid": 7.22
         },
         "firstName": "Steven",
         "id": 45772,
         "lastName": "Parsons",
         "partyName": "Libertarian",
-        "votes": 4729
+        "votes": 355
       },
       {
         "elected": false,
@@ -40,15 +40,15 @@
           "estimatedVotesHigh": 279122,
           "estimatedVotesLow": 228373,
           "estimatedVotesMid": 253745,
-          "turnoutHigh": 89.1,
-          "turnoutLow": 108.9,
-          "turnoutMid": 98.01
+          "turnoutHigh": 6.57,
+          "turnoutLow": 8.03,
+          "turnoutMid": 7.22
         },
         "firstName": "Rodney",
         "id": 52537,
         "lastName": "Govens",
         "partyName": "Democratic",
-        "votes": 75487
+        "votes": 3663
       }
     ],
     "district": "1",
@@ -56,7 +56,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:16.798Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:28:14.279Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -66,7 +67,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 248690,
+    "totalVotes": 18333,
     "year": 2024
   },
   {
@@ -78,15 +79,15 @@
           "estimatedVotesHigh": 335437,
           "estimatedVotesLow": 274447,
           "estimatedVotesMid": 304942,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 1,
+          "turnoutLow": 1.22,
+          "turnoutMid": 1.1
         },
         "firstName": "Marcus",
         "id": 52538,
         "lastName": "Jones",
         "partyName": "Democratic",
-        "votes": 142014
+        "votes": 1086
       },
       {
         "elected": false,
@@ -94,15 +95,15 @@
           "estimatedVotesHigh": 335437,
           "estimatedVotesLow": 274447,
           "estimatedVotesMid": 304942,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 1,
+          "turnoutLow": 1.22,
+          "turnoutMid": 1.1
         },
         "firstName": "French",
         "id": 10950,
         "lastName": "Hill",
         "partyName": "Republican",
-        "votes": 156686
+        "votes": 2266
       }
     ],
     "district": "2",
@@ -110,7 +111,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:16.798Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:27:25.668Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -120,7 +122,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 298700,
+    "totalVotes": 3352,
     "year": 2024
   },
   {
@@ -132,47 +134,47 @@
           "estimatedVotesHigh": 296723,
           "estimatedVotesLow": 242773,
           "estimatedVotesMid": 269748,
-          "turnoutHigh": 89.59,
-          "turnoutLow": 109.5,
-          "turnoutMid": 98.55
-        },
-        "firstName": "Steve",
-        "id": 1066,
-        "lastName": "Womack",
-        "partyName": "Republican",
-        "votes": 158782
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 296723,
-          "estimatedVotesLow": 242773,
-          "estimatedVotesMid": 269748,
-          "turnoutHigh": 89.59,
-          "turnoutLow": 109.5,
-          "turnoutMid": 98.55
-        },
-        "firstName": "Bobby",
-        "id": 84982,
-        "lastName": "Wilson",
-        "partyName": "Libertarian",
-        "votes": 5272
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 296723,
-          "estimatedVotesLow": 242773,
-          "estimatedVotesMid": 269748,
-          "turnoutHigh": 89.59,
-          "turnoutLow": 109.5,
-          "turnoutMid": 98.55
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Caitlin",
         "id": 84981,
         "lastName": "Mattelin",
         "partyName": "Democratic",
-        "votes": 101771
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 296723,
+          "estimatedVotesLow": 242773,
+          "estimatedVotesMid": 269748,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Steve",
+        "id": 1066,
+        "lastName": "Womack",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 296723,
+          "estimatedVotesLow": 242773,
+          "estimatedVotesMid": 269748,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bobby",
+        "id": 84982,
+        "lastName": "Wilson",
+        "partyName": "Libertarian",
+        "votes": 0
       }
     ],
     "district": "3",
@@ -180,7 +182,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:16.798Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -190,7 +193,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 265825,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -199,50 +202,50 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 291052,
-          "estimatedVotesLow": 238130,
-          "estimatedVotesMid": 264591,
-          "turnoutHigh": 89.01,
-          "turnoutLow": 108.8,
-          "turnoutMid": 97.92
+          "estimatedVotesHigh": 290032,
+          "estimatedVotesLow": 237298,
+          "estimatedVotesMid": 263664,
+          "turnoutHigh": 9.31,
+          "turnoutLow": 11.38,
+          "turnoutMid": 10.24
         },
         "firstName": "John",
         "id": 84983,
         "lastName": "White",
         "partyName": "Independent",
-        "votes": 4874
+        "votes": 492
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 291052,
-          "estimatedVotesLow": 238130,
-          "estimatedVotesMid": 264591,
-          "turnoutHigh": 89.01,
-          "turnoutLow": 108.8,
-          "turnoutMid": 97.92
+          "estimatedVotesHigh": 290032,
+          "estimatedVotesLow": 237298,
+          "estimatedVotesMid": 263664,
+          "turnoutHigh": 9.31,
+          "turnoutLow": 11.38,
+          "turnoutMid": 10.24
         },
         "firstName": "Bruce",
         "id": 1067,
         "lastName": "Westerman",
         "partyName": "Republican",
-        "votes": 169548
+        "votes": 19804
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 291052,
-          "estimatedVotesLow": 238130,
-          "estimatedVotesMid": 264591,
-          "turnoutHigh": 89.01,
-          "turnoutLow": 108.8,
-          "turnoutMid": 97.92
+          "estimatedVotesHigh": 290032,
+          "estimatedVotesLow": 237298,
+          "estimatedVotesMid": 263664,
+          "turnoutHigh": 9.31,
+          "turnoutLow": 11.38,
+          "turnoutMid": 10.24
         },
         "firstName": "Risie",
         "id": 52540,
         "lastName": "Howard",
         "partyName": "Democratic",
-        "votes": 84654
+        "votes": 6701
       }
     ],
     "district": "4",
@@ -250,7 +253,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T20:54:16.798Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:28:14.279Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -260,7 +264,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 259076,
+    "totalVotes": 26997,
     "year": 2024
   },
   {
@@ -288,6 +292,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "154",
@@ -326,6 +331,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "154",
@@ -348,15 +354,15 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.9
+          "turnoutHigh": 2.9,
+          "turnoutLow": 3.54,
+          "turnoutMid": 3.19
         },
         "firstName": "John",
         "id": 21281,
         "lastName": "Thurston",
         "partyName": "Republican",
-        "votes": 663943
+        "votes": 26799
       },
       {
         "elected": false,
@@ -364,15 +370,15 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.9
+          "turnoutHigh": 2.9,
+          "turnoutLow": 3.54,
+          "turnoutMid": 3.19
         },
         "firstName": "John",
         "id": 52541,
         "lastName": "Pagan",
         "partyName": "Democratic",
-        "votes": 386987
+        "votes": 7319
       },
       {
         "elected": false,
@@ -380,15 +386,15 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.9
+          "turnoutHigh": 2.9,
+          "turnoutLow": 3.54,
+          "turnoutMid": 3.19
         },
         "firstName": "Michael",
         "id": 84925,
         "lastName": "Pakko",
         "partyName": "Libertarian",
-        "votes": 18367
+        "votes": 691
       }
     ],
     "district": "",
@@ -396,7 +402,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.995Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:27:25.668Z",
     "office": {
       "officeId": "146",
       "officeName": "Treasurer",
@@ -406,7 +413,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 1069297,
+    "totalVotes": 34809,
     "year": 2024
   },
   {
@@ -418,15 +425,15 @@
           "estimatedVotesHigh": 33612,
           "estimatedVotesLow": 27500,
           "estimatedVotesMid": 30556,
-          "turnoutHigh": 65.36,
-          "turnoutLow": 79.89,
-          "turnoutMid": 71.9
+          "turnoutHigh": 10.7,
+          "turnoutLow": 13.07,
+          "turnoutMid": 11.77
         },
         "firstName": "Asher",
         "id": 84926,
         "lastName": "Williams",
         "partyName": "Libertarian",
-        "votes": 594
+        "votes": 96
       },
       {
         "elected": false,
@@ -434,15 +441,15 @@
           "estimatedVotesHigh": 33612,
           "estimatedVotesLow": 27500,
           "estimatedVotesMid": 30556,
-          "turnoutHigh": 65.36,
-          "turnoutLow": 79.89,
-          "turnoutMid": 71.9
+          "turnoutHigh": 10.7,
+          "turnoutLow": 13.07,
+          "turnoutMid": 11.77
         },
         "firstName": "Ben",
         "id": 21309,
         "lastName": "Gilmore",
         "partyName": "Republican",
-        "votes": 21376
+        "votes": 3499
       }
     ],
     "district": "1",
@@ -450,7 +457,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:20:15.668Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:27:25.668Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -460,7 +468,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 21970,
+    "totalVotes": 3595,
     "year": 2024
   },
   {
@@ -472,15 +480,15 @@
           "estimatedVotesHigh": 29417,
           "estimatedVotesLow": 24067,
           "estimatedVotesMid": 26742,
-          "turnoutHigh": 64.92,
-          "turnoutLow": 79.35,
-          "turnoutMid": 71.42
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 84927,
         "lastName": "Lutmer",
         "partyName": "Libertarian",
-        "votes": 415
+        "votes": 0
       },
       {
         "elected": false,
@@ -488,15 +496,15 @@
           "estimatedVotesHigh": 29417,
           "estimatedVotesLow": 24067,
           "estimatedVotesMid": 26742,
-          "turnoutHigh": 64.92,
-          "turnoutLow": 79.35,
-          "turnoutMid": 71.42
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 21314,
         "lastName": "Crowell",
         "partyName": "Republican",
-        "votes": 18683
+        "votes": 0
       }
     ],
     "district": "3",
@@ -504,7 +512,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:21:13.931Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:34.247Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -514,7 +523,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 19098,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -526,15 +535,15 @@
           "estimatedVotesHigh": 31886,
           "estimatedVotesLow": 26089,
           "estimatedVotesMid": 28987,
-          "turnoutHigh": 67.76,
-          "turnoutLow": 82.81,
-          "turnoutMid": 74.53
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Lonny",
-        "id": 84928,
-        "lastName": "Goodwin",
-        "partyName": "Libertarian",
-        "votes": 432
+        "firstName": "Jimmy",
+        "id": 52543,
+        "lastName": "Hickey Jr.",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -542,15 +551,15 @@
           "estimatedVotesHigh": 31886,
           "estimatedVotesLow": 26089,
           "estimatedVotesMid": 28987,
-          "turnoutHigh": 67.76,
-          "turnoutLow": 82.81,
-          "turnoutMid": 74.53
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jimmy",
-        "id": 52543,
-        "lastName": "Hickey Jr.",
-        "partyName": "Republican",
-        "votes": 21173
+        "firstName": "Lonny",
+        "id": 84928,
+        "lastName": "Goodwin",
+        "partyName": "Libertarian",
+        "votes": 0
       }
     ],
     "district": "4",
@@ -558,7 +567,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:15.313Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -568,7 +578,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 21605,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -596,6 +606,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -634,6 +645,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -672,6 +684,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -710,6 +723,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -732,15 +746,15 @@
           "estimatedVotesHigh": 39569,
           "estimatedVotesLow": 32375,
           "estimatedVotesMid": 35972,
-          "turnoutHigh": 86.54,
-          "turnoutLow": 105.77,
-          "turnoutMid": 95.2
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maureen",
         "id": 52544,
         "lastName": "Skinner",
         "partyName": "Democratic",
-        "votes": 6358
+        "votes": 0
       },
       {
         "elected": false,
@@ -748,15 +762,15 @@
           "estimatedVotesHigh": 39569,
           "estimatedVotesLow": 32375,
           "estimatedVotesMid": 35972,
-          "turnoutHigh": 86.54,
-          "turnoutLow": 105.77,
-          "turnoutMid": 95.2
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 21326,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 27886
+        "votes": 0
       }
     ],
     "district": "17",
@@ -764,7 +778,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.995Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -774,7 +789,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 34244,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -802,6 +817,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -840,6 +856,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -862,15 +879,15 @@
           "estimatedVotesHigh": 29636,
           "estimatedVotesLow": 24248,
           "estimatedVotesMid": 26942,
-          "turnoutHigh": 88.25,
-          "turnoutLow": 107.86,
-          "turnoutMid": 97.08
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Erika",
-        "id": 52546,
-        "lastName": "Askeland",
-        "partyName": "Democratic",
-        "votes": 3400
+        "firstName": "Dan",
+        "id": 8293,
+        "lastName": "Sullivan",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -878,15 +895,15 @@
           "estimatedVotesHigh": 29636,
           "estimatedVotesLow": 24248,
           "estimatedVotesMid": 26942,
-          "turnoutHigh": 88.25,
-          "turnoutLow": 107.86,
-          "turnoutMid": 97.08
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Dan",
-        "id": 8293,
-        "lastName": "Sullivan",
-        "partyName": "Republican",
-        "votes": 22754
+        "firstName": "Erika",
+        "id": 52546,
+        "lastName": "Askeland",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "20",
@@ -894,7 +911,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.995Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -904,7 +922,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 26154,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -916,15 +934,15 @@
           "estimatedVotesHigh": 33634,
           "estimatedVotesLow": 27518,
           "estimatedVotesMid": 30576,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 21334,
         "lastName": "Payton",
         "partyName": "Republican",
-        "votes": 29471
+        "votes": 0
       },
       {
         "elected": false,
@@ -932,15 +950,15 @@
           "estimatedVotesHigh": 33634,
           "estimatedVotesLow": 27518,
           "estimatedVotesMid": 30576,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sandy",
         "id": 52547,
         "lastName": "Maier",
         "partyName": "Democratic",
-        "votes": 791
+        "votes": 0
       }
     ],
     "district": "22",
@@ -948,7 +966,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-25T01:17:52.723Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -958,7 +977,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 29933,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -986,6 +1005,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1008,15 +1028,15 @@
           "estimatedVotesHigh": 33791,
           "estimatedVotesLow": 27647,
           "estimatedVotesMid": 30719,
-          "turnoutHigh": 88.42,
-          "turnoutLow": 108.07,
-          "turnoutMid": 97.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michelle",
         "id": 52548,
         "lastName": "Justice",
         "partyName": "Democratic",
-        "votes": 967
+        "votes": 0
       },
       {
         "elected": false,
@@ -1024,15 +1044,15 @@
           "estimatedVotesHigh": 33791,
           "estimatedVotesLow": 27647,
           "estimatedVotesMid": 30719,
-          "turnoutHigh": 88.42,
-          "turnoutLow": 108.07,
-          "turnoutMid": 97.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Breanne",
         "id": 21337,
         "lastName": "Davis",
         "partyName": "Republican",
-        "votes": 28912
+        "votes": 0
       }
     ],
     "district": "25",
@@ -1040,7 +1060,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.995Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1050,7 +1071,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 29879,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1078,6 +1099,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1116,6 +1138,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1154,6 +1177,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "10",
@@ -1176,15 +1200,15 @@
           "estimatedVotesHigh": 40058,
           "estimatedVotesLow": 32774,
           "estimatedVotesMid": 36416,
-          "turnoutHigh": 89.41,
-          "turnoutLow": 109.28,
-          "turnoutMid": 98.35
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 21357,
         "lastName": "Dotson",
         "partyName": "Republican",
-        "votes": 33669
+        "votes": 0
       },
       {
         "elected": false,
@@ -1192,15 +1216,15 @@
           "estimatedVotesHigh": 40058,
           "estimatedVotesLow": 32774,
           "estimatedVotesMid": 36416,
-          "turnoutHigh": 89.41,
-          "turnoutLow": 109.28,
-          "turnoutMid": 98.35
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kaylee",
         "id": 52549,
         "lastName": "Wedgeworth",
         "partyName": "Democratic",
-        "votes": 2147
+        "votes": 0
       }
     ],
     "district": "34",
@@ -1208,7 +1232,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:07:14.626Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1218,7 +1243,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 35816,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1246,6 +1271,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1284,6 +1310,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1322,6 +1349,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1360,6 +1388,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1398,6 +1427,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -1420,15 +1450,15 @@
           "estimatedVotesHigh": 12549,
           "estimatedVotesLow": 10267,
           "estimatedVotesMid": 11408,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Harlan",
         "id": 21427,
         "lastName": "Breaux",
         "partyName": "Republican",
-        "votes": 6338
+        "votes": 0
       },
       {
         "elected": false,
@@ -1436,15 +1466,15 @@
           "estimatedVotesHigh": 12549,
           "estimatedVotesLow": 10267,
           "estimatedVotesMid": 11408,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dakota",
         "id": 45775,
         "lastName": "Logan",
         "partyName": "Libertarian",
-        "votes": 225
+        "votes": 0
       },
       {
         "elected": false,
@@ -1452,15 +1482,15 @@
           "estimatedVotesHigh": 12549,
           "estimatedVotesLow": 10267,
           "estimatedVotesMid": 11408,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rick",
         "id": 52552,
         "lastName": "Delaney",
         "partyName": "Democratic",
-        "votes": 4872
+        "votes": 0
       }
     ],
     "district": "6",
@@ -1468,7 +1498,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:12:13.757Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1478,7 +1509,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11435,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1490,15 +1521,15 @@
           "estimatedVotesHigh": 10717,
           "estimatedVotesLow": 8769,
           "estimatedVotesMid": 9743,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brit",
         "id": 21429,
         "lastName": "McKenzie",
         "partyName": "Republican",
-        "votes": 9162
+        "votes": 0
       },
       {
         "elected": false,
@@ -1506,15 +1537,15 @@
           "estimatedVotesHigh": 10717,
           "estimatedVotesLow": 8769,
           "estimatedVotesMid": 9743,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 52553,
         "lastName": "McPherson",
         "partyName": "Democratic",
-        "votes": 380
+        "votes": 0
       }
     ],
     "district": "7",
@@ -1522,7 +1553,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:56:14.832Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1532,7 +1564,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9542,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1544,15 +1576,15 @@
           "estimatedVotesHigh": 14126,
           "estimatedVotesLow": 11558,
           "estimatedVotesMid": 12842,
-          "turnoutHigh": 64.41,
-          "turnoutLow": 78.72,
-          "turnoutMid": 70.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 10953,
         "lastName": "Kalagias",
         "partyName": "Libertarian",
-        "votes": 362
+        "votes": 0
       },
       {
         "elected": false,
@@ -1560,15 +1592,15 @@
           "estimatedVotesHigh": 14126,
           "estimatedVotesLow": 11558,
           "estimatedVotesMid": 12842,
-          "turnoutHigh": 64.41,
-          "turnoutLow": 78.72,
-          "turnoutMid": 70.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Austin",
         "id": 21430,
         "lastName": "McCollum",
         "partyName": "Republican",
-        "votes": 8737
+        "votes": 0
       }
     ],
     "district": "8",
@@ -1576,7 +1608,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:03:14.055Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1586,7 +1619,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9099,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1598,15 +1631,15 @@
           "estimatedVotesHigh": 5425,
           "estimatedVotesLow": 4439,
           "estimatedVotesMid": 4932,
-          "turnoutHigh": 81.18,
-          "turnoutLow": 99.21,
-          "turnoutMid": 89.29
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "DeAnna",
         "id": 21431,
         "lastName": "Hodges",
         "partyName": "Republican",
-        "votes": 4230
+        "votes": 0
       },
       {
         "elected": false,
@@ -1614,15 +1647,15 @@
           "estimatedVotesHigh": 5425,
           "estimatedVotesLow": 4439,
           "estimatedVotesMid": 4932,
-          "turnoutHigh": 81.18,
-          "turnoutLow": 99.21,
-          "turnoutMid": 89.29
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Diana",
         "id": 21363,
         "lastName": "Worthen",
         "partyName": "Democratic",
-        "votes": 174
+        "votes": 0
       }
     ],
     "district": "9",
@@ -1630,7 +1663,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:49:13.991Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1640,7 +1674,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 4404,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1652,15 +1686,15 @@
           "estimatedVotesHigh": 13693,
           "estimatedVotesLow": 11203,
           "estimatedVotesMid": 12448,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mindy",
         "id": 21432,
         "lastName": "McAlindon",
         "partyName": "Republican",
-        "votes": 11583
+        "votes": 0
       },
       {
         "elected": false,
@@ -1668,15 +1702,15 @@
           "estimatedVotesHigh": 13693,
           "estimatedVotesLow": 11203,
           "estimatedVotesMid": 12448,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kate",
         "id": 21364,
         "lastName": "Schaffer",
         "partyName": "Democratic",
-        "votes": 608
+        "votes": 0
       }
     ],
     "district": "10",
@@ -1684,7 +1718,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:22:32.388Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1694,7 +1729,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 12191,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1706,15 +1741,15 @@
           "estimatedVotesHigh": 7711,
           "estimatedVotesLow": 6309,
           "estimatedVotesMid": 7010,
-          "turnoutHigh": 88.95,
-          "turnoutLow": 108.72,
-          "turnoutMid": 97.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rebecca",
         "id": 21433,
         "lastName": "Burkes",
         "partyName": "Republican",
-        "votes": 5023
+        "votes": 0
       },
       {
         "elected": false,
@@ -1722,15 +1757,15 @@
           "estimatedVotesHigh": 7711,
           "estimatedVotesLow": 6309,
           "estimatedVotesMid": 7010,
-          "turnoutHigh": 88.95,
-          "turnoutLow": 108.72,
-          "turnoutMid": 97.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rey",
         "id": 21365,
         "lastName": "Hernandez",
         "partyName": "Democratic",
-        "votes": 1836
+        "votes": 0
       }
     ],
     "district": "11",
@@ -1738,7 +1773,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:26:15.065Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1748,7 +1784,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 6859,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1760,15 +1796,15 @@
           "estimatedVotesHigh": 16136,
           "estimatedVotesLow": 13202,
           "estimatedVotesMid": 14669,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 21302,
         "lastName": "Barber",
         "partyName": "Democratic",
-        "votes": 573
+        "votes": 0
       },
       {
         "elected": false,
@@ -1776,15 +1812,15 @@
           "estimatedVotesHigh": 16136,
           "estimatedVotesLow": 13202,
           "estimatedVotesMid": 14669,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hope",
         "id": 21435,
         "lastName": "Duke",
         "partyName": "Republican",
-        "votes": 13796
+        "votes": 0
       }
     ],
     "district": "12",
@@ -1792,7 +1828,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:06:14.056Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1802,7 +1839,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 14369,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1814,15 +1851,15 @@
           "estimatedVotesHigh": 9730,
           "estimatedVotesLow": 7961,
           "estimatedVotesMid": 8845,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "R. Scott",
         "id": 84929,
         "lastName": "Richardson",
         "partyName": "Republican",
-        "votes": 8315
+        "votes": 0
       },
       {
         "elected": false,
@@ -1830,15 +1867,15 @@
           "estimatedVotesHigh": 9730,
           "estimatedVotesLow": 7961,
           "estimatedVotesMid": 8845,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ashley",
         "id": 52554,
         "lastName": "Sheys",
         "partyName": "Democratic",
-        "votes": 345
+        "votes": 0
       }
     ],
     "district": "13",
@@ -1846,7 +1883,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:28:14.306Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1856,7 +1894,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 8660,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1868,15 +1906,15 @@
           "estimatedVotesHigh": 11402,
           "estimatedVotesLow": 9329,
           "estimatedVotesMid": 10365,
-          "turnoutHigh": 85.06,
-          "turnoutLow": 103.96,
-          "turnoutMid": 93.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nick",
         "id": 52557,
         "lastName": "Burkes",
         "partyName": "Republican",
-        "votes": 8923
+        "votes": 0
       },
       {
         "elected": false,
@@ -1884,15 +1922,15 @@
           "estimatedVotesHigh": 11402,
           "estimatedVotesLow": 9329,
           "estimatedVotesMid": 10365,
-          "turnoutHigh": 85.06,
-          "turnoutLow": 103.96,
-          "turnoutMid": 93.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jacob",
         "id": 52555,
         "lastName": "Malloy",
         "partyName": "Democratic",
-        "votes": 775
+        "votes": 0
       }
     ],
     "district": "14",
@@ -1900,7 +1938,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:17:15.384Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1910,7 +1949,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9698,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1922,15 +1961,15 @@
           "estimatedVotesHigh": 9922,
           "estimatedVotesLow": 8118,
           "estimatedVotesMid": 9020,
-          "turnoutHigh": 89.02,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "John",
-        "id": 21443,
-        "lastName": "Carr",
-        "partyName": "Republican",
-        "votes": 8217
+        "firstName": "Stephanie",
+        "id": 52559,
+        "lastName": "Funk",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1938,15 +1977,15 @@
           "estimatedVotesHigh": 9922,
           "estimatedVotesLow": 8118,
           "estimatedVotesMid": 9020,
-          "turnoutHigh": 89.02,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Stephanie",
-        "id": 52559,
-        "lastName": "Funk",
-        "partyName": "Democratic",
-        "votes": 616
+        "firstName": "John",
+        "id": 21443,
+        "lastName": "Carr",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "15",
@@ -1954,7 +1993,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:38:16.622Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1964,7 +2004,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 8833,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1992,6 +2032,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2030,6 +2071,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2052,15 +2094,15 @@
           "estimatedVotesHigh": 13207,
           "estimatedVotesLow": 10807,
           "estimatedVotesMid": 12007,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Robin",
-        "id": 21446,
-        "lastName": "Lundstrum",
-        "partyName": "Republican",
-        "votes": 2623
+        "firstName": "Justin",
+        "id": 52562,
+        "lastName": "Meeks",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2068,15 +2110,15 @@
           "estimatedVotesHigh": 13207,
           "estimatedVotesLow": 10807,
           "estimatedVotesMid": 12007,
-          "turnoutHigh": 88.17,
-          "turnoutLow": 107.74,
-          "turnoutMid": 96.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Justin",
-        "id": 52562,
-        "lastName": "Meeks",
-        "partyName": "Democratic",
-        "votes": 9021
+        "firstName": "Robin",
+        "id": 21446,
+        "lastName": "Lundstrum",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "18",
@@ -2084,7 +2126,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:57:14.414Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2094,7 +2137,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11644,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2106,15 +2149,15 @@
           "estimatedVotesHigh": 11453,
           "estimatedVotesLow": 9371,
           "estimatedVotesMid": 10412,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.83,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Billy",
         "id": 52563,
         "lastName": "Cook",
         "partyName": "Democratic",
-        "votes": 1018
+        "votes": 0
       },
       {
         "elected": false,
@@ -2122,15 +2165,15 @@
           "estimatedVotesHigh": 11453,
           "estimatedVotesLow": 9371,
           "estimatedVotesMid": 10412,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.83,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 17931,
         "lastName": "Unger",
         "partyName": "Republican",
-        "votes": 9180
+        "votes": 0
       }
     ],
     "district": "19",
@@ -2138,7 +2181,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:46:13.645Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2148,7 +2192,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10198,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2176,6 +2220,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2214,6 +2259,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2252,6 +2298,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2290,6 +2337,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2312,15 +2360,15 @@
           "estimatedVotesHigh": 12881,
           "estimatedVotesLow": 10539,
           "estimatedVotesMid": 11710,
-          "turnoutHigh": 88.99,
-          "turnoutLow": 108.77,
-          "turnoutMid": 97.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 52565,
         "lastName": "Intchauspe",
         "partyName": "Democratic",
-        "votes": 628
+        "votes": 0
       },
       {
         "elected": false,
@@ -2328,15 +2376,15 @@
           "estimatedVotesHigh": 12881,
           "estimatedVotesLow": 10539,
           "estimatedVotesMid": 11710,
-          "turnoutHigh": 88.99,
-          "turnoutLow": 108.77,
-          "turnoutMid": 97.89
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brad",
         "id": 52564,
         "lastName": "Hall",
         "partyName": "Republican",
-        "votes": 10835
+        "votes": 0
       }
     ],
     "district": "24",
@@ -2344,7 +2392,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:28:14.306Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T17:45:37.737Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2354,7 +2403,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11463,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2363,34 +2412,34 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9601,
-          "estimatedVotesLow": 7855,
-          "estimatedVotesMid": 8728,
-          "turnoutHigh": 89.56,
-          "turnoutLow": 109.47,
-          "turnoutMid": 98.52
+          "estimatedVotesHigh": 12920,
+          "estimatedVotesLow": 10570,
+          "estimatedVotesMid": 11745,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Caitlin",
         "id": 21376,
         "lastName": "Oxford",
         "partyName": "Democratic",
-        "votes": 906
+        "votes": 0
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 9601,
-          "estimatedVotesLow": 7855,
-          "estimatedVotesMid": 8728,
-          "turnoutHigh": 89.56,
-          "turnoutLow": 109.47,
-          "turnoutMid": 98.52
+          "estimatedVotesHigh": 12920,
+          "estimatedVotesLow": 10570,
+          "estimatedVotesMid": 11745,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chad",
         "id": 21456,
         "lastName": "Puryear",
         "partyName": "Republican",
-        "votes": 7693
+        "votes": 0
       }
     ],
     "district": "25",
@@ -2398,7 +2447,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-25T04:28:22.000Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2408,7 +2458,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 8599,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2436,6 +2486,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2474,6 +2525,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2512,6 +2564,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2550,6 +2603,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2572,15 +2626,15 @@
           "estimatedVotesHigh": 11293,
           "estimatedVotesLow": 9239,
           "estimatedVotesMid": 10266,
-          "turnoutHigh": 85.63,
-          "turnoutLow": 104.67,
-          "turnoutMid": 94.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Fran",
         "id": 21465,
         "lastName": "Cavenaugh",
         "partyName": "Republican",
-        "votes": 9302
+        "votes": 0
       },
       {
         "elected": false,
@@ -2588,15 +2642,15 @@
           "estimatedVotesHigh": 11293,
           "estimatedVotesLow": 9239,
           "estimatedVotesMid": 10266,
-          "turnoutHigh": 85.63,
-          "turnoutLow": 104.67,
-          "turnoutMid": 94.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hamilton",
         "id": 52568,
         "lastName": "Holmes",
         "partyName": "Democratic",
-        "votes": 368
+        "votes": 0
       }
     ],
     "district": "30",
@@ -2604,7 +2658,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:06:14.056Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:54.753Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2614,7 +2669,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9670,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2642,6 +2697,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2664,47 +2720,47 @@
           "estimatedVotesHigh": 10294,
           "estimatedVotesLow": 8422,
           "estimatedVotesMid": 9358,
-          "turnoutHigh": 89.86,
-          "turnoutLow": 109.83,
-          "turnoutMid": 98.85
-        },
-        "firstName": "Eric",
-        "id": 45780,
-        "lastName": "McGee",
-        "partyName": "Libertarian",
-        "votes": 182
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10294,
-          "estimatedVotesLow": 8422,
-          "estimatedVotesMid": 9358,
-          "turnoutHigh": 89.86,
-          "turnoutLow": 109.83,
-          "turnoutMid": 98.85
-        },
-        "firstName": "Jack",
-        "id": 21468,
-        "lastName": "Ladyman",
-        "partyName": "Republican",
-        "votes": 5862
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10294,
-          "estimatedVotesLow": 8422,
-          "estimatedVotesMid": 9358,
-          "turnoutHigh": 89.86,
-          "turnoutLow": 109.83,
-          "turnoutMid": 98.85
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 52569,
         "lastName": "McAvoy",
         "partyName": "Democratic",
-        "votes": 3206
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10294,
+          "estimatedVotesLow": 8422,
+          "estimatedVotesMid": 9358,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Eric",
+        "id": 45780,
+        "lastName": "McGee",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10294,
+          "estimatedVotesLow": 8422,
+          "estimatedVotesMid": 9358,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jack",
+        "id": 21468,
+        "lastName": "Ladyman",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "32",
@@ -2712,7 +2768,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:26:15.065Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2722,7 +2779,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9250,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2750,6 +2807,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -2772,15 +2830,15 @@
           "estimatedVotesHigh": 7437,
           "estimatedVotesLow": 6085,
           "estimatedVotesMid": 6761,
-          "turnoutHigh": 89.01,
-          "turnoutLow": 108.79,
-          "turnoutMid": 97.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joey",
         "id": 21471,
         "lastName": "Carr",
         "partyName": "Republican",
-        "votes": 6495
+        "votes": 0
       },
       {
         "elected": false,
@@ -2788,15 +2846,15 @@
           "estimatedVotesHigh": 7437,
           "estimatedVotesLow": 6085,
           "estimatedVotesMid": 6761,
-          "turnoutHigh": 89.01,
-          "turnoutLow": 108.79,
-          "turnoutMid": 97.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Desmond",
         "id": 52570,
         "lastName": "Hammett",
         "partyName": "Democratic",
-        "votes": 290
+        "votes": 0
       }
     ],
     "district": "34",
@@ -2804,7 +2862,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-25T01:18:28.000Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2814,7 +2873,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 6620,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2826,15 +2885,15 @@
           "estimatedVotesHigh": 10208,
           "estimatedVotesLow": 8352,
           "estimatedVotesMid": 9280,
-          "turnoutHigh": 88.03,
-          "turnoutLow": 107.59,
-          "turnoutMid": 96.83
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jessie",
         "id": 52571,
         "lastName": "McGruder",
         "partyName": "Democratic",
-        "votes": 7292
+        "votes": 0
       },
       {
         "elected": false,
@@ -2842,15 +2901,15 @@
           "estimatedVotesHigh": 10208,
           "estimatedVotesLow": 8352,
           "estimatedVotesMid": 9280,
-          "turnoutHigh": 88.03,
-          "turnoutLow": 107.59,
-          "turnoutMid": 96.83
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 84930,
         "lastName": "Thorne Jr.",
         "partyName": "Republican",
-        "votes": 1694
+        "votes": 0
       }
     ],
     "district": "35",
@@ -2858,7 +2917,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:11:14.405Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2868,7 +2928,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 8986,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2880,15 +2940,15 @@
           "estimatedVotesHigh": 8679,
           "estimatedVotesLow": 7101,
           "estimatedVotesMid": 7890,
-          "turnoutHigh": 88.96,
-          "turnoutLow": 108.73,
-          "turnoutMid": 97.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Johnny",
         "id": 21473,
         "lastName": "Rye",
         "partyName": "Republican",
-        "votes": 7470
+        "votes": 0
       },
       {
         "elected": false,
@@ -2896,15 +2956,15 @@
           "estimatedVotesHigh": 8679,
           "estimatedVotesLow": 7101,
           "estimatedVotesMid": 7890,
-          "turnoutHigh": 88.96,
-          "turnoutLow": 108.73,
-          "turnoutMid": 97.86
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 52575,
         "lastName": "Parker",
         "partyName": "Democratic",
-        "votes": 251
+        "votes": 0
       }
     ],
     "district": "36",
@@ -2912,7 +2972,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:19:15.050Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2922,7 +2983,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 7721,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2934,15 +2995,15 @@
           "estimatedVotesHigh": 11695,
           "estimatedVotesLow": 9568,
           "estimatedVotesMid": 10631,
-          "turnoutHigh": 87.02,
-          "turnoutLow": 106.36,
-          "turnoutMid": 95.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 21474,
         "lastName": "Hollowell",
         "partyName": "Republican",
-        "votes": 6851
+        "votes": 0
       },
       {
         "elected": false,
@@ -2950,15 +3011,15 @@
           "estimatedVotesHigh": 11695,
           "estimatedVotesLow": 9568,
           "estimatedVotesMid": 10631,
-          "turnoutHigh": 87.02,
-          "turnoutLow": 106.36,
-          "turnoutMid": 95.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lisa",
         "id": 52576,
         "lastName": "Head",
         "partyName": "Democratic",
-        "votes": 3326
+        "votes": 0
       }
     ],
     "district": "37",
@@ -2966,7 +3027,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:23:13.490Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:54.753Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2976,7 +3038,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10177,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3004,6 +3066,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3042,6 +3105,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3080,6 +3144,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3102,15 +3167,15 @@
           "estimatedVotesHigh": 14937,
           "estimatedVotesLow": 12221,
           "estimatedVotesMid": 13579,
-          "turnoutHigh": 89.94,
-          "turnoutLow": 109.93,
-          "turnoutMid": 98.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 52579,
         "lastName": "Nowlin",
         "partyName": "Democratic",
-        "votes": 296
+        "votes": 0
       },
       {
         "elected": false,
@@ -3118,15 +3183,15 @@
           "estimatedVotesHigh": 14937,
           "estimatedVotesLow": 12221,
           "estimatedVotesMid": 13579,
-          "turnoutHigh": 89.94,
-          "turnoutLow": 109.93,
-          "turnoutMid": 98.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alyssa",
         "id": 52577,
         "lastName": "Brown",
         "partyName": "Republican",
-        "votes": 13138
+        "votes": 0
       }
     ],
     "district": "41",
@@ -3134,7 +3199,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:57:14.414Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3144,7 +3210,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 13434,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3156,15 +3222,15 @@
           "estimatedVotesHigh": 15324,
           "estimatedVotesLow": 12538,
           "estimatedVotesMid": 13931,
-          "turnoutHigh": 84.52,
-          "turnoutLow": 103.3,
-          "turnoutMid": 92.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lauren",
         "id": 52580,
         "lastName": "Faulk",
         "partyName": "Democratic",
-        "votes": 885
+        "votes": 0
       },
       {
         "elected": false,
@@ -3172,15 +3238,15 @@
           "estimatedVotesHigh": 15324,
           "estimatedVotesLow": 12538,
           "estimatedVotesMid": 13931,
-          "turnoutHigh": 84.52,
-          "turnoutLow": 103.3,
-          "turnoutMid": 92.97
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Stephen",
         "id": 21483,
         "lastName": "Meeks",
         "partyName": "Republican",
-        "votes": 12067
+        "votes": 0
       }
     ],
     "district": "42",
@@ -3188,7 +3254,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:39:13.908Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3198,7 +3265,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 12952,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3226,6 +3293,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3264,6 +3332,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3286,15 +3355,15 @@
           "estimatedVotesHigh": 11752,
           "estimatedVotesLow": 9615,
           "estimatedVotesMid": 10683,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.9
+          "turnoutHigh": 47.23,
+          "turnoutLow": 57.73,
+          "turnoutMid": 51.96
         },
         "firstName": "Whitney",
         "id": 52581,
         "lastName": "Freeman",
         "partyName": "Democratic",
-        "votes": 287
+        "votes": 1292
       },
       {
         "elected": false,
@@ -3302,15 +3371,15 @@
           "estimatedVotesHigh": 11752,
           "estimatedVotesLow": 9615,
           "estimatedVotesMid": 10683,
-          "turnoutHigh": 89,
-          "turnoutLow": 108.78,
-          "turnoutMid": 97.9
+          "turnoutHigh": 47.23,
+          "turnoutLow": 57.73,
+          "turnoutMid": 51.96
         },
         "firstName": "Aaron",
         "id": 21487,
         "lastName": "Pilkington",
         "partyName": "Republican",
-        "votes": 10172
+        "votes": 4259
       }
     ],
     "district": "45",
@@ -3318,7 +3387,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:51:14.782Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:22:27.501Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3328,7 +3398,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10459,
+    "totalVotes": 5551,
     "year": 2024
   },
   {
@@ -3356,6 +3426,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3394,6 +3465,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3432,6 +3504,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3470,6 +3543,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3492,15 +3566,15 @@
           "estimatedVotesHigh": 9369,
           "estimatedVotesLow": 7665,
           "estimatedVotesMid": 8517,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.93
+          "turnoutHigh": 61.93,
+          "turnoutLow": 75.69,
+          "turnoutMid": 68.12
         },
         "firstName": "Zack",
         "id": 21495,
         "lastName": "Gramlich",
         "partyName": "Republican",
-        "votes": 7842
+        "votes": 3518
       },
       {
         "elected": false,
@@ -3508,15 +3582,15 @@
           "estimatedVotesHigh": 9369,
           "estimatedVotesLow": 7665,
           "estimatedVotesMid": 8517,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.93
+          "turnoutHigh": 61.93,
+          "turnoutLow": 75.69,
+          "turnoutMid": 68.12
         },
         "firstName": "Robin",
         "id": 52582,
         "lastName": "McCray",
         "partyName": "Democratic",
-        "votes": 499
+        "votes": 2284
       }
     ],
     "district": "50",
@@ -3524,7 +3598,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:51:14.782Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:23:15.720Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3534,7 +3609,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 8341,
+    "totalVotes": 5802,
     "year": 2024
   },
   {
@@ -3546,15 +3621,15 @@
           "estimatedVotesHigh": 13917,
           "estimatedVotesLow": 11387,
           "estimatedVotesMid": 12652,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jane-Ellen",
         "id": 52583,
         "lastName": "Udouj-Kutchka",
         "partyName": "Democratic",
-        "votes": 617
+        "votes": 0
       },
       {
         "elected": false,
@@ -3562,15 +3637,15 @@
           "estimatedVotesHigh": 13917,
           "estimatedVotesLow": 11387,
           "estimatedVotesMid": 12652,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cindy",
         "id": 21497,
         "lastName": "Crawford",
         "partyName": "Republican",
-        "votes": 11774
+        "votes": 0
       }
     ],
     "district": "51",
@@ -3578,7 +3653,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:41:14.325Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3588,7 +3664,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 12391,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3616,6 +3692,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -3638,15 +3715,15 @@
           "estimatedVotesHigh": 9305,
           "estimatedVotesLow": 7613,
           "estimatedVotesMid": 8459,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 21500,
         "lastName": "Duffield",
         "partyName": "Republican",
-        "votes": 8037
+        "votes": 0
       },
       {
         "elected": false,
@@ -3654,15 +3731,15 @@
           "estimatedVotesHigh": 9305,
           "estimatedVotesLow": 7613,
           "estimatedVotesMid": 8459,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.93
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Amie",
         "id": 52585,
         "lastName": "Gates",
         "partyName": "Democratic",
-        "votes": 247
+        "votes": 0
       }
     ],
     "district": "53",
@@ -3670,7 +3747,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:51:14.782Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3680,7 +3758,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 8284,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3692,15 +3770,15 @@
           "estimatedVotesHigh": 13341,
           "estimatedVotesLow": 10915,
           "estimatedVotesMid": 12128,
-          "turnoutHigh": 88.91,
-          "turnoutLow": 108.68,
-          "turnoutMid": 97.81
+          "turnoutHigh": 29.08,
+          "turnoutLow": 35.54,
+          "turnoutMid": 31.98
         },
         "firstName": "Doug",
         "id": 52586,
         "lastName": "Corbitt",
         "partyName": "Democratic",
-        "votes": 457
+        "votes": 1721
       },
       {
         "elected": false,
@@ -3708,15 +3786,15 @@
           "estimatedVotesHigh": 13341,
           "estimatedVotesLow": 10915,
           "estimatedVotesMid": 12128,
-          "turnoutHigh": 88.91,
-          "turnoutLow": 108.68,
-          "turnoutMid": 97.81
+          "turnoutHigh": 29.08,
+          "turnoutLow": 35.54,
+          "turnoutMid": 31.98
         },
         "firstName": "Mary",
         "id": 21503,
         "lastName": "Bentley",
         "partyName": "Republican",
-        "votes": 11405
+        "votes": 2158
       }
     ],
     "district": "54",
@@ -3724,7 +3802,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:24:15.313Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:26:35.835Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3734,7 +3813,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11862,
+    "totalVotes": 3879,
     "year": 2024
   },
   {
@@ -3746,15 +3825,15 @@
           "estimatedVotesHigh": 12562,
           "estimatedVotesLow": 10278,
           "estimatedVotesMid": 11420,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cynthia",
         "id": 52587,
         "lastName": "Nations",
         "partyName": "Democratic",
-        "votes": 670
+        "votes": 0
       },
       {
         "elected": false,
@@ -3762,15 +3841,15 @@
           "estimatedVotesHigh": 12562,
           "estimatedVotesLow": 10278,
           "estimatedVotesMid": 11420,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 21505,
         "lastName": "Brown",
         "partyName": "Republican",
-        "votes": 10515
+        "votes": 0
       }
     ],
     "district": "55",
@@ -3778,7 +3857,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:15:13.733Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3788,7 +3868,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11185,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3800,15 +3880,15 @@
           "estimatedVotesHigh": 11924,
           "estimatedVotesLow": 9756,
           "estimatedVotesMid": 10840,
-          "turnoutHigh": 89.02,
-          "turnoutLow": 108.8,
-          "turnoutMid": 97.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kim",
         "id": 21508,
         "lastName": "Slaughter",
         "partyName": "Republican",
-        "votes": 10298
+        "votes": 0
       },
       {
         "elected": false,
@@ -3816,15 +3896,15 @@
           "estimatedVotesHigh": 11924,
           "estimatedVotesLow": 9756,
           "estimatedVotesMid": 10840,
-          "turnoutHigh": 89.02,
-          "turnoutLow": 108.8,
-          "turnoutMid": 97.92
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 21386,
         "lastName": "Magie",
         "partyName": "Democratic",
-        "votes": 317
+        "votes": 0
       }
     ],
     "district": "56",
@@ -3832,7 +3912,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.995Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3842,7 +3923,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10615,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3854,15 +3935,15 @@
           "estimatedVotesHigh": 13963,
           "estimatedVotesLow": 11423,
           "estimatedVotesMid": 12693,
-          "turnoutHigh": 86.79,
-          "turnoutLow": 106.09,
-          "turnoutMid": 95.48
+          "turnoutHigh": 23.91,
+          "turnoutLow": 29.23,
+          "turnoutMid": 26.31
         },
         "firstName": "Ciara'",
         "id": 52588,
         "lastName": "Bolte",
         "partyName": "Democratic",
-        "votes": 766
+        "votes": 634
       },
       {
         "elected": false,
@@ -3870,15 +3951,15 @@
           "estimatedVotesHigh": 13963,
           "estimatedVotesLow": 11423,
           "estimatedVotesMid": 12693,
-          "turnoutHigh": 86.79,
-          "turnoutLow": 106.09,
-          "turnoutMid": 95.48
+          "turnoutHigh": 23.91,
+          "turnoutLow": 29.23,
+          "turnoutMid": 26.31
         },
         "firstName": "Cameron",
         "id": 21509,
         "lastName": "Cooper",
         "partyName": "Republican",
-        "votes": 11617
+        "votes": 2705
       }
     ],
     "district": "57",
@@ -3886,7 +3967,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-25T01:18:46.000Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:27:18.807Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3896,7 +3978,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 12119,
+    "totalVotes": 3339,
     "year": 2024
   },
   {
@@ -3908,15 +3990,15 @@
           "estimatedVotesHigh": 12440,
           "estimatedVotesLow": 10178,
           "estimatedVotesMid": 11309,
-          "turnoutHigh": 86.52,
-          "turnoutLow": 105.75,
-          "turnoutMid": 95.17
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Les",
         "id": 21510,
         "lastName": "Eaves",
         "partyName": "Republican",
-        "votes": 10226
+        "votes": 0
       },
       {
         "elected": false,
@@ -3924,15 +4006,15 @@
           "estimatedVotesHigh": 12440,
           "estimatedVotesLow": 10178,
           "estimatedVotesMid": 11309,
-          "turnoutHigh": 86.52,
-          "turnoutLow": 105.75,
-          "turnoutMid": 95.17
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Trevor",
         "id": 52589,
         "lastName": "McGarrah",
         "partyName": "Democratic",
-        "votes": 537
+        "votes": 0
       }
     ],
     "district": "58",
@@ -3940,7 +4022,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:25:14.613Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3950,7 +4033,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10763,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3978,6 +4061,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4016,6 +4100,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4038,15 +4123,15 @@
           "estimatedVotesHigh": 11313,
           "estimatedVotesLow": 9256,
           "estimatedVotesMid": 10284,
-          "turnoutHigh": 63.74,
-          "turnoutLow": 77.91,
-          "turnoutMid": 70.12
+          "turnoutHigh": 20.5,
+          "turnoutLow": 25.05,
+          "turnoutMid": 22.55
         },
         "firstName": "Jeremiah",
         "id": 21514,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 7093
+        "votes": 2256
       },
       {
         "elected": false,
@@ -4054,15 +4139,15 @@
           "estimatedVotesHigh": 11313,
           "estimatedVotesLow": 9256,
           "estimatedVotesMid": 10284,
-          "turnoutHigh": 63.74,
-          "turnoutLow": 77.91,
-          "turnoutMid": 70.12
+          "turnoutHigh": 20.5,
+          "turnoutLow": 25.05,
+          "turnoutMid": 22.55
         },
         "firstName": "Garrett",
         "id": 45791,
         "lastName": "Sheeks",
         "partyName": "Libertarian",
-        "votes": 204
+        "votes": 63
       }
     ],
     "district": "61",
@@ -4070,7 +4155,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-25T01:19:01.000Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:25:43.449Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4080,7 +4166,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 7211,
+    "totalVotes": 2319,
     "year": 2024
   },
   {
@@ -4092,15 +4178,15 @@
           "estimatedVotesHigh": 10114,
           "estimatedVotesLow": 8276,
           "estimatedVotesMid": 9195,
-          "turnoutHigh": 88.83,
-          "turnoutLow": 108.55,
-          "turnoutMid": 97.71
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dexter",
         "id": 21391,
         "lastName": "Miller",
         "partyName": "Democratic",
-        "votes": 6946
+        "votes": 0
       },
       {
         "elected": false,
@@ -4108,15 +4194,15 @@
           "estimatedVotesHigh": 10114,
           "estimatedVotesLow": 8276,
           "estimatedVotesMid": 9195,
-          "turnoutHigh": 88.83,
-          "turnoutLow": 108.55,
-          "turnoutMid": 97.71
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 21516,
         "lastName": "McElroy",
         "partyName": "Republican",
-        "votes": 2038
+        "votes": 0
       }
     ],
     "district": "62",
@@ -4124,7 +4210,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:10:14.061Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:10.846Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4134,7 +4221,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 8984,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4146,15 +4233,15 @@
           "estimatedVotesHigh": 8648,
           "estimatedVotesLow": 7075,
           "estimatedVotesMid": 7861,
-          "turnoutHigh": 87.34,
-          "turnoutLow": 106.76,
-          "turnoutMid": 96.08
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lincoln",
         "id": 21393,
         "lastName": "Barnett",
         "partyName": "Democratic",
-        "votes": 7013
+        "votes": 0
       },
       {
         "elected": false,
@@ -4162,15 +4249,15 @@
           "estimatedVotesHigh": 8648,
           "estimatedVotesLow": 7075,
           "estimatedVotesMid": 7861,
-          "turnoutHigh": 87.34,
-          "turnoutLow": 106.76,
-          "turnoutMid": 96.08
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tammi",
         "id": 52592,
         "lastName": "Bell",
         "partyName": "Republican",
-        "votes": 540
+        "votes": 0
       }
     ],
     "district": "63",
@@ -4178,7 +4265,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:43:14.754Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4188,7 +4276,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 7553,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4216,6 +4304,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4254,6 +4343,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4276,15 +4366,15 @@
           "estimatedVotesHigh": 10135,
           "estimatedVotesLow": 8293,
           "estimatedVotesMid": 9214,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 21396,
         "lastName": "Perry",
         "partyName": "Democratic",
-        "votes": 8304
+        "votes": 0
       },
       {
         "elected": false,
@@ -4292,15 +4382,15 @@
           "estimatedVotesHigh": 10135,
           "estimatedVotesLow": 8293,
           "estimatedVotesMid": 9214,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Wayne",
         "id": 84931,
         "lastName": "Ball",
         "partyName": "Republican",
-        "votes": 720
+        "votes": 0
       }
     ],
     "district": "66",
@@ -4308,7 +4398,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:15:13.733Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4318,7 +4409,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9024,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4330,15 +4421,15 @@
           "estimatedVotesHigh": 13736,
           "estimatedVotesLow": 11238,
           "estimatedVotesMid": 12487,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Karilyn",
         "id": 21519,
         "lastName": "Brown",
         "partyName": "Republican",
-        "votes": 610
+        "votes": 0
       },
       {
         "elected": false,
@@ -4346,15 +4437,15 @@
           "estimatedVotesHigh": 13736,
           "estimatedVotesLow": 11238,
           "estimatedVotesMid": 12487,
-          "turnoutHigh": 89.04,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrew",
         "id": 52596,
         "lastName": "Eberly",
         "partyName": "Democratic",
-        "votes": 11621
+        "votes": 0
       }
     ],
     "district": "67",
@@ -4362,7 +4453,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:26:15.065Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4372,7 +4464,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 12231,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4384,15 +4476,15 @@
           "estimatedVotesHigh": 12415,
           "estimatedVotesLow": 10157,
           "estimatedVotesMid": 11286,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Tom",
-        "id": 52597,
-        "lastName": "Bartole",
-        "partyName": "Democratic",
-        "votes": 330
+        "firstName": "Brian",
+        "id": 11052,
+        "lastName": "Evans",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4400,15 +4492,15 @@
           "estimatedVotesHigh": 12415,
           "estimatedVotesLow": 10157,
           "estimatedVotesMid": 11286,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.95
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Brian",
-        "id": 11052,
-        "lastName": "Evans",
-        "partyName": "Republican",
-        "votes": 10725
+        "firstName": "Tom",
+        "id": 52597,
+        "lastName": "Bartole",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "68",
@@ -4416,7 +4508,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:23:15.320Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:01.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4426,7 +4519,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11055,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4438,15 +4531,15 @@
           "estimatedVotesHigh": 12689,
           "estimatedVotesLow": 10382,
           "estimatedVotesMid": 11535,
-          "turnoutHigh": 81.91,
-          "turnoutLow": 100.11,
-          "turnoutMid": 90.1
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 21520,
         "lastName": "Ray",
         "partyName": "Republican",
-        "votes": 3427
+        "votes": 0
       },
       {
         "elected": false,
@@ -4454,15 +4547,15 @@
           "estimatedVotesHigh": 12689,
           "estimatedVotesLow": 10382,
           "estimatedVotesMid": 11535,
-          "turnoutHigh": 81.91,
-          "turnoutLow": 100.11,
-          "turnoutMid": 90.1
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kwami",
         "id": 52598,
         "lastName": "Abdul-Bey",
         "partyName": "Democratic",
-        "votes": 6966
+        "votes": 0
       }
     ],
     "district": "69",
@@ -4470,7 +4563,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:26:15.065Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4480,7 +4574,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10393,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4492,15 +4586,15 @@
           "estimatedVotesHigh": 16156,
           "estimatedVotesLow": 13218,
           "estimatedVotesMid": 14687,
-          "turnoutHigh": 86.69,
-          "turnoutLow": 105.95,
-          "turnoutMid": 95.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Carlton",
-        "id": 21521,
-        "lastName": "Wing",
-        "partyName": "Republican",
-        "votes": 1680
+        "firstName": "Alex",
+        "id": 52599,
+        "lastName": "Holladay",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4508,15 +4602,15 @@
           "estimatedVotesHigh": 16156,
           "estimatedVotesLow": 13218,
           "estimatedVotesMid": 14687,
-          "turnoutHigh": 86.69,
-          "turnoutLow": 105.95,
-          "turnoutMid": 95.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Alex",
-        "id": 52599,
-        "lastName": "Holladay",
-        "partyName": "Democratic",
-        "votes": 12325
+        "firstName": "Carlton",
+        "id": 21521,
+        "lastName": "Wing",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "70",
@@ -4524,7 +4618,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:56:14.832Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4534,7 +4629,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 14005,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4546,15 +4641,15 @@
           "estimatedVotesHigh": 13621,
           "estimatedVotesLow": 11145,
           "estimatedVotesMid": 12383,
-          "turnoutHigh": 85.65,
-          "turnoutLow": 104.67,
-          "turnoutMid": 94.21
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cassandra",
         "id": 52600,
         "lastName": "Green",
         "partyName": "Democratic",
-        "votes": 10851
+        "votes": 0
       },
       {
         "elected": false,
@@ -4562,15 +4657,15 @@
           "estimatedVotesHigh": 13621,
           "estimatedVotesLow": 11145,
           "estimatedVotesMid": 12383,
-          "turnoutHigh": 85.65,
-          "turnoutLow": 104.67,
-          "turnoutMid": 94.21
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brandon",
         "id": 21522,
         "lastName": "Achor",
         "partyName": "Republican",
-        "votes": 815
+        "votes": 0
       }
     ],
     "district": "71",
@@ -4578,7 +4673,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:36:13.821Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4588,7 +4684,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11666,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4616,6 +4712,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4654,6 +4751,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4692,6 +4790,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4714,15 +4813,15 @@
           "estimatedVotesHigh": 14552,
           "estimatedVotesLow": 11906,
           "estimatedVotesMid": 13229,
-          "turnoutHigh": 49,
-          "turnoutLow": 59.89,
-          "turnoutMid": 53.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Ashley",
-        "id": 21404,
-        "lastName": "Hudson",
-        "partyName": "Democratic",
-        "votes": 6989
+        "firstName": "Michael",
+        "id": 44294,
+        "lastName": "White",
+        "partyName": "Libertarian",
+        "votes": 0
       },
       {
         "elected": false,
@@ -4730,15 +4829,15 @@
           "estimatedVotesHigh": 14552,
           "estimatedVotesLow": 11906,
           "estimatedVotesMid": 13229,
-          "turnoutHigh": 49,
-          "turnoutLow": 59.89,
-          "turnoutMid": 53.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Michael",
-        "id": 44294,
-        "lastName": "White",
-        "partyName": "Libertarian",
-        "votes": 141
+        "firstName": "Ashley",
+        "id": 21404,
+        "lastName": "Hudson",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "75",
@@ -4746,7 +4845,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:57:14.414Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:37.679Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4756,7 +4856,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 7130,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4784,6 +4884,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4822,6 +4923,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4844,15 +4946,15 @@
           "estimatedVotesHigh": 16472,
           "estimatedVotesLow": 13476,
           "estimatedVotesMid": 14974,
-          "turnoutHigh": 89.07,
-          "turnoutLow": 108.87,
-          "turnoutMid": 97.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Keith",
         "id": 21527,
         "lastName": "Brooks",
         "partyName": "Republican",
-        "votes": 5454
+        "votes": 0
       },
       {
         "elected": false,
@@ -4860,15 +4962,15 @@
           "estimatedVotesHigh": 16472,
           "estimatedVotesLow": 13476,
           "estimatedVotesMid": 14974,
-          "turnoutHigh": 89.07,
-          "turnoutLow": 108.87,
-          "turnoutMid": 97.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 52604,
         "lastName": "Bartolomei",
         "partyName": "Democratic",
-        "votes": 9217
+        "votes": 0
       }
     ],
     "district": "78",
@@ -4876,7 +4978,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:22:32.388Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4886,7 +4989,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 14671,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -4914,6 +5017,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4952,6 +5056,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -4974,15 +5079,15 @@
           "estimatedVotesHigh": 12312,
           "estimatedVotesLow": 10074,
           "estimatedVotesMid": 11193,
-          "turnoutHigh": 88.43,
-          "turnoutLow": 108.07,
-          "turnoutMid": 97.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gina",
         "id": 52606,
         "lastName": "Thomas-Littlejohn",
         "partyName": "Democratic",
-        "votes": 543
+        "votes": 0
       },
       {
         "elected": false,
@@ -4990,15 +5095,15 @@
           "estimatedVotesHigh": 12312,
           "estimatedVotesLow": 10074,
           "estimatedVotesMid": 11193,
-          "turnoutHigh": 88.43,
-          "turnoutLow": 108.07,
-          "turnoutMid": 97.27
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "RJ",
         "id": 21529,
         "lastName": "Hawk",
         "partyName": "Republican",
-        "votes": 10344
+        "votes": 0
       }
     ],
     "district": "81",
@@ -5006,7 +5111,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:42:15.339Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5016,7 +5122,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10887,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5028,15 +5134,15 @@
           "estimatedVotesHigh": 11509,
           "estimatedVotesLow": 9417,
           "estimatedVotesMid": 10463,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tony",
         "id": 21530,
         "lastName": "Furman",
         "partyName": "Republican",
-        "votes": 9839
+        "votes": 0
       },
       {
         "elected": false,
@@ -5044,15 +5150,15 @@
           "estimatedVotesHigh": 11509,
           "estimatedVotesLow": 9417,
           "estimatedVotesMid": 10463,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.81,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Samuel",
         "id": 52607,
         "lastName": "Brazell Jr.",
         "partyName": "Democratic",
-        "votes": 408
+        "votes": 0
       }
     ],
     "district": "82",
@@ -5060,7 +5166,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:28:14.306Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5070,7 +5177,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10247,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5082,15 +5189,15 @@
           "estimatedVotesHigh": 17314,
           "estimatedVotesLow": 14166,
           "estimatedVotesMid": 15740,
-          "turnoutHigh": 72.26,
-          "turnoutLow": 88.32,
-          "turnoutMid": 79.49
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 52609,
         "lastName": "Childress",
         "partyName": "Republican",
-        "votes": 12137
+        "votes": 0
       },
       {
         "elected": false,
@@ -5098,15 +5205,15 @@
           "estimatedVotesHigh": 17314,
           "estimatedVotesLow": 14166,
           "estimatedVotesMid": 15740,
-          "turnoutHigh": 72.26,
-          "turnoutLow": 88.32,
-          "turnoutMid": 79.49
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Teresa",
         "id": 52610,
         "lastName": "Dannaway",
         "partyName": "Democratic",
-        "votes": 374
+        "votes": 0
       }
     ],
     "district": "83",
@@ -5114,7 +5221,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:30:14.179Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:40.911Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5124,7 +5232,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 12511,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5136,15 +5244,15 @@
           "estimatedVotesHigh": 11631,
           "estimatedVotesLow": 9517,
           "estimatedVotesMid": 10574,
-          "turnoutHigh": 85.44,
-          "turnoutLow": 104.41,
-          "turnoutMid": 93.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Jill",
-        "id": 52611,
-        "lastName": "Summerford",
-        "partyName": "Democratic",
-        "votes": 495
+        "firstName": "Les",
+        "id": 21532,
+        "lastName": "Warren",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -5152,15 +5260,15 @@
           "estimatedVotesHigh": 11631,
           "estimatedVotesLow": 9517,
           "estimatedVotesMid": 10574,
-          "turnoutHigh": 85.44,
-          "turnoutLow": 104.41,
-          "turnoutMid": 93.98
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Les",
-        "id": 21532,
-        "lastName": "Warren",
-        "partyName": "Republican",
-        "votes": 9442
+        "firstName": "Jill",
+        "id": 52611,
+        "lastName": "Summerford",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "84",
@@ -5168,7 +5276,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:29:14.995Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5178,7 +5287,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9937,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5190,15 +5299,15 @@
           "estimatedVotesHigh": 13285,
           "estimatedVotesLow": 10869,
           "estimatedVotesMid": 12077,
-          "turnoutHigh": 89.94,
-          "turnoutLow": 109.94,
-          "turnoutMid": 98.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Richard",
         "id": 21533,
         "lastName": "McGrew",
         "partyName": "Republican",
-        "votes": 11593
+        "votes": 0
       },
       {
         "elected": false,
@@ -5206,15 +5315,15 @@
           "estimatedVotesHigh": 13285,
           "estimatedVotesLow": 10869,
           "estimatedVotesMid": 12077,
-          "turnoutHigh": 89.94,
-          "turnoutLow": 109.94,
-          "turnoutMid": 98.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cortney",
         "id": 21294,
         "lastName": "McKee",
         "partyName": "Democratic",
-        "votes": 356
+        "votes": 0
       }
     ],
     "district": "85",
@@ -5222,7 +5331,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:37:15.029Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5232,7 +5342,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11949,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5244,15 +5354,15 @@
           "estimatedVotesHigh": 12936,
           "estimatedVotesLow": 10584,
           "estimatedVotesMid": 11760,
-          "turnoutHigh": 88.97,
-          "turnoutLow": 108.74,
-          "turnoutMid": 97.87
+          "turnoutHigh": 43.83,
+          "turnoutLow": 53.57,
+          "turnoutMid": 48.21
         },
         "firstName": "John",
         "id": 21534,
         "lastName": "Maddox",
         "partyName": "Republican",
-        "votes": 11169
+        "votes": 4739
       },
       {
         "elected": false,
@@ -5260,15 +5370,15 @@
           "estimatedVotesHigh": 12936,
           "estimatedVotesLow": 10584,
           "estimatedVotesMid": 11760,
-          "turnoutHigh": 88.97,
-          "turnoutLow": 108.74,
-          "turnoutMid": 97.87
+          "turnoutHigh": 43.83,
+          "turnoutLow": 53.57,
+          "turnoutMid": 48.21
         },
         "firstName": "Bill",
         "id": 52612,
         "lastName": "Bradshaw",
         "partyName": "Democratic",
-        "votes": 340
+        "votes": 931
       }
     ],
     "district": "86",
@@ -5276,7 +5386,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T18:34:15.492Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:27:25.668Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5286,7 +5397,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11509,
+    "totalVotes": 5670,
     "year": 2024
   },
   {
@@ -5298,15 +5409,15 @@
           "estimatedVotesHigh": 10656,
           "estimatedVotesLow": 8718,
           "estimatedVotesMid": 9687,
-          "turnoutHigh": 67.75,
-          "turnoutLow": 82.81,
-          "turnoutMid": 74.52
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "DeAnn",
         "id": 21535,
         "lastName": "Vaught",
         "partyName": "Republican",
-        "votes": 7081
+        "votes": 0
       },
       {
         "elected": false,
@@ -5314,15 +5425,15 @@
           "estimatedVotesHigh": 10656,
           "estimatedVotesLow": 8718,
           "estimatedVotesMid": 9687,
-          "turnoutHigh": 67.75,
-          "turnoutLow": 82.81,
-          "turnoutMid": 74.52
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marc",
         "id": 45802,
         "lastName": "Rosson",
         "partyName": "Libertarian",
-        "votes": 138
+        "votes": 0
       }
     ],
     "district": "87",
@@ -5330,7 +5441,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:25:14.613Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5340,7 +5452,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 7219,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5352,15 +5464,15 @@
           "estimatedVotesHigh": 10264,
           "estimatedVotesLow": 8399,
           "estimatedVotesMid": 9331,
-          "turnoutHigh": 65.78,
-          "turnoutLow": 80.39,
-          "turnoutMid": 72.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Dolly",
-        "id": 52614,
-        "lastName": "Henley",
-        "partyName": "Republican",
-        "votes": 6623
+        "firstName": "Tammy",
+        "id": 84932,
+        "lastName": "Goodwin",
+        "partyName": "Libertarian",
+        "votes": 0
       },
       {
         "elected": false,
@@ -5368,15 +5480,15 @@
           "estimatedVotesHigh": 10264,
           "estimatedVotesLow": 8399,
           "estimatedVotesMid": 9331,
-          "turnoutHigh": 65.78,
-          "turnoutLow": 80.39,
-          "turnoutMid": 72.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Tammy",
-        "id": 84932,
-        "lastName": "Goodwin",
-        "partyName": "Libertarian",
-        "votes": 129
+        "firstName": "Dolly",
+        "id": 52614,
+        "lastName": "Henley",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "88",
@@ -5384,7 +5496,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:19:15.050Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:08:06.647Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5394,7 +5507,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 6752,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5422,6 +5535,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5460,6 +5574,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5498,6 +5613,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5520,15 +5636,15 @@
           "estimatedVotesHigh": 14052,
           "estimatedVotesLow": 11498,
           "estimatedVotesMid": 12775,
-          "turnoutHigh": 88.79,
-          "turnoutLow": 108.51,
-          "turnoutMid": 97.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julie",
         "id": 21541,
         "lastName": "Mayberry",
         "partyName": "Republican",
-        "votes": 11835
+        "votes": 0
       },
       {
         "elected": false,
@@ -5536,15 +5652,15 @@
           "estimatedVotesHigh": 14052,
           "estimatedVotesLow": 11498,
           "estimatedVotesMid": 12775,
-          "turnoutHigh": 88.79,
-          "turnoutLow": 108.51,
-          "turnoutMid": 97.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 52616,
         "lastName": "Murray",
         "partyName": "Democratic",
-        "votes": 642
+        "votes": 0
       }
     ],
     "district": "92",
@@ -5552,7 +5668,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:21:13.931Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:43.515Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5562,7 +5679,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 12477,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5590,6 +5707,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5612,15 +5730,15 @@
           "estimatedVotesHigh": 11172,
           "estimatedVotesLow": 9142,
           "estimatedVotesMid": 10157,
-          "turnoutHigh": 88.94,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 21544,
         "lastName": "Wardlaw",
         "partyName": "Republican",
-        "votes": 8964
+        "votes": 0
       },
       {
         "elected": false,
@@ -5628,15 +5746,15 @@
           "estimatedVotesHigh": 11172,
           "estimatedVotesLow": 9142,
           "estimatedVotesMid": 10157,
-          "turnoutHigh": 88.94,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Annette",
         "id": 52617,
         "lastName": "Taylor",
         "partyName": "Democratic",
-        "votes": 972
+        "votes": 0
       }
     ],
     "district": "94",
@@ -5644,7 +5762,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:07:14.626Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:06:30.087Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5654,7 +5773,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 9936,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5682,6 +5801,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5704,15 +5824,15 @@
           "estimatedVotesHigh": 13053,
           "estimatedVotesLow": 10679,
           "estimatedVotesMid": 11866,
-          "turnoutHigh": 87.86,
-          "turnoutLow": 107.4,
-          "turnoutMid": 96.65
+          "turnoutHigh": 11.37,
+          "turnoutLow": 13.9,
+          "turnoutMid": 12.51
         },
         "firstName": "Sonia",
         "id": 21546,
         "lastName": "Barker",
         "partyName": "Republican",
-        "votes": 9588
+        "votes": 866
       },
       {
         "elected": false,
@@ -5720,15 +5840,15 @@
           "estimatedVotesHigh": 13053,
           "estimatedVotesLow": 10679,
           "estimatedVotesMid": 11866,
-          "turnoutHigh": 87.86,
-          "turnoutLow": 107.4,
-          "turnoutMid": 96.65
+          "turnoutHigh": 11.37,
+          "turnoutLow": 13.9,
+          "turnoutMid": 12.51
         },
         "firstName": "Robin",
         "id": 52620,
         "lastName": "Roark",
         "partyName": "Democratic",
-        "votes": 1881
+        "votes": 618
       }
     ],
     "district": "96",
@@ -5736,7 +5856,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:12:13.757Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:28:14.279Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5746,7 +5867,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 11469,
+    "totalVotes": 1484,
     "year": 2024
   },
   {
@@ -5758,15 +5879,15 @@
           "estimatedVotesHigh": 11791,
           "estimatedVotesLow": 9647,
           "estimatedVotesMid": 10719,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "O'Dell",
         "id": 52621,
         "lastName": "Carr",
         "partyName": "Democratic",
-        "votes": 523
+        "votes": 0
       },
       {
         "elected": false,
@@ -5774,15 +5895,15 @@
           "estimatedVotesHigh": 11791,
           "estimatedVotesLow": 9647,
           "estimatedVotesMid": 10719,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matthew",
         "id": 21547,
         "lastName": "Shepherd",
         "partyName": "Republican",
-        "votes": 9975
+        "votes": 0
       }
     ],
     "district": "97",
@@ -5790,7 +5911,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "lastUpdated": "2024-10-24T19:04:13.937Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T18:07:20.046Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5800,7 +5922,7 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 10498,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -5828,6 +5950,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5866,6 +5989,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
@@ -5904,6 +6028,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-23T14:38:24.916Z",
     "office": {
       "officeId": "9",
