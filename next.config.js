@@ -341,6 +341,12 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/voter-guide-2/:sessionId*',
+        destination:
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-2&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/voter-guide-1/:sessionId*',
         destination:
           '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-1&sessionId=:sessionId*',
