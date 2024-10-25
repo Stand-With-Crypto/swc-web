@@ -510,14 +510,14 @@ enum CommunicationMessageStatus {
 }
 
 model UserCommunication {
-  id                         String                      @id @default(uuid())
-  userCommunicationJourneyId String                      @map("user_communication_journey_id")
-  userCommunicationJourney   UserCommunicationJourney    @relation(fields: [userCommunicationJourneyId], references: [id])
-  communicationType          CommunicationType           @map("communication_type")
-  messageId                  String                      @map("message_id")
-  status                     CommunicationMessageStatus?
-  datetimeCreated            DateTime                    @default(now()) @map("datetime_created")
-  datetimeUpdated            DateTime?                   @updatedAt @map("datetime_updated")
+  id                         String                     @id @default(uuid())
+  userCommunicationJourneyId String                     @map("user_communication_journey_id")
+  userCommunicationJourney   UserCommunicationJourney   @relation(fields: [userCommunicationJourneyId], references: [id])
+  communicationType          CommunicationType          @map("communication_type")
+  messageId                  String                     @map("message_id")
+  status                     CommunicationMessageStatus @default(PROCESSING)
+  datetimeCreated            DateTime                   @default(now()) @map("datetime_created")
+  datetimeUpdated            DateTime?                  @updatedAt @map("datetime_updated")
 
   @@index([messageId])
   @@index([userCommunicationJourneyId])
