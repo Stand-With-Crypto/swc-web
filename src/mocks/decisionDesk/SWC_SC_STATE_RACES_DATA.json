@@ -1,6 +1,7 @@
 [
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8,15 +9,15 @@
           "estimatedVotesHigh": 382171,
           "estimatedVotesLow": 312685,
           "estimatedVotesMid": 347428,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.54,
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.88,
           "turnoutMid": 99
         },
         "firstName": "Nancy",
         "id": 13601,
         "lastName": "Mace",
         "partyName": "Republican",
-        "votes": 186197
+        "votes": 187002
       },
       {
         "elected": false,
@@ -24,15 +25,15 @@
           "estimatedVotesHigh": 382171,
           "estimatedVotesLow": 312685,
           "estimatedVotesMid": 347428,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.54,
+          "turnoutHigh": 91.54,
+          "turnoutLow": 111.88,
           "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 16866,
         "lastName": "Moore",
         "partyName": "Democratic",
-        "votes": 162571
+        "votes": 162822
       }
     ],
     "district": "1",
@@ -41,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:01.125Z",
+    "lastUpdated": "2024-10-25T20:51:58.775Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -51,11 +52,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 348768,
+    "totalVotes": 349824,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -63,15 +65,15 @@
           "estimatedVotesHigh": 374790,
           "estimatedVotesLow": 306647,
           "estimatedVotesMid": 340718,
-          "turnoutHigh": 91.3,
-          "turnoutLow": 111.59,
+          "turnoutHigh": 91.57,
+          "turnoutLow": 111.92,
           "turnoutMid": 99
         },
         "firstName": "David",
         "id": 85126,
         "lastName": "Robinson",
         "partyName": "Democratic",
-        "votes": 149056
+        "votes": 150054
       },
       {
         "elected": false,
@@ -79,8 +81,8 @@
           "estimatedVotesHigh": 374790,
           "estimatedVotesLow": 306647,
           "estimatedVotesMid": 340718,
-          "turnoutHigh": 91.3,
-          "turnoutLow": 111.59,
+          "turnoutHigh": 91.57,
+          "turnoutLow": 111.92,
           "turnoutMid": 99
         },
         "firstName": "Joe",
@@ -96,7 +98,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:01.125Z",
+    "lastUpdated": "2024-10-25T20:51:58.775Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -106,7 +108,7 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 342196,
+    "totalVotes": 343194,
     "year": 2024
   },
   {
@@ -117,6 +119,14 @@
       "lastName": "Biggs",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Sheri",
+        "id": 75709,
+        "lastName": "Biggs",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -124,15 +134,15 @@
           "estimatedVotesHigh": 362191,
           "estimatedVotesLow": 296338,
           "estimatedVotesMid": 329264,
-          "turnoutHigh": 91.28,
-          "turnoutLow": 111.56,
+          "turnoutHigh": 91.53,
+          "turnoutLow": 111.87,
           "turnoutMid": 99
         },
         "firstName": "Bryon",
         "id": 75707,
         "lastName": "Best",
         "partyName": "Democratic",
-        "votes": 99276
+        "votes": 99521
       },
       {
         "elected": true,
@@ -140,15 +150,15 @@
           "estimatedVotesHigh": 362191,
           "estimatedVotesLow": 296338,
           "estimatedVotesMid": 329264,
-          "turnoutHigh": 91.28,
-          "turnoutLow": 111.56,
+          "turnoutHigh": 91.53,
+          "turnoutLow": 111.87,
           "turnoutMid": 99
         },
         "firstName": "Sheri",
         "id": 75709,
         "lastName": "Biggs",
         "partyName": "Republican",
-        "votes": 224637
+        "votes": 225271
       },
       {
         "elected": false,
@@ -156,15 +166,15 @@
           "estimatedVotesHigh": 362191,
           "estimatedVotesLow": 296338,
           "estimatedVotesMid": 329264,
-          "turnoutHigh": 91.28,
-          "turnoutLow": 111.56,
+          "turnoutHigh": 91.53,
+          "turnoutLow": 111.87,
           "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 85127,
         "lastName": "Bedenbaugh",
         "partyName": "Alliance",
-        "votes": 6692
+        "votes": 6720
       }
     ],
     "district": "3",
@@ -173,7 +183,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:01.108Z",
+    "lastUpdated": "2024-10-25T20:51:58.789Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -183,7 +193,7 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 330605,
+    "totalVotes": 331512,
     "year": 2024
   },
   {
@@ -194,6 +204,14 @@
       "lastName": "Timmons",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "William",
+        "id": 9670,
+        "lastName": "Timmons",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -201,8 +219,8 @@
           "estimatedVotesHigh": 356466,
           "estimatedVotesLow": 291654,
           "estimatedVotesMid": 324060,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
+          "turnoutHigh": 91.94,
+          "turnoutLow": 112.38,
           "turnoutMid": 99
         },
         "firstName": "Kathryn",
@@ -217,15 +235,15 @@
           "estimatedVotesHigh": 356466,
           "estimatedVotesLow": 291654,
           "estimatedVotesMid": 324060,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
+          "turnoutHigh": 91.94,
+          "turnoutLow": 112.38,
           "turnoutMid": 99
         },
         "firstName": "William",
         "id": 9670,
         "lastName": "Timmons",
         "partyName": "Republican",
-        "votes": 188002
+        "votes": 191087
       },
       {
         "elected": false,
@@ -233,15 +251,15 @@
           "estimatedVotesHigh": 356466,
           "estimatedVotesLow": 291654,
           "estimatedVotesMid": 324060,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
+          "turnoutHigh": 91.94,
+          "turnoutLow": 112.38,
           "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 14832,
         "lastName": "Hackett",
         "partyName": "Constitution",
-        "votes": 6619
+        "votes": 6732
       }
     ],
     "district": "4",
@@ -250,7 +268,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:38:11.529Z",
+    "lastUpdated": "2024-10-25T20:51:58.775Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -260,7 +278,7 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 324551,
+    "totalVotes": 327749,
     "year": 2024
   },
   {
@@ -271,6 +289,14 @@
       "lastName": "Norman",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Ralph",
+        "id": 2290,
+        "lastName": "Norman",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -278,15 +304,15 @@
           "estimatedVotesHigh": 369739,
           "estimatedVotesLow": 302514,
           "estimatedVotesMid": 336126,
-          "turnoutHigh": 91.48,
-          "turnoutLow": 111.81,
+          "turnoutHigh": 92.1,
+          "turnoutLow": 112.57,
           "turnoutMid": 99
         },
         "firstName": "Evangeline",
         "id": 23826,
         "lastName": "Hundley",
         "partyName": "Democratic",
-        "votes": 137134
+        "votes": 138409
       },
       {
         "elected": true,
@@ -294,15 +320,15 @@
           "estimatedVotesHigh": 369739,
           "estimatedVotesLow": 302514,
           "estimatedVotesMid": 336126,
-          "turnoutHigh": 91.48,
-          "turnoutLow": 111.81,
+          "turnoutHigh": 92.1,
+          "turnoutLow": 112.57,
           "turnoutMid": 99
         },
         "firstName": "Ralph",
         "id": 2290,
         "lastName": "Norman",
         "partyName": "Republican",
-        "votes": 201118
+        "votes": 202134
       }
     ],
     "district": "5",
@@ -311,7 +337,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:01.108Z",
+    "lastUpdated": "2024-10-25T20:51:58.775Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -321,7 +347,7 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 338252,
+    "totalVotes": 340543,
     "year": 2024
   },
   {
@@ -332,6 +358,14 @@
       "lastName": "Clyburn",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Jim",
+        "id": 85128,
+        "lastName": "Clyburn",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": true,
@@ -339,15 +373,15 @@
           "estimatedVotesHigh": 337395,
           "estimatedVotesLow": 276053,
           "estimatedVotesMid": 306724,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.89,
+          "turnoutLow": 112.31,
           "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 85128,
         "lastName": "Clyburn",
         "partyName": "Democratic",
-        "votes": 189167
+        "votes": 190140
       },
       {
         "elected": false,
@@ -355,15 +389,15 @@
           "estimatedVotesHigh": 337395,
           "estimatedVotesLow": 276053,
           "estimatedVotesMid": 306724,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.89,
+          "turnoutLow": 112.31,
           "turnoutMid": 99
         },
         "firstName": "Gregg",
         "id": 85129,
         "lastName": "Dixon",
         "partyName": "United Citizens",
-        "votes": 5799
+        "votes": 5829
       },
       {
         "elected": false,
@@ -371,15 +405,15 @@
           "estimatedVotesHigh": 337395,
           "estimatedVotesLow": 276053,
           "estimatedVotesMid": 306724,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.89,
+          "turnoutLow": 112.31,
           "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 85130,
         "lastName": "Simpson",
         "partyName": "Libertarian",
-        "votes": 5697
+        "votes": 5713
       },
       {
         "elected": false,
@@ -387,15 +421,15 @@
           "estimatedVotesHigh": 337395,
           "estimatedVotesLow": 276053,
           "estimatedVotesMid": 306724,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.89,
+          "turnoutLow": 112.31,
           "turnoutMid": 99
         },
         "firstName": "Duke",
         "id": 13596,
         "lastName": "Buckner",
         "partyName": "Republican",
-        "votes": 102016
+        "votes": 102636
       },
       {
         "elected": false,
@@ -403,15 +437,15 @@
           "estimatedVotesHigh": 337395,
           "estimatedVotesLow": 276053,
           "estimatedVotesMid": 306724,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.89,
+          "turnoutLow": 112.31,
           "turnoutMid": 99
         },
         "firstName": "Joseph",
         "id": 44406,
         "lastName": "Oddo",
         "partyName": "Alliance",
-        "votes": 5720
+        "votes": 5725
       }
     ],
     "district": "6",
@@ -420,7 +454,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:07.537Z",
+    "lastUpdated": "2024-10-25T20:51:58.789Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -430,7 +464,7 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 308399,
+    "totalVotes": 310043,
     "year": 2024
   },
   {
@@ -441,6 +475,14 @@
       "lastName": "Fry",
       "partyName": "Republican"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Russell",
+        "id": 23833,
+        "lastName": "Fry",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -448,15 +490,15 @@
           "estimatedVotesHigh": 364169,
           "estimatedVotesLow": 297955,
           "estimatedVotesMid": 331062,
-          "turnoutHigh": 91.75,
-          "turnoutLow": 112.14,
+          "turnoutHigh": 91.84,
+          "turnoutLow": 112.25,
           "turnoutMid": 99
         },
         "firstName": "Mal",
         "id": 1616,
         "lastName": "Hyman",
         "partyName": "Democratic",
-        "votes": 138915
+        "votes": 138984
       },
       {
         "elected": true,
@@ -464,15 +506,15 @@
           "estimatedVotesHigh": 364169,
           "estimatedVotesLow": 297955,
           "estimatedVotesMid": 331062,
-          "turnoutHigh": 91.75,
-          "turnoutLow": 112.14,
+          "turnoutHigh": 91.84,
+          "turnoutLow": 112.25,
           "turnoutMid": 99
         },
         "firstName": "Russell",
         "id": 23833,
         "lastName": "Fry",
         "partyName": "Republican",
-        "votes": 195218
+        "votes": 195484
       }
     ],
     "district": "7",
@@ -481,7 +523,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:39:01.108Z",
+    "lastUpdated": "2024-10-25T20:51:58.775Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -491,11 +533,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 334133,
+    "totalVotes": 334468,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -535,6 +578,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -574,6 +618,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -614,7 +659,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:03:07.882Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -629,6 +674,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -668,6 +714,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -707,6 +754,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -746,6 +794,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -785,6 +834,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -825,7 +875,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:36:18.332Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -840,6 +890,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -847,15 +898,15 @@
           "estimatedVotesHigh": 57901,
           "estimatedVotesLow": 47373,
           "estimatedVotesMid": 52637,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.15,
+          "turnoutHigh": 91.68,
+          "turnoutLow": 112.06,
           "turnoutMid": 99
         },
         "firstName": "Daniel",
         "id": 95873,
         "lastName": "Verdin",
         "partyName": "Republican",
-        "votes": 33940
+        "votes": 34283
       },
       {
         "elected": false,
@@ -863,15 +914,15 @@
           "estimatedVotesHigh": 57901,
           "estimatedVotesLow": 47373,
           "estimatedVotesMid": 52637,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.15,
+          "turnoutHigh": 91.68,
+          "turnoutLow": 112.06,
           "turnoutMid": 99
         },
         "firstName": "Charles",
         "id": 95872,
         "lastName": "Driggers",
         "partyName": "Democratic",
-        "votes": 18714
+        "votes": 18802
       }
     ],
     "district": "9",
@@ -880,7 +931,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.223Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -890,11 +941,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 52654,
+    "totalVotes": 53085,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -902,8 +954,8 @@
           "estimatedVotesHigh": 60752,
           "estimatedVotesLow": 49706,
           "estimatedVotesMid": 55229,
-          "turnoutHigh": 91.47,
-          "turnoutLow": 111.79,
+          "turnoutHigh": 92.02,
+          "turnoutLow": 112.47,
           "turnoutMid": 99
         },
         "firstName": "Frances",
@@ -918,15 +970,15 @@
           "estimatedVotesHigh": 60752,
           "estimatedVotesLow": 49706,
           "estimatedVotesMid": 55229,
-          "turnoutHigh": 91.47,
-          "turnoutLow": 111.79,
+          "turnoutHigh": 92.02,
+          "turnoutLow": 112.47,
           "turnoutMid": 99
         },
         "firstName": "Billy",
         "id": 74392,
         "lastName": "Garrett",
         "partyName": "Republican",
-        "votes": 36098
+        "votes": 36434
       }
     ],
     "district": "10",
@@ -935,7 +987,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.223Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -945,11 +997,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 55567,
+    "totalVotes": 55903,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -957,8 +1010,8 @@
           "estimatedVotesHigh": 48590,
           "estimatedVotesLow": 39756,
           "estimatedVotesMid": 44173,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.28,
+          "turnoutLow": 111.56,
           "turnoutMid": 99
         },
         "firstName": "Joshua",
@@ -973,15 +1026,15 @@
           "estimatedVotesHigh": 48590,
           "estimatedVotesLow": 39756,
           "estimatedVotesMid": 44173,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.28,
+          "turnoutLow": 111.56,
           "turnoutMid": 99
         },
         "firstName": "Angela",
         "id": 23823,
         "lastName": "Geter",
         "partyName": "Democratic",
-        "votes": 17669
+        "votes": 17847
       }
     ],
     "district": "11",
@@ -990,7 +1043,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:03:00.027Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1000,11 +1053,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 44173,
+    "totalVotes": 44351,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1012,15 +1066,15 @@
           "estimatedVotesHigh": 58014,
           "estimatedVotesLow": 47466,
           "estimatedVotesMid": 52740,
-          "turnoutHigh": 90.99,
-          "turnoutLow": 111.21,
+          "turnoutHigh": 91.49,
+          "turnoutLow": 111.82,
           "turnoutMid": 99
         },
         "firstName": "Roger",
         "id": 46053,
         "lastName": "Nutt",
         "partyName": "Republican",
-        "votes": 32077
+        "votes": 32315
       },
       {
         "elected": false,
@@ -1028,15 +1082,15 @@
           "estimatedVotesHigh": 58014,
           "estimatedVotesLow": 47466,
           "estimatedVotesMid": 52740,
-          "turnoutHigh": 90.99,
-          "turnoutLow": 111.21,
+          "turnoutHigh": 91.49,
+          "turnoutLow": 111.82,
           "turnoutMid": 99
         },
         "firstName": "Octavia",
         "id": 75736,
         "lastName": "Amaechi",
         "partyName": "Democratic",
-        "votes": 20712
+        "votes": 20761
       }
     ],
     "district": "12",
@@ -1045,7 +1099,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:42.430Z",
+    "lastUpdated": "2024-10-25T20:51:58.417Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1055,11 +1109,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 52789,
+    "totalVotes": 53076,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1099,6 +1154,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1138,6 +1194,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1145,9 +1202,9 @@
           "estimatedVotesHigh": 60713,
           "estimatedVotesLow": 49675,
           "estimatedVotesMid": 55194,
-          "turnoutHigh": 71.82,
-          "turnoutLow": 87.78,
-          "turnoutMid": 79
+          "turnoutHigh": 72.52,
+          "turnoutLow": 88.63,
+          "turnoutMid": 79.77
         },
         "firstName": "Sarah",
         "id": 47481,
@@ -1161,15 +1218,15 @@
           "estimatedVotesHigh": 60713,
           "estimatedVotesLow": 49675,
           "estimatedVotesMid": 55194,
-          "turnoutHigh": 71.82,
-          "turnoutLow": 87.78,
-          "turnoutMid": 79
+          "turnoutHigh": 72.52,
+          "turnoutLow": 88.63,
+          "turnoutMid": 79.77
         },
         "firstName": "David",
         "id": 95876,
         "lastName": "Climer",
         "partyName": "Republican",
-        "votes": 42214
+        "votes": 42637
       }
     ],
     "district": "15",
@@ -1178,7 +1235,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:22:17.188Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1188,11 +1245,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 43605,
+    "totalVotes": 44028,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1200,9 +1258,9 @@
           "estimatedVotesHigh": 61247,
           "estimatedVotesLow": 50112,
           "estimatedVotesMid": 55679,
-          "turnoutHigh": 74.3,
-          "turnoutLow": 90.81,
-          "turnoutMid": 81.73
+          "turnoutHigh": 74.31,
+          "turnoutLow": 90.83,
+          "turnoutMid": 81.75
         },
         "firstName": "Robert",
         "id": 95877,
@@ -1216,15 +1274,15 @@
           "estimatedVotesHigh": 61247,
           "estimatedVotesLow": 50112,
           "estimatedVotesMid": 55679,
-          "turnoutHigh": 74.3,
-          "turnoutLow": 90.81,
-          "turnoutMid": 81.73
+          "turnoutHigh": 74.31,
+          "turnoutLow": 90.83,
+          "turnoutMid": 81.75
         },
         "firstName": "Patrick",
         "id": 95878,
         "lastName": "Mace",
         "partyName": "Workers Party",
-        "votes": 1464
+        "votes": 1470
       }
     ],
     "district": "16",
@@ -1233,7 +1291,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:49.452Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1243,11 +1301,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 45509,
+    "totalVotes": 45515,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1255,15 +1314,15 @@
           "estimatedVotesHigh": 58172,
           "estimatedVotesLow": 47595,
           "estimatedVotesMid": 52883,
-          "turnoutHigh": 91.1,
-          "turnoutLow": 111.34,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.69,
           "turnoutMid": 99
         },
         "firstName": "Everett",
         "id": 75746,
         "lastName": "Stubbs",
         "partyName": "Republican",
-        "votes": 24592
+        "votes": 24738
       },
       {
         "elected": false,
@@ -1271,15 +1330,15 @@
           "estimatedVotesHigh": 58172,
           "estimatedVotesLow": 47595,
           "estimatedVotesMid": 52883,
-          "turnoutHigh": 91.1,
-          "turnoutLow": 111.34,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.69,
           "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 95879,
         "lastName": "Fanning",
         "partyName": "Democratic",
-        "votes": 28402
+        "votes": 28419
       }
     ],
     "district": "17",
@@ -1288,7 +1347,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1298,11 +1357,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 52994,
+    "totalVotes": 53157,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1342,6 +1402,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1349,8 +1410,8 @@
           "estimatedVotesHigh": 47676,
           "estimatedVotesLow": 39008,
           "estimatedVotesMid": 43342,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 90.93,
+          "turnoutLow": 111.14,
           "turnoutMid": 99
         },
         "firstName": "Tameika",
@@ -1365,15 +1426,15 @@
           "estimatedVotesHigh": 47676,
           "estimatedVotesLow": 39008,
           "estimatedVotesMid": 43342,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 90.93,
+          "turnoutLow": 111.14,
           "turnoutMid": 99
         },
         "firstName": "Christopher",
         "id": 95880,
         "lastName": "Nelums",
         "partyName": "United Citizens",
-        "votes": 1088
+        "votes": 1100
       }
     ],
     "district": "19",
@@ -1382,7 +1443,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:22:17.188Z",
+    "lastUpdated": "2024-10-25T20:52:15.351Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1392,11 +1453,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 43342,
+    "totalVotes": 43354,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1404,15 +1466,15 @@
           "estimatedVotesHigh": 54542,
           "estimatedVotesLow": 44626,
           "estimatedVotesMid": 49584,
-          "turnoutHigh": 77.36,
-          "turnoutLow": 94.55,
-          "turnoutMid": 85.09
+          "turnoutHigh": 78.14,
+          "turnoutLow": 95.5,
+          "turnoutMid": 85.95
         },
         "firstName": "Kendal",
         "id": 44381,
         "lastName": "Ludden",
         "partyName": "Libertarian",
-        "votes": 1274
+        "votes": 1288
       },
       {
         "elected": false,
@@ -1420,15 +1482,15 @@
           "estimatedVotesHigh": 54542,
           "estimatedVotesLow": 44626,
           "estimatedVotesMid": 49584,
-          "turnoutHigh": 77.36,
-          "turnoutLow": 94.55,
-          "turnoutMid": 85.09
+          "turnoutHigh": 78.14,
+          "turnoutLow": 95.5,
+          "turnoutMid": 85.95
         },
         "firstName": "Edward",
         "id": 95881,
         "lastName": "Sutton",
         "partyName": "Democratic",
-        "votes": 40919
+        "votes": 41329
       }
     ],
     "district": "20",
@@ -1437,7 +1499,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:34:49.575Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1447,11 +1509,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 42193,
+    "totalVotes": 42617,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1491,6 +1554,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1530,6 +1594,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1569,6 +1634,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1609,7 +1675,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1624,6 +1690,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1663,6 +1730,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1670,15 +1738,15 @@
           "estimatedVotesHigh": 44252,
           "estimatedVotesLow": 36207,
           "estimatedVotesMid": 40229,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.23,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.68,
           "turnoutMid": 99
         },
         "firstName": "Jason",
         "id": 75759,
         "lastName": "Guerry",
         "partyName": "Republican",
-        "votes": 18578
+        "votes": 18595
       },
       {
         "elected": false,
@@ -1686,15 +1754,15 @@
           "estimatedVotesHigh": 44252,
           "estimatedVotesLow": 36207,
           "estimatedVotesMid": 40229,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.23,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.68,
           "turnoutMid": 99
         },
         "firstName": "Harold",
         "id": 95884,
         "lastName": "Geddings",
         "partyName": "Workers Party",
-        "votes": 800
+        "votes": 807
       },
       {
         "elected": false,
@@ -1702,15 +1770,15 @@
           "estimatedVotesHigh": 44252,
           "estimatedVotesLow": 36207,
           "estimatedVotesMid": 40229,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.23,
+          "turnoutHigh": 91.38,
+          "turnoutLow": 111.68,
           "turnoutMid": 99
         },
         "firstName": "Russell",
         "id": 46112,
         "lastName": "Ott",
         "partyName": "Democratic",
-        "votes": 20895
+        "votes": 21034
       }
     ],
     "district": "26",
@@ -1719,7 +1787,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1729,11 +1797,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 40273,
+    "totalVotes": 40436,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1741,15 +1810,15 @@
           "estimatedVotesHigh": 56875,
           "estimatedVotesLow": 46533,
           "estimatedVotesMid": 51704,
-          "turnoutHigh": 91.85,
-          "turnoutLow": 112.26,
+          "turnoutHigh": 92.18,
+          "turnoutLow": 112.67,
           "turnoutMid": 99
         },
         "firstName": "Allen",
         "id": 75762,
         "lastName": "Blackmon",
         "partyName": "Republican",
-        "votes": 34603
+        "votes": 34792
       },
       {
         "elected": false,
@@ -1757,8 +1826,8 @@
           "estimatedVotesHigh": 56875,
           "estimatedVotesLow": 46533,
           "estimatedVotesMid": 51704,
-          "turnoutHigh": 91.85,
-          "turnoutLow": 112.26,
+          "turnoutHigh": 92.18,
+          "turnoutLow": 112.67,
           "turnoutMid": 99
         },
         "firstName": "Tiffonya",
@@ -1774,7 +1843,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1784,11 +1853,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 52239,
+    "totalVotes": 52428,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1828,6 +1898,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1835,15 +1906,15 @@
           "estimatedVotesHigh": 54827,
           "estimatedVotesLow": 44859,
           "estimatedVotesMid": 49843,
-          "turnoutHigh": 91.31,
-          "turnoutLow": 111.6,
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.22,
           "turnoutMid": 99
         },
         "firstName": "Gerald",
         "id": 75765,
         "lastName": "Malloy",
         "partyName": "Democratic",
-        "votes": 26963
+        "votes": 27240
       },
       {
         "elected": false,
@@ -1851,8 +1922,8 @@
           "estimatedVotesHigh": 54827,
           "estimatedVotesLow": 44859,
           "estimatedVotesMid": 49843,
-          "turnoutHigh": 91.31,
-          "turnoutLow": 111.6,
+          "turnoutHigh": 91.81,
+          "turnoutLow": 112.22,
           "turnoutMid": 99
         },
         "firstName": "James",
@@ -1868,7 +1939,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1878,11 +1949,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 50062,
+    "totalVotes": 50339,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1890,15 +1962,15 @@
           "estimatedVotesHigh": 49700,
           "estimatedVotesLow": 40662,
           "estimatedVotesMid": 45181,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.62,
           "turnoutMid": 99
         },
-        "firstName": "Kent",
-        "id": 75767,
-        "lastName": "Williams",
-        "partyName": "Democratic",
-        "votes": 23885
+        "firstName": "Rodney",
+        "id": 75768,
+        "lastName": "Berry",
+        "partyName": "Republican",
+        "votes": 21501
       },
       {
         "elected": false,
@@ -1906,15 +1978,15 @@
           "estimatedVotesHigh": 49700,
           "estimatedVotesLow": 40662,
           "estimatedVotesMid": 45181,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.62,
           "turnoutMid": 99
         },
-        "firstName": "Rodney",
-        "id": 75768,
-        "lastName": "Berry",
-        "partyName": "Republican",
-        "votes": 21431
+        "firstName": "Kent",
+        "id": 75767,
+        "lastName": "Williams",
+        "partyName": "Democratic",
+        "votes": 23885
       }
     ],
     "district": "30",
@@ -1923,7 +1995,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1933,11 +2005,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 45316,
+    "totalVotes": 45386,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1945,15 +2018,15 @@
           "estimatedVotesHigh": 49165,
           "estimatedVotesLow": 40226,
           "estimatedVotesMid": 44695,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Belinda",
         "id": 75769,
         "lastName": "Timmons",
         "partyName": "Democratic",
-        "votes": 18329
+        "votes": 18513
       },
       {
         "elected": false,
@@ -1961,15 +2034,15 @@
           "estimatedVotesHigh": 49165,
           "estimatedVotesLow": 40226,
           "estimatedVotesMid": 44695,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Johnathan",
         "id": 95888,
         "lastName": "Reichenbach",
         "partyName": "Republican",
-        "votes": 26366
+        "votes": 26631
       }
     ],
     "district": "31",
@@ -1978,7 +2051,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:26:56.245Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1988,11 +2061,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 44695,
+    "totalVotes": 45144,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2032,6 +2106,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2039,15 +2114,15 @@
           "estimatedVotesHigh": 52290,
           "estimatedVotesLow": 42782,
           "estimatedVotesMid": 47536,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.47,
+          "turnoutLow": 111.79,
           "turnoutMid": 99
         },
         "firstName": "Luke",
         "id": 75774,
         "lastName": "Rankin",
         "partyName": "Republican",
-        "votes": 29087
+        "votes": 29379
       },
       {
         "elected": false,
@@ -2055,8 +2130,8 @@
           "estimatedVotesHigh": 52290,
           "estimatedVotesLow": 42782,
           "estimatedVotesMid": 47536,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.47,
+          "turnoutLow": 111.79,
           "turnoutMid": 99
         },
         "firstName": "John",
@@ -2072,7 +2147,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:32:24.335Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2082,11 +2157,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 47536,
+    "totalVotes": 47828,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2126,6 +2202,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2133,15 +2210,15 @@
           "estimatedVotesHigh": 50787,
           "estimatedVotesLow": 41553,
           "estimatedVotesMid": 46170,
-          "turnoutHigh": 91.49,
-          "turnoutLow": 111.82,
+          "turnoutHigh": 91.86,
+          "turnoutLow": 112.28,
           "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 87256,
         "lastName": "Jones",
         "partyName": "Republican",
-        "votes": 20979
+        "votes": 21155
       },
       {
         "elected": false,
@@ -2149,15 +2226,15 @@
           "estimatedVotesHigh": 50787,
           "estimatedVotesLow": 41553,
           "estimatedVotesMid": 46170,
-          "turnoutHigh": 91.49,
-          "turnoutLow": 111.82,
+          "turnoutHigh": 91.86,
+          "turnoutLow": 112.28,
           "turnoutMid": 99
         },
         "firstName": "Jeffrey",
         "id": 75777,
         "lastName": "Graham",
         "partyName": "Democratic",
-        "votes": 25485
+        "votes": 25500
       }
     ],
     "district": "35",
@@ -2166,7 +2243,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2176,11 +2253,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 46464,
+    "totalVotes": 46655,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2188,15 +2266,15 @@
           "estimatedVotesHigh": 56260,
           "estimatedVotesLow": 46031,
           "estimatedVotesMid": 51145,
-          "turnoutHigh": 91.4,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Jeffrey",
         "id": 95890,
         "lastName": "Zell",
         "partyName": "Republican",
-        "votes": 23550
+        "votes": 23567
       },
       {
         "elected": false,
@@ -2204,15 +2282,15 @@
           "estimatedVotesHigh": 56260,
           "estimatedVotesLow": 46031,
           "estimatedVotesMid": 51145,
-          "turnoutHigh": 91.4,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Kevin",
         "id": 9066,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 27874
+        "votes": 28092
       }
     ],
     "district": "36",
@@ -2221,7 +2299,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2231,11 +2309,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 51424,
+    "totalVotes": 51659,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2275,6 +2354,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2314,6 +2394,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2321,15 +2402,15 @@
           "estimatedVotesHigh": 51388,
           "estimatedVotesLow": 42044,
           "estimatedVotesMid": 46716,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.49,
+          "turnoutHigh": 91.33,
+          "turnoutLow": 111.63,
           "turnoutMid": 99
         },
         "firstName": "Vernon",
         "id": 75787,
         "lastName": "Stephens",
         "partyName": "Democratic",
-        "votes": 24619
+        "votes": 24651
       },
       {
         "elected": false,
@@ -2337,15 +2418,15 @@
           "estimatedVotesHigh": 51388,
           "estimatedVotesLow": 42044,
           "estimatedVotesMid": 46716,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.49,
+          "turnoutHigh": 91.33,
+          "turnoutLow": 111.63,
           "turnoutMid": 99
         },
         "firstName": "Thomas",
         "id": 95892,
         "lastName": "Fernandez",
         "partyName": "Republican",
-        "votes": 22254
+        "votes": 22283
       }
     ],
     "district": "39",
@@ -2354,7 +2435,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:20:44.633Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2364,11 +2445,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 46873,
+    "totalVotes": 46934,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2376,8 +2458,8 @@
           "estimatedVotesHigh": 52965,
           "estimatedVotesLow": 43335,
           "estimatedVotesMid": 48150,
-          "turnoutHigh": 91.02,
-          "turnoutLow": 111.25,
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.34,
           "turnoutMid": 99
         },
         "firstName": "Sharon",
@@ -2392,15 +2474,15 @@
           "estimatedVotesHigh": 52965,
           "estimatedVotesLow": 43335,
           "estimatedVotesMid": 48150,
-          "turnoutHigh": 91.02,
-          "turnoutLow": 111.25,
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.34,
           "turnoutMid": 99
         },
         "firstName": "Charles",
         "id": 95893,
         "lastName": "Hutto",
         "partyName": "Democratic",
-        "votes": 26080
+        "votes": 26117
       }
     ],
     "district": "40",
@@ -2409,7 +2491,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:39:05.298Z",
+    "lastUpdated": "2024-10-25T20:52:17.717Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2419,11 +2501,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 48211,
+    "totalVotes": 48248,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2431,15 +2514,15 @@
           "estimatedVotesHigh": 56993,
           "estimatedVotesLow": 46630,
           "estimatedVotesMid": 51811,
-          "turnoutHigh": 92.16,
-          "turnoutLow": 112.64,
+          "turnoutHigh": 92.32,
+          "turnoutLow": 112.84,
           "turnoutMid": 99
         },
         "firstName": "Rita",
         "id": 75791,
         "lastName": "Adkins",
         "partyName": "Democratic",
-        "votes": 23906
+        "votes": 24000
       },
       {
         "elected": false,
@@ -2447,8 +2530,8 @@
           "estimatedVotesHigh": 56993,
           "estimatedVotesLow": 46630,
           "estimatedVotesMid": 51811,
-          "turnoutHigh": 92.16,
-          "turnoutLow": 112.64,
+          "turnoutHigh": 92.32,
+          "turnoutLow": 112.84,
           "turnoutMid": 99
         },
         "firstName": "Matthew",
@@ -2464,7 +2547,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2474,11 +2557,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 52522,
+    "totalVotes": 52616,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2518,6 +2602,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2558,7 +2643,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2573,6 +2658,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2613,7 +2699,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:09.386Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2628,6 +2714,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2667,6 +2754,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2674,8 +2762,8 @@
           "estimatedVotesHigh": 62643,
           "estimatedVotesLow": 51253,
           "estimatedVotesMid": 56948,
-          "turnoutHigh": 90.96,
-          "turnoutLow": 111.17,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.6,
           "turnoutMid": 99
         },
         "firstName": "Thomas",
@@ -2690,15 +2778,15 @@
           "estimatedVotesHigh": 62643,
           "estimatedVotesLow": 51253,
           "estimatedVotesMid": 56948,
-          "turnoutHigh": 90.96,
-          "turnoutLow": 111.17,
+          "turnoutHigh": 91.31,
+          "turnoutLow": 111.6,
           "turnoutMid": 99
         },
         "firstName": "Gwyneth",
         "id": 75800,
         "lastName": "Saunders",
         "partyName": "Democratic",
-        "votes": 23208
+        "votes": 23429
       }
     ],
     "district": "46",
@@ -2707,7 +2795,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2717,11 +2805,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 56979,
+    "totalVotes": 57200,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2761,6 +2850,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2800,6 +2890,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2807,15 +2898,15 @@
           "estimatedVotesHigh": 13008,
           "estimatedVotesLow": 10643,
           "estimatedVotesMid": 11825,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
           "turnoutMid": 99
         },
         "firstName": "James",
         "id": 51972,
         "lastName": "Bowers",
         "partyName": "Republican",
-        "votes": 7100
+        "votes": 7172
       },
       {
         "elected": false,
@@ -2823,8 +2914,8 @@
           "estimatedVotesHigh": 13008,
           "estimatedVotesLow": 10643,
           "estimatedVotesMid": 11825,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
           "turnoutMid": 99
         },
         "firstName": "Eunice",
@@ -2840,7 +2931,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:12:14.700Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2850,11 +2941,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 11825,
+    "totalVotes": 11897,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2894,6 +2986,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2933,6 +3026,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2940,15 +3034,15 @@
           "estimatedVotesHigh": 22353,
           "estimatedVotesLow": 18289,
           "estimatedVotesMid": 20321,
-          "turnoutHigh": 91.16,
-          "turnoutLow": 111.42,
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.73,
           "turnoutMid": 99
         },
         "firstName": "Anthony",
         "id": 95899,
         "lastName": "Wagoner",
         "partyName": "Democratic",
-        "votes": 5631
+        "votes": 5688
       },
       {
         "elected": false,
@@ -2956,8 +3050,8 @@
           "estimatedVotesHigh": 22353,
           "estimatedVotesLow": 18289,
           "estimatedVotesMid": 20321,
-          "turnoutHigh": 91.16,
-          "turnoutLow": 111.42,
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.73,
           "turnoutMid": 99
         },
         "firstName": "April",
@@ -2973,7 +3067,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:26:05.284Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2983,11 +3077,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 20378,
+    "totalVotes": 20435,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2995,15 +3090,15 @@
           "estimatedVotesHigh": 18656,
           "estimatedVotesLow": 15264,
           "estimatedVotesMid": 16960,
-          "turnoutHigh": 88.86,
-          "turnoutLow": 108.6,
-          "turnoutMid": 97.74
+          "turnoutHigh": 88.93,
+          "turnoutLow": 108.69,
+          "turnoutMid": 97.82
         },
         "firstName": "Thomas",
         "id": 95900,
         "lastName": "Gilreath",
         "partyName": "Republican",
-        "votes": 16148
+        "votes": 16160
       },
       {
         "elected": false,
@@ -3011,15 +3106,15 @@
           "estimatedVotesHigh": 18656,
           "estimatedVotesLow": 15264,
           "estimatedVotesMid": 16960,
-          "turnoutHigh": 88.86,
-          "turnoutLow": 108.6,
-          "turnoutMid": 97.74
+          "turnoutHigh": 88.93,
+          "turnoutLow": 108.69,
+          "turnoutMid": 97.82
         },
         "firstName": "Hunter",
         "id": 95901,
         "lastName": "Savirino",
         "partyName": "Libertarian",
-        "votes": 429
+        "votes": 430
       }
     ],
     "district": "7",
@@ -3028,7 +3123,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3038,11 +3133,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 16577,
+    "totalVotes": 16590,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3050,9 +3146,9 @@
           "estimatedVotesHigh": 20215,
           "estimatedVotesLow": 16539,
           "estimatedVotesMid": 18377,
-          "turnoutHigh": 84.32,
-          "turnoutLow": 103.06,
-          "turnoutMid": 92.75
+          "turnoutHigh": 84.35,
+          "turnoutLow": 103.1,
+          "turnoutMid": 92.78
         },
         "firstName": "Donald",
         "id": 95902,
@@ -3066,15 +3162,15 @@
           "estimatedVotesHigh": 20215,
           "estimatedVotesLow": 16539,
           "estimatedVotesMid": 18377,
-          "turnoutHigh": 84.32,
-          "turnoutLow": 103.06,
-          "turnoutMid": 92.75
+          "turnoutHigh": 84.35,
+          "turnoutLow": 103.1,
+          "turnoutMid": 92.78
         },
         "firstName": "Jacqueline",
         "id": 95903,
         "lastName": "Todd",
         "partyName": "Alliance",
-        "votes": 491
+        "votes": 497
       }
     ],
     "district": "8",
@@ -3083,7 +3179,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:10:36.968Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3093,11 +3189,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 17045,
+    "totalVotes": 17051,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3137,6 +3234,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3176,6 +3274,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3215,6 +3314,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3222,8 +3322,8 @@
           "estimatedVotesHigh": 17041,
           "estimatedVotesLow": 13943,
           "estimatedVotesMid": 15492,
-          "turnoutHigh": 91.68,
-          "turnoutLow": 112.06,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.68,
           "turnoutMid": 99
         },
         "firstName": "Jumelle",
@@ -3238,15 +3338,15 @@
           "estimatedVotesHigh": 17041,
           "estimatedVotesLow": 13943,
           "estimatedVotesMid": 15492,
-          "turnoutHigh": 91.68,
-          "turnoutLow": 112.06,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.68,
           "turnoutMid": 99
         },
         "firstName": "Norman",
         "id": 95904,
         "lastName": "Gibson",
         "partyName": "Republican",
-        "votes": 7642
+        "votes": 7729
       }
     ],
     "district": "12",
@@ -3255,7 +3355,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:52:17.717Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3265,11 +3365,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 15624,
+    "totalVotes": 15711,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3277,15 +3378,15 @@
           "estimatedVotesHigh": 22315,
           "estimatedVotesLow": 18257,
           "estimatedVotesMid": 20286,
-          "turnoutHigh": 91.17,
-          "turnoutLow": 111.43,
+          "turnoutHigh": 92.05,
+          "turnoutLow": 112.51,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 46032,
         "lastName": "McCravy",
         "partyName": "Republican",
-        "votes": 14526
+        "votes": 14665
       },
       {
         "elected": false,
@@ -3293,15 +3394,15 @@
           "estimatedVotesHigh": 22315,
           "estimatedVotesLow": 18257,
           "estimatedVotesMid": 20286,
-          "turnoutHigh": 91.17,
-          "turnoutLow": 111.43,
+          "turnoutHigh": 92.05,
+          "turnoutLow": 112.51,
           "turnoutMid": 99
         },
         "firstName": "William",
         "id": 95905,
         "lastName": "Kimler",
         "partyName": "Democratic",
-        "votes": 5818
+        "votes": 5876
       }
     ],
     "district": "13",
@@ -3310,7 +3411,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3320,11 +3421,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 20344,
+    "totalVotes": 20541,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3364,6 +3466,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3371,8 +3474,8 @@
           "estimatedVotesHigh": 13466,
           "estimatedVotesLow": 11018,
           "estimatedVotesMid": 12242,
-          "turnoutHigh": 91.74,
-          "turnoutLow": 112.13,
+          "turnoutHigh": 91.96,
+          "turnoutLow": 112.4,
           "turnoutMid": 99
         },
         "firstName": "JA",
@@ -3387,15 +3490,15 @@
           "estimatedVotesHigh": 13466,
           "estimatedVotesLow": 11018,
           "estimatedVotesMid": 12242,
-          "turnoutHigh": 91.74,
-          "turnoutLow": 112.13,
+          "turnoutHigh": 91.96,
+          "turnoutLow": 112.4,
           "turnoutMid": 99
         },
         "firstName": "Lee",
         "id": 95906,
         "lastName": "Walker",
         "partyName": "Republican",
-        "votes": 5265
+        "votes": 5295
       }
     ],
     "district": "15",
@@ -3404,7 +3507,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:19:11.614Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3414,11 +3517,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 12354,
+    "totalVotes": 12384,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3458,6 +3562,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3497,6 +3602,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3536,6 +3642,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3575,6 +3682,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3582,15 +3690,15 @@
           "estimatedVotesHigh": 20941,
           "estimatedVotesLow": 17133,
           "estimatedVotesMid": 19037,
-          "turnoutHigh": 91.83,
-          "turnoutLow": 112.25,
+          "turnoutHigh": 93.08,
+          "turnoutLow": 113.77,
           "turnoutMid": 99
         },
         "firstName": "Stephen",
         "id": 75821,
         "lastName": "Frank",
         "partyName": "Republican",
-        "votes": 12717
+        "votes": 12845
       },
       {
         "elected": false,
@@ -3598,15 +3706,15 @@
           "estimatedVotesHigh": 20941,
           "estimatedVotesLow": 17133,
           "estimatedVotesMid": 19037,
-          "turnoutHigh": 91.83,
-          "turnoutLow": 112.25,
+          "turnoutHigh": 93.08,
+          "turnoutLow": 113.77,
           "turnoutMid": 99
         },
         "firstName": "Stephen",
         "id": 75819,
         "lastName": "Dreyfus",
         "partyName": "Democratic",
-        "votes": 6514
+        "votes": 6647
       }
     ],
     "district": "20",
@@ -3615,7 +3723,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:56.994Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3625,11 +3733,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 19231,
+    "totalVotes": 19492,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3669,6 +3778,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3676,15 +3786,15 @@
           "estimatedVotesHigh": 23018,
           "estimatedVotesLow": 18833,
           "estimatedVotesMid": 20925,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Brann",
         "id": 75822,
         "lastName": "Fowler",
         "partyName": "Democratic",
-        "votes": 9405
+        "votes": 9500
       },
       {
         "elected": false,
@@ -3692,8 +3802,8 @@
           "estimatedVotesHigh": 23018,
           "estimatedVotesLow": 18833,
           "estimatedVotesMid": 20925,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.72,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Paul",
@@ -3709,7 +3819,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:33:37.596Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3719,11 +3829,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 21041,
+    "totalVotes": 21136,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3764,7 +3875,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:26:56.245Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3779,6 +3890,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3786,8 +3898,8 @@
           "estimatedVotesHigh": 23629,
           "estimatedVotesLow": 19333,
           "estimatedVotesMid": 21481,
-          "turnoutHigh": 91.83,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.27,
+          "turnoutLow": 112.77,
           "turnoutMid": 99
         },
         "firstName": "Bruce",
@@ -3802,15 +3914,15 @@
           "estimatedVotesHigh": 23629,
           "estimatedVotesLow": 19333,
           "estimatedVotesMid": 21481,
-          "turnoutHigh": 91.83,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.27,
+          "turnoutLow": 112.77,
           "turnoutMid": 99
         },
         "firstName": "Shauna",
         "id": 75825,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 10278
+        "votes": 10382
       }
     ],
     "district": "24",
@@ -3819,7 +3931,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:14:08.107Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3829,11 +3941,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 21698,
+    "totalVotes": 21802,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3874,7 +3987,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:22:45.311Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3889,6 +4002,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3896,15 +4010,15 @@
           "estimatedVotesHigh": 21058,
           "estimatedVotesLow": 17230,
           "estimatedVotesMid": 19144,
-          "turnoutHigh": 91.48,
-          "turnoutLow": 111.8,
+          "turnoutHigh": 92.41,
+          "turnoutLow": 112.94,
           "turnoutMid": 99
         },
         "firstName": "Robert",
         "id": 95909,
         "lastName": "Vilardebo",
         "partyName": "Democratic",
-        "votes": 7627
+        "votes": 7704
       },
       {
         "elected": false,
@@ -3912,15 +4026,15 @@
           "estimatedVotesHigh": 21058,
           "estimatedVotesLow": 17230,
           "estimatedVotesMid": 19144,
-          "turnoutHigh": 91.48,
-          "turnoutLow": 111.8,
+          "turnoutHigh": 92.41,
+          "turnoutLow": 112.94,
           "turnoutMid": 99
         },
         "firstName": "David",
         "id": 26278,
         "lastName": "Martin",
         "partyName": "Republican",
-        "votes": 11287
+        "votes": 11401
       },
       {
         "elected": false,
@@ -3928,15 +4042,15 @@
           "estimatedVotesHigh": 21058,
           "estimatedVotesLow": 17230,
           "estimatedVotesMid": 19144,
-          "turnoutHigh": 91.48,
-          "turnoutLow": 111.8,
+          "turnoutHigh": 92.41,
+          "turnoutLow": 112.94,
           "turnoutMid": 99
         },
         "firstName": "Patrick",
         "id": 95878,
         "lastName": "Mace",
         "partyName": "Workers Party",
-        "votes": 350
+        "votes": 355
       }
     ],
     "district": "26",
@@ -3945,7 +4059,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:35:30.618Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3955,11 +4069,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 19264,
+    "totalVotes": 19460,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3967,8 +4082,8 @@
           "estimatedVotesHigh": 22386,
           "estimatedVotesLow": 18316,
           "estimatedVotesMid": 20351,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.61,
           "turnoutMid": 99
         },
         "firstName": "Marion David",
@@ -3983,15 +4098,15 @@
           "estimatedVotesHigh": 22386,
           "estimatedVotesLow": 18316,
           "estimatedVotesMid": 20351,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.32,
+          "turnoutLow": 111.61,
           "turnoutMid": 99
         },
         "firstName": "John",
         "id": 75827,
         "lastName": "MacCarthy",
         "partyName": "Democratic",
-        "votes": 9147
+        "votes": 9239
       }
     ],
     "district": "27",
@@ -4000,7 +4115,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:24:37.325Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4010,11 +4125,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 20351,
+    "totalVotes": 20443,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4055,7 +4171,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:08:38.351Z",
+    "lastUpdated": "2024-10-25T20:51:47.970Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4070,6 +4186,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4109,6 +4226,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4116,15 +4234,15 @@
           "estimatedVotesHigh": 18976,
           "estimatedVotesLow": 15526,
           "estimatedVotesMid": 17251,
-          "turnoutHigh": 91.62,
-          "turnoutLow": 111.97,
+          "turnoutHigh": 92.63,
+          "turnoutLow": 113.22,
           "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 95912,
         "lastName": "Lawson",
         "partyName": "Republican",
-        "votes": 13366
+        "votes": 13559
       },
       {
         "elected": false,
@@ -4132,8 +4250,8 @@
           "estimatedVotesHigh": 18976,
           "estimatedVotesLow": 15526,
           "estimatedVotesMid": 17251,
-          "turnoutHigh": 91.62,
-          "turnoutLow": 111.97,
+          "turnoutHigh": 92.63,
+          "turnoutLow": 113.22,
           "turnoutMid": 99
         },
         "firstName": "Ysante",
@@ -4149,7 +4267,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4159,11 +4277,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 17385,
+    "totalVotes": 17578,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4203,6 +4322,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4242,6 +4362,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4249,8 +4370,8 @@
           "estimatedVotesHigh": 21953,
           "estimatedVotesLow": 17961,
           "estimatedVotesMid": 19957,
-          "turnoutHigh": 91.82,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.44,
+          "turnoutLow": 112.99,
           "turnoutMid": 99
         },
         "firstName": "Travis",
@@ -4265,15 +4386,15 @@
           "estimatedVotesHigh": 21953,
           "estimatedVotesLow": 17961,
           "estimatedVotesMid": 19957,
-          "turnoutHigh": 91.82,
-          "turnoutLow": 112.23,
+          "turnoutHigh": 92.44,
+          "turnoutLow": 112.99,
           "turnoutMid": 99
         },
         "firstName": "Clemson",
         "id": 75837,
         "lastName": "Turregano",
         "partyName": "Democratic",
-        "votes": 6694
+        "votes": 6831
       }
     ],
     "district": "33",
@@ -4282,7 +4403,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:30:09.876Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4292,11 +4413,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 20157,
+    "totalVotes": 20294,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4336,6 +4458,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4375,6 +4498,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4414,6 +4538,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4453,6 +4578,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4460,15 +4586,15 @@
           "estimatedVotesHigh": 21856,
           "estimatedVotesLow": 17882,
           "estimatedVotesMid": 19869,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 77251,
         "lastName": "Taylor",
         "partyName": "Democratic",
-        "votes": 3921
+        "votes": 3961
       },
       {
         "elected": false,
@@ -4476,15 +4602,15 @@
           "estimatedVotesHigh": 21856,
           "estimatedVotesLow": 17882,
           "estimatedVotesMid": 19869,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Roy",
         "id": 95915,
         "lastName": "Magnuson",
         "partyName": "Republican",
-        "votes": 15948
+        "votes": 16108
       }
     ],
     "district": "38",
@@ -4493,7 +4619,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:23:50.535Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4503,11 +4629,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 19869,
+    "totalVotes": 20069,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4547,6 +4674,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4586,6 +4714,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4625,6 +4754,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4632,15 +4762,15 @@
           "estimatedVotesHigh": 18514,
           "estimatedVotesLow": 15148,
           "estimatedVotesMid": 16831,
-          "turnoutHigh": 91.55,
-          "turnoutLow": 111.89,
+          "turnoutHigh": 91.65,
+          "turnoutLow": 112.01,
           "turnoutMid": 99
         },
         "firstName": "Jonathan",
         "id": 95919,
         "lastName": "Gossett",
         "partyName": "Democratic",
-        "votes": 6742
+        "votes": 6761
       },
       {
         "elected": false,
@@ -4648,8 +4778,8 @@
           "estimatedVotesHigh": 18514,
           "estimatedVotesLow": 15148,
           "estimatedVotesMid": 16831,
-          "turnoutHigh": 91.55,
-          "turnoutLow": 111.89,
+          "turnoutHigh": 91.65,
+          "turnoutLow": 112.01,
           "turnoutMid": 99
         },
         "firstName": "Leon",
@@ -4665,7 +4795,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4675,11 +4805,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 16949,
+    "totalVotes": 16968,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4719,6 +4850,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4726,15 +4858,15 @@
           "estimatedVotesHigh": 23767,
           "estimatedVotesLow": 19445,
           "estimatedVotesMid": 21606,
-          "turnoutHigh": 92.49,
-          "turnoutLow": 113.04,
+          "turnoutHigh": 93.68,
+          "turnoutLow": 114.51,
           "turnoutMid": 99
         },
         "firstName": "Katie",
         "id": 46059,
         "lastName": "Crosby",
         "partyName": "Democratic",
-        "votes": 9348
+        "votes": 9633
       },
       {
         "elected": false,
@@ -4742,8 +4874,8 @@
           "estimatedVotesHigh": 23767,
           "estimatedVotesLow": 19445,
           "estimatedVotesMid": 21606,
-          "turnoutHigh": 92.49,
-          "turnoutLow": 113.04,
+          "turnoutHigh": 93.68,
+          "turnoutLow": 114.51,
           "turnoutMid": 99
         },
         "firstName": "James",
@@ -4759,7 +4891,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:23:58.434Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4769,11 +4901,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 21981,
+    "totalVotes": 22266,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4781,15 +4914,15 @@
           "estimatedVotesHigh": 20278,
           "estimatedVotesLow": 16592,
           "estimatedVotesMid": 18435,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.63,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.68,
           "turnoutMid": 99
         },
         "firstName": "Brandon",
         "id": 46062,
         "lastName": "Newton",
         "partyName": "Republican",
-        "votes": 10868
+        "votes": 11043
       },
       {
         "elected": false,
@@ -4797,8 +4930,8 @@
           "estimatedVotesHigh": 20278,
           "estimatedVotesLow": 16592,
           "estimatedVotesMid": 18435,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.63,
+          "turnoutHigh": 92.2,
+          "turnoutLow": 112.68,
           "turnoutMid": 99
         },
         "firstName": "Nicole",
@@ -4814,7 +4947,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:19:57.335Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4824,11 +4957,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 18521,
+    "totalVotes": 18696,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4869,7 +5003,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:22:21.780Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4884,6 +5018,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4923,6 +5058,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4962,6 +5098,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5001,6 +5138,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5040,6 +5178,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5079,6 +5218,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5118,6 +5258,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5158,7 +5299,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5173,6 +5314,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5180,15 +5322,15 @@
           "estimatedVotesHigh": 17935,
           "estimatedVotesLow": 14673,
           "estimatedVotesMid": 16304,
-          "turnoutHigh": 88.48,
-          "turnoutLow": 108.15,
-          "turnoutMid": 97.33
+          "turnoutHigh": 88.83,
+          "turnoutLow": 108.57,
+          "turnoutMid": 97.71
         },
         "firstName": "Jason",
         "id": 95926,
         "lastName": "Luck",
         "partyName": "Democratic",
-        "votes": 9113
+        "votes": 9175
       },
       {
         "elected": false,
@@ -5196,9 +5338,9 @@
           "estimatedVotesHigh": 17935,
           "estimatedVotesLow": 14673,
           "estimatedVotesMid": 16304,
-          "turnoutHigh": 88.48,
-          "turnoutLow": 108.15,
-          "turnoutMid": 97.33
+          "turnoutHigh": 88.83,
+          "turnoutLow": 108.57,
+          "turnoutMid": 97.71
         },
         "firstName": "Angus",
         "id": 95927,
@@ -5213,7 +5355,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5223,11 +5365,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 15869,
+    "totalVotes": 15931,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5267,6 +5410,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5306,6 +5450,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5313,15 +5458,15 @@
           "estimatedVotesHigh": 20605,
           "estimatedVotesLow": 16860,
           "estimatedVotesMid": 18732,
-          "turnoutHigh": 77.73,
-          "turnoutLow": 95,
-          "turnoutMid": 85.51
+          "turnoutHigh": 78.29,
+          "turnoutLow": 95.68,
+          "turnoutMid": 86.12
         },
         "firstName": "Frank",
         "id": 95929,
         "lastName": "Atkinson",
         "partyName": "Democratic",
-        "votes": 8846
+        "votes": 8920
       },
       {
         "elected": false,
@@ -5329,15 +5474,15 @@
           "estimatedVotesHigh": 20605,
           "estimatedVotesLow": 16860,
           "estimatedVotesMid": 18732,
-          "turnoutHigh": 77.73,
-          "turnoutLow": 95,
-          "turnoutMid": 85.51
+          "turnoutHigh": 78.29,
+          "turnoutLow": 95.68,
+          "turnoutMid": 86.12
         },
         "firstName": "Kevin",
         "id": 75856,
         "lastName": "Coleridge",
         "partyName": "Republican",
-        "votes": 7171
+        "votes": 7212
       }
     ],
     "district": "57",
@@ -5346,7 +5491,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5356,11 +5501,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 16017,
+    "totalVotes": 16132,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5400,6 +5546,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5439,6 +5586,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5478,6 +5626,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5517,6 +5666,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5556,6 +5706,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5563,15 +5714,15 @@
           "estimatedVotesHigh": 19058,
           "estimatedVotesLow": 15593,
           "estimatedVotesMid": 17325,
-          "turnoutHigh": 91.46,
-          "turnoutLow": 111.78,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.24,
           "turnoutMid": 99
         },
         "firstName": "Kory",
         "id": 75860,
         "lastName": "Haskins",
         "partyName": "Democratic",
-        "votes": 6957
+        "votes": 7028
       },
       {
         "elected": false,
@@ -5579,8 +5730,8 @@
           "estimatedVotesHigh": 19058,
           "estimatedVotesLow": 15593,
           "estimatedVotesMid": 17325,
-          "turnoutHigh": 91.46,
-          "turnoutLow": 111.78,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.24,
           "turnoutMid": 99
         },
         "firstName": "Wallace",
@@ -5596,7 +5747,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:58.851Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5606,11 +5757,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 17430,
+    "totalVotes": 17501,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5618,15 +5770,15 @@
           "estimatedVotesHigh": 21649,
           "estimatedVotesLow": 17713,
           "estimatedVotesMid": 19681,
-          "turnoutHigh": 91.03,
-          "turnoutLow": 111.26,
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.74,
           "turnoutMid": 99
         },
         "firstName": "Quadri",
         "id": 75861,
         "lastName": "Bell",
         "partyName": "Democratic",
-        "votes": 10908
+        "votes": 10992
       },
       {
         "elected": false,
@@ -5634,8 +5786,8 @@
           "estimatedVotesHigh": 21649,
           "estimatedVotesLow": 17713,
           "estimatedVotesMid": 19681,
-          "turnoutHigh": 91.03,
-          "turnoutLow": 111.26,
+          "turnoutHigh": 91.42,
+          "turnoutLow": 111.74,
           "turnoutMid": 99
         },
         "firstName": "Fawn",
@@ -5651,7 +5803,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.551Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5661,11 +5813,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 19708,
+    "totalVotes": 19792,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5705,6 +5858,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5744,6 +5898,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5783,6 +5938,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5822,6 +5978,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5829,9 +5986,9 @@
           "estimatedVotesHigh": 21461,
           "estimatedVotesLow": 17559,
           "estimatedVotesMid": 19510,
-          "turnoutHigh": 86.11,
-          "turnoutLow": 105.24,
-          "turnoutMid": 94.72
+          "turnoutHigh": 86.94,
+          "turnoutLow": 106.26,
+          "turnoutMid": 95.64
         },
         "firstName": "Allen",
         "id": 95932,
@@ -5845,15 +6002,15 @@
           "estimatedVotesHigh": 21461,
           "estimatedVotesLow": 17559,
           "estimatedVotesMid": 19510,
-          "turnoutHigh": 86.11,
-          "turnoutLow": 105.24,
-          "turnoutMid": 94.72
+          "turnoutHigh": 86.94,
+          "turnoutLow": 106.26,
+          "turnoutMid": 95.64
         },
         "firstName": "Christopher",
         "id": 95933,
         "lastName": "Wooten",
         "partyName": "Republican",
-        "votes": 17921
+        "votes": 18101
       }
     ],
     "district": "69",
@@ -5862,7 +6019,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:16:06.377Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5872,11 +6029,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 18479,
+    "totalVotes": 18659,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5916,6 +6074,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5955,6 +6114,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5994,6 +6154,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6033,6 +6194,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6072,6 +6234,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6079,8 +6242,8 @@
           "estimatedVotesHigh": 19919,
           "estimatedVotesLow": 16297,
           "estimatedVotesMid": 18108,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.71,
           "turnoutMid": 99
         },
         "firstName": "Kirkman",
@@ -6095,15 +6258,15 @@
           "estimatedVotesHigh": 19919,
           "estimatedVotesLow": 16297,
           "estimatedVotesMid": 18108,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.71,
           "turnoutMid": 99
         },
         "firstName": "Heather",
         "id": 46094,
         "lastName": "Bauer",
         "partyName": "Democratic",
-        "votes": 9735
+        "votes": 9833
       }
     ],
     "district": "75",
@@ -6112,7 +6275,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:26:10.573Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6122,11 +6285,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 18108,
+    "totalVotes": 18206,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6134,15 +6298,15 @@
           "estimatedVotesHigh": 18324,
           "estimatedVotesLow": 14992,
           "estimatedVotesMid": 16658,
-          "turnoutHigh": 61.24,
-          "turnoutLow": 74.85,
-          "turnoutMid": 67.36
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Gary",
         "id": 95936,
         "lastName": "Votour",
         "partyName": "Workers Party",
-        "votes": 245
+        "votes": 374
       },
       {
         "elected": false,
@@ -6150,15 +6314,15 @@
           "estimatedVotesHigh": 18324,
           "estimatedVotesLow": 14992,
           "estimatedVotesMid": 16658,
-          "turnoutHigh": 61.24,
-          "turnoutLow": 74.85,
-          "turnoutMid": 67.36
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Leon",
         "id": 46096,
         "lastName": "Howard",
         "partyName": "Democratic",
-        "votes": 10976
+        "votes": 16284
       }
     ],
     "district": "76",
@@ -6167,7 +6331,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:34:43.218Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6177,11 +6341,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 11221,
+    "totalVotes": 16658,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6221,6 +6386,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6260,6 +6426,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6267,8 +6434,8 @@
           "estimatedVotesHigh": 20902,
           "estimatedVotesLow": 17102,
           "estimatedVotesMid": 19002,
-          "turnoutHigh": 91.62,
-          "turnoutLow": 111.98,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Hamilton",
@@ -6283,15 +6450,15 @@
           "estimatedVotesHigh": 20902,
           "estimatedVotesLow": 17102,
           "estimatedVotesMid": 19002,
-          "turnoutHigh": 91.62,
-          "turnoutLow": 111.98,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Rebecca",
         "id": 75872,
         "lastName": "Madsen",
         "partyName": "Republican",
-        "votes": 4334
+        "votes": 4378
       }
     ],
     "district": "79",
@@ -6300,7 +6467,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:22:17.188Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6310,11 +6477,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 19150,
+    "totalVotes": 19194,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6322,15 +6490,15 @@
           "estimatedVotesHigh": 24467,
           "estimatedVotesLow": 20019,
           "estimatedVotesMid": 22243,
-          "turnoutHigh": 91.56,
-          "turnoutLow": 111.9,
+          "turnoutHigh": 92.56,
+          "turnoutLow": 113.12,
           "turnoutMid": 99
         },
         "firstName": "Katherine",
         "id": 95937,
         "lastName": "Landing",
         "partyName": "Republican",
-        "votes": 12103
+        "votes": 12348
       },
       {
         "elected": false,
@@ -6338,8 +6506,8 @@
           "estimatedVotesHigh": 24467,
           "estimatedVotesLow": 20019,
           "estimatedVotesMid": 22243,
-          "turnoutHigh": 91.56,
-          "turnoutLow": 111.9,
+          "turnoutHigh": 92.56,
+          "turnoutLow": 113.12,
           "turnoutMid": 99
         },
         "firstName": "Donna",
@@ -6355,7 +6523,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:14:08.134Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6365,11 +6533,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 22401,
+    "totalVotes": 22646,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6410,7 +6579,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6425,6 +6594,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6465,7 +6635,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:51:57.830Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6480,6 +6650,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6519,6 +6690,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6558,6 +6730,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6597,6 +6770,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6636,6 +6810,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6643,9 +6818,9 @@
           "estimatedVotesHigh": 24276,
           "estimatedVotesLow": 19862,
           "estimatedVotesMid": 22069,
-          "turnoutHigh": 80.65,
-          "turnoutLow": 98.58,
-          "turnoutMid": 88.72
+          "turnoutHigh": 82.23,
+          "turnoutLow": 100.51,
+          "turnoutMid": 90.46
         },
         "firstName": "Robin",
         "id": 95942,
@@ -6659,15 +6834,15 @@
           "estimatedVotesHigh": 24276,
           "estimatedVotesLow": 19862,
           "estimatedVotesMid": 22069,
-          "turnoutHigh": 80.65,
-          "turnoutLow": 98.58,
-          "turnoutMid": 88.72
+          "turnoutHigh": 82.23,
+          "turnoutLow": 100.51,
+          "turnoutMid": 90.46
         },
         "firstName": "Paula",
         "id": 46107,
         "lastName": "Calhoon",
         "partyName": "Republican",
-        "votes": 19030
+        "votes": 19414
       }
     ],
     "district": "87",
@@ -6676,7 +6851,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:28:28.578Z",
+    "lastUpdated": "2024-10-25T20:51:59.134Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6686,11 +6861,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 19579,
+    "totalVotes": 19963,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6730,6 +6906,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6770,7 +6947,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:15:19.725Z",
+    "lastUpdated": "2024-10-25T20:51:59.134Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6785,6 +6962,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6792,9 +6970,9 @@
           "estimatedVotesHigh": 20666,
           "estimatedVotesLow": 16908,
           "estimatedVotesMid": 18787,
-          "turnoutHigh": 79.09,
-          "turnoutLow": 96.67,
-          "turnoutMid": 87
+          "turnoutHigh": 79.46,
+          "turnoutLow": 97.12,
+          "turnoutMid": 87.41
         },
         "firstName": "Herbert",
         "id": 95944,
@@ -6808,15 +6986,15 @@
           "estimatedVotesHigh": 20666,
           "estimatedVotesLow": 16908,
           "estimatedVotesMid": 18787,
-          "turnoutHigh": 79.09,
-          "turnoutLow": 96.67,
-          "turnoutMid": 87
+          "turnoutHigh": 79.46,
+          "turnoutLow": 97.12,
+          "turnoutMid": 87.41
         },
         "firstName": "Justin",
         "id": 23871,
         "lastName": "Bamberg",
         "partyName": "Democratic",
-        "votes": 9955
+        "votes": 10031
       }
     ],
     "district": "90",
@@ -6825,7 +7003,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:52:22.051Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6835,11 +7013,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 16345,
+    "totalVotes": 16421,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6847,15 +7026,15 @@
           "estimatedVotesHigh": 20016,
           "estimatedVotesLow": 16377,
           "estimatedVotesMid": 18196,
-          "turnoutHigh": 91.45,
-          "turnoutLow": 111.77,
+          "turnoutHigh": 92.12,
+          "turnoutLow": 112.58,
           "turnoutMid": 99
         },
-        "firstName": "Benny",
-        "id": 95945,
-        "lastName": "Kinlaw",
-        "partyName": "Republican",
-        "votes": 8418
+        "firstName": "Lonnie",
+        "id": 23873,
+        "lastName": "Hosey",
+        "partyName": "Democratic",
+        "votes": 9996
       },
       {
         "elected": false,
@@ -6863,15 +7042,15 @@
           "estimatedVotesHigh": 20016,
           "estimatedVotesLow": 16377,
           "estimatedVotesMid": 18196,
-          "turnoutHigh": 91.45,
-          "turnoutLow": 111.77,
+          "turnoutHigh": 92.12,
+          "turnoutLow": 112.58,
           "turnoutMid": 99
         },
-        "firstName": "Lonnie",
-        "id": 23873,
-        "lastName": "Hosey",
-        "partyName": "Democratic",
-        "votes": 9886
+        "firstName": "Benny",
+        "id": 95945,
+        "lastName": "Kinlaw",
+        "partyName": "Republican",
+        "votes": 8442
       }
     ],
     "district": "91",
@@ -6880,7 +7059,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:52:22.051Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6890,11 +7069,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 18304,
+    "totalVotes": 18438,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6934,6 +7114,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6990,7 +7171,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:51:59.134Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7005,6 +7186,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7044,6 +7226,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7083,6 +7266,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7122,6 +7306,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7161,6 +7346,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7201,7 +7387,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:05:55.459Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7216,6 +7402,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7255,6 +7442,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7294,6 +7482,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7333,6 +7522,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7340,15 +7530,15 @@
           "estimatedVotesHigh": 21035,
           "estimatedVotesLow": 17211,
           "estimatedVotesMid": 19123,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.06,
           "turnoutMid": 99
         },
-        "firstName": "Joseph",
-        "id": 46121,
-        "lastName": "Jefferson",
-        "partyName": "Democratic",
-        "votes": 9677
+        "firstName": "Harriet",
+        "id": 75896,
+        "lastName": "Holman",
+        "partyName": "Republican",
+        "votes": 9610
       },
       {
         "elected": false,
@@ -7356,15 +7546,15 @@
           "estimatedVotesHigh": 21035,
           "estimatedVotesLow": 17211,
           "estimatedVotesMid": 19123,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.06,
           "turnoutMid": 99
         },
-        "firstName": "Harriet",
-        "id": 75896,
-        "lastName": "Holman",
-        "partyName": "Republican",
-        "votes": 9446
+        "firstName": "Joseph",
+        "id": 46121,
+        "lastName": "Jefferson",
+        "partyName": "Democratic",
+        "votes": 9677
       }
     ],
     "district": "102",
@@ -7373,7 +7563,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:26:56.245Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7383,11 +7573,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 19123,
+    "totalVotes": 19287,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7427,6 +7618,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7466,6 +7658,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7505,6 +7698,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7544,6 +7738,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7583,6 +7778,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7622,6 +7818,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7661,6 +7858,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7668,15 +7866,15 @@
           "estimatedVotesHigh": 23524,
           "estimatedVotesLow": 19247,
           "estimatedVotesMid": 21385,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Anthony",
         "id": 95954,
         "lastName": "Moffett",
         "partyName": "Democratic",
-        "votes": 10489
+        "votes": 10595
       },
       {
         "elected": false,
@@ -7684,15 +7882,15 @@
           "estimatedVotesHigh": 23524,
           "estimatedVotesLow": 19247,
           "estimatedVotesMid": 21385,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.83,
+          "turnoutLow": 112.23,
           "turnoutMid": 99
         },
         "firstName": "Thomas",
         "id": 95953,
         "lastName": "Hartnett",
         "partyName": "Republican",
-        "votes": 10896
+        "votes": 11006
       }
     ],
     "district": "110",
@@ -7701,7 +7899,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:37:02.735Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7711,11 +7909,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 21385,
+    "totalVotes": 21601,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7723,15 +7922,15 @@
           "estimatedVotesHigh": 17518,
           "estimatedVotesLow": 14333,
           "estimatedVotesMid": 15925,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.14,
           "turnoutMid": 99
         },
         "firstName": "Joseph",
         "id": 95955,
         "lastName": "Jernigan",
         "partyName": "Libertarian",
-        "votes": 377
+        "votes": 382
       },
       {
         "elected": false,
@@ -7739,8 +7938,8 @@
           "estimatedVotesHigh": 17518,
           "estimatedVotesLow": 14333,
           "estimatedVotesMid": 15925,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 90.94,
+          "turnoutLow": 111.14,
           "turnoutMid": 99
         },
         "firstName": "Wendell",
@@ -7756,7 +7955,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:13:47.758Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7766,11 +7965,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 15925,
+    "totalVotes": 15930,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7778,8 +7978,8 @@
           "estimatedVotesHigh": 26601,
           "estimatedVotesLow": 21765,
           "estimatedVotesMid": 24183,
-          "turnoutHigh": 91.43,
-          "turnoutLow": 111.74,
+          "turnoutHigh": 92.48,
+          "turnoutLow": 113.03,
           "turnoutMid": 99
         },
         "firstName": "Peter",
@@ -7794,15 +7994,15 @@
           "estimatedVotesHigh": 26601,
           "estimatedVotesLow": 21765,
           "estimatedVotesMid": 24183,
-          "turnoutHigh": 91.43,
-          "turnoutLow": 111.74,
+          "turnoutHigh": 92.48,
+          "turnoutLow": 113.03,
           "turnoutMid": 99
         },
         "firstName": "Joseph",
         "id": 95956,
         "lastName": "Bustos",
         "partyName": "Republican",
-        "votes": 13810
+        "votes": 14090
       }
     ],
     "district": "112",
@@ -7811,7 +8011,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:19:11.614Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7821,11 +8021,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 24321,
+    "totalVotes": 24601,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7865,6 +8066,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7872,15 +8074,15 @@
           "estimatedVotesHigh": 24254,
           "estimatedVotesLow": 19844,
           "estimatedVotesMid": 22049,
-          "turnoutHigh": 91.36,
-          "turnoutLow": 111.67,
+          "turnoutHigh": 92.05,
+          "turnoutLow": 112.5,
           "turnoutMid": 99
         },
         "firstName": "Adrienne",
         "id": 75903,
         "lastName": "Lett",
         "partyName": "Democratic",
-        "votes": 9735
+        "votes": 9834
       },
       {
         "elected": false,
@@ -7888,15 +8090,15 @@
           "estimatedVotesHigh": 24254,
           "estimatedVotesLow": 19844,
           "estimatedVotesMid": 22049,
-          "turnoutHigh": 91.36,
-          "turnoutLow": 111.67,
+          "turnoutHigh": 92.05,
+          "turnoutLow": 112.5,
           "turnoutMid": 99
         },
         "firstName": "Gary",
         "id": 23966,
         "lastName": "Brewer",
         "partyName": "Republican",
-        "votes": 12424
+        "votes": 12491
       }
     ],
     "district": "114",
@@ -7905,7 +8107,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:25:00.079Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7915,11 +8117,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 22159,
+    "totalVotes": 22325,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7960,7 +8163,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:34:44.719Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7975,6 +8178,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7982,15 +8186,15 @@
           "estimatedVotesHigh": 24724,
           "estimatedVotesLow": 20229,
           "estimatedVotesMid": 22476,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.45,
+          "turnoutLow": 111.77,
           "turnoutMid": 99
         },
         "firstName": "Charlie",
         "id": 75907,
         "lastName": "Murray",
         "partyName": "Democratic",
-        "votes": 11779
+        "votes": 11896
       },
       {
         "elected": false,
@@ -7998,15 +8202,15 @@
           "estimatedVotesHigh": 24724,
           "estimatedVotesLow": 20229,
           "estimatedVotesMid": 22476,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
+          "turnoutHigh": 91.45,
+          "turnoutLow": 111.77,
           "turnoutMid": 99
         },
         "firstName": "James",
         "id": 75908,
         "lastName": "Teeple",
         "partyName": "Republican",
-        "votes": 10697
+        "votes": 10713
       }
     ],
     "district": "116",
@@ -8015,7 +8219,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -8025,11 +8229,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 22476,
+    "totalVotes": 22609,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8069,6 +8274,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8109,7 +8315,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:17:40.799Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -8124,6 +8330,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8164,7 +8371,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:27:05.639Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -8179,6 +8386,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8186,15 +8394,15 @@
           "estimatedVotesHigh": 22456,
           "estimatedVotesLow": 18372,
           "estimatedVotesMid": 20414,
-          "turnoutHigh": 91.51,
-          "turnoutLow": 111.85,
+          "turnoutHigh": 91.98,
+          "turnoutLow": 112.43,
           "turnoutMid": 99
         },
         "firstName": "William Weston",
         "id": 95962,
         "lastName": "Newton",
         "partyName": "Republican",
-        "votes": 12370
+        "votes": 12476
       },
       {
         "elected": false,
@@ -8202,8 +8410,8 @@
           "estimatedVotesHigh": 22456,
           "estimatedVotesLow": 18372,
           "estimatedVotesMid": 20414,
-          "turnoutHigh": 91.51,
-          "turnoutLow": 111.85,
+          "turnoutHigh": 91.98,
+          "turnoutLow": 112.43,
           "turnoutMid": 99
         },
         "firstName": "Katherine",
@@ -8219,7 +8427,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -8229,11 +8437,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 20550,
+    "totalVotes": 20656,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8241,8 +8450,8 @@
           "estimatedVotesHigh": 18971,
           "estimatedVotesLow": 15522,
           "estimatedVotesMid": 17246,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
+          "turnoutHigh": 91.68,
+          "turnoutLow": 112.05,
           "turnoutMid": 99
         },
         "firstName": "Shelley",
@@ -8257,15 +8466,15 @@
           "estimatedVotesHigh": 18971,
           "estimatedVotesLow": 15522,
           "estimatedVotesMid": 17246,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
+          "turnoutHigh": 91.68,
+          "turnoutLow": 112.05,
           "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 23883,
         "lastName": "Rivers",
         "partyName": "Democratic",
-        "votes": 10509
+        "votes": 10616
       }
     ],
     "district": "121",
@@ -8274,7 +8483,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -8284,11 +8493,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 17285,
+    "totalVotes": 17392,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8296,15 +8506,15 @@
           "estimatedVotesHigh": 21119,
           "estimatedVotesLow": 17280,
           "estimatedVotesMid": 19199,
-          "turnoutHigh": 85.83,
-          "turnoutLow": 104.9,
-          "turnoutMid": 94.42
+          "turnoutHigh": 91.85,
+          "turnoutLow": 112.26,
+          "turnoutMid": 99
         },
         "firstName": "Audrey",
         "id": 95965,
         "lastName": "Williams",
         "partyName": "Democratic",
-        "votes": 9885
+        "votes": 10595
       },
       {
         "elected": false,
@@ -8312,15 +8522,15 @@
           "estimatedVotesHigh": 21119,
           "estimatedVotesLow": 17280,
           "estimatedVotesMid": 19199,
-          "turnoutHigh": 85.83,
-          "turnoutLow": 104.9,
-          "turnoutMid": 94.42
+          "turnoutHigh": 91.85,
+          "turnoutLow": 112.26,
+          "turnoutMid": 99
         },
         "firstName": "William",
         "id": 95964,
         "lastName": "Hager",
         "partyName": "Republican",
-        "votes": 8242
+        "votes": 8803
       }
     ],
     "district": "122",
@@ -8329,7 +8539,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -8339,11 +8549,12 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 18127,
+    "totalVotes": 19398,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8384,7 +8595,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:38:59.961Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -8399,6 +8610,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8439,7 +8651,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:07:59.449Z",
+    "lastUpdated": "2024-10-25T20:52:16.894Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",

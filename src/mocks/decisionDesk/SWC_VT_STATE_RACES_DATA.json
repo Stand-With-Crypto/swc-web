@@ -1,6 +1,7 @@
 [
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8,9 +9,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.17,
-          "turnoutLow": 33.21,
-          "turnoutMid": 29.89
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.02,
+          "turnoutMid": 30.62
         },
         "firstName": "Mark",
         "id": 102227,
@@ -24,9 +25,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.17,
-          "turnoutLow": 33.21,
-          "turnoutMid": 29.89
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.02,
+          "turnoutMid": 30.62
         },
         "firstName": "Bernie",
         "id": 113432,
@@ -40,9 +41,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.17,
-          "turnoutLow": 33.21,
-          "turnoutMid": 29.89
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.02,
+          "turnoutMid": 30.62
         },
         "firstName": "Matt",
         "id": 102228,
@@ -56,9 +57,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.17,
-          "turnoutLow": 33.21,
-          "turnoutMid": 29.89
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.02,
+          "turnoutMid": 30.62
         },
         "firstName": "Steve",
         "id": 101849,
@@ -72,15 +73,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.17,
-          "turnoutLow": 33.21,
-          "turnoutMid": 29.89
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.02,
+          "turnoutMid": 30.62
         },
         "firstName": "Justin",
         "id": 85171,
         "lastName": "Schoville",
         "partyName": "Peace and Justice",
-        "votes": 5838
+        "votes": 6040
       },
       {
         "elected": false,
@@ -88,15 +89,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.17,
-          "turnoutLow": 33.21,
-          "turnoutMid": 29.89
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.02,
+          "turnoutMid": 30.62
         },
         "firstName": "Gerald",
         "id": 28838,
         "lastName": "Malloy",
         "partyName": "Republican",
-        "votes": 91966
+        "votes": 94143
       }
     ],
     "district": "",
@@ -105,7 +106,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:36.574Z",
+    "lastUpdated": "2024-10-25T20:53:50.291Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -115,11 +116,12 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 97804,
+    "totalVotes": 100183,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -127,25 +129,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.09,
-          "turnoutLow": 6.22,
-          "turnoutMid": 5.6
-        },
-        "firstName": "Phil",
-        "id": 393,
-        "lastName": "Scott",
-        "partyName": "Republican",
-        "votes": 16411
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.09,
-          "turnoutLow": 6.22,
-          "turnoutMid": 5.6
+          "turnoutHigh": 5.12,
+          "turnoutLow": 6.25,
+          "turnoutMid": 5.63
         },
         "firstName": "Kevin",
         "id": 15076,
@@ -159,9 +145,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.09,
-          "turnoutLow": 6.22,
-          "turnoutMid": 5.6
+          "turnoutHigh": 5.12,
+          "turnoutLow": 6.25,
+          "turnoutMid": 5.63
         },
         "firstName": "Esther",
         "id": 83182,
@@ -175,15 +161,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.09,
-          "turnoutLow": 6.22,
-          "turnoutMid": 5.6
+          "turnoutHigh": 5.12,
+          "turnoutLow": 6.25,
+          "turnoutMid": 5.63
         },
-        "firstName": "Eli",
-        "id": 84972,
-        "lastName": "Mutino",
-        "partyName": "Independent",
-        "votes": 919
+        "firstName": "Phil",
+        "id": 393,
+        "lastName": "Scott",
+        "partyName": "Republican",
+        "votes": 16504
       },
       {
         "elected": false,
@@ -191,15 +177,31 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.09,
-          "turnoutLow": 6.22,
-          "turnoutMid": 5.6
+          "turnoutHigh": 5.12,
+          "turnoutLow": 6.25,
+          "turnoutMid": 5.63
+        },
+        "firstName": "Eli",
+        "id": 84972,
+        "lastName": "Mutino",
+        "partyName": "Independent",
+        "votes": 930
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 5.12,
+          "turnoutLow": 6.25,
+          "turnoutMid": 5.63
         },
         "firstName": "June",
         "id": 85172,
         "lastName": "Goodband",
         "partyName": "Peace and Justice",
-        "votes": 978
+        "votes": 985
       }
     ],
     "district": "",
@@ -208,7 +210,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:36.574Z",
+    "lastUpdated": "2024-10-25T20:53:50.291Z",
     "office": {
       "officeId": "2",
       "officeName": "Governor",
@@ -218,7 +220,7 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 18308,
+    "totalVotes": 18419,
     "year": 2024
   },
   {
@@ -229,6 +231,14 @@
       "lastName": "Balint",
       "partyName": "Democratic"
     },
+    "calledCandidates": [
+      {
+        "firstName": "Becca",
+        "id": 28841,
+        "lastName": "Balint",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -236,14 +246,30 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.66,
-          "turnoutLow": 103.48,
-          "turnoutMid": 93.13
+          "turnoutHigh": 85.16,
+          "turnoutLow": 104.09,
+          "turnoutMid": 93.68
         },
         "firstName": "Adam",
         "id": 44468,
         "lastName": "Ortiz",
         "partyName": "Independent",
+        "votes": 5950
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 85.16,
+          "turnoutLow": 104.09,
+          "turnoutMid": 93.68
+        },
+        "firstName": "Jessica",
+        "id": 102230,
+        "lastName": "Diamondstone",
+        "partyName": "Peace and Justice",
         "votes": 5882
       },
       {
@@ -252,31 +278,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.66,
-          "turnoutLow": 103.48,
-          "turnoutMid": 93.13
-        },
-        "firstName": "Jessica",
-        "id": 102230,
-        "lastName": "Diamondstone",
-        "partyName": "Peace and Justice",
-        "votes": 5815
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.66,
-          "turnoutLow": 103.48,
-          "turnoutMid": 93.13
+          "turnoutHigh": 85.16,
+          "turnoutLow": 104.09,
+          "turnoutMid": 93.68
         },
         "firstName": "Mark",
         "id": 28910,
         "lastName": "Coester",
         "partyName": "Republican",
-        "votes": 96374
+        "votes": 97156
       },
       {
         "elected": true,
@@ -284,15 +294,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.66,
-          "turnoutLow": 103.48,
-          "turnoutMid": 93.13
+          "turnoutHigh": 85.16,
+          "turnoutLow": 104.09,
+          "turnoutMid": 93.68
         },
         "firstName": "Becca",
         "id": 28841,
         "lastName": "Balint",
         "partyName": "Democratic",
-        "votes": 196646
+        "votes": 197533
       }
     ],
     "district": "At-Large",
@@ -301,7 +311,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T19:40:47.692Z",
+    "lastUpdated": "2024-10-25T20:53:52.819Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -311,11 +321,12 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 304717,
+    "totalVotes": 306521,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -371,6 +382,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -410,6 +422,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -466,7 +479,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -481,6 +494,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -553,7 +567,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -568,6 +582,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -608,7 +623,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -623,6 +638,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -662,6 +678,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -702,7 +719,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -717,6 +734,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -773,7 +791,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -788,6 +806,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -828,7 +847,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -843,6 +862,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -899,7 +919,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -914,6 +934,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -970,7 +991,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -985,6 +1006,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1025,7 +1047,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1040,6 +1062,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1080,7 +1103,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1095,6 +1118,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1135,7 +1159,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:52.852Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1150,6 +1174,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1222,7 +1247,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1237,6 +1262,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1292,6 +1318,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1332,7 +1359,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1347,6 +1374,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1386,6 +1414,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1425,6 +1454,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1464,6 +1494,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1503,6 +1534,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1558,6 +1590,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1613,6 +1646,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1668,6 +1702,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1723,6 +1758,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1762,6 +1798,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1817,6 +1854,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1889,7 +1927,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -1904,6 +1942,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1959,6 +1998,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2015,7 +2055,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2030,6 +2070,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2070,7 +2111,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2085,6 +2126,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2140,6 +2182,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2196,7 +2239,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2211,6 +2254,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2250,6 +2294,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2290,7 +2335,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2305,6 +2350,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2360,6 +2406,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2399,6 +2446,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2438,6 +2486,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2477,6 +2526,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2516,6 +2566,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2555,6 +2606,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2594,6 +2646,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2666,7 +2719,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2681,6 +2734,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2720,6 +2774,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2759,6 +2814,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2814,6 +2870,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2853,6 +2910,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2893,7 +2951,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2908,6 +2966,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2963,6 +3022,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3018,6 +3078,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3057,6 +3118,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3097,7 +3159,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3112,6 +3174,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3152,7 +3215,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3167,6 +3230,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3239,7 +3303,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:33.652Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3254,6 +3318,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3293,6 +3358,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3365,7 +3431,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3380,6 +3446,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3420,7 +3487,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3435,6 +3502,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3523,7 +3591,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3538,6 +3606,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3578,7 +3647,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3593,6 +3662,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3633,7 +3703,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3648,6 +3718,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3687,6 +3758,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3727,7 +3799,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3742,6 +3814,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3814,7 +3887,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3829,6 +3902,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3868,6 +3942,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3907,6 +3982,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3946,6 +4022,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3986,7 +4063,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4001,6 +4078,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4056,6 +4134,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4095,6 +4174,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4134,6 +4214,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4173,6 +4254,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4229,7 +4311,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4244,6 +4326,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4283,6 +4366,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4323,7 +4407,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4338,6 +4422,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4377,6 +4462,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4416,6 +4502,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4455,6 +4542,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4494,6 +4582,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4534,7 +4623,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4549,6 +4638,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4589,7 +4679,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4604,6 +4694,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4644,7 +4735,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:43.515Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4659,6 +4750,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4731,7 +4823,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4746,6 +4838,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4818,7 +4911,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4833,6 +4926,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4905,7 +4999,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4920,6 +5014,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4975,6 +5070,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5014,6 +5110,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5053,6 +5150,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5125,7 +5223,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5140,6 +5238,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5196,7 +5295,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5211,6 +5310,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5251,7 +5351,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5266,6 +5366,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5305,6 +5406,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5377,7 +5479,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5392,6 +5494,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5448,7 +5551,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5463,6 +5566,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5502,6 +5606,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5542,7 +5647,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5557,6 +5662,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5597,7 +5703,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5612,6 +5718,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5668,7 +5775,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5683,6 +5790,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5722,6 +5830,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5762,7 +5871,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5777,6 +5886,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5832,6 +5942,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5872,7 +5983,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5887,6 +5998,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5959,7 +6071,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5974,6 +6086,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6013,6 +6126,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6053,7 +6167,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6068,6 +6182,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6140,7 +6255,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6155,6 +6270,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6194,6 +6310,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6234,7 +6351,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6249,6 +6366,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6321,7 +6439,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6336,6 +6454,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6376,7 +6495,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6391,6 +6510,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6463,7 +6583,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -6478,6 +6598,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6582,7 +6703,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -6597,6 +6718,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6637,7 +6759,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -6652,6 +6774,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6723,6 +6846,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6763,7 +6887,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -6778,6 +6902,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6866,7 +6991,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -6881,6 +7006,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6920,6 +7046,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6975,6 +7102,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7015,7 +7143,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:53.020Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7030,6 +7158,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7070,7 +7199,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:55.940Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7085,6 +7214,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7125,7 +7255,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:55.940Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7140,6 +7270,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7180,7 +7311,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:55.940Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7195,6 +7326,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7283,7 +7415,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:55.940Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7298,6 +7430,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7370,7 +7503,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:34.066Z",
+    "lastUpdated": "2024-10-25T20:53:55.940Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7385,6 +7518,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7473,7 +7607,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:47.076Z",
+    "lastUpdated": "2024-10-25T20:53:55.940Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7488,6 +7622,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7608,7 +7743,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:47.076Z",
+    "lastUpdated": "2024-10-25T20:53:55.940Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -7623,6 +7758,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7630,15 +7766,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 4.48,
-          "turnoutLow": 5.47,
-          "turnoutMid": 4.92
+          "turnoutHigh": 5.58,
+          "turnoutLow": 6.82,
+          "turnoutMid": 6.14
         },
         "firstName": "John",
         "id": 83184,
         "lastName": "Rodgers",
         "partyName": "Republican",
-        "votes": 5419
+        "votes": 7581
       },
       {
         "elected": false,
@@ -7646,15 +7782,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 4.48,
-          "turnoutLow": 5.47,
-          "turnoutMid": 4.92
+          "turnoutHigh": 5.58,
+          "turnoutLow": 6.82,
+          "turnoutMid": 6.14
         },
         "firstName": "Ian",
         "id": 44531,
         "lastName": "Diamondstone",
         "partyName": "Green Mountain",
-        "votes": 314
+        "votes": 400
       },
       {
         "elected": false,
@@ -7662,15 +7798,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 4.48,
-          "turnoutLow": 5.47,
-          "turnoutMid": 4.92
+          "turnoutHigh": 5.58,
+          "turnoutLow": 6.82,
+          "turnoutMid": 6.14
         },
         "firstName": "David",
         "id": 14272,
         "lastName": "Zuckerman",
         "partyName": "Democratic",
-        "votes": 10378
+        "votes": 12116
       }
     ],
     "district": "",
@@ -7679,7 +7815,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:30.980Z",
+    "lastUpdated": "2024-10-25T20:53:32.815Z",
     "office": {
       "officeId": "8",
       "officeName": "Lt Governor",
@@ -7689,11 +7825,12 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 16111,
+    "totalVotes": 20097,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7701,15 +7838,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.28,
-          "turnoutLow": 6.45,
-          "turnoutMid": 5.81
+          "turnoutHigh": 5.7,
+          "turnoutLow": 6.96,
+          "turnoutMid": 6.27
         },
         "firstName": "Charity",
         "id": 28850,
         "lastName": "Clark",
         "partyName": "Democratic",
-        "votes": 11502
+        "votes": 12176
       },
       {
         "elected": false,
@@ -7717,15 +7854,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.28,
-          "turnoutLow": 6.45,
-          "turnoutMid": 5.81
+          "turnoutHigh": 5.7,
+          "turnoutLow": 6.96,
+          "turnoutMid": 6.27
         },
         "firstName": "Ture",
         "id": 102093,
         "lastName": "Nelson",
         "partyName": "Republican",
-        "votes": 7120
+        "votes": 7915
       },
       {
         "elected": false,
@@ -7733,15 +7870,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.28,
-          "turnoutLow": 6.45,
-          "turnoutMid": 5.81
+          "turnoutHigh": 5.7,
+          "turnoutLow": 6.96,
+          "turnoutMid": 6.27
         },
         "firstName": "Kevin",
         "id": 102094,
         "lastName": "Gustafson",
         "partyName": "Green Mountain",
-        "votes": 380
+        "votes": 410
       }
     ],
     "district": "",
@@ -7750,7 +7887,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:36.412Z",
+    "lastUpdated": "2024-10-25T20:53:32.815Z",
     "office": {
       "officeId": "27",
       "officeName": "Attorney General",
@@ -7760,11 +7897,12 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 19002,
+    "totalVotes": 20501,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7772,15 +7910,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.19,
-          "turnoutLow": 6.34,
-          "turnoutMid": 5.7
+          "turnoutHigh": 5.5,
+          "turnoutLow": 6.72,
+          "turnoutMid": 6.05
         },
         "firstName": "H. Brooke",
         "id": 10368,
         "lastName": "Paige",
         "partyName": "Republican",
-        "votes": 7524
+        "votes": 8055
       },
       {
         "elected": false,
@@ -7788,15 +7926,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.19,
-          "turnoutLow": 6.34,
-          "turnoutMid": 5.7
+          "turnoutHigh": 5.5,
+          "turnoutLow": 6.72,
+          "turnoutMid": 6.05
         },
         "firstName": "Sarah",
         "id": 102095,
         "lastName": "Copeland Hanzas",
         "partyName": "Democratic",
-        "votes": 11140
+        "votes": 11744
       }
     ],
     "district": "",
@@ -7805,7 +7943,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:49.250Z",
+    "lastUpdated": "2024-10-25T20:53:32.815Z",
     "office": {
       "officeId": "39",
       "officeName": "Secretary of State",
@@ -7815,11 +7953,12 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 18664,
+    "totalVotes": 19799,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7827,15 +7966,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.69,
-          "turnoutLow": 6.96,
-          "turnoutMid": 6.26
+          "turnoutHigh": 5.73,
+          "turnoutLow": 7,
+          "turnoutMid": 6.3
         },
         "firstName": "H. Brooke",
         "id": 10368,
         "lastName": "Paige",
         "partyName": "Republican",
-        "votes": 7570
+        "votes": 7655
       },
       {
         "elected": false,
@@ -7843,15 +7982,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.69,
-          "turnoutLow": 6.96,
-          "turnoutMid": 6.26
+          "turnoutHigh": 5.73,
+          "turnoutLow": 7,
+          "turnoutMid": 6.3
         },
         "firstName": "Doug",
         "id": 28856,
         "lastName": "Hoffer",
         "partyName": "Democratic",
-        "votes": 12925
+        "votes": 12966
       }
     ],
     "district": "",
@@ -7860,7 +7999,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:49.250Z",
+    "lastUpdated": "2024-10-25T20:53:32.815Z",
     "office": {
       "officeId": "135",
       "officeName": "Auditor",
@@ -7870,11 +8009,12 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 20495,
+    "totalVotes": 20621,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7882,15 +8022,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.51,
-          "turnoutLow": 6.73,
-          "turnoutMid": 6.06
+          "turnoutHigh": 5.53,
+          "turnoutLow": 6.76,
+          "turnoutMid": 6.08
         },
         "firstName": "Joshua",
         "id": 83187,
         "lastName": "Bechhoefer",
         "partyName": "Republican",
-        "votes": 7670
+        "votes": 7710
       },
       {
         "elected": false,
@@ -7898,15 +8038,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 5.51,
-          "turnoutLow": 6.73,
-          "turnoutMid": 6.06
+          "turnoutHigh": 5.53,
+          "turnoutLow": 6.76,
+          "turnoutMid": 6.08
         },
         "firstName": "Michael",
         "id": 102096,
         "lastName": "Pieciak",
         "partyName": "Democratic",
-        "votes": 12152
+        "votes": 12196
       }
     ],
     "district": "",
@@ -7915,7 +8055,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:40:49.250Z",
+    "lastUpdated": "2024-10-25T20:53:32.815Z",
     "office": {
       "officeId": "146",
       "officeName": "Treasurer",
@@ -7925,7 +8065,7 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 19822,
+    "totalVotes": 19906,
     "year": 2024
   }
 ]

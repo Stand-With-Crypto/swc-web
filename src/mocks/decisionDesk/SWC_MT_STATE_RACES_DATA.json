@@ -1,6 +1,7 @@
 [
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -8,15 +9,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 115.55,
+          "turnoutLow": 141.23,
+          "turnoutMid": 99
         },
         "firstName": "Jon",
         "id": 8239,
         "lastName": "Tester",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 259752
       },
       {
         "elected": false,
@@ -24,15 +25,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 115.55,
+          "turnoutLow": 141.23,
+          "turnoutMid": 99
         },
         "firstName": "Tim",
         "id": 71312,
         "lastName": "Sheehy",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 306705
       },
       {
         "elected": false,
@@ -40,15 +41,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 115.55,
+          "turnoutLow": 141.23,
+          "turnoutMid": 99
         },
         "firstName": "Sid",
         "id": 45844,
         "lastName": "Daoud",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 125720
       },
       {
         "elected": false,
@@ -56,9 +57,9 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 115.55,
+          "turnoutLow": 141.23,
+          "turnoutMid": 99
         },
         "firstName": "Robert",
         "id": 102192,
@@ -73,7 +74,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -83,11 +84,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 692177,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -95,15 +97,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.63,
+          "turnoutLow": 109.55,
+          "turnoutMid": 98.6
         },
         "firstName": "Kaiser",
         "id": 84950,
         "lastName": "Leib",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 10525
       },
       {
         "elected": false,
@@ -111,15 +113,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.63,
+          "turnoutLow": 109.55,
+          "turnoutMid": 98.6
         },
         "firstName": "Ryan",
         "id": 71324,
         "lastName": "Busse",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 221493
       },
       {
         "elected": false,
@@ -127,15 +129,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.63,
+          "turnoutLow": 109.55,
+          "turnoutMid": 98.6
         },
         "firstName": "Greg",
         "id": 977,
         "lastName": "Gianforte",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 304927
       }
     ],
     "district": "",
@@ -144,7 +146,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:39:27.503Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "2",
       "officeName": "Governor",
@@ -154,11 +156,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 536945,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -166,15 +169,15 @@
           "estimatedVotesHigh": 310194,
           "estimatedVotesLow": 253795,
           "estimatedVotesMid": 281993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.98,
+          "turnoutMid": 99
         },
         "firstName": "Monica",
         "id": 22990,
         "lastName": "Tranel",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 127944
       },
       {
         "elected": false,
@@ -182,15 +185,15 @@
           "estimatedVotesHigh": 310194,
           "estimatedVotesLow": 253795,
           "estimatedVotesMid": 281993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.98,
+          "turnoutMid": 99
         },
         "firstName": "Ryan",
         "id": 1395,
         "lastName": "Zinke",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 148199
       },
       {
         "elected": false,
@@ -198,15 +201,15 @@
           "estimatedVotesHigh": 310194,
           "estimatedVotesLow": 253795,
           "estimatedVotesMid": 281993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.8,
+          "turnoutLow": 110.98,
+          "turnoutMid": 99
         },
         "firstName": "Dennis",
         "id": 85049,
         "lastName": "Hayes",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 5520
       }
     ],
     "district": "1",
@@ -215,7 +218,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:10.641Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -225,11 +228,25 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 281663,
     "year": 2024
   },
   {
-    "calledCandidate": null,
+    "calledCandidate": {
+      "firstName": "Troy",
+      "id": 9674,
+      "incumbent": false,
+      "lastName": "Downing",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Troy",
+        "id": 9674,
+        "lastName": "Downing",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -237,31 +254,31 @@
           "estimatedVotesHigh": 288812,
           "estimatedVotesLow": 236297,
           "estimatedVotesMid": 262553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.25,
+          "turnoutLow": 111.53,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 71323,
         "lastName": "Driscoll",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 98185
       },
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 288812,
           "estimatedVotesLow": 236297,
           "estimatedVotesMid": 262553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.25,
+          "turnoutLow": 111.53,
+          "turnoutMid": 99
         },
         "firstName": "Troy",
         "id": 9674,
         "lastName": "Downing",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 165346
       }
     ],
     "district": "2",
@@ -269,8 +286,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-25T20:46:10.641Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -280,11 +297,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 263531,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -292,47 +310,47 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 44351,
-        "lastName": "Lamb",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 599037,
-          "estimatedVotesLow": 490118,
-          "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Christi",
-        "id": 71326,
-        "lastName": "Jacobsen",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 599037,
-          "estimatedVotesLow": 490118,
-          "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.42,
+          "turnoutLow": 110.51,
+          "turnoutMid": 99
         },
         "firstName": "Jesse",
         "id": 47624,
         "lastName": "Mullen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 230964
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 599037,
+          "estimatedVotesLow": 490118,
+          "estimatedVotesMid": 544574,
+          "turnoutHigh": 90.42,
+          "turnoutLow": 110.51,
+          "turnoutMid": 99
+        },
+        "firstName": "John",
+        "id": 44351,
+        "lastName": "Lamb",
+        "partyName": "Libertarian",
+        "votes": 10870
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 599037,
+          "estimatedVotesLow": 490118,
+          "estimatedVotesMid": 544574,
+          "turnoutHigh": 90.42,
+          "turnoutLow": 110.51,
+          "turnoutMid": 99
+        },
+        "firstName": "Christi",
+        "id": 71326,
+        "lastName": "Jacobsen",
+        "partyName": "Republican",
+        "votes": 299817
       }
     ],
     "district": "",
@@ -341,7 +359,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "39",
       "officeName": "Secretary of State",
@@ -351,11 +369,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 541651,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -363,15 +382,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.2,
+          "turnoutMid": 99
         },
         "firstName": "Ben",
         "id": 71327,
         "lastName": "Alke",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 230228
       },
       {
         "elected": false,
@@ -379,15 +398,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.98,
+          "turnoutLow": 111.2,
+          "turnoutMid": 99
         },
         "firstName": "Austin",
         "id": 71328,
         "lastName": "Knudsen",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 314773
       }
     ],
     "district": "",
@@ -396,7 +415,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "27",
       "officeName": "Attorney General",
@@ -406,11 +425,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 545001,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -418,15 +438,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.06,
+          "turnoutMid": 99
         },
-        "firstName": "James",
-        "id": 21187,
-        "lastName": "Brown",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "John",
+        "id": 71330,
+        "lastName": "Repke",
+        "partyName": "Democratic",
+        "votes": 221499
       },
       {
         "elected": false,
@@ -434,15 +454,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.69,
+          "turnoutLow": 112.06,
+          "turnoutMid": 99
         },
-        "firstName": "John",
-        "id": 71330,
-        "lastName": "Repke",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "James",
+        "id": 21187,
+        "lastName": "Brown",
+        "partyName": "Republican",
+        "votes": 327748
       }
     ],
     "district": "",
@@ -451,7 +471,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "135",
       "officeName": "Auditor",
@@ -461,11 +481,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 549247,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -473,15 +494,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.2,
+          "turnoutLow": 113.91,
+          "turnoutMid": 99
         },
         "firstName": "Susie",
         "id": 71332,
         "lastName": "Hedalen",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 342959
       },
       {
         "elected": false,
@@ -489,15 +510,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.2,
+          "turnoutLow": 113.91,
+          "turnoutMid": 99
         },
         "firstName": "Shannon",
         "id": 71334,
         "lastName": "O'Brien",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 215346
       }
     ],
     "district": "",
@@ -506,7 +527,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "28",
       "officeName": "State Superintendent of Public Instruction",
@@ -516,11 +537,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 558305,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -528,15 +550,15 @@
           "estimatedVotesHigh": 187491,
           "estimatedVotesLow": 153401,
           "estimatedVotesMid": 170445,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.17,
+          "turnoutLow": 111.43,
+          "turnoutMid": 99
         },
         "firstName": "Susan",
         "id": 71336,
         "lastName": "Bilo",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 74165
       },
       {
         "elected": false,
@@ -544,15 +566,15 @@
           "estimatedVotesHigh": 187491,
           "estimatedVotesLow": 153401,
           "estimatedVotesMid": 170445,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.17,
+          "turnoutLow": 111.43,
+          "turnoutMid": 99
         },
         "firstName": "Brad",
         "id": 71337,
         "lastName": "Molnar",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 96768
       }
     ],
     "district": "2",
@@ -561,7 +583,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "140",
       "officeName": "Public Service Commissioner",
@@ -571,11 +593,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 170933,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -583,15 +606,15 @@
           "estimatedVotesHigh": 240073,
           "estimatedVotesLow": 196422,
           "estimatedVotesMid": 218247,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.54,
+          "turnoutLow": 110.66,
+          "turnoutMid": 99
         },
-        "firstName": "Leonard",
-        "id": 71340,
-        "lastName": "Williams",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Jeff",
+        "id": 71339,
+        "lastName": "Welborn",
+        "partyName": "Republican",
+        "votes": 121555
       },
       {
         "elected": false,
@@ -599,15 +622,15 @@
           "estimatedVotesHigh": 240073,
           "estimatedVotesLow": 196422,
           "estimatedVotesMid": 218247,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.54,
+          "turnoutLow": 110.66,
+          "turnoutMid": 99
         },
-        "firstName": "Jeff",
-        "id": 71339,
-        "lastName": "Welborn",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Leonard",
+        "id": 71340,
+        "lastName": "Williams",
+        "partyName": "Democratic",
+        "votes": 95801
       }
     ],
     "district": "3",
@@ -616,7 +639,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "140",
       "officeName": "Public Service Commissioner",
@@ -626,11 +649,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 217356,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -638,15 +662,15 @@
           "estimatedVotesHigh": 195086,
           "estimatedVotesLow": 159615,
           "estimatedVotesMid": 177350,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 56.83,
+          "turnoutLow": 69.46,
+          "turnoutMid": 62.52
         },
         "firstName": "Elena",
         "id": 101420,
         "lastName": "Evans",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 4008
       },
       {
         "elected": false,
@@ -654,15 +678,15 @@
           "estimatedVotesHigh": 195086,
           "estimatedVotesLow": 159615,
           "estimatedVotesMid": 177350,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 56.83,
+          "turnoutLow": 69.46,
+          "turnoutMid": 62.52
         },
         "firstName": "Jennifer",
         "id": 71341,
         "lastName": "Fielder",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 106865
       }
     ],
     "district": "4",
@@ -671,7 +695,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "140",
       "officeName": "Public Service Commissioner",
@@ -681,11 +705,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 110873,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -693,15 +718,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.68,
+          "turnoutLow": 110.83,
+          "turnoutMid": 99
         },
         "firstName": "Erin",
         "id": 71343,
         "lastName": "Farris-Olsen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 213787
       },
       {
         "elected": false,
@@ -709,15 +734,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.68,
+          "turnoutLow": 110.83,
+          "turnoutMid": 99
         },
         "firstName": "Bowen",
         "id": 71342,
         "lastName": "Greenwood",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 318401
       },
       {
         "elected": false,
@@ -725,15 +750,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.68,
+          "turnoutLow": 110.83,
+          "turnoutMid": 99
         },
         "firstName": "Roger",
         "id": 101421,
         "lastName": "Roots",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 11021
       }
     ],
     "district": "",
@@ -742,7 +767,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "185",
       "officeName": "Clerk of the Supreme Court",
@@ -752,11 +777,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 543209,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -764,15 +790,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.12,
+          "turnoutLow": 111.37,
+          "turnoutMid": 99
         },
         "firstName": "Cory",
         "id": 71345,
         "lastName": "Swanson",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 278270
       },
       {
         "elected": false,
@@ -780,15 +806,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.12,
+          "turnoutLow": 111.37,
+          "turnoutMid": 99
         },
         "firstName": "Jeremiah",
         "id": 71344,
         "lastName": "Lynch",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 267573
       }
     ],
     "district": "",
@@ -797,7 +823,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "30",
       "officeName": "State Supreme Court",
@@ -807,11 +833,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 545843,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -819,15 +846,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.68,
+          "turnoutLow": 110.83,
+          "turnoutMid": 99
         },
         "firstName": "Dan",
         "id": 71346,
         "lastName": "Wilson",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 274351
       },
       {
         "elected": false,
@@ -835,15 +862,15 @@
           "estimatedVotesHigh": 599037,
           "estimatedVotesLow": 490118,
           "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.68,
+          "turnoutLow": 110.83,
+          "turnoutMid": 99
         },
         "firstName": "Katherine",
         "id": 71347,
         "lastName": "Bidegaray",
         "partyName": "Nonpartisan",
-        "votes": 0
+        "votes": 268854
       }
     ],
     "district": "",
@@ -852,7 +879,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:20.046Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "30",
       "officeName": "State Supreme Court",
@@ -862,11 +889,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 543205,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -874,15 +902,15 @@
           "estimatedVotesHigh": 12718,
           "estimatedVotesLow": 10406,
           "estimatedVotesMid": 11562,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Dave",
         "id": 24389,
         "lastName": "Fern",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3810
       },
       {
         "elected": false,
@@ -890,15 +918,15 @@
           "estimatedVotesHigh": 12718,
           "estimatedVotesLow": 10406,
           "estimatedVotesMid": 11562,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Doug",
         "id": 70428,
         "lastName": "Adams",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7752
       }
     ],
     "district": "2",
@@ -907,7 +935,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:22:54.456Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -917,11 +945,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 11562,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -929,15 +958,15 @@
           "estimatedVotesHigh": 12939,
           "estimatedVotesLow": 10587,
           "estimatedVotesMid": 11763,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.9,
+          "turnoutLow": 112.32,
+          "turnoutMid": 99
         },
         "firstName": "Carl",
         "id": 71389,
         "lastName": "Glimm",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6390
       },
       {
         "elected": false,
@@ -945,15 +974,15 @@
           "estimatedVotesHigh": 12939,
           "estimatedVotesLow": 10587,
           "estimatedVotesMid": 11763,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.9,
+          "turnoutLow": 112.32,
+          "turnoutMid": 99
         },
         "firstName": "Angela",
         "id": 24390,
         "lastName": "Kennedy",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5501
       }
     ],
     "district": "3",
@@ -962,7 +991,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:07:02.327Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -972,11 +1001,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 11891,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -984,15 +1014,15 @@
           "estimatedVotesHigh": 11637,
           "estimatedVotesLow": 9521,
           "estimatedVotesMid": 10579,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Matt",
         "id": 24476,
         "lastName": "Regier",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7717
       },
       {
         "elected": false,
@@ -1000,15 +1030,15 @@
           "estimatedVotesHigh": 11637,
           "estimatedVotesLow": 9521,
           "estimatedVotesMid": 10579,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Link",
         "id": 71391,
         "lastName": "Neimark",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2862
       }
     ],
     "district": "5",
@@ -1017,7 +1047,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:30:10.095Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1027,11 +1057,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 10579,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1039,15 +1070,15 @@
           "estimatedVotesHigh": 12559,
           "estimatedVotesLow": 10275,
           "estimatedVotesMid": 11417,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.93,
+          "turnoutLow": 58.58,
+          "turnoutMid": 52.72
         },
         "firstName": "Craig",
         "id": 71393,
         "lastName": "Pablo",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1644
       },
       {
         "elected": false,
@@ -1055,15 +1086,15 @@
           "estimatedVotesHigh": 12559,
           "estimatedVotesLow": 10275,
           "estimatedVotesMid": 11417,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.93,
+          "turnoutLow": 58.58,
+          "turnoutMid": 52.72
         },
         "firstName": "Greg",
         "id": 71392,
         "lastName": "Hertz",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4375
       }
     ],
     "district": "7",
@@ -1072,7 +1103,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1082,11 +1113,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6019,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1126,6 +1158,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1165,6 +1198,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1172,15 +1206,15 @@
           "estimatedVotesHigh": 7439,
           "estimatedVotesLow": 6087,
           "estimatedVotesMid": 6762,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.88,
+          "turnoutLow": 112.29,
+          "turnoutMid": 99
         },
         "firstName": "Jonathan",
         "id": 24411,
         "lastName": "Boy",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3979
       },
       {
         "elected": false,
@@ -1188,15 +1222,15 @@
           "estimatedVotesHigh": 7439,
           "estimatedVotesLow": 6087,
           "estimatedVotesMid": 6762,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.88,
+          "turnoutLow": 112.29,
+          "turnoutMid": 99
         },
         "firstName": "Perri",
         "id": 71396,
         "lastName": "Jacobs",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2856
       }
     ],
     "district": "16",
@@ -1205,7 +1239,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:08.614Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1215,11 +1249,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6835,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1259,6 +1294,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1266,15 +1302,15 @@
           "estimatedVotesHigh": 10814,
           "estimatedVotesLow": 8848,
           "estimatedVotesMid": 9831,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 58.7,
+          "turnoutLow": 71.75,
+          "turnoutMid": 64.57
         },
         "firstName": "Sue",
         "id": 24546,
         "lastName": "Vinton",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 5164
       },
       {
         "elected": false,
@@ -1282,15 +1318,15 @@
           "estimatedVotesHigh": 10814,
           "estimatedVotesLow": 8848,
           "estimatedVotesMid": 9831,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 58.7,
+          "turnoutLow": 71.75,
+          "turnoutMid": 64.57
         },
         "firstName": "Linda",
         "id": 71398,
         "lastName": "Auch",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1184
       }
     ],
     "district": "20",
@@ -1299,7 +1335,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:13:22.040Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1309,11 +1345,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6348,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1321,15 +1358,15 @@
           "estimatedVotesHigh": 7385,
           "estimatedVotesLow": 6043,
           "estimatedVotesMid": 6714,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 16.25,
+          "turnoutLow": 19.86,
+          "turnoutMid": 17.87
         },
-        "firstName": "Sharon",
-        "id": 71399,
-        "lastName": "Peregoy",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Gayle",
+        "id": 71400,
+        "lastName": "Lammers",
+        "partyName": "Republican",
+        "votes": 644
       },
       {
         "elected": false,
@@ -1337,15 +1374,15 @@
           "estimatedVotesHigh": 7385,
           "estimatedVotesLow": 6043,
           "estimatedVotesMid": 6714,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 16.25,
+          "turnoutLow": 19.86,
+          "turnoutMid": 17.87
         },
-        "firstName": "Gayle",
-        "id": 71400,
-        "lastName": "Lammers",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Sharon",
+        "id": 71399,
+        "lastName": "Peregoy",
+        "partyName": "Democratic",
+        "votes": 556
       }
     ],
     "district": "21",
@@ -1354,7 +1391,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:30:32.013Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1364,11 +1401,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 1200,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1376,15 +1414,15 @@
           "estimatedVotesHigh": 8583,
           "estimatedVotesLow": 7023,
           "estimatedVotesMid": 7803,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.41,
+          "turnoutLow": 111.72,
+          "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 24540,
         "lastName": "Yakawich",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3611
       },
       {
         "elected": false,
@@ -1392,15 +1430,15 @@
           "estimatedVotesHigh": 8583,
           "estimatedVotesLow": 7023,
           "estimatedVotesMid": 7803,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.41,
+          "turnoutLow": 111.72,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 71403,
         "lastName": "Nicholson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4235
       }
     ],
     "district": "24",
@@ -1409,7 +1447,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:13:22.040Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1419,11 +1457,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 7846,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1431,15 +1470,15 @@
           "estimatedVotesHigh": 12872,
           "estimatedVotesLow": 10532,
           "estimatedVotesMid": 11702,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 52.9,
+          "turnoutLow": 64.65,
+          "turnoutMid": 58.19
         },
         "firstName": "Karen",
         "id": 71405,
         "lastName": "Lyncoln",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2878
       },
       {
         "elected": false,
@@ -1447,15 +1486,15 @@
           "estimatedVotesHigh": 12872,
           "estimatedVotesLow": 10532,
           "estimatedVotesMid": 11702,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 52.9,
+          "turnoutLow": 64.65,
+          "turnoutMid": 58.19
         },
         "firstName": "Tom",
         "id": 71404,
         "lastName": "Mcgillvray",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3931
       }
     ],
     "district": "26",
@@ -1464,7 +1503,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:28:49.521Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1474,11 +1513,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6809,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1486,15 +1526,15 @@
           "estimatedVotesHigh": 11894,
           "estimatedVotesLow": 9732,
           "estimatedVotesMid": 10813,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.7,
+          "turnoutMid": 99
         },
         "firstName": "Vince",
         "id": 71408,
         "lastName": "Ricci",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 7248
       },
       {
         "elected": false,
@@ -1502,15 +1542,15 @@
           "estimatedVotesHigh": 11894,
           "estimatedVotesLow": 9732,
           "estimatedVotesMid": 10813,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.4,
+          "turnoutLow": 111.7,
+          "turnoutMid": 99
         },
         "firstName": "Kathleen",
         "id": 71407,
         "lastName": "Gilluly",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3623
       }
     ],
     "district": "27",
@@ -1519,7 +1559,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:33:56.961Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1529,11 +1569,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 10871,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1541,15 +1582,15 @@
           "estimatedVotesHigh": 14096,
           "estimatedVotesLow": 11532,
           "estimatedVotesMid": 12814,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 3.49,
+          "turnoutLow": 4.27,
+          "turnoutMid": 3.84
         },
         "firstName": "Tyler",
         "id": 71409,
         "lastName": "Rogers",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 208
       },
       {
         "elected": false,
@@ -1557,15 +1598,15 @@
           "estimatedVotesHigh": 14096,
           "estimatedVotesLow": 11532,
           "estimatedVotesMid": 12814,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 3.49,
+          "turnoutLow": 4.27,
+          "turnoutMid": 3.84
         },
         "firstName": "Cora",
         "id": 22989,
         "lastName": "Neumann",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 284
       }
     ],
     "district": "30",
@@ -1574,7 +1615,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:55.146Z",
+    "lastUpdated": "2024-10-25T20:22:54.456Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1584,11 +1625,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 492,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1596,15 +1638,15 @@
           "estimatedVotesHigh": 13893,
           "estimatedVotesLow": 11367,
           "estimatedVotesMid": 12630,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Christopher",
         "id": 71410,
         "lastName": "Pope",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 8166
       },
       {
         "elected": false,
@@ -1612,15 +1654,15 @@
           "estimatedVotesHigh": 13893,
           "estimatedVotesLow": 11367,
           "estimatedVotesMid": 12630,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Neal",
         "id": 71411,
         "lastName": "Ganser",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4464
       }
     ],
     "district": "33",
@@ -1629,7 +1671,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:16:50.298Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1639,11 +1681,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 12630,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1683,6 +1726,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1690,15 +1734,15 @@
           "estimatedVotesHigh": 10919,
           "estimatedVotesLow": 8934,
           "estimatedVotesMid": 9926,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.83,
+          "turnoutLow": 16.9,
+          "turnoutMid": 15.21
         },
         "firstName": "Darlean",
         "id": 71415,
         "lastName": "Newman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 848
       },
       {
         "elected": false,
@@ -1706,15 +1750,15 @@
           "estimatedVotesHigh": 10919,
           "estimatedVotesLow": 8934,
           "estimatedVotesMid": 9926,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.83,
+          "turnoutLow": 16.9,
+          "turnoutMid": 15.21
         },
         "firstName": "Sara",
         "id": 24444,
         "lastName": "Novak",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 662
       }
     ],
     "district": "36",
@@ -1723,7 +1767,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1733,11 +1777,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 1510,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1745,15 +1790,15 @@
           "estimatedVotesHigh": 11699,
           "estimatedVotesLow": 9572,
           "estimatedVotesMid": 10635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Derek",
         "id": 24442,
         "lastName": "Harvey",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6337
       },
       {
         "elected": false,
@@ -1761,15 +1806,15 @@
           "estimatedVotesHigh": 11699,
           "estimatedVotesLow": 9572,
           "estimatedVotesMid": 10635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 45851,
         "lastName": "Kephart",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4298
       }
     ],
     "district": "37",
@@ -1778,7 +1823,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:25:27.594Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1788,11 +1833,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 10635,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1800,15 +1846,15 @@
           "estimatedVotesHigh": 13926,
           "estimatedVotesLow": 11395,
           "estimatedVotesMid": 12660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 38.14,
+          "turnoutLow": 46.61,
+          "turnoutMid": 41.95
         },
         "firstName": "Becky",
         "id": 24573,
         "lastName": "Beard",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3339
       },
       {
         "elected": false,
@@ -1816,15 +1862,15 @@
           "estimatedVotesHigh": 13926,
           "estimatedVotesLow": 11395,
           "estimatedVotesMid": 12660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 38.14,
+          "turnoutLow": 46.61,
+          "turnoutMid": 41.95
         },
         "firstName": "Jeffrey",
         "id": 71416,
         "lastName": "Benson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1972
       }
     ],
     "district": "38",
@@ -1833,7 +1879,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:07.666Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1843,11 +1889,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5311,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1888,7 +1935,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:46:07.666Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1903,6 +1950,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1910,15 +1958,15 @@
           "estimatedVotesHigh": 12831,
           "estimatedVotesLow": 10497,
           "estimatedVotesMid": 11664,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 87.73,
+          "turnoutLow": 107.24,
+          "turnoutMid": 96.51
         },
         "firstName": "Greg",
         "id": 71420,
         "lastName": "Guthrie",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 6201
       },
       {
         "elected": false,
@@ -1926,15 +1974,15 @@
           "estimatedVotesHigh": 12831,
           "estimatedVotesLow": 10497,
           "estimatedVotesMid": 11664,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 87.73,
+          "turnoutLow": 107.24,
+          "turnoutMid": 96.51
         },
         "firstName": "Laura",
         "id": 24445,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5056
       }
     ],
     "district": "40",
@@ -1943,7 +1991,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -1953,11 +2001,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 11257,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1965,15 +2014,15 @@
           "estimatedVotesHigh": 14438,
           "estimatedVotesLow": 11813,
           "estimatedVotesMid": 13125,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.11,
+          "turnoutLow": 113.8,
+          "turnoutMid": 99
         },
         "firstName": "Theresa",
         "id": 71421,
         "lastName": "Manzella",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 9043
       },
       {
         "elected": false,
@@ -1981,15 +2030,15 @@
           "estimatedVotesHigh": 14438,
           "estimatedVotesLow": 11813,
           "estimatedVotesMid": 13125,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.11,
+          "turnoutLow": 113.8,
+          "turnoutMid": 99
         },
         "firstName": "Cade",
         "id": 71423,
         "lastName": "Scatolini",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4400
       }
     ],
     "district": "44",
@@ -1998,7 +2047,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:20:16.848Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2008,11 +2057,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 13443,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2020,15 +2070,15 @@
           "estimatedVotesHigh": 13014,
           "estimatedVotesLow": 10648,
           "estimatedVotesMid": 11831,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 69.63,
+          "turnoutLow": 85.1,
+          "turnoutMid": 76.59
         },
         "firstName": "Kelley",
         "id": 101422,
         "lastName": "Durbin-Williams",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 167
       },
       {
         "elected": false,
@@ -2036,15 +2086,15 @@
           "estimatedVotesHigh": 13014,
           "estimatedVotesLow": 10648,
           "estimatedVotesMid": 11831,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 69.63,
+          "turnoutLow": 85.1,
+          "turnoutMid": 76.59
         },
         "firstName": "Devin",
         "id": 24466,
         "lastName": "Jackson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5951
       },
       {
         "elected": false,
@@ -2052,15 +2102,15 @@
           "estimatedVotesHigh": 13014,
           "estimatedVotesLow": 10648,
           "estimatedVotesMid": 11831,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 69.63,
+          "turnoutLow": 85.1,
+          "turnoutMid": 76.59
         },
         "firstName": "Denley",
         "id": 24495,
         "lastName": "Loge",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2943
       }
     ],
     "district": "45",
@@ -2069,7 +2119,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:06:15.648Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2079,11 +2129,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 9061,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2091,15 +2142,15 @@
           "estimatedVotesHigh": 12517,
           "estimatedVotesLow": 10242,
           "estimatedVotesMid": 11379,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 61.55,
+          "turnoutLow": 75.22,
+          "turnoutMid": 67.7
         },
         "firstName": "Charles",
         "id": 71426,
         "lastName": "Headley",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2553
       },
       {
         "elected": false,
@@ -2107,15 +2158,15 @@
           "estimatedVotesHigh": 12517,
           "estimatedVotesLow": 10242,
           "estimatedVotesMid": 11379,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 61.55,
+          "turnoutLow": 75.22,
+          "turnoutMid": 67.7
         },
         "firstName": "Jacinda",
         "id": 71427,
         "lastName": "Morigeau",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5151
       }
     ],
     "district": "46",
@@ -2134,11 +2185,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 7704,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2146,15 +2198,15 @@
           "estimatedVotesHigh": 13288,
           "estimatedVotesLow": 10872,
           "estimatedVotesMid": 12080,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 57.15,
+          "turnoutLow": 69.85,
+          "turnoutMid": 62.86
         },
         "firstName": "Abigail",
         "id": 71428,
         "lastName": "Maki",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3546
       },
       {
         "elected": false,
@@ -2162,15 +2214,15 @@
           "estimatedVotesHigh": 13288,
           "estimatedVotesLow": 10872,
           "estimatedVotesMid": 12080,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 57.15,
+          "turnoutLow": 69.85,
+          "turnoutMid": 62.86
         },
         "firstName": "Ellie",
         "id": 101423,
         "lastName": "Boldman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4048
       }
     ],
     "district": "47",
@@ -2179,7 +2231,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:29:40.526Z",
     "office": {
       "officeId": "10",
       "officeName": "State Senate",
@@ -2189,11 +2241,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 7594,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2201,15 +2254,15 @@
           "estimatedVotesHigh": 6793,
           "estimatedVotesLow": 5558,
           "estimatedVotesMid": 6175,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.39,
+          "turnoutLow": 109.25,
+          "turnoutMid": 98.33
         },
         "firstName": "Neil",
         "id": 24473,
         "lastName": "Duram",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4224
       },
       {
         "elected": false,
@@ -2217,15 +2270,15 @@
           "estimatedVotesHigh": 6793,
           "estimatedVotesLow": 5558,
           "estimatedVotesMid": 6175,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 89.39,
+          "turnoutLow": 109.25,
+          "turnoutMid": 98.33
         },
         "firstName": "Dakota",
         "id": 71430,
         "lastName": "Adams",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1848
       }
     ],
     "district": "1",
@@ -2234,7 +2287,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2244,11 +2297,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6072,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2256,15 +2310,15 @@
           "estimatedVotesHigh": 5977,
           "estimatedVotesLow": 4891,
           "estimatedVotesMid": 5434,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 73.92,
+          "turnoutLow": 90.33,
+          "turnoutMid": 81.3
         },
         "firstName": "Brad",
         "id": 101424,
         "lastName": "Simonis",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1066
       },
       {
         "elected": false,
@@ -2272,15 +2326,15 @@
           "estimatedVotesHigh": 5977,
           "estimatedVotesLow": 4891,
           "estimatedVotesMid": 5434,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 73.92,
+          "turnoutLow": 90.33,
+          "turnoutMid": 81.3
         },
         "firstName": "Tom",
         "id": 71431,
         "lastName": "Millett",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3352
       }
     ],
     "district": "2",
@@ -2289,7 +2343,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2299,11 +2353,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4418,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2311,15 +2366,15 @@
           "estimatedVotesHigh": 6877,
           "estimatedVotesLow": 5627,
           "estimatedVotesMid": 6252,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Debo",
         "id": 71434,
         "lastName": "Powers",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2475
       },
       {
         "elected": false,
@@ -2327,15 +2382,15 @@
           "estimatedVotesHigh": 6877,
           "estimatedVotesLow": 5627,
           "estimatedVotesMid": 6252,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Cathy",
         "id": 71436,
         "lastName": "Mitchell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3777
       }
     ],
     "district": "3",
@@ -2344,7 +2399,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:09:45.956Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2354,11 +2409,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6252,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2366,15 +2422,15 @@
           "estimatedVotesHigh": 5953,
           "estimatedVotesLow": 4871,
           "estimatedVotesMid": 5412,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.15,
+          "turnoutLow": 111.39,
+          "turnoutMid": 99
         },
         "firstName": "Lyn",
         "id": 24477,
         "lastName": "Bennett",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4103
       },
       {
         "elected": false,
@@ -2382,15 +2438,15 @@
           "estimatedVotesHigh": 5953,
           "estimatedVotesLow": 4871,
           "estimatedVotesMid": 5412,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.15,
+          "turnoutLow": 111.39,
+          "turnoutMid": 99
         },
         "firstName": "Lindsey",
         "id": 71437,
         "lastName": "Jordan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1323
       }
     ],
     "district": "4",
@@ -2399,7 +2455,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:11:23.118Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2409,11 +2465,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5426,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2421,15 +2478,15 @@
           "estimatedVotesHigh": 6367,
           "estimatedVotesLow": 5209,
           "estimatedVotesMid": 5788,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.2,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 71438,
         "lastName": "Paugh",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3510
       },
       {
         "elected": false,
@@ -2437,15 +2494,15 @@
           "estimatedVotesHigh": 6367,
           "estimatedVotesLow": 5209,
           "estimatedVotesMid": 5788,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.2,
+          "turnoutLow": 111.48,
+          "turnoutMid": 99
         },
         "firstName": "Braxton",
         "id": 24474,
         "lastName": "Mitchell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2297
       }
     ],
     "district": "5",
@@ -2454,7 +2511,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:20:16.848Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2464,11 +2521,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5807,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2476,15 +2534,15 @@
           "estimatedVotesHigh": 6779,
           "estimatedVotesLow": 5547,
           "estimatedVotesMid": 6163,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Velvet",
-        "id": 71439,
-        "lastName": "Phillipssullivan",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Amy",
+        "id": 24479,
+        "lastName": "Regier",
+        "partyName": "Republican",
+        "votes": 4055
       },
       {
         "elected": false,
@@ -2492,15 +2550,15 @@
           "estimatedVotesHigh": 6779,
           "estimatedVotesLow": 5547,
           "estimatedVotesMid": 6163,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Amy",
-        "id": 24479,
-        "lastName": "Regier",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Velvet",
+        "id": 71439,
+        "lastName": "Phillipssullivan",
+        "partyName": "Democratic",
+        "votes": 2108
       }
     ],
     "district": "6",
@@ -2509,7 +2567,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:03:41.658Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2519,11 +2577,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6163,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2531,15 +2590,15 @@
           "estimatedVotesHigh": 4888,
           "estimatedVotesLow": 4000,
           "estimatedVotesMid": 4444,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.92,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Courtenay",
         "id": 24481,
         "lastName": "Sprunger",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2591
       },
       {
         "elected": false,
@@ -2547,15 +2606,15 @@
           "estimatedVotesHigh": 4888,
           "estimatedVotesLow": 4000,
           "estimatedVotesMid": 4444,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.92,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Arthur",
         "id": 71441,
         "lastName": "Fretheim",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1853
       }
     ],
     "district": "7",
@@ -2564,7 +2623,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:11:23.118Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2574,11 +2633,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4444,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2586,15 +2646,15 @@
           "estimatedVotesHigh": 5853,
           "estimatedVotesLow": 4789,
           "estimatedVotesMid": 5321,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Lukas",
         "id": 71442,
         "lastName": "Schubert",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3679
       },
       {
         "elected": false,
@@ -2602,15 +2662,15 @@
           "estimatedVotesHigh": 5853,
           "estimatedVotesLow": 4789,
           "estimatedVotesMid": 5321,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Beth",
         "id": 71443,
         "lastName": "Sibert",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1642
       }
     ],
     "district": "8",
@@ -2619,7 +2679,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:32:12.892Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2629,11 +2689,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5321,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2641,15 +2702,15 @@
           "estimatedVotesHigh": 6171,
           "estimatedVotesLow": 5049,
           "estimatedVotesMid": 5610,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Steven",
         "id": 71444,
         "lastName": "Kelly",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4111
       },
       {
         "elected": false,
@@ -2657,15 +2718,15 @@
           "estimatedVotesHigh": 6171,
           "estimatedVotesLow": 5049,
           "estimatedVotesMid": 5610,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Joanne",
         "id": 71445,
         "lastName": "Morrow",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1499
       }
     ],
     "district": "9",
@@ -2674,7 +2735,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:12:29.803Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2684,11 +2745,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5610,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2696,15 +2758,15 @@
           "estimatedVotesHigh": 5511,
           "estimatedVotesLow": 4509,
           "estimatedVotesMid": 5010,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92,
+          "turnoutLow": 112.44,
+          "turnoutMid": 99
         },
         "firstName": "Terry",
         "id": 24483,
         "lastName": "Falk",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3754
       },
       {
         "elected": false,
@@ -2712,15 +2774,15 @@
           "estimatedVotesHigh": 5511,
           "estimatedVotesLow": 4509,
           "estimatedVotesMid": 5010,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92,
+          "turnoutLow": 112.44,
+          "turnoutMid": 99
         },
         "firstName": "Devin",
         "id": 71446,
         "lastName": "Marconi",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1316
       }
     ],
     "district": "10",
@@ -2729,7 +2791,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:31:24.695Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2739,11 +2801,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5070,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2751,15 +2814,15 @@
           "estimatedVotesHigh": 6623,
           "estimatedVotesLow": 5419,
           "estimatedVotesMid": 6021,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ed",
         "id": 71447,
         "lastName": "Byrne",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4319
       },
       {
         "elected": false,
@@ -2767,15 +2830,15 @@
           "estimatedVotesHigh": 6623,
           "estimatedVotesLow": 5419,
           "estimatedVotesMid": 6021,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 71448,
         "lastName": "Allen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1702
       }
     ],
     "district": "11",
@@ -2784,7 +2847,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:15:06.673Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2794,11 +2857,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6021,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2806,15 +2870,15 @@
           "estimatedVotesHigh": 7189,
           "estimatedVotesLow": 5881,
           "estimatedVotesMid": 6535,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 48.42,
+          "turnoutLow": 59.19,
+          "turnoutMid": 53.27
         },
         "firstName": "Tracy",
         "id": 71449,
         "lastName": "Sharp",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2000
       },
       {
         "elected": false,
@@ -2822,15 +2886,15 @@
           "estimatedVotesHigh": 7189,
           "estimatedVotesLow": 5881,
           "estimatedVotesMid": 6535,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 48.42,
+          "turnoutLow": 59.19,
+          "turnoutMid": 53.27
         },
         "firstName": "Barry",
         "id": 71450,
         "lastName": "Olson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1481
       }
     ],
     "district": "12",
@@ -2839,7 +2903,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:32:12.892Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2849,11 +2913,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3481,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2909,6 +2974,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2916,15 +2982,15 @@
           "estimatedVotesHigh": 6675,
           "estimatedVotesLow": 5461,
           "estimatedVotesMid": 6068,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 53.78,
+          "turnoutLow": 65.74,
+          "turnoutMid": 59.16
         },
         "firstName": "Paul",
         "id": 24494,
         "lastName": "Fielder",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2656
       },
       {
         "elected": false,
@@ -2932,15 +2998,15 @@
           "estimatedVotesHigh": 6675,
           "estimatedVotesLow": 5461,
           "estimatedVotesMid": 6068,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 53.78,
+          "turnoutLow": 65.74,
+          "turnoutMid": 59.16
         },
         "firstName": "Colleen",
         "id": 24393,
         "lastName": "Hinds",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 934
       }
     ],
     "district": "14",
@@ -2949,7 +3015,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:03:41.658Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -2959,11 +3025,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3590,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2971,15 +3038,15 @@
           "estimatedVotesHigh": 4076,
           "estimatedVotesLow": 3335,
           "estimatedVotesMid": 3705,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 86.14,
+          "turnoutLow": 105.28,
+          "turnoutMid": 94.76
         },
         "firstName": "Thedis",
         "id": 24395,
         "lastName": "Crowe",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2055
       },
       {
         "elected": false,
@@ -2987,15 +3054,15 @@
           "estimatedVotesHigh": 4076,
           "estimatedVotesLow": 3335,
           "estimatedVotesMid": 3705,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 86.14,
+          "turnoutLow": 105.28,
+          "turnoutMid": 94.76
         },
         "firstName": "Ralph",
         "id": 24497,
         "lastName": "Foster",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1456
       }
     ],
     "district": "15",
@@ -3004,7 +3071,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3014,11 +3081,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3511,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3026,15 +3094,15 @@
           "estimatedVotesHigh": 4838,
           "estimatedVotesLow": 3958,
           "estimatedVotesMid": 4398,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Elaine",
         "id": 71452,
         "lastName": "Mitchell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1342
       },
       {
         "elected": false,
@@ -3042,15 +3110,15 @@
           "estimatedVotesHigh": 4838,
           "estimatedVotesLow": 3958,
           "estimatedVotesMid": 4398,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Tyson",
         "id": 24397,
         "lastName": "Wolf",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3056
       }
     ],
     "district": "16",
@@ -3059,7 +3127,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:33:07.479Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3069,11 +3137,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4398,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3081,15 +3150,15 @@
           "estimatedVotesHigh": 6755,
           "estimatedVotesLow": 5527,
           "estimatedVotesMid": 6141,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 53.32,
+          "turnoutLow": 65.17,
+          "turnoutMid": 58.65
         },
         "firstName": "Leonard",
         "id": 71454,
         "lastName": "Bates",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 926
       },
       {
         "elected": false,
@@ -3097,15 +3166,15 @@
           "estimatedVotesHigh": 6755,
           "estimatedVotesLow": 5527,
           "estimatedVotesMid": 6141,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 53.32,
+          "turnoutLow": 65.17,
+          "turnoutMid": 58.65
         },
         "firstName": "Zack",
         "id": 71453,
         "lastName": "Wirth",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2676
       }
     ],
     "district": "17",
@@ -3114,7 +3183,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3124,11 +3193,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3602,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3136,15 +3206,15 @@
           "estimatedVotesHigh": 5655,
           "estimatedVotesLow": 4627,
           "estimatedVotesMid": 5141,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 64.3,
+          "turnoutLow": 78.58,
+          "turnoutMid": 70.73
         },
         "firstName": "David",
         "id": 71455,
         "lastName": "Arends",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 855
       },
       {
         "elected": false,
@@ -3152,15 +3222,15 @@
           "estimatedVotesHigh": 5655,
           "estimatedVotesLow": 4627,
           "estimatedVotesMid": 5141,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 64.3,
+          "turnoutLow": 78.58,
+          "turnoutMid": 70.73
         },
         "firstName": "Llew",
         "id": 24501,
         "lastName": "Jones",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2781
       }
     ],
     "district": "18",
@@ -3169,7 +3239,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3179,11 +3249,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3636,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3191,15 +3262,15 @@
           "estimatedVotesHigh": 3728,
           "estimatedVotesLow": 3050,
           "estimatedVotesMid": 3389,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.6,
+          "turnoutLow": 111.97,
+          "turnoutMid": 99
         },
         "firstName": "Jane",
         "id": 71457,
         "lastName": "Weber",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 852
       },
       {
         "elected": false,
@@ -3207,15 +3278,15 @@
           "estimatedVotesHigh": 3728,
           "estimatedVotesLow": 3050,
           "estimatedVotesMid": 3389,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.6,
+          "turnoutLow": 111.97,
+          "turnoutMid": 99
         },
         "firstName": "Hannah",
         "id": 71458,
         "lastName": "Trebas",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2563
       }
     ],
     "district": "19",
@@ -3224,7 +3295,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3234,11 +3305,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3415,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3246,15 +3318,15 @@
           "estimatedVotesHigh": 5528,
           "estimatedVotesLow": 4523,
           "estimatedVotesMid": 5025,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Rina",
         "id": 71459,
         "lastName": "Moore",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1865
       },
       {
         "elected": false,
@@ -3262,15 +3334,15 @@
           "estimatedVotesHigh": 5528,
           "estimatedVotesLow": 4523,
           "estimatedVotesMid": 5025,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Melissa",
         "id": 71460,
         "lastName": "Nikolakakos",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3160
       }
     ],
     "district": "20",
@@ -3279,7 +3351,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3289,11 +3361,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5025,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3301,15 +3374,15 @@
           "estimatedVotesHigh": 5887,
           "estimatedVotesLow": 4817,
           "estimatedVotesMid": 5352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Lela",
         "id": 24400,
         "lastName": "Graham",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2288
       },
       {
         "elected": false,
@@ -3317,15 +3390,15 @@
           "estimatedVotesHigh": 5887,
           "estimatedVotesLow": 4817,
           "estimatedVotesMid": 5352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ed",
         "id": 24504,
         "lastName": "Buttrey",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3064
       }
     ],
     "district": "21",
@@ -3334,7 +3407,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3344,11 +3417,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5352,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3356,15 +3430,15 @@
           "estimatedVotesHigh": 3400,
           "estimatedVotesLow": 2782,
           "estimatedVotesMid": 3091,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "George",
         "id": 24510,
         "lastName": "Nikolakakos",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1856
       },
       {
         "elected": false,
@@ -3372,15 +3446,15 @@
           "estimatedVotesHigh": 3400,
           "estimatedVotesLow": 2782,
           "estimatedVotesMid": 3091,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ronald",
         "id": 71462,
         "lastName": "Paulick",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1235
       }
     ],
     "district": "22",
@@ -3389,7 +3463,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3399,11 +3473,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3091,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3411,15 +3486,15 @@
           "estimatedVotesHigh": 4962,
           "estimatedVotesLow": 4060,
           "estimatedVotesMid": 4511,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Eric",
         "id": 71464,
         "lastName": "Tilleman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2374
       },
       {
         "elected": false,
@@ -3427,15 +3502,15 @@
           "estimatedVotesHigh": 4962,
           "estimatedVotesLow": 4060,
           "estimatedVotesMid": 4511,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Kevin",
         "id": 101425,
         "lastName": "Leatherbarrow",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 87
       },
       {
         "elected": false,
@@ -3443,15 +3518,15 @@
           "estimatedVotesHigh": 4962,
           "estimatedVotesLow": 4060,
           "estimatedVotesMid": 4511,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Sandor",
         "id": 71465,
         "lastName": "Hopkins",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2050
       }
     ],
     "district": "23",
@@ -3460,7 +3535,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3470,11 +3545,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4511,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3514,6 +3590,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3521,15 +3598,15 @@
           "estimatedVotesHigh": 5764,
           "estimatedVotesLow": 4716,
           "estimatedVotesMid": 5240,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.22,
+          "turnoutLow": 110.26,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 71470,
         "lastName": "Rickley",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2424
       },
       {
         "elected": false,
@@ -3537,15 +3614,15 @@
           "estimatedVotesHigh": 5764,
           "estimatedVotesLow": 4716,
           "estimatedVotesMid": 5240,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.22,
+          "turnoutLow": 110.26,
+          "turnoutMid": 99
         },
         "firstName": "Steve",
         "id": 24508,
         "lastName": "Gist",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2776
       }
     ],
     "district": "25",
@@ -3554,7 +3631,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:37.679Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3564,11 +3641,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5200,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3608,6 +3686,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3615,15 +3694,15 @@
           "estimatedVotesHigh": 4749,
           "estimatedVotesLow": 3885,
           "estimatedVotesMid": 4317,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 24.57,
+          "turnoutLow": 30.04,
+          "turnoutMid": 27.03
         },
         "firstName": "Paul",
         "id": 24407,
         "lastName": "Tuss",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 305
       },
       {
         "elected": false,
@@ -3631,15 +3710,15 @@
           "estimatedVotesHigh": 4749,
           "estimatedVotesLow": 3885,
           "estimatedVotesMid": 4317,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 24.57,
+          "turnoutLow": 30.04,
+          "turnoutMid": 27.03
         },
         "firstName": "Ed",
         "id": 24512,
         "lastName": "Hill",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 862
       }
     ],
     "district": "27",
@@ -3648,7 +3727,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:07.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3658,11 +3737,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 1167,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3670,15 +3750,15 @@
           "estimatedVotesHigh": 5633,
           "estimatedVotesLow": 4610,
           "estimatedVotesMid": 5121,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 20.7,
+          "turnoutLow": 25.29,
+          "turnoutMid": 22.77
         },
         "firstName": "Eric",
         "id": 71473,
         "lastName": "Albus",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 662
       },
       {
         "elected": false,
@@ -3686,15 +3766,15 @@
           "estimatedVotesHigh": 5633,
           "estimatedVotesLow": 4610,
           "estimatedVotesMid": 5121,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 20.7,
+          "turnoutLow": 25.29,
+          "turnoutMid": 22.77
         },
         "firstName": "Blake",
         "id": 71475,
         "lastName": "Borst",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 504
       }
     ],
     "district": "28",
@@ -3703,7 +3783,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:07.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3713,11 +3793,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 1166,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3757,6 +3838,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3796,6 +3878,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3803,15 +3886,15 @@
           "estimatedVotesHigh": 3687,
           "estimatedVotesLow": 3017,
           "estimatedVotesMid": 3352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 85.49,
+          "turnoutLow": 104.47,
+          "turnoutMid": 94.03
         },
         "firstName": "Frank",
         "id": 24409,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1851
       },
       {
         "elected": false,
@@ -3819,15 +3902,15 @@
           "estimatedVotesHigh": 3687,
           "estimatedVotesLow": 3017,
           "estimatedVotesMid": 3352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 85.49,
+          "turnoutLow": 104.47,
+          "turnoutMid": 94.03
         },
         "firstName": "Kevin",
         "id": 71480,
         "lastName": "Taylor",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1301
       }
     ],
     "district": "31",
@@ -3836,7 +3919,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:07.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3846,11 +3929,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3152,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3858,15 +3942,15 @@
           "estimatedVotesHigh": 3999,
           "estimatedVotesLow": 3272,
           "estimatedVotesMid": 3635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 86.8,
+          "turnoutLow": 106.08,
+          "turnoutMid": 95.49
         },
         "firstName": "Mike",
         "id": 71481,
         "lastName": "Fox",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2023
       },
       {
         "elected": false,
@@ -3874,15 +3958,15 @@
           "estimatedVotesHigh": 3999,
           "estimatedVotesLow": 3272,
           "estimatedVotesMid": 3635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 86.8,
+          "turnoutLow": 106.08,
+          "turnoutMid": 95.49
         },
         "firstName": "Jason",
         "id": 71482,
         "lastName": "Ulrich",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1448
       }
     ],
     "district": "32",
@@ -3891,7 +3975,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:07.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -3901,11 +3985,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3471,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3945,6 +4030,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -3984,6 +4070,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4024,7 +4111,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4039,6 +4126,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4079,7 +4167,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4094,6 +4182,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4134,7 +4223,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:07.666Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4149,6 +4238,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4188,6 +4278,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4195,15 +4286,15 @@
           "estimatedVotesHigh": 5244,
           "estimatedVotesLow": 4290,
           "estimatedVotesMid": 4767,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 46.38,
+          "turnoutLow": 56.69,
+          "turnoutMid": 51.02
         },
         "firstName": "Melissa",
         "id": 24403,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 480
       },
       {
         "elected": false,
@@ -4211,15 +4302,15 @@
           "estimatedVotesHigh": 5244,
           "estimatedVotesLow": 4290,
           "estimatedVotesMid": 4767,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 46.38,
+          "turnoutLow": 56.69,
+          "turnoutMid": 51.02
         },
         "firstName": "Kerri",
         "id": 24532,
         "lastName": "Seekins-Crowe",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1952
       }
     ],
     "district": "39",
@@ -4228,7 +4319,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:34:47.356Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4238,11 +4329,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 2432,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4298,6 +4390,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4305,15 +4398,15 @@
           "estimatedVotesHigh": 3139,
           "estimatedVotesLow": 2568,
           "estimatedVotesMid": 2853,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 23.73,
+          "turnoutLow": 29.01,
+          "turnoutMid": 26.11
         },
         "firstName": "Da",
         "id": 71493,
         "lastName": "Bull",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 299
       },
       {
         "elected": false,
@@ -4321,15 +4414,15 @@
           "estimatedVotesHigh": 3139,
           "estimatedVotesLow": 2568,
           "estimatedVotesMid": 2853,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 23.73,
+          "turnoutLow": 29.01,
+          "turnoutMid": 26.11
         },
         "firstName": "Jade",
         "id": 71492,
         "lastName": "Sooktis",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 446
       }
     ],
     "district": "41",
@@ -4338,7 +4431,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:43.515Z",
+    "lastUpdated": "2024-10-25T20:08:48.284Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4348,11 +4441,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 745,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4360,15 +4454,15 @@
           "estimatedVotesHigh": 4043,
           "estimatedVotesLow": 3309,
           "estimatedVotesMid": 3676,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 59.41,
+          "turnoutLow": 72.59,
+          "turnoutMid": 65.34
         },
         "firstName": "Sidney",
         "id": 71495,
         "lastName": "Fitzpatrick",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1122
       },
       {
         "elected": false,
@@ -4376,15 +4470,15 @@
           "estimatedVotesHigh": 4043,
           "estimatedVotesLow": 3309,
           "estimatedVotesMid": 3676,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 59.41,
+          "turnoutLow": 72.59,
+          "turnoutMid": 65.34
         },
         "firstName": "Bill",
         "id": 71494,
         "lastName": "Hodges",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1280
       }
     ],
     "district": "42",
@@ -4393,7 +4487,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4403,11 +4497,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 2402,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4415,15 +4510,15 @@
           "estimatedVotesHigh": 5026,
           "estimatedVotesLow": 4112,
           "estimatedVotesMid": 4569,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Alexander",
         "id": 71496,
         "lastName": "Clark",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1502
       },
       {
         "elected": false,
@@ -4431,15 +4526,15 @@
           "estimatedVotesHigh": 5026,
           "estimatedVotesLow": 4112,
           "estimatedVotesMid": 4569,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.23,
+          "turnoutLow": 111.5,
+          "turnoutMid": 99
         },
         "firstName": "Larry",
         "id": 24533,
         "lastName": "Brewster",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3083
       }
     ],
     "district": "43",
@@ -4448,7 +4543,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:25:53.746Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4458,11 +4553,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4585,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4502,6 +4598,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4509,15 +4606,15 @@
           "estimatedVotesHigh": 5507,
           "estimatedVotesLow": 4505,
           "estimatedVotesMid": 5006,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Kassidy",
         "id": 71497,
         "lastName": "Olson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3293
       },
       {
         "elected": false,
@@ -4525,15 +4622,15 @@
           "estimatedVotesHigh": 5507,
           "estimatedVotesLow": 4505,
           "estimatedVotesMid": 5006,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Denise",
         "id": 24417,
         "lastName": "Baum",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1713
       }
     ],
     "district": "45",
@@ -4542,7 +4639,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:23:46.809Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4552,11 +4649,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5006,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4564,15 +4662,15 @@
           "estimatedVotesHigh": 5149,
           "estimatedVotesLow": 4213,
           "estimatedVotesMid": 4681,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.73,
+          "turnoutLow": 112.11,
+          "turnoutMid": 99
         },
         "firstName": "Emma",
         "id": 71498,
         "lastName": "Carpenter",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1971
       },
       {
         "elected": false,
@@ -4580,15 +4678,15 @@
           "estimatedVotesHigh": 5149,
           "estimatedVotesLow": 4213,
           "estimatedVotesMid": 4681,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.73,
+          "turnoutLow": 112.11,
+          "turnoutMid": 99
         },
         "firstName": "Starr",
         "id": 71499,
         "lastName": "Emery",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2752
       }
     ],
     "district": "46",
@@ -4597,7 +4695,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:30:32.013Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4607,11 +4705,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4723,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4619,15 +4718,15 @@
           "estimatedVotesHigh": 3900,
           "estimatedVotesLow": 3191,
           "estimatedVotesMid": 3545,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 24420,
         "lastName": "Reavis",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1976
       },
       {
         "elected": false,
@@ -4635,15 +4734,15 @@
           "estimatedVotesHigh": 3900,
           "estimatedVotesLow": 3191,
           "estimatedVotesMid": 3545,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.09,
+          "turnoutMid": 99
         },
         "firstName": "Stephanie",
         "id": 71501,
         "lastName": "Moncada",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1569
       }
     ],
     "district": "47",
@@ -4652,7 +4751,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:03:41.658Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4662,11 +4761,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3545,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4674,15 +4774,15 @@
           "estimatedVotesHigh": 4709,
           "estimatedVotesLow": 3853,
           "estimatedVotesMid": 4281,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Curtis",
         "id": 24545,
         "lastName": "Schomer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2024
       },
       {
         "elected": false,
@@ -4690,15 +4790,15 @@
           "estimatedVotesHigh": 4709,
           "estimatedVotesLow": 3853,
           "estimatedVotesMid": 4281,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Anne",
         "id": 71502,
         "lastName": "Ross",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2257
       }
     ],
     "district": "48",
@@ -4707,7 +4807,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:25:27.594Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4717,11 +4817,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4281,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4729,15 +4830,15 @@
           "estimatedVotesHigh": 5416,
           "estimatedVotesLow": 4432,
           "estimatedVotesMid": 4924,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 64,
+          "turnoutLow": 78.2,
+          "turnoutMid": 70.39
         },
         "firstName": "Rudolf",
         "id": 101426,
         "lastName": "Haden",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1782
       },
       {
         "elected": false,
@@ -4745,15 +4846,15 @@
           "estimatedVotesHigh": 5416,
           "estimatedVotesLow": 4432,
           "estimatedVotesMid": 4924,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 64,
+          "turnoutLow": 78.2,
+          "turnoutMid": 70.39
         },
         "firstName": "Sherry",
         "id": 24541,
         "lastName": "Essmann",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1684
       }
     ],
     "district": "49",
@@ -4762,7 +4863,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:31:24.695Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4772,11 +4873,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3466,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4784,15 +4886,15 @@
           "estimatedVotesHigh": 6109,
           "estimatedVotesLow": 4999,
           "estimatedVotesMid": 5554,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 83.58,
+          "turnoutLow": 102.14,
+          "turnoutMid": 91.93
         },
         "firstName": "Shawn",
         "id": 71504,
         "lastName": "Giesick",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2436
       },
       {
         "elected": false,
@@ -4800,15 +4902,15 @@
           "estimatedVotesHigh": 6109,
           "estimatedVotesLow": 4999,
           "estimatedVotesMid": 5554,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 83.58,
+          "turnoutLow": 102.14,
+          "turnoutMid": 91.93
         },
         "firstName": "Anthony",
         "id": 71503,
         "lastName": "Nicastro",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2670
       }
     ],
     "district": "50",
@@ -4817,7 +4919,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:15:06.673Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4827,11 +4929,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5106,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4839,15 +4942,15 @@
           "estimatedVotesHigh": 5900,
           "estimatedVotesLow": 4828,
           "estimatedVotesMid": 5364,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 52.61,
+          "turnoutLow": 64.29,
+          "turnoutMid": 57.87
         },
         "firstName": "Janna",
         "id": 101427,
         "lastName": "Hafer",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 103
       },
       {
         "elected": false,
@@ -4855,15 +4958,15 @@
           "estimatedVotesHigh": 5900,
           "estimatedVotesLow": 4828,
           "estimatedVotesMid": 5364,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 52.61,
+          "turnoutLow": 64.29,
+          "turnoutMid": 57.87
         },
         "firstName": "Jodee",
         "id": 24537,
         "lastName": "Etchart",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3001
       }
     ],
     "district": "51",
@@ -4872,7 +4975,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:16:50.298Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4882,11 +4985,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 3104,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4894,15 +4998,15 @@
           "estimatedVotesHigh": 6988,
           "estimatedVotesLow": 5718,
           "estimatedVotesMid": 6353,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 71.82,
+          "turnoutLow": 87.78,
+          "turnoutMid": 79
         },
         "firstName": "Bill",
         "id": 24535,
         "lastName": "Mercer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2901
       },
       {
         "elected": false,
@@ -4910,15 +5014,15 @@
           "estimatedVotesHigh": 6988,
           "estimatedVotesLow": 5718,
           "estimatedVotesMid": 6353,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 71.82,
+          "turnoutLow": 87.78,
+          "turnoutMid": 79
         },
         "firstName": "Carole",
         "id": 24422,
         "lastName": "Boerner",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2118
       }
     ],
     "district": "52",
@@ -4927,7 +5031,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:21.307Z",
+    "lastUpdated": "2024-10-25T20:23:46.809Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4937,11 +5041,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5019,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4949,15 +5054,15 @@
           "estimatedVotesHigh": 6666,
           "estimatedVotesLow": 5454,
           "estimatedVotesMid": 6060,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ellie",
         "id": 71506,
         "lastName": "Kerns",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1794
       },
       {
         "elected": false,
@@ -4965,15 +5070,15 @@
           "estimatedVotesHigh": 6666,
           "estimatedVotesLow": 5454,
           "estimatedVotesMid": 6060,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Nelly",
         "id": 24542,
         "lastName": "Nicol",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4266
       }
     ],
     "district": "53",
@@ -4982,7 +5087,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:26:23.083Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -4992,11 +5097,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6060,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5036,6 +5142,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5076,7 +5183,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5091,6 +5198,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5130,6 +5238,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5170,7 +5279,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:54.753Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5185,6 +5294,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5225,7 +5335,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5240,6 +5350,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5247,15 +5358,15 @@
           "estimatedVotesHigh": 7666,
           "estimatedVotesLow": 6272,
           "estimatedVotesMid": 6969,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.42,
+          "turnoutLow": 7.84,
+          "turnoutMid": 7.06
         },
         "firstName": "Marc",
         "id": 24552,
         "lastName": "Greendorfer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 200
       },
       {
         "elected": false,
@@ -5263,15 +5374,15 @@
           "estimatedVotesHigh": 7666,
           "estimatedVotesLow": 6272,
           "estimatedVotesMid": 6969,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.42,
+          "turnoutLow": 7.84,
+          "turnoutMid": 7.06
         },
         "firstName": "Ed",
         "id": 24429,
         "lastName": "Stafman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 292
       }
     ],
     "district": "59",
@@ -5280,7 +5391,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:48.027Z",
+    "lastUpdated": "2024-10-25T20:34:47.356Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5290,11 +5401,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 492,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5350,6 +5462,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5357,15 +5470,15 @@
           "estimatedVotesHigh": 3034,
           "estimatedVotesLow": 2482,
           "estimatedVotesMid": 2758,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Becky",
         "id": 71514,
         "lastName": "Edwards",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1714
       },
       {
         "elected": false,
@@ -5373,15 +5486,15 @@
           "estimatedVotesHigh": 3034,
           "estimatedVotesLow": 2482,
           "estimatedVotesMid": 2758,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Thomas",
         "id": 71515,
         "lastName": "Carlson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1044
       }
     ],
     "district": "61",
@@ -5390,7 +5503,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:07:05.893Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5400,11 +5513,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 2758,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5412,15 +5526,15 @@
           "estimatedVotesHigh": 5792,
           "estimatedVotesLow": 4739,
           "estimatedVotesMid": 5265,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.92,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Owen",
         "id": 71518,
         "lastName": "Lang",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1614
       },
       {
         "elected": false,
@@ -5428,15 +5542,15 @@
           "estimatedVotesHigh": 5792,
           "estimatedVotesLow": 4739,
           "estimatedVotesMid": 5265,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.92,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Joshua",
         "id": 71517,
         "lastName": "Seckinger",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3652
       }
     ],
     "district": "62",
@@ -5445,7 +5559,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:18:33.999Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5455,11 +5569,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5266,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5467,15 +5582,15 @@
           "estimatedVotesHigh": 6102,
           "estimatedVotesLow": 4992,
           "estimatedVotesMid": 5547,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 71522,
         "lastName": "Lewis",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2207
       },
       {
         "elected": false,
@@ -5483,15 +5598,15 @@
           "estimatedVotesHigh": 6102,
           "estimatedVotesLow": 4992,
           "estimatedVotesMid": 5547,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Peter",
         "id": 71519,
         "lastName": "Strand",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3340
       }
     ],
     "district": "63",
@@ -5500,7 +5615,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:28:49.521Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5510,11 +5625,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5547,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5522,15 +5638,15 @@
           "estimatedVotesHigh": 5755,
           "estimatedVotesLow": 4709,
           "estimatedVotesMid": 5232,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jolene",
         "id": 71523,
         "lastName": "Crum",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2825
       },
       {
         "elected": false,
@@ -5538,15 +5654,15 @@
           "estimatedVotesHigh": 5755,
           "estimatedVotesLow": 4709,
           "estimatedVotesMid": 5232,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Kelly",
         "id": 24433,
         "lastName": "Kortum",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2407
       }
     ],
     "district": "64",
@@ -5555,7 +5671,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:13:22.040Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5565,11 +5681,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5232,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5577,15 +5694,15 @@
           "estimatedVotesHigh": 6786,
           "estimatedVotesLow": 5552,
           "estimatedVotesMid": 6169,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.78,
+          "turnoutLow": 112.18,
+          "turnoutMid": 99
         },
         "firstName": "Esther",
         "id": 71526,
         "lastName": "Fishbaugh",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2317
       },
       {
         "elected": false,
@@ -5593,15 +5710,15 @@
           "estimatedVotesHigh": 6786,
           "estimatedVotesLow": 5552,
           "estimatedVotesMid": 6169,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.78,
+          "turnoutLow": 112.18,
+          "turnoutMid": 99
         },
         "firstName": "Brian",
         "id": 71525,
         "lastName": "Close",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3911
       }
     ],
     "district": "65",
@@ -5610,7 +5727,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:27:09.440Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5620,11 +5737,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6228,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5632,15 +5750,15 @@
           "estimatedVotesHigh": 7418,
           "estimatedVotesLow": 6070,
           "estimatedVotesMid": 6744,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 97.61,
+          "turnoutLow": 119.29,
+          "turnoutMid": 99
         },
         "firstName": "Marla",
         "id": 71527,
         "lastName": "Davis",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2404
       },
       {
         "elected": false,
@@ -5648,15 +5766,15 @@
           "estimatedVotesHigh": 7418,
           "estimatedVotesLow": 6070,
           "estimatedVotesMid": 6744,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 97.61,
+          "turnoutLow": 119.29,
+          "turnoutMid": 99
         },
         "firstName": "Eric",
         "id": 24434,
         "lastName": "Matthews",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4837
       }
     ],
     "district": "66",
@@ -5665,7 +5783,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:25:27.594Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5675,11 +5793,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 7241,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5687,15 +5806,15 @@
           "estimatedVotesHigh": 6004,
           "estimatedVotesLow": 4912,
           "estimatedVotesMid": 5458,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Jedediah",
         "id": 24557,
         "lastName": "Hinkle",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3202
       },
       {
         "elected": false,
@@ -5703,15 +5822,15 @@
           "estimatedVotesHigh": 6004,
           "estimatedVotesLow": 4912,
           "estimatedVotesMid": 5458,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Carl",
         "id": 46122,
         "lastName": "Anderson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2256
       }
     ],
     "district": "67",
@@ -5720,7 +5839,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:12:10.070Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5730,11 +5849,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5458,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5742,15 +5862,15 @@
           "estimatedVotesHigh": 6035,
           "estimatedVotesLow": 4937,
           "estimatedVotesMid": 5486,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 111.38,
+          "turnoutLow": 136.16,
+          "turnoutMid": 99
         },
         "firstName": "Alexander",
         "id": 71529,
         "lastName": "Colafrancesco",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3202
       },
       {
         "elected": false,
@@ -5758,15 +5878,15 @@
           "estimatedVotesHigh": 6035,
           "estimatedVotesLow": 4937,
           "estimatedVotesMid": 5486,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 111.38,
+          "turnoutLow": 136.16,
+          "turnoutMid": 99
         },
         "firstName": "Caleb",
         "id": 24558,
         "lastName": "Hinkle",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3520
       }
     ],
     "district": "68",
@@ -5775,7 +5895,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:07:05.893Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5785,11 +5905,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6722,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5829,6 +5950,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5868,6 +5990,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5875,15 +5998,15 @@
           "estimatedVotesHigh": 5690,
           "estimatedVotesLow": 4655,
           "estimatedVotesMid": 5172,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 14.24,
+          "turnoutLow": 17.4,
+          "turnoutMid": 15.66
         },
         "firstName": "Scott",
         "id": 71534,
         "lastName": "Demarois",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 398
       },
       {
         "elected": false,
@@ -5891,15 +6014,15 @@
           "estimatedVotesHigh": 5690,
           "estimatedVotesLow": 4655,
           "estimatedVotesMid": 5172,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 14.24,
+          "turnoutLow": 17.4,
+          "turnoutMid": 15.66
         },
         "firstName": "H",
         "id": 71533,
         "lastName": "Steiger",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 412
       }
     ],
     "district": "71",
@@ -5908,7 +6031,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5918,11 +6041,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 810,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5930,15 +6054,15 @@
           "estimatedVotesHigh": 5217,
           "estimatedVotesLow": 4269,
           "estimatedVotesMid": 4743,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 14.82,
+          "turnoutLow": 18.11,
+          "turnoutMid": 16.3
         },
         "firstName": "Donavon",
         "id": 24443,
         "lastName": "Hawk",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 302
       },
       {
         "elected": false,
@@ -5946,15 +6070,15 @@
           "estimatedVotesHigh": 5217,
           "estimatedVotesLow": 4269,
           "estimatedVotesMid": 4743,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 14.82,
+          "turnoutLow": 18.11,
+          "turnoutMid": 16.3
         },
         "firstName": "Andy",
         "id": 71535,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 471
       }
     ],
     "district": "72",
@@ -5963,7 +6087,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:10.846Z",
+    "lastUpdated": "2024-10-25T20:29:40.526Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -5973,11 +6097,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 773,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -5985,15 +6110,15 @@
           "estimatedVotesHigh": 5060,
           "estimatedVotesLow": 4140,
           "estimatedVotesMid": 4600,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.44,
+          "turnoutLow": 111.76,
+          "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 48242,
         "lastName": "Lynch",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2654
       },
       {
         "elected": false,
@@ -6001,15 +6126,15 @@
           "estimatedVotesHigh": 5060,
           "estimatedVotesLow": 4140,
           "estimatedVotesMid": 4600,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.44,
+          "turnoutLow": 111.76,
+          "turnoutMid": 99
         },
         "firstName": "Zach",
         "id": 71536,
         "lastName": "Tomaszewski",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1973
       }
     ],
     "district": "73",
@@ -6018,7 +6143,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:12:08.964Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6028,11 +6153,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4627,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6040,15 +6166,15 @@
           "estimatedVotesHigh": 6703,
           "estimatedVotesLow": 5485,
           "estimatedVotesMid": 6094,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 86.35,
+          "turnoutLow": 105.52,
+          "turnoutMid": 94.98
         },
         "firstName": "Trenin",
         "id": 71538,
         "lastName": "Bayless",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2627
       },
       {
         "elected": false,
@@ -6056,15 +6182,15 @@
           "estimatedVotesHigh": 6703,
           "estimatedVotesLow": 5485,
           "estimatedVotesMid": 6094,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 86.35,
+          "turnoutLow": 105.52,
+          "turnoutMid": 94.98
         },
         "firstName": "Marc",
         "id": 71537,
         "lastName": "Lee",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3161
       }
     ],
     "district": "74",
@@ -6073,7 +6199,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:07:05.893Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6083,11 +6209,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5788,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6095,15 +6222,15 @@
           "estimatedVotesHigh": 7567,
           "estimatedVotesLow": 6191,
           "estimatedVotesMid": 6879,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Marta",
         "id": 24566,
         "lastName": "Bertoglio",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4528
       },
       {
         "elected": false,
@@ -6111,15 +6238,15 @@
           "estimatedVotesHigh": 7567,
           "estimatedVotesLow": 6191,
           "estimatedVotesMid": 6879,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Nancy",
         "id": 71539,
         "lastName": "Lien",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2351
       }
     ],
     "district": "75",
@@ -6128,7 +6255,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:14.794Z",
+    "lastUpdated": "2024-10-25T20:07:05.893Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6138,11 +6265,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6879,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6183,7 +6311,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:46:09.639Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6198,6 +6326,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6238,7 +6367,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:46:09.639Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6253,6 +6382,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6293,7 +6423,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:09.639Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6308,6 +6438,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6315,15 +6446,15 @@
           "estimatedVotesHigh": 7183,
           "estimatedVotesLow": 5877,
           "estimatedVotesMid": 6530,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 85.24,
+          "turnoutLow": 104.19,
+          "turnoutMid": 93.77
         },
         "firstName": "Jill",
         "id": 24575,
         "lastName": "Sark",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2622
       },
       {
         "elected": false,
@@ -6331,15 +6462,15 @@
           "estimatedVotesHigh": 7183,
           "estimatedVotesLow": 5877,
           "estimatedVotesMid": 6530,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 85.24,
+          "turnoutLow": 104.19,
+          "turnoutMid": 93.77
         },
         "firstName": "Luke",
         "id": 71545,
         "lastName": "Muszkiewicz",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3501
       }
     ],
     "district": "79",
@@ -6348,7 +6479,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:08:06.647Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6358,11 +6489,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6123,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6370,15 +6502,15 @@
           "estimatedVotesHigh": 5723,
           "estimatedVotesLow": 4683,
           "estimatedVotesMid": 5203,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Rachel",
         "id": 71547,
         "lastName": "Burright",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3563
       },
       {
         "elected": false,
@@ -6386,15 +6518,15 @@
           "estimatedVotesHigh": 5723,
           "estimatedVotesLow": 4683,
           "estimatedVotesMid": 5203,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.1,
+          "turnoutMid": 99
         },
         "firstName": "Melissa",
         "id": 24446,
         "lastName": "Romano",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1640
       }
     ],
     "district": "80",
@@ -6403,7 +6535,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6413,11 +6545,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5203,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6425,15 +6558,15 @@
           "estimatedVotesHigh": 6607,
           "estimatedVotesLow": 5405,
           "estimatedVotesMid": 6006,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Dustin",
         "id": 71548,
         "lastName": "Scott",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2733
       },
       {
         "elected": false,
@@ -6441,15 +6574,15 @@
           "estimatedVotesHigh": 6607,
           "estimatedVotesLow": 5405,
           "estimatedVotesMid": 6006,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Mary",
         "id": 24449,
         "lastName": "Caferro",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3273
       }
     ],
     "district": "81",
@@ -6458,7 +6591,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6468,11 +6601,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6006,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6480,15 +6614,15 @@
           "estimatedVotesHigh": 6094,
           "estimatedVotesLow": 4986,
           "estimatedVotesMid": 5540,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 97.01,
+          "turnoutLow": 118.57,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 71550,
         "lastName": "Looney Sr.",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2639
       },
       {
         "elected": false,
@@ -6496,15 +6630,15 @@
           "estimatedVotesHigh": 6094,
           "estimatedVotesLow": 4986,
           "estimatedVotesMid": 5540,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 97.01,
+          "turnoutLow": 118.57,
+          "turnoutMid": 99
         },
         "firstName": "Pete",
         "id": 71551,
         "lastName": "Elverum",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3273
       }
     ],
     "district": "82",
@@ -6513,7 +6647,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6523,11 +6657,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5912,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6535,15 +6670,15 @@
           "estimatedVotesHigh": 6402,
           "estimatedVotesLow": 5238,
           "estimatedVotesMid": 5820,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.85,
+          "turnoutLow": 112.26,
+          "turnoutMid": 99
         },
         "firstName": "Jill",
         "id": 24452,
         "lastName": "Cohenour",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3219
       },
       {
         "elected": false,
@@ -6551,15 +6686,15 @@
           "estimatedVotesHigh": 6402,
           "estimatedVotesLow": 5238,
           "estimatedVotesMid": 5820,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.85,
+          "turnoutLow": 112.26,
+          "turnoutMid": 99
         },
         "firstName": "Wes",
         "id": 71553,
         "lastName": "Feist",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2661
       }
     ],
     "district": "83",
@@ -6568,7 +6703,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6578,11 +6713,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5880,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6590,15 +6726,15 @@
           "estimatedVotesHigh": 7141,
           "estimatedVotesLow": 5843,
           "estimatedVotesMid": 6492,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Julie",
         "id": 24561,
         "lastName": "Dooling",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3260
       },
       {
         "elected": false,
@@ -6606,15 +6742,15 @@
           "estimatedVotesHigh": 7141,
           "estimatedVotesLow": 5843,
           "estimatedVotesMid": 6492,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Michele",
         "id": 71554,
         "lastName": "Crepeau",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3232
       }
     ],
     "district": "84",
@@ -6623,7 +6759,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:46:01.309Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6633,11 +6769,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6492,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6645,15 +6782,15 @@
           "estimatedVotesHigh": 7149,
           "estimatedVotesLow": 5849,
           "estimatedVotesMid": 6499,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Laura",
-        "id": 71557,
-        "lastName": "Jackson",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Kathy",
+        "id": 71556,
+        "lastName": "Love",
+        "partyName": "Republican",
+        "votes": 4873
       },
       {
         "elected": false,
@@ -6661,15 +6798,15 @@
           "estimatedVotesHigh": 7149,
           "estimatedVotesLow": 5849,
           "estimatedVotesMid": 6499,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
-        "firstName": "Kathy",
-        "id": 71556,
-        "lastName": "Love",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Laura",
+        "id": 71557,
+        "lastName": "Jackson",
+        "partyName": "Democratic",
+        "votes": 1626
       }
     ],
     "district": "85",
@@ -6678,7 +6815,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:26:23.083Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6688,11 +6825,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6499,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6700,15 +6838,15 @@
           "estimatedVotesHigh": 6588,
           "estimatedVotesLow": 5390,
           "estimatedVotesMid": 5989,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jeff",
         "id": 71559,
         "lastName": "Kempka",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2378
       },
       {
         "elected": false,
@@ -6716,15 +6854,15 @@
           "estimatedVotesHigh": 6588,
           "estimatedVotesLow": 5390,
           "estimatedVotesMid": 5989,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 24582,
         "lastName": "Bedey",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3611
       }
     ],
     "district": "86",
@@ -6733,7 +6871,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T17:45:37.737Z",
+    "lastUpdated": "2024-10-25T20:17:42.466Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6743,11 +6881,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5989,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6755,15 +6894,15 @@
           "estimatedVotesHigh": 7251,
           "estimatedVotesLow": 5933,
           "estimatedVotesMid": 6592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ron",
         "id": 24584,
         "lastName": "Marshall",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4775
       },
       {
         "elected": false,
@@ -6771,15 +6910,15 @@
           "estimatedVotesHigh": 7251,
           "estimatedVotesLow": 5933,
           "estimatedVotesMid": 6592,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tammie",
         "id": 71561,
         "lastName": "Milligan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1817
       }
     ],
     "district": "87",
@@ -6788,7 +6927,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:01.746Z",
+    "lastUpdated": "2024-10-25T20:07:05.893Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6798,11 +6937,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6592,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6810,15 +6950,15 @@
           "estimatedVotesHigh": 7181,
           "estimatedVotesLow": 5875,
           "estimatedVotesMid": 6528,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Evan",
         "id": 71564,
         "lastName": "Schroedel",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2173
       },
       {
         "elected": false,
@@ -6826,15 +6966,15 @@
           "estimatedVotesHigh": 7181,
           "estimatedVotesLow": 5875,
           "estimatedVotesMid": 6528,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Greg",
         "id": 71562,
         "lastName": "Overstreet",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 4355
       }
     ],
     "district": "88",
@@ -6843,7 +6983,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:15:06.673Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6853,11 +6993,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6528,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6865,15 +7006,15 @@
           "estimatedVotesHigh": 6745,
           "estimatedVotesLow": 5519,
           "estimatedVotesMid": 6132,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
+          "turnoutMid": 99
         },
         "firstName": "Lyn",
         "id": 24596,
         "lastName": "Hellegaard",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2506
       },
       {
         "elected": false,
@@ -6881,15 +7022,15 @@
           "estimatedVotesHigh": 6745,
           "estimatedVotesLow": 5519,
           "estimatedVotesMid": 6132,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.46,
+          "turnoutLow": 111.78,
+          "turnoutMid": 99
         },
         "firstName": "Mark",
         "id": 24469,
         "lastName": "Thane",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3663
       }
     ],
     "district": "89",
@@ -6898,7 +7039,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:10:32.955Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -6908,11 +7049,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6169,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6952,6 +7094,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -6959,15 +7102,15 @@
           "estimatedVotesHigh": 6056,
           "estimatedVotesLow": 4955,
           "estimatedVotesMid": 5505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 30.6,
+          "turnoutLow": 37.4,
+          "turnoutMid": 33.66
         },
         "firstName": "David",
         "id": 101429,
         "lastName": "Passieri",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 319
       },
       {
         "elected": false,
@@ -6975,15 +7118,15 @@
           "estimatedVotesHigh": 6056,
           "estimatedVotesLow": 4955,
           "estimatedVotesMid": 5505,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 30.6,
+          "turnoutLow": 37.4,
+          "turnoutMid": 33.66
         },
         "firstName": "Shelly",
         "id": 71567,
         "lastName": "Fyant",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1534
       }
     ],
     "district": "91",
@@ -6992,7 +7135,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:25:27.594Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7002,11 +7145,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 1853,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7014,15 +7158,15 @@
           "estimatedVotesHigh": 6571,
           "estimatedVotesLow": 5377,
           "estimatedVotesMid": 5974,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.33,
+          "turnoutLow": 111.6,
+          "turnoutMid": 99
         },
         "firstName": "Connie",
         "id": 24459,
         "lastName": "Keogh",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2647
       },
       {
         "elected": false,
@@ -7030,15 +7174,15 @@
           "estimatedVotesHigh": 6571,
           "estimatedVotesLow": 5377,
           "estimatedVotesMid": 5974,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.33,
+          "turnoutLow": 111.6,
+          "turnoutMid": 99
         },
         "firstName": "Ted",
         "id": 71568,
         "lastName": "Morgan",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3354
       }
     ],
     "district": "92",
@@ -7047,7 +7191,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:03:41.658Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7057,11 +7201,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6001,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7117,6 +7262,7 @@
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7124,15 +7270,15 @@
           "estimatedVotesHigh": 7137,
           "estimatedVotesLow": 5839,
           "estimatedVotesMid": 6488,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Marilyn",
         "id": 24458,
         "lastName": "Marler",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3539
       },
       {
         "elected": false,
@@ -7140,15 +7286,15 @@
           "estimatedVotesHigh": 7137,
           "estimatedVotesLow": 5839,
           "estimatedVotesMid": 6488,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Adam",
         "id": 101430,
         "lastName": "Henson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2949
       }
     ],
     "district": "94",
@@ -7157,7 +7303,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:25:27.594Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7167,11 +7313,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 6488,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7179,15 +7326,15 @@
           "estimatedVotesHigh": 5815,
           "estimatedVotesLow": 4757,
           "estimatedVotesMid": 5286,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Barbara",
         "id": 71571,
         "lastName": "Starmer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1437
       },
       {
         "elected": false,
@@ -7195,15 +7342,15 @@
           "estimatedVotesHigh": 5815,
           "estimatedVotesLow": 4757,
           "estimatedVotesMid": 5286,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Zooey",
         "id": 24471,
         "lastName": "Zephyr",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3849
       }
     ],
     "district": "95",
@@ -7212,7 +7359,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:18:33.999Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7222,11 +7369,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5286,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7234,15 +7382,15 @@
           "estimatedVotesHigh": 6384,
           "estimatedVotesLow": 5224,
           "estimatedVotesMid": 5804,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.45,
+          "turnoutLow": 111.75,
+          "turnoutMid": 99
         },
         "firstName": "Robert",
         "id": 71572,
         "lastName": "Labair",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2866
       },
       {
         "elected": false,
@@ -7250,15 +7398,15 @@
           "estimatedVotesHigh": 6384,
           "estimatedVotesLow": 5224,
           "estimatedVotesMid": 5804,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.45,
+          "turnoutLow": 111.75,
+          "turnoutMid": 99
         },
         "firstName": "Bob",
         "id": 24467,
         "lastName": "Carter",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2972
       }
     ],
     "district": "96",
@@ -7267,7 +7415,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:25:27.594Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7277,11 +7425,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5838,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7289,15 +7438,15 @@
           "estimatedVotesHigh": 6156,
           "estimatedVotesLow": 5036,
           "estimatedVotesMid": 5596,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Melody",
         "id": 71573,
         "lastName": "Cunningham",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 2437
       },
       {
         "elected": false,
@@ -7305,15 +7454,15 @@
           "estimatedVotesHigh": 6156,
           "estimatedVotesLow": 5036,
           "estimatedVotesMid": 5596,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Nick",
         "id": 24386,
         "lastName": "Knowles",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 3045
       },
       {
         "elected": false,
@@ -7321,15 +7470,15 @@
           "estimatedVotesHigh": 6156,
           "estimatedVotesLow": 5036,
           "estimatedVotesMid": 5596,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.9,
+          "turnoutLow": 111.12,
+          "turnoutMid": 99
         },
         "firstName": "Richard",
         "id": 45859,
         "lastName": "Armerding",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 114
       }
     ],
     "district": "97",
@@ -7338,7 +7487,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:05:23.185Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7348,11 +7497,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5596,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7360,15 +7510,15 @@
           "estimatedVotesHigh": 5623,
           "estimatedVotesLow": 4601,
           "estimatedVotesMid": 5112,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jonathan",
         "id": 24464,
         "lastName": "Karlen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3257
       },
       {
         "elected": false,
@@ -7376,15 +7526,15 @@
           "estimatedVotesHigh": 5623,
           "estimatedVotesLow": 4601,
           "estimatedVotesMid": 5112,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Jace",
         "id": 71575,
         "lastName": "Beard",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1855
       }
     ],
     "district": "98",
@@ -7393,7 +7543,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:30:32.013Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7403,11 +7553,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5112,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7415,15 +7566,15 @@
           "estimatedVotesHigh": 6293,
           "estimatedVotesLow": 5149,
           "estimatedVotesMid": 5721,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Tom",
         "id": 24462,
         "lastName": "France",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3398
       },
       {
         "elected": false,
@@ -7431,15 +7582,15 @@
           "estimatedVotesHigh": 6293,
           "estimatedVotesLow": 5149,
           "estimatedVotesMid": 5721,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Ryan",
         "id": 24598,
         "lastName": "Darling",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 2323
       }
     ],
     "district": "99",
@@ -7448,7 +7599,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:07:34.247Z",
+    "lastUpdated": "2024-10-25T20:16:50.298Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7458,11 +7609,12 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 5721,
     "year": 2024
   },
   {
     "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -7470,15 +7622,15 @@
           "estimatedVotesHigh": 5246,
           "estimatedVotesLow": 4292,
           "estimatedVotesMid": 4769,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.61,
+          "turnoutLow": 111.98,
+          "turnoutMid": 99
         },
         "firstName": "Christopher",
         "id": 71577,
         "lastName": "Buckles",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 837
       },
       {
         "elected": false,
@@ -7486,15 +7638,15 @@
           "estimatedVotesHigh": 5246,
           "estimatedVotesLow": 4292,
           "estimatedVotesMid": 4769,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.61,
+          "turnoutLow": 111.98,
+          "turnoutMid": 99
         },
         "firstName": "SJ",
         "id": 24463,
         "lastName": "Howell",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3969
       }
     ],
     "district": "100",
@@ -7503,7 +7655,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T18:06:30.087Z",
+    "lastUpdated": "2024-10-25T20:34:47.356Z",
     "office": {
       "officeId": "9",
       "officeName": "State House",
@@ -7513,7 +7665,7 @@
     "raceDate": "2024-11-05",
     "state": "MT",
     "stateName": "Montana",
-    "totalVotes": 0,
+    "totalVotes": 4806,
     "year": 2024
   }
 ]
