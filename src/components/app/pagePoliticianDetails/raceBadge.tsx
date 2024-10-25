@@ -11,16 +11,12 @@ import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usState
 export function RaceBadge({
   person,
   locale,
+  runningRole,
 }: {
   person: DTSIPersonDetails
   locale: SupportedLocale
+  runningRole?: DTSIPersonDetails['roles'][0]
 }) {
-  const runningRole = person.roles.find(
-    role =>
-      role.status === DTSI_PersonRoleStatus.RUNNING_FOR &&
-      (!role.group || role.group.groupInstance === '119'),
-  )
-
   if (!runningRole) {
     return null
   }

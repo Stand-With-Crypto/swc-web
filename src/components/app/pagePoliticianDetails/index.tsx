@@ -3,6 +3,7 @@ import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
+import { PACFooter } from '@/components/app/pacFooter'
 import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
 import { Button } from '@/components/ui/button'
@@ -11,7 +12,7 @@ import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
+import { DTSI_PersonRoleStatus, DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { SupportedLocale } from '@/intl/locales'
 import {
@@ -45,11 +46,16 @@ export function PagePoliticianDetails({
     x => (x.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP ? 0 : 1),
     x => -1 * new Date(x.dateStanceMade).getTime(),
   ])
+  const runningRole = person.roles.find(
+    role =>
+      role.status === DTSI_PersonRoleStatus.RUNNING_FOR &&
+      (!role.group || role.group.groupInstance === '119'),
+  )
 
   return (
     <div className="standard-spacing-from-navbar container max-w-3xl">
       <section>
-        <RaceBadge locale={locale} person={person} />
+        <RaceBadge locale={locale} person={person} runningRole={runningRole} />
         {person.profilePictureUrl ? (
           <div
             className="mx-auto mb-6 overflow-hidden rounded-xl"
@@ -148,6 +154,12 @@ export function PagePoliticianDetails({
           ))}
         </div>
       </section>
+
+      {runningRole && (
+        <section>
+          <PACFooter />
+        </section>
+      )}
     </div>
   )
 }
