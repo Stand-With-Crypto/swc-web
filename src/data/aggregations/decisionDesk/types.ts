@@ -21,7 +21,7 @@ export interface CongressDataResponse {
   office: (typeof OFFICES)[0] | null
   year: number
   candidatesWithVotes: (CandidatesWithVote & {
-    dtsiData: DTSI_AllPeopleQuery['people'][number] | null
+    dtsiData?: DTSI_AllPeopleQuery['people'][number] | null
   })[]
 }
 
