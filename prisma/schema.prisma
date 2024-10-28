@@ -309,6 +309,7 @@ model UserAction {
   @@index([datetimeCreated])
   @@index([userId, nftMintId])
   @@index([userId, actionType, campaignName])
+  @@index([actionType, userId])
   @@index([actionType, campaignName])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
