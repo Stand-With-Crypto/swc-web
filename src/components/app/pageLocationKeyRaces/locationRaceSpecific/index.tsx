@@ -57,7 +57,7 @@ export function LocationRaceSpecific({
   )
 
   return (
-    <div>
+    <div className="space-y-20 xl:space-y-28">
       <DarkHeroSection className="text-center">
         <h2 className={'mb-4'}>
           <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
@@ -164,7 +164,7 @@ export function LocationRaceSpecific({
       </div>
 
       <PACFooter className="container text-center" />
-      <DDHQFooter />
+      <DDHQFooter className="container text-center" />
     </div>
   )
 }

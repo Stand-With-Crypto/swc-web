@@ -199,7 +199,7 @@ export function LocationUnitedStatesLiveResults({
         </ContentSection>
 
         <PACFooter className="container text-center" />
-        <DDHQFooter />
+        <DDHQFooter className="container text-center" />
       </div>
     </div>
   )

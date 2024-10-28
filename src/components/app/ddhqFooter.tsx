@@ -3,7 +3,7 @@ import { cn } from '@/utils/web/cn'
 
 export function DDHQFooter({ className }: { className?: string }) {
   return (
-    <div className={cn('mx-auto max-w-3xl text-center', className)}>
+    <div className={cn('relative top-20 mx-auto max-w-3xl', className)}>
       <p>Election data sourced from</p>
       <NextImage
         alt="Decision Desk HQ"

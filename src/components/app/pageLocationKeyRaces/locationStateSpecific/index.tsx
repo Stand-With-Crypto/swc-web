@@ -174,7 +174,7 @@ export function LocationStateSpecific({
           There's no election data for {stateName}
         </PageTitle>
       ) : (
-        <div className="mt-20 space-y-20">
+        <div className="space-y-20 xl:space-y-28">
           {hasCriticalElections ? (
             <ContentSection
               subtitle="These elections are critical to the future of crypto in America. View live updates below."
@@ -287,7 +287,7 @@ export function LocationStateSpecific({
           )}
 
           <PACFooter className="container text-center" />
-          <DDHQFooter />
+          <DDHQFooter className="container text-center" />
         </div>
       )}
     </div>
