@@ -1,51 +1,22 @@
 [
   {
-    "calledCandidate": {
-      "firstName": "Kamala",
-      "id": 988,
-      "incumbent": false,
-      "lastName": "Harris",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 304553,
-          "estimatedVotesLow": 249178,
-          "estimatedVotesMid": 276865,
-          "turnoutHigh": 89.59,
-          "turnoutLow": 109.5,
-          "turnoutMid": 98.55
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 228648
-      },
       {
         "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 304553,
           "estimatedVotesLow": 249178,
           "estimatedVotesMid": 276865,
-          "turnoutHigh": 89.59,
-          "turnoutLow": 109.5,
-          "turnoutMid": 98.55
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
         "votes": 0
       },
       {
@@ -54,15 +25,31 @@
           "estimatedVotesHigh": 304553,
           "estimatedVotesLow": 249178,
           "estimatedVotesMid": 276865,
-          "turnoutHigh": 89.59,
-          "turnoutLow": 109.5,
-          "turnoutMid": 98.55
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 44198
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 304553,
+          "estimatedVotesLow": 249178,
+          "estimatedVotesMid": 276865,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
       }
     ],
     "district": "",
@@ -70,8 +57,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:31:02.520Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -81,7 +68,7 @@
     "raceDate": "2024-11-05",
     "state": "DC",
     "stateName": "District of Columbia",
-    "totalVotes": 272846,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

@@ -1,20 +1,7 @@
 [
   {
-    "calledCandidate": {
-      "firstName": "Diana",
-      "id": 326,
-      "incumbent": true,
-      "lastName": "DeGette",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Diana",
-        "id": 326,
-        "lastName": "DeGette",
-        "partyName": "Democratic"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -22,31 +9,15 @@
           "estimatedVotesHigh": 341119,
           "estimatedVotesLow": 279097,
           "estimatedVotesMid": 310108,
-          "turnoutHigh": 91.64,
-          "turnoutLow": 112,
-          "turnoutMid": 99
-        },
-        "firstName": "Valdamar",
-        "id": 76770,
-        "lastName": "Archuleta",
-        "partyName": "Republican",
-        "votes": 56463
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 341119,
-          "estimatedVotesLow": 279097,
-          "estimatedVotesMid": 310108,
-          "turnoutHigh": 91.64,
-          "turnoutLow": 112,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Critter",
         "id": 48171,
         "lastName": "Milton",
         "partyName": "Unity Party of Colorado",
-        "votes": 5630
+        "votes": 0
       },
       {
         "elected": false,
@@ -54,31 +25,47 @@
           "estimatedVotesHigh": 341119,
           "estimatedVotesLow": 279097,
           "estimatedVotesMid": 310108,
-          "turnoutHigh": 91.64,
-          "turnoutLow": 112,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Valdamar",
+        "id": 76770,
+        "lastName": "Archuleta",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 341119,
+          "estimatedVotesLow": 279097,
+          "estimatedVotesMid": 310108,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 102115,
         "lastName": "Lutz",
         "partyName": "Approval Voting Party",
-        "votes": 6195
+        "votes": 0
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 341119,
           "estimatedVotesLow": 279097,
           "estimatedVotesMid": 310108,
-          "turnoutHigh": 91.64,
-          "turnoutLow": 112,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Diana",
         "id": 326,
         "lastName": "DeGette",
         "partyName": "Democratic",
-        "votes": 244307
+        "votes": 0
       }
     ],
     "district": "1",
@@ -86,8 +73,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -97,25 +84,12 @@
     "raceDate": "2024-11-05",
     "state": "CO",
     "stateName": "Colorado",
-    "totalVotes": 312595,
+    "totalVotes": 0,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Joe",
-      "id": 10008,
-      "incumbent": true,
-      "lastName": "Neguse",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Joe",
-        "id": 10008,
-        "lastName": "Neguse",
-        "partyName": "Democratic"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -123,63 +97,15 @@
           "estimatedVotesHigh": 408300,
           "estimatedVotesLow": 334066,
           "estimatedVotesMid": 371183,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.15,
-          "turnoutMid": 99
-        },
-        "firstName": "Marshall",
-        "id": 24680,
-        "lastName": "Dawson",
-        "partyName": "Republican",
-        "votes": 102260
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 408300,
-          "estimatedVotesLow": 334066,
-          "estimatedVotesMid": 371183,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.15,
-          "turnoutMid": 99
-        },
-        "firstName": "Joe",
-        "id": 10008,
-        "lastName": "Neguse",
-        "partyName": "Democratic",
-        "votes": 248314
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 408300,
-          "estimatedVotesLow": 334066,
-          "estimatedVotesMid": 371183,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.15,
-          "turnoutMid": 99
-        },
-        "firstName": "Gaylon",
-        "id": 1903,
-        "lastName": "Kent",
-        "partyName": "Libertarian",
-        "votes": 6930
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 408300,
-          "estimatedVotesLow": 334066,
-          "estimatedVotesMid": 371183,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.15,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jan",
         "id": 48237,
         "lastName": "Kok",
         "partyName": "Approval Voting Party",
-        "votes": 6627
+        "votes": 0
       },
       {
         "elected": false,
@@ -187,15 +113,63 @@
           "estimatedVotesHigh": 408300,
           "estimatedVotesLow": 334066,
           "estimatedVotesMid": 371183,
-          "turnoutHigh": 90.94,
-          "turnoutLow": 111.15,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cynthia",
         "id": 102118,
         "lastName": "Sirianni",
         "partyName": "Unity Party of Colorado",
-        "votes": 7178
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 408300,
+          "estimatedVotesLow": 334066,
+          "estimatedVotesMid": 371183,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Gaylon",
+        "id": 1903,
+        "lastName": "Kent",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 408300,
+          "estimatedVotesLow": 334066,
+          "estimatedVotesMid": 371183,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Marshall",
+        "id": 24680,
+        "lastName": "Dawson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 408300,
+          "estimatedVotesLow": 334066,
+          "estimatedVotesMid": 371183,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joe",
+        "id": 10008,
+        "lastName": "Neguse",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "2",
@@ -203,8 +177,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -214,7 +188,7 @@
     "raceDate": "2024-11-05",
     "state": "CO",
     "stateName": "Colorado",
-    "totalVotes": 371309,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -227,63 +201,63 @@
           "estimatedVotesHigh": 402593,
           "estimatedVotesLow": 329394,
           "estimatedVotesMid": 365993,
-          "turnoutHigh": 88.92,
-          "turnoutLow": 108.68,
-          "turnoutMid": 97.81
-        },
-        "firstName": "James",
-        "id": 102119,
-        "lastName": "Wiley",
-        "partyName": "Libertarian",
-        "votes": 6890
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 402593,
-          "estimatedVotesLow": 329394,
-          "estimatedVotesMid": 365993,
-          "turnoutHigh": 88.92,
-          "turnoutLow": 108.68,
-          "turnoutMid": 97.81
-        },
-        "firstName": "Adam",
-        "id": 102120,
-        "lastName": "Withrow",
-        "partyName": "Unity Party of Colorado",
-        "votes": 6849
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 402593,
-          "estimatedVotesLow": 329394,
-          "estimatedVotesMid": 365993,
-          "turnoutHigh": 88.92,
-          "turnoutLow": 108.68,
-          "turnoutMid": 97.81
-        },
-        "firstName": "Jeff",
-        "id": 76774,
-        "lastName": "Hurd",
-        "partyName": "Republican",
-        "votes": 184265
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 402593,
-          "estimatedVotesLow": 329394,
-          "estimatedVotesMid": 365993,
-          "turnoutHigh": 88.92,
-          "turnoutLow": 108.68,
-          "turnoutMid": 97.81
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adam",
         "id": 24671,
         "lastName": "Frisch",
         "partyName": "Democratic",
-        "votes": 159969
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 402593,
+          "estimatedVotesLow": 329394,
+          "estimatedVotesMid": 365993,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jeff",
+        "id": 76774,
+        "lastName": "Hurd",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 402593,
+          "estimatedVotesLow": 329394,
+          "estimatedVotesMid": 365993,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Adam",
+        "id": 102120,
+        "lastName": "Withrow",
+        "partyName": "Unity Party of Colorado",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 402593,
+          "estimatedVotesLow": 329394,
+          "estimatedVotesMid": 365993,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "James",
+        "id": 102119,
+        "lastName": "Wiley",
+        "partyName": "Libertarian",
+        "votes": 0
       }
     ],
     "district": "3",
@@ -292,7 +266,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
+    "lastUpdated": "2024-10-28T15:14:38.331Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -302,7 +276,7 @@
     "raceDate": "2024-11-05",
     "state": "CO",
     "stateName": "Colorado",
-    "totalVotes": 357973,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -315,47 +289,15 @@
           "estimatedVotesHigh": 447186,
           "estimatedVotesLow": 365876,
           "estimatedVotesMid": 406529,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.22,
-          "turnoutMid": 99
-        },
-        "firstName": "Frank",
-        "id": 44231,
-        "lastName": "Atwood",
-        "partyName": "Approval Voting Party",
-        "votes": 7480
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 447186,
-          "estimatedVotesLow": 365876,
-          "estimatedVotesMid": 406529,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.22,
-          "turnoutMid": 99
-        },
-        "firstName": "Lauren",
-        "id": 13808,
-        "lastName": "Boebert",
-        "partyName": "Republican",
-        "votes": 227786
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 447186,
-          "estimatedVotesLow": 365876,
-          "estimatedVotesMid": 406529,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.22,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hannah",
         "id": 78626,
         "lastName": "Goodman",
         "partyName": "Libertarian",
-        "votes": 7252
+        "votes": 0
       },
       {
         "elected": false,
@@ -363,15 +305,47 @@
           "estimatedVotesHigh": 447186,
           "estimatedVotesLow": 365876,
           "estimatedVotesMid": 406529,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.22,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lauren",
+        "id": 13808,
+        "lastName": "Boebert",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 447186,
+          "estimatedVotesLow": 365876,
+          "estimatedVotesMid": 406529,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Frank",
+        "id": 44231,
+        "lastName": "Atwood",
+        "partyName": "Approval Voting Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 447186,
+          "estimatedVotesLow": 365876,
+          "estimatedVotesMid": 406529,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 47381,
         "lastName": "Fiorino",
         "partyName": "Unity Party of Colorado",
-        "votes": 7511
+        "votes": 0
       },
       {
         "elected": false,
@@ -379,15 +353,15 @@
           "estimatedVotesHigh": 447186,
           "estimatedVotesLow": 365876,
           "estimatedVotesMid": 406529,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.22,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Trish",
         "id": 84985,
         "lastName": "Calvarese",
         "partyName": "Democratic",
-        "votes": 156888
+        "votes": 0
       }
     ],
     "district": "4",
@@ -396,7 +370,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -406,7 +380,7 @@
     "raceDate": "2024-11-05",
     "state": "CO",
     "stateName": "Colorado",
-    "totalVotes": 406917,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -419,3943 +393,107 @@
           "estimatedVotesHigh": 344614,
           "estimatedVotesLow": 281957,
           "estimatedVotesMid": 313285,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
-        },
-        "firstName": "Jeff",
-        "id": 76781,
-        "lastName": "Crank",
-        "partyName": "Republican",
-        "votes": 157302
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344614,
-          "estimatedVotesLow": 281957,
-          "estimatedVotesMid": 313285,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
-        },
-        "firstName": "Christopher",
-        "id": 44302,
-        "lastName": "Mitchell",
-        "partyName": "Constitution",
-        "votes": 5740
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344614,
-          "estimatedVotesLow": 281957,
-          "estimatedVotesMid": 313285,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
-        },
-        "firstName": "Michael",
-        "id": 102122,
-        "lastName": "Vance",
-        "partyName": "Libertarian",
-        "votes": 6438
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344614,
-          "estimatedVotesLow": 281957,
-          "estimatedVotesMid": 313285,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
-        },
-        "firstName": "Christopher",
-        "id": 102121,
-        "lastName": "Sweat",
-        "partyName": "Forward",
-        "votes": 6796
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344614,
-          "estimatedVotesLow": 281957,
-          "estimatedVotesMid": 313285,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
-        },
-        "firstName": "River",
-        "id": 76779,
-        "lastName": "Gassen",
-        "partyName": "Democratic",
-        "votes": 131708
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344614,
-          "estimatedVotesLow": 281957,
-          "estimatedVotesMid": 313285,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joseph",
         "id": 102123,
         "lastName": "Gaye",
         "partyName": "Independent",
-        "votes": 6555
-      }
-    ],
-    "district": "5",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
-    "office": {
-      "officeId": "3",
-      "officeName": "US House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 314539,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Jason",
-      "id": 10052,
-      "incumbent": true,
-      "lastName": "Crow",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Jason",
-        "id": 10052,
-        "lastName": "Crow",
-        "partyName": "Democratic"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 366534,
-          "estimatedVotesLow": 299890,
-          "estimatedVotesMid": 333212,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.55,
-          "turnoutMid": 99
-        },
-        "firstName": "John",
-        "id": 76782,
-        "lastName": "Fabbricatore",
-        "partyName": "Republican",
-        "votes": 124457
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 366534,
-          "estimatedVotesLow": 299890,
-          "estimatedVotesMid": 333212,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.55,
-          "turnoutMid": 99
-        },
-        "firstName": "John",
-        "id": 44296,
-        "lastName": "Kittleson",
-        "partyName": "Libertarian",
-        "votes": 6224
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 366534,
-          "estimatedVotesLow": 299890,
-          "estimatedVotesMid": 333212,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Jason",
-        "id": 10052,
-        "lastName": "Crow",
-        "partyName": "Democratic",
-        "votes": 197357
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 366534,
-          "estimatedVotesLow": 299890,
-          "estimatedVotesMid": 333212,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Travis",
-        "id": 102124,
-        "lastName": "Nicks",
-        "partyName": "Approval Voting Party",
-        "votes": 6479
-      }
-    ],
-    "district": "6",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
-    "office": {
-      "officeId": "3",
-      "officeName": "US House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 334517,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 439614,
-          "estimatedVotesLow": 359687,
-          "estimatedVotesMid": 399650,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.52,
-          "turnoutMid": 99
-        },
-        "firstName": "Brittany",
-        "id": 24677,
-        "lastName": "Pettersen",
-        "partyName": "Democratic",
-        "votes": 220940
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 439614,
-          "estimatedVotesLow": 359687,
-          "estimatedVotesMid": 399650,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.52,
-          "turnoutMid": 99
-        },
-        "firstName": "Sergei",
-        "id": 76783,
-        "lastName": "Matveyuk",
-        "partyName": "Republican",
-        "votes": 169190
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 439614,
-          "estimatedVotesLow": 359687,
-          "estimatedVotesMid": 399650,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.52,
-          "turnoutMid": 99
-        },
-        "firstName": "Patrick",
-        "id": 102125,
-        "lastName": "Bohan",
-        "partyName": "Libertarian",
-        "votes": 7342
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 439614,
-          "estimatedVotesLow": 359687,
-          "estimatedVotesMid": 399650,
-          "turnoutHigh": 92.07,
-          "turnoutLow": 112.52,
-          "turnoutMid": 99
-        },
-        "firstName": "Ron",
-        "id": 102126,
-        "lastName": "Tupa",
-        "partyName": "Unity Party of Colorado",
-        "votes": 7265
-      }
-    ],
-    "district": "7",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
-    "office": {
-      "officeId": "3",
-      "officeName": "US House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 404737,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344179,
-          "estimatedVotesLow": 281600,
-          "estimatedVotesMid": 312889,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Yadira",
-        "id": 24678,
-        "lastName": "Caraveo",
-        "partyName": "Democratic",
-        "votes": 160013
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344179,
-          "estimatedVotesLow": 281600,
-          "estimatedVotesMid": 312889,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Chris",
-        "id": 102127,
-        "lastName": "Baum",
-        "partyName": "Approval Voting Party",
-        "votes": 6381
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344179,
-          "estimatedVotesLow": 281600,
-          "estimatedVotesMid": 312889,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Gabe",
-        "id": 24852,
-        "lastName": "Evans",
-        "partyName": "Republican",
-        "votes": 140472
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344179,
-          "estimatedVotesLow": 281600,
-          "estimatedVotesMid": 312889,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Susan",
-        "id": 102128,
-        "lastName": "Hall",
-        "partyName": "Unity Party of Colorado",
-        "votes": 6027
-      }
-    ],
-    "district": "8",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.808Z",
-    "office": {
-      "officeId": "3",
-      "officeName": "US House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 312893,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 103892,
-          "estimatedVotesLow": 85002,
-          "estimatedVotesMid": 94447,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Caryn",
-        "id": 101962,
-        "lastName": "Harlos",
-        "partyName": "Libertarian",
-        "votes": 1687
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 103892,
-          "estimatedVotesLow": 85002,
-          "estimatedVotesMid": 94447,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Lisa",
-        "id": 24847,
-        "lastName": "Frizell",
-        "partyName": "Republican",
-        "votes": 54051
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 103892,
-          "estimatedVotesLow": 85002,
-          "estimatedVotesMid": 94447,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Jennifer",
-        "id": 76801,
-        "lastName": "Brady",
-        "partyName": "Democratic",
-        "votes": 38709
-      }
-    ],
-    "district": "2",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 94447,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 91184,
-          "estimatedVotesLow": 74607,
-          "estimatedVotesMid": 82895,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
-        },
-        "firstName": "Marc",
-        "id": 24865,
-        "lastName": "Catlin",
-        "partyName": "Republican",
-        "votes": 41727
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 91184,
-          "estimatedVotesLow": 74607,
-          "estimatedVotesMid": 82895,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
-        },
-        "firstName": "Cole",
-        "id": 76803,
-        "lastName": "Buerger",
-        "partyName": "Democratic",
-        "votes": 41387
-      }
-    ],
-    "district": "5",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 83114,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 94546,
-          "estimatedVotesLow": 77356,
-          "estimatedVotesMid": 85951,
-          "turnoutHigh": 89.43,
-          "turnoutLow": 109.3,
-          "turnoutMid": 98.37
-        },
-        "firstName": "Vivian",
-        "id": 76804,
-        "lastName": "Smotherman",
-        "partyName": "Democratic",
-        "votes": 44138
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 94546,
-          "estimatedVotesLow": 77356,
-          "estimatedVotesMid": 85951,
-          "turnoutHigh": 89.43,
-          "turnoutLow": 109.3,
-          "turnoutMid": 98.37
-        },
-        "firstName": "Cleave",
-        "id": 101964,
-        "lastName": "Simpson Jr.",
-        "partyName": "Republican",
-        "votes": 40415
-      }
-    ],
-    "district": "6",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 84553,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 85445,
-          "estimatedVotesLow": 69909,
-          "estimatedVotesMid": 77677,
-          "turnoutHigh": 77.03,
-          "turnoutLow": 94.15,
-          "turnoutMid": 84.74
-        },
-        "firstName": "John",
-        "id": 101965,
-        "lastName": "Hjershman",
-        "partyName": "Libertarian",
-        "votes": 2091
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 85445,
-          "estimatedVotesLow": 69909,
-          "estimatedVotesMid": 77677,
-          "turnoutHigh": 77.03,
-          "turnoutLow": 94.15,
-          "turnoutMid": 84.74
-        },
-        "firstName": "Larry",
-        "id": 76808,
-        "lastName": "Liston",
-        "partyName": "Republican",
-        "votes": 63730
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 85445,
-          "estimatedVotesLow": 69909,
-          "estimatedVotesMid": 77677,
-          "turnoutHigh": 77.03,
-          "turnoutLow": 94.15,
-          "turnoutMid": 84.74
-        },
-        "firstName": "Ryan",
-        "id": 122883,
-        "lastName": "Lucas",
-        "partyName": "Democratic",
         "votes": 0
-      }
-    ],
-    "district": "10",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 65821,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 72899,
-          "estimatedVotesLow": 59645,
-          "estimatedVotesMid": 66272,
-          "turnoutHigh": 91.59,
-          "turnoutLow": 111.94,
-          "turnoutMid": 99
-        },
-        "firstName": "Marc",
-        "id": 24750,
-        "lastName": "Snyder",
-        "partyName": "Democratic",
-        "votes": 35884
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 72899,
-          "estimatedVotesLow": 59645,
-          "estimatedVotesMid": 66272,
-          "turnoutHigh": 91.59,
-          "turnoutLow": 111.94,
-          "turnoutMid": 99
-        },
-        "firstName": "Stan",
-        "id": 76810,
-        "lastName": "VanderWerf",
-        "partyName": "Republican",
-        "votes": 29505
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 72899,
-          "estimatedVotesLow": 59645,
-          "estimatedVotesMid": 66272,
-          "turnoutHigh": 91.59,
-          "turnoutLow": 111.94,
-          "turnoutMid": 99
-        },
-        "firstName": "John",
-        "id": 101966,
-        "lastName": "Angle",
-        "partyName": "Libertarian",
-        "votes": 1376
-      }
-    ],
-    "district": "12",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 66765,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 64044,
-          "estimatedVotesLow": 52400,
-          "estimatedVotesMid": 58222,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Scott",
-        "id": 76812,
-        "lastName": "Bright",
-        "partyName": "Republican",
-        "votes": 29708
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 64044,
-          "estimatedVotesLow": 52400,
-          "estimatedVotesMid": 58222,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Matt",
-        "id": 76811,
-        "lastName": "Johnston",
-        "partyName": "Democratic",
-        "votes": 28514
-      }
-    ],
-    "district": "13",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 58222,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 82150,
-          "estimatedVotesLow": 67214,
-          "estimatedVotesMid": 74682,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Jeff",
-        "id": 101967,
-        "lastName": "Brosius",
-        "partyName": "Libertarian",
-        "votes": 1364
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 82150,
-          "estimatedVotesLow": 67214,
-          "estimatedVotesMid": 74682,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Cathy",
-        "id": 24784,
-        "lastName": "Kipp",
-        "partyName": "Democratic",
-        "votes": 51158
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 82150,
-          "estimatedVotesLow": 67214,
-          "estimatedVotesMid": 74682,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Phoebe",
-        "id": 76813,
-        "lastName": "McWilliams",
-        "partyName": "Republican",
-        "votes": 22160
-      }
-    ],
-    "district": "14",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 74682,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 109333,
-          "estimatedVotesLow": 89453,
-          "estimatedVotesMid": 99393,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Bennett",
-        "id": 47386,
-        "lastName": "Rutledge",
-        "partyName": "Libertarian",
-        "votes": 1943
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 109333,
-          "estimatedVotesLow": 89453,
-          "estimatedVotesMid": 99393,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Chris",
-        "id": 76814,
-        "lastName": "Kolker",
-        "partyName": "Democratic",
-        "votes": 54322
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 109333,
-          "estimatedVotesLow": 89453,
-          "estimatedVotesMid": 99393,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Robyn",
-        "id": 76815,
-        "lastName": "Carnes",
-        "partyName": "Republican",
-        "votes": 43128
-      }
-    ],
-    "district": "16",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 99393,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 98222,
-          "estimatedVotesLow": 80364,
-          "estimatedVotesMid": 89293,
-          "turnoutHigh": 91.13,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
-        },
-        "firstName": "Tom",
-        "id": 76816,
-        "lastName": "Van Lone",
-        "partyName": "Republican",
-        "votes": 26574
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 98222,
-          "estimatedVotesLow": 80364,
-          "estimatedVotesMid": 89293,
-          "turnoutHigh": 91.13,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
-        },
-        "firstName": "Sonya",
-        "id": 15713,
-        "lastName": "Lewis",
-        "partyName": "Democratic",
-        "votes": 62932
-      }
-    ],
-    "district": "17",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 89506,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 84438,
-          "estimatedVotesLow": 69086,
-          "estimatedVotesMid": 76762,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Judy",
-        "id": 24783,
-        "lastName": "Amabile",
-        "partyName": "Democratic",
-        "votes": 74854
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 84438,
-          "estimatedVotesLow": 69086,
-          "estimatedVotesMid": 76762,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Gary",
-        "id": 47387,
-        "lastName": "Swing",
-        "partyName": "Unity Party of Colorado",
-        "votes": 1908
-      }
-    ],
-    "district": "18",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 76762,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 102172,
-          "estimatedVotesLow": 83596,
-          "estimatedVotesMid": 92884,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Sam",
-        "id": 76819,
-        "lastName": "Bandimere",
-        "partyName": "Republican",
-        "votes": 38391
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 102172,
-          "estimatedVotesLow": 83596,
-          "estimatedVotesMid": 92884,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Ryan",
-        "id": 101968,
-        "lastName": "Van Gundy",
-        "partyName": "Libertarian",
-        "votes": 1809
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 102172,
-          "estimatedVotesLow": 83596,
-          "estimatedVotesMid": 92884,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Lindsey",
-        "id": 24756,
-        "lastName": "Daugherty",
-        "partyName": "Democratic",
-        "votes": 52684
-      }
-    ],
-    "district": "19",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 92884,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 73048,
-          "estimatedVotesLow": 59766,
-          "estimatedVotesMid": 66407,
-          "turnoutHigh": 90.92,
-          "turnoutLow": 111.13,
-          "turnoutMid": 99
-        },
-        "firstName": "Dafna",
-        "id": 24764,
-        "lastName": "Jenet",
-        "partyName": "Democratic",
-        "votes": 36527
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 73048,
-          "estimatedVotesLow": 59766,
-          "estimatedVotesMid": 66407,
-          "turnoutHigh": 90.92,
-          "turnoutLow": 111.13,
-          "turnoutMid": 99
-        },
-        "firstName": "Frederick",
-        "id": 76820,
-        "lastName": "Alfred Jr.",
-        "partyName": "Republican",
-        "votes": 29888
-      }
-    ],
-    "district": "21",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 66415,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Barbara",
-      "id": 15738,
-      "incumbent": true,
-      "lastName": "Kirkmeyer",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Barbara",
-        "id": 15738,
-        "lastName": "Kirkmeyer",
-        "partyName": "Republican"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
+          "estimatedVotesHigh": 344614,
+          "estimatedVotesLow": 281957,
+          "estimatedVotesMid": 313285,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Barbara",
-        "id": 15738,
-        "lastName": "Kirkmeyer",
-        "partyName": "Republican",
-        "votes": 0
-      }
-    ],
-    "district": "23",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-24T17:03:43.263Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 83217,
-          "estimatedVotesLow": 68087,
-          "estimatedVotesMid": 75652,
-          "turnoutHigh": 89.42,
-          "turnoutLow": 109.29,
-          "turnoutMid": 98.36
-        },
         "firstName": "Jeff",
-        "id": 76823,
-        "lastName": "Bridges",
-        "partyName": "Democratic",
-        "votes": 50104
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 83217,
-          "estimatedVotesLow": 68087,
-          "estimatedVotesMid": 75652,
-          "turnoutHigh": 89.42,
-          "turnoutLow": 109.29,
-          "turnoutMid": 98.36
-        },
-        "firstName": "Meredith",
-        "id": 101969,
-        "lastName": "Ryan",
-        "partyName": "Unity Party of Colorado",
-        "votes": 1442
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 83217,
-          "estimatedVotesLow": 68087,
-          "estimatedVotesMid": 75652,
-          "turnoutHigh": 89.42,
-          "turnoutLow": 109.29,
-          "turnoutMid": 98.36
-        },
-        "firstName": "Bob",
-        "id": 76824,
-        "lastName": "Lane",
-        "partyName": "Republican",
-        "votes": 22868
-      }
-    ],
-    "district": "26",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 74414,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 59833,
-          "estimatedVotesLow": 48955,
-          "estimatedVotesMid": 54394,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
-        },
-        "firstName": "Pedro",
-        "id": 76826,
-        "lastName": "Espinoza",
-        "partyName": "Republican",
-        "votes": 18046
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 59833,
-          "estimatedVotesLow": 48955,
-          "estimatedVotesMid": 54394,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
-        },
-        "firstName": "Mike",
-        "id": 24769,
-        "lastName": "Weissman",
-        "partyName": "Democratic",
-        "votes": 36489
-      }
-    ],
-    "district": "28",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 54535,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 71352,
-          "estimatedVotesLow": 58379,
-          "estimatedVotesMid": 64865,
-          "turnoutHigh": 88.46,
-          "turnoutLow": 108.12,
-          "turnoutMid": 97.31
-        },
-        "firstName": "Janet",
-        "id": 76827,
-        "lastName": "Buckner",
-        "partyName": "Democratic",
-        "votes": 63121
-      }
-    ],
-    "district": "29",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 63121,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 86468,
-          "estimatedVotesLow": 70746,
-          "estimatedVotesMid": 78607,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Chris",
-        "id": 67991,
-        "lastName": "Hansen",
-        "partyName": "Democratic",
-        "votes": 76925
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 86468,
-          "estimatedVotesLow": 70746,
-          "estimatedVotesMid": 78607,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "David",
-        "id": 101971,
-        "lastName": "Aitken",
-        "partyName": "Libertarian",
-        "votes": 1682
-      }
-    ],
-    "district": "31",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 78607,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 73146,
-          "estimatedVotesLow": 59846,
-          "estimatedVotesMid": 66496,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "James",
-        "id": 22526,
-        "lastName": "Coleman",
-        "partyName": "Democratic",
-        "votes": 56942
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 73146,
-          "estimatedVotesLow": 59846,
-          "estimatedVotesMid": 66496,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Max",
-        "id": 76829,
-        "lastName": "Minnig",
-        "partyName": "Republican",
-        "votes": 9554
-      }
-    ],
-    "district": "33",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "10",
-      "officeName": "State Senate",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 66496,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 39109,
-          "estimatedVotesLow": 31999,
-          "estimatedVotesMid": 35554,
-          "turnoutHigh": 92.68,
-          "turnoutLow": 113.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Barbara",
-        "id": 76830,
-        "lastName": "DeHaan",
-        "partyName": "Republican",
-        "votes": 11106
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 39109,
-          "estimatedVotesLow": 31999,
-          "estimatedVotesMid": 35554,
-          "turnoutHigh": 92.68,
-          "turnoutLow": 113.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Javier",
-        "id": 24734,
-        "lastName": "Mabrey",
-        "partyName": "Democratic",
-        "votes": 25140
-      }
-    ],
-    "district": "1",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 36246,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 51065,
-          "estimatedVotesLow": 41781,
-          "estimatedVotesMid": 46423,
-          "turnoutHigh": 89.69,
-          "turnoutLow": 109.62,
-          "turnoutMid": 98.66
-        },
-        "firstName": "Steven",
-        "id": 24735,
-        "lastName": "Woodrow",
-        "partyName": "Democratic",
-        "votes": 36439
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 51065,
-          "estimatedVotesLow": 41781,
-          "estimatedVotesMid": 46423,
-          "turnoutHigh": 89.69,
-          "turnoutLow": 109.62,
-          "turnoutMid": 98.66
-        },
-        "firstName": "Michael",
-        "id": 76831,
-        "lastName": "DiManna",
-        "partyName": "Republican",
-        "votes": 9362
-      }
-    ],
-    "district": "2",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 45801,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 43041,
-          "estimatedVotesLow": 35215,
-          "estimatedVotesMid": 39128,
-          "turnoutHigh": 89.13,
-          "turnoutLow": 108.93,
-          "turnoutMid": 98.04
-        },
-        "firstName": "Meg",
-        "id": 24736,
-        "lastName": "Froelich",
-        "partyName": "Democratic",
-        "votes": 26407
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 43041,
-          "estimatedVotesLow": 35215,
-          "estimatedVotesMid": 39128,
-          "turnoutHigh": 89.13,
-          "turnoutLow": 108.93,
-          "turnoutMid": 98.04
-        },
-        "firstName": "Michaela",
-        "id": 101973,
-        "lastName": "Neal",
-        "partyName": "Republican",
-        "votes": 11954
-      }
-    ],
-    "district": "3",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 38361,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40818,
-          "estimatedVotesLow": 33396,
-          "estimatedVotesMid": 37107,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Cecelia",
-        "id": 76834,
-        "lastName": "Espenoza",
-        "partyName": "Democratic",
-        "votes": 31052
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40818,
-          "estimatedVotesLow": 33396,
-          "estimatedVotesMid": 37107,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Jack",
-        "id": 24801,
-        "lastName": "Daus",
-        "partyName": "Republican",
-        "votes": 6055
-      }
-    ],
-    "district": "4",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 37107,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34737,
-          "estimatedVotesLow": 28421,
-          "estimatedVotesMid": 31579,
-          "turnoutHigh": 91.14,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
-        },
-        "firstName": "Alex",
-        "id": 24738,
-        "lastName": "Valdez",
-        "partyName": "Democratic",
-        "votes": 26481
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34737,
-          "estimatedVotesLow": 28421,
-          "estimatedVotesMid": 31579,
-          "turnoutHigh": 91.14,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
-        },
-        "firstName": "Johnnie",
-        "id": 24802,
-        "lastName": "Johnson",
-        "partyName": "Republican",
-        "votes": 5180
-      }
-    ],
-    "district": "5",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 31661,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 42570,
-          "estimatedVotesLow": 34830,
-          "estimatedVotesMid": 38700,
-          "turnoutHigh": 91.68,
-          "turnoutLow": 112.05,
-          "turnoutMid": 99
-        },
-        "firstName": "Sean",
-        "id": 76835,
-        "lastName": "Camacho",
-        "partyName": "Democratic",
-        "votes": 32910
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 42570,
-          "estimatedVotesLow": 34830,
-          "estimatedVotesMid": 38700,
-          "turnoutHigh": 91.68,
-          "turnoutLow": 112.05,
-          "turnoutMid": 99
-        },
-        "firstName": "Kyle",
-        "id": 76836,
-        "lastName": "Witter",
-        "partyName": "Republican",
-        "votes": 6117
-      }
-    ],
-    "district": "6",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 39027,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 33767,
-          "estimatedVotesLow": 27627,
-          "estimatedVotesMid": 30697,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Jennifer",
-        "id": 24741,
-        "lastName": "Bacon",
-        "partyName": "Democratic",
-        "votes": 24396
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 33767,
-          "estimatedVotesLow": 27627,
-          "estimatedVotesMid": 30697,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Raymon",
-        "id": 10996,
-        "lastName": "Doane",
-        "partyName": "Libertarian",
-        "votes": 543
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 33767,
-          "estimatedVotesLow": 27627,
-          "estimatedVotesMid": 30697,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Tom",
-        "id": 76837,
-        "lastName": "Swift",
-        "partyName": "Republican",
-        "votes": 5758
-      }
-    ],
-    "district": "7",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 30697,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 47508,
-          "estimatedVotesLow": 38870,
-          "estimatedVotesMid": 43189,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.23,
-          "turnoutMid": 99
-        },
-        "firstName": "Philip",
-        "id": 76839,
-        "lastName": "Borrelli",
-        "partyName": "Republican",
-        "votes": 4470
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 47508,
-          "estimatedVotesLow": 38870,
-          "estimatedVotesMid": 43189,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.23,
-          "turnoutMid": 99
-        },
-        "firstName": "Lindsay",
-        "id": 76838,
-        "lastName": "Gilchrist",
-        "partyName": "Democratic",
-        "votes": 37893
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 47508,
-          "estimatedVotesLow": 38870,
-          "estimatedVotesMid": 43189,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.23,
-          "turnoutMid": 99
-        },
-        "firstName": "Jesse",
-        "id": 101974,
-        "lastName": "Parris",
-        "partyName": "Unity Party of Colorado",
-        "votes": 872
-      }
-    ],
-    "district": "8",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 43235,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 42956,
-          "estimatedVotesLow": 35146,
-          "estimatedVotesMid": 39050,
-          "turnoutHigh": 91.75,
-          "turnoutLow": 112.14,
-          "turnoutMid": 99
-        },
-        "firstName": "Emily",
-        "id": 24743,
-        "lastName": "Sirota",
-        "partyName": "Democratic",
-        "votes": 29671
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 42956,
-          "estimatedVotesLow": 35146,
-          "estimatedVotesMid": 39050,
-          "turnoutHigh": 91.75,
-          "turnoutLow": 112.14,
-          "turnoutMid": 99
-        },
-        "firstName": "Tom",
-        "id": 24805,
-        "lastName": "Cowhick",
-        "partyName": "Republican",
-        "votes": 9740
-      }
-    ],
-    "district": "9",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 39411,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 36895,
-          "estimatedVotesLow": 30187,
-          "estimatedVotesMid": 33541,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Junie",
-        "id": 46148,
-        "lastName": "Joseph",
-        "partyName": "Democratic",
-        "votes": 30045
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 36895,
-          "estimatedVotesLow": 30187,
-          "estimatedVotesMid": 33541,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "William",
-        "id": 24806,
-        "lastName": "DeOreo",
-        "partyName": "Republican",
-        "votes": 3496
-      }
-    ],
-    "district": "10",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 33541,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 48285,
-          "estimatedVotesLow": 39506,
-          "estimatedVotesMid": 43895,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Karen",
-        "id": 10040,
-        "lastName": "McCormick",
-        "partyName": "Democratic",
-        "votes": 30022
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 48285,
-          "estimatedVotesLow": 39506,
-          "estimatedVotesMid": 43895,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Kathy",
-        "id": 76841,
-        "lastName": "Reeves",
-        "partyName": "Republican",
-        "votes": 13873
-      }
-    ],
-    "district": "11",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 43895,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54164,
-          "estimatedVotesLow": 44316,
-          "estimatedVotesMid": 49240,
-          "turnoutHigh": 91.09,
-          "turnoutLow": 111.33,
-          "turnoutMid": 99
-        },
-        "firstName": "Mark",
-        "id": 15719,
-        "lastName": "Milliman",
-        "partyName": "Republican",
-        "votes": 9848
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54164,
-          "estimatedVotesLow": 44316,
-          "estimatedVotesMid": 49240,
-          "turnoutHigh": 91.09,
-          "turnoutLow": 111.33,
-          "turnoutMid": 99
-        },
-        "firstName": "Kyle",
-        "id": 76843,
-        "lastName": "Brown",
-        "partyName": "Democratic",
-        "votes": 39491
-      }
-    ],
-    "district": "12",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 49339,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55425,
-          "estimatedVotesLow": 45347,
-          "estimatedVotesMid": 50386,
-          "turnoutHigh": 89.31,
-          "turnoutLow": 109.16,
-          "turnoutMid": 98.25
-        },
-        "firstName": "Dave",
-        "id": 24685,
-        "lastName": "Williams",
-        "partyName": "Republican",
-        "votes": 22892
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55425,
-          "estimatedVotesLow": 45347,
-          "estimatedVotesMid": 50386,
-          "turnoutHigh": 89.31,
-          "turnoutLow": 109.16,
-          "turnoutMid": 98.25
-        },
-        "firstName": "Julie",
-        "id": 24744,
-        "lastName": "McCluskie",
-        "partyName": "Democratic",
-        "votes": 26610
-      }
-    ],
-    "district": "13",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 49502,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53522,
-          "estimatedVotesLow": 43790,
-          "estimatedVotesMid": 48656,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
-        },
-        "firstName": "Rose",
-        "id": 24810,
-        "lastName": "Pugliese",
-        "partyName": "Republican",
-        "votes": 26764
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53522,
-          "estimatedVotesLow": 43790,
-          "estimatedVotesMid": 48656,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
-        },
-        "firstName": "Katherine",
-        "id": 76845,
-        "lastName": "Gayle",
-        "partyName": "Democratic",
-        "votes": 22112
-      }
-    ],
-    "district": "14",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 48876,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 41999,
-          "estimatedVotesLow": 34363,
-          "estimatedVotesMid": 38181,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Jeff",
-        "id": 76846,
-        "lastName": "Livingston",
-        "partyName": "Democratic",
-        "votes": 16225
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 41999,
-          "estimatedVotesLow": 34363,
-          "estimatedVotesMid": 38181,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Scott",
-        "id": 24812,
-        "lastName": "Bottoms",
-        "partyName": "Republican",
-        "votes": 21956
-      }
-    ],
-    "district": "15",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 38181,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 41733,
-          "estimatedVotesLow": 34145,
-          "estimatedVotesMid": 37939,
-          "turnoutHigh": 91.33,
-          "turnoutLow": 111.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Rebecca",
-        "id": 24684,
-        "lastName": "Keltie",
-        "partyName": "Republican",
-        "votes": 17487
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 41733,
-          "estimatedVotesLow": 34145,
-          "estimatedVotesMid": 37939,
-          "turnoutHigh": 91.33,
-          "turnoutLow": 111.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Stephanie",
-        "id": 24747,
-        "lastName": "Vigil",
-        "partyName": "Democratic",
-        "votes": 20626
-      }
-    ],
-    "district": "16",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 38113,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 26276,
-          "estimatedVotesLow": 21498,
-          "estimatedVotesMid": 23887,
-          "turnoutHigh": 89.45,
-          "turnoutLow": 109.33,
-          "turnoutMid": 98.4
-        },
-        "firstName": "Elizabeth",
-        "id": 76848,
-        "lastName": "Riggs",
-        "partyName": "Republican",
-        "votes": 9242
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 26276,
-          "estimatedVotesLow": 21498,
-          "estimatedVotesMid": 23887,
-          "turnoutHigh": 89.45,
-          "turnoutLow": 109.33,
-          "turnoutMid": 98.4
-        },
-        "firstName": "Regina",
-        "id": 24748,
-        "lastName": "English",
-        "partyName": "Democratic",
-        "votes": 14262
-      }
-    ],
-    "district": "17",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 23504,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45425,
-          "estimatedVotesLow": 37167,
-          "estimatedVotesMid": 41296,
-          "turnoutHigh": 90.04,
-          "turnoutLow": 110.04,
-          "turnoutMid": 99
-        },
-        "firstName": "Amy",
-        "id": 76849,
-        "lastName": "Paschal",
-        "partyName": "Democratic",
-        "votes": 21888
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45425,
-          "estimatedVotesLow": 37167,
-          "estimatedVotesMid": 41296,
-          "turnoutHigh": 90.04,
-          "turnoutLow": 110.04,
-          "turnoutMid": 99
-        },
-        "firstName": "James",
-        "id": 101977,
-        "lastName": "Boelens",
-        "partyName": "Republican",
-        "votes": 19011
-      }
-    ],
-    "district": "18",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 40899,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 57017,
-          "estimatedVotesLow": 46651,
-          "estimatedVotesMid": 51834,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.35,
-          "turnoutMid": 99
-        },
-        "firstName": "Dan",
-        "id": 15746,
-        "lastName": "Woog",
-        "partyName": "Republican",
-        "votes": 23273
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 57017,
-          "estimatedVotesLow": 46651,
-          "estimatedVotesMid": 51834,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.35,
-          "turnoutMid": 99
-        },
-        "firstName": "Jillaire",
-        "id": 101978,
-        "lastName": "McMillan",
-        "partyName": "Democratic",
-        "votes": 28673
-      }
-    ],
-    "district": "19",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 51946,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54294,
-          "estimatedVotesLow": 44422,
-          "estimatedVotesMid": 49358,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Jarvis",
-        "id": 76852,
-        "lastName": "Caldwell",
-        "partyName": "Republican",
-        "votes": 32984
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54294,
-          "estimatedVotesLow": 44422,
-          "estimatedVotesMid": 49358,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Arik",
-        "id": 24705,
-        "lastName": "Dougherty",
-        "partyName": "Democratic",
-        "votes": 16374
-      }
-    ],
-    "district": "20",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 49358,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 28673,
-          "estimatedVotesLow": 23459,
-          "estimatedVotesMid": 26066,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Mary",
-        "id": 24818,
-        "lastName": "Bradfield",
-        "partyName": "Republican",
-        "votes": 13946
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 28673,
-          "estimatedVotesLow": 23459,
-          "estimatedVotesMid": 26066,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Liz",
-        "id": 76853,
-        "lastName": "Rosenbaum",
-        "partyName": "Democratic",
-        "votes": 12120
-      }
-    ],
-    "district": "21",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 26066,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45926,
-          "estimatedVotesLow": 37576,
-          "estimatedVotesMid": 41751,
-          "turnoutHigh": 89.7,
-          "turnoutLow": 109.64,
-          "turnoutMid": 98.67
-        },
-        "firstName": "Michael",
-        "id": 76856,
-        "lastName": "Pierson",
-        "partyName": "Democratic",
-        "votes": 17359
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45926,
-          "estimatedVotesLow": 37576,
-          "estimatedVotesMid": 41751,
-          "turnoutHigh": 89.7,
-          "turnoutLow": 109.64,
-          "turnoutMid": 98.67
-        },
-        "firstName": "Daniel",
-        "id": 122884,
-        "lastName": "Campana",
-        "partyName": "Unaffiliated",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45926,
-          "estimatedVotesLow": 37576,
-          "estimatedVotesMid": 41751,
-          "turnoutHigh": 89.7,
-          "turnoutLow": 109.64,
-          "turnoutMid": 98.67
-        },
-        "firstName": "Kenneth",
-        "id": 24820,
-        "lastName": "DeGraaf",
-        "partyName": "Republican",
-        "votes": 23838
-      }
-    ],
-    "district": "22",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 41197,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53044,
-          "estimatedVotesLow": 43400,
-          "estimatedVotesMid": 48222,
-          "turnoutHigh": 84.93,
-          "turnoutLow": 103.8,
-          "turnoutMid": 93.42
-        },
-        "firstName": "Monica",
-        "id": 24755,
-        "lastName": "Duran",
-        "partyName": "Democratic",
-        "votes": 45049
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53044,
-          "estimatedVotesLow": 43400,
-          "estimatedVotesMid": 48222,
-          "turnoutHigh": 84.93,
-          "turnoutLow": 103.8,
-          "turnoutMid": 93.42
-        },
-        "firstName": "Cory",
-        "id": 122885,
-        "lastName": "Ohnesorge",
+        "id": 76781,
+        "lastName": "Crank",
         "partyName": "Republican",
         "votes": 0
-      }
-    ],
-    "district": "23",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:16:17.847Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 45049,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 56697,
-          "estimatedVotesLow": 46389,
-          "estimatedVotesMid": 51543,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
-        },
-        "firstName": "Lisa",
-        "id": 76858,
-        "lastName": "Feret",
-        "partyName": "Democratic",
-        "votes": 30449
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 56697,
-          "estimatedVotesLow": 46389,
-          "estimatedVotesMid": 51543,
-          "turnoutHigh": 91.27,
-          "turnoutLow": 111.56,
-          "turnoutMid": 99
-        },
-        "firstName": "Gwen",
-        "id": 76859,
-        "lastName": "Henderson",
-        "partyName": "Republican",
-        "votes": 21301
-      }
-    ],
-    "district": "24",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:39.786Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 51750,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 62587,
-          "estimatedVotesLow": 51207,
-          "estimatedVotesMid": 56897,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.96
-        },
-        "firstName": "George",
-        "id": 101981,
-        "lastName": "Mumma",
-        "partyName": "Republican",
-        "votes": 26211
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 62587,
-          "estimatedVotesLow": 51207,
-          "estimatedVotesMid": 56897,
-          "turnoutHigh": 89.05,
-          "turnoutLow": 108.84,
-          "turnoutMid": 97.96
-        },
-        "firstName": "Tammy",
-        "id": 24757,
-        "lastName": "Story",
-        "partyName": "Democratic",
-        "votes": 29524
-      }
-    ],
-    "district": "25",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:51:12.946Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 55735,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 48886,
-          "estimatedVotesLow": 39998,
-          "estimatedVotesMid": 44442,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
-        },
-        "firstName": "Meghan",
-        "id": 24758,
-        "lastName": "Lukens",
-        "partyName": "Democratic",
-        "votes": 24255
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 48886,
-          "estimatedVotesLow": 39998,
-          "estimatedVotesMid": 44442,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
-        },
-        "firstName": "Nathan",
-        "id": 27263,
-        "lastName": "Butler",
-        "partyName": "Republican",
-        "votes": 20199
-      }
-    ],
-    "district": "26",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 44454,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55200,
-          "estimatedVotesLow": 45164,
-          "estimatedVotesMid": 50182,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Brianna",
-        "id": 24759,
-        "lastName": "Titone",
-        "partyName": "Democratic",
-        "votes": 30652
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55200,
-          "estimatedVotesLow": 45164,
-          "estimatedVotesMid": 50182,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Ed",
-        "id": 76861,
-        "lastName": "Cox",
-        "partyName": "Republican",
-        "votes": 19530
-      }
-    ],
-    "district": "27",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:51:45.050Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 50182,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54071,
-          "estimatedVotesLow": 44240,
-          "estimatedVotesMid": 49155,
-          "turnoutHigh": 57.6,
-          "turnoutLow": 70.4,
-          "turnoutMid": 63.36
-        },
-        "firstName": "Peter",
-        "id": 76862,
-        "lastName": "Boddie",
-        "partyName": "Republican",
-        "votes": 14119
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54071,
-          "estimatedVotesLow": 44240,
-          "estimatedVotesMid": 49155,
-          "turnoutHigh": 57.6,
-          "turnoutLow": 70.4,
-          "turnoutMid": 63.36
-        },
-        "firstName": "Sheila",
-        "id": 46156,
-        "lastName": "Lieder",
-        "partyName": "Democratic",
-        "votes": 17025
-      }
-    ],
-    "district": "28",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:22:32.661Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 31144,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 51969,
-          "estimatedVotesLow": 42519,
-          "estimatedVotesMid": 47244,
-          "turnoutHigh": 89.09,
-          "turnoutLow": 108.89,
-          "turnoutMid": 98
-        },
-        "firstName": "Evan",
-        "id": 76863,
-        "lastName": "Hunt",
-        "partyName": "Republican",
-        "votes": 17955
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 51969,
-          "estimatedVotesLow": 42519,
-          "estimatedVotesMid": 47244,
-          "turnoutHigh": 89.09,
-          "turnoutLow": 108.89,
-          "turnoutMid": 98
-        },
-        "firstName": "Shannon",
-        "id": 24761,
-        "lastName": "Bird",
-        "partyName": "Democratic",
-        "votes": 28346
-      }
-    ],
-    "district": "29",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 46301,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45291,
-          "estimatedVotesLow": 37057,
-          "estimatedVotesMid": 41174,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Ramey",
-        "id": 76866,
-        "lastName": "Johnson",
-        "partyName": "Republican",
-        "votes": 13687
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45291,
-          "estimatedVotesLow": 37057,
-          "estimatedVotesMid": 41174,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Rebekah",
-        "id": 76864,
-        "lastName": "Stewart",
-        "partyName": "Democratic",
-        "votes": 27487
-      }
-    ],
-    "district": "30",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:16:47.446Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 41174,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34285,
-          "estimatedVotesLow": 28051,
-          "estimatedVotesMid": 31168,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Heidi",
-        "id": 24831,
-        "lastName": "Pitchforth",
-        "partyName": "Republican",
-        "votes": 12383
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34285,
-          "estimatedVotesLow": 28051,
-          "estimatedVotesMid": 31168,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Jacque",
-        "id": 101984,
-        "lastName": "Phillips",
-        "partyName": "Democratic",
-        "votes": 18785
-      }
-    ],
-    "district": "31",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 31168,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Manny",
-      "id": 76869,
-      "incumbent": true,
-      "lastName": "Rutinel",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Manny",
-        "id": 76869,
-        "lastName": "Rutinel",
-        "partyName": "Democratic"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
+          "estimatedVotesHigh": 344614,
+          "estimatedVotesLow": 281957,
+          "estimatedVotesMid": 313285,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Manny",
-        "id": 76869,
-        "lastName": "Rutinel",
+        "firstName": "Michael",
+        "id": 102122,
+        "lastName": "Vance",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 344614,
+          "estimatedVotesLow": 281957,
+          "estimatedVotesMid": 313285,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "River",
+        "id": 76779,
+        "lastName": "Gassen",
         "partyName": "Democratic",
         "votes": 0
-      }
-    ],
-    "district": "32",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-24T17:03:43.263Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54553,
-          "estimatedVotesLow": 44635,
-          "estimatedVotesMid": 49594,
-          "turnoutHigh": 89.1,
-          "turnoutLow": 108.9,
-          "turnoutMid": 98.01
-        },
-        "firstName": "William",
-        "id": 24765,
-        "lastName": "Lindstedt",
-        "partyName": "Democratic",
-        "votes": 30263
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 54553,
-          "estimatedVotesLow": 44635,
-          "estimatedVotesMid": 49594,
-          "turnoutHigh": 89.1,
-          "turnoutLow": 108.9,
-          "turnoutMid": 98.01
+          "estimatedVotesHigh": 344614,
+          "estimatedVotesLow": 281957,
+          "estimatedVotesMid": 313285,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Michael",
-        "id": 76870,
-        "lastName": "Martinez",
-        "partyName": "Republican",
-        "votes": 18345
-      }
-    ],
-    "district": "33",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 48608,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45571,
-          "estimatedVotesLow": 37285,
-          "estimatedVotesMid": 41428,
-          "turnoutHigh": 90.22,
-          "turnoutLow": 110.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Jenny",
-        "id": 24767,
-        "lastName": "Willford",
-        "partyName": "Democratic",
-        "votes": 23023
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45571,
-          "estimatedVotesLow": 37285,
-          "estimatedVotesMid": 41428,
-          "turnoutHigh": 90.22,
-          "turnoutLow": 110.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Alexander",
-        "id": 122886,
-        "lastName": "Winkler",
+        "firstName": "Christopher",
+        "id": 44302,
+        "lastName": "Mitchell",
         "partyName": "Constitution",
         "votes": 0
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 45571,
-          "estimatedVotesLow": 37285,
-          "estimatedVotesMid": 41428,
-          "turnoutHigh": 90.22,
-          "turnoutLow": 110.27,
-          "turnoutMid": 99
+          "estimatedVotesHigh": 344614,
+          "estimatedVotesLow": 281957,
+          "estimatedVotesMid": 313285,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Mark",
-        "id": 101987,
-        "lastName": "Bromley",
-        "partyName": "Unaffiliated",
-        "votes": 862
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 45571,
-          "estimatedVotesLow": 37285,
-          "estimatedVotesMid": 41428,
-          "turnoutHigh": 90.22,
-          "turnoutLow": 110.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Craig",
-        "id": 57897,
-        "lastName": "Sullivan",
-        "partyName": "Republican",
-        "votes": 17230
-      }
-    ],
-    "district": "34",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 41115,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34283,
-          "estimatedVotesLow": 28049,
-          "estimatedVotesMid": 31166,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Lee",
-        "id": 76872,
-        "lastName": "Knoll",
-        "partyName": "Republican",
-        "votes": 10531
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34283,
-          "estimatedVotesLow": 28049,
-          "estimatedVotesMid": 31166,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Lorena",
-        "id": 76871,
-        "lastName": "Garcia",
-        "partyName": "Democratic",
-        "votes": 20635
-      }
-    ],
-    "district": "35",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 31166,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34687,
-          "estimatedVotesLow": 28379,
-          "estimatedVotesMid": 31533,
-          "turnoutHigh": 81.21,
-          "turnoutLow": 99.26,
-          "turnoutMid": 89.33
-        },
-        "firstName": "Eric",
-        "id": 101988,
-        "lastName": "Mulder",
+        "firstName": "Christopher",
+        "id": 102121,
+        "lastName": "Sweat",
         "partyName": "Forward",
-        "votes": 832
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 34687,
-          "estimatedVotesLow": 28379,
-          "estimatedVotesMid": 31533,
-          "turnoutHigh": 81.21,
-          "turnoutLow": 99.26,
-          "turnoutMid": 89.33
-        },
-        "firstName": "Michael",
-        "id": 76874,
-        "lastName": "Carter",
-        "partyName": "Democratic",
-        "votes": 27338
-      }
-    ],
-    "district": "36",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 28170,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 51718,
-          "estimatedVotesLow": 42314,
-          "estimatedVotesMid": 47016,
-          "turnoutHigh": 58.27,
-          "turnoutLow": 71.22,
-          "turnoutMid": 64.1
-        },
-        "firstName": "Chad",
-        "id": 76875,
-        "lastName": "Clifford",
-        "partyName": "Democratic",
-        "votes": 29194
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 51718,
-          "estimatedVotesLow": 42314,
-          "estimatedVotesMid": 47016,
-          "turnoutHigh": 58.27,
-          "turnoutLow": 71.22,
-          "turnoutMid": 64.1
-        },
-        "firstName": "Kevin",
-        "id": 101989,
-        "lastName": "Biehl",
-        "partyName": "Unaffiliated",
-        "votes": 943
-      }
-    ],
-    "district": "37",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 30137,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 57904,
-          "estimatedVotesLow": 47376,
-          "estimatedVotesMid": 52640,
-          "turnoutHigh": 90.07,
-          "turnoutLow": 110.09,
-          "turnoutMid": 99
-        },
-        "firstName": "Jeffrey",
-        "id": 76878,
-        "lastName": "Patty",
-        "partyName": "Republican",
-        "votes": 22032
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 57904,
-          "estimatedVotesLow": 47376,
-          "estimatedVotesMid": 52640,
-          "turnoutHigh": 90.07,
-          "turnoutLow": 110.09,
-          "turnoutMid": 99
-        },
-        "firstName": "Gretchen",
-        "id": 76877,
-        "lastName": "Rydin",
-        "partyName": "Democratic",
-        "votes": 30122
-      }
-    ],
-    "district": "38",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 52154,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 61346,
-          "estimatedVotesLow": 50192,
-          "estimatedVotesMid": 55769,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
-        },
-        "firstName": "Brandi",
-        "id": 24839,
-        "lastName": "Bradley",
-        "partyName": "Republican",
-        "votes": 29314
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 61346,
-          "estimatedVotesLow": 50192,
-          "estimatedVotesMid": 55769,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
-        },
-        "firstName": "Eric",
-        "id": 24772,
-        "lastName": "Brody",
-        "partyName": "Democratic",
-        "votes": 26721
-      }
-    ],
-    "district": "39",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 56035,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 46451,
-          "estimatedVotesLow": 38005,
-          "estimatedVotesMid": 42228,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Naquetta",
-        "id": 24773,
-        "lastName": "Ricks",
-        "partyName": "Democratic",
-        "votes": 25999
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 46451,
-          "estimatedVotesLow": 38005,
-          "estimatedVotesMid": 42228,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Allison",
-        "id": 101990,
-        "lastName": "Spink",
-        "partyName": "Libertarian",
-        "votes": 809
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 46451,
-          "estimatedVotesLow": 38005,
-          "estimatedVotesMid": 42228,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Darryl",
-        "id": 76879,
-        "lastName": "Gibbs",
-        "partyName": "Republican",
-        "votes": 15420
-      }
-    ],
-    "district": "40",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 42228,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40581,
-          "estimatedVotesLow": 33203,
-          "estimatedVotesMid": 36892,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Iman",
-        "id": 24774,
-        "lastName": "Jodeh",
-        "partyName": "Democratic",
-        "votes": 25043
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40581,
-          "estimatedVotesLow": 33203,
-          "estimatedVotesMid": 36892,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Rob",
-        "id": 76880,
-        "lastName": "McKenna",
-        "partyName": "Republican",
-        "votes": 11185
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40581,
-          "estimatedVotesLow": 33203,
-          "estimatedVotesMid": 36892,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Keith",
-        "id": 101991,
-        "lastName": "Porter",
-        "partyName": "Libertarian",
-        "votes": 664
-      }
-    ],
-    "district": "41",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 36892,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Mandy",
-      "id": 24775,
-      "incumbent": true,
-      "lastName": "Lindsay",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Mandy",
-        "id": 24775,
-        "lastName": "Lindsay",
-        "partyName": "Democratic"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mandy",
-        "id": 24775,
-        "lastName": "Lindsay",
-        "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "42",
+    "district": "5",
     "electionType": {
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-24T17:03:43.263Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
-      "officeId": "9",
-      "officeName": "State House",
+      "officeId": "3",
+      "officeName": "US House",
       "officeTypeId": "2"
     },
     "partyName": null,
@@ -4372,310 +510,78 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 55559,
-          "estimatedVotesLow": 45457,
-          "estimatedVotesMid": 50508,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Matt",
-        "id": 76883,
-        "lastName": "Burcham",
-        "partyName": "Republican",
-        "votes": 23455
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55559,
-          "estimatedVotesLow": 45457,
-          "estimatedVotesMid": 50508,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert",
-        "id": 8563,
-        "lastName": "Marshall",
-        "partyName": "Democratic",
-        "votes": 27053
-      }
-    ],
-    "district": "43",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 50508,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54302,
-          "estimatedVotesLow": 44429,
-          "estimatedVotesMid": 49365,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Anthony",
-        "id": 24846,
-        "lastName": "Hartsook",
-        "partyName": "Republican",
-        "votes": 27025
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 54302,
-          "estimatedVotesLow": 44429,
-          "estimatedVotesMid": 49365,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Alyssa",
-        "id": 76884,
-        "lastName": "Nilemo",
-        "partyName": "Democratic",
-        "votes": 22340
-      }
-    ],
-    "district": "44",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 49365,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 56890,
-          "estimatedVotesLow": 46546,
-          "estimatedVotesMid": 51718,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Chad",
-        "id": 76885,
-        "lastName": "Cox",
-        "partyName": "Democratic",
-        "votes": 21610
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 56890,
-          "estimatedVotesLow": 46546,
-          "estimatedVotesMid": 51718,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Max",
-        "id": 76886,
-        "lastName": "Brooks",
-        "partyName": "Republican",
-        "votes": 30108
-      }
-    ],
-    "district": "45",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 51718,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 48786,
-          "estimatedVotesLow": 39916,
-          "estimatedVotesMid": 44351,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Kimberly",
-        "id": 101992,
-        "lastName": "Swearingen",
-        "partyName": "Republican",
-        "votes": 22079
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 48786,
-          "estimatedVotesLow": 39916,
-          "estimatedVotesMid": 44351,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Tisha",
-        "id": 24779,
-        "lastName": "Mauro",
-        "partyName": "Democratic",
-        "votes": 22272
-      }
-    ],
-    "district": "46",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 44351,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 46534,
-          "estimatedVotesLow": 38074,
-          "estimatedVotesMid": 42303,
-          "turnoutHigh": 90.95,
-          "turnoutLow": 111.16,
-          "turnoutMid": 99
-        },
-        "firstName": "Elizabeth",
-        "id": 76889,
-        "lastName": "Bulthuis",
-        "partyName": "Democratic",
-        "votes": 15452
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 46534,
-          "estimatedVotesLow": 38074,
-          "estimatedVotesMid": 42303,
-          "turnoutHigh": 90.95,
-          "turnoutLow": 111.16,
-          "turnoutMid": 99
-        },
-        "firstName": "Ty",
-        "id": 24850,
-        "lastName": "Winter",
-        "partyName": "Republican",
-        "votes": 26870
-      }
-    ],
-    "district": "47",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 42322,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
+          "estimatedVotesHigh": 366534,
+          "estimatedVotesLow": 299890,
+          "estimatedVotesMid": 333212,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Carlos",
-        "id": 76890,
-        "lastName": "Barron",
+        "firstName": "John",
+        "id": 76782,
+        "lastName": "Fabbricatore",
         "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 366534,
+          "estimatedVotesLow": 299890,
+          "estimatedVotesMid": 333212,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jason",
+        "id": 10052,
+        "lastName": "Crow",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 366534,
+          "estimatedVotesLow": 299890,
+          "estimatedVotesMid": 333212,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Travis",
+        "id": 102124,
+        "lastName": "Nicks",
+        "partyName": "Approval Voting Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 366534,
+          "estimatedVotesLow": 299890,
+          "estimatedVotesMid": 333212,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 44296,
+        "lastName": "Kittleson",
+        "partyName": "Libertarian",
         "votes": 0
       }
     ],
-    "district": "48",
+    "district": "6",
     "electionType": {
       "electionType": "General Election",
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
-      "officeId": "9",
-      "officeName": "State House",
+      "officeId": "3",
+      "officeName": "US House",
       "officeTypeId": "2"
     },
     "partyName": null,
@@ -4692,376 +598,78 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 61000,
-          "estimatedVotesLow": 49910,
-          "estimatedVotesMid": 55455,
-          "turnoutHigh": 90.96,
-          "turnoutLow": 111.18,
-          "turnoutMid": 99
-        },
-        "firstName": "Steve",
-        "id": 76893,
-        "lastName": "Ferrante",
-        "partyName": "Republican",
-        "votes": 18861
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 61000,
-          "estimatedVotesLow": 49910,
-          "estimatedVotesMid": 55455,
-          "turnoutHigh": 90.96,
-          "turnoutLow": 111.18,
-          "turnoutMid": 99
-        },
-        "firstName": "Lesley",
-        "id": 76891,
-        "lastName": "Smith",
-        "partyName": "Democratic",
-        "votes": 36627
-      }
-    ],
-    "district": "49",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 55488,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 27025,
-          "estimatedVotesLow": 22111,
-          "estimatedVotesMid": 24568,
-          "turnoutHigh": 75.44,
-          "turnoutLow": 92.21,
-          "turnoutMid": 82.99
-        },
-        "firstName": "Mary",
-        "id": 15744,
-        "lastName": "Young",
-        "partyName": "Democratic",
-        "votes": 10888
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 27025,
-          "estimatedVotesLow": 22111,
-          "estimatedVotesMid": 24568,
-          "turnoutHigh": 75.44,
-          "turnoutLow": 92.21,
-          "turnoutMid": 82.99
-        },
-        "firstName": "Ryan",
-        "id": 24855,
-        "lastName": "Gonzalez",
-        "partyName": "Republican",
-        "votes": 9501
-      }
-    ],
-    "district": "50",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:28:54.840Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 20389,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55309,
-          "estimatedVotesLow": 45253,
-          "estimatedVotesMid": 50281,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "estimatedVotesHigh": 439614,
+          "estimatedVotesLow": 359687,
+          "estimatedVotesMid": 399650,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ron",
-        "id": 76895,
-        "lastName": "Weinberg",
-        "partyName": "Republican",
-        "votes": 26084
+        "id": 102126,
+        "lastName": "Tupa",
+        "partyName": "Unity Party of Colorado",
+        "votes": 0
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 55309,
-          "estimatedVotesLow": 45253,
-          "estimatedVotesMid": 50281,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Sarah",
-        "id": 76894,
-        "lastName": "McKeen",
-        "partyName": "Democratic",
-        "votes": 24197
-      }
-    ],
-    "district": "51",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 50281,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 52724,
-          "estimatedVotesLow": 43138,
-          "estimatedVotesMid": 47931,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.14,
-          "turnoutMid": 98.22
-        },
-        "firstName": "Steve",
-        "id": 44299,
-        "lastName": "Yurash",
-        "partyName": "Colorado Center Party",
-        "votes": 1264
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 52724,
-          "estimatedVotesLow": 43138,
-          "estimatedVotesMid": 47931,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.14,
-          "turnoutMid": 98.22
-        },
-        "firstName": "Yara",
-        "id": 15742,
-        "lastName": "Zokaie",
-        "partyName": "Democratic",
-        "votes": 45816
-      }
-    ],
-    "district": "52",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 47080,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40274,
-          "estimatedVotesLow": 32952,
-          "estimatedVotesMid": 36613,
-          "turnoutHigh": 90.32,
-          "turnoutLow": 110.39,
-          "turnoutMid": 99
-        },
-        "firstName": "Andrew",
-        "id": 24785,
-        "lastName": "Boesenecker",
-        "partyName": "Democratic",
-        "votes": 26073
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 40274,
-          "estimatedVotesLow": 32952,
-          "estimatedVotesMid": 36613,
-          "turnoutHigh": 90.32,
-          "turnoutLow": 110.39,
-          "turnoutMid": 99
-        },
-        "firstName": "Donna",
-        "id": 24859,
-        "lastName": "Walter",
-        "partyName": "Republican",
-        "votes": 10304
-      }
-    ],
-    "district": "53",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:43.421Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 36377,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Matt",
-      "id": 24860,
-      "incumbent": true,
-      "lastName": "Soper",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Matt",
-        "id": 24860,
-        "lastName": "Soper",
-        "partyName": "Republican"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
+          "estimatedVotesHigh": 439614,
+          "estimatedVotesLow": 359687,
+          "estimatedVotesMid": 399650,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Matt",
-        "id": 24860,
-        "lastName": "Soper",
-        "partyName": "Republican",
+        "firstName": "Patrick",
+        "id": 102125,
+        "lastName": "Bohan",
+        "partyName": "Libertarian",
         "votes": 0
-      }
-    ],
-    "district": "54",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-24T17:03:43.263Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Rick",
-      "id": 24861,
-      "incumbent": true,
-      "lastName": "Taggart",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
+      },
       {
-        "firstName": "Rick",
-        "id": 24861,
-        "lastName": "Taggart",
-        "partyName": "Republican"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
+          "estimatedVotesHigh": 439614,
+          "estimatedVotesLow": 359687,
+          "estimatedVotesMid": 399650,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Rick",
-        "id": 24861,
-        "lastName": "Taggart",
+        "firstName": "Sergei",
+        "id": 76783,
+        "lastName": "Matveyuk",
         "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 439614,
+          "estimatedVotesLow": 359687,
+          "estimatedVotesMid": 399650,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brittany",
+        "id": 24677,
+        "lastName": "Pettersen",
+        "partyName": "Democratic",
         "votes": 0
       }
     ],
-    "district": "55",
+    "district": "7",
     "electionType": {
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-24T17:03:43.263Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T15:14:38.331Z",
     "office": {
-      "officeId": "9",
-      "officeName": "State House",
+      "officeId": "3",
+      "officeName": "US House",
       "officeTypeId": "2"
     },
     "partyName": null,
@@ -5078,422 +686,78 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 58210,
-          "estimatedVotesLow": 47624,
-          "estimatedVotesMid": 52916,
-          "turnoutHigh": 89.22,
-          "turnoutLow": 109.06,
-          "turnoutMid": 98.15
+          "estimatedVotesHigh": 344179,
+          "estimatedVotesLow": 281600,
+          "estimatedVotesMid": 312889,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Alessandra",
-        "id": 76898,
-        "lastName": "Navetta",
+        "firstName": "Yadira",
+        "id": 24678,
+        "lastName": "Caraveo",
         "partyName": "Democratic",
-        "votes": 13075
+        "votes": 0
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 58210,
-          "estimatedVotesLow": 47624,
-          "estimatedVotesMid": 52916,
-          "turnoutHigh": 89.22,
-          "turnoutLow": 109.06,
-          "turnoutMid": 98.15
+          "estimatedVotesHigh": 344179,
+          "estimatedVotesLow": 281600,
+          "estimatedVotesMid": 312889,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
-        "id": 76899,
-        "lastName": "Richardson",
-        "partyName": "Republican",
-        "votes": 38862
-      }
-    ],
-    "district": "56",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 51937,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 46074,
-          "estimatedVotesLow": 37697,
-          "estimatedVotesMid": 41885,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
-        },
-        "firstName": "Caleb",
-        "id": 76900,
-        "lastName": "Waller",
-        "partyName": "Republican",
-        "votes": 16809
+        "id": 102127,
+        "lastName": "Baum",
+        "partyName": "Approval Voting Party",
+        "votes": 0
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 46074,
-          "estimatedVotesLow": 37697,
-          "estimatedVotesMid": 41885,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
-        },
-        "firstName": "Elizabeth",
-        "id": 24790,
-        "lastName": "Velasco",
-        "partyName": "Democratic",
-        "votes": 25264
-      }
-    ],
-    "district": "57",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 42073,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55826,
-          "estimatedVotesLow": 45674,
-          "estimatedVotesMid": 50750,
-          "turnoutHigh": 90.95,
-          "turnoutLow": 111.17,
-          "turnoutMid": 99
-        },
-        "firstName": "Kathleen",
-        "id": 76901,
-        "lastName": "Curry",
-        "partyName": "Democratic",
-        "votes": 23067
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 55826,
-          "estimatedVotesLow": 45674,
-          "estimatedVotesMid": 50750,
-          "turnoutHigh": 90.95,
-          "turnoutLow": 111.17,
-          "turnoutMid": 99
-        },
-        "firstName": "Larry",
-        "id": 76902,
-        "lastName": "Suckla",
-        "partyName": "Republican",
-        "votes": 27707
-      }
-    ],
-    "district": "58",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:36:22.677Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 50774,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53707,
-          "estimatedVotesLow": 43941,
-          "estimatedVotesMid": 48824,
-          "turnoutHigh": 83.93,
-          "turnoutLow": 102.59,
-          "turnoutMid": 92.33
-        },
-        "firstName": "Clark",
-        "id": 76905,
-        "lastName": "Craig",
-        "partyName": "Republican",
-        "votes": 21109
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53707,
-          "estimatedVotesLow": 43941,
-          "estimatedVotesMid": 48824,
-          "turnoutHigh": 83.93,
-          "turnoutLow": 102.59,
-          "turnoutMid": 92.33
-        },
-        "firstName": "Katie",
-        "id": 76904,
-        "lastName": "Stewart",
-        "partyName": "Democratic",
-        "votes": 23968
-      }
-    ],
-    "district": "59",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:43.421Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 45077,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53105,
-          "estimatedVotesLow": 43450,
-          "estimatedVotesMid": 48277,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Stephanie",
-        "id": 24867,
-        "lastName": "Luck",
-        "partyName": "Republican",
-        "votes": 32849
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53105,
-          "estimatedVotesLow": 43450,
-          "estimatedVotesMid": 48277,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Kathryn",
-        "id": 24793,
-        "lastName": "Green",
-        "partyName": "Democratic",
-        "votes": 15428
-      }
-    ],
-    "district": "60",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:43.421Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 48277,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53637,
-          "estimatedVotesLow": 43885,
-          "estimatedVotesMid": 48761,
-          "turnoutHigh": 73.94,
-          "turnoutLow": 90.37,
-          "turnoutMid": 81.33
-        },
-        "firstName": "Joe",
-        "id": 15748,
-        "lastName": "Johnson",
-        "partyName": "Libertarian",
-        "votes": 1323
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 53637,
-          "estimatedVotesLow": 43885,
-          "estimatedVotesMid": 48761,
-          "turnoutHigh": 73.94,
-          "turnoutLow": 90.37,
-          "turnoutMid": 81.33
-        },
-        "firstName": "Eliza",
-        "id": 24794,
-        "lastName": "Hamrick",
-        "partyName": "Democratic",
-        "votes": 38334
-      }
-    ],
-    "district": "61",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:43.421Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 39657,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 41870,
-          "estimatedVotesLow": 34259,
-          "estimatedVotesMid": 38064,
-          "turnoutHigh": 91.07,
-          "turnoutLow": 111.31,
-          "turnoutMid": 99
-        },
-        "firstName": "Matthew",
-        "id": 24795,
-        "lastName": "Martinez",
-        "partyName": "Democratic",
-        "votes": 21495
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 41870,
-          "estimatedVotesLow": 34259,
-          "estimatedVotesMid": 38064,
-          "turnoutHigh": 91.07,
-          "turnoutLow": 111.31,
-          "turnoutMid": 99
-        },
-        "firstName": "Carol",
-        "id": 24869,
-        "lastName": "Riggenbach",
-        "partyName": "Republican",
-        "votes": 16637
-      }
-    ],
-    "district": "62",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:43.421Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 38132,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 0,
-          "estimatedVotesLow": 0,
-          "estimatedVotesMid": 0,
+          "estimatedVotesHigh": 344179,
+          "estimatedVotesLow": 281600,
+          "estimatedVotesMid": 312889,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Dusty",
-        "id": 9629,
-        "lastName": "Johnson",
+        "firstName": "Gabe",
+        "id": 24852,
+        "lastName": "Evans",
         "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 344179,
+          "estimatedVotesLow": 281600,
+          "estimatedVotesMid": 312889,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Susan",
+        "id": 102128,
+        "lastName": "Hall",
+        "partyName": "Unity Party of Colorado",
         "votes": 0
       }
     ],
-    "district": "63",
+    "district": "8",
     "electionType": {
       "electionType": "General Election",
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-23T14:38:24.916Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
-      "officeId": "9",
-      "officeName": "State House",
+      "officeId": "3",
+      "officeName": "US House",
       "officeTypeId": "2"
     },
     "partyName": null,
@@ -5501,118 +765,6 @@
     "state": "CO",
     "stateName": "Colorado",
     "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 56502,
-          "estimatedVotesLow": 46228,
-          "estimatedVotesMid": 51365,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Mark",
-        "id": 76909,
-        "lastName": "Matthews",
-        "partyName": "Democratic",
-        "votes": 20188
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 56502,
-          "estimatedVotesLow": 46228,
-          "estimatedVotesMid": 51365,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Ryan",
-        "id": 24873,
-        "lastName": "Armagost",
-        "partyName": "Republican",
-        "votes": 31177
-      }
-    ],
-    "district": "64",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:43.421Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 51365,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 62284,
-          "estimatedVotesLow": 50960,
-          "estimatedVotesMid": 56622,
-          "turnoutHigh": 91.07,
-          "turnoutLow": 111.31,
-          "turnoutMid": 99
-        },
-        "firstName": "Lori",
-        "id": 76911,
-        "lastName": "Sander",
-        "partyName": "Republican",
-        "votes": 32901
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 62284,
-          "estimatedVotesLow": 50960,
-          "estimatedVotesMid": 56622,
-          "turnoutHigh": 91.07,
-          "turnoutLow": 111.31,
-          "turnoutMid": 99
-        },
-        "firstName": "Will",
-        "id": 76910,
-        "lastName": "Walters",
-        "partyName": "Democratic",
-        "votes": 23822
-      }
-    ],
-    "district": "65",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T20:35:43.421Z",
-    "office": {
-      "officeId": "9",
-      "officeName": "State House",
-      "officeTypeId": "2"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CO",
-    "stateName": "Colorado",
-    "totalVotes": 56723,
     "year": 2024
   }
 ]

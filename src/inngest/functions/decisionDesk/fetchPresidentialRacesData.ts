@@ -58,7 +58,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
   async ({ event, step, logger }) => {
     const {
       race_date = '2024-11-05',
-      office_id = '1',
+      office = 'President',
       limit = '150',
       name = 'General Election',
       year = '2024',
@@ -86,7 +86,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         year,
         limit,
         name,
-        office_id,
+        office,
         race_date,
         ...rest,
       }),
@@ -104,7 +104,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         limit,
         name,
         race_date,
-        office_id: '4',
+        office: 'US Senate',
         ...rest,
       }),
     )
@@ -121,7 +121,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         limit,
         name,
         race_date,
-        office_id: '3',
+        office: 'US House',
         ...rest,
       }),
     )
@@ -265,7 +265,6 @@ export const fetchPresidentialRacesData = inngest.createFunction(
           async () => {
             return getAllRacesData({
               ...getAllRacesPerStateParams,
-              ...rest,
             })
           },
         )
@@ -275,7 +274,9 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         timeTakenInSeconds = (new Date().getTime() - startDate.getTime()) / 1000
 
         const stateRacesDataOnly = stateRacesData.filter(
-          currentStateRacesData => currentStateRacesData.office?.officeName !== 'President',
+          currentStateRacesData =>
+            currentStateRacesData.office?.officeName === 'US House' ||
+            currentStateRacesData.office?.officeName === 'US Senate',
         )
 
         if (stateRacesDataOnly.length === 0) {
