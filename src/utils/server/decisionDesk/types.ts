@@ -43,7 +43,7 @@ export interface RacesData {
   party_id: number
   party: string
   level: string
-  advance_candidates: string
+  advance_candidates: 'true' | 'false'
   expected_winners: number
   uncontested: boolean
   last_updated: string
