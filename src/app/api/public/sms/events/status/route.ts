@@ -127,6 +127,10 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         campaignName: 'bulk-welcome',
         journeyType: UserCommunicationJourneyType.WELCOME_SMS,
         phoneNumber,
+        message: {
+          id: messageId,
+          status: newMessageStatus,
+        },
       })
     }
   }
