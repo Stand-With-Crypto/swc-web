@@ -12,6 +12,7 @@ import {
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { Badge } from '@/components/ui/badge'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -93,6 +94,10 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   const getPercentage = useCallback((electoralVotes: number) => {
     return (electoralVotes / 538) * 100
   }, [])
+
+  if (calledCandidate) {
+    return <WinnerAvatarBox candidate={calledCandidate} />
+  }
 
   return (
     <div className="relative flex w-full flex-col gap-4">
@@ -185,35 +190,25 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           )}
         >
           {!isNil(ddhqCandidateA?.votingData?.votes) && (
-            <>
-              {/* <p className="font-bold">
-                {(ddhqCandidateA?.votingData?.percentage || 0)?.toFixed(2)}%
-              </p> */}
-              <p>
-                {FormattedNumber({
-                  amount: ddhqCandidateA?.votingData?.votes || 0,
-                  locale,
-                })}{' '}
-                votes
-              </p>
-            </>
+            <p>
+              {FormattedNumber({
+                amount: ddhqCandidateA?.votingData?.votes || 0,
+                locale,
+              })}{' '}
+              votes
+            </p>
           )}
         </div>
 
         <div className={cn('flex items-center gap-2', getOpacity(dtsiCandidateB, liveResultData))}>
           {!isNil(ddhqCandidateB?.votingData?.votes) && (
-            <>
-              {/* <p className="font-bold">
-                {(ddhqCandidateB?.votingData?.percentage || 0)?.toFixed(2)}%
-              </p> */}
-              <p>
-                {FormattedNumber({
-                  amount: ddhqCandidateB?.votingData?.votes || 0,
-                  locale,
-                })}{' '}
-                votes
-              </p>
-            </>
+            <p>
+              {FormattedNumber({
+                amount: ddhqCandidateB?.votingData?.votes || 0,
+                locale,
+              })}{' '}
+              votes
+            </p>
           )}
         </div>
       </div>
@@ -240,6 +235,33 @@ function AvatarBox(props: AvatarBoxProps) {
       </div>
       <div className="mt-2">
         <p className="text-lg font-bold">{dtsiPersonFullName(candidate)}</p>
+      </div>
+    </div>
+  )
+}
+
+interface WinnerAvatarBoxProps {
+  candidate: PresidentialDataWithVotingResponse
+}
+
+function WinnerAvatarBox(props: WinnerAvatarBoxProps) {
+  const { candidate } = props
+
+  return (
+    <div className="flex flex-col items-center gap-6">
+      <Badge className={'bg-[#23262B] px-4 py-1 text-base text-white'}>Winner</Badge>
+
+      <div className="relative w-fit">
+        <DTSIAvatar className="rounded-full" person={candidate} size={175} />
+        <DTSIFormattedLetterGrade
+          className="absolute bottom-0 right-0 h-12 w-12 rounded-full shadow-md"
+          person={candidate}
+        />
+      </div>
+
+      <div className="mt-2 text-center">
+        <p className="text-lg font-bold">{dtsiPersonFullName(candidate)}</p>
+        <p className="text-gray-400">{candidate.votingData?.electoralVotes} electoral votes</p>
       </div>
     </div>
   )

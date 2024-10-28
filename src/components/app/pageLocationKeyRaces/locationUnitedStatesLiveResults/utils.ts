@@ -14,7 +14,7 @@ import { twNoop } from '@/utils/web/cn'
 
 export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
   if (isNil(score)) {
-    return twNoop('bg-gray-400')
+    return twNoop('bg-[#5b616e]')
   }
   if (score >= 90) {
     return twNoop('bg-green-700')
