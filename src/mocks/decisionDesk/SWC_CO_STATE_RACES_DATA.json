@@ -1,24 +1,10 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 341119,
-          "estimatedVotesLow": 279097,
-          "estimatedVotesMid": 310108,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Critter",
-        "id": 48171,
-        "lastName": "Milton",
-        "partyName": "Unity Party of Colorado",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -66,6 +52,22 @@
         "lastName": "DeGette",
         "partyName": "Democratic",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 341119,
+          "estimatedVotesLow": 279097,
+          "estimatedVotesMid": 310108,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Critter",
+        "id": 48171,
+        "lastName": "Milton",
+        "partyName": "Unity Party of Colorado",
+        "votes": 0
       }
     ],
     "district": "1",
@@ -74,7 +76,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -88,9 +90,43 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 408300,
+          "estimatedVotesLow": 334066,
+          "estimatedVotesMid": 371183,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joe",
+        "id": 10008,
+        "lastName": "Neguse",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 408300,
+          "estimatedVotesLow": 334066,
+          "estimatedVotesMid": 371183,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Marshall",
+        "id": 24680,
+        "lastName": "Dawson",
+        "partyName": "Republican",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -138,38 +174,6 @@
         "lastName": "Kent",
         "partyName": "Libertarian",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 408300,
-          "estimatedVotesLow": 334066,
-          "estimatedVotesMid": 371183,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Marshall",
-        "id": 24680,
-        "lastName": "Dawson",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 408300,
-          "estimatedVotesLow": 334066,
-          "estimatedVotesMid": 371183,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Joe",
-        "id": 10008,
-        "lastName": "Neguse",
-        "partyName": "Democratic",
-        "votes": 0
       }
     ],
     "district": "2",
@@ -178,7 +182,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -192,6 +196,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -221,10 +227,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Jeff",
-        "id": 76774,
-        "lastName": "Hurd",
-        "partyName": "Republican",
+        "firstName": "James",
+        "id": 102119,
+        "lastName": "Wiley",
+        "partyName": "Libertarian",
         "votes": 0
       },
       {
@@ -253,10 +259,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "James",
-        "id": 102119,
-        "lastName": "Wiley",
-        "partyName": "Libertarian",
+        "firstName": "Jeff",
+        "id": 76774,
+        "lastName": "Hurd",
+        "partyName": "Republican",
         "votes": 0
       }
     ],
@@ -266,7 +272,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -280,9 +286,27 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 447186,
+          "estimatedVotesLow": 365876,
+          "estimatedVotesMid": 406529,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Paul",
+        "id": 47381,
+        "lastName": "Fiorino",
+        "partyName": "Unity Party of Colorado",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -341,22 +365,6 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Paul",
-        "id": 47381,
-        "lastName": "Fiorino",
-        "partyName": "Unity Party of Colorado",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 447186,
-          "estimatedVotesLow": 365876,
-          "estimatedVotesMid": 406529,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
         "firstName": "Trish",
         "id": 84985,
         "lastName": "Calvarese",
@@ -370,7 +378,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T19:19:49.012Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -384,6 +392,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -417,6 +427,22 @@
         "id": 76781,
         "lastName": "Crank",
         "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 344614,
+          "estimatedVotesLow": 281957,
+          "estimatedVotesMid": 313285,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Christopher",
+        "id": 102121,
+        "lastName": "Sweat",
+        "partyName": "Forward",
         "votes": 0
       },
       {
@@ -466,22 +492,6 @@
         "lastName": "Mitchell",
         "partyName": "Constitution",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344614,
-          "estimatedVotesLow": 281957,
-          "estimatedVotesMid": 313285,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Christopher",
-        "id": 102121,
-        "lastName": "Sweat",
-        "partyName": "Forward",
-        "votes": 0
       }
     ],
     "district": "5",
@@ -490,7 +500,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:13.770Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -504,9 +514,43 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 366534,
+          "estimatedVotesLow": 299890,
+          "estimatedVotesMid": 333212,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 44296,
+        "lastName": "Kittleson",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 366534,
+          "estimatedVotesLow": 299890,
+          "estimatedVotesMid": 333212,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Travis",
+        "id": 102124,
+        "lastName": "Nicks",
+        "partyName": "Approval Voting Party",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -538,38 +582,6 @@
         "lastName": "Crow",
         "partyName": "Democratic",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 366534,
-          "estimatedVotesLow": 299890,
-          "estimatedVotesMid": 333212,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Travis",
-        "id": 102124,
-        "lastName": "Nicks",
-        "partyName": "Approval Voting Party",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 366534,
-          "estimatedVotesLow": 299890,
-          "estimatedVotesMid": 333212,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 44296,
-        "lastName": "Kittleson",
-        "partyName": "Libertarian",
-        "votes": 0
       }
     ],
     "district": "6",
@@ -578,7 +590,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T19:20:13.770Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -592,6 +604,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -666,7 +680,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:19:49.012Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -680,25 +694,11 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 344179,
-          "estimatedVotesLow": 281600,
-          "estimatedVotesMid": 312889,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Yadira",
-        "id": 24678,
-        "lastName": "Caraveo",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -741,6 +741,22 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
+        "firstName": "Yadira",
+        "id": 24678,
+        "lastName": "Caraveo",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 344179,
+          "estimatedVotesLow": 281600,
+          "estimatedVotesMid": 312889,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
         "firstName": "Susan",
         "id": 102128,
         "lastName": "Hall",
@@ -754,7 +770,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

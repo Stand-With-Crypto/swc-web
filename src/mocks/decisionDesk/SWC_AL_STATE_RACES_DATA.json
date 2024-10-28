@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,15 +11,15 @@
           "estimatedVotesHigh": 330183,
           "estimatedVotesLow": 270149,
           "estimatedVotesMid": 300165,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Barry",
         "id": 9657,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 226212
+        "votes": 0
       },
       {
         "elected": false,
@@ -25,15 +27,15 @@
           "estimatedVotesHigh": 330183,
           "estimatedVotesLow": 270149,
           "estimatedVotesMid": 300165,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 52629,
         "lastName": "Holmes",
         "partyName": "Democratic",
-        "votes": 73953
+        "votes": 0
       }
     ],
     "district": "1",
@@ -42,7 +44,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -52,10 +54,12 @@
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 300165,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -65,15 +69,15 @@
           "estimatedVotesHigh": 308599,
           "estimatedVotesLow": 252491,
           "estimatedVotesMid": 280544,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 20.24,
+          "turnoutLow": 24.74,
+          "turnoutMid": 22.26
         },
-        "firstName": "Caroleene",
-        "id": 52637,
-        "lastName": "Dobson",
-        "partyName": "Republican",
-        "votes": 122586
+        "firstName": "Shomari",
+        "id": 52631,
+        "lastName": "Figures",
+        "partyName": "Democratic",
+        "votes": 34769
       },
       {
         "elected": false,
@@ -81,15 +85,15 @@
           "estimatedVotesHigh": 308599,
           "estimatedVotesLow": 252491,
           "estimatedVotesMid": 280544,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 20.24,
+          "turnoutLow": 24.74,
+          "turnoutMid": 22.26
         },
-        "firstName": "Shomari",
-        "id": 52631,
-        "lastName": "Figures",
-        "partyName": "Democratic",
-        "votes": 157958
+        "firstName": "Caroleene",
+        "id": 52637,
+        "lastName": "Dobson",
+        "partyName": "Republican",
+        "votes": 27694
       }
     ],
     "district": "2",
@@ -98,7 +102,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T20:51:08.970Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -108,10 +112,12 @@
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 280544,
+    "totalVotes": 62463,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -152,6 +158,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -192,6 +200,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -232,6 +242,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -241,15 +253,15 @@
           "estimatedVotesHigh": 368267,
           "estimatedVotesLow": 301308,
           "estimatedVotesMid": 334787,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 10.08,
+          "turnoutLow": 12.32,
+          "turnoutMid": 11.09
         },
-        "firstName": "Elizabeth",
-        "id": 52647,
-        "lastName": "Anderson",
-        "partyName": "Democratic",
-        "votes": 102037
+        "firstName": "Gary",
+        "id": 1061,
+        "lastName": "Palmer",
+        "partyName": "Republican",
+        "votes": 27600
       },
       {
         "elected": false,
@@ -257,15 +269,15 @@
           "estimatedVotesHigh": 368267,
           "estimatedVotesLow": 301308,
           "estimatedVotesMid": 334787,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 10.08,
+          "turnoutLow": 12.32,
+          "turnoutMid": 11.09
         },
-        "firstName": "Gary",
-        "id": 1061,
-        "lastName": "Palmer",
-        "partyName": "Republican",
-        "votes": 232750
+        "firstName": "Elizabeth",
+        "id": 52647,
+        "lastName": "Anderson",
+        "partyName": "Democratic",
+        "votes": 9530
       }
     ],
     "district": "6",
@@ -274,7 +286,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T20:54:19.420Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -284,10 +296,12 @@
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 334787,
+    "totalVotes": 37130,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -297,15 +311,15 @@
           "estimatedVotesHigh": 327610,
           "estimatedVotesLow": 268043,
           "estimatedVotesMid": 297826,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 2.41,
+          "turnoutLow": 2.95,
+          "turnoutMid": 2.65
         },
         "firstName": "Robin",
         "id": 21099,
         "lastName": "Litaker",
         "partyName": "Republican",
-        "votes": 100750
+        "votes": 3263
       },
       {
         "elected": false,
@@ -313,15 +327,15 @@
           "estimatedVotesHigh": 327610,
           "estimatedVotesLow": 268043,
           "estimatedVotesMid": 297826,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 2.41,
+          "turnoutLow": 2.95,
+          "turnoutMid": 2.65
         },
         "firstName": "Terri",
         "id": 84978,
         "lastName": "Sewall",
         "partyName": "Democratic",
-        "votes": 197076
+        "votes": 4643
       }
     ],
     "district": "7",
@@ -330,7 +344,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T20:53:09.770Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -340,7 +354,7 @@
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 297826,
+    "totalVotes": 7906,
     "year": 2024
   }
 ]

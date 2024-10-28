@@ -1,7 +1,8 @@
 'use client'
 
 import { useMemo } from 'react'
-import { format, parseISO } from 'date-fns'
+import { TZDate } from '@date-fns/tz'
+import { format } from 'date-fns'
 import { isNil } from 'lodash-es'
 import { usePathname } from 'next/navigation'
 
@@ -121,8 +122,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
   const lastUpdated = useMemo(() => {
     if (!raceData?.lastUpdated) return ''
-    const parsedDate = new Date(raceData.lastUpdated.replace('Z', ''))
-    return format(parsedDate, "'Data updated' M/d/yy 'at' h:mm a")
+
+    const tzDate = new TZDate(raceData.lastUpdated, 'America/New_York')
+
+    return format(tzDate, "'Data updated' M/d/yy 'at' h:mm a 'ET'")
   }, [raceData])
 
   const raceStatus = useMemo<Status>(() => {

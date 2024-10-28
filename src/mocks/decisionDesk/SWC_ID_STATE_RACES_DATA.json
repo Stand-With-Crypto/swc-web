@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -17,6 +19,22 @@
         "id": 44635,
         "lastName": "Gomez",
         "partyName": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 452185,
+          "estimatedVotesLow": 369972,
+          "estimatedVotesMid": 411077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ross",
+        "id": 85003,
+        "lastName": "Fulcher",
+        "partyName": "Republican",
         "votes": 0
       },
       {
@@ -50,22 +68,6 @@
         "lastName": "Peterson",
         "partyName": "Democratic",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 452185,
-          "estimatedVotesLow": 369972,
-          "estimatedVotesMid": 411077,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ross",
-        "id": 85003,
-        "lastName": "Fulcher",
-        "partyName": "Republican",
-        "votes": 0
       }
     ],
     "district": "1",
@@ -74,7 +76,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -88,6 +90,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -162,7 +166,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:13.770Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

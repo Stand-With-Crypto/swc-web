@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,46 +11,46 @@
           "estimatedVotesHigh": 6039891,
           "estimatedVotesLow": 4941728,
           "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Don",
-        "id": 11348,
-        "lastName": "Kissick",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6039891,
-          "estimatedVotesLow": 4941728,
-          "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bernie",
-        "id": 53893,
-        "lastName": "Moreno",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6039891,
-          "estimatedVotesLow": 4941728,
-          "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 55.84,
+          "turnoutLow": 68.24,
+          "turnoutMid": 61.42
         },
         "firstName": "Sherrod",
         "id": 8225,
         "lastName": "Brown",
         "partyName": "Democratic",
+        "votes": 1548144
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6039891,
+          "estimatedVotesLow": 4941728,
+          "estimatedVotesMid": 5490807,
+          "turnoutHigh": 55.84,
+          "turnoutLow": 68.24,
+          "turnoutMid": 61.42
+        },
+        "firstName": "Bernie",
+        "id": 53893,
+        "lastName": "Moreno",
+        "partyName": "Republican",
+        "votes": 1824287
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6039891,
+          "estimatedVotesLow": 4941728,
+          "estimatedVotesMid": 5490807,
+          "turnoutHigh": 55.84,
+          "turnoutLow": 68.24,
+          "turnoutMid": 61.42
+        },
+        "firstName": "Don",
+        "id": 11348,
+        "lastName": "Kissick",
+        "partyName": "Libertarian",
         "votes": 0
       }
     ],
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T21:03:22.136Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -68,10 +70,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 3372431,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -81,15 +85,15 @@
           "estimatedVotesHigh": 415682,
           "estimatedVotesLow": 340104,
           "estimatedVotesMid": 377893,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 68.08,
+          "turnoutLow": 83.21,
+          "turnoutMid": 74.89
         },
         "firstName": "Orlando",
         "id": 28103,
         "lastName": "Sonza",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 116630
       },
       {
         "elected": false,
@@ -97,15 +101,15 @@
           "estimatedVotesHigh": 415682,
           "estimatedVotesLow": 340104,
           "estimatedVotesMid": 377893,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 68.08,
+          "turnoutLow": 83.21,
+          "turnoutMid": 74.89
         },
         "firstName": "Greg",
         "id": 19173,
         "lastName": "Landsman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 166377
       }
     ],
     "district": "1",
@@ -114,7 +118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:01:41.599Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -124,10 +128,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 283007,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -137,15 +143,15 @@
           "estimatedVotesHigh": 407501,
           "estimatedVotesLow": 333412,
           "estimatedVotesMid": 370456,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.57,
+          "turnoutLow": 58.14,
+          "turnoutMid": 52.33
         },
         "firstName": "Samantha",
         "id": 19175,
         "lastName": "Meadows",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 47185
       },
       {
         "elected": false,
@@ -153,15 +159,15 @@
           "estimatedVotesHigh": 407501,
           "estimatedVotesLow": 333412,
           "estimatedVotesMid": 370456,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.57,
+          "turnoutLow": 58.14,
+          "turnoutMid": 52.33
         },
         "firstName": "David",
         "id": 53901,
         "lastName": "Taylor",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 146673
       }
     ],
     "district": "2",
@@ -170,7 +176,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:11.658Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -180,10 +186,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 193858,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -193,15 +201,15 @@
           "estimatedVotesHigh": 373754,
           "estimatedVotesLow": 305798,
           "estimatedVotesMid": 339776,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.32,
+          "turnoutLow": 76.17,
+          "turnoutMid": 68.56
         },
         "firstName": "Joyce",
         "id": 1520,
         "lastName": "Beatty",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 169616
       },
       {
         "elected": false,
@@ -209,15 +217,15 @@
           "estimatedVotesHigh": 373754,
           "estimatedVotesLow": 305798,
           "estimatedVotesMid": 339776,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.32,
+          "turnoutLow": 76.17,
+          "turnoutMid": 68.56
         },
         "firstName": "Michael",
         "id": 53902,
         "lastName": "Young",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 63318
       }
     ],
     "district": "3",
@@ -226,7 +234,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:42:44.622Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -236,10 +244,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 232934,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -249,15 +259,15 @@
           "estimatedVotesHigh": 417264,
           "estimatedVotesLow": 341400,
           "estimatedVotesMid": 379332,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.31,
+          "turnoutLow": 57.83,
+          "turnoutMid": 52.04
         },
         "firstName": "Jim",
         "id": 1523,
         "lastName": "Jordan",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 127277
       },
       {
         "elected": false,
@@ -265,15 +275,15 @@
           "estimatedVotesHigh": 417264,
           "estimatedVotesLow": 341400,
           "estimatedVotesMid": 379332,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.31,
+          "turnoutLow": 57.83,
+          "turnoutMid": 52.04
         },
         "firstName": "Tamie",
         "id": 19179,
         "lastName": "Wilson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 70140
       }
     ],
     "district": "4",
@@ -282,7 +292,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:11.658Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -292,10 +302,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 197417,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -305,15 +317,15 @@
           "estimatedVotesHigh": 409222,
           "estimatedVotesLow": 334817,
           "estimatedVotesMid": 372019,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.01,
+          "turnoutMid": 30.61
         },
         "firstName": "Keith ",
         "id": 1546,
         "lastName": "Mundy",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 32668
       },
       {
         "elected": false,
@@ -321,15 +333,15 @@
           "estimatedVotesHigh": 409222,
           "estimatedVotesLow": 334817,
           "estimatedVotesMid": 372019,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 27.83,
+          "turnoutLow": 34.01,
+          "turnoutMid": 30.61
         },
         "firstName": "Bob",
         "id": 1525,
         "lastName": "Latta",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 81212
       }
     ],
     "district": "5",
@@ -338,7 +350,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:31.852Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -348,10 +360,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 113880,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -361,15 +375,15 @@
           "estimatedVotesHigh": 402900,
           "estimatedVotesLow": 329644,
           "estimatedVotesMid": 366272,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 48.55,
+          "turnoutLow": 59.34,
+          "turnoutMid": 53.41
         },
         "firstName": "Michael",
         "id": 28116,
         "lastName": "Rulli",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 138537
       },
       {
         "elected": false,
@@ -377,15 +391,15 @@
           "estimatedVotesHigh": 402900,
           "estimatedVotesLow": 329644,
           "estimatedVotesMid": 366272,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 48.55,
+          "turnoutLow": 59.34,
+          "turnoutMid": 53.41
         },
         "firstName": "Michael",
         "id": 53906,
         "lastName": "Kripchak",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 57082
       }
     ],
     "district": "6",
@@ -394,7 +408,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:59.385Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -404,10 +418,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 195619,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -417,31 +433,15 @@
           "estimatedVotesHigh": 442546,
           "estimatedVotesLow": 362083,
           "estimatedVotesMid": 402314,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Dennis",
-        "id": 85111,
-        "lastName": "Kucinich",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 442546,
-          "estimatedVotesLow": 362083,
-          "estimatedVotesMid": 402314,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 82.86,
+          "turnoutLow": 101.27,
+          "turnoutMid": 91.14
         },
         "firstName": "Max",
         "id": 19194,
         "lastName": "Miller",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 199774
       },
       {
         "elected": false,
@@ -449,15 +449,31 @@
           "estimatedVotesHigh": 442546,
           "estimatedVotesLow": 362083,
           "estimatedVotesMid": 402314,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 82.86,
+          "turnoutLow": 101.27,
+          "turnoutMid": 91.14
         },
         "firstName": "Matthew",
         "id": 85110,
         "lastName": "Diemer",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 159262
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 442546,
+          "estimatedVotesLow": 362083,
+          "estimatedVotesMid": 402314,
+          "turnoutHigh": 82.86,
+          "turnoutLow": 101.27,
+          "turnoutMid": 91.14
+        },
+        "firstName": "Dennis",
+        "id": 85111,
+        "lastName": "Kucinich",
+        "partyName": "Independent",
+        "votes": 7641
       }
     ],
     "district": "7",
@@ -466,7 +482,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:01:41.599Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -476,10 +492,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 366677,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -489,15 +507,15 @@
           "estimatedVotesHigh": 406793,
           "estimatedVotesLow": 332831,
           "estimatedVotesMid": 369812,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 80.39,
+          "turnoutLow": 98.25,
+          "turnoutMid": 88.42
         },
         "firstName": "Warren",
         "id": 1531,
         "lastName": "Davidson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 198423
       },
       {
         "elected": false,
@@ -505,15 +523,15 @@
           "estimatedVotesHigh": 406793,
           "estimatedVotesLow": 332831,
           "estimatedVotesMid": 369812,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 80.39,
+          "turnoutLow": 98.25,
+          "turnoutMid": 88.42
         },
         "firstName": "Vanessa",
         "id": 8846,
         "lastName": "Enoch",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 128579
       }
     ],
     "district": "8",
@@ -522,7 +540,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:30.803Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -532,10 +550,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 327002,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -545,9 +565,9 @@
           "estimatedVotesHigh": 394847,
           "estimatedVotesLow": 323055,
           "estimatedVotesMid": 358951,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.46,
+          "turnoutLow": 61.67,
+          "turnoutMid": 55.5
         },
         "firstName": "Tom",
         "id": 128251,
@@ -561,15 +581,15 @@
           "estimatedVotesHigh": 394847,
           "estimatedVotesLow": 323055,
           "estimatedVotesMid": 358951,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.46,
+          "turnoutLow": 61.67,
+          "turnoutMid": 55.5
         },
         "firstName": "Derek",
         "id": 28246,
         "lastName": "Merrin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 108738
       },
       {
         "elected": false,
@@ -577,15 +597,15 @@
           "estimatedVotesHigh": 394847,
           "estimatedVotesLow": 323055,
           "estimatedVotesMid": 358951,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.46,
+          "turnoutLow": 61.67,
+          "turnoutMid": 55.5
         },
         "firstName": "Marcy",
         "id": 1532,
         "lastName": "Kaptur",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 90486
       }
     ],
     "district": "9",
@@ -594,7 +614,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:11.658Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -604,10 +624,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 199224,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -617,15 +639,15 @@
           "estimatedVotesHigh": 394472,
           "estimatedVotesLow": 322749,
           "estimatedVotesMid": 358610,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.44,
+          "turnoutLow": 76.32,
+          "turnoutMid": 68.69
         },
         "firstName": "Michael",
         "id": 85112,
         "lastName": "Harbaugh",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 4871
       },
       {
         "elected": false,
@@ -633,15 +655,15 @@
           "estimatedVotesHigh": 394472,
           "estimatedVotesLow": 322749,
           "estimatedVotesMid": 358610,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.44,
+          "turnoutLow": 76.32,
+          "turnoutMid": 68.69
         },
         "firstName": "Michael",
         "id": 1535,
         "lastName": "Turner",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 118077
       },
       {
         "elected": false,
@@ -649,15 +671,15 @@
           "estimatedVotesHigh": 394472,
           "estimatedVotesLow": 322749,
           "estimatedVotesMid": 358610,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.44,
+          "turnoutLow": 76.32,
+          "turnoutMid": 68.69
         },
         "firstName": "Amy",
         "id": 28163,
         "lastName": "Cox",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 123379
       }
     ],
     "district": "10",
@@ -666,7 +688,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:01:33.392Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -676,10 +698,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 246327,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -689,31 +713,15 @@
           "estimatedVotesHigh": 353759,
           "estimatedVotesLow": 289439,
           "estimatedVotesMid": 321599,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Shontel",
-        "id": 16959,
-        "lastName": "Brown",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 353759,
-          "estimatedVotesLow": 289439,
-          "estimatedVotesMid": 321599,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.22,
+          "turnoutLow": 110.27,
+          "turnoutMid": 99
         },
         "firstName": "Alan",
         "id": 53916,
         "lastName": "Rapoport",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 67784
       },
       {
         "elected": false,
@@ -721,15 +729,31 @@
           "estimatedVotesHigh": 353759,
           "estimatedVotesLow": 289439,
           "estimatedVotesMid": 321599,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.22,
+          "turnoutLow": 110.27,
+          "turnoutMid": 99
+        },
+        "firstName": "Shontel",
+        "id": 16959,
+        "lastName": "Brown",
+        "partyName": "Democratic",
+        "votes": 245499
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 353759,
+          "estimatedVotesLow": 289439,
+          "estimatedVotesMid": 321599,
+          "turnoutHigh": 90.22,
+          "turnoutLow": 110.27,
+          "turnoutMid": 99
         },
         "firstName": "Sean",
         "id": 85114,
         "lastName": "Freeman",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 5884
       }
     ],
     "district": "11",
@@ -738,7 +762,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:39.964Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -748,10 +772,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 319167,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -761,15 +787,15 @@
           "estimatedVotesHigh": 404641,
           "estimatedVotesLow": 331070,
           "estimatedVotesMid": 367855,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 49.48,
+          "turnoutLow": 60.47,
+          "turnoutMid": 54.42
         },
         "firstName": "Troy",
         "id": 8816,
         "lastName": "Balderson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 128279
       },
       {
         "elected": false,
@@ -777,15 +803,15 @@
           "estimatedVotesHigh": 404641,
           "estimatedVotesLow": 331070,
           "estimatedVotesMid": 367855,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 49.48,
+          "turnoutLow": 60.47,
+          "turnoutMid": 54.42
         },
         "firstName": "Jerrad",
         "id": 53918,
         "lastName": "Christian",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 71926
       }
     ],
     "district": "12",
@@ -794,7 +820,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:10.886Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -804,10 +830,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 200205,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -817,15 +845,15 @@
           "estimatedVotesHigh": 416542,
           "estimatedVotesLow": 340808,
           "estimatedVotesMid": 378675,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 18.12,
+          "turnoutLow": 22.15,
+          "turnoutMid": 19.94
         },
-        "firstName": "Emilia",
-        "id": 19212,
-        "lastName": "Sykes",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Kevin",
+        "id": 53920,
+        "lastName": "Coughlin",
+        "partyName": "Republican",
+        "votes": 42133
       },
       {
         "elected": false,
@@ -833,15 +861,15 @@
           "estimatedVotesHigh": 416542,
           "estimatedVotesLow": 340808,
           "estimatedVotesMid": 378675,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 18.12,
+          "turnoutLow": 22.15,
+          "turnoutMid": 19.94
         },
-        "firstName": "Kevin",
-        "id": 53920,
-        "lastName": "Coughlin",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Emilia",
+        "id": 19212,
+        "lastName": "Sykes",
+        "partyName": "Democratic",
+        "votes": 33364
       }
     ],
     "district": "13",
@@ -850,7 +878,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:56:10.701Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -860,10 +888,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 75497,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -873,15 +903,15 @@
           "estimatedVotesHigh": 423346,
           "estimatedVotesLow": 346374,
           "estimatedVotesMid": 384860,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 63.49,
+          "turnoutLow": 77.6,
+          "turnoutMid": 69.84
         },
         "firstName": "David",
         "id": 1543,
         "lastName": "Joyce",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 154930
       },
       {
         "elected": false,
@@ -889,15 +919,15 @@
           "estimatedVotesHigh": 423346,
           "estimatedVotesLow": 346374,
           "estimatedVotesMid": 384860,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 63.49,
+          "turnoutLow": 77.6,
+          "turnoutMid": 69.84
         },
         "firstName": "Brian",
         "id": 53921,
         "lastName": "Kenderes",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 113841
       }
     ],
     "district": "14",
@@ -906,7 +936,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:56:10.701Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -916,10 +946,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 268771,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -929,15 +961,15 @@
           "estimatedVotesHigh": 375375,
           "estimatedVotesLow": 307124,
           "estimatedVotesMid": 341249,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 74.82,
+          "turnoutLow": 91.45,
+          "turnoutMid": 82.31
         },
-        "firstName": "Mike",
-        "id": 16974,
-        "lastName": "Carey",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Adam",
+        "id": 28212,
+        "lastName": "Miller",
+        "partyName": "Democratic",
+        "votes": 149907
       },
       {
         "elected": false,
@@ -945,15 +977,15 @@
           "estimatedVotesHigh": 375375,
           "estimatedVotesLow": 307124,
           "estimatedVotesMid": 341249,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 74.82,
+          "turnoutLow": 91.45,
+          "turnoutMid": 82.31
         },
-        "firstName": "Adam",
-        "id": 28212,
-        "lastName": "Miller",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Mike",
+        "id": 16974,
+        "lastName": "Carey",
+        "partyName": "Republican",
+        "votes": 130967
       }
     ],
     "district": "15",
@@ -962,7 +994,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:09.645Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -972,7 +1004,7 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 280874,
     "year": 2024
   }
 ]

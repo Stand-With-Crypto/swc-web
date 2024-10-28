@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -90,7 +92,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -104,6 +106,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -120,38 +124,6 @@
         "firstName": "Shondrell",
         "id": 50991,
         "lastName": "Perrilloux",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 350829,
-          "estimatedVotesLow": 287043,
-          "estimatedVotesMid": 318936,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Devin",
-        "id": 85029,
-        "lastName": "Davis",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 350829,
-          "estimatedVotesLow": 287043,
-          "estimatedVotesMid": 318936,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Christy",
-        "id": 102146,
-        "lastName": "Lynch",
         "partyName": "Republican",
         "votes": 0
       },
@@ -186,6 +158,38 @@
         "lastName": "Graham",
         "partyName": "Republican",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350829,
+          "estimatedVotesLow": 287043,
+          "estimatedVotesMid": 318936,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Devin",
+        "id": 85029,
+        "lastName": "Davis",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 350829,
+          "estimatedVotesLow": 287043,
+          "estimatedVotesMid": 318936,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Christy",
+        "id": 102146,
+        "lastName": "Lynch",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "2",
@@ -194,7 +198,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -208,6 +212,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -282,7 +288,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -296,6 +302,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -338,7 +346,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -352,6 +360,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -410,7 +420,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:12.873Z",
+    "lastUpdated": "2024-10-28T19:18:38.045Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -424,6 +434,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -469,6 +481,22 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
+        "firstName": "Quentin",
+        "id": 85034,
+        "lastName": "Anderson",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 342275,
+          "estimatedVotesLow": 280043,
+          "estimatedVotesMid": 311159,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
         "firstName": "Cleo",
         "id": 50852,
         "lastName": "Fields",
@@ -490,22 +518,6 @@
         "lastName": "Williams",
         "partyName": "Democratic",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 342275,
-          "estimatedVotesLow": 280043,
-          "estimatedVotesMid": 311159,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Quentin",
-        "id": 85034,
-        "lastName": "Anderson",
-        "partyName": "Democratic",
-        "votes": 0
       }
     ],
     "district": "6",
@@ -514,7 +526,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

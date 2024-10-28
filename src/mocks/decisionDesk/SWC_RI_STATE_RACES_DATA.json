@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,15 +11,15 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.36,
+          "turnoutLow": 16.32,
+          "turnoutMid": 14.69
         },
         "firstName": "Patricia",
         "id": 10790,
         "lastName": "Morgan",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 25732
       },
       {
         "elected": false,
@@ -25,15 +27,15 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.36,
+          "turnoutLow": 16.32,
+          "turnoutMid": 14.69
         },
         "firstName": "Sheldon",
         "id": 8240,
         "lastName": "Whitehouse",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 43693
       }
     ],
     "district": "",
@@ -42,7 +44,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T21:03:43.366Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -52,10 +54,12 @@
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 69425,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -65,31 +69,15 @@
           "estimatedVotesHigh": 237663,
           "estimatedVotesLow": 194450,
           "estimatedVotesMid": 216055,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Christopher",
-        "id": 102212,
-        "lastName": "Reynolds",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 237663,
-          "estimatedVotesLow": 194450,
-          "estimatedVotesMid": 216055,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 31.6,
+          "turnoutLow": 38.62,
+          "turnoutMid": 34.76
         },
         "firstName": "Allen",
         "id": 14728,
         "lastName": "Waters",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 25880
       },
       {
         "elected": false,
@@ -97,15 +85,31 @@
           "estimatedVotesHigh": 237663,
           "estimatedVotesLow": 194450,
           "estimatedVotesMid": 216055,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 31.6,
+          "turnoutLow": 38.62,
+          "turnoutMid": 34.76
         },
         "firstName": "Gabe",
         "id": 50693,
         "lastName": "Amo",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 47694
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 237663,
+          "estimatedVotesLow": 194450,
+          "estimatedVotesMid": 216055,
+          "turnoutHigh": 31.6,
+          "turnoutLow": 38.62,
+          "turnoutMid": 34.76
+        },
+        "firstName": "Christopher",
+        "id": 102212,
+        "lastName": "Reynolds",
+        "partyName": "Independent",
+        "votes": 1531
       }
     ],
     "district": "1",
@@ -114,7 +118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:05:11.503Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -124,10 +128,12 @@
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 75105,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -137,15 +143,15 @@
           "estimatedVotesHigh": 282128,
           "estimatedVotesLow": 230833,
           "estimatedVotesMid": 256479,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 34.07,
+          "turnoutLow": 41.64,
+          "turnoutMid": 37.48
         },
         "firstName": "Seth",
         "id": 32146,
         "lastName": "Magaziner",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 54185
       },
       {
         "elected": false,
@@ -153,15 +159,15 @@
           "estimatedVotesHigh": 282128,
           "estimatedVotesLow": 230833,
           "estimatedVotesMid": 256479,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 34.07,
+          "turnoutLow": 41.64,
+          "turnoutMid": 37.48
         },
         "firstName": "Steven",
         "id": 84412,
         "lastName": "Corvi",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 41931
       }
     ],
     "district": "2",
@@ -170,7 +176,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:05:49.482Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -180,7 +186,7 @@
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 96116,
     "year": 2024
   }
 ]

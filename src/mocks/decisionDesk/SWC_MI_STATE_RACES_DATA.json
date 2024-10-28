@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,14 +11,14 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 32.46,
+          "turnoutLow": 39.67,
+          "turnoutMid": 35.71
         },
-        "firstName": "Doug",
-        "id": 14712,
-        "lastName": "Dern",
-        "partyName": "Natural Law",
+        "firstName": "Joseph",
+        "id": 102160,
+        "lastName": "Solis-Mullen",
+        "partyName": "Libertarian",
         "votes": 0
       },
       {
@@ -25,9 +27,9 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 32.46,
+          "turnoutLow": 39.67,
+          "turnoutMid": 35.71
         },
         "firstName": "Douglas",
         "id": 102159,
@@ -41,15 +43,15 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 32.46,
+          "turnoutLow": 39.67,
+          "turnoutMid": 35.71
         },
-        "firstName": "Elissa",
-        "id": 10364,
-        "lastName": "Slotkin",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Mike",
+        "id": 8219,
+        "lastName": "Rogers",
+        "partyName": "Republican",
+        "votes": 668141
       },
       {
         "elected": false,
@@ -57,9 +59,9 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 32.46,
+          "turnoutLow": 39.67,
+          "turnoutMid": 35.71
         },
         "firstName": "Dave",
         "id": 102162,
@@ -73,15 +75,15 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 32.46,
+          "turnoutLow": 39.67,
+          "turnoutMid": 35.71
         },
-        "firstName": "Mike",
-        "id": 8219,
-        "lastName": "Rogers",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Elissa",
+        "id": 10364,
+        "lastName": "Slotkin",
+        "partyName": "Democratic",
+        "votes": 1142705
       },
       {
         "elected": false,
@@ -89,14 +91,14 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 32.46,
+          "turnoutLow": 39.67,
+          "turnoutMid": 35.71
         },
-        "firstName": "Joseph",
-        "id": 102160,
-        "lastName": "Solis-Mullen",
-        "partyName": "Libertarian",
+        "firstName": "Doug",
+        "id": 14712,
+        "lastName": "Dern",
+        "partyName": "Natural Law",
         "votes": 0
       }
     ],
@@ -106,7 +108,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T21:00:03.115Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -116,10 +118,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 1810846,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -129,15 +133,15 @@
           "estimatedVotesHigh": 470067,
           "estimatedVotesLow": 384602,
           "estimatedVotesMid": 427332,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.66,
+          "turnoutLow": 13.02,
+          "turnoutMid": 11.72
         },
         "firstName": "Andrew",
         "id": 44334,
         "lastName": "Gale",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 946
       },
       {
         "elected": false,
@@ -145,31 +149,15 @@
           "estimatedVotesHigh": 470067,
           "estimatedVotesLow": 384602,
           "estimatedVotesMid": 427332,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Liz",
-        "id": 44335,
-        "lastName": "Hakola",
-        "partyName": "Working Class",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 470067,
-          "estimatedVotesLow": 384602,
-          "estimatedVotesMid": 427332,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.66,
+          "turnoutLow": 13.02,
+          "turnoutMid": 11.72
         },
         "firstName": "John",
         "id": 1328,
         "lastName": "Bergman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 31693
       },
       {
         "elected": false,
@@ -177,15 +165,31 @@
           "estimatedVotesHigh": 470067,
           "estimatedVotesLow": 384602,
           "estimatedVotesMid": 427332,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.66,
+          "turnoutLow": 13.02,
+          "turnoutMid": 11.72
+        },
+        "firstName": "Liz",
+        "id": 44335,
+        "lastName": "Hakola",
+        "partyName": "Working Class",
+        "votes": 948
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 470067,
+          "estimatedVotesLow": 384602,
+          "estimatedVotesMid": 427332,
+          "turnoutHigh": 10.66,
+          "turnoutLow": 13.02,
+          "turnoutMid": 11.72
         },
         "firstName": "Callie",
         "id": 79443,
         "lastName": "Barr",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 16500
       }
     ],
     "district": "1",
@@ -194,7 +198,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:59:11.057Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -204,10 +208,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 50087,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -217,15 +223,15 @@
           "estimatedVotesHigh": 425832,
           "estimatedVotesLow": 348407,
           "estimatedVotesMid": 387119,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 24.61,
+          "turnoutLow": 30.08,
+          "turnoutMid": 27.07
         },
         "firstName": "John",
         "id": 1333,
         "lastName": "Moolenaar",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 67951
       },
       {
         "elected": false,
@@ -233,15 +239,15 @@
           "estimatedVotesHigh": 425832,
           "estimatedVotesLow": 348407,
           "estimatedVotesMid": 387119,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 24.61,
+          "turnoutLow": 30.08,
+          "turnoutMid": 27.07
         },
         "firstName": "Michael",
         "id": 79445,
         "lastName": "Lynch",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 34836
       },
       {
         "elected": false,
@@ -249,9 +255,9 @@
           "estimatedVotesHigh": 425832,
           "estimatedVotesLow": 348407,
           "estimatedVotesMid": 387119,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 24.61,
+          "turnoutLow": 30.08,
+          "turnoutMid": 27.07
         },
         "firstName": "Scott",
         "id": 105878,
@@ -265,15 +271,15 @@
           "estimatedVotesHigh": 425832,
           "estimatedVotesLow": 348407,
           "estimatedVotesMid": 387119,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 24.61,
+          "turnoutLow": 30.08,
+          "turnoutMid": 27.07
         },
         "firstName": "Ben",
         "id": 102165,
         "lastName": "DeJong",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 2003
       }
     ],
     "district": "2",
@@ -282,7 +288,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:46.214Z",
+    "lastUpdated": "2024-10-28T20:58:40.826Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -292,10 +298,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 104790,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -305,15 +313,15 @@
           "estimatedVotesHigh": 421389,
           "estimatedVotesLow": 344773,
           "estimatedVotesMid": 383081,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.17,
+          "turnoutLow": 9.98,
+          "turnoutMid": 8.98
         },
         "firstName": "Paul",
         "id": 79446,
         "lastName": "Hudson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 19259
       },
       {
         "elected": false,
@@ -321,15 +329,15 @@
           "estimatedVotesHigh": 421389,
           "estimatedVotesLow": 344773,
           "estimatedVotesMid": 383081,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.17,
+          "turnoutLow": 9.98,
+          "turnoutMid": 8.98
         },
         "firstName": "Louis",
         "id": 44338,
         "lastName": "Palus",
         "partyName": "Working Class",
-        "votes": 0
+        "votes": 739
       },
       {
         "elected": false,
@@ -337,15 +345,15 @@
           "estimatedVotesHigh": 421389,
           "estimatedVotesLow": 344773,
           "estimatedVotesMid": 383081,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.17,
+          "turnoutLow": 9.98,
+          "turnoutMid": 8.98
         },
         "firstName": "Alexander",
         "id": 46318,
         "lastName": "Avery",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 784
       },
       {
         "elected": false,
@@ -353,15 +361,15 @@
           "estimatedVotesHigh": 421389,
           "estimatedVotesLow": 344773,
           "estimatedVotesMid": 383081,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.17,
+          "turnoutLow": 9.98,
+          "turnoutMid": 8.98
         },
         "firstName": "Hillary",
         "id": 14562,
         "lastName": "Scholten",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 13626
       }
     ],
     "district": "3",
@@ -370,7 +378,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:49:39.719Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -380,10 +388,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 34408,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -393,31 +403,15 @@
           "estimatedVotesHigh": 422012,
           "estimatedVotesLow": 345282,
           "estimatedVotesMid": 383647,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bill",
-        "id": 1330,
-        "lastName": "Huizenga",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 422012,
-          "estimatedVotesLow": 345282,
-          "estimatedVotesMid": 383647,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 14.15,
+          "turnoutLow": 17.29,
+          "turnoutMid": 15.56
         },
         "firstName": "Jessica",
         "id": 79448,
         "lastName": "Swartz",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 25187
       },
       {
         "elected": false,
@@ -425,15 +419,31 @@
           "estimatedVotesHigh": 422012,
           "estimatedVotesLow": 345282,
           "estimatedVotesMid": 383647,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 14.15,
+          "turnoutLow": 17.29,
+          "turnoutMid": 15.56
         },
         "firstName": "Curtis",
         "id": 47693,
         "lastName": "Clark",
         "partyName": "US Taxpayers",
-        "votes": 0
+        "votes": 1179
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 422012,
+          "estimatedVotesLow": 345282,
+          "estimatedVotesMid": 383647,
+          "turnoutHigh": 14.15,
+          "turnoutLow": 17.29,
+          "turnoutMid": 15.56
+        },
+        "firstName": "Bill",
+        "id": 1330,
+        "lastName": "Huizenga",
+        "partyName": "Republican",
+        "votes": 33335
       }
     ],
     "district": "4",
@@ -442,7 +452,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "lastUpdated": "2024-10-28T20:56:52.105Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -452,10 +462,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 59701,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -465,15 +477,15 @@
           "estimatedVotesHigh": 406224,
           "estimatedVotesLow": 332366,
           "estimatedVotesMid": 369294,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.88,
+          "turnoutLow": 13.3,
+          "turnoutMid": 11.97
         },
         "firstName": "James",
         "id": 102166,
         "lastName": "Bronke",
         "partyName": "Green",
-        "votes": 0
+        "votes": 863
       },
       {
         "elected": false,
@@ -481,15 +493,15 @@
           "estimatedVotesHigh": 406224,
           "estimatedVotesLow": 332366,
           "estimatedVotesMid": 369294,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.88,
+          "turnoutLow": 13.3,
+          "turnoutMid": 11.97
         },
         "firstName": "Libbi",
         "id": 79450,
         "lastName": "Urban",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 17583
       },
       {
         "elected": false,
@@ -497,15 +509,15 @@
           "estimatedVotesHigh": 406224,
           "estimatedVotesLow": 332366,
           "estimatedVotesMid": 369294,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.88,
+          "turnoutLow": 13.3,
+          "turnoutMid": 11.97
         },
         "firstName": "Tim",
         "id": 1339,
         "lastName": "Walberg",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 25770
       }
     ],
     "district": "5",
@@ -514,7 +526,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:57:43.756Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -524,10 +536,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 44216,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -537,15 +551,15 @@
           "estimatedVotesHigh": 452323,
           "estimatedVotesLow": 370083,
           "estimatedVotesMid": 411203,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 19.07,
+          "turnoutLow": 23.31,
+          "turnoutMid": 20.98
         },
         "firstName": "Heather",
         "id": 79451,
         "lastName": "Smiley",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 22711
       },
       {
         "elected": false,
@@ -553,15 +567,15 @@
           "estimatedVotesHigh": 452323,
           "estimatedVotesLow": 370083,
           "estimatedVotesMid": 411203,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 19.07,
+          "turnoutLow": 23.31,
+          "turnoutMid": 20.98
         },
         "firstName": "Clyde",
         "id": 14558,
         "lastName": "Shabazz",
         "partyName": "Green",
-        "votes": 0
+        "votes": 1680
       },
       {
         "elected": false,
@@ -569,15 +583,15 @@
           "estimatedVotesHigh": 452323,
           "estimatedVotesLow": 370083,
           "estimatedVotesMid": 411203,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 19.07,
+          "turnoutLow": 23.31,
+          "turnoutMid": 20.98
         },
         "firstName": "Bill",
         "id": 102167,
         "lastName": "Krebaum",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 1516
       },
       {
         "elected": false,
@@ -585,15 +599,15 @@
           "estimatedVotesHigh": 452323,
           "estimatedVotesLow": 370083,
           "estimatedVotesMid": 411203,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 19.07,
+          "turnoutLow": 23.31,
+          "turnoutMid": 20.98
         },
         "firstName": "Debbie",
         "id": 1348,
         "lastName": "Dingell",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 60364
       }
     ],
     "district": "6",
@@ -602,7 +616,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -612,10 +626,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 86271,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -674,7 +690,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -688,6 +704,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -697,15 +715,15 @@
           "estimatedVotesHigh": 429839,
           "estimatedVotesLow": 351689,
           "estimatedVotesMid": 390764,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.45,
+          "turnoutLow": 10.33,
+          "turnoutMid": 9.3
         },
         "firstName": "Paul",
         "id": 13968,
         "lastName": "Junge",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 18540
       },
       {
         "elected": false,
@@ -713,15 +731,15 @@
           "estimatedVotesHigh": 429839,
           "estimatedVotesLow": 351689,
           "estimatedVotesMid": 390764,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.45,
+          "turnoutLow": 10.33,
+          "turnoutMid": 9.3
         },
         "firstName": "Kristen",
         "id": 79454,
         "lastName": "McDonald Rivet",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 14963
       },
       {
         "elected": false,
@@ -729,15 +747,15 @@
           "estimatedVotesHigh": 429839,
           "estimatedVotesLow": 351689,
           "estimatedVotesMid": 390764,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.45,
+          "turnoutLow": 10.33,
+          "turnoutMid": 9.3
         },
         "firstName": "Jim",
         "id": 102169,
         "lastName": "Casha",
         "partyName": "Green",
-        "votes": 0
+        "votes": 706
       },
       {
         "elected": false,
@@ -745,15 +763,15 @@
           "estimatedVotesHigh": 429839,
           "estimatedVotesLow": 351689,
           "estimatedVotesMid": 390764,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.45,
+          "turnoutLow": 10.33,
+          "turnoutMid": 9.3
         },
         "firstName": "Kathy",
         "id": 11186,
         "lastName": "Goodwin",
         "partyName": "Working Class",
-        "votes": 0
+        "votes": 650
       },
       {
         "elected": false,
@@ -761,15 +779,15 @@
           "estimatedVotesHigh": 429839,
           "estimatedVotesLow": 351689,
           "estimatedVotesMid": 390764,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.45,
+          "turnoutLow": 10.33,
+          "turnoutMid": 9.3
         },
         "firstName": "James",
         "id": 102171,
         "lastName": "Little",
         "partyName": "US Taxpayers",
-        "votes": 0
+        "votes": 745
       },
       {
         "elected": false,
@@ -777,15 +795,15 @@
           "estimatedVotesHigh": 429839,
           "estimatedVotesLow": 351689,
           "estimatedVotesMid": 390764,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.45,
+          "turnoutLow": 10.33,
+          "turnoutMid": 9.3
         },
         "firstName": "Steve",
         "id": 102170,
         "lastName": "Barcelo",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 730
       }
     ],
     "district": "8",
@@ -794,7 +812,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:59:11.057Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -804,10 +822,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 36334,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -817,15 +837,15 @@
           "estimatedVotesHigh": 480293,
           "estimatedVotesLow": 392965,
           "estimatedVotesMid": 436629,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.17,
+          "turnoutLow": 12.43,
+          "turnoutMid": 11.19
         },
         "firstName": "Jim",
         "id": 44343,
         "lastName": "Walkowicz",
         "partyName": "Working Class",
-        "votes": 0
+        "votes": 969
       },
       {
         "elected": false,
@@ -833,15 +853,15 @@
           "estimatedVotesHigh": 480293,
           "estimatedVotesLow": 392965,
           "estimatedVotesMid": 436629,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.17,
+          "turnoutLow": 12.43,
+          "turnoutMid": 11.19
         },
         "firstName": "Kevin",
         "id": 102172,
         "lastName": "Vayko",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 962
       },
       {
         "elected": false,
@@ -849,15 +869,15 @@
           "estimatedVotesHigh": 480293,
           "estimatedVotesLow": 392965,
           "estimatedVotesMid": 436629,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.17,
+          "turnoutLow": 12.43,
+          "turnoutMid": 11.19
         },
         "firstName": "Clinton",
         "id": 79457,
         "lastName": "St. Mosley",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 14418
       },
       {
         "elected": false,
@@ -865,15 +885,15 @@
           "estimatedVotesHigh": 480293,
           "estimatedVotesLow": 392965,
           "estimatedVotesMid": 436629,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10.17,
+          "turnoutLow": 12.43,
+          "turnoutMid": 11.19
         },
         "firstName": "Lisa",
         "id": 13975,
         "lastName": "McClain",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 32509
       }
     ],
     "district": "9",
@@ -882,7 +902,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:53:10.106Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -892,10 +912,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 48858,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -905,15 +927,15 @@
           "estimatedVotesHigh": 431587,
           "estimatedVotesLow": 353117,
           "estimatedVotesMid": 392352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.14,
+          "turnoutLow": 57.62,
+          "turnoutMid": 51.85
         },
         "firstName": "Andrea",
         "id": 11191,
         "lastName": "Kirby",
         "partyName": "Working Class",
-        "votes": 0
+        "votes": 4064
       },
       {
         "elected": false,
@@ -921,15 +943,15 @@
           "estimatedVotesHigh": 431587,
           "estimatedVotesLow": 353117,
           "estimatedVotesMid": 392352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.14,
+          "turnoutLow": 57.62,
+          "turnoutMid": 51.85
         },
         "firstName": "John",
         "id": 10301,
         "lastName": "James",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 98337
       },
       {
         "elected": false,
@@ -937,15 +959,15 @@
           "estimatedVotesHigh": 431587,
           "estimatedVotesLow": 353117,
           "estimatedVotesMid": 392352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.14,
+          "turnoutLow": 57.62,
+          "turnoutMid": 51.85
         },
         "firstName": "Carl",
         "id": 26564,
         "lastName": "Marlinga",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 97075
       },
       {
         "elected": false,
@@ -953,15 +975,15 @@
           "estimatedVotesHigh": 431587,
           "estimatedVotesLow": 353117,
           "estimatedVotesMid": 392352,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.14,
+          "turnoutLow": 57.62,
+          "turnoutMid": 51.85
         },
         "firstName": "Mike",
         "id": 14550,
         "lastName": "Saliba",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 3975
       }
     ],
     "district": "10",
@@ -970,7 +992,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:59:57.309Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -980,10 +1002,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 203451,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1042,7 +1066,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:13.770Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1056,6 +1080,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1065,47 +1091,15 @@
           "estimatedVotesHigh": 385552,
           "estimatedVotesLow": 315452,
           "estimatedVotesMid": 350502,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "James",
-        "id": 26589,
-        "lastName": "Hooper",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 385552,
-          "estimatedVotesLow": 315452,
-          "estimatedVotesMid": 350502,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Rashida",
-        "id": 10267,
-        "lastName": "Tlaib",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 385552,
-          "estimatedVotesLow": 315452,
-          "estimatedVotesMid": 350502,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.75,
+          "turnoutLow": 11.92,
+          "turnoutMid": 10.73
         },
         "firstName": "Gary",
         "id": 11197,
         "lastName": "Walkowicz",
         "partyName": "Working Class",
-        "votes": 0
+        "votes": 732
       },
       {
         "elected": false,
@@ -1113,15 +1107,47 @@
           "estimatedVotesHigh": 385552,
           "estimatedVotesLow": 315452,
           "estimatedVotesMid": 350502,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.75,
+          "turnoutLow": 11.92,
+          "turnoutMid": 10.73
         },
         "firstName": "Brenda",
         "id": 102174,
         "lastName": "Sanders",
         "partyName": "Green",
-        "votes": 0
+        "votes": 701
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 385552,
+          "estimatedVotesLow": 315452,
+          "estimatedVotesMid": 350502,
+          "turnoutHigh": 9.75,
+          "turnoutLow": 11.92,
+          "turnoutMid": 10.73
+        },
+        "firstName": "James",
+        "id": 26589,
+        "lastName": "Hooper",
+        "partyName": "Republican",
+        "votes": 6150
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 385552,
+          "estimatedVotesLow": 315452,
+          "estimatedVotesMid": 350502,
+          "turnoutHigh": 9.75,
+          "turnoutLow": 11.92,
+          "turnoutMid": 10.73
+        },
+        "firstName": "Rashida",
+        "id": 10267,
+        "lastName": "Tlaib",
+        "partyName": "Democratic",
+        "votes": 30026
       }
     ],
     "district": "12",
@@ -1130,7 +1156,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:00:11.463Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1140,10 +1166,12 @@
     "raceDate": "2024-11-05",
     "state": "MI",
     "stateName": "Michigan",
-    "totalVotes": 0,
+    "totalVotes": 37609,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1234,7 +1262,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:13.770Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

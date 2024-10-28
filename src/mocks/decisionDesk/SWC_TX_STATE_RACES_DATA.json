@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,47 +11,47 @@
           "estimatedVotesHigh": 11471348,
           "estimatedVotesLow": 9385656,
           "estimatedVotesMid": 10428487,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ted",
-        "id": 2,
-        "lastName": "Cruz",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11471348,
-          "estimatedVotesLow": 9385656,
-          "estimatedVotesMid": 10428487,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Colin",
-        "id": 8358,
-        "lastName": "Allred",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 11471348,
-          "estimatedVotesLow": 9385656,
-          "estimatedVotesMid": 10428487,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 37.94,
+          "turnoutLow": 46.37,
+          "turnoutMid": 41.73
         },
         "firstName": "Ted",
         "id": 14930,
         "lastName": "Brown",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 49085
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11471348,
+          "estimatedVotesLow": 9385656,
+          "estimatedVotesMid": 10428487,
+          "turnoutHigh": 37.94,
+          "turnoutLow": 46.37,
+          "turnoutMid": 41.73
+        },
+        "firstName": "Ted",
+        "id": 2,
+        "lastName": "Cruz",
+        "partyName": "Republican",
+        "votes": 2238626
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 11471348,
+          "estimatedVotesLow": 9385656,
+          "estimatedVotesMid": 10428487,
+          "turnoutHigh": 37.94,
+          "turnoutLow": 46.37,
+          "turnoutMid": 41.73
+        },
+        "firstName": "Colin",
+        "id": 8358,
+        "lastName": "Allred",
+        "partyName": "Democratic",
+        "votes": 2064154
       }
     ],
     "district": "",
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T21:07:10.935Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -68,10 +70,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 4351865,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -112,6 +116,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -121,15 +127,15 @@
           "estimatedVotesHigh": 331469,
           "estimatedVotesLow": 271203,
           "estimatedVotesMid": 301336,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.5,
+          "turnoutLow": 58.05,
+          "turnoutMid": 52.25
         },
         "firstName": "Daniel",
         "id": 85131,
         "lastName": "Crenshaw",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 95824
       },
       {
         "elected": false,
@@ -137,15 +143,15 @@
           "estimatedVotesHigh": 331469,
           "estimatedVotesLow": 271203,
           "estimatedVotesMid": 301336,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 47.5,
+          "turnoutLow": 58.05,
+          "turnoutMid": 52.25
         },
         "firstName": "Peter",
         "id": 52726,
         "lastName": "Filler",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 61614
       }
     ],
     "district": "2",
@@ -154,7 +160,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:59:10.511Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -164,10 +170,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 157438,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -177,15 +185,15 @@
           "estimatedVotesHigh": 380808,
           "estimatedVotesLow": 311570,
           "estimatedVotesMid": 346189,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 54.54,
+          "turnoutLow": 66.66,
+          "turnoutMid": 59.99
         },
         "firstName": "Keith",
         "id": 18161,
         "lastName": "Self",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 115740
       },
       {
         "elected": false,
@@ -193,15 +201,15 @@
           "estimatedVotesHigh": 380808,
           "estimatedVotesLow": 311570,
           "estimatedVotesMid": 346189,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 54.54,
+          "turnoutLow": 66.66,
+          "turnoutMid": 59.99
         },
         "firstName": "Sandeep",
         "id": 18098,
         "lastName": "Srivastava",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 91942
       }
     ],
     "district": "3",
@@ -210,7 +218,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:58:11.263Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -220,10 +228,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 207682,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -233,15 +243,15 @@
           "estimatedVotesHigh": 352807,
           "estimatedVotesLow": 288662,
           "estimatedVotesMid": 320734,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 39.94,
+          "turnoutLow": 48.82,
+          "turnoutMid": 43.94
         },
         "firstName": "Simon",
         "id": 52727,
         "lastName": "Cardell",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 59612
       },
       {
         "elected": false,
@@ -249,15 +259,15 @@
           "estimatedVotesHigh": 352807,
           "estimatedVotesLow": 288662,
           "estimatedVotesMid": 320734,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 39.94,
+          "turnoutLow": 48.82,
+          "turnoutMid": 43.94
         },
         "firstName": "Pat",
         "id": 14965,
         "lastName": "Fallon",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 81303
       }
     ],
     "district": "4",
@@ -266,7 +276,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:04:11.070Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -276,10 +286,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 140915,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -289,15 +301,15 @@
           "estimatedVotesHigh": 308463,
           "estimatedVotesLow": 252380,
           "estimatedVotesMid": 280421,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 21.97,
+          "turnoutLow": 26.85,
+          "turnoutMid": 24.16
         },
         "firstName": "Lance",
         "id": 8498,
         "lastName": "Gooden",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 51134
       },
       {
         "elected": false,
@@ -305,15 +317,15 @@
           "estimatedVotesHigh": 308463,
           "estimatedVotesLow": 252380,
           "estimatedVotesMid": 280421,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 21.97,
+          "turnoutLow": 26.85,
+          "turnoutMid": 24.16
         },
         "firstName": "Ruth",
         "id": 52729,
         "lastName": "Torres",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 16624
       }
     ],
     "district": "5",
@@ -322,7 +334,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:07:21.314Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -332,10 +344,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 67758,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -345,15 +359,15 @@
           "estimatedVotesHigh": 295962,
           "estimatedVotesLow": 242152,
           "estimatedVotesMid": 269056,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 15.68,
+          "turnoutLow": 19.17,
+          "turnoutMid": 17.25
         },
         "firstName": "John",
         "id": 9772,
         "lastName": "Love",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 20658
       },
       {
         "elected": false,
@@ -361,15 +375,15 @@
           "estimatedVotesHigh": 295962,
           "estimatedVotesLow": 242152,
           "estimatedVotesMid": 269056,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 15.68,
+          "turnoutLow": 19.17,
+          "turnoutMid": 17.25
         },
         "firstName": "Jake",
         "id": 15174,
         "lastName": "Ellzey",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 25755
       }
     ],
     "district": "6",
@@ -378,7 +392,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:07:21.314Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -388,29 +402,15 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 46413,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 265799,
-          "estimatedVotesLow": 217471,
-          "estimatedVotesMid": 241635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Lizzie",
-        "id": 8476,
-        "lastName": "Fletcher",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -426,6 +426,22 @@
         "lastName": "Kane",
         "partyName": "Republican",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 265799,
+          "estimatedVotesLow": 217471,
+          "estimatedVotesMid": 241635,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lizzie",
+        "id": 8476,
+        "lastName": "Fletcher",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "7",
@@ -434,7 +450,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -448,6 +464,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -457,15 +475,15 @@
           "estimatedVotesHigh": 343561,
           "estimatedVotesLow": 281096,
           "estimatedVotesMid": 312328,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 15.14,
+          "turnoutLow": 18.5,
+          "turnoutMid": 16.65
         },
         "firstName": "Laura",
         "id": 12438,
         "lastName": "Jones",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 10638
       },
       {
         "elected": false,
@@ -473,15 +491,15 @@
           "estimatedVotesHigh": 343561,
           "estimatedVotesLow": 281096,
           "estimatedVotesMid": 312328,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 15.14,
+          "turnoutLow": 18.5,
+          "turnoutMid": 16.65
         },
         "firstName": "Morgan",
         "id": 18176,
         "lastName": "Luttrell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 41362
       }
     ],
     "district": "8",
@@ -490,7 +508,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:40.606Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -500,10 +518,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 52000,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -544,6 +564,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -553,15 +575,15 @@
           "estimatedVotesHigh": 349117,
           "estimatedVotesLow": 285644,
           "estimatedVotesMid": 317379,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 41.27,
+          "turnoutLow": 50.44,
+          "turnoutMid": 45.4
         },
         "firstName": "Michael",
         "id": 1651,
         "lastName": "McCaul",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 82705
       },
       {
         "elected": false,
@@ -569,15 +591,15 @@
           "estimatedVotesHigh": 349117,
           "estimatedVotesLow": 285644,
           "estimatedVotesMid": 317379,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 41.27,
+          "turnoutLow": 50.44,
+          "turnoutMid": 45.4
         },
         "firstName": "Theresa",
         "id": 52736,
         "lastName": "Boisseau",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 58600
       },
       {
         "elected": false,
@@ -585,15 +607,15 @@
           "estimatedVotesHigh": 349117,
           "estimatedVotesLow": 285644,
           "estimatedVotesMid": 317379,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 41.27,
+          "turnoutLow": 50.44,
+          "turnoutMid": 45.4
         },
         "firstName": "Jeff",
         "id": 45229,
         "lastName": "Miller",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 2778
       }
     ],
     "district": "10",
@@ -602,7 +624,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:06:56.597Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -612,10 +634,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 144083,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -625,15 +649,15 @@
           "estimatedVotesHigh": 263844,
           "estimatedVotesLow": 215874,
           "estimatedVotesMid": 239858,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 31.96,
+          "turnoutLow": 39.06,
+          "turnoutMid": 35.15
         },
         "firstName": "August",
         "id": 12312,
         "lastName": "Pfluger",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 82213
       },
       {
         "elected": false,
@@ -641,15 +665,15 @@
           "estimatedVotesHigh": 263844,
           "estimatedVotesLow": 215874,
           "estimatedVotesMid": 239858,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 31.96,
+          "turnoutLow": 39.06,
+          "turnoutMid": 35.15
         },
         "firstName": "Wacey",
         "id": 14926,
         "lastName": "Cody",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 2105
       }
     ],
     "district": "11",
@@ -658,7 +682,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:57.106Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -668,10 +692,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 84318,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -681,15 +707,15 @@
           "estimatedVotesHigh": 337877,
           "estimatedVotesLow": 276445,
           "estimatedVotesMid": 307161,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 7.41,
+          "turnoutLow": 9.05,
+          "turnoutMid": 8.15
         },
         "firstName": "Craig",
         "id": 15330,
         "lastName": "Goldman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 21096
       },
       {
         "elected": false,
@@ -697,15 +723,15 @@
           "estimatedVotesHigh": 337877,
           "estimatedVotesLow": 276445,
           "estimatedVotesMid": 307161,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 7.41,
+          "turnoutLow": 9.05,
+          "turnoutMid": 8.15
         },
         "firstName": "Trey",
         "id": 18105,
         "lastName": "Hunt",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 3929
       }
     ],
     "district": "12",
@@ -714,7 +740,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:55:10.389Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -724,10 +750,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 25025,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -737,15 +765,15 @@
           "estimatedVotesHigh": 295274,
           "estimatedVotesLow": 241589,
           "estimatedVotesMid": 268430,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 26.9,
+          "turnoutLow": 32.88,
+          "turnoutMid": 29.59
         },
         "firstName": "Ronny",
         "id": 12322,
         "lastName": "Jackson",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 77353
       },
       {
         "elected": false,
@@ -753,15 +781,15 @@
           "estimatedVotesHigh": 295274,
           "estimatedVotesLow": 241589,
           "estimatedVotesMid": 268430,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 26.9,
+          "turnoutLow": 32.88,
+          "turnoutMid": 29.59
         },
         "firstName": "Mike",
         "id": 2183,
         "lastName": "Kolls",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 2075
       }
     ],
     "district": "13",
@@ -770,7 +798,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:07:24.033Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -780,10 +808,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 79428,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -793,15 +823,15 @@
           "estimatedVotesHigh": 319475,
           "estimatedVotesLow": 261390,
           "estimatedVotesMid": 290432,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
         "firstName": "Randy",
         "id": 1657,
         "lastName": "Weber",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15184
       },
       {
         "elected": false,
@@ -809,15 +839,15 @@
           "estimatedVotesHigh": 319475,
           "estimatedVotesLow": 261390,
           "estimatedVotesMid": 290432,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
         "firstName": "Rhonda",
         "id": 52744,
         "lastName": "Hart",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 11992
       }
     ],
     "district": "14",
@@ -826,7 +856,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:00:40.269Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -836,10 +866,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 27176,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -849,31 +881,15 @@
           "estimatedVotesHigh": 237925,
           "estimatedVotesLow": 194665,
           "estimatedVotesMid": 216295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Monica",
-        "id": 18190,
-        "lastName": "De La Cruz",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 237925,
-          "estimatedVotesLow": 194665,
-          "estimatedVotesMid": 216295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 17.36,
+          "turnoutLow": 21.22,
+          "turnoutMid": 19.1
         },
         "firstName": "Arthur",
         "id": 14937,
         "lastName": "DiBianca",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 769
       },
       {
         "elected": false,
@@ -881,15 +897,31 @@
           "estimatedVotesHigh": 237925,
           "estimatedVotesLow": 194665,
           "estimatedVotesMid": 216295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 17.36,
+          "turnoutLow": 21.22,
+          "turnoutMid": 19.1
+        },
+        "firstName": "Monica",
+        "id": 18190,
+        "lastName": "De La Cruz",
+        "partyName": "Republican",
+        "votes": 25926
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 237925,
+          "estimatedVotesLow": 194665,
+          "estimatedVotesMid": 216295,
+          "turnoutHigh": 17.36,
+          "turnoutLow": 21.22,
+          "turnoutMid": 19.1
         },
         "firstName": "Michelle",
         "id": 18113,
         "lastName": "Vallejo",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 14617
       }
     ],
     "district": "15",
@@ -898,7 +930,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:10.886Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -908,10 +940,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 41312,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -954,7 +988,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -968,6 +1002,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -977,15 +1013,15 @@
           "estimatedVotesHigh": 307147,
           "estimatedVotesLow": 251302,
           "estimatedVotesMid": 279223,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 29.9,
+          "turnoutLow": 36.54,
+          "turnoutMid": 32.89
         },
         "firstName": "Clyde",
         "id": 85135,
         "lastName": "Garland",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 1777
       },
       {
         "elected": false,
@@ -993,15 +1029,15 @@
           "estimatedVotesHigh": 307147,
           "estimatedVotesLow": 251302,
           "estimatedVotesMid": 279223,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 29.9,
+          "turnoutLow": 36.54,
+          "turnoutMid": 32.89
         },
         "firstName": "Pete",
         "id": 1689,
         "lastName": "Sessions",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 52175
       },
       {
         "elected": false,
@@ -1009,15 +1045,15 @@
           "estimatedVotesHigh": 307147,
           "estimatedVotesLow": 251302,
           "estimatedVotesMid": 279223,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 29.9,
+          "turnoutLow": 36.54,
+          "turnoutMid": 32.89
         },
         "firstName": "Mark",
         "id": 52747,
         "lastName": "Lorenzen",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 37873
       }
     ],
     "district": "17",
@@ -1026,7 +1062,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:07:21.314Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1036,29 +1072,15 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 91825,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 237688,
-          "estimatedVotesLow": 194472,
-          "estimatedVotesMid": 216080,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Sylvester",
-        "id": 102226,
-        "lastName": "Turner",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -1074,6 +1096,22 @@
         "lastName": "Centonze",
         "partyName": "Republican",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 237688,
+          "estimatedVotesLow": 194472,
+          "estimatedVotesMid": 216080,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sylvester",
+        "id": 102226,
+        "lastName": "Turner",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "18",
@@ -1082,7 +1120,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1096,6 +1134,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1105,15 +1145,15 @@
           "estimatedVotesHigh": 276424,
           "estimatedVotesLow": 226170,
           "estimatedVotesMid": 251295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.96,
+          "turnoutLow": 17.06,
+          "turnoutMid": 15.36
         },
         "firstName": "Jodey",
         "id": 1665,
         "lastName": "Arrington",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 36793
       },
       {
         "elected": false,
@@ -1121,15 +1161,15 @@
           "estimatedVotesHigh": 276424,
           "estimatedVotesLow": 226170,
           "estimatedVotesMid": 251295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.96,
+          "turnoutLow": 17.06,
+          "turnoutMid": 15.36
         },
         "firstName": "Bernard",
         "id": 85137,
         "lastName": "Johnson",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 898
       },
       {
         "elected": false,
@@ -1137,15 +1177,15 @@
           "estimatedVotesHigh": 276424,
           "estimatedVotesLow": 226170,
           "estimatedVotesMid": 251295,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.96,
+          "turnoutLow": 17.06,
+          "turnoutMid": 15.36
         },
         "firstName": "Nathan",
         "id": 44428,
         "lastName": "Lewis",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 899
       }
     ],
     "district": "19",
@@ -1154,7 +1194,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:07:21.314Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1164,10 +1204,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 38590,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1177,15 +1219,15 @@
           "estimatedVotesHigh": 250199,
           "estimatedVotesLow": 204709,
           "estimatedVotesMid": 227454,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 40.14,
+          "turnoutLow": 49.06,
+          "turnoutMid": 44.15
         },
         "firstName": "Pat",
         "id": 85138,
         "lastName": "Dixon",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 3290
       },
       {
         "elected": false,
@@ -1193,15 +1235,15 @@
           "estimatedVotesHigh": 250199,
           "estimatedVotesLow": 204709,
           "estimatedVotesMid": 227454,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 40.14,
+          "turnoutLow": 49.06,
+          "turnoutMid": 44.15
         },
         "firstName": "Joaquin",
         "id": 1666,
         "lastName": "Castro",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 97140
       }
     ],
     "district": "20",
@@ -1210,7 +1252,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:05:50.346Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1220,10 +1262,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 100430,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1233,15 +1277,15 @@
           "estimatedVotesHigh": 434225,
           "estimatedVotesLow": 355274,
           "estimatedVotesMid": 394749,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 44.8,
+          "turnoutLow": 54.75,
+          "turnoutMid": 49.28
         },
         "firstName": "Chip",
         "id": 8429,
         "lastName": "Roy",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 106213
       },
       {
         "elected": false,
@@ -1249,31 +1293,31 @@
           "estimatedVotesHigh": 434225,
           "estimatedVotesLow": 355274,
           "estimatedVotesMid": 394749,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bob",
-        "id": 85140,
-        "lastName": "King",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 434225,
-          "estimatedVotesLow": 355274,
-          "estimatedVotesMid": 394749,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 44.8,
+          "turnoutLow": 54.75,
+          "turnoutMid": 49.28
         },
         "firstName": "Kristin",
         "id": 52753,
         "lastName": "Hook",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 84550
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 434225,
+          "estimatedVotesLow": 355274,
+          "estimatedVotesMid": 394749,
+          "turnoutHigh": 44.8,
+          "turnoutLow": 54.75,
+          "turnoutMid": 49.28
+        },
+        "firstName": "Bob",
+        "id": 85140,
+        "lastName": "King",
+        "partyName": "Libertarian",
+        "votes": 3755
       }
     ],
     "district": "21",
@@ -1282,7 +1326,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:42.117Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1292,10 +1336,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 194518,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1305,15 +1351,15 @@
           "estimatedVotesHigh": 353607,
           "estimatedVotesLow": 289315,
           "estimatedVotesMid": 321460,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 52.11,
+          "turnoutLow": 63.69,
+          "turnoutMid": 57.32
         },
         "firstName": "Troy",
         "id": 12374,
         "lastName": "Nehls",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 99707
       },
       {
         "elected": false,
@@ -1321,15 +1367,15 @@
           "estimatedVotesHigh": 353607,
           "estimatedVotesLow": 289315,
           "estimatedVotesMid": 321460,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 52.11,
+          "turnoutLow": 63.69,
+          "turnoutMid": 57.32
         },
         "firstName": "Marquette",
         "id": 52754,
         "lastName": "Greene-Scott",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 84562
       }
     ],
     "district": "22",
@@ -1338,7 +1384,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:50:25.254Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1348,10 +1394,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 184269,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1361,15 +1409,15 @@
           "estimatedVotesHigh": 305711,
           "estimatedVotesLow": 250126,
           "estimatedVotesMid": 277916,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 61.83,
+          "turnoutLow": 75.57,
+          "turnoutMid": 68.01
         },
         "firstName": "Santos",
         "id": 52756,
         "lastName": "Limon",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 91446
       },
       {
         "elected": false,
@@ -1377,15 +1425,15 @@
           "estimatedVotesHigh": 305711,
           "estimatedVotesLow": 250126,
           "estimatedVotesMid": 277916,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 61.83,
+          "turnoutLow": 75.57,
+          "turnoutMid": 68.01
         },
         "firstName": "Tony",
         "id": 12384,
         "lastName": "Gonzales",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 97569
       }
     ],
     "district": "23",
@@ -1394,7 +1442,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:04:49.867Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1404,10 +1452,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 189015,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1417,15 +1467,15 @@
           "estimatedVotesHigh": 388348,
           "estimatedVotesLow": 317739,
           "estimatedVotesMid": 353043,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 22.04,
+          "turnoutLow": 26.94,
+          "turnoutMid": 24.24
         },
         "firstName": "Sam",
         "id": 52760,
         "lastName": "Eppler",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 43211
       },
       {
         "elected": false,
@@ -1433,15 +1483,15 @@
           "estimatedVotesHigh": 388348,
           "estimatedVotesLow": 317739,
           "estimatedVotesMid": 353043,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 22.04,
+          "turnoutLow": 26.94,
+          "turnoutMid": 24.24
         },
         "firstName": "Beth",
         "id": 12547,
         "lastName": "Van Duyne",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 42377
       }
     ],
     "district": "24",
@@ -1450,7 +1500,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:50:09.861Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1460,10 +1510,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 85588,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1504,6 +1556,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1513,47 +1567,47 @@
           "estimatedVotesHigh": 380201,
           "estimatedVotesLow": 311073,
           "estimatedVotesMid": 345637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brandon",
-        "id": 52767,
-        "lastName": "Gill",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 380201,
-          "estimatedVotesLow": 311073,
-          "estimatedVotesMid": 345637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ernest",
-        "id": 85142,
-        "lastName": "Lineberger",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 380201,
-          "estimatedVotesLow": 311073,
-          "estimatedVotesMid": 345637,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 38.88,
+          "turnoutLow": 47.52,
+          "turnoutMid": 42.77
         },
         "firstName": "Phil",
         "id": 1812,
         "lastName": "Gray",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 2762
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 380201,
+          "estimatedVotesLow": 311073,
+          "estimatedVotesMid": 345637,
+          "turnoutHigh": 38.88,
+          "turnoutLow": 47.52,
+          "turnoutMid": 42.77
+        },
+        "firstName": "Ernest",
+        "id": 85142,
+        "lastName": "Lineberger",
+        "partyName": "Democratic",
+        "votes": 61991
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 380201,
+          "estimatedVotesLow": 311073,
+          "estimatedVotesMid": 345637,
+          "turnoutHigh": 38.88,
+          "turnoutLow": 47.52,
+          "turnoutMid": 42.77
+        },
+        "firstName": "Brandon",
+        "id": 52767,
+        "lastName": "Gill",
+        "partyName": "Republican",
+        "votes": 83081
       }
     ],
     "district": "26",
@@ -1562,7 +1616,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:02:28.339Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1572,10 +1626,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 147834,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1585,15 +1641,15 @@
           "estimatedVotesHigh": 295703,
           "estimatedVotesLow": 241937,
           "estimatedVotesMid": 268820,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 22.67,
+          "turnoutLow": 27.71,
+          "turnoutMid": 24.94
         },
-        "firstName": "Tanya",
-        "id": 52774,
-        "lastName": "Lloyd",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Michael",
+        "id": 8390,
+        "lastName": "Cloud",
+        "partyName": "Republican",
+        "votes": 44702
       },
       {
         "elected": false,
@@ -1601,15 +1657,15 @@
           "estimatedVotesHigh": 295703,
           "estimatedVotesLow": 241937,
           "estimatedVotesMid": 268820,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 22.67,
+          "turnoutLow": 27.71,
+          "turnoutMid": 24.94
         },
-        "firstName": "Michael",
-        "id": 8390,
-        "lastName": "Cloud",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Tanya",
+        "id": 52774,
+        "lastName": "Lloyd",
+        "partyName": "Democratic",
+        "votes": 22345
       }
     ],
     "district": "27",
@@ -1618,7 +1674,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:05:50.346Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1628,10 +1684,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 67047,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1641,15 +1699,15 @@
           "estimatedVotesHigh": 252416,
           "estimatedVotesLow": 206521,
           "estimatedVotesMid": 229468,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.64,
+          "turnoutLow": 61.89,
+          "turnoutMid": 55.7
         },
         "firstName": "Jay",
         "id": 52777,
         "lastName": "Furman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 60655
       },
       {
         "elected": false,
@@ -1657,15 +1715,15 @@
           "estimatedVotesHigh": 252416,
           "estimatedVotesLow": 206521,
           "estimatedVotesMid": 229468,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.64,
+          "turnoutLow": 61.89,
+          "turnoutMid": 55.7
         },
         "firstName": "Henry",
         "id": 1681,
         "lastName": "Cuellar",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 64601
       },
       {
         "elected": false,
@@ -1673,15 +1731,15 @@
           "estimatedVotesHigh": 252416,
           "estimatedVotesLow": 206521,
           "estimatedVotesMid": 229468,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.64,
+          "turnoutLow": 61.89,
+          "turnoutMid": 55.7
         },
         "firstName": "Bailey",
         "id": 85144,
         "lastName": "Cole",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 2557
       }
     ],
     "district": "28",
@@ -1690,7 +1748,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:07:24.214Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1700,10 +1758,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 127813,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1713,15 +1773,15 @@
           "estimatedVotesHigh": 169378,
           "estimatedVotesLow": 138582,
           "estimatedVotesMid": 153980,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Sylvia",
         "id": 8374,
         "lastName": "Garcia",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 107468
       },
       {
         "elected": false,
@@ -1729,15 +1789,15 @@
           "estimatedVotesHigh": 169378,
           "estimatedVotesLow": 138582,
           "estimatedVotesMid": 153980,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
         },
         "firstName": "Alan",
         "id": 52783,
         "lastName": "Garza",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 46512
       }
     ],
     "district": "29",
@@ -1746,7 +1806,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:57:41.543Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1756,10 +1816,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 153980,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1802,7 +1864,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1816,6 +1878,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1825,47 +1889,47 @@
           "estimatedVotesHigh": 363099,
           "estimatedVotesLow": 297080,
           "estimatedVotesMid": 330089,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 1688,
-        "lastName": "Carter",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 363099,
-          "estimatedVotesLow": 297080,
-          "estimatedVotesMid": 330089,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Caleb",
-        "id": 85145,
-        "lastName": "Ferrell",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 363099,
-          "estimatedVotesLow": 297080,
-          "estimatedVotesMid": 330089,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 19.83,
+          "turnoutLow": 24.24,
+          "turnoutMid": 21.81
         },
         "firstName": "Stuart",
         "id": 52787,
         "lastName": "Whitlow",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 20526
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 363099,
+          "estimatedVotesLow": 297080,
+          "estimatedVotesMid": 330089,
+          "turnoutHigh": 19.83,
+          "turnoutLow": 24.24,
+          "turnoutMid": 21.81
+        },
+        "firstName": "John",
+        "id": 1688,
+        "lastName": "Carter",
+        "partyName": "Republican",
+        "votes": 50094
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 363099,
+          "estimatedVotesLow": 297080,
+          "estimatedVotesMid": 330089,
+          "turnoutHigh": 19.83,
+          "turnoutLow": 24.24,
+          "turnoutMid": 21.81
+        },
+        "firstName": "Caleb",
+        "id": 85145,
+        "lastName": "Ferrell",
+        "partyName": "Libertarian",
+        "votes": 1387
       }
     ],
     "district": "31",
@@ -1874,7 +1938,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:07:05.124Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1884,10 +1948,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 72007,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1897,15 +1963,15 @@
           "estimatedVotesHigh": 248703,
           "estimatedVotesLow": 203485,
           "estimatedVotesMid": 226094,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 51.76,
+          "turnoutLow": 63.26,
+          "turnoutMid": 56.93
         },
         "firstName": "Darrell",
         "id": 18232,
         "lastName": "Day",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 42690
       },
       {
         "elected": false,
@@ -1913,15 +1979,15 @@
           "estimatedVotesHigh": 248703,
           "estimatedVotesLow": 203485,
           "estimatedVotesMid": 226094,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 51.76,
+          "turnoutLow": 63.26,
+          "turnoutMid": 56.93
         },
         "firstName": "Julie",
         "id": 15399,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 83302
       },
       {
         "elected": false,
@@ -1929,15 +1995,15 @@
           "estimatedVotesHigh": 248703,
           "estimatedVotesLow": 203485,
           "estimatedVotesMid": 226094,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 51.76,
+          "turnoutLow": 63.26,
+          "turnoutMid": 56.93
         },
         "firstName": "Kevin",
         "id": 14916,
         "lastName": "Hale",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 2726
       }
     ],
     "district": "32",
@@ -1946,7 +2012,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:50:11.753Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1956,10 +2022,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 128718,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1969,15 +2037,15 @@
           "estimatedVotesHigh": 180959,
           "estimatedVotesLow": 148058,
           "estimatedVotesMid": 164508,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 61.91,
+          "turnoutLow": 75.66,
+          "turnoutMid": 68.1
         },
         "firstName": "Patrick",
         "id": 18237,
         "lastName": "Gillespie",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 25986
       },
       {
         "elected": false,
@@ -1985,15 +2053,15 @@
           "estimatedVotesHigh": 180959,
           "estimatedVotesLow": 148058,
           "estimatedVotesMid": 164508,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 61.91,
+          "turnoutLow": 75.66,
+          "turnoutMid": 68.1
         },
         "firstName": "Marc",
         "id": 1690,
         "lastName": "Veasey",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 86038
       }
     ],
     "district": "33",
@@ -2002,7 +2070,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:05:12.354Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2012,29 +2080,15 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 112024,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 211657,
-          "estimatedVotesLow": 173173,
-          "estimatedVotesMid": 192415,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Vicente",
-        "id": 1658,
-        "lastName": "Gonzalez",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -2066,6 +2120,22 @@
         "lastName": "Flores",
         "partyName": "Republican",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 211657,
+          "estimatedVotesLow": 173173,
+          "estimatedVotesMid": 192415,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Vicente",
+        "id": 1658,
+        "lastName": "Gonzalez",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "34",
@@ -2074,7 +2144,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:18:04.637Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2088,6 +2158,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2097,15 +2169,15 @@
           "estimatedVotesHigh": 262661,
           "estimatedVotesLow": 214905,
           "estimatedVotesMid": 238783,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 23.19,
+          "turnoutLow": 28.35,
+          "turnoutMid": 25.51
         },
         "firstName": "Greg",
         "id": 18144,
         "lastName": "Casar",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 41530
       },
       {
         "elected": false,
@@ -2113,15 +2185,15 @@
           "estimatedVotesHigh": 262661,
           "estimatedVotesLow": 214905,
           "estimatedVotesMid": 238783,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 23.19,
+          "turnoutLow": 28.35,
+          "turnoutMid": 25.51
         },
         "firstName": "Clark",
         "id": 2192,
         "lastName": "Patterson",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 1070
       },
       {
         "elected": false,
@@ -2129,15 +2201,15 @@
           "estimatedVotesHigh": 262661,
           "estimatedVotesLow": 214905,
           "estimatedVotesMid": 238783,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 23.19,
+          "turnoutLow": 28.35,
+          "turnoutMid": 25.51
         },
         "firstName": "Steven",
         "id": 52804,
         "lastName": "Wright",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 18320
       }
     ],
     "district": "35",
@@ -2146,7 +2218,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:10.729Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2156,10 +2228,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 60920,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2169,15 +2243,15 @@
           "estimatedVotesHigh": 311170,
           "estimatedVotesLow": 254594,
           "estimatedVotesMid": 282881,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 16,
+          "turnoutLow": 19.55,
+          "turnoutMid": 17.6
         },
         "firstName": "Dayna",
         "id": 8353,
         "lastName": "Steele",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 16926
       },
       {
         "elected": false,
@@ -2185,15 +2259,15 @@
           "estimatedVotesHigh": 311170,
           "estimatedVotesLow": 254594,
           "estimatedVotesMid": 282881,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 16,
+          "turnoutLow": 19.55,
+          "turnoutMid": 17.6
         },
         "firstName": "Brian",
         "id": 1696,
         "lastName": "Babin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 32857
       }
     ],
     "district": "36",
@@ -2202,7 +2276,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:59:56.814Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2212,10 +2286,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 49783,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2225,15 +2301,15 @@
           "estimatedVotesHigh": 347246,
           "estimatedVotesLow": 284110,
           "estimatedVotesMid": 315678,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 79.19,
+          "turnoutLow": 96.79,
+          "turnoutMid": 87.11
         },
         "firstName": "Jenny",
         "id": 12414,
         "lastName": "Sharon",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 65902
       },
       {
         "elected": false,
@@ -2241,15 +2317,15 @@
           "estimatedVotesHigh": 347246,
           "estimatedVotesLow": 284110,
           "estimatedVotesMid": 315678,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 79.19,
+          "turnoutLow": 96.79,
+          "turnoutMid": 87.11
         },
         "firstName": "Lloyd",
         "id": 1694,
         "lastName": "Doggett",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 202937
       },
       {
         "elected": false,
@@ -2257,15 +2333,15 @@
           "estimatedVotesHigh": 347246,
           "estimatedVotesLow": 284110,
           "estimatedVotesMid": 315678,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 79.19,
+          "turnoutLow": 96.79,
+          "turnoutMid": 87.11
         },
         "firstName": "Girish",
         "id": 85149,
         "lastName": "Altekar",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 6143
       }
     ],
     "district": "37",
@@ -2274,7 +2350,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:05:12.354Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2284,10 +2360,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 274982,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2346,7 +2424,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

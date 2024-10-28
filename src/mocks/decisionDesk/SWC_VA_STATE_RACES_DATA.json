@@ -1,23 +1,38 @@
 [
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Tim",
+      "id": 8289,
+      "incumbent": true,
+      "lastName": "Kaine",
+      "partyName": "Democratic"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Tim",
+        "id": 8289,
+        "lastName": "Kaine",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 4429965,
           "estimatedVotesLow": 3624517,
           "estimatedVotesMid": 4027236,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 76.82,
+          "turnoutLow": 93.9,
+          "turnoutMid": 84.51
         },
-        "firstName": "Hung",
-        "id": 44452,
-        "lastName": "Cao",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Tim",
+        "id": 8289,
+        "lastName": "Kaine",
+        "partyName": "Democratic",
+        "votes": 2005475
       },
       {
         "elected": false,
@@ -25,15 +40,15 @@
           "estimatedVotesHigh": 4429965,
           "estimatedVotesLow": 3624517,
           "estimatedVotesMid": 4027236,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 76.82,
+          "turnoutLow": 93.9,
+          "turnoutMid": 84.51
         },
-        "firstName": "Tim",
-        "id": 8289,
-        "lastName": "Kaine",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Hung",
+        "id": 44452,
+        "lastName": "Cao",
+        "partyName": "Republican",
+        "votes": 1397766
       }
     ],
     "district": "",
@@ -41,8 +56,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T21:08:28.771Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -52,10 +67,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 3403241,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -65,15 +82,15 @@
           "estimatedVotesHigh": 482457,
           "estimatedVotesLow": 394740,
           "estimatedVotesMid": 438598,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 83.28,
+          "turnoutLow": 101.79,
+          "turnoutMid": 91.61
         },
         "firstName": "Robert J",
         "id": 1706,
         "lastName": "Wittman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 217352
       },
       {
         "elected": false,
@@ -81,15 +98,15 @@
           "estimatedVotesHigh": 482457,
           "estimatedVotesLow": 394740,
           "estimatedVotesMid": 438598,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 83.28,
+          "turnoutLow": 101.79,
+          "turnoutMid": 91.61
         },
         "firstName": "Leslie",
         "id": 69513,
         "lastName": "Mehta",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 184443
       }
     ],
     "district": "1",
@@ -98,7 +115,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:16.868Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -108,10 +125,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 401795,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -121,15 +140,15 @@
           "estimatedVotesHigh": 406015,
           "estimatedVotesLow": 332194,
           "estimatedVotesMid": 369104,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.08,
+          "turnoutLow": 110.1,
+          "turnoutMid": 99
         },
         "firstName": "Missy",
         "id": 85155,
         "lastName": "Cotter Smasal",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 187386
       },
       {
         "elected": false,
@@ -137,15 +156,15 @@
           "estimatedVotesHigh": 406015,
           "estimatedVotesLow": 332194,
           "estimatedVotesMid": 369104,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.08,
+          "turnoutLow": 110.1,
+          "turnoutMid": 99
         },
         "firstName": "Jennifer",
         "id": 85154,
         "lastName": "Kiggans",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 171172
       },
       {
         "elected": false,
@@ -153,15 +172,15 @@
           "estimatedVotesHigh": 406015,
           "estimatedVotesLow": 332194,
           "estimatedVotesMid": 369104,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.08,
+          "turnoutLow": 110.1,
+          "turnoutMid": 99
         },
         "firstName": "Robert",
         "id": 85156,
         "lastName": "Reid",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 7182
       }
     ],
     "district": "2",
@@ -170,7 +189,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:11.760Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -180,12 +199,27 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 365740,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Robert C.",
+      "id": 85157,
+      "incumbent": true,
+      "lastName": "Scott",
+      "partyName": "Democratic"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Robert C.",
+        "id": 85157,
+        "lastName": "Scott",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -193,31 +227,31 @@
           "estimatedVotesHigh": 329348,
           "estimatedVotesLow": 269467,
           "estimatedVotesMid": 299407,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert C.",
-        "id": 85157,
-        "lastName": "Scott",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 329348,
-          "estimatedVotesLow": 269467,
-          "estimatedVotesMid": 299407,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.01,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 50181,
         "lastName": "Sitka III",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 88178
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 329348,
+          "estimatedVotesLow": 269467,
+          "estimatedVotesMid": 299407,
+          "turnoutHigh": 91.01,
+          "turnoutLow": 111.23,
+          "turnoutMid": 99
+        },
+        "firstName": "Robert C.",
+        "id": 85157,
+        "lastName": "Scott",
+        "partyName": "Democratic",
+        "votes": 211559
       }
     ],
     "district": "3",
@@ -225,8 +259,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T21:02:40.742Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -236,12 +270,27 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 299737,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Jennifer",
+      "id": 16706,
+      "incumbent": true,
+      "lastName": "McClellan",
+      "partyName": "Democratic"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Jennifer",
+        "id": 16706,
+        "lastName": "McClellan",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -249,31 +298,31 @@
           "estimatedVotesHigh": 393624,
           "estimatedVotesLow": 322056,
           "estimatedVotesMid": 357840,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jennifer",
-        "id": 16706,
-        "lastName": "McClellan",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 393624,
-          "estimatedVotesLow": 322056,
-          "estimatedVotesMid": 357840,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 60.34,
+          "turnoutLow": 73.75,
+          "turnoutMid": 66.37
         },
         "firstName": "Bill",
         "id": 76623,
         "lastName": "Moher",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 87444
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 393624,
+          "estimatedVotesLow": 322056,
+          "estimatedVotesMid": 357840,
+          "turnoutHigh": 60.34,
+          "turnoutLow": 73.75,
+          "turnoutMid": 66.37
+        },
+        "firstName": "Jennifer",
+        "id": 16706,
+        "lastName": "McClellan",
+        "partyName": "Democratic",
+        "votes": 150062
       }
     ],
     "district": "4",
@@ -281,8 +330,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T21:08:11.760Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -292,10 +341,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 237506,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -305,15 +356,15 @@
           "estimatedVotesHigh": 441746,
           "estimatedVotesLow": 361429,
           "estimatedVotesMid": 401586,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.85,
+          "turnoutLow": 108.59,
+          "turnoutMid": 97.74
         },
-        "firstName": "Gloria",
-        "id": 85159,
-        "lastName": "Tinsley Witt",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "John",
+        "id": 13706,
+        "lastName": "McGuire III",
+        "partyName": "Republican",
+        "votes": 211340
       },
       {
         "elected": false,
@@ -321,15 +372,15 @@
           "estimatedVotesHigh": 441746,
           "estimatedVotesLow": 361429,
           "estimatedVotesMid": 401586,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.85,
+          "turnoutLow": 108.59,
+          "turnoutMid": 97.74
         },
-        "firstName": "John",
-        "id": 13706,
-        "lastName": "McGuire III",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Gloria",
+        "id": 85159,
+        "lastName": "Tinsley Witt",
+        "partyName": "Democratic",
+        "votes": 181152
       }
     ],
     "district": "5",
@@ -338,7 +389,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:11.760Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -348,10 +399,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 392492,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -361,31 +414,15 @@
           "estimatedVotesHigh": 405593,
           "estimatedVotesLow": 331846,
           "estimatedVotesMid": 368719,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ken",
-        "id": 76620,
-        "lastName": "Mitchell",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 405593,
-          "estimatedVotesLow": 331846,
-          "estimatedVotesMid": 368719,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.83,
+          "turnoutLow": 108.58,
+          "turnoutMid": 97.72
         },
         "firstName": "Robert",
         "id": 102231,
         "lastName": "Well Jr.",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 7416
       },
       {
         "elected": false,
@@ -393,15 +430,31 @@
           "estimatedVotesHigh": 405593,
           "estimatedVotesLow": 331846,
           "estimatedVotesMid": 368719,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.83,
+          "turnoutLow": 108.58,
+          "turnoutMid": 97.72
+        },
+        "firstName": "Ken",
+        "id": 76620,
+        "lastName": "Mitchell",
+        "partyName": "Democratic",
+        "votes": 126450
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 405593,
+          "estimatedVotesLow": 331846,
+          "estimatedVotesMid": 368719,
+          "turnoutHigh": 88.83,
+          "turnoutLow": 108.58,
+          "turnoutMid": 97.72
         },
         "firstName": "Benjamin Lee",
         "id": 85160,
         "lastName": "Cline",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 226437
       }
     ],
     "district": "6",
@@ -410,7 +463,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:11.760Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -420,10 +473,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 360303,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -433,15 +488,15 @@
           "estimatedVotesHigh": 391043,
           "estimatedVotesLow": 319943,
           "estimatedVotesMid": 355493,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.35,
+          "turnoutLow": 111.65,
+          "turnoutMid": 99
         },
-        "firstName": "Eugene",
-        "id": 69520,
-        "lastName": "Vindman",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Derrick",
+        "id": 24614,
+        "lastName": "Anderson",
+        "partyName": "Republican",
+        "votes": 177504
       },
       {
         "elected": false,
@@ -449,15 +504,15 @@
           "estimatedVotesHigh": 391043,
           "estimatedVotesLow": 319943,
           "estimatedVotesMid": 355493,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.35,
+          "turnoutLow": 111.65,
+          "turnoutMid": 99
         },
-        "firstName": "Derrick",
-        "id": 24614,
-        "lastName": "Anderson",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Eugene",
+        "id": 69520,
+        "lastName": "Vindman",
+        "partyName": "Democratic",
+        "votes": 179702
       }
     ],
     "district": "7",
@@ -466,7 +521,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:11.760Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -476,10 +531,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 357206,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -489,47 +546,15 @@
           "estimatedVotesHigh": 356424,
           "estimatedVotesLow": 291621,
           "estimatedVotesMid": 324022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald Sternoff",
-        "id": 85161,
-        "lastName": "Beyer Jr.",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 356424,
-          "estimatedVotesLow": 291621,
-          "estimatedVotesMid": 324022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Brentley",
-        "id": 102232,
-        "lastName": "Hensel",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 356424,
-          "estimatedVotesLow": 291621,
-          "estimatedVotesMid": 324022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.33,
+          "turnoutMid": 99
         },
         "firstName": "Jerry",
         "id": 30315,
         "lastName": "Torres",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 66157
       },
       {
         "elected": false,
@@ -537,15 +562,47 @@
           "estimatedVotesHigh": 356424,
           "estimatedVotesLow": 291621,
           "estimatedVotesMid": 324022,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.33,
+          "turnoutMid": 99
+        },
+        "firstName": "Donald Sternoff",
+        "id": 85161,
+        "lastName": "Beyer Jr.",
+        "partyName": "Democratic",
+        "votes": 246892
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 356424,
+          "estimatedVotesLow": 291621,
+          "estimatedVotesMid": 324022,
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.33,
+          "turnoutMid": 99
         },
         "firstName": "David",
         "id": 85163,
         "lastName": "Kennedy",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 5683
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 356424,
+          "estimatedVotesLow": 291621,
+          "estimatedVotesMid": 324022,
+          "turnoutHigh": 91.09,
+          "turnoutLow": 111.33,
+          "turnoutMid": 99
+        },
+        "firstName": "Brentley",
+        "id": 102232,
+        "lastName": "Hensel",
+        "partyName": "Independent",
+        "votes": 5941
       }
     ],
     "district": "8",
@@ -554,7 +611,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:03:42.117Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -564,10 +621,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 324673,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -577,15 +636,15 @@
           "estimatedVotesHigh": 401363,
           "estimatedVotesLow": 328390,
           "estimatedVotesMid": 364875,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 87.02,
+          "turnoutLow": 106.35,
+          "turnoutMid": 95.72
         },
-        "firstName": "Karen",
-        "id": 76621,
-        "lastName": "Baker",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "H. Morgan",
+        "id": 44450,
+        "lastName": "Griffith",
+        "partyName": "Republican",
+        "votes": 247666
       },
       {
         "elected": false,
@@ -593,15 +652,15 @@
           "estimatedVotesHigh": 401363,
           "estimatedVotesLow": 328390,
           "estimatedVotesMid": 364875,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 87.02,
+          "turnoutLow": 106.35,
+          "turnoutMid": 95.72
         },
-        "firstName": "H. Morgan",
-        "id": 44450,
-        "lastName": "Griffith",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Karen",
+        "id": 76621,
+        "lastName": "Baker",
+        "partyName": "Democratic",
+        "votes": 101586
       }
     ],
     "district": "9",
@@ -610,7 +669,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:28.124Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -620,10 +679,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 349252,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -633,15 +694,15 @@
           "estimatedVotesHigh": 412019,
           "estimatedVotesLow": 337106,
           "estimatedVotesMid": 374562,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
         },
-        "firstName": "Mike",
-        "id": 69537,
-        "lastName": "Clancy",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Suhas",
+        "id": 11609,
+        "lastName": "Subramanyam",
+        "partyName": "Democratic",
+        "votes": 212551
       },
       {
         "elected": false,
@@ -649,15 +710,15 @@
           "estimatedVotesHigh": 412019,
           "estimatedVotesLow": 337106,
           "estimatedVotesMid": 374562,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.81,
+          "turnoutLow": 110.99,
+          "turnoutMid": 99
         },
-        "firstName": "Suhas",
-        "id": 11609,
-        "lastName": "Subramanyam",
-        "partyName": "Democratic",
-        "votes": 0
+        "firstName": "Mike",
+        "id": 69537,
+        "lastName": "Clancy",
+        "partyName": "Republican",
+        "votes": 161597
       }
     ],
     "district": "10",
@@ -666,7 +727,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:11.760Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -676,10 +737,12 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 374148,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -689,15 +752,15 @@
           "estimatedVotesHigh": 410254,
           "estimatedVotesLow": 335663,
           "estimatedVotesMid": 372958,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91,
+          "turnoutLow": 111.22,
+          "turnoutMid": 99
         },
         "firstName": "Gerald",
         "id": 1725,
         "lastName": "Connolly",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 264902
       },
       {
         "elected": false,
@@ -705,15 +768,15 @@
           "estimatedVotesHigh": 410254,
           "estimatedVotesLow": 335663,
           "estimatedVotesMid": 372958,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91,
+          "turnoutLow": 111.22,
+          "turnoutMid": 99
         },
         "firstName": "Michael",
         "id": 50153,
         "lastName": "Van Meter",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 108429
       }
     ],
     "district": "11",
@@ -722,7 +785,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:04:49.241Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -732,7 +795,7 @@
     "raceDate": "2024-11-05",
     "state": "VA",
     "stateName": "Virginia",
-    "totalVotes": 0,
+    "totalVotes": 373331,
     "year": 2024
   }
 ]

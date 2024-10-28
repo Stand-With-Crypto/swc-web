@@ -38,6 +38,7 @@
   "dependencies": {
     "@builder.io/sdk": "^2.2.2",
     "@coinbase/onchainkit": "^0.12.1",
+    "@date-fns/tz": "^1.1.2",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@next/bundle-analyzer": "^14.1.0",
@@ -81,7 +82,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
-    "date-fns": "^2.30.0",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.3.1",
     "dotenv-cli": "^7.3.0",
     "ethers": "^5.7.2",

@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,15 +11,15 @@
           "estimatedVotesHigh": 318349,
           "estimatedVotesLow": 260467,
           "estimatedVotesMid": 289406,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 18.86,
+          "turnoutLow": 23.05,
+          "turnoutMid": 20.74
         },
         "firstName": "Paul",
         "id": 27117,
         "lastName": "Buskirk",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 19131
       },
       {
         "elected": false,
@@ -25,15 +27,15 @@
           "estimatedVotesHigh": 318349,
           "estimatedVotesLow": 260467,
           "estimatedVotesMid": 289406,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 18.86,
+          "turnoutLow": 23.05,
+          "turnoutMid": 20.74
         },
         "firstName": "Tracey",
         "id": 13940,
         "lastName": "Mann",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 40899
       }
     ],
     "district": "1",
@@ -42,7 +44,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:59:11.057Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -52,10 +54,12 @@
     "raceDate": "2024-11-05",
     "state": "KS",
     "stateName": "Kansas",
-    "totalVotes": 0,
+    "totalVotes": 60030,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -65,15 +69,15 @@
           "estimatedVotesHigh": 321877,
           "estimatedVotesLow": 263356,
           "estimatedVotesMid": 292616,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.66,
+          "turnoutLow": 6.92,
+          "turnoutMid": 6.23
         },
         "firstName": "Derek",
         "id": 27132,
         "lastName": "Schmidt",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 11417
       },
       {
         "elected": false,
@@ -81,15 +85,15 @@
           "estimatedVotesHigh": 321877,
           "estimatedVotesLow": 263356,
           "estimatedVotesMid": 292616,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.66,
+          "turnoutLow": 6.92,
+          "turnoutMid": 6.23
         },
         "firstName": "Nancy",
         "id": 81778,
         "lastName": "Boyda",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 6446
       },
       {
         "elected": false,
@@ -97,15 +101,15 @@
           "estimatedVotesHigh": 321877,
           "estimatedVotesLow": 263356,
           "estimatedVotesMid": 292616,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.66,
+          "turnoutLow": 6.92,
+          "turnoutMid": 6.23
         },
         "firstName": "John",
         "id": 102141,
         "lastName": "Hauer",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 356
       }
     ],
     "district": "2",
@@ -114,7 +118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:20.752Z",
+    "lastUpdated": "2024-10-28T20:56:41.331Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -124,10 +128,12 @@
     "raceDate": "2024-11-05",
     "state": "KS",
     "stateName": "Kansas",
-    "totalVotes": 0,
+    "totalVotes": 18219,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -137,15 +143,15 @@
           "estimatedVotesHigh": 402801,
           "estimatedVotesLow": 329565,
           "estimatedVotesMid": 366183,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 3.57,
+          "turnoutLow": 4.37,
+          "turnoutMid": 3.93
         },
         "firstName": "Prasanth",
         "id": 81785,
         "lastName": "Reddy",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10038
       },
       {
         "elected": false,
@@ -153,15 +159,15 @@
           "estimatedVotesHigh": 402801,
           "estimatedVotesLow": 329565,
           "estimatedVotesMid": 366183,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 3.57,
+          "turnoutLow": 4.37,
+          "turnoutMid": 3.93
         },
         "firstName": "Steve",
         "id": 47431,
         "lastName": "Roberts",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 264
       },
       {
         "elected": false,
@@ -169,15 +175,15 @@
           "estimatedVotesHigh": 402801,
           "estimatedVotesLow": 329565,
           "estimatedVotesMid": 366183,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 3.57,
+          "turnoutLow": 4.37,
+          "turnoutMid": 3.93
         },
         "firstName": "Sharice",
         "id": 10137,
         "lastName": "Davids",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 4092
       }
     ],
     "district": "3",
@@ -186,7 +192,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T20:57:10.151Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -196,10 +202,12 @@
     "raceDate": "2024-11-05",
     "state": "KS",
     "stateName": "Kansas",
-    "totalVotes": 0,
+    "totalVotes": 14394,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -209,15 +217,15 @@
           "estimatedVotesHigh": 328794,
           "estimatedVotesLow": 269013,
           "estimatedVotesMid": 298903,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.79,
+          "turnoutLow": 5.86,
+          "turnoutMid": 5.27
         },
         "firstName": "Ron",
         "id": 2278,
         "lastName": "Estes",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 10249
       },
       {
         "elected": false,
@@ -225,15 +233,15 @@
           "estimatedVotesHigh": 328794,
           "estimatedVotesLow": 269013,
           "estimatedVotesMid": 298903,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 4.79,
+          "turnoutLow": 5.86,
+          "turnoutMid": 5.27
         },
         "firstName": "Esaua",
         "id": 85027,
         "lastName": "Freeman",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 5502
       }
     ],
     "district": "4",
@@ -242,7 +250,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:28.388Z",
+    "lastUpdated": "2024-10-28T20:58:11.456Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -252,7 +260,7 @@
     "raceDate": "2024-11-05",
     "state": "KS",
     "stateName": "Kansas",
-    "totalVotes": 0,
+    "totalVotes": 15751,
     "year": 2024
   }
 ]
