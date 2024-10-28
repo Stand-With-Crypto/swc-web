@@ -215,15 +215,15 @@
         "estimatedVotesHigh": 17594830,
         "estimatedVotesLow": 14395769,
         "estimatedVotesMid": 15995298,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Adam",
       "id": 216,
       "lastName": "Schiff",
       "partyName": "Democratic",
-      "votes": 10337229
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -271,15 +271,15 @@
         "estimatedVotesHigh": 17594830,
         "estimatedVotesLow": 14395769,
         "estimatedVotesMid": 15995298,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Steve",
       "id": 53071,
       "lastName": "Garvey",
       "partyName": "Republican",
-      "votes": 5658069
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -329,9 +329,9 @@
         "estimatedVotesHigh": 496159,
         "estimatedVotesLow": 405949,
         "estimatedVotesMid": 451054,
-        "turnoutHigh": 2.24,
-        "turnoutLow": 2.74,
-        "turnoutMid": 2.47
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Lisa Blunt",
       "id": 1147,
@@ -385,15 +385,15 @@
         "estimatedVotesHigh": 496159,
         "estimatedVotesLow": 405949,
         "estimatedVotesMid": 451054,
-        "turnoutHigh": 2.24,
-        "turnoutLow": 2.74,
-        "turnoutMid": 2.47
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Michael",
       "id": 84943,
       "lastName": "Katz",
       "partyName": "Independent",
-      "votes": 11134
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -441,14 +441,62 @@
         "estimatedVotesHigh": 496159,
         "estimatedVotesLow": 405949,
         "estimatedVotesMid": 451054,
-        "turnoutHigh": 2.24,
-        "turnoutLow": 2.74,
-        "turnoutMid": 2.47
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Eric",
       "id": 77458,
       "lastName": "Hansen",
       "partyName": "Republican",
+      "votes": 0
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Peter",
+        "firstNickname": "",
+        "id": "fed125a0-9407-4cc0-9373-98cb6c5e6811",
+        "lastName": "Bono",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": "REPUBLICAN",
+        "primaryRole": {
+          "dateEnd": "2027-01-06T00:00:00.000Z",
+          "dateStart": "2025-01-06T00:00:00.000Z",
+          "id": "f7a287cf-929b-4285-8a6b-1039fbb9be1c",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "50",
+          "primaryState": "CA",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240405-022559-PeterBono.png",
+        "profilePictureUrlDimensions": {
+          "height": 300,
+          "width": 200
+        },
+        "promotedPositioning": null,
+        "slug": "peter--bono",
+        "stanceCount": 0,
+        "twitterAccounts": []
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 10821376,
+        "estimatedVotesLow": 8853856,
+        "estimatedVotesMid": 9837612,
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
+      },
+      "firstName": "Feena",
+      "id": 44277,
+      "lastName": "Bonoan",
+      "partyName": "Libertarian",
       "votes": 0
     },
     {
@@ -458,9 +506,9 @@
         "estimatedVotesHigh": 10821376,
         "estimatedVotesLow": 8853856,
         "estimatedVotesMid": 9837612,
-        "turnoutHigh": 91.01,
-        "turnoutLow": 111.24,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Tuan",
       "id": 84945,
@@ -515,63 +563,15 @@
         "estimatedVotesHigh": 10821376,
         "estimatedVotesLow": 8853856,
         "estimatedVotesMid": 9837612,
-        "turnoutHigh": 91.01,
-        "turnoutLow": 111.24,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Rick",
       "id": 10591,
       "lastName": "Scott",
       "partyName": "Republican",
-      "votes": 5220574
-    },
-    {
-      "dtsiData": {
-        "computedStanceScore": null,
-        "computedSumStanceScoreWeight": null,
-        "firstName": "Peter",
-        "firstNickname": "",
-        "id": "fed125a0-9407-4cc0-9373-98cb6c5e6811",
-        "lastName": "Bono",
-        "manuallyOverriddenStanceScore": null,
-        "nameSuffix": "",
-        "politicalAffiliationCategory": "REPUBLICAN",
-        "primaryRole": {
-          "dateEnd": "2027-01-06T00:00:00.000Z",
-          "dateStart": "2025-01-06T00:00:00.000Z",
-          "id": "f7a287cf-929b-4285-8a6b-1039fbb9be1c",
-          "primaryCity": "",
-          "primaryCountryCode": "US",
-          "primaryDistrict": "50",
-          "primaryState": "CA",
-          "roleCategory": "CONGRESS",
-          "status": "RUNNING_FOR",
-          "title": ""
-        },
-        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240405-022559-PeterBono.png",
-        "profilePictureUrlDimensions": {
-          "height": 300,
-          "width": 200
-        },
-        "promotedPositioning": null,
-        "slug": "peter--bono",
-        "stanceCount": 0,
-        "twitterAccounts": []
-      },
-      "elected": false,
-      "estimatedVotes": {
-        "estimatedVotesHigh": 10821376,
-        "estimatedVotesLow": 8853856,
-        "estimatedVotesMid": 9837612,
-        "turnoutHigh": 91.01,
-        "turnoutLow": 111.24,
-        "turnoutMid": 99
-      },
-      "firstName": "Feena",
-      "id": 44277,
-      "lastName": "Bonoan",
-      "partyName": "Libertarian",
-      "votes": 307112
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -619,15 +619,15 @@
         "estimatedVotesHigh": 10821376,
         "estimatedVotesLow": 8853856,
         "estimatedVotesMid": 9837612,
-        "turnoutHigh": 91.01,
-        "turnoutLow": 111.24,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Debbie",
       "id": 10660,
       "lastName": "Mucarsel-Powell",
       "partyName": "Democratic",
-      "votes": 4321285
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -636,9 +636,9 @@
         "estimatedVotesHigh": 10821376,
         "estimatedVotesLow": 8853856,
         "estimatedVotesMid": 9837612,
-        "turnoutHigh": 91.01,
-        "turnoutLow": 111.24,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Ben",
       "id": 84944,
@@ -878,15 +878,15 @@
         "estimatedVotesHigh": 3084673,
         "estimatedVotesLow": 2523825,
         "estimatedVotesMid": 2804245,
-        "turnoutHigh": 91.72,
-        "turnoutLow": 112.1,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Andrew",
       "id": 44322,
       "lastName": "Horning",
       "partyName": "Libertarian",
-      "votes": 40868
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -937,20 +937,20 @@
           }
         ]
       },
-      "elected": true,
+      "elected": false,
       "estimatedVotes": {
         "estimatedVotesHigh": 3084673,
         "estimatedVotesLow": 2523825,
         "estimatedVotesMid": 2804245,
-        "turnoutHigh": 91.72,
-        "turnoutLow": 112.1,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Jim",
       "id": 8888,
       "lastName": "Banks",
       "partyName": "Republican",
-      "votes": 1638073
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -998,15 +998,15 @@
         "estimatedVotesHigh": 3084673,
         "estimatedVotesLow": 2523825,
         "estimatedVotesMid": 2804245,
-        "turnoutHigh": 91.72,
-        "turnoutLow": 112.1,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Valerie",
       "id": 65448,
       "lastName": "McCray",
       "partyName": "Democratic",
-      "votes": 1150265
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1054,15 +1054,15 @@
         "estimatedVotesHigh": 813373,
         "estimatedVotesLow": 665472,
         "estimatedVotesMid": 739395,
-        "turnoutHigh": 29.64,
-        "turnoutLow": 36.22,
-        "turnoutMid": 32.6
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Demi",
       "id": 75258,
       "lastName": "Kouzounas",
       "partyName": "Republican",
-      "votes": 107530
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1102,15 +1102,15 @@
         "estimatedVotesHigh": 813373,
         "estimatedVotesLow": 665472,
         "estimatedVotesMid": 739395,
-        "turnoutHigh": 29.64,
-        "turnoutLow": 36.22,
-        "turnoutMid": 32.6
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "David",
       "id": 75257,
       "lastName": "Costello",
       "partyName": "Democratic",
-      "votes": 4014
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1158,15 +1158,15 @@
         "estimatedVotesHigh": 813373,
         "estimatedVotesLow": 665472,
         "estimatedVotesMid": 739395,
-        "turnoutHigh": 29.64,
-        "turnoutLow": 36.22,
-        "turnoutMid": 32.6
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Jason",
       "id": 84946,
       "lastName": "Cherry",
       "partyName": "Independent",
-      "votes": 4024
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1215,15 +1215,15 @@
         "estimatedVotesHigh": 813373,
         "estimatedVotesLow": 665472,
         "estimatedVotesMid": 739395,
-        "turnoutHigh": 29.64,
-        "turnoutLow": 36.22,
-        "turnoutMid": 32.6
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Angus",
       "id": 8285,
       "lastName": "King",
       "partyName": "Independent",
-      "votes": 125497
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1271,15 +1271,15 @@
         "estimatedVotesHigh": 3040430,
         "estimatedVotesLow": 2487627,
         "estimatedVotesMid": 2764028,
-        "turnoutHigh": 90.67,
-        "turnoutLow": 110.82,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Larry",
       "id": 10832,
       "lastName": "Hogan",
       "partyName": "Republican",
-      "votes": 900053
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1327,15 +1327,15 @@
         "estimatedVotesHigh": 3040430,
         "estimatedVotesLow": 2487627,
         "estimatedVotesMid": 2764028,
-        "turnoutHigh": 90.67,
-        "turnoutLow": 110.82,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Angela",
       "id": 67193,
       "lastName": "Alsobrooks",
       "partyName": "Democratic",
-      "votes": 1801402
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1384,15 +1384,15 @@
         "estimatedVotesHigh": 3040430,
         "estimatedVotesLow": 2487627,
         "estimatedVotesMid": 2764028,
-        "turnoutHigh": 90.67,
-        "turnoutLow": 110.82,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Mike",
       "id": 84947,
       "lastName": "Scott",
       "partyName": "Libertarian",
-      "votes": 55376
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1441,15 +1441,15 @@
         "estimatedVotesHigh": 3625935,
         "estimatedVotesLow": 2966685,
         "estimatedVotesMid": 3296293,
-        "turnoutHigh": 3.96,
-        "turnoutLow": 4.84,
-        "turnoutMid": 4.36
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Elizabeth",
       "id": 8284,
       "lastName": "Warren",
       "partyName": "Democratic",
-      "votes": 143678
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1504,9 +1504,9 @@
         "estimatedVotesHigh": 3625935,
         "estimatedVotesLow": 2966685,
         "estimatedVotesMid": 3296293,
-        "turnoutHigh": 3.96,
-        "turnoutLow": 4.84,
-        "turnoutMid": 4.36
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "John",
       "id": 84377,
@@ -1552,9 +1552,9 @@
         "estimatedVotesHigh": 3625935,
         "estimatedVotesLow": 2966685,
         "estimatedVotesMid": 3296293,
-        "turnoutHigh": 3.96,
-        "turnoutLow": 4.84,
-        "turnoutMid": 4.36
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Joseph",
       "id": 102154,
@@ -1569,9 +1569,9 @@
         "estimatedVotesHigh": 3625935,
         "estimatedVotesLow": 2966685,
         "estimatedVotesMid": 3296293,
-        "turnoutHigh": 3.96,
-        "turnoutLow": 4.84,
-        "turnoutMid": 4.36
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Shiva",
       "id": 11165,
@@ -1625,9 +1625,9 @@
         "estimatedVotesHigh": 3625935,
         "estimatedVotesLow": 2966685,
         "estimatedVotesMid": 3296293,
-        "turnoutHigh": 3.96,
-        "turnoutLow": 4.84,
-        "turnoutMid": 4.36
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Brandon",
       "id": 102155,
@@ -1682,9 +1682,9 @@
         "estimatedVotesHigh": 5578833,
         "estimatedVotesLow": 4564498,
         "estimatedVotesMid": 5071660,
-        "turnoutHigh": 91.5,
-        "turnoutLow": 111.83,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Doug",
       "id": 14712,
@@ -1740,9 +1740,9 @@
         "estimatedVotesHigh": 5578833,
         "estimatedVotesLow": 4564498,
         "estimatedVotesMid": 5071660,
-        "turnoutHigh": 91.5,
-        "turnoutLow": 111.83,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Douglas",
       "id": 102159,
@@ -1796,15 +1796,15 @@
         "estimatedVotesHigh": 5578833,
         "estimatedVotesLow": 4564498,
         "estimatedVotesMid": 5071660,
-        "turnoutHigh": 91.5,
-        "turnoutLow": 111.83,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Elissa",
       "id": 10364,
       "lastName": "Slotkin",
       "partyName": "Democratic",
-      "votes": 2701833
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -1854,9 +1854,9 @@
         "estimatedVotesHigh": 5578833,
         "estimatedVotesLow": 4564498,
         "estimatedVotesMid": 5071660,
-        "turnoutHigh": 91.5,
-        "turnoutLow": 111.83,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Dave",
       "id": 102162,
@@ -1910,15 +1910,15 @@
         "estimatedVotesHigh": 5578833,
         "estimatedVotesLow": 4564498,
         "estimatedVotesMid": 5071660,
-        "turnoutHigh": 91.5,
-        "turnoutLow": 111.83,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Mike",
       "id": 8219,
       "lastName": "Rogers",
       "partyName": "Republican",
-      "votes": 2402862
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -1927,9 +1927,9 @@
         "estimatedVotesHigh": 5578833,
         "estimatedVotesLow": 4564498,
         "estimatedVotesMid": 5071660,
-        "turnoutHigh": 91.5,
-        "turnoutLow": 111.83,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Joseph",
       "id": 102160,
@@ -1985,15 +1985,15 @@
         "estimatedVotesHigh": 3289032,
         "estimatedVotesLow": 2691028,
         "estimatedVotesMid": 2990027,
-        "turnoutHigh": 49.49,
-        "turnoutLow": 60.49,
-        "turnoutMid": 54.44
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Amy",
       "id": 8233,
       "lastName": "Klobuchar",
       "partyName": "Democratic",
-      "votes": 1627849
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -2002,9 +2002,9 @@
         "estimatedVotesHigh": 3289032,
         "estimatedVotesLow": 2691028,
         "estimatedVotesMid": 2990027,
-        "turnoutHigh": 49.49,
-        "turnoutLow": 60.49,
-        "turnoutMid": 54.44
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Rebecca",
       "id": 102178,
@@ -2065,9 +2065,9 @@
         "estimatedVotesHigh": 3289032,
         "estimatedVotesLow": 2691028,
         "estimatedVotesMid": 2990027,
-        "turnoutHigh": 49.49,
-        "turnoutLow": 60.49,
-        "turnoutMid": 54.44
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Joyce",
       "id": 102177,
@@ -2121,9 +2121,9 @@
         "estimatedVotesHigh": 3289032,
         "estimatedVotesLow": 2691028,
         "estimatedVotesMid": 2990027,
-        "turnoutHigh": 49.49,
-        "turnoutLow": 60.49,
-        "turnoutMid": 54.44
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Royce",
       "id": 28730,
@@ -2169,15 +2169,15 @@
         "estimatedVotesHigh": 1317049,
         "estimatedVotesLow": 1077582,
         "estimatedVotesMid": 1197312,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Ty",
       "id": 52370,
       "lastName": "Pinkins",
       "partyName": "Democratic",
-      "votes": 493692
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -2225,15 +2225,15 @@
         "estimatedVotesHigh": 1317049,
         "estimatedVotesLow": 1077582,
         "estimatedVotesMid": 1197312,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Roger",
       "id": 8242,
       "lastName": "Wicker",
       "partyName": "Republican",
-      "votes": 703620
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -2567,9 +2567,9 @@
         "estimatedVotesHigh": 599037,
         "estimatedVotesLow": 490118,
         "estimatedVotesMid": 544574,
-        "turnoutHigh": 114.9,
-        "turnoutLow": 140.43,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Robert",
       "id": 102192,
@@ -2624,15 +2624,15 @@
         "estimatedVotesHigh": 599037,
         "estimatedVotesLow": 490118,
         "estimatedVotesMid": 544574,
-        "turnoutHigh": 114.9,
-        "turnoutLow": 140.43,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Jon",
       "id": 8239,
       "lastName": "Tester",
       "partyName": "Democratic",
-      "votes": 258964
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -2681,15 +2681,15 @@
         "estimatedVotesHigh": 599037,
         "estimatedVotesLow": 490118,
         "estimatedVotesMid": 544574,
-        "turnoutHigh": 114.9,
-        "turnoutLow": 140.43,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Sid",
       "id": 45844,
       "lastName": "Daoud",
       "partyName": "Libertarian",
-      "votes": 122783
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -2737,15 +2737,15 @@
         "estimatedVotesHigh": 599037,
         "estimatedVotesLow": 490118,
         "estimatedVotesMid": 544574,
-        "turnoutHigh": 114.9,
-        "turnoutLow": 140.43,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Tim",
       "id": 71312,
       "lastName": "Sheehy",
       "partyName": "Republican",
-      "votes": 306532
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -2867,15 +2867,15 @@
         "estimatedVotesHigh": 1323302,
         "estimatedVotesLow": 1082703,
         "estimatedVotesMid": 1203002,
-        "turnoutHigh": 84.72,
-        "turnoutLow": 103.55,
-        "turnoutMid": 93.2
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Chris",
       "id": 44716,
       "lastName": "Cunningham",
       "partyName": "Libertarian",
-      "votes": 20185
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -2924,15 +2924,15 @@
         "estimatedVotesHigh": 1323302,
         "estimatedVotesLow": 1082703,
         "estimatedVotesMid": 1203002,
-        "turnoutHigh": 84.72,
-        "turnoutLow": 103.55,
-        "turnoutMid": 93.2
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Sam",
       "id": 23446,
       "lastName": "Brown",
       "partyName": "Republican",
-      "votes": 525518
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -2980,15 +2980,15 @@
         "estimatedVotesHigh": 1323302,
         "estimatedVotesLow": 1082703,
         "estimatedVotesMid": 1203002,
-        "turnoutHigh": 84.72,
-        "turnoutLow": 103.55,
-        "turnoutMid": 93.2
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Janine",
       "id": 84952,
       "lastName": "Hansen",
       "partyName": "American Independent Party",
-      "votes": 21243
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3028,15 +3028,15 @@
         "estimatedVotesHigh": 1323302,
         "estimatedVotesLow": 1082703,
         "estimatedVotesMid": 1203002,
-        "turnoutHigh": 84.72,
-        "turnoutLow": 103.55,
-        "turnoutMid": 93.2
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Jacky",
       "id": 1463,
       "lastName": "Rosen",
       "partyName": "Democratic",
-      "votes": 554195
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -3045,15 +3045,15 @@
         "estimatedVotesHigh": 4687094,
         "estimatedVotesLow": 3834894,
         "estimatedVotesMid": 4260993,
-        "turnoutHigh": 89.27,
-        "turnoutLow": 109.1,
-        "turnoutMid": 98.19
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Joanne",
       "id": 44376,
       "lastName": "Kuniansky",
       "partyName": "Socialist Workers",
-      "votes": 78950
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -3062,15 +3062,15 @@
         "estimatedVotesHigh": 4687094,
         "estimatedVotesLow": 3834894,
         "estimatedVotesMid": 4260993,
-        "turnoutHigh": 89.27,
-        "turnoutLow": 109.1,
-        "turnoutMid": 98.19
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Christina",
       "id": 84957,
       "lastName": "Khalil",
       "partyName": "Green",
-      "votes": 77471
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -3079,15 +3079,15 @@
         "estimatedVotesHigh": 4687094,
         "estimatedVotesLow": 3834894,
         "estimatedVotesMid": 4260993,
-        "turnoutHigh": 89.27,
-        "turnoutLow": 109.1,
-        "turnoutMid": 98.19
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Patricia",
       "id": 84960,
       "lastName": "Mooneyham",
       "partyName": "Independent",
-      "votes": 76636
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3135,15 +3135,15 @@
         "estimatedVotesHigh": 4687094,
         "estimatedVotesLow": 3834894,
         "estimatedVotesMid": 4260993,
-        "turnoutHigh": 89.27,
-        "turnoutLow": 109.1,
-        "turnoutMid": 98.19
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Curtis",
       "id": 75425,
       "lastName": "Bashaw",
       "partyName": "Republican",
-      "votes": 1642072
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3188,15 +3188,15 @@
         "estimatedVotesHigh": 4687094,
         "estimatedVotesLow": 3834894,
         "estimatedVotesMid": 4260993,
-        "turnoutHigh": 89.27,
-        "turnoutLow": 109.1,
-        "turnoutMid": 98.19
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Kenneth",
       "id": 84958,
       "lastName": "Kaplan",
       "partyName": "Libertarian",
-      "votes": 77320
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3246,15 +3246,15 @@
         "estimatedVotesHigh": 4687094,
         "estimatedVotesLow": 3834894,
         "estimatedVotesMid": 4260993,
-        "turnoutHigh": 89.27,
-        "turnoutLow": 109.1,
-        "turnoutMid": 98.19
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Andy",
       "id": 9523,
       "lastName": "Kim",
       "partyName": "Democratic",
-      "votes": 2231574
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3304,15 +3304,15 @@
         "estimatedVotesHigh": 902128,
         "estimatedVotesLow": 738105,
         "estimatedVotesMid": 820114,
-        "turnoutHigh": 93.28,
-        "turnoutLow": 114.01,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Martin",
       "id": 8271,
       "lastName": "Heinrich",
       "partyName": "Democratic",
-      "votes": 477361
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3360,15 +3360,15 @@
         "estimatedVotesHigh": 902128,
         "estimatedVotesLow": 738105,
         "estimatedVotesMid": 820114,
-        "turnoutHigh": 93.28,
-        "turnoutLow": 114.01,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Nella",
       "id": 71578,
       "lastName": "Domenici",
       "partyName": "Republican",
-      "votes": 364124
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3409,15 +3409,15 @@
         "estimatedVotesHigh": 8625403,
         "estimatedVotesLow": 7057149,
         "estimatedVotesMid": 7841271,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Jonathan",
       "id": 84962,
       "lastName": "Ramos",
       "partyName": "Independent",
-      "votes": 146481
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3465,15 +3465,15 @@
         "estimatedVotesHigh": 8625403,
         "estimatedVotesLow": 7057149,
         "estimatedVotesMid": 7841271,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Mike",
       "id": 77535,
       "lastName": "Sapraicone",
       "partyName": "Republican",
-      "votes": 2854610
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3522,15 +3522,15 @@
         "estimatedVotesHigh": 8625403,
         "estimatedVotesLow": 7057149,
         "estimatedVotesMid": 7841271,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Kirsten",
       "id": 8259,
       "lastName": "Gillibrand",
       "partyName": "Democratic",
-      "votes": 4543815
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3578,15 +3578,15 @@
         "estimatedVotesHigh": 8625403,
         "estimatedVotesLow": 7057149,
         "estimatedVotesMid": 7841271,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "YueXin",
       "id": 84961,
       "lastName": "Miller",
       "partyName": "American Independent Party",
-      "votes": 149312
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3636,15 +3636,15 @@
         "estimatedVotesHigh": 8625403,
         "estimatedVotesLow": 7057149,
         "estimatedVotesMid": 7841271,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Diane",
       "id": 44279,
       "lastName": "Sare",
       "partyName": "LaRouche",
-      "votes": 147055
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3692,15 +3692,15 @@
         "estimatedVotesHigh": 371432,
         "estimatedVotesLow": 303899,
         "estimatedVotesMid": 337662,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Katrina",
       "id": 23642,
       "lastName": "Christiansen",
       "partyName": "Democratic",
-      "votes": 109787
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3749,15 +3749,15 @@
         "estimatedVotesHigh": 371432,
         "estimatedVotesLow": 303899,
         "estimatedVotesMid": 337662,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Kevin",
       "id": 1423,
       "lastName": "Cramer",
       "partyName": "Republican",
-      "votes": 227875
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -3766,9 +3766,9 @@
         "estimatedVotesHigh": 6039891,
         "estimatedVotesLow": 4941728,
         "estimatedVotesMid": 5490807,
-        "turnoutHigh": 89.12,
-        "turnoutLow": 108.93,
-        "turnoutMid": 98.04
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Don",
       "id": 11348,
@@ -3822,15 +3822,15 @@
         "estimatedVotesHigh": 6039891,
         "estimatedVotesLow": 4941728,
         "estimatedVotesMid": 5490807,
-        "turnoutHigh": 89.12,
-        "turnoutLow": 108.93,
-        "turnoutMid": 98.04
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Bernie",
       "id": 53893,
       "lastName": "Moreno",
       "partyName": "Republican",
-      "votes": 2865673
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3879,15 +3879,15 @@
         "estimatedVotesHigh": 6039891,
         "estimatedVotesLow": 4941728,
         "estimatedVotesMid": 5490807,
-        "turnoutHigh": 89.12,
-        "turnoutLow": 108.93,
-        "turnoutMid": 98.04
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Sherrod",
       "id": 8225,
       "lastName": "Brown",
       "partyName": "Democratic",
-      "votes": 2517321
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3935,15 +3935,15 @@
         "estimatedVotesHigh": 6945189,
         "estimatedVotesLow": 5682427,
         "estimatedVotesMid": 6313806,
-        "turnoutHigh": 91.89,
-        "turnoutLow": 112.31,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "David",
       "id": 20590,
       "lastName": "McCormick",
       "partyName": "Republican",
-      "votes": 3103977
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -3998,15 +3998,15 @@
         "estimatedVotesHigh": 6945189,
         "estimatedVotesLow": 5682427,
         "estimatedVotesMid": 6313806,
-        "turnoutHigh": 91.89,
-        "turnoutLow": 112.31,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Bob",
       "id": 11349,
       "lastName": "Casey Jr.",
       "partyName": "Democratic",
-      "votes": 3277747
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4054,15 +4054,15 @@
         "estimatedVotesHigh": 519796,
         "estimatedVotesLow": 425288,
         "estimatedVotesMid": 472539,
-        "turnoutHigh": 13.55,
-        "turnoutLow": 16.56,
-        "turnoutMid": 14.9
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Patricia",
       "id": 10790,
       "lastName": "Morgan",
       "partyName": "Republican",
-      "votes": 26025
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4112,15 +4112,15 @@
         "estimatedVotesHigh": 519796,
         "estimatedVotesLow": 425288,
         "estimatedVotesMid": 472539,
-        "turnoutHigh": 13.55,
-        "turnoutLow": 16.56,
-        "turnoutMid": 14.9
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Sheldon",
       "id": 8240,
       "lastName": "Whitehouse",
       "partyName": "Democratic",
-      "votes": 44382
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -4415,15 +4415,15 @@
         "estimatedVotesHigh": 11471348,
         "estimatedVotesLow": 9385656,
         "estimatedVotesMid": 10428487,
-        "turnoutHigh": 91.63,
-        "turnoutLow": 111.99,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Ted",
       "id": 2,
       "lastName": "Cruz",
       "partyName": "Republican",
-      "votes": 5585618
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4472,15 +4472,15 @@
         "estimatedVotesHigh": 11471348,
         "estimatedVotesLow": 9385656,
         "estimatedVotesMid": 10428487,
-        "turnoutHigh": 91.63,
-        "turnoutLow": 111.99,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Colin",
       "id": 8358,
       "lastName": "Allred",
       "partyName": "Democratic",
-      "votes": 4805435
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4529,15 +4529,15 @@
         "estimatedVotesHigh": 11471348,
         "estimatedVotesLow": 9385656,
         "estimatedVotesMid": 10428487,
-        "turnoutHigh": 91.63,
-        "turnoutLow": 111.99,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Ted",
       "id": 14930,
       "lastName": "Brown",
       "partyName": "Libertarian",
-      "votes": 120209
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4585,15 +4585,15 @@
         "estimatedVotesHigh": 1240489,
         "estimatedVotesLow": 1014945,
         "estimatedVotesMid": 1127716,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Caroline",
       "id": 76175,
       "lastName": "Gleich",
       "partyName": "Democratic",
-      "votes": 435605
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4642,15 +4642,15 @@
         "estimatedVotesHigh": 1240489,
         "estimatedVotesLow": 1014945,
         "estimatedVotesMid": 1127716,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "John",
       "id": 8307,
       "lastName": "Curtis",
       "partyName": "Republican",
-      "votes": 670053
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4698,15 +4698,15 @@
         "estimatedVotesHigh": 1240489,
         "estimatedVotesLow": 1014945,
         "estimatedVotesMid": 1127716,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Carlton E.",
       "id": 84967,
       "lastName": "Bowen",
       "partyName": "American Independent Party",
-      "votes": 22058
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -4754,9 +4754,9 @@
         "estimatedVotesHigh": 359924,
         "estimatedVotesLow": 294481,
         "estimatedVotesMid": 327192,
-        "turnoutHigh": 27.71,
-        "turnoutLow": 33.87,
-        "turnoutMid": 30.48
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Steve",
       "id": 101849,
@@ -4810,9 +4810,9 @@
         "estimatedVotesHigh": 359924,
         "estimatedVotesLow": 294481,
         "estimatedVotesMid": 327192,
-        "turnoutHigh": 27.71,
-        "turnoutLow": 33.87,
-        "turnoutMid": 30.48
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Bernie",
       "id": 113432,
@@ -4827,15 +4827,15 @@
         "estimatedVotesHigh": 359924,
         "estimatedVotesLow": 294481,
         "estimatedVotesMid": 327192,
-        "turnoutHigh": 27.71,
-        "turnoutLow": 33.87,
-        "turnoutMid": 30.48
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Justin",
       "id": 85171,
       "lastName": "Schoville",
       "partyName": "Peace and Justice",
-      "votes": 5940
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -4844,9 +4844,9 @@
         "estimatedVotesHigh": 359924,
         "estimatedVotesLow": 294481,
         "estimatedVotesMid": 327192,
-        "turnoutHigh": 27.71,
-        "turnoutLow": 33.87,
-        "turnoutMid": 30.48
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Mark",
       "id": 102227,
@@ -4893,9 +4893,9 @@
         "estimatedVotesHigh": 359924,
         "estimatedVotesLow": 294481,
         "estimatedVotesMid": 327192,
-        "turnoutHigh": 27.71,
-        "turnoutLow": 33.87,
-        "turnoutMid": 30.48
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Matt",
       "id": 102228,
@@ -4949,71 +4949,15 @@
         "estimatedVotesHigh": 359924,
         "estimatedVotesLow": 294481,
         "estimatedVotesMid": 327192,
-        "turnoutHigh": 27.71,
-        "turnoutLow": 33.87,
-        "turnoutMid": 30.48
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Gerald",
       "id": 28838,
       "lastName": "Malloy",
       "partyName": "Republican",
-      "votes": 93792
-    },
-    {
-      "dtsiData": {
-        "computedStanceScore": null,
-        "computedSumStanceScoreWeight": null,
-        "firstName": "Luther",
-        "firstNickname": "",
-        "id": "c8aca691-5754-4ae1-8333-5ba305ce08ba",
-        "lastName": "Layne",
-        "manuallyOverriddenStanceScore": null,
-        "nameSuffix": "",
-        "politicalAffiliationCategory": null,
-        "primaryRole": {
-          "dateEnd": "2027-01-03T00:00:00.000Z",
-          "dateStart": "2025-01-03T00:00:00.000Z",
-          "id": "9da6fadb-f79b-41c2-b025-edcdc028be85",
-          "primaryCity": "",
-          "primaryCountryCode": "US",
-          "primaryDistrict": "25",
-          "primaryState": "NY",
-          "roleCategory": "CONGRESS",
-          "status": "RUNNING_FOR",
-          "title": ""
-        },
-        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240912-183612-Screenshot2024-09-12at2.35.57PM.png",
-        "profilePictureUrlDimensions": {
-          "height": 694,
-          "width": 554
-        },
-        "promotedPositioning": null,
-        "slug": "luther---layne",
-        "stanceCount": 0,
-        "twitterAccounts": [
-          {
-            "accountType": "PROFESSIONAL",
-            "id": "b5b34778-dc50-4ba4-9f47-99f44f5fd294",
-            "personId": "c8aca691-5754-4ae1-8333-5ba305ce08ba",
-            "state": "VISIBLE",
-            "username": "LutherForNY25"
-          }
-        ]
-      },
-      "elected": true,
-      "estimatedVotes": {
-        "estimatedVotesHigh": 4429965,
-        "estimatedVotesLow": 3624517,
-        "estimatedVotesMid": 4027236,
-        "turnoutHigh": 93.07,
-        "turnoutLow": 113.75,
-        "turnoutMid": 99
-      },
-      "firstName": "Tim",
-      "id": 8289,
-      "lastName": "Kaine",
-      "partyName": "Democratic",
-      "votes": 2325220
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5061,15 +5005,71 @@
         "estimatedVotesHigh": 4429965,
         "estimatedVotesLow": 3624517,
         "estimatedVotesMid": 4027236,
-        "turnoutHigh": 93.07,
-        "turnoutLow": 113.75,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Hung",
       "id": 44452,
       "lastName": "Cao",
       "partyName": "Republican",
-      "votes": 1797828
+      "votes": 0
+    },
+    {
+      "dtsiData": {
+        "computedStanceScore": null,
+        "computedSumStanceScoreWeight": null,
+        "firstName": "Luther",
+        "firstNickname": "",
+        "id": "c8aca691-5754-4ae1-8333-5ba305ce08ba",
+        "lastName": "Layne",
+        "manuallyOverriddenStanceScore": null,
+        "nameSuffix": "",
+        "politicalAffiliationCategory": null,
+        "primaryRole": {
+          "dateEnd": "2027-01-03T00:00:00.000Z",
+          "dateStart": "2025-01-03T00:00:00.000Z",
+          "id": "9da6fadb-f79b-41c2-b025-edcdc028be85",
+          "primaryCity": "",
+          "primaryCountryCode": "US",
+          "primaryDistrict": "25",
+          "primaryState": "NY",
+          "roleCategory": "CONGRESS",
+          "status": "RUNNING_FOR",
+          "title": ""
+        },
+        "profilePictureUrl": "https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/20240912-183612-Screenshot2024-09-12at2.35.57PM.png",
+        "profilePictureUrlDimensions": {
+          "height": 694,
+          "width": 554
+        },
+        "promotedPositioning": null,
+        "slug": "luther---layne",
+        "stanceCount": 0,
+        "twitterAccounts": [
+          {
+            "accountType": "PROFESSIONAL",
+            "id": "b5b34778-dc50-4ba4-9f47-99f44f5fd294",
+            "personId": "c8aca691-5754-4ae1-8333-5ba305ce08ba",
+            "state": "VISIBLE",
+            "username": "LutherForNY25"
+          }
+        ]
+      },
+      "elected": false,
+      "estimatedVotes": {
+        "estimatedVotesHigh": 4429965,
+        "estimatedVotesLow": 3624517,
+        "estimatedVotesMid": 4027236,
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
+      },
+      "firstName": "Tim",
+      "id": 8289,
+      "lastName": "Kaine",
+      "partyName": "Democratic",
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5118,15 +5118,15 @@
         "estimatedVotesHigh": 4035935,
         "estimatedVotesLow": 3302130,
         "estimatedVotesMid": 3669031,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Maria",
       "id": 8226,
       "lastName": "Cantwell",
       "partyName": "Democratic",
-      "votes": 2180638
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5174,15 +5174,15 @@
         "estimatedVotesHigh": 4035935,
         "estimatedVotesLow": 3302130,
         "estimatedVotesMid": 3669031,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Raul",
       "id": 14042,
       "lastName": "Garcia",
       "partyName": "Republican",
-      "votes": 1488393
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5230,15 +5230,15 @@
         "estimatedVotesHigh": 796969,
         "estimatedVotesLow": 652073,
         "estimatedVotesMid": 724518,
-        "turnoutHigh": 91.81,
-        "turnoutLow": 112.21,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Glenn",
       "id": 67484,
       "lastName": "Elliott",
       "partyName": "Democratic",
-      "votes": 212407
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5281,20 +5281,20 @@
           }
         ]
       },
-      "elected": true,
+      "elected": false,
       "estimatedVotes": {
         "estimatedVotesHigh": 796969,
         "estimatedVotesLow": 652073,
         "estimatedVotesMid": 724518,
-        "turnoutHigh": 91.81,
-        "turnoutLow": 112.21,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Jim",
       "id": 13636,
       "lastName": "Justice",
       "partyName": "Republican",
-      "votes": 498682
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5342,15 +5342,15 @@
         "estimatedVotesHigh": 796969,
         "estimatedVotesLow": 652073,
         "estimatedVotesMid": 724518,
-        "turnoutHigh": 91.81,
-        "turnoutLow": 112.21,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "David",
       "id": 2108,
       "lastName": "Moran",
       "partyName": "Libertarian",
-      "votes": 20591
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5405,15 +5405,15 @@
         "estimatedVotesHigh": 3309506,
         "estimatedVotesLow": 2707775,
         "estimatedVotesMid": 3008635,
-        "turnoutHigh": 91.32,
-        "turnoutLow": 111.62,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Tammy",
       "id": 8263,
       "lastName": "Baldwin",
       "partyName": "Democratic",
-      "votes": 1447559
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5461,15 +5461,15 @@
         "estimatedVotesHigh": 3309506,
         "estimatedVotesLow": 2707775,
         "estimatedVotesMid": 3008635,
-        "turnoutHigh": 91.32,
-        "turnoutLow": 111.62,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Phillip",
       "id": 85173,
       "lastName": "Anderson",
       "partyName": "Disrupt the Corruption",
-      "votes": 57349
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5519,15 +5519,15 @@
         "estimatedVotesHigh": 3309506,
         "estimatedVotesLow": 2707775,
         "estimatedVotesMid": 3008635,
-        "turnoutHigh": 91.32,
-        "turnoutLow": 111.62,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Thomas",
       "id": 84975,
       "lastName": "Leager",
       "partyName": "America First Republican",
-      "votes": 57947
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5575,15 +5575,15 @@
         "estimatedVotesHigh": 3309506,
         "estimatedVotesLow": 2707775,
         "estimatedVotesMid": 3008635,
-        "turnoutHigh": 91.32,
-        "turnoutLow": 111.62,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Eric",
       "id": 83597,
       "lastName": "Hovde",
       "partyName": "Republican",
-      "votes": 1459534
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -5592,15 +5592,15 @@
         "estimatedVotesHigh": 268545,
         "estimatedVotesLow": 219720,
         "estimatedVotesMid": 244131,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Scott",
       "id": 84151,
       "lastName": "Morrow",
       "partyName": "Democratic",
-      "votes": 67317
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5649,15 +5649,15 @@
         "estimatedVotesHigh": 268545,
         "estimatedVotesLow": 219720,
         "estimatedVotesMid": 244131,
-        "turnoutHigh": 90.91,
-        "turnoutLow": 111.11,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "John",
       "id": 8241,
       "lastName": "Barrasso",
       "partyName": "Republican",
-      "votes": 176814
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5706,15 +5706,15 @@
         "estimatedVotesHigh": 1804153,
         "estimatedVotesLow": 1476136,
         "estimatedVotesMid": 1640137,
-        "turnoutHigh": 95.73,
-        "turnoutLow": 117.01,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Chris",
       "id": 105272,
       "lastName": "Murphy",
       "partyName": "Democratic",
-      "votes": 967910
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5763,15 +5763,15 @@
         "estimatedVotesHigh": 1804153,
         "estimatedVotesLow": 1476136,
         "estimatedVotesMid": 1640137,
-        "turnoutHigh": 95.73,
-        "turnoutLow": 117.01,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Matthew",
       "id": 105273,
       "lastName": "Corey",
       "partyName": "Republican",
-      "votes": 668338
+      "votes": 0
     },
     {
       "dtsiData": {
@@ -5821,15 +5821,15 @@
         "estimatedVotesHigh": 1804153,
         "estimatedVotesLow": 1476136,
         "estimatedVotesMid": 1640137,
-        "turnoutHigh": 95.73,
-        "turnoutLow": 117.01,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Robert",
       "id": 105274,
       "lastName": "Hyde",
       "partyName": "Independent",
-      "votes": 61866
+      "votes": 0
     },
     {
       "dtsiData": null,
@@ -5838,15 +5838,15 @@
         "estimatedVotesHigh": 1804153,
         "estimatedVotesLow": 1476136,
         "estimatedVotesMid": 1640137,
-        "turnoutHigh": 95.73,
-        "turnoutLow": 117.01,
-        "turnoutMid": 99
+        "turnoutHigh": 0,
+        "turnoutLow": 0,
+        "turnoutMid": 0
       },
       "firstName": "Justin",
       "id": 14653,
       "lastName": "Paglino",
       "partyName": "Green",
-      "votes": 29040
+      "votes": 0
     }
   ],
   "office": {

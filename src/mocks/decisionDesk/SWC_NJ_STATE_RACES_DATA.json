@@ -9,183 +9,15 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Joseph",
-        "id": 105868,
-        "lastName": "Kishore",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Randall",
-        "id": 84941,
-        "lastName": "Terry",
-        "partyName": "Constitution",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Rachele",
-        "id": 104297,
-        "lastName": "Fruit",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 83041
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 2410125
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 90.76,
-          "turnoutLow": 110.93,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 1760897
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "NJ",
-    "stateName": "New Jersey",
-    "totalVotes": 4254063,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 89.27,
-          "turnoutLow": 109.1,
-          "turnoutMid": 98.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joanne",
         "id": 44376,
         "lastName": "Kuniansky",
         "partyName": "Socialist Workers",
-        "votes": 78950
+        "votes": 0
       },
       {
         "elected": false,
@@ -193,15 +25,15 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 89.27,
-          "turnoutLow": 109.1,
-          "turnoutMid": 98.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christina",
         "id": 84957,
         "lastName": "Khalil",
         "partyName": "Green",
-        "votes": 77471
+        "votes": 0
       },
       {
         "elected": false,
@@ -209,15 +41,15 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 89.27,
-          "turnoutLow": 109.1,
-          "turnoutMid": 98.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patricia",
         "id": 84960,
         "lastName": "Mooneyham",
         "partyName": "Independent",
-        "votes": 76636
+        "votes": 0
       },
       {
         "elected": false,
@@ -225,15 +57,15 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 89.27,
-          "turnoutLow": 109.1,
-          "turnoutMid": 98.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Curtis",
         "id": 75425,
         "lastName": "Bashaw",
         "partyName": "Republican",
-        "votes": 1642072
+        "votes": 0
       },
       {
         "elected": false,
@@ -241,15 +73,15 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 89.27,
-          "turnoutLow": 109.1,
-          "turnoutMid": 98.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kenneth",
         "id": 84958,
         "lastName": "Kaplan",
         "partyName": "Libertarian",
-        "votes": 77320
+        "votes": 0
       },
       {
         "elected": false,
@@ -257,15 +89,15 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 89.27,
-          "turnoutLow": 109.1,
-          "turnoutMid": 98.19
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andy",
         "id": 9523,
         "lastName": "Kim",
         "partyName": "Democratic",
-        "votes": 2231574
+        "votes": 0
       }
     ],
     "district": "",
@@ -274,7 +106,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:38.331Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -284,7 +116,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 4184023,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -297,15 +129,15 @@
           "estimatedVotesHigh": 419615,
           "estimatedVotesLow": 343321,
           "estimatedVotesMid": 381468,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Austin",
         "id": 85061,
         "lastName": "Johnson",
         "partyName": "Independent",
-        "votes": 7903
+        "votes": 0
       },
       {
         "elected": false,
@@ -313,15 +145,15 @@
           "estimatedVotesHigh": 419615,
           "estimatedVotesLow": 343321,
           "estimatedVotesMid": 381468,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Donald",
         "id": 9516,
         "lastName": "Norcross",
         "partyName": "Democratic",
-        "votes": 232269
+        "votes": 0
       },
       {
         "elected": false,
@@ -329,15 +161,15 @@
           "estimatedVotesHigh": 419615,
           "estimatedVotesLow": 343321,
           "estimatedVotesMid": 381468,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robin",
         "id": 85060,
         "lastName": "Brownfield",
         "partyName": "Green",
-        "votes": 7514
+        "votes": 0
       },
       {
         "elected": false,
@@ -345,15 +177,15 @@
           "estimatedVotesHigh": 419615,
           "estimatedVotesLow": 343321,
           "estimatedVotesMid": 381468,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Theodore",
         "id": 75429,
         "lastName": "Liddell",
         "partyName": "Republican",
-        "votes": 133781
+        "votes": 0
       }
     ],
     "district": "1",
@@ -362,7 +194,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -372,7 +204,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 381467,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -385,15 +217,15 @@
           "estimatedVotesHigh": 432661,
           "estimatedVotesLow": 353995,
           "estimatedVotesMid": 393328,
-          "turnoutHigh": 92.65,
-          "turnoutLow": 113.24,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 13863,
         "lastName": "Van Drew",
         "partyName": "Republican",
-        "votes": 203586
+        "votes": 0
       },
       {
         "elected": false,
@@ -401,15 +233,15 @@
           "estimatedVotesHigh": 432661,
           "estimatedVotesLow": 353995,
           "estimatedVotesMid": 393328,
-          "turnoutHigh": 92.65,
-          "turnoutLow": 113.24,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 75431,
         "lastName": "Salerno",
         "partyName": "Democratic",
-        "votes": 181531
+        "votes": 0
       },
       {
         "elected": false,
@@ -417,15 +249,15 @@
           "estimatedVotesHigh": 432661,
           "estimatedVotesLow": 353995,
           "estimatedVotesMid": 393328,
-          "turnoutHigh": 92.65,
-          "turnoutLow": 113.24,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 85062,
         "lastName": "Cannavo",
         "partyName": "Green",
-        "votes": 15739
+        "votes": 0
       }
     ],
     "district": "2",
@@ -434,7 +266,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -444,7 +276,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 400856,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -457,15 +289,15 @@
           "estimatedVotesHigh": 458928,
           "estimatedVotesLow": 375487,
           "estimatedVotesMid": 417207,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Herbert",
         "id": 85063,
         "lastName": "Conaway",
         "partyName": "Democratic",
-        "votes": 222521
+        "votes": 0
       },
       {
         "elected": false,
@@ -473,15 +305,15 @@
           "estimatedVotesHigh": 458928,
           "estimatedVotesLow": 375487,
           "estimatedVotesMid": 417207,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rajesh",
         "id": 75437,
         "lastName": "Mohan",
         "partyName": "Republican",
-        "votes": 163062
+        "votes": 0
       },
       {
         "elected": false,
@@ -489,15 +321,15 @@
           "estimatedVotesHigh": 458928,
           "estimatedVotesLow": 375487,
           "estimatedVotesMid": 417207,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Justin",
         "id": 85175,
         "lastName": "Barbera",
         "partyName": "Join the Revolution",
-        "votes": 8086
+        "votes": 0
       },
       {
         "elected": false,
@@ -505,15 +337,15 @@
           "estimatedVotesHigh": 458928,
           "estimatedVotesLow": 375487,
           "estimatedVotesMid": 417207,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Douglas",
         "id": 85176,
         "lastName": "Wynn",
         "partyName": "Why not Wynn",
-        "votes": 7546
+        "votes": 0
       },
       {
         "elected": false,
@@ -521,15 +353,15 @@
           "estimatedVotesHigh": 458928,
           "estimatedVotesLow": 375487,
           "estimatedVotesMid": 417207,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steven",
         "id": 2139,
         "lastName": "Welzer",
         "partyName": "Green",
-        "votes": 7974
+        "votes": 0
       },
       {
         "elected": false,
@@ -537,15 +369,15 @@
           "estimatedVotesHigh": 458928,
           "estimatedVotesLow": 375487,
           "estimatedVotesMid": 417207,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 85065,
         "lastName": "Russomanno",
         "partyName": "Libertarian",
-        "votes": 8018
+        "votes": 0
       }
     ],
     "district": "3",
@@ -554,7 +386,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -564,7 +396,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 417207,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -577,15 +409,15 @@
           "estimatedVotesHigh": 447479,
           "estimatedVotesLow": 366119,
           "estimatedVotesMid": 406799,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Barry",
         "id": 51104,
         "lastName": "Bendar",
         "partyName": "Green",
-        "votes": 7509
+        "votes": 0
       },
       {
         "elected": false,
@@ -593,15 +425,15 @@
           "estimatedVotesHigh": 447479,
           "estimatedVotesLow": 366119,
           "estimatedVotesMid": 406799,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 23022,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 241914
+        "votes": 0
       },
       {
         "elected": false,
@@ -609,15 +441,15 @@
           "estimatedVotesHigh": 447479,
           "estimatedVotesLow": 366119,
           "estimatedVotesMid": 406799,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 51106,
         "lastName": "Morrison",
         "partyName": "Libertarian",
-        "votes": 7451
+        "votes": 0
       },
       {
         "elected": false,
@@ -625,15 +457,15 @@
           "estimatedVotesHigh": 447479,
           "estimatedVotesLow": 366119,
           "estimatedVotesMid": 406799,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matthew",
         "id": 23005,
         "lastName": "Jenkins",
         "partyName": "Democratic",
-        "votes": 149925
+        "votes": 0
       }
     ],
     "district": "4",
@@ -642,7 +474,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -652,7 +484,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 406799,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -665,15 +497,15 @@
           "estimatedVotesHigh": 442142,
           "estimatedVotesLow": 361752,
           "estimatedVotesMid": 401947,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Aamir",
         "id": 85178,
         "lastName": "Arif",
         "partyName": "Peace Freedom Liberty",
-        "votes": 7597
+        "votes": 0
       },
       {
         "elected": false,
@@ -681,15 +513,15 @@
           "estimatedVotesHigh": 442142,
           "estimatedVotesLow": 361752,
           "estimatedVotesMid": 401947,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Beau",
         "id": 85068,
         "lastName": "Forte",
         "partyName": "Green",
-        "votes": 8019
+        "votes": 0
       },
       {
         "elected": false,
@@ -697,15 +529,15 @@
           "estimatedVotesHigh": 442142,
           "estimatedVotesLow": 361752,
           "estimatedVotesMid": 401947,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 17459,
         "lastName": "Tosone",
         "partyName": "Libertarian",
-        "votes": 7399
+        "votes": 0
       },
       {
         "elected": false,
@@ -713,15 +545,15 @@
           "estimatedVotesHigh": 442142,
           "estimatedVotesLow": 361752,
           "estimatedVotesMid": 401947,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mary Jo",
         "id": 75440,
         "lastName": "Guinchard",
         "partyName": "Republican",
-        "votes": 172179
+        "votes": 0
       },
       {
         "elected": false,
@@ -729,15 +561,15 @@
           "estimatedVotesHigh": 442142,
           "estimatedVotesLow": 361752,
           "estimatedVotesMid": 401947,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 1437,
         "lastName": "Gottheimer",
         "partyName": "Democratic",
-        "votes": 206756
+        "votes": 0
       }
     ],
     "district": "5",
@@ -746,7 +578,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -756,7 +588,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 401950,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -769,79 +601,79 @@
           "estimatedVotesHigh": 346829,
           "estimatedVotesLow": 283769,
           "estimatedVotesMid": 315299,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Scott",
-        "id": 75443,
-        "lastName": "Fegler",
-        "partyName": "Republican",
-        "votes": 118169
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 346829,
-          "estimatedVotesLow": 283769,
-          "estimatedVotesMid": 315299,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Herb",
-        "id": 85071,
-        "lastName": "Tarbous",
-        "partyName": "Green",
-        "votes": 6204
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 346829,
-          "estimatedVotesLow": 283769,
-          "estimatedVotesMid": 315299,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Fahad",
-        "id": 85070,
-        "lastName": "Akhtar",
-        "partyName": "Common Sense Party",
-        "votes": 6078
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 346829,
-          "estimatedVotesLow": 283769,
-          "estimatedVotesMid": 315299,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Matthew",
-        "id": 85072,
-        "lastName": "Amitrano",
-        "partyName": "Libertarian",
-        "votes": 5835
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 346829,
-          "estimatedVotesLow": 283769,
-          "estimatedVotesMid": 315299,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Frank",
         "id": 44369,
         "lastName": "Pallone",
         "partyName": "Democratic",
-        "votes": 179012
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 346829,
+          "estimatedVotesLow": 283769,
+          "estimatedVotesMid": 315299,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Scott",
+        "id": 75443,
+        "lastName": "Fegler",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 346829,
+          "estimatedVotesLow": 283769,
+          "estimatedVotesMid": 315299,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Herb",
+        "id": 85071,
+        "lastName": "Tarbous",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 346829,
+          "estimatedVotesLow": 283769,
+          "estimatedVotesMid": 315299,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Fahad",
+        "id": 85070,
+        "lastName": "Akhtar",
+        "partyName": "Common Sense Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 346829,
+          "estimatedVotesLow": 283769,
+          "estimatedVotesMid": 315299,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Matthew",
+        "id": 85072,
+        "lastName": "Amitrano",
+        "partyName": "Libertarian",
+        "votes": 0
       }
     ],
     "district": "6",
@@ -850,7 +682,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -860,7 +692,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 315298,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -873,63 +705,63 @@
           "estimatedVotesHigh": 483968,
           "estimatedVotesLow": 395974,
           "estimatedVotesMid": 439971,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Lana",
-        "id": 85075,
-        "lastName": "Leguia",
-        "partyName": "Libertarian",
-        "votes": 8112
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 483968,
-          "estimatedVotesLow": 395974,
-          "estimatedVotesMid": 439971,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Thomas",
-        "id": 44373,
-        "lastName": "Kean",
-        "partyName": "Republican",
-        "votes": 203057
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 483968,
-          "estimatedVotesLow": 395974,
-          "estimatedVotesMid": 439971,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Andrew",
-        "id": 85074,
-        "lastName": "Black",
-        "partyName": "Green",
-        "votes": 7930
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 483968,
-          "estimatedVotesLow": 395974,
-          "estimatedVotesMid": 439971,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Susan",
         "id": 75445,
         "lastName": "Altman",
         "partyName": "Democratic",
-        "votes": 220872
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 483968,
+          "estimatedVotesLow": 395974,
+          "estimatedVotesMid": 439971,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lana",
+        "id": 85075,
+        "lastName": "Leguia",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 483968,
+          "estimatedVotesLow": 395974,
+          "estimatedVotesMid": 439971,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Thomas",
+        "id": 44373,
+        "lastName": "Kean",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 483968,
+          "estimatedVotesLow": 395974,
+          "estimatedVotesMid": 439971,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Andrew",
+        "id": 85074,
+        "lastName": "Black",
+        "partyName": "Green",
+        "votes": 0
       }
     ],
     "district": "7",
@@ -938,7 +770,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -948,7 +780,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 439971,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -961,15 +793,15 @@
           "estimatedVotesHigh": 230145,
           "estimatedVotesLow": 188301,
           "estimatedVotesMid": 209223,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 75449,
         "lastName": "Valdes",
         "partyName": "Republican",
-        "votes": 55507
+        "votes": 0
       },
       {
         "elected": false,
@@ -977,15 +809,15 @@
           "estimatedVotesHigh": 230145,
           "estimatedVotesLow": 188301,
           "estimatedVotesMid": 209223,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christian",
         "id": 85076,
         "lastName": "Robbins",
         "partyName": "Green",
-        "votes": 4213
+        "votes": 0
       },
       {
         "elected": false,
@@ -993,15 +825,15 @@
           "estimatedVotesHigh": 230145,
           "estimatedVotesLow": 188301,
           "estimatedVotesMid": 209223,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 9514,
         "lastName": "Menendez",
         "partyName": "Democratic",
-        "votes": 141076
+        "votes": 0
       },
       {
         "elected": false,
@@ -1009,15 +841,15 @@
           "estimatedVotesHigh": 230145,
           "estimatedVotesLow": 188301,
           "estimatedVotesMid": 209223,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lea",
         "id": 44379,
         "lastName": "Sherman",
         "partyName": "Socialist Workers",
-        "votes": 4193
+        "votes": 0
       },
       {
         "elected": false,
@@ -1025,15 +857,15 @@
           "estimatedVotesHigh": 230145,
           "estimatedVotesLow": 188301,
           "estimatedVotesMid": 209223,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pablo",
         "id": 85077,
         "lastName": "Olivera",
         "partyName": "Labour",
-        "votes": 4232
+        "votes": 0
       }
     ],
     "district": "8",
@@ -1042,7 +874,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1052,7 +884,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 209221,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1065,15 +897,15 @@
           "estimatedVotesHigh": 317673,
           "estimatedVotesLow": 259914,
           "estimatedVotesMid": 288793,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nellie",
         "id": 49753,
         "lastName": "Pou",
         "partyName": "Democratic",
-        "votes": 169613
+        "votes": 0
       },
       {
         "elected": false,
@@ -1081,15 +913,15 @@
           "estimatedVotesHigh": 317673,
           "estimatedVotesLow": 259914,
           "estimatedVotesMid": 288793,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bruno",
         "id": 85079,
         "lastName": "Pereira",
         "partyName": "Libertarian",
-        "votes": 5745
+        "votes": 0
       },
       {
         "elected": false,
@@ -1097,15 +929,15 @@
           "estimatedVotesHigh": 317673,
           "estimatedVotesLow": 259914,
           "estimatedVotesMid": 288793,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Benjamin",
         "id": 85078,
         "lastName": "Taylor",
         "partyName": "Green",
-        "votes": 5646
+        "votes": 0
       },
       {
         "elected": false,
@@ -1113,15 +945,15 @@
           "estimatedVotesHigh": 317673,
           "estimatedVotesLow": 259914,
           "estimatedVotesMid": 288793,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Billy",
         "id": 13884,
         "lastName": "Prempeh",
         "partyName": "Republican",
-        "votes": 107788
+        "votes": 0
       }
     ],
     "district": "9",
@@ -1130,7 +962,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1140,7 +972,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 288792,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1153,15 +985,15 @@
           "estimatedVotesHigh": 293305,
           "estimatedVotesLow": 239975,
           "estimatedVotesMid": 266640,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Donna",
         "id": 85181,
         "lastName": "Weiss",
         "partyName": "Social Activist",
-        "votes": 4882
+        "votes": 0
       },
       {
         "elected": false,
@@ -1169,15 +1001,15 @@
           "estimatedVotesHigh": 293305,
           "estimatedVotesLow": 239975,
           "estimatedVotesMid": 266640,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carmen",
         "id": 49744,
         "lastName": "Bucco",
         "partyName": "Republican",
-        "votes": 45076
+        "votes": 0
       },
       {
         "elected": false,
@@ -1185,15 +1017,15 @@
           "estimatedVotesHigh": 293305,
           "estimatedVotesLow": 239975,
           "estimatedVotesMid": 266640,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cynthia",
         "id": 85180,
         "lastName": "Johnson",
         "partyName": "C4C 2024",
-        "votes": 5069
+        "votes": 0
       },
       {
         "elected": false,
@@ -1201,15 +1033,15 @@
           "estimatedVotesHigh": 293305,
           "estimatedVotesLow": 239975,
           "estimatedVotesMid": 266640,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michelle",
         "id": 85179,
         "lastName": "Middleton",
         "partyName": "All of Us",
-        "votes": 4842
+        "votes": 0
       },
       {
         "elected": false,
@@ -1217,15 +1049,15 @@
           "estimatedVotesHigh": 293305,
           "estimatedVotesLow": 239975,
           "estimatedVotesMid": 266640,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jon",
         "id": 85082,
         "lastName": "Serrano",
         "partyName": "Green",
-        "votes": 5049
+        "votes": 0
       },
       {
         "elected": false,
@@ -1233,15 +1065,15 @@
           "estimatedVotesHigh": 293305,
           "estimatedVotesLow": 239975,
           "estimatedVotesMid": 266640,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "LaMonica",
         "id": 82098,
         "lastName": "McIver",
         "partyName": "Democratic",
-        "votes": 201722
+        "votes": 0
       }
     ],
     "district": "10",
@@ -1250,7 +1082,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1260,7 +1092,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 266640,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1273,15 +1105,15 @@
           "estimatedVotesHigh": 446057,
           "estimatedVotesLow": 364956,
           "estimatedVotesMid": 405506,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joshua",
         "id": 85182,
         "lastName": "Lanzara",
         "partyName": "Truth Freedom Prosperity",
-        "votes": 8078
+        "votes": 0
       },
       {
         "elected": false,
@@ -1289,15 +1121,15 @@
           "estimatedVotesHigh": 446057,
           "estimatedVotesLow": 364956,
           "estimatedVotesMid": 405506,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joseph",
         "id": 51100,
         "lastName": "Belnome",
         "partyName": "Republican",
-        "votes": 163188
+        "votes": 0
       },
       {
         "elected": false,
@@ -1305,15 +1137,15 @@
           "estimatedVotesHigh": 446057,
           "estimatedVotesLow": 364956,
           "estimatedVotesMid": 405506,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mikie",
         "id": 9535,
         "lastName": "Sherrill",
         "partyName": "Democratic",
-        "votes": 226024
+        "votes": 0
       },
       {
         "elected": false,
@@ -1321,15 +1153,15 @@
           "estimatedVotesHigh": 446057,
           "estimatedVotesLow": 364956,
           "estimatedVotesMid": 405506,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lily",
         "id": 85084,
         "lastName": "Benavides",
         "partyName": "Green",
-        "votes": 8216
+        "votes": 0
       }
     ],
     "district": "11",
@@ -1338,7 +1170,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1348,7 +1180,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 405506,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1361,15 +1193,15 @@
           "estimatedVotesHigh": 368204,
           "estimatedVotesLow": 301256,
           "estimatedVotesMid": 334730,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Darius",
         "id": 23044,
         "lastName": "Mayfield",
         "partyName": "Republican",
-        "votes": 103189
+        "votes": 0
       },
       {
         "elected": false,
@@ -1377,15 +1209,15 @@
           "estimatedVotesHigh": 368204,
           "estimatedVotesLow": 301256,
           "estimatedVotesMid": 334730,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kim",
         "id": 85086,
         "lastName": "Meudt",
         "partyName": "Green",
-        "votes": 6408
+        "votes": 0
       },
       {
         "elected": false,
@@ -1393,15 +1225,15 @@
           "estimatedVotesHigh": 368204,
           "estimatedVotesLow": 301256,
           "estimatedVotesMid": 334730,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bonnie",
         "id": 44386,
         "lastName": "Coleman",
         "partyName": "Democratic",
-        "votes": 218363
+        "votes": 0
       },
       {
         "elected": false,
@@ -1409,15 +1241,15 @@
           "estimatedVotesHigh": 368204,
           "estimatedVotesLow": 301256,
           "estimatedVotesMid": 334730,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vic",
         "id": 85087,
         "lastName": "Kaplan",
         "partyName": "Libertarian",
-        "votes": 6770
+        "votes": 0
       }
     ],
     "district": "12",
@@ -1426,7 +1258,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1436,7 +1268,7 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 334730,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

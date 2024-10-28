@@ -1,138 +1,5 @@
 [
   {
-    "calledCandidate": {
-      "firstName": "Donald J.",
-      "id": 5,
-      "incumbent": false,
-      "lastName": "Trump",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 92.08,
-          "turnoutLow": 112.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 92.08,
-          "turnoutLow": 112.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 2215352
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 92.08,
-          "turnoutLow": 112.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 67618
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 92.08,
-          "turnoutLow": 112.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 120622
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 92.08,
-          "turnoutLow": 112.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 92.08,
-          "turnoutLow": 112.55,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 2242617
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "GA",
-    "stateName": "Georgia",
-    "totalVotes": 4646209,
-    "year": 2024
-  },
-  {
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -142,15 +9,15 @@
           "estimatedVotesHigh": 333871,
           "estimatedVotesLow": 273171,
           "estimatedVotesMid": 303520,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joyce",
         "id": 84998,
         "lastName": "Griggs",
         "partyName": "Independent",
-        "votes": 6019
+        "votes": 0
       },
       {
         "elected": false,
@@ -158,15 +25,15 @@
           "estimatedVotesHigh": 333871,
           "estimatedVotesLow": 273171,
           "estimatedVotesMid": 303520,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patti",
         "id": 68010,
         "lastName": "Hewitt",
         "partyName": "Democratic",
-        "votes": 121294
+        "votes": 0
       },
       {
         "elected": false,
@@ -174,15 +41,15 @@
           "estimatedVotesHigh": 333871,
           "estimatedVotesLow": 273171,
           "estimatedVotesMid": 303520,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Earl",
         "id": 21581,
         "lastName": "Carter",
         "partyName": "Republican",
-        "votes": 170733
+        "votes": 0
       },
       {
         "elected": false,
@@ -190,15 +57,15 @@
           "estimatedVotesHigh": 333871,
           "estimatedVotesLow": 273171,
           "estimatedVotesMid": 303520,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nicholas",
         "id": 84997,
         "lastName": "Brookins",
         "partyName": "Green",
-        "votes": 5952
+        "votes": 0
       }
     ],
     "district": "1",
@@ -207,7 +74,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:12.873Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -217,7 +84,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 303998,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -230,15 +97,15 @@
           "estimatedVotesHigh": 314802,
           "estimatedVotesLow": 257564,
           "estimatedVotesMid": 286181,
-          "turnoutHigh": 88.56,
-          "turnoutLow": 108.25,
-          "turnoutMid": 97.42
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Colleen",
         "id": 85000,
         "lastName": "Massey",
         "partyName": "Independent",
-        "votes": 5300
+        "votes": 0
       },
       {
         "elected": false,
@@ -246,15 +113,15 @@
           "estimatedVotesHigh": 314802,
           "estimatedVotesLow": 257564,
           "estimatedVotesMid": 286181,
-          "turnoutHigh": 88.56,
-          "turnoutLow": 108.25,
-          "turnoutMid": 97.42
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 84999,
         "lastName": "Gregors",
         "partyName": "Libertarian",
-        "votes": 5384
+        "votes": 0
       },
       {
         "elected": false,
@@ -262,15 +129,15 @@
           "estimatedVotesHigh": 314802,
           "estimatedVotesLow": 257564,
           "estimatedVotesMid": 286181,
-          "turnoutHigh": 88.56,
-          "turnoutLow": 108.25,
-          "turnoutMid": 97.42
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sanford",
         "id": 1188,
         "lastName": "Bishop",
         "partyName": "Democratic",
-        "votes": 148701
+        "votes": 0
       },
       {
         "elected": false,
@@ -278,15 +145,15 @@
           "estimatedVotesHigh": 314802,
           "estimatedVotesLow": 257564,
           "estimatedVotesMid": 286181,
-          "turnoutHigh": 88.56,
-          "turnoutLow": 108.25,
-          "turnoutMid": 97.42
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "A Wayne",
         "id": 14791,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 119418
+        "votes": 0
       }
     ],
     "district": "2",
@@ -295,7 +162,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -305,7 +172,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 278803,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -318,15 +185,15 @@
           "estimatedVotesHigh": 397620,
           "estimatedVotesLow": 325326,
           "estimatedVotesMid": 361473,
-          "turnoutHigh": 90.92,
-          "turnoutLow": 111.13,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maura",
         "id": 68015,
         "lastName": "Keller",
         "partyName": "Democratic",
-        "votes": 121062
+        "votes": 0
       },
       {
         "elected": false,
@@ -334,15 +201,15 @@
           "estimatedVotesHigh": 397620,
           "estimatedVotesLow": 325326,
           "estimatedVotesMid": 361473,
-          "turnoutHigh": 90.92,
-          "turnoutLow": 111.13,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 68016,
         "lastName": "Jack",
         "partyName": "Republican",
-        "votes": 233671
+        "votes": 0
       },
       {
         "elected": false,
@@ -350,15 +217,15 @@
           "estimatedVotesHigh": 397620,
           "estimatedVotesLow": 325326,
           "estimatedVotesMid": 361473,
-          "turnoutHigh": 90.92,
-          "turnoutLow": 111.13,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "George",
         "id": 85001,
         "lastName": "Cantrell",
         "partyName": "Independent",
-        "votes": 6798
+        "votes": 0
       }
     ],
     "district": "3",
@@ -367,7 +234,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -377,7 +244,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 361531,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -390,15 +257,15 @@
           "estimatedVotesHigh": 296375,
           "estimatedVotesLow": 242489,
           "estimatedVotesMid": 269432,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eugene",
         "id": 100,
         "lastName": "Yu",
         "partyName": "Republican",
-        "votes": 56537
+        "votes": 0
       },
       {
         "elected": false,
@@ -406,15 +273,15 @@
           "estimatedVotesHigh": 296375,
           "estimatedVotesLow": 242489,
           "estimatedVotesMid": 269432,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hank",
         "id": 9143,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 212895
+        "votes": 0
       }
     ],
     "district": "4",
@@ -423,7 +290,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:53.304Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -433,7 +300,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 269432,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -446,15 +313,15 @@
           "estimatedVotesHigh": 324255,
           "estimatedVotesLow": 265299,
           "estimatedVotesMid": 294777,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nikema",
         "id": 14803,
         "lastName": "Williams",
         "partyName": "Democratic",
-        "votes": 256040
+        "votes": 0
       },
       {
         "elected": false,
@@ -462,15 +329,15 @@
           "estimatedVotesHigh": 324255,
           "estimatedVotesLow": 265299,
           "estimatedVotesMid": 294777,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 68020,
         "lastName": "Salvesen",
         "partyName": "Republican",
-        "votes": 39624
+        "votes": 0
       }
     ],
     "district": "5",
@@ -479,7 +346,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -489,7 +356,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 295664,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -502,15 +369,15 @@
           "estimatedVotesHigh": 352429,
           "estimatedVotesLow": 288351,
           "estimatedVotesMid": 320390,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 68022,
         "lastName": "Criswell",
         "partyName": "Republican",
-        "votes": 73564
+        "votes": 0
       },
       {
         "elected": false,
@@ -518,15 +385,15 @@
           "estimatedVotesHigh": 352429,
           "estimatedVotesLow": 288351,
           "estimatedVotesMid": 320390,
-          "turnoutHigh": 91.05,
-          "turnoutLow": 111.28,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lucy",
         "id": 9147,
         "lastName": "McBath",
         "partyName": "Democratic",
-        "votes": 247320
+        "votes": 0
       }
     ],
     "district": "6",
@@ -535,7 +402,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -545,7 +412,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 320884,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -558,15 +425,15 @@
           "estimatedVotesHigh": 403285,
           "estimatedVotesLow": 329959,
           "estimatedVotesMid": 366622,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bob",
         "id": 21558,
         "lastName": "Christian",
         "partyName": "Democratic",
-        "votes": 147726
+        "votes": 0
       },
       {
         "elected": false,
@@ -574,15 +441,15 @@
           "estimatedVotesHigh": 403285,
           "estimatedVotesLow": 329959,
           "estimatedVotesMid": 366622,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Charles",
         "id": 85002,
         "lastName": "King",
         "partyName": "Independent",
-        "votes": 7019
+        "votes": 0
       },
       {
         "elected": false,
@@ -590,15 +457,15 @@
           "estimatedVotesHigh": 403285,
           "estimatedVotesLow": 329959,
           "estimatedVotesMid": 366622,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rich",
         "id": 13516,
         "lastName": "McCormick",
         "partyName": "Republican",
-        "votes": 211876
+        "votes": 0
       }
     ],
     "district": "7",
@@ -607,7 +474,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -617,7 +484,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 366621,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -630,15 +497,15 @@
           "estimatedVotesHigh": 334372,
           "estimatedVotesLow": 273575,
           "estimatedVotesMid": 303971,
-          "turnoutHigh": 91.03,
-          "turnoutLow": 111.26,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Austin",
         "id": 13552,
         "lastName": "Scott",
         "partyName": "Republican",
-        "votes": 193653
+        "votes": 0
       },
       {
         "elected": false,
@@ -646,15 +513,15 @@
           "estimatedVotesHigh": 334372,
           "estimatedVotesLow": 273575,
           "estimatedVotesMid": 303971,
-          "turnoutHigh": 91.03,
-          "turnoutLow": 111.26,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Darrius",
         "id": 21562,
         "lastName": "Butler",
         "partyName": "Democratic",
-        "votes": 110736
+        "votes": 0
       }
     ],
     "district": "8",
@@ -663,7 +530,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:07.202Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -673,7 +540,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 304389,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -686,15 +553,15 @@
           "estimatedVotesHigh": 369100,
           "estimatedVotesLow": 301991,
           "estimatedVotesMid": 335544,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tambrei",
         "id": 68024,
         "lastName": "Cash",
         "partyName": "Democratic",
-        "votes": 112832
+        "votes": 0
       },
       {
         "elected": false,
@@ -702,15 +569,15 @@
           "estimatedVotesHigh": 369100,
           "estimatedVotesLow": 301991,
           "estimatedVotesMid": 335544,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrew",
         "id": 13526,
         "lastName": "Clyde",
         "partyName": "Republican",
-        "votes": 222712
+        "votes": 0
       }
     ],
     "district": "9",
@@ -719,7 +586,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -729,7 +596,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 335544,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -742,15 +609,15 @@
           "estimatedVotesHigh": 392270,
           "estimatedVotesLow": 320949,
           "estimatedVotesMid": 356608,
-          "turnoutHigh": 90.95,
-          "turnoutLow": 111.16,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lexy",
         "id": 68025,
         "lastName": "Doherty",
         "partyName": "Democratic",
-        "votes": 133036
+        "votes": 0
       },
       {
         "elected": false,
@@ -758,15 +625,15 @@
           "estimatedVotesHigh": 392270,
           "estimatedVotesLow": 320949,
           "estimatedVotesMid": 356608,
-          "turnoutHigh": 90.95,
-          "turnoutLow": 111.16,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 21626,
         "lastName": "Collins",
         "partyName": "Republican",
-        "votes": 223722
+        "votes": 0
       }
     ],
     "district": "10",
@@ -775,7 +642,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -785,7 +652,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 356758,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -798,15 +665,15 @@
           "estimatedVotesHigh": 393319,
           "estimatedVotesLow": 321805,
           "estimatedVotesMid": 357562,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Katy",
         "id": 68026,
         "lastName": "Stamper",
         "partyName": "Democratic",
-        "votes": 136069
+        "votes": 0
       },
       {
         "elected": false,
@@ -814,15 +681,15 @@
           "estimatedVotesHigh": 393319,
           "estimatedVotesLow": 321805,
           "estimatedVotesMid": 357562,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Barry",
         "id": 97,
         "lastName": "Loudermilk",
         "partyName": "Republican",
-        "votes": 221493
+        "votes": 0
       }
     ],
     "district": "11",
@@ -831,7 +698,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:12.873Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -841,7 +708,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 357562,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -854,15 +721,15 @@
           "estimatedVotesHigh": 343109,
           "estimatedVotesLow": 280729,
           "estimatedVotesMid": 311918,
-          "turnoutHigh": 90.96,
-          "turnoutLow": 111.17,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rick",
         "id": 99,
         "lastName": "Allen",
         "partyName": "Republican",
-        "votes": 165478
+        "votes": 0
       },
       {
         "elected": false,
@@ -870,15 +737,15 @@
           "estimatedVotesHigh": 343109,
           "estimatedVotesLow": 280729,
           "estimatedVotesMid": 311918,
-          "turnoutHigh": 90.96,
-          "turnoutLow": 111.17,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Liz",
         "id": 68030,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 146611
+        "votes": 0
       }
     ],
     "district": "12",
@@ -887,7 +754,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -897,7 +764,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 312089,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -910,15 +777,15 @@
           "estimatedVotesHigh": 347783,
           "estimatedVotesLow": 284548,
           "estimatedVotesMid": 316165,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 1209,
         "lastName": "Scott",
         "partyName": "Democratic",
-        "votes": 225431
+        "votes": 0
       },
       {
         "elected": false,
@@ -926,15 +793,15 @@
           "estimatedVotesHigh": 347783,
           "estimatedVotesLow": 284548,
           "estimatedVotesMid": 316165,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jonathan",
         "id": 21589,
         "lastName": "Chavez",
         "partyName": "Republican",
-        "votes": 90734
+        "votes": 0
       }
     ],
     "district": "13",
@@ -943,7 +810,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:22.643Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -953,7 +820,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 316165,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -966,15 +833,15 @@
           "estimatedVotesHigh": 361278,
           "estimatedVotesLow": 295589,
           "estimatedVotesMid": 328433,
-          "turnoutHigh": 90.99,
-          "turnoutLow": 111.22,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marjorie",
         "id": 21648,
         "lastName": "Taylor Greene",
         "partyName": "Republican",
-        "votes": 226568
+        "votes": 0
       },
       {
         "elected": false,
@@ -982,15 +849,15 @@
           "estimatedVotesHigh": 361278,
           "estimatedVotesLow": 295589,
           "estimatedVotesMid": 328433,
-          "turnoutHigh": 90.99,
-          "turnoutLow": 111.22,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shawn",
         "id": 68039,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 102175
+        "votes": 0
       }
     ],
     "district": "14",
@@ -999,7 +866,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:22.643Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1009,7 +876,7 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 328743,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

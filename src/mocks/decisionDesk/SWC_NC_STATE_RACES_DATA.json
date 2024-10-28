@@ -6,138 +6,18 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 86.71,
-          "turnoutLow": 105.98,
-          "turnoutMid": 95.38
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 5737
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 86.71,
-          "turnoutLow": 105.98,
-          "turnoutMid": 95.38
-        },
-        "firstName": "Randall",
-        "id": 84941,
-        "lastName": "Terry",
-        "partyName": "Constitution",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 86.71,
-          "turnoutLow": 105.98,
-          "turnoutMid": 95.38
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 2238244
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 86.71,
-          "turnoutLow": 105.98,
-          "turnoutMid": 95.38
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 81714
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 86.71,
-          "turnoutLow": 105.98,
-          "turnoutMid": 95.38
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 2404168
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 86.71,
-          "turnoutLow": 105.98,
-          "turnoutMid": 95.38
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "NC",
-    "stateName": "North Carolina",
-    "totalVotes": 4729863,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
           "estimatedVotesHigh": 386652,
           "estimatedVotesLow": 316350,
           "estimatedVotesMid": 351500,
-          "turnoutHigh": 92.82,
-          "turnoutLow": 113.45,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Laurie",
         "id": 53440,
         "lastName": "Buckhout",
         "partyName": "Republican",
-        "votes": 173691
+        "votes": 0
       },
       {
         "elected": false,
@@ -145,15 +25,15 @@
           "estimatedVotesHigh": 386652,
           "estimatedVotesLow": 316350,
           "estimatedVotesMid": 351500,
-          "turnoutHigh": 92.82,
-          "turnoutLow": 113.45,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Don",
         "id": 20218,
         "lastName": "Davis",
         "partyName": "Democratic",
-        "votes": 173248
+        "votes": 0
       },
       {
         "elected": false,
@@ -161,15 +41,15 @@
           "estimatedVotesHigh": 386652,
           "estimatedVotesLow": 316350,
           "estimatedVotesMid": 351500,
-          "turnoutHigh": 92.82,
-          "turnoutLow": 113.45,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 11316,
         "lastName": "Bailey",
         "partyName": "Libertarian",
-        "votes": 11960
+        "votes": 0
       }
     ],
     "district": "1",
@@ -178,7 +58,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -188,7 +68,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 358899,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -201,15 +81,15 @@
           "estimatedVotesHigh": 392282,
           "estimatedVotesLow": 320958,
           "estimatedVotesMid": 356620,
-          "turnoutHigh": 91.17,
-          "turnoutLow": 111.43,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Deborah",
         "id": 1006,
         "lastName": "Ross",
         "partyName": "Democratic",
-        "votes": 231265
+        "votes": 0
       },
       {
         "elected": false,
@@ -217,15 +97,15 @@
           "estimatedVotesHigh": 392282,
           "estimatedVotesLow": 320958,
           "estimatedVotesMid": 356620,
-          "turnoutHigh": 91.17,
-          "turnoutLow": 111.43,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 85103,
         "lastName": "Dublin",
         "partyName": "Green",
-        "votes": 7793
+        "votes": 0
       },
       {
         "elected": false,
@@ -233,15 +113,15 @@
           "estimatedVotesHigh": 392282,
           "estimatedVotesLow": 320958,
           "estimatedVotesMid": 356620,
-          "turnoutHigh": 91.17,
-          "turnoutLow": 111.43,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alan",
         "id": 14570,
         "lastName": "Swain",
         "partyName": "Republican",
-        "votes": 118579
+        "votes": 0
       }
     ],
     "district": "2",
@@ -250,7 +130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -260,7 +140,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 357637,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -273,15 +153,15 @@
           "estimatedVotesHigh": 358983,
           "estimatedVotesLow": 293712,
           "estimatedVotesMid": 326347,
-          "turnoutHigh": 75.1,
-          "turnoutLow": 91.79,
-          "turnoutMid": 82.61
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gheorghe",
         "id": 85104,
         "lastName": "Cormos",
         "partyName": "Libertarian",
-        "votes": 8856
+        "votes": 0
       },
       {
         "elected": false,
@@ -289,15 +169,15 @@
           "estimatedVotesHigh": 358983,
           "estimatedVotesLow": 293712,
           "estimatedVotesMid": 326347,
-          "turnoutHigh": 75.1,
-          "turnoutLow": 91.79,
-          "turnoutMid": 82.61
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Greg",
         "id": 11509,
         "lastName": "Murphy",
         "partyName": "Republican",
-        "votes": 260749
+        "votes": 0
       }
     ],
     "district": "3",
@@ -306,7 +186,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -316,7 +196,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 269605,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -329,15 +209,15 @@
           "estimatedVotesHigh": 403360,
           "estimatedVotesLow": 330024,
           "estimatedVotesMid": 366692,
-          "turnoutHigh": 91.37,
-          "turnoutLow": 111.68,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Guy",
         "id": 45463,
         "lastName": "Meilleur",
         "partyName": "Libertarian",
-        "votes": 7486
+        "votes": 0
       },
       {
         "elected": false,
@@ -345,15 +225,15 @@
           "estimatedVotesHigh": 403360,
           "estimatedVotesLow": 330024,
           "estimatedVotesMid": 366692,
-          "turnoutHigh": 91.37,
-          "turnoutLow": 111.68,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 53444,
         "lastName": "Blankenburg",
         "partyName": "Republican",
-        "votes": 93015
+        "votes": 0
       },
       {
         "elected": false,
@@ -361,15 +241,15 @@
           "estimatedVotesHigh": 403360,
           "estimatedVotesLow": 330024,
           "estimatedVotesMid": 366692,
-          "turnoutHigh": 91.37,
-          "turnoutLow": 111.68,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Valerie",
         "id": 20224,
         "lastName": "Foushee",
         "partyName": "Democratic",
-        "votes": 268065
+        "votes": 0
       }
     ],
     "district": "4",
@@ -378,7 +258,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -388,7 +268,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 368566,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -401,15 +281,15 @@
           "estimatedVotesHigh": 398574,
           "estimatedVotesLow": 326102,
           "estimatedVotesMid": 362338,
-          "turnoutHigh": 91.36,
-          "turnoutLow": 111.67,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Virginia ",
         "id": 1405,
         "lastName": "Foxx",
         "partyName": "Republican",
-        "votes": 212001
+        "votes": 0
       },
       {
         "elected": false,
@@ -417,15 +297,15 @@
           "estimatedVotesHigh": 398574,
           "estimatedVotesLow": 326102,
           "estimatedVotesMid": 362338,
-          "turnoutHigh": 91.36,
-          "turnoutLow": 111.67,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chuck",
         "id": 45549,
         "lastName": "Hubbard",
         "partyName": "Democratic",
-        "votes": 152149
+        "votes": 0
       }
     ],
     "district": "5",
@@ -434,7 +314,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -444,7 +324,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 364150,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -457,15 +337,15 @@
           "estimatedVotesHigh": 383859,
           "estimatedVotesLow": 314067,
           "estimatedVotesMid": 348963,
-          "turnoutHigh": 59.8,
-          "turnoutLow": 73.09,
-          "turnoutMid": 65.78
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Addison",
         "id": 53446,
         "lastName": "McDowell",
         "partyName": "Republican",
-        "votes": 221417
+        "votes": 0
       },
       {
         "elected": false,
@@ -473,15 +353,15 @@
           "estimatedVotesHigh": 383859,
           "estimatedVotesLow": 314067,
           "estimatedVotesMid": 348963,
-          "turnoutHigh": 59.8,
-          "turnoutLow": 73.09,
-          "turnoutMid": 65.78
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 14714,
         "lastName": "Hayes",
         "partyName": "Constitution",
-        "votes": 8144
+        "votes": 0
       }
     ],
     "district": "6",
@@ -490,7 +370,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -500,7 +380,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 229561,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -513,15 +393,15 @@
           "estimatedVotesHigh": 413404,
           "estimatedVotesLow": 338242,
           "estimatedVotesMid": 375823,
-          "turnoutHigh": 91.19,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marlando",
         "id": 53448,
         "lastName": "Pridgen",
         "partyName": "Democratic",
-        "votes": 163649
+        "votes": 0
       },
       {
         "elected": false,
@@ -529,15 +409,15 @@
           "estimatedVotesHigh": 413404,
           "estimatedVotesLow": 338242,
           "estimatedVotesMid": 375823,
-          "turnoutHigh": 91.19,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David ",
         "id": 1409,
         "lastName": "Rouzer",
         "partyName": "Republican",
-        "votes": 213335
+        "votes": 0
       }
     ],
     "district": "7",
@@ -546,7 +426,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -556,7 +436,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 376984,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -569,15 +449,15 @@
           "estimatedVotesHigh": 398073,
           "estimatedVotesLow": 325698,
           "estimatedVotesMid": 361885,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.47,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 8772,
         "lastName": "Harris",
         "partyName": "Republican",
-        "votes": 211517
+        "votes": 0
       },
       {
         "elected": false,
@@ -585,15 +465,15 @@
           "estimatedVotesHigh": 398073,
           "estimatedVotesLow": 325698,
           "estimatedVotesMid": 361885,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.47,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Justin",
         "id": 53449,
         "lastName": "Dues",
         "partyName": "Democratic",
-        "votes": 151553
+        "votes": 0
       }
     ],
     "district": "8",
@@ -602,7 +482,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -612,7 +492,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 363070,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -625,15 +505,15 @@
           "estimatedVotesHigh": 369507,
           "estimatedVotesLow": 302327,
           "estimatedVotesMid": 335916,
-          "turnoutHigh": 95.48,
-          "turnoutLow": 116.7,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Richard ",
         "id": 1411,
         "lastName": "Hudson",
         "partyName": "Republican",
-        "votes": 184818
+        "votes": 0
       },
       {
         "elected": false,
@@ -641,15 +521,15 @@
           "estimatedVotesHigh": 369507,
           "estimatedVotesLow": 302327,
           "estimatedVotesMid": 335916,
-          "turnoutHigh": 95.48,
-          "turnoutLow": 116.7,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shelane",
         "id": 85105,
         "lastName": "Etchison",
         "partyName": "Independent",
-        "votes": 22388
+        "votes": 0
       },
       {
         "elected": false,
@@ -657,15 +537,15 @@
           "estimatedVotesHigh": 369507,
           "estimatedVotesLow": 302327,
           "estimatedVotesMid": 335916,
-          "turnoutHigh": 95.48,
-          "turnoutLow": 116.7,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nigel",
         "id": 53455,
         "lastName": "Bristow",
         "partyName": "Democratic",
-        "votes": 145610
+        "votes": 0
       }
     ],
     "district": "9",
@@ -674,7 +554,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -684,7 +564,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 352816,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -697,15 +577,15 @@
           "estimatedVotesHigh": 396571,
           "estimatedVotesLow": 324467,
           "estimatedVotesMid": 360519,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Todd",
         "id": 102198,
         "lastName": "Helm",
         "partyName": "Constitution",
-        "votes": 7061
+        "votes": 0
       },
       {
         "elected": false,
@@ -713,15 +593,15 @@
           "estimatedVotesHigh": 396571,
           "estimatedVotesLow": 324467,
           "estimatedVotesMid": 360519,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ralph",
         "id": 85108,
         "lastName": "Scott",
         "partyName": "Democratic",
-        "votes": 151013
+        "votes": 0
       },
       {
         "elected": false,
@@ -729,15 +609,15 @@
           "estimatedVotesHigh": 396571,
           "estimatedVotesLow": 324467,
           "estimatedVotesMid": 360519,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steven",
         "id": 85106,
         "lastName": "Feldman",
         "partyName": "Libertarian",
-        "votes": 6979
+        "votes": 0
       },
       {
         "elected": false,
@@ -745,15 +625,15 @@
           "estimatedVotesHigh": 396571,
           "estimatedVotesLow": 324467,
           "estimatedVotesMid": 360519,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patrick",
         "id": 85107,
         "lastName": "Harrigan",
         "partyName": "Republican",
-        "votes": 197194
+        "votes": 0
       }
     ],
     "district": "10",
@@ -762,7 +642,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -772,7 +652,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 362247,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -785,15 +665,15 @@
           "estimatedVotesHigh": 420929,
           "estimatedVotesLow": 344399,
           "estimatedVotesMid": 382663,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chuck",
         "id": 20297,
         "lastName": "Edwards",
         "partyName": "Republican",
-        "votes": 207994
+        "votes": 0
       },
       {
         "elected": false,
@@ -801,15 +681,15 @@
           "estimatedVotesHigh": 420929,
           "estimatedVotesLow": 344399,
           "estimatedVotesMid": 382663,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Caleb",
         "id": 45579,
         "lastName": "Rudow",
         "partyName": "Democratic",
-        "votes": 176383
+        "votes": 0
       }
     ],
     "district": "11",
@@ -818,7 +698,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -828,7 +708,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 384377,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -841,15 +721,15 @@
           "estimatedVotesHigh": 331290,
           "estimatedVotesLow": 271056,
           "estimatedVotesMid": 301173,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alma",
         "id": 1418,
         "lastName": "Adams",
         "partyName": "Democratic",
-        "votes": 230554
+        "votes": 0
       },
       {
         "elected": false,
@@ -857,15 +737,15 @@
           "estimatedVotesHigh": 331290,
           "estimatedVotesLow": 271056,
           "estimatedVotesMid": 301173,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Addul",
         "id": 53462,
         "lastName": "Ali",
         "partyName": "Republican",
-        "votes": 72053
+        "votes": 0
       }
     ],
     "district": "12",
@@ -874,7 +754,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -884,7 +764,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 302607,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -897,15 +777,15 @@
           "estimatedVotesHigh": 406623,
           "estimatedVotesLow": 332692,
           "estimatedVotesMid": 369656,
-          "turnoutHigh": 91.1,
-          "turnoutLow": 111.34,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brad",
         "id": 53466,
         "lastName": "Knott",
         "partyName": "Republican",
-        "votes": 210936
+        "votes": 0
       },
       {
         "elected": false,
@@ -913,15 +793,15 @@
           "estimatedVotesHigh": 406623,
           "estimatedVotesLow": 332692,
           "estimatedVotesMid": 369656,
-          "turnoutHigh": 91.1,
-          "turnoutLow": 111.34,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Frank",
         "id": 53463,
         "lastName": "Pierce",
         "partyName": "Democratic",
-        "votes": 159489
+        "votes": 0
       }
     ],
     "district": "13",
@@ -930,7 +810,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -940,7 +820,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 370425,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -953,15 +833,15 @@
           "estimatedVotesHigh": 393832,
           "estimatedVotesLow": 322226,
           "estimatedVotesMid": 358029,
-          "turnoutHigh": 91.4,
-          "turnoutLow": 111.71,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tim",
         "id": 45574,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 212156
+        "votes": 0
       },
       {
         "elected": false,
@@ -969,15 +849,15 @@
           "estimatedVotesHigh": 393832,
           "estimatedVotesLow": 322226,
           "estimatedVotesMid": 358029,
-          "turnoutHigh": 91.4,
-          "turnoutLow": 111.71,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pam",
         "id": 20235,
         "lastName": "Genant",
         "partyName": "Democratic",
-        "votes": 147808
+        "votes": 0
       }
     ],
     "district": "14",
@@ -986,7 +866,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -996,7 +876,7 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 359964,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

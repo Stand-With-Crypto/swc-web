@@ -9,145 +9,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 85.47,
-          "turnoutLow": 104.46,
-          "turnoutMid": 94.02
-        },
-        "firstName": "Rachele",
-        "id": 104297,
-        "lastName": "Fruit",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 85.47,
-          "turnoutLow": 104.46,
-          "turnoutMid": 94.02
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 9025
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 85.47,
-          "turnoutLow": 104.46,
-          "turnoutMid": 94.02
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 85.47,
-          "turnoutLow": 104.46,
-          "turnoutMid": 94.02
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 204146
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 85.47,
-          "turnoutLow": 104.46,
-          "turnoutMid": 94.02
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 85.47,
-          "turnoutLow": 104.46,
-          "turnoutMid": 94.02
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 85.47,
-          "turnoutLow": 104.46,
-          "turnoutMid": 94.02
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 94442
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "VT",
-    "stateName": "Vermont",
-    "totalVotes": 307613,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.71,
-          "turnoutLow": 33.87,
-          "turnoutMid": 30.48
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 101849,
@@ -161,9 +25,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.71,
-          "turnoutLow": 33.87,
-          "turnoutMid": 30.48
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bernie",
         "id": 113432,
@@ -177,15 +41,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.71,
-          "turnoutLow": 33.87,
-          "turnoutMid": 30.48
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Justin",
         "id": 85171,
         "lastName": "Schoville",
         "partyName": "Peace and Justice",
-        "votes": 5940
+        "votes": 0
       },
       {
         "elected": false,
@@ -193,9 +57,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.71,
-          "turnoutLow": 33.87,
-          "turnoutMid": 30.48
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 102227,
@@ -209,9 +73,9 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.71,
-          "turnoutLow": 33.87,
-          "turnoutMid": 30.48
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 102228,
@@ -225,15 +89,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 27.71,
-          "turnoutLow": 33.87,
-          "turnoutMid": 30.48
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gerald",
         "id": 28838,
         "lastName": "Malloy",
         "partyName": "Republican",
-        "votes": 93792
+        "votes": 0
       }
     ],
     "district": "",
@@ -242,7 +106,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -252,7 +116,7 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 99732,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -265,15 +129,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.99,
-          "turnoutLow": 103.88,
-          "turnoutMid": 93.5
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Becca",
         "id": 28841,
         "lastName": "Balint",
         "partyName": "Democratic",
-        "votes": 197191
+        "votes": 0
       },
       {
         "elected": false,
@@ -281,15 +145,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.99,
-          "turnoutLow": 103.88,
-          "turnoutMid": 93.5
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jessica",
         "id": 102230,
         "lastName": "Diamondstone",
         "partyName": "Peace and Justice",
-        "votes": 5834
+        "votes": 0
       },
       {
         "elected": false,
@@ -297,15 +161,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.99,
-          "turnoutLow": 103.88,
-          "turnoutMid": 93.5
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 28910,
         "lastName": "Coester",
         "partyName": "Republican",
-        "votes": 96984
+        "votes": 0
       },
       {
         "elected": false,
@@ -313,15 +177,15 @@
           "estimatedVotesHigh": 359924,
           "estimatedVotesLow": 294481,
           "estimatedVotesMid": 327192,
-          "turnoutHigh": 84.99,
-          "turnoutLow": 103.88,
-          "turnoutMid": 93.5
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adam",
         "id": 44468,
         "lastName": "Ortiz",
         "partyName": "Independent",
-        "votes": 5907
+        "votes": 0
       }
     ],
     "district": "At-Large",
@@ -330,7 +194,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -340,7 +204,7 @@
     "raceDate": "2024-11-05",
     "state": "VT",
     "stateName": "Vermont",
-    "totalVotes": 305916,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

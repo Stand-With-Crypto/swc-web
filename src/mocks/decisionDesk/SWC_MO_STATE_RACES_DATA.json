@@ -9,97 +9,9 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 80.76,
-          "turnoutLow": 98.7,
-          "turnoutMid": 88.83
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 934401
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040461,
-          "estimatedVotesLow": 2487647,
-          "estimatedVotesMid": 2764049,
-          "turnoutHigh": 80.76,
-          "turnoutLow": 98.7,
-          "turnoutMid": 88.83
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 1471631
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040461,
-          "estimatedVotesLow": 2487647,
-          "estimatedVotesMid": 2764049,
-          "turnoutHigh": 80.76,
-          "turnoutLow": 98.7,
-          "turnoutMid": 88.83
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040461,
-          "estimatedVotesLow": 2487647,
-          "estimatedVotesMid": 2764049,
-          "turnoutHigh": 80.76,
-          "turnoutLow": 98.7,
-          "turnoutMid": 88.83
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 49372
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "MO",
-    "stateName": "Missouri",
-    "totalVotes": 2455404,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040461,
-          "estimatedVotesLow": 2487647,
-          "estimatedVotesMid": 2764049,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jared",
         "id": 102179,
@@ -113,15 +25,15 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lucas",
         "id": 27330,
         "lastName": "Kunce",
         "partyName": "Democratic",
-        "votes": 1148241
+        "votes": 0
       },
       {
         "elected": false,
@@ -129,9 +41,9 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nathan",
         "id": 102180,
@@ -145,15 +57,15 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "W.C.",
         "id": 84948,
         "lastName": "Young",
         "partyName": "Libertarian",
-        "votes": 60021
+        "votes": 0
       },
       {
         "elected": false,
@@ -161,15 +73,15 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 2069,
         "lastName": "Hawley",
         "partyName": "Republican",
-        "votes": 1566298
+        "votes": 0
       }
     ],
     "district": "",
@@ -178,7 +90,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -188,7 +100,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 2774560,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -201,15 +113,15 @@
           "estimatedVotesHigh": 344590,
           "estimatedVotesLow": 281938,
           "estimatedVotesMid": 313264,
-          "turnoutHigh": 57.5,
-          "turnoutLow": 70.27,
-          "turnoutMid": 63.24
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Blake",
         "id": 102181,
         "lastName": "Ashby",
         "partyName": "Better Party",
-        "votes": 3349
+        "votes": 0
       },
       {
         "elected": false,
@@ -217,15 +129,15 @@
           "estimatedVotesHigh": 344590,
           "estimatedVotesLow": 281938,
           "estimatedVotesMid": 313264,
-          "turnoutHigh": 57.5,
-          "turnoutLow": 70.27,
-          "turnoutMid": 63.24
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Don",
         "id": 2083,
         "lastName": "Fitz",
         "partyName": "Green",
-        "votes": 3484
+        "votes": 0
       },
       {
         "elected": false,
@@ -233,15 +145,15 @@
           "estimatedVotesHigh": 344590,
           "estimatedVotesLow": 281938,
           "estimatedVotesMid": 313264,
-          "turnoutHigh": 57.5,
-          "turnoutLow": 70.27,
-          "turnoutMid": 63.24
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rochelle",
         "id": 102182,
         "lastName": "Riggins",
         "partyName": "Libertarian",
-        "votes": 3596
+        "votes": 0
       },
       {
         "elected": false,
@@ -249,15 +161,15 @@
           "estimatedVotesHigh": 344590,
           "estimatedVotesLow": 281938,
           "estimatedVotesMid": 313264,
-          "turnoutHigh": 57.5,
-          "turnoutLow": 70.27,
-          "turnoutMid": 63.24
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrew",
         "id": 27367,
         "lastName": "Jones",
         "partyName": "Republican",
-        "votes": 42488
+        "votes": 0
       },
       {
         "elected": false,
@@ -265,15 +177,15 @@
           "estimatedVotesHigh": 344590,
           "estimatedVotesLow": 281938,
           "estimatedVotesMid": 313264,
-          "turnoutHigh": 57.5,
-          "turnoutLow": 70.27,
-          "turnoutMid": 63.24
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Wesley",
         "id": 82292,
         "lastName": "Bell",
         "partyName": "Democratic",
-        "votes": 145206
+        "votes": 0
       }
     ],
     "district": "1",
@@ -282,7 +194,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -292,7 +204,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 198123,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -305,15 +217,15 @@
           "estimatedVotesHigh": 452850,
           "estimatedVotesLow": 370515,
           "estimatedVotesMid": 411682,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brandon",
         "id": 102185,
         "lastName": "Daugherty",
         "partyName": "Libertarian",
-        "votes": 7554
+        "votes": 0
       },
       {
         "elected": false,
@@ -321,15 +233,15 @@
           "estimatedVotesHigh": 452850,
           "estimatedVotesLow": 370515,
           "estimatedVotesMid": 411682,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ray",
         "id": 82294,
         "lastName": "Hartmann",
         "partyName": "Democratic",
-        "votes": 184474
+        "votes": 0
       },
       {
         "elected": false,
@@ -337,15 +249,15 @@
           "estimatedVotesHigh": 452850,
           "estimatedVotesLow": 370515,
           "estimatedVotesMid": 411682,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ann",
         "id": 1373,
         "lastName": "Wagner",
         "partyName": "Republican",
-        "votes": 211883
+        "votes": 0
       },
       {
         "elected": false,
@@ -353,15 +265,15 @@
           "estimatedVotesHigh": 452850,
           "estimatedVotesLow": 370515,
           "estimatedVotesMid": 411682,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shelby",
         "id": 102184,
         "lastName": "Davis",
         "partyName": "Green",
-        "votes": 7771
+        "votes": 0
       }
     ],
     "district": "2",
@@ -370,7 +282,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -380,7 +292,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 411682,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -393,31 +305,15 @@
           "estimatedVotesHigh": 412345,
           "estimatedVotesLow": 337374,
           "estimatedVotesMid": 374859,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Bethany",
-        "id": 27361,
-        "lastName": "Mann",
-        "partyName": "Democratic",
-        "votes": 133222
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 412345,
-          "estimatedVotesLow": 337374,
-          "estimatedVotesMid": 374859,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bob",
         "id": 82299,
         "lastName": "Onder",
         "partyName": "Republican",
-        "votes": 227548
+        "votes": 0
       },
       {
         "elected": false,
@@ -425,15 +321,15 @@
           "estimatedVotesHigh": 412345,
           "estimatedVotesLow": 337374,
           "estimatedVotesMid": 374859,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "William",
         "id": 102186,
         "lastName": "Hastings",
         "partyName": "Green",
-        "votes": 7065
+        "votes": 0
       },
       {
         "elected": false,
@@ -441,15 +337,31 @@
           "estimatedVotesHigh": 412345,
           "estimatedVotesLow": 337374,
           "estimatedVotesMid": 374859,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bethany",
+        "id": 27361,
+        "lastName": "Mann",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 412345,
+          "estimatedVotesLow": 337374,
+          "estimatedVotesMid": 374859,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jordan",
         "id": 102187,
         "lastName": "Rowden",
         "partyName": "Libertarian",
-        "votes": 7037
+        "votes": 0
       }
     ],
     "district": "3",
@@ -458,7 +370,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -468,7 +380,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 374872,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -481,15 +393,15 @@
           "estimatedVotesHigh": 372273,
           "estimatedVotesLow": 304585,
           "estimatedVotesMid": 338428,
-          "turnoutHigh": 80.69,
-          "turnoutLow": 98.63,
-          "turnoutMid": 88.76
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 27374,
         "lastName": "Alford",
         "partyName": "Republican",
-        "votes": 215907
+        "votes": 0
       },
       {
         "elected": false,
@@ -497,15 +409,15 @@
           "estimatedVotesHigh": 372273,
           "estimatedVotesLow": 304585,
           "estimatedVotesMid": 338428,
-          "turnoutHigh": 80.69,
-          "turnoutLow": 98.63,
-          "turnoutMid": 88.76
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeanette",
         "id": 82302,
         "lastName": "Cass",
         "partyName": "Democratic",
-        "votes": 78739
+        "votes": 0
       },
       {
         "elected": false,
@@ -513,15 +425,15 @@
           "estimatedVotesHigh": 372273,
           "estimatedVotesLow": 304585,
           "estimatedVotesMid": 338428,
-          "turnoutHigh": 80.69,
-          "turnoutLow": 98.63,
-          "turnoutMid": 88.76
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 102188,
         "lastName": "Holbrook",
         "partyName": "Libertarian",
-        "votes": 5755
+        "votes": 0
       }
     ],
     "district": "4",
@@ -530,7 +442,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -540,7 +452,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 300401,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -553,15 +465,15 @@
           "estimatedVotesHigh": 345262,
           "estimatedVotesLow": 282486,
           "estimatedVotesMid": 313874,
-          "turnoutHigh": 17.67,
-          "turnoutLow": 21.6,
-          "turnoutMid": 19.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 102189,
         "lastName": "Day",
         "partyName": "Green",
-        "votes": 1167
+        "votes": 0
       },
       {
         "elected": false,
@@ -569,15 +481,15 @@
           "estimatedVotesHigh": 345262,
           "estimatedVotesLow": 282486,
           "estimatedVotesMid": 313874,
-          "turnoutHigh": 17.67,
-          "turnoutLow": 21.6,
-          "turnoutMid": 19.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sean",
         "id": 82304,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 26805
+        "votes": 0
       },
       {
         "elected": false,
@@ -585,15 +497,15 @@
           "estimatedVotesHigh": 345262,
           "estimatedVotesLow": 282486,
           "estimatedVotesMid": 313874,
-          "turnoutHigh": 17.67,
-          "turnoutLow": 21.6,
-          "turnoutMid": 19.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bill",
         "id": 46330,
         "lastName": "Wayne",
         "partyName": "Libertarian",
-        "votes": 1171
+        "votes": 0
       },
       {
         "elected": false,
@@ -601,15 +513,15 @@
           "estimatedVotesHigh": 345262,
           "estimatedVotesLow": 282486,
           "estimatedVotesMid": 313874,
-          "turnoutHigh": 17.67,
-          "turnoutLow": 21.6,
-          "turnoutMid": 19.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Emanuel",
         "id": 1378,
         "lastName": "Cleaver",
         "partyName": "Democratic",
-        "votes": 31874
+        "votes": 0
       }
     ],
     "district": "5",
@@ -618,7 +530,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -628,7 +540,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 61017,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -641,15 +553,15 @@
           "estimatedVotesHigh": 382304,
           "estimatedVotesLow": 312796,
           "estimatedVotesMid": 347548,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.14,
-          "turnoutMid": 98.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sam",
         "id": 1381,
         "lastName": "Graves",
         "partyName": "Republican",
-        "votes": 222142
+        "votes": 0
       },
       {
         "elected": false,
@@ -657,15 +569,15 @@
           "estimatedVotesHigh": 382304,
           "estimatedVotesLow": 312796,
           "estimatedVotesMid": 347548,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.14,
-          "turnoutMid": 98.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pam",
         "id": 82308,
         "lastName": "May",
         "partyName": "Democratic",
-        "votes": 105857
+        "votes": 0
       },
       {
         "elected": false,
@@ -673,15 +585,15 @@
           "estimatedVotesHigh": 382304,
           "estimatedVotesLow": 312796,
           "estimatedVotesMid": 347548,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.14,
-          "turnoutMid": 98.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 2075,
         "lastName": "Diel",
         "partyName": "Green",
-        "votes": 6826
+        "votes": 0
       },
       {
         "elected": false,
@@ -689,15 +601,15 @@
           "estimatedVotesHigh": 382304,
           "estimatedVotesLow": 312796,
           "estimatedVotesMid": 347548,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.14,
-          "turnoutMid": 98.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andy",
         "id": 44350,
         "lastName": "Maidment",
         "partyName": "Libertarian",
-        "votes": 6576
+        "votes": 0
       }
     ],
     "district": "6",
@@ -706,7 +618,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -716,7 +628,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 341401,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -729,15 +641,15 @@
           "estimatedVotesHigh": 361332,
           "estimatedVotesLow": 295634,
           "estimatedVotesMid": 328483,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 14611,
         "lastName": "Craig",
         "partyName": "Libertarian",
-        "votes": 6131
+        "votes": 0
       },
       {
         "elected": false,
@@ -745,15 +657,15 @@
           "estimatedVotesHigh": 361332,
           "estimatedVotesLow": 295634,
           "estimatedVotesMid": 328483,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 27388,
         "lastName": "Burlison",
         "partyName": "Republican",
-        "votes": 234193
+        "votes": 0
       },
       {
         "elected": false,
@@ -761,15 +673,15 @@
           "estimatedVotesHigh": 361332,
           "estimatedVotesLow": 295634,
           "estimatedVotesMid": 328483,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Missi",
         "id": 82310,
         "lastName": "Hesketh",
         "partyName": "Democratic",
-        "votes": 88159
+        "votes": 0
       }
     ],
     "district": "7",
@@ -778,7 +690,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -788,7 +700,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 328483,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -801,15 +713,15 @@
           "estimatedVotesHigh": 369277,
           "estimatedVotesLow": 302132,
           "estimatedVotesMid": 335704,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jake",
         "id": 102191,
         "lastName": "Dawson",
         "partyName": "Libertarian",
-        "votes": 6602
+        "votes": 0
       },
       {
         "elected": false,
@@ -817,15 +729,15 @@
           "estimatedVotesHigh": 369277,
           "estimatedVotesLow": 302132,
           "estimatedVotesMid": 335704,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jason",
         "id": 1385,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 248406
+        "votes": 0
       },
       {
         "elected": false,
@@ -833,15 +745,15 @@
           "estimatedVotesHigh": 369277,
           "estimatedVotesLow": 302132,
           "estimatedVotesMid": 335704,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Randi",
         "id": 27366,
         "lastName": "McCallian",
         "partyName": "Democratic",
-        "votes": 80689
+        "votes": 0
       }
     ],
     "district": "8",
@@ -850,7 +762,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:15:12.873Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -860,7 +772,7 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 335697,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

@@ -9,135 +9,15 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 6.83,
-          "turnoutLow": 8.34,
-          "turnoutMid": 7.51
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 4266
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3625935,
-          "estimatedVotesLow": 2966685,
-          "estimatedVotesMid": 3296293,
-          "turnoutHigh": 6.83,
-          "turnoutLow": 8.34,
-          "turnoutMid": 7.51
-        },
-        "firstName": "Shiva",
-        "id": 11165,
-        "lastName": "Ayyadurai",
-        "partyName": "Independent",
-        "votes": 31
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3625935,
-          "estimatedVotesLow": 2966685,
-          "estimatedVotesMid": 3296293,
-          "turnoutHigh": 6.83,
-          "turnoutLow": 8.34,
-          "turnoutMid": 7.51
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 148570
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3625935,
-          "estimatedVotesLow": 2966685,
-          "estimatedVotesMid": 3296293,
-          "turnoutHigh": 6.83,
-          "turnoutLow": 8.34,
-          "turnoutMid": 7.51
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 94303
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3625935,
-          "estimatedVotesLow": 2966685,
-          "estimatedVotesMid": 3296293,
-          "turnoutHigh": 6.83,
-          "turnoutLow": 8.34,
-          "turnoutMid": 7.51
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 35
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3625935,
-          "estimatedVotesLow": 2966685,
-          "estimatedVotesMid": 3296293,
-          "turnoutHigh": 6.83,
-          "turnoutLow": 8.34,
-          "turnoutMid": 7.51
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 328
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "MA",
-    "stateName": "Massachusetts",
-    "totalVotes": 247533,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3625935,
-          "estimatedVotesLow": 2966685,
-          "estimatedVotesMid": 3296293,
-          "turnoutHigh": 3.96,
-          "turnoutLow": 4.84,
-          "turnoutMid": 4.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Elizabeth",
         "id": 8284,
         "lastName": "Warren",
         "partyName": "Democratic",
-        "votes": 143678
+        "votes": 0
       },
       {
         "elected": false,
@@ -145,9 +25,9 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 3.96,
-          "turnoutLow": 4.84,
-          "turnoutMid": 4.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 84377,
@@ -161,9 +41,9 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 3.96,
-          "turnoutLow": 4.84,
-          "turnoutMid": 4.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joseph",
         "id": 102154,
@@ -177,9 +57,9 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 3.96,
-          "turnoutLow": 4.84,
-          "turnoutMid": 4.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shiva",
         "id": 11165,
@@ -193,9 +73,9 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 3.96,
-          "turnoutLow": 4.84,
-          "turnoutMid": 4.36
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brandon",
         "id": 102155,
@@ -210,7 +90,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:46.214Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -220,7 +100,7 @@
     "raceDate": "2024-11-05",
     "state": "MA",
     "stateName": "Massachusetts",
-    "totalVotes": 143678,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -233,15 +113,15 @@
           "estimatedVotesHigh": 398799,
           "estimatedVotesLow": 326297,
           "estimatedVotesMid": 362543,
-          "turnoutHigh": 73.02,
-          "turnoutLow": 89.24,
-          "turnoutMid": 80.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Richard",
         "id": 10750,
         "lastName": "Neal",
         "partyName": "Democratic",
-        "votes": 272944
+        "votes": 0
       },
       {
         "elected": false,
@@ -249,15 +129,15 @@
           "estimatedVotesHigh": 398799,
           "estimatedVotesLow": 326297,
           "estimatedVotesMid": 362543,
-          "turnoutHigh": 73.02,
-          "turnoutLow": 89.24,
-          "turnoutMid": 80.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nadia",
         "id": 102157,
         "lastName": "Milleron",
         "partyName": "Unenrolled",
-        "votes": 8929
+        "votes": 0
       },
       {
         "elected": false,
@@ -265,15 +145,15 @@
           "estimatedVotesHigh": 398799,
           "estimatedVotesLow": 326297,
           "estimatedVotesMid": 362543,
-          "turnoutHigh": 73.02,
-          "turnoutLow": 89.24,
-          "turnoutMid": 80.32
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 102156,
         "lastName": "Celata",
         "partyName": "No Party Affiliation",
-        "votes": 9323
+        "votes": 0
       }
     ],
     "district": "1",
@@ -282,7 +162,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -292,7 +172,7 @@
     "raceDate": "2024-11-05",
     "state": "MA",
     "stateName": "Massachusetts",
-    "totalVotes": 291196,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -305,15 +185,15 @@
           "estimatedVotesHigh": 399815,
           "estimatedVotesLow": 327124,
           "estimatedVotesMid": 363467,
-          "turnoutHigh": 76.16,
-          "turnoutLow": 93.09,
-          "turnoutMid": 83.78
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 30688,
         "lastName": "McGovern",
         "partyName": "Democratic",
-        "votes": 295579
+        "votes": 0
       },
       {
         "elected": false,
@@ -321,15 +201,15 @@
           "estimatedVotesHigh": 399815,
           "estimatedVotesLow": 327124,
           "estimatedVotesMid": 363467,
-          "turnoutHigh": 76.16,
-          "turnoutLow": 93.09,
-          "turnoutMid": 83.78
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cornelius",
         "id": 102158,
         "lastName": "Shea",
         "partyName": "Independent",
-        "votes": 8927
+        "votes": 0
       }
     ],
     "district": "2",
@@ -338,7 +218,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -348,7 +228,7 @@
     "raceDate": "2024-11-05",
     "state": "MA",
     "stateName": "Massachusetts",
-    "totalVotes": 304506,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -378,7 +258,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -418,7 +298,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -458,7 +338,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -498,7 +378,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -538,7 +418,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -561,15 +441,15 @@
           "estimatedVotesHigh": 415166,
           "estimatedVotesLow": 339679,
           "estimatedVotesMid": 377422,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.15,
-          "turnoutMid": 98.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Stephen",
         "id": 1302,
         "lastName": "Lynch",
         "partyName": "Democratic",
-        "votes": 249663
+        "votes": 0
       },
       {
         "elected": false,
@@ -577,15 +457,15 @@
           "estimatedVotesHigh": 415166,
           "estimatedVotesLow": 339679,
           "estimatedVotesMid": 377422,
-          "turnoutHigh": 89.3,
-          "turnoutLow": 109.15,
-          "turnoutMid": 98.23
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 30695,
         "lastName": "Burke",
         "partyName": "Republican",
-        "votes": 121086
+        "votes": 0
       }
     ],
     "district": "8",
@@ -594,7 +474,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -604,7 +484,7 @@
     "raceDate": "2024-11-05",
     "state": "MA",
     "stateName": "Massachusetts",
-    "totalVotes": 370749,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -617,15 +497,15 @@
           "estimatedVotesHigh": 474716,
           "estimatedVotesLow": 388407,
           "estimatedVotesMid": 431559,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 8293,
         "lastName": "Sullivan",
         "partyName": "Republican",
-        "votes": 168145
+        "votes": 0
       },
       {
         "elected": false,
@@ -633,15 +513,15 @@
           "estimatedVotesHigh": 474716,
           "estimatedVotesLow": 388407,
           "estimatedVotesMid": 431559,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "William ",
         "id": 1304,
         "lastName": "Keating",
         "partyName": "Democratic",
-        "votes": 263414
+        "votes": 0
       }
     ],
     "district": "9",
@@ -650,7 +530,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -660,7 +540,7 @@
     "raceDate": "2024-11-05",
     "state": "MA",
     "stateName": "Massachusetts",
-    "totalVotes": 431559,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

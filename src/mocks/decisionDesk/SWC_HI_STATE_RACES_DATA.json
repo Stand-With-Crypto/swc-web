@@ -9,78 +9,14 @@
           "estimatedVotesHigh": 575671,
           "estimatedVotesLow": 471003,
           "estimatedVotesMid": 523337,
-          "turnoutHigh": 88.93,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
+        "firstName": "Mazie",
+        "id": 8272,
+        "lastName": "Hirono",
         "partyName": "Democratic",
-        "votes": 313513
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 575671,
-          "estimatedVotesLow": 471003,
-          "estimatedVotesMid": 523337,
-          "turnoutHigh": 88.93,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 9611
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 575671,
-          "estimatedVotesLow": 471003,
-          "estimatedVotesMid": 523337,
-          "turnoutHigh": 88.93,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 9784
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 575671,
-          "estimatedVotesLow": 471003,
-          "estimatedVotesMid": 523337,
-          "turnoutHigh": 88.93,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 9601
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 575671,
-          "estimatedVotesLow": 471003,
-          "estimatedVotesMid": 523337,
-          "turnoutHigh": 88.93,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
-        },
-        "firstName": "Peter",
-        "id": 104291,
-        "lastName": "Sonski",
-        "partyName": "Independent",
         "votes": 0
       },
       {
@@ -89,49 +25,25 @@
           "estimatedVotesHigh": 575671,
           "estimatedVotesLow": 471003,
           "estimatedVotesMid": 523337,
-          "turnoutHigh": 88.93,
-          "turnoutLow": 108.69,
-          "turnoutMid": 97.82
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
+        "firstName": "Bob",
+        "id": 29426,
+        "lastName": "McDermott",
         "partyName": "Republican",
-        "votes": 169438
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "HI",
-    "stateName": "Hawaii",
-    "totalVotes": 511947,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 575671,
           "estimatedVotesLow": 471003,
           "estimatedVotesMid": 523337,
-          "turnoutHigh": 59.91,
-          "turnoutLow": 73.23,
-          "turnoutMid": 65.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Emma",
         "id": 44276,
@@ -145,46 +57,14 @@
           "estimatedVotesHigh": 575671,
           "estimatedVotesLow": 471003,
           "estimatedVotesMid": 523337,
-          "turnoutHigh": 59.91,
-          "turnoutLow": 73.23,
-          "turnoutMid": 65.9
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shelby",
         "id": 102136,
         "lastName": "Billionaire",
         "partyName": "We The People",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 575671,
-          "estimatedVotesLow": 471003,
-          "estimatedVotesMid": 523337,
-          "turnoutHigh": 59.91,
-          "turnoutLow": 73.23,
-          "turnoutMid": 65.9
-        },
-        "firstName": "Mazie",
-        "id": 8272,
-        "lastName": "Hirono",
-        "partyName": "Democratic",
-        "votes": 344899
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 575671,
-          "estimatedVotesLow": 471003,
-          "estimatedVotesMid": 523337,
-          "turnoutHigh": 59.91,
-          "turnoutLow": 73.23,
-          "turnoutMid": 65.9
-        },
-        "firstName": "Bob",
-        "id": 29426,
-        "lastName": "McDermott",
-        "partyName": "Republican",
         "votes": 0
       }
     ],
@@ -194,7 +74,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -204,7 +84,7 @@
     "raceDate": "2024-11-05",
     "state": "HI",
     "stateName": "Hawaii",
-    "totalVotes": 344899,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -217,15 +97,15 @@
           "estimatedVotesHigh": 282154,
           "estimatedVotesLow": 230854,
           "estimatedVotesMid": 256504,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patrick",
         "id": 29437,
         "lastName": "Largey",
         "partyName": "Republican",
-        "votes": 90613
+        "votes": 0
       },
       {
         "elected": false,
@@ -233,15 +113,15 @@
           "estimatedVotesHigh": 282154,
           "estimatedVotesLow": 230854,
           "estimatedVotesMid": 256504,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ed",
         "id": 10452,
         "lastName": "Case",
         "partyName": "Democratic",
-        "votes": 165891
+        "votes": 0
       }
     ],
     "district": "1",
@@ -250,7 +130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -260,7 +140,7 @@
     "raceDate": "2024-11-05",
     "state": "HI",
     "stateName": "Hawaii",
-    "totalVotes": 256504,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -273,15 +153,15 @@
           "estimatedVotesHigh": 293510,
           "estimatedVotesLow": 240144,
           "estimatedVotesMid": 266827,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jill",
         "id": 29433,
         "lastName": "Tokuda",
         "partyName": "Democratic",
-        "votes": 166480
+        "votes": 0
       },
       {
         "elected": false,
@@ -289,15 +169,15 @@
           "estimatedVotesHigh": 293510,
           "estimatedVotesLow": 240144,
           "estimatedVotesMid": 266827,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steven",
         "id": 14203,
         "lastName": "Bond",
         "partyName": "Republican",
-        "votes": 90271
+        "votes": 0
       },
       {
         "elected": false,
@@ -305,15 +185,15 @@
           "estimatedVotesHigh": 293510,
           "estimatedVotesLow": 240144,
           "estimatedVotesMid": 266827,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Aaron",
         "id": 102137,
         "lastName": "Toman",
         "partyName": "Libertarian",
-        "votes": 5072
+        "votes": 0
       },
       {
         "elected": false,
@@ -321,15 +201,15 @@
           "estimatedVotesHigh": 293510,
           "estimatedVotesLow": 240144,
           "estimatedVotesMid": 266827,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Randall",
         "id": 102138,
         "lastName": "Meyer",
         "partyName": "Nonpartisan",
-        "votes": 5004
+        "votes": 0
       }
     ],
     "district": "2",
@@ -338,7 +218,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -348,7 +228,7 @@
     "raceDate": "2024-11-05",
     "state": "HI",
     "stateName": "Hawaii",
-    "totalVotes": 266827,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

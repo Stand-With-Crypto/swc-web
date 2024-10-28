@@ -9,71 +9,15 @@
           "estimatedVotesHigh": 8625403,
           "estimatedVotesLow": 7057149,
           "estimatedVotesMid": 7841271,
-          "turnoutHigh": 87.23,
-          "turnoutLow": 106.61,
-          "turnoutMid": 95.95
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 2943687
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8625403,
-          "estimatedVotesLow": 7057149,
-          "estimatedVotesMid": 7841271,
-          "turnoutHigh": 87.23,
-          "turnoutLow": 106.61,
-          "turnoutMid": 95.95
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 4579998
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "NY",
-    "stateName": "New York",
-    "totalVotes": 7523685,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 8625403,
-          "estimatedVotesLow": 7057149,
-          "estimatedVotesMid": 7841271,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jonathan",
         "id": 84962,
         "lastName": "Ramos",
         "partyName": "Independent",
-        "votes": 146481
+        "votes": 0
       },
       {
         "elected": false,
@@ -81,15 +25,15 @@
           "estimatedVotesHigh": 8625403,
           "estimatedVotesLow": 7057149,
           "estimatedVotesMid": 7841271,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 77535,
         "lastName": "Sapraicone",
         "partyName": "Republican",
-        "votes": 2854610
+        "votes": 0
       },
       {
         "elected": false,
@@ -97,15 +41,15 @@
           "estimatedVotesHigh": 8625403,
           "estimatedVotesLow": 7057149,
           "estimatedVotesMid": 7841271,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kirsten",
         "id": 8259,
         "lastName": "Gillibrand",
         "partyName": "Democratic",
-        "votes": 4543815
+        "votes": 0
       },
       {
         "elected": false,
@@ -113,15 +57,15 @@
           "estimatedVotesHigh": 8625403,
           "estimatedVotesLow": 7057149,
           "estimatedVotesMid": 7841271,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "YueXin",
         "id": 84961,
         "lastName": "Miller",
         "partyName": "American Independent Party",
-        "votes": 149312
+        "votes": 0
       },
       {
         "elected": false,
@@ -129,15 +73,15 @@
           "estimatedVotesHigh": 8625403,
           "estimatedVotesLow": 7057149,
           "estimatedVotesMid": 7841271,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Diane",
         "id": 44279,
         "lastName": "Sare",
         "partyName": "LaRouche",
-        "votes": 147055
+        "votes": 0
       }
     ],
     "district": "",
@@ -146,7 +90,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:46.214Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -156,7 +100,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 7841273,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -169,15 +113,15 @@
           "estimatedVotesHigh": 446163,
           "estimatedVotesLow": 365043,
           "estimatedVotesMid": 405603,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nicholas",
         "id": 30593,
         "lastName": "LaLota",
         "partyName": "Republican",
-        "votes": 192013
+        "votes": 0
       },
       {
         "elected": false,
@@ -185,15 +129,15 @@
           "estimatedVotesHigh": 446163,
           "estimatedVotesLow": 365043,
           "estimatedVotesMid": 405603,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 76940,
         "lastName": "Avlon",
         "partyName": "Democratic",
-        "votes": 191418
+        "votes": 0
       },
       {
         "elected": false,
@@ -201,15 +145,15 @@
           "estimatedVotesHigh": 446163,
           "estimatedVotesLow": 365043,
           "estimatedVotesMid": 405603,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jarrett",
         "id": 85090,
         "lastName": "Adorno",
         "partyName": "Independent",
-        "votes": 7481
+        "votes": 0
       },
       {
         "elected": false,
@@ -217,15 +161,15 @@
           "estimatedVotesHigh": 446163,
           "estimatedVotesLow": 365043,
           "estimatedVotesMid": 405603,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Patrick",
         "id": 85088,
         "lastName": "Denman",
         "partyName": "Independent",
-        "votes": 7359
+        "votes": 0
       },
       {
         "elected": false,
@@ -233,15 +177,15 @@
           "estimatedVotesHigh": 446163,
           "estimatedVotesLow": 365043,
           "estimatedVotesMid": 405603,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 85089,
         "lastName": "Kalata",
         "partyName": "Independent",
-        "votes": 7332
+        "votes": 0
       }
     ],
     "district": "1",
@@ -250,7 +194,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -260,7 +204,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 405603,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -273,15 +217,15 @@
           "estimatedVotesHigh": 379073,
           "estimatedVotesLow": 310151,
           "estimatedVotesMid": 344612,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrew",
         "id": 13726,
         "lastName": "Garbarino",
         "partyName": "Republican",
-        "votes": 177881
+        "votes": 0
       },
       {
         "elected": false,
@@ -289,15 +233,15 @@
           "estimatedVotesHigh": 379073,
           "estimatedVotesLow": 310151,
           "estimatedVotesMid": 344612,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rob",
         "id": 76941,
         "lastName": "Lubin",
         "partyName": "Democratic",
-        "votes": 166731
+        "votes": 0
       }
     ],
     "district": "2",
@@ -306,7 +250,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -316,7 +260,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 344612,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -329,15 +273,15 @@
           "estimatedVotesHigh": 398657,
           "estimatedVotesLow": 326175,
           "estimatedVotesMid": 362416,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 13729,
         "lastName": "Suozzi",
         "partyName": "Democratic",
-        "votes": 192482
+        "votes": 0
       },
       {
         "elected": false,
@@ -345,15 +289,15 @@
           "estimatedVotesHigh": 398657,
           "estimatedVotesLow": 326175,
           "estimatedVotesMid": 362416,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jacob",
         "id": 85092,
         "lastName": "Soto",
         "partyName": "Independent",
-        "votes": 6924
+        "votes": 0
       },
       {
         "elected": false,
@@ -361,15 +305,15 @@
           "estimatedVotesHigh": 398657,
           "estimatedVotesLow": 326175,
           "estimatedVotesMid": 362416,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matthew",
         "id": 85091,
         "lastName": "Nappo",
         "partyName": "Independent",
-        "votes": 6759
+        "votes": 0
       },
       {
         "elected": false,
@@ -377,15 +321,15 @@
           "estimatedVotesHigh": 398657,
           "estimatedVotesLow": 326175,
           "estimatedVotesMid": 362416,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 76942,
         "lastName": "LiPetri Jr.",
         "partyName": "Republican",
-        "votes": 156251
+        "votes": 0
       }
     ],
     "district": "3",
@@ -394,7 +338,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -404,7 +348,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 362416,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -417,15 +361,15 @@
           "estimatedVotesHigh": 403561,
           "estimatedVotesLow": 330187,
           "estimatedVotesMid": 366874,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 44493,
         "lastName": "D'Esposito",
         "partyName": "Republican",
-        "votes": 151614
+        "votes": 0
       },
       {
         "elected": false,
@@ -433,15 +377,15 @@
           "estimatedVotesHigh": 403561,
           "estimatedVotesLow": 330187,
           "estimatedVotesMid": 366874,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Laura",
         "id": 30539,
         "lastName": "Gillen",
         "partyName": "Democratic",
-        "votes": 215260
+        "votes": 0
       }
     ],
     "district": "4",
@@ -450,7 +394,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -460,7 +404,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 366874,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -473,47 +417,47 @@
           "estimatedVotesHigh": 267211,
           "estimatedVotesLow": 218627,
           "estimatedVotesMid": 242919,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Gregory",
-        "id": 9938,
-        "lastName": "Meeks",
-        "partyName": "Democratic",
-        "votes": 197088
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 267211,
-          "estimatedVotesLow": 218627,
-          "estimatedVotesMid": 242919,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Khalif",
-        "id": 85093,
-        "lastName": "Havens",
-        "partyName": "Independent",
-        "votes": 4415
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 267211,
-          "estimatedVotesLow": 218627,
-          "estimatedVotesMid": 242919,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 44494,
         "lastName": "King",
         "partyName": "Republican",
-        "votes": 41416
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 267211,
+          "estimatedVotesLow": 218627,
+          "estimatedVotesMid": 242919,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Gregory",
+        "id": 9938,
+        "lastName": "Meeks",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 267211,
+          "estimatedVotesLow": 218627,
+          "estimatedVotesMid": 242919,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Khalif",
+        "id": 85093,
+        "lastName": "Havens",
+        "partyName": "Independent",
+        "votes": 0
       }
     ],
     "district": "5",
@@ -522,7 +466,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -532,7 +476,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 242919,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -545,15 +489,15 @@
           "estimatedVotesHigh": 228074,
           "estimatedVotesLow": 186606,
           "estimatedVotesMid": 207340,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 14513,
         "lastName": "Zmich",
         "partyName": "Republican",
-        "votes": 70312
+        "votes": 0
       },
       {
         "elected": false,
@@ -561,15 +505,15 @@
           "estimatedVotesHigh": 228074,
           "estimatedVotesLow": 186606,
           "estimatedVotesMid": 207340,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joseph",
         "id": 85094,
         "lastName": "Chou",
         "partyName": "Independent",
-        "votes": 4733
+        "votes": 0
       },
       {
         "elected": false,
@@ -577,15 +521,15 @@
           "estimatedVotesHigh": 228074,
           "estimatedVotesLow": 186606,
           "estimatedVotesMid": 207340,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Grace",
         "id": 1475,
         "lastName": "Meng",
         "partyName": "Democratic",
-        "votes": 132295
+        "votes": 0
       }
     ],
     "district": "6",
@@ -594,7 +538,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -604,7 +548,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 207340,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -617,15 +561,15 @@
           "estimatedVotesHigh": 235571,
           "estimatedVotesLow": 192739,
           "estimatedVotesMid": 214155,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "William",
         "id": 76943,
         "lastName": "Kregler",
         "partyName": "Republican",
-        "votes": 41048
+        "votes": 0
       },
       {
         "elected": false,
@@ -633,15 +577,15 @@
           "estimatedVotesHigh": 235571,
           "estimatedVotesLow": 192739,
           "estimatedVotesMid": 214155,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nydia",
         "id": 85095,
         "lastName": "Velaquez",
         "partyName": "Democratic",
-        "votes": 173107
+        "votes": 0
       }
     ],
     "district": "7",
@@ -650,7 +594,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -660,7 +604,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 214155,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -673,15 +617,15 @@
           "estimatedVotesHigh": 259520,
           "estimatedVotesLow": 212334,
           "estimatedVotesMid": 235927,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Hakeem",
         "id": 1479,
         "lastName": "Jeffries",
         "partyName": "Democratic",
-        "votes": 183108
+        "votes": 0
       },
       {
         "elected": false,
@@ -689,15 +633,15 @@
           "estimatedVotesHigh": 259520,
           "estimatedVotesLow": 212334,
           "estimatedVotesMid": 235927,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 49997,
         "lastName": "Delaney",
         "partyName": "Republican",
-        "votes": 52819
+        "votes": 0
       }
     ],
     "district": "8",
@@ -706,7 +650,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -716,7 +660,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 235927,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -729,15 +673,15 @@
           "estimatedVotesHigh": 261797,
           "estimatedVotesLow": 214197,
           "estimatedVotesMid": 237997,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Menachem",
         "id": 76944,
         "lastName": "Raitport",
         "partyName": "Republican",
-        "votes": 59344
+        "votes": 0
       },
       {
         "elected": false,
@@ -745,15 +689,15 @@
           "estimatedVotesHigh": 261797,
           "estimatedVotesLow": 214197,
           "estimatedVotesMid": 237997,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joel",
         "id": 85096,
         "lastName": "Anabilah-Azumah",
         "partyName": "Independent",
-        "votes": 4659
+        "votes": 0
       },
       {
         "elected": false,
@@ -761,15 +705,15 @@
           "estimatedVotesHigh": 261797,
           "estimatedVotesLow": 214197,
           "estimatedVotesMid": 237997,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Yvette",
         "id": 9943,
         "lastName": "Clarke",
         "partyName": "Democratic",
-        "votes": 173994
+        "votes": 0
       }
     ],
     "district": "9",
@@ -778,7 +722,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -788,7 +732,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 237997,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -801,15 +745,15 @@
           "estimatedVotesHigh": 262176,
           "estimatedVotesLow": 214508,
           "estimatedVotesMid": 238342,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.23,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 85097,
         "lastName": "Briscoe",
         "partyName": "Conservative",
-        "votes": 4536
+        "votes": 0
       },
       {
         "elected": false,
@@ -817,15 +761,15 @@
           "estimatedVotesHigh": 262176,
           "estimatedVotesLow": 214508,
           "estimatedVotesMid": 238342,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.23,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alexander",
         "id": 76947,
         "lastName": "Dodenhoff",
         "partyName": "Republican",
-        "votes": 20196
+        "votes": 0
       },
       {
         "elected": false,
@@ -833,15 +777,15 @@
           "estimatedVotesHigh": 262176,
           "estimatedVotesLow": 214508,
           "estimatedVotesMid": 238342,
-          "turnoutHigh": 91,
-          "turnoutLow": 111.23,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 30548,
         "lastName": "Goldman",
         "partyName": "Democratic",
-        "votes": 213855
+        "votes": 0
       }
     ],
     "district": "10",
@@ -850,7 +794,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -860,7 +804,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 238587,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -873,15 +817,15 @@
           "estimatedVotesHigh": 293295,
           "estimatedVotesLow": 239969,
           "estimatedVotesMid": 266632,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrea",
         "id": 76948,
         "lastName": "Morse",
         "partyName": "Democratic",
-        "votes": 125899
+        "votes": 0
       },
       {
         "elected": false,
@@ -889,15 +833,15 @@
           "estimatedVotesHigh": 293295,
           "estimatedVotesLow": 239969,
           "estimatedVotesMid": 266632,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nicole",
         "id": 13749,
         "lastName": "Malliotakis",
         "partyName": "Republican",
-        "votes": 140733
+        "votes": 0
       }
     ],
     "district": "11",
@@ -906,7 +850,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -916,7 +860,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 266632,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -929,15 +873,15 @@
           "estimatedVotesHigh": 312134,
           "estimatedVotesLow": 255382,
           "estimatedVotesMid": 283758,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.49,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 76949,
         "lastName": "Zumbluskas",
         "partyName": "Republican",
-        "votes": 37588
+        "votes": 0
       },
       {
         "elected": false,
@@ -945,15 +889,15 @@
           "estimatedVotesHigh": 312134,
           "estimatedVotesLow": 255382,
           "estimatedVotesMid": 283758,
-          "turnoutHigh": 91.22,
-          "turnoutLow": 111.49,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jerrold",
         "id": 13747,
         "lastName": "Nadler",
         "partyName": "Democratic",
-        "votes": 247133
+        "votes": 0
       }
     ],
     "district": "12",
@@ -962,7 +906,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -972,7 +916,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 284721,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -985,15 +929,15 @@
           "estimatedVotesHigh": 255183,
           "estimatedVotesLow": 208785,
           "estimatedVotesMid": 231984,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ruben",
         "id": 76950,
         "lastName": "Vargas",
         "partyName": "Republican",
-        "votes": 28162
+        "votes": 0
       },
       {
         "elected": false,
@@ -1001,15 +945,15 @@
           "estimatedVotesHigh": 255183,
           "estimatedVotesLow": 208785,
           "estimatedVotesMid": 231984,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adriano",
         "id": 1487,
         "lastName": "Espaillat",
         "partyName": "Democratic",
-        "votes": 203822
+        "votes": 0
       }
     ],
     "district": "13",
@@ -1018,7 +962,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1028,7 +972,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 231984,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1041,15 +985,15 @@
           "estimatedVotesHigh": 222584,
           "estimatedVotesLow": 182115,
           "estimatedVotesMid": 202349,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Tina",
-        "id": 30602,
-        "lastName": "Forte",
-        "partyName": "Republican",
-        "votes": 43006
+        "firstName": "Alexandria",
+        "id": 9956,
+        "lastName": "Ocasio-Cortez",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1057,15 +1001,15 @@
           "estimatedVotesHigh": 222584,
           "estimatedVotesLow": 182115,
           "estimatedVotesMid": 202349,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Alexandria",
-        "id": 9956,
-        "lastName": "Ocasio-Cortez",
-        "partyName": "Democratic",
-        "votes": 159343
+        "firstName": "Tina",
+        "id": 30602,
+        "lastName": "Forte",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "14",
@@ -1074,7 +1018,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1084,7 +1028,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 202349,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1097,15 +1041,15 @@
           "estimatedVotesHigh": 211605,
           "estimatedVotesLow": 173131,
           "estimatedVotesMid": 192368,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ritchie",
         "id": 13771,
         "lastName": "Torres",
         "partyName": "Democratic",
-        "votes": 162259
+        "votes": 0
       },
       {
         "elected": false,
@@ -1113,15 +1057,15 @@
           "estimatedVotesHigh": 211605,
           "estimatedVotesLow": 173131,
           "estimatedVotesMid": 192368,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jose",
         "id": 85099,
         "lastName": "Vega",
         "partyName": "LaRouche",
-        "votes": 3721
+        "votes": 0
       },
       {
         "elected": false,
@@ -1129,15 +1073,15 @@
           "estimatedVotesHigh": 211605,
           "estimatedVotesLow": 173131,
           "estimatedVotesMid": 192368,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gonzalo",
         "id": 76952,
         "lastName": "Duran",
         "partyName": "Republican",
-        "votes": 26388
+        "votes": 0
       }
     ],
     "district": "15",
@@ -1146,7 +1090,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1156,7 +1100,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 192368,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1169,15 +1113,15 @@
           "estimatedVotesHigh": 343228,
           "estimatedVotesLow": 280823,
           "estimatedVotesMid": 312025,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "George",
         "id": 76953,
         "lastName": "Latimer",
         "partyName": "Democratic",
-        "votes": 230449
+        "votes": 0
       },
       {
         "elected": false,
@@ -1185,15 +1129,15 @@
           "estimatedVotesHigh": 343228,
           "estimatedVotesLow": 280823,
           "estimatedVotesMid": 312025,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Miriam",
         "id": 44501,
         "lastName": "Flisser",
         "partyName": "Republican",
-        "votes": 81576
+        "votes": 0
       }
     ],
     "district": "16",
@@ -1202,7 +1146,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1212,7 +1156,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 312025,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1225,15 +1169,15 @@
           "estimatedVotesHigh": 396715,
           "estimatedVotesLow": 324585,
           "estimatedVotesMid": 360649,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 75277,
         "lastName": "Lawler",
         "partyName": "Republican",
-        "votes": 158527
+        "votes": 0
       },
       {
         "elected": false,
@@ -1241,15 +1185,15 @@
           "estimatedVotesHigh": 396715,
           "estimatedVotesLow": 324585,
           "estimatedVotesMid": 360649,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mondaire",
         "id": 13782,
         "lastName": "Jones",
         "partyName": "Democratic",
-        "votes": 195057
+        "votes": 0
       },
       {
         "elected": false,
@@ -1257,15 +1201,15 @@
           "estimatedVotesHigh": 396715,
           "estimatedVotesLow": 324585,
           "estimatedVotesMid": 360649,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 102196,
         "lastName": "Frascone",
         "partyName": "Working Families",
-        "votes": 7065
+        "votes": 0
       }
     ],
     "district": "17",
@@ -1274,7 +1218,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1284,7 +1228,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 360649,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1297,15 +1241,15 @@
           "estimatedVotesHigh": 375608,
           "estimatedVotesLow": 307316,
           "estimatedVotesMid": 341462,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alison",
         "id": 76954,
         "lastName": "Esposito",
         "partyName": "Republican",
-        "votes": 153140
+        "votes": 0
       },
       {
         "elected": false,
@@ -1313,15 +1257,15 @@
           "estimatedVotesHigh": 375608,
           "estimatedVotesLow": 307316,
           "estimatedVotesMid": 341462,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pat",
         "id": 9989,
         "lastName": "Ryan",
         "partyName": "Democratic",
-        "votes": 188322
+        "votes": 0
       }
     ],
     "district": "18",
@@ -1330,7 +1274,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1340,7 +1284,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 341462,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1353,15 +1297,15 @@
           "estimatedVotesHigh": 386235,
           "estimatedVotesLow": 316009,
           "estimatedVotesMid": 351121,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marc",
         "id": 10840,
         "lastName": "Molinaro",
         "partyName": "Republican",
-        "votes": 168963
+        "votes": 0
       },
       {
         "elected": false,
@@ -1369,15 +1313,15 @@
           "estimatedVotesHigh": 386235,
           "estimatedVotesLow": 316009,
           "estimatedVotesMid": 351121,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 30574,
         "lastName": "Riley",
         "partyName": "Democratic",
-        "votes": 182158
+        "votes": 0
       }
     ],
     "district": "19",
@@ -1386,7 +1330,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1396,7 +1340,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 351121,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1409,15 +1353,15 @@
           "estimatedVotesHigh": 394872,
           "estimatedVotesLow": 323077,
           "estimatedVotesMid": 358973,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 76955,
         "lastName": "Waltz",
         "partyName": "Republican",
-        "votes": 137499
+        "votes": 0
       },
       {
         "elected": false,
@@ -1425,15 +1369,15 @@
           "estimatedVotesHigh": 394872,
           "estimatedVotesLow": 323077,
           "estimatedVotesMid": 358973,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 1499,
         "lastName": "Tonko",
         "partyName": "Democratic",
-        "votes": 221474
+        "votes": 0
       }
     ],
     "district": "20",
@@ -1442,7 +1386,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1452,7 +1396,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 358973,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1465,15 +1409,15 @@
           "estimatedVotesHigh": 361688,
           "estimatedVotesLow": 295925,
           "estimatedVotesMid": 328805,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Elise",
         "id": 1502,
         "lastName": "Stefanik",
         "partyName": "Republican",
-        "votes": 187967
+        "votes": 0
       },
       {
         "elected": false,
@@ -1481,15 +1425,15 @@
           "estimatedVotesHigh": 361688,
           "estimatedVotesLow": 295925,
           "estimatedVotesMid": 328805,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 85100,
         "lastName": "Lewis",
         "partyName": "Common Sense Party",
-        "votes": 6820
+        "votes": 0
       },
       {
         "elected": false,
@@ -1497,15 +1441,15 @@
           "estimatedVotesHigh": 361688,
           "estimatedVotesLow": 295925,
           "estimatedVotesMid": 328805,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paula",
         "id": 76956,
         "lastName": "Collins",
         "partyName": "Democratic",
-        "votes": 134019
+        "votes": 0
       }
     ],
     "district": "21",
@@ -1514,7 +1458,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1524,7 +1468,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 328806,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1537,15 +1481,15 @@
           "estimatedVotesHigh": 375385,
           "estimatedVotesLow": 307132,
           "estimatedVotesMid": 341258,
-          "turnoutHigh": 86.97,
-          "turnoutLow": 106.3,
-          "turnoutMid": 95.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christopher",
         "id": 85101,
         "lastName": "Gowett",
         "partyName": "Independent",
-        "votes": 6175
+        "votes": 0
       },
       {
         "elected": false,
@@ -1553,15 +1497,15 @@
           "estimatedVotesHigh": 375385,
           "estimatedVotesLow": 307132,
           "estimatedVotesMid": 341258,
-          "turnoutHigh": 86.97,
-          "turnoutLow": 106.3,
-          "turnoutMid": 95.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brandon",
         "id": 30612,
         "lastName": "Williams",
         "partyName": "Republican",
-        "votes": 139390
+        "votes": 0
       },
       {
         "elected": false,
@@ -1569,15 +1513,15 @@
           "estimatedVotesHigh": 375385,
           "estimatedVotesLow": 307132,
           "estimatedVotesMid": 341258,
-          "turnoutHigh": 86.97,
-          "turnoutLow": 106.3,
-          "turnoutMid": 95.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 45168,
         "lastName": "Mannion",
         "partyName": "Democratic",
-        "votes": 180926
+        "votes": 0
       }
     ],
     "district": "22",
@@ -1586,7 +1530,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1596,7 +1540,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 326491,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1609,15 +1553,15 @@
           "estimatedVotesHigh": 409832,
           "estimatedVotesLow": 335318,
           "estimatedVotesMid": 372575,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 76957,
         "lastName": "Carle",
         "partyName": "Democratic",
-        "votes": 153128
+        "votes": 0
       },
       {
         "elected": false,
@@ -1625,15 +1569,15 @@
           "estimatedVotesHigh": 409832,
           "estimatedVotesLow": 335318,
           "estimatedVotesMid": 372575,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nick",
         "id": 30615,
         "lastName": "Langworthy",
         "partyName": "Republican",
-        "votes": 219447
+        "votes": 0
       }
     ],
     "district": "23",
@@ -1642,7 +1586,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1652,7 +1596,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 372575,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1665,15 +1609,15 @@
           "estimatedVotesHigh": 387507,
           "estimatedVotesLow": 317052,
           "estimatedVotesMid": 352279,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Claudia",
         "id": 1504,
         "lastName": "Tenney",
         "partyName": "Republican",
-        "votes": 202421
+        "votes": 0
       },
       {
         "elected": false,
@@ -1681,15 +1625,15 @@
           "estimatedVotesHigh": 387507,
           "estimatedVotesLow": 317052,
           "estimatedVotesMid": 352279,
-          "turnoutHigh": 88.1,
-          "turnoutLow": 107.68,
-          "turnoutMid": 96.91
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 76958,
         "lastName": "Wagenhauser",
         "partyName": "Democratic",
-        "votes": 138974
+        "votes": 0
       }
     ],
     "district": "24",
@@ -1698,7 +1642,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1708,7 +1652,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 341395,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1721,15 +1665,15 @@
           "estimatedVotesHigh": 396710,
           "estimatedVotesLow": 324580,
           "estimatedVotesMid": 360645,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gregg",
         "id": 76959,
         "lastName": "Sadwick",
         "partyName": "Republican",
-        "votes": 154527
+        "votes": 0
       },
       {
         "elected": false,
@@ -1737,15 +1681,15 @@
           "estimatedVotesHigh": 396710,
           "estimatedVotesLow": 324580,
           "estimatedVotesMid": 360645,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Luther",
         "id": 85102,
         "lastName": "Layne",
         "partyName": "Libertarian",
-        "votes": 7620
+        "votes": 0
       },
       {
         "elected": false,
@@ -1753,15 +1697,15 @@
           "estimatedVotesHigh": 396710,
           "estimatedVotesLow": 324580,
           "estimatedVotesMid": 360645,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joseph",
         "id": 9980,
         "lastName": "Morelle",
         "partyName": "Democratic",
-        "votes": 198499
+        "votes": 0
       }
     ],
     "district": "25",
@@ -1770,7 +1714,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1780,7 +1724,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 360646,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1793,15 +1737,15 @@
           "estimatedVotesHigh": 358426,
           "estimatedVotesLow": 293257,
           "estimatedVotesMid": 325841,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Timothy",
         "id": 45183,
         "lastName": "Kennedy",
         "partyName": "Democratic",
-        "votes": 205998
+        "votes": 0
       },
       {
         "elected": false,
@@ -1809,15 +1753,15 @@
           "estimatedVotesHigh": 358426,
           "estimatedVotesLow": 293257,
           "estimatedVotesMid": 325841,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anthony",
         "id": 76960,
         "lastName": "Marecki",
         "partyName": "Republican",
-        "votes": 119843
+        "votes": 0
       }
     ],
     "district": "26",
@@ -1826,7 +1770,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1836,7 +1780,7 @@
     "raceDate": "2024-11-05",
     "state": "NY",
     "stateName": "New York",
-    "totalVotes": 325841,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

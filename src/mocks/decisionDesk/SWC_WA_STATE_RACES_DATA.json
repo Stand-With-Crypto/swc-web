@@ -9,199 +9,15 @@
           "estimatedVotesHigh": 4035935,
           "estimatedVotesLow": 3302130,
           "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 1510075
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Shiva",
-        "id": 11165,
-        "lastName": "Ayyadurai",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Rachele",
-        "id": 104297,
-        "lastName": "Fruit",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Joseph",
-        "id": 105868,
-        "lastName": "Kishore",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 2152128
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "WA",
-    "stateName": "Washington",
-    "totalVotes": 3662203,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maria",
         "id": 8226,
         "lastName": "Cantwell",
         "partyName": "Democratic",
-        "votes": 2180638
+        "votes": 0
       },
       {
         "elected": false,
@@ -209,15 +25,15 @@
           "estimatedVotesHigh": 4035935,
           "estimatedVotesLow": 3302130,
           "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Raul",
         "id": 14042,
         "lastName": "Garcia",
         "partyName": "Republican",
-        "votes": 1488393
+        "votes": 0
       }
     ],
     "district": "",
@@ -226,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -236,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 3669031,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -249,15 +65,15 @@
           "estimatedVotesHigh": 385974,
           "estimatedVotesLow": 315796,
           "estimatedVotesMid": 350885,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeb",
         "id": 27849,
         "lastName": "Brewer",
         "partyName": "Republican",
-        "votes": 119150
+        "votes": 0
       },
       {
         "elected": false,
@@ -265,15 +81,15 @@
           "estimatedVotesHigh": 385974,
           "estimatedVotesLow": 315796,
           "estimatedVotesMid": 350885,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Suzan",
         "id": 1727,
         "lastName": "DelBene",
         "partyName": "Democratic",
-        "votes": 231735
+        "votes": 0
       }
     ],
     "district": "1",
@@ -282,7 +98,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -292,7 +108,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 350885,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -305,15 +121,15 @@
           "estimatedVotesHigh": 443275,
           "estimatedVotesLow": 362679,
           "estimatedVotesMid": 402977,
-          "turnoutHigh": 73.24,
-          "turnoutLow": 89.52,
-          "turnoutMid": 80.57
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cody",
         "id": 27762,
         "lastName": "Hart",
         "partyName": "MAGA Republican",
-        "votes": 10399
+        "votes": 0
       },
       {
         "elected": false,
@@ -321,15 +137,15 @@
           "estimatedVotesHigh": 443275,
           "estimatedVotesLow": 362679,
           "estimatedVotesMid": 402977,
-          "turnoutHigh": 73.24,
-          "turnoutLow": 89.52,
-          "turnoutMid": 80.57
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rick",
         "id": 1729,
         "lastName": "Larsen",
         "partyName": "Democratic",
-        "votes": 314273
+        "votes": 0
       }
     ],
     "district": "2",
@@ -338,7 +154,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -348,7 +164,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 324672,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -361,9 +177,9 @@
           "estimatedVotesHigh": 417265,
           "estimatedVotesLow": 341399,
           "estimatedVotesMid": 379331,
-          "turnoutHigh": 42.48,
-          "turnoutLow": 51.92,
-          "turnoutMid": 46.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 27767,
@@ -377,15 +193,15 @@
           "estimatedVotesHigh": 417265,
           "estimatedVotesLow": 341399,
           "estimatedVotesMid": 379331,
-          "turnoutHigh": 42.48,
-          "turnoutLow": 51.92,
-          "turnoutMid": 46.73
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marie",
         "id": 82754,
         "lastName": "Gluesenkamp Perez",
         "partyName": "Democratic",
-        "votes": 177246
+        "votes": 0
       }
     ],
     "district": "3",
@@ -394,7 +210,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -404,7 +220,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 177246,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -417,15 +233,15 @@
           "estimatedVotesHigh": 331991,
           "estimatedVotesLow": 271631,
           "estimatedVotesMid": 301811,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jerrod",
         "id": 27777,
         "lastName": "Sessler",
         "partyName": "Republican",
-        "votes": 150904
+        "votes": 0
       },
       {
         "elected": false,
@@ -433,15 +249,15 @@
           "estimatedVotesHigh": 331991,
           "estimatedVotesLow": 271631,
           "estimatedVotesMid": 301811,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dan",
         "id": 1734,
         "lastName": "Newhouse",
         "partyName": "Republican",
-        "votes": 150992
+        "votes": 0
       }
     ],
     "district": "4",
@@ -450,7 +266,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -460,7 +276,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 301896,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -473,15 +289,15 @@
           "estimatedVotesHigh": 417637,
           "estimatedVotesLow": 341704,
           "estimatedVotesMid": 379670,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carmela",
         "id": 82763,
         "lastName": "Conroy",
         "partyName": "Democratic",
-        "votes": 172873
+        "votes": 0
       },
       {
         "elected": false,
@@ -489,15 +305,15 @@
           "estimatedVotesHigh": 417637,
           "estimatedVotesLow": 341704,
           "estimatedVotesMid": 379670,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 82766,
         "lastName": "Baumgartner",
         "partyName": "Republican",
-        "votes": 206797
+        "votes": 0
       }
     ],
     "district": "5",
@@ -506,7 +322,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -516,7 +332,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 379670,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -529,15 +345,15 @@
           "estimatedVotesHigh": 445107,
           "estimatedVotesLow": 364177,
           "estimatedVotesMid": 404642,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Drew",
         "id": 27837,
         "lastName": "MacEwen",
         "partyName": "Republican",
-        "votes": 160690
+        "votes": 0
       },
       {
         "elected": false,
@@ -545,15 +361,15 @@
           "estimatedVotesHigh": 445107,
           "estimatedVotesLow": 364177,
           "estimatedVotesMid": 404642,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Emily",
         "id": 27818,
         "lastName": "Randall",
         "partyName": "Democratic",
-        "votes": 243952
+        "votes": 0
       }
     ],
     "district": "6",
@@ -562,7 +378,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -572,7 +388,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 404642,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -585,15 +401,15 @@
           "estimatedVotesHigh": 429206,
           "estimatedVotesLow": 351168,
           "estimatedVotesMid": 390187,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Dan",
-        "id": 82771,
-        "lastName": "Alexander",
-        "partyName": "Republican",
-        "votes": 44039
+        "firstName": "Pramila",
+        "id": 1739,
+        "lastName": "Jayapal",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -601,15 +417,15 @@
           "estimatedVotesHigh": 429206,
           "estimatedVotesLow": 351168,
           "estimatedVotesMid": 390187,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Pramila",
-        "id": 1739,
-        "lastName": "Jayapal",
-        "partyName": "Democratic",
-        "votes": 346148
+        "firstName": "Dan",
+        "id": 82771,
+        "lastName": "Alexander",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "7",
@@ -618,7 +434,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -628,7 +444,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 390187,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -641,15 +457,15 @@
           "estimatedVotesHigh": 445081,
           "estimatedVotesLow": 364157,
           "estimatedVotesMid": 404619,
-          "turnoutHigh": 90.88,
-          "turnoutLow": 111.08,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carmen",
         "id": 28079,
         "lastName": "Goers",
         "partyName": "Republican",
-        "votes": 181752
+        "votes": 0
       },
       {
         "elected": false,
@@ -657,15 +473,15 @@
           "estimatedVotesHigh": 445081,
           "estimatedVotesLow": 364157,
           "estimatedVotesMid": 404619,
-          "turnoutHigh": 90.88,
-          "turnoutLow": 111.08,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kim",
         "id": 10132,
         "lastName": "Schrier",
         "partyName": "Democratic",
-        "votes": 222756
+        "votes": 0
       }
     ],
     "district": "8",
@@ -674,7 +490,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -684,7 +500,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 404508,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -697,15 +513,15 @@
           "estimatedVotesHigh": 345747,
           "estimatedVotesLow": 282884,
           "estimatedVotesMid": 314315,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Melissa",
         "id": 82774,
         "lastName": "Chaudhry",
         "partyName": "Democratic",
-        "votes": 146561
+        "votes": 0
       },
       {
         "elected": false,
@@ -713,15 +529,15 @@
           "estimatedVotesHigh": 345747,
           "estimatedVotesLow": 282884,
           "estimatedVotesMid": 314315,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adam",
         "id": 1743,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 167754
+        "votes": 0
       }
     ],
     "district": "9",
@@ -730,7 +546,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -740,7 +556,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 314315,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -753,15 +569,15 @@
           "estimatedVotesHigh": 374038,
           "estimatedVotesLow": 306032,
           "estimatedVotesMid": 340035,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Don",
         "id": 14125,
         "lastName": "Hewett",
         "partyName": "Republican",
-        "votes": 137418
+        "votes": 0
       },
       {
         "elected": false,
@@ -769,15 +585,15 @@
           "estimatedVotesHigh": 374038,
           "estimatedVotesLow": 306032,
           "estimatedVotesMid": 340035,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marilyn",
         "id": 14134,
         "lastName": "Strickland",
         "partyName": "Democratic",
-        "votes": 202617
+        "votes": 0
       }
     ],
     "district": "10",
@@ -786,7 +602,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -796,7 +612,7 @@
     "raceDate": "2024-11-05",
     "state": "WA",
     "stateName": "Washington",
-    "totalVotes": 340035,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

@@ -6,106 +6,18 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 826144,
-          "estimatedVotesLow": 675940,
-          "estimatedVotesMid": 751030,
-          "turnoutHigh": 84.72,
-          "turnoutLow": 103.54,
-          "turnoutMid": 93.19
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 826144,
-          "estimatedVotesLow": 675940,
-          "estimatedVotesMid": 751030,
-          "turnoutHigh": 84.72,
-          "turnoutLow": 103.54,
-          "turnoutMid": 93.19
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 370348
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 826144,
-          "estimatedVotesLow": 675940,
-          "estimatedVotesMid": 751030,
-          "turnoutHigh": 84.72,
-          "turnoutLow": 103.54,
-          "turnoutMid": 93.19
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 329532
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 826144,
-          "estimatedVotesLow": 675940,
-          "estimatedVotesMid": 751030,
-          "turnoutHigh": 84.72,
-          "turnoutLow": 103.54,
-          "turnoutMid": 93.19
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "NH",
-    "stateName": "New Hampshire",
-    "totalVotes": 699880,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
           "estimatedVotesHigh": 415645,
           "estimatedVotesLow": 340074,
           "estimatedVotesMid": 377856,
-          "turnoutHigh": 90.72,
-          "turnoutLow": 110.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Russell",
         "id": 31072,
         "lastName": "Prescott",
         "partyName": "Republican",
-        "votes": 173747
+        "votes": 0
       },
       {
         "elected": false,
@@ -113,15 +25,15 @@
           "estimatedVotesHigh": 415645,
           "estimatedVotesLow": 340074,
           "estimatedVotesMid": 377856,
-          "turnoutHigh": 90.72,
-          "turnoutLow": 110.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 10573,
         "lastName": "Pappas",
         "partyName": "Democratic",
-        "votes": 203310
+        "votes": 0
       }
     ],
     "district": "1",
@@ -130,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -140,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "NH",
     "stateName": "New Hampshire",
-    "totalVotes": 377057,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -153,15 +65,15 @@
           "estimatedVotesHigh": 410499,
           "estimatedVotesLow": 335866,
           "estimatedVotesMid": 373174,
-          "turnoutHigh": 90.54,
-          "turnoutLow": 110.66,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lily",
         "id": 31078,
         "lastName": "Williams",
         "partyName": "Republican",
-        "votes": 160878
+        "votes": 0
       },
       {
         "elected": false,
@@ -169,15 +81,15 @@
           "estimatedVotesHigh": 410499,
           "estimatedVotesLow": 335866,
           "estimatedVotesMid": 373174,
-          "turnoutHigh": 90.54,
-          "turnoutLow": 110.66,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 102193,
         "lastName": "Donnelly",
         "partyName": "Independent",
-        "votes": 6832
+        "votes": 0
       },
       {
         "elected": false,
@@ -185,15 +97,15 @@
           "estimatedVotesHigh": 410499,
           "estimatedVotesLow": 335866,
           "estimatedVotesMid": 373174,
-          "turnoutHigh": 90.54,
-          "turnoutLow": 110.66,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maggie",
         "id": 84919,
         "lastName": "Goodlander",
         "partyName": "Democratic",
-        "votes": 196642
+        "votes": 0
       },
       {
         "elected": false,
@@ -201,15 +113,15 @@
           "estimatedVotesHigh": 410499,
           "estimatedVotesLow": 335866,
           "estimatedVotesMid": 373174,
-          "turnoutHigh": 90.54,
-          "turnoutLow": 110.66,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sterling",
         "id": 102194,
         "lastName": "Sykes",
         "partyName": "Independent",
-        "votes": 7310
+        "votes": 0
       }
     ],
     "district": "2",
@@ -218,7 +130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -228,7 +140,7 @@
     "raceDate": "2024-11-05",
     "state": "NH",
     "stateName": "New Hampshire",
-    "totalVotes": 371662,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

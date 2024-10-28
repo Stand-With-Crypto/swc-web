@@ -6,106 +6,18 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 423426,
-          "estimatedVotesLow": 346436,
-          "estimatedVotesMid": 384928,
-          "turnoutHigh": 91.04,
-          "turnoutLow": 111.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 243195
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 423426,
-          "estimatedVotesLow": 346436,
-          "estimatedVotesMid": 384928,
-          "turnoutHigh": 91.04,
-          "turnoutLow": 111.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 7602
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 423426,
-          "estimatedVotesLow": 346436,
-          "estimatedVotesMid": 384928,
-          "turnoutHigh": 91.04,
-          "turnoutLow": 111.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 423426,
-          "estimatedVotesLow": 346436,
-          "estimatedVotesMid": 384928,
-          "turnoutHigh": 91.04,
-          "turnoutLow": 111.27,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 134672
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "SD",
-    "stateName": "South Dakota",
-    "totalVotes": 385469,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
           "estimatedVotesHigh": 423424,
           "estimatedVotesLow": 346434,
           "estimatedVotesMid": 384926,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dusty",
         "id": 9629,
         "lastName": "Johnson",
         "partyName": "Republican",
-        "votes": 243306
+        "votes": 0
       },
       {
         "elected": false,
@@ -113,15 +25,15 @@
           "estimatedVotesHigh": 423424,
           "estimatedVotesLow": 346434,
           "estimatedVotesMid": 384926,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sheryl",
         "id": 44812,
         "lastName": "Johnson",
         "partyName": "Democratic",
-        "votes": 141620
+        "votes": 0
       }
     ],
     "district": "At-Large",
@@ -130,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -140,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "SD",
     "stateName": "South Dakota",
-    "totalVotes": 384926,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

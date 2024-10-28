@@ -9,119 +9,15 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.38,
-          "turnoutLow": 110.46,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040430,
-          "estimatedVotesLow": 2487627,
-          "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.38,
-          "turnoutLow": 110.46,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 1780514
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040430,
-          "estimatedVotesLow": 2487627,
-          "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.38,
-          "turnoutLow": 110.46,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040430,
-          "estimatedVotesLow": 2487627,
-          "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.38,
-          "turnoutLow": 110.46,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 913109
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040430,
-          "estimatedVotesLow": 2487627,
-          "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.38,
-          "turnoutLow": 110.46,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 54239
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "MD",
-    "stateName": "Maryland",
-    "totalVotes": 2747862,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040430,
-          "estimatedVotesLow": 2487627,
-          "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.67,
-          "turnoutLow": 110.82,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Larry",
         "id": 10832,
         "lastName": "Hogan",
         "partyName": "Republican",
-        "votes": 900053
+        "votes": 0
       },
       {
         "elected": false,
@@ -129,15 +25,15 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.67,
-          "turnoutLow": 110.82,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Angela",
         "id": 67193,
         "lastName": "Alsobrooks",
         "partyName": "Democratic",
-        "votes": 1801402
+        "votes": 0
       },
       {
         "elected": false,
@@ -145,15 +41,15 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 90.67,
-          "turnoutLow": 110.82,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 84947,
         "lastName": "Scott",
         "partyName": "Libertarian",
-        "votes": 55376
+        "votes": 0
       }
     ],
     "district": "",
@@ -162,7 +58,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -172,7 +68,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 2756831,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -185,47 +81,47 @@
           "estimatedVotesHigh": 425268,
           "estimatedVotesLow": 347947,
           "estimatedVotesMid": 386607,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Joshua",
-        "id": 85039,
-        "lastName": "O'Brien",
-        "partyName": "Libertarian",
-        "votes": 7649
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 425268,
-          "estimatedVotesLow": 347947,
-          "estimatedVotesMid": 386607,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Blane",
-        "id": 85037,
-        "lastName": "Miller",
-        "partyName": "Democratic",
-        "votes": 164280
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 425268,
-          "estimatedVotesLow": 347947,
-          "estimatedVotesMid": 386607,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andy",
         "id": 1307,
         "lastName": "Harris",
         "partyName": "Republican",
-        "votes": 214675
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 425268,
+          "estimatedVotesLow": 347947,
+          "estimatedVotesMid": 386607,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joshua",
+        "id": 85039,
+        "lastName": "O'Brien",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 425268,
+          "estimatedVotesLow": 347947,
+          "estimatedVotesMid": 386607,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Blane",
+        "id": 85037,
+        "lastName": "Miller",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "1",
@@ -234,7 +130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -244,7 +140,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 386604,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -257,15 +153,15 @@
           "estimatedVotesHigh": 406052,
           "estimatedVotesLow": 332225,
           "estimatedVotesMid": 369138,
-          "turnoutHigh": 87.28,
-          "turnoutLow": 106.67,
-          "turnoutMid": 96.01
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jasen",
         "id": 2138,
         "lastName": "Wunder",
         "partyName": "Libertarian",
-        "votes": 6362
+        "votes": 0
       },
       {
         "elected": false,
@@ -273,15 +169,15 @@
           "estimatedVotesHigh": 406052,
           "estimatedVotesLow": 332225,
           "estimatedVotesMid": 369138,
-          "turnoutHigh": 87.28,
-          "turnoutLow": 106.67,
-          "turnoutMid": 96.01
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 85040,
         "lastName": "Olszewski",
         "partyName": "Democratic",
-        "votes": 204546
+        "votes": 0
       },
       {
         "elected": false,
@@ -289,15 +185,15 @@
           "estimatedVotesHigh": 406052,
           "estimatedVotesLow": 332225,
           "estimatedVotesMid": 369138,
-          "turnoutHigh": 87.28,
-          "turnoutLow": 106.67,
-          "turnoutMid": 96.01
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kim",
         "id": 67213,
         "lastName": "Klacik",
         "partyName": "Republican",
-        "votes": 143488
+        "votes": 0
       }
     ],
     "district": "2",
@@ -306,7 +202,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -316,7 +212,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 354396,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -329,15 +225,15 @@
           "estimatedVotesHigh": 420002,
           "estimatedVotesLow": 343638,
           "estimatedVotesMid": 381820,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Miguel",
         "id": 85041,
         "lastName": "Barajas",
         "partyName": "Libertarian",
-        "votes": 7341
+        "votes": 0
       },
       {
         "elected": false,
@@ -345,15 +241,15 @@
           "estimatedVotesHigh": 420002,
           "estimatedVotesLow": 343638,
           "estimatedVotesMid": 381820,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sarah",
         "id": 25942,
         "lastName": "Elfreth",
         "partyName": "Democratic",
-        "votes": 229553
+        "votes": 0
       },
       {
         "elected": false,
@@ -361,15 +257,15 @@
           "estimatedVotesHigh": 420002,
           "estimatedVotesLow": 343638,
           "estimatedVotesMid": 381820,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 67230,
         "lastName": "Steinberger",
         "partyName": "Republican",
-        "votes": 144925
+        "votes": 0
       }
     ],
     "district": "3",
@@ -378,7 +274,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -388,7 +284,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 381819,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -401,15 +297,15 @@
           "estimatedVotesHigh": 288909,
           "estimatedVotesLow": 236380,
           "estimatedVotesMid": 262644,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "George",
         "id": 13034,
         "lastName": "McDermott",
         "partyName": "Republican",
-        "votes": 25225
+        "votes": 0
       },
       {
         "elected": false,
@@ -417,15 +313,15 @@
           "estimatedVotesHigh": 288909,
           "estimatedVotesLow": 236380,
           "estimatedVotesMid": 262644,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Glenn",
         "id": 27,
         "lastName": "Ivey",
         "partyName": "Democratic",
-        "votes": 237419
+        "votes": 0
       }
     ],
     "district": "4",
@@ -434,7 +330,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -444,7 +340,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 262644,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -457,15 +353,15 @@
           "estimatedVotesHigh": 427733,
           "estimatedVotesLow": 349965,
           "estimatedVotesMid": 388849,
-          "turnoutHigh": 78.91,
-          "turnoutLow": 96.45,
-          "turnoutMid": 86.8
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steny",
         "id": 1316,
         "lastName": "Hoyer",
         "partyName": "Democratic",
-        "votes": 244645
+        "votes": 0
       },
       {
         "elected": false,
@@ -473,15 +369,15 @@
           "estimatedVotesHigh": 427733,
           "estimatedVotesLow": 349965,
           "estimatedVotesMid": 388849,
-          "turnoutHigh": 78.91,
-          "turnoutLow": 96.45,
-          "turnoutMid": 86.8
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michelle",
         "id": 25982,
         "lastName": "Talkington",
         "partyName": "Republican",
-        "votes": 92893
+        "votes": 0
       }
     ],
     "district": "5",
@@ -490,7 +386,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -500,7 +396,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 337538,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -513,15 +409,15 @@
           "estimatedVotesHigh": 380741,
           "estimatedVotesLow": 311515,
           "estimatedVotesMid": 346128,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Neil",
         "id": 13047,
         "lastName": "Parrott",
         "partyName": "Republican",
-        "votes": 147431
+        "votes": 0
       },
       {
         "elected": false,
@@ -529,15 +425,15 @@
           "estimatedVotesHigh": 380741,
           "estimatedVotesLow": 311515,
           "estimatedVotesMid": 346128,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "April",
         "id": 85042,
         "lastName": "McClain-Delaney",
         "partyName": "Democratic",
-        "votes": 198697
+        "votes": 0
       }
     ],
     "district": "6",
@@ -546,7 +442,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -556,7 +452,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 346128,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -569,15 +465,15 @@
           "estimatedVotesHigh": 304344,
           "estimatedVotesLow": 249008,
           "estimatedVotesMid": 276676,
-          "turnoutHigh": 26.97,
-          "turnoutLow": 32.96,
-          "turnoutMid": 29.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ronald",
         "id": 102153,
         "lastName": "Owens-Bey",
         "partyName": "Libertarian",
-        "votes": 1495
+        "votes": 0
       },
       {
         "elected": false,
@@ -585,15 +481,15 @@
           "estimatedVotesHigh": 304344,
           "estimatedVotesLow": 249008,
           "estimatedVotesMid": 276676,
-          "turnoutHigh": 26.97,
-          "turnoutLow": 32.96,
-          "turnoutMid": 29.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kweisi",
         "id": 11940,
         "lastName": "Mfume",
         "partyName": "Democratic",
-        "votes": 54122
+        "votes": 0
       },
       {
         "elected": false,
@@ -601,15 +497,15 @@
           "estimatedVotesHigh": 304344,
           "estimatedVotesLow": 249008,
           "estimatedVotesMid": 276676,
-          "turnoutHigh": 26.97,
-          "turnoutLow": 32.96,
-          "turnoutMid": 29.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 13017,
         "lastName": "Collier",
         "partyName": "Republican",
-        "votes": 26460
+        "votes": 0
       }
     ],
     "district": "7",
@@ -618,7 +514,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -628,7 +524,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 82077,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -641,15 +537,15 @@
           "estimatedVotesHigh": 387338,
           "estimatedVotesLow": 316914,
           "estimatedVotesMid": 352126,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jamie",
         "id": 44,
         "lastName": "Raskin",
         "partyName": "Democratic",
-        "votes": 276726
+        "votes": 0
       },
       {
         "elected": false,
@@ -657,15 +553,15 @@
           "estimatedVotesHigh": 387338,
           "estimatedVotesLow": 316914,
           "estimatedVotesMid": 352126,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cheryl",
         "id": 67250,
         "lastName": "Riley",
         "partyName": "Republican",
-        "votes": 68119
+        "votes": 0
       },
       {
         "elected": false,
@@ -673,15 +569,15 @@
           "estimatedVotesHigh": 387338,
           "estimatedVotesLow": 316914,
           "estimatedVotesMid": 352126,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nancy",
         "id": 2137,
         "lastName": "Wallace",
         "partyName": "Green",
-        "votes": 7279
+        "votes": 0
       }
     ],
     "district": "8",
@@ -690,7 +586,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -700,7 +596,7 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 352124,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

@@ -9,46 +9,14 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 89.53,
-          "turnoutLow": 109.43,
-          "turnoutMid": 98.49
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 171126
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 268545,
-          "estimatedVotesLow": 219720,
-          "estimatedVotesMid": 244131,
-          "turnoutHigh": 89.53,
-          "turnoutLow": 109.43,
-          "turnoutMid": 98.49
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 4737
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 268545,
-          "estimatedVotesLow": 219720,
-          "estimatedVotesMid": 244131,
-          "turnoutHigh": 89.53,
-          "turnoutLow": 109.43,
-          "turnoutMid": 98.49
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
+        "firstName": "Scott",
+        "id": 84151,
+        "lastName": "Morrow",
+        "partyName": "Democratic",
         "votes": 0
       },
       {
@@ -57,71 +25,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 89.53,
-          "turnoutLow": 109.43,
-          "turnoutMid": 98.49
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 64574
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "WY",
-    "stateName": "Wyoming",
-    "totalVotes": 240437,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 268545,
-          "estimatedVotesLow": 219720,
-          "estimatedVotesMid": 244131,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Scott",
-        "id": 84151,
-        "lastName": "Morrow",
-        "partyName": "Democratic",
-        "votes": 67317
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 268545,
-          "estimatedVotesLow": 219720,
-          "estimatedVotesMid": 244131,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 8241,
         "lastName": "Barrasso",
         "partyName": "Republican",
-        "votes": 176814
+        "votes": 0
       }
     ],
     "district": "",
@@ -130,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:15:12.873Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -140,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 244131,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -153,15 +65,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 92.85,
-          "turnoutLow": 113.48,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Richard",
         "id": 14707,
         "lastName": "Brubaker",
         "partyName": "Libertarian",
-        "votes": 9022
+        "votes": 0
       },
       {
         "elected": false,
@@ -169,15 +81,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 92.85,
-          "turnoutLow": 113.48,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Harriet",
         "id": 10529,
         "lastName": "Hageman",
         "partyName": "Republican",
-        "votes": 167604
+        "votes": 0
       },
       {
         "elected": false,
@@ -185,15 +97,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 92.85,
-          "turnoutLow": 113.48,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kyle",
         "id": 84153,
         "lastName": "Cameron",
         "partyName": "Democratic",
-        "votes": 67419
+        "votes": 0
       },
       {
         "elected": false,
@@ -201,15 +113,15 @@
           "estimatedVotesHigh": 268545,
           "estimatedVotesLow": 219720,
           "estimatedVotesMid": 244131,
-          "turnoutHigh": 92.85,
-          "turnoutLow": 113.48,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeff",
         "id": 102233,
         "lastName": "Haggit",
         "partyName": "Constitution",
-        "votes": 5296
+        "votes": 0
       }
     ],
     "district": "At-Large",
@@ -218,7 +130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.750Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -228,7 +140,7 @@
     "raceDate": "2024-11-05",
     "state": "WY",
     "stateName": "Wyoming",
-    "totalVotes": 249341,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

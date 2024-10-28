@@ -9,103 +9,15 @@
           "estimatedVotesHigh": 6945189,
           "estimatedVotesLow": 5682427,
           "estimatedVotesMid": 6313806,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6945189,
-          "estimatedVotesLow": 5682427,
-          "estimatedVotesMid": 6313806,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 3070983
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6945189,
-          "estimatedVotesLow": 5682427,
-          "estimatedVotesMid": 6313806,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 3266466
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6945189,
-          "estimatedVotesLow": 5682427,
-          "estimatedVotesMid": 6313806,
-          "turnoutHigh": 91.25,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "PA",
-    "stateName": "Pennsylvania",
-    "totalVotes": 6337449,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6945189,
-          "estimatedVotesLow": 5682427,
-          "estimatedVotesMid": 6313806,
-          "turnoutHigh": 91.89,
-          "turnoutLow": 112.31,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 20590,
         "lastName": "McCormick",
         "partyName": "Republican",
-        "votes": 3103977
+        "votes": 0
       },
       {
         "elected": false,
@@ -113,15 +25,15 @@
           "estimatedVotesHigh": 6945189,
           "estimatedVotesLow": 5682427,
           "estimatedVotesMid": 6313806,
-          "turnoutHigh": 91.89,
-          "turnoutLow": 112.31,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bob",
         "id": 11349,
         "lastName": "Casey Jr.",
         "partyName": "Democratic",
-        "votes": 3277747
+        "votes": 0
       }
     ],
     "district": "",
@@ -130,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -140,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 6381724,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -153,15 +65,15 @@
           "estimatedVotesHigh": 474029,
           "estimatedVotesLow": 387843,
           "estimatedVotesMid": 430936,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ashley",
         "id": 20569,
         "lastName": "Ehasz",
         "partyName": "Democratic",
-        "votes": 226601
+        "votes": 0
       },
       {
         "elected": false,
@@ -169,15 +81,15 @@
           "estimatedVotesHigh": 474029,
           "estimatedVotesLow": 387843,
           "estimatedVotesMid": 430936,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 1580,
         "lastName": "Fitzpatrick",
         "partyName": "Republican",
-        "votes": 204337
+        "votes": 0
       }
     ],
     "district": "1",
@@ -186,7 +98,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -196,7 +108,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 430938,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -209,15 +121,15 @@
           "estimatedVotesHigh": 293920,
           "estimatedVotesLow": 240480,
           "estimatedVotesMid": 267200,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Aaron",
         "id": 20594,
         "lastName": "Bashir",
         "partyName": "Republican",
-        "votes": 75211
+        "votes": 0
       },
       {
         "elected": false,
@@ -225,15 +137,15 @@
           "estimatedVotesHigh": 293920,
           "estimatedVotesLow": 240480,
           "estimatedVotesMid": 267200,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brendan ",
         "id": 1589,
         "lastName": "Boyle",
         "partyName": "Democratic",
-        "votes": 191989
+        "votes": 0
       }
     ],
     "district": "2",
@@ -242,7 +154,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -252,7 +164,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 267200,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -282,7 +194,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -305,15 +217,15 @@
           "estimatedVotesHigh": 472493,
           "estimatedVotesLow": 386585,
           "estimatedVotesMid": 429539,
-          "turnoutHigh": 89.12,
-          "turnoutLow": 108.92,
-          "turnoutMid": 98.03
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 59519,
         "lastName": "Winkler",
         "partyName": "Republican",
-        "votes": 175573
+        "votes": 0
       },
       {
         "elected": false,
@@ -321,15 +233,15 @@
           "estimatedVotesHigh": 472493,
           "estimatedVotesLow": 386585,
           "estimatedVotesMid": 429539,
-          "turnoutHigh": 89.12,
-          "turnoutLow": 108.92,
-          "turnoutMid": 98.03
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Madeleine",
         "id": 44400,
         "lastName": "Dean",
         "partyName": "Democratic",
-        "votes": 245508
+        "votes": 0
       }
     ],
     "district": "4",
@@ -338,7 +250,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -348,7 +260,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 421081,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -361,15 +273,15 @@
           "estimatedVotesHigh": 419230,
           "estimatedVotesLow": 343007,
           "estimatedVotesMid": 381118,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mary Gay",
         "id": 85122,
         "lastName": "Scanlon",
         "partyName": "Democratic",
-        "votes": 251734
+        "votes": 0
       },
       {
         "elected": false,
@@ -377,15 +289,15 @@
           "estimatedVotesHigh": 419230,
           "estimatedVotesLow": 343007,
           "estimatedVotesMid": 381118,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alfeia",
         "id": 59520,
         "lastName": "Devaughn-Goodwin",
         "partyName": "Republican",
-        "votes": 129384
+        "votes": 0
       }
     ],
     "district": "5",
@@ -394,7 +306,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -404,7 +316,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 381118,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -417,15 +329,15 @@
           "estimatedVotesHigh": 422634,
           "estimatedVotesLow": 345792,
           "estimatedVotesMid": 384213,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christina",
         "id": 59521,
         "lastName": "Houlahan",
         "partyName": "Democratic",
-        "votes": 224551
+        "votes": 0
       },
       {
         "elected": false,
@@ -433,15 +345,15 @@
           "estimatedVotesHigh": 422634,
           "estimatedVotesLow": 345792,
           "estimatedVotesMid": 384213,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Neil Carlin",
         "id": 85123,
         "lastName": "Young",
         "partyName": "Republican",
-        "votes": 159662
+        "votes": 0
       }
     ],
     "district": "6",
@@ -450,7 +362,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -460,7 +372,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 384213,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -473,15 +385,15 @@
           "estimatedVotesHigh": 400627,
           "estimatedVotesLow": 327784,
           "estimatedVotesMid": 364205,
-          "turnoutHigh": 89.23,
-          "turnoutLow": 109.06,
-          "turnoutMid": 98.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Susan",
         "id": 9063,
         "lastName": "Wild",
         "partyName": "Democratic",
-        "votes": 175857
+        "votes": 0
       },
       {
         "elected": false,
@@ -489,15 +401,15 @@
           "estimatedVotesHigh": 400627,
           "estimatedVotesLow": 327784,
           "estimatedVotesMid": 364205,
-          "turnoutHigh": 89.23,
-          "turnoutLow": 109.06,
-          "turnoutMid": 98.15
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ryan",
         "id": 21047,
         "lastName": "Mackenzie",
         "partyName": "Republican",
-        "votes": 181616
+        "votes": 0
       }
     ],
     "district": "7",
@@ -506,7 +418,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -516,7 +428,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 357473,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -529,15 +441,15 @@
           "estimatedVotesHigh": 374237,
           "estimatedVotesLow": 306195,
           "estimatedVotesMid": 340216,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 85124,
         "lastName": "Bresnahan",
         "partyName": "Republican",
-        "votes": 173458
+        "votes": 0
       },
       {
         "elected": false,
@@ -545,15 +457,15 @@
           "estimatedVotesHigh": 374237,
           "estimatedVotesLow": 306195,
           "estimatedVotesMid": 340216,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matthew",
         "id": 59524,
         "lastName": "Cartwright",
         "partyName": "Democratic",
-        "votes": 166758
+        "votes": 0
       }
     ],
     "district": "8",
@@ -562,7 +474,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -572,7 +484,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 340216,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -585,15 +497,15 @@
           "estimatedVotesHigh": 394479,
           "estimatedVotesLow": 322757,
           "estimatedVotesMid": 358618,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Amanda",
         "id": 20574,
         "lastName": "Waldman",
         "partyName": "Democratic",
-        "votes": 113011
+        "votes": 0
       },
       {
         "elected": false,
@@ -601,15 +513,15 @@
           "estimatedVotesHigh": 394479,
           "estimatedVotesLow": 322757,
           "estimatedVotesMid": 358618,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 8978,
         "lastName": "Meuser",
         "partyName": "Republican",
-        "votes": 245607
+        "votes": 0
       }
     ],
     "district": "9",
@@ -618,7 +530,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -628,7 +540,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 358618,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -641,15 +553,15 @@
           "estimatedVotesHigh": 405712,
           "estimatedVotesLow": 331946,
           "estimatedVotesMid": 368829,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Janelle",
-        "id": 59526,
-        "lastName": "Stelson",
-        "partyName": "Democratic",
-        "votes": 178163
+        "firstName": "Scott",
+        "id": 1572,
+        "lastName": "Perry",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -657,15 +569,15 @@
           "estimatedVotesHigh": 405712,
           "estimatedVotesLow": 331946,
           "estimatedVotesMid": 368829,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Scott",
-        "id": 1572,
-        "lastName": "Perry",
-        "partyName": "Republican",
-        "votes": 190666
+        "firstName": "Janelle",
+        "id": 59526,
+        "lastName": "Stelson",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "10",
@@ -674,7 +586,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -684,7 +596,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 368829,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -697,15 +609,15 @@
           "estimatedVotesHigh": 404361,
           "estimatedVotesLow": 330841,
           "estimatedVotesMid": 367600,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lloyd",
         "id": 8980,
         "lastName": "Smucker",
         "partyName": "Republican",
-        "votes": 231908
+        "votes": 0
       },
       {
         "elected": false,
@@ -713,15 +625,15 @@
           "estimatedVotesHigh": 404361,
           "estimatedVotesLow": 330841,
           "estimatedVotesMid": 367600,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 59529,
         "lastName": "Atkinson",
         "partyName": "Democratic",
-        "votes": 135692
+        "votes": 0
       }
     ],
     "district": "11",
@@ -730,7 +642,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -740,7 +652,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 367600,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -753,15 +665,15 @@
           "estimatedVotesHigh": 417215,
           "estimatedVotesLow": 341359,
           "estimatedVotesMid": 379287,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 59532,
         "lastName": "Hayes",
         "partyName": "Republican",
-        "votes": 153303
+        "votes": 0
       },
       {
         "elected": false,
@@ -769,15 +681,15 @@
           "estimatedVotesHigh": 417215,
           "estimatedVotesLow": 341359,
           "estimatedVotesMid": 379287,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Summer",
         "id": 20580,
         "lastName": "Lee",
         "partyName": "Democratic",
-        "votes": 225985
+        "votes": 0
       }
     ],
     "district": "12",
@@ -786,7 +698,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -796,7 +708,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 379288,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -809,15 +721,15 @@
           "estimatedVotesHigh": 406267,
           "estimatedVotesLow": 332402,
           "estimatedVotesMid": 369334,
-          "turnoutHigh": 91.47,
-          "turnoutLow": 111.8,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Elizabeth",
         "id": 59533,
         "lastName": "Farnham",
         "partyName": "Democratic",
-        "votes": 99117
+        "votes": 0
       },
       {
         "elected": false,
@@ -825,15 +737,15 @@
           "estimatedVotesHigh": 406267,
           "estimatedVotesLow": 332402,
           "estimatedVotesMid": 369334,
-          "turnoutHigh": 91.47,
-          "turnoutLow": 111.8,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 8988,
         "lastName": "Joyce",
         "partyName": "Republican",
-        "votes": 272512
+        "votes": 0
       }
     ],
     "district": "13",
@@ -842,7 +754,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -852,7 +764,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 371629,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -865,15 +777,15 @@
           "estimatedVotesHigh": 421497,
           "estimatedVotesLow": 344861,
           "estimatedVotesMid": 383179,
-          "turnoutHigh": 89.25,
-          "turnoutLow": 109.08,
-          "turnoutMid": 98.18
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christopher",
         "id": 59535,
         "lastName": "Dziados",
         "partyName": "Democratic",
-        "votes": 126466
+        "votes": 0
       },
       {
         "elected": false,
@@ -881,15 +793,15 @@
           "estimatedVotesHigh": 421497,
           "estimatedVotesLow": 344861,
           "estimatedVotesMid": 383179,
-          "turnoutHigh": 89.25,
-          "turnoutLow": 109.08,
-          "turnoutMid": 98.18
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Guy",
         "id": 8991,
         "lastName": "Reschenthaler",
         "partyName": "Republican",
-        "votes": 249724
+        "votes": 0
       }
     ],
     "district": "14",
@@ -898,7 +810,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -908,7 +820,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 376190,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -921,15 +833,15 @@
           "estimatedVotesHigh": 388328,
           "estimatedVotesLow": 317722,
           "estimatedVotesMid": 353024,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Zacheray",
         "id": 59536,
         "lastName": "Womer",
         "partyName": "Democratic",
-        "votes": 110307
+        "votes": 0
       },
       {
         "elected": false,
@@ -937,15 +849,15 @@
           "estimatedVotesHigh": 388328,
           "estimatedVotesLow": 317722,
           "estimatedVotesMid": 353024,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Glenn",
         "id": 1574,
         "lastName": "Thompson",
         "partyName": "Republican",
-        "votes": 242717
+        "votes": 0
       }
     ],
     "district": "15",
@@ -954,7 +866,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -964,7 +876,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 353024,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -977,15 +889,15 @@
           "estimatedVotesHigh": 414158,
           "estimatedVotesLow": 338858,
           "estimatedVotesMid": 376508,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "George",
         "id": 1570,
         "lastName": "Kelly",
         "partyName": "Republican",
-        "votes": 221956
+        "votes": 0
       },
       {
         "elected": false,
@@ -993,15 +905,15 @@
           "estimatedVotesHigh": 414158,
           "estimatedVotesLow": 338858,
           "estimatedVotesMid": 376508,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Preston",
         "id": 59537,
         "lastName": "Nouri",
         "partyName": "Democratic",
-        "votes": 154552
+        "votes": 0
       }
     ],
     "district": "16",
@@ -1010,7 +922,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1020,7 +932,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 376508,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1033,15 +945,15 @@
           "estimatedVotesHigh": 457720,
           "estimatedVotesLow": 374498,
           "estimatedVotesMid": 416109,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christopher",
         "id": 85125,
         "lastName": "Deluzio",
         "partyName": "Democratic",
-        "votes": 218412
+        "votes": 0
       },
       {
         "elected": false,
@@ -1049,15 +961,15 @@
           "estimatedVotesHigh": 457720,
           "estimatedVotesLow": 374498,
           "estimatedVotesMid": 416109,
-          "turnoutHigh": 89.03,
-          "turnoutLow": 108.82,
-          "turnoutMid": 97.94
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 59539,
         "lastName": "Mercuri",
         "partyName": "Republican",
-        "votes": 189114
+        "votes": 0
       }
     ],
     "district": "17",
@@ -1066,7 +978,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:36.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1076,7 +988,7 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 407526,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

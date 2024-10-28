@@ -39,7 +39,7 @@ export const fetchPresidentialRacesDataCron = inngest.createFunction(
   },
 )
 
-const persistFile = true
+const persistFile = false
 const rootDir = path.join(__dirname, 'raceWinners')
 
 if (persistFile) {
@@ -275,7 +275,6 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
         const stateRacesDataOnly = stateRacesData.filter(
           currentStateRacesData =>
-            currentStateRacesData.office?.officeName === 'President' ||
             currentStateRacesData.office?.officeName === 'US House' ||
             currentStateRacesData.office?.officeName === 'US Senate',
         )

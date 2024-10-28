@@ -9,183 +9,15 @@
           "estimatedVotesHigh": 3289032,
           "estimatedVotesLow": 2691028,
           "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 1492822
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Rachele",
-        "id": 104297,
-        "lastName": "Fruit",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Shiva",
-        "id": 11165,
-        "lastName": "Ayyadurai",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 1591734
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "MN",
-    "stateName": "Minnesota",
-    "totalVotes": 3084556,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 49.49,
-          "turnoutLow": 60.49,
-          "turnoutMid": 54.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Amy",
         "id": 8233,
         "lastName": "Klobuchar",
         "partyName": "Democratic",
-        "votes": 1627849
+        "votes": 0
       },
       {
         "elected": false,
@@ -193,9 +25,9 @@
           "estimatedVotesHigh": 3289032,
           "estimatedVotesLow": 2691028,
           "estimatedVotesMid": 2990027,
-          "turnoutHigh": 49.49,
-          "turnoutLow": 60.49,
-          "turnoutMid": 54.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rebecca",
         "id": 102178,
@@ -209,9 +41,9 @@
           "estimatedVotesHigh": 3289032,
           "estimatedVotesLow": 2691028,
           "estimatedVotesMid": 2990027,
-          "turnoutHigh": 49.49,
-          "turnoutLow": 60.49,
-          "turnoutMid": 54.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joyce",
         "id": 102177,
@@ -225,9 +57,9 @@
           "estimatedVotesHigh": 3289032,
           "estimatedVotesLow": 2691028,
           "estimatedVotesMid": 2990027,
-          "turnoutHigh": 49.49,
-          "turnoutLow": 60.49,
-          "turnoutMid": 54.44
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Royce",
         "id": 28730,
@@ -242,7 +74,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -252,7 +84,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 1627849,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -265,15 +97,15 @@
           "estimatedVotesHigh": 387398,
           "estimatedVotesLow": 316961,
           "estimatedVotesMid": 352178,
-          "turnoutHigh": 92.97,
-          "turnoutLow": 113.62,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Brad",
-        "id": 22174,
-        "lastName": "Finstad",
-        "partyName": "Republican",
-        "votes": 194006
+        "firstName": "Rachel",
+        "id": 83442,
+        "lastName": "Bohman",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -281,15 +113,15 @@
           "estimatedVotesHigh": 387398,
           "estimatedVotesLow": 316961,
           "estimatedVotesMid": 352178,
-          "turnoutHigh": 92.97,
-          "turnoutLow": 113.62,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Rachel",
-        "id": 83442,
-        "lastName": "Bohman",
-        "partyName": "Democratic",
-        "votes": 166140
+        "firstName": "Brad",
+        "id": 22174,
+        "lastName": "Finstad",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "1",
@@ -298,7 +130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:14:38.331Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -308,7 +140,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 360146,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -321,15 +153,15 @@
           "estimatedVotesHigh": 433415,
           "estimatedVotesLow": 354612,
           "estimatedVotesMid": 394013,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 83443,
         "lastName": "Teirab",
         "partyName": "Republican",
-        "votes": 181114
+        "votes": 0
       },
       {
         "elected": false,
@@ -337,15 +169,15 @@
           "estimatedVotesHigh": 433415,
           "estimatedVotesLow": 354612,
           "estimatedVotesMid": 394013,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Angie",
         "id": 1356,
         "lastName": "Craig",
         "partyName": "Democratic",
-        "votes": 205514
+        "votes": 0
       },
       {
         "elected": false,
@@ -353,15 +185,15 @@
           "estimatedVotesHigh": 433415,
           "estimatedVotesLow": 354612,
           "estimatedVotesMid": 394013,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 102176,
         "lastName": "Bowman",
         "partyName": "Conservative",
-        "votes": 7385
+        "votes": 0
       }
     ],
     "district": "2",
@@ -370,7 +202,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -380,7 +212,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 394013,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -393,15 +225,15 @@
           "estimatedVotesHigh": 438280,
           "estimatedVotesLow": 358593,
           "estimatedVotesMid": 398436,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kelly",
         "id": 45013,
         "lastName": "Morrison",
         "partyName": "Democratic",
-        "votes": 244374
+        "votes": 0
       },
       {
         "elected": false,
@@ -409,15 +241,15 @@
           "estimatedVotesHigh": 438280,
           "estimatedVotesLow": 358593,
           "estimatedVotesMid": 398436,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tad",
         "id": 83446,
         "lastName": "Jude",
         "partyName": "Republican",
-        "votes": 154062
+        "votes": 0
       }
     ],
     "district": "3",
@@ -426,7 +258,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -436,7 +268,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 398436,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -449,15 +281,15 @@
           "estimatedVotesHigh": 388321,
           "estimatedVotesLow": 317717,
           "estimatedVotesMid": 353019,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "May",
-        "id": 28727,
-        "lastName": "Lor Xiong",
-        "partyName": "Republican",
-        "votes": 108368
+        "firstName": "Betty",
+        "id": 1360,
+        "lastName": "McCollum",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -465,15 +297,15 @@
           "estimatedVotesHigh": 388321,
           "estimatedVotesLow": 317717,
           "estimatedVotesMid": 353019,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Betty",
-        "id": 1360,
-        "lastName": "McCollum",
-        "partyName": "Democratic",
-        "votes": 244651
+        "firstName": "May",
+        "id": 28727,
+        "lastName": "Lor Xiong",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "4",
@@ -482,7 +314,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -492,7 +324,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 353019,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -505,15 +337,15 @@
           "estimatedVotesHigh": 366033,
           "estimatedVotesLow": 299481,
           "estimatedVotesMid": 332757,
-          "turnoutHigh": 146.51,
-          "turnoutLow": 179.07,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ilhan",
         "id": 10474,
         "lastName": "Omar",
         "partyName": "Democratic",
-        "votes": 273034
+        "votes": 0
       },
       {
         "elected": false,
@@ -521,15 +353,15 @@
           "estimatedVotesHigh": 366033,
           "estimatedVotesLow": 299481,
           "estimatedVotesMid": 332757,
-          "turnoutHigh": 146.51,
-          "turnoutLow": 179.07,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dalia",
         "id": 14257,
         "lastName": "Al-Aqidi",
         "partyName": "Republican",
-        "votes": 263247
+        "votes": 0
       }
     ],
     "district": "5",
@@ -538,7 +370,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -548,7 +380,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 536281,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -561,15 +393,15 @@
           "estimatedVotesHigh": 437104,
           "estimatedVotesLow": 357631,
           "estimatedVotesMid": 397367,
-          "turnoutHigh": 91.52,
-          "turnoutLow": 111.85,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 1365,
         "lastName": "Emmer",
         "partyName": "Republican",
-        "votes": 232459
+        "votes": 0
       },
       {
         "elected": false,
@@ -577,15 +409,15 @@
           "estimatedVotesHigh": 437104,
           "estimatedVotesLow": 357631,
           "estimatedVotesMid": 397367,
-          "turnoutHigh": 91.52,
-          "turnoutLow": 111.85,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jeanne",
         "id": 44463,
         "lastName": "Hendricks",
         "partyName": "Democratic",
-        "votes": 167568
+        "votes": 0
       }
     ],
     "district": "6",
@@ -594,7 +426,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -604,7 +436,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 400027,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -617,15 +449,15 @@
           "estimatedVotesHigh": 405291,
           "estimatedVotesLow": 331605,
           "estimatedVotesMid": 368447,
-          "turnoutHigh": 91.13,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michelle",
         "id": 14264,
         "lastName": "Fischbach",
         "partyName": "Republican",
-        "votes": 238570
+        "votes": 0
       },
       {
         "elected": false,
@@ -633,15 +465,15 @@
           "estimatedVotesHigh": 405291,
           "estimatedVotesLow": 331605,
           "estimatedVotesMid": 368447,
-          "turnoutHigh": 91.13,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 8810,
         "lastName": "Peters",
         "partyName": "Democratic",
-        "votes": 130761
+        "votes": 0
       }
     ],
     "district": "7",
@@ -650,7 +482,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -660,7 +492,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 369331,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -673,15 +505,15 @@
           "estimatedVotesHigh": 433134,
           "estimatedVotesLow": 354382,
           "estimatedVotesMid": 393758,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jennifer",
         "id": 44465,
         "lastName": "Schultz",
         "partyName": "Democratic",
-        "votes": 170467
+        "votes": 0
       },
       {
         "elected": false,
@@ -689,15 +521,15 @@
           "estimatedVotesHigh": 433134,
           "estimatedVotesLow": 354382,
           "estimatedVotesMid": 393758,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Peter",
         "id": 85048,
         "lastName": "Stauber",
         "partyName": "Republican",
-        "votes": 223291
+        "votes": 0
       }
     ],
     "district": "8",
@@ -706,7 +538,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:35.672Z",
+    "lastUpdated": "2024-10-28T15:15:22.643Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -716,7 +548,7 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 393758,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

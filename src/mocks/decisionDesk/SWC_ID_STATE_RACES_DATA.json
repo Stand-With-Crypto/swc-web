@@ -6,186 +6,18 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 14706
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Joel",
-        "id": 104294,
-        "lastName": "Skousen",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 14580
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Shiva",
-        "id": 11165,
-        "lastName": "Ayyadurai",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Randall",
-        "id": 84941,
-        "lastName": "Terry",
-        "partyName": "Constitution",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 14655
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 489568
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 240578
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.45,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 14975
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "ID",
-    "stateName": "Idaho",
-    "totalVotes": 789062,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
           "estimatedVotesHigh": 452185,
           "estimatedVotesLow": 369972,
           "estimatedVotesMid": 411077,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brendan",
         "id": 44635,
         "lastName": "Gomez",
         "partyName": "Constitution",
-        "votes": 7835
+        "votes": 0
       },
       {
         "elected": false,
@@ -193,15 +25,15 @@
           "estimatedVotesHigh": 452185,
           "estimatedVotesLow": 369972,
           "estimatedVotesMid": 411077,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 85004,
         "lastName": "Loesby",
         "partyName": "Libertarian",
-        "votes": 8087
+        "votes": 0
       },
       {
         "elected": false,
@@ -209,31 +41,31 @@
           "estimatedVotesHigh": 452185,
           "estimatedVotesLow": 369972,
           "estimatedVotesMid": 411077,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Ross",
-        "id": 85003,
-        "lastName": "Fulcher",
-        "partyName": "Republican",
-        "votes": 277797
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 452185,
-          "estimatedVotesLow": 369972,
-          "estimatedVotesMid": 411077,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kaylee",
         "id": 19690,
         "lastName": "Peterson",
         "partyName": "Democratic",
-        "votes": 117361
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 452185,
+          "estimatedVotesLow": 369972,
+          "estimatedVotesMid": 411077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ross",
+        "id": 85003,
+        "lastName": "Fulcher",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "1",
@@ -242,7 +74,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -252,7 +84,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 411080,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -265,15 +97,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Idaho",
         "id": 85005,
         "lastName": "Law",
         "partyName": "Constitution",
-        "votes": 7378
+        "votes": 0
       },
       {
         "elected": false,
@@ -281,15 +113,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 1226,
         "lastName": "Simpson",
         "partyName": "Republican",
-        "votes": 221940
+        "votes": 0
       },
       {
         "elected": false,
@@ -297,15 +129,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Todd",
         "id": 85006,
         "lastName": "Corsetti",
         "partyName": "Libertarian",
-        "votes": 7233
+        "votes": 0
       },
       {
         "elected": false,
@@ -313,15 +145,15 @@
           "estimatedVotesHigh": 412793,
           "estimatedVotesLow": 337740,
           "estimatedVotesMid": 375265,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 19689,
         "lastName": "Roth",
         "partyName": "Democratic",
-        "votes": 138799
+        "votes": 0
       }
     ],
     "district": "2",
@@ -330,7 +162,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -340,7 +172,7 @@
     "raceDate": "2024-11-05",
     "state": "ID",
     "stateName": "Idaho",
-    "totalVotes": 375350,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

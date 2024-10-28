@@ -9,30 +9,14 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.63,
-          "turnoutLow": 111.98,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
+        "firstName": "Glenn",
+        "id": 67484,
+        "lastName": "Elliott",
         "partyName": "Democratic",
-        "votes": 213159
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.63,
-          "turnoutLow": 111.98,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
         "votes": 0
       },
       {
@@ -41,15 +25,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.63,
-          "turnoutLow": 111.98,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
+        "firstName": "Jim",
+        "id": 13636,
+        "lastName": "Justice",
         "partyName": "Republican",
-        "votes": 502835
+        "votes": 0
       },
       {
         "elected": false,
@@ -57,31 +41,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.63,
-          "turnoutLow": 111.98,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
+        "firstName": "David",
+        "id": 2108,
+        "lastName": "Moran",
         "partyName": "Libertarian",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.63,
-          "turnoutLow": 111.98,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 84942,
-        "lastName": "Stein",
-        "partyName": "Mountain",
-        "votes": 14229
       }
     ],
     "district": "",
@@ -90,92 +58,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "WV",
-    "stateName": "West Virginia",
-    "totalVotes": 730223,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Jim",
-      "id": 13636,
-      "incumbent": false,
-      "lastName": "Justice",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Jim",
-        "id": 13636,
-        "lastName": "Justice",
-        "partyName": "Republican"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.81,
-          "turnoutLow": 112.21,
-          "turnoutMid": 99
-        },
-        "firstName": "Glenn",
-        "id": 67484,
-        "lastName": "Elliott",
-        "partyName": "Democratic",
-        "votes": 212407
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.81,
-          "turnoutLow": 112.21,
-          "turnoutMid": 99
-        },
-        "firstName": "Jim",
-        "id": 13636,
-        "lastName": "Justice",
-        "partyName": "Republican",
-        "votes": 498682
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 91.81,
-          "turnoutLow": 112.21,
-          "turnoutMid": 99
-        },
-        "firstName": "David",
-        "id": 2108,
-        "lastName": "Moran",
-        "partyName": "Libertarian",
-        "votes": 20591
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:46.214Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -185,7 +68,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 731680,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -198,15 +81,15 @@
           "estimatedVotesHigh": 393943,
           "estimatedVotesLow": 322322,
           "estimatedVotesMid": 358130,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carol",
         "id": 8746,
         "lastName": "Miller",
         "partyName": "Republican",
-        "votes": 246933
+        "votes": 0
       },
       {
         "elected": false,
@@ -214,15 +97,15 @@
           "estimatedVotesHigh": 393943,
           "estimatedVotesLow": 322322,
           "estimatedVotesMid": 358130,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Wes",
         "id": 85169,
         "lastName": "Holden",
         "partyName": "Independent",
-        "votes": 7105
+        "votes": 0
       },
       {
         "elected": false,
@@ -230,15 +113,15 @@
           "estimatedVotesHigh": 393943,
           "estimatedVotesLow": 322322,
           "estimatedVotesMid": 358130,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 67489,
         "lastName": "Reed",
         "partyName": "Democratic",
-        "votes": 104089
+        "votes": 0
       }
     ],
     "district": "1",
@@ -247,7 +130,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -257,7 +140,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 358127,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -270,15 +153,15 @@
           "estimatedVotesHigh": 402938,
           "estimatedVotesLow": 329677,
           "estimatedVotesMid": 366307,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Riley",
         "id": 67494,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 256722
+        "votes": 0
       },
       {
         "elected": false,
@@ -286,15 +169,15 @@
           "estimatedVotesHigh": 402938,
           "estimatedVotesLow": 329677,
           "estimatedVotesMid": 366307,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steven",
         "id": 67496,
         "lastName": "Wendelin",
         "partyName": "Democratic",
-        "votes": 109666
+        "votes": 0
       }
     ],
     "district": "2",
@@ -303,7 +186,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.725Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -313,7 +196,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 366388,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

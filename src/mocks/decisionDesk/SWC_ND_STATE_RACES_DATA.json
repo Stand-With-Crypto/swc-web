@@ -9,87 +9,15 @@
           "estimatedVotesHigh": 371432,
           "estimatedVotesLow": 303899,
           "estimatedVotesMid": 337662,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.47,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 106491
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 371432,
-          "estimatedVotesLow": 303899,
-          "estimatedVotesMid": 337662,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.47,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 225646
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 371432,
-          "estimatedVotesLow": 303899,
-          "estimatedVotesMid": 337662,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.47,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 6631
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "ND",
-    "stateName": "North Dakota",
-    "totalVotes": 338768,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 371432,
-          "estimatedVotesLow": 303899,
-          "estimatedVotesMid": 337662,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Katrina",
         "id": 23642,
         "lastName": "Christiansen",
         "partyName": "Democratic",
-        "votes": 109787
+        "votes": 0
       },
       {
         "elected": false,
@@ -97,15 +25,15 @@
           "estimatedVotesHigh": 371432,
           "estimatedVotesLow": 303899,
           "estimatedVotesMid": 337662,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 1423,
         "lastName": "Cramer",
         "partyName": "Republican",
-        "votes": 227875
+        "votes": 0
       }
     ],
     "district": "",
@@ -114,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:46.214Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -124,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 337662,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -137,15 +65,15 @@
           "estimatedVotesHigh": 371427,
           "estimatedVotesLow": 303896,
           "estimatedVotesMid": 337657,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Trygve",
         "id": 23650,
         "lastName": "Hammer",
         "partyName": "Democratic",
-        "votes": 108232
+        "votes": 0
       },
       {
         "elected": false,
@@ -153,15 +81,15 @@
           "estimatedVotesHigh": 371427,
           "estimatedVotesLow": 303896,
           "estimatedVotesMid": 337657,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julie",
         "id": 23655,
         "lastName": "Fedorchak",
         "partyName": "Republican",
-        "votes": 229425
+        "votes": 0
       }
     ],
     "district": "At-Large",
@@ -170,7 +98,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.647Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -180,7 +108,7 @@
     "raceDate": "2024-11-05",
     "state": "ND",
     "stateName": "North Dakota",
-    "totalVotes": 337657,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

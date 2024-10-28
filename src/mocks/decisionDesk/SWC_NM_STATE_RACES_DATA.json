@@ -9,151 +9,15 @@
           "estimatedVotesHigh": 902128,
           "estimatedVotesLow": 738105,
           "estimatedVotesMid": 820114,
-          "turnoutHigh": 94.19,
-          "turnoutLow": 115.12,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 94.19,
-          "turnoutLow": 115.12,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 28389
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 94.19,
-          "turnoutLow": 115.12,
-          "turnoutMid": 99
-        },
-        "firstName": "Laura",
-        "id": 105869,
-        "lastName": "Ebke",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 94.19,
-          "turnoutLow": 115.12,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 94.19,
-          "turnoutLow": 115.12,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 454384
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 94.19,
-          "turnoutLow": 115.12,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 366900
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 94.19,
-          "turnoutLow": 115.12,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "NM",
-    "stateName": "New Mexico",
-    "totalVotes": 849673,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 93.28,
-          "turnoutLow": 114.01,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Martin",
         "id": 8271,
         "lastName": "Heinrich",
         "partyName": "Democratic",
-        "votes": 477361
+        "votes": 0
       },
       {
         "elected": false,
@@ -161,15 +25,15 @@
           "estimatedVotesHigh": 902128,
           "estimatedVotesLow": 738105,
           "estimatedVotesMid": 820114,
-          "turnoutHigh": 93.28,
-          "turnoutLow": 114.01,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nella",
         "id": 71578,
         "lastName": "Domenici",
         "partyName": "Republican",
-        "votes": 364124
+        "votes": 0
       }
     ],
     "district": "",
@@ -178,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -188,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "NM",
     "stateName": "New Mexico",
-    "totalVotes": 841485,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -201,15 +65,15 @@
           "estimatedVotesHigh": 352115,
           "estimatedVotesLow": 288090,
           "estimatedVotesMid": 320102,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 71579,
         "lastName": "Jones",
         "partyName": "Republican",
-        "votes": 138329
+        "votes": 0
       },
       {
         "elected": false,
@@ -217,15 +81,15 @@
           "estimatedVotesHigh": 352115,
           "estimatedVotesLow": 288090,
           "estimatedVotesMid": 320102,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Melanie Ann",
         "id": 23047,
         "lastName": "Stansbury",
         "partyName": "Democratic",
-        "votes": 181773
+        "votes": 0
       }
     ],
     "district": "1",
@@ -234,7 +98,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -244,7 +108,7 @@
     "raceDate": "2024-11-05",
     "state": "NM",
     "stateName": "New Mexico",
-    "totalVotes": 320102,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -257,15 +121,15 @@
           "estimatedVotesHigh": 257716,
           "estimatedVotesLow": 210857,
           "estimatedVotesMid": 234286,
-          "turnoutHigh": 62.43,
-          "turnoutLow": 76.3,
-          "turnoutMid": 68.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Yvette",
         "id": 9838,
         "lastName": "Herrell",
         "partyName": "Republican",
-        "votes": 78733
+        "votes": 0
       },
       {
         "elected": false,
@@ -273,15 +137,15 @@
           "estimatedVotesHigh": 257716,
           "estimatedVotesLow": 210857,
           "estimatedVotesMid": 234286,
-          "turnoutHigh": 62.43,
-          "turnoutLow": 76.3,
-          "turnoutMid": 68.67
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gabriel",
         "id": 23049,
         "lastName": "Vasquez",
         "partyName": "Democratic",
-        "votes": 82159
+        "votes": 0
       }
     ],
     "district": "2",
@@ -290,7 +154,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -300,7 +164,7 @@
     "raceDate": "2024-11-05",
     "state": "NM",
     "stateName": "New Mexico",
-    "totalVotes": 160892,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -313,15 +177,15 @@
           "estimatedVotesHigh": 290029,
           "estimatedVotesLow": 237297,
           "estimatedVotesMid": 263663,
-          "turnoutHigh": 92.98,
-          "turnoutLow": 113.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sharon",
         "id": 71580,
         "lastName": "Clahchischilliage",
         "partyName": "Republican",
-        "votes": 120273
+        "votes": 0
       },
       {
         "elected": false,
@@ -329,15 +193,15 @@
           "estimatedVotesHigh": 290029,
           "estimatedVotesLow": 237297,
           "estimatedVotesMid": 263663,
-          "turnoutHigh": 92.98,
-          "turnoutLow": 113.64,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Teresa",
         "id": 13000,
         "lastName": "Fernandez",
         "partyName": "Democratic",
-        "votes": 149392
+        "votes": 0
       }
     ],
     "district": "3",
@@ -346,7 +210,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -356,7 +220,7 @@
     "raceDate": "2024-11-05",
     "state": "NM",
     "stateName": "New Mexico",
-    "totalVotes": 269665,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

@@ -9,46 +9,14 @@
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 16958
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 956991,
-          "estimatedVotesLow": 782995,
-          "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 510617
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 956991,
-          "estimatedVotesLow": 782995,
-          "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
+        "firstName": "Dan",
+        "id": 101441,
+        "lastName": "Osborn",
+        "partyName": "Independent",
         "votes": 0
       },
       {
@@ -57,30 +25,14 @@
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 327720
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 956991,
-          "estimatedVotesLow": 782995,
-          "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
+        "firstName": "Deb",
+        "id": 8288,
+        "lastName": "Fischer",
+        "partyName": "Republican",
         "votes": 0
       }
     ],
@@ -90,76 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "NE",
-    "stateName": "Nebraska",
-    "totalVotes": 855295,
-    "year": 2024
-  },
-  {
-    "calledCandidate": {
-      "firstName": "Deb",
-      "id": 8288,
-      "incumbent": true,
-      "lastName": "Fischer",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Deb",
-        "id": 8288,
-        "lastName": "Fischer",
-        "partyName": "Republican"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 956991,
-          "estimatedVotesLow": 782995,
-          "estimatedVotesMid": 869987,
-          "turnoutHigh": 65.72,
-          "turnoutLow": 80.32,
-          "turnoutMid": 72.29
-        },
-        "firstName": "Dan",
-        "id": 101441,
-        "lastName": "Osborn",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 956991,
-          "estimatedVotesLow": 782995,
-          "estimatedVotesMid": 869987,
-          "turnoutHigh": 65.72,
-          "turnoutLow": 80.32,
-          "turnoutMid": 72.29
-        },
-        "firstName": "Deb",
-        "id": 8288,
-        "lastName": "Fischer",
-        "partyName": "Republican",
-        "votes": 628938
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -169,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 628938,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -182,15 +65,15 @@
           "estimatedVotesHigh": 320145,
           "estimatedVotesLow": 261938,
           "estimatedVotesMid": 291041,
-          "turnoutHigh": 90.83,
-          "turnoutLow": 111.01,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 19037,
         "lastName": "Flood",
         "partyName": "Republican",
-        "votes": 162295
+        "votes": 0
       },
       {
         "elected": false,
@@ -198,15 +81,15 @@
           "estimatedVotesHigh": 320145,
           "estimatedVotesLow": 261938,
           "estimatedVotesMid": 291041,
-          "turnoutHigh": 90.83,
-          "turnoutLow": 111.01,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carol",
         "id": 19057,
         "lastName": "Blood",
         "partyName": "Democratic",
-        "votes": 128491
+        "votes": 0
       }
     ],
     "district": "1",
@@ -215,7 +98,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -225,7 +108,7 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 290786,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -238,15 +121,15 @@
           "estimatedVotesHigh": 313528,
           "estimatedVotesLow": 256523,
           "estimatedVotesMid": 285025,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tony",
         "id": 19043,
         "lastName": "Vargas",
         "partyName": "Democratic",
-        "votes": 155925
+        "votes": 0
       },
       {
         "elected": false,
@@ -254,15 +137,15 @@
           "estimatedVotesHigh": 313528,
           "estimatedVotesLow": 256523,
           "estimatedVotesMid": 285025,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Don",
         "id": 1427,
         "lastName": "Bacon",
         "partyName": "Republican",
-        "votes": 129100
+        "votes": 0
       }
     ],
     "district": "2",
@@ -271,7 +154,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -281,7 +164,7 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 285025,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -294,15 +177,15 @@
           "estimatedVotesHigh": 323309,
           "estimatedVotesLow": 264526,
           "estimatedVotesMid": 293912,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 67652,
         "lastName": "Ebers",
         "partyName": "Democratic",
-        "votes": 65741
+        "votes": 0
       },
       {
         "elected": false,
@@ -310,15 +193,15 @@
           "estimatedVotesHigh": 323309,
           "estimatedVotesLow": 264526,
           "estimatedVotesMid": 293912,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adrian",
         "id": 1428,
         "lastName": "Smith",
         "partyName": "Republican",
-        "votes": 228171
+        "votes": 0
       }
     ],
     "district": "3",
@@ -327,7 +210,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:53.946Z",
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -337,7 +220,7 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 293912,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

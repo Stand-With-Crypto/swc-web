@@ -1,154 +1,5 @@
 [
   {
-    "calledCandidate": {
-      "firstName": "Donald J.",
-      "id": 5,
-      "incumbent": false,
-      "lastName": "Trump",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican"
-      }
-    ],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.32,
-          "turnoutMid": 99
-        },
-        "firstName": "Peter",
-        "id": 104291,
-        "lastName": "Sonski",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.32,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 5288335
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.32,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.32,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 269728
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.32,
-          "turnoutMid": 99
-        },
-        "firstName": "Randall",
-        "id": 84941,
-        "lastName": "Terry",
-        "partyName": "Constitution",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.32,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 151556
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 92.72,
-          "turnoutLow": 113.32,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 4323460
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "FL",
-    "stateName": "Florida",
-    "totalVotes": 10033079,
-    "year": 2024
-  },
-  {
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -158,9 +9,25 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.24,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Feena",
+        "id": 44277,
+        "lastName": "Bonoan",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10821376,
+          "estimatedVotesLow": 8853856,
+          "estimatedVotesMid": 9837612,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tuan",
         "id": 84945,
@@ -174,15 +41,15 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.24,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rick",
         "id": 10591,
         "lastName": "Scott",
         "partyName": "Republican",
-        "votes": 5220574
+        "votes": 0
       },
       {
         "elected": false,
@@ -190,31 +57,15 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.24,
-          "turnoutMid": 99
-        },
-        "firstName": "Feena",
-        "id": 44277,
-        "lastName": "Bonoan",
-        "partyName": "Libertarian",
-        "votes": 307112
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.24,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Debbie",
         "id": 10660,
         "lastName": "Mucarsel-Powell",
         "partyName": "Democratic",
-        "votes": 4321285
+        "votes": 0
       },
       {
         "elected": false,
@@ -222,9 +73,9 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 91.01,
-          "turnoutLow": 111.24,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ben",
         "id": 84944,
@@ -239,7 +90,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -249,7 +100,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 9848971,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -262,15 +113,15 @@
           "estimatedVotesHigh": 395924,
           "estimatedVotesLow": 323938,
           "estimatedVotesMid": 359931,
-          "turnoutHigh": 91.1,
-          "turnoutLow": 111.34,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gay",
         "id": 83827,
         "lastName": "Valimont",
         "partyName": "Democratic",
-        "votes": 119985
+        "votes": 0
       },
       {
         "elected": false,
@@ -278,15 +129,15 @@
           "estimatedVotesHigh": 395924,
           "estimatedVotesLow": 323938,
           "estimatedVotesMid": 359931,
-          "turnoutHigh": 91.1,
-          "turnoutLow": 111.34,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 660,
         "lastName": "Gaetz",
         "partyName": "Republican",
-        "votes": 240684
+        "votes": 0
       }
     ],
     "district": "1",
@@ -295,7 +146,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -305,7 +156,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 360669,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -318,15 +169,15 @@
           "estimatedVotesHigh": 399776,
           "estimatedVotesLow": 327092,
           "estimatedVotesMid": 363434,
-          "turnoutHigh": 91.44,
-          "turnoutLow": 111.76,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Neal",
         "id": 652,
         "lastName": "Dunn",
         "partyName": "Republican",
-        "votes": 199706
+        "votes": 0
       },
       {
         "elected": false,
@@ -334,15 +185,15 @@
           "estimatedVotesHigh": 399776,
           "estimatedVotesLow": 327092,
           "estimatedVotesMid": 363434,
-          "turnoutHigh": 91.44,
-          "turnoutLow": 111.76,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Yen",
         "id": 102131,
         "lastName": "Bailey",
         "partyName": "Democratic",
-        "votes": 165865
+        "votes": 0
       }
     ],
     "district": "2",
@@ -351,7 +202,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -361,7 +212,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 365571,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -374,15 +225,15 @@
           "estimatedVotesHigh": 396611,
           "estimatedVotesLow": 324499,
           "estimatedVotesMid": 360554,
-          "turnoutHigh": 91.31,
-          "turnoutLow": 111.6,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 10602,
         "lastName": "Wells",
         "partyName": "Democratic",
-        "votes": 147843
+        "votes": 0
       },
       {
         "elected": false,
@@ -390,15 +241,15 @@
           "estimatedVotesHigh": 396611,
           "estimatedVotesLow": 324499,
           "estimatedVotesMid": 360554,
-          "turnoutHigh": 91.31,
-          "turnoutLow": 111.6,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kat",
         "id": 14304,
         "lastName": "Cammack",
         "partyName": "Republican",
-        "votes": 214297
+        "votes": 0
       }
     ],
     "district": "3",
@@ -407,7 +258,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:53.304Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -417,7 +268,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 362140,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -430,15 +281,15 @@
           "estimatedVotesHigh": 401143,
           "estimatedVotesLow": 328207,
           "estimatedVotesMid": 364675,
-          "turnoutHigh": 91.04,
-          "turnoutLow": 111.27,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "LaShonda",
         "id": 14468,
         "lastName": "Holloway",
         "partyName": "Democratic",
-        "votes": 173741
+        "votes": 0
       },
       {
         "elected": false,
@@ -446,15 +297,15 @@
           "estimatedVotesHigh": 401143,
           "estimatedVotesLow": 328207,
           "estimatedVotesMid": 364675,
-          "turnoutHigh": 91.04,
-          "turnoutLow": 111.27,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Aaron",
         "id": 30289,
         "lastName": "Bean",
         "partyName": "Republican",
-        "votes": 191440
+        "votes": 0
       }
     ],
     "district": "4",
@@ -463,7 +314,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -473,7 +324,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 365181,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -486,15 +337,15 @@
           "estimatedVotesHigh": 420408,
           "estimatedVotesLow": 343970,
           "estimatedVotesMid": 382189,
-          "turnoutHigh": 91.13,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 696,
         "lastName": "Rutherford",
         "partyName": "Republican",
-        "votes": 224274
+        "votes": 0
       },
       {
         "elected": false,
@@ -502,15 +353,15 @@
           "estimatedVotesHigh": 420408,
           "estimatedVotesLow": 343970,
           "estimatedVotesMid": 382189,
-          "turnoutHigh": 91.13,
-          "turnoutLow": 111.38,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jay",
         "id": 682,
         "lastName": "McGovern",
         "partyName": "Democratic",
-        "votes": 158826
+        "votes": 0
       }
     ],
     "district": "5",
@@ -519,7 +370,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:07.202Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -529,7 +380,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 383100,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -542,15 +393,15 @@
           "estimatedVotesHigh": 430425,
           "estimatedVotesLow": 352168,
           "estimatedVotesMid": 391296,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.54,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 10605,
         "lastName": "Waltz",
         "partyName": "Republican",
-        "votes": 241743
+        "votes": 0
       },
       {
         "elected": false,
@@ -558,15 +409,15 @@
           "estimatedVotesHigh": 430425,
           "estimatedVotesLow": 352168,
           "estimatedVotesMid": 391296,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.54,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "James",
         "id": 84986,
         "lastName": "Stockton",
         "partyName": "Democratic",
-        "votes": 151076
+        "votes": 0
       }
     ],
     "district": "6",
@@ -575,7 +426,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -585,7 +436,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 392819,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -598,15 +449,15 @@
           "estimatedVotesHigh": 431504,
           "estimatedVotesLow": 353048,
           "estimatedVotesMid": 392276,
-          "turnoutHigh": 91.17,
-          "turnoutLow": 111.43,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jennifer",
         "id": 84987,
         "lastName": "Ada",
         "partyName": "Democratic",
-        "votes": 183967
+        "votes": 0
       },
       {
         "elected": false,
@@ -614,15 +465,15 @@
           "estimatedVotesHigh": 431504,
           "estimatedVotesLow": 353048,
           "estimatedVotesMid": 392276,
-          "turnoutHigh": 91.17,
-          "turnoutLow": 111.43,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cory",
         "id": 30297,
         "lastName": "Mills",
         "partyName": "Republican",
-        "votes": 209417
+        "votes": 0
       }
     ],
     "district": "7",
@@ -631,7 +482,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -641,7 +492,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 393384,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -654,15 +505,15 @@
           "estimatedVotesHigh": 454450,
           "estimatedVotesLow": 371822,
           "estimatedVotesMid": 413136,
-          "turnoutHigh": 91.53,
-          "turnoutLow": 111.88,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 83835,
         "lastName": "Haridopolos",
         "partyName": "Republican",
-        "votes": 246960
+        "votes": 0
       },
       {
         "elected": false,
@@ -670,15 +521,15 @@
           "estimatedVotesHigh": 454450,
           "estimatedVotesLow": 371822,
           "estimatedVotesMid": 413136,
-          "turnoutHigh": 91.53,
-          "turnoutLow": 111.88,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sandy",
         "id": 83837,
         "lastName": "Kennedy",
         "partyName": "Democratic",
-        "votes": 169017
+        "votes": 0
       }
     ],
     "district": "8",
@@ -687,7 +538,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -697,7 +548,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 415977,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -710,15 +561,15 @@
           "estimatedVotesHigh": 337519,
           "estimatedVotesLow": 276152,
           "estimatedVotesMid": 306835,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Marcus",
         "id": 102132,
         "lastName": "Carter",
         "partyName": "Independent",
-        "votes": 6182
+        "votes": 0
       },
       {
         "elected": false,
@@ -726,31 +577,31 @@
           "estimatedVotesHigh": 337519,
           "estimatedVotesLow": 276152,
           "estimatedVotesMid": 306835,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
-          "turnoutMid": 99
-        },
-        "firstName": "Thomas",
-        "id": 83839,
-        "lastName": "Chalifoux",
-        "partyName": "Republican",
-        "votes": 118384
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 337519,
-          "estimatedVotesLow": 276152,
-          "estimatedVotesMid": 306835,
-          "turnoutHigh": 91.11,
-          "turnoutLow": 111.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Darren",
         "id": 700,
         "lastName": "Soto",
         "partyName": "Democratic",
-        "votes": 182961
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 337519,
+          "estimatedVotesLow": 276152,
+          "estimatedVotesMid": 306835,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Thomas",
+        "id": 83839,
+        "lastName": "Chalifoux",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "9",
@@ -759,7 +610,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -769,7 +620,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 307527,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -782,15 +633,15 @@
           "estimatedVotesHigh": 318707,
           "estimatedVotesLow": 260761,
           "estimatedVotesMid": 289734,
-          "turnoutHigh": 91.42,
-          "turnoutLow": 111.73,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Willie",
         "id": 14328,
         "lastName": "Montague",
         "partyName": "Republican",
-        "votes": 102321
+        "votes": 0
       },
       {
         "elected": false,
@@ -798,15 +649,15 @@
           "estimatedVotesHigh": 318707,
           "estimatedVotesLow": 260761,
           "estimatedVotesMid": 289734,
-          "turnoutHigh": 91.42,
-          "turnoutLow": 111.73,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maxwell Alejandro",
         "id": 30265,
         "lastName": "Frost",
         "partyName": "Democratic",
-        "votes": 189026
+        "votes": 0
       }
     ],
     "district": "10",
@@ -815,7 +666,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -825,7 +676,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 291347,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -838,15 +689,15 @@
           "estimatedVotesHigh": 434007,
           "estimatedVotesLow": 355097,
           "estimatedVotesMid": 394551,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 708,
         "lastName": "Webster",
         "partyName": "Republican",
-        "votes": 219330
+        "votes": 0
       },
       {
         "elected": false,
@@ -854,15 +705,15 @@
           "estimatedVotesHigh": 434007,
           "estimatedVotesLow": 355097,
           "estimatedVotesMid": 394551,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Barbie",
         "id": 83842,
         "lastName": "Harden Hall",
         "partyName": "Democratic",
-        "votes": 176144
+        "votes": 0
       }
     ],
     "district": "11",
@@ -871,7 +722,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -881,7 +732,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 395474,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -894,15 +745,15 @@
           "estimatedVotesHigh": 434726,
           "estimatedVotesLow": 355684,
           "estimatedVotesMid": 395205,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.44,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rock",
         "id": 84988,
         "lastName": "Aboujaoude",
         "partyName": "Democratic",
-        "votes": 143142
+        "votes": 0
       },
       {
         "elected": false,
@@ -910,15 +761,15 @@
           "estimatedVotesHigh": 434726,
           "estimatedVotesLow": 355684,
           "estimatedVotesMid": 395205,
-          "turnoutHigh": 91.18,
-          "turnoutLow": 111.44,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Gus",
         "id": 1166,
         "lastName": "Bilirakis",
         "partyName": "Republican",
-        "votes": 253236
+        "votes": 0
       }
     ],
     "district": "12",
@@ -927,7 +778,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -937,7 +788,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 396378,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -950,15 +801,15 @@
           "estimatedVotesHigh": 428490,
           "estimatedVotesLow": 350582,
           "estimatedVotesMid": 389536,
-          "turnoutHigh": 91.37,
-          "turnoutLow": 111.67,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Whitney",
         "id": 83848,
         "lastName": "Fox",
         "partyName": "Democratic",
-        "votes": 175600
+        "votes": 0
       },
       {
         "elected": false,
@@ -966,15 +817,15 @@
           "estimatedVotesHigh": 428490,
           "estimatedVotesLow": 350582,
           "estimatedVotesMid": 389536,
-          "turnoutHigh": 91.37,
-          "turnoutLow": 111.67,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anna",
         "id": 84989,
         "lastName": "Paulina Luna",
         "partyName": "Republican",
-        "votes": 215895
+        "votes": 0
       }
     ],
     "district": "13",
@@ -983,7 +834,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:51.360Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -993,7 +844,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 391495,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1006,15 +857,15 @@
           "estimatedVotesHigh": 369305,
           "estimatedVotesLow": 302159,
           "estimatedVotesMid": 335732,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nathaniel",
         "id": 102133,
         "lastName": "Snyder",
         "partyName": "Libertarian",
-        "votes": 6359
+        "votes": 0
       },
       {
         "elected": false,
@@ -1022,15 +873,15 @@
           "estimatedVotesHigh": 369305,
           "estimatedVotesLow": 302159,
           "estimatedVotesMid": 335732,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rocky",
         "id": 83853,
         "lastName": "Rochford",
         "partyName": "Republican",
-        "votes": 125831
+        "votes": 0
       },
       {
         "elected": false,
@@ -1038,15 +889,15 @@
           "estimatedVotesHigh": 369305,
           "estimatedVotesLow": 302159,
           "estimatedVotesMid": 335732,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kathy",
         "id": 1169,
         "lastName": "Castor",
         "partyName": "Democratic",
-        "votes": 198054
+        "votes": 0
       },
       {
         "elected": false,
@@ -1054,15 +905,15 @@
           "estimatedVotesHigh": 369305,
           "estimatedVotesLow": 302159,
           "estimatedVotesMid": 335732,
-          "turnoutHigh": 91.26,
-          "turnoutLow": 111.53,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christopher",
         "id": 102134,
         "lastName": "Bradley",
         "partyName": "Independent",
-        "votes": 6768
+        "votes": 0
       }
     ],
     "district": "14",
@@ -1071,7 +922,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:52.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1081,7 +932,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 337012,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1094,15 +945,15 @@
           "estimatedVotesHigh": 364291,
           "estimatedVotesLow": 298057,
           "estimatedVotesMid": 331174,
-          "turnoutHigh": 91.47,
-          "turnoutLow": 111.8,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pat",
         "id": 83855,
         "lastName": "Kemp",
         "partyName": "Democratic",
-        "votes": 162633
+        "votes": 0
       },
       {
         "elected": false,
@@ -1110,15 +961,15 @@
           "estimatedVotesHigh": 364291,
           "estimatedVotesLow": 298057,
           "estimatedVotesMid": 331174,
-          "turnoutHigh": 91.47,
-          "turnoutLow": 111.8,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Laurel",
         "id": 30317,
         "lastName": "Lee",
         "partyName": "Republican",
-        "votes": 170600
+        "votes": 0
       }
     ],
     "district": "15",
@@ -1127,7 +978,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1137,7 +988,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 333233,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1150,15 +1001,15 @@
           "estimatedVotesHigh": 402609,
           "estimatedVotesLow": 329407,
           "estimatedVotesMid": 366008,
-          "turnoutHigh": 91.16,
-          "turnoutLow": 111.42,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jan",
         "id": 699,
         "lastName": "Schneider",
         "partyName": "Democratic",
-        "votes": 164904
+        "votes": 0
       },
       {
         "elected": false,
@@ -1166,15 +1017,15 @@
           "estimatedVotesHigh": 402609,
           "estimatedVotesLow": 329407,
           "estimatedVotesMid": 366008,
-          "turnoutHigh": 91.16,
-          "turnoutLow": 111.42,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vernon",
         "id": 84991,
         "lastName": "Buchanan",
         "partyName": "Republican",
-        "votes": 202117
+        "votes": 0
       }
     ],
     "district": "16",
@@ -1183,7 +1034,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1193,7 +1044,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 367021,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1206,15 +1057,15 @@
           "estimatedVotesHigh": 425526,
           "estimatedVotesLow": 348158,
           "estimatedVotesMid": 386842,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.58,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Manny",
         "id": 595,
         "lastName": "Lopez",
         "partyName": "Democratic",
-        "votes": 167697
+        "votes": 0
       },
       {
         "elected": false,
@@ -1222,15 +1073,15 @@
           "estimatedVotesHigh": 425526,
           "estimatedVotesLow": 348158,
           "estimatedVotesMid": 386842,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.58,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Greg",
         "id": 460,
         "lastName": "Steube",
         "partyName": "Republican",
-        "votes": 220764
+        "votes": 0
       }
     ],
     "district": "17",
@@ -1239,7 +1090,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1249,7 +1100,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 388461,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1262,15 +1113,15 @@
           "estimatedVotesHigh": 356366,
           "estimatedVotesLow": 291574,
           "estimatedVotesMid": 323970,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andrea Doria",
         "id": 44484,
         "lastName": "Kale",
         "partyName": "Democratic",
-        "votes": 130659
+        "votes": 0
       },
       {
         "elected": false,
@@ -1278,15 +1129,15 @@
           "estimatedVotesHigh": 356366,
           "estimatedVotesLow": 291574,
           "estimatedVotesMid": 323970,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.36,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 14339,
         "lastName": "Franklin",
         "partyName": "Republican",
-        "votes": 194050
+        "votes": 0
       }
     ],
     "district": "18",
@@ -1295,7 +1146,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:16.594Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1305,7 +1156,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 324709,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1318,15 +1169,15 @@
           "estimatedVotesHigh": 393684,
           "estimatedVotesLow": 322106,
           "estimatedVotesMid": 357895,
-          "turnoutHigh": 91.6,
-          "turnoutLow": 111.95,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Byron",
         "id": 602,
         "lastName": "Donalds",
         "partyName": "Republican",
-        "votes": 216762
+        "votes": 0
       },
       {
         "elected": false,
@@ -1334,15 +1185,15 @@
           "estimatedVotesHigh": 393684,
           "estimatedVotesLow": 322106,
           "estimatedVotesMid": 357895,
-          "turnoutHigh": 91.6,
-          "turnoutLow": 111.95,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kari",
         "id": 83860,
         "lastName": "Lerner",
         "partyName": "Democratic",
-        "votes": 143840
+        "votes": 0
       }
     ],
     "district": "19",
@@ -1351,7 +1202,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:07.202Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1361,7 +1212,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 360602,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1414,15 +1265,15 @@
           "estimatedVotesHigh": 446617,
           "estimatedVotesLow": 365414,
           "estimatedVotesMid": 406015,
-          "turnoutHigh": 91.08,
-          "turnoutLow": 111.33,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brian",
         "id": 679,
         "lastName": "Mast",
         "partyName": "Republican",
-        "votes": 217302
+        "votes": 0
       },
       {
         "elected": false,
@@ -1430,15 +1281,15 @@
           "estimatedVotesHigh": 446617,
           "estimatedVotesLow": 365414,
           "estimatedVotesMid": 406015,
-          "turnoutHigh": 91.08,
-          "turnoutLow": 111.33,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Thomas",
         "id": 83862,
         "lastName": "Witkop",
         "partyName": "Democratic",
-        "votes": 189499
+        "votes": 0
       }
     ],
     "district": "21",
@@ -1447,7 +1298,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1457,7 +1308,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 406801,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1470,15 +1321,15 @@
           "estimatedVotesHigh": 374535,
           "estimatedVotesLow": 306437,
           "estimatedVotesMid": 340486,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lois",
         "id": 1179,
         "lastName": "Frankel",
         "partyName": "Democratic",
-        "votes": 203862
+        "votes": 0
       },
       {
         "elected": false,
@@ -1486,15 +1337,15 @@
           "estimatedVotesHigh": 374535,
           "estimatedVotesLow": 306437,
           "estimatedVotesMid": 340486,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Daniel",
         "id": 84993,
         "lastName": "Franzese",
         "partyName": "Republican",
-        "votes": 138036
+        "votes": 0
       }
     ],
     "district": "22",
@@ -1503,7 +1354,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1513,7 +1364,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 341898,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1526,15 +1377,15 @@
           "estimatedVotesHigh": 394843,
           "estimatedVotesLow": 323053,
           "estimatedVotesMid": 358948,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jared",
         "id": 30277,
         "lastName": "Moskowitz",
         "partyName": "Democratic",
-        "votes": 205051
+        "votes": 0
       },
       {
         "elected": false,
@@ -1542,15 +1393,15 @@
           "estimatedVotesHigh": 394843,
           "estimatedVotesLow": 323053,
           "estimatedVotesMid": 358948,
-          "turnoutHigh": 91.32,
-          "turnoutLow": 111.61,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joe",
         "id": 673,
         "lastName": "Kaufman",
         "partyName": "Republican",
-        "votes": 155520
+        "votes": 0
       }
     ],
     "district": "23",
@@ -1559,7 +1410,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:03.844Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1569,7 +1420,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 360571,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1582,15 +1433,15 @@
           "estimatedVotesHigh": 316585,
           "estimatedVotesLow": 259025,
           "estimatedVotesMid": 287805,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.73,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jesus",
         "id": 30338,
         "lastName": "Navarro",
         "partyName": "Republican",
-        "votes": 67496
+        "votes": 0
       },
       {
         "elected": false,
@@ -1598,15 +1449,15 @@
           "estimatedVotesHigh": 316585,
           "estimatedVotesLow": 259025,
           "estimatedVotesMid": 287805,
-          "turnoutHigh": 91.41,
-          "turnoutLow": 111.73,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Frederica",
         "id": 710,
         "lastName": "Wilson",
         "partyName": "Democratic",
-        "votes": 221909
+        "votes": 0
       }
     ],
     "district": "24",
@@ -1615,7 +1466,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:38.331Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1625,7 +1476,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 289405,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1638,15 +1489,15 @@
           "estimatedVotesHigh": 374078,
           "estimatedVotesLow": 306064,
           "estimatedVotesMid": 340071,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christopher",
         "id": 84994,
         "lastName": "Eddy",
         "partyName": "Republican",
-        "votes": 134441
+        "votes": 0
       },
       {
         "elected": false,
@@ -1654,15 +1505,15 @@
           "estimatedVotesHigh": 374078,
           "estimatedVotesLow": 306064,
           "estimatedVotesMid": 340071,
-          "turnoutHigh": 91.29,
-          "turnoutLow": 111.57,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Debbie",
         "id": 707,
         "lastName": "Wasserman Schultz",
         "partyName": "Democratic",
-        "votes": 207038
+        "votes": 0
       }
     ],
     "district": "25",
@@ -1671,7 +1522,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1681,7 +1532,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 341479,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1694,15 +1545,15 @@
           "estimatedVotesHigh": 302569,
           "estimatedVotesLow": 247556,
           "estimatedVotesMid": 275062,
-          "turnoutHigh": 91.44,
-          "turnoutLow": 111.76,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joey David",
         "id": 84995,
         "lastName": "Atkins",
         "partyName": "Democratic",
-        "votes": 112285
+        "votes": 0
       },
       {
         "elected": false,
@@ -1710,15 +1561,15 @@
           "estimatedVotesHigh": 302569,
           "estimatedVotesLow": 247556,
           "estimatedVotesMid": 275062,
-          "turnoutHigh": 91.44,
-          "turnoutLow": 111.76,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mario",
         "id": 1185,
         "lastName": "Diaz-Balart",
         "partyName": "Republican",
-        "votes": 164380
+        "votes": 0
       }
     ],
     "district": "26",
@@ -1727,7 +1578,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1737,7 +1588,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 276665,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1750,15 +1601,15 @@
           "estimatedVotesHigh": 346473,
           "estimatedVotesLow": 283478,
           "estimatedVotesMid": 314975,
-          "turnoutHigh": 91.42,
-          "turnoutLow": 111.74,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "María",
         "id": 84996,
         "lastName": "Elvira-Salazar",
         "partyName": "Republican",
-        "votes": 162783
+        "votes": 0
       },
       {
         "elected": false,
@@ -1766,15 +1617,15 @@
           "estimatedVotesHigh": 346473,
           "estimatedVotesLow": 283478,
           "estimatedVotesMid": 314975,
-          "turnoutHigh": 91.42,
-          "turnoutLow": 111.74,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lucia",
         "id": 83873,
         "lastName": "Baez-Geller",
         "partyName": "Democratic",
-        "votes": 153969
+        "votes": 0
       }
     ],
     "district": "27",
@@ -1783,7 +1634,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1793,7 +1644,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 316752,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1806,15 +1657,15 @@
           "estimatedVotesHigh": 338889,
           "estimatedVotesLow": 277273,
           "estimatedVotesMid": 308080,
-          "turnoutHigh": 91.33,
-          "turnoutLow": 111.63,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Phil",
         "id": 10594,
         "lastName": "Ehr",
         "partyName": "Democratic",
-        "votes": 144144
+        "votes": 0
       },
       {
         "elected": false,
@@ -1822,15 +1673,15 @@
           "estimatedVotesHigh": 338889,
           "estimatedVotesLow": 277273,
           "estimatedVotesMid": 308080,
-          "turnoutHigh": 91.33,
-          "turnoutLow": 111.63,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Carlos",
         "id": 14777,
         "lastName": "Gimenez",
         "partyName": "Republican",
-        "votes": 165369
+        "votes": 0
       }
     ],
     "district": "28",
@@ -1839,7 +1690,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.388Z",
+    "lastUpdated": "2024-10-28T15:15:22.643Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1849,7 +1700,7 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 309513,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

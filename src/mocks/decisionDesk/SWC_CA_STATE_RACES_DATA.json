@@ -9,14 +9,14 @@
           "estimatedVotesHigh": 17594830,
           "estimatedVotesLow": 14395769,
           "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.66,
-          "turnoutLow": 110.81,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
+        "firstName": "Adam",
+        "id": 216,
+        "lastName": "Schiff",
+        "partyName": "Democratic",
         "votes": 0
       },
       {
@@ -25,135 +25,15 @@
           "estimatedVotesHigh": 17594830,
           "estimatedVotesLow": 14395769,
           "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.66,
-          "turnoutLow": 110.81,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 300411
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17594830,
-          "estimatedVotesLow": 14395769,
-          "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.66,
-          "turnoutLow": 110.81,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 9645657
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17594830,
-          "estimatedVotesLow": 14395769,
-          "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.66,
-          "turnoutLow": 110.81,
-          "turnoutMid": 99
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 304219
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17594830,
-          "estimatedVotesLow": 14395769,
-          "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.66,
-          "turnoutLow": 110.81,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 303434
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17594830,
-          "estimatedVotesLow": 14395769,
-          "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.66,
-          "turnoutLow": 110.81,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 5397531
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "CA",
-    "stateName": "California",
-    "totalVotes": 15951252,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17594830,
-          "estimatedVotesLow": 14395769,
-          "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
-        },
-        "firstName": "Adam",
-        "id": 216,
-        "lastName": "Schiff",
-        "partyName": "Democratic",
-        "votes": 10337229
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 17594830,
-          "estimatedVotesLow": 14395769,
-          "estimatedVotesMid": 15995298,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 53071,
         "lastName": "Garvey",
         "partyName": "Republican",
-        "votes": 5658069
+        "votes": 0
       }
     ],
     "district": "",
@@ -162,7 +42,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T15:14:38.331Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -172,7 +52,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 15995298,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -185,15 +65,15 @@
           "estimatedVotesHigh": 350601,
           "estimatedVotesLow": 286857,
           "estimatedVotesMid": 318729,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rose",
         "id": 53080,
         "lastName": "Yee",
         "partyName": "Democratic",
-        "votes": 126175
+        "votes": 0
       },
       {
         "elected": false,
@@ -201,15 +81,15 @@
           "estimatedVotesHigh": 350601,
           "estimatedVotesLow": 286857,
           "estimatedVotesMid": 318729,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Doug",
         "id": 118,
         "lastName": "La Malfa",
         "partyName": "Republican",
-        "votes": 192554
+        "votes": 0
       }
     ],
     "district": "1",
@@ -218,7 +98,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -228,7 +108,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 318729,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -241,15 +121,15 @@
           "estimatedVotesHigh": 426443,
           "estimatedVotesLow": 348909,
           "estimatedVotesMid": 387676,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jared",
         "id": 1079,
         "lastName": "Huffman",
         "partyName": "Democratic",
-        "votes": 289675
+        "votes": 0
       },
       {
         "elected": false,
@@ -257,15 +137,15 @@
           "estimatedVotesHigh": 426443,
           "estimatedVotesLow": 348909,
           "estimatedVotesMid": 387676,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chris",
         "id": 22214,
         "lastName": "Coulombe",
         "partyName": "Republican",
-        "votes": 98001
+        "votes": 0
       }
     ],
     "district": "2",
@@ -274,7 +154,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -284,7 +164,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 387676,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -297,15 +177,15 @@
           "estimatedVotesHigh": 464149,
           "estimatedVotesLow": 379757,
           "estimatedVotesMid": 421953,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jessica",
         "id": 9269,
         "lastName": "Morse",
         "partyName": "Democratic",
-        "votes": 203186
+        "votes": 0
       },
       {
         "elected": false,
@@ -313,15 +193,15 @@
           "estimatedVotesHigh": 464149,
           "estimatedVotesLow": 379757,
           "estimatedVotesMid": 421953,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 17041,
         "lastName": "Kiley",
         "partyName": "Republican",
-        "votes": 218767
+        "votes": 0
       }
     ],
     "district": "3",
@@ -330,7 +210,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -340,7 +220,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 421953,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -353,15 +233,15 @@
           "estimatedVotesHigh": 381438,
           "estimatedVotesLow": 312086,
           "estimatedVotesMid": 346762,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 133,
         "lastName": "Thompson",
         "partyName": "Democratic",
-        "votes": 238778
+        "votes": 0
       },
       {
         "elected": false,
@@ -369,15 +249,15 @@
           "estimatedVotesHigh": 381438,
           "estimatedVotesLow": 312086,
           "estimatedVotesMid": 346762,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 53085,
         "lastName": "Munn",
         "partyName": "Republican",
-        "votes": 107984
+        "votes": 0
       }
     ],
     "district": "4",
@@ -386,7 +266,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -396,7 +276,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 346762,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -409,15 +289,15 @@
           "estimatedVotesHigh": 415586,
           "estimatedVotesLow": 340025,
           "estimatedVotesMid": 377805,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 22224,
         "lastName": "Barkley",
         "partyName": "Democratic",
-        "votes": 165712
+        "votes": 0
       },
       {
         "elected": false,
@@ -425,15 +305,15 @@
           "estimatedVotesHigh": 415586,
           "estimatedVotesLow": 340025,
           "estimatedVotesMid": 377805,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 132,
         "lastName": "McClintock",
         "partyName": "Republican",
-        "votes": 212093
+        "votes": 0
       }
     ],
     "district": "5",
@@ -442,7 +322,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:38.331Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -452,7 +332,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 377805,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -465,15 +345,15 @@
           "estimatedVotesHigh": 330851,
           "estimatedVotesLow": 270697,
           "estimatedVotesMid": 300774,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Christine",
         "id": 53089,
         "lastName": "Bish",
         "partyName": "Republican",
-        "votes": 127254
+        "votes": 0
       },
       {
         "elected": false,
@@ -481,15 +361,15 @@
           "estimatedVotesHigh": 330851,
           "estimatedVotesLow": 270697,
           "estimatedVotesMid": 300774,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ami",
         "id": 1087,
         "lastName": "Bera",
         "partyName": "Democratic",
-        "votes": 173520
+        "votes": 0
       }
     ],
     "district": "6",
@@ -498,7 +378,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -508,7 +388,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 300774,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -521,15 +401,15 @@
           "estimatedVotesHigh": 342870,
           "estimatedVotesLow": 280530,
           "estimatedVotesMid": 311700,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 53092,
         "lastName": "Silva",
         "partyName": "Republican",
-        "votes": 99029
+        "votes": 0
       },
       {
         "elected": false,
@@ -537,15 +417,15 @@
           "estimatedVotesHigh": 342870,
           "estimatedVotesLow": 280530,
           "estimatedVotesMid": 311700,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Doris",
         "id": 137,
         "lastName": "Matsui",
         "partyName": "Democratic",
-        "votes": 212672
+        "votes": 0
       }
     ],
     "district": "7",
@@ -554,7 +434,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -564,7 +444,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 311701,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -577,15 +457,15 @@
           "estimatedVotesHigh": 323758,
           "estimatedVotesLow": 264892,
           "estimatedVotesMid": 294325,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rudy",
         "id": 22235,
         "lastName": "Recile",
         "partyName": "Republican",
-        "votes": 68273
+        "votes": 0
       },
       {
         "elected": false,
@@ -593,15 +473,15 @@
           "estimatedVotesHigh": 323758,
           "estimatedVotesLow": 264892,
           "estimatedVotesMid": 294325,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 129,
         "lastName": "Garamendi",
         "partyName": "Democratic",
-        "votes": 226052
+        "votes": 0
       }
     ],
     "district": "8",
@@ -610,7 +490,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -620,7 +500,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 294325,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -633,15 +513,15 @@
           "estimatedVotesHigh": 291074,
           "estimatedVotesLow": 238151,
           "estimatedVotesMid": 264612,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Josh",
         "id": 9293,
         "lastName": "Harder",
         "partyName": "Democratic",
-        "votes": 150701
+        "votes": 0
       },
       {
         "elected": false,
@@ -649,15 +529,15 @@
           "estimatedVotesHigh": 291074,
           "estimatedVotesLow": 238151,
           "estimatedVotesMid": 264612,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 53094,
         "lastName": "Lincoln",
         "partyName": "Republican",
-        "votes": 113911
+        "votes": 0
       }
     ],
     "district": "9",
@@ -666,7 +546,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:52.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -676,7 +556,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 264612,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -689,15 +569,15 @@
           "estimatedVotesHigh": 418296,
           "estimatedVotesLow": 342242,
           "estimatedVotesMid": 380269,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mark",
         "id": 157,
         "lastName": "DeSaulnier",
         "partyName": "Democratic",
-        "votes": 269741
+        "votes": 0
       },
       {
         "elected": false,
@@ -705,15 +585,15 @@
           "estimatedVotesHigh": 418296,
           "estimatedVotesLow": 342242,
           "estimatedVotesMid": 380269,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Katherine",
         "id": 53097,
         "lastName": "Piccinini",
         "partyName": "Republican",
-        "votes": 110528
+        "votes": 0
       }
     ],
     "district": "10",
@@ -722,7 +602,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:52.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -732,7 +612,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 380269,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -745,15 +625,15 @@
           "estimatedVotesHigh": 374109,
           "estimatedVotesLow": 306089,
           "estimatedVotesMid": 340099,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nancy",
         "id": 159,
         "lastName": "Pelosi",
         "partyName": "Democratic",
-        "votes": 300601
+        "votes": 0
       },
       {
         "elected": false,
@@ -761,15 +641,15 @@
           "estimatedVotesHigh": 374109,
           "estimatedVotesLow": 306089,
           "estimatedVotesMid": 340099,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bruce",
         "id": 53102,
         "lastName": "Lou",
         "partyName": "Republican",
-        "votes": 39498
+        "votes": 0
       }
     ],
     "district": "11",
@@ -778,7 +658,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -788,7 +668,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 340099,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -801,15 +681,15 @@
           "estimatedVotesHigh": 354396,
           "estimatedVotesLow": 289960,
           "estimatedVotesMid": 322178,
-          "turnoutHigh": 91.24,
-          "turnoutLow": 111.51,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lateefah",
         "id": 53108,
         "lastName": "Simon",
         "partyName": "Democratic",
-        "votes": 161018
+        "votes": 0
       },
       {
         "elected": false,
@@ -817,15 +697,15 @@
           "estimatedVotesHigh": 354396,
           "estimatedVotesLow": 289960,
           "estimatedVotesMid": 322178,
-          "turnoutHigh": 91.24,
-          "turnoutLow": 111.51,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jennifer",
         "id": 53110,
         "lastName": "Tran",
         "partyName": "Democratic",
-        "votes": 162329
+        "votes": 0
       }
     ],
     "district": "12",
@@ -834,7 +714,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -844,7 +724,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 323347,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -857,15 +737,15 @@
           "estimatedVotesHigh": 233384,
           "estimatedVotesLow": 190951,
           "estimatedVotesMid": 212167,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 22254,
         "lastName": "Duarte",
         "partyName": "Republican",
-        "votes": 95672
+        "votes": 0
       },
       {
         "elected": false,
@@ -873,15 +753,15 @@
           "estimatedVotesHigh": 233384,
           "estimatedVotesLow": 190951,
           "estimatedVotesMid": 212167,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Adam",
         "id": 22256,
         "lastName": "Gray",
         "partyName": "Democratic",
-        "votes": 116495
+        "votes": 0
       }
     ],
     "district": "13",
@@ -890,7 +770,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -900,7 +780,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 212167,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -913,15 +793,15 @@
           "estimatedVotesHigh": 334737,
           "estimatedVotesLow": 273875,
           "estimatedVotesMid": 304306,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vin",
         "id": 53111,
         "lastName": "Kruttiventi",
         "partyName": "Republican",
-        "votes": 79037
+        "votes": 0
       },
       {
         "elected": false,
@@ -929,15 +809,15 @@
           "estimatedVotesHigh": 334737,
           "estimatedVotesLow": 273875,
           "estimatedVotesMid": 304306,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 166,
         "lastName": "Swalwell",
         "partyName": "Democratic",
-        "votes": 225269
+        "votes": 0
       }
     ],
     "district": "14",
@@ -946,7 +826,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -956,7 +836,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 304306,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -969,15 +849,15 @@
           "estimatedVotesHigh": 344355,
           "estimatedVotesLow": 281745,
           "estimatedVotesMid": 313050,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Anna",
         "id": 53113,
         "lastName": "Kramer",
         "partyName": "Republican",
-        "votes": 69927
+        "votes": 0
       },
       {
         "elected": false,
@@ -985,15 +865,15 @@
           "estimatedVotesHigh": 344355,
           "estimatedVotesLow": 281745,
           "estimatedVotesMid": 313050,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kevin",
         "id": 22266,
         "lastName": "Mullin",
         "partyName": "Democratic",
-        "votes": 243123
+        "votes": 0
       }
     ],
     "district": "15",
@@ -1002,7 +882,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1012,7 +892,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 313050,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1025,15 +905,15 @@
           "estimatedVotesHigh": 380465,
           "estimatedVotesLow": 311289,
           "estimatedVotesMid": 345877,
-          "turnoutHigh": 90.99,
-          "turnoutLow": 111.21,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Evan",
         "id": 22539,
         "lastName": "Low",
         "partyName": "Democratic",
-        "votes": 171764
+        "votes": 0
       },
       {
         "elected": false,
@@ -1041,15 +921,15 @@
           "estimatedVotesHigh": 380465,
           "estimatedVotesLow": 311289,
           "estimatedVotesMid": 345877,
-          "turnoutHigh": 90.99,
-          "turnoutLow": 111.21,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sam",
         "id": 53116,
         "lastName": "Liccardo",
         "partyName": "Democratic",
-        "votes": 174427
+        "votes": 0
       }
     ],
     "district": "16",
@@ -1058,7 +938,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1068,7 +948,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 346191,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1137,15 +1017,15 @@
           "estimatedVotesHigh": 273736,
           "estimatedVotesLow": 223964,
           "estimatedVotesMid": 248850,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Zoe",
         "id": 180,
         "lastName": "Lofgren",
         "partyName": "Democratic",
-        "votes": 176780
+        "votes": 0
       },
       {
         "elected": false,
@@ -1153,15 +1033,15 @@
           "estimatedVotesHigh": 273736,
           "estimatedVotesLow": 223964,
           "estimatedVotesMid": 248850,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Peter",
         "id": 22275,
         "lastName": "Hernandez",
         "partyName": "Republican",
-        "votes": 72070
+        "votes": 0
       }
     ],
     "district": "18",
@@ -1170,7 +1050,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1180,7 +1060,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 248850,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1193,15 +1073,15 @@
           "estimatedVotesHigh": 416717,
           "estimatedVotesLow": 340950,
           "estimatedVotesMid": 378833,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jimmy",
         "id": 182,
         "lastName": "Panetta",
         "partyName": "Democratic",
-        "votes": 263015
+        "votes": 0
       },
       {
         "elected": false,
@@ -1209,15 +1089,15 @@
           "estimatedVotesHigh": 416717,
           "estimatedVotesLow": 340950,
           "estimatedVotesMid": 378833,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jason",
         "id": 53127,
         "lastName": "Anderson",
         "partyName": "Republican",
-        "votes": 115818
+        "votes": 0
       }
     ],
     "district": "19",
@@ -1226,7 +1106,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1236,7 +1116,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 378833,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1249,15 +1129,15 @@
           "estimatedVotesHigh": 358813,
           "estimatedVotesLow": 293575,
           "estimatedVotesMid": 326194,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Vince",
-        "id": 22651,
-        "lastName": "Fong",
+        "firstName": "Mike",
+        "id": 53130,
+        "lastName": "Boudreaux",
         "partyName": "Republican",
-        "votes": 164217
+        "votes": 0
       },
       {
         "elected": false,
@@ -1265,15 +1145,15 @@
           "estimatedVotesHigh": 358813,
           "estimatedVotesLow": 293575,
           "estimatedVotesMid": 326194,
-          "turnoutHigh": 90.93,
-          "turnoutLow": 111.14,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Mike",
-        "id": 53130,
-        "lastName": "Boudreaux",
+        "firstName": "Vince",
+        "id": 22651,
+        "lastName": "Fong",
         "partyName": "Republican",
-        "votes": 162066
+        "votes": 0
       }
     ],
     "district": "20",
@@ -1282,7 +1162,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1292,7 +1172,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 326283,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1305,15 +1185,15 @@
           "estimatedVotesHigh": 227588,
           "estimatedVotesLow": 186208,
           "estimatedVotesMid": 206898,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jim",
         "id": 168,
         "lastName": "Costa",
         "partyName": "Democratic",
-        "votes": 122959
+        "votes": 0
       },
       {
         "elected": false,
@@ -1321,15 +1201,15 @@
           "estimatedVotesHigh": 227588,
           "estimatedVotesLow": 186208,
           "estimatedVotesMid": 206898,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 18679,
         "lastName": "Maher",
         "partyName": "Republican",
-        "votes": 83939
+        "votes": 0
       }
     ],
     "district": "21",
@@ -1338,7 +1218,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1348,7 +1228,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 206898,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1361,15 +1241,15 @@
           "estimatedVotesHigh": 190281,
           "estimatedVotesLow": 155684,
           "estimatedVotesMid": 172982,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 189,
         "lastName": "Valadao",
         "partyName": "Republican",
-        "votes": 75796
+        "votes": 0
       },
       {
         "elected": false,
@@ -1377,15 +1257,15 @@
           "estimatedVotesHigh": 190281,
           "estimatedVotesLow": 155684,
           "estimatedVotesMid": 172982,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rudy",
         "id": 22283,
         "lastName": "Salas",
         "partyName": "Democratic",
-        "votes": 97186
+        "votes": 0
       }
     ],
     "district": "22",
@@ -1394,7 +1274,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1404,7 +1284,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 172982,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1417,15 +1297,15 @@
           "estimatedVotesHigh": 301579,
           "estimatedVotesLow": 246748,
           "estimatedVotesMid": 274163,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jay",
         "id": 12117,
         "lastName": "Obernolte",
         "partyName": "Republican",
-        "votes": 155107
+        "votes": 0
       },
       {
         "elected": false,
@@ -1433,15 +1313,15 @@
           "estimatedVotesHigh": 301579,
           "estimatedVotesLow": 246748,
           "estimatedVotesMid": 274163,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Derek",
         "id": 22285,
         "lastName": "Marshall",
         "partyName": "Democratic",
-        "votes": 119056
+        "votes": 0
       }
     ],
     "district": "23",
@@ -1450,7 +1330,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1460,7 +1340,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 274163,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1473,15 +1353,15 @@
           "estimatedVotesHigh": 377908,
           "estimatedVotesLow": 309198,
           "estimatedVotesMid": 343553,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Salud",
-        "id": 197,
-        "lastName": "Carbajal",
-        "partyName": "Democratic",
-        "votes": 223648
+        "firstName": "Thomas",
+        "id": 1554,
+        "lastName": "Cole",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1489,15 +1369,15 @@
           "estimatedVotesHigh": 377908,
           "estimatedVotesLow": 309198,
           "estimatedVotesMid": 343553,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Thomas",
-        "id": 1554,
-        "lastName": "Cole",
-        "partyName": "Republican",
-        "votes": 119905
+        "firstName": "Salud",
+        "id": 197,
+        "lastName": "Carbajal",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "24",
@@ -1506,7 +1386,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1516,7 +1396,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 343553,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1529,15 +1409,15 @@
           "estimatedVotesHigh": 272530,
           "estimatedVotesLow": 222980,
           "estimatedVotesMid": 247755,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ian",
         "id": 22656,
         "lastName": "Weeks",
         "partyName": "Republican",
-        "votes": 106133
+        "votes": 0
       },
       {
         "elected": false,
@@ -1545,15 +1425,15 @@
           "estimatedVotesHigh": 272530,
           "estimatedVotesLow": 222980,
           "estimatedVotesMid": 247755,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Raul",
         "id": 243,
         "lastName": "Ruiz",
         "partyName": "Democratic",
-        "votes": 141622
+        "votes": 0
       }
     ],
     "district": "25",
@@ -1562,7 +1442,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1572,7 +1452,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 247755,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1585,15 +1465,15 @@
           "estimatedVotesHigh": 385281,
           "estimatedVotesLow": 315230,
           "estimatedVotesMid": 350255,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Julia",
         "id": 210,
         "lastName": "Brownley",
         "partyName": "Democratic",
-        "votes": 201237
+        "votes": 0
       },
       {
         "elected": false,
@@ -1601,15 +1481,15 @@
           "estimatedVotesHigh": 385281,
           "estimatedVotesLow": 315230,
           "estimatedVotesMid": 350255,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 53142,
         "lastName": "Koslow",
         "partyName": "Republican",
-        "votes": 149018
+        "votes": 0
       }
     ],
     "district": "26",
@@ -1618,7 +1498,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1628,7 +1508,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 350255,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1641,15 +1521,15 @@
           "estimatedVotesHigh": 347981,
           "estimatedVotesLow": 284711,
           "estimatedVotesMid": 316346,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 12174,
         "lastName": "Garcia",
         "partyName": "Republican",
-        "votes": 141802
+        "votes": 0
       },
       {
         "elected": false,
@@ -1657,15 +1537,15 @@
           "estimatedVotesHigh": 347981,
           "estimatedVotesLow": 284711,
           "estimatedVotesMid": 316346,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "George",
         "id": 53144,
         "lastName": "Whitesides",
         "partyName": "Democratic",
-        "votes": 174544
+        "votes": 0
       }
     ],
     "district": "27",
@@ -1674,7 +1554,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:12.873Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1684,7 +1564,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 316346,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1697,15 +1577,15 @@
           "estimatedVotesHigh": 379837,
           "estimatedVotesLow": 310777,
           "estimatedVotesMid": 345307,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Judy",
         "id": 212,
         "lastName": "Chu",
         "partyName": "Democratic",
-        "votes": 236531
+        "votes": 0
       },
       {
         "elected": false,
@@ -1713,15 +1593,15 @@
           "estimatedVotesHigh": 379837,
           "estimatedVotesLow": 310777,
           "estimatedVotesMid": 345307,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "April",
         "id": 53145,
         "lastName": "Verlato",
         "partyName": "Republican",
-        "votes": 108776
+        "votes": 0
       }
     ],
     "district": "28",
@@ -1730,7 +1610,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1740,7 +1620,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 345307,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1753,15 +1633,15 @@
           "estimatedVotesHigh": 274293,
           "estimatedVotesLow": 224421,
           "estimatedVotesMid": 249357,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Benito",
         "id": 9363,
         "lastName": "Bernal",
         "partyName": "Republican",
-        "votes": 58119
+        "votes": 0
       },
       {
         "elected": false,
@@ -1769,15 +1649,15 @@
           "estimatedVotesHigh": 274293,
           "estimatedVotesLow": 224421,
           "estimatedVotesMid": 249357,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Luz",
         "id": 22568,
         "lastName": "Rivas",
         "partyName": "Democratic",
-        "votes": 191238
+        "votes": 0
       }
     ],
     "district": "29",
@@ -1786,7 +1666,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1796,7 +1676,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 249357,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1809,15 +1689,15 @@
           "estimatedVotesHigh": 363504,
           "estimatedVotesLow": 297412,
           "estimatedVotesMid": 330458,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Alex",
         "id": 53158,
         "lastName": "Balekian",
         "partyName": "Republican",
-        "votes": 92034
+        "votes": 0
       },
       {
         "elected": false,
@@ -1825,15 +1705,15 @@
           "estimatedVotesHigh": 363504,
           "estimatedVotesLow": 297412,
           "estimatedVotesMid": 330458,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Laura",
         "id": 22569,
         "lastName": "Friedman",
         "partyName": "Democratic",
-        "votes": 238424
+        "votes": 0
       }
     ],
     "district": "30",
@@ -1842,7 +1722,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1852,7 +1732,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 330458,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1865,15 +1745,15 @@
           "estimatedVotesHigh": 314755,
           "estimatedVotesLow": 257527,
           "estimatedVotesMid": 286141,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Gil",
-        "id": 9393,
-        "lastName": "Cisneros",
-        "partyName": "Democratic",
-        "votes": 189167
+        "firstName": "Daniel",
+        "id": 22313,
+        "lastName": "Martinez",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -1881,15 +1761,15 @@
           "estimatedVotesHigh": 314755,
           "estimatedVotesLow": 257527,
           "estimatedVotesMid": 286141,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Daniel",
-        "id": 22313,
-        "lastName": "Martinez",
-        "partyName": "Republican",
-        "votes": 96974
+        "firstName": "Gil",
+        "id": 9393,
+        "lastName": "Cisneros",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "31",
@@ -1898,7 +1778,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1908,7 +1788,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 286141,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1921,15 +1801,15 @@
           "estimatedVotesHigh": 388213,
           "estimatedVotesLow": 317629,
           "estimatedVotesMid": 352920,
-          "turnoutHigh": 90.8,
-          "turnoutLow": 110.97,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Brad",
         "id": 226,
         "lastName": "Sherman",
         "partyName": "Democratic",
-        "votes": 243616
+        "votes": 0
       },
       {
         "elected": false,
@@ -1937,15 +1817,15 @@
           "estimatedVotesHigh": 388213,
           "estimatedVotesLow": 317629,
           "estimatedVotesMid": 352920,
-          "turnoutHigh": 90.8,
-          "turnoutLow": 110.97,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Larry",
         "id": 53171,
         "lastName": "Thompson",
         "partyName": "Republican",
-        "votes": 108863
+        "votes": 0
       }
     ],
     "district": "32",
@@ -1954,7 +1834,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -1964,7 +1844,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 352479,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -1977,15 +1857,15 @@
           "estimatedVotesHigh": 278675,
           "estimatedVotesLow": 228007,
           "estimatedVotesMid": 253341,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Pete",
         "id": 229,
         "lastName": "Aguilar",
         "partyName": "Democratic",
-        "votes": 160728
+        "votes": 0
       },
       {
         "elected": false,
@@ -1993,15 +1873,15 @@
           "estimatedVotesHigh": 278675,
           "estimatedVotesLow": 228007,
           "estimatedVotesMid": 253341,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Tom",
         "id": 53172,
         "lastName": "Herman",
         "partyName": "Republican",
-        "votes": 92613
+        "votes": 0
       }
     ],
     "district": "33",
@@ -2010,7 +1890,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2020,7 +1900,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 253341,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2033,15 +1913,15 @@
           "estimatedVotesHigh": 250578,
           "estimatedVotesLow": 205018,
           "estimatedVotesMid": 227798,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jimmy",
         "id": 2326,
         "lastName": "Gomez",
         "partyName": "Democratic",
-        "votes": 112453
+        "votes": 0
       },
       {
         "elected": false,
@@ -2049,15 +1929,15 @@
           "estimatedVotesHigh": 250578,
           "estimatedVotesLow": 205018,
           "estimatedVotesMid": 227798,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 9154,
         "lastName": "Kim",
         "partyName": "Democratic",
-        "votes": 115345
+        "votes": 0
       }
     ],
     "district": "34",
@@ -2066,7 +1946,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2076,7 +1956,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 227798,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2089,15 +1969,15 @@
           "estimatedVotesHigh": 281999,
           "estimatedVotesLow": 230726,
           "estimatedVotesMid": 256362,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Mike",
-        "id": 12212,
-        "lastName": "Cargile",
-        "partyName": "Republican",
-        "votes": 94797
+        "firstName": "Norma",
+        "id": 242,
+        "lastName": "Torres",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2105,15 +1985,15 @@
           "estimatedVotesHigh": 281999,
           "estimatedVotesLow": 230726,
           "estimatedVotesMid": 256362,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Norma",
-        "id": 242,
-        "lastName": "Torres",
-        "partyName": "Democratic",
-        "votes": 161565
+        "firstName": "Mike",
+        "id": 12212,
+        "lastName": "Cargile",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "35",
@@ -2122,7 +2002,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2132,7 +2012,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 256362,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2145,15 +2025,15 @@
           "estimatedVotesHigh": 412677,
           "estimatedVotesLow": 337645,
           "estimatedVotesMid": 375161,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Melissa",
         "id": 22319,
         "lastName": "Toomim",
         "partyName": "Republican",
-        "votes": 101773
+        "votes": 0
       },
       {
         "elected": false,
@@ -2161,15 +2041,15 @@
           "estimatedVotesHigh": 412677,
           "estimatedVotesLow": 337645,
           "estimatedVotesMid": 375161,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ted",
         "id": 9374,
         "lastName": "Lieu",
         "partyName": "Democratic",
-        "votes": 273388
+        "votes": 0
       }
     ],
     "district": "36",
@@ -2178,7 +2058,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2188,7 +2068,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 375161,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2201,15 +2081,15 @@
           "estimatedVotesHigh": 274908,
           "estimatedVotesLow": 224924,
           "estimatedVotesMid": 249916,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sydney",
         "id": 53180,
         "lastName": "Kamlager-Dove",
         "partyName": "Democratic",
-        "votes": 244052
+        "votes": 0
       },
       {
         "elected": false,
@@ -2217,15 +2097,15 @@
           "estimatedVotesHigh": 274908,
           "estimatedVotesLow": 224924,
           "estimatedVotesMid": 249916,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Juan",
         "id": 84984,
         "lastName": "Rey",
         "partyName": "Independent",
-        "votes": 5864
+        "votes": 0
       }
     ],
     "district": "37",
@@ -2234,7 +2114,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2244,7 +2124,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 249916,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2257,15 +2137,15 @@
           "estimatedVotesHigh": 349813,
           "estimatedVotesLow": 286210,
           "estimatedVotesMid": 318011,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eric",
         "id": 22339,
         "lastName": "Ching",
         "partyName": "Republican",
-        "votes": 108945
+        "votes": 0
       },
       {
         "elected": false,
@@ -2273,15 +2153,15 @@
           "estimatedVotesHigh": 349813,
           "estimatedVotesLow": 286210,
           "estimatedVotesMid": 318011,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Linda",
         "id": 53181,
         "lastName": "Sanchez",
         "partyName": "Democratic",
-        "votes": 209066
+        "votes": 0
       }
     ],
     "district": "38",
@@ -2290,7 +2170,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2300,7 +2180,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 318011,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2313,15 +2193,15 @@
           "estimatedVotesHigh": 269509,
           "estimatedVotesLow": 220507,
           "estimatedVotesMid": 245008,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "David",
-        "id": 53183,
-        "lastName": "Serpa",
-        "partyName": "Republican",
-        "votes": 94323
+        "firstName": "Mark",
+        "id": 256,
+        "lastName": "Takano",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2329,15 +2209,15 @@
           "estimatedVotesHigh": 269509,
           "estimatedVotesLow": 220507,
           "estimatedVotesMid": 245008,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Mark",
-        "id": 256,
-        "lastName": "Takano",
-        "partyName": "Democratic",
-        "votes": 150685
+        "firstName": "David",
+        "id": 53183,
+        "lastName": "Serpa",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "39",
@@ -2346,7 +2226,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2356,7 +2236,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 245008,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2369,15 +2249,15 @@
           "estimatedVotesHigh": 433382,
           "estimatedVotesLow": 354586,
           "estimatedVotesMid": 393984,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Joe",
-        "id": 22476,
-        "lastName": "Kerr",
-        "partyName": "Democratic",
-        "votes": 199288
+        "firstName": "Young",
+        "id": 9401,
+        "lastName": "Kim",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2385,15 +2265,15 @@
           "estimatedVotesHigh": 433382,
           "estimatedVotesLow": 354586,
           "estimatedVotesMid": 393984,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Young",
-        "id": 9401,
-        "lastName": "Kim",
-        "partyName": "Republican",
-        "votes": 194696
+        "firstName": "Joe",
+        "id": 22476,
+        "lastName": "Kerr",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "40",
@@ -2402,7 +2282,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T15:15:40.552Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2412,7 +2292,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 393984,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2425,15 +2305,15 @@
           "estimatedVotesHigh": 385901,
           "estimatedVotesLow": 315737,
           "estimatedVotesMid": 350819,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ken",
         "id": 261,
         "lastName": "Calvert",
         "partyName": "Republican",
-        "votes": 179542
+        "votes": 0
       },
       {
         "elected": false,
@@ -2441,15 +2321,15 @@
           "estimatedVotesHigh": 385901,
           "estimatedVotesLow": 315737,
           "estimatedVotesMid": 350819,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Will",
         "id": 22350,
         "lastName": "Rollins",
         "partyName": "Democratic",
-        "votes": 171277
+        "votes": 0
       }
     ],
     "district": "41",
@@ -2458,7 +2338,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2468,7 +2348,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 350819,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2481,15 +2361,15 @@
           "estimatedVotesHigh": 291393,
           "estimatedVotesLow": 238413,
           "estimatedVotesMid": 264903,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "John",
         "id": 9439,
         "lastName": "Briscoe",
         "partyName": "Republican",
-        "votes": 72929
+        "votes": 0
       },
       {
         "elected": false,
@@ -2497,15 +2377,15 @@
           "estimatedVotesHigh": 291393,
           "estimatedVotesLow": 238413,
           "estimatedVotesMid": 264903,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert",
         "id": 19349,
         "lastName": "Garcia",
         "partyName": "Democratic",
-        "votes": 191974
+        "votes": 0
       }
     ],
     "district": "42",
@@ -2514,7 +2394,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2524,7 +2404,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 264903,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2537,15 +2417,15 @@
           "estimatedVotesHigh": 274831,
           "estimatedVotesLow": 224861,
           "estimatedVotesMid": 249846,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Maxine",
         "id": 264,
         "lastName": "Waters",
         "partyName": "Democratic",
-        "votes": 208885
+        "votes": 0
       },
       {
         "elected": false,
@@ -2553,15 +2433,15 @@
           "estimatedVotesHigh": 274831,
           "estimatedVotesLow": 224861,
           "estimatedVotesMid": 249846,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Steve",
         "id": 10436,
         "lastName": "Williams",
         "partyName": "Republican",
-        "votes": 40961
+        "votes": 0
       }
     ],
     "district": "43",
@@ -2570,7 +2450,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2580,7 +2460,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 249846,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2593,15 +2473,15 @@
           "estimatedVotesHigh": 301274,
           "estimatedVotesLow": 246497,
           "estimatedVotesMid": 273885,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Nanette",
         "id": 53189,
         "lastName": "Barragan",
         "partyName": "Democratic",
-        "votes": 205227
+        "votes": 0
       },
       {
         "elected": false,
@@ -2609,15 +2489,15 @@
           "estimatedVotesHigh": 301274,
           "estimatedVotesLow": 246497,
           "estimatedVotesMid": 273885,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Roger",
         "id": 53190,
         "lastName": "Groh",
         "partyName": "Republican",
-        "votes": 68658
+        "votes": 0
       }
     ],
     "district": "44",
@@ -2626,7 +2506,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2636,7 +2516,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 273885,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2649,15 +2529,15 @@
           "estimatedVotesHigh": 363821,
           "estimatedVotesLow": 297671,
           "estimatedVotesMid": 330746,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michelle",
         "id": 12251,
         "lastName": "Steel",
         "partyName": "Republican",
-        "votes": 154562
+        "votes": 0
       },
       {
         "elected": false,
@@ -2665,15 +2545,15 @@
           "estimatedVotesHigh": 363821,
           "estimatedVotesLow": 297671,
           "estimatedVotesMid": 330746,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Derek",
         "id": 53194,
         "lastName": "Tran",
         "partyName": "Democratic",
-        "votes": 176184
+        "votes": 0
       }
     ],
     "district": "45",
@@ -2682,7 +2562,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:58.769Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2692,7 +2572,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 330746,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2705,15 +2585,15 @@
           "estimatedVotesHigh": 255706,
           "estimatedVotesLow": 209214,
           "estimatedVotesMid": 232460,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "David",
         "id": 53195,
         "lastName": "Pan",
         "partyName": "Republican",
-        "votes": 75783
+        "votes": 0
       },
       {
         "elected": false,
@@ -2721,15 +2601,15 @@
           "estimatedVotesHigh": 255706,
           "estimatedVotesLow": 209214,
           "estimatedVotesMid": 232460,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lou",
         "id": 279,
         "lastName": "Correa",
         "partyName": "Democratic",
-        "votes": 156677
+        "votes": 0
       }
     ],
     "district": "46",
@@ -2738,7 +2618,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2748,7 +2628,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 232460,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2761,15 +2641,15 @@
           "estimatedVotesHigh": 389511,
           "estimatedVotesLow": 318691,
           "estimatedVotesMid": 354101,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Dave",
         "id": 9429,
         "lastName": "Min",
         "partyName": "Democratic",
-        "votes": 195458
+        "votes": 0
       },
       {
         "elected": false,
@@ -2777,15 +2657,15 @@
           "estimatedVotesHigh": 389511,
           "estimatedVotesLow": 318691,
           "estimatedVotesMid": 354101,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 9448,
         "lastName": "Baugh",
         "partyName": "Republican",
-        "votes": 158643
+        "votes": 0
       }
     ],
     "district": "47",
@@ -2794,7 +2674,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2804,7 +2684,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 354101,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2817,15 +2697,15 @@
           "estimatedVotesHigh": 396771,
           "estimatedVotesLow": 324631,
           "estimatedVotesMid": 360701,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Darrell",
-        "id": 294,
-        "lastName": "Issa",
-        "partyName": "Republican",
-        "votes": 198292
+        "firstName": "Stephen",
+        "id": 22365,
+        "lastName": "Houlahan",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -2833,15 +2713,15 @@
           "estimatedVotesHigh": 396771,
           "estimatedVotesLow": 324631,
           "estimatedVotesMid": 360701,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Stephen",
-        "id": 22365,
-        "lastName": "Houlahan",
-        "partyName": "Democratic",
-        "votes": 162409
+        "firstName": "Darrell",
+        "id": 294,
+        "lastName": "Issa",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "48",
@@ -2850,7 +2730,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2860,7 +2740,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 360701,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2873,15 +2753,15 @@
           "estimatedVotesHigh": 409420,
           "estimatedVotesLow": 334980,
           "estimatedVotesMid": 372200,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Mike",
         "id": 9459,
         "lastName": "Levin",
         "partyName": "Democratic",
-        "votes": 204825
+        "votes": 0
       },
       {
         "elected": false,
@@ -2889,15 +2769,15 @@
           "estimatedVotesHigh": 409420,
           "estimatedVotesLow": 334980,
           "estimatedVotesMid": 372200,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Matt",
         "id": 22499,
         "lastName": "Gunderson",
         "partyName": "Republican",
-        "votes": 167375
+        "votes": 0
       }
     ],
     "district": "49",
@@ -2906,7 +2786,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:15:32.086Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2916,7 +2796,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 372200,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2929,15 +2809,15 @@
           "estimatedVotesHigh": 378553,
           "estimatedVotesLow": 309725,
           "estimatedVotesMid": 344139,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Peter",
         "id": 53209,
         "lastName": "Bono",
         "partyName": "Republican",
-        "votes": 119285
+        "votes": 0
       },
       {
         "elected": false,
@@ -2945,15 +2825,15 @@
           "estimatedVotesHigh": 378553,
           "estimatedVotesLow": 309725,
           "estimatedVotesMid": 344139,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Scott",
         "id": 305,
         "lastName": "Peters",
         "partyName": "Democratic",
-        "votes": 224854
+        "votes": 0
       }
     ],
     "district": "50",
@@ -2962,7 +2842,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -2972,7 +2852,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 344139,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -2985,15 +2865,15 @@
           "estimatedVotesHigh": 358014,
           "estimatedVotesLow": 292920,
           "estimatedVotesMid": 325467,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Sara",
         "id": 9457,
         "lastName": "Jacobs",
         "partyName": "Democratic",
-        "votes": 200329
+        "votes": 0
       },
       {
         "elected": false,
@@ -3001,15 +2881,15 @@
           "estimatedVotesHigh": 358014,
           "estimatedVotesLow": 292920,
           "estimatedVotesMid": 325467,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Bill",
         "id": 9477,
         "lastName": "Wells",
         "partyName": "Republican",
-        "votes": 125138
+        "votes": 0
       }
     ],
     "district": "51",
@@ -3018,7 +2898,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -3028,7 +2908,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 325467,
+    "totalVotes": 0,
     "year": 2024
   },
   {
@@ -3041,15 +2921,15 @@
           "estimatedVotesHigh": 298376,
           "estimatedVotesLow": 244126,
           "estimatedVotesMid": 271251,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Juan",
         "id": 301,
         "lastName": "Vargas",
         "partyName": "Democratic",
-        "votes": 183264
+        "votes": 0
       },
       {
         "elected": false,
@@ -3057,15 +2937,15 @@
           "estimatedVotesHigh": 298376,
           "estimatedVotesLow": 244126,
           "estimatedVotesMid": 271251,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Justin",
         "id": 53213,
         "lastName": "Lee",
         "partyName": "Republican",
-        "votes": 87987
+        "votes": 0
       }
     ],
     "district": "52",
@@ -3074,7 +2954,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:51.705Z",
+    "lastUpdated": "2024-10-28T15:14:31.695Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -3084,7 +2964,7 @@
     "raceDate": "2024-11-05",
     "state": "CA",
     "stateName": "California",
-    "totalVotes": 271251,
+    "totalVotes": 0,
     "year": 2024
   }
 ]
