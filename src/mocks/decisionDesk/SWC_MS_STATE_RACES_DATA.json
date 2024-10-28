@@ -1,20 +1,7 @@
 [
   {
-    "calledCandidate": {
-      "firstName": "Roger",
-      "id": 8242,
-      "incumbent": true,
-      "lastName": "Wicker",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Roger",
-        "id": 8242,
-        "lastName": "Wicker",
-        "partyName": "Republican"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -22,31 +9,159 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 91.19,
-          "turnoutLow": 111.46,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
           "turnoutMid": 99
         },
-        "firstName": "Ty",
-        "id": 52370,
-        "lastName": "Pinkins",
-        "partyName": "Democratic",
-        "votes": 495699
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 22568
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 91.19,
-          "turnoutLow": 111.46,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
           "turnoutMid": 99
         },
-        "firstName": "Roger",
-        "id": 8242,
-        "lastName": "Wicker",
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 464147
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 705336
+        "votes": 667546
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Randall",
+        "id": 84941,
+        "lastName": "Terry",
+        "partyName": "Constitution",
+        "votes": 22468
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 22405
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Shiva",
+        "id": 11165,
+        "lastName": "Ayyadurai",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 91.05,
+          "turnoutLow": 111.28,
+          "turnoutMid": 99
+        },
+        "firstName": "Peter",
+        "id": 104291,
+        "lastName": "Sonski",
+        "partyName": "Independent",
+        "votes": 0
       }
     ],
     "district": "",
@@ -54,8 +169,64 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:44:52.901Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "office": {
+      "officeId": "1",
+      "officeName": "President",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "MS",
+    "stateName": "Mississippi",
+    "totalVotes": 1199134,
+    "year": 2024
+  },
+  {
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
+        },
+        "firstName": "Ty",
+        "id": 52370,
+        "lastName": "Pinkins",
+        "partyName": "Democratic",
+        "votes": 493692
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
+        },
+        "firstName": "Roger",
+        "id": 8242,
+        "lastName": "Wicker",
+        "partyName": "Republican",
+        "votes": 703620
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T07:24:55.507Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -65,25 +236,12 @@
     "raceDate": "2024-11-05",
     "state": "MS",
     "stateName": "Mississippi",
-    "totalVotes": 1201035,
+    "totalVotes": 1197312,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Trent",
-      "id": 1387,
-      "incumbent": true,
-      "lastName": "Kelly",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Trent",
-        "id": 1387,
-        "lastName": "Kelly",
-        "partyName": "Republican"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -91,31 +249,31 @@
           "estimatedVotesHigh": 336892,
           "estimatedVotesLow": 275637,
           "estimatedVotesMid": 306264,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.48,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
           "turnoutMid": 99
         },
         "firstName": "Dianne",
         "id": 22974,
         "lastName": "Black",
         "partyName": "Democratic",
-        "votes": 102342
+        "votes": 102065
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 336892,
           "estimatedVotesLow": 275637,
           "estimatedVotesMid": 306264,
-          "turnoutHigh": 91.21,
-          "turnoutLow": 111.48,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
           "turnoutMid": 99
         },
         "firstName": "Trent",
         "id": 1387,
         "lastName": "Kelly",
         "partyName": "Republican",
-        "votes": 204936
+        "votes": 204199
       }
     ],
     "district": "1",
@@ -123,8 +281,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:45:27.136Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T07:24:35.672Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -134,25 +292,12 @@
     "raceDate": "2024-11-05",
     "state": "MS",
     "stateName": "Mississippi",
-    "totalVotes": 307278,
+    "totalVotes": 306264,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Bennie ",
-      "id": 1388,
-      "incumbent": true,
-      "lastName": "Thompson",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Bennie ",
-        "id": 1388,
-        "lastName": "Thompson",
-        "partyName": "Democratic"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -160,31 +305,31 @@
           "estimatedVotesHigh": 327164,
           "estimatedVotesLow": 267675,
           "estimatedVotesMid": 297418,
-          "turnoutHigh": 91.3,
-          "turnoutLow": 111.6,
-          "turnoutMid": 99
-        },
-        "firstName": "Ronald",
-        "id": 22980,
-        "lastName": "Eller",
-        "partyName": "Republican",
-        "votes": 111077
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 327164,
-          "estimatedVotesLow": 267675,
-          "estimatedVotesMid": 297418,
-          "turnoutHigh": 91.3,
-          "turnoutLow": 111.6,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
           "turnoutMid": 99
         },
         "firstName": "Bennie ",
         "id": 1388,
         "lastName": "Thompson",
         "partyName": "Democratic",
-        "votes": 187640
+        "votes": 186617
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 327164,
+          "estimatedVotesLow": 267675,
+          "estimatedVotesMid": 297418,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
+          "turnoutMid": 99
+        },
+        "firstName": "Ronald",
+        "id": 22980,
+        "lastName": "Eller",
+        "partyName": "Republican",
+        "votes": 110801
       }
     ],
     "district": "2",
@@ -192,8 +337,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:45:27.136Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T07:24:35.672Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -203,28 +348,15 @@
     "raceDate": "2024-11-05",
     "state": "MS",
     "stateName": "Mississippi",
-    "totalVotes": 298717,
+    "totalVotes": 297418,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Michael",
-      "id": 9635,
-      "incumbent": true,
-      "lastName": "Guest",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Michael",
-        "id": 9635,
-        "lastName": "Guest",
-        "partyName": "Republican"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 0,
           "estimatedVotesLow": 0,
@@ -245,7 +377,7 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
+    "hasCalledCandidate": false,
     "lastUpdated": "2024-10-25T19:31:29.024Z",
     "office": {
       "officeId": "3",
@@ -260,21 +392,8 @@
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Mike",
-      "id": 22985,
-      "incumbent": true,
-      "lastName": "Ezell",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Mike",
-        "id": 22985,
-        "lastName": "Ezell",
-        "partyName": "Republican"
-      }
-    ],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -282,31 +401,31 @@
           "estimatedVotesHigh": 302895,
           "estimatedVotesLow": 247823,
           "estimatedVotesMid": 275358,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
           "turnoutMid": 99
         },
         "firstName": "Craig",
         "id": 53767,
         "lastName": "Raybon",
         "partyName": "Democratic",
-        "votes": 85807
+        "votes": 85580
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 302895,
           "estimatedVotesLow": 247823,
           "estimatedVotesMid": 275358,
-          "turnoutHigh": 91.34,
-          "turnoutLow": 111.64,
+          "turnoutHigh": 90.91,
+          "turnoutLow": 111.11,
           "turnoutMid": 99
         },
         "firstName": "Mike",
         "id": 22985,
         "lastName": "Ezell",
         "partyName": "Republican",
-        "votes": 190868
+        "votes": 189778
       }
     ],
     "district": "4",
@@ -314,8 +433,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-25T20:45:27.136Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T07:24:53.946Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -325,7 +444,7 @@
     "raceDate": "2024-11-05",
     "state": "MS",
     "stateName": "Mississippi",
-    "totalVotes": 276675,
+    "totalVotes": 275358,
     "year": 2024
   }
 ]
