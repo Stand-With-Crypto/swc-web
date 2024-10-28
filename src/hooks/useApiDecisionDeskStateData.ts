@@ -5,6 +5,7 @@ import * as Sentry from '@sentry/nextjs'
 import useSWR, { SWRResponse } from 'swr'
 
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import * as stateRacesMockData from '@/mocks/decisionDesk'
 import { Candidate } from '@/utils/server/decisionDesk/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -25,13 +26,16 @@ export function useApiDecisionDeskData({
   stateCode,
   district,
 }: UseApiDecisionDeskDataProps) {
+  const hasHydrated = useHasHydrated()
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID)
   const mockedRaceCookieData = parseKeyRacesMockCookie(apiTamperedValue)
 
   const swrData = useSWR(
-    district
-      ? apiUrls.decisionDeskDistrictData({ stateCode, district: district?.toString() })
-      : apiUrls.decisionDeskStateData({ stateCode }),
+    !hasHydrated
+      ? null
+      : district
+        ? apiUrls.decisionDeskDistrictData({ stateCode, district: district?.toString() })
+        : apiUrls.decisionDeskStateData({ stateCode }),
     url =>
       fetchReq(url)
         .then(res => res.json())
@@ -39,8 +43,8 @@ export function useApiDecisionDeskData({
     {
       fallbackData: initialRaceData ?? undefined,
       refreshInterval: 30 * 1000,
-      errorRetryInterval: 30 * 1000,
       refreshWhenHidden: true,
+      keepPreviousData: true,
       onError: error => {
         Sentry.captureException(error, {
           extra: {

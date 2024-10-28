@@ -5,6 +5,7 @@ import * as Sentry from '@sentry/nextjs'
 import useSWR, { SWRResponse } from 'swr'
 
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { SWC_PRESIDENTIAL_RACES_DATA } from '@/mocks/decisionDesk'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
@@ -16,11 +17,12 @@ import { apiUrls } from '@/utils/shared/urls'
 export function useApiDecisionDeskPresidentialData(
   fallbackData: PresidentialDataWithVotingResponse[] | null,
 ) {
+  const hasHydrated = useHasHydrated()
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID)
   const mockedRaceCookieData = parseKeyRacesMockCookie(apiTamperedValue)
 
   const swrData = useSWR(
-    apiTamperedValue ? null : apiUrls.decisionDeskPresidentialData(),
+    !hasHydrated ? null : apiUrls.decisionDeskPresidentialData(),
     url =>
       fetchReq(url)
         .then(res => res.json())
@@ -28,8 +30,8 @@ export function useApiDecisionDeskPresidentialData(
     {
       fallbackData: fallbackData ?? undefined,
       refreshInterval: 30 * 1000,
-      errorRetryInterval: 30 * 1000,
       refreshWhenHidden: true,
+      keepPreviousData: true,
       onError: error => {
         Sentry.captureException(error, {
           tags: { domain: 'liveResult' },
