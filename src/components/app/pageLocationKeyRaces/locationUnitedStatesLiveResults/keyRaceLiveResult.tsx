@@ -121,8 +121,8 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
   const lastUpdated = useMemo(() => {
     if (!raceData?.lastUpdated) return ''
-
-    return format(parseISO(raceData.lastUpdated), "'Data updated' M/d/yy 'at' h:mm a")
+    const parsedDate = new Date(raceData.lastUpdated.replace('Z', ''))
+    return format(parsedDate, "'Data updated' M/d/yy 'at' h:mm a")
   }, [raceData])
 
   const raceStatus = useMemo<Status>(() => {
