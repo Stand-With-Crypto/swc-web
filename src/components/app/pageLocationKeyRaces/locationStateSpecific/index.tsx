@@ -5,6 +5,7 @@ import { compact, isEmpty, times } from 'lodash-es'
 
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DDHQFooter } from '@/components/app/ddhqFooter'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
@@ -285,7 +286,8 @@ export function LocationStateSpecific({
             </ContentSection>
           )}
 
-          <PACFooter className="container" />
+          <PACFooter className="container text-center" />
+          <DDHQFooter />
         </div>
       )}
     </div>

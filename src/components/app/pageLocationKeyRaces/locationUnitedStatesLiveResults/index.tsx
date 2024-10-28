@@ -1,5 +1,6 @@
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DDHQFooter } from '@/components/app/ddhqFooter'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
@@ -198,6 +199,7 @@ export function LocationUnitedStatesLiveResults({
         </ContentSection>
 
         <PACFooter className="container text-center" />
+        <DDHQFooter />
       </div>
     </div>
   )

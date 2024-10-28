@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import { compact } from 'lodash-es'
 
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DDHQFooter } from '@/components/app/ddhqFooter'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
@@ -162,7 +163,8 @@ export function LocationRaceSpecific({
         </div>
       </div>
 
-      <PACFooter className="container" />
+      <PACFooter className="container text-center" />
+      <DDHQFooter />
     </div>
   )
 }
