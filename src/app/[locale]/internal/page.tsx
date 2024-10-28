@@ -1,7 +1,6 @@
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const dynamic = 'error'
 
@@ -18,11 +17,6 @@ export default async function InternalHomepage() {
               { children: 'User Experiments', href: '/internal/user-experiments' },
               { children: 'User Action Deeplinks', href: '/internal/user-action-deeplinks' },
             ],
-          },
-          {
-            sectionTitle: 'API response tampering',
-            links: [{ children: 'Key races', href: '/internal/api-tampering/key-races' }],
-            disabled: NEXT_PUBLIC_ENVIRONMENT !== 'local' && NEXT_PUBLIC_ENVIRONMENT !== 'preview',
           },
           {
             sectionTitle: 'Sentry Debugging',
@@ -60,23 +54,20 @@ export default async function InternalHomepage() {
               },
             ],
           },
-        ].map(
-          ({ sectionTitle, subSectionTitle, links, disabled }) =>
-            !disabled && (
-              <div className="space-y-4" key={sectionTitle}>
-                <PageTitle size="sm">{sectionTitle}</PageTitle>
-                {subSectionTitle && <PageSubTitle>{subSectionTitle}</PageSubTitle>}
-                {links.map(props => (
-                  <InternalLink
-                    className="block text-lg underline"
-                    key={props.href}
-                    prefetch={false}
-                    {...props}
-                  />
-                ))}
-              </div>
-            ),
-        )}
+        ].map(({ sectionTitle, subSectionTitle, links }) => (
+          <div className="space-y-4" key={sectionTitle}>
+            <PageTitle size="sm">{sectionTitle}</PageTitle>
+            {subSectionTitle && <PageSubTitle>{subSectionTitle}</PageSubTitle>}
+            {links.map(props => (
+              <InternalLink
+                className="block text-lg underline"
+                key={props.href}
+                prefetch={false}
+                {...props}
+              />
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   )
