@@ -82,16 +82,6 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
     <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
       {[
         {
-          label: 'Crypto advocates',
-          value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
-        },
-        {
-          label: 'Advocates researched voting options',
-          value: (
-            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
-          ),
-        },
-        {
           label: 'Donated by crypto advocates',
           value: (
             <TooltipProvider delayDuration={0}>
@@ -115,6 +105,16 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
+          ),
+        },
+        {
+          label: 'Crypto advocates',
+          value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
+        },
+        {
+          label: 'Advocates researched voting options',
+          value: (
+            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),
         },
       ].map(({ label, value }, index) => (
