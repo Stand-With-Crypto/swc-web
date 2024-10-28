@@ -23,6 +23,8 @@ export interface RacesVotingDataResponse {
   calledCandidates: Candidate[]
   candidatesWithVotes: CandidatesWithVote[]
   hasCalledCandidate: boolean
+  advanceCandidates: string
+  advancingCandidates: unknown[]
 }
 
 export interface CongressDataResponse {

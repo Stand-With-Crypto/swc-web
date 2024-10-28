@@ -72,6 +72,8 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
           return false
         })
         .filter(Boolean),
+      advanceCandidates: currentData.advance_candidates,
+      advancingCandidates: currentData.topline_results.advancing_candidates,
       candidatesWithVotes: currentData.candidates.map(candidate => ({
         id: candidate.cand_id,
         firstName: candidate.first_name,
