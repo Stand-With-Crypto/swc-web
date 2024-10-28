@@ -14,7 +14,7 @@ import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
-  'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
+  'countVoterActions' | 'countUsers' | 'sumDonations'
 > & { locale: SupportedLocale }
 
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
@@ -27,20 +27,7 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   countUsers: {
     count: roundDownNumberToAnimateIn(initial.countUsers.count, 100),
   },
-  countPolicymakerContacts: {
-    countUserActionCalls: roundDownNumberToAnimateIn(
-      initial.countPolicymakerContacts.countUserActionCalls,
-      100,
-    ),
-    countUserActionEmails: roundDownNumberToAnimateIn(
-      initial.countPolicymakerContacts.countUserActionEmails,
-      100,
-    ),
-    hardcodedCountSum: roundDownNumberToAnimateIn(
-      initial.countPolicymakerContacts.hardcodedCountSum,
-      100,
-    ),
-  },
+  countVoterActions: roundDownNumberToAnimateIn(initial.countVoterActions, 100),
 })
 
 export function TopLevelMetrics({ locale, ...data }: Props & { locale: SupportedLocale }) {
@@ -86,11 +73,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
         count: intlNumberFormat(locale).format(values.countUsers.count),
       },
       countPolicymakerContacts: {
-        count: intlNumberFormat(locale).format(
-          values.countPolicymakerContacts.countUserActionEmails +
-            values.countPolicymakerContacts.countUserActionCalls +
-            values.countPolicymakerContacts.hardcodedCountSum,
-        ),
+        count: intlNumberFormat(locale).format(values.countVoterActions),
       },
     }
   }, [formatCurrency, values, locale])
@@ -98,6 +81,16 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
   return (
     <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
       {[
+        {
+          label: 'Crypto advocates',
+          value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
+        },
+        {
+          label: 'Advocates researched voting options',
+          value: (
+            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
+          ),
+        },
         {
           label: 'Donated by crypto advocates',
           value: (
@@ -122,16 +115,6 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-          ),
-        },
-        {
-          label: 'Crypto advocates',
-          value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
-        },
-        {
-          label: 'Policymaker contacts',
-          value: (
-            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),
         },
       ].map(({ label, value }, index) => (
