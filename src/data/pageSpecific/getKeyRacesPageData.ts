@@ -16,8 +16,7 @@ import { getElectionStatus } from '@/utils/server/decisionDesk/getElectionStatus
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export const getKeyRacesPageData = async () => {
-  const [dtsiResults] = await Promise.all([queryDTSILocationUnitedStatesInformation()])
-
+  const dtsiResults = await queryDTSILocationUnitedStatesInformation()
   const races = organizePeople(dtsiResults)
 
   const racesDataMap: Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null> =
@@ -39,23 +38,48 @@ export const getKeyRacesPageData = async () => {
       })
   })
 
-  await Promise.allSettled(racesPromises)
-
   let presidentialRaceLiveResult: PresidentialDataWithVotingResponse[] | null = null
-  try {
-    presidentialRaceLiveResult = await getDecisionDataFromRedis<
-      PresidentialDataWithVotingResponse[]
-    >('SWC_PRESIDENTIAL_RACES_DATA')
-  } catch (error) {
-    Sentry.captureException(error, {
+  let congressRaceLiveResult: GetAllCongressDataResponse = {
+    senateDataWithDtsi: null,
+    houseDataWithDtsi: null,
+  }
+  let initialElectionStatusData = null
+
+  const [presidentialResult, congressResult, electionStatusResult] = await Promise.allSettled([
+    getDecisionDataFromRedis<PresidentialDataWithVotingResponse[]>('SWC_PRESIDENTIAL_RACES_DATA'),
+    getCongressLiveResultData(),
+    getElectionStatus(),
+    racesPromises,
+  ])
+
+  if (presidentialResult.status === 'fulfilled') {
+    presidentialRaceLiveResult = presidentialResult.value
+  } else {
+    Sentry.captureException(presidentialResult.reason, {
       extra: { key: 'SWC_PRESIDENTIAL_RACES_DATA' },
       tags: { domain: 'liveResult' },
     })
-    throw error
+    throw presidentialResult.reason
   }
 
-  const congressRaceLiveResult: GetAllCongressDataResponse = await getCongressLiveResultData()
-  const initialElectionStatusData = await getElectionStatus()
+  if (congressResult.status === 'fulfilled') {
+    congressRaceLiveResult = congressResult.value
+  } else {
+    Sentry.captureException(congressResult.reason, {
+      extra: { keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'] },
+      tags: { domain: 'liveResult' },
+    })
+    throw congressResult.reason
+  }
+
+  if (electionStatusResult.status === 'fulfilled') {
+    initialElectionStatusData = electionStatusResult.value
+  } else {
+    Sentry.captureException(electionStatusResult.reason, {
+      tags: { domain: 'liveResult' },
+    })
+    throw electionStatusResult.reason
+  }
 
   return {
     dtsiResults: races,
