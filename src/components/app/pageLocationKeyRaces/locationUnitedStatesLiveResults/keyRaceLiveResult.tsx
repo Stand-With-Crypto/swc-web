@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
+import { format, parseISO } from 'date-fns'
 import { isNil } from 'lodash-es'
 import { usePathname } from 'next/navigation'
 
@@ -119,9 +120,9 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   const [ddhqCandidateA, ddhqCandidateB] = useLiveCandidateSelection(candidates, raceData)
 
   const lastUpdated = useMemo(() => {
-    if (!raceData?.lastUpdated) return
+    if (!raceData?.lastUpdated) return ''
 
-    return new Date(raceData.lastUpdated).toLocaleString()
+    return format(parseISO(raceData.lastUpdated), "'Data updated' M/d/yy 'at' h:mm a")
   }, [raceData])
 
   const raceStatus = useMemo<Status>(() => {
@@ -157,9 +158,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-2">
             <p className="text-lg font-semibold">{raceName}</p>
-            {lastUpdated && (
-              <p className="text-sm text-fontcolor-muted">Data updated {lastUpdated}</p>
-            )}
+            {lastUpdated && <p className="text-sm text-fontcolor-muted">{lastUpdated}</p>}
           </div>
           <LiveStatusBadge
             status={raceStatus}
@@ -173,7 +172,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             winnerName={raceData?.calledCandidate ? winnerName : ''}
           />
           {lastUpdated && (
-            <p className="text-center text-base text-fontcolor-muted">Data updated {lastUpdated}</p>
+            <p className="text-center text-base text-fontcolor-muted">{lastUpdated}</p>
           )}
         </div>
       )}
