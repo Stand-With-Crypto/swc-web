@@ -168,9 +168,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           skip += phoneNumberList.length
           index += 1
 
-          allPhoneNumbers.push(
-            ...phoneNumberList.map(({ phoneNumber }) => phoneNumber).filter(isPhoneNumberSupported),
-          )
+          allPhoneNumbers.push(...phoneNumberList.filter(isPhoneNumberSupported))
 
           logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
 
@@ -426,32 +424,36 @@ export interface GetPhoneNumberOptions {
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
-  return prismaClient.user.groupBy({
-    by: ['phoneNumber'],
-    where: {
-      ...mergeWhereParams(
-        { ...options.userWhereInput },
-        {
-          UserCommunicationJourney: {
-            every: {
-              campaignName: {
-                not: options.campaignName,
+  return prismaClient.user
+    .groupBy({
+      by: ['phoneNumber'],
+      where: {
+        ...mergeWhereParams(
+          { ...options.userWhereInput },
+          {
+            UserCommunicationJourney: {
+              every: {
+                campaignName: {
+                  not: options.campaignName,
+                },
               },
             },
           },
+        ),
+        hasValidPhoneNumber: true,
+        smsStatus: {
+          in: [
+            SMSStatus.OPTED_IN,
+            SMSStatus.OPTED_IN_HAS_REPLIED,
+            ...(options.includePendingDoubleOptIn
+              ? [SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN]
+              : []),
+          ],
         },
-      ),
-      hasValidPhoneNumber: true,
-      smsStatus: {
-        in: [
-          SMSStatus.OPTED_IN,
-          SMSStatus.OPTED_IN_HAS_REPLIED,
-          ...(options.includePendingDoubleOptIn ? [SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN] : []),
-        ],
       },
-    },
-    skip: options.skip,
-    take: DATABASE_QUERY_LIMIT,
-    orderBy: { phoneNumber: 'asc' },
-  })
+      skip: options.skip,
+      take: DATABASE_QUERY_LIMIT,
+      orderBy: { phoneNumber: 'asc' },
+    })
+    .then(res => res.map(({ phoneNumber }) => phoneNumber))
 }
