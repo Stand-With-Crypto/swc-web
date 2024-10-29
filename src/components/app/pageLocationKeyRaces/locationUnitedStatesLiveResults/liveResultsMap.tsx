@@ -206,7 +206,7 @@ function Tooltip({
     ? `View race in ${hoveredStateName}`
     : `${FormattedNumber({ amount: totalElectedCandidates, locale })} pro-crypto ${proCryptoPoliticianText} elected in ${hoveredStateName}`
 
-  const tooltipWidth = formattedNumber.length * 8
+  const tooltipWidth = formattedNumber.length * (!totalElectedCandidates ? 10 : 8)
   const offsetX = tooltipWidth / 2
 
   const centeredX = mousePosition.x - offsetX
