@@ -201,7 +201,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
       <div className="space-y-3">
         <div className="relative">
-          <div className="mb-4 flex h-5 justify-between overflow-hidden rounded-full bg-secondary text-xs text-white">
+          <div className="flex h-4 justify-between overflow-hidden rounded-full bg-secondary text-xs text-white">
             {canShowProgress && ddhqCandidateA ? (
               <Progress
                 className={cn(

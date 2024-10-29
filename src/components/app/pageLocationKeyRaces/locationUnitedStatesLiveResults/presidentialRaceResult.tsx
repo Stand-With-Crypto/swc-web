@@ -14,8 +14,6 @@ import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUn
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Badge } from '@/components/ui/badge'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { Progress } from '@/components/ui/progress'
-import { Skeleton } from '@/components/ui/skeleton'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
@@ -136,50 +134,47 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
         </div>
       </div>
 
-      <div className="flex">
-        {canShowProgress ? (
-          <>
+      <div className="relative">
+        <div
+          className={cn(
+            'flex h-6 justify-between overflow-hidden rounded-full bg-[#23262B] text-xs text-white',
+            progressBarBackground,
+          )}
+        >
+          {canShowProgress && ddhqCandidateA ? (
             <Progress
               className={cn(
-                'h-6 rounded-l-full rounded-r-none bg-[#23262B]',
-                progressBarBackground,
-              )}
-              indicatorClassName={cn(
-                'bg-none rounded-r-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  dtsiCandidateA.manuallyOverriddenStanceScore ??
-                    dtsiCandidateA.computedStanceScore,
+                  ddhqCandidateA?.manuallyOverriddenStanceScore ??
+                    ddhqCandidateA?.computedStanceScore,
                 ),
-                getOpacity(dtsiCandidateA, liveResultData),
+                getOpacity(ddhqCandidateA, liveResultData),
               )}
-              value={Math.min(
-                +getPercentage(ddhqCandidateA?.votingData?.electoralVotes || 0).toFixed(0) * 2,
+              percentage={Math.min(
+                +getPercentage(ddhqCandidateA?.votingData?.electoralVotes || 0).toFixed(2),
                 100,
               )}
             />
+          ) : null}
+
+          <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 transform bg-white" />
+
+          {canShowProgress && ddhqCandidateB ? (
             <Progress
               className={cn(
-                'h-6 rounded-l-none rounded-r-full border-l bg-[#23262B]',
-                progressBarBackground,
-              )}
-              indicatorClassName={cn(
-                'bg-none rounded-l-none',
                 convertDTSIStanceScoreToBgColorClass(
-                  dtsiCandidateB.manuallyOverriddenStanceScore ??
-                    dtsiCandidateB.computedStanceScore,
+                  ddhqCandidateB?.manuallyOverriddenStanceScore ??
+                    ddhqCandidateB?.computedStanceScore,
                 ),
-                getOpacity(dtsiCandidateB, liveResultData),
+                getOpacity(ddhqCandidateB, liveResultData),
               )}
-              inverted
-              value={Math.min(
-                +getPercentage(ddhqCandidateB?.votingData?.electoralVotes || 0).toFixed(0) * 2,
+              percentage={Math.min(
+                +getPercentage(ddhqCandidateB?.votingData?.electoralVotes || 0).toFixed(2),
                 100,
               )}
             />
-          </>
-        ) : (
-          <Skeleton className="h-6 w-full rounded-full" />
-        )}
+          ) : null}
+        </div>
       </div>
 
       <div className="relative flex items-center justify-between text-sm text-gray-400">
@@ -278,4 +273,27 @@ function getOpacity(
   if (!calledCandidate) return 'opacity-100'
 
   return calledCandidate.id === candidate.id ? 'opacity-100' : 'opacity-50'
+}
+
+interface ProgressProps {
+  percentage: number | undefined
+  className?: string
+}
+
+function Progress(props: ProgressProps) {
+  const { percentage, className } = props
+
+  return (
+    <div
+      className={cn(
+        'flex items-center justify-center bg-[#23262B] text-center transition-all',
+        className,
+      )}
+      style={{
+        width: Math.min(+(percentage || 0).toFixed(2), 100) + '%',
+      }}
+    >
+      {percentage ? <span className="text-center font-bold">{percentage.toFixed(2)}%</span> : null}
+    </div>
+  )
 }
