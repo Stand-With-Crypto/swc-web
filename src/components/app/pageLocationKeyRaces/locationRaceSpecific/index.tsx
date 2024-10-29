@@ -27,6 +27,7 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 
 interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode?: USStateCode
@@ -93,11 +94,11 @@ export function LocationRaceSpecific({
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
         </PageTitle>
-        <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
+        <LoginDialogWrapper authenticatedContent={null}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
-            Make sure you're registered to vote
+            Join Stand With Crypto
           </Button>
-        </UserActionFormVoterRegistrationDialog>
+        </LoginDialogWrapper>
       </DarkHeroSection>
 
       <div className="divide-y-2">
