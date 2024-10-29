@@ -45,6 +45,23 @@ export async function getCongressElectionStatus(): Promise<GetCongressElectionSt
     })
   }
 
+  if (houseData.status === 'fulfilled') {
+    houseData.value?.candidatesWithVotes.forEach(currentCandidate => {
+      if (currentCandidate.elected) {
+        congressElectionStatus.house.push({
+          firstName: currentCandidate.firstName,
+          lastName: currentCandidate.lastName,
+          partyName: currentCandidate.partyName,
+          office: houseData.value?.office?.officeName ?? 'N/A',
+          state: currentCandidate.dtsiData?.primaryRole?.primaryState ?? 'N/A',
+          slug: currentCandidate.dtsiData?.slug ?? 'N/A',
+          elected: currentCandidate.elected,
+          votes: currentCandidate.votes,
+        })
+      }
+    })
+  }
+
   return {
     house:
       congressElectionStatus.house.length > 0 ? congressElectionStatus.house : ['NOT_CALLED_YET'],

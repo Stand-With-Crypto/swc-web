@@ -10,6 +10,7 @@ import { LiveStatusBadgeWithApi } from '@/components/app/pageLocationKeyRaces/lo
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { getCongressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
@@ -172,7 +173,6 @@ export function LocationUnitedStatesLiveResults({
                 />
                 <LoginDialogWrapper
                   authenticatedContent={
-                    // TODO: Claim I Voted NFT
                     <>
                       <div className="space-y-2">
                         <p className="text-xl font-semibold">
@@ -180,7 +180,11 @@ export function LocationUnitedStatesLiveResults({
                         </p>
                         <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
                       </div>
-                      <Button className="w-fit">Claim I Voted NFT</Button>
+                      <UserActionVotingDayDialog>
+                        <Button className="mt-6 w-full max-w-xs" variant="secondary">
+                          Claim I Voted NFT
+                        </Button>
+                      </UserActionVotingDayDialog>
                     </>
                   }
                 >

@@ -60,20 +60,37 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
             candidate.cand_id,
           )
 
-          if (hasBeenCalled) {
-            return {
-              id: candidate.cand_id,
-              firstName: candidate.first_name,
-              lastName: candidate.last_name,
-              partyName: candidate.party_name,
-            }
+          if (!hasBeenCalled) {
+            return null
           }
 
-          return false
+          return {
+            id: candidate.cand_id,
+            firstName: candidate.first_name,
+            lastName: candidate.last_name,
+            partyName: candidate.party_name,
+          }
         })
         .filter(Boolean),
       advanceCandidates: currentData.advance_candidates === 'true',
-      advancingCandidates: currentData.topline_results.advancing_candidates,
+      advancingCandidates: currentData.topline_results.advancing_candidates
+        .map(currentAdvancingCandidateId => {
+          const advancingCandidate = currentData.candidates.find(
+            candidate => candidate.cand_id === currentAdvancingCandidateId,
+          )
+
+          if (!advancingCandidate) {
+            return null
+          }
+
+          return {
+            id: advancingCandidate.cand_id,
+            firstName: advancingCandidate.first_name,
+            lastName: advancingCandidate.last_name,
+            partyName: advancingCandidate.party_name,
+          }
+        })
+        .filter(Boolean),
       candidatesWithVotes: currentData.candidates.map(candidate => ({
         id: candidate.cand_id,
         firstName: candidate.first_name,
