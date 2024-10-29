@@ -7,6 +7,7 @@ import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillReactivationInngestSchema } from '@/inngest/functions/backfillReactivation'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
+import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import type {
   CapitolCanaryBackfillSmsOptInReplySchema,
   CapitolCanaryBackfillSmsOptInReplyUpdateBatchOfUsersSchema,
@@ -54,5 +55,6 @@ type EventTypes =
   | MonitorBaseEthBalancesInngestEventSchema
   | InitialSignupUserCommunicationSchema
   | EnqueueSMSInngestEventSchema
+  | BackfillUserCommunicationMessageStatusSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
