@@ -13,5 +13,6 @@ export const revalidate = SECONDS_DURATION.MINUTE
 
 export async function GET() {
   const allCompletedRaces: AllCompletedRacesResponse = await getElectionStatus()
+
   return NextResponse.json(allCompletedRaces)
 }
