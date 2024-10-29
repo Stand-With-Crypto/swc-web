@@ -6,6 +6,7 @@ import { getClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { prismaClient } from '@/utils/server/prismaClient'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
 export const dynamic = 'force-dynamic'
@@ -14,8 +15,6 @@ async function apiResponseForUserFullProfileInfo() {
   const { user } = await getMaybeUserAndMethodOfMatchWithMaybeSession({
     prisma: {
       include: {
-        primaryUserCryptoAddress: true,
-        primaryUserEmailAddress: true,
         address: true,
         userActions: {
           include: {
@@ -45,12 +44,35 @@ async function apiResponseForUserFullProfileInfo() {
     },
   })
 
+  let primaryUserEmailAddress
+  let primaryUserCryptoAddress
+
+  if (user?.id) {
+    const results = await Promise.all([
+      prismaClient.userEmailAddress.findFirst({
+        where: { userId: user?.id },
+      }),
+      prismaClient.userCryptoAddress.findFirst({
+        where: { userId: user?.id },
+      }),
+    ])
+
+    primaryUserEmailAddress = results[0]
+    primaryUserCryptoAddress = results[1]
+  }
+
   return {
-    user: user && {
-      ...getSensitiveDataClientUser(user),
-      address: user.address && getClientAddress(user.address),
-      userActions: user.userActions.map(record => getSensitiveDataClientUserAction({ record })),
-    },
+    user: user &&
+      primaryUserEmailAddress &&
+      primaryUserCryptoAddress && {
+        ...getSensitiveDataClientUser({
+          ...user,
+          primaryUserEmailAddress,
+          primaryUserCryptoAddress,
+        }),
+        address: user.address && getClientAddress(user.address),
+        userActions: user.userActions.map(record => getSensitiveDataClientUserAction({ record })),
+      },
   }
 }
 
