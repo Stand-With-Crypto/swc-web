@@ -164,8 +164,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             {lastUpdated && <p className="text-sm text-fontcolor-muted">{lastUpdated}</p>}
           </div>
           <LiveStatusBadge
-            // status={raceStatus}
-            status="runoff"
+            status={raceStatus}
             winnerName={raceData?.calledCandidate ? winnerName : ''}
           />
         </div>
