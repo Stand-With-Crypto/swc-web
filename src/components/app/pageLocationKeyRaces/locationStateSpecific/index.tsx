@@ -92,18 +92,23 @@ export function LocationStateSpecific({
     stateCode,
   )
 
-  const hasCriticalElections = useMemo(() => {
-    const hasCriticalDistrict = US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.some(
-      district => {
-        return Boolean(groups.congresspeople[district]?.people.length)
-      },
-    )
+  const { hasCriticalElections, criticalElectionsCount } = useMemo(() => {
+    const criticalDistricts =
+      US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.filter(district =>
+        Boolean(groups.congresspeople[district]?.people.length),
+      ) || []
 
-    return (
-      hasCriticalDistrict ||
-      Boolean(groups.senators.length) ||
-      Boolean(groups.congresspeople['at-large']?.people.length)
-    )
+    const criticalSenatorsCount = groups.senators.length ? 1 : 0
+    const criticalAtLargeCount = groups.congresspeople['at-large']?.people.length ? 1 : 0
+
+    const hasCriticalDistrict = criticalDistricts.length > 0
+    const hasCriticalElections =
+      hasCriticalDistrict || criticalSenatorsCount > 0 || criticalAtLargeCount > 0
+
+    const criticalElectionsCount =
+      criticalDistricts.length + criticalSenatorsCount + criticalAtLargeCount
+
+    return { hasCriticalElections, criticalElectionsCount }
   }, [groups, stateCode])
 
   const raceStatus = useMemo<RaceStatus>(() => getRaceStatus(stateRaceData), [stateRaceData])
@@ -146,7 +151,7 @@ export function LocationStateSpecific({
         </div>
       </DarkHeroSection>
 
-      {stateRaceData ? (
+      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? null : (
         <div className="mt-20 space-y-20">
           <ContentSection
             className="container"
@@ -172,7 +177,7 @@ export function LocationStateSpecific({
             </div>
           </ContentSection>
         </div>
-      ) : null}
+      )}
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
         <PageTitle as="h3" className="mt-20" size="sm">
@@ -186,9 +191,17 @@ export function LocationStateSpecific({
               title={`Critical elections in ${stateName}`}
               titleProps={{ size: 'xs' }}
             >
-              <LiveResultsGrid>
+              <LiveResultsGrid
+                className={criticalElectionsCount === 1 ? 'flex items-center justify-center' : ''}
+              >
                 {!!groups.senators.length && (
-                  <LiveResultsGrid.GridItem>
+                  <LiveResultsGrid.GridItem
+                    className={
+                      criticalElectionsCount === 1
+                        ? 'items-center justify-center last:!border-r-0 lg:odd:justify-center'
+                        : ''
+                    }
+                  >
                     <KeyRaceLiveResult
                       candidates={groups.senators}
                       initialRaceData={initialRaceData || undefined}
@@ -200,7 +213,13 @@ export function LocationStateSpecific({
                 )}
 
                 {!!groups.congresspeople['at-large']?.people.length && (
-                  <LiveResultsGrid.GridItem>
+                  <LiveResultsGrid.GridItem
+                    className={
+                      criticalElectionsCount === 1
+                        ? 'items-center justify-center last:!border-r-0 lg:odd:justify-center'
+                        : ''
+                    }
+                  >
                     <KeyRaceLiveResult
                       candidates={groups.congresspeople['at-large'].people}
                       initialRaceData={initialRaceData || undefined}
@@ -217,7 +236,14 @@ export function LocationStateSpecific({
                     return null
                   }
                   return (
-                    <LiveResultsGrid.GridItem key={district}>
+                    <LiveResultsGrid.GridItem
+                      className={
+                        criticalElectionsCount === 1
+                          ? 'items-center justify-center last:!border-r-0 lg:odd:justify-center'
+                          : ''
+                      }
+                      key={district}
+                    >
                       <KeyRaceLiveResult
                         candidates={districtPeople}
                         initialRaceData={initialRaceData || undefined}

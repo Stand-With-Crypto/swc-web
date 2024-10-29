@@ -1,8 +1,19 @@
 import { cn } from '@/utils/web/cn'
 
-export function LiveResultsGrid({ children }: { children: React.ReactNode }) {
+export function LiveResultsGrid({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
   return (
-    <section className="grid grid-cols-1 divide-x-2 divide-y-2 border-b-2 border-t-2 lg:grid-cols-2">
+    <section
+      className={cn(
+        'grid grid-cols-1 divide-x-2 divide-y-2 border-b-2 border-t-2 lg:grid-cols-2',
+        className,
+      )}
+    >
       {children}
     </section>
   )
