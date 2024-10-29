@@ -12,27 +12,35 @@ interface ElectedData {
   electoralVotes?: number
 }
 
-export async function getPresidentialElectionStatus(): Promise<ElectedData | 'N/A'> {
+interface GetPresidentialElectionStatusResponse {
+  presidentElected: ElectedData | 'NOT_CALLED_YET'
+}
+
+export async function getPresidentialElectionStatus(): Promise<GetPresidentialElectionStatusResponse> {
   const presidentialData = await getDecisionDataFromRedis<PresidentialDataWithVotingResponse[]>(
     'SWC_PRESIDENTIAL_RACES_DATA',
   )
 
   const currentPresidentElected = presidentialData?.find(
-    presidentialRace => !presidentialRace.votingData?.called,
+    presidentialRace => presidentialRace.votingData?.called,
   )
 
   if (!currentPresidentElected) {
-    return 'N/A'
+    return {
+      presidentElected: 'NOT_CALLED_YET',
+    }
   }
 
   return {
-    firstName: currentPresidentElected.firstName,
-    lastName: currentPresidentElected.lastName,
-    slug: currentPresidentElected.slug,
-    party: currentPresidentElected.votingData?.partyName,
-    votes: currentPresidentElected.votingData?.votes,
-    elected: currentPresidentElected.votingData?.called ?? false,
-    percentage: currentPresidentElected.votingData?.percentage,
-    electoralVotes: currentPresidentElected.votingData?.electoralVotes,
+    presidentElected: {
+      firstName: currentPresidentElected.firstName,
+      lastName: currentPresidentElected.lastName,
+      slug: currentPresidentElected.slug,
+      party: currentPresidentElected.votingData?.partyName,
+      votes: currentPresidentElected.votingData?.votes,
+      elected: currentPresidentElected.votingData?.called ?? false,
+      percentage: currentPresidentElected.votingData?.percentage,
+      electoralVotes: currentPresidentElected.votingData?.electoralVotes,
+    },
   }
 }

@@ -13,21 +13,19 @@ interface CongressCandidate {
 }
 
 interface GetCongressElectionStatusResponse {
-  house: CongressCandidate[]
-  senate: CongressCandidate[]
+  house: CongressCandidate[] | ['NOT_CALLED_YET']
+  senate: CongressCandidate[] | ['NOT_CALLED_YET']
 }
 
-export async function getCongressElectionStatus(): Promise<
-  GetCongressElectionStatusResponse | 'N/A'
-> {
+export async function getCongressElectionStatus(): Promise<GetCongressElectionStatusResponse> {
   const [senateData, houseData] = await Promise.allSettled([
     getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_SENATE_DATA'),
     getDecisionDataFromRedis<CongressDataResponse>('SWC_ALL_HOUSE_DATA'),
   ])
 
-  const congressElectionStatus: GetCongressElectionStatusResponse = {
-    house: [],
-    senate: [],
+  const congressElectionStatus = {
+    house: [] as CongressCandidate[],
+    senate: [] as CongressCandidate[],
   }
 
   if (senateData.status === 'fulfilled') {
@@ -47,5 +45,10 @@ export async function getCongressElectionStatus(): Promise<
     })
   }
 
-  return congressElectionStatus
+  return {
+    house:
+      congressElectionStatus.house.length > 0 ? congressElectionStatus.house : ['NOT_CALLED_YET'],
+    senate:
+      congressElectionStatus.senate.length > 0 ? congressElectionStatus.senate : ['NOT_CALLED_YET'],
+  }
 }
