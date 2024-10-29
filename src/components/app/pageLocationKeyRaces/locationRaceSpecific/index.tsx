@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import { compact } from 'lodash-es'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DDHQFooter } from '@/components/app/ddhqFooter'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
@@ -25,9 +26,9 @@ import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
+import { possessive } from '@/utils/shared/possessive'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 
 interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode?: USStateCode
@@ -94,7 +95,16 @@ export function LocationRaceSpecific({
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
         </PageTitle>
-        <LoginDialogWrapper authenticatedContent={null}>
+        <LoginDialogWrapper
+          authenticatedContent={
+            // TODO: Claim I Voted NFT
+            <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
+              <Button className="mt-6 w-full max-w-xs" variant="secondary">
+                Claim I Voted NFT
+              </Button>
+            </UserActionFormVoterRegistrationDialog>
+          }
+        >
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
             Join Stand With Crypto
           </Button>
@@ -142,7 +152,7 @@ export function LocationRaceSpecific({
                   {person.stances.length ? (
                     <>
                       <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
-                        "{dtsiPersonFullName(person)} statements on crypto"
+                        {possessive(dtsiPersonFullName(person))} statements on crypto
                       </PageTitle>
                       <MaybeOverflowedStances
                         locale={locale}

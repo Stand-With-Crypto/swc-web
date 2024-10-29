@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DDHQFooter } from '@/components/app/ddhqFooter'
@@ -19,9 +20,10 @@ import {
   getCongressLiveResultOverview,
   getRaceStatus,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import {
@@ -127,17 +129,20 @@ export function LocationStateSpecific({
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}
-          {stateCode === 'MI' ? (
-            <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
-              <ExternalLink href="https://mvic.sos.state.mi.us/Voter/Index">
-                Find your poll location
-              </ExternalLink>
+          <LoginDialogWrapper
+            authenticatedContent={
+              // TODO: Claim I Voted NFT
+              <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
+                <Button className="mt-6 w-full max-w-xs" variant="secondary">
+                  Claim I Voted NFT
+                </Button>
+              </UserActionFormVoterRegistrationDialog>
+            }
+          >
+            <Button className="mt-6 w-full max-w-xs" variant="secondary">
+              Join Stand With Crypto
             </Button>
-          ) : (
-            <Button className="mt-6 w-full max-w-xs md:w-fit" variant="secondary">
-              Claim I Voted NFT
-            </Button>
-          )}
+          </LoginDialogWrapper>
         </div>
       </DarkHeroSection>
 
