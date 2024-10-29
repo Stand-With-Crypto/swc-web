@@ -7,6 +7,7 @@ interface ElectedData {
   slug: string
   party?: string
   votes?: number
+  elected: boolean
   percentage?: number
   electoralVotes?: number
 }
@@ -30,6 +31,7 @@ export async function getPresidentialElectionStatus(): Promise<ElectedData | 'N/
     slug: currentPresidentElected.slug,
     party: currentPresidentElected.votingData?.partyName,
     votes: currentPresidentElected.votingData?.votes,
+    elected: currentPresidentElected.votingData?.called ?? false,
     percentage: currentPresidentElected.votingData?.percentage,
     electoralVotes: currentPresidentElected.votingData?.electoralVotes,
   }
