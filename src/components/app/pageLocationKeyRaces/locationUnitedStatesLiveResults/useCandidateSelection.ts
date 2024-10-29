@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import * as Sentry from '@sentry/nextjs'
 
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { CandidatesWithVote, RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
@@ -75,9 +74,6 @@ export const useLiveCandidateSelection = (
     )
 
     if (!matchedCandidate) {
-      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
-        extra: { DDHQ_Candidate: ddhqCandidate, liveResultData },
-      })
       shouldFallback = true
       return null
     }
