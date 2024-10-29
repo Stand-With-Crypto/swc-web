@@ -1,8 +1,7 @@
+import { setVoterActionsCountCache } from '@/data/aggregations/getCountVoterActions'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { setVoterActionsCountCache } from '@/data/aggregations/getCountVoterActions'
 
 const UPDATE_VOTER_ACTIONS_COUNT_CACHE_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minutes.
 const UPDATE_VOTER_ACTIONS_COUNT_CACHE_CRON_JOB_FUNCTION_ID =

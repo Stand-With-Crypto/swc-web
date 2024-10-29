@@ -1,8 +1,9 @@
 import 'server-only'
 
-import { redis } from '@/utils/server/redis'
-import { prismaClient } from '@/utils/server/prismaClient'
 import { UserActionType } from '@prisma/client'
+
+import { prismaClient } from '@/utils/server/prismaClient'
+import { redis } from '@/utils/server/redis'
 
 const REDIS_KEY = 'db:count_voter_actions'
 const FALLBACK_MOCK_COUNT = 502_054

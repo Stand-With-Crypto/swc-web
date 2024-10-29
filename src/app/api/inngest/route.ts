@@ -28,6 +28,7 @@ import {
   bulkSMSCommunicationJourney,
   enqueueSMS,
 } from '@/inngest/functions/sms'
+import { updateVoterActionsCounterCacheInngestCronJob } from '@/inngest/functions/updateVoterActionsCountCacheCronJob'
 import { deleteUserActions } from '@/inngest/functions/user/deleteUserActions'
 import {
   auditUsersTotalDonationAmountUsdInngest,
@@ -38,7 +39,6 @@ import {
   backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/usersTotalDonationAmountUsd/backfill'
 import { inngest } from '@/inngest/inngest'
-import { updateVoterActionsCounterCacheInngestCronJob } from '@/inngest/functions/updateVoterActionsCountCacheCronJob'
 
 export const maxDuration = 180 // 3 minutes
 
