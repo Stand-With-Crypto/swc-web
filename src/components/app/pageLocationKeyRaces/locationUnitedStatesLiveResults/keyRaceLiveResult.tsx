@@ -215,7 +215,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               />
             ) : null}
 
-            <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-full w-[4px] -translate-x-1/2 -translate-y-1/2 transform bg-white" />
+            <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 transform bg-black" />
 
             {canShowProgress && ddhqCandidateB ? (
               <Progress
