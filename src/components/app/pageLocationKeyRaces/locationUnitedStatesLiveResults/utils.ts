@@ -55,7 +55,7 @@ export const getRaceStatus = (
 ): RaceStatus => {
   if (!raceData) return 'unknown'
 
-  let calledRace: boolean
+  let calledRace: boolean = false
   if (Array.isArray(raceData)) {
     if (raceData.length === 0) {
       return 'unknown'
@@ -74,6 +74,16 @@ export const getRaceStatus = (
     return 'runoff'
   }
 
+  let isLive: boolean = false
+  if (Array.isArray(raceData)) {
+    isLive = raceData.some(race => +race.totalVotes > 0)
+  } else {
+    isLive = +raceData.totalVotes > 0
+  }
+  if (isLive) {
+    return 'live'
+  }
+
   const now = new Date()
   let raceDate: Date
   if (Array.isArray(raceData)) {
@@ -81,7 +91,6 @@ export const getRaceStatus = (
   } else {
     raceDate = new Date(raceData?.raceDate || '2024-11-05')
   }
-
   if (isBefore(startOfDay(now), startOfDay(raceDate))) {
     return 'not-started'
   }
