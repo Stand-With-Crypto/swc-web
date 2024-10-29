@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,15 +11,15 @@
           "estimatedVotesHigh": 3191025,
           "estimatedVotesLow": 2610835,
           "estimatedVotesMid": 2900929,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Ruben",
         "id": 1074,
         "lastName": "Gallego",
         "partyName": "Democratic",
-        "votes": 1427080
+        "votes": 0
       },
       {
         "elected": false,
@@ -25,9 +27,9 @@
           "estimatedVotesHigh": 3191025,
           "estimatedVotesLow": 2610835,
           "estimatedVotesMid": 2900929,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Eduardo",
         "id": 102113,
@@ -41,15 +43,15 @@
           "estimatedVotesHigh": 3191025,
           "estimatedVotesLow": 2610835,
           "estimatedVotesMid": 2900929,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kari",
         "id": 26347,
         "lastName": "Lake",
         "partyName": "Republican",
-        "votes": 1473849
+        "votes": 0
       }
     ],
     "district": "",
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:55.507Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -68,10 +70,12 @@
     "raceDate": "2024-11-05",
     "state": "AZ",
     "stateName": "Arizona",
-    "totalVotes": 2900929,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -114,7 +118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -128,6 +132,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -170,7 +176,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:22.643Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -184,6 +190,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -242,7 +250,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:46.214Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -256,25 +264,11 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 332731,
-          "estimatedVotesLow": 272235,
-          "estimatedVotesMid": 302483,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kelly",
-        "id": 26327,
-        "lastName": "Cooper",
-        "partyName": "Republican",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -306,6 +300,22 @@
         "lastName": "Beck-Jones",
         "partyName": "Green",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 332731,
+          "estimatedVotesLow": 272235,
+          "estimatedVotesMid": 302483,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kelly",
+        "id": 26327,
+        "lastName": "Cooper",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "4",
@@ -314,7 +324,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -328,6 +338,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -337,15 +349,15 @@
           "estimatedVotesHigh": 409635,
           "estimatedVotesLow": 335155,
           "estimatedVotesMid": 372395,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Katrina",
         "id": 79262,
         "lastName": "Schaffner",
         "partyName": "Democratic",
-        "votes": 158196
+        "votes": 0
       },
       {
         "elected": false,
@@ -353,15 +365,15 @@
           "estimatedVotesHigh": 409635,
           "estimatedVotesLow": 335155,
           "estimatedVotesMid": 372395,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Andy",
         "id": 745,
         "lastName": "Biggs",
         "partyName": "Republican",
-        "votes": 214199
+        "votes": 0
       }
     ],
     "district": "5",
@@ -370,7 +382,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -380,10 +392,12 @@
     "raceDate": "2024-11-05",
     "state": "AZ",
     "stateName": "Arizona",
-    "totalVotes": 372395,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -442,7 +456,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T19:18:45.527Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -456,25 +470,11 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 281464,
-          "estimatedVotesLow": 230290,
-          "estimatedVotesMid": 255877,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Raul",
-        "id": 1071,
-        "lastName": "Grijalva",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -490,6 +490,22 @@
         "lastName": "Butierez",
         "partyName": "Republican",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 281464,
+          "estimatedVotesLow": 230290,
+          "estimatedVotesMid": 255877,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Raul",
+        "id": 1071,
+        "lastName": "Grijalva",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "7",
@@ -498,7 +514,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:40.552Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -512,6 +528,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -554,7 +572,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:18:45.527Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -568,6 +586,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -577,15 +597,15 @@
           "estimatedVotesHigh": 351218,
           "estimatedVotesLow": 287360,
           "estimatedVotesMid": 319289,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Paul",
         "id": 741,
         "lastName": "Gosar",
         "partyName": "Republican",
-        "votes": 201737
+        "votes": 0
       },
       {
         "elected": false,
@@ -593,15 +613,15 @@
           "estimatedVotesHigh": 351218,
           "estimatedVotesLow": 287360,
           "estimatedVotesMid": 319289,
-          "turnoutHigh": 90.91,
-          "turnoutLow": 111.11,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Quacy",
         "id": 79267,
         "lastName": "Smith",
         "partyName": "Democratic",
-        "votes": 117552
+        "votes": 0
       }
     ],
     "district": "9",
@@ -610,7 +630,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:50.791Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -620,7 +640,7 @@
     "raceDate": "2024-11-05",
     "state": "AZ",
     "stateName": "Arizona",
-    "totalVotes": 319289,
+    "totalVotes": 0,
     "year": 2024
   }
 ]

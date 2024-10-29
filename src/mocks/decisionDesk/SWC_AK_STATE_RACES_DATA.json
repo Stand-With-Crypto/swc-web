@@ -1,8 +1,26 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mary",
+        "id": 23403,
+        "lastName": "Peltola",
+        "partyName": "Democratic",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -45,22 +63,6 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Mary",
-        "id": 23403,
-        "lastName": "Peltola",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 349218,
-          "estimatedVotesLow": 285724,
-          "estimatedVotesMid": 317471,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
         "firstName": "Eric",
         "id": 9117,
         "lastName": "Hafner",
@@ -74,7 +76,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:18:45.527Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

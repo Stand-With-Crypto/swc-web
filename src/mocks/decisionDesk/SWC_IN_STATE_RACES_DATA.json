@@ -1,39 +1,38 @@
 [
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Jim",
+      "id": 8888,
+      "incumbent": false,
+      "lastName": "Banks",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Jim",
+        "id": 8888,
+        "lastName": "Banks",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Andrew",
-        "id": 44322,
-        "lastName": "Horning",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3084673,
-          "estimatedVotesLow": 2523825,
-          "estimatedVotesMid": 2804245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 81.28,
+          "turnoutLow": 99.34,
+          "turnoutMid": 89.4
         },
         "firstName": "Jim",
         "id": 8888,
         "lastName": "Banks",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 1459303
       },
       {
         "elected": false,
@@ -41,15 +40,31 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 81.28,
+          "turnoutLow": 99.34,
+          "turnoutMid": 89.4
         },
         "firstName": "Valerie",
         "id": 65448,
         "lastName": "McCray",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1011534
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3084673,
+          "estimatedVotesLow": 2523825,
+          "estimatedVotesMid": 2804245,
+          "turnoutHigh": 81.28,
+          "turnoutLow": 99.34,
+          "turnoutMid": 89.4
+        },
+        "firstName": "Andrew",
+        "id": 44322,
+        "lastName": "Horning",
+        "partyName": "Libertarian",
+        "votes": 36274
       }
     ],
     "district": "",
@@ -57,8 +72,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:28.388Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:58:51.745Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -68,10 +83,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 2507111,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -81,15 +98,15 @@
           "estimatedVotesHigh": 343717,
           "estimatedVotesLow": 281222,
           "estimatedVotesMid": 312469,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 59.11,
+          "turnoutLow": 72.24,
+          "turnoutMid": 65.02
         },
         "firstName": "Frank",
         "id": 12879,
         "lastName": "Mrvan",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 101747
       },
       {
         "elected": false,
@@ -97,15 +114,15 @@
           "estimatedVotesHigh": 343717,
           "estimatedVotesLow": 281222,
           "estimatedVotesMid": 312469,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 59.11,
+          "turnoutLow": 72.24,
+          "turnoutMid": 65.02
         },
         "firstName": "Dakotah",
         "id": 85018,
         "lastName": "Miskus",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 3689
       },
       {
         "elected": false,
@@ -113,15 +130,15 @@
           "estimatedVotesHigh": 343717,
           "estimatedVotesLow": 281222,
           "estimatedVotesMid": 312469,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 59.11,
+          "turnoutLow": 72.24,
+          "turnoutMid": 65.02
         },
         "firstName": "Randall",
         "id": 85014,
         "lastName": "Niemeyer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 97732
       }
     ],
     "district": "1",
@@ -130,7 +147,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:51.360Z",
+    "lastUpdated": "2024-10-28T20:56:41.951Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -140,12 +157,27 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 203168,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Rudy",
+      "id": 44319,
+      "incumbent": true,
+      "lastName": "Yakym",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Rudy",
+        "id": 44319,
+        "lastName": "Yakym",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -153,31 +185,31 @@
           "estimatedVotesHigh": 313770,
           "estimatedVotesLow": 256721,
           "estimatedVotesMid": 285245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.29,
+          "turnoutLow": 107.91,
+          "turnoutMid": 97.12
         },
         "firstName": "Lori",
         "id": 65450,
         "lastName": "Camp",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 106405
       },
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 313770,
           "estimatedVotesLow": 256721,
           "estimatedVotesMid": 285245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.29,
+          "turnoutLow": 107.91,
+          "turnoutMid": 97.12
         },
         "firstName": "Rudy",
         "id": 44319,
         "lastName": "Yakym",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 165345
       },
       {
         "elected": false,
@@ -185,15 +217,15 @@
           "estimatedVotesHigh": 313770,
           "estimatedVotesLow": 256721,
           "estimatedVotesMid": 285245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 88.29,
+          "turnoutLow": 107.91,
+          "turnoutMid": 97.12
         },
         "firstName": "William",
         "id": 44318,
         "lastName": "Henry",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 5273
       }
     ],
     "district": "2",
@@ -201,8 +233,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:58:53.604Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -212,12 +244,27 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 277023,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Marlin",
+      "id": 65802,
+      "incumbent": false,
+      "lastName": "Stutzman",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Marlin",
+        "id": 65802,
+        "lastName": "Stutzman",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -225,47 +272,47 @@
           "estimatedVotesHigh": 337279,
           "estimatedVotesLow": 275954,
           "estimatedVotesMid": 306616,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.35,
+          "turnoutLow": 112.87,
+          "turnoutMid": 99
         },
         "firstName": "Jarrad",
         "id": 85020,
         "lastName": "Lancaster",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 6199
       },
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 337279,
           "estimatedVotesLow": 275954,
           "estimatedVotesMid": 306616,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kiley",
-        "id": 65451,
-        "lastName": "Adolph",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 337279,
-          "estimatedVotesLow": 275954,
-          "estimatedVotesMid": 306616,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.35,
+          "turnoutLow": 112.87,
+          "turnoutMid": 99
         },
         "firstName": "Marlin",
         "id": 65802,
         "lastName": "Stutzman",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 193889
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 337279,
+          "estimatedVotesLow": 275954,
+          "estimatedVotesMid": 306616,
+          "turnoutHigh": 92.35,
+          "turnoutLow": 112.87,
+          "turnoutMid": 99
+        },
+        "firstName": "Kiley",
+        "id": 65451,
+        "lastName": "Adolph",
+        "partyName": "Democratic",
+        "votes": 111378
       }
     ],
     "district": "3",
@@ -273,8 +320,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:40.552Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:58:53.604Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -284,12 +331,27 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 311466,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Jim",
+      "id": 8889,
+      "incumbent": true,
+      "lastName": "Baird",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Jim",
+        "id": 8889,
+        "lastName": "Baird",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -297,31 +359,31 @@
           "estimatedVotesHigh": 356517,
           "estimatedVotesLow": 291697,
           "estimatedVotesMid": 324106,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.08,
+          "turnoutLow": 110.09,
+          "turnoutMid": 99
         },
         "firstName": "Derrick",
         "id": 65454,
         "lastName": "Holder",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 107464
       },
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 356517,
           "estimatedVotesLow": 291697,
           "estimatedVotesMid": 324106,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.08,
+          "turnoutLow": 110.09,
+          "turnoutMid": 99
         },
         "firstName": "Jim",
         "id": 8889,
         "lastName": "Baird",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 207401
       },
       {
         "elected": false,
@@ -329,15 +391,15 @@
           "estimatedVotesHigh": 356517,
           "estimatedVotesLow": 291697,
           "estimatedVotesMid": 324106,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 90.08,
+          "turnoutLow": 110.09,
+          "turnoutMid": 99
         },
         "firstName": "Ashley",
         "id": 85021,
         "lastName": "Groff",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 6274
       }
     ],
     "district": "4",
@@ -345,8 +407,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:40.552Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:58:53.604Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -356,10 +418,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 321139,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -369,15 +433,15 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.49,
+          "turnoutLow": 113.05,
+          "turnoutMid": 99
         },
         "firstName": "Deborah",
         "id": 65456,
         "lastName": "Pickett",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 150998
       },
       {
         "elected": false,
@@ -385,15 +449,15 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.49,
+          "turnoutLow": 113.05,
+          "turnoutMid": 99
         },
         "firstName": "Robby",
         "id": 102140,
         "lastName": "Slaughter",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 6983
       },
       {
         "elected": false,
@@ -401,15 +465,15 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.49,
+          "turnoutLow": 113.05,
+          "turnoutMid": 99
         },
         "firstName": "Victoria",
         "id": 12929,
         "lastName": "Spartz",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 189572
       },
       {
         "elected": false,
@@ -417,15 +481,15 @@
           "estimatedVotesHigh": 382813,
           "estimatedVotesLow": 313210,
           "estimatedVotesMid": 348011,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 92.49,
+          "turnoutLow": 113.05,
+          "turnoutMid": 99
         },
         "firstName": "Lauri",
         "id": 85022,
         "lastName": "Shillings",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 6524
       }
     ],
     "district": "5",
@@ -434,7 +498,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:28.388Z",
+    "lastUpdated": "2024-10-28T20:58:53.604Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -444,12 +508,27 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 354077,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Jefferson",
+      "id": 49079,
+      "incumbent": false,
+      "lastName": "Shreve",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Jefferson",
+        "id": 49079,
+        "lastName": "Shreve",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -457,31 +536,31 @@
           "estimatedVotesHigh": 340275,
           "estimatedVotesLow": 278409,
           "estimatedVotesMid": 309342,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.51,
+          "turnoutLow": 114.29,
+          "turnoutMid": 99
         },
         "firstName": "Cynthia",
         "id": 18707,
         "lastName": "Wirth",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 105752
       },
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 340275,
           "estimatedVotesLow": 278409,
           "estimatedVotesMid": 309342,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.51,
+          "turnoutLow": 114.29,
+          "turnoutMid": 99
         },
         "firstName": "Jefferson",
         "id": 49079,
         "lastName": "Shreve",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 206232
       },
       {
         "elected": false,
@@ -489,15 +568,15 @@
           "estimatedVotesHigh": 340275,
           "estimatedVotesLow": 278409,
           "estimatedVotesMid": 309342,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.51,
+          "turnoutLow": 114.29,
+          "turnoutMid": 99
         },
         "firstName": "James",
         "id": 44238,
         "lastName": "Sceniak",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 6210
       }
     ],
     "district": "6",
@@ -505,8 +584,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:40.552Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:58:53.604Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -516,10 +595,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 318194,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -529,31 +610,15 @@
           "estimatedVotesHigh": 298830,
           "estimatedVotesLow": 244498,
           "estimatedVotesMid": 271664,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Rusty",
-        "id": 85024,
-        "lastName": "Johnson",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 298830,
-          "estimatedVotesLow": 244498,
-          "estimatedVotesMid": 271664,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.26,
+          "turnoutLow": 113.98,
+          "turnoutMid": 99
         },
         "firstName": "John",
         "id": 18994,
         "lastName": "Schmitz",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 78263
       },
       {
         "elected": false,
@@ -561,15 +626,31 @@
           "estimatedVotesHigh": 298830,
           "estimatedVotesLow": 244498,
           "estimatedVotesMid": 271664,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 93.26,
+          "turnoutLow": 113.98,
+          "turnoutMid": 99
         },
         "firstName": "Andre",
         "id": 85023,
         "lastName": "Carson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 195275
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 298830,
+          "estimatedVotesLow": 244498,
+          "estimatedVotesMid": 271664,
+          "turnoutHigh": 93.26,
+          "turnoutLow": 113.98,
+          "turnoutMid": 99
+        },
+        "firstName": "Rusty",
+        "id": 85024,
+        "lastName": "Johnson",
+        "partyName": "Libertarian",
+        "votes": 5136
       }
     ],
     "district": "7",
@@ -578,7 +659,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T20:51:18.580Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -588,10 +669,12 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 278674,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -601,31 +684,15 @@
           "estimatedVotesHigh": 351320,
           "estimatedVotesLow": 287445,
           "estimatedVotesMid": 319381,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "K. Richard",
-        "id": 85025,
-        "lastName": "Fitzlaff",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 351320,
-          "estimatedVotesLow": 287445,
-          "estimatedVotesMid": 319381,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 67.04,
+          "turnoutLow": 81.94,
+          "turnoutMid": 73.74
         },
         "firstName": "Erik",
         "id": 65457,
         "lastName": "Hurt",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 70831
       },
       {
         "elected": false,
@@ -633,15 +700,31 @@
           "estimatedVotesHigh": 351320,
           "estimatedVotesLow": 287445,
           "estimatedVotesMid": 319381,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 67.04,
+          "turnoutLow": 81.94,
+          "turnoutMid": 73.74
+        },
+        "firstName": "K. Richard",
+        "id": 85025,
+        "lastName": "Fitzlaff",
+        "partyName": "Libertarian",
+        "votes": 4732
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 351320,
+          "estimatedVotesLow": 287445,
+          "estimatedVotesMid": 319381,
+          "turnoutHigh": 67.04,
+          "turnoutLow": 81.94,
+          "turnoutMid": 73.74
         },
         "firstName": "Mark",
         "id": 18856,
         "lastName": "Messmer",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 159962
       }
     ],
     "district": "8",
@@ -650,7 +733,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:58:53.604Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -660,60 +743,75 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 235525,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Erin",
+      "id": 18810,
+      "incumbent": true,
+      "lastName": "Houchin",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Erin",
+        "id": 18810,
+        "lastName": "Houchin",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
-        "elected": false,
+        "elected": true,
         "estimatedVotes": {
           "estimatedVotesHigh": 360017,
           "estimatedVotesLow": 294559,
           "estimatedVotesMid": 327288,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Timothy",
-        "id": 65460,
-        "lastName": "Peck",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 360017,
-          "estimatedVotesLow": 294559,
-          "estimatedVotesMid": 327288,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Russell",
-        "id": 1928,
-        "lastName": "Brooksbank",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 360017,
-          "estimatedVotesLow": 294559,
-          "estimatedVotesMid": 327288,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 91.95,
+          "turnoutLow": 112.38,
+          "turnoutMid": 99
         },
         "firstName": "Erin",
         "id": 18810,
         "lastName": "Houchin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 211873
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 360017,
+          "estimatedVotesLow": 294559,
+          "estimatedVotesMid": 327288,
+          "turnoutHigh": 91.95,
+          "turnoutLow": 112.38,
+          "turnoutMid": 99
+        },
+        "firstName": "Russell",
+        "id": 1928,
+        "lastName": "Brooksbank",
+        "partyName": "Libertarian",
+        "votes": 6695
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 360017,
+          "estimatedVotesLow": 294559,
+          "estimatedVotesMid": 327288,
+          "turnoutHigh": 91.95,
+          "turnoutLow": 112.38,
+          "turnoutMid": 99
+        },
+        "firstName": "Timothy",
+        "id": 65460,
+        "lastName": "Peck",
+        "partyName": "Democratic",
+        "votes": 112452
       }
     ],
     "district": "9",
@@ -721,8 +819,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:40.552Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:58:53.604Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -732,7 +830,7 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 331020,
     "year": 2024
   }
 ]

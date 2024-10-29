@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,9 +11,9 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 0.2,
+          "turnoutLow": 0.24,
+          "turnoutMid": 0.22
         },
         "firstName": "Lisa Blunt",
         "id": 1147,
@@ -25,15 +27,15 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 0.2,
+          "turnoutLow": 0.24,
+          "turnoutMid": 0.22
         },
         "firstName": "Michael",
         "id": 84943,
         "lastName": "Katz",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 991
       },
       {
         "elected": false,
@@ -41,9 +43,9 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 0.2,
+          "turnoutLow": 0.24,
+          "turnoutMid": 0.22
         },
         "firstName": "Eric",
         "id": 77458,
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:28.388Z",
+    "lastUpdated": "2024-10-28T20:56:07.731Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -68,10 +70,12 @@
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 991,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -81,15 +85,15 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.69,
+          "turnoutLow": 8.18,
+          "turnoutMid": 7.36
         },
         "firstName": "Sarah",
         "id": 15816,
         "lastName": "McBride",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 15997
       },
       {
         "elected": false,
@@ -97,15 +101,15 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.69,
+          "turnoutLow": 8.18,
+          "turnoutMid": 7.36
         },
         "firstName": "John",
         "id": 84468,
         "lastName": "Whalen III",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 17201
       }
     ],
     "district": "At-Large",
@@ -114,7 +118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T20:49:38.298Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -124,7 +128,7 @@
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 0,
+    "totalVotes": 33198,
     "year": 2024
   }
 ]

@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "1",
       "officeName": "President",

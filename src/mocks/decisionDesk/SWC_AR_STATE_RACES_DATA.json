@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:40.552Z",
+    "lastUpdated": "2024-10-28T19:19:54.305Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -72,25 +74,11 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 335437,
-          "estimatedVotesLow": 274447,
-          "estimatedVotesMid": 304942,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Marcus",
-        "id": 52538,
-        "lastName": "Jones",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -106,6 +94,22 @@
         "lastName": "Hill",
         "partyName": "Republican",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 335437,
+          "estimatedVotesLow": 274447,
+          "estimatedVotesMid": 304942,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Marcus",
+        "id": 52538,
+        "lastName": "Jones",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "2",
@@ -114,7 +118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:46.214Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -128,6 +132,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -186,7 +192,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -200,6 +206,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -258,7 +266,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

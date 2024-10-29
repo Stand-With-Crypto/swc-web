@@ -1,36 +1,25 @@
 [
   {
-    "calledCandidate": {
-      "firstName": "Donald J.",
-      "id": 5,
-      "incumbent": false,
-      "lastName": "Trump",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican"
-      }
-    ],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 2353142,
           "estimatedVotesLow": 1925300,
           "estimatedVotesMid": 2139218,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
+          "turnoutHigh": 3.94,
+          "turnoutLow": 4.82,
+          "turnoutMid": 4.33
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 1366964
+        "votes": 52906
       },
       {
         "elected": false,
@@ -38,15 +27,15 @@
           "estimatedVotesHigh": 2353142,
           "estimatedVotesLow": 1925300,
           "estimatedVotesMid": 2139218,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
+          "turnoutHigh": 3.94,
+          "turnoutLow": 4.82,
+          "turnoutMid": 4.33
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 777866
+        "votes": 39801
       },
       {
         "elected": false,
@@ -54,9 +43,9 @@
           "estimatedVotesHigh": 2353142,
           "estimatedVotesLow": 1925300,
           "estimatedVotesMid": 2139218,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
+          "turnoutHigh": 3.94,
+          "turnoutLow": 4.82,
+          "turnoutMid": 4.33
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -70,9 +59,9 @@
           "estimatedVotesHigh": 2353142,
           "estimatedVotesLow": 1925300,
           "estimatedVotesMid": 2139218,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
+          "turnoutHigh": 3.94,
+          "turnoutLow": 4.82,
+          "turnoutMid": 4.33
         },
         "firstName": "Jill",
         "id": 353,
@@ -86,9 +75,9 @@
           "estimatedVotesHigh": 2353142,
           "estimatedVotesLow": 1925300,
           "estimatedVotesMid": 2139218,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.4,
-          "turnoutMid": 99
+          "turnoutHigh": 3.94,
+          "turnoutLow": 4.82,
+          "turnoutMid": 4.33
         },
         "firstName": "Chase",
         "id": 14810,
@@ -102,8 +91,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:55:14.050Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -113,10 +102,12 @@
     "raceDate": "2024-11-05",
     "state": "AL",
     "stateName": "Alabama",
-    "totalVotes": 2144830,
+    "totalVotes": 92707,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -255,7 +246,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -269,6 +260,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -278,15 +271,15 @@
           "estimatedVotesHigh": 3191025,
           "estimatedVotesLow": 2610835,
           "estimatedVotesMid": 2900929,
-          "turnoutHigh": 90.9,
-          "turnoutLow": 111.1,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 54051
+        "votes": 0
       },
       {
         "elected": false,
@@ -294,15 +287,15 @@
           "estimatedVotesHigh": 3191025,
           "estimatedVotesLow": 2610835,
           "estimatedVotesMid": 2900929,
-          "turnoutHigh": 90.9,
-          "turnoutLow": 111.1,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 1394247
+        "votes": 0
       },
       {
         "elected": false,
@@ -310,15 +303,15 @@
           "estimatedVotesHigh": 3191025,
           "estimatedVotesLow": 2610835,
           "estimatedVotesMid": 2900929,
-          "turnoutHigh": 90.9,
-          "turnoutLow": 111.1,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 1396304
+        "votes": 0
       },
       {
         "elected": false,
@@ -326,15 +319,15 @@
           "estimatedVotesHigh": 3191025,
           "estimatedVotesLow": 2610835,
           "estimatedVotesMid": 2900929,
-          "turnoutHigh": 90.9,
-          "turnoutLow": 111.1,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jill",
         "id": 353,
         "lastName": "Stein",
         "partyName": "Green",
-        "votes": 56012
+        "votes": 0
       }
     ],
     "district": "",
@@ -343,7 +336,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -353,25 +346,14 @@
     "raceDate": "2024-11-05",
     "state": "AZ",
     "stateName": "Arizona",
-    "totalVotes": 2900614,
+    "totalVotes": 0,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Donald J.",
-      "id": 5,
-      "incumbent": false,
-      "lastName": "Trump",
-      "partyName": "Republican"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican"
-      }
-    ],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -379,9 +361,9 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.41,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Michael",
         "id": 104292,
@@ -390,20 +372,20 @@
         "votes": 0
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.41,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 681648
+        "votes": 0
       },
       {
         "elected": false,
@@ -411,15 +393,15 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.41,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jill",
         "id": 353,
         "lastName": "Stein",
         "partyName": "Green",
-        "votes": 21362
+        "votes": 0
       },
       {
         "elected": false,
@@ -427,9 +409,9 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.41,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -443,15 +425,15 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.41,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 21141
+        "votes": 0
       },
       {
         "elected": false,
@@ -459,9 +441,9 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.41,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Peter",
         "id": 104291,
@@ -475,15 +457,15 @@
           "estimatedVotesHigh": 1201405,
           "estimatedVotesLow": 982965,
           "estimatedVotesMid": 1092182,
-          "turnoutHigh": 91.15,
-          "turnoutLow": 111.41,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 370973
+        "votes": 0
       }
     ],
     "district": "",
@@ -491,8 +473,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -502,10 +484,12 @@
     "raceDate": "2024-11-05",
     "state": "AR",
     "stateName": "Arkansas",
-    "totalVotes": 1095124,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -612,7 +596,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -626,9 +610,59 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3094254,
+          "estimatedVotesLow": 2531661,
+          "estimatedVotesMid": 2812954,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3094254,
+          "estimatedVotesLow": 2531661,
+          "estimatedVotesMid": 2812954,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3094254,
+          "estimatedVotesLow": 2531661,
+          "estimatedVotesMid": 2812954,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -703,54 +737,6 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3094254,
-          "estimatedVotesLow": 2531661,
-          "estimatedVotesMid": 2812954,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3094254,
-          "estimatedVotesLow": 2531661,
-          "estimatedVotesMid": 2812954,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3094254,
-          "estimatedVotesLow": 2531661,
-          "estimatedVotesMid": 2812954,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
@@ -764,7 +750,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -778,6 +764,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -787,9 +775,9 @@
           "estimatedVotesHigh": 1804153,
           "estimatedVotesLow": 1476136,
           "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.43,
+          "turnoutLow": 16.42,
+          "turnoutMid": 14.78
         },
         "firstName": "Jill",
         "id": 353,
@@ -803,15 +791,15 @@
           "estimatedVotesHigh": 1804153,
           "estimatedVotesLow": 1476136,
           "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.43,
+          "turnoutLow": 16.42,
+          "turnoutMid": 14.78
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 4745
       },
       {
         "elected": false,
@@ -819,15 +807,15 @@
           "estimatedVotesHigh": 1804153,
           "estimatedVotesLow": 1476136,
           "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.43,
+          "turnoutLow": 16.42,
+          "turnoutMid": 14.78
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 92043
       },
       {
         "elected": false,
@@ -835,15 +823,15 @@
           "estimatedVotesHigh": 1804153,
           "estimatedVotesLow": 1476136,
           "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.43,
+          "turnoutLow": 16.42,
+          "turnoutMid": 14.78
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 145553
       }
     ],
     "district": "",
@@ -852,7 +840,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:07.202Z",
+    "lastUpdated": "2024-10-28T20:55:42.486Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -862,25 +850,14 @@
     "raceDate": "2024-11-05",
     "state": "CT",
     "stateName": "Connecticut",
-    "totalVotes": 0,
+    "totalVotes": 242341,
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Kamala",
-      "id": 988,
-      "incumbent": false,
-      "lastName": "Harris",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic"
-      }
-    ],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -888,9 +865,9 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 90.71,
-          "turnoutLow": 110.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Vermin",
         "id": 104293,
@@ -904,31 +881,31 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 90.71,
-          "turnoutLow": 110.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 170039
+        "votes": 0
       },
       {
-        "elected": true,
+        "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 90.71,
-          "turnoutLow": 110.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 262913
+        "votes": 0
       },
       {
         "elected": false,
@@ -936,15 +913,15 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 90.71,
-          "turnoutLow": 110.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert F.",
         "id": 69575,
         "lastName": "Kennedy Jr.",
         "partyName": "Independent",
-        "votes": 8632
+        "votes": 0
       },
       {
         "elected": false,
@@ -952,15 +929,15 @@
           "estimatedVotesHigh": 496159,
           "estimatedVotesLow": 405949,
           "estimatedVotesMid": 451054,
-          "turnoutHigh": 90.71,
-          "turnoutLow": 110.87,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 8493
+        "votes": 0
       }
     ],
     "district": "",
@@ -968,8 +945,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -979,10 +956,12 @@
     "raceDate": "2024-11-05",
     "state": "DE",
     "stateName": "Delaware",
-    "totalVotes": 450077,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1041,7 +1020,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1055,18 +1034,65 @@
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Donald J.",
+      "id": 5,
+      "incumbent": false,
+      "lastName": "Trump",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10821376,
+          "estimatedVotesLow": 8853856,
+          "estimatedVotesMid": 9837612,
+          "turnoutHigh": 78.6,
+          "turnoutLow": 96.07,
+          "turnoutMid": 86.46
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 4287897
+      },
       {
         "elected": false,
         "estimatedVotes": {
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 78.6,
+          "turnoutLow": 96.07,
+          "turnoutMid": 86.46
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 3857916
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 10821376,
+          "estimatedVotesLow": 8853856,
+          "estimatedVotesMid": 9837612,
+          "turnoutHigh": 78.6,
+          "turnoutLow": 96.07,
+          "turnoutMid": 86.46
         },
         "firstName": "Peter",
         "id": 104291,
@@ -1080,15 +1106,15 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 78.6,
+          "turnoutLow": 96.07,
+          "turnoutMid": 86.46
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 129238
       },
       {
         "elected": false,
@@ -1096,9 +1122,9 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 78.6,
+          "turnoutLow": 96.07,
+          "turnoutMid": 86.46
         },
         "firstName": "Claudia",
         "id": 84939,
@@ -1112,15 +1138,15 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 78.6,
+          "turnoutLow": 96.07,
+          "turnoutMid": 86.46
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 230602
       },
       {
         "elected": false,
@@ -1128,46 +1154,14 @@
           "estimatedVotesHigh": 10821376,
           "estimatedVotesLow": 8853856,
           "estimatedVotesMid": 9837612,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 78.6,
+          "turnoutLow": 96.07,
+          "turnoutMid": 86.46
         },
         "firstName": "Randall",
         "id": 84941,
         "lastName": "Terry",
         "partyName": "Constitution",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 10821376,
-          "estimatedVotesLow": 8853856,
-          "estimatedVotesMid": 9837612,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
         "votes": 0
       }
     ],
@@ -1176,8 +1170,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:55:43.476Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1187,12 +1181,27 @@
     "raceDate": "2024-11-05",
     "state": "FL",
     "stateName": "Florida",
-    "totalVotes": 0,
+    "totalVotes": 8505653,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Donald J.",
+      "id": 5,
+      "incumbent": false,
+      "lastName": "Trump",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1200,9 +1209,73 @@
           "estimatedVotesHigh": 5045672,
           "estimatedVotesLow": 4128279,
           "estimatedVotesMid": 4586966,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 63.48,
+          "turnoutLow": 77.59,
+          "turnoutMid": 69.83
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 1522924
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5045672,
+          "estimatedVotesLow": 4128279,
+          "estimatedVotesMid": 4586966,
+          "turnoutHigh": 63.48,
+          "turnoutLow": 77.59,
+          "turnoutMid": 69.83
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 46613
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5045672,
+          "estimatedVotesLow": 4128279,
+          "estimatedVotesMid": 4586966,
+          "turnoutHigh": 63.48,
+          "turnoutLow": 77.59,
+          "turnoutMid": 69.83
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5045672,
+          "estimatedVotesLow": 4128279,
+          "estimatedVotesMid": 4586966,
+          "turnoutHigh": 63.48,
+          "turnoutLow": 77.59,
+          "turnoutMid": 69.83
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 1550419
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5045672,
+          "estimatedVotesLow": 4128279,
+          "estimatedVotesMid": 4586966,
+          "turnoutHigh": 63.48,
+          "turnoutLow": 77.59,
+          "turnoutMid": 69.83
         },
         "firstName": "Claudia",
         "id": 84939,
@@ -1216,79 +1289,15 @@
           "estimatedVotesHigh": 5045672,
           "estimatedVotesLow": 4128279,
           "estimatedVotesMid": 4586966,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 63.48,
+          "turnoutLow": 77.59,
+          "turnoutMid": 69.83
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5045672,
-          "estimatedVotesLow": 4128279,
-          "estimatedVotesMid": 4586966,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
+        "votes": 83014
       }
     ],
     "district": "",
@@ -1296,8 +1305,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:12.873Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:55:38.010Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1307,10 +1316,12 @@
     "raceDate": "2024-11-05",
     "state": "GA",
     "stateName": "Georgia",
-    "totalVotes": 0,
+    "totalVotes": 3202970,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1417,7 +1428,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1431,9 +1442,27 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 865352,
+          "estimatedVotesLow": 708019,
+          "estimatedVotesMid": 786683,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Randall",
+        "id": 84941,
+        "lastName": "Terry",
+        "partyName": "Constitution",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -1448,6 +1477,54 @@
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 865352,
+          "estimatedVotesLow": 708019,
+          "estimatedVotesMid": 786683,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Shiva",
+        "id": 11165,
+        "lastName": "Ayyadurai",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 865352,
+          "estimatedVotesLow": 708019,
+          "estimatedVotesMid": 786683,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 865352,
+          "estimatedVotesLow": 708019,
+          "estimatedVotesMid": 786683,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
         "votes": 0
       },
       {
@@ -1476,70 +1553,6 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Shiva",
-        "id": 11165,
-        "lastName": "Ayyadurai",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Randall",
-        "id": 84941,
-        "lastName": "Terry",
-        "partyName": "Constitution",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 865352,
-          "estimatedVotesLow": 708019,
-          "estimatedVotesMid": 786683,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
@@ -1585,7 +1598,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1599,6 +1612,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1608,15 +1623,15 @@
           "estimatedVotesHigh": 6027502,
           "estimatedVotesLow": 4931602,
           "estimatedVotesMid": 5479546,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.02,
+          "turnoutLow": 11.03,
+          "turnoutMid": 9.93
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 276095
       },
       {
         "elected": false,
@@ -1624,9 +1639,9 @@
           "estimatedVotesHigh": 6027502,
           "estimatedVotesLow": 4931602,
           "estimatedVotesMid": 5479546,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.02,
+          "turnoutLow": 11.03,
+          "turnoutMid": 9.93
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -1640,15 +1655,15 @@
           "estimatedVotesHigh": 6027502,
           "estimatedVotesLow": 4931602,
           "estimatedVotesMid": 5479546,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.02,
+          "turnoutLow": 11.03,
+          "turnoutMid": 9.93
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 267809
       }
     ],
     "district": "",
@@ -1657,7 +1672,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:07.202Z",
+    "lastUpdated": "2024-10-28T20:53:16.675Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1667,12 +1682,27 @@
     "raceDate": "2024-11-05",
     "state": "IL",
     "stateName": "Illinois",
-    "totalVotes": 0,
+    "totalVotes": 543904,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Donald J.",
+      "id": 5,
+      "incumbent": false,
+      "lastName": "Trump",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1680,47 +1710,31 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3084673,
-          "estimatedVotesLow": 2523825,
-          "estimatedVotesMid": 2804245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3084673,
-          "estimatedVotesLow": 2523825,
-          "estimatedVotesMid": 2804245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 84.14,
+          "turnoutLow": 102.83,
+          "turnoutMid": 92.55
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1033621
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3084673,
+          "estimatedVotesLow": 2523825,
+          "estimatedVotesMid": 2804245,
+          "turnoutHigh": 84.14,
+          "turnoutLow": 102.83,
+          "turnoutMid": 92.55
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 1523262
       },
       {
         "elected": false,
@@ -1728,15 +1742,31 @@
           "estimatedVotesHigh": 3084673,
           "estimatedVotesLow": 2523825,
           "estimatedVotesMid": 2804245,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 84.14,
+          "turnoutLow": 102.83,
+          "turnoutMid": 92.55
         },
         "firstName": "Robert F.",
         "id": 69575,
         "lastName": "Kennedy Jr.",
         "partyName": "Independent",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3084673,
+          "estimatedVotesLow": 2523825,
+          "estimatedVotesMid": 2804245,
+          "turnoutHigh": 84.14,
+          "turnoutLow": 102.83,
+          "turnoutMid": 92.55
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 38456
       }
     ],
     "district": "",
@@ -1744,8 +1774,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:55:46.102Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1755,61 +1785,15 @@
     "raceDate": "2024-11-05",
     "state": "IN",
     "stateName": "Indiana",
-    "totalVotes": 0,
+    "totalVotes": 2595339,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1691948,
-          "estimatedVotesLow": 1384315,
-          "estimatedVotesMid": 1538129,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Shiva",
-        "id": 11165,
-        "lastName": "Ayyadurai",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1691948,
-          "estimatedVotesLow": 1384315,
-          "estimatedVotesMid": 1538129,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1691948,
-          "estimatedVotesLow": 1384315,
-          "estimatedVotesMid": 1538129,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -1873,6 +1857,54 @@
         "lastName": "Stodden",
         "partyName": "Independent",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1691948,
+          "estimatedVotesLow": 1384315,
+          "estimatedVotesMid": 1538129,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1691948,
+          "estimatedVotesLow": 1384315,
+          "estimatedVotesMid": 1538129,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1691948,
+          "estimatedVotesLow": 1384315,
+          "estimatedVotesMid": 1538129,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Shiva",
+        "id": 11165,
+        "lastName": "Ayyadurai",
+        "partyName": "Independent",
+        "votes": 0
       }
     ],
     "district": "",
@@ -1881,7 +1913,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:52.576Z",
+    "lastUpdated": "2024-10-28T19:19:47.246Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1895,6 +1927,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -1904,9 +1938,25 @@
           "estimatedVotesHigh": 1371838,
           "estimatedVotesLow": 1122414,
           "estimatedVotesMid": 1247124,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 30.82,
+          "turnoutLow": 37.67,
+          "turnoutMid": 33.91
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 8097
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1371838,
+          "estimatedVotesLow": 1122414,
+          "estimatedVotesMid": 1247124,
+          "turnoutHigh": 30.82,
+          "turnoutLow": 37.67,
+          "turnoutMid": 33.91
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -1920,15 +1970,15 @@
           "estimatedVotesHigh": 1371838,
           "estimatedVotesLow": 1122414,
           "estimatedVotesMid": 1247124,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 30.82,
+          "turnoutLow": 37.67,
+          "turnoutMid": 33.91
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 187814
       },
       {
         "elected": false,
@@ -1936,31 +1986,15 @@
           "estimatedVotesHigh": 1371838,
           "estimatedVotesLow": 1122414,
           "estimatedVotesMid": 1247124,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 30.82,
+          "turnoutLow": 37.67,
+          "turnoutMid": 33.91
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1371838,
-          "estimatedVotesLow": 1122414,
-          "estimatedVotesMid": 1247124,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
+        "votes": 226947
       }
     ],
     "district": "",
@@ -1969,7 +2003,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "lastUpdated": "2024-10-28T20:55:30.438Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -1979,12 +2013,27 @@
     "raceDate": "2024-11-05",
     "state": "KS",
     "stateName": "Kansas",
-    "totalVotes": 0,
+    "totalVotes": 422858,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Donald J.",
+      "id": 5,
+      "incumbent": false,
+      "lastName": "Trump",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -1992,15 +2041,31 @@
           "estimatedVotesHigh": 2161899,
           "estimatedVotesLow": 1768828,
           "estimatedVotesMid": 1965357,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 76.01,
+          "turnoutLow": 92.9,
+          "turnoutMid": 83.61
         },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
         "votes": 0
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2161899,
+          "estimatedVotesLow": 1768828,
+          "estimatedVotesMid": 1965357,
+          "turnoutHigh": 76.01,
+          "turnoutLow": 92.9,
+          "turnoutMid": 83.61
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 1073073
       },
       {
         "elected": false,
@@ -2008,9 +2073,9 @@
           "estimatedVotesHigh": 2161899,
           "estimatedVotesLow": 1768828,
           "estimatedVotesMid": 1965357,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 76.01,
+          "turnoutLow": 92.9,
+          "turnoutMid": 83.61
         },
         "firstName": "Chase",
         "id": 14810,
@@ -2024,9 +2089,25 @@
           "estimatedVotesHigh": 2161899,
           "estimatedVotesLow": 1768828,
           "estimatedVotesMid": 1965357,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 76.01,
+          "turnoutLow": 92.9,
+          "turnoutMid": 83.61
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2161899,
+          "estimatedVotesLow": 1768828,
+          "estimatedVotesMid": 1965357,
+          "turnoutHigh": 76.01,
+          "turnoutLow": 92.9,
+          "turnoutMid": 83.61
         },
         "firstName": "Shiva",
         "id": 11165,
@@ -2040,47 +2121,15 @@
           "estimatedVotesHigh": 2161899,
           "estimatedVotesLow": 1768828,
           "estimatedVotesMid": 1965357,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 76.01,
+          "turnoutLow": 92.9,
+          "turnoutMid": 83.61
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2161899,
-          "estimatedVotesLow": 1768828,
-          "estimatedVotesMid": 1965357,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2161899,
-          "estimatedVotesLow": 1768828,
-          "estimatedVotesMid": 1965357,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 570191
       }
     ],
     "district": "",
@@ -2088,8 +2137,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:55:23.637Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -2099,10 +2148,12 @@
     "raceDate": "2024-11-05",
     "state": "KY",
     "stateName": "Kentucky",
-    "totalVotes": 0,
+    "totalVotes": 1643264,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2180,9 +2231,9 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
+        "firstName": "Rachele",
+        "id": 104297,
+        "lastName": "Fruit",
         "partyName": "Independent",
         "votes": 0
       },
@@ -2196,10 +2247,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
         "votes": 0
       },
       {
@@ -2228,9 +2279,9 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Rachele",
-        "id": 104297,
-        "lastName": "Fruit",
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
         "partyName": "Independent",
         "votes": 0
       },
@@ -2244,10 +2295,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
         "votes": 0
       },
       {
@@ -2289,7 +2340,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -2303,21 +2354,10 @@
     "year": 2024
   },
   {
-    "calledCandidate": {
-      "firstName": "Kamala",
-      "id": 988,
-      "incumbent": false,
-      "lastName": "Harris",
-      "partyName": "Democratic"
-    },
-    "calledCandidates": [
-      {
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic"
-      }
-    ],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -2325,15 +2365,15 @@
           "estimatedVotesHigh": 820431,
           "estimatedVotesLow": 671246,
           "estimatedVotesMid": 745811,
-          "turnoutHigh": 29.32,
-          "turnoutLow": 35.83,
-          "turnoutMid": 32.25
+          "turnoutHigh": 3.41,
+          "turnoutLow": 4.17,
+          "turnoutMid": 3.75
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 4039
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 12819
       },
       {
         "elected": false,
@@ -2341,9 +2381,41 @@
           "estimatedVotesHigh": 820431,
           "estimatedVotesLow": 671246,
           "estimatedVotesMid": 745811,
-          "turnoutHigh": 29.32,
-          "turnoutLow": 35.83,
-          "turnoutMid": 32.25
+          "turnoutHigh": 3.41,
+          "turnoutLow": 4.17,
+          "turnoutMid": 3.75
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 472
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 820431,
+          "estimatedVotesLow": 671246,
+          "estimatedVotesMid": 745811,
+          "turnoutHigh": 3.41,
+          "turnoutLow": 4.17,
+          "turnoutMid": 3.75
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 474
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 820431,
+          "estimatedVotesLow": 671246,
+          "estimatedVotesMid": 745811,
+          "turnoutHigh": 3.41,
+          "turnoutLow": 4.17,
+          "turnoutMid": 3.75
         },
         "firstName": "Cornel",
         "id": 84938,
@@ -2357,47 +2429,15 @@
           "estimatedVotesHigh": 820431,
           "estimatedVotesLow": 671246,
           "estimatedVotesMid": 745811,
-          "turnoutHigh": 29.32,
-          "turnoutLow": 35.83,
-          "turnoutMid": 32.25
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 4033
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 820431,
-          "estimatedVotesLow": 671246,
-          "estimatedVotesMid": 745811,
-          "turnoutHigh": 29.32,
-          "turnoutLow": 35.83,
-          "turnoutMid": 32.25
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 108323
-      },
-      {
-        "elected": true,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 820431,
-          "estimatedVotesLow": 671246,
-          "estimatedVotesMid": 745811,
-          "turnoutHigh": 29.32,
-          "turnoutLow": 35.83,
-          "turnoutMid": 32.25
+          "turnoutHigh": 3.41,
+          "turnoutLow": 4.17,
+          "turnoutMid": 3.75
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 124145
+        "votes": 14201
       }
     ],
     "district": "",
@@ -2405,8 +2445,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": true,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:55:48.036Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -2416,10 +2456,12 @@
     "raceDate": "2024-11-05",
     "state": "ME",
     "stateName": "Maine",
-    "totalVotes": 240540,
+    "totalVotes": 27966,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2429,9 +2471,9 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.46,
+          "turnoutLow": 1.79,
+          "turnoutMid": 1.61
         },
         "firstName": "Jill",
         "id": 353,
@@ -2445,15 +2487,15 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.46,
+          "turnoutLow": 1.79,
+          "turnoutMid": 1.61
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 17899
       },
       {
         "elected": false,
@@ -2461,9 +2503,9 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.46,
+          "turnoutLow": 1.79,
+          "turnoutMid": 1.61
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -2477,15 +2519,15 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.46,
+          "turnoutLow": 1.79,
+          "turnoutMid": 1.61
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 25760
       },
       {
         "elected": false,
@@ -2493,15 +2535,15 @@
           "estimatedVotesHigh": 3040430,
           "estimatedVotesLow": 2487627,
           "estimatedVotesMid": 2764028,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.46,
+          "turnoutLow": 1.79,
+          "turnoutMid": 1.61
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 871
       }
     ],
     "district": "",
@@ -2510,7 +2552,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:28.388Z",
+    "lastUpdated": "2024-10-28T20:54:44.301Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -2520,10 +2562,12 @@
     "raceDate": "2024-11-05",
     "state": "MD",
     "stateName": "Maryland",
-    "totalVotes": 0,
+    "totalVotes": 44530,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2533,15 +2577,15 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.22,
+          "turnoutLow": 1.49,
+          "turnoutMid": 1.34
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 24925
       },
       {
         "elected": false,
@@ -2549,25 +2593,9 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3625935,
-          "estimatedVotesLow": 2966685,
-          "estimatedVotesMid": 3296293,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.22,
+          "turnoutLow": 1.49,
+          "turnoutMid": 1.34
         },
         "firstName": "Shiva",
         "id": 11165,
@@ -2581,15 +2609,15 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.22,
+          "turnoutLow": 1.49,
+          "turnoutMid": 1.34
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 822
       },
       {
         "elected": false,
@@ -2597,9 +2625,25 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.22,
+          "turnoutLow": 1.49,
+          "turnoutMid": 1.34
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 18562
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3625935,
+          "estimatedVotesLow": 2966685,
+          "estimatedVotesMid": 3296293,
+          "turnoutHigh": 1.22,
+          "turnoutLow": 1.49,
+          "turnoutMid": 1.34
         },
         "firstName": "Claudia",
         "id": 84939,
@@ -2613,9 +2657,9 @@
           "estimatedVotesHigh": 3625935,
           "estimatedVotesLow": 2966685,
           "estimatedVotesMid": 3296293,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 1.22,
+          "turnoutLow": 1.49,
+          "turnoutMid": 1.34
         },
         "firstName": "Jill",
         "id": 353,
@@ -2630,7 +2674,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T20:55:14.050Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -2640,10 +2684,12 @@
     "raceDate": "2024-11-05",
     "state": "MA",
     "stateName": "Massachusetts",
-    "totalVotes": 0,
+    "totalVotes": 44309,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2653,9 +2699,57 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 262561
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5578833,
+          "estimatedVotesLow": 4564498,
+          "estimatedVotesMid": 5071660,
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 220401
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5578833,
+          "estimatedVotesLow": 4564498,
+          "estimatedVotesMid": 5071660,
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 7387
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5578833,
+          "estimatedVotesLow": 4564498,
+          "estimatedVotesMid": 5071660,
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
         },
         "firstName": "Cornel",
         "id": 84938,
@@ -2669,9 +2763,25 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 15215
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5578833,
+          "estimatedVotesLow": 4564498,
+          "estimatedVotesMid": 5071660,
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
         },
         "firstName": "Joseph",
         "id": 105868,
@@ -2685,6 +2795,64 @@
           "estimatedVotesHigh": 5578833,
           "estimatedVotesLow": 4564498,
           "estimatedVotesMid": 5071660,
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 52562
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5578833,
+          "estimatedVotesLow": 4564498,
+          "estimatedVotesMid": 5071660,
+          "turnoutHigh": 10,
+          "turnoutLow": 12.23,
+          "turnoutMid": 11
+        },
+        "firstName": "Randall",
+        "id": 84940,
+        "lastName": "Terry",
+        "partyName": "US Taxpayers",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:55:14.050Z",
+    "office": {
+      "officeId": "1",
+      "officeName": "President",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "MI",
+    "stateName": "Michigan",
+    "totalVotes": 558126,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3289032,
+          "estimatedVotesLow": 2691028,
+          "estimatedVotesMid": 2990027,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
@@ -2698,9 +2866,25 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5578833,
-          "estimatedVotesLow": 4564498,
-          "estimatedVotesMid": 5071660,
+          "estimatedVotesHigh": 3289032,
+          "estimatedVotesLow": 2691028,
+          "estimatedVotesMid": 2990027,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3289032,
+          "estimatedVotesLow": 2691028,
+          "estimatedVotesMid": 2990027,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
@@ -2714,41 +2898,9 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5578833,
-          "estimatedVotesLow": 4564498,
-          "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5578833,
-          "estimatedVotesLow": 4564498,
-          "estimatedVotesMid": 5071660,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Randall",
-        "id": 84940,
-        "lastName": "Terry",
-        "partyName": "US Taxpayers",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5578833,
-          "estimatedVotesLow": 4564498,
-          "estimatedVotesMid": 5071660,
+          "estimatedVotesHigh": 3289032,
+          "estimatedVotesLow": 2691028,
+          "estimatedVotesMid": 2990027,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
@@ -2762,100 +2914,12 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 5578833,
-          "estimatedVotesLow": 4564498,
-          "estimatedVotesMid": 5071660,
+          "estimatedVotesHigh": 3289032,
+          "estimatedVotesLow": 2691028,
+          "estimatedVotesMid": 2990027,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:22.643Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "MI",
-    "stateName": "Michigan",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 1492822
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
         },
         "firstName": "Rachele",
         "id": 104297,
@@ -2869,25 +2933,9 @@
           "estimatedVotesHigh": 3289032,
           "estimatedVotesLow": 2691028,
           "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shiva",
         "id": 11165,
@@ -2901,9 +2949,25 @@
           "estimatedVotesHigh": 3289032,
           "estimatedVotesLow": 2691028,
           "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3289032,
+          "estimatedVotesLow": 2691028,
+          "estimatedVotesMid": 2990027,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -2917,31 +2981,15 @@
           "estimatedVotesHigh": 3289032,
           "estimatedVotesLow": 2691028,
           "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3289032,
-          "estimatedVotesLow": 2691028,
-          "estimatedVotesMid": 2990027,
-          "turnoutHigh": 93.78,
-          "turnoutLow": 114.62,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 1591734
       }
     ],
     "district": "",
@@ -2950,7 +2998,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -2960,10 +3008,12 @@
     "raceDate": "2024-11-05",
     "state": "MN",
     "stateName": "Minnesota",
-    "totalVotes": 3084556,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -2973,14 +3023,14 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
         "votes": 0
       },
       {
@@ -2989,9 +3039,41 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 3414
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 67687
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1317049,
+          "estimatedVotesLow": 1077582,
+          "estimatedVotesMid": 1197312,
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
         "firstName": "Claudia",
         "id": 84939,
@@ -3005,47 +3087,15 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1317049,
-          "estimatedVotesLow": 1077582,
-          "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1317049,
-          "estimatedVotesLow": 1077582,
-          "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 102346
       },
       {
         "elected": false,
@@ -3053,9 +3103,9 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -3069,15 +3119,15 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
         "firstName": "Randall",
         "id": 84941,
         "lastName": "Terry",
         "partyName": "Constitution",
-        "votes": 0
+        "votes": 3421
       },
       {
         "elected": false,
@@ -3085,15 +3135,15 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
         "firstName": "Jill",
         "id": 353,
         "lastName": "Stein",
         "partyName": "Green",
-        "votes": 0
+        "votes": 3386
       },
       {
         "elected": false,
@@ -3101,9 +3151,9 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
         "firstName": "Shiva",
         "id": 11165,
@@ -3117,9 +3167,9 @@
           "estimatedVotesHigh": 1317049,
           "estimatedVotesLow": 1077582,
           "estimatedVotesMid": 1197312,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 13.69,
+          "turnoutLow": 16.73,
+          "turnoutMid": 15.05
         },
         "firstName": "Peter",
         "id": 104291,
@@ -3134,7 +3184,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:20.752Z",
+    "lastUpdated": "2024-10-28T20:55:14.050Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3144,10 +3194,12 @@
     "raceDate": "2024-11-05",
     "state": "MS",
     "stateName": "Mississippi",
-    "totalVotes": 0,
+    "totalVotes": 180254,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3157,31 +3209,15 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3040461,
-          "estimatedVotesLow": 2487647,
-          "estimatedVotesMid": 2764049,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 17.4,
+          "turnoutLow": 21.27,
+          "turnoutMid": 19.14
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 260274
       },
       {
         "elected": false,
@@ -3189,9 +3225,9 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 17.4,
+          "turnoutLow": 21.27,
+          "turnoutMid": 19.14
         },
         "firstName": "Jill",
         "id": 353,
@@ -3205,15 +3241,31 @@
           "estimatedVotesHigh": 3040461,
           "estimatedVotesLow": 2487647,
           "estimatedVotesMid": 2764049,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 17.4,
+          "turnoutLow": 21.27,
+          "turnoutMid": 19.14
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 258517
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3040461,
+          "estimatedVotesLow": 2487647,
+          "estimatedVotesMid": 2764049,
+          "turnoutHigh": 17.4,
+          "turnoutLow": 21.27,
+          "turnoutMid": 19.14
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 10310
       }
     ],
     "district": "",
@@ -3222,7 +3274,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:20.752Z",
+    "lastUpdated": "2024-10-28T20:55:14.050Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3232,10 +3284,12 @@
     "raceDate": "2024-11-05",
     "state": "MO",
     "stateName": "Missouri",
-    "totalVotes": 0,
+    "totalVotes": 529101,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3281,6 +3335,22 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 599037,
+          "estimatedVotesLow": 490118,
+          "estimatedVotesMid": 544574,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
         "firstName": "Jill",
         "id": 353,
         "lastName": "Stein",
@@ -3302,22 +3372,6 @@
         "lastName": "Harris",
         "partyName": "Democratic",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 599037,
-          "estimatedVotesLow": 490118,
-          "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
       }
     ],
     "district": "",
@@ -3326,7 +3380,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:12.873Z",
+    "lastUpdated": "2024-10-28T19:19:54.305Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3340,6 +3394,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3349,15 +3405,15 @@
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 16958
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3365,25 +3421,9 @@
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 510617
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 956991,
-          "estimatedVotesLow": 782995,
-          "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jill",
         "id": 353,
@@ -3397,15 +3437,15 @@
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 327720
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 0
       },
       {
         "elected": false,
@@ -3413,14 +3453,30 @@
           "estimatedVotesHigh": 956991,
           "estimatedVotesLow": 782995,
           "estimatedVotesMid": 869987,
-          "turnoutHigh": 89.37,
-          "turnoutLow": 109.23,
-          "turnoutMid": 98.31
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cornel",
         "id": 84938,
         "lastName": "West",
         "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 956991,
+          "estimatedVotesLow": 782995,
+          "estimatedVotesMid": 869987,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
         "votes": 0
       }
     ],
@@ -3430,7 +3486,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3440,13 +3496,31 @@
     "raceDate": "2024-11-05",
     "state": "NE",
     "stateName": "Nebraska",
-    "totalVotes": 855295,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1323302,
+          "estimatedVotesLow": 1082703,
+          "estimatedVotesMid": 1203002,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -3489,22 +3563,6 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1323302,
-          "estimatedVotesLow": 1082703,
-          "estimatedVotesMid": 1203002,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
@@ -3518,7 +3576,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "lastUpdated": "2024-10-28T19:19:54.305Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3532,6 +3590,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3541,46 +3601,30 @@
           "estimatedVotesHigh": 826144,
           "estimatedVotesLow": 675940,
           "estimatedVotesMid": 751030,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 826144,
-          "estimatedVotesLow": 675940,
-          "estimatedVotesMid": 751030,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 826144,
-          "estimatedVotesLow": 675940,
-          "estimatedVotesMid": 751030,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 66.93,
+          "turnoutLow": 81.8,
+          "turnoutMid": 73.62
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
+        "votes": 257927
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 826144,
+          "estimatedVotesLow": 675940,
+          "estimatedVotesMid": 751030,
+          "turnoutHigh": 66.93,
+          "turnoutLow": 81.8,
+          "turnoutMid": 73.62
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
         "votes": 0
       },
       {
@@ -3589,14 +3633,30 @@
           "estimatedVotesHigh": 826144,
           "estimatedVotesLow": 675940,
           "estimatedVotesMid": 751030,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 66.93,
+          "turnoutLow": 81.8,
+          "turnoutMid": 73.62
         },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 295017
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 826144,
+          "estimatedVotesLow": 675940,
+          "estimatedVotesMid": 751030,
+          "turnoutHigh": 66.93,
+          "turnoutLow": 81.8,
+          "turnoutMid": 73.62
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
         "votes": 0
       }
     ],
@@ -3606,7 +3666,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T20:55:48.154Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3616,10 +3676,12 @@
     "raceDate": "2024-11-05",
     "state": "NH",
     "stateName": "New Hampshire",
-    "totalVotes": 0,
+    "totalVotes": 552944,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3629,57 +3691,9 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Joseph",
-        "id": 105868,
-        "lastName": "Kishore",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Randall",
-        "id": 84941,
-        "lastName": "Terry",
-        "partyName": "Constitution",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4687094,
-          "estimatedVotesLow": 3834894,
-          "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
         "firstName": "Rachele",
         "id": 104297,
@@ -3693,14 +3707,30 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
         "firstName": "Robert F.",
         "id": 69575,
         "lastName": "Kennedy Jr.",
         "partyName": "Independent",
+        "votes": 7976
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4687094,
+          "estimatedVotesLow": 3834894,
+          "estimatedVotesMid": 4260993,
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
+        },
+        "firstName": "Randall",
+        "id": 84941,
+        "lastName": "Terry",
+        "partyName": "Constitution",
         "votes": 0
       },
       {
@@ -3709,9 +3739,9 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
         "firstName": "Chase",
         "id": 14810,
@@ -3725,9 +3755,9 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
         "firstName": "Jill",
         "id": 353,
@@ -3741,14 +3771,46 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
+        "votes": 223290
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4687094,
+          "estimatedVotesLow": 3834894,
+          "estimatedVotesMid": 4260993,
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 167743
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4687094,
+          "estimatedVotesLow": 3834894,
+          "estimatedVotesMid": 4260993,
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
+        },
+        "firstName": "Joseph",
+        "id": 105868,
+        "lastName": "Kishore",
+        "partyName": "Independent",
         "votes": 0
       },
       {
@@ -3757,14 +3819,14 @@
           "estimatedVotesHigh": 4687094,
           "estimatedVotesLow": 3834894,
           "estimatedVotesMid": 4260993,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.51,
+          "turnoutLow": 10.4,
+          "turnoutMid": 9.36
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
         "votes": 0
       }
     ],
@@ -3774,7 +3836,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T20:54:44.301Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3784,10 +3846,12 @@
     "raceDate": "2024-11-05",
     "state": "NJ",
     "stateName": "New Jersey",
-    "totalVotes": 0,
+    "totalVotes": 399009,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3805,22 +3869,6 @@
         "id": 69575,
         "lastName": "Kennedy Jr.",
         "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 902128,
-          "estimatedVotesLow": 738105,
-          "estimatedVotesMid": 820114,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
         "votes": 0
       },
       {
@@ -3865,6 +3913,22 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 902128,
+          "estimatedVotesLow": 738105,
+          "estimatedVotesMid": 820114,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
@@ -3910,7 +3974,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:46.214Z",
+    "lastUpdated": "2024-10-28T19:19:54.305Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3924,6 +3988,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3966,7 +4032,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:19:54.305Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -3980,6 +4046,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -3989,9 +4057,25 @@
           "estimatedVotesHigh": 5454855,
           "estimatedVotesLow": 4463064,
           "estimatedVotesMid": 4958956,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.17,
+          "turnoutLow": 75.99,
+          "turnoutMid": 68.39
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 1594034
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5454855,
+          "estimatedVotesLow": 4463064,
+          "estimatedVotesMid": 4958956,
+          "turnoutHigh": 62.17,
+          "turnoutLow": 75.99,
+          "turnoutMid": 68.39
         },
         "firstName": "Randall",
         "id": 84941,
@@ -4005,31 +4089,15 @@
           "estimatedVotesHigh": 5454855,
           "estimatedVotesLow": 4463064,
           "estimatedVotesMid": 4958956,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.17,
+          "turnoutLow": 75.99,
+          "turnoutMid": 68.39
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1738187
       },
       {
         "elected": false,
@@ -4037,15 +4105,15 @@
           "estimatedVotesHigh": 5454855,
           "estimatedVotesLow": 4463064,
           "estimatedVotesMid": 4958956,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.17,
+          "turnoutLow": 75.99,
+          "turnoutMid": 68.39
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 55123
       },
       {
         "elected": false,
@@ -4053,31 +4121,31 @@
           "estimatedVotesHigh": 5454855,
           "estimatedVotesLow": 4463064,
           "estimatedVotesMid": 4958956,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 5454855,
-          "estimatedVotesLow": 4463064,
-          "estimatedVotesMid": 4958956,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 62.17,
+          "turnoutLow": 75.99,
+          "turnoutMid": 68.39
         },
         "firstName": "Cornel",
         "id": 84938,
         "lastName": "West",
         "partyName": "Independent",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 5454855,
+          "estimatedVotesLow": 4463064,
+          "estimatedVotesMid": 4958956,
+          "turnoutHigh": 62.17,
+          "turnoutLow": 75.99,
+          "turnoutMid": 68.39
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 3995
       }
     ],
     "district": "",
@@ -4086,7 +4154,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:46.214Z",
+    "lastUpdated": "2024-10-28T20:55:39.590Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4096,10 +4164,12 @@
     "raceDate": "2024-11-05",
     "state": "NC",
     "stateName": "North Carolina",
-    "totalVotes": 0,
+    "totalVotes": 3391339,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -4129,10 +4199,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
         "votes": 0
       },
       {
@@ -4145,10 +4215,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
         "votes": 0
       }
     ],
@@ -4158,7 +4228,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T19:20:09.296Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4172,6 +4242,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -4181,15 +4253,15 @@
           "estimatedVotesHigh": 6039891,
           "estimatedVotesLow": 4941728,
           "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.73,
+          "turnoutLow": 62,
+          "turnoutMid": 55.8
         },
-        "firstName": "Peter",
-        "id": 104291,
-        "lastName": "Sonski",
-        "partyName": "Independent",
-        "votes": 0
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 1688206
       },
       {
         "elected": false,
@@ -4197,25 +4269,9 @@
           "estimatedVotesHigh": 6039891,
           "estimatedVotesLow": 4941728,
           "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 6039891,
-          "estimatedVotesLow": 4941728,
-          "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.73,
+          "turnoutLow": 62,
+          "turnoutMid": 55.8
         },
         "firstName": "Richard",
         "id": 15609,
@@ -4229,14 +4285,14 @@
           "estimatedVotesHigh": 6039891,
           "estimatedVotesLow": 4941728,
           "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.73,
+          "turnoutLow": 62,
+          "turnoutMid": 55.8
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
+        "firstName": "Peter",
+        "id": 104291,
+        "lastName": "Sonski",
+        "partyName": "Independent",
         "votes": 0
       },
       {
@@ -4245,15 +4301,31 @@
           "estimatedVotesHigh": 6039891,
           "estimatedVotesLow": 4941728,
           "estimatedVotesMid": 5490807,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 50.73,
+          "turnoutLow": 62,
+          "turnoutMid": 55.8
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 6039891,
+          "estimatedVotesLow": 4941728,
+          "estimatedVotesMid": 5490807,
+          "turnoutHigh": 50.73,
+          "turnoutLow": 62,
+          "turnoutMid": 55.8
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 1375825
       }
     ],
     "district": "",
@@ -4262,7 +4334,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T20:55:48.766Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4272,10 +4344,12 @@
     "raceDate": "2024-11-05",
     "state": "OH",
     "stateName": "Ohio",
-    "totalVotes": 0,
+    "totalVotes": 3064031,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -4285,15 +4359,15 @@
           "estimatedVotesHigh": 1548417,
           "estimatedVotesLow": 1266898,
           "estimatedVotesMid": 1407653,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.92,
+          "turnoutLow": 7.24,
+          "turnoutMid": 6.51
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 30259
       },
       {
         "elected": false,
@@ -4301,31 +4375,15 @@
           "estimatedVotesHigh": 1548417,
           "estimatedVotesLow": 1266898,
           "estimatedVotesMid": 1407653,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1548417,
-          "estimatedVotesLow": 1266898,
-          "estimatedVotesMid": 1407653,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.92,
+          "turnoutLow": 7.24,
+          "turnoutMid": 6.51
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 57898
       },
       {
         "elected": false,
@@ -4333,15 +4391,31 @@
           "estimatedVotesHigh": 1548417,
           "estimatedVotesLow": 1266898,
           "estimatedVotesMid": 1407653,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.92,
+          "turnoutLow": 7.24,
+          "turnoutMid": 6.51
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 1796
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1548417,
+          "estimatedVotesLow": 1266898,
+          "estimatedVotesMid": 1407653,
+          "turnoutHigh": 5.92,
+          "turnoutLow": 7.24,
+          "turnoutMid": 6.51
         },
         "firstName": "Robert F.",
         "id": 69575,
         "lastName": "Kennedy Jr.",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 1750
       },
       {
         "elected": false,
@@ -4349,9 +4423,9 @@
           "estimatedVotesHigh": 1548417,
           "estimatedVotesLow": 1266898,
           "estimatedVotesMid": 1407653,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 5.92,
+          "turnoutLow": 7.24,
+          "turnoutMid": 6.51
         },
         "firstName": "Chris",
         "id": 105870,
@@ -4366,7 +4440,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:12.873Z",
+    "lastUpdated": "2024-10-28T20:55:33.068Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4376,10 +4450,12 @@
     "raceDate": "2024-11-05",
     "state": "OK",
     "stateName": "Oklahoma",
-    "totalVotes": 0,
+    "totalVotes": 91703,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -4389,9 +4465,57 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 90.78,
-          "turnoutLow": 110.95,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2348348,
+          "estimatedVotesLow": 1921375,
+          "estimatedVotesMid": 2134860,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Randall",
+        "id": 84941,
+        "lastName": "Terry",
+        "partyName": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2348348,
+          "estimatedVotesLow": 1921375,
+          "estimatedVotesMid": 2134860,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2348348,
+          "estimatedVotesLow": 1921375,
+          "estimatedVotesMid": 2134860,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -4405,63 +4529,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 90.78,
-          "turnoutLow": 110.95,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 843248
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2348348,
-          "estimatedVotesLow": 1921375,
-          "estimatedVotesMid": 2134860,
-          "turnoutHigh": 90.78,
-          "turnoutLow": 110.95,
-          "turnoutMid": 99
-        },
-        "firstName": "Randall",
-        "id": 84941,
-        "lastName": "Terry",
-        "partyName": "Constitution",
-        "votes": 39124
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2348348,
-          "estimatedVotesLow": 1921375,
-          "estimatedVotesMid": 2134860,
-          "turnoutHigh": 90.78,
-          "turnoutLow": 110.95,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 1131130
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2348348,
-          "estimatedVotesLow": 1921375,
-          "estimatedVotesMid": 2134860,
-          "turnoutHigh": 90.78,
-          "turnoutLow": 110.95,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Jill",
         "id": 353,
         "lastName": "Stein",
         "partyName": "Green",
-        "votes": 39130
+        "votes": 0
       },
       {
         "elected": false,
@@ -4469,15 +4545,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 90.78,
-          "turnoutLow": 110.95,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 39848
+        "votes": 0
       },
       {
         "elected": false,
@@ -4485,15 +4561,15 @@
           "estimatedVotesHigh": 2348348,
           "estimatedVotesLow": 1921375,
           "estimatedVotesMid": 2134860,
-          "turnoutHigh": 90.78,
-          "turnoutLow": 110.95,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cornel",
         "id": 84938,
         "lastName": "West",
         "partyName": "Independent",
-        "votes": 39260
+        "votes": 0
       }
     ],
     "district": "",
@@ -4502,7 +4578,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4512,10 +4588,12 @@
     "raceDate": "2024-11-05",
     "state": "OR",
     "stateName": "Oregon",
-    "totalVotes": 2131740,
+    "totalVotes": 0,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -4525,9 +4603,9 @@
           "estimatedVotesHigh": 6945189,
           "estimatedVotesLow": 5682427,
           "estimatedVotesMid": 6313806,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 25.98,
+          "turnoutLow": 31.75,
+          "turnoutMid": 28.58
         },
         "firstName": "Jill",
         "id": 353,
@@ -4541,15 +4619,15 @@
           "estimatedVotesHigh": 6945189,
           "estimatedVotesLow": 5682427,
           "estimatedVotesMid": 6313806,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 25.98,
+          "turnoutLow": 31.75,
+          "turnoutMid": 28.58
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 578383
       },
       {
         "elected": false,
@@ -4557,15 +4635,15 @@
           "estimatedVotesHigh": 6945189,
           "estimatedVotesLow": 5682427,
           "estimatedVotesMid": 6313806,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 25.98,
+          "turnoutLow": 31.75,
+          "turnoutMid": 28.58
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 1225857
       },
       {
         "elected": false,
@@ -4573,9 +4651,9 @@
           "estimatedVotesHigh": 6945189,
           "estimatedVotesLow": 5682427,
           "estimatedVotesMid": 6313806,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 25.98,
+          "turnoutLow": 31.75,
+          "turnoutMid": 28.58
         },
         "firstName": "Chase",
         "id": 14810,
@@ -4590,7 +4668,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T20:55:18.717Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4600,10 +4678,12 @@
     "raceDate": "2024-11-05",
     "state": "PA",
     "stateName": "Pennsylvania",
-    "totalVotes": 0,
+    "totalVotes": 1804240,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -4613,9 +4693,9 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 11.38,
+          "turnoutLow": 13.91,
+          "turnoutMid": 12.52
         },
         "firstName": "Robert",
         "id": 105871,
@@ -4629,9 +4709,9 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 11.38,
+          "turnoutLow": 13.91,
+          "turnoutMid": 12.52
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -4645,9 +4725,9 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 11.38,
+          "turnoutLow": 13.91,
+          "turnoutMid": 12.52
         },
         "firstName": "Chase",
         "id": 14810,
@@ -4661,15 +4741,15 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 11.38,
+          "turnoutLow": 13.91,
+          "turnoutMid": 12.52
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 37426
       },
       {
         "elected": false,
@@ -4677,15 +4757,15 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 11.38,
+          "turnoutLow": 13.91,
+          "turnoutMid": 12.52
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 21728
       },
       {
         "elected": false,
@@ -4693,9 +4773,9 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 11.38,
+          "turnoutLow": 13.91,
+          "turnoutMid": 12.52
         },
         "firstName": "Claudia",
         "id": 84939,
@@ -4709,9 +4789,9 @@
           "estimatedVotesHigh": 519796,
           "estimatedVotesLow": 425288,
           "estimatedVotesMid": 472539,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 11.38,
+          "turnoutLow": 13.91,
+          "turnoutMid": 12.52
         },
         "firstName": "Jill",
         "id": 353,
@@ -4726,7 +4806,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:16.594Z",
+    "lastUpdated": "2024-10-28T20:54:44.301Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4736,12 +4816,27 @@
     "raceDate": "2024-11-05",
     "state": "RI",
     "stateName": "Rhode Island",
-    "totalVotes": 0,
+    "totalVotes": 59154,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Kamala",
+      "id": 988,
+      "incumbent": false,
+      "lastName": "Harris",
+      "partyName": "Democratic"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
@@ -4749,47 +4844,15 @@
           "estimatedVotesHigh": 2548483,
           "estimatedVotesLow": 2085124,
           "estimatedVotesMid": 2316802,
-          "turnoutHigh": 87.73,
-          "turnoutLow": 107.23,
-          "turnoutMid": 96.5
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2548483,
-          "estimatedVotesLow": 2085124,
-          "estimatedVotesMid": 2316802,
-          "turnoutHigh": 87.73,
-          "turnoutLow": 107.23,
-          "turnoutMid": 96.5
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2548483,
-          "estimatedVotesLow": 2085124,
-          "estimatedVotesMid": 2316802,
-          "turnoutHigh": 87.73,
-          "turnoutLow": 107.23,
-          "turnoutMid": 96.5
+          "turnoutHigh": 59.31,
+          "turnoutLow": 72.5,
+          "turnoutMid": 65.25
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 1268851
+        "votes": 755617
       },
       {
         "elected": false,
@@ -4797,41 +4860,9 @@
           "estimatedVotesHigh": 2548483,
           "estimatedVotesLow": 2085124,
           "estimatedVotesMid": 2316802,
-          "turnoutHigh": 87.73,
-          "turnoutLow": 107.23,
-          "turnoutMid": 96.5
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 6602
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2548483,
-          "estimatedVotesLow": 2085124,
-          "estimatedVotesMid": 2316802,
-          "turnoutHigh": 87.73,
-          "turnoutLow": 107.23,
-          "turnoutMid": 96.5
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 2548483,
-          "estimatedVotesLow": 2085124,
-          "estimatedVotesMid": 2316802,
-          "turnoutHigh": 87.73,
-          "turnoutLow": 107.23,
-          "turnoutMid": 96.5
+          "turnoutHigh": 59.31,
+          "turnoutLow": 72.5,
+          "turnoutMid": 65.25
         },
         "firstName": "Randall",
         "id": 84941,
@@ -4845,15 +4876,79 @@
           "estimatedVotesHigh": 2548483,
           "estimatedVotesLow": 2085124,
           "estimatedVotesMid": 2316802,
-          "turnoutHigh": 87.73,
-          "turnoutLow": 107.23,
-          "turnoutMid": 96.5
+          "turnoutHigh": 59.31,
+          "turnoutLow": 72.5,
+          "turnoutMid": 65.25
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2548483,
+          "estimatedVotesLow": 2085124,
+          "estimatedVotesMid": 2316802,
+          "turnoutHigh": 59.31,
+          "turnoutLow": 72.5,
+          "turnoutMid": 65.25
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 4254
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2548483,
+          "estimatedVotesLow": 2085124,
+          "estimatedVotesMid": 2316802,
+          "turnoutHigh": 59.31,
+          "turnoutLow": 72.5,
+          "turnoutMid": 65.25
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2548483,
+          "estimatedVotesLow": 2085124,
+          "estimatedVotesMid": 2316802,
+          "turnoutHigh": 59.31,
+          "turnoutLow": 72.5,
+          "turnoutMid": 65.25
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 2548483,
+          "estimatedVotesLow": 2085124,
+          "estimatedVotesMid": 2316802,
+          "turnoutHigh": 59.31,
+          "turnoutLow": 72.5,
+          "turnoutMid": 65.25
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 960361
+        "votes": 751751
       }
     ],
     "district": "",
@@ -4861,8 +4956,8 @@
       "electionType": "General Election",
       "electionTypeId": "1"
     },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:55:44.335Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4872,29 +4967,15 @@
     "raceDate": "2024-11-05",
     "state": "SC",
     "stateName": "South Carolina",
-    "totalVotes": 2235814,
+    "totalVotes": 1511622,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 423426,
-          "estimatedVotesLow": 346436,
-          "estimatedVotesMid": 384928,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -4937,6 +5018,22 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 423426,
+          "estimatedVotesLow": 346436,
+          "estimatedVotesMid": 384928,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
@@ -4950,7 +5047,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:12.873Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -4964,6 +5061,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -4973,9 +5072,9 @@
           "estimatedVotesHigh": 3012772,
           "estimatedVotesLow": 2464997,
           "estimatedVotesMid": 2738880,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
+          "turnoutHigh": 5.13,
+          "turnoutLow": 6.27,
+          "turnoutMid": 5.64
         },
         "firstName": "Rachele",
         "id": 104297,
@@ -4989,9 +5088,9 @@
           "estimatedVotesHigh": 3012772,
           "estimatedVotesLow": 2464997,
           "estimatedVotesMid": 2738880,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
+          "turnoutHigh": 5.13,
+          "turnoutLow": 6.27,
+          "turnoutMid": 5.64
         },
         "firstName": "Jay",
         "id": 105872,
@@ -5005,41 +5104,9 @@
           "estimatedVotesHigh": 3012772,
           "estimatedVotesLow": 2464997,
           "estimatedVotesMid": 2738880,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 1714510
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3012772,
-          "estimatedVotesLow": 2464997,
-          "estimatedVotesMid": 2738880,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3012772,
-          "estimatedVotesLow": 2464997,
-          "estimatedVotesMid": 2738880,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
+          "turnoutHigh": 5.13,
+          "turnoutLow": 6.27,
+          "turnoutMid": 5.64
         },
         "firstName": "Jill",
         "id": 353,
@@ -5053,9 +5120,9 @@
           "estimatedVotesHigh": 3012772,
           "estimatedVotesLow": 2464997,
           "estimatedVotesMid": 2738880,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
+          "turnoutHigh": 5.13,
+          "turnoutLow": 6.27,
+          "turnoutMid": 5.64
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -5069,15 +5136,47 @@
           "estimatedVotesHigh": 3012772,
           "estimatedVotesLow": 2464997,
           "estimatedVotesMid": 2738880,
-          "turnoutHigh": 91.12,
-          "turnoutLow": 111.37,
-          "turnoutMid": 99
+          "turnoutHigh": 5.13,
+          "turnoutLow": 6.27,
+          "turnoutMid": 5.64
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 1030839
+        "votes": 37352
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3012772,
+          "estimatedVotesLow": 2464997,
+          "estimatedVotesMid": 2738880,
+          "turnoutHigh": 5.13,
+          "turnoutLow": 6.27,
+          "turnoutMid": 5.64
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 117207
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3012772,
+          "estimatedVotesLow": 2464997,
+          "estimatedVotesMid": 2738880,
+          "turnoutHigh": 5.13,
+          "turnoutLow": 6.27,
+          "turnoutMid": 5.64
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
       }
     ],
     "district": "",
@@ -5086,7 +5185,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
+    "lastUpdated": "2024-10-28T20:55:20.556Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -5096,10 +5195,12 @@
     "raceDate": "2024-11-05",
     "state": "TN",
     "stateName": "Tennessee",
-    "totalVotes": 2745349,
+    "totalVotes": 154559,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -5109,15 +5210,15 @@
           "estimatedVotesHigh": 11471348,
           "estimatedVotesLow": 9385656,
           "estimatedVotesMid": 10428487,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.96,
+          "turnoutLow": 8.5,
+          "turnoutMid": 7.65
         },
         "firstName": "Jill",
         "id": 353,
         "lastName": "Stein",
         "partyName": "Green",
-        "votes": 0
+        "votes": 5591
       },
       {
         "elected": false,
@@ -5125,15 +5226,15 @@
           "estimatedVotesHigh": 11471348,
           "estimatedVotesLow": 9385656,
           "estimatedVotesMid": 10428487,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.96,
+          "turnoutLow": 8.5,
+          "turnoutMid": 7.65
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 9234
       },
       {
         "elected": false,
@@ -5141,15 +5242,15 @@
           "estimatedVotesHigh": 11471348,
           "estimatedVotesLow": 9385656,
           "estimatedVotesMid": 10428487,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.96,
+          "turnoutLow": 8.5,
+          "turnoutMid": 7.65
         },
         "firstName": "Donald J.",
         "id": 5,
         "lastName": "Trump",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 458671
       },
       {
         "elected": false,
@@ -5157,15 +5258,15 @@
           "estimatedVotesHigh": 11471348,
           "estimatedVotesLow": 9385656,
           "estimatedVotesMid": 10428487,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.96,
+          "turnoutLow": 8.5,
+          "turnoutMid": 7.65
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 324701
       }
     ],
     "district": "",
@@ -5174,7 +5275,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T20:55:52.765Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -5184,10 +5285,12 @@
     "raceDate": "2024-11-05",
     "state": "TX",
     "stateName": "Texas",
-    "totalVotes": 0,
+    "totalVotes": 798197,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -5197,47 +5300,15 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 620025
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 20624
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 386168
+        "votes": 0
       },
       {
         "elected": false,
@@ -5245,25 +5316,9 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 20939
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Lucifer",
         "id": 105873,
@@ -5277,9 +5332,25 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Joel",
         "id": 104294,
@@ -5293,158 +5364,6 @@
           "estimatedVotesHigh": 1240489,
           "estimatedVotesLow": 1014945,
           "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 20775
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1240489,
-          "estimatedVotesLow": 1014945,
-          "estimatedVotesMid": 1127716,
-          "turnoutHigh": 87.78,
-          "turnoutLow": 107.29,
-          "turnoutMid": 96.56
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 20386
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "UT",
-    "stateName": "Utah",
-    "totalVotes": 1088917,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Rachele",
-        "id": 104297,
-        "lastName": "Fruit",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 359924,
-          "estimatedVotesLow": 294481,
-          "estimatedVotesMid": 327192,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
@@ -5454,53 +5373,13 @@
         "lastName": "Trump",
         "partyName": "Republican",
         "votes": 0
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "VT",
-    "stateName": "Vermont",
-    "totalVotes": 0,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4429965,
-          "estimatedVotesLow": 3624517,
-          "estimatedVotesMid": 4027236,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
       },
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4429965,
-          "estimatedVotesLow": 3624517,
-          "estimatedVotesMid": 4027236,
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
@@ -5514,25 +5393,9 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4429965,
-          "estimatedVotesLow": 3624517,
-          "estimatedVotesMid": 4027236,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4429965,
-          "estimatedVotesLow": 3624517,
-          "estimatedVotesMid": 4027236,
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
@@ -5546,32 +5409,16 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4429965,
-          "estimatedVotesLow": 3624517,
-          "estimatedVotesMid": 4027236,
+          "estimatedVotesHigh": 1240489,
+          "estimatedVotesLow": 1014945,
+          "estimatedVotesMid": 1127716,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4429965,
-          "estimatedVotesLow": 3624517,
-          "estimatedVotesMid": 4027236,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
         "partyName": "Independent",
         "votes": 0
       }
@@ -5582,7 +5429,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -5590,40 +5437,39 @@
     },
     "partyName": null,
     "raceDate": "2024-11-05",
-    "state": "VA",
-    "stateName": "Virginia",
+    "state": "UT",
+    "stateName": "Utah",
     "totalVotes": 0,
     "year": 2024
   },
   {
-    "calledCandidate": null,
-    "calledCandidates": [],
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Kamala",
+      "id": 988,
+      "incumbent": false,
+      "lastName": "Harris",
+      "partyName": "Democratic"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic"
+      }
+    ],
     "candidatesWithVotes": [
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 1510075
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 60.18,
+          "turnoutLow": 73.55,
+          "turnoutMid": 66.2
         },
         "firstName": "Robert F.",
         "id": 69575,
@@ -5634,12 +5480,269 @@
       {
         "elected": false,
         "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 60.18,
+          "turnoutLow": 73.55,
+          "turnoutMid": 66.2
+        },
+        "firstName": "Rachele",
+        "id": 104297,
+        "lastName": "Fruit",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 60.18,
+          "turnoutLow": 73.55,
+          "turnoutMid": 66.2
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 60.18,
+          "turnoutLow": 73.55,
+          "turnoutMid": 66.2
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 64512
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 60.18,
+          "turnoutLow": 73.55,
+          "turnoutMid": 66.2
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 6580
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 60.18,
+          "turnoutLow": 73.55,
+          "turnoutMid": 66.2
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 359924,
+          "estimatedVotesLow": 294481,
+          "estimatedVotesMid": 327192,
+          "turnoutHigh": 60.18,
+          "turnoutLow": 73.55,
+          "turnoutMid": 66.2
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 145495
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:55:47.135Z",
+    "office": {
+      "officeId": "1",
+      "officeName": "President",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "VT",
+    "stateName": "Vermont",
+    "totalVotes": 216587,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Kamala",
+      "id": 988,
+      "incumbent": false,
+      "lastName": "Harris",
+      "partyName": "Democratic"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic"
+      }
+    ],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4429965,
+          "estimatedVotesLow": 3624517,
+          "estimatedVotesMid": 4027236,
+          "turnoutHigh": 73.56,
+          "turnoutLow": 89.9,
+          "turnoutMid": 80.91
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4429965,
+          "estimatedVotesLow": 3624517,
+          "estimatedVotesMid": 4027236,
+          "turnoutHigh": 73.56,
+          "turnoutLow": 89.9,
+          "turnoutMid": 80.91
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4429965,
+          "estimatedVotesLow": 3624517,
+          "estimatedVotesMid": 4027236,
+          "turnoutHigh": 73.56,
+          "turnoutLow": 89.9,
+          "turnoutMid": 80.91
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 1983074
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4429965,
+          "estimatedVotesLow": 3624517,
+          "estimatedVotesMid": 4027236,
+          "turnoutHigh": 73.56,
+          "turnoutLow": 89.9,
+          "turnoutMid": 80.91
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4429965,
+          "estimatedVotesLow": 3624517,
+          "estimatedVotesMid": 4027236,
+          "turnoutHigh": 73.56,
+          "turnoutLow": 89.9,
+          "turnoutMid": 80.91
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 1275522
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4429965,
+          "estimatedVotesLow": 3624517,
+          "estimatedVotesMid": 4027236,
+          "turnoutHigh": 73.56,
+          "turnoutLow": 89.9,
+          "turnoutMid": 80.91
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:55:51.770Z",
+    "office": {
+      "officeId": "1",
+      "officeName": "President",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "VA",
+    "stateName": "Virginia",
+    "totalVotes": 3258596,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
           "estimatedVotesHigh": 4035935,
           "estimatedVotesLow": 3302130,
           "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Cornel",
         "id": 84938,
@@ -5653,9 +5756,25 @@
           "estimatedVotesHigh": 4035935,
           "estimatedVotesLow": 3302130,
           "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4035935,
+          "estimatedVotesLow": 3302130,
+          "estimatedVotesMid": 3669031,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Shiva",
         "id": 11165,
@@ -5669,9 +5788,9 @@
           "estimatedVotesHigh": 4035935,
           "estimatedVotesLow": 3302130,
           "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Rachele",
         "id": 104297,
@@ -5685,9 +5804,9 @@
           "estimatedVotesHigh": 4035935,
           "estimatedVotesLow": 3302130,
           "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
         },
         "firstName": "Claudia",
         "id": 84939,
@@ -5701,142 +5820,6 @@
           "estimatedVotesHigh": 4035935,
           "estimatedVotesLow": 3302130,
           "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Joseph",
-        "id": 105868,
-        "lastName": "Kishore",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 4035935,
-          "estimatedVotesLow": 3302130,
-          "estimatedVotesMid": 3669031,
-          "turnoutHigh": 90.74,
-          "turnoutLow": 110.9,
-          "turnoutMid": 99
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 2152128
-      }
-    ],
-    "district": "",
-    "electionType": {
-      "electionType": "General Election",
-      "electionTypeId": "1"
-    },
-    "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T07:24:22.520Z",
-    "office": {
-      "officeId": "1",
-      "officeName": "President",
-      "officeTypeId": "1"
-    },
-    "partyName": null,
-    "raceDate": "2024-11-05",
-    "state": "WA",
-    "stateName": "Washington",
-    "totalVotes": 3662203,
-    "year": 2024
-  },
-  {
-    "calledCandidate": null,
-    "calledCandidates": [],
-    "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
@@ -5850,17 +5833,65 @@
       {
         "elected": false,
         "estimatedVotes": {
-          "estimatedVotesHigh": 796969,
-          "estimatedVotesLow": 652073,
-          "estimatedVotesMid": 724518,
+          "estimatedVotesHigh": 4035935,
+          "estimatedVotesLow": 3302130,
+          "estimatedVotesMid": 3669031,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4035935,
+          "estimatedVotesLow": 3302130,
+          "estimatedVotesMid": 3669031,
           "turnoutHigh": 0,
           "turnoutLow": 0,
           "turnoutMid": 0
         },
         "firstName": "Jill",
-        "id": 84942,
+        "id": 353,
         "lastName": "Stein",
-        "partyName": "Mountain",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4035935,
+          "estimatedVotesLow": 3302130,
+          "estimatedVotesMid": 3669031,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Joseph",
+        "id": 105868,
+        "lastName": "Kishore",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 4035935,
+          "estimatedVotesLow": 3302130,
+          "estimatedVotesMid": 3669031,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
         "votes": 0
       }
     ],
@@ -5870,7 +5901,113 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:40.552Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
+    "office": {
+      "officeId": "1",
+      "officeName": "President",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "WA",
+    "stateName": "Washington",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 796969,
+          "estimatedVotesLow": 652073,
+          "estimatedVotesMid": 724518,
+          "turnoutHigh": 48.27,
+          "turnoutLow": 58.99,
+          "turnoutMid": 53.09
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 796969,
+          "estimatedVotesLow": 652073,
+          "estimatedVotesMid": 724518,
+          "turnoutHigh": 48.27,
+          "turnoutLow": 58.99,
+          "turnoutMid": 53.09
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 261210
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 796969,
+          "estimatedVotesLow": 652073,
+          "estimatedVotesMid": 724518,
+          "turnoutHigh": 48.27,
+          "turnoutLow": 58.99,
+          "turnoutMid": 53.09
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 116019
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 796969,
+          "estimatedVotesLow": 652073,
+          "estimatedVotesMid": 724518,
+          "turnoutHigh": 48.27,
+          "turnoutLow": 58.99,
+          "turnoutMid": 53.09
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 796969,
+          "estimatedVotesLow": 652073,
+          "estimatedVotesMid": 724518,
+          "turnoutHigh": 48.27,
+          "turnoutLow": 58.99,
+          "turnoutMid": 53.09
+        },
+        "firstName": "Jill",
+        "id": 84942,
+        "lastName": "Stein",
+        "partyName": "Mountain",
+        "votes": 7439
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:54:57.980Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -5880,13 +6017,79 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 0,
+    "totalVotes": 384668,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Claudia",
+        "id": 84939,
+        "lastName": "De la Cruz",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 3309506,
+          "estimatedVotesLow": 2707775,
+          "estimatedVotesMid": 3008635,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Robert F.",
+        "id": 69575,
+        "lastName": "Kennedy Jr.",
+        "partyName": "Independent",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -5929,10 +6132,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Robert F.",
-        "id": 69575,
-        "lastName": "Kennedy Jr.",
-        "partyName": "Independent",
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
         "votes": 0
       },
       {
@@ -5950,70 +6153,6 @@
         "lastName": "Trump",
         "partyName": "Republican",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3309506,
-          "estimatedVotesLow": 2707775,
-          "estimatedVotesMid": 3008635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3309506,
-          "estimatedVotesLow": 2707775,
-          "estimatedVotesMid": 3008635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3309506,
-          "estimatedVotesLow": 2707775,
-          "estimatedVotesMid": 3008635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Claudia",
-        "id": 84939,
-        "lastName": "De la Cruz",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 3309506,
-          "estimatedVotesLow": 2707775,
-          "estimatedVotesMid": 3008635,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
       }
     ],
     "district": "",
@@ -6022,7 +6161,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -6036,6 +6175,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -6049,10 +6190,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
         "votes": 0
       },
       {
@@ -6069,6 +6210,22 @@
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
         "votes": 0
       },
       {
@@ -6086,22 +6243,6 @@
         "lastName": "Kennedy Jr.",
         "partyName": "Independent",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 268545,
-          "estimatedVotesLow": 219720,
-          "estimatedVotesMid": 244131,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
       }
     ],
     "district": "",
@@ -6110,7 +6251,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:52.576Z",
+    "lastUpdated": "2024-10-28T19:19:47.246Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -6124,6 +6265,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -6133,79 +6276,79 @@
           "estimatedVotesHigh": 430389,
           "estimatedVotesLow": 352133,
           "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 430389,
-          "estimatedVotesLow": 352133,
-          "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 430389,
-          "estimatedVotesLow": 352133,
-          "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 430389,
-          "estimatedVotesLow": 352133,
-          "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 430389,
-          "estimatedVotesLow": 352133,
-          "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 33.92,
+          "turnoutLow": 41.46,
+          "turnoutMid": 37.31
         },
         "firstName": "Jill",
         "id": 353,
         "lastName": "Stein",
         "partyName": "Green",
-        "votes": 0
+        "votes": 3715
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 430389,
+          "estimatedVotesLow": 352133,
+          "estimatedVotesMid": 391258,
+          "turnoutHigh": 33.92,
+          "turnoutLow": 41.46,
+          "turnoutMid": 37.31
+        },
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
+        "votes": 3299
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 430389,
+          "estimatedVotesLow": 352133,
+          "estimatedVotesMid": 391258,
+          "turnoutHigh": 33.92,
+          "turnoutLow": 41.46,
+          "turnoutMid": 37.31
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 2691
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 430389,
+          "estimatedVotesLow": 352133,
+          "estimatedVotesMid": 391258,
+          "turnoutHigh": 33.92,
+          "turnoutLow": 41.46,
+          "turnoutMid": 37.31
+        },
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
+        "votes": 89202
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 430389,
+          "estimatedVotesLow": 352133,
+          "estimatedVotesMid": 391258,
+          "turnoutHigh": 33.92,
+          "turnoutLow": 41.46,
+          "turnoutMid": 37.31
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 47074
       }
     ],
     "district": null,
@@ -6214,7 +6357,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T20:55:48.494Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -6224,10 +6367,12 @@
     "raceDate": "2024-11-05",
     "state": "ME1",
     "stateName": "Maine 01",
-    "totalVotes": 0,
+    "totalVotes": 145981,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -6237,15 +6382,15 @@
           "estimatedVotesHigh": 390042,
           "estimatedVotesLow": 319113,
           "estimatedVotesMid": 354553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 31.33,
+          "turnoutLow": 38.29,
+          "turnoutMid": 34.47
         },
         "firstName": "Cornel",
         "id": 84938,
         "lastName": "West",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 3307
       },
       {
         "elected": false,
@@ -6253,31 +6398,15 @@
           "estimatedVotesHigh": 390042,
           "estimatedVotesLow": 319113,
           "estimatedVotesMid": 354553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 390042,
-          "estimatedVotesLow": 319113,
-          "estimatedVotesMid": 354553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 31.33,
+          "turnoutLow": 38.29,
+          "turnoutMid": 34.47
         },
         "firstName": "Kamala",
         "id": 988,
         "lastName": "Harris",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 50843
       },
       {
         "elected": false,
@@ -6285,31 +6414,47 @@
           "estimatedVotesHigh": 390042,
           "estimatedVotesLow": 319113,
           "estimatedVotesMid": 354553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Donald J.",
-        "id": 5,
-        "lastName": "Trump",
-        "partyName": "Republican",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 390042,
-          "estimatedVotesLow": 319113,
-          "estimatedVotesMid": 354553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 31.33,
+          "turnoutLow": 38.29,
+          "turnoutMid": 34.47
         },
         "firstName": "Chase",
         "id": 14810,
         "lastName": "Oliver",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 3877
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 390042,
+          "estimatedVotesLow": 319113,
+          "estimatedVotesMid": 354553,
+          "turnoutHigh": 31.33,
+          "turnoutLow": 38.29,
+          "turnoutMid": 34.47
+        },
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
+        "votes": 2838
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 390042,
+          "estimatedVotesLow": 319113,
+          "estimatedVotesMid": 354553,
+          "turnoutHigh": 31.33,
+          "turnoutLow": 38.29,
+          "turnoutMid": 34.47
+        },
+        "firstName": "Donald J.",
+        "id": 5,
+        "lastName": "Trump",
+        "partyName": "Republican",
+        "votes": 61336
       }
     ],
     "district": null,
@@ -6318,7 +6463,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T20:55:55.559Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -6328,10 +6473,12 @@
     "raceDate": "2024-11-05",
     "state": "ME2",
     "stateName": "Maine 02",
-    "totalVotes": 0,
+    "totalVotes": 122201,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -6345,10 +6492,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Chase",
-        "id": 14810,
-        "lastName": "Oliver",
-        "partyName": "Libertarian",
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
         "votes": 0
       },
       {
@@ -6377,10 +6524,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
+        "firstName": "Chase",
+        "id": 14810,
+        "lastName": "Oliver",
+        "partyName": "Libertarian",
         "votes": 0
       },
       {
@@ -6422,7 +6569,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:31.695Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -6436,6 +6583,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -6526,7 +6675,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "1",
       "officeName": "President",
@@ -6540,6 +6689,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -6553,26 +6704,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Kamala",
-        "id": 988,
-        "lastName": "Harris",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 323309,
-          "estimatedVotesLow": 264526,
-          "estimatedVotesMid": 293912,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Cornel",
-        "id": 84938,
-        "lastName": "West",
-        "partyName": "Independent",
+        "firstName": "Jill",
+        "id": 353,
+        "lastName": "Stein",
+        "partyName": "Green",
         "votes": 0
       },
       {
@@ -6601,10 +6736,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Jill",
-        "id": 353,
-        "lastName": "Stein",
-        "partyName": "Green",
+        "firstName": "Kamala",
+        "id": 988,
+        "lastName": "Harris",
+        "partyName": "Democratic",
         "votes": 0
       },
       {
@@ -6622,6 +6757,22 @@
         "lastName": "Oliver",
         "partyName": "Libertarian",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 323309,
+          "estimatedVotesLow": 264526,
+          "estimatedVotesMid": 293912,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Cornel",
+        "id": 84938,
+        "lastName": "West",
+        "partyName": "Independent",
+        "votes": 0
       }
     ],
     "district": null,
@@ -6630,7 +6781,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:53.304Z",
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
     "office": {
       "officeId": "1",
       "officeName": "President",

@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -74,7 +76,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:03.844Z",
+    "lastUpdated": "2024-10-28T19:19:57.508Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -88,6 +90,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -194,7 +198,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:13.770Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -208,9 +212,27 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 376285,
+          "estimatedVotesLow": 307870,
+          "estimatedVotesMid": 342077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mark",
+        "id": 1462,
+        "lastName": "Amodei",
+        "partyName": "Republican",
+        "votes": 0
+      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -258,22 +280,6 @@
         "lastName": "Kidd",
         "partyName": "Independent",
         "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 376285,
-          "estimatedVotesLow": 307870,
-          "estimatedVotesMid": 342077,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Mark",
-        "id": 1462,
-        "lastName": "Amodei",
-        "partyName": "Republican",
-        "votes": 0
       }
     ],
     "district": "2",
@@ -282,7 +288,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -296,6 +302,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -338,7 +346,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -352,41 +360,11 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 305263,
-          "estimatedVotesLow": 249762,
-          "estimatedVotesMid": 277512,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Timothy",
-        "id": 85059,
-        "lastName": "Ferreira",
-        "partyName": "Libertarian",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 305263,
-          "estimatedVotesLow": 249762,
-          "estimatedVotesMid": 277512,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 18953,
-        "lastName": "Lee",
-        "partyName": "Republican",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -418,6 +396,38 @@
         "lastName": "Best",
         "partyName": "Independent American",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 305263,
+          "estimatedVotesLow": 249762,
+          "estimatedVotesMid": 277512,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Timothy",
+        "id": 85059,
+        "lastName": "Ferreira",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 305263,
+          "estimatedVotesLow": 249762,
+          "estimatedVotesMid": 277512,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 18953,
+        "lastName": "Lee",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "4",
@@ -426,7 +436,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

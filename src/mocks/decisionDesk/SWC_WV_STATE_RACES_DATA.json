@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,15 +11,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 72.08,
+          "turnoutLow": 88.1,
+          "turnoutMid": 79.29
         },
         "firstName": "Glenn",
         "id": 67484,
         "lastName": "Elliott",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 170013
       },
       {
         "elected": false,
@@ -25,15 +27,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 72.08,
+          "turnoutLow": 88.1,
+          "turnoutMid": 79.29
         },
         "firstName": "Jim",
         "id": 13636,
         "lastName": "Justice",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 393335
       },
       {
         "elected": false,
@@ -41,15 +43,15 @@
           "estimatedVotesHigh": 796969,
           "estimatedVotesLow": 652073,
           "estimatedVotesMid": 724518,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 72.08,
+          "turnoutLow": 88.1,
+          "turnoutMid": 79.29
         },
         "firstName": "David",
         "id": 2108,
         "lastName": "Moran",
         "partyName": "Libertarian",
-        "votes": 0
+        "votes": 11099
       }
     ],
     "district": "",
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:46.214Z",
+    "lastUpdated": "2024-10-28T21:08:59.447Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -68,10 +70,12 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 0,
+    "totalVotes": 574447,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -81,15 +85,15 @@
           "estimatedVotesHigh": 393943,
           "estimatedVotesLow": 322322,
           "estimatedVotesMid": 358130,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 77.03,
+          "turnoutLow": 94.15,
+          "turnoutMid": 84.74
         },
         "firstName": "Carol",
         "id": 8746,
         "lastName": "Miller",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 206303
       },
       {
         "elected": false,
@@ -97,15 +101,15 @@
           "estimatedVotesHigh": 393943,
           "estimatedVotesLow": 322322,
           "estimatedVotesMid": 358130,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 77.03,
+          "turnoutLow": 94.15,
+          "turnoutMid": 84.74
         },
         "firstName": "Wes",
         "id": 85169,
         "lastName": "Holden",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 6016
       },
       {
         "elected": false,
@@ -113,15 +117,15 @@
           "estimatedVotesHigh": 393943,
           "estimatedVotesLow": 322322,
           "estimatedVotesMid": 358130,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 77.03,
+          "turnoutLow": 94.15,
+          "turnoutMid": 84.74
         },
         "firstName": "Chris",
         "id": 67489,
         "lastName": "Reed",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 91153
       }
     ],
     "district": "1",
@@ -130,7 +134,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:11.760Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -140,10 +144,12 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 0,
+    "totalVotes": 303472,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -153,15 +159,15 @@
           "estimatedVotesHigh": 402938,
           "estimatedVotesLow": 329677,
           "estimatedVotesMid": 366307,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 63.89,
+          "turnoutLow": 78.08,
+          "turnoutMid": 70.28
         },
         "firstName": "Riley",
         "id": 67494,
         "lastName": "Moore",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 184084
       },
       {
         "elected": false,
@@ -169,15 +175,15 @@
           "estimatedVotesHigh": 402938,
           "estimatedVotesLow": 329677,
           "estimatedVotesMid": 366307,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 63.89,
+          "turnoutLow": 78.08,
+          "turnoutMid": 70.28
         },
         "firstName": "Steven",
         "id": 67496,
         "lastName": "Wendelin",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 73340
       }
     ],
     "district": "2",
@@ -186,7 +192,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T21:08:53.175Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -196,7 +202,7 @@
     "raceDate": "2024-11-05",
     "state": "WV",
     "stateName": "West Virginia",
-    "totalVotes": 0,
+    "totalVotes": 257424,
     "year": 2024
   }
 ]

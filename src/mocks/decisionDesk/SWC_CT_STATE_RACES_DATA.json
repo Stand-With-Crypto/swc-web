@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,15 +11,15 @@
           "estimatedVotesHigh": 361817,
           "estimatedVotesLow": 296029,
           "estimatedVotesMid": 328921,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.93,
+          "turnoutLow": 12.13,
+          "turnoutMid": 10.92
         },
         "firstName": "Jim",
         "id": 12249,
         "lastName": "Griffin",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 14258
       },
       {
         "elected": false,
@@ -25,15 +27,15 @@
           "estimatedVotesHigh": 361817,
           "estimatedVotesLow": 296029,
           "estimatedVotesMid": 328921,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.93,
+          "turnoutLow": 12.13,
+          "turnoutMid": 10.92
         },
         "firstName": "John",
         "id": 1137,
         "lastName": "Larson",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 21655
       }
     ],
     "district": "1",
@@ -42,7 +44,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T20:55:10.277Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -52,10 +54,12 @@
     "raceDate": "2024-11-05",
     "state": "CT",
     "stateName": "Connecticut",
-    "totalVotes": 0,
+    "totalVotes": 35913,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -65,15 +69,15 @@
           "estimatedVotesHigh": 386857,
           "estimatedVotesLow": 316523,
           "estimatedVotesMid": 351688,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.52,
+          "turnoutLow": 10.41,
+          "turnoutMid": 9.37
         },
         "firstName": "Mike",
         "id": 44456,
         "lastName": "France",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15146
       },
       {
         "elected": false,
@@ -81,15 +85,15 @@
           "estimatedVotesHigh": 386857,
           "estimatedVotesLow": 316523,
           "estimatedVotesMid": 351688,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.52,
+          "turnoutLow": 10.41,
+          "turnoutMid": 9.37
         },
         "firstName": "Joe",
         "id": 8267,
         "lastName": "Courtney",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 17797
       }
     ],
     "district": "2",
@@ -98,7 +102,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:07.202Z",
+    "lastUpdated": "2024-10-28T20:56:52.098Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -108,10 +112,12 @@
     "raceDate": "2024-11-05",
     "state": "CT",
     "stateName": "Connecticut",
-    "totalVotes": 0,
+    "totalVotes": 32943,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -121,15 +127,15 @@
           "estimatedVotesHigh": 360916,
           "estimatedVotesLow": 295297,
           "estimatedVotesMid": 328106,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.61,
+          "turnoutLow": 11.75,
+          "turnoutMid": 10.58
         },
         "firstName": "Rosa",
         "id": 44457,
         "lastName": "DeLauro",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 18977
       },
       {
         "elected": false,
@@ -137,15 +143,15 @@
           "estimatedVotesHigh": 360916,
           "estimatedVotesLow": 295297,
           "estimatedVotesMid": 328106,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 9.61,
+          "turnoutLow": 11.75,
+          "turnoutMid": 10.58
         },
         "firstName": "Michael",
         "id": 83010,
         "lastName": "Massey",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 15721
       }
     ],
     "district": "3",
@@ -154,7 +160,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:46.214Z",
+    "lastUpdated": "2024-10-28T20:55:26.902Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -164,10 +170,12 @@
     "raceDate": "2024-11-05",
     "state": "CT",
     "stateName": "Connecticut",
-    "totalVotes": 0,
+    "totalVotes": 34698,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -177,15 +185,15 @@
           "estimatedVotesHigh": 340686,
           "estimatedVotesLow": 278743,
           "estimatedVotesMid": 309713,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 28.44,
+          "turnoutLow": 34.76,
+          "turnoutMid": 31.28
         },
         "firstName": "Michael",
         "id": 28686,
         "lastName": "Goldstein",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 27594
       },
       {
         "elected": false,
@@ -193,15 +201,15 @@
           "estimatedVotesHigh": 340686,
           "estimatedVotesLow": 278743,
           "estimatedVotesMid": 309713,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 28.44,
+          "turnoutLow": 34.76,
+          "turnoutMid": 31.28
         },
         "firstName": "Jaden",
         "id": 102130,
         "lastName": "Skudlarek",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 1879
       },
       {
         "elected": false,
@@ -209,15 +217,15 @@
           "estimatedVotesHigh": 340686,
           "estimatedVotesLow": 278743,
           "estimatedVotesMid": 309713,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 28.44,
+          "turnoutLow": 34.76,
+          "turnoutMid": 31.28
         },
         "firstName": "Benjamin",
         "id": 102129,
         "lastName": "Wesley",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 1866
       },
       {
         "elected": false,
@@ -225,15 +233,15 @@
           "estimatedVotesHigh": 340686,
           "estimatedVotesLow": 278743,
           "estimatedVotesMid": 309713,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 28.44,
+          "turnoutLow": 34.76,
+          "turnoutMid": 31.28
         },
         "firstName": "Jim",
         "id": 1143,
         "lastName": "Himes",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 65542
       }
     ],
     "district": "4",
@@ -242,7 +250,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:07.202Z",
+    "lastUpdated": "2024-10-28T20:56:41.253Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -252,10 +260,12 @@
     "raceDate": "2024-11-05",
     "state": "CT",
     "stateName": "Connecticut",
-    "totalVotes": 0,
+    "totalVotes": 96881,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -265,15 +275,15 @@
           "estimatedVotesHigh": 353866,
           "estimatedVotesLow": 289534,
           "estimatedVotesMid": 321698,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.88,
+          "turnoutLow": 10.85,
+          "turnoutMid": 9.77
         },
         "firstName": "George",
         "id": 28689,
         "lastName": "Logan",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 14428
       },
       {
         "elected": false,
@@ -281,15 +291,15 @@
           "estimatedVotesHigh": 353866,
           "estimatedVotesLow": 289534,
           "estimatedVotesMid": 321698,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 8.88,
+          "turnoutLow": 10.85,
+          "turnoutMid": 9.77
         },
         "firstName": "Jahana",
         "id": 10465,
         "lastName": "Hayes",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 16992
       }
     ],
     "district": "5",
@@ -298,7 +308,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:07.202Z",
+    "lastUpdated": "2024-10-28T20:56:59.247Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -308,10 +318,12 @@
     "raceDate": "2024-11-05",
     "state": "CT",
     "stateName": "Connecticut",
-    "totalVotes": 0,
+    "totalVotes": 31420,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -321,31 +333,15 @@
           "estimatedVotesHigh": 1804153,
           "estimatedVotesLow": 1476136,
           "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Chris",
-        "id": 105272,
-        "lastName": "Murphy",
-        "partyName": "Democratic",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 1804153,
-          "estimatedVotesLow": 1476136,
-          "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 35.4,
+          "turnoutLow": 43.27,
+          "turnoutMid": 38.94
         },
         "firstName": "Matthew",
         "id": 105273,
         "lastName": "Corey",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 225151
       },
       {
         "elected": false,
@@ -353,15 +349,15 @@
           "estimatedVotesHigh": 1804153,
           "estimatedVotesLow": 1476136,
           "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 35.4,
+          "turnoutLow": 43.27,
+          "turnoutMid": 38.94
         },
         "firstName": "Robert",
         "id": 105274,
         "lastName": "Hyde",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 25425
       },
       {
         "elected": false,
@@ -369,15 +365,31 @@
           "estimatedVotesHigh": 1804153,
           "estimatedVotesLow": 1476136,
           "estimatedVotesMid": 1640137,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 35.4,
+          "turnoutLow": 43.27,
+          "turnoutMid": 38.94
         },
         "firstName": "Justin",
         "id": 14653,
         "lastName": "Paglino",
         "partyName": "Green",
-        "votes": 0
+        "votes": 10573
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 1804153,
+          "estimatedVotesLow": 1476136,
+          "estimatedVotesMid": 1640137,
+          "turnoutHigh": 35.4,
+          "turnoutLow": 43.27,
+          "turnoutMid": 38.94
+        },
+        "firstName": "Chris",
+        "id": 105272,
+        "lastName": "Murphy",
+        "partyName": "Democratic",
+        "votes": 377508
       }
     ],
     "district": null,
@@ -386,7 +398,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:58.769Z",
+    "lastUpdated": "2024-10-28T20:57:41.804Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -396,7 +408,7 @@
     "raceDate": "2024-11-05",
     "state": "CT",
     "stateName": "Connecticut",
-    "totalVotes": 0,
+    "totalVotes": 638657,
     "year": 2024
   }
 ]

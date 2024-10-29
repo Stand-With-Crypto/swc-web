@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -42,7 +44,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:22.643Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -56,6 +58,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -114,7 +118,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -128,25 +132,11 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 428590,
-          "estimatedVotesLow": 350666,
-          "estimatedVotesMid": 389628,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Zach",
-        "id": 22715,
-        "lastName": "Nunn",
-        "partyName": "Republican",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -162,6 +152,22 @@
         "lastName": "Baccam",
         "partyName": "Democratic",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 428590,
+          "estimatedVotesLow": 350666,
+          "estimatedVotesMid": 389628,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Zach",
+        "id": 22715,
+        "lastName": "Nunn",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "3",
@@ -170,7 +176,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -184,6 +190,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -226,7 +234,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

@@ -1,24 +1,10 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 599037,
-          "estimatedVotesLow": 490118,
-          "estimatedVotesMid": 544574,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Robert",
-        "id": 102192,
-        "lastName": "Barb",
-        "partyName": "Green",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -45,10 +31,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Sid",
-        "id": 45844,
-        "lastName": "Daoud",
-        "partyName": "Libertarian",
+        "firstName": "Tim",
+        "id": 71312,
+        "lastName": "Sheehy",
+        "partyName": "Republican",
         "votes": 0
       },
       {
@@ -61,10 +47,26 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Tim",
-        "id": 71312,
-        "lastName": "Sheehy",
-        "partyName": "Republican",
+        "firstName": "Robert",
+        "id": 102192,
+        "lastName": "Barb",
+        "partyName": "Green",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 599037,
+          "estimatedVotesLow": 490118,
+          "estimatedVotesMid": 544574,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Sid",
+        "id": 45844,
+        "lastName": "Daoud",
+        "partyName": "Libertarian",
         "votes": 0
       }
     ],
@@ -74,7 +76,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:14:38.331Z",
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -88,6 +90,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -146,7 +150,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:16.884Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -160,25 +164,11 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 288812,
-          "estimatedVotesLow": 236297,
-          "estimatedVotesMid": 262553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "John",
-        "id": 71323,
-        "lastName": "Driscoll",
-        "partyName": "Democratic",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -194,6 +184,22 @@
         "lastName": "Downing",
         "partyName": "Republican",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 288812,
+          "estimatedVotesLow": 236297,
+          "estimatedVotesMid": 262553,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 71323,
+        "lastName": "Driscoll",
+        "partyName": "Democratic",
+        "votes": 0
       }
     ],
     "district": "2",
@@ -202,7 +208,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

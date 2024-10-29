@@ -1,24 +1,10 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 381962,
-          "estimatedVotesLow": 312514,
-          "estimatedVotesMid": 347238,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Bob",
-        "id": 85120,
-        "lastName": "Todd",
-        "partyName": "Republican",
-        "votes": 0
-      },
       {
         "elected": false,
         "estimatedVotes": {
@@ -50,6 +36,22 @@
         "lastName": "Bonamici",
         "partyName": "Democratic",
         "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 381962,
+          "estimatedVotesLow": 312514,
+          "estimatedVotesMid": 347238,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Bob",
+        "id": 85120,
+        "lastName": "Todd",
+        "partyName": "Republican",
+        "votes": 0
       }
     ],
     "district": "1",
@@ -58,7 +60,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:22.067Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -72,6 +74,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -130,7 +134,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:19.656Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -144,6 +148,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -234,7 +240,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -248,6 +254,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -277,10 +285,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Monique",
-        "id": 68263,
-        "lastName": "DeSpain",
-        "partyName": "Republican",
+        "firstName": "Justin",
+        "id": 86463,
+        "lastName": "Filip",
+        "partyName": "Pacific Green",
         "votes": 0
       },
       {
@@ -293,10 +301,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Justin",
-        "id": 86463,
-        "lastName": "Filip",
-        "partyName": "Pacific Green",
+        "firstName": "Monique",
+        "id": 68263,
+        "lastName": "DeSpain",
+        "partyName": "Republican",
         "votes": 0
       },
       {
@@ -322,7 +330,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -336,6 +344,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -349,10 +359,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Lori",
-        "id": 20015,
-        "lastName": "Chavez-DeRemer",
-        "partyName": "Republican",
+        "firstName": "Sonja",
+        "id": 102206,
+        "lastName": "Feintech",
+        "partyName": "Libertarian",
         "votes": 0
       },
       {
@@ -429,10 +439,10 @@
           "turnoutLow": 0,
           "turnoutMid": 0
         },
-        "firstName": "Sonja",
-        "id": 102206,
-        "lastName": "Feintech",
-        "partyName": "Libertarian",
+        "firstName": "Lori",
+        "id": 20015,
+        "lastName": "Chavez-DeRemer",
+        "partyName": "Republican",
         "votes": 0
       }
     ],
@@ -442,7 +452,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -456,6 +466,8 @@
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -498,7 +510,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",

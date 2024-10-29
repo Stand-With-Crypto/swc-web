@@ -1,5 +1,7 @@
 [
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -9,15 +11,15 @@
           "estimatedVotesHigh": 813373,
           "estimatedVotesLow": 665472,
           "estimatedVotesMid": 739395,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.79,
+          "turnoutLow": 8.3,
+          "turnoutMid": 7.47
         },
         "firstName": "Demi",
         "id": 75258,
         "lastName": "Kouzounas",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 24427
       },
       {
         "elected": false,
@@ -25,15 +27,15 @@
           "estimatedVotesHigh": 813373,
           "estimatedVotesLow": 665472,
           "estimatedVotesMid": 739395,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.79,
+          "turnoutLow": 8.3,
+          "turnoutMid": 7.47
         },
         "firstName": "David",
         "id": 75257,
         "lastName": "Costello",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 983
       },
       {
         "elected": false,
@@ -41,15 +43,15 @@
           "estimatedVotesHigh": 813373,
           "estimatedVotesLow": 665472,
           "estimatedVotesMid": 739395,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.79,
+          "turnoutLow": 8.3,
+          "turnoutMid": 7.47
         },
         "firstName": "Jason",
         "id": 84946,
         "lastName": "Cherry",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 978
       },
       {
         "elected": false,
@@ -57,15 +59,15 @@
           "estimatedVotesHigh": 813373,
           "estimatedVotesLow": 665472,
           "estimatedVotesMid": 739395,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 6.79,
+          "turnoutLow": 8.3,
+          "turnoutMid": 7.47
         },
         "firstName": "Angus",
         "id": 8285,
         "lastName": "King",
         "partyName": "Independent",
-        "votes": 0
+        "votes": 28842
       }
     ],
     "district": "",
@@ -74,7 +76,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:28.388Z",
+    "lastUpdated": "2024-10-28T20:59:39.572Z",
     "office": {
       "officeId": "4",
       "officeName": "US Senate",
@@ -84,10 +86,12 @@
     "raceDate": "2024-11-05",
     "state": "ME",
     "stateName": "Maine",
-    "totalVotes": 0,
+    "totalVotes": 55231,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -97,31 +101,15 @@
           "estimatedVotesHigh": 430389,
           "estimatedVotesLow": 352133,
           "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
-        },
-        "firstName": "Ethan",
-        "id": 85036,
-        "lastName": "Alcorn",
-        "partyName": "Independent",
-        "votes": 0
-      },
-      {
-        "elected": false,
-        "estimatedVotes": {
-          "estimatedVotesHigh": 430389,
-          "estimatedVotesLow": 352133,
-          "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 29.12,
+          "turnoutLow": 35.59,
+          "turnoutMid": 32.03
         },
         "firstName": "Ronald",
         "id": 24312,
         "lastName": "Russell",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 43273
       },
       {
         "elected": false,
@@ -129,15 +117,31 @@
           "estimatedVotesHigh": 430389,
           "estimatedVotesLow": 352133,
           "estimatedVotesMid": 391258,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 29.12,
+          "turnoutLow": 35.59,
+          "turnoutMid": 32.03
         },
         "firstName": "Chellie",
         "id": 1323,
         "lastName": "Pingree",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 79569
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 430389,
+          "estimatedVotesLow": 352133,
+          "estimatedVotesMid": 391258,
+          "turnoutHigh": 29.12,
+          "turnoutLow": 35.59,
+          "turnoutMid": 32.03
+        },
+        "firstName": "Ethan",
+        "id": 85036,
+        "lastName": "Alcorn",
+        "partyName": "Independent",
+        "votes": 2489
       }
     ],
     "district": "1",
@@ -146,7 +150,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "lastUpdated": "2024-10-28T20:59:41.127Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -156,10 +160,12 @@
     "raceDate": "2024-11-05",
     "state": "ME",
     "stateName": "Maine",
-    "totalVotes": 0,
+    "totalVotes": 125331,
     "year": 2024
   },
   {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
     "calledCandidate": null,
     "calledCandidates": [],
     "candidatesWithVotes": [
@@ -169,15 +175,15 @@
           "estimatedVotesHigh": 390042,
           "estimatedVotesLow": 319113,
           "estimatedVotesMid": 354553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 19.93,
+          "turnoutLow": 24.36,
+          "turnoutMid": 21.93
         },
         "firstName": "Austin",
         "id": 24178,
         "lastName": "Theriault",
         "partyName": "Republican",
-        "votes": 0
+        "votes": 41326
       },
       {
         "elected": false,
@@ -185,15 +191,15 @@
           "estimatedVotesHigh": 390042,
           "estimatedVotesLow": 319113,
           "estimatedVotesMid": 354553,
-          "turnoutHigh": 0,
-          "turnoutLow": 0,
-          "turnoutMid": 0
+          "turnoutHigh": 19.93,
+          "turnoutLow": 24.36,
+          "turnoutMid": 21.93
         },
         "firstName": "Jared",
         "id": 8628,
         "lastName": "Golden",
         "partyName": "Democratic",
-        "votes": 0
+        "votes": 36413
       }
     ],
     "district": "2",
@@ -202,7 +208,7 @@
       "electionTypeId": "1"
     },
     "hasCalledCandidate": false,
-    "lastUpdated": "2024-10-28T15:15:28.388Z",
+    "lastUpdated": "2024-10-28T20:59:34.514Z",
     "office": {
       "officeId": "3",
       "officeName": "US House",
@@ -212,7 +218,7 @@
     "raceDate": "2024-11-05",
     "state": "ME",
     "stateName": "Maine",
-    "totalVotes": 0,
+    "totalVotes": 77739,
     "year": 2024
   }
 ]
