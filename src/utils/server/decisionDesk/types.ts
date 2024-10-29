@@ -65,8 +65,11 @@ export interface ToplineResults {
   precincts: Precincts
   called_candidates: number[]
   call_times: CallTime[]
-  advancing_candidates: any[]
-  advance_times: any[]
+  advancing_candidates: number[]
+  // TODO: Check if this is correct
+  advance_times: {
+    [key: string]: number | string
+  }[]
 }
 
 export interface Votes {
