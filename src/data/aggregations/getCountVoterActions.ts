@@ -16,7 +16,7 @@ export async function getCountVoterActions() {
   return isValidCount(cachedCount) ? Number(cachedCount) : FALLBACK_MOCK_COUNT
 }
 
-export async function setVoterActionsCacheCount() {
+export async function setVoterActionsCountCache() {
   // `prismaClient.count` doesn't support distinct, that's why we're using a raw query here
   // see https://github.com/prisma/prisma/issues/4228
   const count = await prismaClient.$queryRaw<{ count: number }[]>`

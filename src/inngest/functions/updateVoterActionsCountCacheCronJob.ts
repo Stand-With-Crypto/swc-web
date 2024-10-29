@@ -2,7 +2,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { setVoterActionsCacheCount } from '@/data/aggregations/getCountVoterActions'
+import { setVoterActionsCountCache } from '@/data/aggregations/getCountVoterActions'
 
 const UPDATE_VOTER_ACTIONS_COUNT_CACHE_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minutes.
 const UPDATE_VOTER_ACTIONS_COUNT_CACHE_CRON_JOB_FUNCTION_ID =
@@ -30,5 +30,5 @@ export const updateVoterActionsCounterCacheInngestCronJob = inngest.createFuncti
       ? { cron: UPDATE_VOTER_ACTIONS_COUNT_CACHE_CRON_JOB_SCHEDULE }
       : { event: UPDATE_VOTER_ACTIONS_COUNT_CACHE_CRON_JOB_EVENT_NAME }),
   },
-  () => setVoterActionsCacheCount(),
+  () => setVoterActionsCountCache(),
 )
