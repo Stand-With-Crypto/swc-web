@@ -55,7 +55,7 @@ export function LocationUnitedStatesLiveResults({
   return (
     <div className="space-y-20">
       <DarkHeroSection className="py-8 lg:px-28 lg:py-20">
-        <div className="mx-auto flex w-full max-w-[1800px] flex-col items-center justify-between gap-10 md:px-8 lg:flex-row">
+        <div className="mx-auto flex w-full max-w-[1800px] flex-col items-center justify-between gap-16 md:px-8 lg:flex-row">
           <div className="space-y-6 text-center">
             <NextImage
               alt="SWC shield"
@@ -64,12 +64,14 @@ export function LocationUnitedStatesLiveResults({
               src="/actionTypeIcons/optIn.png"
               width={100}
             />
-            <PageTitle as="h1" className="text-center lg:text-left" size="md">
-              Crypto election updates
-            </PageTitle>
-            <PageSubTitle className="text-gray-400 lg:text-left" size="lg">
-              See how crypto is influencing the election. Get live election updates.
-            </PageSubTitle>
+            <div className="space-y-2 text-center">
+              <PageTitle as="h1" className="text-center lg:text-left" size="md">
+                Crypto election updates
+              </PageTitle>
+              <PageSubTitle className="text-gray-400 lg:text-left" size="lg">
+                See how crypto is influencing the election. Get live election updates.
+              </PageSubTitle>
+            </div>
 
             <Button asChild className="hidden w-fit font-bold lg:flex" variant="secondary">
               <InternalLink href={urls.locationUnitedStatesPresidential()}>
