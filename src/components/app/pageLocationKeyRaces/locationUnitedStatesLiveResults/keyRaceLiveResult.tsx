@@ -28,7 +28,6 @@ import {
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
-import { Progress } from '@/components/ui/progress'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
@@ -201,46 +200,36 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       </div>
 
       <div className="space-y-3">
-        <div className="flex gap-1">
-          {canShowProgress && ddhqCandidateA ? (
-            <Progress
-              className={cn(
-                'rounded-l-full rounded-r-none bg-secondary',
-                getOpacity(ddhqCandidateA, raceData),
-              )}
-              indicatorClassName={cn(
-                'bg-none rounded-r-none',
-                convertDTSIStanceScoreToBgColorClass(
-                  ddhqCandidateA?.manuallyOverriddenStanceScore ??
-                    ddhqCandidateA?.computedStanceScore,
-                ),
-              )}
-              value={Math.min(
-                +getVotePercentage(ddhqCandidateA, raceData).toFixed(0) * (ddhqCandidateB ? 2 : 1),
-                100,
-              )}
-            />
-          ) : null}
-          {canShowProgress && ddhqCandidateB ? (
-            <Progress
-              className={cn(
-                'rounded-l-none rounded-r-full  bg-secondary',
-                getOpacity(ddhqCandidateB, raceData),
-              )}
-              indicatorClassName={cn(
-                'bg-none rounded-l-none',
-                convertDTSIStanceScoreToBgColorClass(
-                  ddhqCandidateB?.manuallyOverriddenStanceScore ??
-                    ddhqCandidateB?.computedStanceScore,
-                ),
-              )}
-              inverted
-              value={Math.min(
-                +getVotePercentage(ddhqCandidateB, raceData).toFixed(0) * (ddhqCandidateA ? 2 : 1),
-                100,
-              )}
-            />
-          ) : null}
+        <div className="relative">
+          <div className="mb-4 flex h-5 justify-between overflow-hidden rounded-full bg-secondary text-xs text-white">
+            {canShowProgress && ddhqCandidateA ? (
+              <Progress
+                className={cn(
+                  convertDTSIStanceScoreToBgColorClass(
+                    ddhqCandidateA?.manuallyOverriddenStanceScore ??
+                      ddhqCandidateA?.computedStanceScore,
+                  ),
+                  getOpacity(ddhqCandidateA, raceData),
+                )}
+                percentage={getVotePercentage(ddhqCandidateA, raceData)}
+              />
+            ) : null}
+
+            <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-full w-[4px] -translate-x-1/2 -translate-y-1/2 transform bg-white" />
+
+            {canShowProgress && ddhqCandidateB ? (
+              <Progress
+                className={cn(
+                  convertDTSIStanceScoreToBgColorClass(
+                    ddhqCandidateB?.manuallyOverriddenStanceScore ??
+                      ddhqCandidateB?.computedStanceScore,
+                  ),
+                  getOpacity(ddhqCandidateB, raceData),
+                )}
+                percentage={getVotePercentage(ddhqCandidateB, raceData)}
+              />
+            ) : null}
+          </div>
         </div>
 
         <div className="flex items-center justify-between gap-4">
@@ -303,6 +292,29 @@ function AvatarBox(props: AvatarBoxProps) {
           {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(candidate)}
         </p>
       </div>
+    </div>
+  )
+}
+
+interface ProgressProps {
+  percentage: number | undefined
+  className?: string
+}
+
+function Progress(props: ProgressProps) {
+  const { percentage, className } = props
+
+  return (
+    <div
+      className={cn(
+        'flex items-center justify-center bg-black text-center transition-all',
+        className,
+      )}
+      style={{
+        width: Math.min(+(percentage || 0).toFixed(2), 100) + '%',
+      }}
+    >
+      {percentage ? <span className="text-center font-bold">{percentage.toFixed(2)}%</span> : null}
     </div>
   )
 }
