@@ -31,6 +31,14 @@ export async function generateMetadata({ params }: PressReleasePageProps): Promi
   })
 }
 
+export async function generateStaticParams() {
+  return MOCK_PRESS_CONTENT.map(currentArticle => {
+    return {
+      slug: currentArticle.link.slice(1),
+    }
+  })
+}
+
 export default async function PressRelease({ params }: PressReleasePageProps) {
   const currentArticle = MOCK_PRESS_CONTENT.find(article => article.link === `/${params.slug}`)
 
