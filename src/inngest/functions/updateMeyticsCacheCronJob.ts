@@ -4,8 +4,8 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const UPDATE_METRICS_CACHE_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minutes.
-const UPDATE_METRICS_CACHE_CRON_JOB_FUNCTION_ID = 'script.update-voter-actions-cache-cron-job'
-const UPDATE_METRICS_CACHE_CRON_JOB_EVENT_NAME = 'script/update.voter.actions.cache.cron.job'
+const UPDATE_METRICS_CACHE_CRON_JOB_FUNCTION_ID = 'script.update-metrics-cache-cron-job'
+const UPDATE_METRICS_CACHE_CRON_JOB_EVENT_NAME = 'script/update.metrics.cache.cron.job'
 
 export interface UpdateMetricsCounterCacheCronJobSchema {
   name: typeof UPDATE_METRICS_CACHE_CRON_JOB_EVENT_NAME
