@@ -22,7 +22,7 @@ import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functio
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
 import type { BulkSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
 import type { EnqueueSMSInngestEventSchema } from '@/inngest/functions/sms/enqueueMessages'
-import { UpdateVoterActionsCounterCacheCronJobSchema } from '@/inngest/functions/updateVoterActionsCountCacheCronJob'
+import { UpdateVoterActionsCounterCacheCronJobSchema } from '@/inngest/functions/updateMeyticsCacheCronJob'
 import type { DeleteUserActionsInngestEventSchema } from '@/inngest/functions/user/deleteUserActions'
 import type { AuditUserBatchEventSchema } from '@/inngest/functions/usersTotalDonationAmountUsd/audit'
 import type {

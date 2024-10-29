@@ -28,7 +28,7 @@ import {
   bulkSMSCommunicationJourney,
   enqueueSMS,
 } from '@/inngest/functions/sms'
-import { updateVoterActionsCounterCacheInngestCronJob } from '@/inngest/functions/updateVoterActionsCountCacheCronJob'
+import { updateMetricsCacheInngestCronJob } from '@/inngest/functions/updateMeyticsCacheCronJob'
 import { deleteUserActions } from '@/inngest/functions/user/deleteUserActions'
 import {
   auditUsersTotalDonationAmountUsdInngest,
@@ -72,6 +72,6 @@ export const { GET, POST, PUT } = serve({
     sendEventNotificationWithInngest,
     deleteUserActions,
     enqueueSMS,
-    updateVoterActionsCounterCacheInngestCronJob,
+    updateMetricsCacheInngestCronJob,
   ],
 })
