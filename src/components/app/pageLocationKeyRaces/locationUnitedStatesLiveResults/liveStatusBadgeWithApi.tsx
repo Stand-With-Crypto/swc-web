@@ -6,7 +6,7 @@ import useSWR from 'swr'
 
 import {
   LiveStatusBadge,
-  Status,
+  RaceStatus,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { AllCompletedRacesResponse } from '@/utils/server/decisionDesk/getElectionStatus'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -39,7 +39,7 @@ export function LiveStatusBadgeWithApi(props: LiveStatusBadgeWithApiProps) {
 
   const { data } = useElectionStatus(initialElectionStatusData)
 
-  const raceStatus = useMemo<Status>(() => {
+  const raceStatus = useMemo<RaceStatus>(() => {
     if (!data) return 'unknown'
 
     const now = new Date()

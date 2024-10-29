@@ -8,7 +8,7 @@ import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import {
   LiveStatusBadge,
-  Status,
+  RaceStatus,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
@@ -83,7 +83,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     return liveResultData.find(candidate => candidate.votingData?.called)
   }, [liveResultData])
 
-  const raceStatus = useMemo<Status>(() => {
+  const raceStatus = useMemo<RaceStatus>(() => {
     if (!liveResultData) return 'unknown'
     if (calledCandidate) return 'called'
     if (isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))) return 'not-started'

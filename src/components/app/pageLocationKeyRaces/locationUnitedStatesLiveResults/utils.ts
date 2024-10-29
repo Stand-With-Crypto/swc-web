@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 import { isBefore, startOfDay } from 'date-fns'
 import { isNil } from 'lodash-es'
 
+import { RaceStatus } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import {
   CandidatesWithVote,
   CongressDataResponse,
@@ -51,7 +52,7 @@ export const getVotePercentage = (
 
 export const getRaceStatus = (
   raceData: RacesVotingDataResponse | RacesVotingDataResponse[] | null | undefined,
-) => {
+): RaceStatus => {
   if (!raceData) return 'unknown'
 
   let calledRace: boolean
@@ -67,6 +68,10 @@ export const getRaceStatus = (
 
   if (calledRace) {
     return 'called'
+  }
+
+  if (!Array.isArray(raceData) && raceData.advanceCandidates) {
+    return 'runoff'
   }
 
   const now = new Date()

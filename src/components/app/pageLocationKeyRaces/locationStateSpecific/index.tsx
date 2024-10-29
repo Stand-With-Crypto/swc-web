@@ -12,7 +12,7 @@ import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResul
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import {
   LiveStatusBadge,
-  Status,
+  RaceStatus,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import {
@@ -104,7 +104,7 @@ export function LocationStateSpecific({
     )
   }, [groups, stateCode])
 
-  const raceStatus = useMemo<Status>(() => getRaceStatus(stateRaceData), [stateRaceData])
+  const raceStatus = useMemo<RaceStatus>(() => getRaceStatus(stateRaceData), [stateRaceData])
 
   return (
     <div>

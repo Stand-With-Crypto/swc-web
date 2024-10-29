@@ -1,10 +1,10 @@
 import { Badge, BadgeProps } from '@/components/ui/badge'
 import { cn } from '@/utils/web/cn'
 
-export type Status = 'live' | 'not-started' | 'called' | 'unknown'
+export type RaceStatus = 'live' | 'not-started' | 'called' | 'runoff' | 'unknown'
 
 interface LiveStatusBadgeProps {
-  status: Status
+  status: RaceStatus
   winnerName?: string
   className?: string
 }
@@ -19,6 +19,8 @@ export function LiveStatusBadge(props: LiveStatusBadgeProps) {
       return <CalledBadge className={className} winnerName={winnerName} />
     case 'not-started':
       return <NotStartedBadge className={className} />
+    case 'runoff':
+      return <RunoffBadge className={className} />
     default:
       return null
   }
@@ -48,6 +50,14 @@ function CalledBadge({ className, winnerName, ...props }: BadgeProps & { winnerN
   return (
     <Badge className={cn('py-1 text-base', className)} variant="primary-cta-subtle" {...props}>
       {winnerName ? `Winner: ${winnerName}` : 'Final'}
+    </Badge>
+  )
+}
+
+function RunoffBadge({ className, ...props }: BadgeProps) {
+  return (
+    <Badge className={cn('py-1 text-base', className)} variant="green-subtle" {...props}>
+      Advancing candidates
     </Badge>
   )
 }

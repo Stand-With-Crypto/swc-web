@@ -9,7 +9,7 @@ import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import {
   LiveStatusBadge,
-  Status,
+  RaceStatus,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import {
@@ -125,7 +125,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     return format(parsedDate, "'Data updated' M/d/yy 'at' h:mm a")
   }, [raceData])
 
-  const raceStatus = useMemo<Status>(() => {
+  const raceStatus = useMemo<RaceStatus>(() => {
     return getRaceStatus(raceData)
   }, [raceData])
 
@@ -161,7 +161,8 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             {lastUpdated && <p className="text-sm text-fontcolor-muted">{lastUpdated}</p>}
           </div>
           <LiveStatusBadge
-            status={raceStatus}
+            // status={raceStatus}
+            status="runoff"
             winnerName={raceData?.calledCandidate ? winnerName : ''}
           />
         </div>
