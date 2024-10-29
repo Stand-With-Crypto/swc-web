@@ -119,7 +119,7 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
           {({ geographies }) =>
             geographies.map(geo => (
               <Geography
-                cursor={proCryptoStates[geo.properties.name] ? 'pointer' : 'default'}
+                cursor="pointer"
                 geography={geo}
                 key={geo.rsmKey}
                 onClick={_event => handleStateClick(geo)}
@@ -133,22 +133,22 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
                     strokeWidth: '0.777px',
                     outline: 'none',
                     transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
-                    cursor: proCryptoStates[geo.properties.name] ? 'pointer' : 'default',
+                    cursor: 'pointer',
                   },
                   hover: {
-                    fill: proCryptoStates[geo.properties.name] ? '#7620FF' : '#F4EEFF',
+                    fill: proCryptoStates[geo.properties.name] ? '#7620FF' : '#DDC9FF',
                     outline: 'none',
                     stroke: '#DAC5FF',
                     strokeWidth: '0.777px',
                     transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
-                    cursor: proCryptoStates[geo.properties.name] ? 'pointer' : 'default',
+                    cursor: 'pointer',
                   },
                   pressed: {
                     fill: '#DDC9FF',
                     outline: 'none',
                     stroke: '#DAC5FF',
                     strokeWidth: '0.777px',
-                    cursor: proCryptoStates[geo.properties.name] ? 'pointer' : 'default',
+                    cursor: 'pointer',
                   },
                 }}
               />
@@ -199,11 +199,12 @@ function Tooltip({
   if (!mousePosition || !hoveredStateName) return null
 
   const totalElectedCandidates = getTotalElectedCandidatesByState(hoveredStateName)
-  if (!totalElectedCandidates) return null
 
   const proCryptoPoliticianText = totalElectedCandidates === 1 ? 'politician' : 'politicians'
 
-  const formattedNumber = `${FormattedNumber({ amount: totalElectedCandidates, locale })} pro-crypto ${proCryptoPoliticianText} elected in ${hoveredStateName}`
+  const formattedNumber = !totalElectedCandidates
+    ? `View race in ${hoveredStateName}`
+    : `${FormattedNumber({ amount: totalElectedCandidates, locale })} pro-crypto ${proCryptoPoliticianText} elected in ${hoveredStateName}`
 
   const tooltipWidth = formattedNumber.length * 8
   const offsetX = tooltipWidth / 2
