@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
 import { getClientAddress } from '@/clientModels/clientAddress'
@@ -44,8 +45,8 @@ async function apiResponseForUserFullProfileInfo() {
     },
   })
 
-  let primaryUserEmailAddress
-  let primaryUserCryptoAddress
+  let primaryUserEmailAddress: UserEmailAddress | null = null
+  let primaryUserCryptoAddress: UserCryptoAddress | null = null
 
   if (user?.id) {
     const results = await Promise.all([
@@ -62,17 +63,15 @@ async function apiResponseForUserFullProfileInfo() {
   }
 
   return {
-    user: user &&
-      primaryUserEmailAddress &&
-      primaryUserCryptoAddress && {
-        ...getSensitiveDataClientUser({
-          ...user,
-          primaryUserEmailAddress,
-          primaryUserCryptoAddress,
-        }),
-        address: user.address && getClientAddress(user.address),
-        userActions: user.userActions.map(record => getSensitiveDataClientUserAction({ record })),
-      },
+    user: user && {
+      ...getSensitiveDataClientUser({
+        ...user,
+        primaryUserEmailAddress,
+        primaryUserCryptoAddress,
+      }),
+      address: user.address && getClientAddress(user.address),
+      userActions: user.userActions.map(record => getSensitiveDataClientUserAction({ record })),
+    },
   }
 }
 
