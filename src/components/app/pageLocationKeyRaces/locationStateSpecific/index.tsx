@@ -163,7 +163,7 @@ export function LocationStateSpecific({
               <LiveStatusBadge status={raceStatus} />
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
               <ResultsOverviewCard
                 antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
                 proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}

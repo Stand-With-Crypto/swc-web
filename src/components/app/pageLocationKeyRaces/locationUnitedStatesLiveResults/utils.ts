@@ -61,9 +61,9 @@ export const getRaceStatus = (
       return 'unknown'
     }
 
-    calledRace = raceData.every(race => !!race.calledCandidate)
+    calledRace = raceData.every(race => race.hasCalledCandidate || race.advanceCandidates)
   } else {
-    calledRace = !!raceData.calledCandidate
+    calledRace = raceData.hasCalledCandidate
   }
 
   if (calledRace) {
