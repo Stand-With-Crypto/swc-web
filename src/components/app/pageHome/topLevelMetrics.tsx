@@ -32,6 +32,7 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
 
 export function TopLevelMetrics({ locale, ...data }: Props & { locale: SupportedLocale }) {
   const [isDonatedTooltipOpen, setIsDonatedTooltipOpen] = useState(false)
+  const [isVoterActionsTooltipOpen, setIsVoterActionsTooltipOpen] = useState(false)
   const decreasedInitialValues = useMemo(
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
     [data],
@@ -72,7 +73,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
       countUsers: {
         count: intlNumberFormat(locale).format(values.countUsers.count),
       },
-      countPolicymakerContacts: {
+      countVoterActions: {
         count: intlNumberFormat(locale).format(values.countVoterActions),
       },
     }
@@ -112,9 +113,28 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
           value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
         },
         {
-          label: 'Advocates researched voting options',
+          label: 'Prepared to vote',
           value: (
-            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
+            <TooltipProvider delayDuration={0}>
+              <Tooltip onOpenChange={setIsVoterActionsTooltipOpen} open={isVoterActionsTooltipOpen}>
+                <TooltipTrigger
+                  className="mx-auto flex gap-1"
+                  onClick={() => setIsVoterActionsTooltipOpen(true)}
+                  style={{ height: 35 }}
+                >
+                  <AnimatedNumericOdometer size={35} value={formatted.countVoterActions.count} />
+                  <sup>
+                    <Info className="h-4 w-4" />
+                  </sup>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs" side="bottom">
+                  <p className="text-sm font-normal tracking-normal">
+                    "Prepared To Vote" includes anyone who has used SWC's Voter Center tools to
+                    research candidates or voting methods
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           ),
         },
       ].map(({ label, value }, index) => (
