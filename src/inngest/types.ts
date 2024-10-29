@@ -28,6 +28,7 @@ import type {
   BackfillUsersTotalDonationAmountUsdEventSchema,
   UpdateUserBatchEventSchema,
 } from '@/inngest/functions/usersTotalDonationAmountUsd/backfill'
+import { UpdateVoterActionsCounterCacheCronJobSchema } from '@/inngest/functions/updateVoterActionsCountCacheCronJob'
 
 type EventTypes =
   | CapitolCanaryCheckSmsOptInReplySchema
@@ -54,5 +55,6 @@ type EventTypes =
   | MonitorBaseEthBalancesInngestEventSchema
   | InitialSignupUserCommunicationSchema
   | EnqueueSMSInngestEventSchema
+  | UpdateVoterActionsCounterCacheCronJobSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

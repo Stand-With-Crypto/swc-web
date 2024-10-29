@@ -38,6 +38,7 @@ import {
   backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/usersTotalDonationAmountUsd/backfill'
 import { inngest } from '@/inngest/inngest'
+import { updateVoterActionsCounterCacheInngestCronJob } from '@/inngest/functions/updateVoterActionsCountCacheCronJob'
 
 export const maxDuration = 180 // 3 minutes
 
@@ -71,5 +72,6 @@ export const { GET, POST, PUT } = serve({
     sendEventNotificationWithInngest,
     deleteUserActions,
     enqueueSMS,
+    updateVoterActionsCounterCacheInngestCronJob,
   ],
 })
