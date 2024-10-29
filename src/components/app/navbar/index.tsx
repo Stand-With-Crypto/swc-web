@@ -40,7 +40,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 
   const leftLinks = [
-    { href: urls.locationUnitedStates(), text: 'Key Races' },
+    { href: urls.locationUnitedStates(), text: '2024 Election results' },
     {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
