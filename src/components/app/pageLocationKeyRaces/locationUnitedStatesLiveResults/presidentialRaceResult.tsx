@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { isBefore, startOfDay } from 'date-fns'
 import { isNil } from 'lodash-es'
 
@@ -19,6 +19,7 @@ import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { fetchRacesData } from '@/utils/server/decisionDesk/services'
 import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
@@ -91,6 +92,17 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
 
   const getPercentage = useCallback((electoralVotes: number) => {
     return (electoralVotes / 538) * 100
+  }, [])
+
+  useEffect(() => {
+    void fetchRacesData({
+      state: 'OH',
+      year: '2024',
+      limit: '250',
+      office_id: '3',
+    }).then(data => {
+      console.log('OHIO', data)
+    })
   }, [])
 
   if (calledCandidate) {
@@ -293,7 +305,7 @@ function Progress(props: ProgressProps) {
         width: Math.min(+(percentage || 0).toFixed(2), 100) + '%',
       }}
     >
-      {percentage ? <span className="text-center font-bold">{percentage.toFixed(2)}%</span> : null}
+      {/* {percentage ? <span className="text-center font-bold">{percentage.toFixed(2)}%</span> : null} */}
     </div>
   )
 }

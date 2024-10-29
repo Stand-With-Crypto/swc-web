@@ -116,6 +116,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       ) ?? null
     )
   }, [candidateA, candidateB, liveResultData, primaryDistrict])
+  console.log('raceData', raceData)
 
   const [ddhqCandidateA, ddhqCandidateB] = useLiveCandidateSelection(candidates, raceData)
 
@@ -314,7 +315,7 @@ function Progress(props: ProgressProps) {
         width: Math.min(+(percentage || 0).toFixed(2), 100) + '%',
       }}
     >
-      {percentage ? <span className="text-center font-bold">{percentage.toFixed(2)}%</span> : null}
+      {/* {percentage ? <span className="text-center font-bold">{percentage.toFixed(2)}%</span> : null} */}
     </div>
   )
 }
