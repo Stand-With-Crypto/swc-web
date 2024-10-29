@@ -116,7 +116,6 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       ) ?? null
     )
   }, [candidateA, candidateB, liveResultData, primaryDistrict])
-  console.log('raceData', raceData)
 
   const [ddhqCandidateA, ddhqCandidateB] = useLiveCandidateSelection(candidates, raceData)
 
