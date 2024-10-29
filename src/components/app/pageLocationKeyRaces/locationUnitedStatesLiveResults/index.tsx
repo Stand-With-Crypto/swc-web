@@ -170,18 +170,29 @@ export function LocationUnitedStatesLiveResults({
                   src="/shields/shield_DoublePurple.png"
                   width={120}
                 />
-                <div className="space-y-2">
-                  <p className="text-xl font-semibold">Did you vote in this year's election?</p>
-                  <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
-                </div>
-
                 <LoginDialogWrapper
                   authenticatedContent={
                     // TODO: Claim I Voted NFT
-                    <Button className="w-fit">Claim I Voted NFT</Button>
+                    <>
+                      <div className="space-y-2">
+                        <p className="text-xl font-semibold">
+                          Did you vote in this year's election?
+                        </p>
+                        <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
+                      </div>
+                      <Button className="w-fit">Claim I Voted NFT</Button>
+                    </>
                   }
                 >
-                  <Button className="w-fit">Join Stand With Crypto</Button>
+                  <div>
+                    <div className="space-y-2">
+                      <p className="text-xl font-semibold">Did you vote in this year's election?</p>
+                      <p className="text-fontcolor-muted">
+                        Now take the next step and sign up to join Stand With Crypto
+                      </p>
+                    </div>
+                    <Button className="mt-8 w-fit">Join Stand With Crypto</Button>
+                  </div>
                 </LoginDialogWrapper>
               </div>
             </LiveResultsGrid.GridItem>
