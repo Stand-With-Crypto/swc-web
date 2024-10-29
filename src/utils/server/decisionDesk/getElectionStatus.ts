@@ -39,8 +39,9 @@ export async function getElectionStatus() {
     }
   }
 
-  allCompletedRaces.statesFinished = statesFinished
-  allCompletedRaces.statesLeft = stateKeys.length - statesFinished.length
-
-  return allCompletedRaces
+  return {
+    ...allCompletedRaces,
+    statesFinished,
+    statesLeft: stateKeys.length - statesFinished.length,
+  }
 }
