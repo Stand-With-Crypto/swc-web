@@ -236,6 +236,29 @@ export function LocationStateSpecific({
             </PageTitle>
           )}
 
+          {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
+            <ContentSection
+              className="container"
+              subtitle={'Dive deeper and discover races in other districts.'}
+              title={`Other races in ${stateName}`}
+            >
+              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
+                {otherDistricts.map(district => (
+                  <InternalLink
+                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
+                    href={urls.locationDistrictSpecific({
+                      stateCode,
+                      district,
+                    })}
+                    key={district}
+                  >
+                    District {district}
+                  </InternalLink>
+                ))}
+              </div>
+            </ContentSection>
+          )}
+
           {!!stances.length && (
             <ContentSection
               subtitle={
@@ -265,29 +288,6 @@ export function LocationStateSpecific({
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
-            </ContentSection>
-          )}
-
-          {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
-            <ContentSection
-              className="container"
-              subtitle={'Dive deeper and discover races in other districts.'}
-              title={`Other races in ${stateName}`}
-            >
-              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-                {otherDistricts.map(district => (
-                  <InternalLink
-                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                    href={urls.locationDistrictSpecific({
-                      stateCode,
-                      district,
-                    })}
-                    key={district}
-                  >
-                    District {district}
-                  </InternalLink>
-                ))}
-              </div>
             </ContentSection>
           )}
 

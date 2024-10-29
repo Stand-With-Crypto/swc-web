@@ -1,3 +1,4 @@
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DDHQFooter } from '@/components/app/ddhqFooter'
@@ -171,7 +172,15 @@ export function LocationUnitedStatesLiveResults({
                   <p className="text-xl font-semibold">Did you vote in this year's election?</p>
                   <p className="text-fontcolor-muted">Claim your free "I Voted" NFT</p>
                 </div>
-                <Button className="w-fit">Claim I Voted NFT</Button>
+
+                <LoginDialogWrapper
+                  authenticatedContent={
+                    // TODO: Claim I Voted NFT
+                    <Button className="w-fit">Claim I Voted NFT</Button>
+                  }
+                >
+                  <Button className="w-fit">Join Stand With Crypto</Button>
+                </LoginDialogWrapper>
               </div>
             </LiveResultsGrid.GridItem>
           </LiveResultsGrid>
