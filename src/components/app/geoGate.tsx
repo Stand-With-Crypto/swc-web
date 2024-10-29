@@ -3,10 +3,8 @@
 import Cookies from 'js-cookie'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
+import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
 
 interface GeoGateProps {
   children: React.ReactNode
@@ -20,12 +18,11 @@ export const GeoGate = (props: GeoGateProps) => {
 
   const hasHydrated = useHasHydrated()
 
-  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
-  const parsedExistingCountryCode = parseUserCountryCodeCookie(userCountryCode)
-
   if (!hasHydrated) return children
 
-  if (!bypassCountryCheck && parsedExistingCountryCode?.countryCode !== countryCode) {
+  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
+
+  if (!isValidCountryCode({ countryCode, userCountryCode, bypassCountryCheck })) {
     return unavailableContent
   }
 

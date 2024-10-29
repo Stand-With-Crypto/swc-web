@@ -86,6 +86,10 @@ export function UserConfig() {
             void setCookie(
               USER_COUNTRY_CODE_COOKIE_NAME,
               JSON.stringify({ countryCode: values.countryCode, bypassed: true }),
+              {
+                sameSite: 'lax',
+                secure: true,
+              },
             )
           })}
         >
