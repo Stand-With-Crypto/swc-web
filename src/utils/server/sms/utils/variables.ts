@@ -1,13 +1,21 @@
-export type UserSMSVariables = Partial<{
-  userId: string
-  sessionId: string
-  firstName: string
-  lastName: string
-}>
+import { template } from 'lodash-es'
 
-export function applySMSVariables(message: string, variables: UserSMSVariables) {
-  return message.replace(
-    /{{\s*(\w+)\s*}}/g,
-    (_, variable: keyof UserSMSVariables) => variables[variable] ?? '',
-  )
+interface SMSVariables {
+  userId: string | undefined
+  sessionId: string | undefined
+  firstName: string | undefined
+  lastName: string | undefined
+}
+
+export type UserSMSVariables = Partial<SMSVariables>
+
+export function applySMSVariables(message: string, userSMSVariables: UserSMSVariables) {
+  const variables: SMSVariables = {
+    firstName: undefined,
+    lastName: undefined,
+    sessionId: undefined,
+    userId: undefined,
+  }
+  const compiled = template(message)
+  return compiled({ ...variables, ...userSMSVariables })
 }
