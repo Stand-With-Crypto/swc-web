@@ -1,22 +1,22 @@
 import 'server-only'
 
+import { getCountPolicymakerContacts } from '@/data/aggregations/getCountPolicymakerContacts'
 import { getCountUsers } from '@/data/aggregations/getCountUsers'
-import { getCountVoterActions } from '@/data/aggregations/getCountVoterActions'
 import { getSumDonations } from '@/data/aggregations/getSumDonations'
 import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
 export async function getHomepageTopLevelMetrics() {
-  const [sumDonations, countUsers, countVoterActions] = await Promise.all([
+  const [sumDonations, countUsers, countPolicymakerContacts] = await Promise.all([
     getSumDonations(),
     getCountUsers(),
-    getCountVoterActions(),
+    getCountPolicymakerContacts(),
   ])
   return {
     sumDonations,
     countUsers,
-    countVoterActions,
+    countPolicymakerContacts,
   }
 }
 export type GetHomepageTopLevelMetricsResponse = Awaited<
@@ -30,7 +30,7 @@ interface GetHomePageDataProps {
 
 export async function getHomepageData(props?: GetHomePageDataProps) {
   const [
-    { sumDonations, countUsers, countVoterActions },
+    { sumDonations, countUsers, countPolicymakerContacts },
     actions,
     dtsiHomepagePeople,
     sumDonationsByUser,
@@ -46,7 +46,7 @@ export async function getHomepageData(props?: GetHomePageDataProps) {
   return {
     sumDonations,
     countUsers,
-    countVoterActions,
+    countPolicymakerContacts,
     actions,
     sumDonationsByUser,
     dtsiHomepagePeople,
