@@ -340,6 +340,7 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
         source: '/vg/:campaignId/:sessionId*',
         destination:
