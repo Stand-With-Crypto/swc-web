@@ -16,13 +16,18 @@ import {
 } from '@/utils/server/decisionDesk/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
-const DECISION_DESK_CLIENT_ID = requiredEnv(
+const DECISION_DESK_CLIENT_ID = requiredOutsideLocalEnv(
   process.env.DECISION_DESK_CLIENT_ID,
   'DECISION_DESK_CLIENT_ID',
+  'DecisionDesk client id',
 )
-const DECISION_DESK_SECRET = requiredEnv(process.env.DECISION_DESK_SECRET, 'DECISION_DESK_SECRET')
+const DECISION_DESK_SECRET = requiredOutsideLocalEnv(
+  process.env.DECISION_DESK_SECRET,
+  'DECISION_DESK_SECRET',
+  'DecisionDesk secret',
+)
 
 const logger = getLogger('decisionDesk services')
 
