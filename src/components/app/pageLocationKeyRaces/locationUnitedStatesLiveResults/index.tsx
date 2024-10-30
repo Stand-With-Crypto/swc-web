@@ -75,10 +75,11 @@ export function LocationUnitedStatesLiveResults({
 
           <LoginDialogWrapper
             authenticatedContent={
-              // TODO: Claim I Voted NFT
-              <Button className="w-fit" variant="secondary">
-                Claim I Voted NFT
-              </Button>
+              <UserActionVotingDayDialog>
+                <Button className="mt-6 w-full max-w-xs" variant="secondary">
+                  Claim I Voted NFT
+                </Button>
+              </UserActionVotingDayDialog>
             }
           >
             <Button className="w-fit" variant="secondary">
