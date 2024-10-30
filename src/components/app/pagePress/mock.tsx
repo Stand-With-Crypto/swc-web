@@ -1,3 +1,4 @@
+import { InternalLink, ExternalLink } from '@/components/ui/link'
 import React from 'react'
 
 // this is temporary while we don't leverage builder.io for this content
@@ -991,17 +992,49 @@ export const MOCK_PRESS_CONTENT = [
       <div className="mx-auto">
         <p className="mb-4">
           The results are clear. This year, for the first time, we have seen the incredible
-          influence of a new, engaged, and powerful voting bloc: the crypto voter. Fifty-two million
-          Americans (15% of all U.S. adults) currently own some form of cryptocurrency, and there
-          are eight times as many crypto owners excited to vote for candidates who support crypto
-          than the margin of victory in the 2020 Presidential Election.
+          influence of a new, engaged, and powerful voting bloc: the crypto voter.{' '}
+          <InternalLink href="https://www.standwithcrypto.org/about">
+            Fifty-two million Americans
+          </InternalLink>{' '}
+          (15% of all U.S. adults) currently own some form of cryptocurrency, and there are eight
+          times as many crypto owners excited to vote for candidates who support crypto than the
+          margin of victory in the 2020 Presidential Election.
         </p>
 
         <p className="mb-4">
           Across the five key swing states of Arizona, Nevada, Michigan, Wisconsin, and Pennsylvania
-          alone, there are over 4 million cryptocurrency owners. Crypto owners in these states are
-          more likely to be under 35 (22% compared to 13% of all crypto-aware adults) and non-white
-          (25% vs 18%). They are also bipartisan (identify as 44% Republican, 39% Democrat).
+          alone, there are over{' '}
+          <InternalLink href="https://www.standwithcrypto.org/about">
+            4 million cryptocurrency owners
+          </InternalLink>
+          . Crypto owners in these states are more likely to be under 35 (22% compared to 13% of all
+          crypto-aware adults) and non-white (25% vs 18%).{' '}
+          <InternalLink href="https://www.standwithcrypto.org/about">
+            They are also bipartisan
+          </InternalLink>{' '}
+          (identify as 44% Republican, 39% Democrat).
+        </p>
+
+        <h3 className="text-md mb-2 mt-6 font-semibold">
+          Over the past year, Stand With Crypto has engaged and mobilized this new voter base to
+          support champions of cryptocurrency and effective, smart crypto regulation.
+        </h3>
+
+        <p className="mb-4">
+          With <InternalLink href="https://www.standwithcrypto.org/about">67%</InternalLink> of
+          crypto owners eager to support candidates who support the industry, this group will make
+          the difference next week.
+        </p>
+
+        <p className="mb-4">
+          Crypto is no longer just one issue of many in this election, it is one of the central
+          forces shaping the future makeup of our government.
+        </p>
+
+        <p className="mb-4">
+          This memo provides a detailed, data-backed assessment of how crypto voters and Stand With
+          Crypto's organizing strategy helped the crypto vote to drive momentum and deliver results
+          in this election cycle.
         </p>
 
         <h2 className="text-md mb-2 mt-6 font-semibold">
@@ -1009,9 +1042,13 @@ export const MOCK_PRESS_CONTENT = [
         </h2>
 
         <p className="mb-4">
-          In September 2024, Stand With Crypto launched its <i>"America Loves Crypto"</i> bus tour
-          to drive engagement and excitement for the election and crypto across the country, with a
-          focus on key swing states. Key data from the America Loves Crypto tour include:
+          In September 2024, Stand With Crypto{' '}
+          <InternalLink href="https://www.standwithcrypto.org/press/stand-with-crypto-to-launch-america-loves-crypto-tour-in-battleground-states">
+            launched
+          </InternalLink>{' '}
+          its <i>"America Loves Crypto"</i> bus tour to drive engagement and excitement for the
+          election and crypto across the country, with a focus on key swing states. Key data from
+          the America Loves Crypto tour include:
         </p>
 
         <ul className="mb-4 list-inside list-disc">
@@ -1038,9 +1075,12 @@ export const MOCK_PRESS_CONTENT = [
 
         <p className="mb-4">
           Crypto voters are ready to make their voices heard. A recent national poll by The Digital
-          Chamber reveals that 1 in 7 likely voters identify as part of the Crypto Voting Bloc,
-          indicating that cryptocurrency policy will significantly influence their vote in the 2024
-          elections. This bloc, comprising 26 million Americans, spans both Republicans and
+          Chamber reveals that{' '}
+          <ExternalLink href="https://www.forbes.com/sites/johntamny/2024/10/17/the-growing-political-potency-of-the-crypto-voter-bloc">
+            1 in 7 likely voters identify as part of the Crypto Voting Bloc
+          </ExternalLink>
+          , indicating that cryptocurrency policy will significantly influence their vote in the
+          2024 elections. This bloc, comprising 26 million Americans, spans both Republicans and
           Democrats, highlighting the growing political influence of cryptocurrency.
         </p>
 
@@ -1050,8 +1090,9 @@ export const MOCK_PRESS_CONTENT = [
           As crypto has emerged as a key issue for these voters, they are increasingly aligning with
           candidates who support the industry. In response, many candidates have recognized this
           growing trend and are beginning to take clear positions on crypto-related policies. Below
-          are key data from Stand With Crypto's scorecard that highlight the influence of the crypto
-          voter:
+          are key data from Stand With Crypto's{' '}
+          <InternalLink href="https://www.standwithcrypto.org/politicians">scorecard</InternalLink>{' '}
+          that highlight the influence of the crypto voter:
         </p>
 
         <ul className="mb-4 list-inside list-disc">
@@ -1072,15 +1113,29 @@ export const MOCK_PRESS_CONTENT = [
         </h2>
 
         <ul className="mb-4 list-inside list-disc">
-          <li>Forbes: The Growing Political Potency Of The 'Crypto Voter Bloc'</li>
           <li>
-            Market Watch: Why the Harris-Trump presidential election could be decided by crypto
-            voters
+            Forbes:{' '}
+            <ExternalLink href="https://www.forbes.com/sites/johntamny/2024/10/17/the-growing-political-potency-of-the-crypto-voter-bloc">
+              The Growing Political Potency Of The 'Crypto Voter Bloc'
+            </ExternalLink>
           </li>
-          <li>Reuters: U.S. crypto advocacy group tops 1 million members after Biden veto</li>
           <li>
-            Reuters: Crypto group with 440,000 members launches PAC to target House, Senate
-            elections
+            Market Watch:{' '}
+            <ExternalLink href="https://www.marketwatch.com/story/why-a-harris-trump-contest-could-come-down-to-crypto-voters-37cfe57c">
+              Why the Harris-Trump presidential election could be decided by crypto voters
+            </ExternalLink>
+          </li>
+          <li>
+            Reuters:{' '}
+            <ExternalLink href="https://www.reuters.com/technology/us-crypto-advocacy-group-tops-1-million-members-after-biden-veto-2024-06-06/">
+              U.S. crypto advocacy group tops 1 million members after Biden veto
+            </ExternalLink>
+          </li>
+          <li>
+            Reuters:{' '}
+            <ExternalLink href="https://www.reuters.com/world/us/crypto-group-with-440000-members-launches-pac-target-house-senate-elections-2024-05-10/">
+              Crypto group with 440,000 members launches PAC to target House, Senate elections
+            </ExternalLink>
           </li>
         </ul>
       </div>
