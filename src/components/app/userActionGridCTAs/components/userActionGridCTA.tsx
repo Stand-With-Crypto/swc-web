@@ -19,6 +19,10 @@ export function UserActionGridCTA(props: UserActionGridCTAProps) {
   if (shouldUseFirstCampaignWrapperComponent) {
     const WrapperComponent = props.campaigns[0].WrapperComponent
 
+    if (!WrapperComponent) {
+      return <UserActionCard {...props} />
+    }
+
     return (
       <WrapperComponent>
         <UserActionCard {...props} />

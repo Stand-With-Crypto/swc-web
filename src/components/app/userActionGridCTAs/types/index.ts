@@ -24,7 +24,7 @@ export interface UserActionGridCTACampaign {
   /**
    * The component that will be activated when the CTA is clicked
    */
-  WrapperComponent: (args: { children: React.ReactNode }) => React.ReactNode
+  WrapperComponent: null | ((args: { children: React.ReactNode }) => React.ReactNode)
 }
 
 export type UserActionGridCTA = Record<

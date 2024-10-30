@@ -7,6 +7,7 @@ import {
   CookieConsentPermissions,
   serializeCookieConsent,
 } from '@/utils/shared/cookieConsent'
+import { maybeInitClientAnalytics } from '@/utils/web/clientAnalytics'
 import { setClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
 const REJECTED_VALUES = {
@@ -24,6 +25,7 @@ export function useCookieConsent() {
     typeof window !== 'undefined' && !!window.navigator?.globalPrivacyControl
 
   const toggleProviders = React.useCallback((permissions: CookieConsentPermissions) => {
+    maybeInitClientAnalytics()
     if (!permissions.targeting) {
       mixpanel.opt_out_tracking()
     }
