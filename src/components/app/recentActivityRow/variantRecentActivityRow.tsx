@@ -214,7 +214,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>Voter registration confirmed {voterStateOrEmpty}</MainText>,
+          children: (
+            <MainText>Someone checked their voter registration {voterStateOrEmpty}</MainText>
+          ),
         }
       }
       case UserActionType.LIVE_EVENT: {
