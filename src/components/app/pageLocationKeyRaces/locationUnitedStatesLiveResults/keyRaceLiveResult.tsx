@@ -158,7 +158,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
   return (
     <div className={cn('flex w-full max-w-xl flex-col gap-6', className)}>
       {showLink ? (
-        <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="flex flex-col flex-wrap items-start justify-between gap-4 sm:flex-row">
           <div className="space-y-2">
             <InternalLink className="text-lg font-semibold text-primary" href={link}>
               {raceName}
@@ -166,6 +166,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
             {lastUpdated && <p className="text-sm text-fontcolor-muted">{lastUpdated}</p>}
           </div>
           <LiveStatusBadge
+            className="mx-auto sm:mx-0"
             status={raceStatus}
             winnerName={raceData?.calledCandidate ? winnerName : ''}
           />
