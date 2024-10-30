@@ -13,6 +13,7 @@ export type DTSI_Candidate = DTSIAvatarProps['person'] &
     | 'lastName'
     | 'firstNickname'
     | 'politicalAffiliationCategory'
+    | 'slug'
   > & {
     isRecommended?: boolean
   }

@@ -14,11 +14,14 @@ import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUn
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Badge } from '@/components/ui/badge'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { InternalLink } from '@/components/ui/link'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
+import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
@@ -217,16 +220,19 @@ interface AvatarBoxProps {
 }
 
 function AvatarBox(props: AvatarBoxProps) {
+  const locale = useLocale()
   const { candidate, className } = props
 
   return (
     <div className={className}>
       <div className="relative w-fit">
-        <DTSIAvatar className="rounded-full" person={candidate} size={125} />
-        <DTSIFormattedLetterGrade
-          className="absolute bottom-0 right-0 h-10 w-10 rounded-full shadow-md"
-          person={candidate}
-        />
+        <InternalLink href={getIntlUrls(locale).politicianDetails(candidate.slug)}>
+          <DTSIAvatar className="rounded-full" person={candidate} size={125} />
+          <DTSIFormattedLetterGrade
+            className="absolute bottom-0 right-0 h-10 w-10 rounded-full shadow-md"
+            person={candidate}
+          />
+        </InternalLink>
       </div>
       <div className="mt-2">
         <p className="text-lg font-bold">{dtsiPersonFullName(candidate)}</p>

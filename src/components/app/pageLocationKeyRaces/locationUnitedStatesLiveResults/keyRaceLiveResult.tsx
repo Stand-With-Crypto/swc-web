@@ -31,6 +31,7 @@ import { InternalLink } from '@/components/ui/link'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
+import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -268,6 +269,7 @@ interface AvatarBoxProps {
 }
 
 function AvatarBox(props: AvatarBoxProps) {
+  const locale = useLocale()
   const { dtsiCandidate, ddhqCandidate, className } = props
   const candidate = ddhqCandidate || dtsiCandidate
 
@@ -278,11 +280,13 @@ function AvatarBox(props: AvatarBoxProps) {
   return (
     <div className={className}>
       <div className="relative w-fit">
-        <DTSIAvatar person={candidate} size={125} />
-        <DTSIFormattedLetterGrade
-          className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full shadow-md"
-          person={candidate}
-        />
+        <InternalLink href={getIntlUrls(locale).politicianDetails(candidate.slug)}>
+          <DTSIAvatar person={candidate} size={125} />
+          <DTSIFormattedLetterGrade
+            className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full shadow-md"
+            person={candidate}
+          />
+        </InternalLink>
       </div>
       <div className="mt-6 space-y-2">
         <p className="font-semibold">
