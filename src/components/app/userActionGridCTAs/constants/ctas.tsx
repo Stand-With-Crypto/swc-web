@@ -28,81 +28,6 @@ import {
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
-  [UserActionType.VOTER_ATTESTATION]: {
-    title: 'Get informed',
-    description: 'See where your politicians stand on crypto.',
-    mobileCTADescription: 'See where your politicians stand on crypto.',
-    campaignsModalDescription: 'See where your politicians stand on crypto.',
-    image: '/actionTypeIcons/optIn.png', // Yeah, we are using the join icon here while we only have these 3 CTAs active
-    campaigns: [
-      {
-        actionType: UserActionType.VOTER_ATTESTATION,
-        campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
-        isCampaignActive: true,
-        title: 'Get informed',
-        description: 'See where your politicians stand on crypto.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => {
-          return (
-            <Suspense fallback={children}>
-              <KeyRacesDialog>{children}</KeyRacesDialog>
-            </Suspense>
-          )
-        },
-      },
-    ],
-  },
-  [UserActionType.VOTER_REGISTRATION]: {
-    title: 'Check your voter registration',
-    description: 'Make sure you’re registered to vote in this year’s election.',
-    mobileCTADescription: 'Make sure you’re registered to vote in this year’s election.',
-    campaignsModalDescription: 'Make sure you’re registered to vote in this year’s election.',
-    image: '/actionTypeIcons/voterAttestation.png',
-    campaigns: [
-      {
-        actionType: UserActionType.VOTER_REGISTRATION,
-        campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
-        isCampaignActive: true,
-        title: 'Check your voter registration',
-        description: 'Make sure you’re registered to vote in this year’s election.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormVoterRegistrationDialog,
-      },
-    ],
-  },
-  [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
-    title: 'Prepare to vote',
-    description: 'Find your polling location and learn about early voting options.',
-    mobileCTADescription: 'Find your polling location and learn about early voting options.',
-    campaignsModalDescription: 'Find your polling location and learn about early voting options.',
-
-    image: '/actionTypeIcons/votingResearched.png',
-    campaigns: [
-      {
-        actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
-        campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
-        isCampaignActive: true,
-        canBeTriggeredMultipleTimes: true,
-        title: 'Prepare to vote',
-        description: 'Find your polling location and learn about early voting options.',
-        WrapperComponent: ({ children }) => {
-          return (
-            <Suspense fallback={children}>
-              <UserActionFormVotingInformationResearchedDialog
-                initialValues={{
-                  campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
-                  address: undefined,
-                  shouldReceiveNotifications: false,
-                }}
-              >
-                {children}
-              </UserActionFormVotingInformationResearchedDialog>
-            </Suspense>
-          )
-        },
-      },
-    ],
-  },
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
     description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
@@ -113,14 +38,59 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.OPT_IN,
         campaignName: UserActionOptInCampaignName.DEFAULT,
-        isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
+        isCampaignActive: true,
         title: 'Join Stand With Crypto',
-        // description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`, // TODO: RETURN TO THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
-        description: `Joined over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
+        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
         ),
+      },
+    ],
+  },
+  [UserActionType.TWEET]: {
+    title: 'Follow us on X',
+    description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+    mobileCTADescription: 'Stay up to date on crypto policy.',
+    campaignsModalDescription:
+      'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+    image: '/actionTypeIcons/tweet.png',
+    campaigns: [
+      {
+        actionType: UserActionType.TWEET,
+        campaignName: UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
+        isCampaignActive: true,
+        title: 'Follow us on X',
+        description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormShareOnTwitterDialog,
+      },
+      {
+        actionType: UserActionType.TWEET,
+        campaignName: UserActionTweetCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: 'Tweet Campaign',
+        description: 'You helped bring more advocates to the cause by tweeting about SWC.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormShareOnTwitterDialog,
+      },
+    ],
+  },
+  [UserActionType.DONATION]: {
+    title: 'Make a donation',
+    description: 'Donate fiat or crypto to help keep crypto in America.',
+    campaignsModalDescription: 'Donate fiat or crypto to help keep crypto in America.',
+    image: '/actionTypeIcons/donate.png',
+    link: ({ children }) => <Link href="/donate">{children}</Link>,
+    campaigns: [
+      {
+        actionType: UserActionType.DONATION,
+        campaignName: UserActionDonationCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Make a donation',
+        description: 'Donate fiat or crypto to help keep crypto in America.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null, // This is null because the donate CTA is a link to the donate page,
       },
     ],
   },
@@ -207,49 +177,78 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
     ],
   },
-  [UserActionType.TWEET]: {
-    title: 'Follow us on X',
-    description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-    mobileCTADescription: 'Stay up to date on crypto policy.',
-    campaignsModalDescription:
-      'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-    image: '/actionTypeIcons/tweet.png',
+  [UserActionType.VOTER_ATTESTATION]: {
+    title: 'Get informed',
+    description: 'See where your politicians stand on crypto.',
+    mobileCTADescription: 'See where your politicians stand on crypto.',
+    campaignsModalDescription: 'See where your politicians stand on crypto.',
+    image: '/actionTypeIcons/optIn.png', // Yeah, we are using the join icon here while we only have these 3 CTAs active
     campaigns: [
       {
-        actionType: UserActionType.TWEET,
-        campaignName: UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
-        isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
-        title: 'Follow us on X',
-        description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormShareOnTwitterDialog,
-      },
-      {
-        actionType: UserActionType.TWEET,
-        campaignName: UserActionTweetCampaignName.DEFAULT,
+        actionType: UserActionType.VOTER_ATTESTATION,
+        campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
         isCampaignActive: false,
-        title: 'Tweet Campaign',
-        description: 'You helped bring more advocates to the cause by tweeting about SWC.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormShareOnTwitterDialog,
+        title: 'Get informed',
+        description: 'See where your politicians stand on crypto.',
+        canBeTriggeredMultipleTimes: false,
+        WrapperComponent: ({ children }) => {
+          return (
+            <Suspense fallback={children}>
+              <KeyRacesDialog>{children}</KeyRacesDialog>
+            </Suspense>
+          )
+        },
       },
     ],
   },
-  [UserActionType.DONATION]: {
-    title: 'Make a donation',
-    description: 'Donate fiat or crypto to help keep crypto in America.',
-    campaignsModalDescription: 'Donate fiat or crypto to help keep crypto in America.',
-    image: '/actionTypeIcons/donate.png',
-    link: ({ children }) => <Link href="/donate">{children}</Link>,
+  [UserActionType.VOTER_REGISTRATION]: {
+    title: 'Check your voter registration',
+    description: 'Make sure you’re registered to vote in this year’s election.',
+    mobileCTADescription: 'Make sure you’re registered to vote in this year’s election.',
+    campaignsModalDescription: 'Make sure you’re registered to vote in this year’s election.',
+    image: '/actionTypeIcons/voterAttestation.png',
     campaigns: [
       {
-        actionType: UserActionType.DONATION,
-        campaignName: UserActionDonationCampaignName.DEFAULT,
-        isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
-        title: 'Make a donation',
-        description: 'Donate fiat or crypto to help keep crypto in America.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null, // This is null because the donate CTA is a link to the donate page,
+        actionType: UserActionType.VOTER_REGISTRATION,
+        campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: 'Check your voter registration',
+        description: 'Make sure you’re registered to vote in this year’s election.',
+        canBeTriggeredMultipleTimes: false,
+        WrapperComponent: UserActionFormVoterRegistrationDialog,
+      },
+    ],
+  },
+  [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
+    title: 'Prepare to vote',
+    description: 'Find your polling location and learn about early voting options.',
+    mobileCTADescription: 'Find your polling location and learn about early voting options.',
+    campaignsModalDescription: 'Find your polling location and learn about early voting options.',
+
+    image: '/actionTypeIcons/votingResearched.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
+        campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+        isCampaignActive: false,
+        canBeTriggeredMultipleTimes: false,
+        title: 'Prepare to vote',
+        description: 'Find your polling location and learn about early voting options.',
+        WrapperComponent: ({ children }) => {
+          return (
+            <Suspense fallback={children}>
+              <UserActionFormVotingInformationResearchedDialog
+                initialValues={{
+                  campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+                  address: undefined,
+                  shouldReceiveNotifications: false,
+                }}
+              >
+                {children}
+              </UserActionFormVotingInformationResearchedDialog>
+            </Suspense>
+          )
+        },
       },
     ],
   },
