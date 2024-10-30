@@ -109,15 +109,15 @@ export function LocationUnitedStatesLiveResults({
 
           <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
             <ResultsOverviewCard
-              antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
+              antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected.length}
               locale={locale}
-              proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}
+              proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected.length}
               title="House of Representatives"
             />
             <ResultsOverviewCard
-              antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected}
+              antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected.length}
               locale={locale}
-              proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected}
+              proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected.length}
               title="Senate"
             />
           </div>

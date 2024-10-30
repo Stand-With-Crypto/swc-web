@@ -112,11 +112,11 @@ export const getOpacity = (
 }
 
 export const getCongressLiveResultOverview = (
-  data: CongressDataResponse | null | undefined,
+  data: Pick<CongressDataResponse, 'candidatesWithVotes'> | null | undefined,
   stateCode?: string,
 ) => {
   if (!data?.candidatesWithVotes?.length) {
-    return { proCryptoCandidatesElected: 0, antiCryptoCandidatesElected: 0 }
+    return { proCryptoCandidatesElected: [], antiCryptoCandidatesElected: [] }
   }
 
   return data.candidatesWithVotes.reduce(
@@ -136,13 +136,16 @@ export const getCongressLiveResultOverview = (
       if (isNil(stanceScore)) return acc
 
       if (stanceScore > 50) {
-        acc.proCryptoCandidatesElected += 1
+        acc.proCryptoCandidatesElected.push(candidate)
       } else {
-        acc.antiCryptoCandidatesElected += 1
+        acc.antiCryptoCandidatesElected.push(candidate)
       }
       return acc
     },
-    { proCryptoCandidatesElected: 0, antiCryptoCandidatesElected: 0 },
+    { proCryptoCandidatesElected: [], antiCryptoCandidatesElected: [] } as {
+      proCryptoCandidatesElected: CongressDataResponse['candidatesWithVotes']
+      antiCryptoCandidatesElected: CongressDataResponse['candidatesWithVotes']
+    },
   )
 }
 
