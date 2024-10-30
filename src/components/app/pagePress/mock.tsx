@@ -1,5 +1,6 @@
-import { InternalLink, ExternalLink } from '@/components/ui/link'
 import React from 'react'
+
+import { ExternalLink,InternalLink } from '@/components/ui/link'
 
 // this is temporary while we don't leverage builder.io for this content
 export const MOCK_PRESS_CONTENT = [
