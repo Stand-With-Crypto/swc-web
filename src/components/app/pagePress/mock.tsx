@@ -981,4 +981,109 @@ export const MOCK_PRESS_CONTENT = [
       </div>
     ),
   },
+  {
+    source: 'Press release',
+    dateHeading: 'October 29, 2024',
+    heading: 'The crypto voter is a force in the 2024 election',
+    publication: 'Press Release',
+    link: '/the-crypto-voter-is-a-force-in-the-2024-election',
+    Article: () => (
+      <div className="mx-auto">
+        <p className="mb-4">
+          The results are clear. This year, for the first time, we have seen the incredible
+          influence of a new, engaged, and powerful voting bloc: the crypto voter. Fifty-two million
+          Americans (15% of all U.S. adults) currently own some form of cryptocurrency, and there
+          are eight times as many crypto owners excited to vote for candidates who support crypto
+          than the margin of victory in the 2020 Presidential Election.
+        </p>
+
+        <p className="mb-4">
+          Across the five key swing states of Arizona, Nevada, Michigan, Wisconsin, and Pennsylvania
+          alone, there are over 4 million cryptocurrency owners. Crypto owners in these states are
+          more likely to be under 35 (22% compared to 13% of all crypto-aware adults) and non-white
+          (25% vs 18%). They are also bipartisan (identify as 44% Republican, 39% Democrat).
+        </p>
+
+        <h2 className="text-md mb-2 mt-6 font-semibold">
+          Engaging and Energizing the Cryptocurrency Community
+        </h2>
+
+        <p className="mb-4">
+          In September 2024, Stand With Crypto launched its <i>"America Loves Crypto"</i> bus tour
+          to drive engagement and excitement for the election and crypto across the country, with a
+          focus on key swing states. Key data from the America Loves Crypto tour include:
+        </p>
+
+        <ul className="mb-4 list-inside list-disc">
+          <li>
+            6 swing states visited: Arizona, Nevada, Michigan, Wisconsin, Pennsylvania, and Ohio
+          </li>
+          <li>Over 2,000 advocates attended in-person events</li>
+          <li>10+ elected officials or legislators engaged, including:</li>
+        </ul>
+
+        <ul className="mb-4 ml-6 list-inside">
+          <li>Sen. Kyrsten Sinema, I-AZ</li>
+          <li>Rep. Wiley Nickel, D-NC</li>
+          <li>Arizona House Speaker Pro Tempore Travis Grantham, R-AZ</li>
+          <li>Rudy Pamintuan, R-NV</li>
+          <li>Treasurer Zach Conine, D-NV</li>
+          <li>Rep. Ryan Bergman, R-MI</li>
+          <li>Washington County Executive Joshua Schoemann</li>
+          <li>Sen. Pat Toomey, R-PA (retired)</li>
+          <li>Rep. Patrick Murphy, D-PA (former)</li>
+        </ul>
+
+        <h2 className="text-md mb-2 mt-6 font-semibold">Mobilizing the Crypto Voter Bloc</h2>
+
+        <p className="mb-4">
+          Crypto voters are ready to make their voices heard. A recent national poll by The Digital
+          Chamber reveals that 1 in 7 likely voters identify as part of the Crypto Voting Bloc,
+          indicating that cryptocurrency policy will significantly influence their vote in the 2024
+          elections. This bloc, comprising 26 million Americans, spans both Republicans and
+          Democrats, highlighting the growing political influence of cryptocurrency.
+        </p>
+
+        <h2 className="text-md mb-2 mt-6 font-semibold">Changing the Arc of the 2024 Election</h2>
+
+        <p className="mb-4">
+          As crypto has emerged as a key issue for these voters, they are increasingly aligning with
+          candidates who support the industry. In response, many candidates have recognized this
+          growing trend and are beginning to take clear positions on crypto-related policies. Below
+          are key data from Stand With Crypto's scorecard that highlight the influence of the crypto
+          voter:
+        </p>
+
+        <ul className="mb-4 list-inside list-disc">
+          <li>355 federal candidates who are pro-crypto (rated "A" or "B")</li>
+          <li>75 Democrats, 229 Republicans, and 3 Independents scoring an "A"</li>
+          <li>
+            8 "A" rated candidates in Arizona, 12 in Michigan, 8 in Nevada, 13 in Ohio, 12 in
+            Pennsylvania, and 5 in Wisconsin
+          </li>
+          <li>
+            307 candidates supported prominent pro-crypto bills (FIT21, SAB 121, and the CBDC
+            Anti-Surveillance State Act)
+          </li>
+        </ul>
+
+        <h2 className="text-md mb-2 mt-6 font-semibold">
+          Media Highlights on Crypto's Role in 2024 Election:
+        </h2>
+
+        <ul className="mb-4 list-inside list-disc">
+          <li>Forbes: The Growing Political Potency Of The 'Crypto Voter Bloc'</li>
+          <li>
+            Market Watch: Why the Harris-Trump presidential election could be decided by crypto
+            voters
+          </li>
+          <li>Reuters: U.S. crypto advocacy group tops 1 million members after Biden veto</li>
+          <li>
+            Reuters: Crypto group with 440,000 members launches PAC to target House, Senate
+            elections
+          </li>
+        </ul>
+      </div>
+    ),
+  },
 ]
