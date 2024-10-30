@@ -1,10 +1,7 @@
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
-import {
-  DecisionDeskRedisKeys,
-  getDecisionDataFromRedis,
-} from '@/utils/server/decisionDesk/cachedData'
+import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 export type AllCompletedRacesResponse = {
@@ -33,7 +30,6 @@ export async function getElectedCandidates() {
   const stateRaceWinners: RaceWinnerData[] = []
 
   for (const stateKey of stateKeys) {
-    const key: DecisionDeskRedisKeys = `SWC_${stateKey?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
     const [stateRacesData, dtsiStateData] = await Promise.all([
       getDecisionDataFromRedis<RacesVotingDataResponse[]>(
         `SWC_${stateKey.toUpperCase() as USStateCode}_STATE_RACES_DATA`,
