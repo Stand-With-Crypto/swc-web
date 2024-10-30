@@ -55,48 +55,54 @@ export function LocationUnitedStatesLiveResults({
   return (
     <div className="space-y-20">
       <DarkHeroSection className="py-8 lg:px-28 lg:py-20">
-        <div className="mx-auto flex w-full max-w-[1800px] flex-col items-center justify-between gap-16 md:px-8 lg:flex-row">
-          <div className="space-y-6 text-center">
-            <NextImage
-              alt="SWC shield"
-              className="mx-auto lg:mx-0"
-              height={100}
-              src="/actionTypeIcons/optIn.png"
-              width={100}
-            />
-            <div className="space-y-2 text-center">
-              <PageTitle as="h1" className="text-center lg:text-left" size="md">
-                Crypto election updates
-              </PageTitle>
-              <PageSubTitle className="text-gray-400 lg:text-left" size="lg">
-                See how crypto is influencing the election. Get live election updates.
-              </PageSubTitle>
-            </div>
-
-            <Button asChild className="hidden w-fit font-bold lg:flex" variant="secondary">
-              <InternalLink href={urls.locationUnitedStatesPresidential()}>
-                View presidential race
-              </InternalLink>
-            </Button>
+        <div className="mx-auto flex w-full max-w-[1800px] flex-col items-center justify-between gap-6 text-center md:px-8">
+          <NextImage
+            alt="SWC shield"
+            className="mx-auto"
+            height={100}
+            src="/actionTypeIcons/optIn.png"
+            width={100}
+          />
+          <div className="space-y-4 text-center">
+            <PageTitle as="h1" className="text-center" size="md">
+              Crypto election updates
+            </PageTitle>
+            <PageSubTitle className="text-gray-400" size="lg">
+              See how crypto is influencing the election. Get live election updates.
+            </PageSubTitle>
           </div>
 
-          <div className="w-full max-w-md">
+          <LoginDialogWrapper
+            authenticatedContent={
+              // TODO: Claim I Voted NFT
+              <Button className="w-fit" variant="secondary">
+                Claim I Voted NFT
+              </Button>
+            }
+          >
+            <Button className="w-fit" variant="secondary">
+              Join Stand With Crypto
+            </Button>
+          </LoginDialogWrapper>
+        </div>
+      </DarkHeroSection>
+
+      <div className="space-y-20 xl:space-y-28">
+        <ContentSection
+          className="container"
+          subtitle="See where each candidate stands on crypto and get live updates on the presidential election."
+          title="Presidential race"
+          titleProps={{ size: 'xs' }}
+        >
+          <div className="flex w-full justify-center">
             <PresidentialRaceResult
               candidates={dtsiResults.president}
               initialRaceData={presidentialRaceLiveResult}
               locale={locale}
             />
           </div>
+        </ContentSection>
 
-          <Button asChild className="w-full max-w-xs font-bold lg:hidden" variant="secondary">
-            <InternalLink href={urls.locationUnitedStatesPresidential()}>
-              View presidential race
-            </InternalLink>
-          </Button>
-        </div>
-      </DarkHeroSection>
-
-      <div className="space-y-20 xl:space-y-28">
         <ContentSection
           className="container"
           subtitle="Follow our tracker to see how many pro-crypto candidates get elected in the United States this year."

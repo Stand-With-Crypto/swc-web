@@ -118,7 +118,6 @@ export function LocationRaceSpecific({
               candidates={candidates.map(({ person }) => person)}
               initialRaceData={initialLiveResultData}
               locale={locale}
-              progressBarBackground="bg-secondary"
             />
           ) : (
             <KeyRaceLiveResult

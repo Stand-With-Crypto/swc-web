@@ -13,23 +13,25 @@ import {
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { convertDTSIStanceScoreToBgColorClass } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { InternalLink } from '@/components/ui/link'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface PresidentialRaceResultProps {
   candidates: DTSI_Candidate[]
   initialRaceData: PresidentialDataWithVotingResponse[] | null
-  progressBarBackground?: string
   locale: SupportedLocale
 }
 
 export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
-  const { candidates, initialRaceData = null, progressBarBackground, locale } = props
+  const { candidates, initialRaceData = null, locale } = props
 
   const dtsiCandidateA = useMemo(
     () => candidates?.find(_candidate => _candidate.lastName === 'Trump') || candidates?.[0],
@@ -98,15 +100,21 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   }
 
   return (
-    <div className="relative flex w-full flex-col gap-4">
-      <div className="mt-4 flex items-center justify-between md:mt-0">
+    <div className="relative flex w-full max-w-2xl flex-col gap-4">
+      <LiveStatusBadge
+        className="mx-auto sm:hidden"
+        status={raceStatus}
+        winnerName={calledCandidate ? dtsiPersonFullName(calledCandidate) : undefined}
+      />
+
+      <div className="flex items-center justify-between">
         <AvatarBox
           candidate={dtsiCandidateA}
           className={cn(getOpacity(dtsiCandidateA, liveResultData))}
         />
 
         <LiveStatusBadge
-          className="absolute -top-4 left-1/2 right-1/2 w-fit -translate-x-1/2 whitespace-nowrap md:top-12"
+          className="mx-auto hidden sm:inline-flex"
           status={raceStatus}
           winnerName={calledCandidate ? dtsiPersonFullName(calledCandidate) : undefined}
         />
@@ -137,8 +145,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
       <div className="relative">
         <div
           className={cn(
-            'flex h-6 justify-between overflow-hidden rounded-full bg-[#23262B] text-xs text-white',
-            progressBarBackground,
+            'flex h-6 justify-between overflow-hidden rounded-full bg-secondary text-xs',
           )}
         >
           {canShowProgress && ddhqCandidateA ? (
@@ -157,7 +164,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
             />
           ) : null}
 
-          <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 transform bg-white" />
+          <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-full w-[4px] -translate-x-1/2 -translate-y-1/2 transform bg-white" />
 
           {canShowProgress && ddhqCandidateB ? (
             <Progress
@@ -207,6 +214,12 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
           )}
         </div>
       </div>
+
+      <Button asChild className="mx-auto w-fit" variant="secondary">
+        <InternalLink href={getIntlUrls(locale).locationUnitedStatesPresidential()}>
+          View race
+        </InternalLink>
+      </Button>
     </div>
   )
 }
@@ -247,7 +260,7 @@ function WinnerAvatarBox(props: WinnerAvatarBoxProps) {
       <Badge className={'bg-[#23262B] px-4 py-1 text-base text-white'}>Winner</Badge>
 
       <div className="relative w-fit">
-        <DTSIAvatar className="rounded-full" person={candidate} size={175} />
+        <DTSIAvatar person={candidate} size={175} />
         <DTSIFormattedLetterGrade
           className="absolute bottom-0 right-0 h-12 w-12 rounded-full shadow-md"
           person={candidate}
