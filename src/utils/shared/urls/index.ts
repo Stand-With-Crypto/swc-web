@@ -70,7 +70,8 @@ export const getIntlUrls = (
     locationUnitedStatesPresidential: () => `${localePrefix}/races/presidential`,
     locationUnitedStates: () => `${localePrefix}/races/`,
     endorsedCandidates: () => `${localePrefix}/races/endorsed/`,
-    locationLiveResultsOverview: () => `${localePrefix}/races/congress`,
+    locationCongressHouse: () => `${localePrefix}/races/congress/house`,
+    locationCongressSenate: () => `${localePrefix}/races/congress/senate`,
     locationDistrictSpecific: ({
       stateCode,
       district,
