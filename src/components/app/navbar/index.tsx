@@ -128,15 +128,15 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     </LoginDialogWrapper>
   )
 
-  const VoterGuideButton = () => (
+  const DonateButton = () => (
     <Button
       asChild
       className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
-      key={urls.voterGuide()}
+      key={urls.donate()}
       onClick={maybeCloseAfterNavigating}
       variant="default"
     >
-      <InternalLink href={urls.voterGuide()}>Voter guide</InternalLink>
+      <InternalLink href={urls.donate()}>Donate</InternalLink>
     </Button>
   )
 
@@ -264,7 +264,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               ))}
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
-              <VoterGuideButton />
+              <DonateButton />
               <LoginButton />
             </div>
           </div>
@@ -363,7 +363,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 <LoginButton />
               </div>
               <div className="mt-4 px-6">
-                <VoterGuideButton />
+                <DonateButton />
               </div>
             </div>
           </DrawerContent>
