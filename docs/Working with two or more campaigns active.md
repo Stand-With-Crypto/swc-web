@@ -75,7 +75,7 @@ export const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
 ## How to disable the campaign after it is not necessary anymore
 
 - Delete all files related to the campaign that are no longer needed, including UI components, the deeplink page, server actions, and any other associated components.
-- Locate the campaign object in `USER_ACTION_CTAS_FOR_GRID_DISPLAY` (`src/components/app/userActionGridCTAs/constants/ctas.tsx`). Set `isCampaignActive` to `false`, and update `WrapperComponent` to `WrapperComponent: () => null.`
+- Locate the campaign object in `USER_ACTION_CTAS_FOR_GRID_DISPLAY` (`src/components/app/userActionGridCTAs/constants/ctas.tsx`). Set `isCampaignActive` to `false`, and set `WrapperComponent` to null. `WrapperComponent: null.`
 
 ```javascript
 {
@@ -85,6 +85,6 @@ export const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   title: 'CNN Presidential Debate 2024',
   description: "You emailed CNN and asked them to include the candidates' stance on crypto.",
   canBeTriggeredMultipleTimes: true,
-  WrapperComponent: () => null, // Changing the Wrapper component to return null will enable you to delete all campaign files.
+  WrapperComponent: null, // Changing the Wrapper component to null will enable you to delete all campaign files.
 }
 ```
