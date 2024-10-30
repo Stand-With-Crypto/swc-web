@@ -45,40 +45,41 @@ export const getKeyRacesPageData = async () => {
   }
   let initialElectionStatusData = null
 
-  const [presidentialResult, congressResult, electionStatusResult] = await Promise.allSettled([
-    getDecisionDataFromRedis<PresidentialDataWithVotingResponse[]>('SWC_PRESIDENTIAL_RACES_DATA'),
-    getCongressLiveResultData(),
-    getElectionStatus(),
-    racesPromises,
-  ])
+  const [ddhqRedisPresidentialResult, ddhqRedisCongressResult, ddhqRedisElectionStatus] =
+    await Promise.allSettled([
+      getDecisionDataFromRedis<PresidentialDataWithVotingResponse[]>('SWC_PRESIDENTIAL_RACES_DATA'),
+      getCongressLiveResultData(),
+      getElectionStatus(),
+      racesPromises,
+    ])
 
-  if (presidentialResult.status === 'fulfilled') {
-    presidentialRaceLiveResult = presidentialResult.value
+  if (ddhqRedisPresidentialResult.status === 'fulfilled') {
+    presidentialRaceLiveResult = ddhqRedisPresidentialResult.value
   } else {
-    Sentry.captureException(presidentialResult.reason, {
+    Sentry.captureException(ddhqRedisPresidentialResult.reason, {
       extra: { key: 'SWC_PRESIDENTIAL_RACES_DATA' },
       tags: { domain: 'liveResult' },
     })
-    throw presidentialResult.reason
+    throw ddhqRedisPresidentialResult.reason
   }
 
-  if (congressResult.status === 'fulfilled') {
-    congressRaceLiveResult = congressResult.value
+  if (ddhqRedisCongressResult.status === 'fulfilled') {
+    congressRaceLiveResult = ddhqRedisCongressResult.value
   } else {
-    Sentry.captureException(congressResult.reason, {
+    Sentry.captureException(ddhqRedisCongressResult.reason, {
       extra: { keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'] },
       tags: { domain: 'liveResult' },
     })
-    throw congressResult.reason
+    throw ddhqRedisCongressResult.reason
   }
 
-  if (electionStatusResult.status === 'fulfilled') {
-    initialElectionStatusData = electionStatusResult.value
+  if (ddhqRedisElectionStatus.status === 'fulfilled') {
+    initialElectionStatusData = ddhqRedisElectionStatus.value
   } else {
-    Sentry.captureException(electionStatusResult.reason, {
+    Sentry.captureException(ddhqRedisElectionStatus.reason, {
       tags: { domain: 'liveResult' },
     })
-    throw electionStatusResult.reason
+    throw ddhqRedisElectionStatus.reason
   }
 
   return {

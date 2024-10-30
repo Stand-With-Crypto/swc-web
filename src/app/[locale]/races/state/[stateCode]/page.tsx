@@ -55,8 +55,8 @@ export default async function LocationStateSpecificPage({
   const [
     dtsiResultsResult,
     countAdvocatesResult,
-    stateLiveRaceDataResult,
-    congressRaceLiveDataResult,
+    ddhqRedisStateDataResult,
+    ddhqRedisCongressDataResult,
   ] = await Promise.allSettled([
     queryDTSILocationStateSpecificInformation({ stateCode }),
     prismaClient.user.count({
@@ -78,27 +78,32 @@ export default async function LocationStateSpecificPage({
   }
   const countAdvocates = countAdvocatesResult.value
 
-  if (stateLiveRaceDataResult.status !== 'fulfilled') {
-    Sentry.captureMessage('No live result data for LocationStateSpecificPage', {
+  if (ddhqRedisStateDataResult.status !== 'fulfilled') {
+    Sentry.captureMessage('No state live result data for LocationStateSpecificPage', {
       extra: { params },
       tags: { domain: 'liveResult' },
     })
     throw new Error(`No live result data for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
-  const liveResultdata = stateLiveRaceDataResult.value
+  const initialRaceData = ddhqRedisStateDataResult.value
 
-  if (congressRaceLiveDataResult.status !== 'fulfilled') {
+  if (ddhqRedisCongressDataResult.status !== 'fulfilled') {
+    Sentry.captureMessage('No congress live result data for LocationStateSpecificPage', {
+      extra: { params },
+      tags: { domain: 'liveResult' },
+    })
+
     throw new Error(
-      `Failed to get congress race live result data: ${congressRaceLiveDataResult.reason}`,
+      `Failed to get congress race live result data: ${ddhqRedisCongressDataResult.reason}`,
     )
   }
-  const congressRaceLiveResult = congressRaceLiveDataResult.value
+  const congressRaceLiveResult = ddhqRedisCongressDataResult.value
 
   return (
     <LocationStateSpecific
       countAdvocates={countAdvocates}
       initialCongressLiveResultData={congressRaceLiveResult}
-      initialRaceData={liveResultdata || undefined}
+      initialRaceData={initialRaceData || undefined}
       {...dtsiResults}
       {...{ stateCode, locale }}
     />

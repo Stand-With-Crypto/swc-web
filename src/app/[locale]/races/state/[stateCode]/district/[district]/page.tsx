@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
@@ -6,10 +7,7 @@ import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import {
-  DecisionDeskRedisKeys,
-  getDecisionDataFromRedis,
-} from '@/utils/server/decisionDesk/cachedData'
+import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
@@ -66,23 +64,39 @@ export default async function LocationDistrictSpecificPage({
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
 
-  const dtsiResults = await queryDTSILocationDistrictSpecificInformation({
-    stateCode,
-    district,
-  })
+  const [dtsiResultsResult, ddhqRedisResult] = await Promise.allSettled([
+    queryDTSILocationDistrictSpecificInformation({ stateCode, district }),
+    getDecisionDataFromRedis<RacesVotingDataResponse[]>(
+      `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`,
+    ),
+  ])
 
-  const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
-  const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
-  const dataByDistrict =
-    liveResultdata?.filter?.(data => data.district?.toLowerCase() === district.toString()) ?? null
-
+  if (dtsiResultsResult.status === 'rejected') {
+    throw new Error(`Failed to fetch DTSI results: ${dtsiResultsResult.reason}`)
+  }
+  const dtsiResults = dtsiResultsResult.value
   if (!dtsiResults) {
     throw new Error(`Invalid params for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
   }
 
+  if (ddhqRedisResult.status === 'rejected') {
+    throw new Error(`Failed to fetch live result data: ${ddhqRedisResult.reason}`)
+  }
+
+  const initialLiveResultData =
+    ddhqRedisResult.value?.filter?.(data => data.district?.toLowerCase() === district.toString()) ??
+    null
+
+  if (!initialLiveResultData) {
+    Sentry.captureMessage('No live result data for LocationDistrictSpecificPage', {
+      extra: { stateCode, district },
+      tags: { domain: 'liveResult' },
+    })
+  }
+
   return (
     <LocationRaceSpecific
-      initialLiveResultData={dataByDistrict}
+      initialLiveResultData={initialLiveResultData}
       {...dtsiResults}
       {...{ stateCode, district, locale }}
     />
