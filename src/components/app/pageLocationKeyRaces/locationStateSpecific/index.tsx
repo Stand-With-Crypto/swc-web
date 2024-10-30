@@ -164,13 +164,15 @@ export function LocationStateSpecific({
 
             <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
               <ResultsOverviewCard
-                antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected}
-                proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected}
+                antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected.length}
+                locale={locale}
+                proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected.length}
                 title="House of Representatives"
               />
               <ResultsOverviewCard
-                antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected}
-                proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected}
+                antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected.length}
+                locale={locale}
+                proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected.length}
                 title="Senate"
               />
             </div>
