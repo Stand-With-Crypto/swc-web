@@ -341,15 +341,9 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
-        source: '/vg/2/:sessionId*',
+        source: '/vg/:campaignId/:sessionId*',
         destination:
-          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-2&sessionId=:sessionId*',
-        permanent: true,
-      },
-      {
-        source: '/vg/3/:sessionId*',
-        destination:
-          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-3&sessionId=:sessionId*',
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-:campaignId&sessionId=:sessionId*',
         permanent: true,
       },
       {
