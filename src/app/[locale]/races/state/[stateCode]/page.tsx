@@ -79,22 +79,27 @@ export default async function LocationStateSpecificPage({
   const countAdvocates = countAdvocatesResult.value
 
   if (ddhqRedisStateDataResult.status !== 'fulfilled') {
-    Sentry.captureMessage('No state live result data for LocationStateSpecificPage', {
-      extra: { params },
-      tags: { domain: 'liveResult' },
-    })
-    throw new Error(`No live result data for LocationStateSpecificPage: ${JSON.stringify(params)}`)
+    Sentry.captureMessage(
+      `Failed to get "${stateCode}" state live race data for LocationStateSpecificPage`,
+      {
+        extra: { params, reason: ddhqRedisStateDataResult.reason },
+        tags: { domain: 'liveResult' },
+      },
+    )
+    throw new Error(
+      `Failed to get "${stateCode}" state live race data for LocationStateSpecificPag: ${JSON.stringify(params)}`,
+    )
   }
   const initialRaceData = ddhqRedisStateDataResult.value
 
   if (ddhqRedisCongressDataResult.status !== 'fulfilled') {
-    Sentry.captureMessage('No congress live result data for LocationStateSpecificPage', {
-      extra: { params },
+    Sentry.captureMessage(`Failed to get congress live race data for LocationStateSpecificPage`, {
+      extra: { params, reason: ddhqRedisCongressDataResult.reason },
       tags: { domain: 'liveResult' },
     })
 
     throw new Error(
-      `Failed to get congress race live result data: ${ddhqRedisCongressDataResult.reason}`,
+      `Failed to get congress live race data for LocationStateSpecificPage: ${ddhqRedisCongressDataResult.reason}`,
     )
   }
   const congressRaceLiveResult = ddhqRedisCongressDataResult.value

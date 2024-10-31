@@ -57,7 +57,7 @@ export const getKeyRacesPageData = async () => {
     presidentialRaceLiveResult = ddhqRedisPresidentialResult.value
   } else {
     Sentry.captureException(ddhqRedisPresidentialResult.reason, {
-      extra: { key: 'SWC_PRESIDENTIAL_RACES_DATA' },
+      extra: { key: 'SWC_PRESIDENTIAL_RACES_DATA', reason: ddhqRedisPresidentialResult.reason },
       tags: { domain: 'liveResult' },
     })
     throw ddhqRedisPresidentialResult.reason
@@ -67,7 +67,10 @@ export const getKeyRacesPageData = async () => {
     congressRaceLiveResult = ddhqRedisCongressResult.value
   } else {
     Sentry.captureException(ddhqRedisCongressResult.reason, {
-      extra: { keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'] },
+      extra: {
+        keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'],
+        reason: ddhqRedisCongressResult.reason,
+      },
       tags: { domain: 'liveResult' },
     })
     throw ddhqRedisCongressResult.reason
@@ -77,6 +80,7 @@ export const getKeyRacesPageData = async () => {
     initialElectionStatusData = ddhqRedisElectionStatus.value
   } else {
     Sentry.captureException(ddhqRedisElectionStatus.reason, {
+      extra: { reason: ddhqRedisElectionStatus.reason },
       tags: { domain: 'liveResult' },
     })
     throw ddhqRedisElectionStatus.reason
