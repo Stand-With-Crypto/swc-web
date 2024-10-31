@@ -57,13 +57,13 @@ const enhanceCongressData = (
 
     if (!dtsiData) {
       logger.info('No match for candidates between decisionDesk and DTSI.', {
-        domain: 'aggregations/decisionDesk/getAllCongressData',
+        tags: { domain: 'liveResult' },
         candidateName: `${currentCandidate.firstName} ${currentCandidate.lastName}`,
       })
 
       Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
+        tags: { domain: 'liveResult' },
         extra: {
-          domain: 'aggregations/decisionDesk/getAllCongressData',
           candidateName: `${currentCandidate.firstName} ${currentCandidate.lastName}`,
         },
       })
