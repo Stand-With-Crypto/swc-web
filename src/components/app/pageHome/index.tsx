@@ -26,7 +26,7 @@ export function PageHome({
   params,
   sumDonations,
   countUsers,
-  countPolicymakerContacts,
+  countVoterActions,
   actions,
   sumDonationsByUser,
   dtsiHomepagePeople,
@@ -59,7 +59,7 @@ export function PageHome({
         </div>
       </section>
       <div className="container">
-        <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
+        <TopLevelMetrics {...{ sumDonations, locale, countUsers, countVoterActions }} />
 
         <section className="mb-16 md:mb-36">
           <PageTitle as="h3" className="mb-6 !text-[32px]">
