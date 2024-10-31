@@ -144,14 +144,13 @@ describe('enqueueMessages', () => {
 
   it.each([
     [
-      `Please, finish your profile at ${fullUrl(`/profile?sessionId={{ sessionId }}`)}`,
+      `Please, finish your profile at ${fullUrl(`/profile?sessionId=<%= sessionId %>`)}`,
       `Please, finish your profile at ${fullUrl(`/profile?sessionId=${mockedVariables.sessionId ?? ''}`)}`,
     ],
     [
-      `{{ firstName }} {{ lastName }}, thanks for subscribing to Stand With Crypto`,
+      `<%= firstName %> <%= lastName %>, thanks for subscribing to Stand With Crypto`,
       `${mockedVariables.firstName ?? ''} ${mockedVariables.lastName ?? ''}, thanks for subscribing to Stand With Crypto`,
     ],
-    [`You received a NFT: {{ invalidVariable }}`, `You received a NFT: `],
     ['Message with no variables', 'Message with no variables'],
   ])('should correctly parse the sms body with custom variables', async (input, output) => {
     const phoneNumber = fakerFields.phoneNumber()

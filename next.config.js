@@ -86,13 +86,13 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
-    'https://www.figma.com/embed',
+    'https://www.figma.com',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
   'base-uri': ["'self'"],
   'form-action': ["'self'"],
-  'frame-ancestors': ["'none'"],
+  'frame-ancestors': ["'self'", 'https://www.figma.com'],
   'block-all-mixed-content': [],
   ...(isDev ? {} : { 'upgrade-insecure-requests': [] }),
 }
@@ -340,6 +340,13 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
+      {
+        source: '/vg/:campaignId/:sessionId*',
+        destination:
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-:campaignId&sessionId=:sessionId*',
+        permanent: true,
+      },
       {
         source: '/voter-guide-1/:sessionId*',
         destination:
