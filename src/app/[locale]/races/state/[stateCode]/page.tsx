@@ -1,17 +1,12 @@
+import * as Sentry from '@sentry/nextjs'
 import { Metadata } from 'next'
 
 import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/locationStateSpecific'
-import {
-  GetAllCongressDataResponse,
-  RacesVotingDataResponse,
-} from '@/data/aggregations/decisionDesk/types'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { getCongressLiveResultData } from '@/data/pageSpecific/getKeyRacesPageData'
 import { PageProps } from '@/types'
-import {
-  DecisionDeskRedisKeys,
-  getDecisionDataFromRedis,
-} from '@/utils/server/decisionDesk/cachedData'
+import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
@@ -57,26 +52,63 @@ export default async function LocationStateSpecificPage({
 }: LocationStateSpecificPageProps) {
   const { locale } = params
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
-  const [dtsiResults, countAdvocates] = await Promise.all([
+  const [
+    dtsiResultsResult,
+    countAdvocatesResult,
+    ddhqRedisStateDataResult,
+    ddhqRedisCongressDataResult,
+  ] = await Promise.allSettled([
     queryDTSILocationStateSpecificInformation({ stateCode }),
     prismaClient.user.count({
       where: { address: { countryCode: 'US', administrativeAreaLevel1: stateCode } },
     }),
+    getDecisionDataFromRedis<RacesVotingDataResponse[]>(
+      `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`,
+    ),
+    getCongressLiveResultData(),
   ])
 
-  const key: DecisionDeskRedisKeys = `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`
-  const liveResultdata = await getDecisionDataFromRedis<RacesVotingDataResponse[]>(key)
-  const congressRaceLiveResult: GetAllCongressDataResponse = await getCongressLiveResultData()
-
-  if (!dtsiResults) {
+  if (dtsiResultsResult.status !== 'fulfilled') {
     throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
+  const dtsiResults = dtsiResultsResult.value
+
+  if (countAdvocatesResult.status !== 'fulfilled') {
+    throw new Error(`Failed to count advocates: ${countAdvocatesResult.reason}`)
+  }
+  const countAdvocates = countAdvocatesResult.value
+
+  if (ddhqRedisStateDataResult.status !== 'fulfilled') {
+    Sentry.captureMessage(
+      `Failed to get "${stateCode}" state live race data for LocationStateSpecificPage`,
+      {
+        extra: { params, reason: ddhqRedisStateDataResult.reason },
+        tags: { domain: 'liveResult' },
+      },
+    )
+    throw new Error(
+      `Failed to get "${stateCode}" state live race data for LocationStateSpecificPag: ${JSON.stringify(params)}`,
+    )
+  }
+  const initialRaceData = ddhqRedisStateDataResult.value
+
+  if (ddhqRedisCongressDataResult.status !== 'fulfilled') {
+    Sentry.captureMessage(`Failed to get congress live race data for LocationStateSpecificPage`, {
+      extra: { params, reason: ddhqRedisCongressDataResult.reason },
+      tags: { domain: 'liveResult' },
+    })
+
+    throw new Error(
+      `Failed to get congress live race data for LocationStateSpecificPage: ${ddhqRedisCongressDataResult.reason}`,
+    )
+  }
+  const congressRaceLiveResult = ddhqRedisCongressDataResult.value
 
   return (
     <LocationStateSpecific
       countAdvocates={countAdvocates}
       initialCongressLiveResultData={congressRaceLiveResult}
-      initialRaceData={liveResultdata || undefined}
+      initialRaceData={initialRaceData || undefined}
       {...dtsiResults}
       {...{ stateCode, locale }}
     />
