@@ -68,17 +68,17 @@ export default async function LocationStateSpecificPage({
     getCongressLiveResultData(),
   ])
 
-  if (dtsiResultsResult.status !== 'fulfilled') {
+  if (dtsiResultsResult.status === 'rejected') {
     throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
   const dtsiResults = dtsiResultsResult.value
 
-  if (countAdvocatesResult.status !== 'fulfilled') {
+  if (countAdvocatesResult.status === 'rejected') {
     throw new Error(`Failed to count advocates: ${countAdvocatesResult.reason}`)
   }
   const countAdvocates = countAdvocatesResult.value
 
-  if (ddhqRedisStateDataResult.status !== 'fulfilled') {
+  if (ddhqRedisStateDataResult.status === 'rejected') {
     Sentry.captureMessage(
       `Failed to get "${stateCode}" state live race data for LocationStateSpecificPage`,
       {
@@ -87,12 +87,19 @@ export default async function LocationStateSpecificPage({
       },
     )
     throw new Error(
-      `Failed to get "${stateCode}" state live race data for LocationStateSpecificPag: ${JSON.stringify(params)}`,
+      `Failed to get "${stateCode}" state live race data for LocationStateSpecificPag: ${ddhqRedisStateDataResult.reason}`,
     )
   }
   const initialRaceData = ddhqRedisStateDataResult.value
+  if (!initialRaceData) {
+    Sentry.captureMessage('No ddhq state data for LocationStateSpecificPage', {
+      extra: { stateCode },
+      tags: { domain: 'liveResult' },
+    })
+    throw new Error(`No ddhq state data for LocationStateSpecificPage: ${JSON.stringify(params)}`)
+  }
 
-  if (ddhqRedisCongressDataResult.status !== 'fulfilled') {
+  if (ddhqRedisCongressDataResult.status === 'rejected') {
     Sentry.captureMessage(`Failed to get congress live race data for LocationStateSpecificPage`, {
       extra: { params, reason: ddhqRedisCongressDataResult.reason },
       tags: { domain: 'liveResult' },
@@ -103,6 +110,15 @@ export default async function LocationStateSpecificPage({
     )
   }
   const congressRaceLiveResult = ddhqRedisCongressDataResult.value
+  if (!congressRaceLiveResult) {
+    Sentry.captureMessage('No ddhq congress data for LocationStateSpecificPage', {
+      extra: { stateCode },
+      tags: { domain: 'liveResult' },
+    })
+    throw new Error(
+      `No ddhq congress data for LocationStateSpecificPage: ${JSON.stringify(params)}`,
+    )
+  }
 
   return (
     <LocationStateSpecific

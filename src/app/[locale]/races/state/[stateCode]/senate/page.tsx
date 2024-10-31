@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { Metadata } from 'next'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific'
@@ -45,13 +46,19 @@ export default async function LocationSenateSpecificPage({
   if (dataResult.status === 'rejected' || !dataResult.value) {
     throw new Error(`Invalid params for LocationSenateSpecificPage: ${JSON.stringify(params)}`)
   }
+  const data = dataResult.value
 
   if (ddhqRedisResult.status === 'rejected') {
-    throw new Error(`Failed to fetch live result data: ${ddhqRedisResult.reason}`)
+    Sentry.captureException(ddhqRedisResult.reason, {
+      extra: { stateCode },
+      tags: { domain: 'liveResult' },
+    })
+    throw new Error(`Failed to fetch senate race data: ${ddhqRedisResult.reason}`)
   }
-
-  const data = dataResult.value
   const liveResultdata = ddhqRedisResult.value
+  if (!liveResultdata) {
+    throw new Error(`No ddhq data LocationSenateSpecificPage: ${JSON.stringify(params)}`)
+  }
 
   return (
     <LocationRaceSpecific

@@ -80,7 +80,11 @@ export default async function LocationDistrictSpecificPage({
   }
 
   if (ddhqRedisResult.status === 'rejected') {
-    throw new Error(`Failed to fetch live result data: ${ddhqRedisResult.reason}`)
+    Sentry.captureException(ddhqRedisResult.reason, {
+      extra: { district, stateCode },
+      tags: { domain: 'liveResult' },
+    })
+    throw new Error(`Failed to fetch district race data: ${ddhqRedisResult.reason}`)
   }
 
   const initialLiveResultData =
@@ -88,10 +92,11 @@ export default async function LocationDistrictSpecificPage({
     null
 
   if (!initialLiveResultData) {
-    Sentry.captureMessage('No live result data for LocationDistrictSpecificPage', {
+    Sentry.captureMessage('No ddhq data for LocationDistrictSpecificPage', {
       extra: { stateCode, district },
       tags: { domain: 'liveResult' },
     })
+    throw new Error(`No ddhq data for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
   }
 
   return (
