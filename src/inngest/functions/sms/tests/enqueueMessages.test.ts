@@ -20,7 +20,7 @@ import {
   TOO_MANY_REQUESTS_CODE,
 } from '@/utils/server/sms/SendSMSError'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
-import { fullUrl } from '@/utils/shared/urls'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 jest.mock('@/inngest/functions/sms/utils/flagInvalidPhoneNumbers', () => ({
   flagInvalidPhoneNumbers: jest.fn(),
@@ -73,10 +73,10 @@ describe('enqueueMessages', () => {
   }))
 
   const mockSMSVariables = (): UserSMSVariables => ({
-    firstName: faker.helpers.maybe(faker.person.firstName),
-    lastName: faker.helpers.maybe(faker.person.lastName),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
     sessionId: faker.helpers.maybe(faker.string.uuid),
-    userId: faker.helpers.maybe(faker.string.uuid),
+    userId: faker.string.uuid(),
   })
 
   const mockedPayloadVariables: Record<string, UserSMSVariables> = mockedPayload.reduce(
@@ -91,8 +91,19 @@ describe('enqueueMessages', () => {
 
     expect(sendSMS).toBeCalledTimes(totalMessages)
     mockedPayload.forEach(({ messages, phoneNumber }) =>
-      messages.forEach(({ body, media }) =>
-        expect(sendSMS).toBeCalledWith({ to: phoneNumber, body, media }),
+      messages.forEach(({ body, media, campaignName, journeyType }) =>
+        expect(sendSMS).toBeCalledWith({
+          to: phoneNumber,
+          body,
+          media,
+          statusCallbackUrl: fullUrl(
+            apiUrls.smsStatusCallback({
+              journeyType,
+              campaignName,
+              userId: mockedPayloadVariables[phoneNumber].userId,
+            }),
+          ),
+        }),
       ),
     )
   })
@@ -155,10 +166,13 @@ describe('enqueueMessages', () => {
   ])('should correctly parse the sms body with custom variables', async (input, output) => {
     const phoneNumber = fakerFields.phoneNumber()
 
+    const journeyType = 'BULK_SMS'
+    const campaignName = 'unit-tests'
+
     await enqueueMessages(
       [
         {
-          messages: [{ body: input, journeyType: 'BULK_SMS', campaignName: 'unit-tests' }],
+          messages: [{ body: input, journeyType, campaignName }],
           phoneNumber,
         },
       ],
@@ -167,7 +181,17 @@ describe('enqueueMessages', () => {
       },
     )
 
-    expect(sendSMS).toHaveBeenCalledWith({ body: output, to: phoneNumber })
+    expect(sendSMS).toHaveBeenCalledWith({
+      body: output,
+      to: phoneNumber,
+      statusCallbackUrl: fullUrl(
+        apiUrls.smsStatusCallback({
+          journeyType,
+          campaignName,
+          userId: mockedVariables.userId,
+        }),
+      ),
+    })
   })
 })
 

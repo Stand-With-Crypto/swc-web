@@ -141,5 +141,14 @@ export const apiUrls = {
     stateCode: string
     district: number
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
-  smsStatusCallback: () => `/api/public/sms/events/status`,
+  smsStatusCallback: ({
+    campaignName,
+    journeyType,
+    userId,
+  }: {
+    campaignName: string
+    journeyType: string
+    userId: string
+  }) =>
+    `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&userId=${userId}`,
 }

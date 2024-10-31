@@ -3,7 +3,6 @@ import { z } from 'zod'
 import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 import { messagingClient } from './messagingClient'
 import { SendSMSError } from './SendSMSError'
@@ -17,6 +16,7 @@ const zodSendSMSSchema = z.object({
   to: z.string(),
   body: z.string(),
   media: z.array(z.string()).optional(),
+  statusCallbackUrl: z.string().optional(),
 })
 
 export type SendSMSPayload = z.infer<typeof zodSendSMSSchema>
@@ -28,7 +28,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     throw new Error('Invalid sendSMS payload')
   }
 
-  const { body, to, media } = validatedInput.data
+  const { body, to, media, statusCallbackUrl } = validatedInput.data
 
   if (!isPhoneNumberSupported(to)) {
     return
@@ -42,7 +42,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     const message = await messagingClient.messages.create({
       messagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
       body,
-      statusCallback: fullUrl(apiUrls.smsStatusCallback()),
+      statusCallback: statusCallbackUrl,
       to,
       mediaUrl: media,
     })

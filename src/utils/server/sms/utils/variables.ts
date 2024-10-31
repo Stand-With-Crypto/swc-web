@@ -1,21 +1,19 @@
 import { template } from 'lodash-es'
 
-interface SMSVariables {
-  userId: string | undefined
-  sessionId: string | undefined
-  firstName: string | undefined
-  lastName: string | undefined
+export interface UserSMSVariables {
+  userId: string
+  sessionId?: string
+  firstName: string
+  lastName: string
 }
 
-export type UserSMSVariables = Partial<SMSVariables>
-
-export function applySMSVariables(message: string, userSMSVariables: UserSMSVariables) {
-  const variables: SMSVariables = {
-    firstName: undefined,
-    lastName: undefined,
-    sessionId: undefined,
-    userId: undefined,
-  }
+export function applySMSVariables(message: string, variables: UserSMSVariables) {
   const compiled = template(message)
-  return compiled({ ...variables, ...userSMSVariables })
+  return compiled(
+    // All variables within the template must be defined in the variables object. If they’re not, a ReferenceError will be thrown.
+    Object.assign<UserSMSVariables, UserSMSVariables>(
+      { firstName: '', lastName: '', userId: '', sessionId: undefined },
+      variables,
+    ),
+  )
 }

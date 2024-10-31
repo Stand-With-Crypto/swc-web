@@ -15,6 +15,7 @@ import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getLogger } from '@/utils/shared/logger'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 export const ENQUEUE_SMS_INNGEST_EVENT_NAME = 'app/enqueue.sms'
 const ENQUEUE_SMS_INNGEST_FUNCTION_ID = 'app.enqueue-sms'
@@ -163,6 +164,13 @@ export async function enqueueMessages(
             body: applySMSVariables(body, phoneNumberVariables),
             to: phoneNumber,
             media,
+            statusCallbackUrl: fullUrl(
+              apiUrls.smsStatusCallback({
+                journeyType,
+                campaignName,
+                userId: phoneNumberVariables.userId,
+              }),
+            ),
           })
 
           if (queuedMessage) {
