@@ -10,7 +10,7 @@ export default Prisma.defineExtension(client => {
           const result = await query(args)
           const end = performance.now()
           const time = end - start
-          console.log({ model, operation, args, time: `${time}ms` })
+          console.log({ model, operation, args: JSON.stringify(args), time: `${time}ms` })
           return result
         },
       },
