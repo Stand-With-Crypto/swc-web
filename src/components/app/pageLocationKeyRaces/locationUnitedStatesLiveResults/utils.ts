@@ -11,6 +11,7 @@ import {
 } from '@/data/aggregations/decisionDesk/types'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { dtsiPersonPoliticalAffiliationCategoryAbbreviation } from '@/utils/dtsi/dtsiPersonUtils'
+import { convertDTSIPersonStanceScoreToLetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { twNoop } from '@/utils/web/cn'
 
 export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
@@ -131,13 +132,12 @@ export const getCongressLiveResultOverview = (
       if (!candidate.elected) return acc
       if (stateCode && candidate.dtsiData.primaryRole?.primaryState !== stateCode) return acc
 
-      const stanceScore =
-        candidate.dtsiData.manuallyOverriddenStanceScore || candidate.dtsiData.computedStanceScore
+      const stanceScore = convertDTSIPersonStanceScoreToLetterGrade(candidate.dtsiData)
       if (isNil(stanceScore)) return acc
 
-      if (stanceScore > 50) {
+      if (['A', 'B'].includes(stanceScore)) {
         acc.proCryptoCandidatesElected.push(candidate)
-      } else {
+      } else if (['D', 'F'].includes(stanceScore)) {
         acc.antiCryptoCandidatesElected.push(candidate)
       }
       return acc
