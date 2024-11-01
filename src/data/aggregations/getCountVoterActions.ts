@@ -15,24 +15,23 @@ function isValidCount(count: unknown) {
   return !!count && !Number.isNaN(Number(count))
 }
 
-async function createRedisClient() {
-  const client = await createClient({
+function createRedisClient() {
+  const client = createClient({
     url: UPSTASH_REDIS_URL,
   })
-    .on('error', err => console.log('Redis Client Error', err))
-    .connect()
+  client.on('error', err => console.log('Redis Client Error', err))
+  void client.connect()
   return client
 }
 
+const redis = createRedisClient()
+
 export async function getCountVoterActions() {
-  const redis = await createRedisClient()
   const cachedCount = await redis.get(REDIS_KEY)
   return isValidCount(cachedCount) ? Number(cachedCount) : FALLBACK_MOCK_COUNT
 }
 
 export async function setVoterActionsCountCache() {
-  const redis = await createRedisClient()
-
   // `prismaClient.count` doesn't support distinct, that's why we're using a raw query here
   // see https://github.com/prisma/prisma/issues/4228
   const count = await prismaClient.$queryRaw<{ count: number }[]>`
