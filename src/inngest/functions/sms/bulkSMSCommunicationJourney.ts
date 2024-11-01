@@ -31,7 +31,7 @@ export interface BulkSMSPayload {
     campaignName: string
     media?: string[]
   }>
-  // default to ET: -4
+  // default to ET: -5
   timezone?: number
   send?: boolean
   // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
@@ -41,7 +41,7 @@ export interface BulkSMSPayload {
 const MAX_RETRY_COUNT = 1
 const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
 
-const MIN_ENQUEUE_HOUR = 11 // 11 am
+const MIN_ENQUEUE_HOUR = 9 // 9 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
 // Before this date we were sending messages with a toll-free number, now that we're changing to a short-code number we need to send the legal text again in the first message
@@ -57,7 +57,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { send, sleepTime, messages, timezone = -4 } = event.data
+    const { send, sleepTime, messages, timezone = -5 } = event.data
 
     if (!messages) {
       throw new NonRetriableError('Missing messages to send')

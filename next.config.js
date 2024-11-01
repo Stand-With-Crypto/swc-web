@@ -86,13 +86,13 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
-    'https://www.figma.com/embed',
+    'https://www.figma.com',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
   'base-uri': ["'self'"],
   'form-action': ["'self'"],
-  'frame-ancestors': ["'none'"],
+  'frame-ancestors': ["'self'", 'https://www.figma.com'],
   'block-all-mixed-content': [],
   ...(isDev ? {} : { 'upgrade-insecure-requests': [] }),
 }
@@ -340,16 +340,11 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
-        source: '/vg/2/:sessionId*',
+        source: '/vg/:campaignId/:sessionId*',
         destination:
-          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-2&sessionId=:sessionId*',
-        permanent: true,
-      },
-      {
-        source: '/vg/3/:sessionId*',
-        destination:
-          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-3&sessionId=:sessionId*',
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-:campaignId&sessionId=:sessionId*',
         permanent: true,
       },
       {
@@ -589,6 +584,11 @@ const nextConfig = {
         source: '/america-loves-crypto/pa',
         destination:
           'https://americalovescryptopa.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=pa_2&utm_id=sst',
+        permanent: true,
+      },
+      {
+        source: '/cb-vote-adv-push',
+        destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
         permanent: true,
       },
     ]

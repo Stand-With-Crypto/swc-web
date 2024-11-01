@@ -473,6 +473,82 @@ export function ViewKeyRacesIcon({
   )
 }
 
+export function VotedIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect fill="#FFF2B2" height="40" rx="20" width="40" />
+      <g clipPath="url(#clip0_5232_17227)">
+        <path
+          d="M15.8333 21.6667H18.3333V24.1667H15.8333V21.6667ZM15.8333 15.8334H18.3333V18.3334H15.8333V15.8334ZM14.1666 25.8334H25.8333V14.1667H14.1666V25.8334ZM20.8333 16.2501H25V17.9167H20.8333V16.2501ZM20.8333 22.0834H25V23.7501H20.8333V22.0834ZM15 15.0001H19.1666V19.1667H15V15.0001ZM15 20.8334H19.1666V25.0001H15V20.8334Z"
+          fill="#4A2100"
+          opacity="0.3"
+        />
+        <path
+          d="M20.8333 16.25H25V17.9167H20.8333V16.25ZM20.8333 22.0833H25V23.75H20.8333V22.0833ZM25.8333 12.5H14.1667C13.25 12.5 12.5 13.25 12.5 14.1667V25.8333C12.5 26.75 13.25 27.5 14.1667 27.5H25.8333C26.75 27.5 27.5 26.75 27.5 25.8333V14.1667C27.5 13.25 26.75 12.5 25.8333 12.5ZM25.8333 25.8333H14.1667V14.1667H25.8333V25.8333ZM19.1667 15H15V19.1667H19.1667V15ZM18.3333 18.3333H15.8333V15.8333H18.3333V18.3333ZM19.1667 20.8333H15V25H19.1667V20.8333ZM18.3333 24.1667H15.8333V21.6667H18.3333V24.1667Z"
+          fill="#4A2100"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_5232_17227">
+          <rect fill="white" height="20" transform="translate(10 10)" width="20" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#FFF2B2"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#FFF2B2"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}
+
 export function PrepareToVoteIcon({
   isPulsing = false,
   height = 40,
