@@ -1,6 +1,5 @@
 import 'server-only'
 
-import { cache } from 'react'
 import { UserActionType } from '@prisma/client'
 import { Redis } from '@upstash/redis'
 
@@ -13,11 +12,11 @@ function isValidCount(count: unknown) {
   return !!count && !Number.isNaN(Number(count))
 }
 
-export const getCountVoterActions = cache(async () => {
+export async function getCountVoterActions() {
   const redis = Redis.fromEnv()
   const cachedCount = await redis.get(REDIS_KEY)
   return isValidCount(cachedCount) ? Number(cachedCount) : FALLBACK_MOCK_COUNT
-})
+}
 
 export async function setVoterActionsCountCache() {
   const redis = Redis.fromEnv()
