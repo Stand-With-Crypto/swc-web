@@ -5,7 +5,6 @@ import {
   JoinIcon,
   PrepareToVoteIcon,
   ViewKeyRacesIcon,
-  VotedIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 
 export const STATE_COORDS: Record<string, [number, number]> = {
@@ -119,11 +118,5 @@ export const ADVOCATES_ACTIONS: Partial<
     label: 'Prepared to vote',
     labelMobile: 'prepared',
     labelActionTooltip: 'prepared to vote',
-  },
-  VOTING_DAY: {
-    icon: VotedIcon,
-    label: 'I voted',
-    labelMobile: 'I voted',
-    labelActionTooltip: 'I voted',
   },
 }

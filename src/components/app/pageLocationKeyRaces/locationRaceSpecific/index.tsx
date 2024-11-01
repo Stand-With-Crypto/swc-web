@@ -13,7 +13,6 @@ import { organizeRaceSpecificPeople } from '@/components/app/pageLocationKeyRace
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { isPresidentialData } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
-import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -97,11 +96,9 @@ export function LocationRaceSpecific({
         </PageTitle>
         <LoginDialogWrapper
           authenticatedContent={
-            <UserActionVotingDayDialog>
-              <Button className="mt-6 w-full max-w-xs" variant="secondary">
-                Claim I Voted NFT
-              </Button>
-            </UserActionVotingDayDialog>
+            <Button className="mt-6 w-full max-w-xs" variant="secondary">
+              Claim I Voted NFT
+            </Button>
           }
         >
           <Button className="mt-6 w-full max-w-xs" variant="secondary">

@@ -13,7 +13,6 @@ import {
   UserActionViewKeyRaces,
   UserActionVoterAttestation,
   UserActionVoterRegistration,
-  UserActionVotingDay,
   UserActionVotingInformationResearched,
 } from '@prisma/client'
 import { keyBy } from 'lodash-es'
@@ -52,7 +51,6 @@ type ClientUserActionDatabaseQuery = UserAction & {
         address: Address | null
       })
     | null
-  userActionVotingDay: UserActionVotingDay | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -114,10 +112,6 @@ type ClientUserActionVotingInformationResearched = Pick<
   actionType: typeof UserActionType.VOTING_INFORMATION_RESEARCHED
 }
 
-type ClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
-  actionType: typeof UserActionType.VOTING_DAY
-}
-
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -139,7 +133,6 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionRsvpEvent
       | ClientUserActionViewKeyRaces
       | ClientUserActionVotingInformationResearched
-      | ClientUserActionVotingDay
     )
 >
 
@@ -295,14 +288,6 @@ export const getClientUserAction = ({
         actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
       }
       return getClientModel({ ...sharedProps, ...votingInformationFields })
-    },
-    [UserActionType.VOTING_DAY]: () => {
-      const { votingYear } = getRelatedModel(record, 'userActionVotingDay')
-      const votingDayFields: ClientUserActionVotingDay = {
-        votingYear,
-        actionType: UserActionType.VOTING_DAY,
-      }
-      return getClientModel({ ...sharedProps, ...votingDayFields })
     },
   }
 

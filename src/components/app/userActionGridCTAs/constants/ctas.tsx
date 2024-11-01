@@ -13,7 +13,6 @@ import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionF
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
-import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -24,7 +23,6 @@ import {
   UserActionTweetCampaignName,
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
-  UserActionVotingDayCampaignName,
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
@@ -252,28 +250,6 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Donate fiat or crypto to help keep crypto in America.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null, // This is null because the donate CTA is a link to the donate page,
-      },
-    ],
-  },
-  [UserActionType.VOTING_DAY]: {
-    title: 'I voted!',
-    description: 'Claim your "proof-of-vote" NFT.',
-    mobileCTADescription: 'Claim your "proof-of-vote" NFT.',
-    campaignsModalDescription: 'Claim your "proof-of-vote" NFT.',
-    image: '/actionTypeIcons/iVoted.png',
-    campaigns: [
-      {
-        actionType: UserActionType.VOTING_DAY,
-        campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
-        isCampaignActive: true,
-        title: 'I voted!',
-        description: 'Claim your "proof-of-vote" NFT.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <Suspense fallback={children}>
-            <UserActionVotingDayDialog>{children}</UserActionVotingDayDialog>
-          </Suspense>
-        ),
       },
     ],
   },

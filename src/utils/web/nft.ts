@@ -82,13 +82,4 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'Ballot box badge nft',
     },
   },
-  [NFTSlug.I_VOTED]: {
-    name: 'I voted',
-    image: {
-      url: '/nfts/NFT_IVoted.gif',
-      width: 160,
-      height: 160,
-      alt: 'I voted nft',
-    },
-  },
 }

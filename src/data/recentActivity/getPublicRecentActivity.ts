@@ -50,7 +50,6 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
           address: true,
         },
       },
-      userActionVotingDay: true,
     },
   })
 }
