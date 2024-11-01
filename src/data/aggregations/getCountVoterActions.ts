@@ -13,8 +13,8 @@ function isValidCount(count: unknown) {
 }
 
 export async function getCountVoterActions() {
-  // const cachedCount = await redis.get(REDIS_KEY)
-  return FALLBACK_MOCK_COUNT
+  const cachedCount = await redis.get(REDIS_KEY)
+  return cachedCount ? Number(cachedCount) : FALLBACK_MOCK_COUNT
 }
 
 export async function setVoterActionsCountCache() {
