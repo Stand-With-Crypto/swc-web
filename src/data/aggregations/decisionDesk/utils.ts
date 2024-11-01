@@ -32,12 +32,19 @@ export const getPoliticianFindMatch = (
 
   const hasPassedWithLastNameParts = compareLastNamePartsWithLevenshtein(dtsiPerson, ddhqCandidate)
 
-  return (
+  let isMatch =
     hasPassedWithName ||
     hasPassedWithNickname ||
     hasPassedWithLastName ||
     hasPassedWithLastNameParts
-  )
+
+  if ('state' in ddhqCandidate) {
+    isMatch =
+      isMatch &&
+      dtsiPerson.primaryRole?.primaryState?.toLowerCase() === ddhqCandidate.state.toLowerCase()
+  }
+
+  return isMatch
 }
 
 export const normalizeName = (name: string) => {

@@ -51,6 +51,9 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
             lastName: calledCandidate?.last_name ?? '',
             partyName: calledCandidate?.party_name ?? '',
             incumbent: calledCandidate?.incumbent ?? false,
+            state: currentData.state,
+            stateName: currentData.state_name,
+            district: currentData.district,
           }
         : null,
       hasCalledCandidate: !!calledCandidate,
@@ -69,6 +72,9 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
             firstName: candidate.first_name,
             lastName: candidate.last_name,
             partyName: candidate.party_name,
+            state: currentData.state,
+            stateName: currentData.state_name,
+            district: currentData.district,
           }
         })
         .filter(Boolean),
@@ -88,6 +94,9 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
             firstName: advancingCandidate.first_name,
             lastName: advancingCandidate.last_name,
             partyName: advancingCandidate.party_name,
+            state: currentData.state,
+            stateName: currentData.state_name,
+            district: currentData.district,
           }
         })
         .filter(Boolean),
@@ -109,6 +118,9 @@ export async function getAllRacesData(params: GetRacesParams): Promise<RacesVoti
           currentData.topline_results.voting_data[candidate.cand_id]?.election_day_votes ||
           currentData.topline_results.votes[candidate.cand_id] ||
           0,
+        state: currentData.state,
+        stateName: currentData.state_name,
+        district: currentData.district,
       })),
     }
   })

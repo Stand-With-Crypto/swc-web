@@ -7,6 +7,9 @@ export interface Candidate {
   lastName: string
   partyName: string
   incumbent?: boolean
+  state: string
+  stateName: string
+  district: string
 }
 export interface RacesVotingDataResponse {
   state: string
