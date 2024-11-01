@@ -33,7 +33,7 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-export function Navbar({ locale }: { locale: SupportedLocale }) {
+export function Navbar({ locale, buildTime }: { locale: SupportedLocale; buildTime?: Date }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
   const [hoveredMenuIndex, setHoveredMenuIndex] = useState<number | null>(null)
@@ -146,7 +146,8 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         <div className="flex h-10 items-center bg-yellow-300 text-center">
           <div className="container flex justify-between">
             <p className="flex-shrink-0 font-bold">
-              {capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment
+              {capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment{' '}
+              {buildTime && <>- Built at {buildTime?.toLocaleString()}</>}
             </p>
             <div className="xs:text-xs space-x-3 text-sm">
               <InternalLink className="text-fontcolor underline" href={urls.internalHomepage()}>

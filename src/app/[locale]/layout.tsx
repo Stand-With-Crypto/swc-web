@@ -66,7 +66,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <GeoLocationDisclaimerBanner />
-            <Navbar locale={locale} />
+            <Navbar buildTime={new Date()} locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer locale={locale} />
           </FullHeight.Container>
