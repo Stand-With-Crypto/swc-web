@@ -1,5 +1,5 @@
 import type { DTSIAvatarProps } from '@/components/app/dtsiAvatar'
-import type { DTSI_AllPeopleQuery, DTSI_Person } from '@/data/dtsi/generated'
+import type { DTSI_AllPeopleQuery } from '@/data/dtsi/generated'
 
 export type DTSI_Candidate = DTSIAvatarProps['person'] &
   Pick<
