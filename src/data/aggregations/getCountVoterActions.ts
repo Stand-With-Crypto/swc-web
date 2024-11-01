@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { cache } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -12,10 +13,10 @@ function isValidCount(count: unknown) {
   return !!count && !Number.isNaN(Number(count))
 }
 
-export async function getCountVoterActions() {
+export const getCountVoterActions = cache(async () => {
   const cachedCount = await redis.get(REDIS_KEY)
-  return cachedCount ? Number(cachedCount) : FALLBACK_MOCK_COUNT
-}
+  return isValidCount(cachedCount) ? Number(cachedCount) : FALLBACK_MOCK_COUNT
+})
 
 export async function setVoterActionsCountCache() {
   // `prismaClient.count` doesn't support distinct, that's why we're using a raw query here
