@@ -20,6 +20,7 @@ import {
   getCongressLiveResultOverview,
   getRaceStatus,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
@@ -135,9 +136,11 @@ export function LocationStateSpecific({
           )}
           <LoginDialogWrapper
             authenticatedContent={
-              <Button className="mt-6 w-full max-w-xs" variant="secondary">
-                Claim I Voted NFT
-              </Button>
+              <UserActionVotingDayDialog>
+                <Button className="mt-6 w-full max-w-xs" variant="secondary">
+                  Claim I Voted NFT
+                </Button>
+              </UserActionVotingDayDialog>
             }
           >
             <Button className="mt-6 w-full max-w-xs" variant="secondary">
