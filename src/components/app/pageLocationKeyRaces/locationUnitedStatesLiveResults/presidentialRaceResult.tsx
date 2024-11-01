@@ -87,6 +87,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
   const raceStatus = useMemo<RaceStatus>(() => {
     if (!liveResultData) return 'unknown'
     if (calledCandidate) return 'called'
+    if (liveResultData.some(candidate => (candidate?.votingData?.votes || 0) > 0)) return 'live'
     if (isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))) return 'not-started'
 
     return 'live'
