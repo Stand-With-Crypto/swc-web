@@ -1,5 +1,5 @@
 import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
-import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } from 'date-fns'
+import { addDays, addHours, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
 
@@ -12,7 +12,6 @@ import { TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { BULK_WELCOME_MESSAGE } from '@/utils/server/sms/messages'
 import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 import { prettyStringify } from '@/utils/shared/prettyLog'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -32,25 +31,17 @@ export interface BulkSMSPayload {
     campaignName: string
     media?: string[]
   }>
-  // default to ET: -4
+  // default to ET: -5
   timezone?: number
   send?: boolean
   // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
   sleepTime?: string | number
-  // This is used to take into account the current queue size when queuing new messages
-  currentSegmentsInQueue?: number
 }
 
 const MAX_RETRY_COUNT = 1
 const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
 
-// This constants are specific to our twilio phone number type
-const MESSAGE_SEGMENTS_PER_SECOND = Number(
-  requiredEnv(process.env.MESSAGE_SEGMENTS_PER_SECOND, 'MESSAGE_SEGMENTS_PER_SECOND'),
-)
-const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
-
-const MIN_ENQUEUE_HOUR = 11 // 11 am
+const MIN_ENQUEUE_HOUR = 9 // 9 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
 // Before this date we were sending messages with a toll-free number, now that we're changing to a short-code number we need to send the legal text again in the first message
@@ -66,7 +57,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { send, sleepTime, messages, timezone = -4, currentSegmentsInQueue = 0 } = event.data
+    const { send, sleepTime, messages, timezone = -5 } = event.data
 
     if (!messages) {
       throw new NonRetriableError('Missing messages to send')
@@ -87,14 +78,9 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       await step.sleep('scheduled-sleep', sleepTime)
     }
 
-    // SMS messages over 160 characters are split into 153-character segments due to data headers.
-    const getWaitingTimeInSeconds = (totalSegments: number) =>
-      totalSegments / MESSAGE_SEGMENTS_PER_SECOND
-
     const enqueueMessagesPayloadChunks: EnqueueMessagePayload[][] = []
     let totalSegmentsCount = 0
     let totalMessagesCount = 0
-    let totalTime = 0
     const messagesInfo: Record<string, object> = {}
 
     for (const message of messages) {
@@ -168,9 +154,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           skip += phoneNumberList.length
           index += 1
 
-          allPhoneNumbers.push(
-            ...phoneNumberList.map(({ phoneNumber }) => phoneNumber).filter(isPhoneNumberSupported),
-          )
+          allPhoneNumbers.push(...phoneNumberList.filter(isPhoneNumberSupported))
 
           logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
 
@@ -223,8 +207,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
 
-      const timeToSendSegments = getWaitingTimeInSeconds(payloadCounts.segments)
-
       // This is for debugging and estimation purposes only
       // Grouping bulk send count by campaign name
       update(
@@ -234,13 +216,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           existingPayload = {
             segmentsCount: 0,
             messagesCount: 0,
-            totalTime: 0,
             chunks: 0,
           },
         ) => ({
           segmentsCount: payloadCounts.segments + existingPayload.segmentsCount,
           messagesCount: payloadCounts.messages + existingPayload.messagesCount,
-          totalTime: timeToSendSegments + existingPayload.totalTime,
           chunks: payloadChunks.length + existingPayload.chunks,
         }),
       )
@@ -249,7 +229,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       totalSegmentsCount += payloadCounts.segments
       totalMessagesCount += payloadCounts.messages
-      totalTime += timeToSendSegments
     }
 
     const bulkInfo = {
@@ -257,7 +236,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       total: {
         segmentsCount: totalSegmentsCount,
         messagesCount: totalMessagesCount,
-        totalTime: formatTime(totalTime),
         chunks: enqueueMessagesPayloadChunks.length,
       },
     }
@@ -276,10 +254,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
-    let totalTimeToSendMessagesInSeconds = 0
-
-    let segmentsInQueue = currentSegmentsInQueue ?? 0
-    let timeInSecondsToEmptyQueue = getWaitingTimeInSeconds(segmentsInQueue)
 
     for (let i = 0; i < enqueueMessagesPayloadChunks.length; i += 1) {
       const now = addHours(new Date(), timezone)
@@ -319,71 +293,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       totalQueuedMessages += queuedMessages
       totalQueuedSegments += segmentsSent
 
-      segmentsInQueue += segmentsSent
-      const timeToSendSegments = getWaitingTimeInSeconds(segmentsSent)
-
-      timeInSecondsToEmptyQueue += timeToSendSegments
-      totalTimeToSendMessagesInSeconds += timeToSendSegments
-
-      const emptyQueueTime = addSeconds(now, timeInSecondsToEmptyQueue)
-
-      if (emptyQueueTime > maxEnqueueHourToday) {
-        const waitingTime = differenceInMilliseconds(
-          emptyQueueTime > addDays(minEnqueueHourToday, 1)
-            ? emptyQueueTime
-            : addDays(minEnqueueHourToday, 1),
-          now,
-        )
-        logger.info(
-          `queue will be empty at ${emptyQueueTime.toString()}`,
-          `Sleep for: ${formatTime(waitingTime / 1000)}`,
-        )
-        await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
-
-        segmentsInQueue = 0
-        timeInSecondsToEmptyQueue = 0
-      }
-
-      if (totalSegmentsCount >= MAX_QUEUE_LENGTH) {
-        const nextPayloadChunk = enqueueMessagesPayloadChunks[i + 1]
-
-        if (nextPayloadChunk) {
-          const { segments: nextPayloadSegments } = countMessagesAndSegments(nextPayloadChunk)
-
-          if (segmentsInQueue + nextPayloadSegments >= MAX_QUEUE_LENGTH) {
-            logger.info(
-              'queue-overflow-control',
-              prettyStringify({
-                segmentsInQueue,
-                timeToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
-              }),
-            )
-
-            await step.sleep(
-              `waiting-${formatTime(timeInSecondsToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
-              timeInSecondsToEmptyQueue,
-            )
-
-            segmentsInQueue = 0
-            timeInSecondsToEmptyQueue = 0
-          }
-        }
-      }
-
       logger.info(
         `Shipping estimate: ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
         prettyStringify({
           chunksLeft: enqueueMessagesPayloadChunks.length - (i + 1),
           messagesLeft: bulkInfo.total.messagesCount - totalQueuedMessages,
-          timeLeft: formatTime(totalTime - totalTimeToSendMessagesInSeconds),
         }),
       )
 
       logger.info(
         `Summary info: ${i + 1}/${enqueueMessagesPayloadChunks.length}`,
         prettyStringify({
-          timeInSecondsToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
-          segmentsInQueue,
           totalQueuedMessages,
           totalQueuedSegments,
         }),
@@ -426,32 +346,36 @@ export interface GetPhoneNumberOptions {
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
-  return prismaClient.user.groupBy({
-    by: ['phoneNumber'],
-    where: {
-      ...mergeWhereParams(
-        { ...options.userWhereInput },
-        {
-          UserCommunicationJourney: {
-            every: {
-              campaignName: {
-                not: options.campaignName,
+  return prismaClient.user
+    .groupBy({
+      by: ['phoneNumber'],
+      where: {
+        ...mergeWhereParams(
+          { ...options.userWhereInput },
+          {
+            UserCommunicationJourney: {
+              every: {
+                campaignName: {
+                  not: options.campaignName,
+                },
               },
             },
           },
+        ),
+        hasValidPhoneNumber: true,
+        smsStatus: {
+          in: [
+            SMSStatus.OPTED_IN,
+            SMSStatus.OPTED_IN_HAS_REPLIED,
+            ...(options.includePendingDoubleOptIn
+              ? [SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN]
+              : []),
+          ],
         },
-      ),
-      hasValidPhoneNumber: true,
-      smsStatus: {
-        in: [
-          SMSStatus.OPTED_IN,
-          SMSStatus.OPTED_IN_HAS_REPLIED,
-          ...(options.includePendingDoubleOptIn ? [SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN] : []),
-        ],
       },
-    },
-    skip: options.skip,
-    take: DATABASE_QUERY_LIMIT,
-    orderBy: { phoneNumber: 'asc' },
-  })
+      skip: options.skip,
+      take: DATABASE_QUERY_LIMIT,
+      orderBy: { phoneNumber: 'asc' },
+    })
+    .then(res => res.map(({ phoneNumber }) => phoneNumber))
 }

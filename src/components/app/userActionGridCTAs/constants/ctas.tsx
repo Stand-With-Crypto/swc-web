@@ -117,7 +117,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
         title: 'Join Stand With Crypto',
-        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
+        // description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`, // TODO: RETURN TO THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
+        description: `Joined over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -137,7 +138,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
         isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
         title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        description: 'Make your voice heard. We make it easy.',
+        // description: 'Make your voice heard. We make it easy.', // TODO: RETURN THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
+        description: 'You emailed your representative about FIT21.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
@@ -148,7 +150,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'FIT21 Email Campaign',
         description: 'You emailed your representative and asked them to vote YES on FIT21.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: () => null,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -157,7 +159,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'FIT21 Email Campaign',
         description: 'You emailed your representative and asked them to vote YES on FIT21.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: () => null,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -166,7 +168,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'CNN Presidential Debate 2024',
         description: "You emailed CNN and asked them to include the candidates' stance on crypto.",
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: () => null,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -191,7 +193,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionCallCampaignName.FIT21_2024_04,
         isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
         title: `Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`,
-        description: "The most effective way to make your voice heard. We'll show you how.",
+        // description: "The most effective way to make your voice heard. We'll show you how.", // TODO: RETURN TO THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
+        description: `You called your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })} about FIT21`,
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormCallCongresspersonDialog,
       },
@@ -202,7 +205,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'FIT21 Call Campaign',
         description: 'You called your representative and asked them to vote YES on FIT21.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: () => null,
+        WrapperComponent: null,
       },
     ],
   },
@@ -248,7 +251,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Make a donation',
         description: 'Donate fiat or crypto to help keep crypto in America.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: _ => null, // This returns null because the donate CTA is a link to the donate page,
+        WrapperComponent: null, // This is null because the donate CTA is a link to the donate page,
       },
     ],
   },

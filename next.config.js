@@ -27,8 +27,6 @@ const contentSecurityPolicy = {
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
-    'https://www.googletagmanager.com',
-    'https://static.ads-twitter.com/uwt.js',
     'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
     'https://va.vercel-scripts.com/v1/script.debug.js',
     'https://www.youtube.com/',
@@ -37,14 +35,25 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
+    'https://www.googletagmanager.com/',
+    'https://*.amazon-adsystem.com/',
+    'https://*.paa-reporting-advertising.amazon/',
+    'https://*.ads-twitter.com/',
+    'https://*.google-analytics.com/',
   ],
-  'img-src': ["'self'", 'https: data:', 'blob: data:'],
+  'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
     "'self'",
     'ws: wss:',
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
     'https://cloudflare-eth.com',
     'https://c.thirdweb.com/',
+    'https://c.amazon-adsystem.com/',
+    'https://www.googletagmanager.com/',
+    'https://*.amazon-adsystem.com/',
+    'https://*.paa-reporting-advertising.amazon/',
+    'https://*.ads-twitter.com/',
+    'https://*.google-analytics.com/',
     // ENS
     'https://euc.li/',
     // Thirdweb contract metadata
@@ -77,13 +86,13 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
-    'https://www.figma.com/embed',
+    'https://www.figma.com',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
   'base-uri': ["'self'"],
   'form-action': ["'self'"],
-  'frame-ancestors': ["'none'"],
+  'frame-ancestors': ["'self'", 'https://www.figma.com'],
   'block-all-mixed-content': [],
   ...(isDev ? {} : { 'upgrade-insecure-requests': [] }),
 }
@@ -331,6 +340,13 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
+      {
+        source: '/vg/:campaignId/:sessionId*',
+        destination:
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=voter-guide-:campaignId&sessionId=:sessionId*',
+        permanent: true,
+      },
       {
         source: '/voter-guide-1/:sessionId*',
         destination:
@@ -513,6 +529,12 @@ const nextConfig = {
         source: '/gotv2',
         destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=0820&utm_content=v2',
         permanent: false,
+      },
+      {
+        source: '/oh/1',
+        destination:
+          'https://americalovescryptooh.splashthat.com?utm_source=swc&utm_medium=sms&utm_campaign=oh_1&utm_id=ss',
+        permanent: true,
       },
 
       // Vanity Links

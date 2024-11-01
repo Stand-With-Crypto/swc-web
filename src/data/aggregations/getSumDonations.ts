@@ -4,7 +4,7 @@ import { sum } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
-const FAIRSHAKE_DONATIONS_AMOUNT_USD = 177_877_738.13
+const FAIRSHAKE_DONATIONS_AMOUNT_USD = 204_069_689
 
 const MANUALLY_TRACKED_DONATIONS = [
   FAIRSHAKE_DONATIONS_AMOUNT_USD,

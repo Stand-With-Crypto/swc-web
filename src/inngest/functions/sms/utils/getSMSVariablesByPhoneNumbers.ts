@@ -28,7 +28,7 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
 
       return {
         ...acc,
-        [user?.phoneNumber]: {
+        [user.phoneNumber]: {
           userId: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
