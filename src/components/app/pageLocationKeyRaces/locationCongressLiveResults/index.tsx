@@ -76,7 +76,7 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
           </CollapsibleTrigger>
 
           <CollapsibleContent className="AnimateCollapsibleContent px-0.5 pb-2">
-            <div className="w-full flex-col justify-start gap-6 max-lg:max-w-2xl sm:inline-flex sm:flex-row">
+            <CardGrid>
               {proCryptoCandidatesElected.map(person =>
                 person.dtsiData ? (
                   <DTSIPersonHeroCard
@@ -87,7 +87,7 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
                   />
                 ) : null,
               )}
-            </div>
+            </CardGrid>
           </CollapsibleContent>
         </Collapsible>
       </div>
@@ -113,7 +113,7 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
           </CollapsibleTrigger>
 
           <CollapsibleContent className="AnimateCollapsibleContent px-0.5 pb-2">
-            <div className="w-full flex-col justify-start gap-6 max-lg:max-w-2xl sm:inline-flex sm:flex-row">
+            <CardGrid>
               {antiCryptoCandidatesElected.map(person =>
                 person.dtsiData ? (
                   <DTSIPersonHeroCard
@@ -124,13 +124,21 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
                   />
                 ) : null,
               )}
-            </div>
+            </CardGrid>
           </CollapsibleContent>
         </Collapsible>
       </div>
 
       <PACFooter className="container text-center" />
       <DDHQFooter className="container text-center" />
+    </div>
+  )
+}
+
+function CardGrid({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="w-full flex-col flex-wrap justify-start gap-6 max-lg:max-w-2xl sm:inline-flex sm:flex-row">
+      {children}
     </div>
   )
 }
