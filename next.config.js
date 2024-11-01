@@ -586,6 +586,11 @@ const nextConfig = {
           'https://americalovescryptopa.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=pa_2&utm_id=sst',
         permanent: true,
       },
+      {
+        source: '/cb-vote-adv-push',
+        destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
+        permanent: true,
+      },
     ]
   },
 }
