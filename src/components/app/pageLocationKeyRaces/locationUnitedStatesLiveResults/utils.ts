@@ -11,7 +11,11 @@ import {
 } from '@/data/aggregations/decisionDesk/types'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { dtsiPersonPoliticalAffiliationCategoryAbbreviation } from '@/utils/dtsi/dtsiPersonUtils'
-import { convertDTSIPersonStanceScoreToLetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import {
+  convertDTSIPersonStanceScoreToLetterGrade,
+  isAntiCrypto,
+  isProCrypto,
+} from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { twNoop } from '@/utils/web/cn'
 
 export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
@@ -115,6 +119,7 @@ export const getOpacity = (
 export const getCongressLiveResultOverview = (
   data: Pick<CongressDataResponse, 'candidatesWithVotes'> | null | undefined,
   stateCode?: string,
+  house?: string,
 ) => {
   if (!data?.candidatesWithVotes?.length) {
     return { proCryptoCandidatesElected: [], antiCryptoCandidatesElected: [] }
@@ -135,9 +140,9 @@ export const getCongressLiveResultOverview = (
       const stanceScore = convertDTSIPersonStanceScoreToLetterGrade(candidate.dtsiData)
       if (isNil(stanceScore)) return acc
 
-      if (['A', 'B'].includes(stanceScore)) {
+      if (isProCrypto(stanceScore)) {
         acc.proCryptoCandidatesElected.push(candidate)
-      } else if (['D', 'F'].includes(stanceScore)) {
+      } else if (isAntiCrypto(stanceScore)) {
         acc.antiCryptoCandidatesElected.push(candidate)
       }
       return acc

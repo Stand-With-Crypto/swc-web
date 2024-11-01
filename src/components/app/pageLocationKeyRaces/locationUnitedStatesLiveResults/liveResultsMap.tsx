@@ -12,6 +12,10 @@ import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongre
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
+import {
+  convertDTSIPersonStanceScoreToLetterGrade,
+  isProCrypto,
+} from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
   getUSStateCodeFromStateName,
@@ -43,15 +47,15 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
 
     const statesMap = candidates.reduce(
       (acc, candidate) => {
-        const stanceScore =
-          candidate.dtsiData?.manuallyOverriddenStanceScore ||
-          candidate.dtsiData?.computedStanceScore
+        if (!candidate.dtsiData) return acc
+
+        const stanceScore = convertDTSIPersonStanceScoreToLetterGrade(candidate.dtsiData)
         const state = candidate.dtsiData?.primaryRole?.primaryState as USStateCode
         const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[state]
 
         if (isNil(stanceScore) || isNil(stateName)) return acc
 
-        if (stanceScore > 50 && candidate.elected) {
+        if (isProCrypto(stanceScore) && candidate.elected) {
           acc[stateName] = (acc[stateName] || 0) + 1
         }
 
