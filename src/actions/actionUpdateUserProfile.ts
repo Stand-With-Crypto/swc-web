@@ -30,7 +30,10 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
-import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import {
+  logCongressionalDistrictNotFound,
+  maybeGetCongressionalDistrictFromAddress,
+} from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -61,22 +64,11 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         validatedFields.data.address,
       )
       if ('notFoundReason' in usCongressionalDistrict) {
-        logger.error(
-          `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
-        )
-        if (
-          ['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)
-        ) {
-          Sentry.captureMessage(
-            `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription}`,
-            {
-              extra: {
-                domain: 'actionUpdateUserProfile',
-                notFoundReason: usCongressionalDistrict.notFoundReason,
-              },
-            },
-          )
-        }
+        logCongressionalDistrictNotFound({
+          address: validatedFields.data.address.formattedDescription,
+          notFoundReason: usCongressionalDistrict.notFoundReason,
+          domain: 'actionUpdateUserProfile',
+        })
       }
       if ('districtNumber' in usCongressionalDistrict) {
         validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
