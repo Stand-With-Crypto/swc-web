@@ -39,6 +39,7 @@ async function apiResponseForUserFullProfileInfo() {
                 address: true,
               },
             },
+            userActionVotingDay: true,
           },
         },
       },
