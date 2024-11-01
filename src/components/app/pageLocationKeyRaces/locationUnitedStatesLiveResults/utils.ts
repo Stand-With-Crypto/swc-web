@@ -119,7 +119,6 @@ export const getOpacity = (
 export const getCongressLiveResultOverview = (
   data: Pick<CongressDataResponse, 'candidatesWithVotes'> | null | undefined,
   stateCode?: string,
-  house?: string,
 ) => {
   if (!data?.candidatesWithVotes?.length) {
     return { proCryptoCandidatesElected: [], antiCryptoCandidatesElected: [] }
