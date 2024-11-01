@@ -116,6 +116,7 @@
     "react-use": "^17.5.0",
     "react-wrap-balancer": "^1.1.0",
     "react-youtube": "^10.1.0",
+    "redis": "^4.7.0",
     "sanitize-html": "^2.11.0",
     "server-only": "^0.0.1",
     "sms-segments-calculator": "^1.2.0",

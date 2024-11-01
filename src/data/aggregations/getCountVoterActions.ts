@@ -1,9 +1,12 @@
 import 'server-only'
 
 import { UserActionType } from '@prisma/client'
-import { Redis } from '@upstash/redis'
+import { createClient } from 'redis'
 
 import { prismaClient } from '@/utils/server/prismaClient'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
+
+const UPSTASH_REDIS_URL = requiredEnv(process.env.UPSTASH_REDIS_URL, 'UPSTASH_REDIS_URL')
 
 const REDIS_KEY = 'db:count_voter_actions'
 const FALLBACK_MOCK_COUNT = 502_054
@@ -12,14 +15,23 @@ function isValidCount(count: unknown) {
   return !!count && !Number.isNaN(Number(count))
 }
 
+async function createRedisClient() {
+  const client = await createClient({
+    url: UPSTASH_REDIS_URL,
+  })
+    .on('error', err => console.log('Redis Client Error', err))
+    .connect()
+  return client
+}
+
 export async function getCountVoterActions() {
-  const redis = Redis.fromEnv()
+  const redis = await createRedisClient()
   const cachedCount = await redis.get(REDIS_KEY)
   return isValidCount(cachedCount) ? Number(cachedCount) : FALLBACK_MOCK_COUNT
 }
 
 export async function setVoterActionsCountCache() {
-  const redis = Redis.fromEnv()
+  const redis = await createRedisClient()
 
   // `prismaClient.count` doesn't support distinct, that's why we're using a raw query here
   // see https://github.com/prisma/prisma/issues/4228
