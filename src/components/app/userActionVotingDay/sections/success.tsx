@@ -16,7 +16,7 @@ export const UserActionIVotedSuccess = () => {
       <Button asChild className="w-full md:w-[250px]" size="lg" variant="default">
         <ExternalLink
           href={createTweetLink({
-            message: `Thanks to @StandWithCrypto for helping me cast an informed vote in this year's election!`,
+            message: `Thanks to @StandWithCrypto for helping me cast an informed vote in this year's election! #StandWithCrypto`,
             url: 'www.standwithcrypto.org/vote',
           })}
         >
