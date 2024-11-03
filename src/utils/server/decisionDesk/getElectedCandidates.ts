@@ -4,28 +4,18 @@ import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/q
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
-export type AllCompletedRacesResponse = {
-  electedCandidates: {
-    firstName: string
-    lastName: string
-    slug: string
-    elected: boolean
-    state: string
-    district: string
-    office: string
-    partyName: string
-  }[]
-}
-
 interface RaceWinnerData {
   firstName: string
   lastName: string
   slug: string
-  elected: boolean | 'N/A'
+  elected: boolean | string
   state?: USStateCode
+  district?: string
+  office?: string
+  partyName?: string
 }
 
-export async function getElectedCandidates() {
+export async function getElectedCandidates(): Promise<RaceWinnerData[]> {
   const stateKeys = Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)
   const stateRaceWinners: RaceWinnerData[] = []
 
@@ -45,12 +35,6 @@ export async function getElectedCandidates() {
           currentCandidate => currentCandidate.elected,
         )
 
-        // compare with advance_times and advance_candidates to check latest candidate being elected
-        // const advanceCandidates = currentRace.advanceCandidates
-        // if (advanceCandidates) {
-        //   const advancingCandidate = currentRace.advancingCandidates
-        // }
-
         if (!currentElectedCandidate) {
           return null
         }
@@ -63,7 +47,7 @@ export async function getElectedCandidates() {
           firstName: currentElectedCandidate.firstName,
           lastName: currentElectedCandidate.lastName,
           slug: currentCandidateDTSI?.slug ?? 'N/A',
-          elected: currentElectedCandidate.elected,
+          elected: currentRace.advanceCandidates ? 'RUN OFF' : currentElectedCandidate.elected,
           state: stateKey as USStateCode,
           district: currentRace.district,
           office: currentRace.office?.officeName,
