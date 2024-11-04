@@ -26,7 +26,7 @@ const useElectionStatus = (initialData: AllCompletedRacesResponse | undefined) =
     {
       fallbackData: initialData,
       refreshInterval: 60 * 1000,
-      errorRetryInterval: 30 * 1000,
+      errorRetryInterval: 30 * 1000, // 30 SECONDS
       refreshWhenHidden: true,
     },
   )
