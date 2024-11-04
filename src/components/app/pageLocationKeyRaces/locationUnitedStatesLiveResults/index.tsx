@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
@@ -11,6 +13,7 @@ import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/lo
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { getCongressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
@@ -28,6 +31,7 @@ import { AllCompletedRacesResponse } from '@/utils/server/decisionDesk/getElecti
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
+import { createTweetLink } from '@/utils/web/createTweetLink'
 
 import { organizePeople } from './organizePeople'
 
@@ -88,6 +92,25 @@ export function LocationUnitedStatesLiveResults({
           </LoginDialogWrapper>
         </div>
       </DarkHeroSection>
+
+      <div className="container">
+        <Link
+          href={createTweetLink({
+            message:
+              'Watch live election results and see which candidates #StandWithCrypto: https://standwithcrypto.org/races',
+          })}
+        >
+          <Badge
+            className="mb-14 flex w-full items-center justify-between gap-8 rounded-2xl p-6 text-sm md:text-base"
+            variant="primary-cta-subtle"
+          >
+            <p className="font-normal">
+              Bookmark this page and track your candidates live when polls close on Election Day!
+            </p>
+            <p className="min-w-max">Share on X</p>
+          </Badge>
+        </Link>
+      </div>
 
       <div className="space-y-20 xl:space-y-28">
         <ContentSection
