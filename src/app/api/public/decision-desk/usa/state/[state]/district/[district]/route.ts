@@ -23,7 +23,7 @@ export async function GET(
         error: 'State and district are required',
       },
       {
-        status: 400,
+        status: 404,
       },
     )
   }
@@ -37,7 +37,7 @@ export async function GET(
       {
         error: 'Data not found',
       },
-      { status: 400 },
+      { status: 404 },
     )
   }
 
@@ -51,7 +51,7 @@ export async function GET(
         error: 'Data not found',
       },
       {
-        status: 400,
+        status: 404,
       },
     )
   }

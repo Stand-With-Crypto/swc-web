@@ -20,7 +20,7 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
         error: 'State is required',
       },
       {
-        status: 400,
+        status: 404,
       },
     )
   }
@@ -35,7 +35,7 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
         error: 'Data not found',
       },
       {
-        status: 400,
+        status: 404,
       },
     )
   }

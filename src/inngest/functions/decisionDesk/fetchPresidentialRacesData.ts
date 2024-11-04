@@ -8,6 +8,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { setDecisionDataOnRedis } from '@/utils/server/decisionDesk/cachedData'
 import { GetRacesParams } from '@/utils/server/decisionDesk/schemas'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 const FETCH_PRESIDENTIAL_RACES_INNGEST_EVENT_NAME = 'script/fetch-presidential-races-data'
@@ -39,7 +40,7 @@ export const fetchPresidentialRacesDataCron = inngest.createFunction(
   },
 )
 
-const persistFile = false
+const persistFile = NEXT_PUBLIC_ENVIRONMENT === 'local' && false
 const rootDir = path.join(__dirname, 'raceWinners')
 
 if (persistFile) {
