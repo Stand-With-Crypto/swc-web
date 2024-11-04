@@ -69,7 +69,7 @@ export function LocationUnitedStatesLiveResults({
               Crypto election updates
             </PageTitle>
             <PageSubTitle className="text-gray-400" size="lg">
-              See how crypto is influencing the election. Get live election updates.
+              Get live election results and see where the winners stand on crypto policy.
             </PageSubTitle>
           </div>
 
