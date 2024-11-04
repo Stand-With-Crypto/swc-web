@@ -30,7 +30,14 @@ export async function GET(_request: NextRequest, { params }: { params: { state: 
   )
 
   if (!data) {
-    return NextResponse.json([])
+    return NextResponse.json(
+      {
+        error: 'Data not found',
+      },
+      {
+        status: 404,
+      },
+    )
   }
 
   return NextResponse.json(data)
