@@ -33,28 +33,12 @@ export async function GET(
   )
 
   if (!data) {
-    return NextResponse.json(
-      {
-        error: 'Data not found',
-      },
-      { status: 404 },
-    )
+    return NextResponse.json([])
   }
 
   const dataFilteredByItsDistrict = data.filter(
     currentData => currentData.district?.toLowerCase() === district?.toLowerCase(),
   )
-
-  if (!dataFilteredByItsDistrict.length) {
-    return NextResponse.json(
-      {
-        error: 'Data not found',
-      },
-      {
-        status: 404,
-      },
-    )
-  }
 
   return NextResponse.json(dataFilteredByItsDistrict)
 }
