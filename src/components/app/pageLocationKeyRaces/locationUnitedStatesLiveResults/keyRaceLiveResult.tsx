@@ -320,9 +320,7 @@ function Progress(props: ProgressProps) {
       style={{
         width: Math.min(+(percentage || 0).toFixed(2), 100) + '%',
       }}
-    >
-      {/* {percentage ? <span className="text-center font-bold">{percentage.toFixed(2)}%</span> : null} */}
-    </div>
+    />
   )
 }
 
