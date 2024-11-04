@@ -60,47 +60,25 @@ export const getRaceStatus = (
 ): RaceStatus => {
   if (!raceData) return 'unknown'
 
-  let calledRace: boolean = false
   if (Array.isArray(raceData)) {
-    if (raceData.length === 0) {
-      return 'unknown'
-    }
+    if (raceData.length === 0) return 'unknown'
 
-    calledRace = raceData.every(race => race.hasCalledCandidate || race.advanceCandidates)
-  } else {
-    calledRace = raceData.hasCalledCandidate
-  }
+    const allCalled = raceData.every(race => race.hasCalledCandidate || race.advanceCandidates)
+    if (allCalled) return 'called'
 
-  if (calledRace) {
-    return 'called'
-  }
+    const anyLive = raceData.some(race => +race.totalVotes > 0)
+    if (anyLive) return 'live'
 
-  if (!Array.isArray(raceData) && raceData.advanceCandidates) {
-    return 'runoff'
+    const raceDate = new Date(raceData[0]?.raceDate || '2024-11-05')
+    return isBefore(startOfDay(new Date()), startOfDay(raceDate)) ? 'not-started' : 'live'
   }
 
-  let isLive: boolean = false
-  if (Array.isArray(raceData)) {
-    isLive = raceData.some(race => +race.totalVotes > 0)
-  } else {
-    isLive = +raceData.totalVotes > 0
-  }
-  if (isLive) {
-    return 'live'
-  }
+  if (raceData.hasCalledCandidate) return 'called'
+  if (raceData.advanceCandidates) return 'runoff'
+  if (+raceData.totalVotes > 0) return 'live'
 
-  const now = new Date()
-  let raceDate: Date
-  if (Array.isArray(raceData)) {
-    raceDate = new Date(raceData?.[0].raceDate || '2024-11-05')
-  } else {
-    raceDate = new Date(raceData?.raceDate || '2024-11-05')
-  }
-  if (isBefore(startOfDay(now), startOfDay(raceDate))) {
-    return 'not-started'
-  }
-
-  return 'live'
+  const raceDate = new Date(raceData.raceDate || '2024-11-05')
+  return isBefore(startOfDay(new Date()), startOfDay(raceDate)) ? 'not-started' : 'live'
 }
 
 export const getOpacity = (

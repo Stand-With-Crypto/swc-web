@@ -4,6 +4,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 
 export type AllCompletedRacesResponse = {
   statesFinished: USStateCode[]
+  statesWithVotes: USStateCode[]
   runoffStates: {
     state: USStateCode
     races: RacesVotingDataResponse[]
@@ -16,6 +17,7 @@ export async function getElectionStatus() {
   const stateKeys = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
   const allCompletedRaces: AllCompletedRacesResponse = {
     statesFinished: [],
+    statesWithVotes: [],
     runoffStates: [],
     statesLeft: stateKeys.length,
     totalStates: stateKeys.length,
@@ -41,6 +43,16 @@ export async function getElectionStatus() {
             state: currentStateKey,
             races: runoffRaces,
           })
+        }
+
+        if (
+          stateRacesData.some(
+            currentRace =>
+              +currentRace.totalVotes > 0 ||
+              currentRace.candidatesWithVotes.some(currentCandidate => +currentCandidate.votes > 0),
+          )
+        ) {
+          allCompletedRaces.statesWithVotes.push(currentStateKey)
         }
 
         if (hasCurrentStateFinished) {
