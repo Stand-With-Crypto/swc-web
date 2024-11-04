@@ -4,7 +4,9 @@ import { UserCommunicationJourneyType } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { verifySignature } from '@/utils/server/sms/utils'
 
@@ -39,9 +41,15 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const userId = params.get('userId')
 
   if (userId) {
+    const user = await prismaClient.user.findFirstOrThrow({
+      where: {
+        id: userId,
+      },
+    })
+
     waitUntil(
       getServerAnalytics({
-        localUser: null,
+        localUser: getLocalUserFromUser(user),
         userId,
       })
         .track('SMS Communication Event', {
