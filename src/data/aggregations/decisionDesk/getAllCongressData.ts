@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/node'
-
 import {
   CongressDataResponse,
   GetAllCongressDataProps,
@@ -49,13 +47,6 @@ const enhanceCongressData = (
       logger.info('No match for candidates between decisionDesk and DTSI.', {
         tags: { domain: 'liveResult' },
         candidateName: `${currentCandidate.firstName} ${currentCandidate.lastName}`,
-      })
-
-      Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
-        tags: { domain: 'liveResult' },
-        extra: {
-          candidateName: `${currentCandidate.firstName} ${currentCandidate.lastName}`,
-        },
       })
     }
 
