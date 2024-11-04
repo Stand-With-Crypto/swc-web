@@ -25,7 +25,7 @@ const useElectionStatus = (initialData: AllCompletedRacesResponse | undefined) =
         .then(data => data as AllCompletedRacesResponse),
     {
       fallbackData: initialData,
-      refreshInterval: 60 * 1000,
+      refreshInterval: 60 * 1000, // 1 MINUTE
       errorRetryInterval: 30 * 1000, // 30 SECONDS
       refreshWhenHidden: true,
     },
