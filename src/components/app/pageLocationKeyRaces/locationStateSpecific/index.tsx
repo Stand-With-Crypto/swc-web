@@ -82,7 +82,7 @@ export function LocationStateSpecific({
             authenticatedContent={
               <UserActionVotingDayDialog>
                 <Button className="mt-6 w-full max-w-xs" variant="secondary">
-                  Claim I Voted NFT
+                  Claim "I Voted" NFT
                 </Button>
               </UserActionVotingDayDialog>
             }
