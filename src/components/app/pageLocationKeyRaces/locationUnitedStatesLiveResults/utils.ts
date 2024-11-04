@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/nextjs'
 import { isBefore } from 'date-fns'
 import { isNil } from 'lodash-es'
 
@@ -105,10 +104,6 @@ export const getCongressLiveResultOverview = (
   return data.candidatesWithVotes.reduce(
     (acc, candidate) => {
       if (!candidate?.dtsiData) {
-        Sentry.captureMessage('No DTSI data for candidate in getCongressLiveResultOverview', {
-          extra: { candidate },
-          tags: { domain: 'liveResult' },
-        })
         return acc
       }
       if (!candidate.elected) return acc
