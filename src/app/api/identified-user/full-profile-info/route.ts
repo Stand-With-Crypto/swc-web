@@ -14,8 +14,8 @@ async function apiResponseForUserFullProfileInfo() {
   const { user } = await getMaybeUserAndMethodOfMatchWithMaybeSession({
     prisma: {
       include: {
-        primaryUserEmailAddress: true,
         primaryUserCryptoAddress: true,
+        primaryUserEmailAddress: true,
         address: true,
         userActions: {
           include: {

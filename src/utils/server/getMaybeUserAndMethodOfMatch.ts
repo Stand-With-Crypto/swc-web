@@ -75,7 +75,6 @@ async function baseGetMaybeUserAndMethodOfMatch<
           orderBy,
           skip,
           take,
-          relationLoadStrategy: 'join',
         })
       : Promise.resolve(null),
     sessionId
@@ -93,7 +92,6 @@ async function baseGetMaybeUserAndMethodOfMatch<
           orderBy,
           skip,
           take,
-          relationLoadStrategy: 'join',
         })
       : Promise.resolve(null),
   ])
