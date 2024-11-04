@@ -45,5 +45,16 @@ export async function GET(
     currentData => currentData.district?.toLowerCase() === district?.toLowerCase(),
   )
 
+  if (!dataFilteredByItsDistrict.length && state?.toUpperCase() !== 'GU') {
+    return NextResponse.json(
+      {
+        error: 'Data not found',
+      },
+      {
+        status: 404,
+      },
+    )
+  }
+
   return NextResponse.json(dataFilteredByItsDistrict)
 }
