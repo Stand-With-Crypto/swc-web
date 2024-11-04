@@ -1,38 +1,23 @@
-'use client'
-
-import { useMemo } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DDHQFooter } from '@/components/app/ddhqFooter'
-import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
-import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
-import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
-import {
-  LiveStatusBadge,
-  RaceStatus,
-} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
-import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
-import {
-  getCongressLiveResultOverview,
-  getRaceStatus,
-} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { CongressSection } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/congressSection'
+import { CriticalElectionsSection } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/criticalElectionsSection'
+import { StancesSection } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/stancesSection'
 import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import {
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
-import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
-import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
+import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -59,7 +44,6 @@ export function LocationStateSpecific({
   initialRaceData,
   initialCongressLiveResultData,
 }: LocationStateSpecificProps) {
-  const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
   const groups = organizeStateSpecificPeople(people)
   const urls = getIntlUrls(locale)
   const stateName = getUSStateNameFromStateCode(stateCode)
@@ -72,46 +56,6 @@ export function LocationStateSpecific({
       return district
     }),
   )
-
-  const { data: stateRaceData } = useApiDecisionDeskData({
-    initialRaceData,
-    stateCode,
-    district: undefined,
-  })
-
-  const { data: congressRaceLiveResult } = useApiDecisionDeskCongressData(
-    initialCongressLiveResultData,
-  )
-
-  const senateElectedData = getCongressLiveResultOverview(
-    congressRaceLiveResult?.senateDataWithDtsi,
-    stateCode,
-  )
-  const houseElectedData = getCongressLiveResultOverview(
-    congressRaceLiveResult?.houseDataWithDtsi,
-    stateCode,
-  )
-
-  const { hasCriticalElections, criticalElectionsCount } = useMemo(() => {
-    const criticalDistricts =
-      US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.filter(district =>
-        Boolean(groups.congresspeople[district]?.people.length),
-      ) || []
-
-    const criticalSenatorsCount = groups.senators.length ? 1 : 0
-    const criticalAtLargeCount = groups.congresspeople['at-large']?.people.length ? 1 : 0
-
-    const hasCriticalDistrict = criticalDistricts.length > 0
-    const hasCriticalElections =
-      hasCriticalDistrict || criticalSenatorsCount > 0 || criticalAtLargeCount > 0
-
-    const criticalElectionsCount =
-      criticalDistricts.length + criticalSenatorsCount + criticalAtLargeCount
-
-    return { hasCriticalElections, criticalElectionsCount }
-  }, [groups, stateCode])
-
-  const raceStatus = useMemo<RaceStatus>(() => getRaceStatus(stateRaceData), [stateRaceData])
 
   return (
     <div>
@@ -152,31 +96,13 @@ export function LocationStateSpecific({
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? null : (
         <div className="mt-20 space-y-20">
-          <ContentSection
-            className="container"
-            subtitle={`Follow our tracker to see how many pro-crypto candidates get elected in ${stateName}.`}
-            title="Live election results"
-            titleProps={{ size: 'xs' }}
-          >
-            <div className="flex justify-center">
-              <LiveStatusBadge status={raceStatus} />
-            </div>
-
-            <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
-              <ResultsOverviewCard
-                antiCryptoCandidatesElected={houseElectedData.antiCryptoCandidatesElected.length}
-                link={getIntlUrls(locale).locationCongressHouse()}
-                proCryptoCandidatesElected={houseElectedData.proCryptoCandidatesElected.length}
-                title="House of Representatives"
-              />
-              <ResultsOverviewCard
-                antiCryptoCandidatesElected={senateElectedData.antiCryptoCandidatesElected.length}
-                link={getIntlUrls(locale).locationCongressSenate()}
-                proCryptoCandidatesElected={senateElectedData.proCryptoCandidatesElected.length}
-                title="Senate"
-              />
-            </div>
-          </ContentSection>
+          <CongressSection
+            initialCongressLiveResultData={initialCongressLiveResultData}
+            initialRaceData={initialRaceData}
+            locale={locale}
+            stateCode={stateCode}
+            stateName={stateName}
+          />
         </div>
       )}
 
@@ -186,82 +112,13 @@ export function LocationStateSpecific({
         </PageTitle>
       ) : (
         <div className="mt-20 space-y-20 xl:space-y-28">
-          {hasCriticalElections ? (
-            <ContentSection
-              subtitle="These elections are critical to the future of crypto in America. View live updates below."
-              title={`Critical elections in ${stateName}`}
-              titleProps={{ size: 'xs' }}
-            >
-              <LiveResultsGrid
-                className={criticalElectionsCount === 1 ? 'flex items-center justify-center' : ''}
-              >
-                {!!groups.senators.length && (
-                  <LiveResultsGrid.GridItem
-                    className={
-                      criticalElectionsCount === 1
-                        ? 'items-center justify-center last:!border-r-0 lg:odd:justify-center'
-                        : ''
-                    }
-                  >
-                    <KeyRaceLiveResult
-                      candidates={groups.senators}
-                      initialRaceData={initialRaceData || undefined}
-                      locale={locale}
-                      primaryDistrict={undefined}
-                      stateCode={stateCode}
-                    />
-                  </LiveResultsGrid.GridItem>
-                )}
-
-                {!!groups.congresspeople['at-large']?.people.length && (
-                  <LiveResultsGrid.GridItem
-                    className={
-                      criticalElectionsCount === 1
-                        ? 'items-center justify-center last:!border-r-0 lg:odd:justify-center'
-                        : ''
-                    }
-                  >
-                    <KeyRaceLiveResult
-                      candidates={groups.congresspeople['at-large'].people}
-                      initialRaceData={initialRaceData || undefined}
-                      locale={locale}
-                      primaryDistrict="at-large"
-                      stateCode={stateCode}
-                    />
-                  </LiveResultsGrid.GridItem>
-                )}
-
-                {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
-                  const districtPeople = groups.congresspeople[district]?.people
-                  if (!districtPeople) {
-                    return null
-                  }
-                  return (
-                    <LiveResultsGrid.GridItem
-                      className={
-                        criticalElectionsCount === 1
-                          ? 'items-center justify-center last:!border-r-0 lg:odd:justify-center'
-                          : ''
-                      }
-                      key={district}
-                    >
-                      <KeyRaceLiveResult
-                        candidates={districtPeople}
-                        initialRaceData={initialRaceData || undefined}
-                        locale={locale}
-                        primaryDistrict={district}
-                        stateCode={stateCode}
-                      />
-                    </LiveResultsGrid.GridItem>
-                  )
-                })}
-              </LiveResultsGrid>
-            </ContentSection>
-          ) : (
-            <PageTitle as="h3" size="sm">
-              There's no critical elections in {stateName}
-            </PageTitle>
-          )}
+          <CriticalElectionsSection
+            groups={groups}
+            initialRaceData={initialRaceData}
+            locale={locale}
+            stateCode={stateCode}
+            stateName={stateName}
+          />
 
           {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
             <ContentSection
@@ -286,36 +143,13 @@ export function LocationStateSpecific({
             </ContentSection>
           )}
 
-          {!!stances.length && (
-            <ContentSection
-              subtitle={
-                <>Keep up with recent tweets about crypto from politicians in {stateName}.</>
-              }
-              title={<>What politicians in {stateCode} are saying</>}
-            >
-              <ScrollArea>
-                <div className="flex justify-center gap-5 pb-3 pl-4">
-                  {stances.map(stance => {
-                    return (
-                      <div
-                        className="flex w-[300px] shrink-0 flex-col lg:w-[500px]"
-                        key={stance.id}
-                      >
-                        <DTSIStanceDetails
-                          bodyClassName="line-clamp-6"
-                          className="flex-grow"
-                          hideImages
-                          locale={locale}
-                          person={stance.person}
-                          stance={stance}
-                        />
-                      </div>
-                    )
-                  })}
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            </ContentSection>
+          {!!personStances.length && (
+            <StancesSection
+              locale={locale}
+              stances={personStances}
+              stateCode={stateCode}
+              stateName={stateName}
+            />
           )}
 
           <PACFooter className="container text-center" />
