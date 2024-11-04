@@ -22,20 +22,15 @@ export const metadata: Metadata = {
 }
 
 export default async function CongressLiveResults({ params: { locale } }: PageProps) {
-  let congressRaceLiveResult: GetAllCongressDataResponse = {
-    senateDataWithDtsi: null,
-    houseDataWithDtsi: null,
-  }
-  const [congressResult] = await Promise.allSettled([getCongressLiveResultData()])
-  if (congressResult.status === 'fulfilled') {
-    congressRaceLiveResult = congressResult.value
-  } else {
-    Sentry.captureException(congressResult.reason, {
-      extra: { keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'] },
-      tags: { domain: 'liveResult' },
+  const congressRaceLiveResult: GetAllCongressDataResponse = await getCongressLiveResultData()
+    .then(res => res)
+    .catch(error => {
+      Sentry.captureException(error.reason, {
+        extra: { keys: ['SWC_ALL_SENATE_DATA', 'SWC_ALL_HOUSE_DATA'] },
+        tags: { domain: 'liveResult' },
+      })
+      throw error.reason
     })
-    throw congressResult.reason
-  }
 
   return (
     <LocationCongressLiveResults

@@ -43,8 +43,8 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
   }, [data, house])
 
   const [isOpen, setIsOpen] = useState({
-    proCryptoCandidates: true,
-    antiCryptoCandidates: true,
+    proCryptoCandidates: proCryptoCandidatesElected.length > 0,
+    antiCryptoCandidates: antiCryptoCandidatesElected.length > 0,
   })
 
   return (
@@ -77,6 +77,9 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
 
           <CollapsibleContent className="AnimateCollapsibleContent px-0.5 pb-2">
             <CardGrid>
+              {proCryptoCandidatesElected.length === 0 && (
+                <div className="text-center text-gray-500">No pro-crypto candidates elected</div>
+              )}
               {proCryptoCandidatesElected.map(person =>
                 person.dtsiData ? (
                   <DTSIPersonHeroCard
@@ -114,6 +117,9 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
 
           <CollapsibleContent className="AnimateCollapsibleContent px-0.5 pb-2">
             <CardGrid>
+              {antiCryptoCandidatesElected.length === 0 && (
+                <div className="text-center text-gray-500">No anti-crypto candidates elected</div>
+              )}
               {antiCryptoCandidatesElected.map(person =>
                 person.dtsiData ? (
                   <DTSIPersonHeroCard
