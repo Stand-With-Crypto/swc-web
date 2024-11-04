@@ -1,21 +1,23 @@
-'use client'
-
-import { useEffect } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
-import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
-import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
+import { DDHQFooter } from '@/components/app/ddhqFooter'
 import { PACFooter } from '@/components/app/pacFooter'
-import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { CongressSection } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/congressSection'
+import { CriticalElectionsSection } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/criticalElectionsSection'
+import { StancesSection } from '@/components/app/pageLocationKeyRaces/locationStateSpecific/stancesSection'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import {
+  GetAllCongressDataResponse,
+  RacesVotingDataResponse,
+} from '@/data/aggregations/decisionDesk/types'
+import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -24,12 +26,13 @@ import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usState
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
-import { UserLocationRaceInfo } from './userLocationRaceInfo'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
   locale: SupportedLocale
   countAdvocates: number
+  initialRaceData: RacesVotingDataResponse[] | undefined
+  initialCongressLiveResultData: GetAllCongressDataResponse
 }
 
 export function LocationStateSpecific({
@@ -38,8 +41,9 @@ export function LocationStateSpecific({
   locale,
   countAdvocates,
   personStances,
+  initialRaceData,
+  initialCongressLiveResultData,
 }: LocationStateSpecificProps) {
-  const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
   const groups = organizeStateSpecificPeople(people)
   const urls = getIntlUrls(locale)
   const stateName = getUSStateNameFromStateCode(stateCode)
@@ -52,12 +56,6 @@ export function LocationStateSpecific({
       return district
     }),
   )
-
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
-    })
-  }, [stateCode])
 
   return (
     <div>
@@ -72,120 +70,55 @@ export function LocationStateSpecific({
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in {stateName}
           </PageTitle>
+          <h3 className="mt-4 text-xl text-gray-400">
+            View the races critical to keeping crypto in {stateName}.
+          </h3>
           {countAdvocates > 1000 && (
             <h3 className="mt-4 font-mono text-xl font-light">
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}
-          {stateCode === 'MI' ? (
-            <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
-              <ExternalLink href="https://mvic.sos.state.mi.us/Voter/Index">
-                Find your poll location
-              </ExternalLink>
+          <LoginDialogWrapper
+            authenticatedContent={
+              <UserActionVotingDayDialog>
+                <Button className="mt-6 w-full max-w-xs" variant="secondary">
+                  Claim I Voted NFT
+                </Button>
+              </UserActionVotingDayDialog>
+            }
+          >
+            <Button className="mt-6 w-full max-w-xs" variant="secondary">
+              Join Stand With Crypto
             </Button>
-          ) : (
-            <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
-              <Button className="mt-6 w-full max-w-xs" variant="secondary">
-                Make sure you're registered to vote
-              </Button>
-            </UserActionFormVoterRegistrationDialog>
-          )}
+          </LoginDialogWrapper>
         </div>
       </DarkHeroSection>
+
+      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? null : (
+        <div className="mt-20 space-y-20">
+          <CongressSection
+            initialCongressLiveResultData={initialCongressLiveResultData}
+            initialRaceData={initialRaceData}
+            locale={locale}
+            stateCode={stateCode}
+            stateName={stateName}
+          />
+        </div>
+      )}
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
         <PageTitle as="h3" className="mt-20" size="sm">
           There's no election data for {stateName}
         </PageTitle>
       ) : (
-        <div className="space-y-20">
-          {!!groups.senators.length && (
-            <div className="mt-20">
-              <DTSIPersonHeroCardSection
-                cta={
-                  <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
-                    View Race
-                  </InternalLink>
-                }
-                locale={locale}
-                people={groups.senators}
-                title={<>U.S. Senate Race ({stateCode})</>}
-              />
-            </div>
-          )}
-          {groups.congresspeople['at-large']?.people.length ? (
-            <div className="mt-20">
-              <DTSIPersonHeroCardSection
-                cta={
-                  <InternalLink
-                    href={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
-                  >
-                    View Race
-                  </InternalLink>
-                }
-                locale={locale}
-                people={groups.congresspeople['at-large'].people}
-                title={<>At-Large Congressional District</>}
-              />
-            </div>
-          ) : (
-            <UserLocationRaceInfo
-              groups={groups}
-              locale={locale}
-              stateCode={stateCode}
-              stateName={stateName}
-            />
-          )}
-          {!!stances.length && (
-            <ContentSection
-              subtitle={
-                <>Keep up with recent tweets about crypto from politicians in {stateName}.</>
-              }
-              title={<>What politicians in {stateCode} are saying</>}
-            >
-              <ScrollArea>
-                <div className="flex justify-center gap-5 pb-3 pl-4">
-                  {stances.map(stance => {
-                    return (
-                      <div
-                        className="flex w-[300px] shrink-0 flex-col lg:w-[500px]"
-                        key={stance.id}
-                      >
-                        <DTSIStanceDetails
-                          bodyClassName="line-clamp-6"
-                          className="flex-grow"
-                          hideImages
-                          locale={locale}
-                          person={stance.person}
-                          stance={stance}
-                        />
-                      </div>
-                    )
-                  })}
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            </ContentSection>
-          )}
-          {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
-            const districtPeople = groups.congresspeople[district]?.people
-            if (!districtPeople) {
-              return null
-            }
-            return (
-              <DTSIPersonHeroCardSection
-                cta={
-                  <InternalLink href={urls.locationDistrictSpecific({ stateCode, district })}>
-                    View Race
-                  </InternalLink>
-                }
-                key={district}
-                locale={locale}
-                people={districtPeople}
-                title={<>Congressional District {district}</>}
-              />
-            )
-          })}
+        <div className="mt-20 space-y-20 xl:space-y-28">
+          <CriticalElectionsSection
+            groups={groups}
+            initialRaceData={initialRaceData}
+            locale={locale}
+            stateCode={stateCode}
+            stateName={stateName}
+          />
 
           {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
             <ContentSection
@@ -210,7 +143,17 @@ export function LocationStateSpecific({
             </ContentSection>
           )}
 
-          <PACFooter className="container" />
+          {!!personStances.length && (
+            <StancesSection
+              locale={locale}
+              stances={personStances}
+              stateCode={stateCode}
+              stateName={stateName}
+            />
+          )}
+
+          <PACFooter className="container text-center" />
+          <DDHQFooter className="container text-center" />
         </div>
       )}
     </div>
