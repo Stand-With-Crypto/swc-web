@@ -42,12 +42,12 @@ export function LiveStatusBadgeWithApi(props: LiveStatusBadgeWithApiProps) {
   const raceStatus = useMemo<RaceStatus>(() => {
     if (!data) return 'unknown'
 
+    if (data.statesFinished.length === data.totalStates) return 'called'
+
     const now = new Date()
-    if (isBefore(startOfDay(now), startOfDay(new Date('2024-11-05')))) {
+    if (isBefore(now, startOfDay(new Date('2024-11-05')))) {
       return 'not-started'
     }
-
-    if (data.statesFinished.length === data.totalStates) return 'called'
 
     return 'live'
   }, [data])

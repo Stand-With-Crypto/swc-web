@@ -70,7 +70,7 @@ export const getRaceStatus = (
     if (anyLive) return 'live'
 
     const raceDate = new Date(raceData[0]?.raceDate || '2024-11-05')
-    return isBefore(startOfDay(new Date()), startOfDay(raceDate)) ? 'not-started' : 'live'
+    return isBefore(new Date(), raceDate) ? 'not-started' : 'live'
   }
 
   if (raceData.hasCalledCandidate) return 'called'
@@ -78,7 +78,7 @@ export const getRaceStatus = (
   if (+raceData.totalVotes > 0) return 'live'
 
   const raceDate = new Date(raceData.raceDate || '2024-11-05')
-  return isBefore(startOfDay(new Date()), startOfDay(raceDate)) ? 'not-started' : 'live'
+  return isBefore(new Date(), raceDate) ? 'not-started' : 'live'
 }
 
 export const getOpacity = (

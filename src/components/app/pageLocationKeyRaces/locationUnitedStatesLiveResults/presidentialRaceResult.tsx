@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useMemo } from 'react'
-import { isBefore, startOfDay } from 'date-fns'
+import { isBefore } from 'date-fns'
 import { isNil } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
@@ -88,7 +88,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     if (!liveResultData) return 'unknown'
     if (calledCandidate) return 'called'
     if (liveResultData.some(candidate => (candidate?.votingData?.votes || 0) > 0)) return 'live'
-    if (isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))) return 'not-started'
+    if (isBefore(new Date(), new Date('2024-11-05'))) return 'not-started'
 
     return 'live'
   }, [calledCandidate, liveResultData])
