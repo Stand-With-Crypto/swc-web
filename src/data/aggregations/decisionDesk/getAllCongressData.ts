@@ -14,34 +14,25 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('aggregations/decisionDesk/getAllCongressData')
 
-const reduceCongressData = (congressData: RacesVotingDataResponse[]) =>
-  congressData.reduce(
-    (acc, currentData) => ({
-      office: currentData.office,
-      year: currentData.year,
-      candidatesWithVotes: [
-        ...acc.candidatesWithVotes,
-        ...currentData.candidatesWithVotes.reduce((innerAcc, currentCandidate) => {
-          const existingCandidate = innerAcc.find(
-            currentInnerAcc => currentInnerAcc.id === currentCandidate.id,
-          )
-
-          return existingCandidate
-            ? innerAcc.map(currentInnerAcc =>
-                currentInnerAcc.id === currentCandidate.id
-                  ? { ...currentInnerAcc, votes: currentInnerAcc.votes + currentCandidate.votes }
-                  : currentInnerAcc,
-              )
-            : [...innerAcc, { ...currentCandidate }]
-        }, [] as CandidatesWithVote[]),
-      ],
-    }),
-    {
-      year: 0,
-      office: null,
-      candidatesWithVotes: [],
-    } as CongressDataResponse,
+const reduceCongressData = (congressData: RacesVotingDataResponse[]) => {
+  const candidatesWithVoteFlatMap = congressData.flatMap(
+    currentData => currentData.candidatesWithVotes,
   )
+  return {
+    office: congressData[0].office,
+    year: congressData[0].year,
+    candidatesWithVotes: candidatesWithVoteFlatMap.map(currentCandidate => {
+      const candidateVotes = candidatesWithVoteFlatMap.filter(
+        candidate => candidate.id === currentCandidate.id,
+      )
+      const totalVotes = candidateVotes.reduce((acc, current) => acc + current.votes, 0)
+      return {
+        ...currentCandidate,
+        votes: totalVotes,
+      }
+    }),
+  }
+}
 
 const enhanceCongressData = (
   congressData: CongressDataResponse,
