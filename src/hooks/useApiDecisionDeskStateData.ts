@@ -21,12 +21,16 @@ export function useApiDecisionDeskData({
 }: UseApiDecisionDeskDataProps) {
   const hasHydrated = useHasHydrated()
 
+  const getUrl = () => {
+    if (!hasHydrated) return null
+    if (district) {
+      return apiUrls.decisionDeskDistrictData({ stateCode, district: district.toString() })
+    }
+    return apiUrls.decisionDeskStateData({ stateCode })
+  }
+
   const swrData = useSWR(
-    !hasHydrated
-      ? null
-      : district
-        ? apiUrls.decisionDeskDistrictData({ stateCode, district: district?.toString() })
-        : apiUrls.decisionDeskStateData({ stateCode }),
+    getUrl,
     url =>
       fetchReq(url)
         .then(res => res.json())
