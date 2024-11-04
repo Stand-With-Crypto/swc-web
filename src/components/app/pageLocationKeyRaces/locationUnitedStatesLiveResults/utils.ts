@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import { isBefore, startOfDay } from 'date-fns'
+import { isBefore } from 'date-fns'
 import { isNil } from 'lodash-es'
 
 import { RaceStatus } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'

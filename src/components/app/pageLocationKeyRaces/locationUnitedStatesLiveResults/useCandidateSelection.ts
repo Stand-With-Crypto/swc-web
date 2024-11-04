@@ -8,30 +8,6 @@ import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
 export const useInitialCandidateSelection = (candidates: DTSI_Candidate[]) => {
-  const getSecondChoice = ({
-    firstChoice,
-    democrat,
-    republican,
-    other,
-  }: {
-    firstChoice: DTSI_Candidate
-    democrat?: DTSI_Candidate
-    republican?: DTSI_Candidate
-    other?: DTSI_Candidate
-  }) => {
-    if (democrat && democrat.id !== firstChoice.id) {
-      return democrat
-    }
-
-    if (republican && republican.id !== firstChoice.id) {
-      return republican
-    }
-
-    if (other && other.id !== firstChoice.id) {
-      return other
-    }
-  }
-
   return useMemo(() => {
     let recommended: DTSI_Candidate | undefined
     let democrat: DTSI_Candidate | undefined
@@ -44,40 +20,31 @@ export const useInitialCandidateSelection = (candidates: DTSI_Candidate[]) => {
       }
 
       switch (candidate.politicalAffiliationCategory) {
-        case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT: {
-          if (!democrat) {
-            democrat = candidate
-          }
+        case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
+          if (!democrat) democrat = candidate
           break
-        }
-        case DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN: {
-          if (!republican) {
-            republican = candidate
-          }
+        case DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN:
+          if (!republican) republican = candidate
           break
-        }
-        default: {
-          if (!other) {
-            other = candidate
-          }
-        }
+        default:
+          if (!other) other = candidate
       }
 
-      if (recommended && democrat && republican) {
-        break
-      }
+      if (recommended && democrat && republican) break
     }
 
     const firstChoice = recommended || democrat || republican || other
     let secondChoice: DTSI_Candidate | undefined
 
     if (firstChoice) {
-      secondChoice = getSecondChoice({
-        firstChoice,
-        democrat,
-        republican,
-        other,
-      })
+      secondChoice =
+        democrat && democrat.id !== firstChoice.id
+          ? democrat
+          : republican && republican.id !== firstChoice.id
+            ? republican
+            : other && other.id !== firstChoice.id
+              ? other
+              : undefined
     }
 
     return [firstChoice, secondChoice].filter((c): c is DTSI_Candidate => !!c)
@@ -94,13 +61,19 @@ export const useLiveCandidateSelection = (
 
   if (!liveResultData) return []
 
+  const totalCastVotes = liveResultData.candidatesWithVotes.reduce(
+    (acc, candidate) => acc + candidate.votes,
+    0,
+  )
+  const isZeroed = totalCastVotes < 100
+
   const sortedCandidates = liveResultData?.candidatesWithVotes
     ?.sort((a, b) => b.votes - a.votes)
     .slice(0, 2)
 
   if (!sortedCandidates || !sortedCandidates.length) return []
 
-  let shouldFallback = false
+  let shouldFallback = isZeroed
   const candidatesToShow = sortedCandidates.map(ddhqCandidate => {
     const matchedCandidate = dtsiCandidates.find(dtsiCandidate =>
       getPoliticianFindMatch(dtsiCandidate, ddhqCandidate),
