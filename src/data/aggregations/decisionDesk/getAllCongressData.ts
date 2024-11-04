@@ -1,7 +1,6 @@
 import * as Sentry from '@sentry/node'
 
 import {
-  CandidatesWithVote,
   CongressDataResponse,
   GetAllCongressDataProps,
   GetAllCongressDataResponse,
