@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["driverAdapters", "tracing"]
+  previewFeatures = ["driverAdapters", "tracing", "relationJoins"]
 }
 
 // generator erd {
