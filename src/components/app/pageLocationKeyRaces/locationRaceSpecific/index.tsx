@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import { compact } from 'lodash-es'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
@@ -49,14 +48,13 @@ export function LocationRaceSpecific({
   const urls = getIntlUrls(locale)
   const { recommended, others } = findRecommendedCandidate(groups)
 
-  const candidates = useMemo(
-    () =>
-      compact([
-        recommended && { person: recommended, isRecommended: true },
-        ...others.map(person => ({ person, isRecommended: false })),
-      ]),
-    [others, recommended],
-  )
+  const candidates = useMemo(() => {
+    const candidatesArray = others.map(person => ({ person, isRecommended: false }))
+    if (recommended) {
+      candidatesArray.unshift({ person: recommended, isRecommended: true })
+    }
+    return candidatesArray
+  }, [others, recommended])
 
   return (
     <div className="space-y-20 xl:space-y-28">
