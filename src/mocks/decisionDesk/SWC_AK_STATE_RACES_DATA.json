@@ -1,0 +1,92 @@
+[
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mary",
+        "id": 23403,
+        "lastName": "Peltola",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 23389,
+        "lastName": "Howe",
+        "partyName": "Alaska Independence Party",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Nick",
+        "id": 23370,
+        "lastName": "Begich",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 349218,
+          "estimatedVotesLow": 285724,
+          "estimatedVotesMid": 317471,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Eric",
+        "id": 9117,
+        "lastName": "Hafner",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "At-Large",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:18:45.527Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "AK",
+    "stateName": "Alaska",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

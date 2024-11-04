@@ -1,0 +1,1004 @@
+[
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 375522,
+          "estimatedVotesLow": 307247,
+          "estimatedVotesMid": 341384,
+          "turnoutHigh": 12.93,
+          "turnoutLow": 15.8,
+          "turnoutMid": 14.22
+        },
+        "firstName": "Jonathan",
+        "id": 24886,
+        "lastName": "Jackson",
+        "partyName": "Democratic",
+        "votes": 43043
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 375522,
+          "estimatedVotesLow": 307247,
+          "estimatedVotesMid": 341384,
+          "turnoutHigh": 12.93,
+          "turnoutLow": 15.8,
+          "turnoutMid": 14.22
+        },
+        "firstName": "Marcus",
+        "id": 53773,
+        "lastName": "Lewis",
+        "partyName": "Republican",
+        "votes": 5501
+      }
+    ],
+    "district": "1",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:19:49.012Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 48544,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 336614,
+          "estimatedVotesLow": 275411,
+          "estimatedVotesMid": 306012,
+          "turnoutHigh": 34.13,
+          "turnoutLow": 41.72,
+          "turnoutMid": 37.54
+        },
+        "firstName": "Robin",
+        "id": 8568,
+        "lastName": "Kelly",
+        "partyName": "Democratic",
+        "votes": 88334
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 336614,
+          "estimatedVotesLow": 275411,
+          "estimatedVotesMid": 306012,
+          "turnoutHigh": 34.13,
+          "turnoutLow": 41.72,
+          "turnoutMid": 37.54
+        },
+        "firstName": "Ashley",
+        "id": 24915,
+        "lastName": "Ramos",
+        "partyName": "Republican",
+        "votes": 26557
+      }
+    ],
+    "district": "2",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:57:41.407Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 114891,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 295963,
+          "estimatedVotesLow": 242151,
+          "estimatedVotesMid": 269057,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 53774,
+        "lastName": "Booras",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 295963,
+          "estimatedVotesLow": 242151,
+          "estimatedVotesMid": 269057,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Angel",
+        "id": 85007,
+        "lastName": "Oakley",
+        "partyName": "Independent",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 295963,
+          "estimatedVotesLow": 242151,
+          "estimatedVotesMid": 269057,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Delia",
+        "id": 24895,
+        "lastName": "Ramirez",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "3",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 241697,
+          "estimatedVotesLow": 197753,
+          "estimatedVotesMid": 219725,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ed",
+        "id": 44312,
+        "lastName": "Hershey",
+        "partyName": "Working Class",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 241697,
+          "estimatedVotesLow": 197753,
+          "estimatedVotesMid": 219725,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jesus",
+        "id": 24897,
+        "lastName": "Garcia",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 241697,
+          "estimatedVotesLow": 197753,
+          "estimatedVotesMid": 219725,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Lupe",
+        "id": 48194,
+        "lastName": "Castillo",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 394145,
+          "estimatedVotesLow": 322481,
+          "estimatedVotesMid": 358313,
+          "turnoutHigh": 31.2,
+          "turnoutLow": 38.13,
+          "turnoutMid": 34.32
+        },
+        "firstName": "Mike",
+        "id": 1233,
+        "lastName": "Quigley",
+        "partyName": "Democratic",
+        "votes": 87444
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 394145,
+          "estimatedVotesLow": 322481,
+          "estimatedVotesMid": 358313,
+          "turnoutHigh": 31.2,
+          "turnoutLow": 38.13,
+          "turnoutMid": 34.32
+        },
+        "firstName": "Tom",
+        "id": 11074,
+        "lastName": "Hanson",
+        "partyName": "Republican",
+        "votes": 35515
+      }
+    ],
+    "district": "5",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:57:10.151Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 122959,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 407455,
+          "estimatedVotesLow": 333373,
+          "estimatedVotesMid": 370414,
+          "turnoutHigh": 23.98,
+          "turnoutLow": 29.31,
+          "turnoutMid": 26.38
+        },
+        "firstName": "Sean",
+        "id": 8580,
+        "lastName": "Casten",
+        "partyName": "Democratic",
+        "votes": 58417
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 407455,
+          "estimatedVotesLow": 333373,
+          "estimatedVotesMid": 370414,
+          "turnoutHigh": 23.98,
+          "turnoutLow": 29.31,
+          "turnoutMid": 26.38
+        },
+        "firstName": "Niki",
+        "id": 24919,
+        "lastName": "Conforti",
+        "partyName": "Republican",
+        "votes": 39282
+      }
+    ],
+    "district": "6",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:58:11.456Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 97699,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 305289,
+          "estimatedVotesLow": 249781,
+          "estimatedVotesMid": 277535,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Danny",
+        "id": 1237,
+        "lastName": "Davis",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 305289,
+          "estimatedVotesLow": 249781,
+          "estimatedVotesMid": 277535,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Chad",
+        "id": 24926,
+        "lastName": "Koppie",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "7",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 337114,
+          "estimatedVotesLow": 275820,
+          "estimatedVotesMid": 306467,
+          "turnoutHigh": 26,
+          "turnoutLow": 31.77,
+          "turnoutMid": 28.59
+        },
+        "firstName": "Raja",
+        "id": 1238,
+        "lastName": "Krishnamoorthi",
+        "partyName": "Democratic",
+        "votes": 55312
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 337114,
+          "estimatedVotesLow": 275820,
+          "estimatedVotesMid": 306467,
+          "turnoutHigh": 26,
+          "turnoutLow": 31.77,
+          "turnoutMid": 28.59
+        },
+        "firstName": "Mark",
+        "id": 53782,
+        "lastName": "Rice",
+        "partyName": "Republican",
+        "votes": 32321
+      }
+    ],
+    "district": "8",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:54:19.249Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 87633,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 379484,
+          "estimatedVotesLow": 310487,
+          "estimatedVotesMid": 344985,
+          "turnoutHigh": 5.25,
+          "turnoutLow": 6.42,
+          "turnoutMid": 5.78
+        },
+        "firstName": "Seth",
+        "id": 85010,
+        "lastName": "Cohen",
+        "partyName": "Republican",
+        "votes": 9040
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 379484,
+          "estimatedVotesLow": 310487,
+          "estimatedVotesMid": 344985,
+          "turnoutHigh": 5.25,
+          "turnoutLow": 6.42,
+          "turnoutMid": 5.78
+        },
+        "firstName": "Jan",
+        "id": 85009,
+        "lastName": "Schakowsky",
+        "partyName": "Democratic",
+        "votes": 10891
+      }
+    ],
+    "district": "9",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:51:39.552Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 19931,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 362580,
+          "estimatedVotesLow": 296656,
+          "estimatedVotesMid": 329618,
+          "turnoutHigh": 54.09,
+          "turnoutLow": 66.11,
+          "turnoutMid": 59.5
+        },
+        "firstName": "Jim",
+        "id": 53783,
+        "lastName": "Carris",
+        "partyName": "Republican",
+        "votes": 63227
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 362580,
+          "estimatedVotesLow": 296656,
+          "estimatedVotesMid": 329618,
+          "turnoutHigh": 54.09,
+          "turnoutLow": 66.11,
+          "turnoutMid": 59.5
+        },
+        "firstName": "Brad",
+        "id": 1242,
+        "lastName": "Schneider",
+        "partyName": "Democratic",
+        "votes": 128682
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 362580,
+          "estimatedVotesLow": 296656,
+          "estimatedVotesMid": 329618,
+          "turnoutHigh": 54.09,
+          "turnoutLow": 66.11,
+          "turnoutMid": 59.5
+        },
+        "firstName": "Joseph",
+        "id": 85011,
+        "lastName": "Severino",
+        "partyName": "Independent",
+        "votes": 4201
+      }
+    ],
+    "district": "10",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:53:30.660Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 196110,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 388799,
+          "estimatedVotesLow": 318110,
+          "estimatedVotesMid": 353454,
+          "turnoutHigh": 17.27,
+          "turnoutLow": 21.11,
+          "turnoutMid": 19
+        },
+        "firstName": "Bill",
+        "id": 12453,
+        "lastName": "Foster",
+        "partyName": "Democratic",
+        "votes": 42692
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 388799,
+          "estimatedVotesLow": 318110,
+          "estimatedVotesMid": 353454,
+          "turnoutHigh": 17.27,
+          "turnoutLow": 21.11,
+          "turnoutMid": 19
+        },
+        "firstName": "Jerry",
+        "id": 12627,
+        "lastName": "Evans",
+        "partyName": "Republican",
+        "votes": 24464
+      }
+    ],
+    "district": "11",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:57:40.494Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 67156,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 383361,
+          "estimatedVotesLow": 313661,
+          "estimatedVotesMid": 348508,
+          "turnoutHigh": 14.1,
+          "turnoutLow": 17.23,
+          "turnoutMid": 15.51
+        },
+        "firstName": "Brian",
+        "id": 53785,
+        "lastName": "Roberts",
+        "partyName": "Democratic",
+        "votes": 14774
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 383361,
+          "estimatedVotesLow": 313661,
+          "estimatedVotesMid": 348508,
+          "turnoutHigh": 14.1,
+          "turnoutLow": 17.23,
+          "turnoutMid": 15.51
+        },
+        "firstName": "Mike",
+        "id": 8598,
+        "lastName": "Bost",
+        "partyName": "Republican",
+        "votes": 39268
+      }
+    ],
+    "district": "12",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:57:41.407Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 54042,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 345308,
+          "estimatedVotesLow": 282525,
+          "estimatedVotesMid": 313916,
+          "turnoutHigh": 4.24,
+          "turnoutLow": 5.18,
+          "turnoutMid": 4.67
+        },
+        "firstName": "Joshua",
+        "id": 53788,
+        "lastName": "Loyd",
+        "partyName": "Republican",
+        "votes": 9464
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 345308,
+          "estimatedVotesLow": 282525,
+          "estimatedVotesMid": 313916,
+          "turnoutHigh": 4.24,
+          "turnoutLow": 5.18,
+          "turnoutMid": 4.67
+        },
+        "firstName": "Nikki",
+        "id": 24902,
+        "lastName": "Budzinski",
+        "partyName": "Democratic",
+        "votes": 5182
+      }
+    ],
+    "district": "13",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:54:19.249Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 14646,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 353849,
+          "estimatedVotesLow": 289513,
+          "estimatedVotesMid": 321681,
+          "turnoutHigh": 59.19,
+          "turnoutLow": 72.34,
+          "turnoutMid": 65.11
+        },
+        "firstName": "James",
+        "id": 12630,
+        "lastName": "Marter",
+        "partyName": "Republican",
+        "votes": 83089
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 353849,
+          "estimatedVotesLow": 289513,
+          "estimatedVotesMid": 321681,
+          "turnoutHigh": 59.19,
+          "turnoutLow": 72.34,
+          "turnoutMid": 65.11
+        },
+        "firstName": "Lauren",
+        "id": 8620,
+        "lastName": "Underwood",
+        "partyName": "Democratic",
+        "votes": 126349
+      }
+    ],
+    "district": "14",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:57:41.407Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 209438,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mary",
+        "id": 8537,
+        "lastName": "Miller",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "15",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Darin ",
+        "id": 1257,
+        "lastName": "LaHood",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "16",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-25T19:31:29.024Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 320401,
+          "estimatedVotesLow": 262147,
+          "estimatedVotesMid": 291273,
+          "turnoutHigh": 3.17,
+          "turnoutLow": 3.88,
+          "turnoutMid": 3.49
+        },
+        "firstName": "Eric",
+        "id": 24907,
+        "lastName": "Sorensen",
+        "partyName": "Democratic",
+        "votes": 4379
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 320401,
+          "estimatedVotesLow": 262147,
+          "estimatedVotesMid": 291273,
+          "turnoutHigh": 3.17,
+          "turnoutLow": 3.88,
+          "turnoutMid": 3.49
+        },
+        "firstName": "Joseph",
+        "id": 85013,
+        "lastName": "McGraw",
+        "partyName": "Republican",
+        "votes": 5782
+      }
+    ],
+    "district": "17",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:48:09.197Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "IL",
+    "stateName": "Illinois",
+    "totalVotes": 10161,
+    "year": 2024
+  }
+]

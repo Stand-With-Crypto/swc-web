@@ -133,3 +133,12 @@ export const convertDTSIStanceScoreToBgColorClass = (score: number | null | unde
   }
   return twNoop('bg-red-200')
 }
+
+export const isProCrypto = (score: DTSILetterGrade | null) => {
+  if (isNil(score)) return false
+  return [DTSILetterGrade.A, DTSILetterGrade.B].includes(score)
+}
+export const isAntiCrypto = (score: DTSILetterGrade | null) => {
+  if (isNil(score)) return false
+  return [DTSILetterGrade.D, DTSILetterGrade.F].includes(score)
+}
