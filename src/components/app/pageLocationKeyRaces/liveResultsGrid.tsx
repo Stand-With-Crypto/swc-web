@@ -3,10 +3,9 @@ import { cn } from '@/utils/web/cn'
 export function LiveResultsGrid({
   children,
   className,
-}: {
-  children: React.ReactNode
+}: React.PropsWithChildren<{
   className?: string
-}) {
+}>) {
   return (
     <section
       className={cn(
