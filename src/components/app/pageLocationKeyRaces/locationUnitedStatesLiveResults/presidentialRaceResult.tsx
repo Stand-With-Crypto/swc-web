@@ -88,7 +88,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     if (!liveResultData) return 'unknown'
     if (calledCandidate) return 'called'
     if (liveResultData.some(candidate => (candidate?.votingData?.votes || 0) > 0)) return 'live'
-    if (isBefore(new Date(), new Date('2024-11-05'))) return 'not-started'
+    if (isBefore(new Date(), new Date('2024-11-05'))) return 'live'
 
     return 'live'
   }, [calledCandidate, liveResultData])

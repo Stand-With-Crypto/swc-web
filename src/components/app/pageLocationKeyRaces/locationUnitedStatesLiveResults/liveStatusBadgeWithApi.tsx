@@ -46,7 +46,7 @@ export function LiveStatusBadgeWithApi(props: LiveStatusBadgeWithApiProps) {
 
     const now = new Date()
     if (isBefore(now, startOfDay(new Date('2024-11-05')))) {
-      return 'not-started'
+      return 'live'
     }
 
     return 'live'
