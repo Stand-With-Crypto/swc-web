@@ -6,6 +6,7 @@ import {
   getGoogleCivicDataFromAddress,
   GoogleCivicInfoResponse,
 } from '@/utils/shared/googleCivicInfo'
+import { logger } from '@/utils/shared/logger'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
 const SINGLE_MEMBER_STATES = ['AK', 'DE', 'ND', 'SD', 'VT', 'WY', 'DC']
@@ -179,5 +180,28 @@ export function formatGetCongressionalDistrictFromAddressNotFoundReason(
     case 'UNEXPECTED_ERROR':
     default:
       return defaultError
+  }
+}
+
+export function logCongressionalDistrictNotFound({
+  address,
+  notFoundReason,
+  domain,
+}: {
+  address: string
+  notFoundReason: string
+  domain: string
+}) {
+  logger.error(
+    `No usCongressionalDistrict found for address ${address} with code ${notFoundReason}`,
+  )
+  if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(notFoundReason)) {
+    Sentry.captureMessage(`No usCongressionalDistrict found for address`, {
+      extra: {
+        domain,
+        notFoundReason,
+        address,
+      },
+    })
   }
 }
