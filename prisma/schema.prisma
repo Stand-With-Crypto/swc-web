@@ -271,6 +271,7 @@ enum UserActionType {
   RSVP_EVENT
   VIEW_KEY_RACES
   VOTING_INFORMATION_RESEARCHED
+  VOTING_DAY
 }
 
 model UserAction {
@@ -305,6 +306,7 @@ model UserAction {
   userActionRsvpEvent                   UserActionRsvpEvent?
   userActionViewKeyRaces                UserActionViewKeyRaces?
   userActionVotingInformationResearched UserActionVotingInformationResearched?
+  userActionVotingDay                   UserActionVotingDay?
 
   @@index([datetimeCreated])
   @@index([userId, nftMintId])
@@ -421,6 +423,15 @@ model NFTMint {
 
   @@index([nftSlug])
   @@map("nft_mint")
+}
+
+model UserActionVotingDay {
+  id         String     @id @default(uuid())
+  userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
+  votingYear String     @map("voting_year")
+  usaState   String?    @map("usa_state")
+
+  @@map("user_action_voting_day")
 }
 
 model UserActionViewKeyRaces {
