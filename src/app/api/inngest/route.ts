@@ -20,6 +20,10 @@ import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCan
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
+import {
+  fetchPresidentialRacesData,
+  fetchPresidentialRacesDataCron,
+} from '@/inngest/functions/decisionDesk/fetchPresidentialRacesData'
 import { sendEventNotificationWithInngest } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
@@ -29,6 +33,7 @@ import {
   bulkSMSCommunicationJourney,
   enqueueSMS,
 } from '@/inngest/functions/sms'
+import { updateMetricsCacheInngestCronJob } from '@/inngest/functions/updateMeyticsCacheCronJob'
 import { deleteUserActions } from '@/inngest/functions/user/deleteUserActions'
 import {
   auditUsersTotalDonationAmountUsdInngest,
@@ -71,7 +76,10 @@ export const { GET, POST, PUT } = serve({
     backfillReactivationCron,
     sendEventNotificationWithInngest,
     deleteUserActions,
+    fetchPresidentialRacesData,
+    fetchPresidentialRacesDataCron,
     enqueueSMS,
     backfillUserCommunicationMessageStatus,
+    updateMetricsCacheInngestCronJob,
   ],
 })

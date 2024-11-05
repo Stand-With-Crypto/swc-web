@@ -1,0 +1,182 @@
+[
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 452185,
+          "estimatedVotesLow": 369972,
+          "estimatedVotesMid": 411077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Brendan",
+        "id": 44635,
+        "lastName": "Gomez",
+        "partyName": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 452185,
+          "estimatedVotesLow": 369972,
+          "estimatedVotesMid": 411077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Ross",
+        "id": 85003,
+        "lastName": "Fulcher",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 452185,
+          "estimatedVotesLow": 369972,
+          "estimatedVotesMid": 411077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Matt",
+        "id": 85004,
+        "lastName": "Loesby",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 452185,
+          "estimatedVotesLow": 369972,
+          "estimatedVotesMid": 411077,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kaylee",
+        "id": 19690,
+        "lastName": "Peterson",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "1",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:19:53.225Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "ID",
+    "stateName": "Idaho",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 412793,
+          "estimatedVotesLow": 337740,
+          "estimatedVotesMid": 375265,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Idaho",
+        "id": 85005,
+        "lastName": "Law",
+        "partyName": "Constitution",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 412793,
+          "estimatedVotesLow": 337740,
+          "estimatedVotesMid": 375265,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Mike",
+        "id": 1226,
+        "lastName": "Simpson",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 412793,
+          "estimatedVotesLow": 337740,
+          "estimatedVotesMid": 375265,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Todd",
+        "id": 85006,
+        "lastName": "Corsetti",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 412793,
+          "estimatedVotesLow": 337740,
+          "estimatedVotesMid": 375265,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "David",
+        "id": 19689,
+        "lastName": "Roth",
+        "partyName": "Democratic",
+        "votes": 0
+      }
+    ],
+    "district": "2",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:20:13.770Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "ID",
+    "stateName": "Idaho",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

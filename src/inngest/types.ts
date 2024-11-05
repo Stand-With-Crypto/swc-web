@@ -17,12 +17,14 @@ import type { CapitolCanaryEmailInngestEventSchema } from '@/inngest/functions/c
 import type { CapitolCanaryUpsertAdvocateInngestSchema } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import type { CleanupNftMintsEventSchema } from '@/inngest/functions/cleanupNFTMints'
 import type { CleanupPostalCodesInngestEventSchema } from '@/inngest/functions/cleanupPostalCodes'
+import type { FetchPresidentialRacesInngestEventSchema } from '@/inngest/functions/decisionDesk/fetchPresidentialRacesData'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
 import type { BulkSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
 import type { EnqueueSMSInngestEventSchema } from '@/inngest/functions/sms/enqueueMessages'
+import { UpdateMetricsCounterCacheCronJobSchema } from '@/inngest/functions/updateMeyticsCacheCronJob'
 import type { DeleteUserActionsInngestEventSchema } from '@/inngest/functions/user/deleteUserActions'
 import type { AuditUserBatchEventSchema } from '@/inngest/functions/usersTotalDonationAmountUsd/audit'
 import type {
@@ -54,7 +56,9 @@ type EventTypes =
   | UpdateUserBatchEventSchema
   | MonitorBaseEthBalancesInngestEventSchema
   | InitialSignupUserCommunicationSchema
+  | FetchPresidentialRacesInngestEventSchema
   | EnqueueSMSInngestEventSchema
   | BackfillUserCommunicationMessageStatusSchema
+  | UpdateMetricsCounterCacheCronJobSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
