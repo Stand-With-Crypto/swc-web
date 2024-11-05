@@ -86,7 +86,7 @@ export function LocationUnitedStatesLiveResults({
               </UserActionVotingDayDialog>
             }
           >
-            <Button className="w-fit" variant="secondary">
+            <Button className="mt-6 w-fit " variant="secondary">
               Join Stand With Crypto
             </Button>
           </LoginDialogWrapper>
