@@ -243,7 +243,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
       {showLink && (
         <Button asChild className="mx-auto w-fit" variant="secondary">
-          <InternalLink href={link}>View Race</InternalLink>
+          <InternalLink href={link}>View race</InternalLink>
         </Button>
       )}
     </div>

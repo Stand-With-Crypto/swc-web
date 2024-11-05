@@ -64,7 +64,7 @@ export function LocationUnitedStates({
         {!!groups.president.length && (
           <DTSIPersonHeroCardSection
             cta={
-              <InternalLink href={urls.locationUnitedStatesPresidential()}>View Race</InternalLink>
+              <InternalLink href={urls.locationUnitedStatesPresidential()}>View race</InternalLink>
             }
             locale={locale}
             people={groups.president}
@@ -130,7 +130,7 @@ export function LocationUnitedStates({
                             : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
                         }
                       >
-                        View Race
+                        View race
                       </InternalLink>
                     }
                     key={`${stateCode}-${primaryDistrict}`}
