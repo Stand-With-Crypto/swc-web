@@ -4,7 +4,10 @@ import * as Sentry from '@sentry/nextjs'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import {
+  logCongressionalDistrictNotFound,
+  maybeGetCongressionalDistrictFromAddress,
+} from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -119,20 +122,16 @@ async function backfillUsCongressionalDistricts(
     }
 
     if ('notFoundReason' in usCongressionalDistrict) {
-      logger.error(
-        `Failed to get usCongressionalDistrict for address ${address.id} with code ${usCongressionalDistrict.notFoundReason}`,
-      )
+      logCongressionalDistrictNotFound({
+        address: address.id,
+        notFoundReason: usCongressionalDistrict.notFoundReason,
+        domain: 'backfillUsCongressionalDistricts',
+      })
+
       if (usCongressionalDistrict.notFoundReason === 'CIVIC_API_QUOTA_LIMIT_REACHED') {
         break
       }
-      if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)) {
-        Sentry.captureMessage(`No usCongressionalDistrict found for address ${address.id}`, {
-          extra: {
-            domain: 'backfillUsCongressionalDistricts',
-            notFoundReason: usCongressionalDistrict.notFoundReason,
-          },
-        })
-      }
+
       if (
         [
           'NOT_USA_ADDRESS',

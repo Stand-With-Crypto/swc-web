@@ -1,0 +1,150 @@
+[
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 415645,
+          "estimatedVotesLow": 340074,
+          "estimatedVotesMid": 377856,
+          "turnoutHigh": 64.52,
+          "turnoutLow": 78.86,
+          "turnoutMid": 70.97
+        },
+        "firstName": "Russell",
+        "id": 31072,
+        "lastName": "Prescott",
+        "partyName": "Republican",
+        "votes": 120191
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 415645,
+          "estimatedVotesLow": 340074,
+          "estimatedVotesMid": 377856,
+          "turnoutHigh": 64.52,
+          "turnoutLow": 78.86,
+          "turnoutMid": 70.97
+        },
+        "firstName": "Chris",
+        "id": 10573,
+        "lastName": "Pappas",
+        "partyName": "Democratic",
+        "votes": 147989
+      }
+    ],
+    "district": "1",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T21:01:48.348Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NH",
+    "stateName": "New Hampshire",
+    "totalVotes": 268180,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 410499,
+          "estimatedVotesLow": 335866,
+          "estimatedVotesMid": 373174,
+          "turnoutHigh": 62.04,
+          "turnoutLow": 75.83,
+          "turnoutMid": 68.25
+        },
+        "firstName": "Ryan",
+        "id": 102193,
+        "lastName": "Donnelly",
+        "partyName": "Independent",
+        "votes": 4725
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 410499,
+          "estimatedVotesLow": 335866,
+          "estimatedVotesMid": 373174,
+          "turnoutHigh": 62.04,
+          "turnoutLow": 75.83,
+          "turnoutMid": 68.25
+        },
+        "firstName": "Maggie",
+        "id": 84919,
+        "lastName": "Goodlander",
+        "partyName": "Democratic",
+        "votes": 136866
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 410499,
+          "estimatedVotesLow": 335866,
+          "estimatedVotesMid": 373174,
+          "turnoutHigh": 62.04,
+          "turnoutLow": 75.83,
+          "turnoutMid": 68.25
+        },
+        "firstName": "Sterling",
+        "id": 102194,
+        "lastName": "Sykes",
+        "partyName": "Independent",
+        "votes": 5003
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 410499,
+          "estimatedVotesLow": 335866,
+          "estimatedVotesMid": 373174,
+          "turnoutHigh": 62.04,
+          "turnoutLow": 75.83,
+          "turnoutMid": 68.25
+        },
+        "firstName": "Lily",
+        "id": 31078,
+        "lastName": "Williams",
+        "partyName": "Republican",
+        "votes": 108093
+      }
+    ],
+    "district": "2",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T21:01:55.012Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "NH",
+    "stateName": "New Hampshire",
+    "totalVotes": 254687,
+    "year": 2024
+  }
+]

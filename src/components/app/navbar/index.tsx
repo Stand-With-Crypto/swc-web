@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
-import { ChevronDown, Menu } from 'lucide-react'
+import { CalendarIcon, ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
@@ -49,14 +49,19 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       href: urls.endorsedCandidates(),
       text: 'Endorsed candidates',
     },
-
     {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
-      text: 'About',
+      text: 'Resources',
       children: [
+        {
+          href: urls.donate(),
+          text: 'Donate',
+          icon: DonateIcon,
+        },
+        {
+          href: urls.events(),
+          text: 'Events',
+          icon: CalendarIcon,
+        },
         {
           href: urls.about(),
           text: 'Our mission',
@@ -71,16 +76,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           href: urls.partners(),
           text: 'Partners',
           icon: PartnersIcon,
-        },
-      ],
-    },
-    {
-      text: 'Resources',
-      children: [
-        {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: DonateIcon,
         },
         {
           href: urls.bills(),
@@ -97,6 +92,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           text: 'Advocacy toolkit',
           icon: AdvocacyToolkitIcon,
         },
+
         {
           href: urls.press(),
           text: 'Press',
@@ -120,7 +116,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       }
     >
       <Button
-        className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
+        className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
         variant="primary-cta"
       >
         Sign In
@@ -159,7 +155,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
 
       <nav
         className={cn(
-          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 min-[1092px]:h-[84px] min-[1092px]:py-5',
+          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 min-[1096px]:h-[84px] min-[1096px]:py-5',
         )}
       >
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
@@ -190,7 +186,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     }
                   }}
                 >
-                  <Button asChild className="hidden min-[1092px]:block" variant="secondary">
+                  <Button asChild className="hidden min-[1096px]:block" variant="secondary">
                     {children ? (
                       <span className="select-none">
                         <div className="flex cursor-default items-center gap-2">
@@ -271,7 +267,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         </div>
         <Drawer {...dialogProps} direction="top" shouldScaleBackground>
           <DrawerTrigger asChild data-testid="drawer-trigger">
-            <button className="p-3 min-[1092px]:hidden">
+            <button className="p-3 min-[1096px]:hidden">
               <span className="sr-only">Open navigation menu</span>
               <Menu />
             </button>
