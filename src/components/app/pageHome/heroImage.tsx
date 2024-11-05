@@ -31,7 +31,7 @@ export function HeroImage({ locale }: HeroImageProps) {
             />
           }
           poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0dpm3AgAD5gHXYQBQLgAAAABJRU5ErkJggg=="
-          src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/swca_refer_app%20(1)-kIQbGyFpERPSDw5emhStqjS8drFdBh.mp4"
+          src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/swca_refer_app-49WzI9pK1mMO5mj40fy1miIzF4Nrqa.mp4"
         />
 
         <div
