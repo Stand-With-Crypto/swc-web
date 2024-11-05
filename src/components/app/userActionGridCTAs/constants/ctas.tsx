@@ -78,6 +78,28 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
     ],
   },
+  [UserActionType.VOTING_DAY]: {
+    title: 'I voted!',
+    description: 'Claim your "proof-of-vote" NFT.',
+    mobileCTADescription: 'Claim your "proof-of-vote" NFT.',
+    campaignsModalDescription: 'Claim your "proof-of-vote" NFT.',
+    image: '/actionTypeIcons/iVoted.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VOTING_DAY,
+        campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
+        isCampaignActive: true,
+        title: 'I voted!',
+        description: 'Claim your "proof-of-vote" NFT.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <Suspense fallback={children}>
+            <UserActionVotingDayDialog>{children}</UserActionVotingDayDialog>
+          </Suspense>
+        ),
+      },
+    ],
+  },
   [UserActionType.DONATION]: {
     title: 'Make a donation',
     description: 'Donate fiat or crypto to help keep crypto in America.',
@@ -251,28 +273,6 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
             </Suspense>
           )
         },
-      },
-    ],
-  },
-  [UserActionType.VOTING_DAY]: {
-    title: 'I voted!',
-    description: 'Claim your "proof-of-vote" NFT.',
-    mobileCTADescription: 'Claim your "proof-of-vote" NFT.',
-    campaignsModalDescription: 'Claim your "proof-of-vote" NFT.',
-    image: '/actionTypeIcons/iVoted.png',
-    campaigns: [
-      {
-        actionType: UserActionType.VOTING_DAY,
-        campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
-        isCampaignActive: true,
-        title: 'I voted!',
-        description: 'Claim your "proof-of-vote" NFT.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <Suspense fallback={children}>
-            <UserActionVotingDayDialog>{children}</UserActionVotingDayDialog>
-          </Suspense>
-        ),
       },
     ],
   },
