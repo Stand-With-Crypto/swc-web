@@ -14,7 +14,7 @@ interface HeroImageProps {
 
 export function HeroImage({ locale }: HeroImageProps) {
   return (
-    <Link href={getIntlUrls(locale).voterGuide()}>
+    <Link href={getIntlUrls(locale).locationUnitedStates()}>
       <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
         <Video
           className={'absolute left-0 top-0 h-full w-full object-cover'}
@@ -31,7 +31,7 @@ export function HeroImage({ locale }: HeroImageProps) {
             />
           }
           poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0dpm3AgAD5gHXYQBQLgAAAABJRU5ErkJggg=="
-          src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
+          src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/swca_refer_app-49WzI9pK1mMO5mj40fy1miIzF4Nrqa.mp4"
         />
 
         <div
@@ -43,9 +43,7 @@ export function HeroImage({ locale }: HeroImageProps) {
               'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
           }}
         >
-          <p>
-            See where your politicians stand on crypto and prepare to vote with the SWC Voter Guide
-          </p>
+          <p>See how pro-crypto candidates are performing in the election</p>
           <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
             Explore
             <ArrowUpRight />
