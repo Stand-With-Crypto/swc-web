@@ -161,4 +161,5 @@ export const apiUrls = {
   decisionDeskDistrictData: ({ stateCode, district }: { stateCode: string; district: string }) =>
     `/api/public/decision-desk/usa/state/${stateCode}/district/${district}`,
   decisionDeskCongressData: () => '/api/public/decision-desk/usa/congress',
+  decisionDeskAllRacesData: () => '/api/public/decision-desk/usa/all',
 }

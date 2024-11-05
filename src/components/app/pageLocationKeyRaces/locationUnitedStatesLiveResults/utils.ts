@@ -1,4 +1,5 @@
 import { isNil } from 'lodash-es'
+import { call } from 'node_modules/viem/_types/actions/public/call'
 
 import {
   CandidatesWithVote,
@@ -47,15 +48,33 @@ export const getVotePercentage = (
   return candidate.votes ? +((candidate.votes / totalVotes) * 100).toFixed(2) : 0
 }
 
-export const getRaceStatus = (raceData: RacesVotingDataResponse | null) => {
+export const getRaceStatus = (
+  raceData: RacesVotingDataResponse | RacesVotingDataResponse[] | null | undefined,
+) => {
   if (!raceData) return 'unknown'
 
-  if (raceData.calledCandidate) {
+  let calledRace: boolean
+  if (Array.isArray(raceData)) {
+    if (raceData.length === 0) {
+      return 'unknown'
+    }
+
+    calledRace = raceData.every(race => !!race.calledCandidate)
+  } else {
+    calledRace = !!raceData.calledCandidate
+  }
+
+  if (calledRace) {
     return 'called'
   }
 
   const now = new Date()
-  const raceDate = new Date(raceData.raceDate || '2024-11-05')
+  let raceDate: Date
+  if (Array.isArray(raceData)) {
+    raceDate = new Date(raceData?.[0].raceDate || '2024-11-05')
+  } else {
+    raceDate = new Date(raceData?.raceDate || '2024-11-05')
+  }
 
   if (now < raceDate) {
     return 'not-started'

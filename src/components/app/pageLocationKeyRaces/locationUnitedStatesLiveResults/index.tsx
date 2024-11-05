@@ -1,12 +1,10 @@
-import { isBefore, startOfDay } from 'date-fns'
-
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
 import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
 import { LiveResultsMap } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveResultsMap'
-import { LiveStatusBadge } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
+import { LiveStatusBadgeWithApi } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadgeWithApi'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { congressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
@@ -48,16 +46,6 @@ export function LocationUnitedStatesLiveResults({
 
   const senateElectedData = congressLiveResultOverview(congressRaceLiveResult?.senateDataWithDtsi)
   const houseElectedData = congressLiveResultOverview(congressRaceLiveResult?.houseDataWithDtsi)
-
-  const presidentialRaceCalledStatus = presidentialRaceLiveResult?.some(
-    candidate => candidate.votingData?.called,
-  )
-
-  const raceStatus = isBefore(startOfDay(new Date()), startOfDay(new Date('2024-11-05')))
-    ? 'not-started'
-    : presidentialRaceCalledStatus
-      ? 'called'
-      : 'live'
 
   return (
     <div className="space-y-20">
@@ -109,7 +97,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
-            <LiveStatusBadge status={raceStatus} />
+            <LiveStatusBadgeWithApi initialRaceData={ddhqResults['SWC_HI_STATE_RACES_DATA']} />
           </div>
 
           <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
@@ -133,7 +121,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
-            <LiveStatusBadge status={raceStatus} />
+            <LiveStatusBadgeWithApi initialRaceData={ddhqResults['SWC_HI_STATE_RACES_DATA']} />
           </div>
           <LiveResultsMap initialRaceData={congressRaceLiveResult} locale={locale} />
         </ContentSection>

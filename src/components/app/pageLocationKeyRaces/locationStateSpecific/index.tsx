@@ -14,7 +14,10 @@ import {
   Status,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
-import { congressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import {
+  congressLiveResultOverview,
+  getRaceStatus,
+} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -86,24 +89,7 @@ export function LocationStateSpecific({
     stateCode,
   )
 
-  const raceStatus = useMemo<Status>(() => {
-    if (!stateRaceData) return 'unknown'
-
-    const isFinal = stateRaceData.every(race => !!race?.calledCandidate)
-
-    if (isFinal) {
-      return 'called'
-    }
-
-    const now = new Date()
-    const raceDate = new Date(stateRaceData?.[0]?.raceDate || '2024-11-05')
-
-    if (now < raceDate) {
-      return 'not-started'
-    }
-
-    return 'live'
-  }, [stateRaceData])
+  const raceStatus = useMemo<Status>(() => getRaceStatus(stateRaceData), [stateRaceData])
 
   return (
     <div>

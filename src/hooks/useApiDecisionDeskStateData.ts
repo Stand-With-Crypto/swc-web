@@ -15,7 +15,7 @@ import {
 import { apiUrls } from '@/utils/shared/urls'
 
 interface UseApiDecisionDeskDataProps {
-  initialRaceData: RacesVotingDataResponse[] | undefined
+  initialRaceData: RacesVotingDataResponse[] | undefined | null
   stateCode: string
   district: string | number | undefined
 }
