@@ -124,7 +124,7 @@ function _UserLocationRaceInfo({
             <InternalLink
               href={urls.locationDistrictSpecific({ stateCode, district: districtNumber })}
             >
-              View Race
+              View race
             </InternalLink>
           </Button>
         </div>

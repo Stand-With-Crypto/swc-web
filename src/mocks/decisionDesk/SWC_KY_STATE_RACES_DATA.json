@@ -1,0 +1,370 @@
+[
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 354022,
+          "estimatedVotesLow": 289655,
+          "estimatedVotesMid": 321836,
+          "turnoutHigh": 83.72,
+          "turnoutLow": 102.33,
+          "turnoutMid": 92.09
+        },
+        "firstName": "James",
+        "id": 1284,
+        "lastName": "Comer",
+        "partyName": "Republican",
+        "votes": 208600
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 354022,
+          "estimatedVotesLow": 289655,
+          "estimatedVotesMid": 321836,
+          "turnoutHigh": 83.72,
+          "turnoutLow": 102.33,
+          "turnoutMid": 92.09
+        },
+        "firstName": "Erin",
+        "id": 67737,
+        "lastName": "Marshall",
+        "partyName": "Democratic",
+        "votes": 87790
+      }
+    ],
+    "district": "1",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:59:11.057Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "totalVotes": 296390,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 361899,
+          "estimatedVotesLow": 296100,
+          "estimatedVotesMid": 328999,
+          "turnoutHigh": 86.19,
+          "turnoutLow": 105.35,
+          "turnoutMid": 94.81
+        },
+        "firstName": "Hank",
+        "id": 9171,
+        "lastName": "Linderman",
+        "partyName": "Democratic",
+        "votes": 100181
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 361899,
+          "estimatedVotesLow": 296100,
+          "estimatedVotesMid": 328999,
+          "turnoutHigh": 86.19,
+          "turnoutLow": 105.35,
+          "turnoutMid": 94.81
+        },
+        "firstName": "Brett ",
+        "id": 1285,
+        "lastName": "Guthrie",
+        "partyName": "Republican",
+        "votes": 211754
+      }
+    ],
+    "district": "2",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T20:59:28.637Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "totalVotes": 311935,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Morgan",
+      "id": 19531,
+      "incumbent": true,
+      "lastName": "McGarvey",
+      "partyName": "Democratic"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Morgan",
+        "id": 19531,
+        "lastName": "McGarvey",
+        "partyName": "Democratic"
+      }
+    ],
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 360171,
+          "estimatedVotesLow": 294685,
+          "estimatedVotesMid": 327428,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.22,
+          "turnoutMid": 99
+        },
+        "firstName": "Morgan",
+        "id": 19531,
+        "lastName": "McGarvey",
+        "partyName": "Democratic",
+        "votes": 206549
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 360171,
+          "estimatedVotesLow": 294685,
+          "estimatedVotesMid": 327428,
+          "turnoutHigh": 91.82,
+          "turnoutLow": 112.22,
+          "turnoutMid": 99
+        },
+        "firstName": "Mike",
+        "id": 9175,
+        "lastName": "Craven",
+        "partyName": "Republican",
+        "votes": 124155
+      }
+    ],
+    "district": "3",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:29:12.741Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "totalVotes": 330704,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Thomas",
+      "id": 1289,
+      "incumbent": true,
+      "lastName": "Massie",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Thomas",
+        "id": 1289,
+        "lastName": "Massie",
+        "partyName": "Republican"
+      }
+    ],
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Thomas",
+        "id": 1289,
+        "lastName": "Massie",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "4",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Hal",
+      "id": 67743,
+      "incumbent": true,
+      "lastName": "Rogers",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Hal",
+        "id": 67743,
+        "lastName": "Rogers",
+        "partyName": "Republican"
+      }
+    ],
+    "candidatesWithVotes": [
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 0,
+          "estimatedVotesLow": 0,
+          "estimatedVotesMid": 0,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Hal",
+        "id": 67743,
+        "lastName": "Rogers",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "5",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T15:18:10.670Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": {
+      "firstName": "Andy",
+      "id": 1292,
+      "incumbent": true,
+      "lastName": "Barr",
+      "partyName": "Republican"
+    },
+    "calledCandidates": [
+      {
+        "firstName": "Andy",
+        "id": 1292,
+        "lastName": "Barr",
+        "partyName": "Republican"
+      }
+    ],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 369908,
+          "estimatedVotesLow": 302653,
+          "estimatedVotesMid": 336280,
+          "turnoutHigh": 93.53,
+          "turnoutLow": 114.32,
+          "turnoutMid": 99
+        },
+        "firstName": "Randy",
+        "id": 67744,
+        "lastName": "Cravens",
+        "partyName": "Democratic",
+        "votes": 155765
+      },
+      {
+        "elected": true,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 369908,
+          "estimatedVotesLow": 302653,
+          "estimatedVotesMid": 336280,
+          "turnoutHigh": 93.53,
+          "turnoutLow": 114.32,
+          "turnoutMid": 99
+        },
+        "firstName": "Andy",
+        "id": 1292,
+        "lastName": "Barr",
+        "partyName": "Republican",
+        "votes": 190225
+      }
+    ],
+    "district": "6",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": true,
+    "lastUpdated": "2024-10-28T20:59:11.057Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "totalVotes": 345990,
+    "year": 2024
+  }
+]

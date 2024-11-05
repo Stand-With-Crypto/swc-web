@@ -46,6 +46,11 @@ const SWC_VOTER_ATTESTATION_NFT_CONTRACT_ADDRESS = requiredEnv(
   'SWC_VOTER_ATTESTATION_NFT_CONTRACT_ADDRESS',
 )
 
+const SWC_I_VOTED_NFT_CONTRACT_ADDRESS = requiredEnv(
+  process.env.SWC_I_VOTED_NFT_CONTRACT_ADDRESS,
+  'SWC_I_VOTED_NFT_CONTRACT_ADDRESS',
+)
+
 export const SWC_DOT_ETH_WALLET = requiredEnv(process.env.SWC_DOT_ETH_WALLET, 'SWC_DOT_ETH_WALLET')
 
 export const NFT_SLUG_BACKEND_METADATA: Record<
@@ -82,6 +87,10 @@ export const NFT_SLUG_BACKEND_METADATA: Record<
   },
   [NFTSlug.VOTER_ATTESTATION]: {
     contractAddress: SWC_VOTER_ATTESTATION_NFT_CONTRACT_ADDRESS,
+    associatedWallet: SWC_DOT_ETH_WALLET,
+  },
+  [NFTSlug.I_VOTED]: {
+    contractAddress: SWC_I_VOTED_NFT_CONTRACT_ADDRESS,
     associatedWallet: SWC_DOT_ETH_WALLET,
   },
 }

@@ -5,12 +5,12 @@ import Cookies from 'js-cookie'
 
 export function useCookieState(
   cookieName: string,
-): [string | undefined, (newValue: string) => void] {
+): [string | undefined, (newValue: string, options?: Cookies.CookieAttributes) => void] {
   const [value, setStateValue] = useState(() => Cookies.get(cookieName))
 
   const setValue = useCallback(
-    (newValue: string) => {
-      Cookies.set(cookieName, newValue)
+    (newValue: string, options?: Cookies.CookieAttributes) => {
+      Cookies.set(cookieName, newValue, options)
       setStateValue(newValue)
     },
     [cookieName],

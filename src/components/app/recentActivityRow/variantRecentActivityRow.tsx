@@ -13,6 +13,7 @@ import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userAc
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { InternalLink } from '@/components/ui/link'
@@ -213,7 +214,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>Voter registration confirmed {voterStateOrEmpty}</MainText>,
+          children: (
+            <MainText>Someone checked their voter registration {voterStateOrEmpty}</MainText>
+          ),
         }
       }
       case UserActionType.LIVE_EVENT: {
@@ -282,6 +285,16 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: undefined,
           children: <MainText>Voter plan researched {voterStateOrEmpty}</MainText>,
+        }
+      }
+      case UserActionType.VOTING_DAY: {
+        return {
+          onFocusContent: () => (
+            <UserActionVotingDayDialog>
+              <Button>I voted!</Button>
+            </UserActionVotingDayDialog>
+          ),
+          children: <MainText>Someone voted</MainText>,
         }
       }
     }

@@ -54,8 +54,11 @@ export const enqueueSMS = inngest.createFunction(
     }
 
     // This function has a built-in mechanism that retries only failed messages
-    if (attempt >= 4) {
-      throw new NonRetriableError(`SMS queuing attempt limit exceeded`)
+    if (attempt >= 5) {
+      return {
+        queuedMessages: 0,
+        segmentsSent: 0,
+      }
     }
 
     // This mechanism reuses previous variables to save an Inngest step

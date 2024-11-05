@@ -1,11 +1,13 @@
+import * as Sentry from '@sentry/nextjs'
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific'
+import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
@@ -19,7 +21,7 @@ import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['10_MINUTES']
+export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 type LocationDistrictSpecificPageProps = PageProps<{
   stateCode: string
@@ -34,22 +36,23 @@ export async function generateMetadata({
   const stateName = getUSStateNameFromStateCode(stateCode)
   const title = `${stateCode} ${formatDTSIDistrictId(district)} District Congressional Race`
   const description = `See where politicians running for in the ${formatDTSIDistrictId(district)} district of ${stateName} stand on crypto.`
-  return generateMetadataDetails({
+  return {
     title,
     description,
-  })
+  }
 }
 
 export async function generateStaticParams() {
   return flatten(
     Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(stateCode =>
-      times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode]).map(districtIndex => ({
-        stateCode: stateCode.toLowerCase(),
-        district:
-          US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode] === 1
+      times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode] || 1).map(
+        districtIndex => ({
+          stateCode: stateCode.toLowerCase(),
+          district: [0, 1].includes(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode])
             ? 'at-large'
             : `${districtIndex + 1}`,
-      })),
+        }),
+      ),
     ),
   ).slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 9999999)
 }
@@ -61,14 +64,46 @@ export default async function LocationDistrictSpecificPage({
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
 
-  const data = await queryDTSILocationDistrictSpecificInformation({
-    stateCode,
-    district,
-  })
+  const [dtsiResultsResult, ddhqRedisResult] = await Promise.allSettled([
+    queryDTSILocationDistrictSpecificInformation({ stateCode, district }),
+    getDecisionDataFromRedis<RacesVotingDataResponse[]>(
+      `SWC_${stateCode?.toUpperCase() as USStateCode}_STATE_RACES_DATA`,
+    ),
+  ])
 
-  if (!data) {
+  if (dtsiResultsResult.status === 'rejected') {
+    throw new Error(`Failed to fetch DTSI results: ${dtsiResultsResult.reason}`)
+  }
+  const dtsiResults = dtsiResultsResult.value
+  if (!dtsiResults) {
     throw new Error(`Invalid params for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return <LocationRaceSpecific {...data} {...{ stateCode, district, locale }} />
+  if (ddhqRedisResult.status === 'rejected') {
+    Sentry.captureException(ddhqRedisResult.reason, {
+      extra: { district, stateCode },
+      tags: { domain: 'liveResult' },
+    })
+    throw new Error(`Failed to fetch district race data: ${ddhqRedisResult.reason}`)
+  }
+
+  const initialLiveResultData =
+    ddhqRedisResult.value?.filter?.(data => data.district?.toLowerCase() === district.toString()) ??
+    null
+
+  if (!initialLiveResultData) {
+    Sentry.captureMessage('No ddhq data for LocationDistrictSpecificPage', {
+      extra: { stateCode, district },
+      tags: { domain: 'liveResult' },
+    })
+    throw new Error(`No ddhq data for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
+  }
+
+  return (
+    <LocationRaceSpecific
+      initialLiveResultData={initialLiveResultData}
+      {...dtsiResults}
+      {...{ stateCode, district, locale }}
+    />
+  )
 }

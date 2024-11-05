@@ -3,9 +3,11 @@ import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dts
 export const dtsiPersonFullName = (
   person: Pick<DTSI_Person, 'firstName' | 'lastName' | 'firstNickname' | 'nameSuffix'>,
 ) => {
-  return `${person.firstNickname || person.firstName} ${person.lastName}${
-    person.nameSuffix ? ` ${person.nameSuffix}` : ''
-  }`
+  const fullNameWithoutSuffix = `${person.firstNickname || person.firstName} ${person.lastName}`
+
+  return person.nameSuffix
+    ? `${fullNameWithoutSuffix.replace(person.nameSuffix, '')} ${person.nameSuffix}`
+    : fullNameWithoutSuffix
 }
 
 export const getDTSIPersonProfilePictureUrlDimensions = (
