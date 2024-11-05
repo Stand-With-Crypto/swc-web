@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { isNil } from 'lodash-es'
 
 import {
@@ -95,7 +96,7 @@ export const getOpacity = (
   return calledCandidate.cand_id === candidate.id ? 'opacity-100' : 'opacity-50'
 }
 
-export const congressLiveResultOverview = (
+export const getCongressLiveResultOverview = (
   data: GetAllCongressDataResponse['senateDataWithDtsi'] | undefined,
   stateCode?: string,
 ) => {
@@ -105,7 +106,13 @@ export const congressLiveResultOverview = (
 
   return data.candidatesWithVotes.reduce(
     (acc, candidate) => {
-      if (!candidate?.dtsiData) return acc
+      if (!candidate?.dtsiData) {
+        Sentry.captureMessage('No DTSI data for candidate in getCongressLiveResultOverview', {
+          extra: { candidate },
+          tags: { domain: 'liveResult' },
+        })
+        return acc
+      }
       if (!candidate.elected) return acc
       if (stateCode && candidate.dtsiData.primaryRole?.primaryState !== stateCode) return acc
 

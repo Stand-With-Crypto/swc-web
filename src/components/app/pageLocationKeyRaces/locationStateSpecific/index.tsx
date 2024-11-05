@@ -15,7 +15,7 @@ import {
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import {
-  congressLiveResultOverview,
+  getCongressLiveResultOverview,
   getRaceStatus,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
@@ -80,11 +80,11 @@ export function LocationStateSpecific({
     initialCongressLiveResultData,
   )
 
-  const senateElectedData = congressLiveResultOverview(
+  const senateElectedData = getCongressLiveResultOverview(
     congressRaceLiveResult?.senateDataWithDtsi,
     stateCode,
   )
-  const houseElectedData = congressLiveResultOverview(
+  const houseElectedData = getCongressLiveResultOverview(
     congressRaceLiveResult?.houseDataWithDtsi,
     stateCode,
   )

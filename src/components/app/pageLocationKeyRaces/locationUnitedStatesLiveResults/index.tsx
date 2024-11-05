@@ -7,7 +7,7 @@ import { LiveResultsMap } from '@/components/app/pageLocationKeyRaces/locationUn
 import { LiveStatusBadgeWithApi } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadgeWithApi'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
-import { congressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { getCongressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
@@ -44,8 +44,10 @@ export function LocationUnitedStatesLiveResults({
 }: LocationUnitedStatesLiveResultsProps) {
   const urls = getIntlUrls(locale)
 
-  const senateElectedData = congressLiveResultOverview(congressRaceLiveResult?.senateDataWithDtsi)
-  const houseElectedData = congressLiveResultOverview(congressRaceLiveResult?.houseDataWithDtsi)
+  const senateElectedData = getCongressLiveResultOverview(
+    congressRaceLiveResult?.senateDataWithDtsi,
+  )
+  const houseElectedData = getCongressLiveResultOverview(congressRaceLiveResult?.houseDataWithDtsi)
 
   return (
     <div className="space-y-20">
