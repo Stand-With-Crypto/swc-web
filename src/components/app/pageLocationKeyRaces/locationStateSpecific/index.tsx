@@ -89,6 +89,20 @@ export function LocationStateSpecific({
     stateCode,
   )
 
+  const hasCriticalElections = useMemo(() => {
+    const hasCriticalDistrict = US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.some(
+      district => {
+        return Boolean(groups.congresspeople[district]?.people.length)
+      },
+    )
+
+    return (
+      hasCriticalDistrict ||
+      Boolean(groups.senators.length) ||
+      Boolean(groups.congresspeople['at-large']?.people.length)
+    )
+  }, [groups, stateCode])
+
   const raceStatus = useMemo<Status>(() => getRaceStatus(stateRaceData), [stateRaceData])
 
   return (
@@ -160,24 +174,24 @@ export function LocationStateSpecific({
         </PageTitle>
       ) : (
         <div className="mt-20 space-y-20">
-          {stateRaceData ? (
+          {hasCriticalElections ? (
             <ContentSection
               subtitle="These elections are critical to the future of crypto in America. View live updates below."
               title={`Critical elections in ${stateName}`}
               titleProps={{ size: 'xs' }}
             >
               <LiveResultsGrid>
-                {/* {groups.senators.length > 1 && ( */}
-                <LiveResultsGrid.GridItem>
-                  <KeyRaceLiveResult
-                    candidates={groups.senators}
-                    initialRaceData={initialRaceData || undefined}
-                    locale={locale}
-                    primaryDistrict={undefined}
-                    stateCode={stateCode}
-                  />
-                </LiveResultsGrid.GridItem>
-                {/* )} */}
+                {groups.senators.length && (
+                  <LiveResultsGrid.GridItem>
+                    <KeyRaceLiveResult
+                      candidates={groups.senators}
+                      initialRaceData={initialRaceData || undefined}
+                      locale={locale}
+                      primaryDistrict={undefined}
+                      stateCode={stateCode}
+                    />
+                  </LiveResultsGrid.GridItem>
+                )}
 
                 {!!groups.congresspeople['at-large']?.people.length && (
                   <LiveResultsGrid.GridItem>
