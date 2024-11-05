@@ -106,7 +106,8 @@ export function LocationUnitedStatesLiveResults({
             variant="primary-cta-subtle"
           >
             <p className="font-normal">
-              Bookmark this page and track your candidates live when polls close on Election Day!
+              Stand With Crypto is the definitive place to track your crypto candidates on Election
+              Day. Help spread the word!
             </p>
             <p className="min-w-max">Share on X</p>
           </Badge>
