@@ -17,12 +17,12 @@ interface EventsNearYouProps {
 export function EventsNearYou(props: EventsNearYouProps) {
   return (
     <Suspense fallback={null}>
-      <_EventsNearYou {...props} />
+      <SuspenseEventsNearYou {...props} />
     </Suspense>
   )
 }
 
-function _EventsNearYou({ events }: EventsNearYouProps) {
+function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
 
   const userState = useMemo(() => {

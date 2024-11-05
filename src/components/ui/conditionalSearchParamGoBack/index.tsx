@@ -19,7 +19,7 @@ export function GoBack({ url }: { url: string }) {
   )
 }
 
-function _ConditionalSearchParamGoBack({ className }: { className?: string }) {
+function SuspenseConditionalSearchParamGoBack({ className }: { className?: string }) {
   const params = useSearchParams()
   const backUrl = params?.get(BACK_URL_PARAM)
   if (!backUrl) {
@@ -37,7 +37,7 @@ function _ConditionalSearchParamGoBack({ className }: { className?: string }) {
 export function ConditionalSearchParamGoBack(props: { className?: string }) {
   return (
     <Suspense>
-      <_ConditionalSearchParamGoBack {...props} />
+      <SuspenseConditionalSearchParamGoBack {...props} />
     </Suspense>
   )
 }
