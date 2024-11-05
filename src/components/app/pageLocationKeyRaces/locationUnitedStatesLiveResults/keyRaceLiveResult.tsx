@@ -27,7 +27,6 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { Progress } from '@/components/ui/progress'
-import { Skeleton } from '@/components/ui/skeleton'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
@@ -81,7 +80,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     : urls.locationStateSpecificSenateRace(stateCode)
   const showLink = !isDistrictPage && !isSenatePage && !isPresidentialPage
 
-  const { data: liveResultData, isLoading } = useApiDecisionDeskData({
+  const { data: liveResultData } = useApiDecisionDeskData({
     initialRaceData,
     stateCode,
     district: primaryDistrict?.toString(),
@@ -131,10 +130,12 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
 
   const canShowProgress = Boolean(liveResultData)
 
-  const shouldHideCard =
-    (!candidateA || !candidateB || !ddhqCandidateA || !ddhqCandidateB) && !isLoading
+  const isUncontested = useMemo(() => {
+    if (!raceData) return false
+    return raceData?.candidatesWithVotes.length === 1
+  }, [raceData])
 
-  if (shouldHideCard) {
+  if (isUncontested) {
     return null
   }
 
@@ -174,21 +175,28 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       )}
 
       <div className="flex justify-between">
-        <AvatarBox
-          className={cn(getOpacity(ddhqCandidateA, raceData))}
-          ddhqCandidate={ddhqCandidateA}
-          dtsiCandidate={candidateA}
-        />
-        <AvatarBox
-          className={cn('flex flex-col items-end text-right', getOpacity(ddhqCandidateB, raceData))}
-          ddhqCandidate={ddhqCandidateB}
-          dtsiCandidate={candidateB}
-        />
+        {candidateA && (
+          <AvatarBox
+            className={cn(getOpacity(ddhqCandidateA, raceData))}
+            ddhqCandidate={ddhqCandidateA}
+            dtsiCandidate={candidateA}
+          />
+        )}
+        {candidateB && (
+          <AvatarBox
+            className={cn(
+              'flex flex-col items-end text-right',
+              getOpacity(ddhqCandidateB, raceData),
+            )}
+            ddhqCandidate={ddhqCandidateB}
+            dtsiCandidate={candidateB}
+          />
+        )}
       </div>
 
       <div className="space-y-3">
         <div className="flex gap-1">
-          {canShowProgress ? (
+          {canShowProgress && ddhqCandidateA ? (
             <Progress
               className={cn(
                 'rounded-l-full rounded-r-none bg-secondary',
@@ -203,10 +211,8 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               )}
               value={Math.min(+getVotePercentage(ddhqCandidateA, raceData).toFixed(0) * 2, 100)}
             />
-          ) : (
-            <Skeleton className="h-4 w-full rounded-full" />
-          )}
-          {canShowProgress ? (
+          ) : null}
+          {canShowProgress && ddhqCandidateB ? (
             <Progress
               className={cn(
                 'rounded-l-none rounded-r-full  bg-secondary',
@@ -222,22 +228,24 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
               inverted
               value={Math.min(+getVotePercentage(ddhqCandidateB, raceData).toFixed(0) * 2, 100)}
             />
-          ) : (
-            <Skeleton className="h-4 w-full rounded-full" />
-          )}
+          ) : null}
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <VoteCount
-            className={cn(getOpacity(ddhqCandidateA, raceData))}
-            percentage={getVotePercentage(ddhqCandidateA, raceData)}
-            votes={FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })}
-          />
-          <VoteCount
-            className={cn('text-right', getOpacity(ddhqCandidateB, raceData))}
-            percentage={getVotePercentage(ddhqCandidateB, raceData)}
-            votes={FormattedNumber({ amount: ddhqCandidateB?.votes || 0, locale })}
-          />
+          {ddhqCandidateA && (
+            <VoteCount
+              className={cn(getOpacity(ddhqCandidateA, raceData))}
+              percentage={getVotePercentage(ddhqCandidateA, raceData)}
+              votes={FormattedNumber({ amount: ddhqCandidateA?.votes || 0, locale })}
+            />
+          )}
+          {ddhqCandidateB && (
+            <VoteCount
+              className={cn('text-right', getOpacity(ddhqCandidateB, raceData))}
+              percentage={getVotePercentage(ddhqCandidateB, raceData)}
+              votes={FormattedNumber({ amount: ddhqCandidateB?.votes || 0, locale })}
+            />
+          )}
         </div>
       </div>
 

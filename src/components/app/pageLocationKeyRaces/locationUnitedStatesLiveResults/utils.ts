@@ -1,5 +1,4 @@
 import { isNil } from 'lodash-es'
-import { call } from 'node_modules/viem/_types/actions/public/call'
 
 import {
   CandidatesWithVote,

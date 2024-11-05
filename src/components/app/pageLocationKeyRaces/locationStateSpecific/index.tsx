@@ -167,17 +167,17 @@ export function LocationStateSpecific({
               titleProps={{ size: 'xs' }}
             >
               <LiveResultsGrid>
-                {groups.senators.length > 1 && (
-                  <LiveResultsGrid.GridItem>
-                    <KeyRaceLiveResult
-                      candidates={groups.senators}
-                      initialRaceData={initialRaceData || undefined}
-                      locale={locale}
-                      primaryDistrict={undefined}
-                      stateCode={stateCode}
-                    />
-                  </LiveResultsGrid.GridItem>
-                )}
+                {/* {groups.senators.length > 1 && ( */}
+                <LiveResultsGrid.GridItem>
+                  <KeyRaceLiveResult
+                    candidates={groups.senators}
+                    initialRaceData={initialRaceData || undefined}
+                    locale={locale}
+                    primaryDistrict={undefined}
+                    stateCode={stateCode}
+                  />
+                </LiveResultsGrid.GridItem>
+                {/* )} */}
 
                 {!!groups.congresspeople['at-large']?.people.length && (
                   <LiveResultsGrid.GridItem>
