@@ -174,7 +174,7 @@ export function LocationStateSpecific({
           There's no election data for {stateName}
         </PageTitle>
       ) : (
-        <div className="space-y-20 xl:space-y-28">
+        <div className="mt-20 space-y-20 xl:space-y-28">
           {hasCriticalElections ? (
             <ContentSection
               subtitle="These elections are critical to the future of crypto in America. View live updates below."
@@ -226,7 +226,7 @@ export function LocationStateSpecific({
               </LiveResultsGrid>
             </ContentSection>
           ) : (
-            <PageTitle as="h3" className="mt-20" size="sm">
+            <PageTitle as="h3" size="sm">
               There's no critical elections in {stateName}
             </PageTitle>
           )}
