@@ -1,8 +1,6 @@
-import { ScrollArea } from '@radix-ui/react-scroll-area'
-
 import { ContentSection } from '@/components/app/ContentSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { ScrollBar } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { USStateCode } from '@/utils/shared/usStateUtils'
