@@ -1,0 +1,150 @@
+[
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Scott",
+        "id": 84151,
+        "lastName": "Morrow",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "John",
+        "id": 8241,
+        "lastName": "Barrasso",
+        "partyName": "Republican",
+        "votes": 0
+      }
+    ],
+    "district": "",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:19:51.576Z",
+    "office": {
+      "officeId": "4",
+      "officeName": "US Senate",
+      "officeTypeId": "1"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "WY",
+    "stateName": "Wyoming",
+    "totalVotes": 0,
+    "year": 2024
+  },
+  {
+    "advanceCandidates": "false",
+    "advancingCandidates": [],
+    "calledCandidate": null,
+    "calledCandidates": [],
+    "candidatesWithVotes": [
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Richard",
+        "id": 14707,
+        "lastName": "Brubaker",
+        "partyName": "Libertarian",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Harriet",
+        "id": 10529,
+        "lastName": "Hageman",
+        "partyName": "Republican",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Kyle",
+        "id": 84153,
+        "lastName": "Cameron",
+        "partyName": "Democratic",
+        "votes": 0
+      },
+      {
+        "elected": false,
+        "estimatedVotes": {
+          "estimatedVotesHigh": 268545,
+          "estimatedVotesLow": 219720,
+          "estimatedVotesMid": 244131,
+          "turnoutHigh": 0,
+          "turnoutLow": 0,
+          "turnoutMid": 0
+        },
+        "firstName": "Jeff",
+        "id": 102233,
+        "lastName": "Haggit",
+        "partyName": "Constitution",
+        "votes": 0
+      }
+    ],
+    "district": "At-Large",
+    "electionType": {
+      "electionType": "General Election",
+      "electionTypeId": "1"
+    },
+    "hasCalledCandidate": false,
+    "lastUpdated": "2024-10-28T19:20:28.188Z",
+    "office": {
+      "officeId": "3",
+      "officeName": "US House",
+      "officeTypeId": "2"
+    },
+    "partyName": null,
+    "raceDate": "2024-11-05",
+    "state": "WY",
+    "stateName": "Wyoming",
+    "totalVotes": 0,
+    "year": 2024
+  }
+]

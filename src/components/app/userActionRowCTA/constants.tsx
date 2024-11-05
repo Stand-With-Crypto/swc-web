@@ -15,6 +15,7 @@ import { UserActionFormVoterAttestationDialog } from '@/components/app/userActio
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
@@ -155,6 +156,16 @@ const USER_ACTION_ROW_CTA_INFO: Record<
     shortSubtext: 'Find your polling location and learn about early voting options.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormVotingInformationResearchedDialog,
+  },
+  [UserActionType.VOTING_DAY]: {
+    actionType: UserActionType.VOTING_DAY,
+    image: { src: '/actionTypeIcons/iVoted.png' },
+    text: 'I voted!',
+    subtext: 'Claim your "proof-of-vote" NFT.',
+    shortText: 'I voted!',
+    shortSubtext: 'Claim your "proof-of-vote" NFT.',
+    canBeTriggeredMultipleTimes: false,
+    WrapperComponent: UserActionVotingDayDialog,
   },
 }
 

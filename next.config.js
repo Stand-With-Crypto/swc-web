@@ -340,6 +340,11 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      {
+        source: '/election',
+        destination: '/races?utm_source=swc&utm_medium=sms&utm_campaign=election-results-2024',
+        permanent: true,
+      },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
         source: '/vg/:campaignId/:sessionId*',
@@ -584,6 +589,11 @@ const nextConfig = {
         source: '/america-loves-crypto/pa',
         destination:
           'https://americalovescryptopa.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=pa_2&utm_id=sst',
+        permanent: true,
+      },
+      {
+        source: '/cb-vote-adv-push',
+        destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
         permanent: true,
       },
     ]

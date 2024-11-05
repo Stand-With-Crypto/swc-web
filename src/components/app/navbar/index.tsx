@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
-import { ChevronDown, Menu } from 'lucide-react'
+import { CalendarIcon, ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
@@ -40,7 +40,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 
   const leftLinks = [
-    { href: urls.locationUnitedStates(), text: 'Key Races' },
+    {
+      href: urls.voterGuide(),
+      text: 'Voter guide',
+    },
     {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
@@ -49,14 +52,19 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       href: urls.endorsedCandidates(),
       text: 'Endorsed candidates',
     },
-
     {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
-      text: 'About',
+      text: 'Resources',
       children: [
+        {
+          href: urls.donate(),
+          text: 'Donate',
+          icon: DonateIcon,
+        },
+        {
+          href: urls.events(),
+          text: 'Events',
+          icon: CalendarIcon,
+        },
         {
           href: urls.about(),
           text: 'Our mission',
@@ -71,16 +79,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           href: urls.partners(),
           text: 'Partners',
           icon: PartnersIcon,
-        },
-      ],
-    },
-    {
-      text: 'Resources',
-      children: [
-        {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: DonateIcon,
         },
         {
           href: urls.bills(),
@@ -97,6 +95,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           text: 'Advocacy toolkit',
           icon: AdvocacyToolkitIcon,
         },
+
         {
           href: urls.press(),
           text: 'Press',
@@ -120,7 +119,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       }
     >
       <Button
-        className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
+        className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
         variant="primary-cta"
       >
         Sign In
@@ -128,15 +127,24 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     </LoginDialogWrapper>
   )
 
-  const VoterGuideButton = () => (
+  const KeyRacesButton = () => (
     <Button
       asChild
-      className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
+      className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
       key={urls.voterGuide()}
       onClick={maybeCloseAfterNavigating}
       variant="default"
     >
-      <InternalLink href={urls.voterGuide()}>Voter guide</InternalLink>
+      <InternalLink
+        className="text-base font-bold leading-4 md:font-normal"
+        href={urls.locationUnitedStates()}
+      >
+        <span className="relative mr-2 flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500"></span>
+        </span>
+        Live election results
+      </InternalLink>
     </Button>
   )
 
@@ -159,7 +167,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
 
       <nav
         className={cn(
-          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 min-[1092px]:h-[84px] min-[1092px]:py-5',
+          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 min-[1096px]:h-[84px] min-[1096px]:py-5',
         )}
       >
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
@@ -190,7 +198,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     }
                   }}
                 >
-                  <Button asChild className="hidden min-[1092px]:block" variant="secondary">
+                  <Button asChild className="hidden min-[1096px]:block" variant="secondary">
                     {children ? (
                       <span className="select-none">
                         <div className="flex cursor-default items-center gap-2">
@@ -263,15 +271,15 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 </div>
               ))}
             </div>
-            <div className="hidden gap-4 min-[1092px]:flex">
-              <VoterGuideButton />
+            <div className="hidden gap-4 min-[1096px]:flex">
+              <KeyRacesButton />
               <LoginButton />
             </div>
           </div>
         </div>
         <Drawer {...dialogProps} direction="top" shouldScaleBackground>
           <DrawerTrigger asChild data-testid="drawer-trigger">
-            <button className="p-3 min-[1092px]:hidden">
+            <button className="p-3 min-[1096px]:hidden">
               <span className="sr-only">Open navigation menu</span>
               <Menu />
             </button>
@@ -363,7 +371,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 <LoginButton />
               </div>
               <div className="mt-4 px-6">
-                <VoterGuideButton />
+                <KeyRacesButton />
               </div>
             </div>
           </DrawerContent>
