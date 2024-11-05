@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
@@ -15,10 +14,7 @@ import {
   Status,
 } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadge'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
-import {
-  congressLiveResultOverview,
-  getRaceStatus,
-} from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
+import { congressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -91,7 +87,22 @@ export function LocationStateSpecific({
   )
 
   const raceStatus = useMemo<Status>(() => {
-    return getRaceStatus(stateRaceData?.[0] || null)
+    if (!stateRaceData) return 'unknown'
+
+    const isFinal = stateRaceData.every(race => !!race?.calledCandidate)
+
+    if (isFinal) {
+      return 'called'
+    }
+
+    const now = new Date()
+    const raceDate = new Date(stateRaceData?.[0]?.raceDate || '2024-11-05')
+
+    if (now < raceDate) {
+      return 'not-started'
+    }
+
+    return 'live'
   }, [stateRaceData])
 
   return (
