@@ -99,6 +99,7 @@ export function LocationUnitedStatesLiveResults({
             message:
               'Watch live election results and see which candidates #StandWithCrypto: https://standwithcrypto.org/races',
           })}
+          target="_blank"
         >
           <Badge
             className="mb-14 flex w-full items-center justify-between gap-8 rounded-2xl p-6 text-sm md:text-base"
