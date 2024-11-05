@@ -12,6 +12,7 @@ import {
   DecisionDeskRedisKeys,
   getDecisionDataFromRedis,
 } from '@/utils/server/decisionDesk/cachedData'
+import { getElectionStatus } from '@/utils/server/decisionDesk/getElectionStatus'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export const getKeyRacesPageData = async () => {
@@ -54,12 +55,14 @@ export const getKeyRacesPageData = async () => {
   }
 
   const congressRaceLiveResult: GetAllCongressDataResponse = await getCongressLiveResultData()
+  const initialElectionStatusData = await getElectionStatus()
 
   return {
     dtsiResults: races,
     ddhqResults: racesDataMap,
     presidentialRaceLiveResult,
     congressRaceLiveResult,
+    initialElectionStatusData,
   }
 }
 

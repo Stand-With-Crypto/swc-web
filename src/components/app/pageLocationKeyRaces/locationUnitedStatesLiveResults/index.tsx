@@ -21,6 +21,7 @@ import {
 import { SupportedLocale } from '@/intl/locales'
 import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { DecisionDeskRedisKeys } from '@/utils/server/decisionDesk/cachedData'
+import { AllCompletedRacesResponse } from '@/utils/server/decisionDesk/getElectionStatus'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -33,6 +34,7 @@ interface LocationUnitedStatesLiveResultsProps {
   ddhqResults: Record<DecisionDeskRedisKeys, RacesVotingDataResponse[] | null>
   presidentialRaceLiveResult: PresidentialDataWithVotingResponse[] | null
   congressRaceLiveResult: GetAllCongressDataResponse
+  initialElectionStatusData: AllCompletedRacesResponse
 }
 
 export function LocationUnitedStatesLiveResults({
@@ -41,6 +43,7 @@ export function LocationUnitedStatesLiveResults({
   ddhqResults,
   presidentialRaceLiveResult,
   congressRaceLiveResult,
+  initialElectionStatusData,
 }: LocationUnitedStatesLiveResultsProps) {
   const urls = getIntlUrls(locale)
 
@@ -97,7 +100,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
-            <LiveStatusBadgeWithApi initialRaceData={ddhqResults['SWC_HI_STATE_RACES_DATA']} />
+            <LiveStatusBadgeWithApi initialElectionStatusData={initialElectionStatusData} />
           </div>
 
           <div className="flex flex-col flex-wrap items-center gap-4 lg:flex-row">
@@ -121,7 +124,7 @@ export function LocationUnitedStatesLiveResults({
           titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
-            <LiveStatusBadgeWithApi initialRaceData={ddhqResults['SWC_HI_STATE_RACES_DATA']} />
+            <LiveStatusBadgeWithApi initialElectionStatusData={initialElectionStatusData} />
           </div>
           <LiveResultsMap initialRaceData={congressRaceLiveResult} locale={locale} />
         </ContentSection>
