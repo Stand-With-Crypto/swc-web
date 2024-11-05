@@ -9,7 +9,7 @@ export function PageVoterGuide() {
       <div className="space-y-2">
         <PageTitle size="xs">Your crypto voter guide</PageTitle>
         <PageSubTitle>
-          This year’s election is critical to the future of crypto in America. Stand With Crypto is
+          This year's election is critical to the future of crypto in America. Stand With Crypto is
           on a mission to inform voters on where politicians stand on crypto. Complete the following
           actions to make an informed vote.
         </PageSubTitle>
