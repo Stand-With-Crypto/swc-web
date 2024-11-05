@@ -71,7 +71,7 @@ const zodExternalUserActionOptIn = z.object({
   firstName: zodFirstName.optional(),
   lastName: zodLastName.optional(),
   address: zodExternalUserActionOptInUserAddress.optional(),
-  phoneNumber: zodOptionalEmptyPhoneNumber,
+  phoneNumber: zodOptionalEmptyPhoneNumber.optional(),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
@@ -176,7 +176,7 @@ export async function handleExternalUserActionOptIn(
     },
   }
 
-  if (input.hasOptedInToReceiveSMSFromSWC) {
+  if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber) {
     await smsActions.optInUser(input.phoneNumber, user)
   }
 

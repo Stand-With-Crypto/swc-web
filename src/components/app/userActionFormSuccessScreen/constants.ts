@@ -52,4 +52,9 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
     title: 'You researched your voting information!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
+  [UserActionType.VOTING_DAY]: {
+    title: 'Thanks for doing your part!',
+    description:
+      "Thanks for doing your part to save crypto this year. We'll send a free NFT to your profile soon. Spread the word and urge others to vote by sharing on X.",
+  },
 }
