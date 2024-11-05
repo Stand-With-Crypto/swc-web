@@ -209,7 +209,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
                     ddhqCandidateA?.computedStanceScore,
                 ),
               )}
-              value={Math.min(+getVotePercentage(ddhqCandidateA, raceData).toFixed(0) * 2, 100)}
+              value={Math.min(
+                +getVotePercentage(ddhqCandidateA, raceData).toFixed(0) * (ddhqCandidateB ? 2 : 1),
+                100,
+              )}
             />
           ) : null}
           {canShowProgress && ddhqCandidateB ? (
@@ -226,7 +229,10 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
                 ),
               )}
               inverted
-              value={Math.min(+getVotePercentage(ddhqCandidateB, raceData).toFixed(0) * 2, 100)}
+              value={Math.min(
+                +getVotePercentage(ddhqCandidateB, raceData).toFixed(0) * (ddhqCandidateA ? 2 : 1),
+                100,
+              )}
             />
           ) : null}
         </div>
