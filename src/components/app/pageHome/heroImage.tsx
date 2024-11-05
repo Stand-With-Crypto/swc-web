@@ -15,24 +15,19 @@ interface HeroImageProps {
 export function HeroImage({ locale }: HeroImageProps) {
   return (
     <Link href={getIntlUrls(locale).locationUnitedStates()}>
-      <LinkBox
-        className="relative flex h-[320px] items-center justify-center overflow-hidden md:rounded-xl lg:h-[400px]"
-        style={{
-          background: 'radial-gradient(74.32% 74.32% at 50% 50%, #F0E8FF 8.5%, #6B28FF 89%);',
-        }}
-      >
+      <LinkBox className="relative flex h-[300px] items-center justify-center overflow-hidden md:rounded-xl lg:h-[400px]">
         <NextImage
           alt="Election results"
           height={400}
           priority
           quality={100}
-          src="/actionTypeIcons/votingResearched.png"
-          width={400}
+          src="/homepageHero-ElectionResults.png"
+          width={510}
         />
 
         <div
           className={
-            'absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white'
+            'absolute bottom-0 flex w-full items-center justify-between gap-2 p-4 text-sm text-white'
           }
           style={{
             background:

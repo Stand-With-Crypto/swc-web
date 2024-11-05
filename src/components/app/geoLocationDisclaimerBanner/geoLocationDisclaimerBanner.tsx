@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Balancer from 'react-wrap-balancer'
 import Cookies from 'js-cookie'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
@@ -93,16 +94,16 @@ export function GeoLocationDisclaimerBanner() {
 
   return (
     <InternalLink
-      className="flex h-16 w-full items-center bg-primary-cta text-center opacity-100 transition-all duration-200"
+      className="flex w-full items-center bg-primary-cta text-center opacity-100 transition-all duration-200"
       href={urls.locationUnitedStates()}
     >
-      <div className="container flex justify-between">
-        <div className="flex w-full items-center justify-center text-center text-base text-white antialiased">
-          <p>
+      <div className="container flex w-full justify-between">
+        <div className="flex w-full items-center justify-center py-2 text-center text-base text-white antialiased">
+          <Balancer>
             Thank you to our advocates for making your voice heard! Check out the election results
             and the role crypto played.
-          </p>
-          <ArrowRight size={16} />
+          </Balancer>
+          <ArrowRight className="w-12 lg:w-8" size={16} />
         </div>
       </div>
     </InternalLink>
