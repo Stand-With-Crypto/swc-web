@@ -5,9 +5,9 @@ import { fetchRacesData } from '@/utils/server/decisionDesk/services'
 
 export async function getAllRacesData(params: GetRacesParams): Promise<RacesVotingDataResponse[]> {
   const { data: firstPageData, total_pages } = await fetchRacesData({
-    ...params,
     page: '1',
     limit: '100',
+    ...params,
   })
 
   const pageIteration = Array.from({ length: total_pages - 1 }, (_, i) => (i + 2).toString())
