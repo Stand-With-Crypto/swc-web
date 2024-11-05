@@ -340,6 +340,11 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      {
+        source: '/election',
+        destination: '/races?utm_source=swc&utm_medium=sms&utm_campaign=election-results-2024',
+        permanent: true,
+      },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
         source: '/vg/:campaignId/:sessionId*',
