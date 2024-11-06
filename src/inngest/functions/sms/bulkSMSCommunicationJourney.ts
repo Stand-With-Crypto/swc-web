@@ -368,9 +368,23 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
           {
             UserCommunicationJourney: {
               every: {
-                campaignName: {
-                  not: options.campaignName,
-                },
+                OR: [
+                  {
+                    campaignName: {
+                      not: options.campaignName,
+                    },
+                  },
+                  {
+                    campaignName: options.campaignName,
+                    userCommunications: {
+                      every: {
+                        status: {
+                          not: CommunicationMessageStatus.DELIVERED,
+                        },
+                      },
+                    },
+                  },
+                ],
               },
             },
           },
