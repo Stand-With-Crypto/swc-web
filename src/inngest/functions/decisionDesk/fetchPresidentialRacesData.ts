@@ -99,24 +99,26 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       logger.error('All races data not fetched.')
     }
 
-    const senateData = await step.run(`fetch-senate-data-requests-${requestsMade}`, async () =>
-      getAllRacesData({
-        year,
-        limit,
-        name,
-        race_date,
-        office: 'US Senate',
-        ...rest,
-      }),
+    const allSenateData = await step.run(
+      `fetch-all-senate-data-requests-${requestsMade}`,
+      async () =>
+        getAllRacesData({
+          year,
+          limit,
+          name,
+          race_date,
+          office: 'US Senate',
+          ...rest,
+        }),
     )
 
     requestsMade += 1
 
-    if (!senateData) {
+    if (!allSenateData) {
       logger.error('Senate data not fetched.')
     }
 
-    const houseData = await step.run(`fetch-house-data-requests-${requestsMade}`, async () =>
+    const allHouseData = await step.run(`fetch-all-house-data-requests-${requestsMade}`, async () =>
       getAllRacesData({
         year,
         limit,
@@ -129,12 +131,44 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
     requestsMade += 1
 
-    if (!houseData) {
+    if (!allHouseData) {
       logger.error('House data not fetched.')
     }
 
+    const laHouseData = await step.run(`fetch-all-races-data-requests-${requestsMade}`, async () =>
+      getAllRacesData({
+        year,
+        limit,
+        race_date,
+        office: 'US House',
+        state: 'LA',
+        election_type: '1',
+      }),
+    )
+
+    const laSenateData = await step.run(`fetch-senate-data-requests-${requestsMade}`, async () =>
+      getAllRacesData({
+        year,
+        limit,
+        race_date,
+        office: 'US Senate',
+        state: 'LA',
+        election_type: '1',
+      }),
+    )
+
+    const senateDataWithoutLA = allSenateData.filter(
+      currentSenateData => currentSenateData.state !== 'LA',
+    )
+    const houseDataWithoutLA = allHouseData.filter(
+      currentHouseData => currentHouseData.state !== 'LA',
+    )
+
+    const senateData = senateDataWithoutLA.concat(laSenateData)
+    const houseData = houseDataWithoutLA.concat(laHouseData)
+
     const allCongressData = await step.run(
-      `fetch-all-congress-data-requests-${requestsMade}`,
+      `fetch-congress-data-requests-${requestsMade}`,
       async () => getAllCongressData({ senateData, houseData }),
     )
 
