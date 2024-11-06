@@ -14,10 +14,10 @@ export const getPoliticianFindMatch = (
   if (!ddhqCandidate) return false
   if (!dtsiPerson) return false
 
-  const decisionDeskDistrict = 'district' in ddhqCandidate ? ddhqCandidate.district : ''
+  const decisionDeskDistrict = 'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''
   if (
     (dtsiPerson.primaryRole?.primaryDistrict?.toLowerCase() ?? '') !==
-    decisionDeskDistrict.toLowerCase()
+    decisionDeskDistrict?.toLowerCase()
   ) {
     return false
   }
