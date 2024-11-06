@@ -7,7 +7,7 @@ import {
   PresidentialDataWithVotingResponse,
 } from '@/data/aggregations/decisionDesk/types'
 
-const HARD_CODED_LASTNAMES = ['BOEBERT', 'BANKS', 'SLOTKIN', 'KIM', 'ALLRED', 'CURTIS', 'GALLEGO']
+const HARD_CODED_LASTNAMES = ['boebert', 'banks', 'slotkin', 'kim', 'allred', 'curtis', 'gallego']
 
 export const getPoliticianFindMatch = (
   dtsiPerson: DTSI_Candidate,
