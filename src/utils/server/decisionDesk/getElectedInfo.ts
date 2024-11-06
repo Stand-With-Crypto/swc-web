@@ -1,6 +1,6 @@
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
-import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import { CandidatesWithVote, RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
+import { getMatchingDDHQCandidateForDTSIPerson } from '@/data/aggregations/decisionDesk/utils'
 import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleGroupCategory,
@@ -46,9 +46,10 @@ export async function getElectedInfo() {
     for (const currentDtsiPerson of dtsiStateData.people) {
       const ddhqPerson = stateRacesData
         ?.flatMap(currentRace => {
-          const currentDDHQPerson = currentRace.candidatesWithVotes.find(currentCandidate =>
-            getPoliticianFindMatch(currentDtsiPerson as DTSI_Candidate, currentCandidate),
-          )
+          const currentDDHQPerson = getMatchingDDHQCandidateForDTSIPerson(
+            currentDtsiPerson as DTSI_Candidate,
+            currentRace.candidatesWithVotes,
+          ) as CandidatesWithVote | undefined
 
           return currentDDHQPerson
         })

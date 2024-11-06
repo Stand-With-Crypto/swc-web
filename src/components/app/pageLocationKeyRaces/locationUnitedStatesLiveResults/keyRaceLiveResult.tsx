@@ -29,7 +29,7 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import { getMatchingDDHQCandidateForDTSIPerson } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
@@ -97,23 +97,18 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
           return (
             race.district.toString().toLowerCase() === primaryDistrict.toString().toLowerCase() &&
             race.office?.officeId?.toString() === '3' &&
-            race.candidatesWithVotes.some(
-              _candidate =>
-                getPoliticianFindMatch(candidateA, _candidate) ||
-                getPoliticianFindMatch(candidateB, _candidate),
-            )
+            (!!getMatchingDDHQCandidateForDTSIPerson(candidateA, race.candidatesWithVotes) ||
+              !!getMatchingDDHQCandidateForDTSIPerson(candidateB, race.candidatesWithVotes))
           )
         }) ?? null
       )
     }
 
     return (
-      liveResultData?.find?.(race =>
-        race.candidatesWithVotes.some(
-          _candidate =>
-            getPoliticianFindMatch(candidateA, _candidate) ||
-            getPoliticianFindMatch(candidateB, _candidate),
-        ),
+      liveResultData?.find?.(
+        race =>
+          !!getMatchingDDHQCandidateForDTSIPerson(candidateA, race.candidatesWithVotes) ||
+          !!getMatchingDDHQCandidateForDTSIPerson(candidateB, race.candidatesWithVotes),
       ) ?? null
     )
   }, [candidateA, candidateB, liveResultData, primaryDistrict])

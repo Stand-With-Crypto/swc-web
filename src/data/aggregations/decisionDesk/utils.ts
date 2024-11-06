@@ -63,6 +63,45 @@ export const normalizeName = (name: string) => {
   return deburr(toLower(trim(name))).replace(/[.-\s]/g, '')
 }
 
+export const isNamesDirectMatch = (
+  dtsiPerson: DTSI_Candidate,
+  ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'] | undefined,
+) => {
+  if (!ddhqCandidate) return false
+  if (!dtsiPerson) return false
+
+  const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
+  const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
+
+  return normalizedDTSIName === normalizedDDHQName
+}
+
+export const getMatchingDDHQCandidateForDTSIPerson = <
+  T extends CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'],
+>(
+  dtsiPerson: DTSI_Candidate,
+  ddhqCandidates: T[],
+): T | undefined => {
+  const directMatch = ddhqCandidates.find(candidate => isNamesDirectMatch(dtsiPerson, candidate))
+  if (directMatch) {
+    return directMatch
+  }
+
+  return ddhqCandidates.find(candidate => getPoliticianFindMatch(dtsiPerson, candidate))
+}
+
+export const getMatchingDTSIDataForDDHQCandidate = (
+  ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'],
+  dtsiPeople: DTSI_Candidate[],
+) => {
+  const directMatch = dtsiPeople.find(dtsiPerson => isNamesDirectMatch(dtsiPerson, ddhqCandidate))
+  if (directMatch) {
+    return directMatch
+  }
+
+  return dtsiPeople.find(dtsiPerson => getPoliticianFindMatch(dtsiPerson, ddhqCandidate))
+}
+
 function compareLastNamePartsWithLevenshtein(
   dtsiPerson: DTSI_Candidate,
   ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'],
