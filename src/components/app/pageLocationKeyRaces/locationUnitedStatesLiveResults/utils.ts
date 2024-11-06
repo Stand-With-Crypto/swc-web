@@ -14,8 +14,11 @@ export const convertDTSIStanceScoreToBgColorClass = (score: number | null | unde
   if (isNil(score)) {
     return twNoop('bg-gray-400')
   }
-  if (score > 50) {
+  if (score > 75) {
     return twNoop('bg-green-700')
+  }
+  if (score > 50) {
+    return twNoop('bg-[#7b8508]')
   }
   if (score === 50) {
     return twNoop('bg-yellow-600')

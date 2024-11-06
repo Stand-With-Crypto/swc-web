@@ -1,5 +1,3 @@
-import '@/globals.css'
-
 import { notFound } from 'next/navigation'
 
 import { PageProps } from '@/types'

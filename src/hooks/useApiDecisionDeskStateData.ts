@@ -3,10 +3,13 @@
 import { useCookie } from 'react-use'
 import useSWR, { SWRResponse } from 'swr'
 
-import { INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID } from '@/app/[locale]/internal/api-tampering/key-races/page'
 import { CandidatesWithVote, RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import * as stateRacesMockData from '@/mocks/decisionDesk'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import {
+  INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID,
+  parseKeyRacesMockCookie,
+} from '@/utils/shared/keyRacesTampering'
 import { apiUrls } from '@/utils/shared/urls'
 
 interface UseApiDecisionDeskDataProps {
@@ -21,6 +24,7 @@ export function useApiDecisionDeskData({
   district,
 }: UseApiDecisionDeskDataProps) {
   const [apiTamperedValue] = useCookie(INTERNAL_API_TAMPERING_KEY_RACES_ESTIMATED_VOTES_MID)
+  const mockedRaceCookieData = parseKeyRacesMockCookie(apiTamperedValue)
 
   const swrData = useSWR(
     district
@@ -37,8 +41,9 @@ export function useApiDecisionDeskData({
     },
   )
 
-  if (apiTamperedValue && stateCode) {
+  if (mockedRaceCookieData && stateCode) {
     const key = `SWC_${stateCode.toUpperCase()}_STATE_RACES_DATA`
+    const { estimatedVotes, raceStatus } = mockedRaceCookieData
 
     const stateRacesData = stateRacesMockData[
       key as keyof typeof stateRacesMockData
@@ -49,8 +54,8 @@ export function useApiDecisionDeskData({
 
       const rawVotes = currentStateRaceData.candidatesWithVotes.map(currentCandidate => {
         const votes = Math.min(
-          Math.round(+apiTamperedValue * Math.abs(Math.random() - 0.5)),
-          +apiTamperedValue,
+          Math.round(+estimatedVotes * Math.abs(Math.random() - 0.5)),
+          +estimatedVotes,
         )
         return { ...currentCandidate, votes }
       })
@@ -60,19 +65,20 @@ export function useApiDecisionDeskData({
       )
 
       const updatedVotes = rawVotes.map(candidate => {
-        const elected = candidate.id === highestVoteCandidate.id
+        const elected = candidate.id === highestVoteCandidate.id && raceStatus === 'finished'
         if (elected) {
           mockedCalledCandidate = candidate
         }
         return {
           ...candidate,
           elected,
+          votes: raceStatus !== 'not-started' ? candidate.votes : 0,
         }
       })
 
       return {
         ...currentStateRaceData,
-        totalVotes: +apiTamperedValue,
+        totalVotes: +estimatedVotes,
         calledCandidate: mockedCalledCandidate,
         candidatesWithVotes: updatedVotes,
       }
