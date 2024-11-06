@@ -211,12 +211,13 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
                       ddhqCandidateA?.computedStanceScore,
                   ),
                   getOpacity(ddhqCandidateA, raceData),
+                  'border-r-2 border-white',
                 )}
                 percentage={getVotePercentage(ddhqCandidateA, raceData)}
               />
             ) : null}
 
-            <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 transform bg-black" />
+            <div className="absolute bottom-1/2 left-1/2 right-1/2 top-1/2 h-6 w-[2px] -translate-x-1/2 -translate-y-1/2 transform bg-black/80" />
 
             {canShowProgress && ddhqCandidateB ? (
               <Progress
@@ -226,6 +227,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
                       ddhqCandidateB?.computedStanceScore,
                   ),
                   getOpacity(ddhqCandidateB, raceData),
+                  'border-l-2 border-white',
                 )}
                 percentage={getVotePercentage(ddhqCandidateB, raceData)}
               />
