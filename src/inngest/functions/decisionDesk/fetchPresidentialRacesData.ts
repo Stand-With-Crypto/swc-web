@@ -28,7 +28,11 @@ const DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE = 40
 
 export const fetchPresidentialRacesDataCron = inngest.createFunction(
   { id: FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_ID },
-  { cron: FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE },
+  {
+    ...(NEXT_PUBLIC_ENVIRONMENT !== 'local'
+      ? { cron: FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE }
+      : { event: FETCH_PRESIDENTIAL_RACES_INNGEST_EVENT_NAME }),
+  },
   async ({ step }) => {
     await step.sendEvent(`${FETCH_PRESIDENTIAL_RACES_INNGEST_EVENT_NAME}-event-call`, {
       name: FETCH_PRESIDENTIAL_RACES_INNGEST_EVENT_NAME,
