@@ -16,9 +16,11 @@ export const getPoliticianFindMatch = (
 ) => {
   if (!ddhqCandidate) return false
   if (!dtsiPerson) return false
+
+  const digest = Math.random().toString(36).substring(7)
   const state =
     'state' in ddhqCandidate ? ddhqCandidate.state : dtsiPerson.primaryRole?.primaryState
-  const logger = getLogger(`${state ?? ''} getPoliticianFindMatch`)
+  const logger = getLogger(`${state ?? ''} | getPoliticianFindMatch | ${digest}`)
 
   logger.info('Comparing DTSI and DDHQ candidates:')
   logger.info(
@@ -28,28 +30,45 @@ export const getPoliticianFindMatch = (
     `DDHQ: ${ddhqCandidate.firstName} ${ddhqCandidate.lastName} - ${'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''}`,
   )
 
+  logger.info(`pre-normalizedDTSIName ${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
+  logger.info(`post-normalizedDTSIName ${normalizedDTSIName}`)
+  logger.info(`pre-normalizedDTSINickname: ${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
   const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
+  logger.info(`post-normalizedDTSINickname: ${normalizedDTSINickname}`)
+  logger.info(`pre-normalizedDTSILastName: ${dtsiPerson.lastName}`)
   const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
+  logger.info(`post-normalizedDTSILastName: ${normalizedDTSILastName}`)
 
+  logger.info(`pre-normalizedDDHQName: ${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
+  logger.info(`post-normalizedDDHQName: ${normalizedDDHQName}`)
+  logger.info(`pre-normalizedDDHQLastName: ${ddhqCandidate.lastName}`)
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
+  logger.info(`post-normalizedDDHQLastName: ${normalizedDDHQLastName}`)
   logger.info(
     `Normalized all names: ${normalizedDTSIName} ${normalizedDTSINickname} ${normalizedDTSILastName} ${normalizedDDHQName} ${normalizedDDHQLastName}`,
   )
 
-  const decisionDeskCandidateDistrict =
-    'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''
-  if (
-    !HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
-    toLower(dtsiPerson.primaryRole?.primaryDistrict ?? '') !==
-      toLower(decisionDeskCandidateDistrict)
-  ) {
+  try {
+    const decisionDeskCandidateDistrict =
+      'district' in ddhqCandidate && ddhqCandidate.district ? ddhqCandidate.district : ''
+    if (
+      !HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
+      toLower(
+        dtsiPerson.primaryRole?.primaryDistrict ? dtsiPerson.primaryRole?.primaryDistrict : '',
+      ) !== toLower(decisionDeskCandidateDistrict)
+    ) {
+      return false
+    }
+    logger.info(
+      `Districts match: ${dtsiPerson.primaryRole?.primaryDistrict ? dtsiPerson.primaryRole?.primaryDistrict : ''} ${decisionDeskCandidateDistrict}`,
+    )
+  } catch (error) {
+    logger.info('Failed to compare districts')
+    logger.error(error)
     return false
   }
-  logger.info(
-    `Districts match: ${dtsiPerson.primaryRole?.primaryDistrict ?? ''} ${decisionDeskCandidateDistrict}`,
-  )
   // Allow up to 2 edits for names, e.g. Sapriacone vs Sapraicone, with a threshold of 2
   const nameThreshold = 2
 
