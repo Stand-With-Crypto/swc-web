@@ -6,6 +6,7 @@ import {
   CandidatesWithVote,
   PresidentialDataWithVotingResponse,
 } from '@/data/aggregations/decisionDesk/types'
+import { getLogger } from '@/utils/shared/logger'
 
 const HARD_CODED_LASTNAMES = ['boebert', 'banks', 'slotkin', 'kim', 'allred', 'curtis', 'gallego']
 
@@ -15,6 +16,17 @@ export const getPoliticianFindMatch = (
 ) => {
   if (!ddhqCandidate) return false
   if (!dtsiPerson) return false
+  const state =
+    'state' in ddhqCandidate ? ddhqCandidate.state : dtsiPerson.primaryRole?.primaryState
+  const logger = getLogger(`${state ?? ''} getPoliticianFindMatch`)
+
+  logger.info('Comparing DTSI and DDHQ candidates:')
+  logger.info(
+    `DTSI: ${dtsiPerson.firstName} ${dtsiPerson.lastName} - ${dtsiPerson.primaryRole?.primaryDistrict ?? ''}`,
+  )
+  logger.info(
+    `DDHQ: ${ddhqCandidate.firstName} ${ddhqCandidate.lastName} - ${'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''}`,
+  )
 
   const decisionDeskDistrict = 'district' in ddhqCandidate ? ddhqCandidate.district : ''
   if (
@@ -30,6 +42,9 @@ export const getPoliticianFindMatch = (
 
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
+  logger.info(
+    `Normalized all names: ${normalizedDTSIName} ${normalizedDTSINickname} ${normalizedDTSILastName} ${normalizedDDHQName} ${normalizedDDHQLastName}`,
+  )
 
   const decisionDeskCandidateDistrict =
     'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''
@@ -40,7 +55,9 @@ export const getPoliticianFindMatch = (
   ) {
     return false
   }
-
+  logger.info(
+    `Districts match: ${dtsiPerson.primaryRole?.primaryDistrict ?? ''} ${decisionDeskCandidateDistrict}`,
+  )
   // Allow up to 2 edits for names, e.g. Sapriacone vs Sapraicone, with a threshold of 2
   const nameThreshold = 2
 
@@ -58,7 +75,9 @@ export const getPoliticianFindMatch = (
     hasPassedWithLastName ||
     hasPassedWithLastNameParts
 
+  logger.info(`isMatch: ${String(isMatch)}`)
   if ('state' in ddhqCandidate) {
+    logger.info(`ddhqCandidate state: ${ddhqCandidate.state ?? ''}`)
     isMatch =
       isMatch && toLower(dtsiPerson.primaryRole?.primaryState) === toLower(ddhqCandidate.state)
   }
