@@ -40,10 +40,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 
   const leftLinks = [
-    {
-      href: urls.voterGuide(),
-      text: 'Voter guide',
-    },
+    { href: urls.locationUnitedStates(), text: '2024 Election results' },
     {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
@@ -127,24 +124,15 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     </LoginDialogWrapper>
   )
 
-  const KeyRacesButton = () => (
+  const DonateButton = () => (
     <Button
       asChild
-      className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
-      key={urls.voterGuide()}
+      className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
+      key={urls.donate()}
       onClick={maybeCloseAfterNavigating}
       variant="default"
     >
-      <InternalLink
-        className="text-base font-bold leading-4 md:font-normal"
-        href={urls.locationUnitedStates()}
-      >
-        <span className="relative mr-2 flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500"></span>
-        </span>
-        Live election results
-      </InternalLink>
+      <InternalLink href={urls.donate()}>Donate</InternalLink>
     </Button>
   )
 
@@ -271,8 +259,8 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 </div>
               ))}
             </div>
-            <div className="hidden gap-4 min-[1096px]:flex">
-              <KeyRacesButton />
+            <div className="hidden gap-4 min-[1092px]:flex">
+              <DonateButton />
               <LoginButton />
             </div>
           </div>
@@ -371,7 +359,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 <LoginButton />
               </div>
               <div className="mt-4 px-6">
-                <KeyRacesButton />
+                <DonateButton />
               </div>
             </div>
           </DrawerContent>

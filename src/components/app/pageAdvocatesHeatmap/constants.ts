@@ -1,10 +1,10 @@
 import { UserActionType } from '@prisma/client'
 
 import {
+  DonateIcon,
+  FollowOnXIcon,
   IconProps,
   JoinIcon,
-  PrepareToVoteIcon,
-  ViewKeyRacesIcon,
   VotedIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 
@@ -95,6 +95,24 @@ export const ADVOCATES_ACTIONS: Partial<
     labelMobile: 'joined',
     labelActionTooltip: 'joined SWC',
   },
+  TWEET: {
+    icon: FollowOnXIcon,
+    label: 'Followed SWC on X',
+    labelMobile: 'Followed on X',
+    labelActionTooltip: 'Followed SWC on X',
+  },
+  VOTING_DAY: {
+    icon: VotedIcon,
+    label: 'I voted',
+    labelMobile: 'I voted',
+    labelActionTooltip: 'I voted',
+  },
+  DONATION: {
+    icon: DonateIcon,
+    label: 'Donated',
+    labelMobile: 'Donated',
+    labelActionTooltip: 'Donated',
+  },
   // removed call and email for the voting day
   // VOTER_REGISTRATION: {
   //   icon: VoterRegIcon,
@@ -108,22 +126,16 @@ export const ADVOCATES_ACTIONS: Partial<
   //   labelMobile: 'pledged to vote',
   //   labelActionTooltip: 'pledged to vote',
   // },
-  VIEW_KEY_RACES: {
-    icon: ViewKeyRacesIcon,
-    label: 'Researched politician scores',
-    labelMobile: 'researched',
-    labelActionTooltip: 'researched politician scores',
-  },
-  VOTING_INFORMATION_RESEARCHED: {
-    icon: PrepareToVoteIcon,
-    label: 'Prepared to vote',
-    labelMobile: 'prepared',
-    labelActionTooltip: 'prepared to vote',
-  },
-  VOTING_DAY: {
-    icon: VotedIcon,
-    label: 'I voted',
-    labelMobile: 'I voted',
-    labelActionTooltip: 'I voted',
-  },
+  // VIEW_KEY_RACES: {
+  //   icon: ViewKeyRacesIcon,
+  //   label: 'Researched politician scores',
+  //   labelMobile: 'researched',
+  //   labelActionTooltip: 'researched politician scores',
+  // },
+  // VOTING_INFORMATION_RESEARCHED: {
+  //   icon: PrepareToVoteIcon,
+  //   label: 'Prepared to vote',
+  //   labelMobile: 'prepared',
+  //   labelActionTooltip: 'prepared to vote',
+  // },
 }
