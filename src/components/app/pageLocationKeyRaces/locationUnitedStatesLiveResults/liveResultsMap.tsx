@@ -109,7 +109,7 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
   )
 
   return (
-    <div className="relative h-full w-full">
+    <div className="pointer-events-none relative h-full w-full touch-none lg:pointer-events-auto lg:touch-auto">
       <ComposableMap
         projection="geoAlbersUsa"
         style={{ width: '100%', height: '100%' }}
