@@ -135,7 +135,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       logger.error('House data not fetched.')
     }
 
-    const laHouseData = await step.run(`fetch-all-races-data-requests-${requestsMade}`, async () =>
+    const laHouseData = await step.run(`fetch-la-house-data-requests-${requestsMade}`, async () =>
       getAllRacesData({
         year,
         limit,
@@ -146,7 +146,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       }),
     )
 
-    const laSenateData = await step.run(`fetch-senate-data-requests-${requestsMade}`, async () =>
+    const laSenateData = await step.run(`fetch-la-senate-data-requests-${requestsMade}`, async () =>
       getAllRacesData({
         year,
         limit,
