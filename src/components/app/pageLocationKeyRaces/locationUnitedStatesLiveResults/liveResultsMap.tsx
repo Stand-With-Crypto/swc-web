@@ -9,7 +9,6 @@ import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
-import { useIsMobile } from '@/hooks/useIsMobile'
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import {
@@ -108,9 +107,6 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
     },
     [router, urls],
   )
-
-  const isMobile = useIsMobile()
-  if (isMobile) return null
 
   return (
     <div className="relative h-full w-full">
@@ -219,7 +215,7 @@ function Tooltip({
   return (
     <div
       className={cn(
-        'pointer-events-none fixed z-50 flex flex-col items-center justify-center gap-2 rounded-2xl bg-black p-4 font-sans text-base text-white',
+        'pointer-events-none fixed z-50 hidden flex-col items-center justify-center gap-2 rounded-2xl bg-black p-4 font-sans text-base text-white lg:flex',
       )}
       style={{
         top: mousePosition.y,

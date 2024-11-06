@@ -1,16 +1,19 @@
+import Link from 'next/link'
+
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DDHQFooter } from '@/components/app/ddhqFooter'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
-import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
+import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/LiveResultCard/keyRaceLiveResultCard'
 import { LiveResultsMap } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveResultsMap'
 import { LiveStatusBadgeWithApi } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadgeWithApi'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
 import { ResultsOverviewCard } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/resultsOverviewCard'
 import { getCongressLiveResultOverview } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/utils'
 import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
@@ -28,6 +31,7 @@ import { AllCompletedRacesResponse } from '@/utils/server/decisionDesk/getElecti
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
+import { createTweetLink } from '@/utils/web/createTweetLink'
 
 import { organizePeople } from './organizePeople'
 
@@ -82,12 +86,33 @@ export function LocationUnitedStatesLiveResults({
               </UserActionVotingDayDialog>
             }
           >
-            <Button className="w-fit" variant="secondary">
+            <Button className="mt-6 w-fit " variant="secondary">
               Join Stand With Crypto
             </Button>
           </LoginDialogWrapper>
         </div>
       </DarkHeroSection>
+
+      <div className="container">
+        <Link
+          href={createTweetLink({
+            message:
+              'Watch live election results and see which candidates #StandWithCrypto: https://standwithcrypto.org/races',
+          })}
+          target="_blank"
+        >
+          <Badge
+            className="mb-14 flex w-full items-center justify-between gap-8 rounded-2xl p-6 text-sm md:text-base"
+            variant="primary-cta-subtle"
+          >
+            <p className="font-normal">
+              Stand With Crypto is the definitive place to track your crypto candidates on Election
+              Day. Help spread the word!
+            </p>
+            <p className="min-w-max">Share on X</p>
+          </Badge>
+        </Link>
+      </div>
 
       <div className="space-y-20 xl:space-y-28">
         <ContentSection
@@ -132,7 +157,7 @@ export function LocationUnitedStatesLiveResults({
         </ContentSection>
 
         <ContentSection
-          className="container hidden lg:block"
+          className="container"
           subtitle="When a state turns purple, it means a pro-crypto candidate has been elected. Follow along to see which states vote pro-crypto."
           title="Map view"
           titleProps={{ size: 'xs' }}

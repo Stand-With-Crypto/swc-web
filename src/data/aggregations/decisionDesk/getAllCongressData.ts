@@ -4,7 +4,7 @@ import {
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import { getMatchingDTSIDataForDDHQCandidate } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_AllPeopleQuery } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { getLogger } from '@/utils/shared/logger'
@@ -38,11 +38,9 @@ const enhanceCongressData = (
   const { people } = dtsiAllPeopleData
 
   const enhancedCandidatesWithVote = congressData.candidatesWithVotes.map(currentCandidate => {
-    const dtsiData =
-      people.find(currentPerson => {
-        return getPoliticianFindMatch(currentPerson, currentCandidate)
-      }) ?? null
-
+    const dtsiData = getMatchingDTSIDataForDDHQCandidate(currentCandidate, people) as
+      | DTSI_AllPeopleQuery['people'][number]
+      | null
     if (!dtsiData) {
       logger.info('No match for candidates between decisionDesk and DTSI.', {
         tags: { domain: 'liveResult' },

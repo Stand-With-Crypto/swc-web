@@ -34,7 +34,7 @@ export function ResultsOverviewCard(props: ResultsOverviewCardProps) {
               Pro-crypto{' '}
               {pluralize({
                 count: proCryptoCandidatesElected,
-                singular: 'candidates',
+                singular: 'candidate',
               })}{' '}
               elected
             </p>
@@ -45,7 +45,7 @@ export function ResultsOverviewCard(props: ResultsOverviewCardProps) {
               Anti-crypto{' '}
               {pluralize({
                 count: antiCryptoCandidatesElected,
-                singular: 'candidates',
+                singular: 'candidate',
               })}{' '}
               elected
             </p>

@@ -29,7 +29,7 @@ export const GetRacesParamsSchema = z.object({
   /**
    * Election Type ID as in ELECTION_TYPES inside src/data/decisionDesk/constants.ts
    */
-  election_type_id: z.string().pipe(z.coerce.number()).pipe(z.coerce.string()).optional(),
+  election_type: z.string().pipe(z.coerce.number()).pipe(z.coerce.string()).optional(),
   /**
    * Office ID as in OFFICES inside src/data/decisionDesk/constants.ts
    */

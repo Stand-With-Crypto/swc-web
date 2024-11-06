@@ -99,24 +99,26 @@ export const fetchPresidentialRacesData = inngest.createFunction(
       logger.error('All races data not fetched.')
     }
 
-    const senateData = await step.run(`fetch-senate-data-requests-${requestsMade}`, async () =>
-      getAllRacesData({
-        year,
-        limit,
-        name,
-        race_date,
-        office: 'US Senate',
-        ...rest,
-      }),
+    const allSenateData = await step.run(
+      `fetch-all-senate-data-requests-${requestsMade}`,
+      async () =>
+        getAllRacesData({
+          year,
+          limit,
+          name,
+          race_date,
+          office: 'US Senate',
+          ...rest,
+        }),
     )
 
     requestsMade += 1
 
-    if (!senateData) {
+    if (!allSenateData) {
       logger.error('Senate data not fetched.')
     }
 
-    const houseData = await step.run(`fetch-house-data-requests-${requestsMade}`, async () =>
+    const allHouseData = await step.run(`fetch-all-house-data-requests-${requestsMade}`, async () =>
       getAllRacesData({
         year,
         limit,
@@ -129,9 +131,41 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
     requestsMade += 1
 
-    if (!houseData) {
+    if (!allHouseData) {
       logger.error('House data not fetched.')
     }
+
+    const laHouseData = await step.run(`fetch-la-house-data-requests-${requestsMade}`, async () =>
+      getAllRacesData({
+        year,
+        limit,
+        race_date,
+        office: 'US House',
+        state: 'LA',
+        election_type: '1',
+      }),
+    )
+
+    const laSenateData = await step.run(`fetch-la-senate-data-requests-${requestsMade}`, async () =>
+      getAllRacesData({
+        year,
+        limit,
+        race_date,
+        office: 'US Senate',
+        state: 'LA',
+        election_type: '1',
+      }),
+    )
+
+    const senateDataWithoutLA = allSenateData.filter(
+      currentSenateData => currentSenateData.state !== 'LA',
+    )
+    const houseDataWithoutLA = allHouseData.filter(
+      currentHouseData => currentHouseData.state !== 'LA',
+    )
+
+    const senateData = senateDataWithoutLA.concat(laSenateData)
+    const houseData = houseDataWithoutLA.concat(laHouseData)
 
     const allCongressData = await step.run(
       `fetch-all-congress-data-requests-${requestsMade}`,
@@ -157,6 +191,11 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         )
       }
 
+      if (!allRacesData || allRacesData?.length === 0) {
+        logger.info('No valid all races data fetched.')
+        return
+      }
+
       return await setDecisionDataOnRedis('SWC_ALL_RACES_DATA', JSON.stringify(allRacesData), {
         ex: undefined,
       })
@@ -170,6 +209,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
           path.join(rootDir, 'SWC_ALL_SENATE_DATA.json'),
           JSON.stringify(allCongressData.senateDataWithDtsi, null, 2),
         )
+      }
+
+      if (
+        !allCongressData?.senateDataWithDtsi?.candidatesWithVotes ||
+        allCongressData?.senateDataWithDtsi?.candidatesWithVotes?.length === 0
+      ) {
+        logger.info('No valid all senate data fetched.')
+        return
       }
 
       return await setDecisionDataOnRedis(
@@ -189,6 +236,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         )
       }
 
+      if (
+        !allCongressData?.houseDataWithDtsi?.candidatesWithVotes ||
+        allCongressData?.houseDataWithDtsi?.candidatesWithVotes?.length === 0
+      ) {
+        logger.info('No valid all house data fetched.')
+        return
+      }
+
       return await setDecisionDataOnRedis(
         'SWC_ALL_HOUSE_DATA',
         JSON.stringify(allCongressData.houseDataWithDtsi),
@@ -206,6 +261,11 @@ export const fetchPresidentialRacesData = inngest.createFunction(
             path.join(rootDir, 'SWC_PRESIDENTIAL_RACES_DATA.json'),
             JSON.stringify(presidentialRacesData, null, 2),
           )
+        }
+
+        if (!presidentialRacesData || presidentialRacesData?.length === 0) {
+          logger.info('No valid presidential race data fetched.')
+          return
         }
 
         return await setDecisionDataOnRedis(
@@ -276,8 +336,8 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
         const stateRacesDataOnly = stateRacesData.filter(
           currentStateRacesData =>
-            currentStateRacesData.office?.officeName === 'US House' ||
-            currentStateRacesData.office?.officeName === 'US Senate',
+            currentStateRacesData?.office?.officeName === 'US House' ||
+            currentStateRacesData?.office?.officeName === 'US Senate',
         )
 
         if (stateRacesDataOnly.length === 0) {
@@ -300,6 +360,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
               2,
             ),
           )
+        }
+
+        if (
+          (!stateRacesDataOnly || stateRacesDataOnly?.length === 0) &&
+          (!stateRacesData || stateRacesData?.length === 0)
+        ) {
+          logger.info(`No valid race data fetched for ${currentStateKey}. Skipping persisting.`)
+          continue
         }
 
         const persistedState = await setDecisionDataOnRedis(

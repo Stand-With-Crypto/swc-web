@@ -46,12 +46,12 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
     <Suspense
       fallback={<DefaultPlacesSelect onChange={noop} stateCode={props.stateCode} value={null} />}
     >
-      <_UserLocationRaceInfo {...props} />
+      <SuspenseUserLocationRaceInfo {...props} />
     </Suspense>
   )
 }
 
-function _UserLocationRaceInfo({
+function SuspenseUserLocationRaceInfo({
   groups,
   stateCode,
   stateName,
