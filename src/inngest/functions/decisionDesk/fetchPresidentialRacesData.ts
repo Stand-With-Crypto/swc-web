@@ -112,7 +112,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
     requestsMade += 1
 
-    if (!senateData) {
+    if (!senateData || senateData.length === 0) {
       logger.error('Senate data not fetched.')
     }
 
@@ -129,13 +129,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
     requestsMade += 1
 
-    if (!houseData) {
-      logger.error('House data not fetched.')
-    }
-
     const allCongressData = await step.run(
       `fetch-all-congress-data-requests-${requestsMade}`,
-      async () => getAllCongressData({ senateData, houseData }),
+      async () => {
+        if (!senateData || senateData.length === 0 || !houseData || houseData.length === 0) {
+          return { senateDataWithDtsi: null, houseDataWithDtsi: null }
+        }
+        return await getAllCongressData({ senateData, houseData })
+      },
     )
 
     if (!persist) {
@@ -299,6 +300,11 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         requestsMade += 1
 
         timeTakenInSeconds = (new Date().getTime() - startDate.getTime()) / 1000
+
+        if (!stateRacesData || stateRacesData?.length === 0) {
+          logger.info(`No valid state race data fetched for ${currentStateKey}.`)
+          continue
+        }
 
         const stateRacesDataOnly = stateRacesData.filter(
           currentStateRacesData =>
