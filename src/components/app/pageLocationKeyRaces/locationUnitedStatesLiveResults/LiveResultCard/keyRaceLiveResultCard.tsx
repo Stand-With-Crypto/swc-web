@@ -27,7 +27,7 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import { getMatchingDDHQCandidateForDTSIPerson } from '@/data/aggregations/decisionDesk/utils'
 import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -92,23 +92,18 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
           return (
             race.district.toString().toLowerCase() === primaryDistrict.toString().toLowerCase() &&
             race.office?.officeId?.toString() === '3' &&
-            race.candidatesWithVotes.some(
-              _candidate =>
-                getPoliticianFindMatch(candidateA, _candidate) ||
-                getPoliticianFindMatch(candidateB, _candidate),
-            )
+            (!!getMatchingDDHQCandidateForDTSIPerson(candidateA, race.candidatesWithVotes) ||
+              !!getMatchingDDHQCandidateForDTSIPerson(candidateB, race.candidatesWithVotes))
           )
         }) ?? null
       )
     }
 
     return (
-      liveResultData?.find?.(race =>
-        race.candidatesWithVotes.some(
-          _candidate =>
-            getPoliticianFindMatch(candidateA, _candidate) ||
-            getPoliticianFindMatch(candidateB, _candidate),
-        ),
+      liveResultData?.find?.(
+        race =>
+          !!getMatchingDDHQCandidateForDTSIPerson(candidateA, race.candidatesWithVotes) ||
+          !!getMatchingDDHQCandidateForDTSIPerson(candidateB, race.candidatesWithVotes),
       ) ?? null
     )
   }, [candidateA, candidateB, liveResultData, primaryDistrict])
@@ -179,22 +174,20 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
       )}
 
       <div className="flex justify-between">
-        {!!candidateA && (
+        {!!ddhqCandidateA && (
           <AvatarBox
             className={cn(getOpacity(ddhqCandidateA, raceData))}
             ddhqCandidate={ddhqCandidateA}
-            dtsiCandidate={candidateA}
             locale={locale}
           />
         )}
-        {!!candidateB && (
+        {!!ddhqCandidateB && (
           <AvatarBox
             className={cn(
               'flex flex-col items-end text-right',
               getOpacity(ddhqCandidateB, raceData),
             )}
             ddhqCandidate={ddhqCandidateB}
-            dtsiCandidate={candidateB}
             locale={locale}
           />
         )}
