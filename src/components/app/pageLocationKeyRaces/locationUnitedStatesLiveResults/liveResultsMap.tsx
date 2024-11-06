@@ -109,7 +109,7 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
   )
 
   return (
-    <div className="pointer-events-none relative h-full w-full touch-none lg:pointer-events-auto lg:touch-auto">
+    <div className="relative h-full w-full">
       <ComposableMap
         projection="geoAlbersUsa"
         style={{ width: '100%', height: '100%' }}
@@ -215,7 +215,7 @@ function Tooltip({
   return (
     <div
       className={cn(
-        'pointer-events-none fixed z-50 flex flex-col items-center justify-center gap-2 rounded-2xl bg-black p-4 font-sans text-base text-white',
+        'pointer-events-none fixed z-50 hidden flex-col items-center justify-center gap-2 rounded-2xl bg-black p-4 font-sans text-base text-white lg:flex',
       )}
       style={{
         top: mousePosition.y,
