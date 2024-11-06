@@ -7,6 +7,8 @@ import {
   PresidentialDataWithVotingResponse,
 } from '@/data/aggregations/decisionDesk/types'
 
+const HARD_CODED_LASTNAMES = ['boebert', 'banks', 'slotkin', 'kim', 'allred', 'curtis', 'gallego']
+
 export const getPoliticianFindMatch = (
   dtsiPerson: DTSI_Candidate,
   ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'] | undefined,
@@ -14,12 +16,29 @@ export const getPoliticianFindMatch = (
   if (!ddhqCandidate) return false
   if (!dtsiPerson) return false
 
+  const decisionDeskDistrict = 'district' in ddhqCandidate ? ddhqCandidate.district : ''
+  if (
+    (dtsiPerson.primaryRole?.primaryDistrict?.toLowerCase() ?? '') !==
+    decisionDeskDistrict.toLowerCase()
+  ) {
+    return false
+  }
+
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
   const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
   const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
 
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
+
+  const decisionDeskDistrict = 'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''
+  if (
+    !HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
+    (dtsiPerson.primaryRole?.primaryDistrict?.toLowerCase() ?? '') !==
+      decisionDeskDistrict?.toLowerCase()
+  ) {
+    return false
+  }
 
   // Allow up to 2 edits for names, e.g. Sapriacone vs Sapraicone, with a threshold of 2
   const nameThreshold = 2
