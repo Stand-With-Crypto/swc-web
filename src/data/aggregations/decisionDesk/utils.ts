@@ -24,8 +24,8 @@ export const getPoliticianFindMatch = (
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
 
   if (
-    HARD_CODED_LASTNAMES.includes(normalizedDDHQLastName) &&
-    HARD_CODED_LASTNAMES.includes(normalizedDTSILastName)
+    HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
+    normalizedDTSILastName === normalizedDDHQLastName
   ) {
     return true
   }
