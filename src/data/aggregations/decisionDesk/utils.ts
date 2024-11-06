@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import levenshtein from 'js-levenshtein'
 import { deburr, toLower, trim } from 'lodash-es'
 
