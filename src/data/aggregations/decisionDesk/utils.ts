@@ -23,17 +23,11 @@ export const getPoliticianFindMatch = (
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
 
-  if (
-    HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
-    normalizedDTSILastName === normalizedDDHQLastName
-  ) {
-    return true
-  }
-
   const decisionDeskDistrict = 'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''
   if (
+    !HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
     (dtsiPerson.primaryRole?.primaryDistrict?.toLowerCase() ?? '') !==
-    decisionDeskDistrict?.toLowerCase()
+      decisionDeskDistrict?.toLowerCase()
   ) {
     return false
   }
