@@ -52,6 +52,7 @@ const getDefaultProps = () => {
           username: 'xHandle',
         },
       ],
+      roles: [],
     },
   }
   return props
