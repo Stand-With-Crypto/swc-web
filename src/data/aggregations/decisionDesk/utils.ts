@@ -22,33 +22,11 @@ export const getPoliticianFindMatch = (
     'state' in ddhqCandidate ? ddhqCandidate.state : dtsiPerson.primaryRole?.primaryState
   const logger = getLogger(`${state ?? ''} | getPoliticianFindMatch | ${digest}`)
 
-  logger.info('Comparing DTSI and DDHQ candidates:')
-  logger.info(
-    `DTSI: ${dtsiPerson.firstName} ${dtsiPerson.lastName} - ${dtsiPerson.primaryRole?.primaryDistrict ?? ''}`,
-  )
-  logger.info(
-    `DDHQ: ${ddhqCandidate.firstName} ${ddhqCandidate.lastName} - ${'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''}`,
-  )
-
-  logger.info(`pre-normalizedDTSIName ${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
-  logger.info(`post-normalizedDTSIName ${normalizedDTSIName}`)
-  logger.info(`pre-normalizedDTSINickname: ${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
   const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
-  logger.info(`post-normalizedDTSINickname: ${normalizedDTSINickname}`)
-  logger.info(`pre-normalizedDTSILastName: ${dtsiPerson.lastName}`)
   const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
-  logger.info(`post-normalizedDTSILastName: ${normalizedDTSILastName}`)
-
-  logger.info(`pre-normalizedDDHQName: ${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
-  logger.info(`post-normalizedDDHQName: ${normalizedDDHQName}`)
-  logger.info(`pre-normalizedDDHQLastName: ${ddhqCandidate.lastName}`)
   const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
-  logger.info(`post-normalizedDDHQLastName: ${normalizedDDHQLastName}`)
-  logger.info(
-    `Normalized all names: ${normalizedDTSIName} ${normalizedDTSINickname} ${normalizedDTSILastName} ${normalizedDDHQName} ${normalizedDDHQLastName}`,
-  )
 
   try {
     const decisionDeskCandidateDistrict =
@@ -61,11 +39,10 @@ export const getPoliticianFindMatch = (
     ) {
       return false
     }
-    logger.info(
-      `Districts match: ${dtsiPerson.primaryRole?.primaryDistrict ? dtsiPerson.primaryRole?.primaryDistrict : ''} ${decisionDeskCandidateDistrict}`,
-    )
   } catch (error) {
-    logger.info('Failed to compare districts')
+    logger.info(
+      `Failed to compare districts between DTSI ${normalizedDTSIName} and DDHQ ${normalizedDDHQName}`,
+    )
     logger.error(error)
     return false
   }
@@ -86,9 +63,7 @@ export const getPoliticianFindMatch = (
     hasPassedWithLastName ||
     hasPassedWithLastNameParts
 
-  logger.info(`isMatch: ${String(isMatch)}`)
   if ('state' in ddhqCandidate) {
-    logger.info(`ddhqCandidate state: ${ddhqCandidate.state ?? ''}`)
     isMatch =
       isMatch && toLower(dtsiPerson.primaryRole?.primaryState) === toLower(ddhqCandidate.state)
   }
