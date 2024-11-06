@@ -64,8 +64,9 @@ export const getPoliticianFindMatch = (
     logger.info(
       `Districts match: ${dtsiPerson.primaryRole?.primaryDistrict ? dtsiPerson.primaryRole?.primaryDistrict : ''} ${decisionDeskCandidateDistrict}`,
     )
-  } catch {
+  } catch (error) {
     logger.info('Failed to compare districts')
+    logger.error(error)
     return false
   }
   // Allow up to 2 edits for names, e.g. Sapriacone vs Sapraicone, with a threshold of 2
