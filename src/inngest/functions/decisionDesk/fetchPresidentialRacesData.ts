@@ -157,6 +157,11 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         )
       }
 
+      if (!allRacesData || allRacesData?.length === 0) {
+        logger.info('No valid all races data fetched.')
+        return
+      }
+
       return await setDecisionDataOnRedis('SWC_ALL_RACES_DATA', JSON.stringify(allRacesData), {
         ex: undefined,
       })
@@ -170,6 +175,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
           path.join(rootDir, 'SWC_ALL_SENATE_DATA.json'),
           JSON.stringify(allCongressData.senateDataWithDtsi, null, 2),
         )
+      }
+
+      if (
+        !allCongressData?.senateDataWithDtsi?.candidatesWithVotes ||
+        allCongressData?.senateDataWithDtsi?.candidatesWithVotes?.length === 0
+      ) {
+        logger.info('No valid all senate data fetched.')
+        return
       }
 
       return await setDecisionDataOnRedis(
@@ -189,6 +202,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
         )
       }
 
+      if (
+        !allCongressData?.houseDataWithDtsi?.candidatesWithVotes ||
+        allCongressData?.houseDataWithDtsi?.candidatesWithVotes?.length === 0
+      ) {
+        logger.info('No valid all house data fetched.')
+        return
+      }
+
       return await setDecisionDataOnRedis(
         'SWC_ALL_HOUSE_DATA',
         JSON.stringify(allCongressData.houseDataWithDtsi),
@@ -206,6 +227,11 @@ export const fetchPresidentialRacesData = inngest.createFunction(
             path.join(rootDir, 'SWC_PRESIDENTIAL_RACES_DATA.json'),
             JSON.stringify(presidentialRacesData, null, 2),
           )
+        }
+
+        if (!presidentialRacesData || presidentialRacesData?.length === 0) {
+          logger.info('No valid presidential race data fetched.')
+          return
         }
 
         return await setDecisionDataOnRedis(
@@ -300,6 +326,14 @@ export const fetchPresidentialRacesData = inngest.createFunction(
               2,
             ),
           )
+        }
+
+        if (
+          (!stateRacesDataOnly || stateRacesDataOnly?.length === 0) &&
+          (!stateRacesData || stateRacesData?.length === 0)
+        ) {
+          logger.info(`No valid race data fetched for ${currentStateKey}. Skipping persisting.`)
+          continue
         }
 
         const persistedState = await setDecisionDataOnRedis(
