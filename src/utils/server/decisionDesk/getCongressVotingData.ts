@@ -1,9 +1,9 @@
+import { format } from 'date-fns'
+
 import { getAllRacesData } from '@/data/aggregations/decisionDesk/getAllRacesData'
 import { getMatchingDTSIDataForDDHQCandidate } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { convertDTSIPersonStanceScoreToLetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { TZDate } from '@date-fns/tz'
-import { format } from 'date-fns'
 
 interface CongressDataElectionData {
   ddhqWinnerFirstName: string
