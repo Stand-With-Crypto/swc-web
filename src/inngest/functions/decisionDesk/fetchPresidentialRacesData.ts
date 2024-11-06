@@ -168,7 +168,7 @@ export const fetchPresidentialRacesData = inngest.createFunction(
     const houseData = houseDataWithoutLA.concat(laHouseData)
 
     const allCongressData = await step.run(
-      `fetch-congress-data-requests-${requestsMade}`,
+      `fetch-all-congress-data-requests-${requestsMade}`,
       async () => getAllCongressData({ senateData, houseData }),
     )
 
