@@ -14,6 +14,14 @@ export const getPoliticianFindMatch = (
   if (!ddhqCandidate) return false
   if (!dtsiPerson) return false
 
+  const decisionDeskDistrict = 'district' in ddhqCandidate ? ddhqCandidate.district : ''
+  if (
+    (dtsiPerson.primaryRole?.primaryDistrict?.toLowerCase() ?? '') !==
+    decisionDeskDistrict.toLowerCase()
+  ) {
+    return false
+  }
+
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
   const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
   const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
