@@ -115,7 +115,13 @@ async function getNotificationInformationForEvents(
         messages: [
           {
             campaignName: `event-reminder-${event.data.slug}-${event.data.state}-${notificationStrategy}`,
-            smsBody,
+            variants: [
+              {
+                percentage: 100,
+                smsBody,
+              },
+            ],
+            includePendingDoubleOptIn: true,
             userWhereInput: {
               phoneNumber: {
                 in: notifications.map(notification => notification.phoneNumber),
