@@ -92,9 +92,10 @@ export const isNamesDirectMatch = (
   if (!dtsiPerson) return false
 
   const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
+  const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
   const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
 
-  return normalizedDTSIName === normalizedDDHQName
+  return normalizedDTSIName === normalizedDDHQName || normalizedDTSINickname === normalizedDDHQName
 }
 
 export const getMatchingDDHQCandidateForDTSIPerson = <
