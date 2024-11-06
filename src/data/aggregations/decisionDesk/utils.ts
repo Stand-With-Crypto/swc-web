@@ -44,6 +44,12 @@ export const getPoliticianFindMatch = (
       dtsiPerson.primaryRole?.primaryState?.toLowerCase() === ddhqCandidate.state.toLowerCase()
   }
 
+  if ('district' in ddhqCandidate && dtsiPerson.primaryRole?.primaryDistrict) {
+    isMatch =
+      isMatch &&
+      dtsiPerson.primaryRole?.primaryDistrict.toLowerCase() === ddhqCandidate.district.toLowerCase()
+  }
+
   return isMatch
 }
 
