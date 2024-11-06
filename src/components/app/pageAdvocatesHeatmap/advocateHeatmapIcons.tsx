@@ -644,11 +644,11 @@ export function FollowOnXIcon({ isPulsing = false, height = 40, width = 40, ...r
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <rect fill="#000" height="40" rx="20" width="40.0007" />
+      <rect fill="#EEF0F3" height="40" rx="20" width="40.0007" />
 
       <path
         d="M21.3319 18.928L26.5437 13H25.3087L20.7833 18.1472L17.1688 13H13L18.4657 20.7835L13 27H14.2351L19.0141 21.5643L22.8312 27H27L21.3316 18.928H21.3319ZM19.6403 20.8521L19.0865 20.077L14.6801 13.9098H16.5772L20.1331 18.887L20.6869 19.662L25.3093 26.1316H23.4122L19.6403 20.8524V20.8521Z"
-        fill="white"
+        fill="black"
       />
       <defs>
         <clipPath id="clip0_5259_17626">
@@ -662,7 +662,7 @@ export function FollowOnXIcon({ isPulsing = false, height = 40, width = 40, ...r
             cy="20"
             fill="none"
             r="18"
-            stroke="#000"
+            stroke="#EEF0F3"
             strokeLinecap="round"
             strokeWidth="8"
           >
@@ -675,7 +675,7 @@ export function FollowOnXIcon({ isPulsing = false, height = 40, width = 40, ...r
             cy="20"
             fill="none"
             r="18"
-            stroke="#000"
+            stroke="#EEF0F3"
             strokeLinecap="round"
             strokeWidth="4"
           >
