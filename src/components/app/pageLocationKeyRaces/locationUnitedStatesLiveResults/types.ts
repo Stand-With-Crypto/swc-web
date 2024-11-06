@@ -17,4 +17,5 @@ export type DTSI_Candidate = DTSIAvatarProps['person'] &
     | 'primaryRole'
   > & {
     isRecommended?: boolean
+    roles?: DTSI_AllPeopleQuery['people'][number]['roles']
   }

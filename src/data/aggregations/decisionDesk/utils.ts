@@ -6,6 +6,7 @@ import {
   CandidatesWithVote,
   PresidentialDataWithVotingResponse,
 } from '@/data/aggregations/decisionDesk/types'
+import { DTSI_PersonRoleStatus } from '@/data/dtsi/generated'
 
 export const getPoliticianFindMatch = (
   dtsiPerson: DTSI_Candidate,
@@ -14,11 +15,13 @@ export const getPoliticianFindMatch = (
   if (!ddhqCandidate) return false
   if (!dtsiPerson) return false
 
+  const runningRole = dtsiPerson.roles?.find(
+    role =>
+      role.status === DTSI_PersonRoleStatus.RUNNING_FOR &&
+      (!role.group || role.group.groupInstance === '119'),
+  )
   const decisionDeskDistrict = 'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''
-  if (
-    (dtsiPerson.primaryRole?.primaryDistrict?.toLowerCase() ?? '') !==
-    decisionDeskDistrict?.toLowerCase()
-  ) {
+  if ((runningRole?.primaryDistrict?.toLowerCase() ?? '') !== decisionDeskDistrict?.toLowerCase()) {
     return false
   }
 

@@ -33,5 +33,31 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
       state
       username
     }
+    roles {
+      id
+      status
+      primaryCity
+      primaryCountryCode
+      primaryDistrict
+      primaryState
+      roleCategory
+      title
+      group {
+        category
+        dateEnd
+        dateStart
+        datetimeCreated
+        datetimeUpdated
+        displayName
+        groupInstance
+        id
+        officialUrl
+        primaryCity
+        primaryCountryCode
+        primaryDistrict
+        primaryState
+        proPublicaId
+      }
+    }
   }
 `
