@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import levenshtein from 'js-levenshtein'
 import { deburr, toLower, trim } from 'lodash-es'
 
@@ -40,6 +41,14 @@ export const getPoliticianFindMatch = (
       return false
     }
   } catch (error) {
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'getPoliticianFindMatch',
+      },
+      extra: {
+        message: `Failed to compare districts between DTSI ${normalizedDTSIName} and DDHQ ${normalizedDDHQName}`,
+      },
+    })
     logger.info(
       `Failed to compare districts between DTSI ${normalizedDTSIName} and DDHQ ${normalizedDDHQName}`,
     )
