@@ -27,8 +27,8 @@ export const getPoliticianFindMatch = (
     'district' in ddhqCandidate ? (ddhqCandidate.district ?? '') : ''
   if (
     !HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
-    (dtsiPerson.primaryRole?.primaryDistrict?.toLowerCase() ?? '') !==
-      decisionDeskCandidateDistrict?.toLowerCase()
+    toLower(dtsiPerson.primaryRole?.primaryDistrict ?? '') !==
+      toLower(decisionDeskCandidateDistrict)
   ) {
     return false
   }
