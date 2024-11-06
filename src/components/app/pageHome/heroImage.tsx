@@ -1,3 +1,4 @@
+import Balancer from 'react-wrap-balancer'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
@@ -36,16 +37,16 @@ export function HeroImage({ locale }: HeroImageProps) {
 
         <div
           className={
-            'absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white'
+            'absolute bottom-0 flex w-full items-center justify-between gap-2 p-4 text-sm text-white'
           }
           style={{
             background:
               'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
           }}
         >
-          <p>See how pro-crypto candidates are performing in the election</p>
+          <Balancer>Check out the election results and the role crypto played.</Balancer>
           <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
-            Explore
+            View results
             <ArrowUpRight />
           </Button>
         </div>
