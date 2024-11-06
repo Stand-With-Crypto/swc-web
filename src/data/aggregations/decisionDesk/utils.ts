@@ -60,8 +60,7 @@ export const getPoliticianFindMatch = (
 
   if ('state' in ddhqCandidate) {
     isMatch =
-      isMatch &&
-      dtsiPerson.primaryRole?.primaryState?.toLowerCase() === ddhqCandidate.state?.toLowerCase()
+      isMatch && toLower(dtsiPerson.primaryRole?.primaryState) === toLower(ddhqCandidate.state)
   }
 
   return isMatch
