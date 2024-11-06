@@ -44,6 +44,8 @@ export const getPoliticianFindMatch = (
     Sentry.captureException(error, {
       tags: {
         domain: 'getPoliticianFindMatch',
+      },
+      extra: {
         message: `Failed to compare districts between DTSI ${normalizedDTSIName} and DDHQ ${normalizedDDHQName}`,
       },
     })
