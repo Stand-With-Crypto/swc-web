@@ -302,8 +302,8 @@ export const fetchPresidentialRacesData = inngest.createFunction(
 
         const stateRacesDataOnly = stateRacesData.filter(
           currentStateRacesData =>
-            currentStateRacesData.office?.officeName === 'US House' ||
-            currentStateRacesData.office?.officeName === 'US Senate',
+            currentStateRacesData?.office?.officeName === 'US House' ||
+            currentStateRacesData?.office?.officeName === 'US Senate',
         )
 
         if (stateRacesDataOnly.length === 0) {
