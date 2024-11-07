@@ -9,7 +9,7 @@ import {
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.MINUTE
+export const revalidate = SECONDS_DURATION['15_MINUTES']
 
 export async function GET() {
   const allCompletedRaces: AllCompletedRacesResponse = await getElectionStatus()
