@@ -5,12 +5,17 @@ import { UserActionType } from '@prisma/client'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/components/userActionGridCTA'
 import { useGridCTAs } from '@/components/app/userActionGridCTAs/hooks/useGridCTAs'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { cn } from '@/utils/web/cn'
 
 interface UserActionGridCTAProps {
   excludeUserActionTypes?: UserActionType[]
+  className?: string
 }
 
-export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTAProps) {
+export function UserActionGridCTAs({
+  excludeUserActionTypes,
+  className = '',
+}: UserActionGridCTAProps) {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const performedUserActionTypes = data?.performedUserActionTypes ?? []
 
@@ -20,7 +25,7 @@ export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTA
   })
 
   return (
-    <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-4">
+    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-4', className)}>
       {ctas.map(cta => {
         const completedCampaigns = cta.campaigns.reduce((acc, campaign) => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
