@@ -36,16 +36,15 @@ export const ENDORSED_DTSI_PERSON_SLUGS = [
   'jake---auchincloss',
   'suhas---subramanyam',
   'jasmine---crockett',
-  'jim---costa',
+  'jim---costa', // CALIFORNIA 21 - EM ABERTO
   'jared---moskowitz',
   'marsha---blackburn',
   'ted---cruz',
-  'john--deaton',
   'shomari--figures',
   'troy---downing',
   'jim---banks',
   'jim--justice',
-  'yadira---caraveo',
+  'yadira---caraveo', // COLORADO 8 - EM ABERTO
   'steven---horsford',
   'patrick---ryan',
   'timothy---kennedy',
@@ -55,11 +54,9 @@ export const ENDORSED_DTSI_PERSON_SLUGS = [
   'donald---davis',
   'brian--jack',
   'michael---lawler',
-  'marcus---molinaro',
-  'lori---chavez-deremer',
+  'lori---chavez-deremer', // OREGON 5 - EM ABERTO
   'young---kim',
   'zach---nunn',
-  'anthony---desposito',
   'kirsten---gillibrand',
   'rick---scott',
 ]
