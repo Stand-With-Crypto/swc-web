@@ -28,7 +28,6 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getMatchingDDHQCandidateForDTSIPerson } from '@/data/aggregations/decisionDesk/utils'
-import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -77,11 +76,7 @@ export function KeyRaceLiveResult(props: KeyRaceLiveResultProps) {
     : urls.locationStateSpecificSenateRace(stateCode)
   const showLink = !isDistrictPage && !isSenatePage && !isPresidentialPage
 
-  const { data: liveResultData } = useApiDecisionDeskData({
-    initialRaceData,
-    stateCode,
-    district: primaryDistrict?.toString(),
-  })
+  const liveResultData = initialRaceData
 
   const raceData = useMemo(() => {
     if (!liveResultData) return null

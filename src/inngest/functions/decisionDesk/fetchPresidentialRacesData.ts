@@ -22,7 +22,7 @@ export interface FetchPresidentialRacesInngestEventSchema {
 }
 
 const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_ID = 'script.fetch-presidential-races-cron-job'
-const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York */5 * * * *' // Every 5 minute
+const FETCH_PRESIDENTIAL_RACES_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York */15 * * * *' // Every 15 minutes
 
 const DECISION_RATE_LIMIT_REQUESTS_PER_MINUTE = 40
 
