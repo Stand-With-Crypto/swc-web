@@ -9,7 +9,7 @@ import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['30_SECONDS']
+export const revalidate = SECONDS_DURATION['15_MINUTES']
 
 type LocationPresidentialRaceSpecificPageProps = PageProps
 

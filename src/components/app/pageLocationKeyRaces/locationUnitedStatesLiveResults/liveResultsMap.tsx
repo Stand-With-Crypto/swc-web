@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/types'
-import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import {
@@ -34,7 +33,7 @@ export function LiveResultsMap(props: LiveResultsMapProps) {
   const urls = getIntlUrls(locale)
   const router = useRouter()
 
-  const { data: liveResultData } = useApiDecisionDeskCongressData(initialRaceData)
+  const liveResultData = initialRaceData
 
   const proCryptoStates = useMemo<Record<string, number>>(() => {
     if (!liveResultData) return {}
