@@ -18,7 +18,6 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
-import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -43,7 +42,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     [candidates],
   )
 
-  const { data: liveResultData } = useApiDecisionDeskPresidentialData(initialRaceData)
+  const liveResultData = initialRaceData as PresidentialDataWithVotingResponse[]
 
   const ddhqCandidateA = useMemo(() => {
     if (!liveResultData) return null

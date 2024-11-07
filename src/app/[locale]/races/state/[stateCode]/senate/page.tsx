@@ -11,7 +11,7 @@ import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usState
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['30_SECONDS']
+export const revalidate = SECONDS_DURATION['15_MINUTES']
 
 type LocationSenateRaceSpecificPageProps = PageProps<{
   stateCode: string
