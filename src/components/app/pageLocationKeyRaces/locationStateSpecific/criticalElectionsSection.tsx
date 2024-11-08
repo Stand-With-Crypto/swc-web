@@ -54,7 +54,6 @@ export function CriticalElectionsSection(props: CriticalElectionsSectionProps) {
     <ContentSection
       subtitle="These elections are critical to the future of crypto in America. View live updates below."
       title={`Critical elections in ${stateName}`}
-      titleProps={{ size: 'xs' }}
     >
       <LiveResultsGrid
         className={criticalElectionsCount === 1 ? 'flex items-center justify-center' : ''}

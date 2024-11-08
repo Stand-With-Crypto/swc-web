@@ -159,12 +159,7 @@ function PledgeSectionSkeleton() {
   return (
     <>
       <PledgeSectionWrapper>
-        <ContentSection
-          title="Presidential Election"
-          titleProps={{
-            size: 'xs',
-          }}
-        >
+        <ContentSection title="Presidential Election">
           {Array.from({ length: 3 }, (_, index) => (
             <Skeleton className="h-36 w-full rounded-3xl" key={index} />
           ))}
@@ -174,12 +169,7 @@ function PledgeSectionSkeleton() {
       <hr />
 
       <PledgeSectionWrapper>
-        <ContentSection
-          title="U.S. Senate Race"
-          titleProps={{
-            size: 'xs',
-          }}
-        >
+        <ContentSection title="U.S. Senate Race">
           {Array.from({ length: 3 }, (_, index) => (
             <Skeleton className="h-36 w-full rounded-3xl" key={index} />
           ))}
@@ -189,12 +179,7 @@ function PledgeSectionSkeleton() {
       <hr />
 
       <PledgeSectionWrapper className={dialogContentPaddingBottomStyles}>
-        <ContentSection
-          title="Congressional District"
-          titleProps={{
-            size: 'xs',
-          }}
-        >
+        <ContentSection title="Congressional District">
           {Array.from({ length: 3 }, (_, index) => (
             <Skeleton className="h-36 w-full rounded-3xl" key={index} />
           ))}

@@ -8,10 +8,10 @@ export const DEFAULT_PAGE_TITLE_SIZE = 'xl'
 
 const titleVariantsConfig = {
   size: {
-    xxs: twNoop('text-lg md:text-lg lg:text-xl'),
-    xs: twNoop('text-xl md:text-xl lg:text-2xl'),
-    sm: twNoop('text-xl md:text-2xl lg:text-2xl'),
-    md: twNoop('text-2xl md:text-3xl lg:text-3xl'),
+    xxs: twNoop('text-base md:text-lg lg:text-lg'),
+    xs: twNoop('text-lg md:text-lg lg:text-xl'),
+    sm: twNoop('text-lg md:text-xl lg:text-2xl'),
+    md: twNoop('text-xl md:text-2xl lg:text-3xl'),
     lg: twNoop('text-3xl md:text-4xl lg:text-5xl'),
     [DEFAULT_PAGE_TITLE_SIZE]: twNoop('text-4xl md:text-5xl lg:text-6xl'),
   },
