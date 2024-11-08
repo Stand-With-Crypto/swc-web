@@ -53,7 +53,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  logger.info('Request URL:', request.url)
+  logger.info('Request URL:', request.url, body)
 
   const [_, searchParams] = request.url.split('?')
 
