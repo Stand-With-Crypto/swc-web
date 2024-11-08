@@ -84,7 +84,7 @@ export function PageContribute() {
                           <PageTitle as="h4" size="md">
                             Sample Email Copy
                           </PageTitle>
-                          <div className="prose max-w-full rounded-2xl bg-secondary p-5">
+                          <div className="prose my-8 max-w-full rounded-2xl bg-secondary p-5">
                             <p>All,</p>
 
                             <p>
