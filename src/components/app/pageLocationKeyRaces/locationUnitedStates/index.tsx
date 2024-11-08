@@ -39,7 +39,7 @@ export function LocationUnitedStates({
     <div className="space-y-20">
       <DarkHeroSection>
         <div className="space-y-6 text-center">
-          <PageTitle as="h1" size="md">
+          <PageTitle as="h1" size="lg">
             Key Races in the United States
           </PageTitle>
           <h2 className="space-y-4 font-light text-muted lg:space-y-1">
@@ -108,7 +108,7 @@ export function LocationUnitedStates({
                 width={150}
               />
 
-              <PageTitle as="h2" size="sm">
+              <PageTitle as="h2" size="md">
                 {stateName}
               </PageTitle>
 

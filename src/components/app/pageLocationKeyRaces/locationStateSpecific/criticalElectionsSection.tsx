@@ -44,7 +44,7 @@ export function CriticalElectionsSection(props: CriticalElectionsSectionProps) {
 
   if (!hasCriticalElections) {
     return (
-      <PageTitle as="h3" size="sm">
+      <PageTitle as="h3" size="md">
         There's no critical elections in {stateName}
       </PageTitle>
     )

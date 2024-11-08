@@ -28,9 +28,7 @@ export function OnboardingTweetAtPersonCampaign({
       />
 
       <div className="mt-4 space-y-2">
-        <PageTitle as="h3" size="sm">
-          Tweet your rep. Get a free NFT. 🍕
-        </PageTitle>
+        <PageTitle as="h3">Tweet your rep. Get a free NFT. 🍕</PageTitle>
         <p className="text-center text-fontcolor-muted">
           <Balancer>
             Held annually on May 22nd, Pizza Day commemorates the day when programmer Laszlo Hanyecz

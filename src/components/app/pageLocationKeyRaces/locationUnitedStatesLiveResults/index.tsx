@@ -69,7 +69,7 @@ export function LocationUnitedStatesLiveResults({
             width={100}
           />
           <div className="space-y-4 text-center">
-            <PageTitle as="h1" className="text-center" size="md">
+            <PageTitle as="h1" className="text-center" size="lg">
               Crypto election updates
             </PageTitle>
             <PageSubTitle className="text-gray-400" size="lg">

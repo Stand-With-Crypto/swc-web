@@ -288,7 +288,7 @@ export function UserActionFormEmailCongressperson({
       >
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
-            <PageTitle className="mb-3" size="sm">
+            <PageTitle className="mb-3" size="md">
               {title}
             </PageTitle>
             <PageSubTitle className="mb-7">{subtitle}</PageSubTitle>
