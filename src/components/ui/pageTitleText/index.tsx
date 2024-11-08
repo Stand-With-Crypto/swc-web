@@ -52,7 +52,6 @@ const getSizeFromComp = (Comp: PageTitleProps['as']) => {
 export const PageTitle = React.forwardRef<HTMLHeadingElement, PageTitleProps>(
   ({ className, children, as: Comp = 'h1', size, withoutBalancer, ...props }, ref) => {
     const computedSize = size || getSizeFromComp(Comp)
-    console.log('computedSize:', computedSize)
     return (
       <Comp
         className={cn(pageTitleVariants({ className, size: computedSize }))}
