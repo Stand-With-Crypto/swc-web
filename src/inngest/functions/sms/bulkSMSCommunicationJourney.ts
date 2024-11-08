@@ -92,11 +92,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       // We need to keep this order as true -> false because later we use groupBy, which keeps the first occurrence of each element. In this case, that would be the user who already received the welcome message, so we don’t need to send the legal disclaimer again.
       // This happens because of how where works with groupBy, and there are cases where different users with the same phone number show up in both groups. So, in those cases, we don’t want to send two messages—just one.
-      for (const hasWelcomeMessage of [true, false]) {
+      for (const userHasWelcomeMessage of [true, false]) {
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
-            UserCommunicationJourney: hasWelcomeMessage
+            UserCommunicationJourney: userHasWelcomeMessage
               ? {
                   some: {
                     journeyType: UserCommunicationJourneyType.WELCOME_SMS,
@@ -132,7 +132,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         logger.info(
           'Fetching phone numbers',
           prettyStringify({
-            hasWelcomeMessage,
+            userHasWelcomeMessage,
             campaignName,
             smsBody,
           }),
@@ -141,7 +141,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         let index = 0
         while (hasNumbersLeft) {
           const phoneNumberList = await step.run(
-            `fetching-phone-numbers-welcome-${String(hasWelcomeMessage)}-${index}`,
+            `fetching-phone-numbers-welcome-${String(userHasWelcomeMessage)}-${index}`,
             () =>
               getPhoneNumberList({
                 campaignName,
@@ -165,7 +165,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
         logger.info('Got phone numbers, adding to messagesPayload')
 
-        const body = !hasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
+        // Here we're adding the welcome legalese to the bulk text, when doing this we need to register in our DB that the user received the welcome legalese
+        const body = !userHasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
 
         // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
         // We need to use concat here because using spread is exceeding maximum call stack size
@@ -173,21 +174,13 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           uniq(allPhoneNumbers).map(phoneNumber => ({
             phoneNumber,
             messages: [
-              ...(!hasWelcomeMessage
-                ? [
-                    {
-                      journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                      campaignName: 'bulk-welcome',
-                    },
-                  ]
-                : []),
               {
-                // Here we're adding the welcome legalese to the bulk text, when doing this we need to add an empty message with
-                // WELCOME_SMS as journey type so that enqueueSMS register in our DB that the user received the welcome legalese
                 body,
                 campaignName,
                 journeyType: UserCommunicationJourneyType.BULK_SMS,
                 media,
+                // If the user does not have a welcome message, the body must have it
+                hasWelcomeMessageInBody: !userHasWelcomeMessage,
               },
             ],
           })),
