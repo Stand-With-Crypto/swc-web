@@ -49,7 +49,7 @@ export function LocationCongressLiveResults(props: LocationCongressLiveResultsPr
   return (
     <div className="mt-20 space-y-20">
       <div className="container max-w-screen-xl">
-        <PageTitle className="text-start" size="sm">
+        <PageTitle className="text-start" size="md">
           {getPageTitle(house)}
         </PageTitle>
       </div>

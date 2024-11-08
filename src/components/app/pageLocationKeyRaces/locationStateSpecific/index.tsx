@@ -67,7 +67,7 @@ export function LocationStateSpecific({
             </InternalLink>{' '}
             / <span>{stateName}</span>
           </h2>
-          <PageTitle as="h1" className="mb-4" size="md">
+          <PageTitle as="h1" className="mb-4" size="lg">
             Key Races in {stateName}
           </PageTitle>
           <h3 className="mt-4 text-xl text-gray-400">
@@ -107,7 +107,7 @@ export function LocationStateSpecific({
       )}
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
-        <PageTitle as="h3" className="mt-20" size="sm">
+        <PageTitle as="h3" className="mt-20" size="md">
           There's no election data for {stateName}
         </PageTitle>
       ) : (
