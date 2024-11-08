@@ -6,7 +6,7 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DDHQFooter } from '@/components/app/ddhqFooter'
 import { PACFooter } from '@/components/app/pacFooter'
 import { LiveResultsGrid } from '@/components/app/pageLocationKeyRaces/liveResultsGrid'
-import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/keyRaceLiveResult'
+import { KeyRaceLiveResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/LiveResultCard/keyRaceLiveResultCard'
 import { LiveResultsMap } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveResultsMap'
 import { LiveStatusBadgeWithApi } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/liveStatusBadgeWithApi'
 import { PresidentialRaceResult } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/presidentialRaceResult'
@@ -86,7 +86,7 @@ export function LocationUnitedStatesLiveResults({
               </UserActionVotingDayDialog>
             }
           >
-            <Button className="w-fit" variant="secondary">
+            <Button className="mt-6 w-fit " variant="secondary">
               Join Stand With Crypto
             </Button>
           </LoginDialogWrapper>
@@ -106,7 +106,8 @@ export function LocationUnitedStatesLiveResults({
             variant="primary-cta-subtle"
           >
             <p className="font-normal">
-              Bookmark this page and track your candidates live when polls close on Election Day!
+              Stand With Crypto is the definitive place to track your crypto candidates on Election
+              Day. Help spread the word!
             </p>
             <p className="min-w-max">Share on X</p>
           </Badge>
@@ -156,7 +157,7 @@ export function LocationUnitedStatesLiveResults({
         </ContentSection>
 
         <ContentSection
-          className="container hidden lg:block"
+          className="container"
           subtitle="When a state turns purple, it means a pro-crypto candidate has been elected. Follow along to see which states vote pro-crypto."
           title="Map view"
           titleProps={{ size: 'xs' }}

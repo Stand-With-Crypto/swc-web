@@ -45,10 +45,13 @@ export const getVotePercentage = (
 ) => {
   if (!candidate) return 0
 
-  const totalVotes = Math.max(
-    candidate?.estimatedVotes?.estimatedVotesMid || 0,
-    raceData?.totalVotes || 0,
-  )
+  let totalVotes: number = 0
+  if (raceData?.totalVotes && raceData.totalVotes > 0) {
+    totalVotes = raceData.totalVotes
+  } else {
+    totalVotes = candidate?.estimatedVotes?.estimatedVotesMid
+  }
+
   if (isNil(totalVotes)) return 0
 
   return candidate.votes ? +((candidate.votes / totalVotes) * 100).toFixed(2) : 0

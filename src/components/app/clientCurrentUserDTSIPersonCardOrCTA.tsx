@@ -39,14 +39,14 @@ function DefaultPlacesSelect(
 export function ClientCurrentUserDTSIPersonCardOrCTA(props: { locale: SupportedLocale }) {
   return (
     <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
-      <_ClientCurrentUserDTSIPersonCardOrCTA {...props} />
+      <SuspenseClientCurrentUserDTSIPersonCardOrCTA {...props} />
     </Suspense>
   )
 }
 
 const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
-function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
+function SuspenseClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
     POLITICIAN_CATEGORY,

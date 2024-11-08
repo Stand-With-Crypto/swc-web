@@ -46,7 +46,7 @@ export function VoterJourneyStepList(props: VoterJourneyStepListProps) {
   )
 
   return (
-    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-3', className)}>
+    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-4', className)}>
       {hydratedSteps.map(({ WrapperComponent, status, ...stepProps }, index) => (
         <WrapperComponent key={index}>
           <button

@@ -18,7 +18,6 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
-import { useApiDecisionDeskPresidentialData } from '@/hooks/useApiDecisionDeskPresidentialData'
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -43,7 +42,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     [candidates],
   )
 
-  const { data: liveResultData } = useApiDecisionDeskPresidentialData(initialRaceData)
+  const liveResultData = initialRaceData as PresidentialDataWithVotingResponse[]
 
   const ddhqCandidateA = useMemo(() => {
     if (!liveResultData) return null
@@ -258,6 +257,7 @@ interface WinnerAvatarBoxProps {
 }
 
 function WinnerAvatarBox(props: WinnerAvatarBoxProps) {
+  const locale = useLocale()
   const { candidate } = props
 
   return (
@@ -265,11 +265,13 @@ function WinnerAvatarBox(props: WinnerAvatarBoxProps) {
       <Badge className={'bg-[#23262B] px-4 py-1 text-base text-white'}>Winner</Badge>
 
       <div className="relative w-fit">
-        <DTSIAvatar person={candidate} size={175} />
-        <DTSIFormattedLetterGrade
-          className="absolute bottom-0 right-0 h-12 w-12 rounded-full shadow-md"
-          person={candidate}
-        />
+        <InternalLink href={getIntlUrls(locale).politicianDetails(candidate.slug)}>
+          <DTSIAvatar person={candidate} size={175} />
+          <DTSIFormattedLetterGrade
+            className="absolute bottom-0 right-0 h-12 w-12 rounded-full shadow-md"
+            person={candidate}
+          />
+        </InternalLink>
       </div>
 
       <div className="mt-2 text-center">

@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/node'
-
 import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
 import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
@@ -58,13 +56,6 @@ export async function getDtsiPresidentialWithVotingData(
     logger.info('No match for candidates between decisionDesk and DTSI.', {
       domain: 'aggregations/decisionDesk/getDtsiPresidentialWithVotingData',
       candidateNames,
-    })
-
-    Sentry.captureMessage('No match for candidates between decisionDesk and DTSI.', {
-      extra: {
-        domain: 'aggregations/decisionDesk/getDtsiPresidentialWithVotingData',
-        candidateNames,
-      },
     })
   }
 

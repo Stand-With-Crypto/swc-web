@@ -629,3 +629,150 @@ export function PrepareToVoteIcon({
     </svg>
   )
 }
+
+export function FollowOnXIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect fill="#000000" height="40" rx="20" width="40.0007" />
+
+      <path
+        d="M21.3319 18.928L26.5437 13H25.3087L20.7833 18.1472L17.1688 13H13L18.4657 20.7835L13 27H14.2351L19.0141 21.5643L22.8312 27H27L21.3316 18.928H21.3319ZM19.6403 20.8521L19.0865 20.077L14.6801 13.9098H16.5772L20.1331 18.887L20.6869 19.662L25.3093 26.1316H23.4122L19.6403 20.8524V20.8521Z"
+        fill="#FFFFFF"
+      />
+      <defs>
+        <clipPath id="clip0_5259_17626">
+          <rect fill="white" height="24" transform="translate(8 8)" width="24" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#000000"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#000000"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}
+
+export function DonateIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect fill="#D3E1FF" height="40" rx="20" width="40.0007" />
+
+      <g clip-path="url(#clip0_3808_560)">
+        <path
+          d="M13.332 24.1665H26.6654V25.8332H13.332V24.1665ZM24.1654 19.0248L22.8154 19.9998L20.832 17.2998L19.9987 16.1665L19.1654 17.2998L17.182 19.9998L15.832 19.0248L17.5654 16.6665H13.332V21.6665H26.6654V16.6665H22.432L24.1654 19.0248Z"
+          fill="#003EC1"
+          opacity="0.3"
+        />
+        <path
+          d="M26.668 14.9998H24.8513C24.943 14.7415 25.0013 14.4582 25.0013 14.1665C25.0013 12.7832 23.8846 11.6665 22.5013 11.6665C21.6263 11.6665 20.868 12.1165 20.418 12.7915L20.0013 13.3498L19.5846 12.7832C19.1346 12.1165 18.3763 11.6665 17.5013 11.6665C16.118 11.6665 15.0013 12.7832 15.0013 14.1665C15.0013 14.4582 15.0596 14.7415 15.1513 14.9998H13.3346C12.4096 14.9998 11.6763 15.7415 11.6763 16.6665L11.668 25.8332C11.668 26.7582 12.4096 27.4998 13.3346 27.4998H26.668C27.593 27.4998 28.3346 26.7582 28.3346 25.8332V16.6665C28.3346 15.7415 27.593 14.9998 26.668 14.9998ZM22.5013 13.3332C22.9596 13.3332 23.3346 13.7082 23.3346 14.1665C23.3346 14.6248 22.9596 14.9998 22.5013 14.9998C22.043 14.9998 21.668 14.6248 21.668 14.1665C21.668 13.7082 22.043 13.3332 22.5013 13.3332ZM17.5013 13.3332C17.9596 13.3332 18.3346 13.7082 18.3346 14.1665C18.3346 14.6248 17.9596 14.9998 17.5013 14.9998C17.043 14.9998 16.668 14.6248 16.668 14.1665C16.668 13.7082 17.043 13.3332 17.5013 13.3332ZM26.668 25.8332H13.3346V24.1665H26.668V25.8332ZM26.668 21.6665H13.3346V16.6665H17.568L15.8346 19.0248L17.1846 19.9998L19.168 17.2998L20.0013 16.1665L20.8346 17.2998L22.818 19.9998L24.168 19.0248L22.4346 16.6665H26.668V21.6665Z"
+          fill="#003EC1"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_3808_560">
+          <rect fill="white" height="20" transform="translate(10 10)" width="20" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#D3E1FF"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#D3E1FF"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}

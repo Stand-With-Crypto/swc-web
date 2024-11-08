@@ -16,8 +16,6 @@ import {
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
-import { useApiDecisionDeskData } from '@/hooks/useApiDecisionDeskStateData'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USStateCode } from '@/utils/shared/usStateUtils'
@@ -33,16 +31,10 @@ interface CongressSectionProps {
 export function CongressSection(props: CongressSectionProps) {
   const { stateCode, stateName, initialCongressLiveResultData, initialRaceData, locale } = props
 
-  const { data: stateRaceData } = useApiDecisionDeskData({
-    initialRaceData,
-    stateCode,
-    district: undefined,
-  })
+  const stateRaceData = initialRaceData
   const raceStatus = useMemo<RaceStatus>(() => getRaceStatus(stateRaceData), [stateRaceData])
 
-  const { data: congressRaceLiveResult } = useApiDecisionDeskCongressData(
-    initialCongressLiveResultData,
-  )
+  const congressRaceLiveResult = initialCongressLiveResultData
 
   const senateElectedData = getCongressLiveResultOverview(
     congressRaceLiveResult?.senateDataWithDtsi,

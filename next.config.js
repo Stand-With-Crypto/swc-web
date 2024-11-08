@@ -341,6 +341,11 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/results',
+        destination: '/races?utm_source=swc&utm_medium=sms&utm_campaign=election-results-2024-2',
+        permanent: true,
+      },
+      {
         source: '/election',
         destination: '/races?utm_source=swc&utm_medium=sms&utm_campaign=election-results-2024',
         permanent: true,

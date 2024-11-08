@@ -40,14 +40,14 @@ interface UserAddressVoterGuideInput {
 export function UserAddressVoterGuideInputSection(props: UserAddressVoterGuideInput) {
   return (
     <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
-      <_UserAddressVoterGuideInputSection {...props} />
+      <SuspenseUserAddressVoterGuideInputSection {...props} />
     </Suspense>
   )
 }
 
 const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
-function _UserAddressVoterGuideInputSection({ locale }: UserAddressVoterGuideInput) {
+function SuspenseUserAddressVoterGuideInputSection({ locale }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
     POLITICIAN_CATEGORY,

@@ -10,6 +10,7 @@ import {
   backfillReactivationWithInngest,
 } from '@/inngest/functions/backfillReactivation'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
+import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import {
   backfillSMSOptInReplyWithInngest,
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -78,6 +79,7 @@ export const { GET, POST, PUT } = serve({
     fetchPresidentialRacesData,
     fetchPresidentialRacesDataCron,
     enqueueSMS,
+    backfillUserCommunicationMessageStatus,
     updateMetricsCacheInngestCronJob,
   ],
 })

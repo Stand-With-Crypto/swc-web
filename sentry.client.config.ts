@@ -31,7 +31,6 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'TLS connection',
   'Unexpected end of',
   'Unknown root exit status',
-  'No match for candidates between decisionDesk and DTSI.',
 ]
 
 const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/api/js']

@@ -4,10 +4,12 @@ import { UserActionType } from '@prisma/client'
 import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
+import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import {
   UserActionCampaignName,
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
+  UserActionVotingDayCampaignName,
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
@@ -64,5 +66,19 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
     campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
     image: '/actionTypeIcons/votingResearched.png',
+  },
+  {
+    title: 'I voted!',
+    description: 'Claim your "proof-of-vote" NFT.',
+    WrapperComponent: ({ children }) => {
+      return (
+        <Suspense fallback={children}>
+          <UserActionVotingDayDialog>{children}</UserActionVotingDayDialog>
+        </Suspense>
+      )
+    },
+    action: UserActionType.VOTING_DAY,
+    campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
+    image: '/actionTypeIcons/iVoted.png',
   },
 ]
