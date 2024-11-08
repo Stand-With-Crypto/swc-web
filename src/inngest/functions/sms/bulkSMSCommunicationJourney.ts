@@ -1,4 +1,9 @@
-import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
+import {
+  CommunicationMessageStatus,
+  Prisma,
+  SMSStatus,
+  UserCommunicationJourneyType,
+} from '@prisma/client'
 import { addDays, addHours, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
@@ -100,6 +105,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
               ? {
                   some: {
                     journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                    userCommunications: {
+                      some: {
+                        status: CommunicationMessageStatus.DELIVERED,
+                      },
+                    },
                     datetimeCreated: {
                       gt: SHORT_CODE_GO_LIVE_DATE,
                     },
@@ -117,6 +127,16 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                         journeyType: UserCommunicationJourneyType.WELCOME_SMS,
                         datetimeCreated: {
                           lt: SHORT_CODE_GO_LIVE_DATE,
+                        },
+                      },
+                      {
+                        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                        userCommunications: {
+                          every: {
+                            status: {
+                              not: CommunicationMessageStatus.DELIVERED,
+                            },
+                          },
                         },
                       },
                     ],
@@ -348,9 +368,23 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
           {
             UserCommunicationJourney: {
               every: {
-                campaignName: {
-                  not: options.campaignName,
-                },
+                OR: [
+                  {
+                    campaignName: {
+                      not: options.campaignName,
+                    },
+                  },
+                  {
+                    campaignName: options.campaignName,
+                    userCommunications: {
+                      every: {
+                        status: {
+                          not: CommunicationMessageStatus.DELIVERED,
+                        },
+                      },
+                    },
+                  },
+                ],
               },
             },
           },

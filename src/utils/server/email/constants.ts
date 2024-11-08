@@ -1,3 +1,5 @@
+import { CommunicationMessageStatus } from '@prisma/client'
+
 export enum EmailEventName {
   PROCESSED = 'processed',
   DEFERRED = 'deferred',
@@ -36,4 +38,12 @@ export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string>
   [EmailEventName.UNSUBSCRIBE]: 'Unsubscribe',
   [EmailEventName.GROUP_UNSUBSCRIBE]: 'Group Unsubscribe',
   [EmailEventName.GROUP_RESUBSCRIBE]: 'Group Resubscribe',
+}
+
+export const EVENT_NAME_TO_COMMUNICATION_STATUS: Partial<
+  Record<EmailEventName, CommunicationMessageStatus>
+> = {
+  [EmailEventName.DELIVERED]: CommunicationMessageStatus.DELIVERED,
+  [EmailEventName.BOUNCE]: CommunicationMessageStatus.FAILED,
+  [EmailEventName.DROPPED]: CommunicationMessageStatus.FAILED,
 }

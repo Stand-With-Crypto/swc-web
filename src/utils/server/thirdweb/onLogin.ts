@@ -80,18 +80,18 @@ export async function login(payload: VerifyLoginPayloadParams) {
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
     include: {
-      address: true,
-      primaryUserEmailAddress: true,
-      userEmailAddresses: true,
-      userCryptoAddresses: true,
+      userActions: { select: { actionType: true } },
     },
     where: {
       userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } },
-      userActions: { some: { actionType: UserActionType.OPT_IN } },
     },
   })
 
-  if (existingVerifiedUser) {
+  const hasOptedIn = existingVerifiedUser?.userActions.some(
+    action => action.actionType === UserActionType.OPT_IN,
+  )
+
+  if (existingVerifiedUser && hasOptedIn) {
     log('existing verified user found')
 
     await onExistingUserLogin({
