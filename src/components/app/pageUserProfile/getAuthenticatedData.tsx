@@ -16,50 +16,65 @@ export async function getAuthenticatedData() {
   if (!authUser) {
     return null
   }
-  const user = await prismaClient.user.findFirstOrThrow({
+
+  const userPromise = prismaClient.user.findFirstOrThrow({
     where: {
       id: authUser.userId,
     },
     include: {
-      userMergeAlertUserA: {
-        include: { userB: { include: { primaryUserCryptoAddress: true, address: true } } },
-      },
-      userMergeAlertUserB: {
-        include: { userA: { include: { primaryUserCryptoAddress: true, address: true } } },
-      },
       primaryUserCryptoAddress: true,
       userCryptoAddresses: true,
       address: true,
       primaryUserEmailAddress: true,
-      userActions: {
-        include: {
-          userActionDonation: true,
-          userActionEmail: {
-            include: {
-              address: true,
-              userActionEmailRecipients: true,
-            },
-          },
-          userActionCall: true,
-          nftMint: true,
-          userActionOptIn: true,
-          userActionVoterRegistration: true,
-          userActionTweetAtPerson: true,
-          userActionRsvpEvent: true,
-          userActionVoterAttestation: true,
-          userActionViewKeyRaces: true,
-          userActionVotingInformationResearched: {
-            include: {
-              address: true,
-            },
-          },
-          userActionVotingDay: true,
-        },
-      },
     },
   })
+
+  const userMergeAlertUserAPromise = prismaClient.userMergeAlert.findMany({
+    where: { userAId: authUser.userId },
+    include: { userB: { include: { primaryUserCryptoAddress: true, address: true } } },
+  })
+
+  const userMergeAlertUserBPromise = prismaClient.userMergeAlert.findMany({
+    where: { userBId: authUser.userId },
+    include: { userA: { include: { primaryUserCryptoAddress: true, address: true } } },
+  })
+
+  const userActionsPromise = prismaClient.userAction.findMany({
+    where: { userId: authUser.userId },
+    include: {
+      userActionDonation: true,
+      userActionEmail: {
+        include: {
+          address: true,
+          userActionEmailRecipients: true,
+        },
+      },
+      userActionCall: true,
+      nftMint: true,
+      userActionOptIn: true,
+      userActionVoterRegistration: true,
+      userActionTweetAtPerson: true,
+      userActionRsvpEvent: true,
+      userActionVoterAttestation: true,
+      userActionViewKeyRaces: true,
+      userActionVotingInformationResearched: {
+        include: {
+          address: true,
+        },
+      },
+      userActionVotingDay: true,
+    },
+  })
+
+  const [user, userMergeAlertUserA, userMergeAlertUserB, userActions] = await Promise.all([
+    userPromise,
+    userMergeAlertUserAPromise,
+    userMergeAlertUserBPromise,
+    userActionsPromise,
+  ])
+
   const dtsiSlugs = new Set<string>()
-  user.userActions.forEach(userAction => {
+  userActions.forEach(userAction => {
     if (userAction.userActionCall?.recipientDtsiSlug) {
       dtsiSlugs.add(userAction.userActionCall.recipientDtsiSlug)
     } else if (userAction.userActionEmail) {
@@ -77,7 +92,7 @@ export async function getAuthenticatedData() {
         user.primaryUserCryptoAddress.cryptoAddress,
       )
     : null
-  const { userActions, address, ...rest } = user
+  const { address, ...rest } = user
   const currentlyAuthenticatedUserCryptoAddress = user.userCryptoAddresses.find(
     x => x.cryptoAddress === authUser.address,
   )
@@ -92,7 +107,7 @@ export async function getAuthenticatedData() {
     address: address && getClientAddress(address),
     userActions: userActions.map(record => getSensitiveDataClientUserAction({ record })),
     mergeAlerts: [
-      ...user.userMergeAlertUserA.map(
+      ...userMergeAlertUserA.map(
         ({
           userB,
           hasBeenConfirmedByUserA,
@@ -109,7 +124,7 @@ export async function getAuthenticatedData() {
           }),
         }),
       ),
-      ...user.userMergeAlertUserB.map(
+      ...userMergeAlertUserB.map(
         ({
           userA,
           hasBeenConfirmedByUserA,

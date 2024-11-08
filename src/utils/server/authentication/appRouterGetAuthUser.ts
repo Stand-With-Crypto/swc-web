@@ -1,3 +1,4 @@
+import { UserActionType } from '@prisma/client'
 import { cookies } from 'next/headers'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
@@ -30,9 +31,9 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
           cryptoAddress: true,
         },
       },
+      userActions: true,
     },
     where: {
-      userActions: { some: { actionType: 'OPT_IN' } },
       userSessions: {
         some: {
           id: sessionId,
@@ -40,7 +41,10 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
       },
     },
   })
-  if (!user) {
+
+  const hasOptedIn = user?.userActions.some(action => action.actionType === UserActionType.OPT_IN)
+
+  if (!user || !hasOptedIn) {
     return null
   }
 
