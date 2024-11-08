@@ -532,6 +532,7 @@ model UserCommunication {
   datetimeUpdated            DateTime?                  @updatedAt @map("datetime_updated")
 
   @@index([messageId])
+  @@index([status])
   @@index([userCommunicationJourneyId])
   @@map("user_communication")
 }
