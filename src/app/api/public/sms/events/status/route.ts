@@ -59,8 +59,8 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   const params = new URLSearchParams(searchParams)
 
-  const journeyType = params.get('journeyType') as UserCommunicationJourneyType | null
-  const campaignName = params.get('campaignName')
+  let journeyType = params.get('journeyType') as UserCommunicationJourneyType | null
+  let campaignName = params.get('campaignName')
   const hasWelcomeMessageInBody = toBool(params.get('hasWelcomeMessageInBody'))
 
   const messageId = body.MessageSid
@@ -69,12 +69,6 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const errorCode = body.ErrorCode
   const from = body.From
   const phoneNumber = body.To
-
-  if (!journeyType || !campaignName) {
-    return new NextResponse('missing search params', {
-      status: 400,
-    })
-  }
 
   logger.info(`Searching user with phone number ${phoneNumber}`)
 
@@ -89,6 +83,14 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const existingMessage = await prismaClient.userCommunication.findFirst({
     where: {
       messageId,
+    },
+    include: {
+      userCommunicationJourney: {
+        select: {
+          journeyType: true,
+          campaignName: true,
+        },
+      },
     },
   })
 
@@ -109,7 +111,16 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         },
       })
     }
+
+    journeyType = existingMessage.userCommunicationJourney.journeyType
+    campaignName = existingMessage.userCommunicationJourney.campaignName
   } else {
+    if (!journeyType || !campaignName) {
+      return new NextResponse('missing search params', {
+        status: 400,
+      })
+    }
+
     logger.info(
       `Creating communication journey of type ${journeyType} for campaign ${campaignName} and user communication with message ${messageId}`,
     )
