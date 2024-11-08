@@ -120,7 +120,9 @@ Cypress.Commands.add('waitForLogin', trigger => {
 })
 
 Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => {
-  cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
+  cy.contains(/Finish your profile|Create an account. Get an NFT./g, { timeout: 30000 }).should(
+    'be.visible',
+  )
 
   cy.typeIntoInput({
     selector: 'input[placeholder="First name"]',

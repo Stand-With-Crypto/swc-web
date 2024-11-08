@@ -9,7 +9,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['30_SECONDS']
+export const revalidate = SECONDS_DURATION['15_MINUTES']
 
 const title = 'U.S. Congress Live Election Results'
 const description =

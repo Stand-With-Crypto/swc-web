@@ -21,7 +21,7 @@ export function useApiDecisionDeskPresidentialData(
         .then(data => data as PresidentialDataWithVotingResponse[]),
     {
       fallbackData: fallbackData ?? undefined,
-      refreshInterval: 30 * 1000,
+      refreshInterval: 30 * 1000, // 30 SECONDS
       refreshWhenHidden: true,
       keepPreviousData: true,
       onError: error => {

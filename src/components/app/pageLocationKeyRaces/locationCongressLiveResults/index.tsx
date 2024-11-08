@@ -11,7 +11,6 @@ import { getCongressLiveResultOverview } from '@/components/app/pageLocationKeyR
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/types'
-import { useApiDecisionDeskCongressData } from '@/hooks/useApiDecisionDeskCongressData'
 import { SupportedLocale } from '@/intl/locales'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 
@@ -24,7 +23,7 @@ interface LocationCongressLiveResultsProps {
 export function LocationCongressLiveResults(props: LocationCongressLiveResultsProps) {
   const { house = 'house', initialCongressData, locale } = props
 
-  const { data } = useApiDecisionDeskCongressData(initialCongressData)
+  const data = initialCongressData
 
   const { proCryptoCandidatesElected, antiCryptoCandidatesElected } = useMemo(() => {
     if (!data) return { proCryptoCandidatesElected: [], antiCryptoCandidatesElected: [] }

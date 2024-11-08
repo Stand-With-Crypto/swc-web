@@ -96,16 +96,19 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   if (existingMessage) {
     logger.info(
-      `Found existing message with id ${messageId} and status ${String(existingMessage.status)}, updating it to ${String(newMessageStatus)}`,
+      `Found existing message with id ${messageId} and status ${String(existingMessage.status)}. New message status: ${String(newMessageStatus)}`,
     )
-    await prismaClient.userCommunication.updateMany({
-      where: {
-        messageId,
-      },
-      data: {
-        status: newMessageStatus,
-      },
-    })
+
+    if (existingMessage.status !== newMessageStatus) {
+      await prismaClient.userCommunication.updateMany({
+        where: {
+          messageId,
+        },
+        data: {
+          status: newMessageStatus,
+        },
+      })
+    }
   } else {
     logger.info(
       `Creating communication journey of type ${journeyType} for campaign ${campaignName} and user communication with message ${messageId}`,
