@@ -28,7 +28,7 @@ export const backfillUserCommunicationMessageStatus = inngest.createFunction(
   async ({ step, logger }) => {
     let updatedCommunications = 0
     let hasMoreMessages = true
-    while (!hasMoreMessages) {
+    while (hasMoreMessages) {
       const userCommunicationIds = await step.run('fetch-user-communication', () =>
         prismaClient.userCommunication
           .findMany({
