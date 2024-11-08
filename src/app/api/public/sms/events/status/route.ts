@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { UserCommunicationJourneyType } from '@prisma/client'
+import { CommunicationMessageStatus, UserCommunicationJourneyType } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -13,10 +13,18 @@ import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 import { getLogger } from '@/utils/shared/logger'
 import { toBool } from '@/utils/shared/toBool'
 
+enum SMSEventMessageStatus {
+  DELIVERED = 'delivered',
+  QUEUED = 'queued',
+  SENT = 'sent',
+  UNDELIVERED = 'undelivered',
+  FAILED = 'failed',
+}
+
 interface SMSStatusEvent {
   ErrorCode?: string
   ApiVersion: string
-  MessageStatus: string
+  MessageStatus: SMSEventMessageStatus
   RawDlrDoneDate: string
   SmsSid: string
   SmsStatus: string
@@ -24,6 +32,14 @@ interface SMSStatusEvent {
   From: string
   MessageSid: string
   AccountSid: string
+}
+
+const EVENT_MESSAGE_STATUS_TO_COMMUNICATION_STATUS: Partial<
+  Record<SMSStatusEvent['MessageStatus'], CommunicationMessageStatus>
+> = {
+  [SMSEventMessageStatus.DELIVERED]: CommunicationMessageStatus.DELIVERED,
+  [SMSEventMessageStatus.FAILED]: CommunicationMessageStatus.FAILED,
+  [SMSEventMessageStatus.UNDELIVERED]: CommunicationMessageStatus.FAILED,
 }
 
 const logger = getLogger('smsStatus')
@@ -37,7 +53,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  logger.info('Request URL:', request.url)
+  logger.info('Request URL:', request.url, body)
 
   const [_, searchParams] = request.url.split('?')
 
@@ -76,9 +92,23 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     },
   })
 
+  const newMessageStatus = EVENT_MESSAGE_STATUS_TO_COMMUNICATION_STATUS[messageStatus]
+
   if (existingMessage) {
-    logger.info(`Found existing message with id ${messageId}`)
-    // TODO: update message status
+    logger.info(
+      `Found existing message with id ${messageId} and status ${String(existingMessage.status)}. New message status: ${String(newMessageStatus)}`,
+    )
+
+    if (existingMessage.status !== newMessageStatus) {
+      await prismaClient.userCommunication.updateMany({
+        where: {
+          messageId,
+        },
+        data: {
+          status: newMessageStatus,
+        },
+      })
+    }
   } else {
     logger.info(
       `Creating communication journey of type ${journeyType} for campaign ${campaignName} and user communication with message ${messageId}`,
@@ -86,7 +116,10 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     await bulkCreateCommunicationJourney({
       campaignName,
       journeyType,
-      messageId,
+      message: {
+        id: messageId,
+        status: newMessageStatus,
+      },
       phoneNumber,
     })
 
@@ -97,6 +130,10 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         campaignName: 'bulk-welcome',
         journeyType: UserCommunicationJourneyType.WELCOME_SMS,
         phoneNumber,
+        message: {
+          id: messageId,
+          status: newMessageStatus,
+        },
       })
     }
   }

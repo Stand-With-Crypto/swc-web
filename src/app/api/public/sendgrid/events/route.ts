@@ -12,6 +12,7 @@ import {
 import {
   EmailEvent,
   EmailEventName,
+  EVENT_NAME_TO_COMMUNICATION_STATUS,
   EVENT_NAME_TO_HUMAN_READABLE_STRING,
   parseEventsWebhookRequest,
   verifySignature,
@@ -67,6 +68,19 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       ...(eventEntry.campaign && { Campaign: eventEntry.campaign }),
     })
 
+    const messageStatus = EVENT_NAME_TO_COMMUNICATION_STATUS[eventEntry.event]
+
+    if (messageStatus) {
+      await prismaClient.userCommunication.updateMany({
+        where: {
+          messageId: parseMessageId(messageId),
+        },
+        data: {
+          status: messageStatus,
+        },
+      })
+    }
+
     if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {
       await inngest.send({
         name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
@@ -87,14 +101,10 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
 async function getUserFromEvent(emailEvent: EmailEvent) {
   let userId = emailEvent.userId
   if (!userId) {
-    const messageId = emailEvent.sg_message_id
-
-    // MessageId received from sendMail: 0GOQ6fMTTmisBJwg
-    // MessageId received by the event webhook: 0GOQ6fMTTmisBJwg.recvd-1123412asd12-wbpn9-1-vdfs3123
-    const parsedMessageId = messageId.split('.')[0]
+    const messageId = parseMessageId(emailEvent.sg_message_id)
 
     const userCommunication = await prismaClient.userCommunication.findFirst({
-      where: { messageId: parsedMessageId },
+      where: { messageId },
       include: {
         userCommunicationJourney: true,
       },
@@ -134,4 +144,10 @@ function removeSearchParamsFromURL(url: string) {
   } catch {
     return null
   }
+}
+
+function parseMessageId(messageId: string) {
+  // MessageId received from sendMail: 0GOQ6fMTTmisBJwg
+  // MessageId received by the event webhook: 0GOQ6fMTTmisBJwg.recvd-1123412asd12-wbpn9-1-vdfs3123
+  return messageId.split('.')[0]
 }
