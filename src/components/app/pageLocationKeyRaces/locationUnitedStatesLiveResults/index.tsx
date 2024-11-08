@@ -119,7 +119,6 @@ export function LocationUnitedStatesLiveResults({
           className="container"
           subtitle="See where each candidate stands on crypto and get live updates on the presidential election."
           title="Presidential race"
-          titleProps={{ size: 'xs' }}
         >
           <div className="flex w-full justify-center">
             <PresidentialRaceResult
@@ -134,7 +133,6 @@ export function LocationUnitedStatesLiveResults({
           className="container"
           subtitle="Follow our tracker to see how many pro-crypto candidates get elected in the United States this year."
           title="Live election results"
-          titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
             <LiveStatusBadgeWithApi initialElectionStatusData={initialElectionStatusData} />
@@ -160,7 +158,6 @@ export function LocationUnitedStatesLiveResults({
           className="container"
           subtitle="When a state turns purple, it means a pro-crypto candidate has been elected. Follow along to see which states vote pro-crypto."
           title="Map view"
-          titleProps={{ size: 'xs' }}
         >
           <div className="flex justify-center">
             <LiveStatusBadgeWithApi initialElectionStatusData={initialElectionStatusData} />
@@ -171,7 +168,6 @@ export function LocationUnitedStatesLiveResults({
         <ContentSection
           subtitle="These elections are critical to the future of crypto in America. View live updates below."
           title="Critical elections"
-          titleProps={{ size: 'xs' }}
         >
           <LiveResultsGrid>
             {Object.entries(dtsiResults.keyRaces).flatMap(([stateCode, keyRaces]) =>

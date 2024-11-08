@@ -50,7 +50,6 @@ export function CongressSection(props: CongressSectionProps) {
       className="container"
       subtitle={`Follow our tracker to see how many pro-crypto candidates get elected in ${stateName}.`}
       title="Live election results"
-      titleProps={{ size: 'xs' }}
     >
       <div className="flex justify-center">
         <LiveStatusBadge status={raceStatus} />
