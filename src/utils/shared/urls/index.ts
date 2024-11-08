@@ -156,7 +156,16 @@ export const apiUrls = {
     stateCode: string
     district: number
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
-  smsStatusCallback: () => `/api/public/sms/events/status`,
+  smsStatusCallback: ({
+    campaignName,
+    journeyType,
+    hasWelcomeMessageInBody,
+  }: {
+    campaignName: string
+    journeyType: string
+    hasWelcomeMessageInBody?: boolean
+  }) =>
+    `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
   decisionDeskPresidentialData: () => '/api/public/decision-desk/usa/presidential',
   decisionDeskStateData: ({ stateCode }: { stateCode: string }) =>
     `/api/public/decision-desk/usa/state/${stateCode}`,

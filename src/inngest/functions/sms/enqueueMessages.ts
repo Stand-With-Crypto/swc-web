@@ -3,10 +3,6 @@ import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 import { update } from 'lodash-es'
 
-import {
-  bulkCreateCommunicationJourney,
-  BulkCreateCommunicationJourneyPayload,
-} from '@/inngest/functions/sms/utils/communicationJourney'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
 import { inngest } from '@/inngest/inngest'
@@ -15,6 +11,7 @@ import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getLogger } from '@/utils/shared/logger'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 export const ENQUEUE_SMS_INNGEST_EVENT_NAME = 'app/enqueue.sms'
 const ENQUEUE_SMS_INNGEST_FUNCTION_ID = 'app.enqueue-sms'
@@ -24,10 +21,11 @@ const MAX_RETRY_COUNT = 0
 export interface EnqueueMessagePayload {
   phoneNumber: string
   messages: Array<{
-    body?: string
+    body: string
     journeyType: UserCommunicationJourneyType
     campaignName: string
     media?: string[]
+    hasWelcomeMessageInBody?: boolean
   }>
 }
 
@@ -145,10 +143,6 @@ export async function enqueueMessages(
 ) {
   const invalidPhoneNumbers: string[] = []
   const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
-  // Messages grouped by journey type and campaign name, Ex: BULK_SMS -> campaign-name: ["messageId"]
-  const messagesSentByJourneyType: {
-    [key in UserCommunicationJourneyType]?: BulkCreateCommunicationJourneyPayload
-  } = {}
   const unsubscribedUsers: string[] = []
 
   let segmentsSent = 0
@@ -156,43 +150,27 @@ export async function enqueueMessages(
 
   const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
     for (const message of messages) {
-      const { body, journeyType, campaignName, media } = message
+      const { body, journeyType, campaignName, media, hasWelcomeMessageInBody } = message
 
       const phoneNumberVariables = variables[phoneNumber] ?? {}
 
       try {
-        if (body) {
-          const queuedMessage = await sendSMS({
-            body: applySMSVariables(body, phoneNumberVariables),
-            to: phoneNumber,
-            media,
-          })
+        const queuedMessage = await sendSMS({
+          body: applySMSVariables(body, phoneNumberVariables),
+          to: phoneNumber,
+          media,
+          statusCallbackUrl: fullUrl(
+            apiUrls.smsStatusCallback({
+              journeyType,
+              campaignName,
+              hasWelcomeMessageInBody,
+            }),
+          ),
+        })
 
-          if (queuedMessage) {
-            update(
-              messagesSentByJourneyType,
-              [journeyType, campaignName],
-              (existingPayload = []) => [
-                ...existingPayload,
-                {
-                  messageId: queuedMessage.sid,
-                  phoneNumber,
-                },
-              ],
-            )
-
-            segmentsSent += countSegments(queuedMessage.body)
-            queuedMessages += 1
-          }
-        } else {
-          // Bulk-SMS have logic to check if the phone number already received a welcome message, if it didn't it includes the welcome message at the end of the bulk message.
-          // When doing this, it also adds a WELCOME_SMS journeyType to enqueueSMS payload, so we need to register that the user received the welcome legalese inside the bulk message
-          update(messagesSentByJourneyType, [journeyType, campaignName], (existingPayload = []) => [
-            ...existingPayload,
-            {
-              phoneNumber,
-            },
-          ])
+        if (queuedMessage) {
+          segmentsSent += countSegments(queuedMessage.body)
+          queuedMessages += 1
         }
       } catch (error) {
         if (error instanceof NonRetriableError) {
@@ -238,7 +216,6 @@ export async function enqueueMessages(
   return {
     invalidPhoneNumbers,
     failedPhoneNumbers,
-    messagesSentByJourneyType,
     unsubscribedUsers,
     segmentsSent,
     queuedMessages,
@@ -248,25 +225,9 @@ export async function enqueueMessages(
 const defaultLogger = getLogger('persistEnqueueMessagesResults')
 
 export async function persistEnqueueMessagesResults(
-  {
-    invalidPhoneNumbers,
-    messagesSentByJourneyType,
-    unsubscribedUsers,
-  }: Awaited<ReturnType<typeof enqueueMessages>>,
+  { invalidPhoneNumbers, unsubscribedUsers }: Awaited<ReturnType<typeof enqueueMessages>>,
   logger = defaultLogger,
 ) {
-  // messagesSentByJourneyType have messages grouped by journeyType and campaignName
-  for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
-    const journeyType = journeyTypeKey as UserCommunicationJourneyType
-
-    logger.info(`Creating ${journeyType} communication journey`)
-
-    // We need to bulk create both communication and communication journey for better performance
-    await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
-
-    logger.info(`Created ${journeyType} communication journey`)
-  }
-
   if (invalidPhoneNumbers.length > 0) {
     logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
     await flagInvalidPhoneNumbers(invalidPhoneNumbers)
