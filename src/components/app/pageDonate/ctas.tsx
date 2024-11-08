@@ -16,7 +16,10 @@ export function CTAs() {
         Do your part to help protect crypto without opening your wallet.
       </PageSubTitle>
 
-      <UserActionGridCTAs excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES} />
+      <UserActionGridCTAs
+        className="lg:grid-cols-3"
+        excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES}
+      />
     </section>
   )
 }
