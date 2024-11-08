@@ -4,20 +4,23 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn, twNoop } from '@/utils/web/cn'
 
+export const DEFAULT_PAGE_TITLE_SIZE = 'xl'
+
 const titleVariantsConfig = {
   size: {
-    lg: twNoop('text-4xl md:text-5xl lg:text-6xl'),
-    md: twNoop('text-3xl md:text-4xl lg:text-5xl'),
-    sm: twNoop('text-xl md:text-2xl lg:text-3xl'),
-    xs: twNoop('text-lg md:text-xl lg:text-2xl'),
-    xxs: twNoop('text-base md:text-lg lg:text-lg'),
+    xxs: twNoop('text-lg md:text-lg lg:text-xl'),
+    xs: twNoop('text-xl md:text-xl lg:text-2xl'),
+    sm: twNoop('text-xl md:text-2xl lg:text-2xl'),
+    md: twNoop('text-2xl md:text-3xl lg:text-3xl'),
+    lg: twNoop('text-3xl md:text-4xl lg:text-5xl'),
+    [DEFAULT_PAGE_TITLE_SIZE]: twNoop('text-4xl md:text-5xl lg:text-6xl'),
   },
 }
 
-const pageTitleVariants = cva('font-sans text-center text-3xl font-bold md:text-4xl lg:text-5xl', {
+const pageTitleVariants = cva('font-sans text-center font-bold', {
   variants: titleVariantsConfig,
   defaultVariants: {
-    size: 'lg',
+    size: DEFAULT_PAGE_TITLE_SIZE,
   },
 })
 
@@ -28,10 +31,34 @@ export interface PageTitleProps
   withoutBalancer?: boolean
 }
 
+const getSizeFromComp = (Comp: PageTitleProps['as']) => {
+  switch (Comp) {
+    case 'h1':
+      return DEFAULT_PAGE_TITLE_SIZE
+    case 'h2':
+      return 'lg'
+    case 'h3':
+      return 'md'
+    case 'h4':
+      return 'sm'
+    case 'h5':
+    case 'h6':
+      return 'xs'
+    default:
+      return DEFAULT_PAGE_TITLE_SIZE
+  }
+}
+
 export const PageTitle = React.forwardRef<HTMLHeadingElement, PageTitleProps>(
   ({ className, children, as: Comp = 'h1', size, withoutBalancer, ...props }, ref) => {
+    const computedSize = size || getSizeFromComp(Comp)
+    console.log('computedSize:', computedSize)
     return (
-      <Comp className={cn(pageTitleVariants({ className, size }))} ref={ref} {...props}>
+      <Comp
+        className={cn(pageTitleVariants({ className, size: computedSize }))}
+        ref={ref}
+        {...props}
+      >
         {withoutBalancer ? children : <Balancer>{children}</Balancer>}
       </Comp>
     )
