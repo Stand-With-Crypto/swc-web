@@ -1,7 +1,7 @@
 import { Card } from '@/components/ui/card'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
 
 function P(props: { children: React.ReactNode }) {
   return <p className="text-center text-fontcolor-muted">{props.children}</p>
@@ -22,7 +22,9 @@ export function PageAbout({ title, description }: { title: string; description: 
           ].map(({ value, label }) => (
             <Card key={label}>
               <Card.Heading>
-                <PageTitle as="p">{value}</PageTitle>
+                <PageTitle as="p" size={DEFAULT_PAGE_TITLE_SIZE}>
+                  {value}
+                </PageTitle>
               </Card.Heading>
               <Card.Description>{label}</Card.Description>
             </Card>
@@ -49,9 +51,7 @@ export function PageAbout({ title, description }: { title: string; description: 
       </section>
 
       <section className="mb-16 space-y-7 md:mb-24">
-        <PageTitle as="h2" size="md">
-          America needs crypto
-        </PageTitle>
+        <PageTitle as="h2">America needs crypto</PageTitle>
 
         <P>
           Cryptocurrencies, like Bitcoin and Ethereum, aren't just digital tokens; they are the new
@@ -62,7 +62,7 @@ export function PageAbout({ title, description }: { title: string; description: 
 
         <div className="flex flex-col gap-4">
           <Card className="space-y-4 text-start text-gray-500">
-            <PageTitle as="h3" className="text-start text-foreground" size="sm">
+            <PageTitle as="h3" className="text-start text-foreground">
               Crypto creates jobs
             </PageTitle>
             <p>Keeping crypto innovation in America will:</p>
@@ -78,7 +78,7 @@ export function PageAbout({ title, description }: { title: string; description: 
             </ul>
           </Card>
           <Card className="space-y-4 text-gray-500">
-            <PageTitle as="h3" className="text-start text-foreground" size="sm">
+            <PageTitle as="h3" className="text-start text-foreground">
               Crypto drives American innovation
             </PageTitle>
             <p>
@@ -93,7 +93,7 @@ export function PageAbout({ title, description }: { title: string; description: 
             </ul>
           </Card>
           <Card className="space-y-4 text-gray-500">
-            <PageTitle as="h3" className="text-start text-foreground" size="sm">
+            <PageTitle as="h3" className="text-start text-foreground">
               Crypto is a national priority
             </PageTitle>
             <p>
@@ -106,9 +106,7 @@ export function PageAbout({ title, description }: { title: string; description: 
       </section>
 
       <section className="mb-16 space-y-7 md:mb-24">
-        <PageTitle as="h2" size="md">
-          What it means to stand with crypto
-        </PageTitle>
+        <PageTitle as="h2">What it means to stand with crypto</PageTitle>
 
         <P>
           By Standing With Crypto you choose to support common sense legislation and elected
@@ -130,9 +128,7 @@ export function PageAbout({ title, description }: { title: string; description: 
       </section>
 
       <section className="mb-16 space-y-7 md:mb-24">
-        <PageTitle as="h2" size="md">
-          Raise your voice: crypto can't wait
-        </PageTitle>
+        <PageTitle as="h2">Raise your voice: crypto can't wait</PageTitle>
 
         <P>
           Lawmakers listen to their constituents, but right now, they're not hearing from the 52
@@ -166,7 +162,9 @@ export function PageAbout({ title, description }: { title: string; description: 
           ].map(({ value, label, image }) => (
             <Card key={label}>
               <Card.Heading>
-                <PageTitle as="p">{value}</PageTitle>
+                <PageTitle as="p" size={DEFAULT_PAGE_TITLE_SIZE}>
+                  {value}
+                </PageTitle>
                 {image && (
                   <NextImage
                     // This is necessary because the image is an svg with a "padding",
