@@ -101,6 +101,7 @@ If you have been assigned to fix an issue or develop a new feature, please follo
 - `npm run intl:extract-compile` - generates initial translation files
 - `npm run storybook` - view isolated [storybook stories](https://storybook.js.org/)
 - `npm run newbranch` - A useful command to run after checking out a newbranch or pulling the latest from `main` to ensure your local environment is configured correctly
+- To measure how long database queries are taking to execute, you can easily do this by adding the `LOG_DATABASE=true` environment variable and restarting the development server. After that, you'll be able to see the query information in your terminal.
 
 ### Updating the database schema
 
