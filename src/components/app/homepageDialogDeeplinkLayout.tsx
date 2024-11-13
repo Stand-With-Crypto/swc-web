@@ -30,7 +30,7 @@ export async function HomepageDialogDeeplinkLayout({
   dialogContentClassName,
 }: HomepageDialogDeeplinkLayoutProps) {
   const urls = getIntlUrls(pageParams.locale)
-  const [{ sumDonations, countUsers, countVoterActions }] = await Promise.all([
+  const [{ sumDonations, countUsers, countPolicymakerContacts }] = await Promise.all([
     getHomepageTopLevelMetrics(),
   ])
   const advocatePerStateDataProps = await getAdvocatesMapData()
@@ -65,7 +65,7 @@ export async function HomepageDialogDeeplinkLayout({
         {...{
           sumDonations,
           countUsers,
-          countVoterActions,
+          countPolicymakerContacts,
         }}
         advocatePerStateDataProps={advocatePerStateDataProps}
       />
