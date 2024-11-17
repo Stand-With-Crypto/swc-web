@@ -8,6 +8,7 @@ import { ThirdwebProvider, useAutoConnect } from 'thirdweb/react'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
+import { usePromoteDevParticipation } from '@/hooks/usePromoteDevParticipation'
 import { useReloadDueToInactivity } from '@/hooks/useReloadDueToInactivity'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
@@ -91,6 +92,8 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
+  usePromoteDevParticipation()
+
   return (
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider>
