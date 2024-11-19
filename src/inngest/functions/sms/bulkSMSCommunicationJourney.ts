@@ -370,13 +370,11 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
               every: {
                 OR: [
                   {
-                    journeyType: UserCommunicationJourneyType.BULK_SMS,
                     campaignName: {
                       not: options.campaignName,
                     },
                   },
                   {
-                    journeyType: UserCommunicationJourneyType.BULK_SMS,
                     campaignName: options.campaignName,
                     userCommunications: {
                       every: {
