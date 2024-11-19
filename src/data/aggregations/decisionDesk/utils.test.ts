@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals'
 
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
-import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { CandidatesWithVote } from '@/data/aggregations/decisionDesk/types'
+import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 
 const fakeDtsiPoliticians = [
   {
