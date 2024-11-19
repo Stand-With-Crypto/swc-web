@@ -1,149 +1,237 @@
-import * as Sentry from '@sentry/nextjs'
 import levenshtein from 'js-levenshtein'
 import { deburr, toLower, trim } from 'lodash-es'
 
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
-import {
-  CandidatesWithVote,
-  PresidentialDataWithVotingResponse,
-} from '@/data/aggregations/decisionDesk/types'
-import { getLogger } from '@/utils/shared/logger'
+import { CandidatesWithVote } from '@/data/aggregations/decisionDesk/types'
 
-const HARD_CODED_LASTNAMES = ['boebert', 'banks', 'slotkin', 'kim', 'allred', 'curtis', 'gallego']
-
-export const getPoliticianFindMatch = (
-  dtsiPerson: DTSI_Candidate,
-  ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'] | undefined,
+export const getDdhqMatchFromDtsi = (
+  ddhqCandidates: CandidatesWithVote | CandidatesWithVote[],
+  dtsiCandidate: DTSI_Candidate,
 ) => {
-  if (!ddhqCandidate) return false
-  if (!dtsiPerson) return false
+  const currentDdhqCandidates = Array.isArray(ddhqCandidates) ? ddhqCandidates : [ddhqCandidates]
 
-  const digest = Math.random().toString(36).substring(7)
-  const state =
-    'state' in ddhqCandidate ? ddhqCandidate.state : dtsiPerson.primaryRole?.primaryState
-  const logger = getLogger(`${state ?? ''} | getPoliticianFindMatch | ${digest}`)
+  if (!dtsiCandidate) return
+  if (!currentDdhqCandidates || currentDdhqCandidates.length === 0) return
 
-  const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
-  const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
-  const normalizedDTSILastName = normalizeName(dtsiPerson.lastName)
-  const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
-  const normalizedDDHQLastName = normalizeName(ddhqCandidate.lastName)
+  return currentDdhqCandidates.find(ddhqCandidate => {
+    const hasStateAndDistrictMatching = checkStateAndDistrict(ddhqCandidate, dtsiCandidate)
 
-  try {
-    const decisionDeskCandidateDistrict =
-      'district' in ddhqCandidate && ddhqCandidate.district ? ddhqCandidate.district : ''
-    if (
-      !HARD_CODED_LASTNAMES.includes(normalizedDTSILastName) &&
-      toLower(
-        dtsiPerson.primaryRole?.primaryDistrict ? dtsiPerson.primaryRole?.primaryDistrict : '',
-      ) !== toLower(decisionDeskCandidateDistrict)
-    ) {
+    if (!hasStateAndDistrictMatching) {
       return false
     }
-  } catch (error) {
-    Sentry.captureException(error, {
-      tags: {
-        domain: 'getPoliticianFindMatch',
-      },
-      extra: {
-        message: `Failed to compare districts between DTSI ${normalizedDTSIName} and DDHQ ${normalizedDDHQName}`,
-      },
+
+    const hasNameDirectMatching = checkDirectNameMatching(ddhqCandidate, dtsiCandidate)
+    const hasLevenshtein = checkLevenshteinNameMatching(ddhqCandidate, dtsiCandidate)
+
+    return hasNameDirectMatching || hasLevenshtein
+  })
+}
+
+export const getDtsiMatchFromDdhq = (
+  ddhqCandidate: CandidatesWithVote,
+  dtsiPeople: DTSI_Candidate[] | DTSI_Candidate,
+) => {
+  const currentDtsiPeople = Array.isArray(dtsiPeople) ? dtsiPeople : [dtsiPeople]
+
+  if (!currentDtsiPeople || currentDtsiPeople.length === 0) return
+
+  return currentDtsiPeople.find(dtsiPerson => {
+    const hasStateAndDistrictMatching = checkStateAndDistrict(ddhqCandidate, dtsiPerson)
+
+    if (!hasStateAndDistrictMatching) {
+      return false
+    }
+
+    const hasNameDirectMatching = checkDirectNameMatching(ddhqCandidate, dtsiPerson)
+    const hasLevenshtein = checkLevenshteinNameMatching(ddhqCandidate, dtsiPerson)
+
+    return hasNameDirectMatching || hasLevenshtein
+  })
+}
+
+export const checkStateAndDistrict = (
+  ddhqCandidate: CandidatesWithVote,
+  dtsiPerson: DTSI_Candidate,
+) => {
+  if (!ddhqCandidate) return false
+
+  // if there's no state and district in ddhqCandidate, return true for it is presidency
+  if (ddhqCandidate && !('state' in ddhqCandidate) && !('district' in ddhqCandidate)) {
+    return true
+  }
+
+  const ddhqCandidateState = ddhqCandidate.state
+  const ddhqCandidateDistrict = ddhqCandidate.district
+  const ddhqRaceType = ddhqCandidateDistrict ? 'HOUSE' : 'SENATE'
+
+  const dtsiCandidateState = dtsiPerson.primaryRole?.primaryState
+
+  const isRunningSameState = toLower(ddhqCandidateState) === toLower(dtsiCandidateState)
+
+  if (isRunningSameState && ddhqRaceType === 'SENATE') {
+    return true
+  }
+
+  const dtsiCandidateDistrict = dtsiPerson.primaryRole?.primaryDistrict
+  const isRunningSameDistrict = toLower(ddhqCandidateDistrict) === toLower(dtsiCandidateDistrict)
+
+  if (isRunningSameState && isRunningSameDistrict && ddhqRaceType === 'HOUSE') {
+    return true
+  }
+
+  return false
+}
+
+export const checkDirectNameMatching = (
+  ddhqCandidate: CandidatesWithVote,
+  dtsiPerson: DTSI_Candidate,
+) => {
+  const ddhqFirstName = ddhqCandidate.firstName
+  const ddhqLastName = ddhqCandidate.lastName
+
+  const dtsiFirstName = dtsiPerson.firstName
+  const dtsiLastName = dtsiPerson.lastName
+  const dtsiNickName = dtsiPerson.firstNickname
+  const dtsiNameSuffix = dtsiPerson.nameSuffix
+
+  const normalizedDdhqFirstName = normalizeName(ddhqFirstName)
+  const normalizedDdhqLastName = normalizeName(ddhqLastName)
+
+  const normalizedDtsiFirstName = normalizeName(dtsiFirstName)
+  const normalizedDtsiLastName = normalizeName(dtsiLastName)
+  const normalizedDtsiNickName = normalizeName(dtsiNickName)
+  const normalizedDtsiSuffix = normalizeName(dtsiNameSuffix)
+
+  const hasFirstNameMatch =
+    ddhqFirstName === dtsiFirstName || normalizedDdhqFirstName === normalizedDtsiFirstName
+  const hasNickNameMatch =
+    dtsiNickName === ddhqFirstName || normalizedDtsiNickName === normalizedDdhqFirstName
+  const hasLastNameMatch =
+    ddhqLastName === dtsiLastName || normalizedDdhqLastName === normalizedDtsiLastName
+
+  // checks for firstName and lastName match
+  if (hasFirstNameMatch && hasLastNameMatch) {
+    return true
+  }
+
+  // checks for nickName, firstName and lastName match
+  if (hasNickNameMatch && hasLastNameMatch) {
+    return true
+  }
+
+  // checks for firstName, lastName and suffix match
+  if (dtsiNameSuffix) {
+    const dtsiNameWithoutSuffix = `${dtsiFirstName} ${dtsiLastName}`
+    const dtsiNameWithSuffix = `${dtsiNameWithoutSuffix.replace(dtsiNameSuffix, '')} ${dtsiNameSuffix}`
+    const ddhqName = `${ddhqFirstName} ${ddhqLastName}`
+
+    if (dtsiNameWithSuffix === ddhqName) {
+      return true
+    }
+  }
+
+  // checks for normalized complete name and suffix match
+  if (normalizedDtsiSuffix) {
+    const normalizedDtsiNameWithoutSuffix = `${normalizedDtsiFirstName}${normalizedDtsiLastName}`
+    const normalizedDtsiNameWithSuffix = `${normalizedDtsiNameWithoutSuffix.replace(
+      normalizedDtsiSuffix,
+      '',
+    )}${normalizedDtsiSuffix}`
+    const normalizedDdhqName = `${normalizedDdhqFirstName}${normalizedDdhqLastName}`
+
+    if (normalizedDdhqName === normalizedDtsiNameWithSuffix) {
+      return true
+    }
+  }
+
+  // checks for names split between '-' or ' '
+  const ddhqFirstNameParts = ddhqFirstName.split(/[\s-]/)
+  const ddhqLastNameParts = ddhqLastName.split(/[\s-]/)
+
+  const dtsiFirstNameParts = dtsiFirstName.split(/[\s-]/)
+  const dtsiLastNameParts = dtsiLastName.split(/[\s-]/)
+
+  const isFirstNamePartsMatching = ddhqFirstNameParts.some(ddhqPart => {
+    return dtsiFirstNameParts.some(dtsiPart => {
+      return ddhqPart === dtsiPart
     })
-    logger.info(
-      `Failed to compare districts between DTSI ${normalizedDTSIName} and DDHQ ${normalizedDDHQName}`,
-    )
-    logger.error(error)
-    return false
+  })
+
+  const isFirstNamePartsMatchingNormalized = ddhqFirstNameParts.some(ddhqPart => {
+    return dtsiFirstNameParts.some(dtsiPart => {
+      return normalizeName(ddhqPart) === normalizeName(dtsiPart)
+    })
+  })
+
+  const isLastNamePartsMatching = ddhqLastNameParts.some(ddhqPart => {
+    return dtsiLastNameParts.some(dtsiPart => {
+      return ddhqPart === dtsiPart
+    })
+  })
+
+  const isLastNamePartsMatchingNormalized = ddhqLastNameParts.some(ddhqPart => {
+    return dtsiLastNameParts.some(dtsiPart => {
+      return normalizeName(ddhqPart) === normalizeName(dtsiPart)
+    })
+  })
+
+  const hasFirstNamePartsMatch = isFirstNamePartsMatching || isFirstNamePartsMatchingNormalized
+  const hasLastNamePartsMatch = isLastNamePartsMatching || isLastNamePartsMatchingNormalized
+
+  if (hasFirstNamePartsMatch && hasLastNamePartsMatch) {
+    return true
   }
-  // Allow up to 2 edits for names, e.g. Sapriacone vs Sapraicone, with a threshold of 2
-  const nameThreshold = 2
 
-  const hasPassedWithName = levenshtein(normalizedDTSIName, normalizedDDHQName) <= nameThreshold
-  const hasPassedWithNickname =
-    levenshtein(normalizedDTSINickname, normalizedDDHQName) <= nameThreshold
-  const hasPassedWithLastName =
-    levenshtein(normalizedDTSILastName, normalizedDDHQLastName) <= nameThreshold
+  return false
+}
 
-  const hasPassedWithLastNameParts = compareLastNamePartsWithLevenshtein(dtsiPerson, ddhqCandidate)
+export const checkLevenshteinNameMatching = (
+  ddhqCandidate: CandidatesWithVote,
+  dtsiPerson: DTSI_Candidate,
+) => {
+  const normalizedDdhqFirstName = normalizeName(ddhqCandidate.firstName)
+  const normalizedDdhqLastName = normalizeName(ddhqCandidate.lastName)
 
-  let isMatch =
-    hasPassedWithName ||
-    hasPassedWithNickname ||
-    hasPassedWithLastName ||
-    hasPassedWithLastNameParts
+  const normalizedDtsiFirstName = normalizeName(dtsiPerson.firstName)
+  const normalizedDtsiLastName = normalizeName(dtsiPerson.lastName)
+  const normalizedDtsiNickName = normalizeName(dtsiPerson.firstNickname)
+  const normalizedDtsiSuffix = normalizeName(dtsiPerson.nameSuffix)
 
-  if ('state' in ddhqCandidate) {
-    isMatch =
-      isMatch && toLower(dtsiPerson.primaryRole?.primaryState) === toLower(ddhqCandidate.state)
+  const hasFirstNameLevenshteinMatch =
+    levenshtein(normalizedDdhqFirstName, normalizedDtsiFirstName) <= 2
+  const hasLastNameLevenshteinMatch =
+    levenshtein(normalizedDdhqLastName, normalizedDtsiLastName) <= 2
+
+  if (hasFirstNameLevenshteinMatch && hasLastNameLevenshteinMatch) {
+    return true
   }
 
-  return isMatch
+  const hasNickNameLevenshteinMatch =
+    levenshtein(normalizedDdhqFirstName, normalizedDtsiNickName) <= 2
+
+  if (hasNickNameLevenshteinMatch && hasLastNameLevenshteinMatch) {
+    return true
+  }
+
+  if (normalizedDtsiSuffix) {
+    const normalizedDtsiNameWithoutSuffix = `${normalizedDtsiFirstName}${normalizedDtsiLastName}`
+    const normalizedDtsiNameWithSuffix = `${normalizedDtsiNameWithoutSuffix.replace(
+      normalizedDtsiSuffix,
+      '',
+    )}${normalizedDtsiSuffix}`
+    const normalizedDdhqName = `${normalizedDdhqFirstName}${normalizedDdhqLastName}`
+
+    const hasNameWithSuffixLevenshteinMatch =
+      levenshtein(normalizedDdhqName, normalizedDtsiNameWithSuffix) <= 2
+
+    if (hasNameWithSuffixLevenshteinMatch) {
+      return true
+    }
+  }
+
+  return false
 }
 
 export const normalizeName = (name: string) => {
   return deburr(toLower(trim(name))).replace(/[.-\s]/g, '')
-}
-
-export const isNamesDirectMatch = (
-  dtsiPerson: DTSI_Candidate,
-  ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'] | undefined,
-) => {
-  if (!ddhqCandidate) return false
-  if (!dtsiPerson) return false
-
-  const normalizedDTSIName = normalizeName(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`)
-  const normalizedDTSINickname = normalizeName(`${dtsiPerson.firstNickname} ${dtsiPerson.lastName}`)
-  const normalizedDDHQName = normalizeName(`${ddhqCandidate.firstName} ${ddhqCandidate.lastName}`)
-
-  return normalizedDTSIName === normalizedDDHQName || normalizedDTSINickname === normalizedDDHQName
-}
-
-export const getMatchingDDHQCandidateForDTSIPerson = <
-  T extends CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'],
->(
-  dtsiPerson: DTSI_Candidate,
-  ddhqCandidates: T[],
-): T | undefined => {
-  const directMatch = ddhqCandidates.find(candidate => isNamesDirectMatch(dtsiPerson, candidate))
-  if (directMatch) {
-    return directMatch
-  }
-
-  return ddhqCandidates.find(candidate => getPoliticianFindMatch(dtsiPerson, candidate))
-}
-
-export const getMatchingDTSIDataForDDHQCandidate = (
-  ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'],
-  dtsiPeople: DTSI_Candidate[],
-) => {
-  const directMatch = dtsiPeople.find(dtsiPerson => isNamesDirectMatch(dtsiPerson, ddhqCandidate))
-  if (directMatch) {
-    return directMatch
-  }
-
-  return dtsiPeople.find(dtsiPerson => getPoliticianFindMatch(dtsiPerson, ddhqCandidate))
-}
-
-function compareLastNamePartsWithLevenshtein(
-  dtsiPerson: DTSI_Candidate,
-  ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'],
-) {
-  const dtsiFirstName = normalizeName(dtsiPerson.firstName)
-  const dtsiLastName = dtsiPerson.lastName
-
-  const ddhqFirstName = normalizeName(ddhqCandidate!.firstName)
-  const ddhqLastName = ddhqCandidate!.lastName
-
-  // split last names either with ' ' or '-'
-  const dtsiLastNameParts = dtsiLastName.split(/[\s-]/).map(part => normalizeName(part))
-  const ddhqLastNameParts = ddhqLastName.split(/[\s-]/).map(part => normalizeName(part))
-
-  const levenshteinThreshold = 2
-
-  const hasPassedFirstName = levenshtein(dtsiFirstName, ddhqFirstName) <= levenshteinThreshold
-  const hasPassedLastName = dtsiLastNameParts.some(dtsiPart =>
-    ddhqLastNameParts.some(ddhqPart => levenshtein(dtsiPart, ddhqPart) <= levenshteinThreshold),
-  )
-
-  return hasPassedFirstName && hasPassedLastName
 }

@@ -1,5 +1,5 @@
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
-import { getMatchingDTSIDataForDDHQCandidate } from '@/data/aggregations/decisionDesk/utils'
+import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
@@ -39,7 +39,7 @@ export async function getElectedCandidates(): Promise<RaceWinnerData[]> {
           return null
         }
 
-        const currentCandidateDTSI = getMatchingDTSIDataForDDHQCandidate(
+        const currentCandidateDTSI = getDtsiMatchFromDdhq(
           currentElectedCandidate,
           dtsiStateData.people,
         )

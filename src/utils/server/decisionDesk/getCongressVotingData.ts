@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 
 import { getAllRacesData } from '@/data/aggregations/decisionDesk/getAllRacesData'
-import { getMatchingDTSIDataForDDHQCandidate } from '@/data/aggregations/decisionDesk/utils'
+import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { convertDTSIPersonStanceScoreToLetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
@@ -21,8 +21,10 @@ interface CongressDataElectionData {
   raceTotalVotes: number
   lastUpdatedDDHQ: string
   raceType: string // (congress/senate)
-  raceState: string
-  raceDistrict: string
+  ddhqState: string
+  dtsiMatchState: string
+  ddhqDistrict: string
+  dtsiMatchDistrict: string
 }
 
 const params = {
@@ -84,10 +86,7 @@ export async function getCongressVotingData(): Promise<CongressDataElectionData[
 
   const allCandidates = allElectedCongressPeople.flatMap(currentRaceData => {
     return currentRaceData.candidatesWithVotes.map(currentDDHQCandidate => {
-      const dtsiMatch = getMatchingDTSIDataForDDHQCandidate(
-        currentDDHQCandidate,
-        dtsiAllPeopleData.people,
-      )
+      const dtsiMatch = getDtsiMatchFromDdhq(currentDDHQCandidate, dtsiAllPeopleData.people)
 
       const dtsiMatchLetterGrade = dtsiMatch
         ? convertDTSIPersonStanceScoreToLetterGrade(dtsiMatch)
@@ -114,8 +113,10 @@ export async function getCongressVotingData(): Promise<CongressDataElectionData[
           ? format(new Date(currentRaceData.lastUpdated), 'yyyy-MM-dd HH:mm:ss')
           : 'N/A',
         raceType: currentRaceData.office?.officeName ?? 'N/A',
-        raceState: currentRaceData.state,
-        raceDistrict: currentRaceData.district,
+        ddhqState: currentRaceData.state,
+        dtsiMatchState: dtsiMatch?.primaryRole?.primaryState ?? 'N/A',
+        ddhqDistrict: currentRaceData.district,
+        dtsiMatchDistrict: dtsiMatch?.primaryRole?.primaryDistrict ?? 'N/A',
       }
     })
   })

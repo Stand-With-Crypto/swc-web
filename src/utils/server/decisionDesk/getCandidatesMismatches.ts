@@ -1,5 +1,5 @@
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
-import { getMatchingDTSIDataForDDHQCandidate } from '@/data/aggregations/decisionDesk/utils'
+import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import {
   DecisionDeskRedisKeys,
@@ -26,10 +26,7 @@ export async function getCandidatesMismatches() {
 
         const currentMismatchCandidates = currentCandidates
           .map(currentCandidate => {
-            const candidateDtsiData = getMatchingDTSIDataForDDHQCandidate(
-              currentCandidate,
-              dtsiStateData.people,
-            )
+            const candidateDtsiData = getDtsiMatchFromDdhq(currentCandidate, dtsiStateData.people)
 
             if (!candidateDtsiData) {
               return {

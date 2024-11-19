@@ -6,6 +6,11 @@ import { getCongressVotingData } from '@/utils/server/decisionDesk/getCongressVo
 async function generateAfterElectionCongressData() {
   const afterElectionCongressData = await getCongressVotingData()
   const afterElectionCongressDataMap = afterElectionCongressData.map(currentCongressData => {
+    const hasDifferentFirstName =
+      currentCongressData.ddhqWinnerFirstName !== currentCongressData.dtsiMatchFirstName
+    const hasDifferentLastName =
+      currentCongressData.ddhqWinnerLastName !== currentCongressData.dtsiMatchLastName
+
     return {
       ['DDHQ Winner First Name']: currentCongressData.ddhqWinnerFirstName,
       ['DDHQ Winner Last Name']: currentCongressData.ddhqWinnerLastName,
@@ -22,8 +27,12 @@ async function generateAfterElectionCongressData() {
       ['Race Total Votes']: currentCongressData.raceTotalVotes,
       ['Last Updated DDHQ']: currentCongressData.lastUpdatedDDHQ,
       ['Race Type']: currentCongressData.raceType,
-      ['Race State']: currentCongressData.raceState,
-      ['Race District']: currentCongressData.raceDistrict,
+      ['DDHQ State']: currentCongressData.ddhqState,
+      ['DTSI Match State']: currentCongressData.dtsiMatchState,
+      ['DDHQ District']: currentCongressData.ddhqDistrict,
+      ['DTSI Match District']: currentCongressData.dtsiMatchDistrict,
+      ['Has Different First Name']: hasDifferentFirstName,
+      ['Has Different Last Name']: hasDifferentLastName,
     }
   })
 

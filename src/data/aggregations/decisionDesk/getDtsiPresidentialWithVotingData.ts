@@ -1,5 +1,8 @@
-import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import {
+  CandidatesWithVote,
+  PresidentialDataWithVotingResponse,
+} from '@/data/aggregations/decisionDesk/types'
+import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { fetchElectoralCollege } from '@/utils/server/decisionDesk/services'
 import { getLogger } from '@/utils/shared/logger'
@@ -33,13 +36,16 @@ export async function getDtsiPresidentialWithVotingData(
   const presidentialData = await getPresidentialData(year)
   const dtsiData = await queryDTSILocationUnitedStatesPresidential()
 
-  const presidentialVoteData = dtsiData.people.map(currentPolitician => {
+  const presidentialVoteData = dtsiData.people.map(currentDtsiPerson => {
     const votingData = presidentialData.find(currentVotingData => {
-      return getPoliticianFindMatch(currentPolitician, currentVotingData)
+      return getDtsiMatchFromDdhq(
+        currentVotingData as unknown as CandidatesWithVote,
+        currentDtsiPerson,
+      )
     })
 
     return {
-      ...currentPolitician,
+      ...currentDtsiPerson,
       votingData,
     }
   })

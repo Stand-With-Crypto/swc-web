@@ -4,10 +4,7 @@ import { useMemo } from 'react'
 
 import { DTSI_Candidate } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults/types'
 import { CandidatesWithVote, RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
-import {
-  getMatchingDDHQCandidateForDTSIPerson,
-  getMatchingDTSIDataForDDHQCandidate,
-} from '@/data/aggregations/decisionDesk/utils'
+import { getDdhqMatchFromDtsi, getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
 export const useInitialCandidateSelection = (candidates: DTSI_Candidate[]) => {
@@ -78,7 +75,7 @@ export const useLiveCandidateSelection = (
 
   let shouldFallback = isZeroed
   const candidatesToShow = sortedCandidates.map(ddhqCandidate => {
-    const matchedCandidate = getMatchingDTSIDataForDDHQCandidate(ddhqCandidate, dtsiCandidates)
+    const matchedCandidate = getDtsiMatchFromDdhq(ddhqCandidate, dtsiCandidates)
 
     if (!matchedCandidate) {
       shouldFallback = true
@@ -93,9 +90,9 @@ export const useLiveCandidateSelection = (
 
   if (shouldFallback) {
     const enhancedFallback = fallback.map(dtsiCandidate => {
-      const matchedCandidate = getMatchingDDHQCandidateForDTSIPerson(
-        dtsiCandidate,
+      const matchedCandidate = getDdhqMatchFromDtsi(
         liveResultData.candidatesWithVotes,
+        dtsiCandidate,
       )
       if (!matchedCandidate) return null
 
