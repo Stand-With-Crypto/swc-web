@@ -1,3 +1,5 @@
+import { UserCommunicationJourneyType } from '@prisma/client'
+
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -156,16 +158,15 @@ export const apiUrls = {
     stateCode: string
     district: number
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
-  smsStatusCallback: ({
-    campaignName,
-    journeyType,
-    hasWelcomeMessageInBody,
-  }: {
+  smsStatusCallback: (params: {
     campaignName: string
-    journeyType: string
-    hasWelcomeMessageInBody?: boolean
+    journeyType: UserCommunicationJourneyType
+    variantName: string
+    hasWelcomeMessageInBody: boolean
   }) =>
-    `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
+    `/api/public/sms/events/status?${Object.entries(params)
+      .map(([key, value]) => `${key}=${String(value)}`)
+      .join('&')}`,
   decisionDeskPresidentialData: () => '/api/public/decision-desk/usa/presidential',
   decisionDeskStateData: ({ stateCode }: { stateCode: string }) =>
     `/api/public/decision-desk/usa/state/${stateCode}`,

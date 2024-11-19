@@ -24,6 +24,7 @@ export interface EnqueueMessagePayload {
     body: string
     journeyType: UserCommunicationJourneyType
     campaignName: string
+    variantName: string
     media?: string[]
     hasWelcomeMessageInBody?: boolean
   }>
@@ -150,7 +151,14 @@ export async function enqueueMessages(
 
   const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
     for (const message of messages) {
-      const { body, journeyType, campaignName, media, hasWelcomeMessageInBody } = message
+      const {
+        body,
+        journeyType,
+        campaignName,
+        media,
+        hasWelcomeMessageInBody = false,
+        variantName,
+      } = message
 
       const phoneNumberVariables = variables[phoneNumber] ?? {}
 
@@ -163,6 +171,7 @@ export async function enqueueMessages(
             apiUrls.smsStatusCallback({
               journeyType,
               campaignName,
+              variantName,
               hasWelcomeMessageInBody,
             }),
           ),

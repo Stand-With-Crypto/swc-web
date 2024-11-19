@@ -34,6 +34,7 @@ export interface BulkSMSPayload {
       smsBody: string
       media?: string[]
       percentage: number
+      variantName: string
     }>
     campaignName: string
     includePendingDoubleOptIn?: boolean
@@ -78,11 +79,15 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       let fullPercentage = 0
 
-      variants.forEach(({ smsBody, percentage }, variantIndex) => {
+      variants.forEach(({ smsBody, percentage, variantName }, variantIndex) => {
         if (!smsBody) {
           throw new NonRetriableError(
             `Missing sms body in variant ${variantIndex}, message ${index}`,
           )
+        }
+
+        if (!variantName) {
+          throw new NonRetriableError(`Missing name in variant ${variantIndex}, message ${index}`)
         }
 
         fullPercentage += percentage
@@ -186,6 +191,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             () =>
               getPhoneNumberList({
                 campaignName,
+                variantNames: variants.map(v => v.variantName),
                 includePendingDoubleOptIn,
                 skip,
                 userWhereInput: customWhere,
@@ -206,12 +212,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
         logger.info(`Fetched all phone numbers ${allPhoneNumbers.length}`)
 
-        logger.info(`Shuffling phone numbers`)
+        const phoneNumberVariants = await step.run(
+          `split-phone-numbers-${String(userHasWelcomeMessage)}-${campaignName}`,
+          async () => {
+            // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
+            const randomizedPhoneNumbers = shuffle(uniq(allPhoneNumbers))
 
-        // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
-        const phoneNumberVariants = splitArrayByPercentages(
-          shuffle(uniq(allPhoneNumbers)),
-          variants.map(v => v.percentage),
+            return splitArrayByPercentages(
+              randomizedPhoneNumbers,
+              variants.map(v => v.percentage), // [60, 40] will return two arrays with 60% and 40% of the phone numbers
+            )
+          },
         )
 
         logger.info(`Splitted phone numbers into ${phoneNumberVariants.length} variants`)
@@ -226,7 +237,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
             variantIndex += 1
 
-            const { smsBody, media } = variant
+            const { smsBody, media, variantName } = variant
 
             // Here we're adding the welcome legalese to the bulk text, when doing this we need to register in our DB that the user received the welcome legalese
             const body = !userHasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
@@ -238,6 +249,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                   {
                     body,
                     campaignName,
+                    variantName,
                     journeyType: UserCommunicationJourneyType.BULK_SMS,
                     media,
                     // If the user does not have a welcome message, the body must have it
@@ -399,6 +411,7 @@ export interface GetPhoneNumberOptions {
   skip: number
   userWhereInput?: Prisma.UserGroupByArgs['where']
   campaignName?: string
+  variantNames?: string[]
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
@@ -416,9 +429,15 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
                     campaignName: {
                       not: options.campaignName,
                     },
+                    variantName: {
+                      notIn: options.variantNames,
+                    },
                   },
                   {
                     campaignName: options.campaignName,
+                    variantName: {
+                      in: options.variantNames,
+                    },
                     userCommunications: {
                       every: {
                         status: {
