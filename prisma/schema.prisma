@@ -506,7 +506,7 @@ model UserCommunicationJourney {
   userCommunications UserCommunication[]
   campaignName       String?                      @map("campaign_name")
 
-  @@index([userId, journeyType, campaignName])
+  @@index([userId])
   @@map("user_communication_journey")
 }
 
