@@ -1,11 +1,11 @@
-import { format, isAfter } from 'date-fns'
+import { format } from 'date-fns'
 
+import { CandidatesWithVote } from '@/data/aggregations/decisionDesk/types'
 import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
-import { convertDTSIPersonStanceScoreToLetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import houseData from '@/mocks/congress/2025/house.json'
 import senateData from '@/mocks/congress/2025/senate.json'
-import { CandidatesWithVote } from '@/data/aggregations/decisionDesk/types'
+import { convertDTSIPersonStanceScoreToLetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
 interface CongressDataElectionData {
   firstName: string
@@ -25,12 +25,6 @@ interface CongressDataElectionData {
   dtsiMatchPartyCategory: string
   dtsiMatchState: string
   dtsiMatchDistrict: string
-}
-
-const params = {
-  race_date: '2024-11-05',
-  limit: '250',
-  year: '2024',
 }
 
 export async function getCongressVotingData2025(): Promise<CongressDataElectionData[]> {
