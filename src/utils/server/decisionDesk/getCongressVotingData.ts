@@ -10,17 +10,22 @@ interface CongressDataElectionData {
   ddhqWinnerLastName: string
   dtsiMatchFirstName: string
   dtsiMatchLastName: string
+  dtsiMatchSlug: string
   dtsiMatchScore: number
   dtsiMatchLetterGrade: string
   dtsiMatchRoleState: string
   dtsiMatchRoleDistrict: string
   dtsiMatchRoleCategory: string
   dtsiMatchRoleDateStart: string
-  dtsiPartyCategory: string
+  dtsiMatchRoleDateEnd: string
+  dtsiMatchRoleStatus: string
+  dtsiMatchPartyCategory: string
+  incumbent: boolean
+  elected: boolean
   totalVotesWon: number
   raceTotalVotes: number
   lastUpdatedDDHQ: string
-  raceType: string // (congress/senate)
+  raceType: string
   ddhqState: string
   dtsiMatchState: string
   ddhqDistrict: string
@@ -60,8 +65,6 @@ export async function getCongressVotingData(): Promise<CongressDataElectionData[
     queryDTSIAllPeople(),
   ])
 
-  console.log('Ended promise all')
-
   const senateDataWithoutLA = senateData.filter(
     currentSenateData => currentSenateData.state !== 'LA',
   )
@@ -71,54 +74,57 @@ export async function getCongressVotingData(): Promise<CongressDataElectionData[
   const allHouseData = houseDataWithoutLA.concat(laHouseData)
 
   const allCongressData = allSenateData.concat(allHouseData)
-  const allElectedCongressPeople = allCongressData.flatMap(currentRaceData => {
-    const candidatesWithVotes = currentRaceData.candidatesWithVotes.filter(
-      currentCandidate => currentCandidate.elected,
-    )
 
-    return {
-      ...currentRaceData,
-      candidatesWithVotes,
-    }
-  })
+  const allCandidates = allCongressData.flatMap(currentRaceData => {
+    return currentRaceData.candidatesWithVotes
+      .map(currentDDHQCandidate => {
+        const dtsiMatch = getDtsiMatchFromDdhq(currentDDHQCandidate, dtsiAllPeopleData.people)
 
-  console.log('Ended allElectedCongressPeople mapping')
+        const dtsiMatchLetterGrade = dtsiMatch
+          ? convertDTSIPersonStanceScoreToLetterGrade(dtsiMatch)
+          : null
 
-  const allCandidates = allElectedCongressPeople.flatMap(currentRaceData => {
-    return currentRaceData.candidatesWithVotes.map(currentDDHQCandidate => {
-      const dtsiMatch = getDtsiMatchFromDdhq(currentDDHQCandidate, dtsiAllPeopleData.people)
+        const isElected = currentDDHQCandidate.elected ?? false
 
-      const dtsiMatchLetterGrade = dtsiMatch
-        ? convertDTSIPersonStanceScoreToLetterGrade(dtsiMatch)
-        : null
+        if (!isElected) {
+          return null
+        }
 
-      return {
-        ddhqWinnerFirstName: currentDDHQCandidate.firstName ?? 'N/A',
-        ddhqWinnerLastName: currentDDHQCandidate.lastName ?? 'N/A',
-        dtsiMatchFirstName: dtsiMatch?.firstName ?? 'N/A',
-        dtsiMatchLastName: dtsiMatch?.lastName ?? 'N/A',
-        dtsiMatchRoleState: dtsiMatch?.primaryRole?.primaryState ?? 'N/A',
-        dtsiMatchRoleDistrict: dtsiMatch?.primaryRole?.primaryDistrict ?? 'N/A',
-        dtsiMatchRoleCategory: dtsiMatch?.primaryRole?.roleCategory ?? 'N/A',
-        dtsiMatchRoleDateStart: dtsiMatch?.primaryRole?.dateStart
-          ? format(new Date(dtsiMatch.primaryRole.dateStart), 'yyyy-MM-dd')
-          : 'N/A',
-        dtsiMatchScore:
-          dtsiMatch?.manuallyOverriddenStanceScore ?? dtsiMatch?.computedStanceScore ?? 0,
-        dtsiMatchLetterGrade: dtsiMatchLetterGrade ?? 'N/A',
-        dtsiPartyCategory: dtsiMatch?.politicalAffiliationCategory ?? 'N/A',
-        totalVotesWon: currentDDHQCandidate.votes ?? 0,
-        raceTotalVotes: currentRaceData.totalVotes,
-        lastUpdatedDDHQ: currentRaceData.lastUpdated
-          ? format(new Date(currentRaceData.lastUpdated), 'yyyy-MM-dd HH:mm:ss')
-          : 'N/A',
-        raceType: currentRaceData.office?.officeName ?? 'N/A',
-        ddhqState: currentRaceData.state,
-        dtsiMatchState: dtsiMatch?.primaryRole?.primaryState ?? 'N/A',
-        ddhqDistrict: currentRaceData.district,
-        dtsiMatchDistrict: dtsiMatch?.primaryRole?.primaryDistrict ?? 'N/A',
-      }
-    })
+        return {
+          ddhqWinnerFirstName: currentDDHQCandidate.firstName ?? 'N/A',
+          ddhqWinnerLastName: currentDDHQCandidate.lastName ?? 'N/A',
+          dtsiMatchFirstName: dtsiMatch?.firstName ?? 'N/A',
+          dtsiMatchLastName: dtsiMatch?.lastName ?? 'N/A',
+          dtsiMatchSlug: dtsiMatch?.slug ?? 'N/A',
+          dtsiMatchRoleState: dtsiMatch?.primaryRole?.primaryState ?? 'N/A',
+          dtsiMatchRoleDistrict: dtsiMatch?.primaryRole?.primaryDistrict ?? 'N/A',
+          dtsiMatchRoleCategory: dtsiMatch?.primaryRole?.roleCategory ?? 'N/A',
+          dtsiMatchRoleDateStart: dtsiMatch?.primaryRole?.dateStart
+            ? format(new Date(dtsiMatch.primaryRole.dateStart), 'yyyy-MM-dd')
+            : 'N/A',
+          dtsiMatchRoleDateEnd: dtsiMatch?.primaryRole?.dateEnd
+            ? format(new Date(dtsiMatch.primaryRole.dateEnd), 'yyyy-MM-dd')
+            : 'N/A',
+          dtsiMatchRoleStatus: dtsiMatch?.primaryRole?.status ?? 'N/A',
+          dtsiMatchScore:
+            dtsiMatch?.manuallyOverriddenStanceScore ?? dtsiMatch?.computedStanceScore ?? 0,
+          dtsiMatchLetterGrade: dtsiMatchLetterGrade ?? 'N/A',
+          dtsiMatchPartyCategory: dtsiMatch?.politicalAffiliationCategory ?? 'N/A',
+          incumbent: currentDDHQCandidate.incumbent ?? false,
+          elected: currentDDHQCandidate.elected ?? false,
+          totalVotesWon: currentDDHQCandidate.votes ?? 0,
+          raceTotalVotes: currentRaceData.totalVotes,
+          lastUpdatedDDHQ: currentRaceData.lastUpdated
+            ? format(new Date(currentRaceData.lastUpdated), 'yyyy-MM-dd HH:mm:ss')
+            : 'N/A',
+          raceType: currentRaceData.office?.officeName ?? 'N/A',
+          ddhqState: currentRaceData.state,
+          dtsiMatchState: dtsiMatch?.primaryRole?.primaryState ?? 'N/A',
+          ddhqDistrict: currentRaceData.district,
+          dtsiMatchDistrict: dtsiMatch?.primaryRole?.primaryDistrict ?? 'N/A',
+        }
+      })
+      .filter(Boolean)
   })
 
   return allCandidates

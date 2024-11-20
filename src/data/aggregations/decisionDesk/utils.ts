@@ -232,6 +232,7 @@ export const checkLevenshteinNameMatching = (
   return false
 }
 
-export const normalizeName = (name: string) => {
+export const normalizeName = (name?: string) => {
+  if (!name) return ''
   return deburr(toLower(trim(name))).replace(/[.-\s]/g, '')
 }

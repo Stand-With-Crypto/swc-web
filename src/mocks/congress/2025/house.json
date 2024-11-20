@@ -1,0 +1,2606 @@
+[
+  {
+    "firstName": "Aaron",
+    "lastName": "Bean",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Abraham",
+    "lastName": "Hamadeh",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Adam",
+    "lastName": "Smith",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Addison",
+    "lastName": "McDowell",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Adrian",
+    "lastName": "Smith",
+    "state": "NE",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Adriano",
+    "lastName": "Espaillat",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Al",
+    "lastName": "Green",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Alexandria",
+    "lastName": "Ocasio-Cortez",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Alma",
+    "lastName": "Adams",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ami",
+    "lastName": "Bera",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "André",
+    "lastName": "Carson",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Andrea",
+    "lastName": "Salinas",
+    "state": "OR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Andrew",
+    "lastName": "Clyde",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Andrew",
+    "lastName": "Garbarino",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Andy",
+    "lastName": "Biggs",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Andy",
+    "lastName": "Barr",
+    "state": "KY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Andy",
+    "lastName": "Harris",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Andy",
+    "lastName": "Ogles",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Angie",
+    "lastName": "Craig",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ann",
+    "lastName": "Wagner",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Anna Paulina",
+    "lastName": "Luna",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "April",
+    "lastName": "McClain-Delaney",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ashley",
+    "lastName": "Hinson",
+    "state": "IA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "August",
+    "lastName": "Pfluger",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Austin",
+    "lastName": "Scott",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ayanna",
+    "lastName": "Pressley",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Barry",
+    "lastName": "Moore",
+    "state": "AL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Barry",
+    "lastName": "Loudermilk",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Becca",
+    "lastName": "Balint",
+    "state": "VT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ben",
+    "lastName": "Cline",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bennie",
+    "lastName": "Thompson",
+    "state": "MS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Beth",
+    "lastName": "Van Duyne",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Betty",
+    "lastName": "McCollum",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Foster",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Keating",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Huizenga",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Blake",
+    "lastName": "Moore",
+    "state": "UT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Onder",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Latta",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bobby",
+    "lastName": "Scott",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bonnie",
+    "lastName": "Watson Coleman",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brad",
+    "lastName": "Sherman",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brad",
+    "lastName": "Schneider",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brad",
+    "lastName": "Finstad",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brad",
+    "lastName": "Knott",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brandon",
+    "lastName": "Gill",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brendan",
+    "lastName": "Boyle",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brett",
+    "lastName": "Guthrie",
+    "state": "KY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brian",
+    "lastName": "Mast",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brian",
+    "lastName": "Jack",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brian",
+    "lastName": "Fitzpatrick",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brian",
+    "lastName": "Babin",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Brittany",
+    "lastName": "Pettersen",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bruce",
+    "lastName": "Westerman",
+    "state": "AR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Bryan",
+    "lastName": "Steil",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Buddy",
+    "lastName": "Carter",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Burgess",
+    "lastName": "Owens",
+    "state": "UT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Byron",
+    "lastName": "Donalds",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Carlos A.",
+    "lastName": "Giménez",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Carol",
+    "lastName": "Miller",
+    "state": "WV",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Celeste",
+    "lastName": "Maloy",
+    "state": "UT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chellie",
+    "lastName": "Pingree",
+    "state": "ME",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chip",
+    "lastName": "Roy",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Pappas",
+    "state": "NH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Smith",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Deluzio",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chrissy",
+    "lastName": "Houlahan",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chuck",
+    "lastName": "Edwards",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chuck",
+    "lastName": "Fleischmann",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Chuy",
+    "lastName": "García",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Claudia",
+    "lastName": "Tenney",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Clay",
+    "lastName": "Higgins",
+    "state": "LA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Cleo",
+    "lastName": "Fields",
+    "state": "LA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Cliff",
+    "lastName": "Bentz",
+    "state": "OR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Cory",
+    "lastName": "Mills",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Craig",
+    "lastName": "Goldman",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dale",
+    "lastName": "Strong",
+    "state": "AL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Goldman",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Meuser",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Crenshaw",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Newhouse",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Webster",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Danny",
+    "lastName": "Davis",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Darin",
+    "lastName": "LaHood",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Darrell",
+    "lastName": "Issa",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Darren",
+    "lastName": "Soto",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dave",
+    "lastName": "Min",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Schweikert",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Valadao",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Scott",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Rouzer",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Taylor",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Joyce",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Kustoff",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Debbie",
+    "lastName": "Wasserman Schultz",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Debbie",
+    "lastName": "Dingell",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Deborah",
+    "lastName": "Ross",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Delia",
+    "lastName": "Ramirez",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Derek",
+    "lastName": "Schmidt",
+    "state": "KS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Derrick",
+    "lastName": "Van Orden",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Diana",
+    "lastName": "DeGette",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Diana",
+    "lastName": "Harshbarger",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dina",
+    "lastName": "Titus",
+    "state": "NV",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Don",
+    "lastName": "Bacon",
+    "state": "NE",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Don",
+    "lastName": "Davis",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Don",
+    "lastName": "Beyer",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Donald",
+    "lastName": "Norcross",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Doris",
+    "lastName": "Matsui",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Doug",
+    "lastName": "LaMalfa",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dusty",
+    "lastName": "Johnson",
+    "state": "SD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Dwight",
+    "lastName": "Evans",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ed",
+    "lastName": "Case",
+    "state": "HI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Eli",
+    "lastName": "Crane",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Elise",
+    "lastName": "Stefanik",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Emanuel",
+    "lastName": "Cleaver",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Emilia",
+    "lastName": "Sykes",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Randall",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Eric",
+    "lastName": "Swalwell",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Eric",
+    "lastName": "Sorensen",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Eric",
+    "lastName": "Burlison",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Erin",
+    "lastName": "Houchin",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Eugene",
+    "lastName": "Vindman",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "Pallone",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "Lucas",
+    "state": "OK",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Frank J.",
+    "lastName": "Mrvan",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Frederica",
+    "lastName": "Wilson",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "French",
+    "lastName": "Hill",
+    "state": "AR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gabe",
+    "lastName": "Evans",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gabe",
+    "lastName": "Vasquez",
+    "state": "NM",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gabe",
+    "lastName": "Amo",
+    "state": "RI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gary",
+    "lastName": "Palmer",
+    "state": "AL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "George",
+    "lastName": "Latimer",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "George T.",
+    "lastName": "Whitesides",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gerry",
+    "lastName": "Connolly",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gil",
+    "lastName": "Cisneros",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Glenn",
+    "lastName": "Ivey",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Glenn",
+    "lastName": "Thompson",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Glenn",
+    "lastName": "Grothman",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Grace",
+    "lastName": "Meng",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Greg",
+    "lastName": "Stanton",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Greg",
+    "lastName": "Steube",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Greg",
+    "lastName": "Murphy",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Greg",
+    "lastName": "Landsman",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Greg",
+    "lastName": "Casar",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gregory",
+    "lastName": "Meeks",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gus",
+    "lastName": "Bilirakis",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Guy",
+    "lastName": "Reschenthaler",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Gwen",
+    "lastName": "Moore",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Hakeem",
+    "lastName": "Jeffries",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Hal",
+    "lastName": "Rogers",
+    "state": "KY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Haley",
+    "lastName": "Stevens",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Hank",
+    "lastName": "Johnson",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Harriet",
+    "lastName": "Hageman",
+    "state": "WY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Henry",
+    "lastName": "Cuellar",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Herb",
+    "lastName": "Conaway",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Hillary",
+    "lastName": "Scholten",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ilhan",
+    "lastName": "Omar",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jack",
+    "lastName": "Bergman",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jahana",
+    "lastName": "Hayes",
+    "state": "CT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jake",
+    "lastName": "Auchincloss",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jake",
+    "lastName": "Ellzey",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Comer",
+    "state": "KY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jamie",
+    "lastName": "Raskin",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jan",
+    "lastName": "Schakowsky",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Janelle",
+    "lastName": "Bynum",
+    "state": "OR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jared",
+    "lastName": "Huffman",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jared",
+    "lastName": "Moskowitz",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jared",
+    "lastName": "Golden",
+    "state": "ME",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jasmine",
+    "lastName": "Crockett",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jason",
+    "lastName": "Crow",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jason",
+    "lastName": "Smith",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jay",
+    "lastName": "Obernolte",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Hurd",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Crank",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Van Drew",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jefferson",
+    "lastName": "Shreve",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jen",
+    "lastName": "Kiggans",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jennifer",
+    "lastName": "McClellan",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jerry",
+    "lastName": "Nadler",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jill",
+    "lastName": "Tokuda",
+    "state": "HI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Costa",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Himes",
+    "state": "CT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Baird",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "McGovern",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Jordan",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Clyburn",
+    "state": "SC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jimmy",
+    "lastName": "Panetta",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jimmy",
+    "lastName": "Gomez",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Joaquin",
+    "lastName": "Castro",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jodey",
+    "lastName": "Arrington",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Neguse",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Courtney",
+    "state": "CT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Wilson",
+    "state": "SC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Garamendi",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Rutherford",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Moolenaar",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "James",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Mannion",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Joyce",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Rose",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Carter",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John",
+    "lastName": "McGuire",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "John B.",
+    "lastName": "Larson",
+    "state": "CT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Johnny",
+    "lastName": "Olszewski",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Jonathan",
+    "lastName": "Jackson",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Joseph",
+    "lastName": "Morelle",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Josh",
+    "lastName": "Harder",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Josh",
+    "lastName": "Gottheimer",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Josh",
+    "lastName": "Riley",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Josh",
+    "lastName": "Brecheen",
+    "state": "OK",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Joyce",
+    "lastName": "Beatty",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Juan",
+    "lastName": "Ciscomani",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Juan",
+    "lastName": "Vargas",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Judy",
+    "lastName": "Chu",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Julia",
+    "lastName": "Brownley",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Julia",
+    "lastName": "Letlow",
+    "state": "LA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Julie",
+    "lastName": "Fedorchak",
+    "state": "ND",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Julie",
+    "lastName": "Johnson",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kat",
+    "lastName": "Cammack",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Katherine",
+    "lastName": "Clark",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kathy",
+    "lastName": "Castor",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Keith",
+    "lastName": "Self",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kelly",
+    "lastName": "Morrison",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ken",
+    "lastName": "Calvert",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Kiley",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Mullin",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Hern",
+    "state": "OK",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kim",
+    "lastName": "Schrier",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kristen",
+    "lastName": "McDonald Rivet",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Kweisi",
+    "lastName": "Mfume",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "LaMonica",
+    "lastName": "McIver",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lance",
+    "lastName": "Gooden",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lateefah",
+    "lastName": "Simon",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Laura",
+    "lastName": "Friedman",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Laura",
+    "lastName": "Gillen",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Laurel",
+    "lastName": "Lee",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lauren",
+    "lastName": "Boebert",
+    "state": "CO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lauren",
+    "lastName": "Underwood",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Linda",
+    "lastName": "Sánchez",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "McClain",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lizzie",
+    "lastName": "Fletcher",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lloyd",
+    "lastName": "Smucker",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lloyd",
+    "lastName": "Doggett",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lois",
+    "lastName": "Frankel",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lori",
+    "lastName": "Trahan",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lou",
+    "lastName": "Correa",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Lucy",
+    "lastName": "McBath",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Luz",
+    "lastName": "Rivas",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Madeleine",
+    "lastName": "Dean",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Maggie",
+    "lastName": "Goodlander",
+    "state": "NH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Marc",
+    "lastName": "Veasey",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Marcy",
+    "lastName": "Kaptur",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "María Elvira",
+    "lastName": "Salazar",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mariannette",
+    "lastName": "Miller-Meeks",
+    "state": "IA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Marie",
+    "lastName": "Gluesenkamp Perez",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Marilyn",
+    "lastName": "Strickland",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mario",
+    "lastName": "Díaz-Balart",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Marjorie Taylor",
+    "lastName": "Greene",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "DeSaulnier",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Takano",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Messmer",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Alford",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Amodei",
+    "state": "NV",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Harris",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Green",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Pocan",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Marlin",
+    "lastName": "Stutzman",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mary",
+    "lastName": "Miller",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mary Gay",
+    "lastName": "Scanlon",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Max",
+    "lastName": "Miller",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Maxine",
+    "lastName": "Waters",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Maxine",
+    "lastName": "Dexter",
+    "state": "OR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Maxwell",
+    "lastName": "Frost",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Melanie",
+    "lastName": "Stansbury",
+    "state": "NM",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Waltz",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Guest",
+    "state": "MS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Rulli",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "McCaul",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Cloud",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Baumgartner",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Michelle",
+    "lastName": "Fischbach",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Rogers",
+    "state": "AL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Thompson",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Levin",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Haridopolos",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Collins",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Simpson",
+    "state": "ID",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Quigley",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Bost",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Johnson",
+    "state": "LA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Ezell",
+    "state": "MS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Flood",
+    "state": "NE",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Lawler",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Turner",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Carey",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Kelly",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Kennedy",
+    "state": "UT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Mikie",
+    "lastName": "Sherrill",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Monica",
+    "lastName": "De La Cruz",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Morgan",
+    "lastName": "McGarvey",
+    "state": "KY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Morgan",
+    "lastName": "Luttrell",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Morgan",
+    "lastName": "Griffith",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nancy",
+    "lastName": "Pelosi",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nancy",
+    "lastName": "Mace",
+    "state": "SC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nanette",
+    "lastName": "Barragán",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nathaniel",
+    "lastName": "Moran",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Neal",
+    "lastName": "Dunn",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nellie",
+    "lastName": "Pou",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nick",
+    "lastName": "LaLota",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nick",
+    "lastName": "Langworthy",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nicole",
+    "lastName": "Malliotakis",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nikema",
+    "lastName": "Williams",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nikki",
+    "lastName": "Budzinski",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Norma",
+    "lastName": "Torres",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Nydia",
+    "lastName": "Velázquez",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Pat",
+    "lastName": "Ryan",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Pat",
+    "lastName": "Harrigan",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Pat",
+    "lastName": "Fallon",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Paul",
+    "lastName": "Gosar",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Paul",
+    "lastName": "Tonko",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Pete",
+    "lastName": "Aguilar",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Pete",
+    "lastName": "Stauber",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Pete",
+    "lastName": "Sessions",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Pramila",
+    "lastName": "Jayapal",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Raja",
+    "lastName": "Krishnamoorthi",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ralph",
+    "lastName": "Norman",
+    "state": "SC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Randy",
+    "lastName": "Feenstra",
+    "state": "IA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Randy",
+    "lastName": "Weber",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rashida",
+    "lastName": "Tlaib",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Raul",
+    "lastName": "Ruiz",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Raúl",
+    "lastName": "Grijalva",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rich",
+    "lastName": "McCormick",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Neal",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Hudson",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rick",
+    "lastName": "Crawford",
+    "state": "AR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rick",
+    "lastName": "Allen",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rick",
+    "lastName": "Larsen",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Riley",
+    "lastName": "Moore",
+    "state": "WV",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ritchie",
+    "lastName": "Torres",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ro",
+    "lastName": "Khanna",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rob",
+    "lastName": "Menendez",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rob",
+    "lastName": "Bresnahan",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rob",
+    "lastName": "Wittman",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Aderholt",
+    "state": "AL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Garcia",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Robin",
+    "lastName": "Kelly",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Roger",
+    "lastName": "Williams",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ron",
+    "lastName": "Estes",
+    "state": "KS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ronny",
+    "lastName": "Jackson",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rosa",
+    "lastName": "DeLauro",
+    "state": "CT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Rudy",
+    "lastName": "Yakym",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Russ",
+    "lastName": "Fulcher",
+    "state": "ID",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Russell",
+    "lastName": "Fry",
+    "state": "SC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ryan",
+    "lastName": "Zinke",
+    "state": "MT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ryan",
+    "lastName": "Mackenzie",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Salud",
+    "lastName": "Carbajal",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sam",
+    "lastName": "Liccardo",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sam",
+    "lastName": "Graves",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sanford",
+    "lastName": "Bishop",
+    "state": "GA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sara",
+    "lastName": "Jacobs",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "McBride",
+    "state": "DE",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Elfreth",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Peters",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Franklin",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Perry",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "DesJarlais",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Fitzgerald",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sean",
+    "lastName": "Casten",
+    "state": "IL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Seth",
+    "lastName": "Moulton",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Seth",
+    "lastName": "Magaziner",
+    "state": "RI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sharice",
+    "lastName": "Davids",
+    "state": "KS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sheila",
+    "lastName": "Cherfilus-McCormick",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sheri",
+    "lastName": "Biggs",
+    "state": "SC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Shomari",
+    "lastName": "Figures",
+    "state": "AL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Shontel",
+    "lastName": "Brown",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Shri",
+    "lastName": "Thanedar",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Steny",
+    "lastName": "Hoyer",
+    "state": "MD",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Stephanie",
+    "lastName": "Bice",
+    "state": "OK",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Stephen",
+    "lastName": "Lynch",
+    "state": "MA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Womack",
+    "state": "AR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Scalise",
+    "state": "LA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Cohen",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Steven",
+    "lastName": "Horsford",
+    "state": "NV",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Suhas",
+    "lastName": "Subramanyam",
+    "state": "VA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Summer",
+    "lastName": "Lee",
+    "state": "PA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Susie",
+    "lastName": "Lee",
+    "state": "NV",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Suzan",
+    "lastName": "DelBene",
+    "state": "WA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Suzanne",
+    "lastName": "Bonamici",
+    "state": "OR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sydney",
+    "lastName": "Kamlager-Dove",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sylvester",
+    "lastName": "Turner",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Sylvia",
+    "lastName": "Garcia",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "TBD",
+    "lastName": "",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "TBD",
+    "lastName": "",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "TBD",
+    "lastName": "",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Ted",
+    "lastName": "Lieu",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Teresa",
+    "lastName": "Leger Fernandez",
+    "state": "NM",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Terri",
+    "lastName": "Sewell",
+    "state": "AL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Thomas",
+    "lastName": "Massie",
+    "state": "KY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Thomas",
+    "lastName": "Kean Jr.",
+    "state": "NJ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Walberg",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Kennedy",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Moore",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Burchett",
+    "state": "TN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "McClintock",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Barrett",
+    "state": "MI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Emmer",
+    "state": "MN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Suozzi",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Cole",
+    "state": "OK",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Tiffany",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tony",
+    "lastName": "Gonzales",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tony",
+    "lastName": "Wied",
+    "state": "WI",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Tracey",
+    "lastName": "Mann",
+    "state": "KS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Trent",
+    "lastName": "Kelly",
+    "state": "MS",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Troy",
+    "lastName": "Carter",
+    "state": "LA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Troy",
+    "lastName": "Downing",
+    "state": "MT",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Troy",
+    "lastName": "Balderson",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Troy",
+    "lastName": "Nehls",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Val",
+    "lastName": "Hoyle",
+    "state": "OR",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Valerie",
+    "lastName": "Foushee",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Vern",
+    "lastName": "Buchanan",
+    "state": "FL",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Veronica",
+    "lastName": "Escobar",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Vicente",
+    "lastName": "Gonzalez",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Victoria",
+    "lastName": "Spartz",
+    "state": "IN",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Vince",
+    "lastName": "Fong",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Virginia",
+    "lastName": "Foxx",
+    "state": "NC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Warren",
+    "lastName": "Davidson",
+    "state": "OH",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Wesley",
+    "lastName": "Bell",
+    "state": "MO",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Wesley",
+    "lastName": "Hunt",
+    "state": "TX",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "William",
+    "lastName": "Timmons",
+    "state": "SC",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Yassamin",
+    "lastName": "Ansari",
+    "state": "AZ",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Young",
+    "lastName": "Kim",
+    "state": "CA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Yvette",
+    "lastName": "Clarke",
+    "state": "NY",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Zach",
+    "lastName": "Nunn",
+    "state": "IA",
+    "congressType": "HOUSE"
+  },
+  {
+    "firstName": "Zoe",
+    "lastName": "Lofgren",
+    "state": "CA",
+    "congressType": "HOUSE"
+  }
+]
