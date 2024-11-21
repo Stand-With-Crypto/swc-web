@@ -13,12 +13,14 @@ import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/a
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
 import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
+import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedLocale } from '@/intl/locales'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
@@ -148,6 +150,7 @@ const MapComponent = ({
   markers,
   handleStateMouseHover,
   handleStateMouseOut,
+  locale,
   isEmbedded,
 }: {
   markers: MapMarker[]
@@ -226,8 +229,15 @@ const MapComponent = ({
                 />
               ))}
               <AnimatePresence>
-                {markers.map(({ id, name, coordinates, actionType, iconType }) => {
-                  const currentActionInfo = `Someone in ${name} ${iconType?.labelActionTooltip ?? ''}`
+                {markers.map(({ id, name, coordinates, actionType, iconType, amountUsd }) => {
+                  const currentAmountUsd = amountUsd
+                    ? FormattedCurrency({
+                        amount: amountUsd,
+                        locale,
+                        currencyCode: SupportedFiatCurrencyCodes.USD,
+                      })
+                    : ''
+                  const currentActionInfo = `Someone in ${name} ${iconType?.labelActionTooltip(currentAmountUsd) ?? ''}`
                   const IconComponent = iconType?.icon as FC<IconProps>
                   const markerKey = `${name}-${actionType}-${id}`
 

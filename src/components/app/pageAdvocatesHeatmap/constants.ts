@@ -72,7 +72,7 @@ export const ADVOCATES_ACTIONS: Partial<
       icon: (args: IconProps) => JSX.Element
       label: string
       labelMobile: string
-      labelActionTooltip: string
+      labelActionTooltip: (extraText?: string) => string
     }
   >
 > = {
@@ -81,61 +81,61 @@ export const ADVOCATES_ACTIONS: Partial<
   //   icon: CallIcon,
   //   label: 'Call made to congress',
   //   labelMobile: 'called',
-  //   labelActionTooltip: 'called their rep',
+  //   labelActionTooltip: () => 'called their rep',
   // },
   // EMAIL: {
   //   icon: EmailIcon,
   //   label: 'Email sent to congress',
   //   labelMobile: 'emailed',
-  //   labelActionTooltip: 'emailed their rep',
+  //   labelActionTooltip: () => 'emailed their rep',
   // },
   OPT_IN: {
     icon: JoinIcon,
     label: 'New member joined',
     labelMobile: 'joined',
-    labelActionTooltip: 'joined SWC',
+    labelActionTooltip: () => 'joined SWC',
   },
   TWEET: {
     icon: FollowOnXIcon,
     label: 'Followed SWC on X',
-    labelMobile: 'Followed on X',
-    labelActionTooltip: 'Followed SWC on X',
+    labelMobile: 'Followed SWC on X',
+    labelActionTooltip: () => 'followed SWC on X',
   },
   VOTING_DAY: {
     icon: VotedIcon,
-    label: 'I voted',
-    labelMobile: 'I voted',
-    labelActionTooltip: 'I voted',
+    label: 'Claimed "I Voted" NFT',
+    labelMobile: 'Claimed "I Voted" NFT',
+    labelActionTooltip: () => 'claimed the "I Voted" NFT',
   },
   DONATION: {
     icon: DonateIcon,
-    label: 'Donated',
-    labelMobile: 'Donated',
-    labelActionTooltip: 'Donated',
+    label: 'Donated to SWC',
+    labelMobile: 'Donated to SWC',
+    labelActionTooltip: extraText => (extraText ? `donated ${extraText} to SWC` : 'donated to SWC'),
   },
   // removed call and email for the voting day
   // VOTER_REGISTRATION: {
   //   icon: VoterRegIcon,
   //   label: 'Checked voter registration',
   //   labelMobile: 'checked voter reg.',
-  //   labelActionTooltip: 'checked voter registration',
+  //   labelActionTooltip: () => 'checked voter registration',
   // },
   // VOTER_ATTESTATION: {
   //   icon: VoterAttestationIcon,
   //   label: 'Pledged to vote',
   //   labelMobile: 'pledged to vote',
-  //   labelActionTooltip: 'pledged to vote',
+  //   labelActionTooltip: () => 'pledged to vote',
   // },
   // VIEW_KEY_RACES: {
   //   icon: ViewKeyRacesIcon,
   //   label: 'Researched politician scores',
   //   labelMobile: 'researched',
-  //   labelActionTooltip: 'researched politician scores',
+  //   labelActionTooltip: () => 'researched politician scores',
   // },
   // VOTING_INFORMATION_RESEARCHED: {
   //   icon: PrepareToVoteIcon,
   //   label: 'Prepared to vote',
   //   labelMobile: 'prepared',
-  //   labelActionTooltip: 'prepared to vote',
+  //   labelActionTooltip: () => 'prepared to vote',
   // },
 }
