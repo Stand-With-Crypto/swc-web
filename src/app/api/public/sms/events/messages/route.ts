@@ -6,6 +6,7 @@ import twilio from 'twilio'
 
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
+import { identifyIncomingKeyword } from '@/utils/server/sms/identifyIncomingKeyword'
 import * as messages from '@/utils/server/sms/messages'
 import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 
@@ -54,20 +55,27 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  const keyword = body.Body?.toUpperCase()
+  const keyword = identifyIncomingKeyword(body.Body)
 
   let message = ''
 
-  if (keyword && keyword.length > 0) {
-    if (['STOPALL', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT', 'STOP'].includes(keyword)) {
-      // We can't get the messageId when replying with twilio, so we need to trigger a Inngest function instead
-      await smsActions.optOutUser(phoneNumber, user)
-    } else if (['YES', 'START', 'CONTINUE', 'UNSTOP'].includes(keyword)) {
-      await smsActions.optUserBackIn(phoneNumber, user)
-    } else if (['HELP'].includes(keyword)) {
-      // We don't want to track this message, so we can just reply with twilio
-      message = messages.HELP_MESSAGE
-    }
+  if (keyword?.isOptOutKeyword) {
+    // We can't get the messageId when replying with twilio, so we need to trigger a Inngest function instead
+    await smsActions.optOutUser(phoneNumber, user)
+  } else if (keyword?.isUnstopKeyword) {
+    await smsActions.optUserBackIn(phoneNumber, user)
+  } else if (keyword?.isHelpKeyword) {
+    // We don't want to track this message, so we can just reply with twilio
+    message = messages.HELP_MESSAGE
+  } else {
+    Sentry.captureMessage('Unable to identify keyword', {
+      extra: {
+        ...body,
+      },
+      tags: {
+        domain: 'smsEventsMessagesRoute',
+      },
+    })
   }
 
   const headers = new Headers()
