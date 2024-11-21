@@ -49,6 +49,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       extra: {
         ...body,
       },
+      level: 'info',
       tags: {
         domain: 'smsEventsMessagesRoute',
       },
@@ -72,6 +73,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       extra: {
         ...body,
       },
+      level: 'info',
       tags: {
         domain: 'smsEventsMessagesRoute',
       },
