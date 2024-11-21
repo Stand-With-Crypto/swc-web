@@ -46,7 +46,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   if (!user) {
     Sentry.captureMessage('Received message from an unused phone number', {
       extra: {
-        phoneNumber,
+        body,
       },
       tags: {
         domain: 'smsEventsMessagesRoute',
