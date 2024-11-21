@@ -32,6 +32,12 @@ export async function getCongressVotingData2025(): Promise<CongressDataElectionD
 
   const allCongressData = houseData.concat(senateData)
 
+  const houseCount = houseData.length
+  const senateCount = senateData.length
+
+  console.log(`House count: ${houseCount}`)
+  console.log(`Senate count: ${senateCount}`)
+
   const allCandidates = allCongressData.map(currentCandidate => {
     const dtsiMatch = getDtsiMatchFromDdhq(
       currentCandidate as unknown as CandidatesWithVote,
