@@ -128,14 +128,15 @@ function compareLastNamePartsWithLevenshtein(
   dtsiPerson: DTSI_Candidate,
   ddhqCandidate: CandidatesWithVote | PresidentialDataWithVotingResponse['votingData'],
 ) {
-  const dtsiFirstName = dtsiPerson.firstName
+  const dtsiFirstName = normalizeName(dtsiPerson.firstName)
   const dtsiLastName = dtsiPerson.lastName
 
-  const ddhqFirstName = ddhqCandidate!.firstName
+  const ddhqFirstName = normalizeName(ddhqCandidate!.firstName)
   const ddhqLastName = ddhqCandidate!.lastName
 
-  const dtsiLastNameParts = dtsiLastName.split(' ').map(part => normalizeName(part))
-  const ddhqLastNameParts = ddhqLastName.split(' ').map(part => normalizeName(part))
+  // split last names either with ' ' or '-'
+  const dtsiLastNameParts = dtsiLastName.split(/[\s-]/).map(part => normalizeName(part))
+  const ddhqLastNameParts = ddhqLastName.split(/[\s-]/).map(part => normalizeName(part))
 
   const levenshteinThreshold = 2
 
