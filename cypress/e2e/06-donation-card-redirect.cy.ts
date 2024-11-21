@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-it.skip('donation card redirects to donation page', () => {
+it('donation card redirects to donation page', () => {
   cy.visit('/')
 
-  cy.contains('Donate to Stand With Crypto').click()
+  cy.contains('Make a donation').click()
   cy.url().should('include', '/donate')
   cy.get('h1').contains('Protect the future of crypto')
 })

@@ -18,8 +18,6 @@ interface PageAdvocacyToolkitProps {
 const DOWNLOAD_LINKS = {
   EVENT_GUIDE:
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto_%20Crypto%20Events%20&%20Watch%20Party%20Guide%20(1)-y76BOobXMsLAu29UiIZdEv18dvR5Ki.pdf',
-  VOTER_REGISTRATION_GUIDE:
-    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20with%20Crypto_%20Voter%20Registration%20Guide%20-%20Fall%202024%20(1)-uf5JaGHpnGFEC9FEeENHIEFwR1xIog.pdf',
   STATE_CHAPTER_GUIDE:
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20with%20Crypto_%20Local%20Chapters%20Guide%20-%20Fall%202024%20(1)-QRUwgpKB8IifHadf2BIBkpPKdvQY2u.pdf',
 }
@@ -101,23 +99,6 @@ export function PageAdvocacyToolkit({ title, description }: PageAdvocacyToolkitP
           variant="primary-cta"
         >
           <ExternalLink href={DOWNLOAD_LINKS.EVENT_GUIDE}>Download event guide</ExternalLink>
-        </Button>
-      </ToolkitSection>
-
-      <ToolkitSection
-        heading="Host a voter registration drive"
-        headingClassName="text-xl"
-        sectionClassName="mt-20"
-        subtext="Hosting a voter registration drive is crucial - it empowers individuals to exercise their democratic right to vote. By organizing such drives, advocates can increase voter participation, and ensure that the crypto voter is heard this election season. Voter registration drives have a significant impact on shaping the political landscape."
-      >
-        <Button
-          asChild
-          className="w-full text-xl font-semibold leading-6 sm:w-auto"
-          variant="primary-cta"
-        >
-          <ExternalLink href={DOWNLOAD_LINKS.VOTER_REGISTRATION_GUIDE}>
-            Download voter registration guide
-          </ExternalLink>
         </Button>
       </ToolkitSection>
 

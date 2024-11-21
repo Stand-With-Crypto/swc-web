@@ -1,4 +1,4 @@
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { CommunicationMessageStatus } from '@prisma/client'
 
 export enum EmailEventName {
   PROCESSED = 'processed',
@@ -40,15 +40,10 @@ export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string>
   [EmailEventName.GROUP_RESUBSCRIBE]: 'Group Resubscribe',
 }
 
-function getBaseUrl() {
-  switch (NEXT_PUBLIC_ENVIRONMENT) {
-    case 'production':
-      return 'https://www.standwithcrypto.org'
-    case 'preview':
-      return `https://${process.env.VERCEL_URL!}`
-    default:
-      return 'http://localhost:3000'
-  }
+export const EVENT_NAME_TO_COMMUNICATION_STATUS: Partial<
+  Record<EmailEventName, CommunicationMessageStatus>
+> = {
+  [EmailEventName.DELIVERED]: CommunicationMessageStatus.DELIVERED,
+  [EmailEventName.BOUNCE]: CommunicationMessageStatus.FAILED,
+  [EmailEventName.DROPPED]: CommunicationMessageStatus.FAILED,
 }
-
-export const INTERNAL_BASE_URL = getBaseUrl()

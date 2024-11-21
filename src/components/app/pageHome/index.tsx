@@ -26,7 +26,7 @@ export function PageHome({
   params,
   sumDonations,
   countUsers,
-  countVoterActions,
+  countPolicymakerContacts,
   actions,
   sumDonationsByUser,
   dtsiHomepagePeople,
@@ -59,18 +59,7 @@ export function PageHome({
         </div>
       </section>
       <div className="container">
-        <TopLevelMetrics {...{ sumDonations, locale, countUsers, countVoterActions }} />
-
-        <section className="mb-16 md:mb-36">
-          <PageTitle as="h3" className="mb-6 !text-[32px]">
-            Voter guide
-          </PageTitle>
-          <PageSubTitle as="h4" className="mb-10">
-            This year’s election is critical to the future of crypto. Here’s how to become an
-            informed voter.
-          </PageSubTitle>
-          <UserActionGridCTAs />
-        </section>
+        <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
 
         <section className="mb-16 md:mb-36">
           <PageTitle as="h3" className="mb-6 !text-[32px]">
@@ -158,7 +147,18 @@ export function PageHome({
             </Button>
           </div>
         </section>
+
+        <section className="mb-16 md:mb-36">
+          <PageTitle as="h3" className="mb-6 !text-[32px]">
+            Get involved
+          </PageTitle>
+          <PageSubTitle as="h4" className="mb-10">
+            The future of crypto is in your hands. Here's how you can help.
+          </PageSubTitle>
+          <UserActionGridCTAs />
+        </section>
       </div>
+
       <section className="mb-16 space-y-6 md:mb-36">
         <div className="container">
           <PageTitle as="h3" className="mb-6 !text-[32px]">

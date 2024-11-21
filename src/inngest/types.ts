@@ -7,6 +7,7 @@ import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillReactivationInngestSchema } from '@/inngest/functions/backfillReactivation'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
+import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import type {
   CapitolCanaryBackfillSmsOptInReplySchema,
   CapitolCanaryBackfillSmsOptInReplyUpdateBatchOfUsersSchema,
@@ -16,6 +17,7 @@ import type { CapitolCanaryEmailInngestEventSchema } from '@/inngest/functions/c
 import type { CapitolCanaryUpsertAdvocateInngestSchema } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import type { CleanupNftMintsEventSchema } from '@/inngest/functions/cleanupNFTMints'
 import type { CleanupPostalCodesInngestEventSchema } from '@/inngest/functions/cleanupPostalCodes'
+import type { FetchPresidentialRacesInngestEventSchema } from '@/inngest/functions/decisionDesk/fetchPresidentialRacesData'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
@@ -54,7 +56,9 @@ type EventTypes =
   | UpdateUserBatchEventSchema
   | MonitorBaseEthBalancesInngestEventSchema
   | InitialSignupUserCommunicationSchema
+  | FetchPresidentialRacesInngestEventSchema
   | EnqueueSMSInngestEventSchema
+  | BackfillUserCommunicationMessageStatusSchema
   | UpdateMetricsCounterCacheCronJobSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

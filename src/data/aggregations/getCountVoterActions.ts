@@ -1,12 +1,9 @@
 import 'server-only'
 
 import { UserActionType } from '@prisma/client'
-import { createClient } from 'redis'
 
 import { prismaClient } from '@/utils/server/prismaClient'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-
-const UPSTASH_REDIS_URL = requiredEnv(process.env.UPSTASH_REDIS_URL, 'UPSTASH_REDIS_URL')
+import { redis } from '@/utils/server/redis'
 
 const REDIS_KEY = 'db:count_voter_actions'
 const FALLBACK_MOCK_COUNT = 502_054
@@ -14,17 +11,6 @@ const FALLBACK_MOCK_COUNT = 502_054
 function isValidCount(count: unknown) {
   return !!count && !Number.isNaN(Number(count))
 }
-
-function createRedisClient() {
-  const client = createClient({
-    url: UPSTASH_REDIS_URL,
-  })
-  client.on('error', err => console.log('Redis Client Error', err))
-  void client.connect()
-  return client
-}
-
-const redis = createRedisClient()
 
 export async function getCountVoterActions() {
   const cachedCount = await redis.get(REDIS_KEY)

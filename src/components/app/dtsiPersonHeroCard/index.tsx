@@ -220,7 +220,7 @@ export function DTSIPersonHeroCard(props: Props) {
   )
 }
 
-function DtsiPersonHeroCardWrapper({
+export function DtsiPersonHeroCardWrapper({
   person,
   locale,
   isClickable,
