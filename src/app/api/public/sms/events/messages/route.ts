@@ -49,7 +49,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       extra: {
         ...body,
       },
-      level: 'info',
+      level: 'warning',
       tags: {
         domain: 'smsEventsMessagesRoute',
       },
