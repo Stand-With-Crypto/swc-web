@@ -11,6 +11,7 @@ export interface MapMarker {
   actionType: UserActionType
   datetimeCreated: string
   iconType: (typeof ADVOCATES_ACTIONS)[keyof typeof ADVOCATES_ACTIONS]
+  amountUsd?: number
 }
 
 const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMarker[] => {
@@ -52,6 +53,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
           actionType: item.actionType,
           datetimeCreated: item.datetimeCreated,
           iconType: currentIconActionType,
+          amountUsd: 'amountUsd' in item ? item.amountUsd : undefined,
         })
       }
     }

@@ -67,10 +67,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const hasSignedUp = data?.performedUserActionTypes.some(
     performedAction => performedAction.actionType === UserActionType.OPT_IN,
   )
-  const newUserStateOrJoin = isStateAvailable
-    ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
-    : 'joined'
-  const voterStateOrEmpty = isStateAvailable
+  const fromStateOrEmpty = isStateAvailable
+    ? `from ${userLocationDetails.administrativeAreaLevel1}`
+    : ''
+  const inStateOrEmpty = isStateAvailable
     ? `in ${userLocationDetails.administrativeAreaLevel1}`
     : ''
 
@@ -87,8 +87,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               ),
           children: (
             <MainText>
-              New member {newUserStateOrJoin}
-              {getSWCDisplayText()}
+              New member {fromStateOrEmpty} joined {getSWCDisplayText()}
             </MainText>
           ),
         }
@@ -125,12 +124,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           },
           children: (
             <MainText>
+              Someone {inStateOrEmpty} donated{' '}
               <FormattedCurrency
                 amount={action.amountUsd}
                 currencyCode={SupportedFiatCurrencyCodes.USD}
                 locale={locale}
               />{' '}
-              donation
+              to {getSWCDisplayText()}
             </MainText>
           ),
         }
@@ -201,7 +201,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
           children:
             action.campaignName === UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
-              <MainText>New {getSWCDisplayText()} follower on X</MainText>
+              <MainText>
+                New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
+              </MainText>
             ) : (
               <MainText>Tweet sent in support of {getSWCDisplayText()}</MainText>
             ),
@@ -214,9 +216,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: (
-            <MainText>Someone checked their voter registration {voterStateOrEmpty}</MainText>
-          ),
+          children: <MainText>Someone checked their voter registration {inStateOrEmpty}</MainText>,
         }
       }
       case UserActionType.LIVE_EVENT: {
@@ -284,7 +284,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VOTING_INFORMATION_RESEARCHED: {
         return {
           onFocusContent: undefined,
-          children: <MainText>Voter plan researched {voterStateOrEmpty}</MainText>,
+          children: <MainText>Voter plan researched {inStateOrEmpty}</MainText>,
         }
       }
       case UserActionType.VOTING_DAY: {
@@ -294,7 +294,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>I voted!</Button>
             </UserActionVotingDayDialog>
           ),
-          children: <MainText>Someone voted</MainText>,
+          children: <MainText>Someone {inStateOrEmpty} claimed "I Voted" NFT</MainText>,
         }
       }
     }
