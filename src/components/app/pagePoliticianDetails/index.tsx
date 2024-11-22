@@ -3,7 +3,10 @@ import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
+import {
+  QUESTIONNAIRE_HASH_KEY,
+  QuestionnaireAccordion,
+} from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
 import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
 import { Button } from '@/components/ui/button'
@@ -47,7 +50,7 @@ export function PagePoliticianDetails({
 
   return (
     <div className="standard-spacing-from-navbar container max-w-3xl">
-      <ScrollToTopOnRender />
+      <ScrollToTopOnRender blockedHashes={[QUESTIONNAIRE_HASH_KEY]} />
       <section>
         {person.profilePictureUrl ? (
           <div

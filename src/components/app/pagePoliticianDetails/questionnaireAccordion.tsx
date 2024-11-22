@@ -20,7 +20,7 @@ interface QuestionnaireAccordionProps {
   questionnaire: SWCQuestionnaireAnswers
 }
 
-const QUESTIONNAIRE_HASH_KEY = 'questionnaire'
+export const QUESTIONNAIRE_HASH_KEY = 'questionnaire'
 
 export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordionProps) {
   const [accordionValue, setAccordionValue] = useState('')
