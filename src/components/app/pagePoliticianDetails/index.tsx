@@ -50,7 +50,6 @@ export function PagePoliticianDetails({
 
   return (
     <div className="standard-spacing-from-navbar container max-w-3xl">
-      <ScrollToTopOnRender blockedHashes={[QUESTIONNAIRE_HASH_KEY]} />
       <section>
         {person.profilePictureUrl ? (
           <div
@@ -150,6 +149,7 @@ export function PagePoliticianDetails({
           ))}
         </div>
       </section>
+      <ScrollToTopOnRender blockedHashes={[QUESTIONNAIRE_HASH_KEY]} />
     </div>
   )
 }
