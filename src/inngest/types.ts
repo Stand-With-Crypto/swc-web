@@ -21,10 +21,11 @@ import type { FetchPresidentialRacesInngestEventSchema } from '@/inngest/functio
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
+import type { BackfillOptedOutUsersSchema } from '@/inngest/functions/sms/backfillOptedOutUsers'
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
 import type { BulkSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
 import type { EnqueueSMSInngestEventSchema } from '@/inngest/functions/sms/enqueueMessages'
-import { UpdateMetricsCounterCacheCronJobSchema } from '@/inngest/functions/updateMeyticsCacheCronJob'
+import type { UpdateMetricsCounterCacheCronJobSchema } from '@/inngest/functions/updateMeyticsCacheCronJob'
 import type { DeleteUserActionsInngestEventSchema } from '@/inngest/functions/user/deleteUserActions'
 import type { AuditUserBatchEventSchema } from '@/inngest/functions/usersTotalDonationAmountUsd/audit'
 import type {
@@ -60,5 +61,6 @@ type EventTypes =
   | EnqueueSMSInngestEventSchema
   | BackfillUserCommunicationMessageStatusSchema
   | UpdateMetricsCounterCacheCronJobSchema
+  | BackfillOptedOutUsersSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

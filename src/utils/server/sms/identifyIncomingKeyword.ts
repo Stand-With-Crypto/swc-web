@@ -8,6 +8,7 @@ export function identifyIncomingKeyword(keyword: string | undefined) {
   const normalizedKeyword = keyword?.toUpperCase().trim()
 
   return {
+    value: normalizedKeyword,
     isOptOutKeyword: optOutKeywords.includes(normalizedKeyword),
     isHelpKeyword: helpKeywords.includes(normalizedKeyword),
     isUnstopKeyword: unstopKeywords.includes(normalizedKeyword),
