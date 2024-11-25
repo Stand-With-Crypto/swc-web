@@ -4,11 +4,11 @@ import { Globe } from 'lucide-react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import {
-  QUESTIONNAIRE_HASH_KEY,
+  // QUESTIONNAIRE_HASH_KEY,
   QuestionnaireAccordion,
 } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
-import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
+// import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
