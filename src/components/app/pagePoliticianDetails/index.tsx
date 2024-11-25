@@ -3,8 +3,12 @@ import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
+import {
+  QUESTIONNAIRE_HASH_KEY,
+  QuestionnaireAccordion,
+} from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
+import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
@@ -145,6 +149,7 @@ export function PagePoliticianDetails({
           ))}
         </div>
       </section>
+      <ScrollToTopOnRender blockedHashes={[QUESTIONNAIRE_HASH_KEY]} />
     </div>
   )
 }
