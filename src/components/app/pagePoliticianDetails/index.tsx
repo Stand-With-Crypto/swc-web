@@ -149,7 +149,7 @@ export function PagePoliticianDetails({
           ))}
         </div>
       </section>
-      <ScrollToTopOnRender blockedHashes={[QUESTIONNAIRE_HASH_KEY]} />
+      {/* <ScrollToTopOnRender blockedHashes={[QUESTIONNAIRE_HASH_KEY]} /> */}
     </div>
   )
 }
