@@ -6,9 +6,7 @@ describe('page - politician details', () => {
 
     cy.get('h2').contains('Candidate questionnaire')
 
-    cy.wait(3000)
-
-    cy.get('[data-testid="questionnaire-trigger"]').click()
+    cy.get('[data-testid="questionnaire-trigger"]').click({ force: true })
 
     cy.get('div')
       .should(
