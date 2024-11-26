@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useIntersection } from 'react-use'
 import {
   Column,
@@ -10,6 +10,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  Row,
   SortingState,
   TableOptions,
   useReactTable,
@@ -36,6 +37,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useWindowEventListeners } from '@/hooks/useWindowEventListeners'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -102,7 +104,7 @@ export function DataTable<TData extends Person = Person>({
 }: DataTableProps<TData>) {
   const searchParams = useSearchParams()
 
-  const params = new URLSearchParams(searchParams?.toString() ?? '')
+  const params = useMemo(() => new URLSearchParams(searchParams?.toString() ?? ''), [searchParams])
   const columnFiltersKey = 'filters'
   const globalFilterKey = 'globalFilter'
   const sortingKey = 'sorting'
@@ -121,26 +123,24 @@ export function DataTable<TData extends Person = Person>({
   const pathname = usePathname()
 
   useEffect(() => {
-    if (!pathname || !searchParams) {
+    if (!pathname || !params) {
       return
     }
 
-    const currentParams = new URLSearchParams(searchParams?.toString() ?? '')
-
     const updateParams = (key: string, value: any, stringify: boolean) => {
       if (isNil(value)) {
-        return currentParams.delete(key)
+        return params.delete(key)
       }
 
-      return currentParams.set(key, stringify ? JSON.stringify(value) : value)
+      return params.set(key, stringify ? JSON.stringify(value) : value)
     }
 
     updateParams(columnFiltersKey, columnFilters, true)
     updateParams(sortingKey, sorting, true)
     updateParams(globalFilterKey, globalFilter, false)
 
-    router.replace(`${pathname}?${currentParams.toString()}`, { scroll: false })
-  }, [columnFilters, globalFilter, pathname, router, searchParams, sorting])
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }, [columnFilters, globalFilter, params, pathname, router, searchParams, sorting])
 
   const table = useReactTable<TData>({
     data,
@@ -209,22 +209,28 @@ export function DataTable<TData extends Person = Person>({
     }
   }, [cellWidths, columns.length])
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (headerRefs.current.length) {
-        const widths = headerRefs.current.map(ref => ref.getBoundingClientRect().width)
-        setCellWidths(widths)
-      }
-    }
-
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('scroll', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('scroll', handleResize)
+  const handleResize = useCallback(() => {
+    if (headerRefs.current.length) {
+      const widths = headerRefs.current.map(ref => ref.getBoundingClientRect().width)
+      setCellWidths(widths)
     }
   }, [])
+
+  useWindowEventListeners(['resize', 'scroll'], handleResize)
+
+  const handleTableRowClick = useCallback(
+    (event: MouseEvent<HTMLTableRowElement>, row: Row<TData>) => {
+      const politicianUrl = getIntlUrls(locale).politicianDetails(row.original.slug)
+      if (event.ctrlKey || event.metaKey) {
+        event.preventDefault()
+        return window.open(politicianUrl, '_blank')
+      }
+      return router.push(politicianUrl)
+    },
+    [locale, router],
+  )
+
+  const tableRowModel = table.getRowModel()
 
   return (
     <div className="space-y-6">
@@ -300,22 +306,13 @@ export function DataTable<TData extends Person = Person>({
                 ))}
               </TableHeader>
               <TableBody>
-                {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map(row => (
+                {tableRowModel.rows?.length ? (
+                  tableRowModel.rows.map(row => (
                     <TableRow
                       className="cursor-pointer"
                       data-state={row.getIsSelected() && 'selected'}
                       key={row.id}
-                      onClick={event => {
-                        const politicianUrl = getIntlUrls(locale).politicianDetails(
-                          row.original.slug,
-                        )
-                        if (event.ctrlKey || event.metaKey) {
-                          event.preventDefault()
-                          return window.open(politicianUrl, '_blank')
-                        }
-                        return router.push(politicianUrl)
-                      }}
+                      onClick={event => handleTableRowClick(event, row)}
                       role="button"
                     >
                       {row.getVisibleCells().map(cell => (
