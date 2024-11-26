@@ -29,51 +29,49 @@ export const backfillUserCommunicationMessageStatus = inngest.createFunction(
     let updatedCommunications = 0
     let hasMoreMessages = true
 
-    // We need to split the query limit in half to avoid Output size is too large errors
-    const queryLimit = DATABASE_QUERY_LIMIT ? DATABASE_QUERY_LIMIT / 2 : undefined
-
+    let index = 0
     while (hasMoreMessages) {
-      const userCommunicationIds = await step.run('fetch-user-communication', () =>
-        prismaClient.userCommunication
-          .findMany({
-            select: {
-              id: true,
+      const { count } = await step.run(
+        `fetch-and-update-user-communication-status-${index}`,
+        async () => {
+          const userCommunicationIds = await prismaClient.userCommunication
+            .findMany({
+              select: {
+                id: true,
+              },
+              where: {
+                status: CommunicationMessageStatus.PROCESSING,
+              },
+              orderBy: {
+                id: 'asc',
+              },
+              take: DATABASE_QUERY_LIMIT,
+              skip: updatedCommunications,
+            })
+            .then(res => res.map(({ id }) => id))
+
+          return prismaClient.userCommunication.updateMany({
+            data: {
+              status: CommunicationMessageStatus.DELIVERED,
             },
             where: {
-              status: CommunicationMessageStatus.PROCESSING,
+              id: {
+                in: userCommunicationIds,
+              },
             },
-            orderBy: {
-              id: 'asc',
-            },
-            take: queryLimit,
-            skip: updatedCommunications,
           })
-          .then(res => res.map(({ id }) => id)),
+        },
       )
 
-      await step.run('update-user-communication', () =>
-        prismaClient.userCommunication.updateMany({
-          data: {
-            status: CommunicationMessageStatus.DELIVERED,
-          },
-          where: {
-            id: {
-              in: userCommunicationIds,
-            },
-          },
-        }),
-      )
+      updatedCommunications += count
+      index += 1
 
-      updatedCommunications += userCommunicationIds.length
-
-      if (!queryLimit || (queryLimit && userCommunicationIds.length < queryLimit)) {
+      if (!DATABASE_QUERY_LIMIT || (DATABASE_QUERY_LIMIT && count < DATABASE_QUERY_LIMIT)) {
         hasMoreMessages = false
-        logger.info(`Updated ${userCommunicationIds.length} messages. Finishing...`)
+        logger.info(`Updated ${count} messages. Finishing...`)
         return updatedCommunications
       } else {
-        logger.info(
-          `Updated ${userCommunicationIds.length} messages, next skipping ${updatedCommunications}`,
-        )
+        logger.info(`Updated ${count} messages, next skipping ${updatedCommunications}`)
       }
     }
   },
