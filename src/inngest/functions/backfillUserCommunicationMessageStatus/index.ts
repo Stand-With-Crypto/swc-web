@@ -28,6 +28,10 @@ export const backfillUserCommunicationMessageStatus = inngest.createFunction(
   async ({ step, logger }) => {
     let updatedCommunications = 0
     let hasMoreMessages = true
+
+    // We need to split the query limit in half to avoid Output size is too large errors
+    const queryLimit = DATABASE_QUERY_LIMIT ? DATABASE_QUERY_LIMIT / 2 : undefined
+
     while (hasMoreMessages) {
       const userCommunicationIds = await step.run('fetch-user-communication', () =>
         prismaClient.userCommunication
@@ -38,7 +42,10 @@ export const backfillUserCommunicationMessageStatus = inngest.createFunction(
             where: {
               status: CommunicationMessageStatus.PROCESSING,
             },
-            take: DATABASE_QUERY_LIMIT,
+            orderBy: {
+              id: 'asc',
+            },
+            take: queryLimit,
             skip: updatedCommunications,
           })
           .then(res => res.map(({ id }) => id)),
@@ -59,12 +66,10 @@ export const backfillUserCommunicationMessageStatus = inngest.createFunction(
 
       updatedCommunications += userCommunicationIds.length
 
-      if (
-        !DATABASE_QUERY_LIMIT ||
-        (DATABASE_QUERY_LIMIT && userCommunicationIds.length < DATABASE_QUERY_LIMIT)
-      ) {
+      if (!queryLimit || (queryLimit && userCommunicationIds.length < queryLimit)) {
         hasMoreMessages = false
         logger.info(`Updated ${userCommunicationIds.length} messages. Finishing...`)
+        return updatedCommunications
       } else {
         logger.info(
           `Updated ${userCommunicationIds.length} messages, next skipping ${updatedCommunications}`,
