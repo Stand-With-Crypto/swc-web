@@ -4,20 +4,18 @@ import React, { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } 
 import { useIntersection } from 'react-use'
 import {
   Column,
-  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   Row,
-  SortingState,
   TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
-import { debounce, isNil } from 'lodash-es'
+import { debounce } from 'lodash-es'
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from 'lucide-react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
@@ -26,6 +24,11 @@ import {
   getGlobalFilterDefaults,
   GlobalFilters,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
+import {
+  useColumnFilters,
+  useGlobalFilter,
+  useSortingFilter,
+} from '@/components/app/dtsiClientPersonDataTable/useTableFilters'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -78,22 +81,6 @@ export const SortableHeader = <TData extends Person = Person>({
   )
 }
 
-function safeParse<T>(value: string | null): T | null {
-  if (!value) {
-    return null
-  }
-
-  try {
-    return typeof value === 'string' &&
-      (value.startsWith('{') || value.startsWith('[')) &&
-      (value.endsWith('}') || value.endsWith(']'))
-      ? (JSON.parse(value) as T)
-      : (value as T)
-  } catch (e) {
-    return null
-  }
-}
-
 export function DataTable<TData extends Person = Person>({
   columns = [],
   data = [],
@@ -102,45 +89,11 @@ export function DataTable<TData extends Person = Person>({
   locale,
   ...rest
 }: DataTableProps<TData>) {
-  const searchParams = useSearchParams()
-
-  const params = useMemo(() => new URLSearchParams(searchParams?.toString() ?? ''), [searchParams])
-  const columnFiltersKey = 'filters'
-  const globalFilterKey = 'globalFilter'
-  const sortingKey = 'sorting'
-
-  const currentColumnFilters = safeParse<ColumnFiltersState>(params?.get(columnFiltersKey))
-  const currentGlobalFilter = safeParse<string>(params?.get(globalFilterKey))
-  const currentSorting = safeParse<SortingState>(params?.get(sortingKey))
-
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    currentColumnFilters ?? getGlobalFilterDefaults(),
-  )
-  const [globalFilter, setGlobalFilter] = useState(currentGlobalFilter ?? '')
-  const [sorting, setSorting] = useState<SortingState>(currentSorting ?? [])
+  const [columnFilters, setColumnFilters] = useColumnFilters()
+  const [globalFilter, setGlobalFilter] = useGlobalFilter()
+  const [sorting, setSorting] = useSortingFilter()
 
   const router = useRouter()
-  const pathname = usePathname()
-
-  useEffect(() => {
-    if (!pathname || !params) {
-      return
-    }
-
-    const updateParams = (key: string, value: any, stringify: boolean) => {
-      if (isNil(value)) {
-        return params.delete(key)
-      }
-
-      return params.set(key, stringify ? JSON.stringify(value) : value)
-    }
-
-    updateParams(columnFiltersKey, columnFilters, true)
-    updateParams(sortingKey, sorting, true)
-    updateParams(globalFilterKey, globalFilter, false)
-
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
-  }, [columnFilters, globalFilter, params, pathname, router, searchParams, sorting])
 
   const table = useReactTable<TData>({
     data,
@@ -199,7 +152,7 @@ export function DataTable<TData extends Person = Person>({
   const shouldShowFixedHeader = !isSearchContainerVisible && !isPaginationVisible
 
   const headerRefs = useRef<HTMLTableCellElement[]>([])
-  const [cellWidths, setCellWidths] = useState<number[]>([])
+  const [headerWidths, setHeaderWidths] = useState<number[]>([])
 
   useEffect(() => {
     const maxRefs = columns.length
@@ -207,12 +160,12 @@ export function DataTable<TData extends Person = Person>({
     if (headerRefs.current.length > maxRefs) {
       headerRefs.current = headerRefs.current.slice(0, maxRefs)
     }
-  }, [cellWidths, columns.length])
+  }, [headerWidths, columns.length])
 
   const handleResize = useCallback(() => {
     if (headerRefs.current.length) {
       const widths = headerRefs.current.map(ref => ref.getBoundingClientRect().width)
-      setCellWidths(widths)
+      setHeaderWidths(widths)
     }
   }, [])
 
@@ -277,7 +230,7 @@ export function DataTable<TData extends Person = Person>({
                 style={{
                   top: shouldShowFixedHeader ? `${currentFilterContainerYPx}px` : 'auto',
                   width: shouldShowFixedHeader
-                    ? cellWidths.reduce((acc, curr) => acc + curr, 0)
+                    ? headerWidths.reduce((acc, curr) => acc + curr, 0)
                     : 'auto',
                 }}
               >
@@ -293,7 +246,7 @@ export function DataTable<TData extends Person = Person>({
                             }
                           }}
                           style={{
-                            width: shouldShowFixedHeader ? cellWidths[header.index] : 'auto',
+                            width: shouldShowFixedHeader ? headerWidths[header.index] : 'auto',
                           }}
                         >
                           {header.isPlaceholder
