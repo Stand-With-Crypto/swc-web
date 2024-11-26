@@ -1,6 +1,6 @@
 'use client'
 
-import React, { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { MouseEvent, useCallback, useMemo, useRef, useState } from 'react'
 import { useIntersection } from 'react-use'
 import {
   Column,
@@ -26,7 +26,7 @@ import {
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import {
   useColumnFilters,
-  useGlobalFilter,
+  useSearchFilter,
   useSortingFilter,
 } from '@/components/app/dtsiClientPersonDataTable/useTableFilters'
 import { Button } from '@/components/ui/button'
@@ -89,11 +89,13 @@ export function DataTable<TData extends Person = Person>({
   locale,
   ...rest
 }: DataTableProps<TData>) {
-  const [columnFilters, setColumnFilters] = useColumnFilters()
-  const [globalFilter, setGlobalFilter] = useGlobalFilter()
-  const [sorting, setSorting] = useSortingFilter()
-
   const router = useRouter()
+
+  const [headerWidths, setHeaderWidths] = useState<number[]>([])
+
+  const [columnFilters, setColumnFilters] = useColumnFilters()
+  const [globalFilter, setGlobalFilter] = useSearchFilter('')
+  const [sorting, setSorting] = useSortingFilter([])
 
   const table = useReactTable<TData>({
     data,
@@ -123,10 +125,8 @@ export function DataTable<TData extends Person = Person>({
 
   const debouncedSetGlobalFilter = useMemo(() => debounce(setGlobalFilter, 300), [setGlobalFilter])
 
-  const paginationRef = useRef<HTMLDivElement>(null)
-  const filterContainerRef = useRef<HTMLDivElement>(null)
   const searchContainerRef = useRef<HTMLDivElement>(null)
-
+  const filterContainerRef = useRef<HTMLDivElement>(null)
   const searchContainerIntersection = useIntersection(searchContainerRef, {
     root: null,
     rootMargin: filterContainerRef.current
@@ -135,39 +135,26 @@ export function DataTable<TData extends Person = Person>({
     threshold: 1,
   })
 
+  const paginationRef = useRef<HTMLDivElement>(null)
   const paginationIntersection = useIntersection(paginationRef, {
     root: null,
     rootMargin: '20px',
     threshold: 1,
   })
 
-  const isSearchContainerVisible = searchContainerIntersection?.intersectionRatio === 1
-  const isPaginationVisible = paginationIntersection?.intersectionRatio === 1
-
-  const filterContainerBoundingRect = filterContainerRef.current?.getBoundingClientRect()
-  const currentFilterContainerYPx = filterContainerBoundingRect
-    ? filterContainerBoundingRect.top + filterContainerBoundingRect.height
-    : 0
-
-  const shouldShowFixedHeader = !isSearchContainerVisible && !isPaginationVisible
-
   const headerRefs = useRef<HTMLTableCellElement[]>([])
-  const [headerWidths, setHeaderWidths] = useState<number[]>([])
-
-  useEffect(() => {
+  const handleResize = useCallback(() => {
     const maxRefs = columns.length
 
     if (headerRefs.current.length > maxRefs) {
       headerRefs.current = headerRefs.current.slice(0, maxRefs)
     }
-  }, [headerWidths, columns.length])
 
-  const handleResize = useCallback(() => {
     if (headerRefs.current.length) {
       const widths = headerRefs.current.map(ref => ref.getBoundingClientRect().width)
       setHeaderWidths(widths)
     }
-  }, [])
+  }, [columns.length])
 
   useWindowEventListeners(['resize', 'scroll'], handleResize)
 
@@ -183,6 +170,15 @@ export function DataTable<TData extends Person = Person>({
     [locale, router],
   )
 
+  const isSearchContainerVisible = searchContainerIntersection?.intersectionRatio === 1
+  const isPaginationVisible = paginationIntersection?.intersectionRatio === 1
+
+  const filterContainerBoundingRect = filterContainerRef.current?.getBoundingClientRect()
+  const currentFilterContainerYPx = filterContainerBoundingRect
+    ? filterContainerBoundingRect.top + filterContainerBoundingRect.height
+    : 0
+
+  const shouldShowFixedHeader = !isSearchContainerVisible && !isPaginationVisible
   const tableRowModel = table.getRowModel()
 
   return (

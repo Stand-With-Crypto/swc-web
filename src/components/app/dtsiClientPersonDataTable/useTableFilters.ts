@@ -11,14 +11,27 @@ import {
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { useSearchParamState } from '@/hooks/useQueryParamState'
 
-export function useGlobalFilter(): [string, Dispatch<SetStateAction<string | undefined | null>>] {
-  const [searchValue, setSearchValue] = useSearchParamState('global')
+export function useSearchFilter(
+  defaultValue: string = '',
+): [string, Dispatch<SetStateAction<string | undefined | null>>] {
+  const [searchValue, setSearchValue] = useSearchParamState('search', defaultValue)
 
-  return [searchValue ?? '', setSearchValue]
+  return [searchValue ?? defaultValue, setSearchValue]
 }
 
-export function useSortingFilter(): [SortingState, Dispatch<SetStateAction<SortingState>>] {
-  const [sortValue, setSortValue] = useSearchParamState('sorting')
+export function useSortingFilter(
+  defaultValue: SortingState = [],
+): [SortingState, Dispatch<SetStateAction<SortingState>>] {
+  const parseValueToString = (value?: SortingState[number]): string | null => {
+    if (!value) return null
+
+    const { id, desc } = value
+
+    return `${id}.${desc ? 'desc' : 'asc'}`
+  }
+
+  const parsedDefaultValue = defaultValue.length > 0 ? parseValueToString(defaultValue.at(0)) : null
+  const [sortValue, setSortValue] = useSearchParamState('sorting', parsedDefaultValue)
 
   const returnValue = useMemo(() => {
     if (!sortValue) return []
@@ -43,9 +56,7 @@ export function useSortingFilter(): [SortingState, Dispatch<SetStateAction<Sorti
 
       const [currentSortingValue] = valueToSet
 
-      const { id, desc } = currentSortingValue
-
-      return setSortValue(`${id}.${desc ? 'desc' : 'asc'}`)
+      return setSortValue(parseValueToString(currentSortingValue))
     },
     [returnValue, setSortValue],
   )

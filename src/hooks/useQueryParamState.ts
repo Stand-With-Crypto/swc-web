@@ -1,6 +1,6 @@
 'use client'
 
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { isNil } from 'lodash-es'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
@@ -31,14 +31,7 @@ export function useSearchParamState(
     return defaultValue
   })
 
-  const setState: Dispatch<SetStateAction<Value>> = useCallback(
-    newValue => {
-      const valueToSet = typeof newValue === 'function' ? newValue(defaultValue) : newValue
-
-      setInternalState(valueToSet)
-    },
-    [defaultValue],
-  )
+  const setState: Dispatch<SetStateAction<Value>> = setInternalState
 
   useEffect(() => {
     if (!searchParams || !pathname || !hasHydrated) {
