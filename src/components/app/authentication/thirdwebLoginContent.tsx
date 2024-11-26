@@ -168,7 +168,7 @@ function ThirdwebLoginEmbedded(
   }
   const embeddedAuthOptions: AuthOption[] = ['google', 'phone', 'email']
 
-  if (window?.navigator?.userAgent === 'Datadog/Synthetics') {
+  if (window?._DATADOG_SYNTHETICS_BROWSER) {
     embeddedAuthOptions.push('passkey')
   }
 
