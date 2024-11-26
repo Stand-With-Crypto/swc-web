@@ -168,6 +168,10 @@ function ThirdwebLoginEmbedded(
   }
   const embeddedAuthOptions: AuthOption[] = ['google', 'phone', 'email']
 
+  if (window?.navigator?.userAgent === 'Datadog/Synthetics') {
+    embeddedAuthOptions.push('passkey')
+  }
+
   const supportedWallets = [
     createWallet('com.coinbase.wallet', { appMetadata }),
     createWallet('io.metamask'),
