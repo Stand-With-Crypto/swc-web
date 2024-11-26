@@ -82,7 +82,6 @@ function safeParse<T>(value: string | null): T | null {
   }
 
   try {
-    // only parse if it's a stringified object
     return typeof value === 'string' &&
       (value.startsWith('{') || value.startsWith('[')) &&
       (value.endsWith('}') || value.endsWith(']'))
@@ -308,10 +307,14 @@ export function DataTable<TData extends Person = Person>({
                       data-state={row.getIsSelected() && 'selected'}
                       key={row.id}
                       onClick={event => {
+                        const politicianUrl = getIntlUrls(locale).politicianDetails(
+                          row.original.slug,
+                        )
                         if (event.ctrlKey || event.metaKey) {
-                          return
+                          event.preventDefault()
+                          return window.open(politicianUrl, '_blank')
                         }
-                        return router.push(getIntlUrls(locale).politicianDetails(row.original.slug))
+                        return router.push(politicianUrl)
                       }}
                       role="button"
                     >
