@@ -20,7 +20,7 @@ interface QuestionnaireAccordionProps {
   questionnaire: SWCQuestionnaireAnswers
 }
 
-const QUESTIONNAIRE_HASH_KEY = 'questionnaire'
+export const QUESTIONNAIRE_HASH_KEY = 'questionnaire'
 
 export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordionProps) {
   const [accordionValue, setAccordionValue] = useState('')
@@ -60,7 +60,9 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
 
       <Accordion collapsible onValueChange={setAccordionValue} type="single" value={accordionValue}>
         <AccordionItem value="questionnaire">
-          <AccordionTrigger>Responses ({answersAmount})</AccordionTrigger>
+          <AccordionTrigger data-testid="questionnaire-trigger">
+            Responses ({answersAmount})
+          </AccordionTrigger>
 
           <AccordionContent className="pb-0">
             <div className="px-6 last:*:border-none">
