@@ -1,7 +1,6 @@
 'use client'
 
-import { MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useIntersection } from 'react-use'
+import { MouseEvent, ReactNode, useCallback, useMemo } from 'react'
 import {
   Column,
   flexRender,
@@ -24,13 +23,11 @@ import {
   getGlobalFilterDefaults,
   GlobalFilters,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
-import { useSyncScroll } from '@/components/app/dtsiClientPersonDataTable/useSyncScroll'
 import {
   useColumnFilters,
   useSearchFilter,
   useSortingFilter,
 } from '@/components/app/dtsiClientPersonDataTable/useTableFilters'
-import { VirtualFixedTableHeader } from '@/components/app/dtsiClientPersonDataTable/virtualFixedTableHeader'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -42,10 +39,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useWindowEventListeners } from '@/hooks/useWindowEventListeners'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { cn } from '@/utils/web/cn'
 
 interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
   loadState: 'loaded' | 'static'
@@ -125,37 +120,6 @@ export function DataTable<TData extends Person = Person>({
 
   const debouncedSetGlobalFilter = useMemo(() => debounce(setGlobalFilter, 300), [setGlobalFilter])
 
-  const searchContainerRef = useRef<HTMLDivElement>(null)
-  const filterContainerRef = useRef<HTMLDivElement>(null)
-  const searchContainerIntersection = useIntersection(searchContainerRef, {
-    root: null,
-    rootMargin: filterContainerRef.current
-      ? `${filterContainerRef.current.offsetHeight + 20}px`
-      : '20px',
-    threshold: 1,
-  })
-
-  const paginationRef = useRef<HTMLDivElement>(null)
-  const paginationIntersection = useIntersection(paginationRef, {
-    root: null,
-    rootMargin: '20px',
-    threshold: 1,
-  })
-
-  const tableRef = useRef<HTMLTableElement>(null)
-  const tableContainerRef = useRef<HTMLDivElement>(null)
-  const virtualTableContainerRef = useRef<HTMLDivElement>(null)
-  useSyncScroll([tableContainerRef, virtualTableContainerRef])
-
-  const [tableWidth, setTableWidth] = useState<number>(0)
-  const handleVirtualTableResize = useCallback(() => {
-    setTableWidth(tableRef.current ? tableRef.current.getBoundingClientRect().width : 0)
-  }, [])
-  useWindowEventListeners('resize', handleVirtualTableResize)
-  useEffect(() => {
-    setTableWidth(tableRef.current ? tableRef.current.getBoundingClientRect().width : 0)
-  }, [])
-
   const handleTableRowClick = useCallback(
     (event: MouseEvent<HTMLTableRowElement>, row: Row<TData>) => {
       const politicianUrl = getIntlUrls(locale).politicianDetails(row.original.slug)
@@ -168,15 +132,11 @@ export function DataTable<TData extends Person = Person>({
     [locale, router],
   )
 
-  const isSearchContainerVisible = searchContainerIntersection?.intersectionRatio === 1
-  const isPaginationVisible = paginationIntersection?.intersectionRatio === 1
-  const shouldShowFixedHeader = !isSearchContainerVisible && !isPaginationVisible
-
   const tableRowModel = table.getRowModel()
 
   return (
     <div className="space-y-6">
-      <div className="container" ref={searchContainerRef}>
+      <div className="container">
         <div className="flex flex-col items-center justify-between gap-3 rounded-lg border p-6 md:flex-row">
           <div className="max-w-[400px]">
             <h3 className="text-2xl font-bold">Search for a politician</h3>
@@ -200,32 +160,16 @@ export function DataTable<TData extends Person = Person>({
       </div>
       <div className="md:container">
         <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
-          <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white lg:top-[84px]">
-            <div
-              className="flex flex-col justify-between p-3 pl-3 lg:flex-row lg:p-6"
-              ref={filterContainerRef}
-            >
-              <PageTitle className="text-left" size="sm">
-                Politicians
-              </PageTitle>
-              <GlobalFilters columns={table.getAllColumns()} />
-            </div>
-            <VirtualFixedTableHeader
-              ref={virtualTableContainerRef}
-              shouldShowFixedHeader={shouldShowFixedHeader}
-              style={{ width: tableWidth ? `${tableWidth}px` : 'inherit' }}
-              table={table}
-            />
+          <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 lg:top-[84px] lg:flex-row lg:p-6">
+            <PageTitle className="text-left" size="sm">
+              Politicians
+            </PageTitle>
+            <GlobalFilters columns={table.getAllColumns()} />
           </div>
 
           <div className="relative w-full">
-            <Table className="lg:table-fixed" ref={tableRef} refTableContainer={tableContainerRef}>
-              <TableHeader
-                className={cn(
-                  'bg-secondary text-gray-400',
-                  shouldShowFixedHeader && 'invisible w-full',
-                )}
-              >
+            <Table className="lg:table-fixed">
+              <TableHeader className="bg-secondary text-gray-400">
                 {table.getHeaderGroups().map(headerGroup => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map(header => {
@@ -269,7 +213,7 @@ export function DataTable<TData extends Person = Person>({
           </div>
         </div>
         {loadState === 'loaded' && (
-          <div className="mt-3 flex justify-center" ref={paginationRef}>
+          <div className="mt-3 flex justify-center">
             <DataTablePagination table={table} />
           </div>
         )}
