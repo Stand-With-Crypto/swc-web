@@ -1,5 +1,6 @@
 'use client'
 import { useCallback, useEffect, useRef } from 'react'
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { AuthOption } from 'node_modules/thirdweb/dist/types/wallets/types'
 import { Arguments, useSWRConfig } from 'swr'
@@ -168,7 +169,7 @@ function ThirdwebLoginEmbedded(
   }
   const embeddedAuthOptions: AuthOption[] = ['google', 'phone', 'email']
 
-  if (window?._DATADOG_SYNTHETICS_BROWSER) {
+  if (Cookies.get('IS_DATADOG_SYNTHETIC_TEST_ENABLED') === 'true') {
     embeddedAuthOptions.push('passkey')
   }
 
