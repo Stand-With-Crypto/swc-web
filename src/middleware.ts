@@ -11,7 +11,11 @@ import {
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
-import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
+import {
+  generateUserSessionId,
+  USER_SESSION_ID_COOKIE_NAME,
+  USER_SESSION_ID_HEADER_NAME,
+} from '@/utils/shared/userSessionId'
 
 const logger = getLogger('middleware')
 // taken from https://i18nexus.com/tutorials/nextjs/react-intl
@@ -50,6 +54,7 @@ export function middleware(request: NextRequest) {
       sameSite: 'lax',
       secure: true,
     })
+    i18nParsedResponse.headers.set(USER_SESSION_ID_HEADER_NAME, sessionId)
   }
 
   const urlUserId = request.nextUrl.searchParams.get('userId')
