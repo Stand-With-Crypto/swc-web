@@ -1,6 +1,6 @@
 'use client'
 
-import { MouseEvent, ReactNode, useCallback, useMemo, useRef } from 'react'
+import { MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useIntersection } from 'react-use'
 import {
   Column,
@@ -10,11 +10,9 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   Row,
-  Table as TableType,
   TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
-import { motion } from 'framer-motion'
 import { debounce } from 'lodash-es'
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -26,11 +24,13 @@ import {
   getGlobalFilterDefaults,
   GlobalFilters,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
+import { useSyncScroll } from '@/components/app/dtsiClientPersonDataTable/useSyncScroll'
 import {
   useColumnFilters,
   useSearchFilter,
   useSortingFilter,
 } from '@/components/app/dtsiClientPersonDataTable/useTableFilters'
+import { VirtualFixedTableHeader } from '@/components/app/dtsiClientPersonDataTable/virtualFixedTableHeader'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -42,6 +42,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useWindowEventListeners } from '@/hooks/useWindowEventListeners'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -79,47 +80,6 @@ export const SortableHeader = <TData extends Person = Person>({
         <ArrowUp className="ml-2 h-4 w-4" />
       )}
     </Button>
-  )
-}
-
-interface FixedTableHeaderProps<TData> {
-  shouldShowFixedHeader: boolean
-  table: TableType<TData>
-}
-
-function VirtualFixedTableHeader<TData>({
-  shouldShowFixedHeader,
-  table,
-}: FixedTableHeaderProps<TData>) {
-  return (
-    <motion.div
-      animate={
-        shouldShowFixedHeader
-          ? { height: 'auto', opacity: 1, y: 0, zIndex: 20 }
-          : { height: 0, opacity: 0, y: -50, zIndex: 0 }
-      }
-      className="overflow-hidden"
-      initial={{ height: 0, opacity: 0, y: -50, zIndex: 0 }}
-      transition={{ duration: 0.2, ease: 'easeInOut' }}
-    >
-      <Table className="z-20 w-full caption-bottom border-t pt-2 text-sm lg:table-fixed">
-        <TableHeader className={cn('w-full bg-secondary text-gray-400')}>
-          {table.getHeaderGroups().map(headerGroup => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map(header => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                )
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-      </Table>
-    </motion.div>
   )
 }
 
@@ -182,6 +142,20 @@ export function DataTable<TData extends Person = Person>({
     threshold: 1,
   })
 
+  const tableRef = useRef<HTMLTableElement>(null)
+  const tableContainerRef = useRef<HTMLDivElement>(null)
+  const virtualTableContainerRef = useRef<HTMLDivElement>(null)
+  useSyncScroll([tableContainerRef, virtualTableContainerRef])
+
+  const [tableWidth, setTableWidth] = useState<number>(0)
+  const handleVirtualTableResize = useCallback(() => {
+    setTableWidth(tableRef.current ? tableRef.current.getBoundingClientRect().width : 0)
+  }, [])
+  useWindowEventListeners('resize', handleVirtualTableResize)
+  useEffect(() => {
+    setTableWidth(tableRef.current ? tableRef.current.getBoundingClientRect().width : 0)
+  }, [])
+
   const handleTableRowClick = useCallback(
     (event: MouseEvent<HTMLTableRowElement>, row: Row<TData>) => {
       const politicianUrl = getIntlUrls(locale).politicianDetails(row.original.slug)
@@ -236,11 +210,16 @@ export function DataTable<TData extends Person = Person>({
               </PageTitle>
               <GlobalFilters columns={table.getAllColumns()} />
             </div>
-            <VirtualFixedTableHeader shouldShowFixedHeader={shouldShowFixedHeader} table={table} />
+            <VirtualFixedTableHeader
+              ref={virtualTableContainerRef}
+              shouldShowFixedHeader={shouldShowFixedHeader}
+              style={{ width: tableWidth ? `${tableWidth}px` : 'inherit' }}
+              table={table}
+            />
           </div>
 
           <div className="relative w-full">
-            <Table className="lg:table-fixed">
+            <Table className="lg:table-fixed" ref={tableRef} refTableContainer={tableContainerRef}>
               <TableHeader
                 className={cn(
                   'bg-secondary text-gray-400',
