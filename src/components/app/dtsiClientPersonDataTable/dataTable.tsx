@@ -1,6 +1,6 @@
 'use client'
 
-import React, { MouseEvent, useCallback, useMemo, useRef, useState } from 'react'
+import { MouseEvent, ReactNode, useCallback, useMemo, useRef } from 'react'
 import { useIntersection } from 'react-use'
 import {
   Column,
@@ -10,9 +10,11 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   Row,
+  Table as TableType,
   TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
+import { motion } from 'framer-motion'
 import { debounce } from 'lodash-es'
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -40,7 +42,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useWindowEventListeners } from '@/hooks/useWindowEventListeners'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -55,7 +56,7 @@ export const SortableHeader = <TData extends Person = Person>({
   children,
 }: {
   column: Column<TData>
-  children: React.ReactNode
+  children: ReactNode
 }) => {
   const sortVal = column.getIsSorted()
 
@@ -81,6 +82,47 @@ export const SortableHeader = <TData extends Person = Person>({
   )
 }
 
+interface FixedTableHeaderProps<TData> {
+  shouldShowFixedHeader: boolean
+  table: TableType<TData>
+}
+
+function VirtualFixedTableHeader<TData>({
+  shouldShowFixedHeader,
+  table,
+}: FixedTableHeaderProps<TData>) {
+  return (
+    <motion.div
+      animate={
+        shouldShowFixedHeader
+          ? { height: 'auto', opacity: 1, y: 0, zIndex: 20 }
+          : { height: 0, opacity: 0, y: -50, zIndex: 0 }
+      }
+      className="overflow-hidden"
+      initial={{ height: 0, opacity: 0, y: -50, zIndex: 0 }}
+      transition={{ duration: 0.2, ease: 'easeInOut' }}
+    >
+      <Table className="z-20 w-full caption-bottom border-t pt-2 text-sm lg:table-fixed">
+        <TableHeader className={cn('w-full bg-secondary text-gray-400')}>
+          {table.getHeaderGroups().map(headerGroup => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map(header => {
+                return (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                )
+              })}
+            </TableRow>
+          ))}
+        </TableHeader>
+      </Table>
+    </motion.div>
+  )
+}
+
 export function DataTable<TData extends Person = Person>({
   columns = [],
   data = [],
@@ -90,8 +132,6 @@ export function DataTable<TData extends Person = Person>({
   ...rest
 }: DataTableProps<TData>) {
   const router = useRouter()
-
-  const [headerWidths, setHeaderWidths] = useState<number[]>([])
 
   const [columnFilters, setColumnFilters] = useColumnFilters()
   const [globalFilter, setGlobalFilter] = useSearchFilter('')
@@ -142,22 +182,6 @@ export function DataTable<TData extends Person = Person>({
     threshold: 1,
   })
 
-  const headerRefs = useRef<HTMLTableCellElement[]>([])
-  const handleResize = useCallback(() => {
-    const maxRefs = columns.length
-
-    if (headerRefs.current.length > maxRefs) {
-      headerRefs.current = headerRefs.current.slice(0, maxRefs)
-    }
-
-    if (headerRefs.current.length) {
-      const widths = headerRefs.current.map(ref => ref.getBoundingClientRect().width)
-      setHeaderWidths(widths)
-    }
-  }, [columns.length])
-
-  useWindowEventListeners(['resize', 'scroll'], handleResize)
-
   const handleTableRowClick = useCallback(
     (event: MouseEvent<HTMLTableRowElement>, row: Row<TData>) => {
       const politicianUrl = getIntlUrls(locale).politicianDetails(row.original.slug)
@@ -172,13 +196,8 @@ export function DataTable<TData extends Person = Person>({
 
   const isSearchContainerVisible = searchContainerIntersection?.intersectionRatio === 1
   const isPaginationVisible = paginationIntersection?.intersectionRatio === 1
-
-  const filterContainerBoundingRect = filterContainerRef.current?.getBoundingClientRect()
-  const currentFilterContainerYPx = filterContainerBoundingRect
-    ? filterContainerBoundingRect.top + filterContainerBoundingRect.height
-    : 0
-
   const shouldShowFixedHeader = !isSearchContainerVisible && !isPaginationVisible
+
   const tableRowModel = table.getRowModel()
 
   return (
@@ -207,44 +226,32 @@ export function DataTable<TData extends Person = Person>({
       </div>
       <div className="md:container">
         <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
-          <div
-            className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 lg:top-[84px] lg:flex-row lg:p-6"
-            ref={filterContainerRef}
-          >
-            <PageTitle className="text-left" size="sm">
-              Politicians
-            </PageTitle>
-            <GlobalFilters columns={table.getAllColumns()} />
+          <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white lg:top-[84px]">
+            <div
+              className="flex flex-col justify-between p-3 pl-3 lg:flex-row lg:p-6"
+              ref={filterContainerRef}
+            >
+              <PageTitle className="text-left" size="sm">
+                Politicians
+              </PageTitle>
+              <GlobalFilters columns={table.getAllColumns()} />
+            </div>
+            <VirtualFixedTableHeader shouldShowFixedHeader={shouldShowFixedHeader} table={table} />
           </div>
+
           <div className="relative w-full">
             <Table className="lg:table-fixed">
               <TableHeader
                 className={cn(
                   'bg-secondary text-gray-400',
-                  shouldShowFixedHeader && 'fixed z-20 w-full',
+                  shouldShowFixedHeader && 'invisible w-full',
                 )}
-                style={{
-                  top: shouldShowFixedHeader ? `${currentFilterContainerYPx}px` : 'auto',
-                  width: shouldShowFixedHeader
-                    ? headerWidths.reduce((acc, curr) => acc + curr, 0)
-                    : 'auto',
-                }}
               >
                 {table.getHeaderGroups().map(headerGroup => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map(header => {
                       return (
-                        <TableHead
-                          key={header.id}
-                          ref={el => {
-                            if (el) {
-                              headerRefs.current.push(el)
-                            }
-                          }}
-                          style={{
-                            width: shouldShowFixedHeader ? headerWidths[header.index] : 'auto',
-                          }}
-                        >
+                        <TableHead key={header.id}>
                           {header.isPlaceholder
                             ? null
                             : flexRender(header.column.columnDef.header, header.getContext())}
