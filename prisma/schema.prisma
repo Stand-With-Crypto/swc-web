@@ -505,6 +505,7 @@ model UserCommunicationJourney {
   datetimeCreated    DateTime                     @default(now()) @map("datetime_created")
   userCommunications UserCommunication[]
   campaignName       String?                      @map("campaign_name")
+  variantName        String?                      @map("variant_name")
 
   @@index([userId])
   @@map("user_communication_journey")

@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
 import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
+import { getLogger } from '@/utils/shared/logger'
+import { prettyStringify } from '@/utils/shared/prettyLog'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -21,6 +23,8 @@ const zodSendSMSSchema = z.object({
 
 export type SendSMSPayload = z.infer<typeof zodSendSMSSchema>
 
+const logger = getLogger('sendSMS')
+
 export const sendSMS = async (payload: SendSMSPayload) => {
   const validatedInput = zodSendSMSSchema.safeParse(payload)
 
@@ -35,6 +39,16 @@ export const sendSMS = async (payload: SendSMSPayload) => {
   }
 
   if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
+    logger.info(
+      'sendSMS localhost',
+      prettyStringify({
+        messagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
+        body,
+        statusCallback: statusCallbackUrl,
+        to,
+        mediaUrl: media,
+      }),
+    )
     return
   }
 

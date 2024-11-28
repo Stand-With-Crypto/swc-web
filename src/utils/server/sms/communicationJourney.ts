@@ -21,6 +21,7 @@ interface BulkCreateCommunicationJourneyPayload {
     status?: CommunicationMessageStatus
   }
   campaignName: string
+  variantName?: string
 }
 
 export async function bulkCreateCommunicationJourney({
@@ -28,6 +29,7 @@ export async function bulkCreateCommunicationJourney({
   journeyType,
   message,
   phoneNumber,
+  variantName,
 }: BulkCreateCommunicationJourneyPayload) {
   const users = await prismaClient.user.findMany({
     where: {
@@ -51,6 +53,7 @@ export async function bulkCreateCommunicationJourney({
         },
         journeyType,
         campaignName,
+        variantName,
       },
       select: {
         userId: true,
@@ -65,6 +68,7 @@ export async function bulkCreateCommunicationJourney({
         journeyType,
         campaignName,
         userId: id,
+        variantName,
       })),
   })
 
@@ -75,6 +79,7 @@ export async function bulkCreateCommunicationJourney({
       },
       journeyType,
       campaignName,
+      variantName,
     },
     select: {
       id: true,
@@ -84,24 +89,22 @@ export async function bulkCreateCommunicationJourney({
 
   if (!message) return
 
-  const createCommunicationPayload = users
-    .map<Prisma.UserCommunicationCreateManyInput>(user => {
-      const communicationJourney = createdCommunicationJourneys.find(
-        ({ userId }) => userId === user.id,
-      )
+  const createCommunicationPayload = users.map<Prisma.UserCommunicationCreateManyInput>(user => {
+    const communicationJourney = createdCommunicationJourneys.find(
+      ({ userId }) => userId === user.id,
+    )
 
-      if (!communicationJourney?.id) {
-        throw new Error(`Couldn't find communicationJourney id for user ${user.id}`)
-      }
+    if (!communicationJourney?.id) {
+      throw new Error(`Couldn't find communicationJourney id for user ${user.id}`)
+    }
 
-      return {
-        messageId: message.id,
-        status: message.status,
-        userCommunicationJourneyId: communicationJourney.id,
-        communicationType: CommunicationType.SMS,
-      }
-    })
-    .filter(communication => !!communication)
+    return {
+      messageId: message.id,
+      status: message.status,
+      userCommunicationJourneyId: communicationJourney.id,
+      communicationType: CommunicationType.SMS,
+    }
+  })
 
   await prismaClient.userCommunication.createMany({
     data: createCommunicationPayload,

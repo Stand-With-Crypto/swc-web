@@ -12,6 +12,7 @@ import { bulkCreateCommunicationJourney } from '@/utils/server/sms/communication
 import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 import { getLogger } from '@/utils/shared/logger'
 import { toBool } from '@/utils/shared/toBool'
+import { apiUrls } from '@/utils/shared/urls'
 
 enum SMSEventMessageStatus {
   DELIVERED = 'delivered',
@@ -55,13 +56,12 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   logger.info('Request URL:', request.url, body)
 
-  const [_, searchParams] = request.url.split('?')
+  const normalizedParams = normalizeSearchParams(request)
 
-  const params = new URLSearchParams(searchParams)
+  const { hasWelcomeMessageInBody, variantName } = normalizedParams
 
-  let journeyType = params.get('journeyType') as UserCommunicationJourneyType | null
-  let campaignName = params.get('campaignName')
-  const hasWelcomeMessageInBody = toBool(params.get('hasWelcomeMessageInBody'))
+  let campaignName = normalizedParams.campaignName
+  let journeyType = normalizedParams.journeyType
 
   const messageId = body.MessageSid
   const messageStatus = body.MessageStatus
@@ -113,7 +113,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     }
 
     journeyType = existingMessage.userCommunicationJourney.journeyType
-    campaignName = existingMessage.userCommunicationJourney.campaignName
+    campaignName = existingMessage.userCommunicationJourney.campaignName || ''
   } else {
     if (!journeyType || !campaignName) {
       return new NextResponse('missing search params', {
@@ -132,6 +132,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
         status: newMessageStatus,
       },
       phoneNumber,
+      variantName,
     })
 
     if (hasWelcomeMessageInBody) {
@@ -168,6 +169,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
           'Message Id': messageId,
           From: from,
           To: phoneNumber,
+          Variant: variantName,
           'Campaign Name': campaignName,
           'Journey Type': journeyType,
           Error: errorCode,
@@ -180,3 +182,23 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     status: 200,
   })
 })
+
+type SmsStatusCallbackParams = Parameters<typeof apiUrls.smsStatusCallback>[0]
+
+function normalizeSearchParams(request: NextRequest): SmsStatusCallbackParams {
+  const [_, rawSearchParams] = request.url.split('?')
+
+  const searchParams = new URLSearchParams(rawSearchParams)
+
+  const campaignName = searchParams.get('campaignName') || ''
+  const hasWelcomeMessageInBody = toBool(searchParams.get('hasWelcomeMessageInBody'))
+  const journeyType = searchParams.get('journeyType') as UserCommunicationJourneyType
+  const variantName = searchParams.get('variantName') || ''
+
+  return {
+    campaignName,
+    hasWelcomeMessageInBody,
+    journeyType,
+    variantName,
+  }
+}
