@@ -3,7 +3,6 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.HOUR
-export const runtime = 'edge'
 export const alt = 'Image of politician and their stance on crypto'
 export const size = {
   width: 1200,
