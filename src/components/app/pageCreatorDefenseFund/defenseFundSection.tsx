@@ -35,7 +35,7 @@ export function DefenseFundSection({
             width={48}
           />
         )}
-        <PageSubTitle className={cn('font-medium text-foreground', headingClassName)} size="md">
+        <PageSubTitle className={cn('font-medium text-foreground', headingClassName)} size="lg">
           {heading}
         </PageSubTitle>
         {subtext && (

@@ -17,13 +17,11 @@ interface PagePressProps {
 export function PagePress({ title, description, pressContent }: PagePressProps) {
   return (
     <div className="standard-spacing-from-navbar container flex flex-col gap-20">
-      <section className="space-y-14">
-        <div className="container flex flex-col items-center gap-4">
-          <PageTitle className="mb-7 font-sans !text-5xl">{title}</PageTitle>
-          <PageSubTitle className="text-muted-foreground" size="md">
-            {description}
-          </PageSubTitle>
-        </div>
+      <section className="container">
+        <PageTitle className="mb-7">{title}</PageTitle>
+        <PageSubTitle className="text-muted-foreground" size="md">
+          {description}
+        </PageSubTitle>
       </section>
 
       <div className="flex flex-col gap-16">

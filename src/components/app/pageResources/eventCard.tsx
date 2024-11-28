@@ -40,7 +40,7 @@ export function EventCard({
           backgroundBlendMode: 'overlay',
         }}
       >
-        <PageTitle as="span" className="text-left" size="sm">
+        <PageTitle as="span" className="text-left" size="md">
           {title}
         </PageTitle>
         <div className="w-full">

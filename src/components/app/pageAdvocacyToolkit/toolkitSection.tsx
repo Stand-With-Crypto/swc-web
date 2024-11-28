@@ -23,7 +23,7 @@ export function ToolkitSection({
   return (
     <section className={cn('mt-10', sectionClassName)}>
       <div className="container flex flex-col items-center gap-4">
-        <PageSubTitle className={cn('font-medium text-foreground', headingClassName)} size="md">
+        <PageSubTitle className={cn('font-medium text-foreground', headingClassName)}>
           {heading}
         </PageSubTitle>
         {subtext && (

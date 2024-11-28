@@ -83,7 +83,7 @@ function ContractMetadataDisplay({ contractMetadata }: { contractMetadata: NFTCl
           src={contractMetadata.image.url}
         />
         <div className="space-y-2">
-          <PageTitle className="text-start" size="sm">
+          <PageTitle className="text-start" size="md">
             {contractMetadata.name}
           </PageTitle>
 
@@ -111,7 +111,7 @@ export function ContractMetadataDisplaySkeleton() {
         <NFTDisplaySkeleton size="lg" />
         <div className="space-y-2">
           <Skeleton>
-            <PageTitle className="text-start" size="sm">
+            <PageTitle className="text-start" size="md">
               Stand With Crypto Supporter
             </PageTitle>
           </Skeleton>
