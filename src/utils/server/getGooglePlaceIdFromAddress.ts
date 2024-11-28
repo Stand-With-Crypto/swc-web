@@ -10,7 +10,7 @@ const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
 
 export async function getGooglePlaceIdFromAddress(address: string) {
   const response = await fetchReq(
-    `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(address)}&language=en&key=${GOOGLE_PLACES_BACKEND_API_KEY}`,
+    `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(address)}&loading=async&language=en&key=${GOOGLE_PLACES_BACKEND_API_KEY}`,
     {
       headers: {
         'Content-Type': 'application/json',
