@@ -49,8 +49,8 @@ export type CreateActionCallCongresspersonInput = z.infer<
 >
 
 interface SharedDependencies {
-  localUser: ReturnType<typeof parseLocalUserFromCookies>
-  sessionId: ReturnType<typeof getUserSessionId>
+  localUser: Awaited<ReturnType<typeof parseLocalUserFromCookies>>
+  sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
   hasRegisteredRatelimit: boolean
@@ -81,8 +81,8 @@ async function _actionCreateUserActionCallCongressperson(
     }
   }
 
-  const localUser = parseLocalUserFromCookies()
-  const sessionId = getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {

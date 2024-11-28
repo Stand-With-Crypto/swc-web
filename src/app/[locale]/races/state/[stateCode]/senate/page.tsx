@@ -6,20 +6,20 @@ import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { queryDTSILocationSenateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationSenateSpecificInformation'
 import { PageProps } from '@/types'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['15_MINUTES']
 
 type LocationSenateRaceSpecificPageProps = PageProps<{
   stateCode: string
 }>
 
-export async function generateMetadata({
-  params,
-}: LocationSenateRaceSpecificPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: LocationSenateRaceSpecificPageProps,
+): Promise<Metadata> {
+  const params = await props.params
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
   const title = `${stateName} US Senate Race`
@@ -30,9 +30,10 @@ export async function generateMetadata({
   }
 }
 
-export default async function LocationSenateSpecificPage({
-  params,
-}: LocationSenateRaceSpecificPageProps) {
+export default async function LocationSenateSpecificPage(
+  props: LocationSenateRaceSpecificPageProps,
+) {
+  const params = await props.params
   const { locale } = params
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
 

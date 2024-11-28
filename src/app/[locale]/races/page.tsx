@@ -3,12 +3,10 @@ import { Metadata } from 'next'
 import { LocationUnitedStatesLiveResults } from '@/components/app/pageLocationKeyRaces/locationUnitedStatesLiveResults'
 import { getKeyRacesPageData } from '@/data/pageSpecific/getKeyRacesPageData'
 import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { toBool } from '@/utils/shared/toBool'
 
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
-export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['15_MINUTES']
+export const dynamicParams = false
 
 type LocationUnitedStatesPageProps = PageProps
 
@@ -22,7 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function LocationUnitedStatesPage({ params }: LocationUnitedStatesPageProps) {
+export default async function LocationUnitedStatesPage(props: LocationUnitedStatesPageProps) {
+  const params = await props.params
   const { locale } = params
 
   const data = await getKeyRacesPageData()

@@ -34,7 +34,8 @@ export function useVoterRegistrationAction() {
           payload: data,
         },
         payload =>
-          actionCreateUserActionVoterRegistration(payload).then(actionResult => {
+          actionCreateUserActionVoterRegistration(payload).then(async actionResultPromise => {
+            const actionResult = await actionResultPromise
             if (actionResult && 'user' in actionResult && actionResult.user) {
               identifyUserOnClient(actionResult.user)
             }

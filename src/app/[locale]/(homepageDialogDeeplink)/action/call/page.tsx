@@ -2,13 +2,13 @@ import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDee
 import { UserActionFormCallCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormCallCongressperson/homepageDialogDeeplinkWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { cn } from '@/utils/web/cn'
 
-export const revalidate = SECONDS_DURATION.HOUR
+export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 
-export default function UserActionCallCongresspersonDeepLink({ params }: PageProps) {
+export default async function UserActionCallCongresspersonDeepLink(props: PageProps) {
+  const params = await props.params
   return (
     <HomepageDialogDeeplinkLayout pageParams={params}>
       <div className={cn('max-md:h-full', dialogContentPaddingStyles)}>

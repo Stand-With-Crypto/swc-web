@@ -6,10 +6,9 @@ import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decision
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { PageProps } from '@/types'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['15_MINUTES']
 
 type LocationPresidentialRaceSpecificPageProps = PageProps
 
@@ -22,9 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function LocationPresidentialSpecificPage({
-  params,
-}: LocationPresidentialRaceSpecificPageProps) {
+export default async function LocationPresidentialSpecificPage(
+  props: LocationPresidentialRaceSpecificPageProps,
+) {
+  const params = await props.params
   const { locale } = params
 
   const data = await queryDTSILocationUnitedStatesPresidential()

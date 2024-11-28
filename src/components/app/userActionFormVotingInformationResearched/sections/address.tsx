@@ -98,12 +98,15 @@ export function Address(props: AddressProps) {
           onError: toastGenericError,
         },
         payload =>
-          actionCreateUserActionVotingInformationResearched(payload).then(actionResult => {
-            if (actionResult && 'user' in actionResult && actionResult.user) {
-              identifyUserOnClient(actionResult.user)
-            }
-            return actionResult
-          }),
+          actionCreateUserActionVotingInformationResearched(payload).then(
+            async actionResultPromise => {
+              const actionResult = await actionResultPromise
+              if (actionResult && 'user' in actionResult && actionResult.user) {
+                identifyUserOnClient(actionResult.user)
+              }
+              return actionResult
+            },
+          ),
       )
       if (result.status === 'success') {
         onSuccess(address)

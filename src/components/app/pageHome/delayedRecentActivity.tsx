@@ -1,7 +1,7 @@
 'use client'
 import { useRef } from 'react'
 import { TabsContent } from '@radix-ui/react-tabs'
-import { useInView } from 'framer-motion'
+import { useInView } from 'motion/react'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'

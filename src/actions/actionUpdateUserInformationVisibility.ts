@@ -42,7 +42,7 @@ async function _actionUpdateUserInformationVisibility(
   waitUntil(
     getServerPeopleAnalytics({
       userId: authUser.userId,
-      localUser: parseLocalUserFromCookies(),
+      localUser: await parseLocalUserFromCookies(),
     })
       .set({
         'Information Visibility': informationVisibility,

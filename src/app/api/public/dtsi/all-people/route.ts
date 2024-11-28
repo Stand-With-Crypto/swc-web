@@ -4,8 +4,8 @@ import { NextResponse } from 'next/server'
 
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 
-export const dynamic = 'error'
 export const revalidate = 0
+export const dynamic = 'error'
 
 export async function GET() {
   const data = await queryDTSIAllPeople()

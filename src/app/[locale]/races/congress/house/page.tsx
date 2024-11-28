@@ -6,10 +6,9 @@ import { GetAllCongressDataResponse } from '@/data/aggregations/decisionDesk/typ
 import { getCongressLiveResultData } from '@/data/pageSpecific/getKeyRacesPageData'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['15_MINUTES']
 
 const title = 'U.S. Congress Live Election Results'
 const description =
@@ -21,7 +20,11 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function CongressLiveResults({ params: { locale } }: PageProps) {
+export default async function CongressLiveResults(props: PageProps) {
+  const params = await props.params
+
+  const { locale } = params
+
   const congressRaceLiveResult: GetAllCongressDataResponse = await getCongressLiveResultData()
     .then(res => res)
     .catch(error => {

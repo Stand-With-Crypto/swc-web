@@ -8,7 +8,8 @@ import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
 
 export function createCountryCodeValidation(requiredCountryCode: string) {
   return async () => {
-    const userCountryCode = cookies().get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+    const currentCookies = await cookies()
+    const userCountryCode = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
 
     if (!isValidCountryCode({ countryCode: requiredCountryCode, userCountryCode })) {
       return {

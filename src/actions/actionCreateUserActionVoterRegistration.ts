@@ -45,8 +45,8 @@ export type CreateActionVoterRegistrationInput = z.infer<
 >
 
 interface SharedDependencies {
-  localUser: ReturnType<typeof parseLocalUserFromCookies>
-  sessionId: ReturnType<typeof getUserSessionId>
+  localUser: Awaited<ReturnType<typeof parseLocalUserFromCookies>>
+  sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
 }
@@ -72,8 +72,8 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     }
   }
 
-  const localUser = parseLocalUserFromCookies()
-  const sessionId = getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },

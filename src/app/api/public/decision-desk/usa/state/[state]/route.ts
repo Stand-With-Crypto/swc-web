@@ -5,13 +5,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { RacesVotingDataResponse } from '@/data/aggregations/decisionDesk/types'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { GetRacesParamsSchema } from '@/utils/server/decisionDesk/schemas'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['15_MINUTES']
 
-export async function GET(_request: NextRequest, { params }: { params: { state: string } }) {
+export async function GET(_request: NextRequest, props: { params: Promise<{ state: string }> }) {
+  const params = await props.params
   const { state } = GetRacesParamsSchema.parse(params)
 
   if (!state) {

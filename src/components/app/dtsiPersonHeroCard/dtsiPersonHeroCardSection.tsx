@@ -14,7 +14,7 @@ export interface DTSIPersonHeroCardSectionProps {
   title: React.ReactNode
   titleProps?: PageTitleProps
   subtitle?: React.ReactNode
-  cta?: ReactElement
+  cta?: ReactElement<any>
   people: Array<DTSI_PersonCardFragment & { isIncumbent?: boolean }>
   recommend?: boolean
   forceMobile?: boolean

@@ -144,7 +144,8 @@ export function UserActionFormEmailDebate({
               payload: { ...values, address },
             },
             payload =>
-              actionCreateUserActionEmailDebate(payload).then(actionResult => {
+              actionCreateUserActionEmailDebate(payload).then(async actionResultPromise => {
+                const actionResult = await actionResultPromise
                 if (actionResult?.user) {
                   identifyUserOnClient(actionResult.user)
                 }

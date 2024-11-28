@@ -120,7 +120,8 @@ export function KeyRacesForm(props: KeyRacesFormProps) {
         onError: toastGenericError,
       },
       input =>
-        actionCreateUserActionViewKeyRaces(input).then(actionResult => {
+        actionCreateUserActionViewKeyRaces(input).then(async actionResultPromise => {
+          const actionResult = await actionResultPromise
           if (actionResult && 'user' in actionResult && actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }

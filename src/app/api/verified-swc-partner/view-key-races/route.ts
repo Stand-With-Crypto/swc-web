@@ -11,7 +11,7 @@ import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/v
 type RequestBody = z.infer<typeof zodVerifiedSWCPartnersUserActionViewKeyRaces>
 
 export async function POST(request: NextRequest) {
-  const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()
+  const partner = await authenticateAndGetVerifiedSWCPartnerFromHeader()
   const requestBody = await request.json()
 
   const baseValidationResult = zodVerifiedSWCPartnersUserActionViewKeyRaces.safeParse(requestBody)

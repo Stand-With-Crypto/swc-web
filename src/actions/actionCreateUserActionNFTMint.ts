@@ -35,8 +35,8 @@ const createActionMintNFTInputValidationSchema = object({
 export type CreateActionMintNFTInput = z.infer<typeof createActionMintNFTInputValidationSchema>
 
 interface SharedDependencies {
-  localUser: ReturnType<typeof parseLocalUserFromCookies>
-  sessionId: ReturnType<typeof getUserSessionId>
+  localUser: Awaited<ReturnType<typeof parseLocalUserFromCookies>>
+  sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   analytics: ReturnType<typeof getServerAnalytics>
 }
 
@@ -61,8 +61,8 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     }
   }
 
-  const localUser = parseLocalUserFromCookies()
-  const sessionId = getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
 
   const authUser = await appRouterGetThirdwebAuthUser()
   if (!authUser) {

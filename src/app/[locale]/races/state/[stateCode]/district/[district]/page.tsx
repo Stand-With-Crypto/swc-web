@@ -8,7 +8,6 @@ import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/querie
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import {
@@ -19,18 +18,19 @@ import {
 import { zodNormalizedDTSIDistrictId } from '@/validation/fields/zodNormalizedDTSIDistrictId'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
-export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['15_MINUTES']
+export const dynamicParams = false
 
 type LocationDistrictSpecificPageProps = PageProps<{
   stateCode: string
   district: string
 }>
 
-export async function generateMetadata({
-  params,
-}: LocationDistrictSpecificPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: LocationDistrictSpecificPageProps,
+): Promise<Metadata> {
+  const params = await props.params
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
@@ -57,9 +57,10 @@ export async function generateStaticParams() {
   ).slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 9999999)
 }
 
-export default async function LocationDistrictSpecificPage({
-  params,
-}: LocationDistrictSpecificPageProps) {
+export default async function LocationDistrictSpecificPage(
+  props: LocationDistrictSpecificPageProps,
+) {
+  const params = await props.params
   const { locale } = params
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())

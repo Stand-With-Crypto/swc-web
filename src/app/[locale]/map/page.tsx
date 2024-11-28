@@ -6,9 +6,8 @@ import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.MINUTE
+export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const title = 'Crypto advocates in America'
@@ -21,7 +20,8 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function MapPage({ params }: PageProps) {
+export default async function MapPage(props: PageProps) {
+  const params = await props.params
   const homeDataProps = await getHomepageData({ recentActivityLimit: 20, restrictToUS: true })
   const advocatePerStateDataProps = await getAdvocatesMapData()
 

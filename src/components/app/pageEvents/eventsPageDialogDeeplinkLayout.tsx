@@ -18,16 +18,17 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface EventsPageDialogDeeplinkLayout {
-  pageParams: PageProps['params']
+  pageParams: Awaited<PageProps['params']>
   hideModal?: boolean
-  children: ReactElement
+  children: ReactElement<any>
 }
 
 export async function EventsPageDialogDeeplinkLayout({
   children,
   pageParams,
 }: EventsPageDialogDeeplinkLayout) {
-  const urls = getIntlUrls(pageParams.locale)
+  const { locale } = pageParams
+  const urls = getIntlUrls(locale)
 
   const events = await getEvents()
 

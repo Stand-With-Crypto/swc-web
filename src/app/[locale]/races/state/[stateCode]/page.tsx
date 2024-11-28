@@ -8,7 +8,6 @@ import { getCongressLiveResultData } from '@/data/pageSpecific/getKeyRacesPageDa
 import { PageProps } from '@/types'
 import { getDecisionDataFromRedis } from '@/utils/server/decisionDesk/cachedData'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import {
   getUSStateNameFromStateCode,
@@ -17,17 +16,16 @@ import {
 } from '@/utils/shared/usStateUtils'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
-export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-export const revalidate = SECONDS_DURATION['15_MINUTES']
+export const dynamicParams = false
 
 type LocationStateSpecificPageProps = PageProps<{
   stateCode: string
 }>
 
-export async function generateMetadata({
-  params,
-}: LocationStateSpecificPageProps): Promise<Metadata> {
+export async function generateMetadata(props: LocationStateSpecificPageProps): Promise<Metadata> {
+  const params = await props.params
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
 
@@ -47,9 +45,8 @@ export async function generateStaticParams() {
     }))
 }
 
-export default async function LocationStateSpecificPage({
-  params,
-}: LocationStateSpecificPageProps) {
+export default async function LocationStateSpecificPage(props: LocationStateSpecificPageProps) {
+  const params = await props.params
   const { locale } = params
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const [

@@ -4,10 +4,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { queryDTSILocationSpecificRacesInformation } from '@/data/dtsi/queries/queryDTSILocationSpecificRacesInformation'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
+export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.HOUR
 
 const zodParams = z.object({
   districtNumber: z.string().pipe(z.coerce.number().int().gte(0).lt(1000)),
@@ -16,8 +15,9 @@ const zodParams = z.object({
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { stateCode: string; districtNumber: string } },
+  props: { params: Promise<{ stateCode: string; districtNumber: string }> },
 ) {
+  const params = await props.params
   const { stateCode, districtNumber } = zodParams.parse(params)
   const data = await queryDTSILocationSpecificRacesInformation({
     stateCode,

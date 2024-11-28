@@ -1,5 +1,5 @@
 import { Children, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
-import { animate, domAnimation, LazyMotion, m, useMotionValue } from 'framer-motion'
+import { animate, domAnimation, LazyMotion, m, useMotionValue } from 'motion/react'
 
 import { cn } from '@/utils/web/cn'
 

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
