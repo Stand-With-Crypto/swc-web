@@ -37,6 +37,7 @@ export function formatPhoneNumber(phoneNumber: string) {
 }
 
 export function validatePhoneNumber(phoneNumber: string) {
+  if (!phoneNumber) return false
   // https://github.com/catamphetamine/libphonenumber-js/issues/468#issue-2504182999
   const parsedPhoneNumber = parsePhoneNumberWithError(
     phoneNumber,
