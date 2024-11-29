@@ -1,4 +1,3 @@
-import { use } from 'react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata } from 'next'
@@ -47,8 +46,11 @@ export const metadata: Metadata = {
   ...TOP_LEVEL_METADATA_DETAILS,
 }
 
-export default function Layout({ children, params }: PageProps & { children: React.ReactNode }) {
-  const { locale } = use(params)
+export default async function Layout({
+  children,
+  params,
+}: PageProps & { children: React.ReactNode }) {
+  const { locale } = await params
 
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()
