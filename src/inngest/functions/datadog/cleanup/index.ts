@@ -52,9 +52,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
       })
     })
 
-    await step.run('script.removeUserActions', async () => {
-      await Promise.all(userActionRemovalPromises)
-    })
+    await step.run('script.removeUserActions', () => Promise.all(userActionRemovalPromises))
 
     const userEmailRemovalPromises = filteredUsers.map(user => {
       const userEmailIds = user.userEmailAddresses.map(userEmail => userEmail.id)
