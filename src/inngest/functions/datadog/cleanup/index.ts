@@ -17,8 +17,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
   },
   { cron: 'TZ=America/New_York 0 3 * * *' }, // Every day - 3AM EST
   async ({ step }) => {
-    const users = await step.run('script.getSyntheticTestUsers', async () => {
-      return prismaClient.user.findMany({
+    const users = await step.run('script.getSyntheticTestUsers', () => prismaClient.user.findMany({
         where: {
           userEmailAddresses: {
             some: {
