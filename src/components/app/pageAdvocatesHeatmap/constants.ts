@@ -1,4 +1,4 @@
-import type { JSX } from 'react'
+import type { ReactNode } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import {
@@ -70,7 +70,7 @@ export const ADVOCATES_ACTIONS: Partial<
   Record<
     UserActionType,
     {
-      icon: (args: IconProps) => JSX.Element
+      icon: (args: IconProps) => ReactNode
       label: string
       labelMobile: string
       labelActionTooltip: (extraText?: string) => string

@@ -1,6 +1,6 @@
 import 'server-only'
 
-import React, { cloneElement, ReactElement } from 'react'
+import React, { cloneElement, JSX } from 'react'
 import { isAfter, parseISO, subDays } from 'date-fns'
 import { X } from 'lucide-react'
 
@@ -20,7 +20,7 @@ import { cn } from '@/utils/web/cn'
 interface EventsPageDialogDeeplinkLayout {
   pageParams: Awaited<PageProps['params']>
   hideModal?: boolean
-  children: ReactElement<any>
+  children: JSX.Element
 }
 
 export async function EventsPageDialogDeeplinkLayout({
