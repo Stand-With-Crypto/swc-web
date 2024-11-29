@@ -17,24 +17,22 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
   },
   { cron: 'TZ=America/New_York 0 3 * * *' }, // Every day - 3AM EST
   async ({ step }) => {
-    const users = await step.run(
-      'script.getSyntheticTestUsers',
-      async () =>
-        await prismaClient.user.findMany({
-          where: {
-            userEmailAddresses: {
-              some: {
-                emailAddress: {
-                  contains: DATADOG_SYNTHETIC_TESTS_EMAIL_DOMAIN,
-                },
+    const users = await step.run('script.getSyntheticTestUsers', () =>
+      prismaClient.user.findMany({
+        where: {
+          userEmailAddresses: {
+            some: {
+              emailAddress: {
+                contains: DATADOG_SYNTHETIC_TESTS_EMAIL_DOMAIN,
               },
             },
           },
-          include: {
-            userEmailAddresses: true,
-            userActions: true,
-          },
-        }),
+        },
+        include: {
+          userEmailAddresses: true,
+          userActions: true,
+        },
+      }),
     )
 
     const filteredUsers = uniqBy(users, user => user.id)
@@ -55,10 +53,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
       })
     })
 
-    await step.run(
-      'script.removeUserActions',
-      async () => await Promise.all(userActionRemovalPromises),
-    )
+    await step.run('script.removeUserActions', () => Promise.all(userActionRemovalPromises))
 
     const userEmailRemovalPromises = filteredUsers.map(user => {
       const userEmailIds = user.userEmailAddresses.map(userEmail => userEmail.id)
@@ -72,10 +67,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
       })
     })
 
-    await step.run(
-      'script.removeUserEmails',
-      async () => await Promise.all(userEmailRemovalPromises),
-    )
+    await step.run('script.removeUserEmails', () => Promise.all(userEmailRemovalPromises))
 
     const usersToUpdatePromises = filteredUsers.map(user => {
       return prismaClient.user.update({
@@ -88,7 +80,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
       })
     })
 
-    await step.run('script.updateUsers', async () => await Promise.all(usersToUpdatePromises))
+    await step.run('script.updateUsers', () => Promise.all(usersToUpdatePromises))
 
     return {
       usersFound: filteredUsers.length,
