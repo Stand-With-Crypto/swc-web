@@ -94,7 +94,7 @@
     "js-cookie": "^3.0.5",
     "js-levenshtein": "^1.1.6",
     "jwt-decode": "^4.0.0",
-    "libphonenumber-js": "^1.11.4",
+    "libphonenumber-js": "^1.11.15",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.294.0",
     "mixpanel": "^0.18.0",
@@ -202,7 +202,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.7.0",
-    "typescript": "^5.5.4",
+    "typescript": "^5.7.2",
     "yargs": "^17.7.2"
   },
   "overrides": {
