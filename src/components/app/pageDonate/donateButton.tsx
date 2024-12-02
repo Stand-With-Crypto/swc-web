@@ -22,16 +22,18 @@ export function DonateButton() {
         },
       },
       () =>
-        actionCreateCoinbaseCommerceCharge().then(async res => {
-          const commerceChargeResponse = await res
-          if (commerceChargeResponse && 'hostedUrl' in commerceChargeResponse) {
-            const windowReference = openWindow(commerceChargeResponse.hostedUrl, '_blank', '')
-            if (!windowReference) {
-              openWindow(commerceChargeResponse.hostedUrl, '_self')
+        actionCreateCoinbaseCommerceCharge().then(
+          async actionCreateCoinbaseCommerceChargeResponse => {
+            const commerceChargeResponse = await actionCreateCoinbaseCommerceChargeResponse
+            if (commerceChargeResponse && 'hostedUrl' in commerceChargeResponse) {
+              const windowReference = openWindow(commerceChargeResponse.hostedUrl, '_blank', '')
+              if (!windowReference) {
+                openWindow(commerceChargeResponse.hostedUrl, '_self')
+              }
             }
-          }
-          return commerceChargeResponse
-        }),
+            return commerceChargeResponse
+          },
+        ),
     )
     setButtonState('completed')
   }
