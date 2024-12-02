@@ -25,6 +25,8 @@ export function formatPhoneNumber(phoneNumber: string) {
   if (!phoneNumber) return ''
 
   // https://github.com/catamphetamine/libphonenumber-js/issues/468#issue-2504182999
+  // We have to add phoneNumberMetadata from the 'libphonenumber-js/mobile/metadata'
+  // in the function call below to make it work as explained in the issue above
   const parsedPhoneNumber = parsePhoneNumberWithError(
     phoneNumber,
     DEFAULT_COUNTRY_CODE,
@@ -39,6 +41,8 @@ export function formatPhoneNumber(phoneNumber: string) {
 export function validatePhoneNumber(phoneNumber: string) {
   if (!phoneNumber) return false
   // https://github.com/catamphetamine/libphonenumber-js/issues/468#issue-2504182999
+  // We have to add phoneNumberMetadata from the 'libphonenumber-js/mobile/metadata'
+  // in the function call below to make it work as explained in the issue above
   const parsedPhoneNumber = parsePhoneNumberWithError(
     phoneNumber,
     DEFAULT_COUNTRY_CODE,
