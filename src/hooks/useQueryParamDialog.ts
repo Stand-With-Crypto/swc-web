@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { useQueryParamState } from '@/hooks/useQueryParamState'
+import { useSearchParamState } from '@/hooks/useSearchParamState'
 import { toBool } from '@/utils/shared/toBool'
 
 export const useQueryParamDialog = ({
@@ -11,7 +11,7 @@ export const useQueryParamDialog = ({
   open: boolean
   onOpenChange?(open: boolean): void
 } => {
-  const { value, setValue } = useQueryParamState({ queryParamKey, defaultValue: null })
+  const [value, setValue] = useSearchParamState(queryParamKey, null)
   const open = toBool(value)
   const onOpenChange = useCallback(() => {
     if (!setValue) {
@@ -23,5 +23,6 @@ export const useQueryParamDialog = ({
       setValue('true')
     }
   }, [setValue, open])
-  return { open, onOpenChange: setValue ? onOpenChange : undefined }
+
+  return { open, onOpenChange }
 }
