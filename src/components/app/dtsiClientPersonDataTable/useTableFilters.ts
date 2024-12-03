@@ -9,7 +9,7 @@ import {
   ROLE_OPTIONS,
   StanceOnCryptoOptions,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
-import { useSearchParamState } from '@/hooks/useQueryParamState'
+import { useSearchParamState } from '@/hooks/useSearchParamState'
 
 export function useSearchFilter(
   defaultValue: string = '',

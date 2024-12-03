@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { useSearchParamState } from '@/hooks/useQueryParamState'
+import { useSearchParamState } from '@/hooks/useSearchParamState'
 import { toBool } from '@/utils/shared/toBool'
 
 export const useQueryParamDialog = ({
