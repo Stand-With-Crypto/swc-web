@@ -16,43 +16,44 @@ interface RecentActivityConfig {
 }
 
 const fetchFromPrisma = async (config: RecentActivityConfig) => {
-  return prismaClient.userAction.findMany({
-    orderBy: {
-      datetimeCreated: 'desc',
-    },
-    take: config.restrictToUS ? 1000 : config.limit,
-    skip: config.offset,
-    where: {
-      user: {
-        internalStatus: UserInternalStatus.VISIBLE,
+  return prismaClient.userAction
+    .findMany({
+      orderBy: {
+        datetimeCreated: 'desc',
       },
-    },
-    include: {
-      user: {
-        include: { primaryUserCryptoAddress: true, address: true },
-      },
-      userActionEmail: {
-        include: {
-          userActionEmailRecipients: true,
+      take: config.restrictToUS ? 1000 : config.limit,
+      skip: config.offset,
+      include: {
+        user: {
+          include: { primaryUserCryptoAddress: true, address: true },
         },
-      },
-      nftMint: true,
-      userActionCall: true,
-      userActionDonation: true,
-      userActionOptIn: true,
-      userActionVoterRegistration: true,
-      userActionTweetAtPerson: true,
-      userActionVoterAttestation: true,
-      userActionRsvpEvent: true,
-      userActionViewKeyRaces: true,
-      userActionVotingInformationResearched: {
-        include: {
-          address: true,
+        userActionEmail: {
+          include: {
+            userActionEmailRecipients: true,
+          },
         },
+        nftMint: true,
+        userActionCall: true,
+        userActionDonation: true,
+        userActionOptIn: true,
+        userActionVoterRegistration: true,
+        userActionTweetAtPerson: true,
+        userActionVoterAttestation: true,
+        userActionRsvpEvent: true,
+        userActionViewKeyRaces: true,
+        userActionVotingInformationResearched: {
+          include: {
+            address: true,
+          },
+        },
+        userActionVotingDay: true,
       },
-      userActionVotingDay: true,
-    },
-  })
+    })
+    .then(userActions =>
+      userActions.filter(
+        ({ user: { internalStatus } }) => internalStatus === UserInternalStatus.VISIBLE,
+      ),
+    )
 }
 
 export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
