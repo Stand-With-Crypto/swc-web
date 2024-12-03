@@ -37,6 +37,12 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
 
     const filteredUsers = uniqBy(users, user => user.id)
 
+    if (filteredUsers.length === 0) {
+      return {
+        usersFound: 0,
+      }
+    }
+
     const userActionRemovalPromises = filteredUsers.map(user => {
       const filteredUserActions = user.userActions.filter(
         userAction => userAction.actionType !== UserActionType.OPT_IN,
