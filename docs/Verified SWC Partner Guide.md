@@ -36,4 +36,4 @@ This API endpoint allows verified partners to sign their users up to become memb
 
 ### /api/verified-swc-partner/view-key-races
 
-This API endpoint adds an user action of type VIWE_KEY_RACES alongside some metadata whenever a signed in user who has at least OPT_IN view certain pages, e.g. /races on the web and a View Key Races CTA on the app.
+This API endpoint adds an user action of type VIEW_KEY_RACES alongside some metadata whenever a signed in user who has at least OPT_IN view certain pages, e.g. /races on the web and a View Key Races CTA on the app.
