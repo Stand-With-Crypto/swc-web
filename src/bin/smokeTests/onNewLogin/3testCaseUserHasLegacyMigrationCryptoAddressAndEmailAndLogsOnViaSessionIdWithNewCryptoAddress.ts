@@ -49,7 +49,7 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSess
       })
       return {
         ...getDefaultParameters(),
-        getUserSessionId: () => existingUser.userSessions[0].id,
+        getUserSessionId: () => Promise.resolve(existingUser.userSessions[0].id),
       }
     },
     validateResults: (

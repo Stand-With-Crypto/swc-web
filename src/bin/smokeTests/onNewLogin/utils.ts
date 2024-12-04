@@ -21,7 +21,7 @@ export function getDefaultParameters(): Params {
   return {
     cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
     localUser: null,
-    getUserSessionId: () => fakerFields.id(),
+    getUserSessionId: () => Promise.resolve(fakerFields.id()),
     // dependency injecting this in to the function so we can mock it in tests
     injectedFetchEmbeddedWalletMetadataFromThirdweb: () => Promise.resolve(null),
   }

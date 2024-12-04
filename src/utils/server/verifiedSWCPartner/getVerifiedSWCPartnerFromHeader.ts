@@ -17,8 +17,9 @@ const areEqual = (a: string, b: string) => {
   }
 }
 
-export const authenticateAndGetVerifiedSWCPartnerFromHeader = () => {
-  const authHeader = headers().get('authorization')
+export const authenticateAndGetVerifiedSWCPartnerFromHeader = async () => {
+  const currentHeaders = await headers()
+  const authHeader = currentHeaders.get('authorization')
   if (!authHeader) {
     throw new Error('No authorization header provided')
   }

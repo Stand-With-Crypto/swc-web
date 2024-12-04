@@ -128,7 +128,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         })
       : existingUserEmailAddress
 
-  const localUser = parseLocalUserFromCookies()
+  const localUser = await parseLocalUserFromCookies()
 
   // If the user removes their phone number and the current smsStatus is not OPTED_OUT we change the smsStatus to NOT_OPTED_IN
   const smsStatus =

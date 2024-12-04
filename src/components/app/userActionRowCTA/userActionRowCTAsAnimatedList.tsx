@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
 import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'

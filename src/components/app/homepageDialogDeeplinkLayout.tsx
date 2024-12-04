@@ -18,7 +18,7 @@ import { cn } from '@/utils/web/cn'
 
 interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
   size?: 'sm' | 'md'
-  pageParams: PageProps['params']
+  pageParams: Awaited<PageProps['params']>
   hideModal?: boolean
   dialogContentClassName?: string
 }

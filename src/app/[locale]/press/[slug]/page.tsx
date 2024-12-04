@@ -5,16 +5,16 @@ import { MOCK_PRESS_CONTENT } from '@/components/app/pagePress/mock'
 import { PagePressRelease } from '@/components/app/pagePress/pressRelease'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { toBool } from '@/utils/shared/toBool'
 
 export const dynamic = 'error'
-export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
+export const dynamicParams = false
 
 type PressReleasePageProps = PageProps<{
   slug: string
 }>
 
-export async function generateMetadata({ params }: PressReleasePageProps): Promise<Metadata> {
+export async function generateMetadata(props: PressReleasePageProps): Promise<Metadata> {
+  const params = await props.params
   const currentArticle = MOCK_PRESS_CONTENT.find(article => article.link === `/${params.slug}`)
 
   if (currentArticle) {
@@ -39,7 +39,8 @@ export async function generateStaticParams() {
   })
 }
 
-export default async function PressRelease({ params }: PressReleasePageProps) {
+export default async function PressRelease(props: PressReleasePageProps) {
+  const params = await props.params
   const currentArticle = MOCK_PRESS_CONTENT.find(article => article.link === `/${params.slug}`)
 
   if (!currentArticle) {

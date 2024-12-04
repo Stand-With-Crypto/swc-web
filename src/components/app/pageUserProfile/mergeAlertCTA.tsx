@@ -42,26 +42,25 @@ export function MergeAlertCTA({
   }, [mergeAlert.hasBeenConfirmedByOtherUser, mergeAlert.otherUser.id, mergeAlert.userAId])
   const [userToDeleteId, setUserToDeleteId] = useState<string>(initialUserToDeleteId)
   const [state, setState] = useState<'loading' | null>(null)
-  const handleApproval = () => {
+  const handleApproval = async () => {
     setState('loading')
-    return actionConfirmUserMergeAlert({
-      userMergeAlertId: mergeAlert.id,
-      userToDeleteId,
-    })
-      .then(result => {
-        if (result?.status === 'complete') {
-          toast.success('Your accounts have been successfully merged!')
-          router.refresh()
-        } else {
-          setState(null)
-          router.refresh()
-        }
+    try {
+      const result = await actionConfirmUserMergeAlert({
+        userMergeAlertId: mergeAlert.id,
+        userToDeleteId,
       })
-      .catch(e => {
-        Sentry.captureException(e)
-        catchUnexpectedServerErrorAndTriggerToast(e)
+      if (result?.status === 'complete') {
+        toast.success('Your accounts have been successfully merged!')
+        router.refresh()
+      } else {
         setState(null)
-      })
+        router.refresh()
+      }
+    } catch (e) {
+      Sentry.captureException(e)
+      catchUnexpectedServerErrorAndTriggerToast(e)
+      setState(null)
+    }
   }
   return (
     <Alert className="mx-auto max-w-4xl">

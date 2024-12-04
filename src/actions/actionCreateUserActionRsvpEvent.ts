@@ -35,8 +35,8 @@ const createActionRsvpEventInputValidationSchema = object({
 export type CreateActionRsvpEventInput = z.infer<typeof createActionRsvpEventInputValidationSchema>
 
 interface SharedDependencies {
-  localUser: ReturnType<typeof parseLocalUserFromCookies>
-  sessionId: ReturnType<typeof getUserSessionId>
+  localUser: Awaited<ReturnType<typeof parseLocalUserFromCookies>>
+  sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
 }
@@ -59,8 +59,8 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
     }
   }
 
-  const localUser = parseLocalUserFromCookies()
-  const sessionId = getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },

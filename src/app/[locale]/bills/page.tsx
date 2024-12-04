@@ -5,7 +5,7 @@ import { queryDTSIAllBills } from '@/data/dtsi/queries/queryDTSIAllBills'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
-export const revalidate = 60
+export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const title = 'Crypto Bills'
@@ -25,7 +25,7 @@ export default async function BillsPage(props: PageProps) {
     <PageBills
       bills={results}
       description={description}
-      locale={props.params.locale}
+      locale={(await props.params).locale}
       title={title}
     />
   )

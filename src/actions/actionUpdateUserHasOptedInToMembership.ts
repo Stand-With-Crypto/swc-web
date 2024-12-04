@@ -30,7 +30,7 @@ async function _actionUpdateUserHasOptedInToMembership() {
   waitUntil(
     getServerPeopleAnalytics({
       userId: authUser.userId,
-      localUser: parseLocalUserFromCookies(),
+      localUser: await parseLocalUserFromCookies(),
     })
       .set({
         'Has Opted In To Membership': true,

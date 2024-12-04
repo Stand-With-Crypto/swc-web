@@ -10,8 +10,8 @@ import { getIntlUrls } from '@/utils/shared/urls'
 
 const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT', 'CALL', 'EMAIL']
 
-export function PageVote({ params }: PageProps) {
-  const { locale } = params
+export async function PageVote({ params }: PageProps) {
+  const { locale } = await params
   const intlUrls = getIntlUrls(locale)
 
   return (

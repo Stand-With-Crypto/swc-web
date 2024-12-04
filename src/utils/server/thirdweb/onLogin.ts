@@ -67,6 +67,7 @@ const getLog = (address: string) => (message: string) =>
   logger.info(`address ${address}: ${message}`)
 
 export async function login(payload: VerifyLoginPayloadParams) {
+  const currentCookies = await cookies()
   const verifiedPayload = await thirdwebAuth.verifyPayload(payload)
 
   if (!verifiedPayload.valid) return
@@ -75,7 +76,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
 
   const cryptoAddress = parseThirdwebAddress(address)
 
-  const localUser = parseLocalUserFromCookies()
+  const localUser = await parseLocalUserFromCookies()
   const log = getLog(cryptoAddress)
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
@@ -126,12 +127,12 @@ export async function login(payload: VerifyLoginPayloadParams) {
       },
     })
 
-    cookies().set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
+    currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
 
     return
   }
 
-  const decreaseCommunicationTimersCookie = cookies().get(
+  const decreaseCommunicationTimersCookie = currentCookies.get(
     'SWC_DECREASE_COMMUNICATION_TIMERS',
   )?.value
 
@@ -160,7 +161,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     },
   })
 
-  cookies().set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
+  currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
 }
 
 type ExistingUserLoginParams = {
@@ -226,7 +227,7 @@ async function onExistingUserLogin({
 interface NewLoginParams {
   cryptoAddress: string
   localUser: ServerLocalUser | null
-  getUserSessionId: () => string | null
+  getUserSessionId: () => Promise<string>
   decreaseCommunicationTimers?: boolean
   // dependency injecting this in to the function so we can mock it in tests
   injectedFetchEmbeddedWalletMetadataFromThirdweb: typeof fetchEmbeddedWalletMetadataFromThirdweb
@@ -351,7 +352,7 @@ export async function onNewLogin(props: NewLoginParams) {
     maybeUser = await createUser({
       localUser,
       hasSignedInWithEmail,
-      sessionId: props.getUserSessionId(),
+      sessionId: await props.getUserSessionId(),
     })
     wasUserCreated = true
   } else {
@@ -418,7 +419,7 @@ export async function onNewLogin(props: NewLoginParams) {
     localUser,
     wasUserCreated,
     analytics,
-    sessionId: props.getUserSessionId(),
+    sessionId: await props.getUserSessionId(),
     embeddedWalletUserDetails,
     decreaseCommunicationTimers: props.decreaseCommunicationTimers,
   })
@@ -474,7 +475,7 @@ async function queryMatchingUsers({
   injectedFetchEmbeddedWalletMetadataFromThirdweb,
 }: NewLoginParams) {
   const log = getLog(cryptoAddress)
-  const userSessionId = getUserSessionId()
+  const userSessionId = await getUserSessionId()
   const embeddedWalletUserDetails =
     await injectedFetchEmbeddedWalletMetadataFromThirdweb(cryptoAddress)
   if (embeddedWalletUserDetails) {

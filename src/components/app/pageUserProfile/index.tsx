@@ -26,7 +26,7 @@ import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
 
-interface PageUserProfile extends PageProps {
+type PageUserProfile = { params: Awaited<PageProps['params']> } & {
   user: PageUserProfileUser
 }
 

@@ -14,7 +14,7 @@ interface ThrowIfRateLimitedProps {
 export async function throwIfRateLimited({
   context = 'unauthenticated',
 }: ThrowIfRateLimitedProps = {}) {
-  const ip = getIPFromHeaders()
+  const ip = await getIPFromHeaders()
   if (!ip) {
     throw new Error('no ip')
   }

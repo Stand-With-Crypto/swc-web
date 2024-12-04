@@ -10,7 +10,8 @@ export async function appRouterGetThirdwebAuthUser(): Promise<{
   userId: string
   address: string
 } | null> {
-  const token = cookies().get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+  const currentCookies = await cookies()
+  const token = currentCookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 
   if (!token?.value) {
     return null

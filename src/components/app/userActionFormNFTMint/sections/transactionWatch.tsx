@@ -82,7 +82,8 @@ export function UserActionFormNFTMintTransactionWatch({
           payload: input,
         },
         payload =>
-          actionCreateUserActionMintNFT(payload).then(actionResult => {
+          actionCreateUserActionMintNFT(payload).then(async actionResultPromise => {
+            const actionResult = await actionResultPromise
             if (actionResult && 'user' in actionResult && actionResult.user) {
               identifyUserOnClient(actionResult.user)
             }

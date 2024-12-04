@@ -175,7 +175,7 @@ export function UserActionFormActionNameSkeleton() {
 ```javascript
 /// page.tsx
 
-export const revalidate = SECONDS_DURATION.HOUR
+export const revalidate = 900 // 15 minutes
 export const dynamic = 'error'
 
 export default function UserActionActionNameDeepLink({ params }: PageProps) {

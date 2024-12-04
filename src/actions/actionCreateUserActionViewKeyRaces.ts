@@ -59,8 +59,8 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     }
   }
 
-  const localUser = parseLocalUserFromCookies()
-  const sessionId = getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
 
   const actionType = UserActionType.VIEW_KEY_RACES
   const campaignName = UserActionViewKeyRacesCampaignName['2024_ELECTION']
@@ -205,8 +205,8 @@ async function createUser({
   sessionId,
   address,
 }: {
-  localUser: ReturnType<typeof parseLocalUserFromCookies>
-  sessionId: ReturnType<typeof getUserSessionId>
+  localUser: Awaited<ReturnType<typeof parseLocalUserFromCookies>>
+  sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   address?: z.infer<typeof zodAddress>
 }) {
   const createdUser = await prismaClient.user.create({

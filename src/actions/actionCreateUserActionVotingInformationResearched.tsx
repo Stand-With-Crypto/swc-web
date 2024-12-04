@@ -62,8 +62,8 @@ async function _actionCreateUserActionVotingInformationResearched(
     }
   }
 
-  const localUser = parseLocalUserFromCookies()
-  const sessionId = getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
 
   const actionType = UserActionType.VOTING_INFORMATION_RESEARCHED
   const campaignName = validatedInput.data.campaignName
@@ -195,8 +195,8 @@ async function createUser({
   sessionId,
   address,
 }: {
-  localUser: ReturnType<typeof parseLocalUserFromCookies>
-  sessionId: ReturnType<typeof getUserSessionId>
+  localUser: Awaited<ReturnType<typeof parseLocalUserFromCookies>>
+  sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   address?: z.infer<typeof zodAddress>
 }) {
   const createdUser = await prismaClient.user.create({
@@ -244,7 +244,7 @@ async function createActionAndUpdateUser({
 }: {
   user: User
   validatedInput: z.SafeParseSuccess<CreateActionVotingInformationResearchedInput>
-  sessionId: ReturnType<typeof getUserSessionId>
+  sessionId: Awaited<ReturnType<typeof getUserSessionId>>
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {

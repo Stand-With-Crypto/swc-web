@@ -5,7 +5,7 @@ export function getSearchParam({
   searchParams,
   queryParamKey,
 }: {
-  searchParams: PageProps['searchParams']
+  searchParams: Awaited<PageProps['searchParams']>
   queryParamKey: string
 }) {
   if (!searchParams) return { value: null, queryString: '' }
