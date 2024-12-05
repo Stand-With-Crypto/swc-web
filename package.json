@@ -23,6 +23,7 @@
     "intl:extract": "formatjs extract 'src/**/*.{ts,tsx}' '!src/**/*.d.ts' --out-file src/intl/generated/extract.json",
     "intl:extract-compile": "formatjs extract 'src/**/*.ts*' '!src/**/*.d.ts' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/intl/generated/compile/en-US.json && rm temp.json",
     "db:seed": "prisma db push --force-reset && prisma db seed",
+    "db:check": "prisma migrate diff --from-schema-datasource=./prisma/schema.prisma --to-schema-datamodel=./prisma/schema.prisma --exit-code",
     "inngest": "npx inngest-cli@latest dev --no-discovery -u http://localhost:3000/api/inngest",
     "newbranch": "npm i && npx prisma generate && npm run codegen",
     "initial": "npx prisma generate && npm run codegen && npm run intl:extract-compile && npm run db:seed",
