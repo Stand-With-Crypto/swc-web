@@ -1,7 +1,6 @@
 'use client'
 
 import { SuccessScreenCTAS } from '@/components/app/userActionGridCTAs/successScreenCTAS'
-import { UserActionRowCTAButtonSkeleton } from '@/components/app/userActionRowCTA'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
@@ -16,9 +15,9 @@ export function UserActionFormSuccessScreenNextActionSkeleton() {
         <Progress />
       </Skeleton>
 
-      <UserActionRowCTAButtonSkeleton />
-      <UserActionRowCTAButtonSkeleton />
-      <UserActionRowCTAButtonSkeleton />
+      <Skeleton className="h-40 w-full" />
+      <Skeleton className="h-40 w-full" />
+      <Skeleton className="h-40 w-full" />
     </div>
   )
 }

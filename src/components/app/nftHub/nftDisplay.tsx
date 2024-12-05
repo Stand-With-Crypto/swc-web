@@ -1,9 +1,8 @@
 'use client'
-import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
-import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
+import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -21,9 +20,7 @@ type NFTImages = {
   key: string
 }
 
-const CTAInfo = getUserActionCTAInfo(UserActionType.NFT_MINT)
-
-const ButtonWrapper = CTAInfo?.WrapperComponent
+const ButtonWrapper = UserActionFormNFTMintDialog
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
   let optInNftButton = true
