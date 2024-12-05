@@ -94,6 +94,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Validate Prisma Schema
+        run: npm run db:check
+
       - name: Wait for MySQL
         run: |
           until mysql -h 127.0.0.1 -P 3306 -u root --password=root --database=swc-web -e "SELECT 1"; do
