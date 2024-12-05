@@ -1,55 +1,81 @@
 'use client'
+import { useMemo } from 'react'
+import { flatten } from 'lodash-es'
+import { ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
-import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
+import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { useLocale } from '@/hooks/useLocale'
 import { fullUrl } from '@/utils/shared/urls'
 import {
   getUserActionDeeplink,
-  USER_ACTION_DEEPLINK_MAP,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 import { UserActionCampaigns } from '@/utils/shared/userActionCampaigns'
-import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
 export const dynamic = 'error'
 
 export default function UserActionDeepLinks() {
   const locale = useLocale()
   const router = useRouter()
+  const CTAS = useMemo(() => {
+    const allCampaigns = flatten(
+      Object.values(USER_ACTION_CTAS_FOR_GRID_DISPLAY).map(cta => cta.campaigns),
+    )
+
+    return allCampaigns.filter(campaign => campaign.isCampaignActive)
+  }, [])
   return (
     <div className="container mx-auto mt-10">
       <div className="space-y-7">
-        {USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
-          actionType => USER_ACTION_DEEPLINK_MAP[actionType.action as UserActionTypesWithDeeplink],
-        ).map(actionType => {
-          const props = getUserActionCTAInfo(actionType.action, actionType.campaign)
-
-          const { WrapperComponent: _, ...userAction } = props
-
+        {CTAS.map(cta => {
           const url = getUserActionDeeplink({
-            actionType: actionType.action as UserActionTypesWithDeeplink,
-            campaign: actionType.campaign as UserActionCampaigns[UserActionTypesWithDeeplink],
+            actionType: cta.actionType as UserActionTypesWithDeeplink,
+            campaign: cta.campaignName as UserActionCampaigns[UserActionTypesWithDeeplink],
             config: {
               locale,
             },
           })
+          const imageSrc = USER_ACTION_CTAS_FOR_GRID_DISPLAY[cta.actionType]?.image ?? ''
 
           return (
-            <div key={userAction.actionType}>
+            <div key={`${cta.actionType}-${cta.campaignName}`}>
               <p className="mb-2">
                 Goes to{' '}
                 <ExternalLink className="underline" href={fullUrl(url ?? '')}>
                   {fullUrl(url ?? '')}
                 </ExternalLink>
               </p>
-              <UserActionRowCTAButton
-                {...userAction}
-                onClick={() => router.push(url ?? '')}
-                state="hidden"
-              />
+              <button
+                className="flex w-full items-center justify-between gap-4 rounded-3xl bg-secondary p-4 text-left transition hover:drop-shadow-lg lg:p-8"
+                onClick={() => router.push(fullUrl(url ?? ''))}
+              >
+                <div className="flex flex-1 items-center gap-4">
+                  <div className="flex h-[80px] w-[80px] flex-shrink-0 items-center justify-center overflow-hidden rounded-xl bg-black lg:h-[100px] lg:w-[100px]">
+                    <NextImage
+                      alt={cta.title}
+                      className="object-cover lg:h-[80px] lg:w-[80px]"
+                      height={60}
+                      sizes="(max-width: 768px) 60px, 80px"
+                      src={imageSrc}
+                      width={60}
+                    />
+                  </div>
+                  <div className="block sm:hidden">
+                    <div className="mb-1 text-base font-bold lg:text-2xl">{cta.title}</div>
+                    <div className="text-sm text-gray-500 lg:text-xl">{cta.title}</div>
+                  </div>
+                  <div className="hidden sm:block">
+                    <div className="mb-1 text-base font-bold lg:text-2xl">{cta.title}</div>
+                    <div className="text-sm text-gray-500 lg:text-xl">{cta.title}</div>
+                  </div>
+                </div>
+                <div className="hidden sm:block">
+                  <ChevronRight className="h-6 w-6 lg:h-8 lg:w-8" />
+                </div>
+              </button>
             </div>
           )
         })}
