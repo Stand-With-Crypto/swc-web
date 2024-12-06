@@ -1,5 +1,5 @@
 import { User, UserAction, UserActionType, UserEmailAddress } from '@prisma/client'
-import { uniqBy } from 'lodash-es'
+import { difference, flatten, uniqBy } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -23,6 +23,8 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
   { cron: 'TZ=America/New_York 0 * * * *' }, // Every hour
   async ({ step }) => {
     try {
+      const ThirtyMinutesAgo = new Date().getTime() - 30 * 60 * 1000
+
       const users = await prismaClient.user.findMany({
         where: {
           userEmailAddresses: {
@@ -45,14 +47,34 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
         return { usersFound: 0 }
       }
 
-      await step.run('script.updateUsers', () => Promise.all(filteredUsers.map(updateUser)))
+      const emailAddressesCreatedInLast30MinutesIds = flatten(
+        filteredUsers.map(user => {
+          return user.userEmailAddresses
+            .filter(
+              userEmail =>
+                userEmail.emailAddress.includes(DATADOG_SYNTHETIC_TESTS_EMAIL_DOMAIN) &&
+                userEmail.datetimeCreated.getTime() > ThirtyMinutesAgo,
+            )
+            .map(userEmail => userEmail.id)
+        }),
+      )
+
+      await step.run('script.updateUsers', () =>
+        Promise.all(
+          filteredUsers.map(user => updateUser(user, emailAddressesCreatedInLast30MinutesIds)),
+        ),
+      )
 
       await step.run('script.removeUserActions', () =>
         Promise.all(filteredUsers.map(removeUserActions)),
       )
 
       await step.run('script.removeUserEmails', () =>
-        Promise.all(filteredUsers.map(removeUserEmails)),
+        Promise.all(
+          filteredUsers.map(user =>
+            removeUserEmails(user, emailAddressesCreatedInLast30MinutesIds),
+          ),
+        ),
       )
 
       return {
@@ -66,7 +88,16 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
   },
 )
 
-async function updateUser(user: User) {
+async function updateUser(user: User, emailAddressesCreatedInLast30MinutesIds: string[]) {
+  const primaryUserEmailAddressId = user.primaryUserEmailAddressId
+
+  if (!primaryUserEmailAddressId) return
+
+  const isPrimaryEmailCreatedInLast30Minutes =
+    emailAddressesCreatedInLast30MinutesIds.includes(primaryUserEmailAddressId)
+
+  if (isPrimaryEmailCreatedInLast30Minutes) return
+
   return prismaClient.user.update({
     where: { id: user.id },
     data: {
@@ -87,16 +118,23 @@ async function removeUserActions(user: UserWithRelations) {
   })
 }
 
-async function removeUserEmails(user: UserWithRelations) {
+async function removeUserEmails(
+  user: UserWithRelations,
+  emailAddressesCreatedInLast30MinutesIds: string[],
+) {
   const userEmailIds = user.userEmailAddresses.map(userEmail => userEmail.id)
+
+  const emailIdsToRemove = difference(userEmailIds, emailAddressesCreatedInLast30MinutesIds)
+
+  const ThirtyMinutesAgo = new Date(new Date().getTime() - 30 * 60 * 1000)
 
   return prismaClient.userEmailAddress.deleteMany({
     where: {
-      id: { in: userEmailIds },
+      id: { in: emailIdsToRemove },
       datetimeCreated: {
         // We only want to delete emails that were created more than 30 minutes ago
         // This approach prevents any potential bugs from deleting emails while the synthetic tests are running.
-        gte: new Date(new Date().getTime() - 30 * 60 * 1000), // 30 minutes
+        gte: ThirtyMinutesAgo, // 30 minutes
       },
     },
   })
