@@ -133,7 +133,7 @@ async function removeUserEmails(
 ) {
   const userEmailIds = user.userEmailAddresses.map(userEmail => userEmail.id)
 
-  // We only want to delete emails that were created more than 30 minutes ago
+  // We only want to delete emails that were created more than 1 hour ago
   // This approach prevents any potential bugs from deleting emails while the synthetic tests are running.
   const emailIdsToRemove = difference(userEmailIds, emailAddressesCreatedInLast1HourIds)
 
