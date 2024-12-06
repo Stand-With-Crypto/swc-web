@@ -119,9 +119,3 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
-
-type UserActionAdditionalCampaigns = {
-  [K in keyof UserActionCampaigns]?: UserActionCampaigns[K][]
-}
-
-export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {}

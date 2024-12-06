@@ -13,6 +13,7 @@
   - [Running One Time Scripts in Testing or Production Environment](#running-one-time-scripts-in-testing-or-production-environment)
 - [Pull requests](#pull-requests)
 - [Inngest functions](#inngest-functions)
+- [Other links](#other-links)
 
 ## Questions
 
@@ -32,9 +33,9 @@ If you are here to suggest a feature, first [create an issue](https://github.com
 
 Below is a list of suggested documentation to read through if you aren't already familiar with the technologies used in this repository:
 
-- Read [Leveraging Modern NextJS Features](<Leveraging Modern NextJS Features.md>) for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
+- Read [Leveraging Modern NextJS Features](<./Leveraging Modern NextJS Features.md>) for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
   - If this is your first time working with these technologies, please take the time to read the linked-to blog posts
-- Read [Coding Conventions](<Coding Conventions.md>) for an overview of coding conventions encouraged for this project
+- Read [Coding Conventions](<./Coding Conventions.md>) for an overview of coding conventions encouraged for this project
 - Read ["What is Prisma"](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma) and ["Why Prisma"](https://www.prisma.io/docs/orm/overview/introduction/why-prisma) to learn about the ORM we use to query our database
 - Watch [this YouTube video](https://www.youtube.com/watch?v=CQuTF-bkOgc) for a great overview of the tradeoffs between the UI library/framework options that exist for frontend development, and why we decided to use TailwindCSS + Radix UI as our template
 - Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)
@@ -105,7 +106,11 @@ If you have been assigned to fix an issue or develop a new feature, please follo
 
 ### Updating the database schema
 
-If you are not a core contributor, reach out to one to make any DB schema updates your PR needs. If you're a core contributor, follow these steps whenever you need to make Prisma Schema changes
+If you are not a core contributor, reach out to one to make any DB schema updates your PR needs. If you're a core contributor, follow these steps whenever you need to make Prisma Schema changes.
+
+> Before anything, keep in mind to always have PlanetScale's PR merged before Github's.
+
+> Be mindful of merging schema changes to `testing` and `production` as it affects directly other developers, so try as much as possible to keep in sync with the work of the team.
 
 1. First of all you should change `schema.prisma` with the database changes you want to make
 2. Run `npx prisma generate`, that will generate updated TypeScript definitions for your local env
@@ -148,3 +153,11 @@ Maintainers merge pull requests by squashing all commits and editing the commit 
 4. Now the function is available to test at http://localhost:8288 by running `npm run inngest`.
 
 5. PS.: Always add `persist?: boolean` on the event payload and the function logic.
+
+## Other links
+
+- [Add new user action](<./Add a new user action.md>)
+- [Verified SWC Partner Guide](<./Verified SWC Partner Guide.md>)
+- [Working with Farcaster Frames](<./Working with Farcaster Frames.md>)
+- [Working with multiple campaigns](<./Working with two or more campaigns active.md>)
+- [Third Party Attribution Best Practices](<./Third Party Attribution Best Practices.md>)
