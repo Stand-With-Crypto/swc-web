@@ -1,4 +1,11 @@
-import { User, UserAction, UserActionType, UserEmailAddress } from '@prisma/client'
+import {
+  User,
+  UserAction,
+  UserActionType,
+  UserCryptoAddress,
+  UserEmailAddress,
+} from '@prisma/client'
+import { differenceInHours } from 'date-fns'
 import { difference, flatten, uniqBy } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
@@ -8,6 +15,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 type UserWithRelations = User & {
   userActions: UserAction[]
   userEmailAddresses: UserEmailAddress[]
+  userCryptoAddresses: UserCryptoAddress[]
 }
 
 const CLEANUP_DATADOG_SYNTHETIC_TESTS_FUNCTION_ID = 'script.cleanup-datadog-synthetic-tests'
@@ -23,8 +31,6 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
   { cron: 'TZ=America/New_York 0 * * * *' }, // Every hour
   async ({ step }) => {
     try {
-      const ThirtyMinutesAgo = new Date().getTime() - 30 * 60 * 1000
-
       const users = await prismaClient.user.findMany({
         where: {
           userEmailAddresses: {
@@ -38,6 +44,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
         include: {
           userEmailAddresses: true,
           userActions: true,
+          userCryptoAddresses: true,
         },
       })
 
@@ -47,13 +54,13 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
         return { usersFound: 0 }
       }
 
-      const emailAddressesCreatedInLast30MinutesIds = flatten(
+      const emailAddressesCreatedInLast1HourIds = flatten(
         filteredUsers.map(user => {
           return user.userEmailAddresses
             .filter(
               userEmail =>
                 userEmail.emailAddress.includes(DATADOG_SYNTHETIC_TESTS_EMAIL_DOMAIN) &&
-                userEmail.datetimeCreated.getTime() > ThirtyMinutesAgo,
+                differenceInHours(new Date(), userEmail.datetimeCreated.getTime()) > 1,
             )
             .map(userEmail => userEmail.id)
         }),
@@ -61,7 +68,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
 
       await step.run('script.updateUsers', () =>
         Promise.all(
-          filteredUsers.map(user => updateUser(user, emailAddressesCreatedInLast30MinutesIds)),
+          filteredUsers.map(user => updateUser(user, emailAddressesCreatedInLast1HourIds)),
         ),
       )
 
@@ -71,10 +78,12 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
 
       await step.run('script.removeUserEmails', () =>
         Promise.all(
-          filteredUsers.map(user =>
-            removeUserEmails(user, emailAddressesCreatedInLast30MinutesIds),
-          ),
+          filteredUsers.map(user => removeUserEmails(user, emailAddressesCreatedInLast1HourIds)),
         ),
+      )
+
+      await step.run('script.removeUserCryptoAddresses', () =>
+        Promise.all(filteredUsers.map(removeUserCryptoAdresses)),
       )
 
       return {
@@ -88,15 +97,15 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
   },
 )
 
-async function updateUser(user: User, emailAddressesCreatedInLast30MinutesIds: string[]) {
+async function updateUser(user: User, emailAddressesCreatedInLast1HourIds: string[]) {
   const primaryUserEmailAddressId = user.primaryUserEmailAddressId
 
   if (!primaryUserEmailAddressId) return
 
-  const isPrimaryEmailCreatedInLast30Minutes =
-    emailAddressesCreatedInLast30MinutesIds.includes(primaryUserEmailAddressId)
+  const isPrimaryEmailCreatedInLast1Hour =
+    emailAddressesCreatedInLast1HourIds.includes(primaryUserEmailAddressId)
 
-  if (isPrimaryEmailCreatedInLast30Minutes) return
+  if (isPrimaryEmailCreatedInLast1Hour) return
 
   return prismaClient.user.update({
     where: { id: user.id },
@@ -120,22 +129,33 @@ async function removeUserActions(user: UserWithRelations) {
 
 async function removeUserEmails(
   user: UserWithRelations,
-  emailAddressesCreatedInLast30MinutesIds: string[],
+  emailAddressesCreatedInLast1HourIds: string[],
 ) {
   const userEmailIds = user.userEmailAddresses.map(userEmail => userEmail.id)
 
-  const emailIdsToRemove = difference(userEmailIds, emailAddressesCreatedInLast30MinutesIds)
-
-  const ThirtyMinutesAgo = new Date(new Date().getTime() - 30 * 60 * 1000)
+  // We only want to delete emails that were created more than 1 hour ago
+  // This approach prevents any potential bugs from deleting emails while the synthetic tests are running.
+  const emailIdsToRemove = difference(userEmailIds, emailAddressesCreatedInLast1HourIds)
 
   return prismaClient.userEmailAddress.deleteMany({
     where: {
       id: { in: emailIdsToRemove },
-      datetimeCreated: {
-        // We only want to delete emails that were created more than 30 minutes ago
-        // This approach prevents any potential bugs from deleting emails while the synthetic tests are running.
-        gte: ThirtyMinutesAgo, // 30 minutes
-      },
+    },
+  })
+}
+
+async function removeUserCryptoAdresses(user: UserWithRelations) {
+  const userCryptoAddresses = user.userCryptoAddresses.map(cryptoAddress => cryptoAddress.id)
+
+  const mainUserCryptoAddressId = user.primaryUserCryptoAddressId
+
+  const filteredUserCryptoAddresses = userCryptoAddresses.filter(
+    cryptoAddress => cryptoAddress !== mainUserCryptoAddressId,
+  )
+
+  return prismaClient.userCryptoAddress.deleteMany({
+    where: {
+      id: { in: filteredUserCryptoAddresses },
     },
   })
 }
