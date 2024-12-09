@@ -2,9 +2,9 @@ import React from 'react'
 
 // fix for https://nextjs.org/docs/messages/react-hydration-error
 export const useHasHydrated = () => {
-  const hasMounted = React.useRef(false)
+  const [hasMounted, setHasMounted] = React.useState(false)
   React.useEffect(() => {
-    hasMounted.current = true
+    setHasMounted(true)
   }, [])
   return hasMounted
 }
