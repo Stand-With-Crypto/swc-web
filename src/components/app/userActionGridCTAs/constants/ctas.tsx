@@ -119,8 +119,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Send an email',
-    description: 'Email your representatives and tell them crypto matters.',
+    title: 'Email Your Senator',
+    description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
