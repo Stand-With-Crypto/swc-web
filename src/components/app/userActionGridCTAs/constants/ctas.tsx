@@ -177,7 +177,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Email Your Senator',
         description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailDebateDialog,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
     ],
   },
