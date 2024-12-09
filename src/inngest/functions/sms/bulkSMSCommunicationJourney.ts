@@ -6,7 +6,7 @@ import {
 } from '@prisma/client'
 import { addDays, addHours, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
+import { chunk, merge, shuffle, uniq, uniqBy, update } from 'lodash-es'
 
 import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
 import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
@@ -30,11 +30,15 @@ export interface BulkSmsCommunicationJourneyInngestEventSchema {
 
 export interface BulkSMSPayload {
   messages: Array<{
-    smsBody: string
-    userWhereInput?: GetPhoneNumberOptions['userWhereInput']
-    includePendingDoubleOptIn?: boolean
+    variants: Array<{
+      smsBody: string
+      media?: string[]
+      percentage: number
+      variantName: string
+    }>
     campaignName: string
-    media?: string[]
+    includePendingDoubleOptIn?: boolean
+    userWhereInput?: GetPhoneNumberOptions['userWhereInput']
   }>
   // default to ET: -5
   timezone?: number
@@ -68,9 +72,31 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       throw new NonRetriableError('Missing messages to send')
     }
 
-    messages.forEach(({ smsBody, campaignName }, index) => {
-      if (!smsBody) {
-        throw new NonRetriableError(`Missing sms body in message ${index}`)
+    messages.forEach(({ campaignName, variants }, index) => {
+      if (variants.length === 0) {
+        throw new NonRetriableError(`Missing variants in message ${index}`)
+      }
+
+      let fullPercentage = 0
+
+      variants.forEach(({ smsBody, percentage, variantName }, variantIndex) => {
+        if (!smsBody) {
+          throw new NonRetriableError(
+            `Missing sms body in variant ${variantIndex}, message ${index}`,
+          )
+        }
+
+        if (!variantName) {
+          throw new NonRetriableError(`Missing name in variant ${variantIndex}, message ${index}`)
+        }
+
+        fullPercentage += percentage
+      })
+
+      if (Math.ceil(fullPercentage) !== 100) {
+        throw new NonRetriableError(
+          `The total percentages provided (${fullPercentage}%) don't add up to 100%.`,
+        )
       }
 
       if (!campaignName) {
@@ -89,7 +115,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     const messagesInfo: Record<string, object> = {}
 
     for (const message of messages) {
-      const { campaignName, smsBody, includePendingDoubleOptIn, media, userWhereInput } = message
+      const { campaignName, includePendingDoubleOptIn, userWhereInput, variants } = message
 
       logger.info(prettyStringify(message))
 
@@ -154,7 +180,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           prettyStringify({
             userHasWelcomeMessage,
             campaignName,
-            smsBody,
+            variants,
           }),
         )
 
@@ -165,6 +191,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             () =>
               getPhoneNumberList({
                 campaignName,
+                variantNames: variants.map(v => v.variantName),
                 includePendingDoubleOptIn,
                 skip,
                 userWhereInput: customWhere,
@@ -183,27 +210,55 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           }
         }
 
-        logger.info('Got phone numbers, adding to messagesPayload')
+        logger.info(`Fetched all phone numbers ${allPhoneNumbers.length}`)
 
-        // Here we're adding the welcome legalese to the bulk text, when doing this we need to register in our DB that the user received the welcome legalese
-        const body = !userHasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
+        const phoneNumberVariants = await step.run(
+          `split-phone-numbers-${String(userHasWelcomeMessage)}-${campaignName}`,
+          async () => {
+            // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
+            const randomizedPhoneNumbers = shuffle(uniq(allPhoneNumbers))
 
-        // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
+            return splitArrayByPercentages(
+              randomizedPhoneNumbers,
+              variants.map(v => v.percentage), // [60, 40] will return two arrays with 60% and 40% of the phone numbers
+            )
+          },
+        )
+
+        logger.info(`Splitted phone numbers into ${phoneNumberVariants.length} variants`)
+
+        let variantIndex = 0
         // We need to use concat here because using spread is exceeding maximum call stack size
         messagesPayload = messagesPayload.concat(
-          uniq(allPhoneNumbers).map(phoneNumber => ({
-            phoneNumber,
-            messages: [
-              {
-                body,
-                campaignName,
-                journeyType: UserCommunicationJourneyType.BULK_SMS,
-                media,
-                // If the user does not have a welcome message, the body must have it
-                hasWelcomeMessageInBody: !userHasWelcomeMessage,
-              },
-            ],
-          })),
+          variants.reduce<EnqueueMessagePayload[]>((acc, variant) => {
+            const phoneNumbersPortion = phoneNumberVariants[variantIndex]
+
+            logger.info(`Variant ${variantIndex} has ${phoneNumbersPortion.length} phone numbers`)
+
+            variantIndex += 1
+
+            const { smsBody, media, variantName } = variant
+
+            // Here we're adding the welcome legalese to the bulk text, when doing this we need to register in our DB that the user received the welcome legalese
+            const body = !userHasWelcomeMessage ? addWelcomeMessage(smsBody) : smsBody
+
+            return acc.concat(
+              phoneNumbersPortion.map(phoneNumber => ({
+                phoneNumber,
+                messages: [
+                  {
+                    body,
+                    campaignName,
+                    variantName,
+                    journeyType: UserCommunicationJourneyType.BULK_SMS,
+                    media,
+                    // If the user does not have a welcome message, the body must have it
+                    hasWelcomeMessageInBody: !userHasWelcomeMessage,
+                  },
+                ],
+              })),
+            )
+          }, []),
         )
 
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
@@ -356,6 +411,7 @@ export interface GetPhoneNumberOptions {
   skip: number
   userWhereInput?: Prisma.UserGroupByArgs['where']
   campaignName?: string
+  variantNames?: string[]
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
@@ -373,9 +429,15 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
                     campaignName: {
                       not: options.campaignName,
                     },
+                    variantName: {
+                      notIn: options.variantNames,
+                    },
                   },
                   {
                     campaignName: options.campaignName,
+                    variantName: {
+                      in: options.variantNames,
+                    },
                     userCommunications: {
                       every: {
                         status: {
@@ -405,4 +467,25 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
       orderBy: { phoneNumber: 'asc' },
     })
     .then(res => res.map(({ phoneNumber }) => phoneNumber))
+}
+
+function splitArrayByPercentages<T>(array: T[], percentages: number[]) {
+  const totalLength = array.length
+  const dividedArrays: Array<typeof array> = []
+
+  let startIndex = 0
+
+  percentages.forEach((percentage, index) => {
+    let size = Math.floor((percentage / 100) * totalLength)
+
+    // If it's the last percentage, we need to add the remaining elements
+    if (index === percentages.length - 1) {
+      size = totalLength - startIndex
+    }
+
+    dividedArrays.push(array.slice(startIndex, startIndex + size))
+    startIndex += size
+  })
+
+  return dividedArrays
 }
