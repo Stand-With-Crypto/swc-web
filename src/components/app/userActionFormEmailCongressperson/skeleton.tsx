@@ -1,4 +1,4 @@
-import { capitalize, noop } from 'lodash-es'
+import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
@@ -15,10 +15,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
-import {
-  getYourPoliticianCategoryShortDisplayName,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
 export function UserActionFormEmailCongresspersonSkeleton({
   locale,
@@ -34,11 +31,12 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Email your {capitalize(getYourPoliticianCategoryShortDisplayName(politicianCategory))}
+            Email Your Senator
           </PageTitle>
           <PageSubTitle className="mb-7">
-            With FIT21 passed by the House, take a moment to reach out to your Rep and say thanks
-            for voting Yes or ask them to reconsider the importance of crypto if they voted against.
+            The Senate is considering re-confirming anti-crypto SEC Commissioner Caroline Crenshaw
+            to the Commission. Let your senators know you stand with crypto and OPPOSE this
+            nomination!
           </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

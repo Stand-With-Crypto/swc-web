@@ -88,9 +88,9 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VOTING_DAY,
         campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'I voted!',
-        description: 'Claim your "proof-of-vote" NFT.',
+        description: 'Claimed your "proof-of-vote" NFT.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <Suspense fallback={children}>
@@ -128,7 +128,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
-        isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
+        isCampaignActive: true,
         title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
         // description: 'Make your voice heard. We make it easy.', // TODO: RETURN THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
         description: 'You emailed your representative about FIT21.',
@@ -165,6 +165,15 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
+        isCampaignActive: false,
+        title: 'ABC Presidential Debate 2024',
+        description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailDebateDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
         isCampaignActive: false,
         title: 'ABC Presidential Debate 2024',
         description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
