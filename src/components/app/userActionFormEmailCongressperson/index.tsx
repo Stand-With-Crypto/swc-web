@@ -38,7 +38,7 @@ import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
@@ -53,6 +53,7 @@ import {
   toastGenericError,
 } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
+import { noop } from 'lodash-es'
 
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
@@ -66,7 +67,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.EMAIL],
+      campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -85,7 +86,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.EMAIL],
+    campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
     firstName: '',
     lastName: '',
     emailAddress: '',
@@ -167,7 +168,6 @@ export function UserActionFormEmailCongressperson({
     control: form.control,
     name: 'lastName',
   })
-  const dtsiPeopleLastNames = dtsiPeople.map(person => person.lastName)
 
   useEffect(() => {
     if (hasModifiedMessage.current) return
@@ -177,10 +177,9 @@ export function UserActionFormEmailCongressperson({
       getSECCommissionerText({
         firstName,
         lastName,
-        dtsiPeopleLastNames,
       }),
     )
-  }, [firstName, lastName, form, dtsiPeopleLastNames])
+  }, [firstName, lastName, form])
 
   return (
     <Form {...form}>
@@ -309,7 +308,7 @@ export function UserActionFormEmailCongressperson({
                     <DTSICongresspersonAssociatedWithFormAddress
                       address={addressProps.field.value}
                       dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
-                      onChangeAddress={() => {}}
+                      onChangeAddress={noop}
                       politicianCategory={politicianCategory}
                     />
                   </div>

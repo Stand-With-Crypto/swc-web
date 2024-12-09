@@ -27,6 +27,7 @@ import {
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 
 export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
@@ -127,9 +128,9 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
-        isCampaignActive: true,
-        title: 'Email Your Senator',
-        description: 'Tell your Senator you oppose anti-crypto commissioners on the SEC.',
+        isCampaignActive: false,
+        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
+        description: 'You emailed your representative about FIT21.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
@@ -172,7 +173,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
-        isCampaignActive: false,
+        isCampaignActive: true,
         title: 'Email Your Senator',
         description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
