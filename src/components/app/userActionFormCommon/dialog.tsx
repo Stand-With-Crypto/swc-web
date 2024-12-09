@@ -28,8 +28,10 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent
-        a11yTitle="user-action-form-dialog-content"
-        aria-describedby="user-action-form-dialog-content"
+        a11yTitle=""
+        aria-describedby={
+          typeof dialogProps.analytics === 'string' ? dialogProps.analytics : undefined
+        }
         className="max-w-3xl"
         padding={padding}
       >
