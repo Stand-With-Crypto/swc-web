@@ -6,7 +6,6 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
@@ -129,9 +128,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
         isCampaignActive: true,
-        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        // description: 'Make your voice heard. We make it easy.', // TODO: RETURN THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
-        description: 'You emailed your representative about FIT21.',
+        title: 'Email Your Senator',
+        description: 'Tell your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
@@ -175,8 +173,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
         isCampaignActive: false,
-        title: 'ABC Presidential Debate 2024',
-        description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
+        title: 'Email Your Senator',
+        description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailDebateDialog,
       },
