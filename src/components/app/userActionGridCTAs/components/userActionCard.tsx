@@ -49,6 +49,7 @@ export const UserActionCard = forwardRef<
           'flex h-full w-full cursor-pointer flex-row-reverse rounded-3xl transition-shadow hover:shadow-lg lg:max-w-96 lg:flex-col',
           isReadOnly && 'pointer-events-none cursor-default',
         )}
+        ref={ref}
         {...rest}
       >
         <div className="flex h-full min-h-36 min-w-32 max-w-32 items-center justify-center rounded-br-3xl rounded-tr-3xl bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9 lg:h-auto lg:min-h-48 lg:w-full lg:max-w-full lg:rounded-br-none lg:rounded-tl-3xl">
