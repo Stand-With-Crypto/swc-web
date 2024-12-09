@@ -81,6 +81,7 @@ const DialogContent = React.forwardRef<
           {...props}
         >
           <VisuallyHidden>
+            <DialogPrimitive.Description>{props['aria-describedby']}</DialogPrimitive.Description>
             <DialogTitle>{a11yTitle}</DialogTitle>
           </VisuallyHidden>
 
