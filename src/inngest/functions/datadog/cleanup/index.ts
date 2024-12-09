@@ -5,7 +5,7 @@ import {
   UserCryptoAddress,
   UserEmailAddress,
 } from '@prisma/client'
-import { differenceInHours } from 'date-fns'
+import { differenceInMinutes } from 'date-fns'
 import { difference, flatten, uniqBy } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
@@ -60,7 +60,7 @@ export const cleanupDatadogSyntheticTestsWithInngest = inngest.createFunction(
             .filter(
               userEmail =>
                 userEmail.emailAddress.includes(DATADOG_SYNTHETIC_TESTS_EMAIL_DOMAIN) &&
-                differenceInHours(new Date(), userEmail.datetimeCreated.getTime()) > 1,
+                differenceInMinutes(new Date(), userEmail.datetimeCreated.getTime()) <= 60,
             )
             .map(userEmail => userEmail.id)
         }),
