@@ -4,6 +4,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { noop } from 'lodash-es'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
@@ -53,7 +54,6 @@ import {
   toastGenericError,
 } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
-import { noop } from 'lodash-es'
 
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues

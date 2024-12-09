@@ -6,6 +6,7 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
@@ -27,7 +28,6 @@ import {
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 
 export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
