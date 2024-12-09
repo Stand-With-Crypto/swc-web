@@ -6,6 +6,7 @@ import { getContract, PreparedTransaction } from 'thirdweb'
 import { base } from 'thirdweb/chains'
 import { TransactionButton, useActiveWalletConnectionStatus } from 'thirdweb/react'
 
+import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import {
   NFTDisplay,
   NFTDisplaySkeleton,
@@ -30,7 +31,6 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { useSession } from '@/hooks/useSession'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { NFTSlug } from '@/utils/shared/nft'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
@@ -77,7 +77,6 @@ export function UserActionFormNFTMintCheckout({
     chain: base,
   })
   const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
-  const session = useSession()
   const [isUSResident, setIsUSResident] = useState(false)
 
   const checkoutError = useCheckoutError({
@@ -87,145 +86,152 @@ export function UserActionFormNFTMintCheckout({
   const maybeOverriddenCheckoutError = debug ? null : checkoutError
   const connectionStatus = useActiveWalletConnectionStatus()
 
-  if (!session.isLoggedInThirdweb) {
-    return <UserActionFormNFTMintCheckoutSkeleton />
-  }
-
   const isLoading = !contract || connectionStatus === 'connecting'
 
   return (
-    <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
-      {isLoading && <LoadingOverlay />}
-      <UserActionFormLayout.Container>
-        <div className="flex gap-6">
-          <NFTDisplay
-            alt={contractMetadata.image.alt}
-            raw
-            size="sm"
-            src={contractMetadata.image.url}
-          />
-
-          <div>
-            <PageTitle className="text-start" size="sm">
-              {contractMetadata.name}
-            </PageTitle>
-
-            <PageSubTitle className="text-start">on Base</PageSubTitle>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <Card>
-            <div className="flex items-center justify-between gap-2">
-              <p>Quantity</p>
-              <QuantityInput
-                onChange={(newValue: number) => setQuantity(Math.floor(newValue))}
-                onDecrement={decrementQuantity}
-                onIncrement={incrementQuantity}
-                value={quantity}
+    <MaybeAuthenticatedContent
+      authenticatedContent={
+        <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
+          {isLoading && <LoadingOverlay />}
+          <UserActionFormLayout.Container>
+            <div className="flex gap-6">
+              <NFTDisplay
+                alt={contractMetadata.image.alt}
+                raw
+                size="sm"
+                src={contractMetadata.image.url}
               />
-            </div>
-          </Card>
 
-          {!totalFeeDisplay ? (
-            <CardSkeleton>
-              <div className="space-y-8">
-                {Array.from({ length: 3 }, (_, i) => (
-                  <div className="flex items-center justify-between gap-2" key={i}>
-                    <div className="max-w-96 text-sm md:text-base">
-                      <p className="text-xs text-muted-foreground">
-                        <Balancer>Loading...</Balancer>
-                      </p>
+              <div>
+                <PageTitle className="text-start" size="sm">
+                  {contractMetadata.name}
+                </PageTitle>
+
+                <PageSubTitle className="text-start">on Base</PageSubTitle>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <Card>
+                <div className="flex items-center justify-between gap-2">
+                  <p>Quantity</p>
+                  <QuantityInput
+                    onChange={(newValue: number) => setQuantity(Math.floor(newValue))}
+                    onDecrement={decrementQuantity}
+                    onIncrement={incrementQuantity}
+                    value={quantity}
+                  />
+                </div>
+              </Card>
+
+              {!totalFeeDisplay ? (
+                <CardSkeleton>
+                  <div className="space-y-8">
+                    {Array.from({ length: 3 }, (_, i) => (
+                      <div className="flex items-center justify-between gap-2" key={i}>
+                        <div className="max-w-96 text-sm md:text-base">
+                          <p className="text-xs text-muted-foreground">
+                            <Balancer>Loading...</Balancer>
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardSkeleton>
+              ) : (
+                <Card className="w-full">
+                  <div className="space-y-8">
+                    <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                      <div className="max-w-96">
+                        <p>Donation</p>
+                        <p className="text-xs text-muted-foreground">
+                          <Balancer>
+                            {mintFeeDisplay}
+                            {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to
+                            Stand With Crypto Alliance, Inc. (SWCA). Donations from foreign
+                            nationals and government contractors are prohibited.
+                          </Balancer>
+                        </p>
+                      </div>
+
+                      <CurrencyDisplay value={mintFeeDisplay} />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                      <p>Gas fee</p>
+                      <CurrencyDisplay value={gasFeeDisplay} />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                      <p>Total</p>
+                      <CurrencyDisplay value={totalFeeDisplay} />
                     </div>
                   </div>
-                ))}
-              </div>
-            </CardSkeleton>
-          ) : (
-            <Card className="w-full">
-              <div className="space-y-8">
-                <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-                  <div className="max-w-96">
-                    <p>Donation</p>
-                    <p className="text-xs text-muted-foreground">
-                      <Balancer>
-                        {mintFeeDisplay}
-                        {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand
-                        With Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and
-                        government contractors are prohibited.
-                      </Balancer>
-                    </p>
-                  </div>
+                </Card>
+              )}
+            </div>
 
-                  <CurrencyDisplay value={mintFeeDisplay} />
-                </div>
+            <Collapsible open={!maybeOverriddenCheckoutError}>
+              <CollapsibleContent className="AnimateCollapsibleContent">
+                <label className="flex cursor-pointer items-center gap-4">
+                  <Checkbox
+                    checked={isUSResident}
+                    onCheckedChange={val => setIsUSResident(val as boolean)}
+                  />
+                  <p className="text-sm leading-4 text-fontcolor-muted md:text-base">
+                    I am a US citizen or lawful permanent resident (i.e. a green card holder).
+                    Checking this box will append data to your onchain transaction to comply with US
+                    regulation. Donations from non-US residents cannot be used for electioneering
+                    purposes.
+                  </p>
+                </label>
+              </CollapsibleContent>
+            </Collapsible>
 
-                <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-                  <p>Gas fee</p>
-                  <CurrencyDisplay value={gasFeeDisplay} />
-                </div>
+            <UserActionFormLayout.Footer className="!mt-auto">
+              {debug ? (
+                <Button
+                  onClick={() => goToSection(UserActionFormNFTMintSectionNames.SUCCESS)}
+                  size="lg"
+                >
+                  Mint now - Mocked
+                </Button>
+              ) : (
+                <TransactionButton
+                  className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
+                  disabled={
+                    isLoading ||
+                    (!!maybeOverriddenCheckoutError &&
+                      maybeOverriddenCheckoutError !== 'networkSwitch') ||
+                    (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
+                  }
+                  onError={e => handleTransactionException(e, { isUSResident })}
+                  onTransactionConfirmed={onMintCallback}
+                  onTransactionSent={result => {
+                    setTransactionHash(result.transactionHash)
+                    goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
+                  }}
+                  theme={theme}
+                  transaction={prepareTransaction}
+                >
+                  Mint now
+                </TransactionButton>
+              )}
 
-                <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-                  <p>Total</p>
-                  <CurrencyDisplay value={totalFeeDisplay} />
-                </div>
-              </div>
-            </Card>
-          )}
-        </div>
-
-        <Collapsible open={!maybeOverriddenCheckoutError}>
-          <CollapsibleContent className="AnimateCollapsibleContent">
-            <label className="flex cursor-pointer items-center gap-4">
-              <Checkbox
-                checked={isUSResident}
-                onCheckedChange={val => setIsUSResident(val as boolean)}
-              />
-              <p className="text-sm leading-4 text-fontcolor-muted md:text-base">
-                I am a US citizen or lawful permanent resident (i.e. a green card holder). Checking
-                this box will append data to your onchain transaction to comply with US regulation.
-                Donations from non-US residents cannot be used for electioneering purposes.
-              </p>
-            </label>
-          </CollapsibleContent>
-        </Collapsible>
-
-        <UserActionFormLayout.Footer className="!mt-auto">
-          {debug ? (
-            <Button
-              onClick={() => goToSection(UserActionFormNFTMintSectionNames.SUCCESS)}
-              size="lg"
-            >
-              Mint now - Mocked
-            </Button>
-          ) : (
-            <TransactionButton
-              className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
-              disabled={
-                isLoading ||
-                (!!maybeOverriddenCheckoutError &&
-                  maybeOverriddenCheckoutError !== 'networkSwitch') ||
-                (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
-              }
-              onError={e => handleTransactionException(e, { isUSResident })}
-              onTransactionConfirmed={onMintCallback}
-              onTransactionSent={result => {
-                setTransactionHash(result.transactionHash)
-                goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
-              }}
-              theme={theme}
-              transaction={prepareTransaction}
-            >
-              Mint now
-            </TransactionButton>
-          )}
-
-          {!!maybeOverriddenCheckoutError && !isLoading && (
-            <ErrorMessage>{CHECKOUT_ERROR_TO_MESSAGE[maybeOverriddenCheckoutError]}</ErrorMessage>
-          )}
-        </UserActionFormLayout.Footer>
-      </UserActionFormLayout.Container>
-    </UserActionFormLayout>
+              {!!maybeOverriddenCheckoutError && !isLoading && (
+                <ErrorMessage>
+                  {CHECKOUT_ERROR_TO_MESSAGE[maybeOverriddenCheckoutError]}
+                </ErrorMessage>
+              )}
+            </UserActionFormLayout.Footer>
+          </UserActionFormLayout.Container>
+        </UserActionFormLayout>
+      }
+      loadingFallback={<UserActionFormNFTMintCheckoutSkeleton />}
+      useThirdwebSession
+    >
+      <UserActionFormNFTMintCheckoutSkeleton />
+    </MaybeAuthenticatedContent>
   )
 }
 

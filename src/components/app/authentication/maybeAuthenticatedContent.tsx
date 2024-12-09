@@ -1,5 +1,6 @@
 'use client'
 
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
 
 export function MaybeAuthenticatedContent({
@@ -14,8 +15,9 @@ export function MaybeAuthenticatedContent({
   useThirdwebSession?: boolean
 }) {
   const session = useSession()
+  const hasHydrated = useHasHydrated()
 
-  if (session.isLoading && loadingFallback) {
+  if ((session.isLoading && loadingFallback) || !hasHydrated) {
     return loadingFallback
   }
 

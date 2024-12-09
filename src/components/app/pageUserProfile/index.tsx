@@ -17,6 +17,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
@@ -185,6 +186,7 @@ function ProfileAndNFTButtons({ user }: { user: PageUserProfileUser }) {
 
 function EditProfileButton({ user }: { user: PageUserProfileUser }) {
   const session = useSession()
+  const hasHydrated = useHasHydrated()
 
   return (
     <UpdateUserProfileFormDialog user={user}>
@@ -195,7 +197,7 @@ function EditProfileButton({ user }: { user: PageUserProfileUser }) {
       ) : (
         <Button
           className="w-full lg:w-auto"
-          variant={session.isLoggedInThirdweb ? 'default' : 'secondary'}
+          variant={session.isLoggedInThirdweb && hasHydrated ? 'default' : 'secondary'}
         >
           Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
         </Button>
