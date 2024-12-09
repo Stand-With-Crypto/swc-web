@@ -4,18 +4,20 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 import { cn, twNoop } from '@/utils/web/cn'
 
+const DEFAULT_SIZE = 'md'
+
 const subTitleVariantsConfig = {
   size: {
-    lg: twNoop('text-base lg:text-xl'),
-    md: twNoop('text-base'),
-    sm: twNoop('text-base lg:text-base'),
+    sm: twNoop('text-sm md:text-base'),
+    md: twNoop('text-base md:text-lg'),
+    lg: twNoop('text-lg md:text-xl'),
   },
 }
 
 const pageSubTitleVariants = cva('text-center text-fontcolor-muted', {
   variants: subTitleVariantsConfig,
   defaultVariants: {
-    size: 'lg',
+    size: DEFAULT_SIZE,
   },
 })
 
@@ -27,7 +29,10 @@ interface PageSubTitleProps
 }
 
 export const PageSubTitle = React.forwardRef<HTMLHeadingElement, PageSubTitleProps>(
-  ({ className, children, size = 'md', as: Comp = 'h2', withoutBalancer, ...props }, ref) => {
+  (
+    { className, children, size = DEFAULT_SIZE, as: Comp = 'h2', withoutBalancer, ...props },
+    ref,
+  ) => {
     return (
       <Comp className={cn(pageSubTitleVariants({ size, className }))} ref={ref} {...props}>
         {withoutBalancer ? children : <Balancer>{children}</Balancer>}

@@ -100,37 +100,19 @@ function RaceSectionWrapper({
 export function KeyRacesSkeleton() {
   return (
     <div className="flex flex-col items-center gap-8 text-center">
-      <ContentSection
-        className="w-full max-w-sm"
-        title="Presidential Election"
-        titleProps={{
-          size: 'xs',
-        }}
-      >
+      <ContentSection className="w-full max-w-sm" title="Presidential Election">
         {Array.from({ length: 3 }, (_, index) => (
           <Skeleton className="h-36 w-full rounded-3xl" key={index} />
         ))}
       </ContentSection>
 
-      <ContentSection
-        className="w-full max-w-sm"
-        title="U.S. Senate Race"
-        titleProps={{
-          size: 'xs',
-        }}
-      >
+      <ContentSection className="w-full max-w-sm" title="U.S. Senate Race">
         {Array.from({ length: 3 }, (_, index) => (
           <Skeleton className="h-36 w-full rounded-3xl" key={index} />
         ))}
       </ContentSection>
 
-      <ContentSection
-        className="w-full max-w-sm"
-        title="Congressional District"
-        titleProps={{
-          size: 'xs',
-        }}
-      >
+      <ContentSection className="w-full max-w-sm" title="Congressional District">
         {Array.from({ length: 3 }, (_, index) => (
           <Skeleton className="h-36 w-full rounded-3xl" key={index} />
         ))}

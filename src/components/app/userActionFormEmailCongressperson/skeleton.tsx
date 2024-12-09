@@ -33,7 +33,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <LoadingOverlay />
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
-          <PageTitle className="mb-3" size="sm">
+          <PageTitle className="mb-3" size="md">
             Email your {capitalize(getYourPoliticianCategoryShortDisplayName(politicianCategory))}
           </PageTitle>
           <PageSubTitle className="mb-7">
