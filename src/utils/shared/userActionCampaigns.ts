@@ -104,7 +104,7 @@ export type UserActionCampaigns = {
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
-  [UserActionType.EMAIL]: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
+  [UserActionType.EMAIL]: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
   [UserActionType.CALL]: UserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: UserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
