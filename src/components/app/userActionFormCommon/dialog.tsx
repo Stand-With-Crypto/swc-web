@@ -27,7 +27,12 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent a11yTitle="" className="max-w-3xl" padding={padding}>
+      <DialogContent
+        a11yTitle="user-action-form-dialog-content"
+        aria-describedby="user-action-form-dialog-content"
+        className="max-w-3xl"
+        padding={padding}
+      >
         <GeoGate
           bypassCountryCheck={bypassCountryCheck}
           countryCode={countryCode}
