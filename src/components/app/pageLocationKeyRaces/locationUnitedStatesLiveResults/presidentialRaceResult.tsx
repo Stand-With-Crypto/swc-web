@@ -16,8 +16,11 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
-import { PresidentialDataWithVotingResponse } from '@/data/aggregations/decisionDesk/types'
-import { getPoliticianFindMatch } from '@/data/aggregations/decisionDesk/utils'
+import {
+  CandidatesWithVote,
+  PresidentialDataWithVotingResponse,
+} from '@/data/aggregations/decisionDesk/types'
+import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -49,7 +52,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     if (!dtsiCandidateA) return null
 
     const candidate = liveResultData?.find(_candidate =>
-      getPoliticianFindMatch(dtsiCandidateA, _candidate.votingData),
+      getDtsiMatchFromDdhq(_candidate.votingData as unknown as CandidatesWithVote, dtsiCandidateA),
     )
 
     if (!candidate) return null
@@ -65,7 +68,7 @@ export const PresidentialRaceResult = (props: PresidentialRaceResultProps) => {
     if (!dtsiCandidateB) return null
 
     const candidate = liveResultData?.find(_candidate =>
-      getPoliticianFindMatch(dtsiCandidateB, _candidate.votingData),
+      getDtsiMatchFromDdhq(_candidate.votingData as unknown as CandidatesWithVote, dtsiCandidateB),
     )
 
     if (!candidate) return null
