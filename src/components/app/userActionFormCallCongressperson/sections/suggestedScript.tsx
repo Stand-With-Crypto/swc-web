@@ -183,7 +183,8 @@ export function SuggestedScript({
           onError: toastGenericError,
         },
         payload =>
-          actionCreateUserActionCallCongressperson(payload).then(actionResult => {
+          actionCreateUserActionCallCongressperson(payload).then(async actionResultPromise => {
+            const actionResult = await actionResultPromise
             if (actionResult && 'user' in actionResult && actionResult.user) {
               identifyUserOnClient(actionResult.user)
             }

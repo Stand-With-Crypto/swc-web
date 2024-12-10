@@ -19,7 +19,7 @@ import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 export async function POST(request: NextRequest) {
   const rawRequestBody = await request.json()
 
-  if (!authenticatePaymentRequest(rawRequestBody)) {
+  if (!(await authenticatePaymentRequest(rawRequestBody))) {
     return new NextResponse('unauthorized', { status: 401 })
   }
 

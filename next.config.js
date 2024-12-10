@@ -202,7 +202,7 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    instrumentationHook: true,
+    turbo: {},
   },
   eslint: {
     ignoreDuringBuilds: true,

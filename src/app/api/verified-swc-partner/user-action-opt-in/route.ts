@@ -12,7 +12,7 @@ import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/v
 type RequestBody = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn>
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
-  const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()
+  const partner = await authenticateAndGetVerifiedSWCPartnerFromHeader()
   const requestBody = await request.json()
 
   const baseValidationResult = zodVerifiedSWCPartnersUserActionOptIn

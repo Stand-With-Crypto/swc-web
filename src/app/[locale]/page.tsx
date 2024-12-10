@@ -5,12 +5,12 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.MINUTE
+export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
-export default async function Home({ params }: PageProps) {
+export default async function Home(props: PageProps) {
+  const params = await props.params
   const asyncProps = await getHomepageData({
     recentActivityLimit: 30,
     restrictToUS: true,

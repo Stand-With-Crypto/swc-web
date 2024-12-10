@@ -24,8 +24,10 @@ export function withServerActionMiddleware<T extends (...args: any) => any>(
   name: string,
   action: T,
 ) {
-  return function orchestratedLogic(...args: Parameters<T>) {
-    const userSession = cookies().get(USER_SESSION_ID_COOKIE_NAME)?.value
+  return async function orchestratedLogic(...args: Parameters<T>) {
+    const currentCookies = await cookies()
+    const currentHeaders = await headers()
+    const userSession = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
 
     if (userSession) {
       Sentry.setUser({
@@ -38,7 +40,7 @@ export function withServerActionMiddleware<T extends (...args: any) => any>(
       name,
       {
         recordResponse: true,
-        headers: headers(),
+        headers: currentHeaders,
         formData: convertArgsToFormData(args),
       },
       () => action(...args),

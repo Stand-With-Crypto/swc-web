@@ -15,7 +15,11 @@ export const metadata: Metadata = {
   ...generateMetadataDetails({ title, description }),
 }
 
-export default async function DonatePage({ params: { locale } }: PageProps) {
+export default async function DonatePage(props: PageProps) {
+  const params = await props.params
+
+  const { locale } = params
+
   const sumDonations = await getSumDonations()
 
   return (

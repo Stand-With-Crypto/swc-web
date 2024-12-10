@@ -67,7 +67,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
     },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
-  const sessionId = getUserSessionId()
+  const sessionId = await getUserSessionId()
   const validatedFields = zodUserActionFormEmailDebateAction.safeParse(input)
   if (!validatedFields.success) {
     return {
@@ -76,7 +76,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
   }
   logger.info('validated fields')
 
-  const localUser = parseLocalUserFromCookies()
+  const localUser = await parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,

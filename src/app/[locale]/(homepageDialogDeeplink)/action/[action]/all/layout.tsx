@@ -12,10 +12,8 @@ export const dynamic = 'error'
 
 type UserActionCampaignsLayoutProps = React.PropsWithChildren<PageProps<{ action: UserActionType }>>
 
-export async function generateMetadata({
-  params,
-}: UserActionCampaignsLayoutProps): Promise<Metadata> {
-  const { action } = params
+export async function generateMetadata(props: UserActionCampaignsLayoutProps): Promise<Metadata> {
+  const { action } = await props.params
   const parsedAction = action?.toUpperCase()
 
   const cta = USER_ACTION_CTAS_FOR_GRID_DISPLAY[parsedAction]
@@ -31,18 +29,16 @@ export async function generateMetadata({
   })
 }
 
-export default async function UserActionCampaignsLayout({
-  params,
-  children,
-}: UserActionCampaignsLayoutProps) {
-  const { action } = params
-  const parsedAction = action?.toUpperCase()
+export default async function UserActionCampaignsLayout(props: UserActionCampaignsLayoutProps) {
+  const { children } = props
+  const params = await props.params
+  const parsedAction = params.action?.toUpperCase()
 
   const cta = USER_ACTION_CTAS_FOR_GRID_DISPLAY[parsedAction]
 
   const hasActiveCampaigns = cta?.campaigns?.some(campaign => campaign.isCampaignActive)
 
-  if (!action || !cta || !hasActiveCampaigns) {
+  if (!params.action || !cta || !hasActiveCampaigns) {
     notFound()
   }
 

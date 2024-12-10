@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function PartnersPage({ params }: PageProps) {
+export default async function PartnersPage(props: PageProps) {
+  const params = await props.params
   return <PagePartners description={description} locale={params.locale} title={title} />
 }

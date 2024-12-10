@@ -5,10 +5,9 @@ import { queryDTSIEndorsedCandidates } from '@/data/dtsi/queries/queryDTSIEndors
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { ENDORSED_DTSI_PERSON_SLUGS } from '@/utils/shared/locationSpecificPages'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
+export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['10_MINUTES']
 
 const title = 'Stand With Crypto PAC 2024 House and Senate Endorsements'
 const description =
@@ -20,7 +19,11 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function AboutPage({ params: { locale } }: PageProps) {
+export default async function AboutPage(props: PageProps) {
+  const params = await props.params
+
+  const { locale } = params
+
   const { people } = await queryDTSIEndorsedCandidates({
     endorsedDTSISlugs: ENDORSED_DTSI_PERSON_SLUGS,
   })

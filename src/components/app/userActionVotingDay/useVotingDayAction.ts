@@ -25,7 +25,8 @@ export function useVotingDayAction() {
           payload: null,
         },
         () =>
-          actionCreateUserActionVotingDay().then(actionResult => {
+          actionCreateUserActionVotingDay().then(async actionResultPromise => {
+            const actionResult = await actionResultPromise
             if (actionResult && 'user' in actionResult && actionResult.user) {
               identifyUserOnClient(actionResult.user)
             }

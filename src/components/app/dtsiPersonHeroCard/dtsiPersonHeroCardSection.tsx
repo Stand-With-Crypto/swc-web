@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactNode } from 'react'
 
 import { ContentSection } from '@/components/app/ContentSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
@@ -14,7 +14,7 @@ export interface DTSIPersonHeroCardSectionProps {
   title: React.ReactNode
   titleProps?: PageTitleProps
   subtitle?: React.ReactNode
-  cta?: ReactElement
+  cta?: ReactNode
   people: Array<DTSI_PersonCardFragment & { isIncumbent?: boolean }>
   recommend?: boolean
   forceMobile?: boolean

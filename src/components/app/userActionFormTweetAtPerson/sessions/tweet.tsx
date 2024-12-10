@@ -130,7 +130,8 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
         payload: data,
       },
       payload =>
-        actionCreateUserActionTweetedAtPerson(payload).then(actionResult => {
+        actionCreateUserActionTweetedAtPerson(payload).then(async actionResultPromise => {
+          const actionResult = await actionResultPromise
           if (actionResult?.user) {
             identifyUserOnClient(actionResult.user)
           }

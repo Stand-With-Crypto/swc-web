@@ -8,7 +8,7 @@ import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
-export const revalidate = 60
+export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 export const dynamicParams = true
 
@@ -20,7 +20,7 @@ export const getData = cache(async (billSlug: string) => {
 })
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const bill = await getData(props.params.billSlug)
+  const bill = await getData((await props.params).billSlug)
   if (!bill) {
     return {}
   }
@@ -37,7 +37,8 @@ export async function generateStaticParams() {
   return slugs
 }
 
-export default async function BillDetails({ params }: Props) {
+export default async function BillDetails(props: Props) {
+  const params = await props.params
   const locale = params.locale
 
   const bill = await queryDTSIBillDetails(params.billSlug)

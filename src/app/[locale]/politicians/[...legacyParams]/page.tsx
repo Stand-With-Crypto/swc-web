@@ -3,17 +3,17 @@ import { permanentRedirect } from 'next/navigation'
 
 import _legacyPoliticianToDTSIMap from '@/staticContent/dtsi/legacyPoliticianToDTSIMap.json'
 import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-const legacyPoliticianToDTSIMap: Record<string, string> = _legacyPoliticianToDTSIMap
-export const revalidate = SECONDS_DURATION.WEEK
+export const revalidate = 604800 // 1 week
 export const dynamic = 'error'
 export const dynamicParams = true
 
+const legacyPoliticianToDTSIMap: Record<string, string> = _legacyPoliticianToDTSIMap
 type Props = PageProps<{ legacyParams: string[] }>
 
-export default async function LegacyPoliticianDetails({ params }: Props) {
+export default async function LegacyPoliticianDetails(props: Props) {
+  const params = await props.params
   const { legacyParams, locale } = params
   const intlUrls = getIntlUrls(locale)
   const maybeLegacySlug = legacyParams[legacyParams.length - 1]

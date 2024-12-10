@@ -1,10 +1,12 @@
 import { SupportedLocale } from '@/intl/locales'
 
 export type PageProps<Params = object> = {
-  params: Params & {
-    locale: SupportedLocale
-  }
-  searchParams?: { [key: string]: string | string[] | undefined }
+  params: Promise<
+    Params & {
+      locale: SupportedLocale
+    }
+  >
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 // ensures that optional fields are at least queried for in graphql requests

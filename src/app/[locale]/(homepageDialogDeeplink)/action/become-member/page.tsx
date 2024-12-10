@@ -6,7 +6,8 @@ import { PageBecomeMember } from './pageBecomeMember'
 
 export const dynamic = 'force-dynamic'
 
-export default async function UserActionBecomeMemberDeepLink({ params }: PageProps) {
+export default async function UserActionBecomeMemberDeepLink(props: PageProps) {
+  const params = await props.params
   const { locale } = params
   const user = await getAuthenticatedData()
 
