@@ -341,6 +341,12 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/secvote/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=crenshawvote&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/results',
         destination: '/races?utm_source=swc&utm_medium=sms&utm_campaign=election-results-2024-2',
         permanent: true,
