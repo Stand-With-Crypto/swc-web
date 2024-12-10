@@ -10,16 +10,12 @@ export interface UserActionFormSuccessScreenFeedbackProps {
   image?: ReactNode
   title?: ReactNode
   description?: ReactNode
-  isVotingDay?: boolean
 }
 
 export function UserActionFormSuccessScreenFeedback(
   props: UserActionFormSuccessScreenFeedbackProps,
 ) {
-  const { image, title, isVotingDay } = props
-  const description = isVotingDay
-    ? props.description // Temporary description until 2024 election is over.
-    : "This year's election is critical to the future of crypto. Here's how to become an informed voter."
+  const { image, title, description } = props
 
   return (
     <div className="flex flex-col items-center justify-center gap-8">
