@@ -1,25 +1,21 @@
 'use client'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { capitalize } from 'lodash-es'
+import { noop } from 'lodash-es'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { BillVoteResult } from '@/app/api/public/dtsi/bill-vote/[billId]/[slug]/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
 } from '@/components/app/userActionFormEmailCongressperson/constants'
-import {
-  getFIT21FollowUpText,
-  getSubjectLine,
-} from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import { getSECCommissionerText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -39,17 +35,12 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
-import { useCongresspersonBillVote } from '@/hooks/useCongresspersonBillVote'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
-import { BILLS_IDS } from '@/utils/shared/constants'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
-import {
-  getYourPoliticianCategoryShortDisplayName,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
@@ -76,18 +67,15 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.EMAIL],
+      campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getFIT21FollowUpText({
-        billVote: 'NO_VOTE',
+      message: getSECCommissionerText({
         firstName: user.firstName,
         lastName: user.lastName,
       }),
-      subject: getSubjectLine({
-        billVote: 'NO_VOTE',
-      }),
+      subject: 'Opposition to Crenshaw re-nomination to SEC',
       address: user.address?.route
         ? {
             description: user.address.formattedDescription,
@@ -98,40 +86,14 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.EMAIL],
+    campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getFIT21FollowUpText({
-      billVote: 'NO_VOTE',
-    }),
-    subject: getSubjectLine({
-      billVote: 'NO_VOTE',
-    }),
+    message: getSECCommissionerText(),
+    subject: 'Opposition to Crenshaw re-nomination to SEC',
     address: undefined,
     dtsiSlugs,
-  }
-}
-
-function getPageHeadingCopy({
-  billVote,
-  politicianCategory,
-}: {
-  billVote: BillVoteResult
-  politicianCategory: YourPoliticianCategory
-}) {
-  const politicianCategoryDisplayName =
-    getYourPoliticianCategoryShortDisplayName(politicianCategory)
-  if (billVote === 'VOTED_FOR') {
-    return {
-      title: `Thank Your ${capitalize(politicianCategoryDisplayName)}`,
-      subtitle: `Email your ${politicianCategoryDisplayName} and thank them for their vote on FIT21. Enter the information below and we will generate a personalized note for your to send.`,
-    }
-  }
-
-  return {
-    title: `Email Your ${capitalize(politicianCategoryDisplayName)}`,
-    subtitle: `Email your ${politicianCategoryDisplayName} and tell them to support crypto. Enter the following information and we will generate a personalized email for you to send.`,
   }
 }
 
@@ -147,13 +109,6 @@ export function UserActionFormEmailCongressperson({
   initialValues?: FormFields
   politicianCategory?: YourPoliticianCategory
 }) {
-  const [location, setLocation] = useState<
-    | {
-        districtNumber: number
-        stateCode: string
-      }
-    | undefined
-  >(undefined)
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
@@ -188,39 +143,6 @@ export function UserActionFormEmailCongressperson({
       : []
   }, [dtsiPeopleFromAddressResponse?.data])
 
-  const { data: congresspersonBillVote } = useCongresspersonBillVote({
-    slug: dtsiPeople?.[0]?.slug,
-    billId: BILLS_IDS.FIT21,
-    config: {
-      onSuccess: data => {
-        if (!hasModifiedMessage.current) {
-          const { firstName, lastName } = form.getValues()
-          form.setValue(
-            'message',
-            getFIT21FollowUpText({
-              billVote: data,
-              location,
-              firstName,
-              lastName,
-              dtsiLastName: dtsiPeople?.[0]?.lastName,
-            }),
-          )
-          form.setValue(
-            'subject',
-            getSubjectLine({
-              billVote: data,
-            }),
-          )
-        }
-      },
-    },
-  })
-
-  const { title, subtitle } = getPageHeadingCopy({
-    billVote: congresspersonBillVote ?? 'NO_VOTE',
-    politicianCategory,
-  })
-
   React.useEffect(() => {
     if (isDesktop) {
       form.setFocus('firstName')
@@ -237,6 +159,27 @@ export function UserActionFormEmailCongressperson({
     const newDtsiSlugs = dtsiPeople.map(person => person.slug)
     form.setValue('dtsiSlugs', newDtsiSlugs)
   }, [dtsiPeople, form])
+
+  const firstName = useWatch({
+    control: form.control,
+    name: 'firstName',
+  })
+  const lastName = useWatch({
+    control: form.control,
+    name: 'lastName',
+  })
+
+  useEffect(() => {
+    if (hasModifiedMessage.current) return
+
+    form.setValue(
+      'message',
+      getSECCommissionerText({
+        firstName,
+        lastName,
+      }),
+    )
+  }, [firstName, lastName, form])
 
   return (
     <Form {...form}>
@@ -289,9 +232,13 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              {title}
+              Email Your Senator
             </PageTitle>
-            <PageSubTitle className="mb-7">{subtitle}</PageSubTitle>
+            <PageSubTitle className="mb-7">
+              The Senate is considering re-confirming anti-crypto SEC Commissioner Caroline Crenshaw
+              to the Commission. Let your senators know you stand with crypto and OPPOSE this
+              nomination!
+            </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField
@@ -361,9 +308,7 @@ export function UserActionFormEmailCongressperson({
                     <DTSICongresspersonAssociatedWithFormAddress
                       address={addressProps.field.value}
                       dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
-                      onChangeAddress={({ location: newLocation }) => {
-                        setLocation(newLocation)
-                      }}
+                      onChangeAddress={noop}
                       politicianCategory={politicianCategory}
                     />
                   </div>
@@ -375,7 +320,7 @@ export function UserActionFormEmailCongressperson({
                 render={({ field }) => (
                   <FormItem>
                     <div className="relative">
-                      {(!dtsiSlugs.length || !congresspersonBillVote) && (
+                      {!dtsiSlugs.length && (
                         <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
                           <p className="text-bold max-w-md text-center">
                             Enter your address to generate a personalized message.
