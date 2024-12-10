@@ -20,6 +20,7 @@ import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCan
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
+import { cleanupDatadogSyntheticTestsWithInngest } from '@/inngest/functions/datadog/cleanup'
 import {
   fetchPresidentialRacesData,
   fetchPresidentialRacesDataCron,
@@ -83,5 +84,6 @@ export const { GET, POST, PUT } = serve({
     backfillUserCommunicationMessageStatus,
     updateMetricsCacheInngestCronJob,
     backfillOptedOutUsers,
+    cleanupDatadogSyntheticTestsWithInngest,
   ],
 })

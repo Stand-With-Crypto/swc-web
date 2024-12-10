@@ -1,4 +1,7 @@
 import { useEffectOnce } from '@/hooks/useEffectOnce'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+
+const isLocal = NEXT_PUBLIC_ENVIRONMENT === 'local'
 
 export function usePromoteDevParticipation() {
   useEffectOnce(() => {
@@ -17,14 +20,14 @@ export function usePromoteDevParticipation() {
 ++++++++++++++++++++++++************************
 ++++++++++++++++++++++++************************
 ++++++++++++++++++++++++************************
- +++++++++++++++++++++++***********************
-  ++++++++++++++++++++++**********************
-   +++++++++++++++++++++********************
-      ++++++++++++++++++*****************
-        ++++++++++++++++***************
-          ++++++++++++++*************
-                ++++++++*******
-                    ++++****
+ +++++++++++++++++++++++*********************** 
+  ++++++++++++++++++++++**********************  
+   +++++++++++++++++++++********************    
+      ++++++++++++++++++*****************       
+        ++++++++++++++++***************         
+          ++++++++++++++*************           
+                ++++++++*******                 
+                    ++++****                    
 `
 
     const lines = asciiShield.trim().split('\n')
@@ -59,7 +62,9 @@ export function usePromoteDevParticipation() {
       styles.push(...currentStyles)
     })
 
-    console.log(styledLines.join('\n'), ...styles)
+    if (!isLocal) {
+      console.log(styledLines.join('\n'), ...styles)
+    }
   })
 
   return null

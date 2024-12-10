@@ -26,6 +26,7 @@ export enum UserActionEmailCampaignName {
   FIT21_2024_04_FOLLOW_UP = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04_FOLLOW_UP',
   CNN_PRESIDENTIAL_DEBATE_2024 = 'CNN_PRESIDENTIAL_DEBATE_2024',
   ABC_PRESIDENTIAL_DEBATE_2024 = 'ABC_PRESIDENTIAL_DEBATE_2024',
+  SEC_COMMISSIONER_2024 = 'SEC_COMMISSIONER_2024',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
@@ -119,9 +120,3 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
-
-type UserActionAdditionalCampaigns = {
-  [K in keyof UserActionCampaigns]?: UserActionCampaigns[K][]
-}
-
-export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {}

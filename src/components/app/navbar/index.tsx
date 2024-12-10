@@ -155,7 +155,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
 
       <nav
         className={cn(
-          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 min-[1096px]:h-[84px] min-[1096px]:py-5',
+          'sticky top-0 z-20 flex h-[72px] w-full items-center bg-white py-3 min-[1096px]:h-[84px] min-[1096px]:py-5',
         )}
       >
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">

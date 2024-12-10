@@ -2,7 +2,7 @@
 
 ### Contribution guide
 
-- Read [Contribution guidelines for this project](docs/Contributing.md) for information on submitting PRs, including database migration steps related to your PR
+- Read [Contribution guidelines for this project](./docs/Contributing.md) for information on submitting PRs, including database migration steps related to your PR.
 
 ## Licenses
 
