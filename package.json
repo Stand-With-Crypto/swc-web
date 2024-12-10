@@ -171,8 +171,8 @@
     "@types/mixpanel-browser": "^2.48.1",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20.16.1",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "@types/react-simple-maps": "^3.0.4",
     "@types/sanitize-html": "^2.9.5",
     "@types/yargs": "^17.0.32",
@@ -206,8 +206,8 @@
     "yargs": "^17.7.2"
   },
   "overrides": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
