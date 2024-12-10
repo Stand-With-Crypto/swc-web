@@ -38,8 +38,6 @@ export function UserActionFormSuccessScreenNextAction({
 
   return (
     <div className="space-y-6 pb-8 text-center">
-      <h3 className="font-mono font-bold">Your voter guide</h3>
-
       <SuccessScreenCTAS
         excludeUserActionTypes={[...Array.from(excludeUserActionTypes)]}
         performedUserActionTypes={performedUserActionTypes}
