@@ -4,7 +4,7 @@ import {
   GetAllCongressDataResponse,
   RacesVotingDataResponse,
 } from '@/data/aggregations/decisionDesk/types'
-import { getMatchingDTSIDataForDDHQCandidate } from '@/data/aggregations/decisionDesk/utils'
+import { getDtsiMatchFromDdhq } from '@/data/aggregations/decisionDesk/utils'
 import { DTSI_AllPeopleQuery } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { getLogger } from '@/utils/shared/logger'
@@ -38,7 +38,7 @@ const enhanceCongressData = (
   const { people } = dtsiAllPeopleData
 
   const enhancedCandidatesWithVote = congressData.candidatesWithVotes.map(currentCandidate => {
-    const dtsiData = getMatchingDTSIDataForDDHQCandidate(currentCandidate, people) as
+    const dtsiData = getDtsiMatchFromDdhq(currentCandidate, people) as
       | DTSI_AllPeopleQuery['people'][number]
       | null
     if (!dtsiData) {
