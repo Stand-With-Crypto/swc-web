@@ -10,7 +10,6 @@ export const UserActionIVotedSuccess = () => {
     <div className="flex h-full flex-col items-center justify-between gap-8">
       <UserActionFormSuccessScreenFeedback
         image={<DidYouVoteVideo />}
-        isVotingDay
         {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.VOTING_DAY}
       />
       <Button asChild className="w-full md:w-[250px]" size="lg" variant="default">
