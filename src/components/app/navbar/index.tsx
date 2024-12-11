@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
-import { CalendarIcon, ChevronDown, Menu } from 'lucide-react'
+import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
@@ -40,7 +40,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 
   const leftLinks = [
-    { href: urls.locationUnitedStates(), text: '2024 Election results' },
     {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
@@ -50,17 +49,16 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Endorsed candidates',
     },
     {
+      href: urls.events(),
+      text: 'Events',
+    },
+    {
       text: 'Resources',
       children: [
         {
           href: urls.donate(),
           text: 'Donate',
           icon: DonateIcon,
-        },
-        {
-          href: urls.events(),
-          text: 'Events',
-          icon: CalendarIcon,
         },
         {
           href: urls.about(),

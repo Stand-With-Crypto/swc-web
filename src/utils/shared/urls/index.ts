@@ -1,9 +1,7 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
-import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -63,29 +61,14 @@ export const getIntlUrls = (
     profile: () => `${localePrefix}/profile`,
     updateProfile: () => `${localePrefix}/profile?hasOpenUpdateUserProfileForm=true`,
     internalHomepage: () => `${localePrefix}/internal`,
-    locationStateSpecific: (stateCode: USStateCode) =>
-      `${localePrefix}/races/state/${stateCode.toLowerCase()}`,
-    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
-      `${localePrefix}/races/state/${stateCode.toLowerCase()}/senate`,
-    locationUnitedStatesPresidential: () => `${localePrefix}/races/presidential`,
-    locationUnitedStates: () => `${localePrefix}/races/`,
     endorsedCandidates: () => `${localePrefix}/races/endorsed/`,
-    locationCongressHouse: () => `${localePrefix}/races/congress/house`,
-    locationCongressSenate: () => `${localePrefix}/races/congress/senate`,
-    locationDistrictSpecific: ({
-      stateCode,
-      district,
-    }: {
-      stateCode: USStateCode
-      district: NormalizedDTSIDistrictId
-    }) => `${localePrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
     becomeMember: () => `${localePrefix}/action/become-member`,
     community: () => `${localePrefix}/community`,
     events: () => `${localePrefix}/events`,
-    voterGuide: () => `${localePrefix}/vote`,
     advocacyToolkit: () => `${localePrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${localePrefix}/creator-defense-fund`,
     press: () => `${localePrefix}/press`,
+    emailDeeplink: () => `${localePrefix}/action/email`,
   }
 }
 
@@ -149,13 +132,6 @@ export const apiUrls = {
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,
   totalAdvocatesPerState: () => '/api/public/advocates-map/total-advocates-per-state',
-  dtsiRacesByCongressionalDistrict: ({
-    stateCode,
-    district,
-  }: {
-    stateCode: string
-    district: number
-  }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
   smsStatusCallback: ({
     campaignName,
     journeyType,
@@ -166,11 +142,4 @@ export const apiUrls = {
     hasWelcomeMessageInBody?: boolean
   }) =>
     `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
-  decisionDeskPresidentialData: () => '/api/public/decision-desk/usa/presidential',
-  decisionDeskStateData: ({ stateCode }: { stateCode: string }) =>
-    `/api/public/decision-desk/usa/state/${stateCode}`,
-  decisionDeskDistrictData: ({ stateCode, district }: { stateCode: string; district: string }) =>
-    `/api/public/decision-desk/usa/state/${stateCode}/district/${district}`,
-  decisionDeskCongressData: () => '/api/public/decision-desk/usa/congress',
-  decisionDeskElectionStatusData: () => '/api/public/decision-desk/usa/status',
 }

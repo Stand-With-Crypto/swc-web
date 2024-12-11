@@ -95,13 +95,12 @@ export function GeoLocationDisclaimerBanner() {
   return (
     <InternalLink
       className="flex w-full items-center bg-primary-cta text-center opacity-100 transition-all duration-200"
-      href={urls.locationUnitedStates()}
+      href={urls.emailDeeplink()}
     >
       <div className="container flex w-full justify-between">
         <div className="flex w-full items-center justify-center py-2 text-center text-base text-white antialiased">
           <Balancer>
-            Thank you to our advocates for making your voice heard! Check out the election results
-            and the role crypto played.
+            Make your voice heard — tell your Senators to vote NO on an anti-crypto SEC nominee!
           </Balancer>
           <ArrowRight className="w-12 lg:w-8" size={16} />
         </div>

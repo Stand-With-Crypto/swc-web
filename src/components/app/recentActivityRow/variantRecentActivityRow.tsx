@@ -11,9 +11,6 @@ import {
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
-import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
-import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
-import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { InternalLink } from '@/components/ui/link'
@@ -211,11 +208,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.VOTER_REGISTRATION: {
         return {
-          onFocusContent: () => (
-            <UserActionFormVoterRegistrationDialog>
-              <Button>Register</Button>
-            </UserActionFormVoterRegistrationDialog>
-          ),
+          onFocusContent: () => null,
           children: <MainText>Someone checked their voter registration {inStateOrEmpty}</MainText>,
         }
       }
@@ -252,11 +245,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.VOTER_ATTESTATION: {
         return {
-          onFocusContent: () => (
-            <UserActionFormVoterAttestationDialog>
-              <Button>Pledge</Button>
-            </UserActionFormVoterAttestationDialog>
-          ),
+          onFocusContent: () => null,
           children: <MainText>Someone pledged to vote</MainText>,
         }
       }
@@ -289,11 +278,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.VOTING_DAY: {
         return {
-          onFocusContent: () => (
-            <UserActionVotingDayDialog>
-              <Button>I voted!</Button>
-            </UserActionVotingDayDialog>
-          ),
+          onFocusContent: () => null,
           children: <MainText>Someone {inStateOrEmpty} claimed "I Voted" NFT</MainText>,
         }
       }
