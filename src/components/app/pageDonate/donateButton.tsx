@@ -4,9 +4,9 @@ import React from 'react'
 import { actionCreateCoinbaseCommerceCharge } from '@/actions/actionCreateCoinbaseCommerceCharge'
 import { Button } from '@/components/ui/button'
 import { openWindow } from '@/utils/shared/openWindow'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
-import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export function DonateButton() {
   const [buttonState, setButtonState] = React.useState<'completed' | 'loading'>('completed')
