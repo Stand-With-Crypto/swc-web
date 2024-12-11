@@ -10,15 +10,17 @@ async function actionsByUserCount() {
 
   const userActionsMap = new Map<string, number>()
 
+  console.log('Fetching user actions...')
+
   while (hasActionsLeft) {
-    const usersBatch = (await prismaClient.$queryRaw`
+    const usersBatch = await prismaClient.$queryRaw<Array<{ userId: string; actions: string }>>`
         SELECT u.id AS userId, COUNT(DISTINCT ua.action_type) AS actions
         FROM user u
         LEFT JOIN user_action ua ON u.id = ua.user_id
         WHERE ua.action_type != 'OPT_IN' OR ua.action_type IS NULL
         GROUP BY u.id
         LIMIT ${limit} OFFSET ${skip};
-      `) as { userId: string; actions: string }[]
+      `
 
     console.log(`Processing ${usersBatch.length} users`)
 
@@ -34,6 +36,35 @@ async function actionsByUserCount() {
     skip += limit
   }
 
+  console.log('Fetching OPT_IN actions')
+
+  let hasOptInActionsLeft = true
+  skip = 0
+
+  let usersThatOnlyOptedIn = 0
+
+  while (hasOptInActionsLeft) {
+    const optInActionsCount = await prismaClient.$queryRaw<Array<{ id: string }>>`
+        SELECT u.id
+        FROM user u
+        LEFT JOIN user_action ua ON u.id = ua.user_id
+        GROUP BY u.id
+        HAVING COUNT(DISTINCT ua.action_type) = 1 AND MAX(ua.action_type) = 'OPT_IN'
+        LIMIT ${limit} OFFSET ${skip};
+    `
+
+    console.log(`Processing ${optInActionsCount.length} users`)
+
+    if (optInActionsCount.length === 0) {
+      hasOptInActionsLeft = false
+    }
+
+    usersThatOnlyOptedIn += optInActionsCount.length
+    skip += limit
+  }
+
+  console.log('Aggregating results...')
+
   // Aggregate results by action counts
   const actionCounts = Array.from(userActionsMap.values()).reduce(
     (acc, actions) => {
@@ -45,9 +76,9 @@ async function actionsByUserCount() {
 
   // Format the result
   const result = Object.entries(actionCounts)
-    .map(([actions, users]) => ({
+    .map(([actions, users], index) => ({
       actions: Number(actions),
-      users,
+      users: index === 0 ? users + usersThatOnlyOptedIn : users,
     }))
     .sort((a, b) => a.actions - b.actions)
 
