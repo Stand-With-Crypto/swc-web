@@ -17,7 +17,7 @@ export function SuccessScreenCTAS({
   excludeUserActionTypes,
   performedUserActionTypes,
 }: SuccessScreenCTASProps) {
-  const { orderedCTAs, performeduserActionObj } = useOrderedCTAs({
+  const { orderedCTAs, performedUserActionObj } = useOrderedCTAs({
     performedUserActionTypes,
     excludeUserActionTypes,
   })
@@ -27,11 +27,11 @@ export function SuccessScreenCTAS({
       {orderedCTAs.map(cta => {
         const completedCampaigns = cta.campaigns.reduce((acc, campaign) => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
-          return performeduserActionObj[key] ? acc + 1 : acc
+          return performedUserActionObj[key] ? acc + 1 : acc
         }, 0)
         const filteredCampaigns = cta.campaigns.filter(campaign => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
-          return campaign.isCampaignActive || !!performeduserActionObj[key]
+          return campaign.isCampaignActive || !!performedUserActionObj[key]
         })
 
         return (
@@ -49,7 +49,7 @@ export function SuccessScreenCTAS({
             key={cta.title + cta.description}
             link={cta.link}
             mobileCTADescription={cta.mobileCTADescription}
-            performedUserActions={performeduserActionObj}
+            performedUserActions={performedUserActionObj}
             title={cta.title}
           />
         )

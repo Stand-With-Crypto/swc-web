@@ -27,7 +27,7 @@ export function useOrderedCTAs({
   performedUserActionTypes,
   excludeUserActionTypes,
 }: UseOrderedCTAsProps) {
-  const performeduserActionObj = useMemo(() => {
+  const performedUserActionObj = useMemo(() => {
     return performedUserActionTypes.length
       ? performedUserActionTypes.reduce(
           (acc, performedUserAction) => {
@@ -64,7 +64,7 @@ export function useOrderedCTAs({
       const completedActions = cta.campaigns
         .map(campaign => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
-          if (!performeduserActionObj[key]) return
+          if (!performedUserActionObj[key]) return
 
           return key
         })
@@ -76,7 +76,7 @@ export function useOrderedCTAs({
     })
 
     return uniqBy([...incompleteCTAs, ...completeCTAs], cta => `${cta.title}-${cta.description}`)
-  }, [filteredInactiveCampaigns, performeduserActionObj])
+  }, [filteredInactiveCampaigns, performedUserActionObj])
 
-  return { orderedCTAs, performeduserActionObj }
+  return { orderedCTAs, performedUserActionObj }
 }
