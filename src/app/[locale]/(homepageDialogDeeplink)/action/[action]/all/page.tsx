@@ -17,7 +17,7 @@ export default function UserActionCampaigns() {
   const { data, isLoading } = useApiResponseForUserPerformedUserActionTypes()
   const performedUserActionTypes = data?.performedUserActionTypes ?? []
 
-  const { performeduserActionObj } = useGridCTAs({
+  const { performedUserActionObj } = useGridCTAs({
     performedUserActionTypes,
   })
 
@@ -37,7 +37,7 @@ export default function UserActionCampaigns() {
       <UserActionGridCampaignsDialogContent
         campaigns={cta.campaigns}
         description={cta.description}
-        performedUserActions={performeduserActionObj}
+        performedUserActions={performedUserActionObj}
         title={cta.title}
       />
     </div>

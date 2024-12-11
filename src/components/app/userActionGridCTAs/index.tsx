@@ -19,7 +19,7 @@ export function UserActionGridCTAs({
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const performedUserActionTypes = data?.performedUserActionTypes ?? []
 
-  const { ctas, performeduserActionObj } = useGridCTAs({
+  const { ctas, performedUserActionObj } = useGridCTAs({
     excludeUserActionTypes,
     performedUserActionTypes,
   })
@@ -29,11 +29,11 @@ export function UserActionGridCTAs({
       {ctas.map(cta => {
         const completedCampaigns = cta.campaigns.reduce((acc, campaign) => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
-          return performeduserActionObj[key] ? acc + 1 : acc
+          return performedUserActionObj[key] ? acc + 1 : acc
         }, 0)
         const filteredCampaigns = cta.campaigns.filter(campaign => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
-          return campaign.isCampaignActive || !!performeduserActionObj[key]
+          return campaign.isCampaignActive || !!performedUserActionObj[key]
         })
 
         return (
@@ -51,7 +51,7 @@ export function UserActionGridCTAs({
             key={cta.title + cta.description}
             link={cta.link}
             mobileCTADescription={cta.mobileCTADescription}
-            performedUserActions={performeduserActionObj}
+            performedUserActions={performedUserActionObj}
             title={cta.title}
           />
         )
