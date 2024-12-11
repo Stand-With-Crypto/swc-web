@@ -92,7 +92,7 @@ export const ADVOCATES_ACTIONS: Partial<
   },
   EMAIL: {
     icon: EmailIcon,
-    label: 'Email sent to congress',
+    label: 'Email sent to senate',
     labelMobile: 'emailed',
     labelActionTooltip: () => 'emailed their rep',
   },
@@ -126,12 +126,6 @@ export const ADVOCATES_ACTIONS: Partial<
   //   label: 'Pledged to vote',
   //   labelMobile: 'pledged to vote',
   //   labelActionTooltip: () => 'pledged to vote',
-  // },
-  // VIEW_KEY_RACES: {
-  //   icon: ViewKeyRacesIcon,
-  //   label: 'Researched politician scores',
-  //   labelMobile: 'researched',
-  //   labelActionTooltip: () => 'researched politician scores',
   // },
   // VOTING_INFORMATION_RESEARCHED: {
   //   icon: PrepareToVoteIcon,
