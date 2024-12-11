@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export function DonateButton() {
   const [buttonState, setButtonState] = React.useState<'completed' | 'loading'>('completed')
@@ -36,9 +37,16 @@ export function DonateButton() {
   }
   return (
     <div className="flex justify-center">
-      <Button disabled={buttonState === 'loading'} onClick={handleDonateClick} size="lg">
-        Donate
-      </Button>
+      <ErrorBoundary
+        severityLevel="fatal"
+        tags={{
+          domain: 'DonateButton',
+        }}
+      >
+        <Button disabled={buttonState === 'loading'} onClick={handleDonateClick} size="lg">
+          Donate
+        </Button>
+      </ErrorBoundary>
     </div>
   )
 }

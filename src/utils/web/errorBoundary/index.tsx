@@ -1,12 +1,14 @@
+'use client'
+
 import { ReactNode } from 'react'
 import * as Sentry from '@sentry/react'
 import { Extras, Primitive } from '@sentry/types'
 
-import { ErrorFallbackComponent } from '@/components/app/errorBoundary/fallback'
+import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
+import { ErrorFallbackComponent } from '@/utils/web/errorBoundary/fallback'
 
 interface ErrorBoundaryProps extends Sentry.ErrorBoundaryProps {
   children: ReactNode
-  sessionId?: string
   tags?: { [key: string]: Primitive }
   extras?: Extras
   fallback?: Sentry.ErrorBoundaryProps['fallback']
@@ -15,7 +17,6 @@ interface ErrorBoundaryProps extends Sentry.ErrorBoundaryProps {
 
 export function ErrorBoundary({
   children,
-  sessionId,
   tags,
   extras,
   fallback,
@@ -24,6 +25,8 @@ export function ErrorBoundary({
   return (
     <Sentry.ErrorBoundary
       beforeCapture={scope => {
+        const sessionId = getUserSessionIdOnClient()
+
         if (sessionId) {
           scope.setUser({
             id: sessionId,
