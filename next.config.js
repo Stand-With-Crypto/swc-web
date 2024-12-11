@@ -607,6 +607,11 @@ const nextConfig = {
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
         permanent: true,
       },
+      {
+        source: '/races',
+        destination: '/politicians',
+        permanent: true,
+      },
     ]
   },
 }

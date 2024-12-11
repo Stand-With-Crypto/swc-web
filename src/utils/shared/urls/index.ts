@@ -86,6 +86,7 @@ export const getIntlUrls = (
     advocacyToolkit: () => `${localePrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${localePrefix}/creator-defense-fund`,
     press: () => `${localePrefix}/press`,
+    emailDeeplink: () => `${localePrefix}/action/email`,
   }
 }
 

@@ -2,10 +2,10 @@ import { UserActionType } from '@prisma/client'
 
 import {
   DonateIcon,
+  EmailIcon,
   FollowOnXIcon,
   IconProps,
   JoinIcon,
-  VotedIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 
 export const STATE_COORDS: Record<string, [number, number]> = {
@@ -83,17 +83,18 @@ export const ADVOCATES_ACTIONS: Partial<
   //   labelMobile: 'called',
   //   labelActionTooltip: () => 'called their rep',
   // },
-  // EMAIL: {
-  //   icon: EmailIcon,
-  //   label: 'Email sent to congress',
-  //   labelMobile: 'emailed',
-  //   labelActionTooltip: () => 'emailed their rep',
-  // },
+
   OPT_IN: {
     icon: JoinIcon,
     label: 'New member joined',
     labelMobile: 'joined',
     labelActionTooltip: () => 'joined SWC',
+  },
+  EMAIL: {
+    icon: EmailIcon,
+    label: 'Email sent to congress',
+    labelMobile: 'emailed',
+    labelActionTooltip: () => 'emailed their rep',
   },
   TWEET: {
     icon: FollowOnXIcon,
@@ -101,12 +102,12 @@ export const ADVOCATES_ACTIONS: Partial<
     labelMobile: 'Followed SWC on X',
     labelActionTooltip: () => 'followed SWC on X',
   },
-  VOTING_DAY: {
-    icon: VotedIcon,
-    label: 'Claimed "I Voted" NFT',
-    labelMobile: 'Claimed "I Voted" NFT',
-    labelActionTooltip: () => 'claimed the "I Voted" NFT',
-  },
+  // VOTING_DAY: {
+  //   icon: VotedIcon,
+  //   label: 'Claimed "I Voted" NFT',
+  //   labelMobile: 'Claimed "I Voted" NFT',
+  //   labelActionTooltip: () => 'claimed the "I Voted" NFT',
+  // },
   DONATION: {
     icon: DonateIcon,
     label: 'Donated to SWC',
