@@ -31,7 +31,7 @@ export const AllOptions: Story = {
       <div className="space-y-8">
         {variants.map(variant => (
           <div className="w-full max-w-xl" key={variant}>
-            <PageTitle className="mb-4" size="sm">
+            <PageTitle className="mb-4" size="md">
               {variant}
             </PageTitle>
             <div className="flex flex-col gap-4 md:flex-row">

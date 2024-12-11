@@ -86,7 +86,7 @@ export function LocationRaceSpecific({
             )
           })()}
         </h2>
-        <PageTitle as="h1" className="mb-4" size="md">
+        <PageTitle as="h1" className="mb-4" size="lg">
           {!stateCode
             ? 'U.S. Presidential Race'
             : district
@@ -147,7 +147,7 @@ export function LocationRaceSpecific({
                 <div className="w-full py-10 md:py-20">
                   {person.stances.length ? (
                     <>
-                      <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                      <PageTitle as="h3" className="mb-8 md:mb-14" size="md">
                         {possessive(dtsiPersonFullName(person))} statements on crypto
                       </PageTitle>
                       <MaybeOverflowedStances

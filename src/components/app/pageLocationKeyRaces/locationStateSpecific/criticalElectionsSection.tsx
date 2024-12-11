@@ -44,7 +44,7 @@ export function CriticalElectionsSection(props: CriticalElectionsSectionProps) {
 
   if (!hasCriticalElections) {
     return (
-      <PageTitle as="h3" size="sm">
+      <PageTitle as="h3" size="md">
         There's no critical elections in {stateName}
       </PageTitle>
     )
@@ -54,7 +54,6 @@ export function CriticalElectionsSection(props: CriticalElectionsSectionProps) {
     <ContentSection
       subtitle="These elections are critical to the future of crypto in America. View live updates below."
       title={`Critical elections in ${stateName}`}
-      titleProps={{ size: 'xs' }}
     >
       <LiveResultsGrid
         className={criticalElectionsCount === 1 ? 'flex items-center justify-center' : ''}

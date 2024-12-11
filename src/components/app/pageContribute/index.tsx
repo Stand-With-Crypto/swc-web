@@ -81,10 +81,10 @@ export function PageContribute() {
                           a11yTitle="Email template"
                           className={cn(dialogContentPaddingStyles, 'max-w-3xl')}
                         >
-                          <PageTitle as="h4" size="sm">
+                          <PageTitle as="h4" size="md">
                             Sample Email Copy
                           </PageTitle>
-                          <div className="prose max-w-full rounded-2xl bg-secondary p-5">
+                          <div className="prose my-8 max-w-full rounded-2xl bg-secondary p-5">
                             <p>All,</p>
 
                             <p>
@@ -276,7 +276,7 @@ export function PageContribute() {
               width={128}
             />
           </div>
-          <PageTitle as="h3" className="mb-2" size="sm">
+          <PageTitle as="h3" className="mb-2" size="md">
             {title}
           </PageTitle>
           <PageSubTitle as="h4" className="mb-9" size="sm">

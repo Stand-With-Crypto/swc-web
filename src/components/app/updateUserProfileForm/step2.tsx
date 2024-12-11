@@ -60,7 +60,7 @@ export function UpdateUserInformationVisibilityForm({
   return (
     <Form {...form}>
       <div>
-        <PageTitle className="mb-1" size="sm">
+        <PageTitle className="mb-1" size="md">
           How you appear on Stand With Crypto
         </PageTitle>
         <PageSubTitle className="mb-7" size="md">

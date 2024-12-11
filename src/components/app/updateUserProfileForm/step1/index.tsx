@@ -116,7 +116,7 @@ export function UpdateUserProfileForm({
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
         <div>
-          <PageTitle className="mb-1" size="sm">
+          <PageTitle className="mb-1" size="md">
             {hasCompleteUserProfile(user) ? 'Edit' : 'Finish'} your profile
           </PageTitle>
           <PageSubTitle className="mb-7" size="md">
