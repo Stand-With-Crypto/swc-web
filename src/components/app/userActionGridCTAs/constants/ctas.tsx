@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
