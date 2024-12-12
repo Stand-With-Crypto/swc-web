@@ -12,6 +12,7 @@ import BecomeMemberReminderEmail from '@/utils/server/email/templates/becomeMemb
 import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
 import ContactYourRepresentativeReminderEmail from '@/utils/server/email/templates/contactYourRepresentativeReminder'
 import FinishSettingUpProfileReminderEmail from '@/utils/server/email/templates/finishSettingUpProfileReminder'
+import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXReminder'
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -131,6 +132,19 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       await step.sleep('wait-for-membership-reminder-follow-up', followUpTimeout)
     }
 
+    const hasFollowedOnX = await hasUserCompletedAction(payload.userId, UserActionType.TWEET)
+    if (!hasFollowedOnX) {
+      await step.run('send-follow-on-x-reminder', async () =>
+        sendInitialSignUpEmail({
+          userId: payload.userId,
+          sessionId: payload.sessionId,
+          userCommunicationJourneyId: userCommunicationJourney.id,
+          step: 'follow-on-x-reminder',
+        }),
+      )
+      await step.sleep('wait-for-follow-on-x-reminder-follow-up', followUpTimeout)
+    }
+
     const hasCalledAndEmailed =
       (await hasUserCompletedAction(payload.userId, UserActionType.CALL)) &&
       (await hasUserCompletedAction(payload.userId, UserActionType.EMAIL))
@@ -231,6 +245,7 @@ const TEMPLATE_BY_STEP = {
   'update-profile-reminder': FinishSettingUpProfileReminderEmail,
   'phone-number-reminder': PhoneNumberReminderEmail,
   'membership-reminder': BecomeMemberReminderEmail,
+  'follow-on-x-reminder': FollowOnXReminderEmail,
   'contact-your-rep-reminder': ContactYourRepresentativeReminderEmail,
 }
 
