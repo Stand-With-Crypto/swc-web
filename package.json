@@ -5,8 +5,7 @@
   "scripts": {
     "ts": "TZ=UTC dotenv -- tsx --tsconfig ./tsconfig.bin.json",
     "ts:ci": "TZ=UTC tsx --tsconfig ./tsconfig.bin.json",
-    "dev": "next dev",
-    "dev:turbo": "SENTRY_SUPPRESS_TURBOPACK_WARNING=1 next dev --turbopack",
+    "dev": "SENTRY_SUPPRESS_TURBOPACK_WARNING=1 next dev --turbopack",
     "email:dev": "email dev --dir \"src/utils/server/email/templates\" --port 3333",
     "build": "CI_OVERRIDES=true next build",
     "postbuild": "next-sitemap",
@@ -101,7 +100,7 @@
     "mixpanel-browser": "^2.48.1",
     "motion": "^12.0.0-alpha.2",
     "nanoid": "^5.0.5",
-    "next": "^15.0.3",
+    "next": "^15.1.0",
     "next-i18n-router": "^5.0.2",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
