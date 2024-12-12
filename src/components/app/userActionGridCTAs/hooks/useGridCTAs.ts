@@ -21,7 +21,7 @@ export function useGridCTAs({
   const locale = useLocale()
   const isProfilePage = pathname?.includes(getIntlUrls(locale).profile())
 
-  const performeduserActionObj = performedUserActionTypes.length
+  const performedUserActionObj = performedUserActionTypes.length
     ? performedUserActionTypes.reduce(
         (acc, performedUserAction) => {
           acc[`${performedUserAction.actionType}-${performedUserAction.campaignName}`] =
@@ -47,12 +47,12 @@ export function useGridCTAs({
          * If we are on the profile page, we want to show all the CTAs, including
          * those with campaigns inactive if the user has already performed them.
          */
-        return campaign.isCampaignActive || (isProfilePage && !!performeduserActionObj[key])
+        return campaign.isCampaignActive || (isProfilePage && !!performedUserActionObj[key])
       })
 
       return { ...cta, campaigns: filteredCampaigns }
     })
     .filter(cta => cta.campaigns.length > 0)
 
-  return { ctas: filteredInactiveCampaigns, performeduserActionObj }
+  return { ctas: filteredInactiveCampaigns, performedUserActionObj }
 }
