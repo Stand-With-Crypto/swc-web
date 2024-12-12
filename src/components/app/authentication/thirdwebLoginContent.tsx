@@ -1,4 +1,5 @@
 'use client'
+
 import { useCallback, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { AuthOption } from 'node_modules/thirdweb/dist/types/wallets/types'
@@ -25,6 +26,7 @@ import { isCypress } from '@/utils/shared/executionEnvironment'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { apiUrls } from '@/utils/shared/urls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 import { theme } from '@/utils/web/thirdweb/theme'
 
 export interface ThirdwebLoginContentProps extends Omit<ConnectEmbedProps, 'client'> {
@@ -91,7 +93,12 @@ export function ThirdwebLoginContent({
   }, [initialEmailAddress])
 
   return (
-    <>
+    <ErrorBoundary
+      severityLevel="fatal"
+      tags={{
+        domain: 'ThirdwebLoginContent',
+      }}
+    >
       <DialogBody className="-mt-8">
         <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
           <div className="flex flex-col items-center space-y-6 pt-6">
@@ -139,7 +146,7 @@ export function ThirdwebLoginContent({
           </p>
         </DialogFooterCTA>
       </DialogBody>
-    </>
+    </ErrorBoundary>
   )
 }
 
