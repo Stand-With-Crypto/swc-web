@@ -592,6 +592,11 @@ const nextConfig = {
         destination: '/politicians',
         permanent: true,
       },
+      {
+        source: '/vote',
+        destination: '/politicians',
+        permanent: true,
+      },
     ]
   },
 }
