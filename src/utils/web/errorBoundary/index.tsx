@@ -5,23 +5,15 @@ import * as Sentry from '@sentry/react'
 import { Extras, Primitive } from '@sentry/types'
 
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
-import { ErrorFallbackComponent } from '@/utils/web/errorBoundary/fallback'
 
 interface ErrorBoundaryProps extends Sentry.ErrorBoundaryProps {
   children: ReactNode
   tags?: { [key: string]: Primitive }
   extras?: Extras
-  fallback?: Sentry.ErrorBoundaryProps['fallback']
   severityLevel?: Sentry.SeverityLevel
 }
 
-export function ErrorBoundary({
-  children,
-  tags,
-  extras,
-  fallback,
-  severityLevel,
-}: ErrorBoundaryProps) {
+export function ErrorBoundary({ children, tags, extras, severityLevel }: ErrorBoundaryProps) {
   return (
     <Sentry.ErrorBoundary
       beforeCapture={scope => {
@@ -42,11 +34,12 @@ export function ErrorBoundary({
           scope.setExtras(extras)
         }
 
-        scope.setLevel(severityLevel ?? 'warning')
+        if (severityLevel) {
+          scope.setLevel(severityLevel)
+        }
 
         return scope
       }}
-      fallback={fallback ?? ErrorFallbackComponent}
     >
       {children}
     </Sentry.ErrorBoundary>
