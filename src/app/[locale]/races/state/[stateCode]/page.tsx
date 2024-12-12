@@ -17,8 +17,8 @@ import {
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const revalidate = 900 // 15 minutes
-export const dynamic = 'error'
-export const dynamicParams = false
+export const dynamic = 'auto'
+export const dynamicParams = true
 
 type LocationStateSpecificPageProps = PageProps<{
   stateCode: string

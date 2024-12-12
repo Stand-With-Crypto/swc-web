@@ -16,7 +16,7 @@ import { toBool } from '@/utils/shared/toBool'
 import { getData } from './getData'
 
 export const revalidate = 604800 // 1 week
-export const dynamic = 'error'
+export const dynamic = 'auto'
 export const dynamicParams = true
 
 type Props = PageProps<{ dtsiSlug: string }>
