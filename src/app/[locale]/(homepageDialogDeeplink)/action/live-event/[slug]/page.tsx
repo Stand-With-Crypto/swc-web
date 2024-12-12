@@ -1,3 +1,4 @@
+import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -8,6 +9,7 @@ import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
@@ -41,10 +43,24 @@ export default async function UserActionLiveEventDeepLink(props: Props) {
   }
 
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
-      <div className={dialogContentPaddingStyles}>
-        <UserActionFormLiveEventDeeplinkWrapper slug={slug as UserActionLiveEventCampaignName} />
-      </div>
-    </HomepageDialogDeeplinkLayout>
+    <ErrorBoundary
+      extras={{
+        action: {
+          isDeeplink: true,
+          actionType: UserActionType.LIVE_EVENT,
+          campaignName: slug,
+        },
+      }}
+      severityLevel="error"
+      tags={{
+        domain: 'UserActionLiveEventDeepLink',
+      }}
+    >
+      <HomepageDialogDeeplinkLayout pageParams={params}>
+        <div className={dialogContentPaddingStyles}>
+          <UserActionFormLiveEventDeeplinkWrapper slug={slug as UserActionLiveEventCampaignName} />
+        </div>
+      </HomepageDialogDeeplinkLayout>
+    </ErrorBoundary>
   )
 }
