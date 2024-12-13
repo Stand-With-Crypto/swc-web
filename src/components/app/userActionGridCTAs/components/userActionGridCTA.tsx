@@ -1,42 +1,98 @@
+import { Fragment } from 'react'
+
 import { UserActionCard } from '@/components/app/userActionGridCTAs/components/userActionCard'
 import { UserActionGridCampaignsDialog } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
 import type { UserActionCardProps as UserActionGridCTAProps } from '@/components/app/userActionGridCTAs/types'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export function UserActionGridCTA(props: UserActionGridCTAProps) {
-  if (props.link) {
-    // If the link property is present, the CTA will function as a link, even if there are multiple campaigns.
-    const LinkComponent = props.link
-    return (
-      <LinkComponent>
-        <UserActionCard {...props} />
-      </LinkComponent>
-    )
-  }
+  const firstCampaign = props.campaigns[0]
 
   // If there is only one campaign, clicking the CTA will trigger the WrapperComponent for that campaign.
   const shouldUseFirstCampaignWrapperComponent = props.campaignsLength === 1
 
-  if (shouldUseFirstCampaignWrapperComponent) {
-    const WrapperComponent = props.campaigns[0].WrapperComponent
-
-    if (!WrapperComponent) {
-      return <UserActionCard {...props} />
-    }
+  if (props.link) {
+    // If the link property is present, the CTA will function as a link, even if there are multiple campaigns.
+    const LinkComponent = props.link
 
     return (
-      <WrapperComponent>
-        <UserActionCard {...props} />
-      </WrapperComponent>
+      <ErrorBoundary
+        extras={{
+          action: {
+            campaignName: firstCampaign.campaignName,
+            actionType: firstCampaign.actionType,
+            isActive: firstCampaign.isCampaignActive,
+            title: firstCampaign.title,
+            description: firstCampaign.description,
+            singleCampaign: shouldUseFirstCampaignWrapperComponent,
+            isLink: true,
+          },
+        }}
+        severityLevel="error"
+        tags={{
+          domain: 'UserActionGridCTA',
+        }}
+      >
+        <LinkComponent>
+          <UserActionCard {...props} />
+        </LinkComponent>
+      </ErrorBoundary>
+    )
+  }
+
+  if (shouldUseFirstCampaignWrapperComponent) {
+    const WrapperComponent = firstCampaign.WrapperComponent ?? Fragment
+
+    return (
+      <ErrorBoundary
+        extras={{
+          action: {
+            campaignName: firstCampaign.campaignName,
+            actionType: firstCampaign.actionType,
+            isActive: firstCampaign.isCampaignActive,
+            title: firstCampaign.title,
+            description: firstCampaign.description,
+            singleCampaign: shouldUseFirstCampaignWrapperComponent,
+            isLink: false,
+          },
+        }}
+        severityLevel="error"
+        tags={{
+          domain: 'UserActionGridCTA',
+        }}
+      >
+        <WrapperComponent>
+          <UserActionCard {...props} />
+        </WrapperComponent>
+      </ErrorBoundary>
     )
   }
 
   return (
-    <UserActionGridCampaignsDialog
-      {...props}
-      description={props.campaignsModalDescription}
-      performedUserActions={props.performedUserActions}
+    <ErrorBoundary
+      extras={{
+        action: {
+          campaignName: firstCampaign.campaignName,
+          actionType: firstCampaign.actionType,
+          isActive: firstCampaign.isCampaignActive,
+          title: firstCampaign.title,
+          description: firstCampaign.description,
+          singleCampaign: shouldUseFirstCampaignWrapperComponent,
+          isLink: false,
+        },
+      }}
+      severityLevel="error"
+      tags={{
+        domain: 'UserActionGridCTA',
+      }}
     >
-      <UserActionCard {...props} />
-    </UserActionGridCampaignsDialog>
+      <UserActionGridCampaignsDialog
+        {...props}
+        description={props.campaignsModalDescription}
+        performedUserActions={props.performedUserActions}
+      >
+        <UserActionCard {...props} />
+      </UserActionGridCampaignsDialog>
+    </ErrorBoundary>
   )
 }

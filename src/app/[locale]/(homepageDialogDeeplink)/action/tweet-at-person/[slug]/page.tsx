@@ -1,3 +1,4 @@
+import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -10,6 +11,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = SECONDS_DURATION['30_SECONDS']
 export const dynamic = 'error'
@@ -47,12 +49,26 @@ export default async function UserActionTweetAtPersonDeepLink({ params }: Props)
   }
 
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
-      <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
-        <UserActionFormTweetToPersonDeeplinkWrapper
-          slug={slug as UserActionTweetAtPersonCampaignName}
-        />
-      </div>
-    </HomepageDialogDeeplinkLayout>
+    <ErrorBoundary
+      extras={{
+        action: {
+          isDeeplink: true,
+          actionType: UserActionType.TWEET_AT_PERSON,
+          campaignName: slug,
+        },
+      }}
+      severityLevel="error"
+      tags={{
+        domain: 'UserActionTweetAtPersonDeepLink',
+      }}
+    >
+      <HomepageDialogDeeplinkLayout pageParams={params}>
+        <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
+          <UserActionFormTweetToPersonDeeplinkWrapper
+            slug={slug as UserActionTweetAtPersonCampaignName}
+          />
+        </div>
+      </HomepageDialogDeeplinkLayout>
+    </ErrorBoundary>
   )
 }
