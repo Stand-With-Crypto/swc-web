@@ -1,4 +1,16 @@
-import { INTERNAL_BASE_URL } from '@/utils/shared/urls'
+// Do NOT abstract this function or import any SWC-specific code into this file.
+function getBaseUrl() {
+  switch (process.env.NEXT_PUBLIC_ENVIRONMENT) {
+    case 'production':
+      return 'https://www.standwithcrypto.org'
+    case 'preview':
+      return `https://${process.env.VERCEL_URL!}`
+    default:
+      return 'http://localhost:3000'
+  }
+}
+
+const INTERNAL_BASE_URL = getBaseUrl()
 
 export function buildTemplateInternalUrl(path: string, params: Record<string, unknown> = {}) {
   if (!path.startsWith('/')) {

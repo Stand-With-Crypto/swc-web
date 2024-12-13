@@ -299,16 +299,6 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: '/races/state',
-        destination: '/races',
-        permanent: false,
-      },
-      {
-        source: '/locations/us/:paths*',
-        destination: '/races/:paths*',
-        permanent: true,
-      },
-      {
         source: '/resources/fit21/docs/FIT21%20SWC%20Founder%20Letter.pdf',
         destination: '/resources/fit21/docs/FIT21%20SWC%20Founder%20Support%20Letter.pdf',
         permanent: true,
@@ -346,16 +336,6 @@ const nextConfig: NextConfig = {
         source: '/secvote/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=crenshawvote&sessionId=:sessionId*',
-        permanent: true,
-      },
-      {
-        source: '/results',
-        destination: '/races?utm_source=swc&utm_medium=sms&utm_campaign=election-results-2024-2',
-        permanent: true,
-      },
-      {
-        source: '/election',
-        destination: '/races?utm_source=swc&utm_medium=sms&utm_campaign=election-results-2024',
         permanent: true,
       },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
@@ -607,6 +587,16 @@ const nextConfig: NextConfig = {
       {
         source: '/cb-vote-adv-push',
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
+        permanent: true,
+      },
+      {
+        source: '/races',
+        destination: '/politicians',
+        permanent: true,
+      },
+      {
+        source: '/vote',
+        destination: '/politicians',
         permanent: true,
       },
     ]
