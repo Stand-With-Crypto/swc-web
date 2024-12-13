@@ -10,6 +10,7 @@ import { Footer } from '@/components/app/footer'
 import { GeoLocationDisclaimerBanner } from '@/components/app/geoLocationDisclaimerBanner/geoLocationDisclaimerBanner'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
 import { Navbar } from '@/components/app/navbar'
+import { NavbarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
@@ -66,6 +67,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <GeoLocationDisclaimerBanner />
+            <NavbarGlobalBanner locale={locale} />
             <Navbar locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer locale={locale} />
