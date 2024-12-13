@@ -6,9 +6,7 @@ import { noop } from 'lodash-es'
 
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
-import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
-import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
@@ -16,8 +14,6 @@ import {
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
-import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import {
   getYourPoliticianCategoryDisplayName,
   YourPoliticianCategory,
@@ -73,10 +69,6 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Supp
   }
   const people = res.data.dtsiPeople
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
-  const stateCode = res.data.dtsiPeople.find(x => x.primaryRole?.primaryState)?.primaryRole
-    ?.primaryState as USStateCode | undefined
-
-  const urls = getIntlUrls(locale)
   return (
     <div>
       <p className="mb-3 text-center text-sm text-fontcolor-muted">
@@ -85,26 +77,6 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Supp
           {address.description}
         </button>
       </p>
-
-      {stateCode && (
-        <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center gap-4 rounded-3xl bg-muted p-6 sm:flex-row">
-          <div>
-            <h4 className="text-xl font-bold">Your crypto voter guide</h4>
-            <p className="mt-4 text-fontcolor-muted">
-              It looks like you’re in {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}. Take a look at
-              our crypto voter guide for more key info on the role your state plays in crypto
-              regulation.
-            </p>
-          </div>
-          <div className="max-sm:w-full">
-            <Button asChild className="w-full">
-              <InternalLink href={urls.locationStateSpecific(stateCode)}>
-                {stateCode} voter guide
-              </InternalLink>
-            </Button>
-          </div>
-        </div>
-      )}
       <p
         className="mb-3 text-center text-xl font-bold"
         data-test-id="dtsi-people-associated-with-address"

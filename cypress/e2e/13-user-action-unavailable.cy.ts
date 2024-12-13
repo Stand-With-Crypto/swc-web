@@ -1,13 +1,7 @@
 /// <reference types="cypress" />
 
 describe('disabled user actions for non-US users', () =>
-  [
-    '/action/email',
-    '/action/call',
-    '/action/share',
-    '/action/voter-registration',
-    '/action/nft-mint',
-  ].forEach(action => {
+  ['/action/email', '/action/call', '/action/share', '/action/nft-mint'].forEach(action => {
     it(`should show user action unavailable message for ${action}`, () => {
       cy.visit(action)
       cy.setCookie('USER_COUNTRY_CODE', 'BR')
