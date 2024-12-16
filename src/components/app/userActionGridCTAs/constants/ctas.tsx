@@ -1,19 +1,14 @@
-import { Suspense } from 'react'
 import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
-import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
-import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
-import { UserActionVotingDayDialog } from '@/components/app/userActionVotingDay/dialog'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -88,15 +83,11 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VOTING_DAY,
         campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'I voted!',
-        description: 'Claim your "proof-of-vote" NFT.',
+        description: 'Claimed your "proof-of-vote" NFT.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <Suspense fallback={children}>
-            <UserActionVotingDayDialog>{children}</UserActionVotingDayDialog>
-          </Suspense>
-        ),
+        WrapperComponent: null,
       },
     ],
   },
@@ -119,8 +110,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Send an email',
-    description: 'Email your representatives and tell them crypto matters.',
+    title: 'Email Your Senator',
+    description: 'Tell your Senator you oppose anti-crypto commissioners on the SEC.',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -128,9 +119,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
-        isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
+        isCampaignActive: false,
         title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        // description: 'Make your voice heard. We make it easy.', // TODO: RETURN THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
         description: 'You emailed your representative about FIT21.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
@@ -170,6 +160,15 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailDebateDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
+        isCampaignActive: true,
+        title: 'Email Your Senator',
+        description: 'Tell your Senator you oppose anti-crypto commissioners on the SEC.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
     ],
   },
@@ -215,13 +214,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Get informed',
         description: 'See where your politicians stand on crypto.',
         canBeTriggeredMultipleTimes: false,
-        WrapperComponent: ({ children }) => {
-          return (
-            <Suspense fallback={children}>
-              <KeyRacesDialog>{children}</KeyRacesDialog>
-            </Suspense>
-          )
-        },
+        WrapperComponent: null,
       },
     ],
   },
@@ -239,7 +232,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Check your voter registration',
         description: 'Make sure you’re registered to vote in this year’s election.',
         canBeTriggeredMultipleTimes: false,
-        WrapperComponent: UserActionFormVoterRegistrationDialog,
+        WrapperComponent: null,
       },
     ],
   },
@@ -258,21 +251,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         canBeTriggeredMultipleTimes: false,
         title: 'Prepare to vote',
         description: 'Find your polling location and learn about early voting options.',
-        WrapperComponent: ({ children }) => {
-          return (
-            <Suspense fallback={children}>
-              <UserActionFormVotingInformationResearchedDialog
-                initialValues={{
-                  campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
-                  address: undefined,
-                  shouldReceiveNotifications: false,
-                }}
-              >
-                {children}
-              </UserActionFormVotingInformationResearchedDialog>
-            </Suspense>
-          )
-        },
+        WrapperComponent: null,
       },
     ],
   },

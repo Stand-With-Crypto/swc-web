@@ -4,13 +4,12 @@ import { Button } from '@/components/ui/button'
 
 interface JoinSWCProps {
   onClose: () => void
-  isVotingDay?: boolean
   title?: string
   description?: string
 }
 
 export function JoinSWC(props: JoinSWCProps) {
-  const { onClose, isVotingDay, title, description } = props
+  const { onClose, title, description } = props
 
   return (
     <div className="flex h-full min-h-[400px] flex-col gap-4">
@@ -19,7 +18,6 @@ export function JoinSWC(props: JoinSWCProps) {
           description ??
           'You did your part to save crypto. Join Stand With Crypto to become a member or sign in to have this action count towards your advocacy progress.'
         }
-        isVotingDay={isVotingDay}
         title={title ?? 'Nice work!'}
       />
 

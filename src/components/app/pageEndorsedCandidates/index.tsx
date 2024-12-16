@@ -1,8 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
-
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
@@ -22,21 +19,17 @@ interface LocationStateSpecificProps extends DTSI_EndorsedCandidatesQuery {
 export function PageEndorsedCandidates({ people, locale }: LocationStateSpecificProps) {
   const urls = getIntlUrls(locale)
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces()
-  }, [])
-
   return (
     <div className="space-y-20">
       <DarkHeroSection>
         <div className="container space-y-4 text-center">
           <h2>
-            <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
+            <InternalLink className="text-gray-400" href={urls.endorsedCandidates()}>
               United States
             </InternalLink>{' '}
             / <span>Endorsements</span>
           </h2>
-          <PageTitle as="h1" size="md">
+          <PageTitle as="h1" size="lg">
             Stand With Crypto PAC 2024 House and Senate Endorsements
           </PageTitle>
           <h3 className="font-mono text-xl font-light">

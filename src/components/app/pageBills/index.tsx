@@ -33,7 +33,7 @@ export function PageBills(props: PageBillsProps) {
         { results: otherBills, sectionTitle: 'Other Crypto Bills' },
       ].map(({ results, sectionTitle }) => (
         <section key={sectionTitle}>
-          <PageTitle as="h3" className="mb-5" size="sm">
+          <PageTitle as="h3" className="mb-5">
             {sectionTitle}
           </PageTitle>
           <div className="flex flex-col gap-4 lg:gap-8">

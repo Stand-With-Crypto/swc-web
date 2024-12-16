@@ -80,7 +80,7 @@ export function PageAdvocacyToolkit({ title, description }: PageAdvocacyToolkitP
     <div className="standard-spacing-from-navbar container">
       <section className="space-y-14">
         <div className="container flex flex-col items-center gap-4">
-          <PageTitle className="mb-7 font-sans !text-5xl">{title}</PageTitle>
+          <PageTitle className="mb-7">{title}</PageTitle>
           <PageSubTitle className="text-muted-foreground" size="md">
             {description}
           </PageSubTitle>

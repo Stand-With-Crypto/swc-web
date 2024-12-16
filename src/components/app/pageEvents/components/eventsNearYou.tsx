@@ -5,7 +5,7 @@ import Balancer from 'react-wrap-balancer'
 
 import { EventCard } from '@/components/app/pageEvents/components/eventCard'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
@@ -48,9 +48,7 @@ function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
 
   return (
     <section className="grid w-full items-center gap-4 lg:gap-6">
-      <PageSubTitle className="text-bold text-center font-sans text-xl text-foreground">
-        Events near you
-      </PageSubTitle>
+      <PageTitle as="h3">Events near you</PageTitle>
 
       <div className="mx-auto w-full max-w-[562px]">
         <GooglePlacesSelect

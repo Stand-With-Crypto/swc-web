@@ -23,7 +23,7 @@ export function EventsPage({ events, isDeepLink }: EventsPageProps) {
   return (
     <div
       className={cn(
-        'container flex w-full flex-col items-center gap-10 px-6 pt-10 sm:gap-20 sm:pt-20 lg:gap-[6.25rem]',
+        'standard-spacing-from-navbar container flex w-full flex-col items-center gap-10 px-6 sm:gap-20 lg:gap-[6.25rem]',
         isDeepLink && 'h-screen',
       )}
     >
