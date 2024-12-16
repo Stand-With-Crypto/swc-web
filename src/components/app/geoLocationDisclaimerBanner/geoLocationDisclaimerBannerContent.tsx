@@ -77,7 +77,7 @@ export function GeoLocationDisclaimerBannerContent() {
 
   return (
     <InternalLink className="h-full w-full" href={urls.emailDeeplink()}>
-      <div className="flex h-full w-full items-center justify-center py-2 text-center text-base text-white antialiased">
+      <div className="flex h-full w-full items-center justify-center py-2 text-center text-base leading-normal text-white antialiased">
         <Balancer>
           Make your voice heard — tell your Senators to vote NO on an anti-crypto SEC nominee!
         </Balancer>
