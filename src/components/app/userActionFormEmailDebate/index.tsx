@@ -162,7 +162,7 @@ export function UserActionFormEmailDebate({
       >
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
-            <PageTitle className="mb-3" size="sm">
+            <PageTitle className="mb-3" size="md">
               Ask ABC to include crypto at the Debate
             </PageTitle>
             <PageSubTitle className="mb-7">

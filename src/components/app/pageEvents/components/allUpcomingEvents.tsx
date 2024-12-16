@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { EventsMap } from '@/components/app/pageEvents/components/eventsMap'
 import { UpcomingEventsList } from '@/components/app/pageEvents/components/upcomingEvents'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 
@@ -25,9 +25,7 @@ export function AllUpcomingEvents({ events }: AllUpcomingEventsProps) {
 
   return (
     <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
-      <PageSubTitle className="text-bold font-sans text-xl text-foreground">
-        All upcoming events
-      </PageSubTitle>
+      <PageTitle as="h3">All upcoming events</PageTitle>
       {!isMobile && (
         <div className="flex items-center justify-center gap-4 rounded-lg bg-backgroundAlternate px-4 py-3">
           <button onClick={() => setDisplayOption('map')}>

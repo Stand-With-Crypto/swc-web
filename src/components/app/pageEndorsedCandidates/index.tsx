@@ -29,7 +29,7 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
             </InternalLink>{' '}
             / <span>Endorsements</span>
           </h2>
-          <PageTitle as="h1" size="md">
+          <PageTitle as="h1" size="lg">
             Stand With Crypto PAC 2024 House and Senate Endorsements
           </PageTitle>
           <h3 className="font-mono text-xl font-light">

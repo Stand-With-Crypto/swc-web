@@ -3,7 +3,7 @@ import { getYear } from 'date-fns'
 import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
 import getIntl from '@/intl/intlMessages'
 import { SupportedLocale } from '@/intl/locales'
 import { externalUrls, getIntlUrls } from '@/utils/shared/urls'
@@ -22,7 +22,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
       <div className="container">
         <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
           <div className="max-w-2xl space-y-8">
-            <PageTitle as="h6" className="text-left">
+            <PageTitle as="h6" className="text-left" size={DEFAULT_PAGE_TITLE_SIZE}>
               Fight for Crypto Rights
             </PageTitle>
             <p className="text-xl">

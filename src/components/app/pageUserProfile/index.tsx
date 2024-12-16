@@ -127,7 +127,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
       </div>
 
       <section>
-        <PageTitle className="mb-4" size="sm">
+        <PageTitle className="mb-4" size="md">
           Your advocacy progress
         </PageTitle>
         <PageSubTitle className="mb-5">
@@ -143,7 +143,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
 
       <section>
         <a className="mt-[-72px] h-0 pt-[72px]" id="nfts" />
-        <PageTitle className="mb-4" size="sm">
+        <PageTitle className="mb-4" size="md">
           Your NFTs
         </PageTitle>
         <PageSubTitle className="mb-5">
@@ -154,7 +154,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
         </div>
       </section>
       <section>
-        <PageTitle className="mb-4" size="sm">
+        <PageTitle className="mb-4" size="md">
           Refer Your Friends
         </PageTitle>
         <PageSubTitle className="mb-5">

@@ -164,7 +164,7 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <div className="mb-4 space-y-2">
-        <PageTitle as="h3" size="sm">
+        <PageTitle as="h3">
           {congressPersonNotFound ? 'Tweet on Pizza Day' : 'Tweet your representative'}
         </PageTitle>
         <p className="text-center text-fontcolor-muted">
