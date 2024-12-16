@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { InternalLink } from '@/components/ui/link'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useLocale } from '@/hooks/useLocale'
 import {
@@ -21,6 +22,7 @@ const languages = getNavigatorLanguages()
 export function GeoLocationDisclaimerBannerContent() {
   const router = useRouter()
   const isMobile = useIsMobile()
+  const hasHydrated = useHasHydrated()
 
   const locale = useLocale()
   const urls = getIntlUrls(locale)
@@ -39,6 +41,8 @@ export function GeoLocationDisclaimerBannerContent() {
     if (!currentCountry?.url) return
     router.push(currentCountry?.url)
   }
+
+  if (!hasHydrated) return null
 
   if (currentCountry) {
     return (
