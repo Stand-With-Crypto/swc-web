@@ -331,6 +331,12 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/secvote-2/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=crenshawvote-2&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/secvote/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=crenshawvote&sessionId=:sessionId*',
