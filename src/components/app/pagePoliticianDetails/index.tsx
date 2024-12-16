@@ -73,7 +73,7 @@ export function PagePoliticianDetails({
             />
           </div>
         )}
-        <PageTitle className="mb-3" size="md">
+        <PageTitle className="mb-3" size="lg">
           {dtsiPersonFullName(person)}
         </PageTitle>
         <PageSubTitle className="mb-3">
@@ -139,7 +139,7 @@ export function PagePoliticianDetails({
       {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />}
 
       <section>
-        <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="sm">
+        <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="md">
           Notable statements
         </PageTitle>
         <div className="space-y-14 md:space-y-16">

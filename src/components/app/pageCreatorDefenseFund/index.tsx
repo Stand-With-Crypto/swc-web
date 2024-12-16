@@ -169,13 +169,11 @@ const FAQ_ITEMS = [
 export function PageCreatorDefenseFund({ title, description }: PageCreatorDefenseFundProps) {
   return (
     <div className="standard-spacing-from-navbar container">
-      <section className="space-y-14">
-        <div className="container flex flex-col items-center gap-4">
-          <PageTitle className="mb-7 font-sans !text-5xl">{title}</PageTitle>
-          <PageSubTitle className="text-muted-foreground" size="md">
-            {description}
-          </PageSubTitle>
-        </div>
+      <section className="container">
+        <PageTitle className="mb-7">{title}</PageTitle>
+        <PageSubTitle className="text-muted-foreground" size="md">
+          {description}
+        </PageSubTitle>
       </section>
 
       <DefenseFundSection

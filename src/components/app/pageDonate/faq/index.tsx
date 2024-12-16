@@ -11,7 +11,7 @@ import { FAQ_DATA } from './faqData'
 export function FAQ() {
   return (
     <section className="space-y-7">
-      <PageTitle as="h2" size="sm">
+      <PageTitle as="h2" size="md">
         Frequently asked questions
       </PageTitle>
       <Accordion collapsible type="single">
