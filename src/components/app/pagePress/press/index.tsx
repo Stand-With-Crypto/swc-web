@@ -27,7 +27,7 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
       </section>
 
       <div className="flex flex-col gap-16">
-        {pressContent.map(({ dateHeading, heading, publication, link }) => {
+        {pressContent.map(({ dateHeading, heading, publication, link }, idx) => {
           const isInternal = publication === 'Press Release' && link.startsWith('/')
 
           const LinkComponent = isInternal ? TrackedInternalLink : TrackedExternalLink
@@ -37,7 +37,7 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
             <PressSection
               dateHeading={dateHeading}
               heading={heading}
-              key={publication}
+              key={idx}
               publication={publication}
             >
               <Button asChild variant="secondary">

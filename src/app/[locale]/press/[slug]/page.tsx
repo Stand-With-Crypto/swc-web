@@ -7,7 +7,7 @@ import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
-export const dynamicParams = false
+export const dynamicParams = true
 
 type PressReleasePageProps = PageProps<{
   slug: string
