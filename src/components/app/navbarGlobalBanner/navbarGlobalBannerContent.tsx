@@ -24,9 +24,6 @@ export function NavBarGlobalBannerContent() {
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
 
-  const locale = useLocale()
-  const urls = getIntlUrls(locale)
-
   const WrapperContainer = isMobile ? 'button' : 'div'
 
   const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
@@ -42,7 +39,7 @@ export function NavBarGlobalBannerContent() {
     router.push(currentCountry?.url)
   }
 
-  if (!hasHydrated) return null
+  if (!hasHydrated) return <CurrentCampaign />
 
   if (currentCountry) {
     return (
@@ -79,16 +76,7 @@ export function NavBarGlobalBannerContent() {
     )
   }
 
-  return (
-    <InternalLink className="h-full w-full" href={urls.emailDeeplink()}>
-      <div className="flex h-full w-full items-center justify-center py-2 text-center text-base leading-normal text-white antialiased">
-        <Balancer>
-          Make your voice heard — tell your Senators to vote NO on an anti-crypto SEC nominee!
-        </Balancer>
-        <ArrowRight className="w-12 lg:w-8" size={16} />
-      </div>
-    </InternalLink>
-  )
+  return <CurrentCampaign />
 }
 
 /**
@@ -122,3 +110,19 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: readonly {
     emoji: '🇨🇦',
   },
 ]
+
+function CurrentCampaign() {
+  const locale = useLocale()
+  const urls = getIntlUrls(locale)
+
+  return (
+    <InternalLink className="h-full w-full" href={urls.emailDeeplink()}>
+      <div className="flex h-full w-full items-center justify-center py-2 text-center text-base leading-normal text-white antialiased">
+        <Balancer>
+          Make your voice heard — tell your Senators to vote NO on an anti-crypto SEC nominee!
+        </Balancer>
+        <ArrowRight className="w-12 lg:w-8" size={16} />
+      </div>
+    </InternalLink>
+  )
+}
