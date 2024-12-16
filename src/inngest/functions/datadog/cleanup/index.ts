@@ -131,15 +131,20 @@ async function removeUserEmails(
   user: UserWithRelations,
   emailAddressesCreatedInLast1HourIds: string[],
 ) {
+  const primaryUserEmailAddressId = user.primaryUserEmailAddressId
+
   const userEmailIds = user.userEmailAddresses.map(userEmail => userEmail.id)
 
   // We only want to delete emails that were created more than 1 hour ago
   // This approach prevents any potential bugs from deleting emails while the synthetic tests are running.
   const emailIdsToRemove = difference(userEmailIds, emailAddressesCreatedInLast1HourIds)
 
+  // Remove the primary email id from the list of emails to remove
+  const filteredIds = emailIdsToRemove.filter(id => id !== primaryUserEmailAddressId)
+
   return prismaClient.userEmailAddress.deleteMany({
     where: {
-      id: { in: emailIdsToRemove },
+      id: { in: filteredIds },
     },
   })
 }
