@@ -106,7 +106,7 @@ export function UserActionFormNFTMintCheckout({
           />
 
           <div>
-            <PageTitle className="text-start" size="sm">
+            <PageTitle className="text-start" size="md">
               {contractMetadata.name}
             </PageTitle>
 
@@ -238,7 +238,7 @@ function UserActionFormNFTMintCheckoutSkeleton() {
 
           <div>
             <Skeleton>
-              <PageTitle className="text-start" size="sm">
+              <PageTitle className="text-start" size="md">
                 Stand With Crypto Supporter
               </PageTitle>
             </Skeleton>

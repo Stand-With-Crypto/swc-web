@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 
 interface FeaturedPastEventsProps {
@@ -22,9 +23,9 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
 
   return (
     <section className="grid w-full gap-4">
-      <h4 className="text-bold mb-2 text-center font-sans text-xl text-foreground">
+      <PageTitle as="h3" className="mb-2">
         Featured past events
-      </h4>
+      </PageTitle>
 
       <div className="grid gap-4 lg:grid-cols-3">
         {pastFeaturedEvents.map(event => (
