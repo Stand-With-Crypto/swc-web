@@ -32,8 +32,8 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
       initial.countPolicymakerContacts.countUserActionCalls,
       100,
     ),
-    countUserActionEmails: roundDownNumberToAnimateIn(
-      initial.countPolicymakerContacts.countUserActionEmails,
+    countUserActionEmailRecipients: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.countUserActionEmailRecipients,
       100,
     ),
     hardcodedCountSum: roundDownNumberToAnimateIn(
@@ -87,7 +87,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
       },
       countPolicymakerContacts: {
         count: intlNumberFormat(locale).format(
-          values.countPolicymakerContacts.countUserActionEmails +
+          values.countPolicymakerContacts.countUserActionEmailRecipients +
             values.countPolicymakerContacts.countUserActionCalls +
             values.countPolicymakerContacts.hardcodedCountSum,
         ),

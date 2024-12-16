@@ -10,6 +10,7 @@ import { toBool } from '@/utils/shared/toBool'
 import { getIsSupportedBrowser, maybeDetectBrowser } from './maybeDetectBrowser'
 
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
+const shouldSuppress = toBool(process.env.NEXT_PUBLIC_SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
 
 const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'No internet connection detected',
@@ -37,6 +38,20 @@ const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/a
 
 const isSupportedBrowser = getIsSupportedBrowser(maybeDetectBrowser())
 
+// Single source of truth for log prefixes and messages
+const LOG_MESSAGE_PREFIXES = {
+  suppressedMessage: shouldSuppress ? 'Suppressed Sentry' : 'Sentry',
+  forceFingerprintTransaction: 'Sentry: Forced fingerprint to',
+  forceFingerprintError: 'Sentry: Forced fingerprint to',
+  transactionNameMatch: 'transaction name match against COMMON_TRANSACTION_NAMES_TO_GROUP',
+  errorMessageMatch: 'error message to match against COMMON_ERROR_MESSAGES_TO_GROUP',
+  failedTransactionFingerprint: 'Sentry: Failed to force transaction fingerprint',
+  failedErrorFingerprint: 'Sentry: Failed to force error message fingerprint',
+}
+
+// Define prefixes for skipping log messages
+const LOG_PREFIXES = Object.values(LOG_MESSAGE_PREFIXES)
+
 Sentry.init({
   environment: NEXT_PUBLIC_ENVIRONMENT,
   dsn,
@@ -59,6 +74,9 @@ Sentry.init({
       // NOTE: when upgrading Sentry major versions we need to manually update this file for compatibility
       workerUrl: '/workers/sentry.worker.js',
     }),
+    Sentry.captureConsoleIntegration({
+      levels: ['error', 'warn'],
+    }),
   ],
   denyUrls: [
     /vitals\.vercel-analytics\.com/i,
@@ -78,11 +96,11 @@ Sentry.init({
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-      const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
-      console.error(
-        `${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
+      console.debug(
+        LOG_MESSAGE_PREFIXES.suppressedMessage,
         hint?.originalException || hint?.syntheticException,
       )
+
       if (shouldSuppress) {
         return null
       }
@@ -93,41 +111,47 @@ Sentry.init({
       return null
     }
 
+    const errorMessage = getErrorMessage(hint.originalException)
+
+    // skip logging if the console log matches known prefixes
+    if (errorMessage && LOG_PREFIXES.some(prefix => errorMessage.startsWith(prefix))) {
+      return null
+    }
+
     // force group common transaction names
     try {
       const transaction = event.transaction
-      console.log('transaction name match against COMMON_TRANSACTION_NAMES_TO_GROUP', transaction)
+      console.log(LOG_MESSAGE_PREFIXES.transactionNameMatch, transaction)
       if (transaction) {
         COMMON_TRANSACTION_NAMES_TO_GROUP.forEach(message => {
           if (transaction.indexOf(message) !== -1) {
             event.fingerprint = [`forceGroupErrorTransaction-${message}`]
             console.log(
-              `Sentry: Forced fingerprint to "${message}" transaction from "${transaction}"`,
+              `${LOG_MESSAGE_PREFIXES.forceFingerprintTransaction} "${message}" transaction from "${transaction}"`,
             )
           }
         })
       }
     } catch (e) {
-      console.error(e)
-      console.log('Sentry: Failed to force transaction fingerprint')
+      console.error(LOG_MESSAGE_PREFIXES.failedTransactionFingerprint, e)
       return event
     }
 
     // force group error names
     try {
-      const errorMessage = getErrorMessage(hint.originalException)
-      console.log('error message to match against COMMON_ERROR_MESSAGES_TO_GROUP', errorMessage)
+      console.log(LOG_MESSAGE_PREFIXES.errorMessageMatch, errorMessage)
       if (errorMessage) {
         COMMON_ERROR_MESSAGES_TO_GROUP.forEach(message => {
           if (errorMessage.indexOf(message) !== -1) {
             event.fingerprint = [`forceGroupErrorMessage-${message}`]
-            console.log(`Sentry: Forced fingerprint to "${message}" message from "${errorMessage}"`)
+            console.log(
+              `${LOG_MESSAGE_PREFIXES.forceFingerprintError} "${message}" message from "${errorMessage}"`,
+            )
           }
         })
       }
     } catch (e) {
-      console.error(e)
-      console.log('Sentry: Failed to force error message fingerprint')
+      console.error(LOG_MESSAGE_PREFIXES.failedErrorFingerprint, e)
       return event
     }
 
@@ -144,5 +168,5 @@ function getErrorMessage(error: unknown) {
     return JSON.stringify(error.reason)
   }
 
-  return JSON.stringify(error)
+  return typeof error !== 'string' ? JSON.stringify(error) : error
 }

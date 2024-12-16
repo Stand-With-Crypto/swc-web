@@ -6,8 +6,8 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const getCountPolicymakerContacts = async () => {
-  const [countUserActionEmails, countUserActionCalls] = await Promise.all([
-    prismaClient.userAction.count({ where: { actionType: UserActionType.EMAIL } }),
+  const [countUserActionEmailRecipients, countUserActionCalls] = await Promise.all([
+    prismaClient.userActionEmailRecipient.count(),
     prismaClient.userAction.count({ where: { actionType: UserActionType.CALL } }),
   ])
   /*
@@ -31,14 +31,18 @@ export const getCountPolicymakerContacts = async () => {
     hardcodedCountCapitolCanaryEmails + hardcodedCountCalls + hardcodedCountIrsContacts
 
   if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
-    return { countUserActionEmails, countUserActionCalls, hardcodedCountSum }
+    return {
+      countUserActionEmailRecipients,
+      countUserActionCalls,
+      hardcodedCountSum,
+    }
   }
   /*
   Our database in testing env is populated with way less info but we want the UI
   to look comparable to production so we mock the numbers
   */
   return {
-    countUserActionEmails: countUserActionEmails * 1011,
+    countUserActionEmailRecipients: countUserActionEmailRecipients * 1011,
     countUserActionCalls: countUserActionCalls * 1011,
     hardcodedCountSum,
   }

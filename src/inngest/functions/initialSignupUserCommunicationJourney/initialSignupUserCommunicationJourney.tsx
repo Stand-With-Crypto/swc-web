@@ -15,7 +15,6 @@ import FinishSettingUpProfileReminderEmail from '@/utils/server/email/templates/
 import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXReminder'
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
-import RegisterToVoteReminderEmail from '@/utils/server/email/templates/registerToVoteReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
@@ -133,22 +132,6 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       await step.sleep('wait-for-membership-reminder-follow-up', followUpTimeout)
     }
 
-    const hasRegisteredToVote = await hasUserCompletedAction(
-      payload.userId,
-      UserActionType.VOTER_REGISTRATION,
-    )
-    if (!hasRegisteredToVote) {
-      await step.run('send-register-to-vote-reminder', async () =>
-        sendInitialSignUpEmail({
-          userId: payload.userId,
-          sessionId: payload.sessionId,
-          userCommunicationJourneyId: userCommunicationJourney.id,
-          step: 'register-to-vote-reminder',
-        }),
-      )
-      await step.sleep('wait-for-register-to-vote-reminder-follow-up', followUpTimeout)
-    }
-
     const hasFollowedOnX = await hasUserCompletedAction(payload.userId, UserActionType.TWEET)
     if (!hasFollowedOnX) {
       await step.run('send-follow-on-x-reminder', async () =>
@@ -262,7 +245,6 @@ const TEMPLATE_BY_STEP = {
   'update-profile-reminder': FinishSettingUpProfileReminderEmail,
   'phone-number-reminder': PhoneNumberReminderEmail,
   'membership-reminder': BecomeMemberReminderEmail,
-  'register-to-vote-reminder': RegisterToVoteReminderEmail,
   'follow-on-x-reminder': FollowOnXReminderEmail,
   'contact-your-rep-reminder': ContactYourRepresentativeReminderEmail,
 }
