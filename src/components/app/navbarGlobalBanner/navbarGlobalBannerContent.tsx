@@ -19,7 +19,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 
 const languages = getNavigatorLanguages()
 
-export function GeoLocationDisclaimerBannerContent() {
+export function NavBarGlobalBannerContent() {
   const router = useRouter()
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
