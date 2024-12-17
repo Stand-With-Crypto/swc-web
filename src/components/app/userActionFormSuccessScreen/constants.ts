@@ -1,13 +1,18 @@
 import { UserActionType } from '@prisma/client'
+import Cookies from 'js-cookie'
 
 import type { UserActionFormSuccessScreenFeedbackProps } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
+import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
+
+const isLoggedinWithThirdweb = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 
 export const DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO = {
   WITHOUT_NFT:
     'Keep up the good work! Complete the actions below to continue your progress as a crypto advocate.',
-  WITH_NFT:
-    '... and got a free NFT for doing so! Complete the actions below to continue your progress as a crypto advocate.',
+  WITH_NFT: isLoggedinWithThirdweb
+    ? '... and got a free NFT for doing so! Complete the actions below to continue your progress as a crypto advocate.'
+    : 'Complete the actions below to continue your progress as a crypto advocate.',
 }
 
 export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
