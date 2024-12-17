@@ -13,7 +13,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -126,7 +126,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
@@ -153,7 +153,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
-    waitUntil(beforeFinish())
+    after(beforeFinish)
     return { user: getClientUser(user) }
   }
 
@@ -231,7 +231,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     },
   })
 
-  waitUntil(beforeFinish())
+  after(beforeFinish)
   return { user: getClientUser(user) }
 }
 

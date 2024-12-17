@@ -7,7 +7,7 @@ import {
   UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 
 import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -331,15 +331,13 @@ async function createUserActionDonation(
   // Track user action created analytics.
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
-  waitUntil(
-    analytics
-      .trackUserActionCreated({
-        actionType: UserActionType.DONATION,
-        campaignName: UserActionDonationCampaignName.DEFAULT,
-        creationMethod: 'On Site',
-        userState: isNewUser ? 'New' : 'Existing',
-      })
-      .flush(),
+  after(
+    analytics.trackUserActionCreated({
+      actionType: UserActionType.DONATION,
+      campaignName: UserActionDonationCampaignName.DEFAULT,
+      creationMethod: 'On Site',
+      userState: isNewUser ? 'New' : 'Existing',
+    }).flush,
   )
 
   return donationAction

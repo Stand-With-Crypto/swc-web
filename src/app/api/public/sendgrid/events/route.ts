@@ -1,7 +1,7 @@
 import 'server-only'
 
 import * as Sentry from '@sentry/nextjs'
-import { NextRequest, NextResponse } from 'next/server'
+import { after, NextRequest, NextResponse } from 'next/server'
 
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
@@ -94,7 +94,7 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       })
     }
 
-    await analytics.flush()
+    after(analytics.flush)
   }
 }
 

@@ -3,6 +3,7 @@ import { Decimal } from '@prisma/client/runtime/library'
 import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
+import { after } from 'next/server'
 
 import { onFailureAirdropNFT } from '@/inngest/functions/airdropNFT/onFailureAirdropNFT'
 import { inngest } from '@/inngest/inngest'
@@ -181,7 +182,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
           })
         })
 
-        await analytics.flush()
+        after(analytics.flush)
 
         return {
           messageId,

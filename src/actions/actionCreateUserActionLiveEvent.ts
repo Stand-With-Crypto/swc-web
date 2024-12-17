@@ -2,7 +2,7 @@
 import 'server-only'
 
 import { SMSStatus, User, UserActionType, UserInformationVisibility } from '@prisma/client'
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -114,7 +114,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     userId: user.id,
     localUser,
   })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
@@ -122,7 +122,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
       validatedInput,
       sharedDependencies: { analytics },
     })
-    waitUntil(beforeFinish())
+    after(beforeFinish)
     return { user: getClientUser(user) }
   }
 
@@ -139,7 +139,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
-  waitUntil(beforeFinish())
+  after(beforeFinish)
   return { user: getClientUser(user) }
 }
 
@@ -163,10 +163,10 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    waitUntil(
-      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
-        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-        .flush(),
+    after(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+        mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+      ).flush,
     )
   }
 

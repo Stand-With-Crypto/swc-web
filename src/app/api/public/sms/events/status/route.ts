@@ -1,8 +1,7 @@
 import 'server-only'
 
 import { CommunicationMessageStatus, UserCommunicationJourneyType } from '@prisma/client'
-import { waitUntil } from '@vercel/functions'
-import { NextRequest, NextResponse } from 'next/server'
+import { after, NextRequest, NextResponse } from 'next/server'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -149,31 +148,28 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     }
   }
 
-  waitUntil(
-    Promise.all([
-      getServerPeopleAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .set({
-          'SMS Status': user.smsStatus,
-        })
-        .flush(),
-      getServerAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .track('SMS Communication Event', {
-          'Message Status': messageStatus,
-          'Message Id': messageId,
-          From: from,
-          To: phoneNumber,
-          'Campaign Name': campaignName,
-          'Journey Type': journeyType,
-          Error: errorCode,
-        })
-        .flush(),
-    ]),
+  after(
+    getServerPeopleAnalytics({
+      localUser: getLocalUserFromUser(user),
+      userId: user.id,
+    }).set({
+      'SMS Status': user.smsStatus,
+    }).flush,
+  )
+
+  after(
+    getServerAnalytics({
+      localUser: getLocalUserFromUser(user),
+      userId: user.id,
+    }).track('SMS Communication Event', {
+      'Message Status': messageStatus,
+      'Message Id': messageId,
+      From: from,
+      To: phoneNumber,
+      'Campaign Name': campaignName,
+      'Journey Type': journeyType,
+      Error: errorCode,
+    }).flush,
   )
 
   return new NextResponse('success', {

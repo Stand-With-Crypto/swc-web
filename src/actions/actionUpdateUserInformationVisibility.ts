@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -39,15 +39,13 @@ async function _actionUpdateUserInformationVisibility(
       id: authUser.userId,
     },
   })
-  waitUntil(
+  after(
     getServerPeopleAnalytics({
       userId: authUser.userId,
       localUser: await parseLocalUserFromCookies(),
-    })
-      .set({
-        'Information Visibility': informationVisibility,
-      })
-      .flush(),
+    }).set({
+      'Information Visibility': informationVisibility,
+    }).flush,
   )
 
   const updatedUser = await prismaClient.user.update({

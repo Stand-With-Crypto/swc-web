@@ -2,7 +2,7 @@
 import 'server-only'
 
 import { SMSStatus, User, UserActionType, UserInformationVisibility } from '@prisma/client'
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 import { boolean, object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -80,29 +80,29 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
     userId: user.id,
     localUser,
   })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentRsvpEventUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
-  const rsvpEventuserAction = recentRsvpEventUserAction?.userActionRsvpEvent
+  const rsvpEventUserAction = recentRsvpEventUserAction?.userActionRsvpEvent
   const shouldUpdateRsvpEventNotificationStatus =
-    rsvpEventuserAction?.shouldReceiveNotifications === false &&
+    rsvpEventUserAction?.shouldReceiveNotifications === false &&
     validatedInput.data.shouldReceiveNotifications === true
 
   if (recentRsvpEventUserAction && !shouldUpdateRsvpEventNotificationStatus) {
     logSpamActionSubmissions({
       sharedDependencies: { analytics },
     })
-    waitUntil(beforeFinish())
+    after(beforeFinish)
     return { user: getClientUser(user) }
   }
 
-  if (shouldUpdateRsvpEventNotificationStatus && rsvpEventuserAction.id) {
+  if (shouldUpdateRsvpEventNotificationStatus && rsvpEventUserAction.id) {
     await changeReceiveNotificationStatus({
-      userActionRsvpEventId: rsvpEventuserAction.id,
+      userActionRsvpEventId: rsvpEventUserAction.id,
       sharedDependencies: { sessionId, analytics, peopleAnalytics },
     })
 
-    waitUntil(beforeFinish())
+    after(beforeFinish)
     return { user: getClientUser(user) }
   }
 
@@ -115,7 +115,7 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
   })
 
-  waitUntil(beforeFinish())
+  after(beforeFinish)
   return { user: getClientUser(user) }
 }
 
@@ -139,10 +139,10 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    waitUntil(
-      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
-        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-        .flush(),
+    after(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+        mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+      ).flush,
     )
   }
 

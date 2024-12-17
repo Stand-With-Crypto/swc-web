@@ -9,7 +9,7 @@ import {
   UserCryptoAddress,
   UserInformationVisibility,
 } from '@prisma/client'
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -76,7 +76,7 @@ async function _actionCreateUserActionTweet() {
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
@@ -100,7 +100,7 @@ async function _actionCreateUserActionTweet() {
       creationMethod: 'On Site',
       userState,
     })
-    waitUntil(beforeFinish())
+    after(beforeFinish)
     return { user: getClientUser(user) }
   }
 
@@ -125,7 +125,7 @@ async function _actionCreateUserActionTweet() {
     userState,
   })
 
-  waitUntil(beforeFinish())
+  after(beforeFinish)
   logger.info('created action')
   return { user: getClientUser(user) }
 }

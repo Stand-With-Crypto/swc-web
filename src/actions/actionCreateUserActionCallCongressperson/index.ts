@@ -3,7 +3,7 @@ import 'server-only'
 
 import { SMSStatus, User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -104,7 +104,7 @@ async function _actionCreateUserActionCallCongressperson(
     userId: user.id,
     localUser,
   })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
@@ -112,7 +112,7 @@ async function _actionCreateUserActionCallCongressperson(
       validatedInput,
       sharedDependencies: { analytics },
     })
-    waitUntil(beforeFinish())
+    after(beforeFinish)
     return { user: getClientUser(user) }
   }
 
@@ -153,7 +153,7 @@ async function _actionCreateUserActionCallCongressperson(
     await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
-  waitUntil(beforeFinish())
+  after(beforeFinish)
   return { user: getClientUser(updatedUser) }
 }
 
@@ -177,10 +177,10 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    waitUntil(
-      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
-        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-        .flush(),
+    after(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+        mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+      ).flush,
     )
   }
 

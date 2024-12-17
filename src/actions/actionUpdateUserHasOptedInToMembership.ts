@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
@@ -27,15 +27,13 @@ async function _actionUpdateUserHasOptedInToMembership() {
     },
   })
 
-  waitUntil(
+  after(
     getServerPeopleAnalytics({
       userId: authUser.userId,
       localUser: await parseLocalUserFromCookies(),
-    })
-      .set({
-        'Has Opted In To Membership': true,
-      })
-      .flush(),
+    }).set({
+      'Has Opted In To Membership': true,
+    }).flush,
   )
 
   await throwIfRateLimited({ context: 'authenticated' })

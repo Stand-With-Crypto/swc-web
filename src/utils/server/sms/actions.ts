@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { SMSStatus, User, UserCommunicationJourneyType } from '@prisma/client'
-import { waitUntil } from '@vercel/functions'
+import { after } from 'next/server'
 
 import { ENQUEUE_SMS_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/enqueueMessages'
 import { inngest } from '@/inngest/inngest'
@@ -60,26 +60,23 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
     })
   }
 
-  waitUntil(
-    Promise.all([
-      getServerPeopleAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .set({
-          'Has Opted In to SMS': true,
-          'SMS Status': newSMSStatus,
-        })
-        .flush(),
-      getServerAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .track('User SMS Opt-In', {
-          provider: smsProvider,
-        })
-        .flush(),
-    ]),
+  after(
+    getServerPeopleAnalytics({
+      localUser: getLocalUserFromUser(user),
+      userId: user.id,
+    }).set({
+      'Has Opted In to SMS': true,
+      'SMS Status': newSMSStatus,
+    }).flush,
+  )
+
+  after(
+    getServerAnalytics({
+      localUser: getLocalUserFromUser(user),
+      userId: user.id,
+    }).track('User SMS Opt-In', {
+      provider: smsProvider,
+    }).flush,
   )
 
   return newSMSStatus
@@ -122,24 +119,21 @@ export async function optOutUser(phoneNumber: string, user?: User | null) {
   }
 
   if (user) {
-    waitUntil(
-      Promise.all([
-        getServerPeopleAnalytics({
-          localUser: getLocalUserFromUser(user),
-          userId: user.id,
-        })
-          .set({
-            'Has Opted In to SMS': false,
-            'SMS Status': newSMSStatus,
-          })
-          .flush(),
-        getServerAnalytics({
-          localUser: getLocalUserFromUser(user),
-          userId: user.id,
-        })
-          .track('User SMS Opt-out')
-          .flush(),
-      ]),
+    after(
+      getServerPeopleAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      }).set({
+        'Has Opted In to SMS': false,
+        'SMS Status': newSMSStatus,
+      }).flush,
+    )
+
+    after(
+      getServerAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      }).track('User SMS Opt-out').flush,
     )
   }
 
@@ -183,24 +177,21 @@ export async function optUserBackIn(phoneNumber: string, user?: User | null) {
   }
 
   if (user) {
-    waitUntil(
-      Promise.all([
-        getServerPeopleAnalytics({
-          localUser: getLocalUserFromUser(user),
-          userId: user.id,
-        })
-          .set({
-            'Has Opted In to SMS': true,
-            'SMS Status': newSMSStatus,
-          })
-          .flush(),
-        getServerAnalytics({
-          localUser: getLocalUserFromUser(user),
-          userId: user.id,
-        })
-          .track('User SMS Unstop')
-          .flush(),
-      ]),
+    after(
+      getServerPeopleAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      }).set({
+        'Has Opted In to SMS': true,
+        'SMS Status': newSMSStatus,
+      }).flush,
+    )
+
+    after(
+      getServerAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      }).track('User SMS Unstop').flush,
     )
   }
 }

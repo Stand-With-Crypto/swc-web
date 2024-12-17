@@ -1,5 +1,6 @@
 import { SMSStatus, User } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
+import { after } from 'next/server'
 
 import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
@@ -57,14 +58,15 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
           id: data.user.id,
         },
       })
-      await getServerAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: data.user.id,
-      })
-        .track('User SMS Opt-In', {
+
+      after(
+        getServerAnalytics({
+          localUser: getLocalUserFromUser(user),
+          userId: data.user.id,
+        }).track('User SMS Opt-In', {
           provider: smsProvider,
-        })
-        .flush()
+        }).flush,
+      )
     })
 
     for (const sleepTime of SLEEP_SCHEDULE) {
@@ -117,12 +119,13 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
                     id: data.user.id,
                   },
                 })
-                await getServerAnalytics({
-                  localUser: getLocalUserFromUser(user),
-                  userId: data.user.id,
-                })
-                  .track('User Replied To SMS Opt-In')
-                  .flush()
+
+                after(
+                  getServerAnalytics({
+                    localUser: getLocalUserFromUser(user),
+                    userId: data.user.id,
+                  }).track('User Replied To SMS Opt-In').flush,
+                )
               },
             )
             return

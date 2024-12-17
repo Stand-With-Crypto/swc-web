@@ -4,8 +4,8 @@ import 'server-only'
 import { NFTCurrency, NFTMintStatus, NFTMintType, User, UserActionType } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
-import { waitUntil } from '@vercel/functions'
 import { BigNumber } from 'ethers'
+import { after } from 'next/server'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -132,7 +132,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     ethTransactionValue,
   })
 
-  waitUntil(analytics.flush())
+  after(analytics.flush)
   return { user: getClientUser(user) }
 }
 

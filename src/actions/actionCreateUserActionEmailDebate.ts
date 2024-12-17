@@ -11,6 +11,7 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
+import { after } from 'next/server'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -86,7 +87,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
@@ -113,7 +114,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
       userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
-    await beforeFinish()
+    after(beforeFinish)
     return { user: getClientUser(user) }
   }
 
@@ -190,7 +191,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
     },
   })
 
-  await beforeFinish()
+  after(beforeFinish)
   return { user: getClientUser(user) }
 }
 

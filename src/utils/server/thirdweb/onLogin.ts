@@ -15,7 +15,6 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { waitUntil } from '@vercel/functions'
 import { compact, groupBy } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
@@ -108,16 +107,16 @@ export async function login(payload: VerifyLoginPayloadParams) {
       throw e
     })
 
-    await Promise.all([
-      getServerAnalytics({ userId: existingVerifiedUser.id, localUser })
-        .track('User Logged In')
-        .flush(),
-      getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser })
-        .set({
-          'Datetime of Last Login': new Date(),
-        })
-        .flush(),
-    ])
+    after(
+      getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
+        .flush,
+    )
+
+    after(
+      getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
+        'Datetime of Last Login': new Date(),
+      }).flush,
+    )
 
     const jwt = await thirdwebAuth.generateJWT({
       payload: verifiedPayload.payload,
@@ -410,7 +409,7 @@ export async function onNewLogin(props: NewLoginParams) {
 
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   // triggerPostLoginUserActionSteps logic
   const postLoginUserActionSteps = await triggerPostLoginUserActionSteps({
@@ -451,8 +450,8 @@ export async function onNewLogin(props: NewLoginParams) {
   peopleAnalytics.set({
     'Datetime of Last Login': new Date(),
   })
+  after(beforeFinish)
 
-  waitUntil(beforeFinish())
   return {
     userId: user.id,
     user,
