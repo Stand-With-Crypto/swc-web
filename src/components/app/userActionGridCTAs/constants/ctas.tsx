@@ -164,9 +164,9 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email Your Senator',
-        description: 'Tell your Senator you oppose anti-crypto commissioners on the SEC.',
+        description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },

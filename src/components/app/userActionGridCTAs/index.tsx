@@ -25,7 +25,7 @@ export function UserActionGridCTAs({
   })
 
   return (
-    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-4', className)}>
+    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-3', className)}>
       {ctas.map(cta => {
         const completedCampaigns = cta.campaigns.reduce((acc, campaign) => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
