@@ -17,6 +17,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSession } from '@/hooks/useSession'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
@@ -32,6 +33,10 @@ interface PageUserProfile extends PageProps {
 
 export function PageUserProfile({ params, user }: PageUserProfile) {
   const { locale } = params
+
+  const isMobile = useIsMobile({
+    defaultState: true,
+  })
 
   const { data } = useApiResponseForUserFullProfileInfo()
 
@@ -76,9 +81,12 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
               </div>
             </div>
           </div>
-          <div className="hidden lg:flex">
-            <ProfileAndNFTButtons user={user} />
-          </div>
+
+          {!isMobile && (
+            <div className="hidden lg:flex">
+              <ProfileAndNFTButtons user={user} />
+            </div>
+          )}
         </div>
         <div className="grid grid-cols-3 rounded-3xl bg-secondary p-3 text-center sm:p-6">
           {[
@@ -122,9 +130,11 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
         </div>
       </section>
 
-      <div className="w-full lg:hidden">
-        <ProfileAndNFTButtons user={user} />
-      </div>
+      {isMobile && (
+        <div className="w-full lg:hidden">
+          <ProfileAndNFTButtons user={user} />
+        </div>
+      )}
 
       <section>
         <PageTitle className="mb-4" size="md">
