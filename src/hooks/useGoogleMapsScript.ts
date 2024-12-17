@@ -8,13 +8,6 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
 const GOOGLE_API_LIBRARIES: Libraries = ['places']
 
 export function useGoogleMapsScript() {
-  if (!NEXT_PUBLIC_GOOGLE_PLACES_API_KEY) {
-    return {
-      isLoaded: false,
-      loadError: new Error('NEXT_PUBLIC_GOOGLE_PLACES_API_KEY is not defined'),
-    }
-  }
-
   return useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: NEXT_PUBLIC_GOOGLE_PLACES_API_KEY,
