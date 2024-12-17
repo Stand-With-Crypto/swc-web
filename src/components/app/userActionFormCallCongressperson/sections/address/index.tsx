@@ -202,10 +202,10 @@ export function useCongresspersonData({
 }: {
   address?: FindRepresentativeCallFormValues['address']
 }) {
-  const scriptStatus = useGoogleMapsScript()
+  const { isLoaded } = useGoogleMapsScript()
 
   const result = useSWR(
-    address && scriptStatus === 'ready' ? `useCongresspersonData-${address.description}` : null,
+    address && isLoaded ? `useCongresspersonData-${address.description}` : null,
     async () => {
       if (!address) {
         return null
@@ -225,6 +225,6 @@ export function useCongresspersonData({
 
   return {
     ...result,
-    isLoading: scriptStatus === 'loading' || result.isLoading,
+    isLoading: !isLoaded || result.isLoading,
   }
 }

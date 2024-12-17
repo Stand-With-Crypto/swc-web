@@ -61,14 +61,14 @@ export const GooglePlacesSelect = React.forwardRef<
     ? data?.filter(place => !place.description.includes('USA') || !place.types.includes('route'))
     : data
 
-  const scriptStatus = useGoogleMapsScript()
+  const { isLoaded } = useGoogleMapsScript()
   const isLoading = loading || isLoadingSuggestions || !ready
 
   useEffect(() => {
-    if (scriptStatus === 'ready') {
+    if (isLoaded) {
       init()
     }
-  }, [init, scriptStatus])
+  }, [init, isLoaded])
 
   return (
     <Combobox
