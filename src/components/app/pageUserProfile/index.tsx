@@ -82,11 +82,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
             </div>
           </div>
 
-          {!isMobile && (
-            <div className="hidden lg:flex">
-              <ProfileAndNFTButtons user={user} />
-            </div>
-          )}
+          {!isMobile && <ProfileAndNFTButtons user={user} />}
         </div>
         <div className="grid grid-cols-3 rounded-3xl bg-secondary p-3 text-center sm:p-6">
           {[
@@ -130,11 +126,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
         </div>
       </section>
 
-      {isMobile && (
-        <div className="w-full lg:hidden">
-          <ProfileAndNFTButtons user={user} />
-        </div>
-      )}
+      {isMobile && <ProfileAndNFTButtons user={user} />}
 
       <section>
         <PageTitle className="mb-4" size="md">
