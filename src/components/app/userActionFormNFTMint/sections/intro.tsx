@@ -16,6 +16,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { useSession } from '@/hooks/useSession'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -24,6 +25,8 @@ import { NFT_CLIENT_METADATA, NFTClientMetadata } from '@/utils/web/nft'
 export function UserActionFormNFTMintIntro({
   goToSection,
 }: UseSectionsReturn<UserActionFormNFTMintSectionNames>) {
+  const session = useSession()
+
   const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
 
   return (
@@ -47,16 +50,16 @@ export function UserActionFormNFTMintIntro({
               loadingFallback={<FooterSkeleton />}
               useThirdwebSession={true}
             >
-              <div className="flex w-full items-center justify-between gap-4">
-                <p className="text-xs text-muted-foreground md:text-sm">
-                  You will need to login first to mint the NFT
-                </p>
-
-                <Button data-testid="signin-button" size="lg">
-                  Sign In
-                </Button>
-              </div>
+              <Button data-testid="signin-button" size="lg">
+                Sign In
+              </Button>
             </LoginDialogWrapper>
+
+            {!session.isLoggedInThirdweb && !session.isLoading && (
+              <p className="text-xs text-muted-foreground md:text-sm">
+                You will need to login first to mint the NFT
+              </p>
+            )}
           </UserActionFormLayout.Footer>
         </div>
       </UserActionFormLayout.Container>
