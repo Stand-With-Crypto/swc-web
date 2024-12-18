@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+printenv
+
 set -e
 npx prisma generate
 npm run intl:extract-compile
