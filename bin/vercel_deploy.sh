@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-printenv
-
 set -e
+npm run db:check
 npx prisma generate
 npm run intl:extract-compile
 npm run codegen
