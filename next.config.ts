@@ -67,6 +67,7 @@ const contentSecurityPolicy = {
     // Thirdweb contract data
     'https://*.ipfscdn.io/',
     'https://*.walletconnect.com/',
+    'https://*.walletconnect.org/',
     'https://developer-access-mainnet.base.org/',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
