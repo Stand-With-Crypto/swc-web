@@ -60,7 +60,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
           <Button data-testid="login-button">Sign In</Button>
         )}
       </PopoverTrigger>
-      <PopoverContent align="end" className="p-0">
+      <PopoverContent a11yTitle="User Profile" align="end" className="p-0">
         <NavbarLoggedInPopoverContent onClose={() => dialogProps.onOpenChange(false)} />
       </PopoverContent>
     </Popover>
