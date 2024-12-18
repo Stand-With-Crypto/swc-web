@@ -1,7 +1,6 @@
 'use client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import {
   NFTDisplay,
   NFTDisplaySkeleton,
@@ -48,15 +47,16 @@ export function UserActionFormNFTMintIntro({
               loadingFallback={<FooterSkeleton />}
               useThirdwebSession={true}
             >
-              <Button data-testid="signin-button" size="lg">
-                Sign In
-              </Button>
+              <div className="flex w-full items-center justify-between gap-4">
+                <p className="text-xs text-muted-foreground md:text-sm">
+                  You will need to login first to mint the NFT
+                </p>
+
+                <Button data-testid="signin-button" size="lg">
+                  Sign In
+                </Button>
+              </div>
             </LoginDialogWrapper>
-            <MaybeAuthenticatedContent authenticatedContent={null} useThirdwebSession={true}>
-              <p className="text-xs text-muted-foreground md:text-sm">
-                You will need to login first to mint the NFT
-              </p>
-            </MaybeAuthenticatedContent>
           </UserActionFormLayout.Footer>
         </div>
       </UserActionFormLayout.Container>
@@ -65,7 +65,7 @@ export function UserActionFormNFTMintIntro({
 }
 
 export function FooterSkeleton() {
-  return <Skeleton className="h-12 w-full" />
+  return <Skeleton className="h-14 w-32" />
 }
 
 const ETH_NFT_DONATION_AMOUNT_DISPLAY = `${fromBigNumber(ETH_NFT_DONATION_AMOUNT)} ${
