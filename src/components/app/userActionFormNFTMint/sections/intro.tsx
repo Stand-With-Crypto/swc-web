@@ -1,7 +1,6 @@
 'use client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import {
   NFTDisplay,
   NFTDisplaySkeleton,
@@ -17,6 +16,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { useSession } from '@/hooks/useSession'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -25,6 +25,8 @@ import { NFT_CLIENT_METADATA, NFTClientMetadata } from '@/utils/web/nft'
 export function UserActionFormNFTMintIntro({
   goToSection,
 }: UseSectionsReturn<UserActionFormNFTMintSectionNames>) {
+  const session = useSession()
+
   const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
 
   return (
@@ -52,11 +54,12 @@ export function UserActionFormNFTMintIntro({
                 Sign In
               </Button>
             </LoginDialogWrapper>
-            <MaybeAuthenticatedContent authenticatedContent={null} useThirdwebSession={true}>
+
+            {!session.isLoggedInThirdweb && !session.isLoading && (
               <p className="text-xs text-muted-foreground md:text-sm">
                 You will need to login first to mint the NFT
               </p>
-            </MaybeAuthenticatedContent>
+            )}
           </UserActionFormLayout.Footer>
         </div>
       </UserActionFormLayout.Container>
@@ -65,7 +68,7 @@ export function UserActionFormNFTMintIntro({
 }
 
 export function FooterSkeleton() {
-  return <Skeleton className="h-12 w-full" />
+  return <Skeleton className="h-14 w-32" />
 }
 
 const ETH_NFT_DONATION_AMOUNT_DISPLAY = `${fromBigNumber(ETH_NFT_DONATION_AMOUNT)} ${
