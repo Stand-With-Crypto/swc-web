@@ -32,6 +32,13 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'TLS connection',
   'Unexpected end of',
   'Unknown root exit status',
+  'Non-Error promise rejection captured with value',
+  'Unexpected token',
+  'fetch failed',
+  'undefined is not an object',
+  'null is not an object',
+  'Unknown root exit status',
+  'Connection closed',
 ]
 
 const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/api/js']
