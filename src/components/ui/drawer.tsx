@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
+import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
@@ -65,13 +66,21 @@ interface DrawerContentProps
   extends React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> {
   touchableIndicatorClassName?: string
   direction?: 'top' | 'bottom'
+  a11yTitle: string
 }
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
   DrawerContentProps
 >(
   (
-    { className, children, touchableIndicatorClassName = '', direction = 'bottom', ...props },
+    {
+      className,
+      children,
+      touchableIndicatorClassName = '',
+      direction = 'bottom',
+      a11yTitle,
+      ...props
+    },
     ref,
   ) => (
     <DrawerPortal>
@@ -85,6 +94,10 @@ const DrawerContent = React.forwardRef<
         ref={ref}
         {...props}
       >
+        <VisuallyHidden>
+          <DrawerPrimitive.Description>{props['aria-describedby']}</DrawerPrimitive.Description>
+          <DrawerTitle>{a11yTitle}</DrawerTitle>
+        </VisuallyHidden>
         {direction === 'bottom' && (
           <div
             className={cn(
