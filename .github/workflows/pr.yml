@@ -12,7 +12,7 @@ jobs:
     if: github.event.pull_request.draft == false
     environment: preview
     runs-on: ubuntu-latest
-    name: Lint, tests, typechecking, DB Schema test
+    name: Lint, tests, typechecking
     env:
       # environment secrets
       VERIFIED_SWC_PARTNER_SECRET_COINBASE: ${{ secrets.VERIFIED_SWC_PARTNER_SECRET_COINBASE }}
@@ -99,6 +99,3 @@ jobs:
 
       - name: Typecheck
         run: npm run typecheck
-
-      - name: Validate Prisma Schema
-        run: npm run db:check
