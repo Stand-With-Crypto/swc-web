@@ -130,6 +130,7 @@ model User {
   acquisitionSource          String                    @map("acquisition_source")
   acquisitionMedium          String                    @map("acquisition_medium")
   acquisitionCampaign        String                    @map("acquisition_campaign")
+  locale                     String?                   @map("locale")
 
   // REMINDER: as we add additional foreign keys to users, we'll want to make sure we account for them in our mergeUsers logic
   userCryptoAddresses UserCryptoAddress[] @relation("userCryptoAddresses")
@@ -294,6 +295,7 @@ model UserAction {
   nftMintId           String?            @unique @map("nft_mint_id")
   nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
   actionType          UserActionType     @map("action_type")
+  locale              String?            @map("locale")
 
   // We'll need in-memory logic to validate and verify only one action type is every associated with a UserAction
   userActionEmail                       UserActionEmail?
