@@ -23,17 +23,17 @@ export function usePlacesAutocompleteAddress(address: string) {
   // the library returns a loading prop but it appears to always be false. Status will be an empty string unless it returns something
   const loading = !status
 
-  const scriptStatus = useGoogleMapsScript()
+  const { isLoaded } = useGoogleMapsScript()
 
   useEffect(() => {
-    if (scriptStatus === 'ready') {
+    if (isLoaded) {
       init()
       if (address) {
         // Setting the value will trigger fetching the address suggestions
         setValue(address)
       }
     }
-  }, [address, init, scriptStatus, setValue])
+  }, [address, init, isLoaded, setValue])
 
   return useMemo(
     () => ({ addressSuggestions, ready, loading }),
