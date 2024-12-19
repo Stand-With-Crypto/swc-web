@@ -9,6 +9,7 @@ import {
 } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 
+import { SupportedLocale } from '@/intl/locales'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 
@@ -58,5 +59,10 @@ export function mockUser(): User {
     totalDonationAmountUsd: new Decimal(
       faker.number.float({ min: 0, max: 30000, multipleOf: 0.01 }),
     ),
+    locale:
+      faker.helpers.maybe(
+        () => faker.helpers.arrayElement([SupportedLocale.EN_US, SupportedLocale.EN_UK]),
+        { probability: 0.5 },
+      ) || null,
   }
 }

@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { DataCreationMethod, Prisma, UserAction } from '@prisma/client'
 
+import { SupportedLocale } from '@/intl/locales'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import {
@@ -30,5 +31,10 @@ export function mockUserAction(): UserAction {
     id: fakerFields.id(),
     userId: fakerFields.id(),
     dataCreationMethod: DataCreationMethod.BY_USER,
+    locale:
+      faker.helpers.maybe(
+        () => faker.helpers.arrayElement([SupportedLocale.EN_US, SupportedLocale.EN_UK]),
+        { probability: 0.5 },
+      ) || null,
   }
 }
