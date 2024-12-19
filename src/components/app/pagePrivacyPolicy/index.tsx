@@ -3,7 +3,7 @@ export function PagePrivacyPolicy() {
     <article className="prose max-w-full">
       <h1>Stand With Crypto Alliance, Inc.: Privacy Policy</h1>
 
-      <p>Effective Date: September 10, 2024</p>
+      <p>Effective Date: December 17, 2024</p>
 
       <p>
         Your privacy is important to us. This Privacy Policy describes the types of data that Stand
@@ -257,8 +257,8 @@ export function PagePrivacyPolicy() {
           applicable) of such personal data;
         </li>
         <li>
-          To provide additional information—at SWC’s option—about specific third-party disclosures
-          (as applicable);
+          To provide additional information about specific third-party disclosures (e.g., categories
+          or specific third parties, as required by law);
         </li>
         <li>To correct inaccuracies in your personal data;</li>
         <li>To delete your personal data;</li>
@@ -422,7 +422,7 @@ export function PagePrivacyPolicy() {
         <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>
       </p>
 
-      <p>Last Updated: September 10, 2024</p>
+      <p>Last Updated: December 17, 2024</p>
     </article>
   )
 }

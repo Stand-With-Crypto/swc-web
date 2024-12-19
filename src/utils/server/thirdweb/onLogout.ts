@@ -9,9 +9,10 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 export async function onLogout() {
-  const localUser = parseLocalUserFromCookies()
+  const currentCookies = await cookies()
+  const localUser = await parseLocalUserFromCookies()
 
-  const token = cookies().get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+  const token = currentCookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
   const decodedToken = token?.value ? jwtDecode<{ ctx?: { userId?: string } }>(token.value) : null
   const { userId } = decodedToken?.ctx ?? {}
 
@@ -21,5 +22,5 @@ export async function onLogout() {
       .flush(),
   )
 
-  cookies().delete(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+  currentCookies.delete(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 }

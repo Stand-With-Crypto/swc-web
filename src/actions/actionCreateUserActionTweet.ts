@@ -63,8 +63,8 @@ async function _actionCreateUserActionTweet() {
     },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
-  const sessionId = getUserSessionId()
-  const localUser = parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
 
   if (!userMatch.user) {
     await triggerRateLimiterAtMostOnce()

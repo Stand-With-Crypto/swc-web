@@ -31,8 +31,7 @@ export function PageHome({
   sumDonationsByUser,
   dtsiHomepagePeople,
   advocatePerStateDataProps,
-}: PageProps &
-  Awaited<ReturnType<typeof getHomepageData>> & {
+}: { params: Awaited<PageProps['params']> } & Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
   }) {
   const { locale } = params

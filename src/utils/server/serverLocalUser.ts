@@ -113,8 +113,8 @@ function parseFromCookieStrings({
   }
 }
 
-export function parseLocalUserFromCookies() {
-  const cookieObj = cookies()
+export async function parseLocalUserFromCookies() {
+  const cookieObj = await cookies()
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value

@@ -22,7 +22,9 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
   })
 }
 
-export default async function Profile({ params, searchParams }: Props) {
+export default async function Profile(props: Props) {
+  const searchParams = await props.searchParams
+  const params = await props.params
   const { locale } = params
   const user = await getAuthenticatedData()
   const hasOptInUserAction = user?.userActions?.some(
@@ -43,5 +45,5 @@ export default async function Profile({ params, searchParams }: Props) {
     )
   }
 
-  return <PageUserProfile params={params} searchParams={searchParams} user={user} />
+  return <PageUserProfile params={params} user={user} />
 }

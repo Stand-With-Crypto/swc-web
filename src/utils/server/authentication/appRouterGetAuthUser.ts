@@ -18,7 +18,9 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
     return thirdwebAuthData
   }
 
-  const sessionId = cookies().get(USER_SESSION_ID_COOKIE_NAME)?.value
+  const currentCookies = await cookies()
+
+  const sessionId = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
   if (!sessionId) {
     return null
   }
