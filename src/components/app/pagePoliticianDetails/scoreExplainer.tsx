@@ -33,7 +33,11 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
           </h4>
         </div>
       </PopoverTrigger>
-      <PopoverContent align="start" className="md:w-full md:max-w-sm">
+      <PopoverContent
+        a11yTitle="Person Score Explainer"
+        align="start"
+        className="md:w-full md:max-w-sm"
+      >
         <div className="p-6 md:p-0">
           <p className="mb-3 text-sm">
             <ExternalLink href={externalUrls.dtsi()}>DoTheySupportIt</ExternalLink> calculates

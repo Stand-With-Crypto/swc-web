@@ -55,7 +55,7 @@ export default function ManageCookiesModal({
   return (
     <Container {...dialogProps}>
       <ContainerTrigger asChild>{children}</ContainerTrigger>
-      <ContainerContent>
+      <ContainerContent a11yTitle="Privacy Choices">
         <ContainerHeader
           className={cn('space-y-6 px-0 pb-4', {
             'px-8': isMobile,
