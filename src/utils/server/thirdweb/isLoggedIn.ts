@@ -5,7 +5,8 @@ import { cookies } from 'next/headers'
 import { thirdwebAuth } from '@/utils/server/thirdweb/thirdwebAuthClient'
 
 export async function isLoggedIn() {
-  const jwt = cookies().get('jwt')
+  const currentCookies = await cookies()
+  const jwt = currentCookies.get('jwt')
   if (!jwt?.value) {
     return false
   }

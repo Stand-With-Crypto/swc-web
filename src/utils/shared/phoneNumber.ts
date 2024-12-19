@@ -1,4 +1,6 @@
-import parsePhoneNumber, { CountryCode } from 'libphonenumber-js'
+import { CountryCode } from 'libphonenumber-js'
+import { parsePhoneNumberWithError } from 'libphonenumber-js/core'
+import phoneNumberMetadata from 'libphonenumber-js/mobile/metadata'
 
 const DEFAULT_COUNTRY_CODE: CountryCode = 'US'
 
@@ -22,7 +24,14 @@ export function normalizePhoneNumber(passed: string) {
 export function formatPhoneNumber(phoneNumber: string) {
   if (!phoneNumber) return ''
 
-  const parsedPhoneNumber = parsePhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+  // https://github.com/catamphetamine/libphonenumber-js/issues/468#issue-2504182999
+  // We have to add phoneNumberMetadata from the 'libphonenumber-js/mobile/metadata'
+  // in the function call below to make it work as explained in the issue above
+  const parsedPhoneNumber = parsePhoneNumberWithError(
+    phoneNumber,
+    DEFAULT_COUNTRY_CODE,
+    phoneNumberMetadata,
+  )
 
   if (!parsedPhoneNumber) throw new Error(`Failed to parse phone number ${phoneNumber}`)
 
@@ -30,7 +39,15 @@ export function formatPhoneNumber(phoneNumber: string) {
 }
 
 export function validatePhoneNumber(phoneNumber: string) {
-  const parsedPhoneNumber = parsePhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+  if (!phoneNumber) return false
+  // https://github.com/catamphetamine/libphonenumber-js/issues/468#issue-2504182999
+  // We have to add phoneNumberMetadata from the 'libphonenumber-js/mobile/metadata'
+  // in the function call below to make it work as explained in the issue above
+  const parsedPhoneNumber = parsePhoneNumberWithError(
+    phoneNumber,
+    DEFAULT_COUNTRY_CODE,
+    phoneNumberMetadata,
+  )
 
   if (!parsedPhoneNumber) return false
 

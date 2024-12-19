@@ -18,8 +18,9 @@ function areSignaturesEqual(a: string, b: string) {
 }
 
 // The below argument is left as any because we want to be able to accept any raw request body.
-export function authenticatePaymentRequest(rawRequestBody: any) {
-  const headerSignature = headers().get('x-cc-webhook-signature')
+export async function authenticatePaymentRequest(rawRequestBody: any) {
+  const currentHeaders = await headers()
+  const headerSignature = currentHeaders.get('x-cc-webhook-signature')
   if (!headerSignature) {
     Sentry.captureMessage('missing signature within request header', {
       extra: { body: rawRequestBody },

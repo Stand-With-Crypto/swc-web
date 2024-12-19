@@ -216,7 +216,8 @@ export function UserActionFormEmailCongressperson({
               },
             },
             payload =>
-              actionCreateUserActionEmailCongressperson(payload).then(actionResult => {
+              actionCreateUserActionEmailCongressperson(payload).then(async actionResultPromise => {
+                const actionResult = await actionResultPromise
                 if (actionResult && 'user' in actionResult && actionResult.user) {
                   identifyUserOnClient(actionResult.user)
                 }

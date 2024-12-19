@@ -6,13 +6,13 @@ import {
   OpenGraphImageOptions,
 } from '@/utils/server/generateOpenGraphImageUrl'
 import { decodeObjectForUrl } from '@/utils/shared/encodeObjectForUrl'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
+export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.HOUR
 export const runtime = 'edge'
 
-export async function GET(_request: NextRequest, { params }: { params: { config: string } }) {
+export async function GET(_request: NextRequest, props: { params: Promise<{ config: string }> }) {
+  const params = await props.params
   const imageData = await fetch(new URL('./shield.png', import.meta.url)).then(res =>
     res.arrayBuffer(),
   )

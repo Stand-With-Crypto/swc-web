@@ -5,13 +5,13 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
 interface RequestContext {
-  params: {
+  params: Promise<{
     sessionId: string
-  }
+  }>
 }
 
 export const GET = withRouteMiddleware(async (_: Request, { params }: RequestContext) => {
-  const { sessionId } = params
+  const { sessionId } = await params
 
   const user = await prismaClient.user.findFirst({
     where: {

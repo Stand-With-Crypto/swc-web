@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Marker } from 'react-simple-maps'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 

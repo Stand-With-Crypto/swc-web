@@ -37,7 +37,9 @@ export async function handleCreateRsvpAction({
       payload: data,
     },
     payload =>
-      actionCreateUserActionRsvpEvent(payload).then(actionResult => {
+      actionCreateUserActionRsvpEvent(payload).then(async actionResultPromise => {
+        const actionResult = await actionResultPromise
+
         if (actionResult?.user) {
           identifyUserOnClient(actionResult.user)
         }

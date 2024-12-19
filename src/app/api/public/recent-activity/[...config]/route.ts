@@ -4,10 +4,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
+export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 const zodParams = z.object({
   limit: z.string().pipe(z.coerce.number().int().gte(0).lt(100)),
@@ -16,8 +15,9 @@ const zodParams = z.object({
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { config: [string, string?] } },
+  props: { params: Promise<{ config: [string, string?] }> },
 ) {
+  const params = await props.params
   const [rawLimit, rawRestrictToUS] = params.config
 
   const { limit, restrictToUS } = zodParams.parse({
