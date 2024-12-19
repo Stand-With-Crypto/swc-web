@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useEvent } from 'react-use'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { Button } from '@/components/ui/button'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { useDialog } from '@/hooks/useDialog'
@@ -57,7 +58,15 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
             <div className="max-w-[150px] truncate">{displayName}</div>
           </Button>
         ) : (
-          <Button data-testid="login-button">Sign In</Button>
+          <LoginDialogWrapper authenticatedContent={null}>
+            <Button
+              className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
+              data-testid="login-button"
+              variant="primary-cta"
+            >
+              Sign In
+            </Button>
+          </LoginDialogWrapper>
         )}
       </PopoverTrigger>
       <PopoverContent a11yTitle="User Profile" align="end" className="p-0">
