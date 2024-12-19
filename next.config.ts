@@ -1,5 +1,8 @@
-const { withSentryConfig } = require('@sentry/nextjs')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import bundleAnalyzer from '@next/bundle-analyzer'
+import { withSentryConfig } from '@sentry/nextjs'
+import type { NextConfig } from 'next'
+
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
@@ -200,10 +203,9 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
   ],
 }))
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   experimental: {
-    instrumentationHook: true,
+    turbo: {},
   },
   eslint: {
     ignoreDuringBuilds: true,

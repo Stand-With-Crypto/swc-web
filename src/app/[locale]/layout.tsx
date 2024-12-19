@@ -46,8 +46,11 @@ export const metadata: Metadata = {
   ...TOP_LEVEL_METADATA_DETAILS,
 }
 
-export default function Layout({ children, params }: PageProps & { children: React.ReactNode }) {
-  const { locale } = params
+export default async function Layout({
+  children,
+  params,
+}: PageProps & { children: React.ReactNode }) {
+  const { locale } = await params
 
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()

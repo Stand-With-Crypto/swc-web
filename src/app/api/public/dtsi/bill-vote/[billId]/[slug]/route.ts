@@ -5,11 +5,10 @@ import { z } from 'zod'
 
 import { DTSI_BillPersonRelationshipType } from '@/data/dtsi/generated'
 import { queryDTSIBillRelationshipByPerson } from '@/data/dtsi/queries/queryDTSIBillRelationshipByPerson'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 
+export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.HOUR
 
 const zodParams = z.object({
   slug: zodDTSISlug,
@@ -40,8 +39,9 @@ async function apiResponseForBillVoteByPerson(
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: z.infer<typeof zodParams> },
+  props: { params: Promise<z.infer<typeof zodParams>> },
 ) {
+  const params = await props.params
   const data = await apiResponseForBillVoteByPerson(params)
   return NextResponse.json(data)
 }

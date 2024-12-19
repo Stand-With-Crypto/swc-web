@@ -7,7 +7,6 @@ import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/even
 import { PageProps } from '@/types'
 import { getEvent } from '@/utils/server/builderIO/swcEvent'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 type Props = PageProps<{
@@ -15,14 +14,15 @@ type Props = PageProps<{
   eventSlug: string
 }>
 
-export const revalidate = SECONDS_DURATION.MINUTE
+export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const title = 'Event'
 const description =
   'Stand With Crypto hosts events nationwide to organize, activate, and energize the nationwide Crypto community. Check this page for information about upcoming events, including times, dates, and locations, and RSVP to events in your area'
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params
   const { state, eventSlug } = params
 
   const event = await getEvent(eventSlug, state)
@@ -43,7 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
-export default async function EventDetailsPageRoot({ params }: Props) {
+export default async function EventDetailsPageRoot(props: Props) {
+  const params = await props.params
   const { state, eventSlug } = params
 
   const event = await getEvent(eventSlug, state)

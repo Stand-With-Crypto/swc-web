@@ -1,3 +1,4 @@
+import { geolocation } from '@vercel/functions'
 import { NextRequest } from 'next/server'
 
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -15,7 +16,7 @@ const defaultCountryCode = ['local', 'testing'].includes(NEXT_PUBLIC_ENVIRONMENT
   : ''
 
 export const getCountryCode = (request: NextRequest) => {
-  const userCountryCode = request.geo?.country
+  const { country: userCountryCode } = geolocation(request)
 
   return userCountryCode || defaultCountryCode
 }

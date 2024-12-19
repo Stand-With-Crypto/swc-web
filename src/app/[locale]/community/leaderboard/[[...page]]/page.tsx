@@ -14,9 +14,8 @@ import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/cons
 import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION['30_MINUTES']
+export const revalidate = 1800 // 30 minutes
 export const dynamic = 'error'
 export const dynamicParams = true
 
@@ -49,7 +48,8 @@ export async function generateStaticParams() {
   return results
 }
 
-export default async function CommunityLeaderboardPage({ params }: Props) {
+export default async function CommunityLeaderboardPage(props: Props) {
+  const params = await props.params
   const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
   const { locale, page } = params
   const pageNum = validatePageNum(page ?? [])

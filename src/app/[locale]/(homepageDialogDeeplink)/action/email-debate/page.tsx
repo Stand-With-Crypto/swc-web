@@ -3,14 +3,14 @@ import { UserActionType } from '@prisma/client'
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { UserActionFormEmailDebateDeeplinkWrapper } from '@/components/app/userActionFormEmailDebate/homepageDialogDeeplinkWrapper'
 import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
-export const revalidate = SECONDS_DURATION.HOUR
+export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 
-export default function UserActionEmailDebateDeepLink({ params }: PageProps) {
+export default async function UserActionEmailDebateDeepLink(props: PageProps) {
+  const params = await props.params
   return (
     <ErrorBoundary
       extras={{
