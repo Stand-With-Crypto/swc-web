@@ -126,3 +126,7 @@ select[id='countries'] {
   pointer-events: none;
   opacity: 0.6;
 }
+
+div[data-scroll-area-viewport] > div:first-child {
+  height: 100%;
+}
