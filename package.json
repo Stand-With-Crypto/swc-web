@@ -125,7 +125,7 @@
     "swr": "^2.2.4",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
-    "thirdweb": "^5.70.0",
+    "thirdweb": "^5.80.0",
     "twemoji": "^14.0.2",
     "twemoji-parser": "^14.0.0",
     "twilio": "^5.1.1",
