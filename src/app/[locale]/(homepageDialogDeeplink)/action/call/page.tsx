@@ -13,23 +13,23 @@ export const dynamic = 'error'
 export default async function UserActionCallCongresspersonDeepLink(props: PageProps) {
   const params = await props.params
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.CALL,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionCallCongresspersonDeepLink',
-      }}
-    >
-      <HomepageDialogDeeplinkLayout pageParams={params}>
-        <div className={cn('max-md:h-full', dialogContentPaddingStyles)}>
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <div className={cn('max-md:h-full', dialogContentPaddingStyles)}>
+        <ErrorBoundary
+          extras={{
+            action: {
+              isDeeplink: true,
+              actionType: UserActionType.CALL,
+            },
+          }}
+          severityLevel="error"
+          tags={{
+            domain: 'UserActionCallCongresspersonDeepLink',
+          }}
+        >
           <UserActionFormCallCongresspersonDeeplinkWrapper />
-        </div>
-      </HomepageDialogDeeplinkLayout>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
+    </HomepageDialogDeeplinkLayout>
   )
 }
