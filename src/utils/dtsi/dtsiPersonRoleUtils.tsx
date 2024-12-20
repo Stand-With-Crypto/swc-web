@@ -1,4 +1,4 @@
-import { format as dateFormat, getYear, isBefore, parseISO } from 'date-fns'
+import { format as dateFormat, isBefore, parseISO } from 'date-fns'
 import { compact, isNumber } from 'lodash-es'
 
 import {
@@ -54,13 +54,15 @@ const getIsRoleInFuture = (role: FuturePrefixRole) => {
   return null
 }
 
+export type DTSIPersonRoleCategoryDisplayNameProps = Pick<
+  DTSI_PersonRole,
+  'roleCategory' | 'title' | 'status' | 'primaryState' | 'dateStart'
+> & {
+  group: null | undefined | { groupInstance: string }
+}
+
 export const getDTSIPersonRoleCategoryDisplayName = (
-  role: Pick<
-    DTSI_PersonRole,
-    'roleCategory' | 'title' | 'status' | 'primaryState' | 'dateStart'
-  > & {
-    group: null | undefined | { groupInstance: string }
-  },
+  role: DTSIPersonRoleCategoryDisplayNameProps,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD || getIsRoleInFuture(role)) {
     return 'Political Figure'
