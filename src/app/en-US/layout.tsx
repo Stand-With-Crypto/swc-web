@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
 
-import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
+import { TopLevelClientLogic } from '@/app/en-US/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
@@ -51,10 +51,10 @@ export default async function Layout({
   params,
 }: PageProps & { children: React.ReactNode }) {
   const { locale } = await params
-
-  if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
-    notFound()
-  }
+  console.log('layout', locale)
+  //if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
+  // notFound()
+  //}
 
   return (
     <html lang={locale} translate="no">
@@ -71,7 +71,7 @@ export default async function Layout({
             <NavBarGlobalBanner />
             <Navbar locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer locale={locale} />
+            {/* <Footer locale={locale} /> */}
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />

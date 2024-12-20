@@ -1,9 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { ExampleUkPageEvents } from '@/components/app/en-UK/pageEvents'
 import { EventsPage } from '@/components/app/pageEvents'
-import { SupportedLocale } from '@/intl/locales'
 import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -23,17 +21,13 @@ export const metadata: Metadata = {
 }
 
 export default async function EventsPageRoot({ params }: PageProps) {
-  const events = await getEvents()
-
   const { locale } = await params
 
-  if (!events || !events?.length) {
-    notFound()
-  }
+  console.log('locale', locale)
 
-  if (locale === SupportedLocale.EN_US) {
-    return <EventsPage events={events} />
-  }
-
-  return <ExampleUkPageEvents />
+  return (
+    <div>
+      <h1>Hello</h1>
+    </div>
+  )
 }

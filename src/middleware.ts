@@ -27,6 +27,14 @@ export function middleware(request: NextRequest) {
     defaultLocale: DEFAULT_LOCALE,
     localeDetector,
   })
+
+  console.log(
+    'middleware',
+    localeDetector(request, {
+      locales: ORDERED_SUPPORTED_LOCALES as string[],
+      defaultLocale: DEFAULT_LOCALE,
+    }),
+  )
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
   if (urlSessionId && urlSessionId !== existingSessionId) {
