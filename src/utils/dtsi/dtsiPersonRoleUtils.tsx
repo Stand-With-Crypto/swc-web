@@ -19,8 +19,6 @@ export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null 
 
 export const CURRENT_SESSION_OF_CONGRESS = 118
 export const NEXT_SESSION_OF_CONGRESS = 119
-export const CURRENT_PRESIDENCY_START_YEAR = 2021
-export const NEXT_PRESIDENCY_START_YEAR = 2025
 
 export const getFormattedDTSIPersonRoleDateRange = ({
   dateEnd,
@@ -69,13 +67,13 @@ export const getDTSIPersonRoleCategoryDisplayName = (
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
-      return `Congressperson`
+      return 'Congressperson'
     case DTSI_PersonRoleCategory.PRESIDENT:
-      return `President`
+      return 'President'
     case DTSI_PersonRoleCategory.SENATE:
-      return `Senator`
+      return 'Senator'
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
-      return `Vice President`
+      return 'Vice President'
   }
   return 'Political Figure'
 }
