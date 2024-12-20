@@ -196,7 +196,7 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
   destination,
   has: [
     {
-      type: 'query',
+      type: 'query' as const,
       key: queryKey,
       value: queryValue,
     },
@@ -333,6 +333,12 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      {
+        source: '/theblocknews',
+        destination:
+          'https://www.theblock.co/post/331309/stand-with-crypto-advocates-flood-senate-with-107000-emails-opposing-sec-crenshaws-renomination',
+        permanent: false,
+      },
       {
         source: '/secvote-2/:sessionId*',
         destination:
