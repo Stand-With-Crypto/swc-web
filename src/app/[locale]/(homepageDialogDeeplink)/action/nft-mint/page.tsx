@@ -13,28 +13,28 @@ export const dynamic = 'error'
 export default async function UserActionNFTMintDeepLink(props: PageProps) {
   const params = await props.params
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.NFT_MINT,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionNFTMintDeepLink',
-      }}
-    >
-      <HomepageDialogDeeplinkLayout pageParams={params}>
-        <div
-          className={cn(
-            'flex flex-col items-center justify-center max-md:h-full',
-            dialogContentPaddingStyles,
-          )}
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <div
+        className={cn(
+          'flex flex-col items-center justify-center max-md:h-full',
+          dialogContentPaddingStyles,
+        )}
+      >
+        <ErrorBoundary
+          extras={{
+            action: {
+              isDeeplink: true,
+              actionType: UserActionType.NFT_MINT,
+            },
+          }}
+          severityLevel="error"
+          tags={{
+            domain: 'UserActionNFTMintDeepLink',
+          }}
         >
           <HomepageDialogDeeplinkNFTMintWrapper />
-        </div>
-      </HomepageDialogDeeplinkLayout>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
+    </HomepageDialogDeeplinkLayout>
   )
 }
