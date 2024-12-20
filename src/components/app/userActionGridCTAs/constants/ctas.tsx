@@ -110,8 +110,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email Your Senator',
-    description: 'Tell your Senator you oppose anti-crypto commissioners on the SEC.',
+    title: 'Contact Your Member Of Congress',
+    description: 'The 119th Congress Needs To Hear From You!',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -167,6 +167,15 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         isCampaignActive: false,
         title: 'Email Your Senator',
         description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+        isCampaignActive: true,
+        title: 'Contact Your Member Of Congress',
+        description: 'The 119th Congress Needs To Hear From You!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
