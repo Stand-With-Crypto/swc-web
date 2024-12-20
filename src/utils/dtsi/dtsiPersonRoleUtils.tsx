@@ -1,4 +1,4 @@
-import { format as dateFormat, isBefore, parseISO } from 'date-fns'
+import { format as dateFormat, getYear, isBefore, parseISO } from 'date-fns'
 import { compact, isNumber } from 'lodash-es'
 
 import {
@@ -17,6 +17,11 @@ export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null 
   return isBefore(parseISO(dateEnd), new Date())
 }
 
+export const CURRENT_SESSION_OF_CONGRESS = 118
+export const NEXT_SESSION_OF_CONGRESS = 119
+export const CURRENT_PRESIDENCY_START_YEAR = 2021
+export const NEXT_PRESIDENCY_START_YEAR = 2025
+
 export const getFormattedDTSIPersonRoleDateRange = ({
   dateEnd,
   dateStart,
@@ -31,21 +36,46 @@ export const getFormattedDTSIPersonRoleDateRange = ({
     .join(' - ')
 }
 
+type FuturePrefixRole = Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'dateStart'> & {
+  group: null | undefined | { groupInstance: string }
+}
+
+const getIsRoleInFuture = (role: FuturePrefixRole) => {
+  if (role.dateStart && isBefore(parseISO(role.dateStart), new Date())) {
+    return false
+  }
+  switch (role.roleCategory) {
+    case DTSI_PersonRoleCategory.SENATE:
+    case DTSI_PersonRoleCategory.CONGRESS: {
+      const groupInstanceNum = role.group?.groupInstance
+        ? parseInt(role.group.groupInstance, 10)
+        : null
+      return groupInstanceNum ? groupInstanceNum > CURRENT_SESSION_OF_CONGRESS : null
+    }
+  }
+  return null
+}
+
 export const getDTSIPersonRoleCategoryDisplayName = (
-  role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'primaryState'>,
+  role: Pick<
+    DTSI_PersonRole,
+    'roleCategory' | 'title' | 'status' | 'primaryState' | 'dateStart'
+  > & {
+    group: null | undefined | { groupInstance: string }
+  },
 ) => {
-  if (role.status !== DTSI_PersonRoleStatus.HELD) {
+  if (role.status !== DTSI_PersonRoleStatus.HELD || getIsRoleInFuture(role)) {
     return 'Political Figure'
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
-      return 'Congressperson'
+      return `Congressperson`
     case DTSI_PersonRoleCategory.PRESIDENT:
-      return 'President'
+      return `President`
     case DTSI_PersonRoleCategory.SENATE:
-      return 'Senator'
+      return `Senator`
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
-      return 'Vice President'
+      return `Vice President`
   }
   return 'Political Figure'
 }
@@ -101,9 +131,6 @@ export const getDTSIPersonRoleLocation = (
   }
   return null
 }
-
-export const CURRENT_SESSION_OF_CONGRESS = 118
-export const NEXT_SESSION_OF_CONGRESS = 119
 
 export type NormalizedDTSIDistrictId = number | 'at-large'
 export const normalizeDTSIDistrictId = (

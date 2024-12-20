@@ -22,6 +22,11 @@ const fragmentDTSIBillRelationships = /* GraphQL */ `
         roleCategory
         title
         primaryState
+        group {
+          id
+          category
+          groupInstance
+        }
       }
       profilePictureUrl
       profilePictureUrlDimensions
