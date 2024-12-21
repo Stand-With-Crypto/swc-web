@@ -25,6 +25,11 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
       roleCategory
       status
       title
+      group {
+        id
+        category
+        groupInstance
+      }
     }
     twitterAccounts {
       accountType
