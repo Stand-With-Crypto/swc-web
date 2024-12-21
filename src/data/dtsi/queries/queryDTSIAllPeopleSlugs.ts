@@ -11,10 +11,13 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [
         CURRENT_US_HOUSE_OF_REPS
         CURRENT_US_SENATE
-        RUNNING_FOR_PRESIDENT
         US_PRESIDENT
+        RUNNING_FOR_PRESIDENT
         RUNNING_FOR_US_HOUSE_OF_REPS
         RUNNING_FOR_US_SENATE
+        NEXT_PRESIDENT
+        NEXT_US_HOUSE_OF_REPS
+        NEXT_US_SENATE
       ]
     ) {
       slug

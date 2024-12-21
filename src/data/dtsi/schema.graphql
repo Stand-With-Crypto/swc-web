@@ -45,6 +45,7 @@ type BillAnalysis {
 
 enum BillAnalysisVerificationStatus {
   APPROVED
+  APPROVED_NOT_PROMOTED
   PENDING
   REJECTED_NOT_RELEVANT
   REJECTED_SPAM
@@ -155,6 +156,7 @@ type Person {
   proPublicaId: String
   profilePictureUrl: String!
   profilePictureUrlDimensions: Json
+  profilePictureUrlUnoptimized: String
   promotedPositioning: Int
   roles: [PersonRole!]!
   slug: String!
@@ -179,6 +181,9 @@ Common groupings of people to query for
 enum PersonGrouping {
   CURRENT_US_HOUSE_OF_REPS
   CURRENT_US_SENATE
+  NEXT_PRESIDENT
+  NEXT_US_HOUSE_OF_REPS
+  NEXT_US_SENATE
   RUNNING_FOR_PRESIDENT
   RUNNING_FOR_US_HOUSE_OF_REPS
   RUNNING_FOR_US_SENATE
@@ -265,6 +270,7 @@ enum PersonRoleStatus {
 }
 
 type PersonStance {
+  additionalAnalysis: [PersonStanceAnalysis!]!
   analysis: [PersonStanceAnalysis!]!
   billRelationship: BillPersonRelationship
   computedStanceScore: Float
@@ -286,6 +292,7 @@ type PersonStanceAnalysis {
   datetimeCreated: DateTime!
   datetimeUpdated: DateTime!
   id: ID!
+  publicUser: PublicUser!
   richTextCommentary: Json
   stanceScore: Float
   user: User!
@@ -294,6 +301,7 @@ type PersonStanceAnalysis {
 
 enum PersonStanceAnalysisVerificationStatus {
   APPROVED
+  APPROVED_NOT_PROMOTED
   PENDING
   REJECTED_NOT_RELEVANT
   REJECTED_SPAM
@@ -346,6 +354,16 @@ enum PersonStanceVerificationStatus {
   REJECTED_SPAM
 }
 
+type PublicUser {
+  displayName: String!
+  id: ID!
+  importanceScore: Int!
+  profilePictureUrl: String!
+  profilePictureUrlDimensions: Json
+  profilePictureUrlUnoptimized: String!
+  twitterUsername: String
+}
+
 type Query {
   bill(id: String!): Bill!
   bills: [Bill!]!
@@ -378,11 +396,6 @@ type Query {
     personRolePrimaryState: String
     personSlugIn: [String!]
   ): [PersonStance!]!
-
-  """
-  Returns all objects that have been updated since the given date
-  """
-  recentlyUpdated(datetimeUpdateGte: String!): [UpdatableUnion!]!
 }
 
 """
@@ -417,6 +430,7 @@ type TweetMedia {
   originalUrl: String!
   type: TweetMediaType!
   url: String!
+  urlUnoptimized: String
   width: Int
 }
 
@@ -449,31 +463,14 @@ enum TwitterAccountType {
   PROFESSIONAL
 }
 
-"""
-Any Object Type with a datetimeUpdated
-"""
-union UpdatableUnion =
-  | Bill
-  | BillAnalysis
-  | BillPersonRelationship
-  | Person
-  | PersonRole
-  | PersonRoleGroup
-  | PersonStance
-  | PersonStanceAnalysis
-  | PersonStanceQuote
-  | Tweet
-  | TweetMedia
-  | TwitterAccount
-  | User
-
 type User {
   bio: String!
   datetimeCreated: DateTime!
   datetimeUpdated: DateTime!
   id: ID!
   image: String
-  importanceScore: Int
+  imageUnoptimized: String
+  importanceScore: Int!
   internalUserId: String
   name: String
   shouldHaveAnalysisSuperseded: Boolean!

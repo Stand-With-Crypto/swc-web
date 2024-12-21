@@ -79,6 +79,39 @@ function personRoleGroupingToPersonRoleMapping(
         },
         status: DTSI_PersonRoleStatus.RUNNING_FOR,
       }
+    case DTSI_PersonGrouping.NEXT_PRESIDENT:
+      return {
+        primaryDistrict: ``,
+        primaryState: '',
+        primaryCountryCode: 'US',
+        roleCategory: DTSI_PersonRoleCategory.PRESIDENT,
+        status: DTSI_PersonRoleStatus.HELD,
+        dateStart: parseISO('2025-01-20').toISOString(),
+      }
+    case DTSI_PersonGrouping.NEXT_US_HOUSE_OF_REPS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.CONGRESS,
+        primaryDistrict: `2`,
+        primaryState: 'NY',
+        primaryCountryCode: 'US',
+        group: {
+          category: DTSI_PersonRoleGroupCategory.CONGRESS,
+          groupInstance: `${NEXT_SESSION_OF_CONGRESS}`,
+        },
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.NEXT_US_SENATE:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.SENATE,
+        primaryDistrict: ``,
+        primaryState: 'NY',
+        primaryCountryCode: 'US',
+        group: {
+          category: DTSI_PersonRoleGroupCategory.CONGRESS,
+          groupInstance: `${NEXT_SESSION_OF_CONGRESS}`,
+        },
+        status: DTSI_PersonRoleStatus.HELD,
+      }
     case DTSI_PersonGrouping.US_PRESIDENT:
       return {
         roleCategory: DTSI_PersonRoleCategory.PRESIDENT,
