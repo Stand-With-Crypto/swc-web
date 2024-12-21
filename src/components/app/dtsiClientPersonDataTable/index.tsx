@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useMemo } from 'react'
+import { useMemo } from 'react'
 import { filterFns } from '@tanstack/react-table'
 import useSWR, { SWRConfiguration } from 'swr'
 
@@ -55,32 +55,30 @@ export function DTSIClientPersonDataTable({
   const tableColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
 
   return (
-    <Suspense>
-      <DataTable
-        columns={tableColumns}
-        data={passedData}
-        globalFilterFn={(row, _, filterValue, addMeta) => {
-          const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
-          if (matchesFullName) {
-            return true
-          }
+    <DataTable
+      columns={tableColumns}
+      data={passedData}
+      globalFilterFn={(row, _, filterValue, addMeta) => {
+        const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
+        if (matchesFullName) {
+          return true
+        }
 
-          const state = row.original.primaryRole?.primaryState ?? ''
-          if (!state) {
-            return false
-          }
+        const state = row.original.primaryRole?.primaryState ?? ''
+        if (!state) {
+          return false
+        }
 
-          const parsedState = parseString(state)
-          const parsedFilterValue = parseString(filterValue)
-          return (
-            parsedState.includes(parsedFilterValue) ||
-            getUSStateNameFromStateCode(state)?.toLowerCase().includes(parsedFilterValue)
-          )
-        }}
-        key={data?.people ? 'loaded' : 'static'}
-        loadState={data?.people ? 'loaded' : 'static'}
-        locale={locale}
-      />
-    </Suspense>
+        const parsedState = parseString(state)
+        const parsedFilterValue = parseString(filterValue)
+        return (
+          parsedState.includes(parsedFilterValue) ||
+          getUSStateNameFromStateCode(state)?.toLowerCase().includes(parsedFilterValue)
+        )
+      }}
+      key={data?.people ? 'loaded' : 'static'}
+      loadState={data?.people ? 'loaded' : 'static'}
+      locale={locale}
+    />
   )
 }
