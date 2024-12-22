@@ -125,6 +125,7 @@ export function UserActionFormEmailCongressperson({
       politicianCategory,
     },
   })
+  const { setFocus } = form
   const dtsiSlugs = useWatch({
     control: form.control,
     name: 'dtsiSlugs',
@@ -143,11 +144,11 @@ export function UserActionFormEmailCongressperson({
       : []
   }, [dtsiPeopleFromAddressResponse?.data])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isDesktop) {
-      form.setFocus('firstName')
+      setFocus('firstName')
     }
-  }, [form, isDesktop])
+  }, [isDesktop, setFocus])
 
   useEffect(() => {
     if (dtsiPeople.length === 0) form.setValue('dtsiSlugs', [])
