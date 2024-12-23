@@ -47,8 +47,6 @@ interface DataTableProps<TData extends Person = Person> extends Partial<TableOpt
   locale: SupportedLocale
 }
 
-type DataTableSkeletonProps<TData extends Person = Person> = Partial<TableOptions<TData>>
-
 export const SortableHeader = <TData extends Person = Person>({
   column,
   children,
@@ -224,7 +222,7 @@ export function DataTable<TData extends Person = Person>({
   )
 }
 
-// create a skeleton for the table using DataTable as above but without the filter and pagination because we dont want to use Nextjs dynamic APIs such as searchParams
+type DataTableSkeletonProps<TData extends Person = Person> = Partial<TableOptions<TData>>
 
 export function DataTableSkeleton<TData extends Person = Person>({
   columns = [],
