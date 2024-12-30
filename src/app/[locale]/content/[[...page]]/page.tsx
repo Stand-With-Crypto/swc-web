@@ -7,14 +7,17 @@ interface PageProps {
   }
 }
 
+const PAGE_PREFIX = '/content/'
+
 export default async function Page(props: PageProps) {
   const model = 'page'
+  const params = await props.params
   const content = await builderIOClient
     // Get the page content from Builder with the specified options
-    .get('page', {
+    .get('content', {
       userAttributes: {
         // Use the page path specified in the URL to fetch the content
-        urlPath: '/' + (props?.params?.page?.join('/') || ''),
+        urlPath: PAGE_PREFIX + (params?.page?.join('/') || ''),
       },
       // Set prerender to false to return JSON instead of HTML
       prerender: false,
