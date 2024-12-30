@@ -35,6 +35,7 @@
     "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
   },
   "dependencies": {
+    "@builder.io/react": "^8.0.0",
     "@builder.io/sdk": "^2.2.2",
     "@coinbase/onchainkit": "^0.12.1",
     "@date-fns/tz": "^1.1.2",
