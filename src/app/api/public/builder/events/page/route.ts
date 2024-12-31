@@ -65,7 +65,9 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     if (query.property === 'urlPath') {
       const urlPath = query.value
 
-      revalidatePath(urlPath)
+      logger.info('Revalidating path', urlPath)
+
+      // revalidatePath(urlPath)
     }
   })
 
