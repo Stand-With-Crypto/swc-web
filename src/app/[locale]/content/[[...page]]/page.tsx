@@ -12,6 +12,7 @@ const PAGE_PREFIX = '/content/'
 export default async function Page(props: PageProps) {
   const model = 'page'
   const params = await props.params
+
   const content = await builderIOClient
     // Get the page content from Builder with the specified options
     .get('content', {
@@ -31,4 +32,18 @@ export default async function Page(props: PageProps) {
       <RenderBuilderContent content={content} model={model} />
     </>
   )
+}
+
+export async function generateStaticParams() {
+  const paths = await builderIOClient
+    .getAll('content', { options: { noTargeting: true } })
+    .then(res => res.map(({ data }) => data?.url))
+
+  return paths.map((path: string) => {
+    return {
+      params: {
+        page: path.replace(PAGE_PREFIX, '').split('/'),
+      },
+    }
+  })
 }

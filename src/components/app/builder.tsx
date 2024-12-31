@@ -1,14 +1,24 @@
 'use client'
+
 import { ComponentProps } from 'react'
 import { BuilderComponent, useIsPreviewing } from '@builder.io/react'
 import DefaultErrorPage from 'next/error'
 
+import { useHasHydrated } from '@/hooks/useHasHydrated'
+
 type BuilderPageProps = ComponentProps<typeof BuilderComponent>
 
 export function RenderBuilderContent(props: BuilderPageProps) {
+  const hasHydrated = useHasHydrated()
+
   // Call the useIsPreviewing hook to determine if
   // the page is being previewed in Builder
   const isPreviewing = useIsPreviewing()
+
+  if (!hasHydrated) {
+    return null
+  }
+
   // If `content` has a value or the page is being previewed in Builder,
   // render the BuilderComponent with the specified content and model props.
   if (props.content || isPreviewing) {
