@@ -1,5 +1,5 @@
 import { RenderBuilderContent } from '@/components/app/builder'
-import { builderIOClient } from '@/utils/server/builderIO/client'
+import { serverCMS } from '@/utils/server/serverCMS/serverCMS'
 
 interface PageProps {
   params: {
@@ -13,7 +13,7 @@ export default async function Page(props: PageProps) {
   const model = 'page'
   const params = await props.params
 
-  const content = await builderIOClient
+  const content = await serverCMS
     // Get the page content from Builder with the specified options
     .get('content', {
       userAttributes: {
@@ -35,7 +35,7 @@ export default async function Page(props: PageProps) {
 }
 
 export async function generateStaticParams() {
-  const paths = await builderIOClient
+  const paths = await serverCMS
     .getAll('content', { options: { noTargeting: true } })
     .then(res => res.map(({ data }) => data?.url))
 

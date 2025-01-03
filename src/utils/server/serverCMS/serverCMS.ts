@@ -2,10 +2,10 @@ import { builder } from '@builder.io/sdk'
 
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
-const BUILDER_IO_PUBLIC_KEY = requiredOutsideLocalEnv(
-  process.env.BUILDER_IO_PUBLIC_KEY,
-  'BUILDER_IO_PUBLIC_KEY',
-  'all builder.io related',
+const NEXT_PUBLIC_BUILDER_IO_PUBLIC_KEY = requiredOutsideLocalEnv(
+  process.env.NEXT_PUBLIC_BUILDER_IO_PUBLIC_KEY,
+  'NEXT_PUBLIC_BUILDER_IO_PUBLIC_KEY',
+  'all builder.io related features',
 )!
 
 const BUILDER_IO_PRIVATE_KEY = requiredOutsideLocalEnv(
@@ -23,8 +23,8 @@ const REQUEST = undefined
 const RESPONSE = undefined
 const AUTH_TOKEN = BUILDER_IO_PRIVATE_KEY
 
-export const builderIOClient = builder.init(
-  BUILDER_IO_PUBLIC_KEY,
+export const serverCMS = builder.init(
+  NEXT_PUBLIC_BUILDER_IO_PUBLIC_KEY,
   CAN_TRACK,
   REQUEST,
   RESPONSE,

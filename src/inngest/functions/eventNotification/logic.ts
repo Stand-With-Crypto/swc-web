@@ -2,8 +2,8 @@ import { differenceInDays, format, startOfDay } from 'date-fns'
 
 import { BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
-import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getEvents } from '@/utils/server/serverCMS/models/data/events'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 

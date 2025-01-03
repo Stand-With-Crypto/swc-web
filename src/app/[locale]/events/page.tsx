@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { EventsPage } from '@/components/app/pageEvents'
-import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getEvents } from '@/utils/server/serverCMS/models/data/events'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'

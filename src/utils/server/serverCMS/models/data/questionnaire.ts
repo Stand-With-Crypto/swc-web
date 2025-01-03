@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
-import { builderIOClient } from '@/utils/server/builderIO/client'
+import { serverCMS } from '@/utils/server/serverCMS/serverCMS'
 import { zodQuestionnaireSchemaValidation } from '@/utils/shared/getSWCQuestionnaire'
 import { getLogger } from '@/utils/shared/logger'
 
@@ -10,7 +10,7 @@ export async function getQuestionnaire(DTSISlug: string) {
   try {
     const entry = await pRetry(
       () =>
-        builderIOClient.get('questionnaire', {
+        serverCMS.get('questionnaire', {
           query: {
             data: {
               dtsiSlug: DTSISlug,

@@ -5,8 +5,11 @@ import { BuilderComponent, useIsPreviewing } from '@builder.io/react'
 import DefaultErrorPage from 'next/error'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import { maybeInitCMSClient } from '@/utils/web/clientCMS'
 
 type BuilderPageProps = ComponentProps<typeof BuilderComponent>
+
+maybeInitCMSClient()
 
 export function RenderBuilderContent(props: BuilderPageProps) {
   const hasHydrated = useHasHydrated()
