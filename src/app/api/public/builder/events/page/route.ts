@@ -61,13 +61,15 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   logger.info('Received page event', prettyStringify(body))
 
-  body.newValue.query.forEach(query => {
+  logger.info('Page event Headers', prettyStringify(request.headers))
+
+  body.newValue?.query.forEach(query => {
     if (query.property === 'urlPath') {
       const urlPath = query.value
 
       logger.info('Revalidating path', urlPath)
 
-      // revalidatePath(urlPath)
+      revalidatePath(urlPath)
     }
   })
 
