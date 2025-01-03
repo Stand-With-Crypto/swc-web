@@ -43,6 +43,7 @@ const contentSecurityPolicy = {
     'https://*.paa-reporting-advertising.amazon/',
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
+    'https://builder.io',
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
