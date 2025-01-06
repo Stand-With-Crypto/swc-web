@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
-import { serverCMS } from '@/utils/server/serverCMS/serverCMS'
+import { serverCMS } from '@/utils/server/builder/serverCMS'
 import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'

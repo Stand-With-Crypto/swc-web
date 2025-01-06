@@ -5,8 +5,8 @@ import sanitizeHtml from 'sanitize-html'
 import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
+import { getEvent } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getEvent } from '@/utils/server/serverCMS/models/data/events'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 type Props = PageProps<{

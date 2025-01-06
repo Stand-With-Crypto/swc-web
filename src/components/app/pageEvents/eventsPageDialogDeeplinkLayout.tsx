@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
 import { PageProps } from '@/types'
-import { getEvents } from '@/utils/server/serverCMS/models/data/events'
+import { getEvents } from '@/utils/server/builder/models/data/events'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 

@@ -1,5 +1,5 @@
 import { RenderBuilderContent } from '@/components/app/builder'
-import { serverCMS } from '@/utils/server/serverCMS/serverCMS'
+import { serverCMS } from '@/utils/server/builder/serverCMS'
 
 interface PageProps {
   params: {
