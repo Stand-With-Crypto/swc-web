@@ -322,6 +322,9 @@ export function DataTableSkeleton<TData extends Person = Person>({
             </Table>
           </div>
         </div>
+        <div className="mt-3 flex justify-center">
+          <DataTablePagination table={table} />
+        </div>
       </div>
     </div>
   )
