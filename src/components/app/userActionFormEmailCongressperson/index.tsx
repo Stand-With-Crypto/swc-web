@@ -145,11 +145,11 @@ export function UserActionFormEmailCongressperson({
       : []
   }, [dtsiPeopleFromAddressResponse?.data])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isDesktop) {
       setFocus('firstName')
     }
-  }, [setFocus, isDesktop])
+  }, [isDesktop, setFocus])
 
   useEffect(() => {
     if (dtsiPeople.length === 0) form.setValue('dtsiSlugs', [])
