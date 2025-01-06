@@ -18,7 +18,7 @@ const contentSecurityPolicy = {
   ],
   'script-src': [
     "'self'",
-    isDev
+    !isProd
       ? // NextJS requires 'unsafe-eval' in dev (faster source maps)
         "'unsafe-eval' 'unsafe-inline' blob:"
       : /*
@@ -27,7 +27,6 @@ const contentSecurityPolicy = {
         a nonce strategy won't work as it requires all our pages to be dynamically generated https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy#adding-a-nonce-with-middleware
         */
         "'unsafe-inline'",
-    !isProd ? "'unsafe-eval'" : '',
     isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
