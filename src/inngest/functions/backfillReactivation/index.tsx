@@ -221,34 +221,36 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
 }
 
 async function sendBatchEmails(users: User[]) {
-  const emailsPayload = users.map(user => {
-    const userSession = user.userSessions?.[0]
-    const completedActionTypes = user.userActions
-      .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-      .map(action => action.actionType)
-    const currentSession = userSession
-      ? {
-          userId: userSession.userId,
-          sessionId: userSession.id,
-        }
-      : null
+  const emailsPayload = await Promise.all(
+    users.map(async user => {
+      const userSession = user.userSessions?.[0]
+      const completedActionTypes = user.userActions
+        .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+        .map(action => action.actionType)
+      const currentSession = userSession
+        ? {
+            userId: userSession.userId,
+            sessionId: userSession.id,
+          }
+        : null
 
-    return {
-      to: user.primaryUserEmailAddress.emailAddress,
-      subject: ReactivationReminder.subjectLine,
-      customArgs: {
-        userId: user.id,
-        category: 'Reactivation Email Reminder',
-        campaign: ReactivationReminder.campaign,
-      },
-      html: render(
-        <ReactivationReminder
-          completedActionTypes={completedActionTypes}
-          session={currentSession}
-        />,
-      ),
-    }
-  })
+      return {
+        to: user.primaryUserEmailAddress.emailAddress,
+        subject: ReactivationReminder.subjectLine,
+        customArgs: {
+          userId: user.id,
+          category: 'Reactivation Email Reminder',
+          campaign: ReactivationReminder.campaign,
+        },
+        html: await render(
+          <ReactivationReminder
+            completedActionTypes={completedActionTypes}
+            session={currentSession}
+          />,
+        ),
+      }
+    }),
+  )
 
   return await sendMail(emailsPayload)
 }

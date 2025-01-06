@@ -44,15 +44,14 @@ export default function ReactivationReminder({
           including:
           <br />
           <br />
-          <ul className="pl-4 text-[15px] text-[#5B616E]">
-            <li>Job creation</li>
-            <li>Technology and innovation</li>
-            <li>Modernizing the financial system</li>
-            <li>Protecting and empowering consumers</li>
-            <li>Maintaining our edge over other nations</li>
-          </ul>
         </Text>
-        <br />
+        <ul className="pl-4 text-[15px] text-[#5B616E]">
+          <li>Job creation</li>
+          <li>Technology and innovation</li>
+          <li>Modernizing the financial system</li>
+          <li>Protecting and empowering consumers</li>
+          <li>Maintaining our edge over other nations</li>
+        </ul>
         <br />
         <Text className="my-0 text-center text-[15px] text-[#5B616E]">
           Stay tuned for more updates and information from SWC. You can always visit{' '}
