@@ -43,16 +43,9 @@ const contentSecurityPolicy = {
     'https://*.paa-reporting-advertising.amazon/',
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
-    'https://builder.io',
-    'https://*.builder.io',
+    'https://builder.io/',
   ],
-  'img-src': [
-    "'self'",
-    'https: data:',
-    'blob: data:',
-    'https://cnv.event.prod.bidr.io/log/cnv',
-    'https://cdn.builder.io',
-  ],
+  'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
     "'self'",
     'ws: wss:',
@@ -65,7 +58,6 @@ const contentSecurityPolicy = {
     'https://*.paa-reporting-advertising.amazon/',
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
-    'https://builder.io',
     // ENS
     'https://euc.li/',
     // Thirdweb contract metadata
@@ -100,7 +92,6 @@ const contentSecurityPolicy = {
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
-    'https://builder.io',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
