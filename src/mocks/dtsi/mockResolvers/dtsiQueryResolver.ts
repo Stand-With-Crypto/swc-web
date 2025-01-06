@@ -53,7 +53,7 @@ function personRoleGroupingToPersonRoleMapping(
         primaryCountryCode: 'US',
         roleCategory: DTSI_PersonRoleCategory.PRESIDENT,
         status: DTSI_PersonRoleStatus.RUNNING_FOR,
-        dateStart: parseISO('2025-01-20').toISOString(),
+        dateStart: parseISO('2029-01-20').toISOString(),
       }
     case DTSI_PersonGrouping.RUNNING_FOR_US_HOUSE_OF_REPS:
       return {
@@ -86,7 +86,7 @@ function personRoleGroupingToPersonRoleMapping(
         primaryCountryCode: 'US',
         roleCategory: DTSI_PersonRoleCategory.PRESIDENT,
         status: DTSI_PersonRoleStatus.HELD,
-        dateStart: parseISO('2025-01-20').toISOString(),
+        dateStart: parseISO('2029-01-20').toISOString(),
       }
     case DTSI_PersonGrouping.NEXT_US_HOUSE_OF_REPS:
       return {
