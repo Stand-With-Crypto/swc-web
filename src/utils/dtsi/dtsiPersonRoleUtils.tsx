@@ -17,8 +17,8 @@ export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null 
   return isBefore(parseISO(dateEnd), new Date())
 }
 
-export const CURRENT_SESSION_OF_CONGRESS = 118
-export const NEXT_SESSION_OF_CONGRESS = 119
+export const CURRENT_SESSION_OF_CONGRESS = 119
+export const NEXT_SESSION_OF_CONGRESS = 120
 
 export const getFormattedDTSIPersonRoleDateRange = ({
   dateEnd,
