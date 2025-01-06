@@ -5,7 +5,7 @@ import { filterFns } from '@tanstack/react-table'
 import useSWR, { SWRConfiguration } from 'swr'
 
 import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
-import { DataTable } from '@/components/app/dtsiClientPersonDataTable/dataTable'
+import { DataTable, DataTableSkeleton } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import {
   DTSIPersonDataTablePeople,
   sortDTSIPersonDataTable,
@@ -55,7 +55,7 @@ export function DTSIClientPersonDataTable({
   const tableColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
 
   return (
-    <Suspense>
+    <Suspense fallback={<DataTableSkeleton columns={tableColumns} data={passedData} />}>
       <DataTable
         columns={tableColumns}
         data={passedData}
