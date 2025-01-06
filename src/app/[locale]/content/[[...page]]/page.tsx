@@ -10,7 +10,7 @@ interface PageProps {
 const PAGE_PREFIX = '/content/'
 
 export default async function Page(props: PageProps) {
-  const model = 'page'
+  const model = 'content'
   const params = await props.params
 
   const content = await serverCMS
