@@ -1,18 +1,22 @@
+import * as Sentry from '@sentry/nextjs'
 import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { getLogger } from '@/utils/shared/logger'
 import { prettyStringify } from '@/utils/shared/prettyLog'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
 const logger = getLogger('builder-events-page-route')
 
+const BUILDER_IO_WEBHOOK_AUTH_TOKEN = requiredOutsideLocalEnv(
+  process.env.BUILDER_IO_WEBHOOK_AUTH_TOKEN,
+  'BUILDER_IO_WEBHOOK_AUTH_TOKEN',
+  "Builder.io webhook's auth token",
+)!
+
 interface EventValue {
-  ownerId: string
-  lastUpdateBy: string | null
-  createdDate: number
   id: string
-  '@version': number
   name: string
   modelId: string
   published: string
@@ -21,9 +25,7 @@ interface EventValue {
     kind: string
     lastPreviewUrl: string
   }
-  priority: number
   query: Array<{
-    '@type': string
     property: string
     operator: string
     value: string
@@ -39,41 +41,53 @@ interface EventValue {
   }
   variations: Record<string, unknown>
   lastUpdated: number
-  firstPublished: number
+  createdDate: number
   testRatio: number
-  screenshot: string
   createdBy: string
-  lastUpdatedBy: string
-  folders: any[]
 }
 
 interface PageEventBody {
-  operation: string
+  operation: 'publish' | 'archive' | 'delete' | 'unpublish' | 'scheduledStart' | 'scheduledEnd'
   modelName: string
-  newValue: EventValue
-  previousValue: EventValue
+  newValue?: EventValue
+  previousValue?: EventValue
 }
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
-  // TODO: validate request headers
+  const authHeader = request.headers.get('Authorization')
+
+  logger.info('Headers: ', prettyStringify(request.headers))
+
+  if (authHeader !== `Bearer ${BUILDER_IO_WEBHOOK_AUTH_TOKEN}`) {
+    Sentry.captureMessage('Received unauthorized request to Builder.io webhook', {
+      extra: {
+        ...request,
+      },
+      tags: {
+        domain: 'builder.io',
+      },
+    })
+
+    return new NextResponse('Unauthorized', {
+      status: 401,
+    })
+  }
 
   const body = (await request.json()) as PageEventBody
 
-  logger.info('Received page event', prettyStringify(body))
-
-  logger.info('Page event Headers', prettyStringify(request.headers))
+  logger.info('Body: ', prettyStringify(body))
 
   body.newValue?.query.forEach(query => {
     if (query.property === 'urlPath') {
       const urlPath = query.value
 
-      logger.info('Revalidating path', urlPath)
+      logger.info('Revalidating: ', urlPath)
 
       revalidatePath(urlPath)
     }
   })
 
-  return new NextResponse('success', {
+  return new NextResponse('Success', {
     status: 200,
   })
 })
