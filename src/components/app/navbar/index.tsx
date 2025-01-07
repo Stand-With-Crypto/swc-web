@@ -45,6 +45,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Politician scores',
     },
     {
+      href: urls.endorsedCandidates(),
+      text: 'Endorsed candidates',
+    },
+    {
       href: urls.events(),
       text: 'Events',
     },
