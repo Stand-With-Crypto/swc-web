@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { FocusScope } from '@radix-ui/react-focus-scope'
 import { X } from 'lucide-react'
 
 import {
@@ -75,22 +76,26 @@ const DialogContent = React.forwardRef<
     return (
       <DialogPortal>
         <DialogOverlay />
-        <DialogPrimitive.Content
-          className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
-          onOpenAutoFocus={isMobile && !forceAutoFocus ? e => e.preventDefault() : onOpenAutoFocus}
-          ref={ref}
-          {...props}
-        >
-          <VisuallyHidden>
-            <DialogPrimitive.Description>{props['aria-describedby']}</DialogPrimitive.Description>
-            <DialogTitle>{a11yTitle}</DialogTitle>
-          </VisuallyHidden>
-          <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
-          <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
-            <X size={20} />
-            <span className="sr-only">Close</span>
-          </DialogPrimitive.Close>
-        </DialogPrimitive.Content>
+        <FocusScope trapped={false}>
+          <DialogPrimitive.Content
+            className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
+            onOpenAutoFocus={
+              isMobile && !forceAutoFocus ? e => e.preventDefault() : onOpenAutoFocus
+            }
+            ref={ref}
+            {...props}
+          >
+            <VisuallyHidden>
+              <DialogPrimitive.Description>{props['aria-describedby']}</DialogPrimitive.Description>
+              <DialogTitle>{a11yTitle}</DialogTitle>
+            </VisuallyHidden>
+            <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
+            <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
+              <X size={20} />
+              <span className="sr-only">Close</span>
+            </DialogPrimitive.Close>
+          </DialogPrimitive.Content>
+        </FocusScope>
       </DialogPortal>
     )
   },
