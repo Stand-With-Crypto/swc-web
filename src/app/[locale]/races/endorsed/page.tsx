@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 import { PageEndorsedCandidates } from '@/components/app/pageEndorsedCandidates'
 import { queryDTSIEndorsedCandidates } from '@/data/dtsi/queries/queryDTSIEndorsedCandidates'
@@ -27,5 +28,8 @@ export default async function AboutPage(props: PageProps) {
   const { people } = await queryDTSIEndorsedCandidates({
     endorsedDTSISlugs: ENDORSED_DTSI_PERSON_SLUGS,
   })
+
+  return notFound()
+
   return <PageEndorsedCandidates {...{ locale, people }} />
 }

@@ -44,10 +44,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
     },
-    {
-      href: urls.endorsedCandidates(),
-      text: 'Endorsed candidates',
-    },
+    // {
+    //   href: urls.endorsedCandidates(),
+    //   text: 'Endorsed candidates',
+    // },
     {
       href: urls.events(),
       text: 'Events',
