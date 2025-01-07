@@ -1,9 +1,12 @@
-import { Content } from '@builder.io/react'
+import type { Content } from '@builder.io/react'
 import { Metadata } from 'next'
 
 import { RenderBuilderContent } from '@/components/app/builder'
 import { serverCMS } from '@/utils/server/builder/serverCMS'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+
+export const dynamic = 'error'
+export const dynamicParams = true
 
 interface PageProps {
   params: {
