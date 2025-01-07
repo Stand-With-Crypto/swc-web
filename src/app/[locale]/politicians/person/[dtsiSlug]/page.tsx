@@ -15,7 +15,7 @@ import { toBool } from '@/utils/shared/toBool'
 
 import { getData } from './getData'
 
-export const revalidate = 604800 // 1 week
+export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
 export const dynamicParams = true
 

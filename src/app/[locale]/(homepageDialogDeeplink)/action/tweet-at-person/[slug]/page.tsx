@@ -50,26 +50,26 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
   }
 
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.TWEET_AT_PERSON,
-          campaignName: slug,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionTweetAtPersonDeepLink',
-      }}
-    >
-      <HomepageDialogDeeplinkLayout pageParams={params}>
-        <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
+        <ErrorBoundary
+          extras={{
+            action: {
+              isDeeplink: true,
+              actionType: UserActionType.TWEET_AT_PERSON,
+              campaignName: slug,
+            },
+          }}
+          severityLevel="error"
+          tags={{
+            domain: 'UserActionTweetAtPersonDeepLink',
+          }}
+        >
           <UserActionFormTweetToPersonDeeplinkWrapper
             slug={slug as UserActionTweetAtPersonCampaignName}
           />
-        </div>
-      </HomepageDialogDeeplinkLayout>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
+    </HomepageDialogDeeplinkLayout>
   )
 }

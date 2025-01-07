@@ -11,21 +11,21 @@ export const dynamic = 'error'
 export default async function UserActionEmailCongresspersonDeepLink(props: PageProps) {
   const params = await props.params
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.EMAIL,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionEmailCongresspersonDeepLink',
-      }}
-    >
-      <HomepageDialogDeeplinkLayout pageParams={params}>
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <ErrorBoundary
+        extras={{
+          action: {
+            isDeeplink: true,
+            actionType: UserActionType.EMAIL,
+          },
+        }}
+        severityLevel="error"
+        tags={{
+          domain: 'UserActionEmailCongresspersonDeepLink',
+        }}
+      >
         <UserActionFormEmailCongresspersonDeeplinkWrapper />
-      </HomepageDialogDeeplinkLayout>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </HomepageDialogDeeplinkLayout>
   )
 }

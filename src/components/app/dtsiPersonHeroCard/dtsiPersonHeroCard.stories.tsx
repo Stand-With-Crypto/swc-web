@@ -42,6 +42,7 @@ const getDefaultProps = () => {
         roleCategory: DTSI_PersonRoleCategory.PRESIDENT,
         status: DTSI_PersonRoleStatus.HELD,
         title: 'President',
+        group: null,
       },
       twitterAccounts: [
         {
