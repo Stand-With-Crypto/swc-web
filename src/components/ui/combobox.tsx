@@ -10,7 +10,6 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { usePreventMobileKeyboardOffset } from '@/hooks/usePreventMobileKeyboardOffset'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
@@ -71,49 +70,34 @@ export function Combobox<T>({
     [analytics],
   )
 
-  if (isMobile) {
-    return (
-      <Dialog analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
-        <DialogTrigger asChild>{formatPopoverTrigger({ value, open })}</DialogTrigger>
-        <DialogContent
-          a11yTitle="Search address"
-          className="min-h-[260px] p-0 pt-10"
-          forceAutoFocus
-        >
-          <StatusList
-            setOpen={setOpen}
-            {...{
-              value,
-              isLoading,
-              onChange,
-              options,
-              getOptionLabel,
-              getOptionKey,
-              ...inputProps,
-            }}
-          />
-        </DialogContent>
-      </Dialog>
-    )
-  }
-
   return (
-    <Popover analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
-      <PopoverTrigger asChild ref={parentRef}>
+    <Dialog analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
+      <DialogTrigger asChild ref={parentRef}>
         {formatPopoverTrigger({ value, open })}
-      </PopoverTrigger>
-      <PopoverContent
-        align="start"
-        avoidCollisions={false}
-        className={cn('p-0', popoverContentClassName)}
+      </DialogTrigger>
+      <DialogContent
+        a11yTitle="Search address"
+        className={cn(
+          isMobile ? 'min-h-[260px] p-0 pt-10' : 'min-h-[370px] pb-4',
+          !isMobile && popoverContentClassName,
+        )}
+        forceAutoFocus={isMobile}
         style={{ width: size.width }}
       >
         <StatusList
           setOpen={setOpen}
-          {...{ value, isLoading, onChange, options, getOptionLabel, getOptionKey, ...inputProps }}
+          {...{
+            value,
+            isLoading,
+            onChange,
+            options,
+            getOptionLabel,
+            getOptionKey,
+            ...inputProps,
+          }}
         />
-      </PopoverContent>
-    </Popover>
+      </DialogContent>
+    </Dialog>
   )
 }
 
