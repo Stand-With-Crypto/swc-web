@@ -1,15 +1,47 @@
-import { Builder } from '@builder.io/react'
-import dynamic from 'next/dynamic'
+import { Builder, withChildren } from '@builder.io/react'
+
+import type { BuilderComponentBaseProps } from '@/utils/web/builder/types'
+
+import { Button, buttonVariantsConfig } from '.'
+
+interface BuilderButtonProps extends BuilderComponentBaseProps {
+  variant: keyof typeof buttonVariantsConfig.variant
+  size: keyof typeof buttonVariantsConfig.size
+}
 
 Builder.registerComponent(
-  dynamic(() => import('.').then(mod => mod.Button)),
+  withChildren((props: BuilderButtonProps) => (
+    <Button size={props.size} variant={props.variant} {...props.attributes}>
+      {props.children}
+    </Button>
+  )),
   {
     name: 'Button',
+    canHaveChildren: true,
+    override: true,
     inputs: [
       {
-        name: 'children',
-        type: 'text',
-        defaultValue: 'Click me',
+        name: 'variant',
+        type: 'enum',
+        defaultValue: 'default',
+        enum: Object.keys(buttonVariantsConfig.variant),
+      },
+      {
+        name: 'size',
+        type: 'enum',
+        defaultValue: 'default',
+        enum: Object.keys(buttonVariantsConfig.size),
+      },
+    ],
+    defaultChildren: [
+      {
+        '@type': '@builder.io/sdk:Element',
+        component: {
+          name: 'Text',
+          options: {
+            text: 'Click me!',
+          },
+        },
       },
     ],
   },
