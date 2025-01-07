@@ -43,24 +43,24 @@ export default async function UserActionLiveEventDeepLink(props: Props) {
   }
 
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.LIVE_EVENT,
-          campaignName: slug,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionLiveEventDeepLink',
-      }}
-    >
-      <HomepageDialogDeeplinkLayout pageParams={params}>
-        <div className={dialogContentPaddingStyles}>
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <div className={dialogContentPaddingStyles}>
+        <ErrorBoundary
+          extras={{
+            action: {
+              isDeeplink: true,
+              actionType: UserActionType.LIVE_EVENT,
+              campaignName: slug,
+            },
+          }}
+          severityLevel="error"
+          tags={{
+            domain: 'UserActionLiveEventDeepLink',
+          }}
+        >
           <UserActionFormLiveEventDeeplinkWrapper slug={slug as UserActionLiveEventCampaignName} />
-        </div>
-      </HomepageDialogDeeplinkLayout>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
+    </HomepageDialogDeeplinkLayout>
   )
 }

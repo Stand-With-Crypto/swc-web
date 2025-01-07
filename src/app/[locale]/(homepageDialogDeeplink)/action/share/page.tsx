@@ -7,21 +7,21 @@ import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export default function UserActionShareOnTwitterDeepLink() {
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.TWEET,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionShareOnTwitterDeepLink',
-      }}
-    >
-      <div className={cn(dialogContentPaddingStyles, 'h-full')}>
+    <div className={cn(dialogContentPaddingStyles, 'h-full')}>
+      <ErrorBoundary
+        extras={{
+          action: {
+            isDeeplink: true,
+            actionType: UserActionType.TWEET,
+          },
+        }}
+        severityLevel="error"
+        tags={{
+          domain: 'UserActionShareOnTwitterDeepLink',
+        }}
+      >
         <UserActionFormShareOnTwitterDeeplinkWrapper />
-      </div>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </div>
   )
 }

@@ -15,7 +15,7 @@ import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
 } from '@/components/app/userActionFormEmailCongressperson/constants'
-import { getSECCommissionerText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import { getEmailBodyText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -67,15 +67,16 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
+      campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getSECCommissionerText({
+      message: getEmailBodyText({
         firstName: user.firstName,
         lastName: user.lastName,
+        address: user?.address?.formattedDescription,
       }),
-      subject: 'Opposition to Crenshaw re-nomination to SEC',
+      subject: 'Crypto Matters To Me',
       address: user.address?.route
         ? {
             description: user.address.formattedDescription,
@@ -86,12 +87,12 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
+    campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getSECCommissionerText(),
-    subject: 'Opposition to Crenshaw re-nomination to SEC',
+    message: getEmailBodyText(),
+    subject: 'Crypto Matters To Me',
     address: undefined,
     dtsiSlugs,
   }
@@ -125,6 +126,7 @@ export function UserActionFormEmailCongressperson({
       politicianCategory,
     },
   })
+  const { setFocus } = form
   const dtsiSlugs = useWatch({
     control: form.control,
     name: 'dtsiSlugs',
@@ -143,11 +145,11 @@ export function UserActionFormEmailCongressperson({
       : []
   }, [dtsiPeopleFromAddressResponse?.data])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isDesktop) {
-      form.setFocus('firstName')
+      setFocus('firstName')
     }
-  }, [form, isDesktop])
+  }, [isDesktop, setFocus])
 
   useEffect(() => {
     if (dtsiPeople.length === 0) form.setValue('dtsiSlugs', [])
@@ -174,12 +176,13 @@ export function UserActionFormEmailCongressperson({
 
     form.setValue(
       'message',
-      getSECCommissionerText({
+      getEmailBodyText({
         firstName,
         lastName,
+        address: addressField?.description,
       }),
     )
-  }, [firstName, lastName, form])
+  }, [firstName, lastName, addressField, form])
 
   return (
     <Form {...form}>
@@ -233,13 +236,9 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Email Your Senator
+              Contact Your Member Of Congress
             </PageTitle>
-            <PageSubTitle className="mb-7">
-              The Senate is considering re-confirming anti-crypto SEC Commissioner Caroline Crenshaw
-              to the Commission. Let your senators know you stand with crypto and OPPOSE this
-              nomination!
-            </PageSubTitle>
+            <PageSubTitle className="mb-7">The 119th Congress Needs To Hear From You!</PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField

@@ -1,9 +1,12 @@
 import { DTSIAvatar, DTSIAvatarProps } from '@/components/app/dtsiAvatar'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { DTSI_Person, DTSI_PersonRole, Maybe } from '@/data/dtsi/generated'
+import { DTSI_Person, Maybe } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
-import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import {
+  DTSIPersonRoleCategoryDisplayNameProps,
+  getDTSIPersonRoleCategoryDisplayName,
+} from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
@@ -15,9 +18,7 @@ interface DTSIAvatarBoxProps extends DTSIAvatarProps {
   locale: SupportedLocale
   person: DTSIAvatarProps['person'] &
     Pick<DTSI_Person, 'slug' | 'politicalAffiliationCategory'> & {
-      primaryRole: Maybe<
-        Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'primaryState'>
-      >
+      primaryRole: Maybe<DTSIPersonRoleCategoryDisplayNameProps>
     }
   prefetch?: boolean
 }
