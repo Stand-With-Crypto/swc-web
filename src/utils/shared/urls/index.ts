@@ -61,7 +61,6 @@ export const getIntlUrls = (
     profile: () => `${localePrefix}/profile`,
     updateProfile: () => `${localePrefix}/profile?hasOpenUpdateUserProfileForm=true`,
     internalHomepage: () => `${localePrefix}/internal`,
-    endorsedCandidates: () => `${localePrefix}/races/endorsed/`,
     becomeMember: () => `${localePrefix}/action/become-member`,
     community: () => `${localePrefix}/community`,
     events: () => `${localePrefix}/events`,
