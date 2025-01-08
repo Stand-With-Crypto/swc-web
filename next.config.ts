@@ -334,6 +334,12 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/new-congress/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=new-member-activation-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/theblocknews',
         destination:
           'https://www.theblock.co/post/331309/stand-with-crypto-advocates-flood-senate-with-107000-emails-opposing-sec-crenshaws-renomination',
