@@ -44,8 +44,6 @@ const EVENT_MESSAGE_STATUS_TO_COMMUNICATION_STATUS: Partial<
 
 const logger = getLogger('smsStatus')
 
-export const maxDuration = 10
-
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SMSStatusEvent>(request)
 
