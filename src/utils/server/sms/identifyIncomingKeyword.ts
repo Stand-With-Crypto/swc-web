@@ -7,10 +7,19 @@ export function identifyIncomingKeyword(keyword: string | undefined) {
 
   const normalizedKeyword = keyword?.toUpperCase().trim()
 
+  const isOptOutKeyword = optOutKeywords.includes(normalizedKeyword)
+  const isHelpKeyword = helpKeywords.includes(normalizedKeyword)
+  const isUnstopKeyword = unstopKeywords.includes(normalizedKeyword)
+
+  const hasKeyword = [...optOutKeywords, ...helpKeywords, ...unstopKeywords].some(command =>
+    normalizedKeyword.includes(command),
+  )
+
   return {
     value: normalizedKeyword,
-    isOptOutKeyword: optOutKeywords.includes(normalizedKeyword),
-    isHelpKeyword: helpKeywords.includes(normalizedKeyword),
-    isUnstopKeyword: unstopKeywords.includes(normalizedKeyword),
+    isOptOutKeyword,
+    isHelpKeyword,
+    isUnstopKeyword,
+    isUnidentifiedKeyword: hasKeyword && !isOptOutKeyword && !isHelpKeyword && !isUnstopKeyword,
   }
 }

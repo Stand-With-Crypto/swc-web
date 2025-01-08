@@ -378,9 +378,7 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
                     campaignName: options.campaignName,
                     userCommunications: {
                       every: {
-                        status: {
-                          not: CommunicationMessageStatus.DELIVERED,
-                        },
+                        status: CommunicationMessageStatus.FAILED,
                       },
                     },
                   },
