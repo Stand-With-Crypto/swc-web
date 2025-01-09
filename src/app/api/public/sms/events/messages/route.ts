@@ -69,7 +69,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     // We don't want to track this message, so we can just reply with twilio
     message = messages.HELP_MESSAGE
   } else if (keyword?.isUnidentifiedKeyword) {
-    Sentry.captureMessage(`Unable to identify keyword ${keyword?.value}`, {
+    Sentry.captureMessage(`Unable to identify keyword`, {
       extra: {
         ...body,
       },
