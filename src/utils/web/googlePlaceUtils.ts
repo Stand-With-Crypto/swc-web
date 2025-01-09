@@ -39,50 +39,72 @@ const formatGooglePlacesResultToAddress = (
   }
 }
 
-export async function convertGooglePlaceAutoPredictionToAddressSchema(
-  prediction: GooglePlaceAutocompletePrediction,
-) {
-  const getAddressComponents = async (placeId: string) => {
-    return getDetails({
-      placeId,
-      fields: ['address_components'],
-    }) as Promise<Required<Pick<google.maps.places.PlaceResult, 'address_components'>>>
-  }
+async function fetchAddressComponents(placeId: string) {
+  return getDetails({
+    placeId,
+    fields: ['address_components'],
+  }) as Promise<Required<Pick<google.maps.places.PlaceResult, 'address_components'>>>
+}
+
+async function refreshPlaceId(placeId: string) {
+  return getDetails({
+    placeId,
+    fields: ['place_id'],
+  }) as Promise<Required<Pick<google.maps.places.PlaceResult, 'place_id'>>>
+}
+
+async function handleExpiredPlaceId(prediction: GooglePlaceAutocompletePrediction) {
+  logger.error('Error fetching place details, attempting to refresh place_id')
 
   try {
-    const result = await getAddressComponents(prediction.place_id)
+    const refreshedPlace = await refreshPlaceId(prediction.place_id)
+    const addressComponents = await fetchAddressComponents(refreshedPlace.place_id)
     return formatGooglePlacesResultToAddress({
-      ...result,
+      ...addressComponents,
+      formattedDescription: prediction.description,
+      placeId: refreshedPlace.place_id,
+    })
+  } catch (refreshError) {
+    logger.error('Failed to refresh place_id:', refreshError)
+    Sentry.captureException(refreshError, {
+      tags: {
+        domain: 'googlePlaceUtils/handleExpiredPlaceId',
+        message: 'Failed to refresh place_id',
+      },
+      extra: {
+        prediction,
+      },
+    })
+    throw refreshError
+  }
+}
+
+async function getAddressWithRetry(prediction: GooglePlaceAutocompletePrediction) {
+  try {
+    const addressComponents = await fetchAddressComponents(prediction.place_id)
+    return formatGooglePlacesResultToAddress({
+      ...addressComponents,
       formattedDescription: prediction.description,
       placeId: prediction.place_id,
     })
   } catch (error) {
     if (error === 'NOT_FOUND' || error === 'INVALID_REQUEST') {
-      logger.error('Error fetching place details, attempting to refresh place_id:', error)
-
-      try {
-        // Refresh the place_id by fetching just the ID (free of charge)
-        const refreshedPlace = (await getDetails({
-          placeId: prediction.place_id,
-          fields: ['place_id'],
-        })) as Required<Pick<google.maps.places.PlaceResult, 'place_id'>>
-
-        const result = await getAddressComponents(refreshedPlace.place_id)
-        return formatGooglePlacesResultToAddress({
-          ...result,
-          formattedDescription: prediction.description,
-          placeId: refreshedPlace.place_id,
-        })
-      } catch (refreshError) {
-        logger.error('Failed to refresh place_id:', refreshError)
-        throw refreshError
-      }
+      return await handleExpiredPlaceId(prediction)
     }
+    throw error
+  }
+}
 
+export async function convertGooglePlaceAutoPredictionToAddressSchema(
+  prediction: GooglePlaceAutocompletePrediction,
+) {
+  try {
+    return await getAddressWithRetry(prediction)
+  } catch (error) {
     logger.error('Unexpected error fetching place details:', error)
     Sentry.captureException(error, {
       tags: {
-        domain: 'convertGooglePlaceAutoPredictionToAddressSchema',
+        domain: 'googlePlaceUtils/convertGooglePlaceAutoPredictionToAddressSchema',
         message: 'Unexpected error fetching place details',
       },
       extra: {
