@@ -2,11 +2,10 @@
 
 import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
+import dynamic from 'next/dynamic'
 
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
-import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
@@ -16,18 +15,32 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { useSession } from '@/hooks/useSession'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
-import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
 
-type PageUserProfile = { params: Awaited<PageProps['params']> } & {
+const ProfileAndNFTButtons = dynamic(
+  () =>
+    import('@/components/app/pageUserProfile/profileAndNFTButtons').then(
+      mod => mod.ProfileAndNFTButtons,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <Skeleton>
+        <Button>Finish your profile</Button>
+      </Skeleton>
+    ),
+  },
+)
+
+export type PageUserProfile = { params: Awaited<PageProps['params']> } & {
   user: PageUserProfileUser
 }
 
@@ -165,43 +178,5 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
         <UserReferralUrl referralId={user.referralId} />
       </section>
     </div>
-  )
-}
-
-function ProfileAndNFTButtons({ user }: { user: PageUserProfileUser }) {
-  return (
-    <div className="flex items-center gap-4">
-      <LoginDialogWrapper
-        authenticatedContent={null}
-        subtitle="Confirm your email address or connect a wallet to receive your NFT."
-        title="Claim your free NFT"
-        useThirdwebSession
-      >
-        <Button className="w-full lg:w-auto">Claim my NFTs</Button>
-      </LoginDialogWrapper>
-
-      <EditProfileButton user={user} />
-    </div>
-  )
-}
-
-function EditProfileButton({ user }: { user: PageUserProfileUser }) {
-  const session = useSession()
-
-  return (
-    <UpdateUserProfileFormDialog user={user}>
-      {hasCompleteUserProfile(user) ? (
-        <Button className="w-full lg:w-auto" variant="secondary">
-          Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
-        </Button>
-      ) : (
-        <Button
-          className="w-full lg:w-auto"
-          variant={session.isLoggedInThirdweb ? 'default' : 'secondary'}
-        >
-          Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
-        </Button>
-      )}
-    </UpdateUserProfileFormDialog>
   )
 }
