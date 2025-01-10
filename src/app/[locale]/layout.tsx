@@ -19,6 +19,7 @@ import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails, TOP_LEVEL_METADATA_DETAILS } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { fontClassName } from '@/utils/web/fonts'
+import { MaybeBuilderContent } from '@/components/app/maybeBuilderContent'
 
 export { viewport } from '@/utils/server/metadataUtils'
 
@@ -69,9 +70,13 @@ export default async function Layout({
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <NavBarGlobalBanner />
-            <Navbar locale={locale} />
+            <MaybeBuilderContent>
+              <Navbar locale={locale} />
+            </MaybeBuilderContent>
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer locale={locale} />
+            <MaybeBuilderContent>
+              <Footer locale={locale} />
+            </MaybeBuilderContent>
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
