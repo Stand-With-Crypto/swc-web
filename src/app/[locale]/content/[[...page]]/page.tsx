@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 import { RenderBuilderContent } from '@/components/app/builder'
+import { BuilderPageLayout } from '@/components/app/builderPageLayout'
 import { PageProps } from '@/types'
+import { contentPageModel } from '@/utils/server/builder/models/page'
 import { serverCMS } from '@/utils/server/builder/serverCMS'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { contentPageModel } from '@/utils/server/builder/models/page'
-import { BuilderPageLayout } from '@/components/app/builderPageLayout'
 
 export const dynamic = 'error'
 export const dynamicParams = true
@@ -20,7 +20,7 @@ export default async function Page(props: DynamicPageProps) {
   const content = await contentPageModel.getPageContent(pathname)
 
   return (
-    <BuilderPageLayout pageModel={contentPageModel} locale={locale} pathname={pathname}>
+    <BuilderPageLayout locale={locale} pageModel={contentPageModel} pathname={pathname}>
       <RenderBuilderContent content={content} model={contentPageModel.modelName} />
     </BuilderPageLayout>
   )

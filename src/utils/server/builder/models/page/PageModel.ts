@@ -1,5 +1,6 @@
-import { serverCMS } from '@/utils/server/builder/serverCMS'
 import type { Content } from '@builder.io/react'
+
+import { serverCMS } from '@/utils/server/builder/serverCMS'
 
 export enum PageModelNames {
   PAGE = 'page',
@@ -22,11 +23,11 @@ export abstract class PageModel {
     this.routePrefix = routePrefix ?? ''
   }
 
-  private addPrefix(pathname?: string) {
-    return `${this.routePrefix ?? ''}${pathname}`
+  private addPrefix(pathname: string) {
+    return `${this.routePrefix}${pathname}`
   }
 
-  public async getPageContent(pathname?: string): Promise<Content | undefined> {
+  public async getPageContent(pathname: string): Promise<Content | undefined> {
     return serverCMS
       .get(this.modelName, {
         userAttributes: {

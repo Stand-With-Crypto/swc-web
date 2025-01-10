@@ -1,4 +1,4 @@
-import { PageModelNames, PageModel } from '@/utils/server/builder/models/page/PageModel'
+import { PageModel, PageModelNames } from '@/utils/server/builder/models/page/PageModel'
 
 class DefaultPageModel extends PageModel {
   public readonly pages = {
