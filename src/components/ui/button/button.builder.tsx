@@ -1,8 +1,11 @@
 import { Builder, withChildren } from '@builder.io/react'
+import dynamic from 'next/dynamic'
 
 import type { BuilderComponentBaseProps } from '@/utils/web/builder/types'
 
-import { Button, buttonVariantsConfig } from '.'
+import { buttonVariantsConfig } from '.'
+
+const Button = dynamic(() => import('@/components/ui/button').then(mod => mod.Button))
 
 interface BuilderButtonProps extends BuilderComponentBaseProps {
   variant: keyof typeof buttonVariantsConfig.variant
