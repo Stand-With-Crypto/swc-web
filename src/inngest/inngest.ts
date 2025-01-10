@@ -1,4 +1,4 @@
-import { sentryMiddleware } from "@inngest/middleware-sentry";
+import { sentryMiddleware } from '@inngest/middleware-sentry'
 import { GetEvents, Inngest } from 'inngest'
 
 import { INNGEST_SCHEMAS } from '@/inngest/types'
