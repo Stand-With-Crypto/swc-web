@@ -53,7 +53,8 @@ export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
         payload: data,
       },
       payload =>
-        actionCreateUserActionLiveEvent(payload).then(actionResult => {
+        actionCreateUserActionLiveEvent(payload).then(async actionResultPromise => {
+          const actionResult = await actionResultPromise
           if (actionResult?.user) {
             identifyUserOnClient(actionResult.user)
           }

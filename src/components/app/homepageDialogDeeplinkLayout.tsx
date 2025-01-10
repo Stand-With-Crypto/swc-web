@@ -10,6 +10,7 @@ import {
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
@@ -18,7 +19,7 @@ import { cn } from '@/utils/web/cn'
 
 interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
   size?: 'sm' | 'md'
-  pageParams: PageProps['params']
+  pageParams: Awaited<PageProps['params']>
   hideModal?: boolean
   dialogContentClassName?: string
 }
@@ -50,7 +51,7 @@ export async function HomepageDialogDeeplinkLayout({
           dialogContentClassName,
         )}
       >
-        {children}
+        <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
         <InternalLink className={dialogCloseStyles} href={urls.home()} replace>
           <X size={20} />
           <span className="sr-only">Close</span>

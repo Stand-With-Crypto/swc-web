@@ -19,7 +19,8 @@ type HandlerFunction = (request: NextRequest, ...args: any[]) => Promise<Respons
  */
 export function withRouteMiddleware(fn: HandlerFunction): HandlerFunction {
   return async function (request: NextRequest, ...args: any[]): Promise<Response> {
-    const userSession = cookies().get(USER_SESSION_ID_COOKIE_NAME)?.value
+    const currentCookies = await cookies()
+    const userSession = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
 
     if (userSession) {
       Sentry.setUser({

@@ -1,16 +1,17 @@
-import React from 'react'
+import { PropsWithChildren, Suspense } from 'react'
 
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.HOUR
+export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 
-export default function Layout({ params, children }: React.PropsWithChildren<PageProps>) {
+export default async function Layout({ params, children }: PropsWithChildren<PageProps>) {
+  const currentParams = await params
+
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
-      <React.Suspense>{children}</React.Suspense>
+    <HomepageDialogDeeplinkLayout pageParams={currentParams}>
+      <Suspense>{children}</Suspense>
     </HomepageDialogDeeplinkLayout>
   )
 }

@@ -64,6 +64,6 @@ it('page - politicians interactions', () => {
   })
   cy.get('[data-test-id="dtsi-people-associated-with-address"]', { timeout: 10000 })
   // clear your address
-  cy.contains('350 Fifth Avenue, New York, NY 10118, USA').click()
+  cy.contains('350 Fifth Avenue, New York, NY 10118').click()
   cy.get('input[placeholder="Enter your address"]')
 })

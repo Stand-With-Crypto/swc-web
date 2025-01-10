@@ -8,7 +8,7 @@ import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMidd
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
-  const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()
+  const partner = await authenticateAndGetVerifiedSWCPartnerFromHeader()
   const validatedFields = zodVerifiedSWCPartnersGetUserMetadata.parse(await request.json())
   const result = await verifiedSWCPartnersGetUserMetadata({
     ...validatedFields,

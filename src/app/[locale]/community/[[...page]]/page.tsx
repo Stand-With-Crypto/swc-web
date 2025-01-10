@@ -14,9 +14,8 @@ import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/cons
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION['30_SECONDS']
+export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 export const dynamicParams = true
 
@@ -48,7 +47,8 @@ export async function generateStaticParams() {
   return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
-export default async function CommunityRecentActivityPage({ params }: Props) {
+export default async function CommunityRecentActivityPage(props: Props) {
+  const params = await props.params
   const { itemsPerPage } =
     COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
   const { locale, page } = params

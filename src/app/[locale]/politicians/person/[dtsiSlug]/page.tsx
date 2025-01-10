@@ -11,12 +11,11 @@ import {
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getQuestionnaire } from '@/utils/server/builderIO/swc-questionnaire'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
 import { getData } from './getData'
 
-export const revalidate = SECONDS_DURATION.WEEK
+export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
 export const dynamicParams = true
 
@@ -45,7 +44,7 @@ const getDescription = (person: DTSIPersonDetails) => {
   return `Based on previous comments, ${fullName} has ${indication}. On this page you can view the tweets, quotes, and other commentary ${fullName} has made about Bitcoin, Ethereum, and cryptocurrency innovation.`
 }
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const person = await getData(props.params.dtsiSlug)
+  const person = await getData((await props.params).dtsiSlug)
   if (!person) {
     return {}
   }
@@ -65,7 +64,8 @@ export async function generateStaticParams() {
   return slugs
 }
 
-export default async function PoliticianDetails({ params }: Props) {
+export default async function PoliticianDetails(props: Props) {
+  const params = await props.params
   const { locale } = params
 
   const [person, questionnaire] = await Promise.all([

@@ -81,6 +81,8 @@ export function Address({
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
 
+  const { setError, clearErrors, control, handleSubmit, formState } = form
+
   const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -88,29 +90,29 @@ export function Address({
     if (!isMobile) {
       inputRef.current?.click()
     }
-  }, [form, isMobile])
+  }, [isMobile])
 
   const address = useWatch({
-    control: form.control,
+    control: control,
     name: 'address',
   })
 
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!liveCongressPersonData) {
       return
     }
 
     if (!('dtsiPeople' in liveCongressPersonData)) {
-      form.setError('address', {
+      setError('address', {
         type: 'manual',
         message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
       })
       return
     } else {
-      form.clearErrors('address')
+      clearErrors('address')
     }
 
     onFindCongressperson(liveCongressPersonData)
@@ -121,17 +123,18 @@ export function Address({
   }, [
     liveCongressPersonData,
     onFindCongressperson,
-    form,
     goToSection,
     address,
     initialAddressOnLoad,
+    setError,
+    clearErrors,
   ])
 
   return (
     <Form {...form}>
       <form
         className="max-md:h-full"
-        onSubmit={form.handleSubmit(
+        onSubmit={handleSubmit(
           () => goToSection(SectionNames.SUGGESTED_SCRIPT),
           trackFormSubmissionSyncErrors(FORM_NAME),
         )}
@@ -141,7 +144,7 @@ export function Address({
             {heading}
 
             <FormField
-              control={form.control}
+              control={control}
               name="address"
               render={({ field }) => (
                 <FormItem>
@@ -163,13 +166,11 @@ export function Address({
           <UserActionFormLayout.Footer>
             <Button
               disabled={
-                form.formState.isSubmitting ||
-                isLoadingLiveCongressPersonData ||
-                !congressPersonData
+                formState.isSubmitting || isLoadingLiveCongressPersonData || !congressPersonData
               }
               type="submit"
             >
-              {form.formState.isSubmitting || isLoadingLiveCongressPersonData
+              {formState.isSubmitting || isLoadingLiveCongressPersonData
                 ? 'Loading...'
                 : submitButtonText}
             </Button>
@@ -202,10 +203,10 @@ export function useCongresspersonData({
 }: {
   address?: FindRepresentativeCallFormValues['address']
 }) {
-  const scriptStatus = useGoogleMapsScript()
+  const { isLoaded } = useGoogleMapsScript()
 
   const result = useSWR(
-    address && scriptStatus === 'ready' ? `useCongresspersonData-${address.description}` : null,
+    address && isLoaded ? `useCongresspersonData-${address.description}` : null,
     async () => {
       if (!address) {
         return null
@@ -225,6 +226,6 @@ export function useCongresspersonData({
 
   return {
     ...result,
-    isLoading: scriptStatus === 'loading' || result.isLoading,
+    isLoading: !isLoaded || result.isLoading,
   }
 }

@@ -8,11 +8,10 @@ import { UserActionFormLiveEventDeeplinkWrapper } from '@/components/app/userAct
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
-export const revalidate = SECONDS_DURATION['30_SECONDS']
+export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 export const dynamicParams = true
 
@@ -20,7 +19,8 @@ const LIVE_EVENT_CAMPAIGN_SLUGS = Object.values(UserActionLiveEventCampaignName)
 
 type Props = PageProps<{ slug: string }>
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params
   const { slug } = params
   const content = MESSAGES[slug as UserActionLiveEventCampaignName]
   if (content) {
@@ -35,31 +35,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
-export default async function UserActionLiveEventDeepLink({ params }: Props) {
+export default async function UserActionLiveEventDeepLink(props: Props) {
+  const params = await props.params
   const { slug } = params
   if (!slug || !LIVE_EVENT_CAMPAIGN_SLUGS.includes(slug)) {
     notFound()
   }
 
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.LIVE_EVENT,
-          campaignName: slug,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionLiveEventDeepLink',
-      }}
-    >
-      <HomepageDialogDeeplinkLayout pageParams={params}>
-        <div className={dialogContentPaddingStyles}>
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <div className={dialogContentPaddingStyles}>
+        <ErrorBoundary
+          extras={{
+            action: {
+              isDeeplink: true,
+              actionType: UserActionType.LIVE_EVENT,
+              campaignName: slug,
+            },
+          }}
+          severityLevel="error"
+          tags={{
+            domain: 'UserActionLiveEventDeepLink',
+          }}
+        >
           <UserActionFormLiveEventDeeplinkWrapper slug={slug as UserActionLiveEventCampaignName} />
-        </div>
-      </HomepageDialogDeeplinkLayout>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
+    </HomepageDialogDeeplinkLayout>
   )
 }

@@ -1,5 +1,8 @@
-const { withSentryConfig } = require('@sentry/nextjs')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import bundleAnalyzer from '@next/bundle-analyzer'
+import { withSentryConfig } from '@sentry/nextjs'
+import type { NextConfig } from 'next'
+
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
@@ -193,17 +196,16 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
   destination,
   has: [
     {
-      type: 'query',
+      type: 'query' as const,
       key: queryKey,
       value: queryValue,
     },
   ],
 }))
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   experimental: {
-    instrumentationHook: true,
+    turbo: {},
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -331,6 +333,18 @@ const nextConfig = {
         permanent: false,
       },
       // SMS shortlinks
+      {
+        source: '/new-congress/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=new-member-activation-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/theblocknews',
+        destination:
+          'https://www.theblock.co/post/331309/stand-with-crypto-advocates-flood-senate-with-107000-emails-opposing-sec-crenshaws-renomination',
+        permanent: false,
+      },
       {
         source: '/secvote-2/:sessionId*',
         destination:

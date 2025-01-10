@@ -99,9 +99,9 @@ export function ThirdwebLoginContent({
         domain: 'ThirdwebLoginContent',
       }}
     >
-      <DialogBody className="-mt-8">
+      <DialogBody>
         <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
-          <div className="flex flex-col items-center space-y-6 pt-6">
+          <div className="flex flex-col items-center space-y-6">
             <NextImage
               alt="Stand With Crypto Logo"
               height={80}

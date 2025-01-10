@@ -96,7 +96,9 @@ UserActionFormLayout.CongresspersonDisplayFooter = CongresspersonDisplayFooter
 
 function Footer({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <div className={cn('flex w-full flex-row-reverse items-center justify-between', className)}>
+    <div
+      className={cn('flex w-full flex-row-reverse items-center justify-between gap-4', className)}
+    >
       {children}
     </div>
   )

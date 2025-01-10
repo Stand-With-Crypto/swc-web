@@ -9,9 +9,8 @@ import {
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION['10_MINUTES']
+export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
 
 type Props = PageProps
@@ -23,7 +22,8 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
   })
 }
 
-export default async function PoliticiansHomepage({ params }: PageProps) {
+export default async function PoliticiansHomepage(props: PageProps) {
+  const params = await props.params
   const { locale } = params
   const results = await queryDTSIAllPeople()
 

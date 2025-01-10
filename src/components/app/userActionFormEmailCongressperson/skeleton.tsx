@@ -2,7 +2,7 @@ import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
-import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import { getEmailBodyText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -31,13 +31,9 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Email Your Senator
+            Contact Your Member Of Congress
           </PageTitle>
-          <PageSubTitle className="mb-7">
-            The Senate is considering re-confirming anti-crypto SEC Commissioner Caroline Crenshaw
-            to the Commission. Let your senators know you stand with crypto and OPPOSE this
-            nomination!
-          </PageSubTitle>
+          <PageSubTitle className="mb-7">The 119th Congress Needs To Hear From You!</PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormItemSkeleton>
@@ -72,7 +68,11 @@ export function UserActionFormEmailCongresspersonSkeleton({
                 </p>
               </div>
               <FormItemSkeleton>
-                <Textarea defaultValue={getDefaultText()} placeholder="Your message..." rows={16} />
+                <Textarea
+                  defaultValue={getEmailBodyText()}
+                  placeholder="Your message..."
+                  rows={16}
+                />
               </FormItemSkeleton>
             </div>
           </div>

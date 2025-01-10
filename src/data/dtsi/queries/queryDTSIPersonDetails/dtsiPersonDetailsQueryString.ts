@@ -22,6 +22,11 @@ export const dtsiPersonDetailsQueryString = /* GraphQL */ `
         roleCategory
         status
         title
+        group {
+          id
+          category
+          groupInstance
+        }
       }
       donationUrl
       firstName

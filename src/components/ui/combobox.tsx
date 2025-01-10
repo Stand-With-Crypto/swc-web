@@ -98,7 +98,7 @@ export function Combobox<T>({
   }
 
   return (
-    <Popover analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
+    <Popover analytics={wrappedAnalytics} modal={true} onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild ref={parentRef}>
         {formatPopoverTrigger({ value, open })}
       </PopoverTrigger>

@@ -4,37 +4,37 @@ import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDee
 import { HomepageDialogDeeplinkNFTMintWrapper } from '@/components/app/userActionFormNFTMint/homepageDialogDeeplinkNFTMintWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { cn } from '@/utils/web/cn'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
-export const revalidate = SECONDS_DURATION.HOUR
+export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 
-export default function UserActionNFTMintDeepLink({ params }: PageProps) {
+export default async function UserActionNFTMintDeepLink(props: PageProps) {
+  const params = await props.params
   return (
-    <ErrorBoundary
-      extras={{
-        action: {
-          isDeeplink: true,
-          actionType: UserActionType.NFT_MINT,
-        },
-      }}
-      severityLevel="error"
-      tags={{
-        domain: 'UserActionNFTMintDeepLink',
-      }}
-    >
-      <HomepageDialogDeeplinkLayout pageParams={params}>
-        <div
-          className={cn(
-            'flex flex-col items-center justify-center max-md:h-full',
-            dialogContentPaddingStyles,
-          )}
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <div
+        className={cn(
+          'flex flex-col items-center justify-center max-md:h-full',
+          dialogContentPaddingStyles,
+        )}
+      >
+        <ErrorBoundary
+          extras={{
+            action: {
+              isDeeplink: true,
+              actionType: UserActionType.NFT_MINT,
+            },
+          }}
+          severityLevel="error"
+          tags={{
+            domain: 'UserActionNFTMintDeepLink',
+          }}
         >
           <HomepageDialogDeeplinkNFTMintWrapper />
-        </div>
-      </HomepageDialogDeeplinkLayout>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
+    </HomepageDialogDeeplinkLayout>
   )
 }

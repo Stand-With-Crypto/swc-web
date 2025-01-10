@@ -83,7 +83,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
-  const sessionId = getUserSessionId()
+  const sessionId = await getUserSessionId()
   const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(input)
   if (!validatedFields.success) {
     return {
@@ -116,7 +116,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     })
   }
 
-  const localUser = parseLocalUserFromCookies()
+  const localUser = await parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,

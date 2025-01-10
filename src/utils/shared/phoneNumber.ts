@@ -1,4 +1,7 @@
-import parsePhoneNumber, { CountryCode } from 'libphonenumber-js'
+import * as Sentry from '@sentry/nextjs'
+import { CountryCode, ParseError } from 'libphonenumber-js'
+import { parsePhoneNumberWithError } from 'libphonenumber-js/core'
+import phoneNumberMetadata from 'libphonenumber-js/mobile/metadata'
 
 const DEFAULT_COUNTRY_CODE: CountryCode = 'US'
 
@@ -19,10 +22,31 @@ export function normalizePhoneNumber(passed: string) {
   return number + (extension ? `x${extension}` : '')
 }
 
+function parsePhoneNumber(phoneNumber: string) {
+  try {
+    // https://github.com/catamphetamine/libphonenumber-js/issues/468#issue-2504182999
+    // We have to add phoneNumberMetadata from the 'libphonenumber-js/mobile/metadata'
+    // in the function call below to make it work as explained in the issue above
+    return parsePhoneNumberWithError(phoneNumber, DEFAULT_COUNTRY_CODE, phoneNumberMetadata)
+  } catch (e) {
+    if (e instanceof ParseError) {
+      Sentry.captureException(e, {
+        tags: {
+          domain: 'parsePhoneNumberWithError',
+        },
+        extra: {
+          payload: phoneNumber,
+        },
+      })
+    }
+    throw e
+  }
+}
+
 export function formatPhoneNumber(phoneNumber: string) {
   if (!phoneNumber) return ''
 
-  const parsedPhoneNumber = parsePhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+  const parsedPhoneNumber = parsePhoneNumber(phoneNumber)
 
   if (!parsedPhoneNumber) throw new Error(`Failed to parse phone number ${phoneNumber}`)
 
@@ -30,7 +54,9 @@ export function formatPhoneNumber(phoneNumber: string) {
 }
 
 export function validatePhoneNumber(phoneNumber: string) {
-  const parsedPhoneNumber = parsePhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+  if (!phoneNumber) return false
+
+  const parsedPhoneNumber = parsePhoneNumber(phoneNumber)
 
   if (!parsedPhoneNumber) return false
 

@@ -78,7 +78,7 @@ export const testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSame
       })
       return {
         ...getDefaultParameters(),
-        getUserSessionId: () => newUser.userSessions[0].id,
+        getUserSessionId: () => Promise.resolve(newUser.userSessions[0].id),
         cryptoAddress: legacyUser1.userCryptoAddresses[0].cryptoAddress,
         injectedFetchEmbeddedWalletMetadataFromThirdweb: () =>
           mockEmbeddedWalletMetadata(legacyUser2.userEmailAddresses[0].emailAddress),

@@ -2,11 +2,10 @@ import { NextResponse } from 'next/server'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
+export const revalidate = 1 // 1 second
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.SECOND
 
 // A faulty API route to test Sentry's error monitoring
 export async function GET() {

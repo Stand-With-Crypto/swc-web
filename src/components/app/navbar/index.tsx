@@ -45,10 +45,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Politician scores',
     },
     {
-      href: urls.endorsedCandidates(),
-      text: 'Endorsed candidates',
-    },
-    {
       href: urls.events(),
       text: 'Events',
     },
@@ -270,7 +266,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               <Menu />
             </button>
           </DrawerTrigger>
-          <DrawerContent direction="top">
+          <DrawerContent a11yTitle="Navigation Menu" direction="top">
             <div className="h-screen overflow-y-auto pb-6 text-left">
               <div className="flex justify-between p-6">
                 <InternalLink className="flex-shrink-0" href={urls.home()}>
