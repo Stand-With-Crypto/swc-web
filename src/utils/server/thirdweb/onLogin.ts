@@ -353,6 +353,12 @@ export async function onNewLogin(props: NewLoginParams) {
       localUser,
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
+    }).catch(error => {
+      Sentry.setExtras({
+        hasSignedInWithEmail,
+        embeddedWalletUserDetails,
+      })
+      throw error
     })
     wasUserCreated = true
   } else {
