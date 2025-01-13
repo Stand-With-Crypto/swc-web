@@ -39,6 +39,7 @@
     "@builder.io/sdk": "^2.2.2",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
+    "@inngest/middleware-sentry": "^0.1.1",
     "@next/bundle-analyzer": "^15.0.3",
     "@next/third-parties": "^15.0.3",
     "@planetscale/database": "^1.16.0",
