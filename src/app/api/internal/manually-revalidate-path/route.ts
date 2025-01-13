@@ -2,8 +2,8 @@ import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
+import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
 
 const logger = getLogger('/api/internal/manually-revalidate-path')
 
