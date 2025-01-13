@@ -21,7 +21,7 @@ export function localeRouter(request: NextRequest): NextResponse {
   }
 
   // If path doesn't start with any locale, rewrite to include default locale
-  if (!firstSegment || firstSegment.indexOf('-') === -1) {
+  if (!firstSegment || !firstSegment.match(/^[a-z]{2}-[A-Z]{2}$/)) {
     const newPath = `/${DEFAULT_LOCALE}${pathname}`
     const searchParams = request.nextUrl.search
 
