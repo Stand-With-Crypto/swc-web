@@ -330,8 +330,10 @@ export function UserActionFormEmailCongressperson({
                       <FormControl>
                         <Textarea
                           autoComplete="off"
+                          autoCorrect="off"
                           placeholder=""
                           rows={16}
+                          spellCheck={false}
                           {...field}
                           onChange={e => {
                             hasModifiedMessage.current = true
