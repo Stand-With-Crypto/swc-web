@@ -329,6 +329,7 @@ export function UserActionFormEmailCongressperson({
                       )}
                       <FormControl>
                         <Textarea
+                          autoComplete="off"
                           placeholder=""
                           rows={16}
                           {...field}

@@ -69,6 +69,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
               </div>
               <FormItemSkeleton>
                 <Textarea
+                  autoComplete="off"
                   defaultValue={getEmailBodyText()}
                   placeholder="Your message..."
                   rows={16}
