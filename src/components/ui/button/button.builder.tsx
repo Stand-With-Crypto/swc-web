@@ -1,3 +1,5 @@
+'use client'
+
 import { Builder, withChildren } from '@builder.io/react'
 import dynamic from 'next/dynamic'
 
