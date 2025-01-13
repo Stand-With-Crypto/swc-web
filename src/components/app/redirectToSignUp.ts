@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 
-import { SupportedLocale } from '@/intl/locales'
 import { setCallbackQueryString } from '@/utils/server/searchParams'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { UrlDestinationsWithoutParams } from '@/utils/shared/urls/types'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 

@@ -7,7 +7,7 @@ import { DTSIAvatarBox } from '@/components/app/pageBillDetails/dtsiAvatarBox'
 import { FILTER_KEYS, Filters, getDefaultFilters } from '@/components/app/pageBillDetails/filters'
 import { DTSI_BillPersonRelationshipType, DTSI_PersonRoleStatus } from '@/data/dtsi/generated'
 import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 const AVATAR_SIZE = 126
 

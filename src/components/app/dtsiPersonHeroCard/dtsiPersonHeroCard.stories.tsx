@@ -9,7 +9,7 @@ import {
   DTSI_TwitterAccountState,
   DTSI_TwitterAccountType,
 } from '@/data/dtsi/generated'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 const getDefaultProps = () => {
   const props: React.ComponentProps<typeof DTSIPersonHeroCard> = {

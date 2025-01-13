@@ -7,7 +7,7 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface Props {
