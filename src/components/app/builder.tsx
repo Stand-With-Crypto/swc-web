@@ -1,5 +1,7 @@
 'use client'
 
+import '@/utils/web/builder/registerComponents'
+
 import { ComponentProps } from 'react'
 import { BuilderComponent, useIsPreviewing } from '@builder.io/react'
 import { notFound } from 'next/navigation'

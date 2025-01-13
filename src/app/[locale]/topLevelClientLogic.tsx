@@ -1,7 +1,5 @@
 'use client'
 
-import '@/utils/web/builder/registerComponents'
-
 import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
