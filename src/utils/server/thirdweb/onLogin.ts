@@ -347,6 +347,8 @@ export async function onNewLogin(props: NewLoginParams) {
   const hasSignedInWithEmail =
     !!embeddedWalletUserDetails?.email && !embeddedWalletUserDetails?.phone
 
+  log(`createUser: hasSignedInWithEmail: ${hasSignedInWithEmail.toString()}`)
+
   if (!maybeUser) {
     log(`createUser: creating user`)
     maybeUser = await createUser({
@@ -354,9 +356,17 @@ export async function onNewLogin(props: NewLoginParams) {
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
     }).catch(error => {
+      log(
+        `createUser: error creating user\n ${JSON.stringify(
+          {
+            embeddedWalletUserDetails,
+          },
+          null,
+          2,
+        )}`,
+      )
       Sentry.setExtras({
         hasSignedInWithEmail,
-        embeddedWalletUserDetails,
       })
       throw error
     })
