@@ -346,6 +346,11 @@ export async function onNewLogin(props: NewLoginParams) {
   let wasUserCreated = false
   const hasSignedInWithEmail =
     !!embeddedWalletUserDetails?.email && !embeddedWalletUserDetails?.phone
+  const hasSignedInWithPhoneNumber = !!embeddedWalletUserDetails?.phone
+  const mergeObjectInfo = {
+    usersToMergeLength: merge?.usersToDelete.length,
+    userToKeepId: merge?.userToKeep?.user.id,
+  }
 
   log(`createUser: hasSignedInWithEmail: ${hasSignedInWithEmail.toString()}`)
 
@@ -360,6 +365,7 @@ export async function onNewLogin(props: NewLoginParams) {
         `createUser: error creating user\n ${JSON.stringify(
           {
             embeddedWalletUserDetails,
+            merge,
           },
           null,
           2,
@@ -367,6 +373,8 @@ export async function onNewLogin(props: NewLoginParams) {
       )
       Sentry.setExtras({
         hasSignedInWithEmail,
+        hasSignedInWithPhoneNumber,
+        mergeObjectInfo,
       })
       throw error
     })
