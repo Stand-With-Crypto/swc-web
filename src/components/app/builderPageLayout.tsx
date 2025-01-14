@@ -6,14 +6,16 @@ import { SupportedLocale } from '@/utils/shared/supportedLocales'
 export async function BuilderPageLayout({
   children,
   locale,
+  pathname,
 }: {
   children: React.ReactNode
   locale: SupportedLocale
+  pathname: string
 }) {
   const navbarContent = await serverCMS
     .get(SectionModelIdentifiers.NAVBAR, {
       userAttributes: {
-        // TODO: add path
+        urlPath: pathname,
       },
       prerender: false,
     })
@@ -22,7 +24,7 @@ export async function BuilderPageLayout({
   const footerContent = await serverCMS
     .get(SectionModelIdentifiers.FOOTER, {
       userAttributes: {
-        // TODO: add path
+        urlPath: pathname,
       },
       prerender: false,
     })

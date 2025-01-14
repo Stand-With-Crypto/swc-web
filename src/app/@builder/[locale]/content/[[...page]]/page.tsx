@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 import { RenderBuilderContent } from '@/components/app/builder'
+import { BuilderPageLayout } from '@/components/app/builderPageLayout'
 import { PageProps } from '@/types'
 import { getDynamicPageContent, PAGE_PREFIX } from '@/utils/server/builder/models/page/content'
 import { PageModelIdentifiers } from '@/utils/server/builder/models/page/uniqueIdentifiers'
@@ -13,11 +14,17 @@ export const dynamicParams = true
 type DynamicPageProps = PageProps<{ page: string[] }>
 
 export default async function Page(props: DynamicPageProps) {
-  const { page } = await props.params
+  const { page, locale } = await props.params
 
   const content = await getDynamicPageContent(page)
 
-  return <RenderBuilderContent content={content} model={PageModelIdentifiers.CONTENT} type="page" />
+  const pathname = PAGE_PREFIX + page?.join('/')
+
+  return (
+    <BuilderPageLayout locale={locale} pathname={pathname}>
+      <RenderBuilderContent content={content} model={PageModelIdentifiers.CONTENT} type="page" />
+    </BuilderPageLayout>
+  )
 }
 
 export async function generateMetadata(props: DynamicPageProps): Promise<Metadata> {
