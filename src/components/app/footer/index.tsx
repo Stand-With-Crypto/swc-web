@@ -10,7 +10,7 @@ import { cn } from '@/utils/web/cn'
 
 const footerLinkStyles = cn('block text-gray-400')
 
-export async function Footer({ locale }: { locale: SupportedLocale }) {
+export function Footer({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)
 
   return (
