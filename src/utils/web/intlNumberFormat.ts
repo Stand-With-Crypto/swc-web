@@ -1,4 +1,4 @@
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 // wrapper around Intl.NumberFormat that includes some legacy browser compat fixes
 export function intlNumberFormat(locale: SupportedLocale, args?: Intl.NumberFormatOptions) {

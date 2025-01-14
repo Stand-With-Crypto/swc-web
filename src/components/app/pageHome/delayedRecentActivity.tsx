@@ -14,7 +14,7 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export function DelayedRecentActivityWithMap(props: {

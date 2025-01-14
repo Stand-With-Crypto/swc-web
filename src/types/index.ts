@@ -1,4 +1,4 @@
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export type PageProps<Params = object> = {
   params: Promise<
