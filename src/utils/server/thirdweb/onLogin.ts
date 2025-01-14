@@ -55,6 +55,7 @@ import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { generateUserSessionId } from '@/utils/shared/userSessionId'
 
 type UpsertedUser = User & {
   address: Address | null
@@ -353,13 +354,19 @@ export async function onNewLogin(props: NewLoginParams) {
   }
 
   log(`createUser: hasSignedInWithEmail: ${hasSignedInWithEmail.toString()}`)
+  log(`createUser: reasonsToMerge: ${JSON.stringify(merge?.reasonsToMerge, null, 2)}`)
 
   if (!maybeUser) {
+    const reasonIsVerifiedUserCryptoAddress = merge?.reasonsToMerge?.every(
+      reason => reason === 'Verified User Crypto Address',
+    )
     log(`createUser: creating user`)
     maybeUser = await createUser({
       localUser,
       hasSignedInWithEmail,
-      sessionId: await props.getUserSessionId(),
+      sessionId: reasonIsVerifiedUserCryptoAddress
+        ? generateUserSessionId()
+        : await props.getUserSessionId(),
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -534,7 +541,26 @@ async function queryMatchingUsers({
         existingEmailAddressMatchedToEmbeddedWallet,
       }
     }
-    return { user, sourceOfExistingUser: 'Session Id' as const }
+
+    const existingPhoneNumberMatchedToUser = embeddedWalletUserDetails?.phone
+      ? user.phoneNumber === embeddedWalletUserDetails.phone
+      : undefined
+    if (existingPhoneNumberMatchedToUser) {
+      return {
+        user,
+        sourceOfExistingUser: 'Embedded Wallet Phone Number' as const,
+        existingPhoneNumberMatchedToUser,
+      }
+    }
+
+    const existingSessionIdMatchedToUser = user.userSessions.find(
+      session => session.id === userSessionId,
+    )
+    if (existingSessionIdMatchedToUser) {
+      return { user, sourceOfExistingUser: 'Session Id' as const, existingSessionIdMatchedToUser }
+    }
+
+    return { user, sourceOfExistingUser: 'Unknown' as const }
   })
   return { embeddedWalletUserDetails, existingUsersWithSource }
 }
@@ -561,20 +587,25 @@ function findUsersToMerge(
   logger.info(`findUsersToMerge: found ${existingUsersWithSource.length} users to merge`)
   prettyLog(existingUsersWithSource)
 
+  const reasonsToMerge: string[] = []
   const usersToMerge = existingUsersWithSource.filter(user => {
     if (user.sourceOfExistingUser === 'Unverified User Crypto Address') {
+      reasonsToMerge.push('Unverified User Crypto Address')
       return true
     }
     if (user.user.userCryptoAddresses.some(addr => addr.hasBeenVerifiedViaAuth)) {
       logger.info(
         `findUsersToMerge: found user with verified crypto address ${user.user.userCryptoAddresses[0].cryptoAddress}, not merging`,
       )
+      reasonsToMerge.push('Verified User Crypto Address')
       return false
     }
     if (user.sourceOfExistingUser === 'Embedded Wallet Email Address') {
+      reasonsToMerge.push('Embedded Wallet Email Address')
       return true
     }
     if (user.sourceOfExistingUser === 'Session Id') {
+      reasonsToMerge.push('Session Id')
       return true
     }
   })
@@ -586,7 +617,7 @@ function findUsersToMerge(
     usersToMerge[0]
 
   const usersToDelete = usersToMerge.filter(x => x.user.id !== userToKeep.user.id)
-  return { userToKeep, usersToDelete }
+  return { userToKeep, usersToDelete, reasonsToMerge }
 }
 
 async function createUser({
@@ -920,6 +951,7 @@ async function getExistingUsers({
     primaryUserEmailAddress: true,
     userEmailAddresses: true,
     userCryptoAddresses: true,
+    userSessions: true,
   }
 
   const existingUsersWithCryptoAddressNotVerifiedViaAuth = prismaClient.user.findMany({
