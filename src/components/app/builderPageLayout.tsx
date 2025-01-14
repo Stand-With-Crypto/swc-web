@@ -1,26 +1,50 @@
-import { Footer } from '@/components/app/footer'
-import { Navbar } from '@/components/app/navbar'
+import { RenderBuilderContent } from '@/components/app/builder'
 import { SupportedLocale } from '@/intl/locales'
-import { PageModel } from '@/utils/server/builder/models/page/PageModel'
+import { SectionModelIdentifiers } from '@/utils/server/builder/models/section/uniqueIdentifiers'
+import { serverCMS } from '@/utils/server/builder/serverCMS'
 
 export async function BuilderPageLayout({
-  pageModel,
   children,
   locale,
-  pathname,
 }: {
-  pageModel: PageModel
   children: React.ReactNode
   locale: SupportedLocale
-  pathname: string
 }) {
-  const details = await pageModel.getPageMetadata(pathname)
+  // console.log('getUserAttributes ---', serverCMS.getUserAttributes())
+
+  const navbarContent = await serverCMS
+    .get(SectionModelIdentifiers.NAVBAR, {
+      userAttributes: {
+        // TODO: add path
+      },
+      prerender: false,
+    })
+    .toPromise()
+
+  const footerContent = await serverCMS
+    .get(SectionModelIdentifiers.FOOTER, {
+      userAttributes: {
+        // TODO: add path
+      },
+      prerender: false,
+    })
+    .toPromise()
 
   return (
     <>
-      {details.hasNavbar && <Navbar locale={locale} />}
+      <RenderBuilderContent
+        content={navbarContent}
+        data={{ locale }}
+        model={SectionModelIdentifiers.NAVBAR}
+        type="section"
+      />
       {children}
-      {details.hasFooter && <Footer locale={locale} />}
+      <RenderBuilderContent
+        content={footerContent}
+        data={{ locale }}
+        model={SectionModelIdentifiers.FOOTER}
+        type="section"
+      />
     </>
   )
 }

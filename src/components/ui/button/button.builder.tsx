@@ -1,5 +1,3 @@
-'use client'
-
 import { Builder, withChildren } from '@builder.io/react'
 
 import type { BuilderComponentBaseProps } from '@/utils/web/builder/types'

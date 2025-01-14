@@ -1,11 +1,18 @@
-import { PageModel, PageModelNames } from '@/utils/server/builder/models/page/PageModel'
+import { PageModelIdentifiers } from '@/utils/server/builder/models/page/uniqueIdentifiers'
+import { serverCMS } from '@/utils/server/builder/serverCMS'
 
-const PAGE_PREFIX = '/content/'
+export const PAGE_PREFIX = '/content/'
 
-class ContentPageModel extends PageModel {
-  isBuilderPage(pathname: string): boolean {
-    return pathname.startsWith(this.routePrefix)
-  }
+export function getDynamicPageContent(page: string[]) {
+  const pathname = page?.join('/')
+
+  return serverCMS
+    .get(PageModelIdentifiers.CONTENT, {
+      userAttributes: {
+        urlPath: PAGE_PREFIX + pathname,
+      },
+      // Set prerender to false to return JSON instead of HTML
+      prerender: false,
+    })
+    .toPromise()
 }
-
-export const contentPageModel = new ContentPageModel(PageModelNames.CONTENT, PAGE_PREFIX)

@@ -8,7 +8,6 @@ import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
-import { MaybeBuilderContent } from '@/components/app/maybeBuilderContent'
 import { Navbar } from '@/components/app/navbar'
 import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
@@ -70,13 +69,9 @@ export default async function Layout({
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <NavBarGlobalBanner />
-            <MaybeBuilderContent>
-              <Navbar locale={locale} />
-            </MaybeBuilderContent>
+            <Navbar locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <MaybeBuilderContent>
-              <Footer locale={locale} />
-            </MaybeBuilderContent>
+            <Footer locale={locale} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
