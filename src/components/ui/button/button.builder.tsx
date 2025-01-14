@@ -1,6 +1,6 @@
 import { Builder, withChildren } from '@builder.io/react'
 
-import type { BuilderComponentBaseProps } from '@/utils/web/builder/types'
+import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
 import { Button, buttonVariantsConfig } from '.'
 

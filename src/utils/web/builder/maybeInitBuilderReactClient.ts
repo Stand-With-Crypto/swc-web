@@ -11,7 +11,7 @@ const NEXT_PUBLIC_BUILDER_IO_PUBLIC_KEY = requiredOutsideLocalEnv(
 )!
 
 let init = false
-export function maybeInitCMSClient() {
+export function maybeInitBuilderReactClient() {
   if (!init) {
     builder.init(NEXT_PUBLIC_BUILDER_IO_PUBLIC_KEY)
     init = true

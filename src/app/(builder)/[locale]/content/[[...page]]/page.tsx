@@ -3,9 +3,9 @@ import { Metadata } from 'next'
 import { RenderBuilderContent } from '@/components/app/builder'
 import { BuilderPageLayout } from '@/components/app/builderPageLayout'
 import { PageProps } from '@/types'
+import { builderSDKClient } from '@/utils/server/builder'
+import { PageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getDynamicPageContent, PAGE_PREFIX } from '@/utils/server/builder/models/page/content'
-import { PageModelIdentifiers } from '@/utils/server/builder/models/page/uniqueIdentifiers'
-import { serverCMS } from '@/utils/server/builder/serverCMS'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
@@ -16,9 +16,9 @@ type DynamicPageProps = PageProps<{ page: string[] }>
 export default async function Page(props: DynamicPageProps) {
   const { page, locale } = await props.params
 
-  const content = await getDynamicPageContent(page)
-
   const pathname = PAGE_PREFIX + page?.join('/')
+
+  const content = await getDynamicPageContent(pathname)
 
   return (
     <BuilderPageLayout locale={locale} pathname={pathname}>
@@ -30,7 +30,9 @@ export default async function Page(props: DynamicPageProps) {
 export async function generateMetadata(props: DynamicPageProps): Promise<Metadata> {
   const { page } = await props.params
 
-  const content = await getDynamicPageContent(page)
+  const pathname = PAGE_PREFIX + page?.join('/')
+
+  const content = await getDynamicPageContent(pathname)
 
   return generateMetadataDetails({
     title: content?.data?.title,
@@ -39,7 +41,7 @@ export async function generateMetadata(props: DynamicPageProps): Promise<Metadat
 }
 
 export async function generateStaticParams() {
-  const paths = await serverCMS
+  const paths = await builderSDKClient
     .getAll(PageModelIdentifiers.CONTENT, { options: { noTargeting: true } })
     .then(res => res.map(({ data }) => data?.url))
 

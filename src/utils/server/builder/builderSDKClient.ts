@@ -23,7 +23,7 @@ const REQUEST = undefined
 const RESPONSE = undefined
 const AUTH_TOKEN = BUILDER_IO_PRIVATE_KEY
 
-export const serverCMS = builder.init(
+export const builderSDKClient = builder.init(
   NEXT_PUBLIC_BUILDER_IO_PUBLIC_KEY,
   CAN_TRACK,
   REQUEST,

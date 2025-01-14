@@ -1,6 +1,6 @@
 import { RenderBuilderContent } from '@/components/app/builder'
-import { SectionModelIdentifiers } from '@/utils/server/builder/models/section/uniqueIdentifiers'
-import { serverCMS } from '@/utils/server/builder/serverCMS'
+import { builderSDKClient } from '@/utils/server/builder'
+import { SectionModelIdentifiers } from '@/utils/server/builder/models/section/constants'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export async function BuilderPageLayout({
@@ -12,7 +12,7 @@ export async function BuilderPageLayout({
   locale: SupportedLocale
   pathname: string
 }) {
-  const navbarContent = await serverCMS
+  const navbarContent = await builderSDKClient
     .get(SectionModelIdentifiers.NAVBAR, {
       userAttributes: {
         urlPath: pathname,
@@ -21,7 +21,7 @@ export async function BuilderPageLayout({
     })
     .toPromise()
 
-  const footerContent = await serverCMS
+  const footerContent = await builderSDKClient
     .get(SectionModelIdentifiers.FOOTER, {
       userAttributes: {
         urlPath: pathname,

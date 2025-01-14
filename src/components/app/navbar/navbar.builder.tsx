@@ -1,8 +1,8 @@
 import { Builder } from '@builder.io/react'
 
-import { SectionModelIdentifiers } from '@/utils/server/builder/models/section/uniqueIdentifiers'
+import { SectionModelIdentifiers } from '@/utils/server/builder/models/section/constants'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/utils/shared/supportedLocales'
-import { BuilderComponentBaseProps } from '@/utils/web/builder/types'
+import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
 import { Navbar } from '.'
 

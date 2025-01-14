@@ -1,15 +1,13 @@
-import { PageModelIdentifiers } from '@/utils/server/builder/models/page/uniqueIdentifiers'
-import { serverCMS } from '@/utils/server/builder/serverCMS'
+import { builderSDKClient } from '@/utils/server/builder'
+import { PageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 
 export const PAGE_PREFIX = '/content/'
 
-export function getDynamicPageContent(page: string[]) {
-  const pathname = page?.join('/')
-
-  return serverCMS
+export function getDynamicPageContent(pathname: string) {
+  return builderSDKClient
     .get(PageModelIdentifiers.CONTENT, {
       userAttributes: {
-        urlPath: PAGE_PREFIX + pathname,
+        urlPath: pathname,
       },
       // Set prerender to false to return JSON instead of HTML
       prerender: false,
