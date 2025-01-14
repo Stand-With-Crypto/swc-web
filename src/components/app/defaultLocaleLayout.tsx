@@ -8,7 +8,7 @@ import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { FullHeight } from '@/components/ui/fullHeight'
-import { DEFAULT_LOCALE } from '@/intl/locales'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import { fontClassName } from '@/utils/web/fonts'
 
 export const dynamic = 'error'

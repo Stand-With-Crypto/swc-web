@@ -4,8 +4,8 @@ import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { IStanceDetailsProps } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonDetailsQuery, DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonDetailsQueryString } from '@/data/dtsi/queries/queryDTSIPersonDetails/dtsiPersonDetailsQueryString'
-import { SupportedLocale } from '@/intl/locales'
 import { queryDTSIMockSchema } from '@/mocks/dtsi/queryDTSIMockSchema'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 const meta = {
   title: 'App/DTSIStanceDetails',

@@ -13,7 +13,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 

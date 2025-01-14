@@ -18,8 +18,8 @@ import {
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedLocale } from '@/intl/locales'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 

@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 
 export function TotalAdvocatesPerStateTooltip({

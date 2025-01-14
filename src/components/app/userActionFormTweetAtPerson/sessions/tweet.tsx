@@ -24,11 +24,11 @@ import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
-import { SupportedLocale } from '@/intl/locales'
 import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'

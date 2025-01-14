@@ -7,8 +7,8 @@ import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdome
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
-import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
