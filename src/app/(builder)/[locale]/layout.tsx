@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
 
+import { TopLevelBuilderClientLogic } from '@/app/(builder)/[locale]/topLevelBuilderClientLogic'
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
@@ -65,10 +66,12 @@ export default async function Layout({
           showSpinner={false}
         />
         <TopLevelClientLogic locale={locale}>
-          <FullHeight.Container>
-            <NavBarGlobalBanner />
-            <FullHeight.Content>{children}</FullHeight.Content>
-          </FullHeight.Container>
+          <TopLevelBuilderClientLogic>
+            <FullHeight.Container>
+              <NavBarGlobalBanner />
+              <FullHeight.Content>{children}</FullHeight.Content>
+            </FullHeight.Container>
+          </TopLevelBuilderClientLogic>
         </TopLevelClientLogic>
         <Toaster />
         <CookieConsent locale={locale} />
