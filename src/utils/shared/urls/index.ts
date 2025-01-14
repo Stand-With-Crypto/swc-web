@@ -1,7 +1,7 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { DEFAULT_LOCALE, SupportedLocale } from '@/utils/shared/supportedLocales'
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {

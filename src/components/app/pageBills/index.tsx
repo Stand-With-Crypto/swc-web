@@ -4,7 +4,7 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIBill, DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 interface PageBillsProps {
   title: string

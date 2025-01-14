@@ -29,8 +29,8 @@ import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
-import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 

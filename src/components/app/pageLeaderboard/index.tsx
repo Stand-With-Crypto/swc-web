@@ -10,7 +10,7 @@ import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import type { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import type { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 

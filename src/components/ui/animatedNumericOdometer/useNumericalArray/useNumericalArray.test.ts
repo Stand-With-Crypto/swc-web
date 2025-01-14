@@ -1,8 +1,8 @@
 import { expect, it } from '@jest/globals'
 import { renderHook } from '@testing-library/react'
 
-import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 import { useNumeralArray } from '.'

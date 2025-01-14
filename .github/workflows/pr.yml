@@ -86,9 +86,6 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Extract intl messages
-        run: npm run intl:extract-compile
-
       - name: Run codegen
         run: npm run codegen
 

@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
-import { SupportedLocale } from '@/intl/locales'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,

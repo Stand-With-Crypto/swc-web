@@ -17,7 +17,6 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
-import { SupportedLocale } from '@/intl/locales'
 import {
   getDTSIPersonRoleCategoryDisplayName,
   getDTSIPersonRoleLocation,
@@ -31,6 +30,7 @@ import {
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SWCQuestionnaireAnswers } from '@/utils/shared/getSWCQuestionnaire'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
