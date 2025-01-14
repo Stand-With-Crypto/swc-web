@@ -5,7 +5,6 @@ import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGr
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
-import { SupportedLocale } from '@/intl/locales'
 import {
   getDTSIPersonRoleCategoryDisplayName,
   getDTSIPersonRoleCategoryWithStateDisplayName,
@@ -19,6 +18,7 @@ import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 

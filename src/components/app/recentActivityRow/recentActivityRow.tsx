@@ -7,7 +7,7 @@ import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserActi
 import { ActivityAvatar } from '@/components/app/recentActivityRow/activityAvatar'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUserWithENSData }

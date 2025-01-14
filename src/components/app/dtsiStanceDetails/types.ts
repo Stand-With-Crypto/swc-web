@@ -9,8 +9,8 @@ import {
   DTSI_TweetMedia,
   DTSI_TwitterAccount,
 } from '@/data/dtsi/generated'
-import { SupportedLocale } from '@/intl/locales'
 import { PartialButDefined } from '@/types'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export type DTSIStanceDetailsQuoteProp = {
   stanceType: DTSI_PersonStanceType.QUOTE

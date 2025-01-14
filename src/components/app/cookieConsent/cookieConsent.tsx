@@ -2,8 +2,8 @@
 
 import React from 'react'
 
-import { SupportedLocale } from '@/intl/locales'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 import { CookieConsentBanner } from './banner'
 import { useCookieConsent } from './useCookieConsent'

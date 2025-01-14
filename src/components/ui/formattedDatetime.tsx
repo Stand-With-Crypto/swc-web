@@ -1,4 +1,4 @@
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export function FormattedDatetime({
   date,

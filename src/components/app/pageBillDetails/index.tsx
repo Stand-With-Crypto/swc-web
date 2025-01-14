@@ -10,7 +10,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 interface PageBillDetailsProps {
   bill: DTSIBillDetails
