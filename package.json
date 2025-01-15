@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@builder.io/react": "^8.0.0",
-    "@builder.io/sdk": "^2.2.2",
+    "@builder.io/sdk": "^6.0.2",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@inngest/middleware-sentry": "^0.1.1",
