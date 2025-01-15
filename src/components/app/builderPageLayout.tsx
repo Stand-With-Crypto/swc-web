@@ -1,6 +1,6 @@
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
-import { PageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
@@ -13,7 +13,7 @@ export async function BuilderPageLayout({
   children: React.ReactNode
   locale: SupportedLocale
   pathname: string
-  modelName: PageModelIdentifiers
+  modelName: BuilderPageModelIdentifiers
 }) {
   const pageMetadata = await getPageDetails(modelName, pathname)
 

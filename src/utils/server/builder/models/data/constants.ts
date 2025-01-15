@@ -1,4 +1,4 @@
-export enum DataModelIdentifiers {
+export enum BuilderDataModelIdentifiers {
   EVENTS = 'events',
   QUESTIONNAIRE = 'questionnaire',
 }

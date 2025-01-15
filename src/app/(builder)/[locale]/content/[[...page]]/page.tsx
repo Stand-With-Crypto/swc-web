@@ -4,7 +4,7 @@ import { RenderBuilderContent } from '@/components/app/builder'
 import { BuilderPageLayout } from '@/components/app/builderPageLayout'
 import { PageProps } from '@/types'
 import { builderSDKClient } from '@/utils/server/builder'
-import { PageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
@@ -12,7 +12,7 @@ export const dynamic = 'error'
 export const dynamicParams = true
 
 const PAGE_PREFIX = '/content/'
-const PAGE_MODEL = PageModelIdentifiers.CONTENT
+const PAGE_MODEL = BuilderPageModelIdentifiers.CONTENT
 
 type DynamicPageProps = PageProps<{ page: string[] }>
 

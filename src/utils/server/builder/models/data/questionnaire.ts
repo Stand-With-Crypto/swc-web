@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder'
-import { DataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
+import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
 import { zodQuestionnaireSchemaValidation } from '@/utils/shared/getSWCQuestionnaire'
 import { getLogger } from '@/utils/shared/logger'
 
@@ -11,7 +11,7 @@ export async function getQuestionnaire(DTSISlug: string) {
   try {
     const entry = await pRetry(
       () =>
-        builderSDKClient.get(DataModelIdentifiers.QUESTIONNAIRE, {
+        builderSDKClient.get(BuilderDataModelIdentifiers.QUESTIONNAIRE, {
           query: {
             data: {
               dtsiSlug: DTSISlug,

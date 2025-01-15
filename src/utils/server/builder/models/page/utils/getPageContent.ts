@@ -1,7 +1,7 @@
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
-import { PageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 
-export function getPageContent(pageModelName: PageModelIdentifiers, pathname: string) {
+export function getPageContent(pageModelName: BuilderPageModelIdentifiers, pathname: string) {
   return builderSDKClient
     .get(pageModelName, {
       userAttributes: {

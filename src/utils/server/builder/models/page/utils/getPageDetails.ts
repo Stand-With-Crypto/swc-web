@@ -1,4 +1,4 @@
-import { PageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageContent } from '@/utils/server/builder/models/page/utils'
 
 export interface PageMetadata {
@@ -9,7 +9,7 @@ export interface PageMetadata {
 }
 
 export async function getPageDetails(
-  pageModelName: PageModelIdentifiers,
+  pageModelName: BuilderPageModelIdentifiers,
   pathname: string,
 ): Promise<PageMetadata> {
   const content = await getPageContent(pageModelName, pathname)

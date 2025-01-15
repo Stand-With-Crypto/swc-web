@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder'
-import { DataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
+import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
 import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -13,7 +13,7 @@ export async function getEvent(eventSlug: string, state: string) {
   try {
     const entry = await pRetry(
       () =>
-        builderSDKClient.get(DataModelIdentifiers.EVENTS, {
+        builderSDKClient.get(BuilderDataModelIdentifiers.EVENTS, {
           query: {
             data: {
               slug: eventSlug,
@@ -53,7 +53,7 @@ const LIMIT = 100
 async function getAllEventsWithOffset(offset: number) {
   return await pRetry(
     () =>
-      builderSDKClient.getAll(DataModelIdentifiers.EVENTS, {
+      builderSDKClient.getAll(BuilderDataModelIdentifiers.EVENTS, {
         query: {
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
           data: {
