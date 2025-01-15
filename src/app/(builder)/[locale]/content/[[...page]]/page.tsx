@@ -25,7 +25,7 @@ export default async function Page(props: DynamicPageProps) {
 
   return (
     <BuilderPageLayout locale={locale} modelName={PAGE_MODEL} pathname={pathname}>
-      <RenderBuilderContent content={content} model={PAGE_MODEL} type="page" />
+      <RenderBuilderContent content={content} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
 }
