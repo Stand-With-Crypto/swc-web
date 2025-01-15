@@ -57,8 +57,6 @@ interface PageEventBody {
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const authHeader = request.headers.get('Authorization')
 
-  logger.info('Headers: ', prettyStringify(request.headers))
-
   if (authHeader !== `Bearer ${BUILDER_IO_WEBHOOK_AUTH_TOKEN}`) {
     Sentry.captureMessage('Received unauthorized request to Builder.io webhook', {
       extra: {
@@ -75,8 +73,6 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   }
 
   const body = (await request.json()) as PageEventBody
-
-  logger.info('Body: ', prettyStringify(body))
 
   body.newValue?.query.forEach(query => {
     if (query.property === 'urlPath') {
