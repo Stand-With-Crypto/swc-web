@@ -26,15 +26,17 @@ export async function triggerServerActionForForm<
         errors: Record<string, string[]>
         errorsMetadata?: {
           field: string
-          data: {
-            triggerException: false
-            severityLevel?: never
-            message?: never
-          } | {
-            triggerException: true
-            severityLevel: SeverityLevel
-            message: string
-          }
+          data:
+            | {
+                triggerException: false
+                severityLevel?: never
+                message?: never
+              }
+            | {
+                triggerException: true
+                severityLevel: SeverityLevel
+                message: string
+              }
         }[]
       }
     | object
@@ -124,6 +126,7 @@ export async function triggerServerActionForForm<
             Sentry.captureException(message ?? response.errors[field]?.join('. ') ?? '', {
               level: severityLevel ?? 'error',
               extra: {
+                field,
                 analyticsProps,
                 response,
                 formName,
