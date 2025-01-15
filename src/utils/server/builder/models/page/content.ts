@@ -11,6 +11,8 @@ export function getDynamicPageContent(pathname: string) {
       },
       // Set prerender to false to return JSON instead of HTML
       prerender: false,
+      // Set cachebust to true to get the latest content
+      cachebust: true,
     })
     .toPromise()
 }

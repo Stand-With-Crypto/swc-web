@@ -6,6 +6,7 @@ import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMidd
 import { getLogger } from '@/utils/shared/logger'
 import { prettyStringify } from '@/utils/shared/prettyLog'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
+import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
 
 const logger = getLogger('builder-events-page-route')
 
@@ -84,6 +85,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       logger.info('Revalidating: ', urlPath)
 
       revalidatePath(urlPath)
+      ORDERED_SUPPORTED_LOCALES.forEach(locale => revalidatePath(`/${locale}${urlPath}`))
     }
   })
 
