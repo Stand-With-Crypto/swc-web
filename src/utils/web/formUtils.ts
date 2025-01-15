@@ -27,9 +27,13 @@ export async function triggerServerActionForForm<
         errorsMetadata?: {
           field: string
           data: {
-            triggerException: boolean
-            severityLevel?: SeverityLevel
-            message?: string
+            triggerException: false
+            severityLevel?: never
+            message?: never
+          } | {
+            triggerException: true
+            severityLevel: SeverityLevel
+            message: string
           }
         }[]
       }
