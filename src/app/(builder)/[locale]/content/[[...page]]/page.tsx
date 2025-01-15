@@ -10,6 +10,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
 export const dynamicParams = true
+export const revalidate = 3600 // 1 hour
 
 type DynamicPageProps = PageProps<{ page: string[] }>
 
