@@ -1,6 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
+import type { ScopeContext, SeverityLevel } from '@sentry/core'
 import * as Sentry from '@sentry/nextjs'
-import type { ScopeContext } from '@sentry/types'
 import { isError, noop } from 'lodash-es'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
@@ -21,7 +21,21 @@ export type GenericErrorFormValues = {
 export async function triggerServerActionForForm<
   F extends UseFormReturn<any, any, any>,
   P,
-  Fn extends (args: P) => Promise<{ errors: Record<string, string[]> } | object | undefined>,
+  Fn extends (args: P) => Promise<
+    | {
+        errors: Record<string, string[]>
+        errorsMetadata?: {
+          field: string
+          data: {
+            triggerException: boolean
+            severityLevel?: SeverityLevel
+            message?: string
+          }
+        }[]
+      }
+    | object
+    | undefined
+  >,
 >(
   {
     form,
@@ -96,12 +110,33 @@ export async function triggerServerActionForForm<
         // LATER-TASK the right way of formatting multiple errors that return
         message: val.join('. '),
       })
+
+      if ('errorsMetadata' in response) {
+        response.errorsMetadata?.forEach(errorMetadata => {
+          const { field, data } = errorMetadata
+          const { triggerException, severityLevel, message } = data
+
+          if (triggerException) {
+            Sentry.captureException(message ?? response.errors[field]?.join('. ') ?? '', {
+              level: severityLevel ?? 'error',
+              extra: {
+                analyticsProps,
+                response,
+                formName,
+                payload,
+              },
+            })
+          }
+        })
+      }
     })
+
     Sentry.captureMessage('Field errors returned from action', {
       fingerprint: [`Field errors returned from action ${formName}`],
       tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
       extra: { analyticsProps, response, formName, payload },
     })
+
     return { status: 'error' as const }
   }
   trackFormSubmitSucceeded(formName, analyticsProps)

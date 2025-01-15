@@ -53,6 +53,7 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 import { userFullName } from '@/utils/shared/userFullName'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
+import { getValidationErrorsMetadata } from '@/validation/utils'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -85,9 +86,15 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = await getUserSessionId()
   const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(input)
+
   if (!validatedFields.success) {
+    const errorsMetadata = getValidationErrorsMetadata(
+      zodUserActionFormEmailCongresspersonAction,
+      validatedFields,
+    )
     return {
       errors: validatedFields.error.flatten().fieldErrors,
+      errorsMetadata,
     }
   }
   logger.info('validated fields')

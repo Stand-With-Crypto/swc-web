@@ -13,7 +13,14 @@ const base = object({
     .min(1, 'Please enter a message')
     .max(2000, 'Your message should not exceed 2000 characters'),
   subject: string().trim(),
-  dtsiSlugs: array(zodDTSISlug).min(1),
+  dtsiSlugs: array(zodDTSISlug)
+    .min(1)
+    .describe(
+      JSON.stringify({
+        triggerException: true,
+        message: 'Something went wrong with the DTSI Slug. Please check against database.',
+      }),
+    ),
   campaignName: nativeEnum(UserActionEmailCampaignName),
   politicianCategory: zodYourPoliticianCategory,
 }).merge(zodFirstAndLastNames)
