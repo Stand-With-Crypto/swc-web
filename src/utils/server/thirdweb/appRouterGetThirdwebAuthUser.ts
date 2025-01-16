@@ -50,6 +50,11 @@ async function getValidatedAuthTokenPayload(cookieToken: string) {
     return null
   }
 
+  const forceDisableTokenReset = currentCookies.get('SWC_DISABLE_TOKEN_REFRESH')
+  if (forceDisableTokenReset?.value === 'true') {
+    return null
+  }
+
   const newJwtToken = await refreshJWT({
     account: thirdwebAdminAccount,
     jwt: cookieToken,
