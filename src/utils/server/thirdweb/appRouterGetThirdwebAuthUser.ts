@@ -11,6 +11,7 @@ import {
   thirdwebAuth,
 } from '@/utils/server/thirdweb/thirdwebAuthClient'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
+import { logger } from '@/utils/shared/logger'
 
 export async function appRouterGetThirdwebAuthUser(): Promise<{
   userId: string
@@ -39,51 +40,74 @@ export async function appRouterGetThirdwebAuthUser(): Promise<{
 
 async function getValidatedAuthTokenPayload(cookieToken: string) {
   const currentCookies = await cookies()
-  const jwtToken = await thirdwebAuth.verifyJWT({ jwt: cookieToken })
+  try {
+    const jwtToken = await thirdwebAuth.verifyJWT({ jwt: cookieToken })
 
-  if (jwtToken.valid) {
-    return jwtToken.parsedJWT
-  }
+    if (jwtToken.valid) {
+      return jwtToken.parsedJWT
+    }
 
-  if (!/^this token expired at/i.test(jwtToken.error)) {
-    await handleJwtValidationError(jwtToken, { domain: 'getValidatedAuthTokenPayload/jwtToken' })
-    return null
-  }
+    if (!/^this token expired at/i.test(jwtToken.error)) {
+      await handleJwtValidationError({
+        verificationResponse: jwtToken,
+        domain: 'getValidatedAuthTokenPayload/jwtToken',
+      })
+      return null
+    }
 
-  const forceDisableTokenReset = currentCookies.get('SWC_DISABLE_TOKEN_REFRESH')
-  if (forceDisableTokenReset?.value === 'true') {
-    return null
-  }
+    const forceDisableTokenReset = currentCookies.get('SWC_DISABLE_TOKEN_REFRESH')
+    if (forceDisableTokenReset?.value === 'true') {
+      logger.info('JWT Refresh manually skipped')
+      return null
+    }
 
-  const newJwtToken = await refreshJWT({
-    account: thirdwebAdminAccount,
-    jwt: cookieToken,
-    expirationTime: THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS,
-  })
-  currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, newJwtToken)
+    const newJwtToken = await refreshJWT({
+      account: thirdwebAdminAccount,
+      jwt: cookieToken,
+      expirationTime: THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS,
+    })
+    currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, newJwtToken)
 
-  const refreshedJwtToken = await thirdwebAuth.verifyJWT({ jwt: newJwtToken })
-  if (!refreshedJwtToken.valid) {
-    await handleJwtValidationError(refreshedJwtToken, {
-      domain: 'getValidatedAuthTokenPayload/refreshedJwtToken',
+    const refreshedJwtToken = await thirdwebAuth.verifyJWT({ jwt: newJwtToken })
+    if (!refreshedJwtToken.valid) {
+      await handleJwtValidationError({
+        verificationResponse: refreshedJwtToken,
+        domain: 'getValidatedAuthTokenPayload/refreshedJwtToken',
+      })
+      return null
+    }
+
+    return refreshedJwtToken.parsedJWT
+  } catch (error) {
+    await handleJwtValidationError({
+      error,
+      domain: 'getValidatedAuthTokenPayload/catch',
     })
     return null
   }
-
-  return refreshedJwtToken.parsedJWT
 }
 
-async function handleJwtValidationError(
-  verificationResponse: {
+async function handleJwtValidationError({
+  error,
+  domain,
+  verificationResponse,
+}: {
+  error?: unknown
+  domain: string
+  verificationResponse?: {
     valid: false
     error: string
-  },
-  { domain }: { domain: string },
-) {
+  }
+}) {
   const currentCookies = await cookies()
   currentCookies.delete(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
   Sentry.captureException('Invalid JWT token', {
-    extra: verificationResponse,
+    extra: {
+      verificationResponse,
+      // not capturing this because the message might include interpolated data and it would create a spam of errors
+      // that would need to be manually grouped
+      error,
+    },
     tags: {
       domain,
     },

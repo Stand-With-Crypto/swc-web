@@ -16,7 +16,7 @@ export async function POST() {
   const newJwtToken = await refreshJWT({
     account: thirdwebAdminAccount,
     jwt: currentToken.value,
-    expirationTime: 1,
+    expirationTime: 10,
   })
   currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, newJwtToken)
   return NextResponse.json({

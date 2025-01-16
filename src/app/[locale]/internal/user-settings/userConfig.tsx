@@ -97,7 +97,7 @@ export function UserConfig() {
           })
 
           if (response.ok) {
-            alert('Token expired')
+            alert('Token will expire in 10s')
           } else {
             alert('Error expiring token')
           }
