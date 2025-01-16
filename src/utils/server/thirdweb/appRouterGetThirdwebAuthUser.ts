@@ -10,8 +10,8 @@ import {
   thirdwebAdminAccount,
   thirdwebAuth,
 } from '@/utils/server/thirdweb/thirdwebAuthClient'
-import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { logger } from '@/utils/shared/logger'
+import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 export async function appRouterGetThirdwebAuthUser(): Promise<{
   userId: string
