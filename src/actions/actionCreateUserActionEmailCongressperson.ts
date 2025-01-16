@@ -14,6 +14,7 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
+import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
@@ -51,7 +52,7 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
-import { z } from '@/utils/shared/zod'
+import { withSafeParseWithMetadata } from '@/utils/shared/zod'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
@@ -84,7 +85,10 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = await getUserSessionId()
-  const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParseWithMetadata(input)
+  const validatedFields = withSafeParseWithMetadata(
+    zodUserActionFormEmailCongresspersonAction,
+    input,
+  )
 
   if (!validatedFields.success) {
     return {

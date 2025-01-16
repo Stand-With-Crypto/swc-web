@@ -1,6 +1,7 @@
 import { array, nativeEnum, object, string } from 'zod'
 
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { withEnhancedDescription } from '@/utils/shared/zod'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
@@ -13,14 +14,10 @@ const base = object({
     .min(1, 'Please enter a message')
     .max(2000, 'Your message should not exceed 2000 characters'),
   subject: string().trim(),
-  dtsiSlugs: array(zodDTSISlug)
-    .min(1)
-    .describe(
-      JSON.stringify({
-        triggerException: true,
-        message: 'Something went wrong with the DTSI Slug. Please check against database.',
-      }),
-    ),
+  dtsiSlugs: withEnhancedDescription(array(zodDTSISlug).min(1), {
+    triggerException: true,
+    message: 'Something went wrong with the DTSI Slug. Please check against database.',
+  }),
   campaignName: nativeEnum(UserActionEmailCampaignName),
   politicianCategory: zodYourPoliticianCategory,
 }).merge(zodFirstAndLastNames)

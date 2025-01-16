@@ -1,11 +1,12 @@
 import { UseFormReturn } from 'react-hook-form'
-import type { ScopeContext, SeverityLevel } from '@sentry/core'
+import type { ScopeContext } from '@sentry/core'
 import * as Sentry from '@sentry/nextjs'
 import { isError, noop } from 'lodash-es'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import { ZodDescribeMetadata } from '@/utils/shared/zod'
 import {
   trackFormSubmitErrored,
   trackFormSubmitSucceeded,
@@ -24,20 +25,7 @@ export async function triggerServerActionForForm<
   Fn extends (args: P) => Promise<
     | {
         errors: Record<string, string[]>
-        errorsMetadata?: {
-          field: string
-          data:
-            | {
-                triggerException: false
-                severityLevel?: never
-                message?: never
-              }
-            | {
-                triggerException: true
-                severityLevel: SeverityLevel
-                message: string
-              }
-        }[]
+        errorsMetadata?: Record<keyof P, ZodDescribeMetadata>
       }
     | object
     | undefined
@@ -117,22 +105,28 @@ export async function triggerServerActionForForm<
         message: val.join('. '),
       })
 
-      if ('errorsMetadata' in response) {
-        response.errorsMetadata?.forEach(errorMetadata => {
-          const { field, data } = errorMetadata
-          const { triggerException, severityLevel, message } = data
+      if ('errorsMetadata' in response && response.errorsMetadata) {
+        Object.keys(response.errorsMetadata).forEach(errorMetadataField => {
+          const metadata = response.errorsMetadata?.[errorMetadataField as keyof P]
 
-          if (triggerException) {
-            Sentry.captureException(message ?? response.errors[field]?.join('. ') ?? '', {
-              level: severityLevel ?? 'error',
-              extra: {
-                field,
-                analyticsProps,
-                response,
-                formName,
-                payload,
-              },
-            })
+          if (metadata) {
+            const { triggerException, severityLevel, message } = metadata
+
+            if (triggerException) {
+              Sentry.captureException(
+                message ?? response.errors[errorMetadataField]?.join('. ') ?? '',
+                {
+                  level: severityLevel ?? 'error',
+                  extra: {
+                    errorMetadataField,
+                    analyticsProps,
+                    response,
+                    formName,
+                    payload,
+                  },
+                },
+              )
+            }
           }
         })
       }
