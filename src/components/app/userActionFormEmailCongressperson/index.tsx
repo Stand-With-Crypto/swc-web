@@ -71,7 +71,7 @@ const getDefaultValues = ({
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getEmailBodyText({
+      contactMessage: getEmailBodyText({
         firstName: user.firstName,
         lastName: user.lastName,
         address: user?.address?.formattedDescription,
@@ -91,7 +91,7 @@ const getDefaultValues = ({
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getEmailBodyText(),
+    contactMessage: getEmailBodyText(),
     subject: 'Crypto Matters To Me',
     address: undefined,
     dtsiSlugs,
@@ -175,7 +175,7 @@ export function UserActionFormEmailCongressperson({
     if (hasModifiedMessage.current) return
 
     form.setValue(
-      'message',
+      'contactMessage',
       getEmailBodyText({
         firstName,
         lastName,
@@ -316,7 +316,7 @@ export function UserActionFormEmailCongressperson({
               />
               <FormField
                 control={form.control}
-                name="message"
+                name="contactMessage"
                 render={({ field }) => (
                   <FormItem>
                     <div className="relative">
@@ -329,8 +329,11 @@ export function UserActionFormEmailCongressperson({
                       )}
                       <FormControl>
                         <Textarea
+                          autoComplete="off"
+                          autoCorrect="off"
                           placeholder=""
                           rows={16}
+                          spellCheck={false}
                           {...field}
                           onChange={e => {
                             hasModifiedMessage.current = true

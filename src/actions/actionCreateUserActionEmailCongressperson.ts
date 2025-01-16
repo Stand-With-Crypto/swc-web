@@ -227,7 +227,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
         isEmailOptin: true,
       },
       emailSubject: validatedFields.data.subject,
-      emailMessage: validatedFields.data.message,
+      emailMessage: validatedFields.data.contactMessage,
     },
   })
 
