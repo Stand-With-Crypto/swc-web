@@ -334,6 +334,12 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/new-congress-2/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=new-member-activation-2&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/email-congress-retry/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=new-member-activation-retry&sessionId=:sessionId*',
