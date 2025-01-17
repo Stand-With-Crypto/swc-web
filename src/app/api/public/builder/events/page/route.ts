@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { getLogger } from '@/utils/shared/logger'
-import { prettyStringify } from '@/utils/shared/prettyLog'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
 
