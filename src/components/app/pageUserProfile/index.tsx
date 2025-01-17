@@ -17,6 +17,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSession } from '@/hooks/useSession'
 import { PageProps } from '@/types'
@@ -187,6 +188,11 @@ function ProfileAndNFTButtons({ user }: { user: PageUserProfileUser }) {
 
 function EditProfileButton({ user }: { user: PageUserProfileUser }) {
   const session = useSession()
+  const hasHydrated = useHasHydrated()
+
+  if (!hasHydrated) {
+    return null
+  }
 
   return (
     <UpdateUserProfileFormDialog user={user}>
