@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 
-import { RenderBuilderContent } from '@/components/app/builder'
-import { BuilderPageLayout } from '@/components/app/builderPageLayout'
+import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
 import { PageProps } from '@/types'
 import { builderSDKClient } from '@/utils/server/builder'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
