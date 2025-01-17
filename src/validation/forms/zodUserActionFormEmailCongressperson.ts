@@ -9,7 +9,7 @@ import { zodYourPoliticianCategory } from '@/validation/fields/zodYourPolitician
 
 const base = object({
   emailAddress: string().trim().email('Please enter a valid email address').toLowerCase(),
-  message: string()
+  contactMessage: string()
     .min(1, 'Please enter a message')
     .max(2000, 'Your message should not exceed 2000 characters'),
   subject: string().trim(),
