@@ -33,6 +33,7 @@ export function UserConfig() {
     'SWC_DECREASE_COMMUNICATION_TIMERS',
   )
   const [bypassSingleActions, setBypassSingleActions] = useCookieState('SWC_BYPASS_SINGLE_ACTIONS')
+  const [disableTokenRefresh, setDisableTokenRefresh] = useCookieState('SWC_DISABLE_TOKEN_REFRESH')
 
   const existingCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
   const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
@@ -79,6 +80,32 @@ export function UserConfig() {
         />
         <p className="leading-4">Bypass block for actions that can only be done once</p>
       </label>
+      <label className="flex cursor-pointer items-center gap-2">
+        <Checkbox
+          checked={disableTokenRefresh === 'true'}
+          onCheckedChange={val => {
+            setDisableTokenRefresh(String(val))
+          }}
+        />
+        <p className="leading-4">Disable Thirdweb JWT Refresh</p>
+      </label>
+
+      <Button
+        onClick={async () => {
+          const response = await fetch('/api/internal/expire-auth-token', {
+            method: 'POST',
+          })
+
+          if (response.ok) {
+            alert('Token will expire in 10s')
+          } else {
+            alert('Error expiring token')
+          }
+        }}
+        size="sm"
+      >
+        Expire Thirdweb Auth Token
+      </Button>
 
       <Form {...form}>
         <form
