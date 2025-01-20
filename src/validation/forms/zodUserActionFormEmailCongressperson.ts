@@ -2,6 +2,7 @@ import { array, nativeEnum, object, string } from 'zod'
 
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { withEnhancedDescription } from '@/utils/shared/zod'
+import { GENERIC_ERROR_DESCRIPTION } from '@/utils/web/errorUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
@@ -16,7 +17,7 @@ const base = object({
   subject: string().trim(),
   dtsiSlugs: withEnhancedDescription(array(zodDTSISlug).min(1), {
     triggerException: true,
-    message: 'Something went wrong with the DTSI Slug. Please check against database.',
+    message: GENERIC_ERROR_DESCRIPTION,
   }),
   campaignName: nativeEnum(UserActionEmailCampaignName),
   politicianCategory: zodYourPoliticianCategory,

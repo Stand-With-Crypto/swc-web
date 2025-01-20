@@ -1,11 +1,11 @@
-import { SeverityLevel } from '@sentry/nextjs'
+import * as Sentry from '@sentry/nextjs'
 import { isString } from 'lodash-es'
 import { z } from 'zod'
 
 interface ZodDescribeMetadataWithException {
   triggerException: true
   message?: string
-  severityLevel?: SeverityLevel
+  severityLevel?: Sentry.SeverityLevel
   [key: string]: unknown
 }
 
@@ -32,6 +32,16 @@ function safeParseDescription({
   try {
     return JSON.stringify(Object.assign({}, description, additionalMetadata))
   } catch (error) {
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'safeParseDescription',
+        message: 'error parsing description',
+      },
+      extra: {
+        description,
+        additionalMetadata,
+      },
+    })
     return 'FAILED_TO_PARSE_DESCRIPTION'
   }
 }
