@@ -9,8 +9,7 @@ interface TextProps {
 
 function transformLi(tagName: string, attribs: Record<string, string>) {
   if (attribs.style && attribs.style.includes('text-indent')) {
-    attribs.class = attribs.class ? `${attribs.class} ml-6` : 'ml-6'
-    attribs.style = attribs.style.replace(/text-indent:[^;]+;/, '')
+    attribs.style = attribs.style.replace('text-indent', 'margin-left')
   }
   return { tagName, attribs }
 }
