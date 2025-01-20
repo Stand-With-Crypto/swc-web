@@ -1,4 +1,5 @@
 import { Builder } from '@builder.io/react'
+import sanitizeHtml from 'sanitize-html'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
@@ -11,7 +12,7 @@ function Text(props: TextProps) {
     <div
       className="prose max-w-full"
       dangerouslySetInnerHTML={{
-        __html: props.text,
+        __html: sanitizeHtml(props.text),
       }}
     />
   )
