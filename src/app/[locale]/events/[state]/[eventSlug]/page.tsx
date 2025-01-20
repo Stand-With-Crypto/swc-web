@@ -5,7 +5,7 @@ import sanitizeHtml from 'sanitize-html'
 import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
-import { getEvent } from '@/utils/server/builderIO/swcEvent'
+import { getEvent } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
