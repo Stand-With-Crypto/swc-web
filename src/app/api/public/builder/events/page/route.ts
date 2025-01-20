@@ -73,14 +73,25 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   const body = (await request.json()) as PageEventBody
 
-  body.newValue?.query.forEach(query => {
-    if (query.property === 'urlPath') {
-      const urlPath = query.value
+  const query = body.newValue?.query ?? body.previousValue?.query ?? []
 
-      logger.info('Revalidating: ', urlPath)
+  if (!query) {
+    Sentry.captureMessage('No query found in Builder.io webhook event', {
+      extra: { ...body },
+      tags: {
+        domain: 'builder.io',
+      },
+    })
+    return new NextResponse('No query found', {
+      status: 400,
+    })
+  }
 
-      revalidatePath(urlPath)
-      ORDERED_SUPPORTED_LOCALES.forEach(locale => revalidatePath(`/${locale}${urlPath}`))
+  query.forEach(({ property, value }) => {
+    if (property === 'urlPath') {
+      logger.info(`Revalidating path: ${value}`)
+      revalidatePath(value)
+      ORDERED_SUPPORTED_LOCALES.forEach(locale => revalidatePath(`/${locale}${value}`))
     }
   })
 

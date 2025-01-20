@@ -9,6 +9,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
 export const dynamicParams = true
+export const revalidate = 3600 // 1 hour
 
 const PAGE_PREFIX = '/content/'
 const PAGE_MODEL = BuilderPageModelIdentifiers.CONTENT
@@ -45,12 +46,12 @@ export async function generateMetadata(props: DynamicPageProps): Promise<Metadat
 export async function generateStaticParams() {
   const paths = await builderSDKClient
     .getAll(PAGE_MODEL, { options: { noTargeting: true } })
-    .then(res => res.map(({ data }) => data?.url))
+    .then(res => res?.map(({ data }) => data?.url) ?? [])
 
-  return paths.map((path: string) => {
+  return paths.map((path?: string) => {
     return {
       params: {
-        page: path.replace(PAGE_PREFIX, '').split('/'),
+        page: path?.replace(PAGE_PREFIX, '').split('/'),
       },
     }
   })
