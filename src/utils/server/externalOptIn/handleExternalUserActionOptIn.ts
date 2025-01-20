@@ -44,7 +44,9 @@ import {
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
@@ -156,12 +158,11 @@ export async function handleExternalUserActionOptIn(
   const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const flushAnalytics = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+
   if (!existingAction?.user) {
-    waitUntil(
-      getServerPeopleAnalytics({ userId: user.id, localUser })
-        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-        .flush(),
-    )
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
 
   const capitolCanaryPayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
@@ -201,7 +202,7 @@ export async function handleExternalUserActionOptIn(
       userState,
       ...input.additionalAnalyticsProperties,
     })
-    waitUntil(analytics.flush())
+    waitUntil(flushAnalytics())
     return {
       result: ExternalUserActionOptInResult.EXISTING_ACTION,
       resultOptions: Object.values(ExternalUserActionOptInResult),
@@ -229,12 +230,23 @@ export async function handleExternalUserActionOptIn(
     },
   })
 
+  const addressAnalyticsProperties = input.address
+    ? convertAddressToAnalyticsProperties(input.address)
+    : {}
+
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: input.partner ? 'Verified SWC Partner' : 'Third Party',
     userState,
     ...input.additionalAnalyticsProperties,
+    ...addressAnalyticsProperties,
+  })
+  peopleAnalytics.set({
+    ...addressAnalyticsProperties,
+    // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
+    $email: input.emailAddress,
+    $name: userFullName(input),
   })
 
   // TODO (Benson): Include p2a source in Capitol Canary payload to know which 3P is sending this request.
@@ -247,7 +259,7 @@ export async function handleExternalUserActionOptIn(
     data: capitolCanaryPayload,
   })
 
-  waitUntil(analytics.flush())
+  waitUntil(flushAnalytics())
   return {
     result: ExternalUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(ExternalUserActionOptInResult),
