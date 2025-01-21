@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
+import { RenderComponentModelTypes } from '@/components/app/builder/constants'
 import { PageProps } from '@/types'
 import { builderSDKClient } from '@/utils/server/builder'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
@@ -25,7 +26,11 @@ export default async function Page(props: DynamicPageProps) {
 
   return (
     <BuilderPageLayout locale={locale} modelName={PAGE_MODEL} pathname={pathname}>
-      <RenderBuilderContent content={content} model={PAGE_MODEL} />
+      <RenderBuilderContent
+        content={content}
+        model={PAGE_MODEL}
+        modelType={RenderComponentModelTypes.PAGE}
+      />
     </BuilderPageLayout>
   )
 }

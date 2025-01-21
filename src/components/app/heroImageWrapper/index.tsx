@@ -44,7 +44,15 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
   )
 }
 
-const unauthenticatedContent = (
+interface UnauthenticatedContentProps {
+  title?: string
+  ctaText?: string
+}
+
+const UnauthenticatedContent = ({
+  title = 'Join Stand With Crypto and help us defend your right to own crypto in America.',
+  ctaText = 'Join',
+}: UnauthenticatedContentProps) => (
   <HeroImage
     fallback={
       <NextImage
@@ -59,15 +67,23 @@ const unauthenticatedContent = (
       />
     }
   >
-    <p>Join Stand With Crypto and help us defend your right to own crypto in America.</p>
+    <p>{title}</p>
     <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
-      Join
+      {ctaText}
       <ArrowUpRight />
     </Button>
   </HeroImage>
 )
 
-const authenticatedContent = (
+interface AuthenticatedContentProps {
+  title?: string
+  ctaText?: string
+}
+
+const AuthenticatedContent = ({
+  title = 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+  ctaText = 'Follow',
+}: AuthenticatedContentProps) => (
   <UserActionFormShareOnTwitterDialog>
     <HeroImage
       className="flex-col sm:flex-row"
@@ -84,22 +100,31 @@ const authenticatedContent = (
         />
       }
     >
-      <p>Stay up to date on crypto policy by following @StandWithCrypto on X.</p>
+      <p>{title}</p>
       <Button
         className={cn('max-sm:w-full', linkBoxLinkClassName)}
         data-link-box-subject
         variant="secondary"
       >
-        Follow <ArrowUpRight />
+        {ctaText}
+        <ArrowUpRight />
       </Button>
     </HeroImage>
   </UserActionFormShareOnTwitterDialog>
 )
 
-export function HeroImageWrapper() {
+export interface HeroImageWrapperProps {
+  unauthenticatedProps?: UnauthenticatedContentProps
+  authenticatedProps?: AuthenticatedContentProps
+}
+
+export function HeroImageWrapper({
+  unauthenticatedProps,
+  authenticatedProps,
+}: HeroImageWrapperProps) {
   return (
-    <LoginDialogWrapper authenticatedContent={authenticatedContent}>
-      {unauthenticatedContent}
+    <LoginDialogWrapper authenticatedContent={<AuthenticatedContent {...authenticatedProps} />}>
+      <UnauthenticatedContent {...unauthenticatedProps} />
     </LoginDialogWrapper>
   )
 }

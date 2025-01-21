@@ -24,6 +24,7 @@ export default async function Home(props: PageProps) {
   if (!ORDERED_SUPPORTED_LOCALES.includes(params.locale)) {
     notFound()
   }
+
   return (
     <PageHome
       advocatePerStateDataProps={advocatePerStateDataProps}

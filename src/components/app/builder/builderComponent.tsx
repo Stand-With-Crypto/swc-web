@@ -4,7 +4,11 @@ import type { ComponentProps } from 'react'
 import { Builder, BuilderComponent, useIsPreviewing } from '@builder.io/react'
 import { notFound } from 'next/navigation'
 
-type BuilderPageProps = ComponentProps<typeof BuilderComponent>
+import { RenderComponentModelTypes } from '@/components/app/builder/constants'
+
+type BuilderPageProps = ComponentProps<typeof BuilderComponent> & {
+  modelType: RenderComponentModelTypes
+}
 
 export function RenderBuilderContent(props: BuilderPageProps) {
   const isPreviewing = useIsPreviewing()
@@ -13,5 +17,9 @@ export function RenderBuilderContent(props: BuilderPageProps) {
     return <BuilderComponent {...props} />
   }
 
-  return notFound()
+  if (props.modelType === RenderComponentModelTypes.PAGE) {
+    return notFound()
+  }
+
+  return null
 }

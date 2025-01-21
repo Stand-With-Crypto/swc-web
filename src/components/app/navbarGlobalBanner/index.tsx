@@ -14,7 +14,13 @@ import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
 
 const languages = getNavigatorLanguages()
 
-export function NavBarGlobalBanner() {
+export interface NavBarGlobalBannerProps {
+  outsideUSBannerText?: string
+}
+
+export function NavBarGlobalBanner({
+  outsideUSBannerText = 'Actions on Stand With Crypto are only available to users based in the United States.',
+}: NavBarGlobalBannerProps) {
   const router = useRouter()
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
@@ -24,21 +30,21 @@ export function NavBarGlobalBanner() {
   const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
   const parsedExistingCountryCode = parseUserCountryCodeCookie(userCountryCode)
 
-  const currentCountry = DISCLAIMER_BANNER_COUNTRY_CODES_MAP.find(
+  const otherSupportedCountry = DISCLAIMER_BANNER_COUNTRY_CODES_MAP.find(
     ({ language, countryCode }) =>
       parsedExistingCountryCode?.countryCode === countryCode || languages?.includes(language),
   )
 
   const handleWrapperClick = () => {
-    if (!currentCountry?.url) return
-    router.push(currentCountry?.url)
+    if (!otherSupportedCountry?.url) return
+    router.push(otherSupportedCountry?.url)
   }
 
   if (!hasHydrated) {
     return <CurrentCampaign />
   }
 
-  if (currentCountry) {
+  if (otherSupportedCountry) {
     return (
       <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
         <WrapperContainer
@@ -48,10 +54,10 @@ export function NavBarGlobalBanner() {
           <div className="container flex justify-between">
             <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
               <p>
-                {currentCountry?.emoji ? `${currentCountry?.emoji} ` : ''}Looking for Stand With
-                Crypto {currentCountry.label}? Click{' '}
+                {otherSupportedCountry?.emoji ? `${otherSupportedCountry?.emoji} ` : ''}Looking for
+                Stand With Crypto {otherSupportedCountry.label}? Click{' '}
                 <strong>
-                  <Link href={currentCountry.url}>here</Link>
+                  <Link href={otherSupportedCountry.url}>here</Link>
                 </strong>
               </p>
             </div>
@@ -67,9 +73,7 @@ export function NavBarGlobalBanner() {
         <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
           <div className="container flex justify-between">
             <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-              <p>
-                Actions on Stand With Crypto are only available to users based in the United States.
-              </p>
+              <p>{outsideUSBannerText}</p>
             </div>
           </div>
         </WrapperContainer>

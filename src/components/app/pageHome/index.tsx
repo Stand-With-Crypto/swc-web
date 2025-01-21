@@ -2,9 +2,9 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
+import { HeroCTA } from '@/components/app/heroCTA'
+import { HeroBuilder } from '@/components/app/heroImageWrapper/heroBuilder'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/delayedRecentActivity'
-import { HeroCTA } from '@/components/app/pageHome/heroCTA'
-import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
@@ -17,12 +17,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
+import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/sections/constants'
+import { getSectionContent } from '@/utils/server/builder/models/sections/utils/getSectionContent'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { TopLevelMetrics } from './topLevelMetrics'
 
-export function PageHome({
+export async function PageHome({
   params,
   sumDonations,
   countUsers,
@@ -39,6 +41,8 @@ export function PageHome({
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
 
+  const heroContent = await getSectionContent(BuilderSectionModelIdentifiers.HERO, '/')
+
   return (
     <>
       <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
@@ -54,7 +58,7 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <HeroImageWrapper />
+          <HeroBuilder content={heroContent} />
         </div>
       </section>
       <div className="container">
