@@ -63,6 +63,7 @@ Builder.registerComponent(
   }),
   {
     name: 'Button',
+    noWrap: true, // Disables the default "Link URL" field
     canHaveChildren: true,
     override: true,
     inputs: [
@@ -96,7 +97,6 @@ Builder.registerComponent(
             name: 'href',
             type: 'string',
             helperText: 'The URL to navigate to',
-            // should always start with / or http(s)://
             regex: {
               pattern: '^(/|https://)',
               message: 'The URL must start with / or https://',

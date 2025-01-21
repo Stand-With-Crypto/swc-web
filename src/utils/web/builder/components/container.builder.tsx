@@ -17,6 +17,7 @@ Builder.registerComponent(
   )),
   {
     name: 'Container',
+    noWrap: true, // Disables the default "Link URL" field
     canHaveChildren: true,
   },
 )

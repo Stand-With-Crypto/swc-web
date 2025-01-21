@@ -47,6 +47,7 @@ Builder.registerComponent(
   ),
   {
     name: 'Rich Text',
+    noWrap: true, // Disables the default "Link URL" field
     inputs: [
       {
         name: 'text',
