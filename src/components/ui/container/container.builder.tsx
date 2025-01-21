@@ -2,13 +2,7 @@ import { Builder, withChildren } from '@builder.io/react'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-function Container(props: { children: React.ReactNode }) {
-  return (
-    <div {...props} className="container">
-      {props.children}
-    </div>
-  )
-}
+import { Container } from '.'
 
 Builder.registerComponent(
   withChildren(({ children, attributes }: BuilderComponentBaseProps) => (
