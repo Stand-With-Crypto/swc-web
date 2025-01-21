@@ -2,10 +2,11 @@ import { Builder, withChildren } from '@builder.io/react'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 import { cn } from '@/utils/web/cn'
+import { sanitizeBuilderAttributes } from '@/utils/web/builder/sanitizeBuilderAttributes'
 
-export function Container(props: { children: React.ReactNode }) {
+export function Container(props: { children: React.ReactNode; className?: string }) {
   return (
-    <div {...props} className={cn('container')}>
+    <div {...props} className={cn('container', props.className)}>
       {props.children}
     </div>
   )
@@ -13,7 +14,7 @@ export function Container(props: { children: React.ReactNode }) {
 
 Builder.registerComponent(
   withChildren(({ children, attributes }: BuilderComponentBaseProps) => (
-    <Container {...attributes}>{children}</Container>
+    <Container {...sanitizeBuilderAttributes(attributes)}>{children}</Container>
   )),
   {
     name: 'Container',

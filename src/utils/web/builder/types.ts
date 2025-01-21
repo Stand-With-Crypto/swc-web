@@ -1,6 +1,8 @@
+export type BuilderComponentAttributes = Record<string, any>
+
 export interface BuilderComponentBaseProps<State = unknown> {
   children?: React.ReactNode
-  attributes?: Record<string, any>
+  attributes?: BuilderComponentAttributes
   builderState?: {
     state: State
   }

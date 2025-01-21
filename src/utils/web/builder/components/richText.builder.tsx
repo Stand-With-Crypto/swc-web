@@ -3,6 +3,7 @@ import sanitizeHtml from 'sanitize-html'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 import { cn } from '@/utils/web/cn'
+import { sanitizeBuilderAttributes } from '@/utils/web/builder/sanitizeBuilderAttributes'
 
 interface RichTextProps {
   content: string
@@ -43,7 +44,7 @@ Builder.registerComponent(
     // Replace text-indent with margin-left because Builder.io applies text-indent to nested lists and
     // RichText uses tailwind typography prose class which doesn't apply text-ident to the ::marker pseudo-element
     // So we need to use margin-left instead
-    <RichText content={text} {...attributes} />
+    <RichText content={text} {...sanitizeBuilderAttributes(attributes)} />
   ),
   {
     name: 'Rich Text',
