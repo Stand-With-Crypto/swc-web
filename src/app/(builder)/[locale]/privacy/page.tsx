@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
-import { StaticPagesCTA } from '@/components/app/staticPagesCTA'
 import { PageProps } from '@/types'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
@@ -20,9 +19,6 @@ export default async function TermsOfServicePage(props: PageProps) {
   return (
     <BuilderPageLayout locale={locale} modelName={PAGE_MODEL} pathname={PATHNAME}>
       <RenderBuilderContent content={content} model={PAGE_MODEL} />
-      <div className="container mt-8 flex flex-col items-center">
-        <StaticPagesCTA />
-      </div>
     </BuilderPageLayout>
   )
 }
