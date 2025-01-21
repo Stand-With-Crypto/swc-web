@@ -1,3 +1,4 @@
-import '@/components/ui/richText/text.builder'
-import '@/components/ui/container/container.builder'
 import '@/components/ui/button/button.builder'
+import '@/utils/web/builder/components/container.builder'
+import '@/utils/web/builder/components/richText.builder'
+import '@/utils/web/builder/components/text.builder'
