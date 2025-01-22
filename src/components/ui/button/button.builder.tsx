@@ -19,25 +19,31 @@ interface BuilderButtonProps extends BuilderComponentBaseProps {
 Builder.registerComponent(
   withChildren((props: BuilderButtonProps) => {
     const buttonProps = {
+      ...props.attributes,
       size: props.size,
       variant: props.variant,
-      ...props.attributes,
     }
 
-    let Comp = <Button {...buttonProps}>{props.children}</Button>
+    const key = props.attributes?.key
+
+    let Comp = (
+      <Button {...buttonProps} key={key}>
+        {props.children}
+      </Button>
+    )
 
     if (props.link) {
       const { href, type } = props.link
 
       if (type === 'external') {
         Comp = (
-          <Button {...buttonProps} asChild>
+          <Button {...buttonProps} asChild key={key}>
             <ExternalLink href={href}>{props.children}</ExternalLink>
           </Button>
         )
       } else if (type === 'internal') {
         Comp = (
-          <Button {...buttonProps} asChild>
+          <Button {...buttonProps} asChild key={key}>
             <InternalLink href={href}>{props.children}</InternalLink>
           </Button>
         )
@@ -49,12 +55,14 @@ Builder.registerComponent(
         <LoginDialogWrapper
           authenticatedContent={Comp}
           loadingFallback={
-            <Button {...buttonProps} disabled>
+            <Button {...buttonProps} disabled key={key}>
               {props.children}
             </Button>
           }
         >
-          <Button {...buttonProps}>{props.children}</Button>
+          <Button {...buttonProps} key={key}>
+            {props.children}
+          </Button>
         </LoginDialogWrapper>
       )
     }

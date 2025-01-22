@@ -1,13 +1,13 @@
 import { Builder } from '@builder.io/react'
 
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
-import { sanitizeBuilderAttributes } from '@/utils/web/builder/sanitizeBuilderAttributes'
+import { BuilderComponentAttributes } from '@/utils/web/builder/types'
 
 interface TextProps {
   text: string
 }
 
-function Text(props: TextProps) {
+function Text(props: TextProps & BuilderComponentAttributes) {
   return <div {...props}>{props.text}</div>
 }
 
@@ -15,7 +15,7 @@ type BuilderTextProps = BuilderComponentBaseProps & TextProps
 
 Builder.registerComponent(
   ({ text, attributes }: BuilderTextProps) => (
-    <Text text={text} {...sanitizeBuilderAttributes(attributes)} />
+    <Text text={text} {...attributes} key={attributes?.key} />
   ),
   {
     name: 'Text',

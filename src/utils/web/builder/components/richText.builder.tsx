@@ -2,12 +2,11 @@ import { Builder } from '@builder.io/react'
 import sanitizeHtml from 'sanitize-html'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
-import { sanitizeBuilderAttributes } from '@/utils/web/builder/sanitizeBuilderAttributes'
+import { BuilderComponentAttributes } from '@/utils/web/builder/types'
 import { cn } from '@/utils/web/cn'
 
 interface RichTextProps {
   content: string
-  className?: string
 }
 
 function transformLi(tagName: string, attribs: Record<string, string>) {
@@ -17,7 +16,7 @@ function transformLi(tagName: string, attribs: Record<string, string>) {
   return { tagName, attribs }
 }
 
-export function RichText(props: RichTextProps) {
+export function RichText(props: RichTextProps & BuilderComponentAttributes) {
   return (
     <div
       className={cn('prose max-w-full', props.className)}
@@ -44,7 +43,7 @@ Builder.registerComponent(
     // Replace text-indent with margin-left because Builder.io applies text-indent to nested lists and
     // RichText uses tailwind typography prose class which doesn't apply text-ident to the ::marker pseudo-element
     // So we need to use margin-left instead
-    <RichText content={text} {...sanitizeBuilderAttributes(attributes)} />
+    <RichText {...attributes} content={text} key={attributes?.key} />
   ),
   {
     name: 'Rich Text',

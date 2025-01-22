@@ -1,10 +1,14 @@
 import { Builder, withChildren } from '@builder.io/react'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
-import { sanitizeBuilderAttributes } from '@/utils/web/builder/sanitizeBuilderAttributes'
+import { BuilderComponentAttributes } from '@/utils/web/builder/types'
 import { cn } from '@/utils/web/cn'
 
-export function Container(props: { children: React.ReactNode; className?: string }) {
+interface ContainerProps {
+  children?: React.ReactNode
+}
+
+export function Container(props: ContainerProps & BuilderComponentAttributes) {
   return (
     <div {...props} className={cn('container', props.className)}>
       {props.children}
@@ -14,7 +18,9 @@ export function Container(props: { children: React.ReactNode; className?: string
 
 Builder.registerComponent(
   withChildren(({ children, attributes }: BuilderComponentBaseProps) => (
-    <Container {...sanitizeBuilderAttributes(attributes)}>{children}</Container>
+    <Container {...attributes} key={attributes?.key}>
+      {children}
+    </Container>
   )),
   {
     name: 'Container',
