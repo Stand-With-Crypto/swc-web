@@ -284,17 +284,6 @@ const nextConfig: NextConfig = {
         destination: '/action/nft-mint',
         permanent: true,
       },
-      // vanity urls
-      {
-        source: '/join/:referralId',
-        destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
-        permanent: false,
-      },
-      {
-        source: '/politicians/person/:slug/questionnaire',
-        destination: '/politicians/person/:slug#questionnaire',
-        permanent: false,
-      },
       // Live event campaigns
       {
         source: '/la',
