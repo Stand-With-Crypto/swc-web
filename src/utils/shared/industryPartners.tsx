@@ -47,7 +47,7 @@ export const INDUSTRY_PARTNERS = [
   },
   {
     title: 'Blockchain.com',
-    imageSrc: '/partners/blockchaindotcom.png',
+    imageSrc: '/partners/blockchaindotcom.svg',
     url: 'https://www.blockchain.com/',
   },
   {
