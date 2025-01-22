@@ -174,7 +174,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
         isCampaignActive: false,
-        title: 'Contact your member of congress',
+        title: 'Contacted and welcomed the 119 congress',
         description: 'The 119th Congress needs to hear from you!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
