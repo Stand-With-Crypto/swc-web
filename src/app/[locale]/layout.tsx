@@ -58,7 +58,9 @@ export default async function Layout({
     notFound()
   }
 
-  const bannerContent = await getSectionContent(BuilderSectionModelIdentifiers.BANNER, '/')
+  // this is meant to be a global banner that is displayed on all pages, therefore no need to pass in pathname
+  // if we ever want to differentiate between pages, we will need to pass in the pathname to the getSectionContent function
+  const bannerContent = await getSectionContent(BuilderSectionModelIdentifiers.BANNER)
 
   return (
     <html lang={locale} translate="no">

@@ -1,7 +1,7 @@
 import { getYear } from 'date-fns'
 
 import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
-import { HeroCTA } from '@/components/app/heroCTA'
+import { HeroCTA } from '@/components/app/hero/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'

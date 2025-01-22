@@ -11,7 +11,12 @@ const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
-  'media-src': ["'self'", 'blob:', 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com'],
+  'media-src': [
+    "'self'",
+    'blob:',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
+    'https://cdn.builder.io',
+  ],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'

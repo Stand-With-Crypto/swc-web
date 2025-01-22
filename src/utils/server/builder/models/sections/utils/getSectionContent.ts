@@ -3,7 +3,7 @@ import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/se
 
 export function getSectionContent(
   sectionModelName: BuilderSectionModelIdentifiers,
-  pathname: string,
+  pathname?: string,
 ) {
   return builderSDKClient
     .get(sectionModelName, {

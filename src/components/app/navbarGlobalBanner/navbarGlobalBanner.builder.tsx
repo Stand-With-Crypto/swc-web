@@ -17,14 +17,25 @@ Builder.registerComponent(
   ),
   {
     name: 'NavBarGlobalBanner',
+    friendlyName: 'Navbar Global Banner',
     canHaveChildren: false,
-    override: true,
+    noWrap: true,
     inputs: [
       {
         name: 'outsideUSBannerText',
+        friendlyName: 'Outside of the US banner text',
         type: 'text',
+        helperText:
+          'This text will be displayed in the navbar when the user is outside of the United States.',
         defaultValue:
           'Actions on Stand With Crypto are only available to users based in the United States.',
+      },
+      {
+        name: 'hideBanner',
+        friendlyName: 'Hide banner',
+        type: 'boolean',
+        defaultValue: false,
+        helperText: 'If true, the banner will not be displayed.',
       },
     ],
   },

@@ -1,5 +1,5 @@
 import '@/components/ui/button/button.builder'
 import '@/components/ui/pageSubTitle/pageSubTitle.builder'
 import '@/components/ui/pageTitleText/pageTitleText.builder'
-import '@/components/app/heroImageWrapper/heroImageWrapper.builder'
 import '@/components/app/navbarGlobalBanner/navbarGlobalBanner.builder'
+import '@/components/app/hero/hero.builder'

@@ -16,10 +16,12 @@ const languages = getNavigatorLanguages()
 
 export interface NavBarGlobalBannerProps {
   outsideUSBannerText?: string
+  hideBanner?: boolean
 }
 
 export function NavBarGlobalBanner({
   outsideUSBannerText = 'Actions on Stand With Crypto are only available to users based in the United States.',
+  hideBanner = false,
 }: NavBarGlobalBannerProps) {
   const router = useRouter()
   const isMobile = useIsMobile()
@@ -30,21 +32,21 @@ export function NavBarGlobalBanner({
   const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
   const parsedExistingCountryCode = parseUserCountryCodeCookie(userCountryCode)
 
-  const otherSupportedCountry = DISCLAIMER_BANNER_COUNTRY_CODES_MAP.find(
+  const currentCountry = DISCLAIMER_BANNER_COUNTRY_CODES_MAP.find(
     ({ language, countryCode }) =>
       parsedExistingCountryCode?.countryCode === countryCode || languages?.includes(language),
   )
 
   const handleWrapperClick = () => {
-    if (!otherSupportedCountry?.url) return
-    router.push(otherSupportedCountry?.url)
+    if (!currentCountry?.url) return
+    router.push(currentCountry?.url)
   }
 
-  if (!hasHydrated) {
+  if (!hasHydrated || hideBanner) {
     return <CurrentCampaign />
   }
 
-  if (otherSupportedCountry) {
+  if (currentCountry) {
     return (
       <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
         <WrapperContainer
@@ -54,10 +56,10 @@ export function NavBarGlobalBanner({
           <div className="container flex justify-between">
             <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
               <p>
-                {otherSupportedCountry?.emoji ? `${otherSupportedCountry?.emoji} ` : ''}Looking for
-                Stand With Crypto {otherSupportedCountry.label}? Click{' '}
+                {currentCountry?.emoji ? `${currentCountry?.emoji} ` : ''}Looking for Stand With
+                Crypto {currentCountry.label}? Click{' '}
                 <strong>
-                  <Link href={otherSupportedCountry.url}>here</Link>
+                  <Link href={currentCountry.url}>here</Link>
                 </strong>
               </p>
             </div>

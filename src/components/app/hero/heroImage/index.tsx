@@ -16,16 +16,22 @@ interface HeroImageProps {
    * Fallback content to display while the video is loading or if the browser does not support the video tag.
    */
   fallback?: ReactNode
+  videoPath?: string
 }
 
-const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
+const HeroImage = ({
+  children,
+  className,
+  fallback,
+  videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
+}: HeroImageProps) => {
   return (
     <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
       <Video
         className={cn('absolute left-0 top-0 h-full w-full object-cover')}
         fallback={fallback}
         poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0dpm3AgAD5gHXYQBQLgAAAABJRU5ErkJggg=="
-        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
+        src={videoPath}
       />
 
       <div
@@ -44,15 +50,19 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
   )
 }
 
-interface UnauthenticatedContentProps {
+export interface UnauthenticatedHeroContentProps {
   title?: string
   ctaText?: string
+  imagePath?: string
+  videoPath?: string
 }
 
-const UnauthenticatedContent = ({
+const UnauthenticatedHeroContent = ({
   title = 'Join Stand With Crypto and help us defend your right to own crypto in America.',
   ctaText = 'Join',
-}: UnauthenticatedContentProps) => (
+  imagePath = '/homepageHero.webp',
+  videoPath,
+}: UnauthenticatedHeroContentProps) => (
   <HeroImage
     fallback={
       <NextImage
@@ -63,9 +73,10 @@ const UnauthenticatedContent = ({
         placeholder="blur"
         priority
         sizes={'(max-width: 400px) 375px, 500px'}
-        src="/homepageHero.webp"
+        src={imagePath}
       />
     }
+    videoPath={videoPath}
   >
     <p>{title}</p>
     <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
@@ -75,15 +86,19 @@ const UnauthenticatedContent = ({
   </HeroImage>
 )
 
-interface AuthenticatedContentProps {
+export interface AuthenticatedHeroContentProps {
   title?: string
   ctaText?: string
+  imagePath?: string
+  videoPath?: string
 }
 
-const AuthenticatedContent = ({
+const AuthenticatedHeroContent = ({
   title = 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
   ctaText = 'Follow',
-}: AuthenticatedContentProps) => (
+  imagePath = '/homepageHero.webp',
+  videoPath,
+}: AuthenticatedHeroContentProps) => (
   <UserActionFormShareOnTwitterDialog>
     <HeroImage
       className="flex-col sm:flex-row"
@@ -96,9 +111,10 @@ const AuthenticatedContent = ({
           placeholder="blur"
           priority
           sizes={'(max-width: 400px) 375px, 500px'}
-          src="/homepageHero.webp"
+          src={imagePath}
         />
       }
+      videoPath={videoPath}
     >
       <p>{title}</p>
       <Button
@@ -114,17 +130,17 @@ const AuthenticatedContent = ({
 )
 
 export interface HeroImageWrapperProps {
-  unauthenticatedProps?: UnauthenticatedContentProps
-  authenticatedProps?: AuthenticatedContentProps
+  unauthenticatedProps?: UnauthenticatedHeroContentProps
+  authenticatedProps?: AuthenticatedHeroContentProps
 }
 
-export function HeroImageWrapper({
+export function HeroImageContainer({
   unauthenticatedProps,
   authenticatedProps,
 }: HeroImageWrapperProps) {
   return (
-    <LoginDialogWrapper authenticatedContent={<AuthenticatedContent {...authenticatedProps} />}>
-      <UnauthenticatedContent {...unauthenticatedProps} />
+    <LoginDialogWrapper authenticatedContent={<AuthenticatedHeroContent {...authenticatedProps} />}>
+      <UnauthenticatedHeroContent {...unauthenticatedProps} />
     </LoginDialogWrapper>
   )
 }

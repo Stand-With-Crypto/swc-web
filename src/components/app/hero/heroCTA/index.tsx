@@ -10,7 +10,21 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
-export function HeroCTA() {
+export interface UnauthenticatedHeroCTAProps {
+  ctaText: string
+}
+
+export interface AuthenticatedHeroCTAProps {
+  finishProfileText: string
+  viewProfileText: string
+}
+
+export interface HeroCTAProps {
+  unauthenticatedProps: UnauthenticatedHeroCTAProps
+  authenticatedProps: AuthenticatedHeroCTAProps
+}
+
+export function HeroCTA({ unauthenticatedProps, authenticatedProps }: HeroCTAProps) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
 
@@ -18,7 +32,7 @@ export function HeroCTA() {
 
   const unauthenticatedContent = (
     <Button size="lg" variant="primary-cta">
-      Join the fight
+      {unauthenticatedProps?.ctaText ?? 'Join now'}
     </Button>
   )
 
@@ -51,12 +65,14 @@ export function HeroCTA() {
     return (
       <Button asChild size="lg" variant="primary-cta">
         {hasCompleteUserProfile(user) ? (
-          <InternalLink href={urls.profile()}>View Profile</InternalLink>
+          <InternalLink href={urls.profile()}>
+            {authenticatedProps?.viewProfileText ?? 'View profile'}
+          </InternalLink>
         ) : (
           <InternalLink
             href={`${urls.profile()}?${OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY}=true`}
           >
-            Finish your profile
+            {authenticatedProps?.finishProfileText ?? 'Finish profile'}
           </InternalLink>
         )}
       </Button>
