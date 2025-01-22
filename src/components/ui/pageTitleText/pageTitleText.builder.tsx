@@ -23,16 +23,5 @@ Builder.registerComponent(
         defaultValue: 'Enter some text...',
       },
     ],
-    defaultChildren: [
-      {
-        '@type': '@builder.io/sdk:Element',
-        component: {
-          name: 'Text',
-          options: {
-            text: 'I am a page title',
-          },
-        },
-      },
-    ],
   },
 )
