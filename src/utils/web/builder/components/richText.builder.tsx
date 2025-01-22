@@ -2,8 +2,8 @@ import { Builder } from '@builder.io/react'
 import sanitizeHtml from 'sanitize-html'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
-import { cn } from '@/utils/web/cn'
 import { sanitizeBuilderAttributes } from '@/utils/web/builder/sanitizeBuilderAttributes'
+import { cn } from '@/utils/web/cn'
 
 interface RichTextProps {
   content: string

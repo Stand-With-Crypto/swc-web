@@ -1,8 +1,8 @@
 import { Builder, withChildren } from '@builder.io/react'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
-import { cn } from '@/utils/web/cn'
 import { sanitizeBuilderAttributes } from '@/utils/web/builder/sanitizeBuilderAttributes'
+import { cn } from '@/utils/web/cn'
 
 export function Container(props: { children: React.ReactNode; className?: string }) {
   return (
