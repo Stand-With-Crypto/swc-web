@@ -335,6 +335,13 @@ const nextConfig: NextConfig = {
         destination: '/action/pledge?utm_source=swc&utm_medium=event&utm_campaign=sst',
         permanent: false,
       },
+      // Email shortlinks
+      {
+        source: '/e/sj-res-3',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=email&utm_campaign=broker-reporting-rule-1',
+        permanent: true,
+      },
       // SMS shortlinks
       {
         source: '/new-congress-2/:sessionId*',
