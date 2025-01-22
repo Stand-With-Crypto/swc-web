@@ -19,7 +19,6 @@ Builder.registerComponent(
   ),
   {
     name: 'PageSubTitle',
-    canHaveChildren: true,
     friendlyName: 'Page Subtitle',
     noWrap: true,
     inputs: [
