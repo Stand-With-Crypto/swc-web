@@ -56,9 +56,15 @@ export function formatPhoneNumber(phoneNumber: string) {
 export function validatePhoneNumber(phoneNumber: string) {
   if (!phoneNumber) return false
 
-  const parsedPhoneNumber = parsePhoneNumber(phoneNumber)
+  try {
+    const parsedPhoneNumber = parsePhoneNumber(phoneNumber)
+    if (!parsedPhoneNumber) return false
 
-  if (!parsedPhoneNumber) return false
-
-  return parsedPhoneNumber.isPossible() && parsedPhoneNumber.isValid()
+    return parsedPhoneNumber.isPossible() && parsedPhoneNumber.isValid()
+  } catch (e) {
+    if (e instanceof ParseError) {
+      return false
+    }
+    throw e
+  }
 }
