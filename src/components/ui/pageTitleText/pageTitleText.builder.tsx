@@ -1,15 +1,9 @@
 import { Builder } from '@builder.io/react'
-import { VariantProps } from 'class-variance-authority'
 
-import { AsVariantsConfig, PageTitle, pageTitleVariants } from '@/components/ui/pageTitleText'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-type BuilderPageTitleProps = BuilderComponentBaseProps &
-  VariantProps<typeof pageTitleVariants> &
-  React.HTMLAttributes<HTMLHeadingElement> & {
-    as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
-    withoutBalancer?: boolean
-  }
+type BuilderPageTitleProps = BuilderComponentBaseProps & React.HTMLAttributes<HTMLHeadingElement>
 
 Builder.registerComponent(
   (props: BuilderPageTitleProps) => (
@@ -23,15 +17,10 @@ Builder.registerComponent(
     noWrap: true,
     inputs: [
       {
-        name: 'as',
-        type: 'enum',
-        defaultValue: 'h2',
-        enum: AsVariantsConfig,
-      },
-      {
-        name: 'withoutBalancer',
-        type: 'boolean',
-        defaultValue: true,
+        name: 'text',
+        type: 'string',
+        required: true,
+        defaultValue: 'Enter some text...',
       },
     ],
     defaultChildren: [
