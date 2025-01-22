@@ -20,8 +20,8 @@ export interface AuthenticatedHeroCTAProps {
 }
 
 export interface HeroCTAProps {
-  unauthenticatedProps: UnauthenticatedHeroCTAProps
-  authenticatedProps: AuthenticatedHeroCTAProps
+  unauthenticatedProps?: UnauthenticatedHeroCTAProps
+  authenticatedProps?: AuthenticatedHeroCTAProps
 }
 
 export function HeroCTA({ unauthenticatedProps, authenticatedProps }: HeroCTAProps) {
