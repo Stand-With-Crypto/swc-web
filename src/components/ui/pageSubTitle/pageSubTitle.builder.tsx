@@ -25,7 +25,6 @@ Builder.registerComponent(
   {
     name: 'PageSubTitle',
     canHaveChildren: true,
-    override: true,
     inputs: [
       {
         name: 'as',
