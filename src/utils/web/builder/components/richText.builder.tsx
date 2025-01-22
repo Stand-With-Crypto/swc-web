@@ -19,6 +19,7 @@ function transformLi(tagName: string, attribs: Record<string, string>) {
 export function RichText(props: RichTextProps & BuilderComponentAttributes) {
   return (
     <div
+      {...props}
       className={cn('prose max-w-full', props.className)}
       dangerouslySetInnerHTML={{
         __html: sanitizeHtml(props.content, {
