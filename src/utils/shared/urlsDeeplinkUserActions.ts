@@ -89,7 +89,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/email-debate`
     },
-    [UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025]: ({ locale }) => {
+    [UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3]: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/email`
     },
   },

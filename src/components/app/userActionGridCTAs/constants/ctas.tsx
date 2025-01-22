@@ -111,7 +111,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.EMAIL]: {
     title: 'Contact your member of congress',
-    description: 'The 119th Congress needs to hear from you!',
+    description: 'Tell your senator to sign the discharge petition',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -173,9 +173,18 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+        isCampaignActive: false,
+        title: 'Contacted and welcomed the 119 congress',
+        description: 'The 119th Congress needs to hear from you!',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
         isCampaignActive: true,
         title: 'Contact your member of congress',
-        description: 'The 119th Congress needs to hear from you!',
+        description: 'Tell your senator to sign the discharge petition',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
