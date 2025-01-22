@@ -67,7 +67,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -87,7 +87,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
     firstName: '',
     lastName: '',
     emailAddress: '',
