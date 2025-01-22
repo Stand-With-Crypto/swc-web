@@ -236,9 +236,11 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Contact Your Member Of Congress
+              Contact your member of congress
             </PageTitle>
-            <PageSubTitle className="mb-7">The 119th Congress Needs To Hear From You!</PageSubTitle>
+            <PageSubTitle className="mb-7">
+              Tell your senator to sign the discharge petition
+            </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField
