@@ -1,4 +1,4 @@
-import { Builder, withChildren } from '@builder.io/react'
+import { Builder } from '@builder.io/react'
 import { VariantProps } from 'class-variance-authority'
 
 import { AsVariantsConfig, PageTitle, pageTitleVariants } from '@/components/ui/pageTitleText'
@@ -12,19 +12,16 @@ type BuilderPageTitleProps = BuilderComponentBaseProps &
   }
 
 Builder.registerComponent(
-  withChildren((props: BuilderPageTitleProps) => (
-    <PageTitle
-      as={props.as}
-      size={props.size}
-      withoutBalancer={props.withoutBalancer}
-      {...props.attributes}
-    >
+  (props: BuilderPageTitleProps) => (
+    <PageTitle {...props.attributes} key={props.attributes?.key}>
       {props.children}
     </PageTitle>
-  )),
+  ),
   {
     name: 'PageTitle',
     canHaveChildren: true,
+    friendlyName: 'Page Title',
+    noWrap: true,
     inputs: [
       {
         name: 'as',
@@ -44,7 +41,7 @@ Builder.registerComponent(
         component: {
           name: 'Text',
           options: {
-            text: 'I am a page subtitle',
+            text: 'I am a page title',
           },
         },
       },

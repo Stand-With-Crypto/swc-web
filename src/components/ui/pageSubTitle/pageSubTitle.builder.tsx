@@ -1,4 +1,4 @@
-import { Builder, withChildren } from '@builder.io/react'
+import { Builder } from '@builder.io/react'
 import { VariantProps } from 'class-variance-authority'
 
 import { AsVariantsConfig, PageSubTitle, pageSubTitleVariants } from '@/components/ui/pageSubTitle'
@@ -12,19 +12,16 @@ type BuilderPageSubtitleProps = BuilderComponentBaseProps &
   }
 
 Builder.registerComponent(
-  withChildren((props: BuilderPageSubtitleProps) => (
-    <PageSubTitle
-      as={props.as}
-      size={props.size}
-      withoutBalancer={props.withoutBalancer}
-      {...props.attributes}
-    >
+  (props: BuilderPageSubtitleProps) => (
+    <PageSubTitle {...props.attributes} key={props.attributes?.key}>
       {props.children}
     </PageSubTitle>
-  )),
+  ),
   {
     name: 'PageSubTitle',
     canHaveChildren: true,
+    friendlyName: 'Page Subtitle',
+    noWrap: true,
     inputs: [
       {
         name: 'as',
