@@ -1,19 +1,23 @@
 import { Builder } from '@builder.io/react'
 
-import { NavBarGlobalBanner, NavBarGlobalBannerProps } from '@/components/app/navbarGlobalBanner'
+import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-type BuilderNavBarGlobalBannerProps = BuilderComponentBaseProps & {
-  builderState: {
-    content: {
-      data: NavBarGlobalBannerProps
-    }
-  }
+interface BuilderNavBarGlobalBannerProps extends BuilderComponentBaseProps {
+  outsideUSBannerText: string
+  hideBanner?: boolean
+  campaignText?: string
 }
 
 Builder.registerComponent(
   (props: BuilderNavBarGlobalBannerProps) => (
-    <NavBarGlobalBanner outsideUSBannerText={props.builderState.content.data.outsideUSBannerText} />
+    <NavBarGlobalBanner
+      {...props.attributes}
+      campaignText={props.campaignText}
+      hideBanner={props.hideBanner}
+      key={props.attributes?.key}
+      outsideUSBannerText={props.outsideUSBannerText}
+    />
   ),
   {
     name: 'NavBarGlobalBanner',
@@ -36,6 +40,12 @@ Builder.registerComponent(
         type: 'boolean',
         defaultValue: false,
         helperText: 'If true, the banner will not be displayed.',
+      },
+      {
+        name: 'campaignText',
+        friendlyName: 'Campaign text',
+        type: 'text',
+        helperText: 'This is a campaign text that will be displayed in the navbar.',
       },
     ],
   },

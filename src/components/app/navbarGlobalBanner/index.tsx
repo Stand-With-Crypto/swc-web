@@ -16,11 +16,13 @@ const languages = getNavigatorLanguages()
 
 export interface NavBarGlobalBannerProps {
   outsideUSBannerText?: string
+  campaignText?: string
   hideBanner?: boolean
 }
 
 export function NavBarGlobalBanner({
   outsideUSBannerText = 'Actions on Stand With Crypto are only available to users based in the United States.',
+  campaignText,
   hideBanner = false,
 }: NavBarGlobalBannerProps) {
   const router = useRouter()
@@ -42,8 +44,12 @@ export function NavBarGlobalBanner({
     router.push(currentCountry?.url)
   }
 
-  if (!hasHydrated || hideBanner) {
-    return <CurrentCampaign />
+  console.log('hasHydrated', hasHydrated)
+  console.log('campaignText', campaignText)
+  console.log('will return null', hideBanner || !hasHydrated)
+
+  if (hideBanner || !hasHydrated) {
+    return null
   }
 
   if (currentCountry) {
@@ -83,7 +89,21 @@ export function NavBarGlobalBanner({
     )
   }
 
-  return <CurrentCampaign />
+  if (campaignText) {
+    return (
+      <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
+        <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
+          <div className="container flex justify-between">
+            <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
+              <p>{campaignText}</p>
+            </div>
+          </div>
+        </WrapperContainer>
+      </div>
+    )
+  }
+
+  return null
 }
 
 /**
@@ -117,7 +137,3 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: readonly {
     emoji: '🇨🇦',
   },
 ]
-
-function CurrentCampaign() {
-  return null
-}

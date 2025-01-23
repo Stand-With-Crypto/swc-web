@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
@@ -53,6 +54,11 @@ const HeroImage = ({
 export interface UnauthenticatedHeroContentProps {
   title?: string
   ctaText?: string
+  ctaOverrideLink?: {
+    enabled: boolean
+    href: string
+    text: string
+  }
   imagePath?: string
   videoPath?: string
 }
@@ -62,49 +68,32 @@ const UnauthenticatedHeroContent = ({
   ctaText = 'Join',
   imagePath = '/homepageHero.webp',
   videoPath,
-}: UnauthenticatedHeroContentProps) => (
-  <HeroImage
-    fallback={
-      <NextImage
-        alt="sign up"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
-        className="h-full w-full object-cover"
-        fill
-        placeholder="blur"
-        priority
-        sizes={'(max-width: 400px) 375px, 500px'}
-        src={imagePath}
-      />
-    }
-    videoPath={videoPath}
-  >
-    <p>{title}</p>
-    <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
-      {ctaText}
-      <ArrowUpRight />
-    </Button>
-  </HeroImage>
-)
+  ctaOverrideLink,
+}: UnauthenticatedHeroContentProps) => {
+  const ctaElement =
+    ctaOverrideLink?.enabled && ctaOverrideLink?.href && ctaOverrideLink?.text ? (
+      <Link href={ctaOverrideLink.href} target="_blank">
+        <Button
+          className={cn('max-sm:w-full', linkBoxLinkClassName)}
+          data-link-box-subject
+          variant="secondary"
+        >
+          {ctaOverrideLink.text}
+          <ArrowUpRight />
+        </Button>
+      </Link>
+    ) : (
+      <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
+        {ctaText}
+        <ArrowUpRight />
+      </Button>
+    )
 
-export interface AuthenticatedHeroContentProps {
-  title?: string
-  ctaText?: string
-  imagePath?: string
-  videoPath?: string
-}
-
-const AuthenticatedHeroContent = ({
-  title = 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-  ctaText = 'Follow',
-  imagePath = '/homepageHero.webp',
-  videoPath,
-}: AuthenticatedHeroContentProps) => (
-  <UserActionFormShareOnTwitterDialog>
+  return (
     <HeroImage
-      className="flex-col sm:flex-row"
       fallback={
         <NextImage
-          alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
+          alt="sign up"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
           className="h-full w-full object-cover"
           fill
@@ -117,6 +106,43 @@ const AuthenticatedHeroContent = ({
       videoPath={videoPath}
     >
       <p>{title}</p>
+      {ctaElement}
+    </HeroImage>
+  )
+}
+
+export interface AuthenticatedHeroContentProps {
+  title?: string
+  ctaText?: string
+  ctaOverrideLink?: {
+    enabled: boolean
+    href: string
+    text: string
+  }
+  imagePath?: string
+  videoPath?: string
+}
+
+const AuthenticatedHeroContent = ({
+  title = 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+  ctaText = 'Follow',
+  imagePath = '/homepageHero.webp',
+  videoPath,
+  ctaOverrideLink,
+}: AuthenticatedHeroContentProps) => {
+  const ctaElement =
+    ctaOverrideLink?.enabled && ctaOverrideLink?.href && ctaOverrideLink?.text ? (
+      <Link href={ctaOverrideLink.href} target="_blank">
+        <Button
+          className={cn('max-sm:w-full', linkBoxLinkClassName)}
+          data-link-box-subject
+          variant="secondary"
+        >
+          {ctaOverrideLink.text}
+          <ArrowUpRight />
+        </Button>
+      </Link>
+    ) : (
       <Button
         className={cn('max-sm:w-full', linkBoxLinkClassName)}
         data-link-box-subject
@@ -125,9 +151,31 @@ const AuthenticatedHeroContent = ({
         {ctaText}
         <ArrowUpRight />
       </Button>
-    </HeroImage>
-  </UserActionFormShareOnTwitterDialog>
-)
+    )
+  return (
+    <UserActionFormShareOnTwitterDialog>
+      <HeroImage
+        className="flex-col sm:flex-row"
+        fallback={
+          <NextImage
+            alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+            className="h-full w-full object-cover"
+            fill
+            placeholder="blur"
+            priority
+            sizes={'(max-width: 400px) 375px, 500px'}
+            src={imagePath}
+          />
+        }
+        videoPath={videoPath}
+      >
+        <p>{title}</p>
+        {ctaElement}
+      </HeroImage>
+    </UserActionFormShareOnTwitterDialog>
+  )
+}
 
 export interface HeroImageWrapperProps {
   unauthenticatedProps?: UnauthenticatedHeroContentProps
@@ -138,6 +186,7 @@ export function HeroImageContainer({
   unauthenticatedProps,
   authenticatedProps,
 }: HeroImageWrapperProps) {
+  console.log('unauthenticatedProps', unauthenticatedProps)
   return (
     <LoginDialogWrapper authenticatedContent={<AuthenticatedHeroContent {...authenticatedProps} />}>
       <UnauthenticatedHeroContent {...unauthenticatedProps} />

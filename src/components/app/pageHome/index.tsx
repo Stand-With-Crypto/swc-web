@@ -2,6 +2,7 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
+import { HeroCTA } from '@/components/app/hero/heroCTA'
 import { HeroBuilder } from '@/components/app/hero/renderHeroBuilder'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/delayedRecentActivity'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
@@ -44,7 +45,22 @@ export async function PageHome({
 
   return (
     <>
-      <HeroBuilder content={heroContent} />
+      <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
+        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
+          <PageTitle className={'lg:text-left'} withoutBalancer>
+            If you care about crypto, it's time to prove it
+          </PageTitle>
+          <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
+            52 million Americans own crypto. And yet, crypto's future in America remains uncertain.
+            Congress is writing the rules as we speak - but they won't vote YES until they've heard
+            from you.
+          </PageSubTitle>
+          <HeroCTA />
+        </div>
+        <div className="order-0 self-start md:container lg:order-1 lg:px-0">
+          <HeroBuilder content={heroContent} />
+        </div>
+      </section>
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
 

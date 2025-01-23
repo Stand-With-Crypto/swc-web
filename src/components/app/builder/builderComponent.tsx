@@ -8,6 +8,7 @@ import { RenderComponentModelTypes } from '@/components/app/builder/constants'
 
 type BuilderPageProps = ComponentProps<typeof BuilderComponent> & {
   modelType: RenderComponentModelTypes
+  fallback?: React.ReactNode
 }
 
 export function RenderBuilderContent(props: BuilderPageProps) {
@@ -19,6 +20,10 @@ export function RenderBuilderContent(props: BuilderPageProps) {
 
   if (props.modelType === RenderComponentModelTypes.PAGE) {
     return notFound()
+  }
+
+  if (props.fallback) {
+    return props.fallback
   }
 
   return null
