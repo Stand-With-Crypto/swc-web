@@ -15,6 +15,7 @@ export function trackPrimitiveComponentAnalytics<A>(
   defaultTrack: AnalyticsFnCall<A>,
   { args, analytics }: { args: A } & PrimitiveComponentAnalytics<A>,
 ) {
+  console.log({ args, analytics })
   if (isString(analytics)) {
     defaultTrack({ args, properties: { Category: analytics } })
     return
