@@ -16,7 +16,8 @@ it('page - politicians interactions', () => {
    * NOTE: If the table rerenders too much the scroll state will reset.
    */
   cy.get('[data-testid="state-filter-trigger"]').as('stateFilterTrigger').scrollIntoView()
-  cy.get('@stateFilterTrigger').should('be.visible').click()
+  cy.get('@stateFilterTrigger').should('be.visible')
+  cy.get('@stateFilterTrigger').click()
   cy.get('[role="option"]').contains('div', 'AK').as('stateOption')
   cy.get('@stateOption').should('be.visible').click({
     // force: true // Bypass visibility checks, not ideal
