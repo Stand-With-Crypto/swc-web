@@ -186,7 +186,6 @@ export function HeroImageContainer({
   unauthenticatedProps,
   authenticatedProps,
 }: HeroImageWrapperProps) {
-  console.log('unauthenticatedProps', unauthenticatedProps)
   return (
     <LoginDialogWrapper authenticatedContent={<AuthenticatedHeroContent {...authenticatedProps} />}>
       <UnauthenticatedHeroContent {...unauthenticatedProps} />

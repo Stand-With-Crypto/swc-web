@@ -17,8 +17,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
-import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/sections/constants'
-import { getSectionContent } from '@/utils/server/builder/models/sections/utils/getSectionContent'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -41,8 +39,6 @@ export async function PageHome({
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
 
-  const heroContent = await getSectionContent(BuilderSectionModelIdentifiers.HERO, '/')
-
   return (
     <>
       <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
@@ -58,7 +54,7 @@ export async function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <HeroBuilder content={heroContent} />
+          <HeroBuilder />
         </div>
       </section>
       <div className="container">

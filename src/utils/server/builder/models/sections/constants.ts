@@ -1,4 +1,4 @@
 export enum BuilderSectionModelIdentifiers {
-  HERO = 'hero',
+  HERO = 'hero-model',
   BANNER = 'banner',
 }
