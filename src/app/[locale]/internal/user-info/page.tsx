@@ -1,7 +1,6 @@
 'use client'
 
 import { useCookie } from 'react-use'
-import { noop } from 'lodash-es'
 
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -23,11 +22,11 @@ export default function UserSettingsPage() {
 
       <div>
         <Label>ID</Label>
-        <Input readOnly value={session.user?.id} />
+        <Input readOnly value={session.user?.id ?? ''} />
       </div>
       <div>
         <Label>Country Code</Label>
-        <Input readOnly value={parsedCountryCode?.countryCode} />
+        <Input readOnly value={parsedCountryCode?.countryCode ?? ''} />
       </div>
     </div>
   )
