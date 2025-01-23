@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, URLPattern } from 'next/server'
 
 import {
   getCountryCode,
@@ -21,47 +21,25 @@ export async function middleware(request: NextRequest) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
 
+  const { pathname } = request.nextUrl
+
   const vanityUrls = await getVanityUrls()
 
-  const createSourceRegex = (source: string) => {
-    const pattern = source
-      .split('/')
-      .map(segment => (segment.startsWith(':') ? '[^/]+' : segment))
-      .join('/')
-    return new RegExp(`^${pattern}$`)
-  }
-
-  const extractDynamicParams = (source: string, path: string) => {
-    const sourceSegments = source.split('/')
-    const pathSegments = path.split('/')
-    const params: Record<string, string> = {}
-
-    sourceSegments.forEach((segment, i) => {
-      if (segment.startsWith(':')) {
-        params[segment.slice(1)] = pathSegments[i]
-      }
-    })
-
-    return params
-  }
-
-  const buildDestinationUrl = (destination: string, params: Record<string, string>) => {
-    return Object.entries(params).reduce(
-      (dest, [key, value]) => dest.replace(`:${key}`, value),
-      destination,
-    )
-  }
-
   for (const vanityUrl of vanityUrls) {
-    const sourceRegex = createSourceRegex(vanityUrl.source)
+    const { source, destination, permanent } = vanityUrl
+    const matcher = new URLPattern({ pathname: source })
+    const match = matcher.exec({ pathname })
 
-    if (sourceRegex.test(request.nextUrl.pathname)) {
-      logger.info('Processing vanity URL redirect', { vanityUrl })
+    if (match) {
+      const resolvedDestination = destination.replace(
+        /:([a-zA-Z]+)/g,
+        (_, key) => match.pathname.groups[key] || '',
+      )
+      const newURL = new URL(resolvedDestination, request.url)
 
-      const params = extractDynamicParams(vanityUrl.source, request.nextUrl.pathname)
-      const destination = buildDestinationUrl(vanityUrl.destination, params)
+      logger.info(`vanity url match found, redirecting to ${newURL.toString()} from ${pathname}`)
 
-      return Response.redirect(new URL(destination, request.url), vanityUrl.permanent ? 308 : 307)
+      return Response.redirect(newURL, permanent ? 308 : 307)
     }
   }
 
