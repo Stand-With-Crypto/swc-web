@@ -23,7 +23,11 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
-  const vanityUrls = await getVanityUrls()
+  const vanityUrls = await getVanityUrls().catch(error => {
+    logger.error('Failed to fetch vanity URLs', { error })
+
+    return []
+  })
 
   for (const vanityUrl of vanityUrls) {
     const { source, destination, permanent } = vanityUrl
