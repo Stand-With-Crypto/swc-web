@@ -16,14 +16,14 @@ const languages = getNavigatorLanguages()
 
 export interface NavBarGlobalBannerProps {
   outsideUSBannerText?: string
-  campaignText?: string
   hideBanner?: boolean
+  campaignText?: string
 }
 
 export function NavBarGlobalBanner({
   outsideUSBannerText = 'Actions on Stand With Crypto are only available to users based in the United States.',
-  campaignText,
   hideBanner = false,
+  campaignText,
 }: NavBarGlobalBannerProps) {
   const router = useRouter()
   const isMobile = useIsMobile()
