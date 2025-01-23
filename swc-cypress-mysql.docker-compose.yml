@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: swc-web
+      MYSQL_DATABASE: swc-web-cypress
     ports:
       - '3307:3306'
     volumes:

@@ -62,7 +62,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "firstname": "Haylie",
   "lastname": "Macejkovic",
   "p2aSource": "source",
-  "phone": "+19178798306",
+  "phone": "+19288798317",
   "smsOptin": ${smsProvider === SMSProviders.CAPITOL_CANARY ? 1 : 0},
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
