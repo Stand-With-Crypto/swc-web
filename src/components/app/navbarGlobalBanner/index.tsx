@@ -44,10 +44,6 @@ export function NavBarGlobalBanner({
     router.push(currentCountry?.url)
   }
 
-  console.log('hasHydrated', hasHydrated)
-  console.log('campaignText', campaignText)
-  console.log('will return null', hideBanner || !hasHydrated)
-
   if (hideBanner || !hasHydrated) {
     return null
   }

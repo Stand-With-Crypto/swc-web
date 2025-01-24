@@ -1,5 +1,6 @@
 import { RenderBuilderContent } from '@/components/app/builder'
 import { RenderComponentModelTypes } from '@/components/app/builder/constants'
+import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/sections/constants'
 import { getSectionContent } from '@/utils/server/builder/models/sections/utils/getSectionContent'
 
@@ -11,6 +12,7 @@ export async function NavBarGlobalBannerBuilder() {
   return (
     <RenderBuilderContent
       content={bannerContent}
+      fallback={<NavBarGlobalBanner />}
       model={BuilderSectionModelIdentifiers.BANNER}
       modelType={RenderComponentModelTypes.SECTION}
     />
