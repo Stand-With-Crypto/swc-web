@@ -20,12 +20,7 @@ interface HeroImageProps {
   videoPath?: string
 }
 
-const HeroImage = ({
-  children,
-  className,
-  fallback,
-  videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
-}: HeroImageProps) => {
+const HeroImage = ({ children, className, fallback, videoPath }: HeroImageProps) => {
   return (
     <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
       <Video
@@ -63,11 +58,11 @@ export interface UnauthenticatedHeroContentProps {
   videoPath?: string
 }
 
-const UnauthenticatedHeroContent = ({
+export const UnauthenticatedHeroContent = ({
   title = 'Join Stand With Crypto and help us defend your right to own crypto in America.',
   ctaText = 'Join',
   imagePath = '/homepageHero.webp',
-  videoPath,
+  videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
   ctaOverrideLink,
 }: UnauthenticatedHeroContentProps) => {
   const ctaElement =
@@ -127,7 +122,7 @@ const AuthenticatedHeroContent = ({
   title = 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
   ctaText = 'Follow',
   imagePath = '/homepageHero.webp',
-  videoPath,
+  videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
   ctaOverrideLink,
 }: AuthenticatedHeroContentProps) => {
   const ctaElement =
@@ -154,25 +149,28 @@ const AuthenticatedHeroContent = ({
     )
   return (
     <UserActionFormShareOnTwitterDialog>
-      <HeroImage
-        className="flex-col sm:flex-row"
-        fallback={
-          <NextImage
-            alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
-            className="h-full w-full object-cover"
-            fill
-            placeholder="blur"
-            priority
-            sizes={'(max-width: 400px) 375px, 500px'}
-            src={imagePath}
-          />
-        }
-        videoPath={videoPath}
-      >
-        <p>{title}</p>
-        {ctaElement}
-      </HeroImage>
+      {/* This div is here because the dialog won't open on builder.io without it*/}
+      <div>
+        <HeroImage
+          className="flex-col sm:flex-row"
+          fallback={
+            <NextImage
+              alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+              className="h-full w-full object-cover"
+              fill
+              placeholder="blur"
+              priority
+              sizes={'(max-width: 400px) 375px, 500px'}
+              src={imagePath}
+            />
+          }
+          videoPath={videoPath}
+        >
+          <p>{title}</p>
+          {ctaElement}
+        </HeroImage>
+      </div>
     </UserActionFormShareOnTwitterDialog>
   )
 }
@@ -188,7 +186,10 @@ export function HeroImageContainer({
 }: HeroImageWrapperProps) {
   return (
     <LoginDialogWrapper authenticatedContent={<AuthenticatedHeroContent {...authenticatedProps} />}>
-      <UnauthenticatedHeroContent {...unauthenticatedProps} />
+      {/* This div is here because the dialog won't open on builder.io without it*/}
+      <div>
+        <UnauthenticatedHeroContent {...unauthenticatedProps} />
+      </div>
     </LoginDialogWrapper>
   )
 }
