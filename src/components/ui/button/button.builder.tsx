@@ -1,6 +1,5 @@
 import { Builder, withChildren } from '@builder.io/react'
 
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
@@ -13,7 +12,6 @@ interface BuilderButtonProps extends BuilderComponentBaseProps {
     href: string
     type: 'internal' | 'external'
   }
-  requireAuthentication?: boolean
 }
 
 Builder.registerComponent(
@@ -26,51 +24,32 @@ Builder.registerComponent(
 
     const key = props.attributes?.key
 
-    let Comp = (
-      <Button {...buttonProps} key={key}>
-        {props.children}
-      </Button>
-    )
-
     if (props.link) {
       const { href, type } = props.link
 
       if (type === 'external') {
-        Comp = (
+        return (
           <Button {...buttonProps} asChild key={key}>
             <ExternalLink href={href}>{props.children}</ExternalLink>
           </Button>
         )
-      } else if (type === 'internal') {
-        Comp = (
-          <Button {...buttonProps} asChild key={key}>
-            <InternalLink href={href}>{props.children}</InternalLink>
-          </Button>
-        )
       }
-    }
 
-    if (props.requireAuthentication) {
       return (
-        <LoginDialogWrapper
-          authenticatedContent={Comp}
-          loadingFallback={
-            <Button {...buttonProps} disabled key={key}>
-              {props.children}
-            </Button>
-          }
-        >
-          <Button {...buttonProps} key={key}>
-            {props.children}
-          </Button>
-        </LoginDialogWrapper>
+        <Button {...buttonProps} asChild key={key}>
+          <InternalLink href={href}>{props.children}</InternalLink>
+        </Button>
       )
     }
 
-    return Comp
+    return (
+      <Button {...buttonProps} key={key}>
+        {props.children}
+      </Button>
+    )
   }),
   {
-    name: 'Button',
+    name: 'Core:Button',
     noWrap: true, // Disables the default "Link URL" field
     canHaveChildren: true,
     override: true,
@@ -88,13 +67,6 @@ Builder.registerComponent(
         defaultValue: 'default',
         enum: Object.keys(buttonVariantsConfig.size),
         helperText: 'The button size',
-      },
-      {
-        name: 'requireAuthentication',
-        friendlyName: 'Require authentication',
-        type: 'boolean',
-        helperText:
-          'When enabled, the user will be prompted to login if they are not authenticated',
       },
       {
         name: 'link',
