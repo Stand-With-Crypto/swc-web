@@ -21,7 +21,7 @@ export const getCountryCode = (request: NextRequest) => {
   return userCountryCode || defaultCountryCode
 }
 
-export const parseUserCountryCodeCookie = (cookieValue?: string) => {
+export const parseUserCountryCodeCookie = (cookieValue?: string | null) => {
   if (!cookieValue) {
     return null
   }
