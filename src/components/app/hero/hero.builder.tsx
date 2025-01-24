@@ -1,15 +1,11 @@
 import { Builder } from '@builder.io/react'
 
-import {
-  AuthenticatedHeroContentProps,
-  HeroImageContainer,
-  UnauthenticatedHeroContentProps,
-} from '@/components/app/hero/heroImage'
+import { HeroContentProps, HeroImageContainer } from '@/components/app/hero/heroImage'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
 interface HeroBuilderProps extends BuilderComponentBaseProps {
-  unauthenticatedImageWrapperProps: UnauthenticatedHeroContentProps
-  authenticatedImageWrapperProps: AuthenticatedHeroContentProps
+  unauthenticatedImageWrapperProps: HeroContentProps
+  authenticatedImageWrapperProps: HeroContentProps
 }
 
 Builder.registerComponent(

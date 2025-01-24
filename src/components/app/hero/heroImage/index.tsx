@@ -46,7 +46,7 @@ const HeroImage = ({ children, className, fallback, videoPath }: HeroImageProps)
   )
 }
 
-export interface UnauthenticatedHeroContentProps {
+export interface HeroContentProps {
   title?: string
   ctaText?: string
   ctaOverrideLink?: {
@@ -58,55 +58,12 @@ export interface UnauthenticatedHeroContentProps {
   videoPath?: string
 }
 
-export const UnauthenticatedHeroContent = ({
-  title = 'Join Stand With Crypto and help us defend your right to own crypto in America.',
-  ctaText = 'Join',
-  imagePath = '/homepageHero.webp',
-  videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
-  ctaOverrideLink,
-}: UnauthenticatedHeroContentProps) => {
-  const ctaElement =
-    ctaOverrideLink?.enabled && ctaOverrideLink?.href && ctaOverrideLink?.text ? (
-      <Link href={ctaOverrideLink.href} target="_blank">
-        <Button
-          className={cn('max-sm:w-full', linkBoxLinkClassName)}
-          data-link-box-subject
-          variant="secondary"
-        >
-          {ctaOverrideLink.text}
-          <ArrowUpRight />
-        </Button>
-      </Link>
-    ) : (
-      <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
-        {ctaText}
-        <ArrowUpRight />
-      </Button>
-    )
-
-  return (
-    <HeroImage
-      fallback={
-        <NextImage
-          alt="sign up"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
-          className="h-full w-full object-cover"
-          fill
-          placeholder="blur"
-          priority
-          sizes={'(max-width: 400px) 375px, 500px'}
-          src={imagePath}
-        />
-      }
-      videoPath={videoPath}
-    >
-      <p>{title}</p>
-      {ctaElement}
-    </HeroImage>
-  )
+export interface HeroImageWrapperProps {
+  unauthenticatedProps?: HeroContentProps
+  authenticatedProps?: HeroContentProps
 }
 
-export interface AuthenticatedHeroContentProps {
+interface HeroImageContentProps {
   title?: string
   ctaText?: string
   ctaOverrideLink?: {
@@ -118,13 +75,13 @@ export interface AuthenticatedHeroContentProps {
   videoPath?: string
 }
 
-const AuthenticatedHeroContent = ({
-  title = 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-  ctaText = 'Follow',
+function HeroImageContent({
+  title,
+  ctaText,
+  ctaOverrideLink,
   imagePath = '/homepageHero.webp',
   videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
-  ctaOverrideLink,
-}: AuthenticatedHeroContentProps) => {
+}: HeroImageContentProps) {
   const ctaElement =
     ctaOverrideLink?.enabled && ctaOverrideLink?.href && ctaOverrideLink?.text ? (
       <Link href={ctaOverrideLink.href} target="_blank">
@@ -147,37 +104,28 @@ const AuthenticatedHeroContent = ({
         <ArrowUpRight />
       </Button>
     )
-  return (
-    <UserActionFormShareOnTwitterDialog>
-      {/* This div is here because the dialog won't open on builder.io without it*/}
-      <div>
-        <HeroImage
-          className="flex-col sm:flex-row"
-          fallback={
-            <NextImage
-              alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
-              className="h-full w-full object-cover"
-              fill
-              placeholder="blur"
-              priority
-              sizes={'(max-width: 400px) 375px, 500px'}
-              src={imagePath}
-            />
-          }
-          videoPath={videoPath}
-        >
-          <p>{title}</p>
-          {ctaElement}
-        </HeroImage>
-      </div>
-    </UserActionFormShareOnTwitterDialog>
-  )
-}
 
-export interface HeroImageWrapperProps {
-  unauthenticatedProps?: UnauthenticatedHeroContentProps
-  authenticatedProps?: AuthenticatedHeroContentProps
+  return (
+    <HeroImage
+      className="flex-col sm:flex-row"
+      fallback={
+        <NextImage
+          alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+          className="h-full w-full object-cover"
+          fill
+          placeholder="blur"
+          priority
+          sizes={'(max-width: 400px) 375px, 500px'}
+          src={imagePath}
+        />
+      }
+      videoPath={videoPath}
+    >
+      <p>{title}</p>
+      {ctaElement}
+    </HeroImage>
+  )
 }
 
 export function HeroImageContainer({
@@ -185,10 +133,27 @@ export function HeroImageContainer({
   authenticatedProps,
 }: HeroImageWrapperProps) {
   return (
-    <LoginDialogWrapper authenticatedContent={<AuthenticatedHeroContent {...authenticatedProps} />}>
+    <LoginDialogWrapper
+      authenticatedContent={
+        <UserActionFormShareOnTwitterDialog>
+          {/* This div is here because the dialog won't open on builder.io without it*/}
+          <div>
+            <HeroImageContent
+              ctaText="Follow"
+              title="Stay up to date on crypto policy by following @StandWithCrypto on X."
+              {...authenticatedProps}
+            />
+          </div>
+        </UserActionFormShareOnTwitterDialog>
+      }
+    >
       {/* This div is here because the dialog won't open on builder.io without it*/}
       <div>
-        <UnauthenticatedHeroContent {...unauthenticatedProps} />
+        <HeroImageContent
+          ctaText="Join"
+          title="Join Stand With Crypto and help us defend your right to own crypto in America."
+          {...unauthenticatedProps}
+        />
       </div>
     </LoginDialogWrapper>
   )
