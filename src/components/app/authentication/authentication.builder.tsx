@@ -32,6 +32,8 @@ Builder.registerComponent(
       ? (props.children as React.ReactElement[]).find(({ key }) => key === authenticatedBlockId)
       : null
 
+    // We need a div wrapping the content because the login dialog needs a parent element to attach to
+    // Without this the dialog won't open on builder.io elements
     const withWrapper = (content: React.ReactNode) => (
       <div {...props.attributes} key={props.attributes?.key}>
         {content}
