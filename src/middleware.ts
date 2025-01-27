@@ -15,7 +15,7 @@ const logger = getLogger('middleware')
 
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
 
-export async function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   if (isCypress) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
