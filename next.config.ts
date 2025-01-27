@@ -95,7 +95,7 @@ const contentSecurityPolicy = {
     'https://vercel.live/',
     'https://www.figma.com',
   ],
-  'font-src': ["'self'", 'https://fonts.gstatic.com'],
+  'font-src': ["'self'"],
   'object-src': ['none'],
   'base-uri': ["'self'"],
   'form-action': ["'self'"],
