@@ -13,6 +13,8 @@ export function RenderBuilderContent(props: BuilderPageProps) {
   const session = useSession()
 
   const builderData: BuilderState = {
+    // This prop should only be used in the context of the Builder.io editor when editing or previewing
+    // We should never use it for the actual rendering of the component
     isAuthenticated: session.isLoggedIn,
   }
 
