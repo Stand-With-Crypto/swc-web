@@ -1,4 +1,4 @@
-import { redis } from "@/utils/server/redis"
+import { redis } from '@/utils/server/redis'
 
 export const VANITY_URLS_KEY = 'vanityUrls'
 

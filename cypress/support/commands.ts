@@ -109,6 +109,10 @@ Cypress.Commands.add('typeIntoInput', ({ selector, text }) => {
   cy.get(selector).should('be.visible').clear().wait(500).type(text)
 })
 
+Cypress.Commands.add('assertLoginModalOpened', () => {
+  cy.get('button[data-testid="e2e-test-login"]').should('be.visible')
+})
+
 Cypress.Commands.add('waitForLogin', trigger => {
   trigger?.click()
 
@@ -208,6 +212,10 @@ declare global {
        */
       waitForProfileCreation(customUser?: typeof mockRandomUser): Chainable<void>
 
+      /**
+       * This command is used to assert that the login modal is opened
+       */
+      assertLoginModalOpened(): Chainable<void>
       //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
