@@ -11,7 +11,7 @@ export const dynamic = 'error'
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
 const PATHNAME = '/privacy'
 
-export default async function TermsOfServicePage(props: PageProps) {
+export default async function PrivacyPage(props: PageProps) {
   const { locale } = await props.params
 
   const content = await getPageContent(PAGE_MODEL, PATHNAME)
