@@ -3,13 +3,18 @@ import { Builder, withChildren } from '@builder.io/react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
+import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 
 const REQUIRE_AUTHENTICATION_BLOCK_NAME = 'RequireAuthentication'
 const UNAUTHENTICATED_BLOCK_NAME = 'RequireAuthentication:Unauthenticated'
 const AUTHENTICATED_BLOCK_NAME = 'RequireAuthentication:Authenticated'
 
+interface RequireAuthenticationProps {
+  shouldOpenLoginDialog: boolean
+}
+
 Builder.registerComponent(
-  withChildren((props: BuilderComponentBaseProps) => {
+  withChildren((props: RequireAuthenticationProps & BuilderComponentBaseProps) => {
     const isAuthenticated = props.builderState?.state.isAuthenticated
 
     const unauthenticatedBlockId = props.builderBlock?.children.find(
@@ -44,10 +49,18 @@ Builder.registerComponent(
       return withWrapper(isAuthenticated ? AuthenticatedBlock : UnauthenticatedBlock)
     }
 
+    if (props.shouldOpenLoginDialog) {
+      return (
+        <LoginDialogWrapper authenticatedContent={withWrapper(AuthenticatedBlock)}>
+          {withWrapper(UnauthenticatedBlock)}
+        </LoginDialogWrapper>
+      )
+    }
+
     return (
-      <LoginDialogWrapper authenticatedContent={withWrapper(AuthenticatedBlock)}>
-        {withWrapper(UnauthenticatedBlock)}
-      </LoginDialogWrapper>
+      <MaybeAuthenticatedContent authenticatedContent={AuthenticatedBlock}>
+        {UnauthenticatedBlock}
+      </MaybeAuthenticatedContent>
     )
   }),
   {
@@ -74,6 +87,16 @@ Builder.registerComponent(
         component: {
           name: AUTHENTICATED_BLOCK_NAME,
         },
+      },
+    ],
+    inputs: [
+      {
+        name: 'shouldOpenLoginDialog',
+        type: 'boolean',
+        defaultValue: false,
+        helperText:
+          'Whether the login dialog should be opened when the unauthorized content is clicked',
+        friendlyName: 'Open Login Dialog',
       },
     ],
   },
