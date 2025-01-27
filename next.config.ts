@@ -244,7 +244,7 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
-    const apiURL = `${process.env.INTERNAL_API_BASE_URL!}/api/vanity-url`
+    const apiURL = `${process.env.INTERNAL_API_BASE_URL!}/api/public/vanity-url`
     const vanityUrls = (await fetch(apiURL)
       .then(res => res.json() ?? [])
       .catch(error => {
