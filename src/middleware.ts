@@ -1,4 +1,4 @@
-import { NextRequest, URLPattern } from 'next/server'
+import { NextRequest } from 'next/server'
 
 import {
   getCountryCode,
@@ -6,7 +6,6 @@ import {
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
 import { localeRouter } from '@/utils/server/localeRouter'
-import { getVanityUrls } from '@/utils/server/vanityUrl'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
@@ -19,32 +18,6 @@ const logger = getLogger('middleware')
 export async function middleware(request: NextRequest) {
   if (isCypress) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
-  }
-
-  const { pathname } = request.nextUrl
-
-  const vanityUrls = await getVanityUrls().catch(error => {
-    logger.error('Failed to fetch vanity URLs', { error })
-
-    return []
-  })
-
-  for (const vanityUrl of vanityUrls) {
-    const { source, destination, permanent } = vanityUrl
-    const matcher = new URLPattern({ pathname: source })
-    const match = matcher.exec({ pathname })
-
-    if (match) {
-      const resolvedDestination = destination.replace(
-        /:([a-zA-Z]+)/g,
-        (_, key) => match.pathname.groups[key] || '',
-      )
-      const newURL = new URL(resolvedDestination, request.url)
-
-      logger.info(`vanity url match found, redirecting to ${newURL.toString()} from ${pathname}`)
-
-      return Response.redirect(newURL, permanent ? 308 : 307)
-    }
   }
 
   const localeResponse = localeRouter(request)
