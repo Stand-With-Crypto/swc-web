@@ -2,8 +2,8 @@ import React from 'react'
 import { Builder, withChildren } from '@builder.io/react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { BuilderComponentBaseProps } from '@/utils/web/builder'
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
+import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
 const REQUIRE_AUTHENTICATION_BLOCK_NAME = 'RequireAuthentication'
 const UNAUTHENTICATED_BLOCK_NAME = 'RequireAuthentication:Unauthenticated'
