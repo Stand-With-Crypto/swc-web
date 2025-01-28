@@ -4,7 +4,7 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { DTSI_BillCardFragment } from '@/data/dtsi/generated'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 

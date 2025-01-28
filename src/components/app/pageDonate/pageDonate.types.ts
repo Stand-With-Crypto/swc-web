@@ -1,5 +1,5 @@
 import { SumDonations } from '@/data/aggregations/getSumDonations'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export interface PageDonateProps {
   locale: SupportedLocale

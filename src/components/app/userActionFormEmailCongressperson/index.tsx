@@ -67,11 +67,11 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getEmailBodyText({
+      contactMessage: getEmailBodyText({
         firstName: user.firstName,
         lastName: user.lastName,
         address: user?.address?.formattedDescription,
@@ -87,11 +87,11 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getEmailBodyText(),
+    contactMessage: getEmailBodyText(),
     subject: 'Crypto Matters To Me',
     address: undefined,
     dtsiSlugs,
@@ -175,7 +175,7 @@ export function UserActionFormEmailCongressperson({
     if (hasModifiedMessage.current) return
 
     form.setValue(
-      'message',
+      'contactMessage',
       getEmailBodyText({
         firstName,
         lastName,
@@ -236,9 +236,11 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Contact Your Member Of Congress
+              Contact your member of congress
             </PageTitle>
-            <PageSubTitle className="mb-7">The 119th Congress Needs To Hear From You!</PageSubTitle>
+            <PageSubTitle className="mb-7">
+              Tell your senator to sign the discharge petition
+            </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField
@@ -316,7 +318,7 @@ export function UserActionFormEmailCongressperson({
               />
               <FormField
                 control={form.control}
-                name="message"
+                name="contactMessage"
                 render={({ field }) => (
                   <FormItem>
                     <div className="relative">
@@ -329,8 +331,11 @@ export function UserActionFormEmailCongressperson({
                       )}
                       <FormControl>
                         <Textarea
+                          autoComplete="off"
+                          autoCorrect="off"
                           placeholder=""
                           rows={16}
+                          spellCheck={false}
                           {...field}
                           onChange={e => {
                             hasModifiedMessage.current = true

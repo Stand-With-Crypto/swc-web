@@ -2,7 +2,6 @@ import { DTSIAvatar, DTSIAvatarProps } from '@/components/app/dtsiAvatar'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { DTSI_Person, Maybe } from '@/data/dtsi/generated'
-import { SupportedLocale } from '@/intl/locales'
 import {
   DTSIPersonRoleCategoryDisplayNameProps,
   getDTSIPersonRoleCategoryDisplayName,
@@ -11,6 +10,7 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 

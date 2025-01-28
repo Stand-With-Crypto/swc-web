@@ -1,9 +1,11 @@
 'use client'
 
 import React from 'react'
+import { useIsPreviewing } from '@builder.io/react'
 
-import { SupportedLocale } from '@/intl/locales'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { isCypress } from '@/utils/shared/executionEnvironment'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 import { CookieConsentBanner } from './banner'
 import { useCookieConsent } from './useCookieConsent'
@@ -19,6 +21,7 @@ export default function CookieConsent({
   locale,
   debug = process.env.NEXT_PUBLIC_DEBUG_COOKIE_CONSENT === 'true',
 }: CookieConsentProps) {
+  const isPreviewing = useIsPreviewing()
   const {
     acceptAllCookies,
     rejectAllOptionalCookies,
@@ -37,7 +40,7 @@ export default function CookieConsent({
     [setShouldShowBanner],
   )
 
-  if (hasGlobalPrivacyControl || !shouldShowBanner) {
+  if (hasGlobalPrivacyControl || !shouldShowBanner || isPreviewing || isCypress) {
     return null
   }
 

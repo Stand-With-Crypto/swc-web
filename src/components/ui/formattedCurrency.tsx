@@ -1,4 +1,4 @@
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 export function FormattedCurrency({

@@ -1,11 +1,12 @@
 import { UseFormReturn } from 'react-hook-form'
+import type { ScopeContext } from '@sentry/core'
 import * as Sentry from '@sentry/nextjs'
-import type { ScopeContext } from '@sentry/types'
 import { isError, noop } from 'lodash-es'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import { ZodDescribeMetadata } from '@/utils/shared/zod'
 import {
   trackFormSubmitErrored,
   trackFormSubmitSucceeded,
@@ -21,7 +22,14 @@ export type GenericErrorFormValues = {
 export async function triggerServerActionForForm<
   F extends UseFormReturn<any, any, any>,
   P,
-  Fn extends (args: P) => Promise<{ errors: Record<string, string[]> } | object | undefined>,
+  Fn extends (args: P) => Promise<
+    | {
+        errors: Record<string, string[]>
+        errorsMetadata?: Record<keyof P, ZodDescribeMetadata>
+      }
+    | object
+    | undefined
+  >,
 >(
   {
     form,
@@ -96,12 +104,40 @@ export async function triggerServerActionForForm<
         // LATER-TASK the right way of formatting multiple errors that return
         message: val.join('. '),
       })
+
+      if ('errorsMetadata' in response && response.errorsMetadata) {
+        Object.keys(response.errorsMetadata).forEach(errorMetadataField => {
+          const metadata = response.errorsMetadata?.[errorMetadataField as keyof P]
+
+          if (metadata) {
+            const { triggerException, severityLevel, message } = metadata
+
+            if (triggerException) {
+              Sentry.captureException(
+                message ?? response.errors[errorMetadataField]?.join('. ') ?? '',
+                {
+                  level: severityLevel ?? 'error',
+                  extra: {
+                    errorMetadataField,
+                    analyticsProps,
+                    response,
+                    formName,
+                    payload,
+                  },
+                },
+              )
+            }
+          }
+        })
+      }
     })
+
     Sentry.captureMessage('Field errors returned from action', {
       fingerprint: [`Field errors returned from action ${formName}`],
       tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
       extra: { analyticsProps, response, formName, payload },
     })
+
     return { status: 'error' as const }
   }
   trackFormSubmitSucceeded(formName, analyticsProps)

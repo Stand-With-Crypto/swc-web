@@ -7,6 +7,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 })
 
 const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
+const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
@@ -17,7 +18,7 @@ const contentSecurityPolicy = {
   ],
   'script-src': [
     "'self'",
-    isDev
+    !isProd
       ? // NextJS requires 'unsafe-eval' in dev (faster source maps)
         "'unsafe-eval' 'unsafe-inline' blob:"
       : /*
@@ -43,6 +44,7 @@ const contentSecurityPolicy = {
     'https://*.paa-reporting-advertising.amazon/',
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
+    'https://*.builder.io/',
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
@@ -57,6 +59,7 @@ const contentSecurityPolicy = {
     'https://*.paa-reporting-advertising.amazon/',
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
+    'https://*.builder.io/',
     // ENS
     'https://euc.li/',
     // Thirdweb contract metadata
@@ -96,7 +99,7 @@ const contentSecurityPolicy = {
   'object-src': ['none'],
   'base-uri': ["'self'"],
   'form-action': ["'self'"],
-  'frame-ancestors': ["'self'", 'https://www.figma.com'],
+  'frame-ancestors': ["'self'", 'https://www.figma.com', 'https://builder.io'],
   'block-all-mixed-content': [],
   ...(isDev ? {} : { 'upgrade-insecure-requests': [] }),
 }
@@ -332,7 +335,26 @@ const nextConfig: NextConfig = {
         destination: '/action/pledge?utm_source=swc&utm_medium=event&utm_campaign=sst',
         permanent: false,
       },
+      // Email shortlinks
+      {
+        source: '/e/sj-res-3',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=email&utm_campaign=broker-reporting-rule-1',
+        permanent: true,
+      },
       // SMS shortlinks
+      {
+        source: '/new-congress-2/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=new-member-activation-2&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/email-congress-retry/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=new-member-activation-retry&sessionId=:sessionId*',
+        permanent: true,
+      },
       {
         source: '/new-congress/:sessionId*',
         destination:

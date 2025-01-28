@@ -6,8 +6,8 @@ import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiP
 import { Button } from '@/components/ui/button'
 import { PageTitleProps } from '@/components/ui/pageTitleText'
 import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
-import { SupportedLocale } from '@/intl/locales'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export interface DTSIPersonHeroCardSectionProps {
   locale: SupportedLocale

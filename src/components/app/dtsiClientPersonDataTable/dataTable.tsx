@@ -39,7 +39,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
@@ -278,7 +278,7 @@ export function DataTableSkeleton<TData extends Person = Person>({
             <GlobalFilters columns={table.getAllColumns()} />
           </div>
 
-          <div className="relative w-full">
+          <div className="relative w-full" data-testid="table-skeleton">
             <Table className="lg:table-fixed">
               <TableHeader className="bg-secondary text-gray-400">
                 {table.getHeaderGroups().map(headerGroup => (

@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useState } from 'react'
+import { useIsPreviewing } from '@builder.io/react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
 import { ChevronDown, Menu } from 'lucide-react'
@@ -28,13 +29,14 @@ import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
-import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
+  const isPreviewing = useIsPreviewing()
   const urls = getIntlUrls(locale)
   const [hoveredMenuIndex, setHoveredMenuIndex] = useState<number | null>(null)
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
@@ -102,7 +104,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     }
   }, [dialogProps])
 
-  const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
+  const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production' && !isPreviewing
   const LoginButton = () => (
     <LoginDialogWrapper
       authenticatedContent={

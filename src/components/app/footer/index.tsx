@@ -4,17 +4,13 @@ import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookie
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
-import getIntl from '@/intl/intlMessages'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { externalUrls, getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-const i18nKey = 'FooterLinks'
-
 const footerLinkStyles = cn('block text-gray-400')
 
-export async function Footer({ locale }: { locale: SupportedLocale }) {
-  const intl = await getIntl(locale)
+export function Footer({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)
 
   return (
@@ -34,69 +30,33 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
           <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-3 sm:space-y-6">
               <ExternalLink className={footerLinkStyles} href={externalUrls.twitter()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.twitterV2`,
-                  defaultMessage: 'Twitter / X',
-                  description: 'Label for twitter footer item',
-                })}
+                Twitter / X
               </ExternalLink>
               <ExternalLink className={footerLinkStyles} href={externalUrls.youtube()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.youtube`,
-                  defaultMessage: 'Youtube',
-                  description: 'Label for Youtube footer item',
-                })}
+                Youtube
               </ExternalLink>
               <ExternalLink className={footerLinkStyles} href={externalUrls.instagram()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.instagram`,
-                  defaultMessage: 'Instagram',
-                  description: 'Label for instagram footer item',
-                })}
+                Instagram
               </ExternalLink>
               <ExternalLink className={footerLinkStyles} href={externalUrls.facebook()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.facebook`,
-                  defaultMessage: 'Facebook',
-                  description: 'Label for Facebook footer item',
-                })}
+                Facebook
               </ExternalLink>
               <ExternalLink className={footerLinkStyles} href={externalUrls.linkedin()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.linkedIn`,
-                  defaultMessage: 'LinkedIn',
-                  description: 'Label for LinkedIn footer item',
-                })}
+                LinkedIn
               </ExternalLink>
               <ExternalLink className={footerLinkStyles} href={externalUrls.discord()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.discord`,
-                  defaultMessage: 'Discord',
-                  description: 'Label for Discord footer item',
-                })}
+                Discord
               </ExternalLink>
               <ExternalLink className={footerLinkStyles} href={externalUrls.emailFeedback()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.feedback`,
-                  defaultMessage: 'Send feedback',
-                  description: 'Label for send feedback footer item',
-                })}
+                Send feedback
               </ExternalLink>
             </div>
             <div className="space-y-3 sm:space-y-6">
               <InternalLink className={footerLinkStyles} href={urls.termsOfService()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.tos`,
-                  defaultMessage: 'Terms of service',
-                  description: 'Label for terms of service footer item',
-                })}
+                Terms of service
               </InternalLink>
               <InternalLink className={footerLinkStyles} href={urls.privacyPolicy()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.privacyPolicy`,
-                  defaultMessage: 'Privacy Policy',
-                  description: 'Label for privacy policy footer item',
-                })}
+                Privacy Policy
               </InternalLink>
               <CookieConsentFooterButton
                 className={cn(footerLinkStyles, 'h-auto text-wrap p-0 text-left text-base')}

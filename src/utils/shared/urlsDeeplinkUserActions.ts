@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
-import { SupportedLocale } from '@/intl/locales'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -89,7 +89,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/email-debate`
     },
-    [UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025]: ({ locale }) => {
+    [UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3]: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/email`
     },
   },

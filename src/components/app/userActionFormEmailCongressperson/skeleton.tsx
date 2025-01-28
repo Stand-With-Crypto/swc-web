@@ -13,7 +13,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { SupportedLocale } from '@/intl/locales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
@@ -31,9 +31,11 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Contact Your Member Of Congress
+            Contact your member of congress
           </PageTitle>
-          <PageSubTitle className="mb-7">The 119th Congress Needs To Hear From You!</PageSubTitle>
+          <PageSubTitle className="mb-7">
+            Tell your senator to sign the discharge petition
+          </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormItemSkeleton>
@@ -69,9 +71,12 @@ export function UserActionFormEmailCongresspersonSkeleton({
               </div>
               <FormItemSkeleton>
                 <Textarea
+                  autoComplete="off"
+                  autoCorrect="off"
                   defaultValue={getEmailBodyText()}
                   placeholder="Your message..."
                   rows={16}
+                  spellCheck={false}
                 />
               </FormItemSkeleton>
             </div>

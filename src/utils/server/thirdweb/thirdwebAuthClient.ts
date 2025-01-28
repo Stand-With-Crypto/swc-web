@@ -10,14 +10,18 @@ const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
   'THIRDWEB_AUTH_PRIVATE_KEY',
 )
 
+export const THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS = 60 * 60 * 24 * 7 // 1 week
+
+export const thirdwebAdminAccount = privateKeyToAccount({
+  client: thirdwebClient,
+  privateKey: THIRDWEB_AUTH_PRIVATE_KEY,
+})
+
 export const thirdwebAuth = createAuth({
   domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || '',
-  adminAccount: privateKeyToAccount({
-    client: thirdwebClient,
-    privateKey: THIRDWEB_AUTH_PRIVATE_KEY,
-  }),
+  adminAccount: thirdwebAdminAccount,
   jwt: {
-    expirationTimeSeconds: 60 * 60 * 24 * 7, // 1 week
+    expirationTimeSeconds: THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS,
   },
   client: thirdwebClient,
 })

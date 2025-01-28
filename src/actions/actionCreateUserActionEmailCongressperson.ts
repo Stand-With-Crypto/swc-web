@@ -52,6 +52,7 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import { withSafeParseWithMetadata } from '@/utils/shared/zod'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
@@ -84,10 +85,15 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = await getUserSessionId()
-  const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(input)
+  const validatedFields = withSafeParseWithMetadata(
+    zodUserActionFormEmailCongresspersonAction,
+    input,
+  )
+
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
+      errorsMetadata: validatedFields.errorsMetadata,
     }
   }
   logger.info('validated fields')
@@ -227,7 +233,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
         isEmailOptin: true,
       },
       emailSubject: validatedFields.data.subject,
-      emailMessage: validatedFields.data.message,
+      emailMessage: validatedFields.data.contactMessage,
     },
   })
 

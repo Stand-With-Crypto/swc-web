@@ -6,28 +6,28 @@ export const INDUSTRY_PARTNERS = [
   },
   {
     title: 'Coinbase',
-    imageSrc: '/partners/coinbase.png',
+    imageSrc: '/partners/coinbase.svg',
     url: 'https://www.coinbase.com/',
   },
   {
     title: 'thirdweb',
-    imageSrc: '/partners/thirdweb.png',
+    imageSrc: '/partners/thirdweb.svg',
     url: 'https://thirdweb.com/',
   },
   {
     title: 'Lightspark',
-    imageSrc: '/partners/lightspark.png',
+    imageSrc: '/partners/lightspark.svg',
     url: 'https://www.lightspark.com/',
   },
-  { title: 'Paxos', imageSrc: '/partners/paxos.png', url: 'https://paxos.com/' },
+  { title: 'Paxos', imageSrc: '/partners/paxos.svg', url: 'https://paxos.com/' },
   {
     title: 'DoTheySupportIt',
-    imageSrc: '/partners/dtsi.png',
+    imageSrc: '/partners/dtsi.svg',
     url: 'https://www.dotheysupportit.com/',
   },
   {
     title: 'Privy',
-    imageSrc: '/partners/privy_coral.png',
+    imageSrc: '/partners/privy.svg',
     url: 'https://www.privy.io/',
   },
   {
@@ -37,32 +37,32 @@ export const INDUSTRY_PARTNERS = [
   },
   {
     title: 'dYdX',
-    imageSrc: '/partners/dydx.png',
+    imageSrc: '/partners/dydx.svg',
     url: 'https://dydx.exchange/',
   },
   {
     title: 'Anchorage Digital',
-    imageSrc: '/partners/anchorage.png',
+    imageSrc: '/partners/anchorage.svg',
     url: 'https://www.anchorage.com/',
   },
   {
     title: 'Blockchain.com',
-    imageSrc: '/partners/blockchaindotcom.png',
+    imageSrc: '/partners/blockchaindotcom.svg',
     url: 'https://www.blockchain.com/',
   },
   {
     title: 'Haun Ventures',
-    imageSrc: '/partners/haun.png',
+    imageSrc: '/partners/haun.svg',
     url: 'https://www.haun.co/',
   },
   {
     title: 'Electric Capital',
-    imageSrc: '/partners/electric_capital.png',
+    imageSrc: '/partners/electric_capital.svg',
     url: 'https://www.electriccapital.com/',
   },
   {
     title: 'Galxe',
-    imageSrc: '/partners/galxe.png',
+    imageSrc: '/partners/galxe.svg',
     url: 'https://www.galxe.com/',
   },
   {
@@ -72,7 +72,7 @@ export const INDUSTRY_PARTNERS = [
   },
   {
     title: 'Consensys',
-    imageSrc: '/partners/consensys.png',
+    imageSrc: '/partners/consensys.svg',
     url: 'https://consensys.io/',
   },
   {
