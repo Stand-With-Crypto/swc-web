@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { optOutUser } from '@/utils/server/sms/actions'
-import { MESSAGE_BLOCKED_CODE } from '@/utils/server/sms/SendSMSError'
+import * as smsErrorCodes from '@/utils/server/sms/errorCodes'
 import { verifySignature } from '@/utils/server/sms/utils'
 
 interface SMSFailedEvent {
@@ -26,7 +26,12 @@ interface SMSFailedEventPayload {
 }
 
 // These errors are related to the user's mobile carrier not being available when we send messages
-const filteredErrors = ['30003', '30005']
+const filteredErrors = [
+  smsErrorCodes.UNREACHABLE_DESTINATION_HANDSET_CODE,
+  smsErrorCodes.UNKNOWN_DESTINATION_HANDSET_CODE,
+  smsErrorCodes.FILTERED_TO_PREVENT_MESSAGE_LOOPS_CODE,
+  smsErrorCodes.LANDLINE_OR_UNREACHABLE_CARRIER_CODE,
+]
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SMSFailedEvent>(request)
@@ -72,7 +77,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 })
 
 async function handleSMSErrors(errorCode: string, messageId: string) {
-  if (errorCode === String(MESSAGE_BLOCKED_CODE)) {
+  if (errorCode === smsErrorCodes.MESSAGE_BLOCKED_CODE) {
     const userCommunication = await prismaClient.userCommunication.findFirst({
       where: {
         messageId,
