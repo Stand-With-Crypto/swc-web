@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
@@ -46,65 +45,24 @@ const HeroImage = ({ children, className, fallback, videoPath }: HeroImageProps)
   )
 }
 
-export interface HeroContentProps {
+export interface HeroImageContentProps {
   title?: string
   ctaText?: string
-  ctaOverrideLink?: {
-    enabled: boolean
-    href: string
-    text: string
-  }
   imagePath?: string
   videoPath?: string
 }
 
 export interface HeroImageWrapperProps {
-  unauthenticatedProps?: HeroContentProps
-  authenticatedProps?: HeroContentProps
+  unauthenticatedProps?: HeroImageContentProps
+  authenticatedProps?: HeroImageContentProps
 }
 
-interface HeroImageContentProps {
-  title?: string
-  ctaText?: string
-  ctaOverrideLink?: {
-    enabled: boolean
-    href: string
-    text: string
-  }
-  imagePath?: string
-  videoPath?: string
-}
-
-function HeroImageContent({
+export function HeroImageContent({
   title,
   ctaText,
-  ctaOverrideLink,
   imagePath = '/homepageHero.webp',
   videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
 }: HeroImageContentProps) {
-  const ctaElement =
-    ctaOverrideLink?.enabled && ctaOverrideLink?.href && ctaOverrideLink?.text ? (
-      <Link href={ctaOverrideLink.href} target="_blank">
-        <Button
-          className={cn('max-sm:w-full', linkBoxLinkClassName)}
-          data-link-box-subject
-          variant="secondary"
-        >
-          {ctaOverrideLink.text}
-          <ArrowUpRight />
-        </Button>
-      </Link>
-    ) : (
-      <Button
-        className={cn('max-sm:w-full', linkBoxLinkClassName)}
-        data-link-box-subject
-        variant="secondary"
-      >
-        {ctaText}
-        <ArrowUpRight />
-      </Button>
-    )
-
   return (
     <HeroImage
       className="flex-col sm:flex-row"
@@ -123,7 +81,14 @@ function HeroImageContent({
       videoPath={videoPath}
     >
       <p>{title}</p>
-      {ctaElement}
+      <Button
+        className={cn('max-sm:w-full', linkBoxLinkClassName)}
+        data-link-box-subject
+        variant="secondary"
+      >
+        {ctaText}
+        <ArrowUpRight />
+      </Button>
     </HeroImage>
   )
 }
@@ -136,25 +101,19 @@ export function HeroImageContainer({
     <LoginDialogWrapper
       authenticatedContent={
         <UserActionFormShareOnTwitterDialog>
-          {/* This div is here because the dialog won't open on builder.io without it*/}
-          <div>
-            <HeroImageContent
-              ctaText="Follow"
-              title="Stay up to date on crypto policy by following @StandWithCrypto on X."
-              {...authenticatedProps}
-            />
-          </div>
+          <HeroImageContent
+            ctaText="Follow"
+            title="Stay up to date on crypto policy by following @StandWithCrypto on X."
+            {...authenticatedProps}
+          />
         </UserActionFormShareOnTwitterDialog>
       }
     >
-      {/* This div is here because the dialog won't open on builder.io without it*/}
-      <div>
-        <HeroImageContent
-          ctaText="Join"
-          title="Join Stand With Crypto and help us defend your right to own crypto in America."
-          {...unauthenticatedProps}
-        />
-      </div>
+      <HeroImageContent
+        ctaText="Join"
+        title="Join Stand With Crypto and help us defend your right to own crypto in America."
+        {...unauthenticatedProps}
+      />
     </LoginDialogWrapper>
   )
 }
