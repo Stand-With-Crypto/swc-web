@@ -1,8 +1,6 @@
 /// <reference types="cypress" />
 
 describe('action - join stand with crypto', () => {
-  // Temporarily skipping this test because we need to update a Thirdweb API key configuration
-  // and the person responsible for this is OOO
   it('should join stand with crypto, ask for profile update and then logout', () => {
     cy.visit('/')
 
@@ -22,6 +20,8 @@ describe('action - join stand with crypto', () => {
     cy.waitForLogout()
 
     // asserts that join with crypto is clickable again after logout
-    cy.contains('Join Stand With Crypto').should('exist').should('be.enabled')
+    // we can not use be.enabled here because the element that has the text is not the button
+    cy.get('button').contains('Join Stand With Crypto').click()
+    cy.assertLoginModalOpened()
   })
 })
