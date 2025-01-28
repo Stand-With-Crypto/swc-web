@@ -9,12 +9,12 @@ const REQUIRE_AUTHENTICATION_BLOCK_NAME = 'RequireAuthentication'
 const UNAUTHENTICATED_BLOCK_NAME = 'RequireAuthentication:Unauthenticated'
 const AUTHENTICATED_BLOCK_NAME = 'RequireAuthentication:Authenticated'
 
-interface RequireAuthenticationProps {
+interface RequireAuthenticationProps extends BuilderComponentBaseProps {
   shouldOpenLoginDialog: boolean
 }
 
 Builder.registerComponent(
-  withChildren((props: RequireAuthenticationProps & BuilderComponentBaseProps) => {
+  withChildren((props: RequireAuthenticationProps) => {
     const isAuthenticated = props.builderState?.state.isAuthenticated
 
     const unauthenticatedBlockId = props.builderBlock?.children.find(

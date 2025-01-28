@@ -1,4 +1,4 @@
-import { Builder, withChildren } from '@builder.io/react'
+import { Builder } from '@builder.io/react'
 
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
@@ -6,6 +6,7 @@ import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 import { Button, buttonVariantsConfig } from '.'
 
 interface BuilderButtonProps extends BuilderComponentBaseProps {
+  text: string
   variant: keyof typeof buttonVariantsConfig.variant
   size: keyof typeof buttonVariantsConfig.size
   link?: {
@@ -15,7 +16,7 @@ interface BuilderButtonProps extends BuilderComponentBaseProps {
 }
 
 Builder.registerComponent(
-  withChildren((props: BuilderButtonProps) => {
+  (props: BuilderButtonProps) => {
     const buttonProps = {
       ...props.attributes,
       size: props.size,
@@ -30,43 +31,46 @@ Builder.registerComponent(
       if (type === 'external') {
         return (
           <Button {...buttonProps} asChild key={key}>
-            <ExternalLink href={href}>{props.children}</ExternalLink>
+            <ExternalLink href={href}>{props.text}</ExternalLink>
           </Button>
         )
       }
 
       return (
         <Button {...buttonProps} asChild key={key}>
-          <InternalLink href={href}>{props.children}</InternalLink>
+          <InternalLink href={href}>{props.text}</InternalLink>
         </Button>
       )
     }
 
     return (
       <Button {...buttonProps} key={key}>
-        {props.children}
+        {props.text}
       </Button>
     )
-  }),
+  },
   {
     name: 'Core:Button',
     noWrap: true, // Disables the default "Link URL" field
-    canHaveChildren: true,
     override: true,
     inputs: [
+      {
+        name: 'text',
+        type: 'string',
+        required: true,
+        defaultValue: 'Click me!',
+      },
       {
         name: 'variant',
         type: 'enum',
         defaultValue: 'default',
         enum: Object.keys(buttonVariantsConfig.variant),
-        helperText: 'The button variant',
       },
       {
         name: 'size',
         type: 'enum',
         defaultValue: 'default',
         enum: Object.keys(buttonVariantsConfig.size),
-        helperText: 'The button size',
       },
       {
         name: 'link',
@@ -90,17 +94,6 @@ Builder.registerComponent(
             helperText: 'Whether the link is internal or external',
           },
         ],
-      },
-    ],
-    defaultChildren: [
-      {
-        '@type': '@builder.io/sdk:Element',
-        component: {
-          name: 'Text',
-          options: {
-            text: 'Click me!',
-          },
-        },
       },
     ],
   },
