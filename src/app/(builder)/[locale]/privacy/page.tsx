@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
+import { RenderComponentModelTypes } from '@/components/app/builder/constants'
 import { PageProps } from '@/types'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
@@ -18,7 +19,11 @@ export default async function PrivacyPage(props: PageProps) {
 
   return (
     <BuilderPageLayout locale={locale} modelName={PAGE_MODEL} pathname={PATHNAME}>
-      <RenderBuilderContent content={content} model={PAGE_MODEL} />
+      <RenderBuilderContent
+        content={content}
+        model={PAGE_MODEL}
+        modelType={RenderComponentModelTypes.PAGE}
+      />
     </BuilderPageLayout>
   )
 }
