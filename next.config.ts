@@ -3,7 +3,11 @@ import { withSentryConfig } from '@sentry/nextjs'
 import * as Sentry from '@sentry/nextjs'
 import type { NextConfig } from 'next'
 
-import { VanityUrl } from '@/utils/server/vanityUrl'
+interface VanityUrl {
+  source: string
+  destination: string
+  permanent: boolean
+}
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
