@@ -6,6 +6,8 @@ it('page - politicians interactions', () => {
   cy.get('h1').contains('politicians')
   cy.get('tbody').find('tr').should('have.length', 100)
 
+  cy.get('[data-testid="table-skeleton"]').should('not.exist')
+
   // filter the table by state
   /**
    * find the element with the data-e2e attribute of "state-filter-trigger".
@@ -16,7 +18,8 @@ it('page - politicians interactions', () => {
    * NOTE: If the table rerenders too much the scroll state will reset.
    */
   cy.get('[data-testid="state-filter-trigger"]').as('stateFilterTrigger').scrollIntoView()
-  cy.get('@stateFilterTrigger').should('be.visible').click()
+  cy.get('@stateFilterTrigger').should('be.visible')
+  cy.get('@stateFilterTrigger').click()
   cy.get('[role="option"]').contains('div', 'AK').as('stateOption')
   cy.get('@stateOption').should('be.visible').click({
     // force: true // Bypass visibility checks, not ideal

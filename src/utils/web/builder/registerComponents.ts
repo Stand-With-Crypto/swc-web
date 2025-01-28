@@ -1,1 +1,5 @@
+import '@/components/app/authentication/authentication.builder'
 import '@/components/ui/button/button.builder'
+import '@/utils/web/builder/components/container.builder'
+import '@/utils/web/builder/components/text.builder'
+import './editorSettings'

@@ -4,6 +4,7 @@ import React from 'react'
 import { useIsPreviewing } from '@builder.io/react'
 
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { isCypress } from '@/utils/shared/executionEnvironment'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 import { CookieConsentBanner } from './banner'
@@ -39,7 +40,7 @@ export default function CookieConsent({
     [setShouldShowBanner],
   )
 
-  if (hasGlobalPrivacyControl || !shouldShowBanner || isPreviewing) {
+  if (hasGlobalPrivacyControl || !shouldShowBanner || isPreviewing || isCypress) {
     return null
   }
 
