@@ -1,6 +1,9 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
+import * as Sentry from '@sentry/nextjs'
 import type { NextConfig } from 'next'
+
+import { VanityUrl } from '@/utils/server/vanityUrl'
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -241,9 +244,22 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
+    const apiURL = `${process.env.INTERNAL_API_BASE_URL!}/api/public/vanity-url`
+    const vanityUrls = (await fetch(apiURL)
+      .then(res => res.json() ?? [])
+      .catch(error => {
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'vanityUrl',
+          },
+        })
+        return []
+      })) as VanityUrl[]
+
     return [
       // redirects from v1 -> v2
       ...V1_ACTION_REDIRECTS,
+      ...vanityUrls,
       {
         permanent: true,
         destination: '/action/call',
