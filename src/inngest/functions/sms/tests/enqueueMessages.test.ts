@@ -12,8 +12,8 @@ import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInval
 import { fakerFields } from '@/mocks/fakerUtils'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
-import type { SendSMSPayload } from '@/utils/server/sms/sendSMS'
 import * as smsErrorCodes from '@/utils/server/sms/errorCodes'
+import type { SendSMSPayload } from '@/utils/server/sms/sendSMS'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
