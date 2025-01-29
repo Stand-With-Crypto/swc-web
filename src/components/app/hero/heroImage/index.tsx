@@ -16,16 +16,17 @@ interface HeroImageProps {
    * Fallback content to display while the video is loading or if the browser does not support the video tag.
    */
   fallback?: ReactNode
+  videoPath?: string
 }
 
-const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
+const HeroImage = ({ children, className, fallback, videoPath }: HeroImageProps) => {
   return (
     <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
       <Video
         className={cn('absolute left-0 top-0 h-full w-full object-cover')}
         fallback={fallback}
         poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0dpm3AgAD5gHXYQBQLgAAAABJRU5ErkJggg=="
-        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
+        src={videoPath}
       />
 
       <div
@@ -44,62 +45,71 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
   )
 }
 
-const unauthenticatedContent = (
-  <HeroImage
-    fallback={
-      <NextImage
-        alt="sign up"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
-        className="h-full w-full object-cover"
-        fill
-        placeholder="blur"
-        priority
-        sizes={'(max-width: 400px) 375px, 500px'}
-        src="/homepageHero.webp"
-      />
-    }
-  >
-    <p>Join Stand With Crypto and help us defend your right to own crypto in America.</p>
-    <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
-      Join
-      <ArrowUpRight />
-    </Button>
-  </HeroImage>
-)
+export interface HeroImageContentProps {
+  title?: string
+  ctaText?: string
+  imagePath?: {
+    src: string
+    alt: string
+  }
+  videoPath?: string
+}
 
-const authenticatedContent = (
-  <UserActionFormShareOnTwitterDialog>
+export function HeroImageContent({
+  ctaText,
+  title,
+  imagePath = {
+    src: '/homepageHero.webp',
+    alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+  },
+  videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
+}: HeroImageContentProps) {
+  return (
     <HeroImage
       className="flex-col sm:flex-row"
       fallback={
         <NextImage
-          alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
+          alt={imagePath.alt}
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
           className="h-full w-full object-cover"
           fill
           placeholder="blur"
           priority
           sizes={'(max-width: 400px) 375px, 500px'}
-          src="/homepageHero.webp"
+          src={imagePath.src}
         />
       }
+      videoPath={videoPath}
     >
-      <p>Stay up to date on crypto policy by following @StandWithCrypto on X.</p>
+      <p>{title}</p>
       <Button
         className={cn('max-sm:w-full', linkBoxLinkClassName)}
         data-link-box-subject
         variant="secondary"
       >
-        Follow <ArrowUpRight />
+        {ctaText}
+        <ArrowUpRight />
       </Button>
     </HeroImage>
-  </UserActionFormShareOnTwitterDialog>
-)
+  )
+}
 
-export function HeroImageWrapper() {
+export function HeroImageContainer() {
   return (
-    <LoginDialogWrapper authenticatedContent={authenticatedContent}>
-      {unauthenticatedContent}
+    <LoginDialogWrapper
+      authenticatedContent={
+        <UserActionFormShareOnTwitterDialog>
+          <HeroImageContent
+            ctaText="Follow"
+            title="Stay up to date on crypto policy by following @StandWithCrypto on X."
+          />
+        </UserActionFormShareOnTwitterDialog>
+      }
+    >
+      <HeroImageContent
+        ctaText="Join"
+        title="Join Stand With Crypto and help us defend your right to own crypto in America."
+      />
     </LoginDialogWrapper>
   )
 }

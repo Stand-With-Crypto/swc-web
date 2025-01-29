@@ -10,7 +10,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
-export function HeroCTA() {
+export function HeroCTA({ ctaText }: { ctaText: string }) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
 
@@ -18,7 +18,7 @@ export function HeroCTA() {
 
   const unauthenticatedContent = (
     <Button size="lg" variant="primary-cta">
-      Join the fight
+      {ctaText}
     </Button>
   )
 

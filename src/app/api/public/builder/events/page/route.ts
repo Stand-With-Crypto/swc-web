@@ -73,6 +73,8 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   const body = (await request.json()) as PageEventBody
 
+  logger.info('Body:', body)
+
   const query = body.newValue?.query ?? body.previousValue?.query ?? []
 
   if (!query) {

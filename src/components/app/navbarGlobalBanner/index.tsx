@@ -14,7 +14,12 @@ import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
 
 const languages = getNavigatorLanguages()
 
-export function NavBarGlobalBanner() {
+export interface NavBarGlobalBannerProps {
+  hideBanner?: boolean
+  campaignText?: string
+}
+
+export function NavBarGlobalBanner({ hideBanner = false, campaignText }: NavBarGlobalBannerProps) {
   const router = useRouter()
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
@@ -34,8 +39,8 @@ export function NavBarGlobalBanner() {
     router.push(currentCountry?.url)
   }
 
-  if (!hasHydrated) {
-    return <CurrentCampaign />
+  if (hideBanner || !hasHydrated) {
+    return null
   }
 
   if (currentCountry) {
@@ -77,7 +82,21 @@ export function NavBarGlobalBanner() {
     )
   }
 
-  return <CurrentCampaign />
+  if (campaignText) {
+    return (
+      <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
+        <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
+          <div className="container flex justify-between">
+            <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
+              <p>{campaignText}</p>
+            </div>
+          </div>
+        </WrapperContainer>
+      </div>
+    )
+  }
+
+  return null
 }
 
 /**
@@ -111,7 +130,3 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: readonly {
     emoji: '🇨🇦',
   },
 ]
-
-function CurrentCampaign() {
-  return null
-}

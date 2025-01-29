@@ -6,7 +6,7 @@ import { cn, twNoop } from '@/utils/web/cn'
 
 const DEFAULT_SIZE = 'md'
 
-const subTitleVariantsConfig = {
+export const subTitleVariantsConfig = {
   size: {
     sm: twNoop('text-sm md:text-base'),
     md: twNoop('text-base md:text-lg'),
@@ -14,17 +14,19 @@ const subTitleVariantsConfig = {
   },
 }
 
-const pageSubTitleVariants = cva('text-center text-fontcolor-muted', {
+export const pageSubTitleVariants = cva('text-center text-fontcolor-muted', {
   variants: subTitleVariantsConfig,
   defaultVariants: {
     size: DEFAULT_SIZE,
   },
 })
 
+export const AsVariantsConfig = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'] as const
+
 interface PageSubTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof pageSubTitleVariants> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
+  as?: (typeof AsVariantsConfig)[number]
   withoutBalancer?: boolean
 }
 

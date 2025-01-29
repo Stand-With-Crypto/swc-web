@@ -4,10 +4,13 @@ import type { ComponentProps } from 'react'
 import { Builder, BuilderComponent } from '@builder.io/react'
 import { notFound } from 'next/navigation'
 
+import { RenderComponentModelTypes } from '@/components/app/builder/constants'
 import { useSession } from '@/hooks/useSession'
 import { BuilderState } from '@/utils/web/builder/types'
 
-type BuilderPageProps = ComponentProps<typeof BuilderComponent>
+type BuilderPageProps = ComponentProps<typeof BuilderComponent> & {
+  modelType: RenderComponentModelTypes
+}
 
 export function RenderBuilderContent(props: BuilderPageProps) {
   const session = useSession()
@@ -22,5 +25,9 @@ export function RenderBuilderContent(props: BuilderPageProps) {
     return <BuilderComponent {...props} data={builderData} />
   }
 
-  return notFound()
+  if (props.modelType === RenderComponentModelTypes.PAGE) {
+    return notFound()
+  }
+
+  return null
 }

@@ -9,7 +9,6 @@ import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
 import { Navbar } from '@/components/app/navbar'
-import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
@@ -68,7 +67,6 @@ export default async function Layout({
         />
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
-            <NavBarGlobalBanner />
             <Navbar locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer locale={locale} />
