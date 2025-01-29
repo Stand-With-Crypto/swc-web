@@ -52,6 +52,7 @@ export async function PageHome({
       <TopLevelBuilderClientLogic>
         <RenderBuilderContent
           content={homeHeroImageContent}
+          model={BuilderSectionModelIdentifiers.HERO_IMAGE}
           modelType={RenderComponentModelTypes.SECTION}
         />
       </TopLevelBuilderClientLogic>
