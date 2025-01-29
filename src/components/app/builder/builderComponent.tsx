@@ -15,7 +15,7 @@ export function RenderBuilderContent(props: BuilderPageProps) {
   const builderData: BuilderState = {
     // This prop should only be used in the context of the Builder.io editor when editing or previewing
     // We should never use it for the actual rendering of the component
-    isAuthenticated: session.isLoggedIn,
+    mockIsAuthenticated: session.isLoggedIn,
   }
 
   if (props.content || Builder.isEditing) {
