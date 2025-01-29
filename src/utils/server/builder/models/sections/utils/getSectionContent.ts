@@ -10,6 +10,7 @@ export function getSectionContent(
       userAttributes: {
         urlPath: pathname,
       },
+      cachebust: true,
     })
     .toPromise()
 }
