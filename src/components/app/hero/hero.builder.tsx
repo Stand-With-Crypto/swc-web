@@ -32,7 +32,7 @@ Builder.registerComponent(
     return <HeroImageContent {...heroProps} key={props.attributes?.key} />
   },
   {
-    name: 'Hero',
+    name: 'HeroImage',
     description: 'The hero image',
     friendlyName: 'Hero Image',
     canHaveChildren: false,

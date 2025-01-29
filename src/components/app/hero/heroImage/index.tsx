@@ -58,8 +58,8 @@ export interface HeroImageWrapperProps {
 }
 
 export function HeroImageContent({
-  title,
   ctaText,
+  title,
   imagePath = '/homepageHero.webp',
   videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
 }: HeroImageContentProps) {
@@ -93,10 +93,7 @@ export function HeroImageContent({
   )
 }
 
-export function HeroImageContainer({
-  unauthenticatedProps,
-  authenticatedProps,
-}: HeroImageWrapperProps) {
+export function HeroImageContainer() {
   return (
     <LoginDialogWrapper
       authenticatedContent={
@@ -104,7 +101,6 @@ export function HeroImageContainer({
           <HeroImageContent
             ctaText="Follow"
             title="Stay up to date on crypto policy by following @StandWithCrypto on X."
-            {...authenticatedProps}
           />
         </UserActionFormShareOnTwitterDialog>
       }
@@ -112,7 +108,6 @@ export function HeroImageContainer({
       <HeroImageContent
         ctaText="Join"
         title="Join Stand With Crypto and help us defend your right to own crypto in America."
-        {...unauthenticatedProps}
       />
     </LoginDialogWrapper>
   )
