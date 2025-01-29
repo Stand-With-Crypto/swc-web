@@ -1,5 +1,4 @@
 export enum BuilderSectionModelIdentifiers {
-  HERO_IMAGE = 'hero-image',
-  HERO_TEXT = 'hero-text',
+  HOME_HERO_CTA = 'home-hero-cta',
   BANNER = 'global-banner',
 }
