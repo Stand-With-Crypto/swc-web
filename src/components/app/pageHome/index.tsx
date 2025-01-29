@@ -4,8 +4,8 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
-import { HeroCTA } from '@/components/app/hero/heroCTA'
-import { HeroBuilder } from '@/components/app/hero/renderHeroBuilder'
+import { HeroImageBuilder } from '@/components/app/hero/renderHeroImageBuilder'
+import { HeroTextBuilder } from '@/components/app/hero/renderHeroTextBuilder'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/delayedRecentActivity'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
@@ -33,10 +33,12 @@ export async function PageHome({
   sumDonationsByUser,
   dtsiHomepagePeople,
   advocatePerStateDataProps,
-  homeHeroContent,
+  homeHeroImageContent,
+  homeHeroTextContent,
 }: { params: Awaited<PageProps['params']> } & Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
-    homeHeroContent: Content
+    homeHeroImageContent: Content
+    homeHeroTextContent: Content
   }) {
   const { locale } = params
   const urls = getIntlUrls(locale)
@@ -45,7 +47,10 @@ export async function PageHome({
 
   return (
     <>
-      <HeroBuilder content={homeHeroContent} />
+      <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
+        <HeroTextBuilder content={homeHeroTextContent} />
+        <HeroImageBuilder content={homeHeroImageContent} />
+      </section>
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
 

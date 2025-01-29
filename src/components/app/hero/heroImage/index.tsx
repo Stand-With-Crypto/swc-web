@@ -46,8 +46,8 @@ const HeroImage = ({ children, className, fallback, videoPath }: HeroImageProps)
 }
 
 export interface HeroImageContentProps {
-  heroTitle?: string
-  heroCtaText?: string
+  title?: string
+  ctaText?: string
   imagePath?: {
     src: string
     alt: string
@@ -56,8 +56,8 @@ export interface HeroImageContentProps {
 }
 
 export function HeroImageContent({
-  heroTitle,
-  heroCtaText,
+  ctaText,
+  title,
   imagePath = {
     src: '/homepageHero.webp',
     alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
@@ -81,13 +81,13 @@ export function HeroImageContent({
       }
       videoPath={videoPath}
     >
-      <p>{heroTitle}</p>
+      <p>{title}</p>
       <Button
         className={cn('max-sm:w-full', linkBoxLinkClassName)}
         data-link-box-subject
         variant="secondary"
       >
-        {heroCtaText}
+        {ctaText}
         <ArrowUpRight />
       </Button>
     </HeroImage>
@@ -100,15 +100,15 @@ export function HeroImageContainer() {
       authenticatedContent={
         <UserActionFormShareOnTwitterDialog>
           <HeroImageContent
-            heroCtaText="Follow"
-            heroTitle="Stay up to date on crypto policy by following @StandWithCrypto on X."
+            ctaText="Follow"
+            title="Stay up to date on crypto policy by following @StandWithCrypto on X."
           />
         </UserActionFormShareOnTwitterDialog>
       }
     >
       <HeroImageContent
-        heroCtaText="Join"
-        heroTitle="Join Stand With Crypto and help us defend your right to own crypto in America."
+        ctaText="Join"
+        title="Join Stand With Crypto and help us defend your right to own crypto in America."
       />
     </LoginDialogWrapper>
   )

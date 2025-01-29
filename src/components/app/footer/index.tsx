@@ -25,7 +25,7 @@ export function Footer({ locale }: { locale: SupportedLocale }) {
               Join to show your support, collect advocacy NFTs, and protect the future of crypto.
               #StandWithCrypto
             </p>
-            <HeroCTA />
+            <HeroCTA ctaText="Join the fight" />
           </div>
           <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-3 sm:space-y-6">

@@ -18,7 +18,11 @@ export default async function Home(props: PageProps) {
     restrictToUS: true,
   })
   const advocatePerStateDataProps = await getAdvocatesMapData()
-  const homeHeroContent = await getSectionContent(BuilderSectionModelIdentifiers.HERO, '/')
+  const homeHeroImageContent = await getSectionContent(
+    BuilderSectionModelIdentifiers.HERO_IMAGE,
+    '/',
+  )
+  const homeHeroTextContent = await getSectionContent(BuilderSectionModelIdentifiers.HERO_TEXT, '/')
 
   /*
   the locale check in layout works for most cases, but for some reason if we hit
@@ -32,7 +36,8 @@ export default async function Home(props: PageProps) {
   return (
     <PageHome
       advocatePerStateDataProps={advocatePerStateDataProps}
-      homeHeroContent={homeHeroContent}
+      homeHeroImageContent={homeHeroImageContent}
+      homeHeroTextContent={homeHeroTextContent}
       params={params}
       {...asyncProps}
     />

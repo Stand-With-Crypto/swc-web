@@ -7,19 +7,14 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-type HeroBuilderProps = BuilderComponentBaseProps &
-  HeroImageContentProps & {
-    ctaTitle: string
-    ctaSubTitle: string
-    ctaButtonText: string
-  }
+type HeroBuilderProps = BuilderComponentBaseProps & HeroImageContentProps
 
 Builder.registerComponent(
   (props: HeroBuilderProps) => {
     const heroProps = {
       ...props.attributes,
-      heroTitle: props.heroTitle,
-      heroCtaText: props.heroCtaText,
+      title: props.title,
+      ctaText: props.ctaText,
       imagePath: props.imagePath,
       videoPath: props.videoPath,
     }
@@ -28,43 +23,21 @@ Builder.registerComponent(
 
     if (isAuthenticated) {
       return (
-        <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
-          <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
-            <PageTitle className={'lg:text-left'} withoutBalancer>
-              {props.ctaTitle}
-            </PageTitle>
-            <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
-              {props.ctaSubTitle}
-            </PageSubTitle>
-            <HeroCTA ctaText={props.ctaButtonText} />
-          </div>
-          <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-            <UserActionFormShareOnTwitterDialog>
-              {/* This div is here because the dialog won't open on builder.io without it*/}
-              <div>
-                <HeroImageContent {...heroProps} key={props.attributes?.key} />
-              </div>
-            </UserActionFormShareOnTwitterDialog>
-          </div>
-        </section>
+        <div className="order-0 self-start md:container lg:order-1 lg:px-0">
+          <UserActionFormShareOnTwitterDialog>
+            {/* This div is here because the dialog won't open on builder.io without it*/}
+            <div>
+              <HeroImageContent {...heroProps} key={props.attributes?.key} />
+            </div>
+          </UserActionFormShareOnTwitterDialog>
+        </div>
       )
     }
 
     return (
-      <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
-        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
-          <PageTitle className={'lg:text-left'} withoutBalancer>
-            {props.ctaTitle}
-          </PageTitle>
-          <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
-            {props.ctaSubTitle}
-          </PageSubTitle>
-          <HeroCTA ctaText={props.ctaButtonText} />
-        </div>
-        <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <HeroImageContent {...heroProps} key={props.attributes?.key} />
-        </div>
-      </section>
+      <div className="order-0 self-start md:container lg:order-1 lg:px-0">
+        <HeroImageContent {...heroProps} key={props.attributes?.key} />
+      </div>
     )
   },
   {
@@ -75,43 +48,18 @@ Builder.registerComponent(
     noWrap: true,
     inputs: [
       {
-        name: 'ctaTitle',
-        helperText: 'The title of the CTA',
-        friendlyName: 'CTA Title',
-        type: 'text',
-        required: true,
-        defaultValue: "If you care about crypto, it's time to prove it",
-      },
-      {
-        name: 'ctaSubTitle',
-        helperText: 'The subtitle of the CTA',
-        friendlyName: 'CTA Subtitle',
-        type: 'text',
-        required: true,
-        defaultValue:
-          "52 million Americans own crypto. And yet, crypto's future in America remains uncertain. Congress is writing the rules as we speak - but they won't vote YES until they've heard from you.",
-      },
-      {
-        name: 'ctaButtonText',
-        helperText: 'The text of the CTA button',
-        friendlyName: 'CTA Button Text',
-        type: 'text',
-        required: true,
-        defaultValue: 'Join the fight',
-      },
-      {
-        name: 'heroTitle',
-        helperText: 'The title of the unauthenticated hero',
-        friendlyName: 'Hero Title',
+        name: 'title',
+        helperText: 'The title of the unauthenticated hero image',
+        friendlyName: 'Title',
         type: 'text',
         required: true,
         defaultValue:
           'Join Stand With Crypto and help us defend your right to own crypto in America.',
       },
       {
-        name: 'heroCtaText',
-        helperText: 'The text of the CTA button for the unauthenticated hero',
-        friendlyName: 'Hero CTA Text',
+        name: 'ctaText',
+        helperText: 'The text of the CTA button for the unauthenticated hero image',
+        friendlyName: 'CTA Text',
         type: 'text',
         required: true,
         defaultValue: 'Join',
@@ -148,6 +96,62 @@ Builder.registerComponent(
         friendlyName: 'Video Path',
         type: 'text',
         defaultValue: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
+      },
+    ],
+  },
+)
+
+type HeroTextBuilderProps = BuilderComponentBaseProps & {
+  title: string
+  subtitle: string
+  ctaText: string
+}
+
+Builder.registerComponent(
+  (props: HeroTextBuilderProps) => {
+    return (
+      <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
+        <PageTitle className={'lg:text-left'} withoutBalancer>
+          {props.title}
+        </PageTitle>
+        <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
+          {props.subtitle}
+        </PageSubTitle>
+        <HeroCTA ctaText={props.ctaText} />
+      </div>
+    )
+  },
+  {
+    name: 'HeroText',
+    description: 'The hero text',
+    friendlyName: 'Hero Text',
+    canHaveChildren: false,
+    noWrap: true,
+    inputs: [
+      {
+        name: 'title',
+        helperText: 'The title of the hero text',
+        friendlyName: 'Title',
+        type: 'text',
+        required: true,
+        defaultValue: "If you care about crypto, it's time to prove it",
+      },
+      {
+        name: 'subtitle',
+        helperText: 'The subtitle of the hero text',
+        friendlyName: 'Subtitle',
+        type: 'text',
+        required: true,
+        defaultValue:
+          "52 million Americans own crypto. And yet, crypto's future in America remains uncertain. Congress is writing the rules as we speak - but they won't vote YES until they've heard from you.",
+      },
+      {
+        name: 'ctaText',
+        helperText: 'The text of the CTA button for the hero text',
+        friendlyName: 'CTA Text',
+        type: 'text',
+        required: true,
+        defaultValue: 'Join the fight',
       },
     ],
   },

@@ -14,6 +14,8 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
+import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/sections/constants'
+import { getSectionContent } from '@/utils/server/builder/models/sections/utils/getSectionContent'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -35,6 +37,11 @@ export async function HomepageDialogDeeplinkLayout({
     getHomepageTopLevelMetrics(),
   ])
   const advocatePerStateDataProps = await getAdvocatesMapData()
+  const homeHeroImageContent = await getSectionContent(
+    BuilderSectionModelIdentifiers.HERO_IMAGE,
+    '/',
+  )
+  const homeHeroTextContent = await getSectionContent(BuilderSectionModelIdentifiers.HERO_TEXT, '/')
 
   return (
     <>
@@ -69,6 +76,8 @@ export async function HomepageDialogDeeplinkLayout({
           countPolicymakerContacts,
         }}
         advocatePerStateDataProps={advocatePerStateDataProps}
+        homeHeroImageContent={homeHeroImageContent}
+        homeHeroTextContent={homeHeroTextContent}
       />
     </>
   )
