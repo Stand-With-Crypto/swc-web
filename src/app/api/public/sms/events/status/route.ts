@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { CommunicationMessageStatus, UserCommunicationJourneyType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -75,6 +76,11 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const user = await getUserByPhoneNumber(phoneNumber)
 
   if (!user) {
+    Sentry.captureMessage(`User not found for phone number ${phoneNumber}`, {
+      tags: {
+        domain: 'smsStatusRoute',
+      },
+    })
     return new NextResponse('success', {
       status: 200,
     })

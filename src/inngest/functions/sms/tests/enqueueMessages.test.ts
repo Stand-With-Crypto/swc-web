@@ -12,12 +12,8 @@ import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInval
 import { fakerFields } from '@/mocks/fakerUtils'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
+import * as smsErrorCodes from '@/utils/server/sms/errorCodes'
 import type { SendSMSPayload } from '@/utils/server/sms/sendSMS'
-import {
-  INVALID_PHONE_NUMBER_CODE,
-  IS_UNSUBSCRIBED_USER_CODE,
-  TOO_MANY_REQUESTS_CODE,
-} from '@/utils/server/sms/SendSMSError'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
@@ -120,9 +116,9 @@ describe('enqueueMessages', () => {
     const failedPhoneNumber = mockedPayload[2].phoneNumber
 
     const phoneNumbersThatShouldThrowErrors = {
-      [invalidPhoneNumber]: INVALID_PHONE_NUMBER_CODE,
-      [unsubscribedPhoneNumber]: IS_UNSUBSCRIBED_USER_CODE,
-      [failedPhoneNumber]: TOO_MANY_REQUESTS_CODE,
+      [invalidPhoneNumber]: smsErrorCodes.INVALID_PHONE_NUMBER_CODE,
+      [unsubscribedPhoneNumber]: smsErrorCodes.IS_UNSUBSCRIBED_USER_CODE,
+      [failedPhoneNumber]: smsErrorCodes.TOO_MANY_REQUESTS_CODE,
     }
 
     ;(sendSMS as jest.Mock).mockImplementation(({ to, body }: SendSMSPayload) => {
