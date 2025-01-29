@@ -3,3 +3,5 @@ export enum SupportedLocale {
 }
 export const DEFAULT_LOCALE = SupportedLocale.EN_US
 export const ORDERED_SUPPORTED_LOCALES: readonly SupportedLocale[] = [SupportedLocale.EN_US]
+
+export const LOCALE_COOKIE = 'SWC_LOCALE'
