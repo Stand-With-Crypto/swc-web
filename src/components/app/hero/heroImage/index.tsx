@@ -46,21 +46,22 @@ const HeroImage = ({ children, className, fallback, videoPath }: HeroImageProps)
 }
 
 export interface HeroImageContentProps {
-  title?: string
-  ctaText?: string
-  imagePath?: string
+  heroTitle?: string
+  heroCtaText?: string
+  imagePath?: {
+    src: string
+    alt: string
+  }
   videoPath?: string
 }
 
-export interface HeroImageWrapperProps {
-  unauthenticatedProps?: HeroImageContentProps
-  authenticatedProps?: HeroImageContentProps
-}
-
 export function HeroImageContent({
-  ctaText,
-  title,
-  imagePath = '/homepageHero.webp',
+  heroTitle,
+  heroCtaText,
+  imagePath = {
+    src: '/homepageHero.webp',
+    alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+  },
   videoPath = 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
 }: HeroImageContentProps) {
   return (
@@ -68,25 +69,25 @@ export function HeroImageContent({
       className="flex-col sm:flex-row"
       fallback={
         <NextImage
-          alt="Stay up to date on crypto policy by following @StandWithCrypto on X."
+          alt={imagePath.alt}
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
           className="h-full w-full object-cover"
           fill
           placeholder="blur"
           priority
           sizes={'(max-width: 400px) 375px, 500px'}
-          src={imagePath}
+          src={imagePath.src}
         />
       }
       videoPath={videoPath}
     >
-      <p>{title}</p>
+      <p>{heroTitle}</p>
       <Button
         className={cn('max-sm:w-full', linkBoxLinkClassName)}
         data-link-box-subject
         variant="secondary"
       >
-        {ctaText}
+        {heroCtaText}
         <ArrowUpRight />
       </Button>
     </HeroImage>
@@ -99,15 +100,15 @@ export function HeroImageContainer() {
       authenticatedContent={
         <UserActionFormShareOnTwitterDialog>
           <HeroImageContent
-            ctaText="Follow"
-            title="Stay up to date on crypto policy by following @StandWithCrypto on X."
+            heroCtaText="Follow"
+            heroTitle="Stay up to date on crypto policy by following @StandWithCrypto on X."
           />
         </UserActionFormShareOnTwitterDialog>
       }
     >
       <HeroImageContent
-        ctaText="Join"
-        title="Join Stand With Crypto and help us defend your right to own crypto in America."
+        heroCtaText="Join"
+        heroTitle="Join Stand With Crypto and help us defend your right to own crypto in America."
       />
     </LoginDialogWrapper>
   )

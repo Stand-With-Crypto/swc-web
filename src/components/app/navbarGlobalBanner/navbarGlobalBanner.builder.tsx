@@ -16,7 +16,6 @@ Builder.registerComponent(
       campaignText={props.campaignText}
       hideBanner={props.hideBanner}
       key={props.attributes?.key}
-      outsideUSBannerText={props.outsideUSBannerText}
     />
   ),
   {
@@ -25,15 +24,6 @@ Builder.registerComponent(
     canHaveChildren: false,
     noWrap: true,
     inputs: [
-      {
-        name: 'outsideUSBannerText',
-        friendlyName: 'Outside of the US banner text',
-        type: 'text',
-        helperText:
-          'This text will be displayed in the navbar when the user is outside of the United States.',
-        defaultValue:
-          'Actions on Stand With Crypto are only available to users based in the United States.',
-      },
       {
         name: 'hideBanner',
         friendlyName: 'Hide banner',

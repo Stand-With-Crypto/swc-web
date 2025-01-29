@@ -15,16 +15,11 @@ import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
 const languages = getNavigatorLanguages()
 
 export interface NavBarGlobalBannerProps {
-  outsideUSBannerText?: string
   hideBanner?: boolean
   campaignText?: string
 }
 
-export function NavBarGlobalBanner({
-  outsideUSBannerText = 'Actions on Stand With Crypto are only available to users based in the United States.',
-  hideBanner = false,
-  campaignText,
-}: NavBarGlobalBannerProps) {
+export function NavBarGlobalBanner({ hideBanner = false, campaignText }: NavBarGlobalBannerProps) {
   const router = useRouter()
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
@@ -77,7 +72,9 @@ export function NavBarGlobalBanner({
         <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
           <div className="container flex justify-between">
             <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-              <p>{outsideUSBannerText}</p>
+              <p>
+                Actions on Stand With Crypto are only available to users based in the United States.
+              </p>
             </div>
           </div>
         </WrapperContainer>

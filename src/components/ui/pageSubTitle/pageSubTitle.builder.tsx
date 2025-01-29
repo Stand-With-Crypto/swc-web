@@ -1,26 +1,54 @@
 import { Builder } from '@builder.io/react'
 
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import {
+  AsVariantsConfig,
+  PageSubTitle,
+  subTitleVariantsConfig,
+} from '@/components/ui/pageSubTitle'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-type BuilderPageSubtitleProps = BuilderComponentBaseProps & React.HTMLAttributes<HTMLHeadingElement>
+interface BuilderPageSubtitleProps extends BuilderComponentBaseProps {
+  title: string
+  as: (typeof AsVariantsConfig)[number]
+  size: keyof typeof subTitleVariantsConfig.size
+}
 
 Builder.registerComponent(
-  (props: BuilderPageSubtitleProps) => (
-    <PageSubTitle {...props.attributes} key={props.attributes?.key}>
-      {props.children}
-    </PageSubTitle>
-  ),
+  (props: BuilderPageSubtitleProps) => {
+    const pageSubTitleProps = {
+      ...props.attributes,
+      as: props.as,
+      size: props.size,
+    }
+
+    return (
+      <PageSubTitle {...pageSubTitleProps} key={props.attributes?.key} size={props.size}>
+        {props.title}
+      </PageSubTitle>
+    )
+  },
   {
     name: 'PageSubTitle',
     friendlyName: 'Page Subtitle',
     noWrap: true,
     inputs: [
       {
-        name: 'text',
+        name: 'title',
         type: 'string',
         required: true,
         defaultValue: 'Enter some text...',
+      },
+      {
+        name: 'as',
+        type: 'enum',
+        defaultValue: 'h2',
+        enum: AsVariantsConfig,
+      },
+      {
+        name: 'size',
+        type: 'enum',
+        defaultValue: 'default',
+        enum: Object.keys(subTitleVariantsConfig.size),
       },
     ],
   },
