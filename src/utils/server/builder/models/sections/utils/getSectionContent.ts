@@ -12,6 +12,7 @@ export function getSectionContent(
       },
       prerender: false,
       cachebust: true,
+      staleCacheSeconds: 60,
     })
     .toPromise()
 }
