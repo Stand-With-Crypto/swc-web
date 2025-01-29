@@ -20,7 +20,7 @@ function Text(props: TextProps & BuilderComponentAttributes) {
   return (
     <div
       {...props}
-      className={cn('prose max-w-full', props.className)}
+      className={cn('prose max-w-full break-words', props.className)}
       dangerouslySetInnerHTML={{
         __html: sanitizeHtml(props.text, {
           allowedAttributes: {
