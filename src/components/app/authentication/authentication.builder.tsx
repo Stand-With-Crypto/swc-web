@@ -95,7 +95,7 @@ Builder.registerComponent(
         type: 'boolean',
         defaultValue: false,
         helperText:
-          'Whether the login dialog should be opened when the unauthorized content is clicked',
+          'Whether the login dialog should be opened when the unauthenticated content is clicked',
         friendlyName: 'Open Login Dialog',
       },
     ],
