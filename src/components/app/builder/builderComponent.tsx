@@ -1,17 +1,12 @@
 'use client'
 
-import '@/utils/web/builder/registerComponents'
-
 import type { ComponentProps } from 'react'
 import { Builder, BuilderComponent } from '@builder.io/react'
 import { notFound } from 'next/navigation'
 
 import { RenderComponentModelTypes } from '@/components/app/builder/constants'
 import { useSession } from '@/hooks/useSession'
-import { maybeInitBuilderReactClient } from '@/utils/web/builder/maybeInitBuilderReactClient'
 import { BuilderState } from '@/utils/web/builder/types'
-
-maybeInitBuilderReactClient()
 
 type BuilderPageProps = ComponentProps<typeof BuilderComponent> & {
   modelType: RenderComponentModelTypes

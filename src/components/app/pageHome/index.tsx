@@ -1,11 +1,10 @@
-import { Content } from '@builder.io/react'
-
+import { RenderBuilderContent } from '@/components/app/builder'
+import { RenderComponentModelTypes } from '@/components/app/builder/constants'
+import { TopLevelBuilderClientLogic } from '@/components/app/builder/topLevelBuilderClientLogic'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
-import { HeroImageBuilder } from '@/components/app/hero/renderHeroImageBuilder'
-import { HeroTextBuilder } from '@/components/app/hero/renderHeroTextBuilder'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/delayedRecentActivity'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
@@ -19,6 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
+import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/sections/constants'
+import { getSectionContent } from '@/utils/server/builder/models/sections/utils/getSectionContent'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -33,24 +34,28 @@ export async function PageHome({
   sumDonationsByUser,
   dtsiHomepagePeople,
   advocatePerStateDataProps,
-  homeHeroImageContent,
-  homeHeroTextContent,
 }: { params: Awaited<PageProps['params']> } & Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
-    homeHeroImageContent: Content
-    homeHeroTextContent: Content
   }) {
   const { locale } = params
   const urls = getIntlUrls(locale)
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
 
+  const homeHeroImageContent = await getSectionContent(
+    BuilderSectionModelIdentifiers.HERO_IMAGE,
+    '/',
+  )
+
   return (
     <>
-      <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
-        <HeroTextBuilder content={homeHeroTextContent} />
-        <HeroImageBuilder content={homeHeroImageContent} />
-      </section>
+      <TopLevelBuilderClientLogic>
+        <RenderBuilderContent
+          content={homeHeroImageContent}
+          modelType={RenderComponentModelTypes.SECTION}
+        />
+      </TopLevelBuilderClientLogic>
+
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
 

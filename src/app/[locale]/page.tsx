@@ -4,11 +4,10 @@ import { PageHome } from '@/components/app/pageHome'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
-import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/sections/constants'
-import { getSectionContent } from '@/utils/server/builder/models/sections/utils/getSectionContent'
 import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
 
-export const revalidate = 60 // 1 minute
+// TODO: change this latter
+export const revalidate = 10 // 1 minute
 export const dynamic = 'error'
 
 export default async function Home(props: PageProps) {
@@ -18,11 +17,6 @@ export default async function Home(props: PageProps) {
     restrictToUS: true,
   })
   const advocatePerStateDataProps = await getAdvocatesMapData()
-  const homeHeroImageContent = await getSectionContent(
-    BuilderSectionModelIdentifiers.HERO_IMAGE,
-    '/',
-  )
-  const homeHeroTextContent = await getSectionContent(BuilderSectionModelIdentifiers.HERO_TEXT, '/')
 
   /*
   the locale check in layout works for most cases, but for some reason if we hit
@@ -36,8 +30,6 @@ export default async function Home(props: PageProps) {
   return (
     <PageHome
       advocatePerStateDataProps={advocatePerStateDataProps}
-      homeHeroImageContent={homeHeroImageContent}
-      homeHeroTextContent={homeHeroTextContent}
       params={params}
       {...asyncProps}
     />

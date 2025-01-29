@@ -9,13 +9,10 @@ import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
 import { Navbar } from '@/components/app/navbar'
-import { NavBarGlobalBannerBuilder } from '@/components/app/navbarGlobalBanner/navbarGlobalBannerBuilder'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
 import { PageProps } from '@/types'
-import { BuilderSectionModelIdentifiers } from '@/utils/server/builder/models/sections/constants'
-import { getSectionContent } from '@/utils/server/builder/models/sections/utils/getSectionContent'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails, TOP_LEVEL_METADATA_DETAILS } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -53,7 +50,6 @@ export default async function Layout({
   params,
 }: PageProps & { children: React.ReactNode }) {
   const { locale } = await params
-  const bannerContent = await getSectionContent(BuilderSectionModelIdentifiers.BANNER)
 
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()
@@ -71,7 +67,6 @@ export default async function Layout({
         />
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
-            <NavBarGlobalBannerBuilder content={bannerContent} />
             <Navbar locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer locale={locale} />
