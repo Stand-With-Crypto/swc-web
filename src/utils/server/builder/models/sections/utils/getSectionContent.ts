@@ -5,6 +5,12 @@ export function getSectionContent(
   sectionModelName: BuilderSectionModelIdentifiers,
   pathname?: string,
 ) {
+  const MyFetchOptions: RequestInit = {
+    method: 'GET',
+    cache: 'no-cache',
+    keepalive: true,
+  }
+
   return builderSDKClient
     .get(sectionModelName, {
       userAttributes: {
@@ -12,6 +18,7 @@ export function getSectionContent(
       },
       prerender: false,
       cachebust: true,
+      fetchOptions: MyFetchOptions,
     })
     .toPromise()
 }
