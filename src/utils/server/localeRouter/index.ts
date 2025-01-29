@@ -22,9 +22,7 @@ export function localeRouter(request: NextRequest): NextResponse {
     const newPath = pathname.replace(`/${DEFAULT_LOCALE}`, '') || '/'
     const searchParams = request.nextUrl.search
 
-    const response = NextResponse.redirect(new URL(`${newPath}${searchParams}`, request.url))
-    setLocaleCookie(response, requestLocale)
-    return response
+    return setLocaleCookie(NextResponse.redirect(new URL(`${newPath}${searchParams}`, request.url)), requestLocale)
   }
 
   // If path doesn't start with any locale, rewrite to include default locale
@@ -32,15 +30,11 @@ export function localeRouter(request: NextRequest): NextResponse {
     const newPath = `/${DEFAULT_LOCALE}${pathname}`
     const searchParams = request.nextUrl.search
 
-    const response = NextResponse.rewrite(new URL(`${newPath}${searchParams}`, request.url))
-    setLocaleCookie(response, requestLocale)
-    return response
+    return setLocaleCookie(NextResponse.rewrite(new URL(`${newPath}${searchParams}`, request.url)), requestLocale)
   }
 
   // For all other locales, keep them visible in the URL
-  const response = NextResponse.next()
-  setLocaleCookie(response, requestLocale)
-  return response
+  return setLocaleCookie(NextResponse.next(), requestLocale)
 }
 
 function setLocaleCookie(response: NextResponse, locale: string) {
