@@ -3,6 +3,7 @@ import { DataCreationMethod, Prisma, UserAction } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -13,6 +14,7 @@ export function mockCreateUserActionInput() {
   return {
     actionType,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
+    tenantId: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Omit<
     Prisma.UserActionCreateInput,
     'userId' | 'nftMintId' | 'userCryptoAddressId' | 'userSessionId' | 'userEmailAddressId' | 'user'

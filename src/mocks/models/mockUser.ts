@@ -11,6 +11,7 @@ import { Decimal } from '@prisma/client/runtime/library'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 export function mockCreateUserInput({
   withData = faker.helpers.maybe(() => true, { probability: 0.5 }),
@@ -42,6 +43,7 @@ export function mockCreateUserInput({
     internalStatus: UserInternalStatus.VISIBLE,
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
+    tenantId: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Prisma.UserCreateInput
 }
 
