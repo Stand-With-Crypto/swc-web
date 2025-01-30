@@ -8,6 +8,7 @@ import {
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 export function mockCreateUserEmailAddressInput() {
   const source = faker.helpers.arrayElement(Object.values(UserEmailAddressSource))
@@ -15,6 +16,7 @@ export function mockCreateUserEmailAddressInput() {
     source,
     emailAddress: faker.internet.email(),
     isVerified: source === UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+    tenantId: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Omit<Prisma.UserEmailAddressCreateInput, 'userId' | 'user'>
 }
 
