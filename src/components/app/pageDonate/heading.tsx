@@ -12,7 +12,7 @@ export function Heading({ countryCode, title, description, sumDonations }: PageD
       <SumDonationsCounter countryCode={countryCode} initialData={sumDonations} />
       <PageTitle>{title}</PageTitle>
       <PageSubTitle>{description}</PageSubTitle>
-      <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} unavailableContent={null}>
+      <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
         <DonateButton />
       </GeoGate>
       <PageSubTitle className="text-xs lg:text-sm">

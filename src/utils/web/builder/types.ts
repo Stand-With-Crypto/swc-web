@@ -17,7 +17,7 @@ interface BuilderBlock {
 
 export interface BuilderState {
   /** This prop should only be used in the context of the Builder.io editor when editing or previewing */
-  isAuthenticated: boolean
+  mockIsAuthenticated: boolean
 }
 
 export interface BuilderComponentBaseProps {

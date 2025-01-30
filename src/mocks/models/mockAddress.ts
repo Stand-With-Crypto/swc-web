@@ -3,8 +3,11 @@ import { Address, Prisma } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 export function mockCreateAddressInput() {
+  const countryCode = faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES))
+
   const partial = {
     googlePlaceId: null,
     streetNumber: faker.location.buildingNumber(),
@@ -15,8 +18,9 @@ export function mockCreateAddressInput() {
     administrativeAreaLevel2: '',
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
-    countryCode: 'US',
+    countryCode: countryCode,
     usCongressionalDistrict: '12',
+    tenantId: countryCode,
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
     ...partial,

@@ -11,21 +11,29 @@ const ANALYTICS_NAME_USER_ACTION_FORM_UNAVAILABLE = 'User Action Form Unavailabl
 
 interface UserActionFormActionUnavailableProps {
   onConfirm?: () => void
+  countryCode?: string
 }
 
-export const UserActionFormActionUnavailable = (props: UserActionFormActionUnavailableProps) => {
-  const { onConfirm } = props
-
+export const UserActionFormActionUnavailable = ({
+  onConfirm,
+  countryCode,
+}: UserActionFormActionUnavailableProps) => {
   useEffectOnce(() => {
     trackPrimitiveComponentAnalytics(
-      ({ properties }) => {
+      ({ properties, args }) => {
         trackClientAnalytic('User Action Unavailable', {
           action: AnalyticActionType.view,
           component: AnalyticComponentType.text,
           ...properties,
+          ...args,
         })
       },
-      { args: undefined, analytics: ANALYTICS_NAME_USER_ACTION_FORM_UNAVAILABLE },
+      {
+        args: {
+          ...(countryCode ? { 'Country Code': countryCode } : {}),
+        },
+        analytics: ANALYTICS_NAME_USER_ACTION_FORM_UNAVAILABLE,
+      },
     )
   })
 

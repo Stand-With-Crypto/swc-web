@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Cookies from 'js-cookie'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
@@ -9,7 +10,7 @@ import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
 interface GeoGateProps {
   children: React.ReactNode
   countryCode: string
-  unavailableContent: React.ReactNode
+  unavailableContent?: React.ReactNode
   bypassCountryCheck?: boolean
 }
 
@@ -23,7 +24,11 @@ export const GeoGate = (props: GeoGateProps) => {
   const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
 
   if (!isValidCountryCode({ countryCode, userCountryCode, bypassCountryCheck })) {
-    return unavailableContent
+    if (!unavailableContent) return null
+
+    return React.cloneElement(unavailableContent as React.ReactElement<{ countryCode: string }>, {
+      countryCode,
+    })
   }
 
   return children

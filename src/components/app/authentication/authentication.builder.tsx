@@ -15,7 +15,7 @@ interface RequireAuthenticationProps extends BuilderComponentBaseProps {
 
 Builder.registerComponent(
   withChildren((props: RequireAuthenticationProps) => {
-    const isAuthenticated = props.builderState?.state.isAuthenticated
+    const mockIsAuthenticated = props.builderState?.state.mockIsAuthenticated
 
     const unauthenticatedBlockId = props.builderBlock?.children.find(
       ({ component }) => component.name === UNAUTHENTICATED_BLOCK_NAME,
@@ -46,7 +46,7 @@ Builder.registerComponent(
     )
 
     if (Builder.isEditing) {
-      return withWrapper(isAuthenticated ? AuthenticatedBlock : UnauthenticatedBlock)
+      return withWrapper(mockIsAuthenticated ? AuthenticatedBlock : UnauthenticatedBlock)
     }
 
     if (props.shouldOpenLoginDialog) {
@@ -95,7 +95,7 @@ Builder.registerComponent(
         type: 'boolean',
         defaultValue: false,
         helperText:
-          'Whether the login dialog should be opened when the unauthorized content is clicked',
+          'Whether the login dialog should be opened when the unauthenticated content is clicked',
         friendlyName: 'Open Login Dialog',
       },
     ],
