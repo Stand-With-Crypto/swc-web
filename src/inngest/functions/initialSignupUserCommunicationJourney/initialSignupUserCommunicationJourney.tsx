@@ -270,7 +270,7 @@ async function sendInitialSignUpEmail({
   const messageId = await sendMail({
     to: user.primaryUserEmailAddress.emailAddress,
     subject: Template.subjectLine,
-    html: render(
+    html: await render(
       <Template
         completedActionTypes={user.userActions
           .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
