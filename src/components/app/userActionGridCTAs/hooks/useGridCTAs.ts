@@ -2,7 +2,7 @@ import { UserActionType } from '@prisma/client'
 import { usePathname } from 'next/navigation'
 
 import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
-import { useLocale } from '@/hooks/useLocale'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface useGridCTAsProps {
@@ -18,8 +18,8 @@ export function useGridCTAs({
   performedUserActionTypes,
 }: useGridCTAsProps) {
   const pathname = usePathname()
-  const locale = useLocale()
-  const isProfilePage = pathname?.includes(getIntlUrls(locale).profile())
+  const countryCode = useCountryCode()
+  const isProfilePage = pathname?.includes(getIntlUrls(countryCode).profile())
 
   const performedUserActionObj = performedUserActionTypes.length
     ? performedUserActionTypes.reduce(

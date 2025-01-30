@@ -23,6 +23,7 @@ import { useSession } from '@/hooks/useSession'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
+import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
@@ -33,7 +34,7 @@ type PageUserProfile = { params: Awaited<PageProps['params']> } & {
 }
 
 export function PageUserProfile({ params, user }: PageUserProfile) {
-  const { locale } = params
+  const { countryCode } = params
 
   const isMobile = useIsMobile({
     defaultState: true,
@@ -77,7 +78,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
                 <FormattedDatetime
                   date={new Date(user.datetimeCreated)}
                   dateStyle="medium"
-                  locale={locale}
+                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
                 />
               </div>
             </div>
@@ -89,7 +90,12 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
           {[
             {
               label: 'Actions',
-              value: <FormattedNumber amount={numActionsCompleted} locale={locale} />,
+              value: (
+                <FormattedNumber
+                  amount={numActionsCompleted}
+                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+                />
+              ),
             },
             {
               label: 'Donated',
@@ -105,7 +111,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
                     return 0
                   })}
                   currencyCode={SupportedFiatCurrencyCodes.USD}
-                  locale={locale}
+                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
                 />
               ),
             },
@@ -114,7 +120,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
               value: (
                 <FormattedNumber
                   amount={userActions.filter(action => action.nftMint).length}
-                  locale={locale}
+                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
                 />
               ),
             },

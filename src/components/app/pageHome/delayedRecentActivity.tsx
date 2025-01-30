@@ -14,13 +14,13 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export function DelayedRecentActivityWithMap(props: {
   actions: PublicRecentActivity
   countUsers: number
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
 }) {
   const recentActivity = useApiRecentActivity(props.actions, { limit: 30, restrictToUS: true })
@@ -47,7 +47,7 @@ export function DelayedRecentActivityWithMap(props: {
       extras={{
         mapProps: {
           countUsers: props.countUsers,
-          locale: props.locale,
+          locale: props.countryCode,
           advocatesMapPageData: props.advocatesMapPageData,
         },
       }}
@@ -60,8 +60,8 @@ export function DelayedRecentActivityWithMap(props: {
         actions={recentActivity.data}
         advocatesMapPageData={props.advocatesMapPageData}
         countUsers={props.countUsers}
+        countryCode={props.countryCode}
         isEmbedded={false}
-        locale={props.locale}
       />
     </ErrorBoundary>
   )

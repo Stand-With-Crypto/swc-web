@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 
 import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recentActivityRow'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
-import { useLocale } from '@/hooks/useLocale'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { cn } from '@/utils/web/cn'
 
 export function RecentActivityRowAnimatedContainer({
@@ -11,7 +11,7 @@ export function RecentActivityRowAnimatedContainer({
 }: {
   actions: RecentActivityRowProps['action'][]
 }) {
-  const locale = useLocale()
+  const countryCode = useCountryCode()
   return (
     <AnimatePresence initial={false}>
       <div>
@@ -24,7 +24,7 @@ export function RecentActivityRowAnimatedContainer({
             key={action.id}
             transition={{ duration: 0.8 }}
           >
-            <VariantRecentActivityRow action={action} locale={locale} />
+            <VariantRecentActivityRow action={action} countryCode={countryCode} />
           </motion.div>
         ))}
       </div>

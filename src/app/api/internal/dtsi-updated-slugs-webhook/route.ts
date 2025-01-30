@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { DTSI_AllPeopleQueryTag } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
-import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 const logger = getLogger('/api/internal/dtsi-updated-slugs-webhook')
@@ -40,8 +40,8 @@ export async function POST(request: NextRequest) {
   const validatedFields = zodPayload.parse(await request.json())
   logger.info('Received webhook with updated slugs', validatedFields)
   const pathsToUpdate = flatten(
-    ORDERED_SUPPORTED_LOCALES.map(locale => {
-      const urls = getIntlUrls(locale, { actualPaths: true })
+    ORDERED_SUPPORTED_COUNTRIES.map(countryCode => {
+      const urls = getIntlUrls(countryCode, { actualPaths: true })
       return [
         urls.home(),
         urls.politiciansHomepage(),

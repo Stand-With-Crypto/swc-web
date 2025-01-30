@@ -2,16 +2,16 @@ import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageDetails } from '@/utils/server/builder/models/page/utils'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export async function BuilderPageLayout({
   children,
-  locale,
+  countryCode,
   pathname,
   modelName,
 }: {
   children: React.ReactNode
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   pathname: string
   modelName: BuilderPageModelIdentifiers
 }) {
@@ -19,9 +19,9 @@ export async function BuilderPageLayout({
 
   return (
     <>
-      {pageMetadata.hasNavbar && <Navbar locale={locale} />}
+      {pageMetadata.hasNavbar && <Navbar countryCode={countryCode} />}
       {children}
-      {pageMetadata.hasFooter && <Footer locale={locale} />}
+      {pageMetadata.hasFooter && <Footer countryCode={countryCode} />}
     </>
   )
 }

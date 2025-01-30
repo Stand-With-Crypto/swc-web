@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -16,7 +16,7 @@ const parseQueryString = (queryString?: string) => {
 }
 
 type DeeplinkConfig = {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   queryString?: string
 }
 
@@ -24,57 +24,57 @@ type DeeplinkFunction = (config: DeeplinkConfig) => string
 
 export const USER_ACTION_DEEPLINK_MAP: {
   [key in ActiveClientUserActionType]: {
-    getDeeplinkUrl: (config: { locale: SupportedLocale; queryString?: string }) => string
+    getDeeplinkUrl: (config: { countryCode: SupportedCountryCodes; queryString?: string }) => string
   }
 } = {
   [UserActionType.OPT_IN]: {
-    getDeeplinkUrl: ({ locale, queryString }) => {
-      return `${getIntlPrefix(locale)}/action/sign-up${parseQueryString(queryString)}`
+    getDeeplinkUrl: ({ countryCode, queryString }) => {
+      return `${getIntlPrefix(countryCode)}/action/sign-up${parseQueryString(queryString)}`
     },
   },
   [UserActionType.CALL]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/call`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/call`
     },
   },
   [UserActionType.EMAIL]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/email`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/email`
     },
   },
   [UserActionType.DONATION]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/donate`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/donate`
     },
   },
   [UserActionType.NFT_MINT]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/nft-mint`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/nft-mint`
     },
   },
   [UserActionType.VOTER_REGISTRATION]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/voter-registration`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/voter-registration`
     },
   },
   [UserActionType.TWEET]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/share`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/share`
     },
   },
   [UserActionType.VOTER_ATTESTATION]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/pledge`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/pledge`
     },
   },
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/voting-information`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/voting-information`
     },
   },
   [UserActionType.VOTING_DAY]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/voting-day`
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/voting-day`
     },
   },
 }
@@ -86,11 +86,11 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   }
 } = {
   [UserActionType.EMAIL]: {
-    [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/email-debate`
+    [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/email-debate`
     },
-    [UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3]: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/email`
+    [UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/email`
     },
   },
 }

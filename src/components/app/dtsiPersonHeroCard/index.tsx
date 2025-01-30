@@ -18,13 +18,13 @@ import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface Props {
   person: DTSI_PersonCardFragment
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   subheader: 'role' | 'role-w-state' | string
   isRecommended?: boolean
   footer?: React.ReactNode
@@ -79,7 +79,7 @@ function DTSIPersonHeroCardFooter({
 export function DTSIPersonHeroCard(props: Props) {
   const {
     person,
-    locale,
+    countryCode,
     isRecommended,
     footer,
     isClickable = true,
@@ -97,9 +97,9 @@ export function DTSIPersonHeroCard(props: Props) {
 
   return (
     <DtsiPersonHeroCardWrapper
+      countryCode={countryCode}
       forceMobile={forceMobile}
       isClickable={isClickable}
-      locale={locale}
       person={person}
       target={target}
     >
@@ -222,7 +222,7 @@ export function DTSIPersonHeroCard(props: Props) {
 
 export function DtsiPersonHeroCardWrapper({
   person,
-  locale,
+  countryCode,
   isClickable,
   children,
   forceMobile = false,
@@ -231,7 +231,7 @@ export function DtsiPersonHeroCardWrapper({
   isClickable: boolean
   children: ReactNode
   person: DTSI_PersonCardFragment
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   forceMobile?: boolean
   target?: React.HTMLAttributeAnchorTarget
 }) {
@@ -250,7 +250,7 @@ export function DtsiPersonHeroCardWrapper({
   return (
     <InternalLink
       className={className}
-      href={getIntlUrls(locale).politicianDetails(person.slug)}
+      href={getIntlUrls(countryCode).politicianDetails(person.slug)}
       target={target}
     >
       {children}

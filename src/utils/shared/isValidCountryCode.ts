@@ -1,5 +1,5 @@
 import { parseUserCountryCodeCookie } from '@/utils/server/getCountryCode'
-import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type IsValidCountryCodeArgs = {
   countryCode: string
@@ -20,7 +20,7 @@ export function isValidCountryCode({
   if (parsedExistingCountryCode.countryCode === countryCode) return true
   // there are cases where users in the US are getting blocked if they are close to the US border so we want to be more permissive with Canada/Mexico
   if (
-    countryCode === SUPPORTED_COUNTRY_CODES.US &&
+    countryCode === SupportedCountryCodes.US &&
     ['MX', 'CA'].includes(parsedExistingCountryCode.countryCode)
   ) {
     return true

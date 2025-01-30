@@ -10,7 +10,7 @@ import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
-import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const languages = getNavigatorLanguages()
 
@@ -61,7 +61,7 @@ export function NavBarGlobalBanner() {
     )
   }
 
-  if (parsedExistingCountryCode?.countryCode !== SUPPORTED_COUNTRY_CODES.US) {
+  if (parsedExistingCountryCode?.countryCode !== SupportedCountryCodes.US) {
     return (
       <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
         <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">

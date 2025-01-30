@@ -12,8 +12,8 @@ import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSucc
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
-import { useLocale } from '@/hooks/useLocale'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -23,8 +23,8 @@ function UserActionFormEmailDebateDeeplinkWrapperContent() {
 
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const router = useRouter()
-  const locale = useLocale()
-  const urls = getIntlUrls(locale)
+  const countryCode = useCountryCode()
+  const urls = getIntlUrls(countryCode)
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
   const [initialValues, loadingParams] =

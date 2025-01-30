@@ -27,8 +27,8 @@ export async function EventsPageDialogDeeplinkLayout({
   children,
   pageParams,
 }: EventsPageDialogDeeplinkLayout) {
-  const { locale } = pageParams
-  const urls = getIntlUrls(locale)
+  const { countryCode } = pageParams
+  const urls = getIntlUrls(countryCode)
 
   const events = await getEvents()
 

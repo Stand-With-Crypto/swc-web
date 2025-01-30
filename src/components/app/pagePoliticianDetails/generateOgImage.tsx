@@ -2,7 +2,7 @@
 // the above eslint rule is disabled because the img elements are required for the og image to work
 import { ImageResponse } from 'next/og'
 
-import { getData } from '@/app/[locale]/politicians/person/[dtsiSlug]/getData'
+import { getData } from '@/app/[countryCode]/politicians/person/[dtsiSlug]/getData'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,

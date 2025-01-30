@@ -22,6 +22,7 @@ import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRol
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
   UserActionEmailCampaignName,
@@ -54,7 +55,7 @@ const getSWCDisplayText = () => (
 )
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
-  locale,
+  countryCode,
 }: RecentActivityRowProps) {
   const urls = useIntlUrls()
 
@@ -114,7 +115,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: () => {
             return (
-              <InternalLink className="block" href={getIntlUrls(locale).donate()}>
+              <InternalLink className="block" href={getIntlUrls(countryCode).donate()}>
                 <Button>Donate</Button>
               </InternalLink>
             )
@@ -125,7 +126,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <FormattedCurrency
                 amount={action.amountUsd}
                 currencyCode={SupportedFiatCurrencyCodes.USD}
-                locale={locale}
+                locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
               />{' '}
               to {getSWCDisplayText()}
             </MainText>
@@ -186,7 +187,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <FormattedCurrency
                 amount={action.nftMint.costAtMintUsd}
                 currencyCode={SupportedFiatCurrencyCodes.USD}
-                locale={locale}
+                locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
               />{' '}
               donation
             </MainText>
@@ -289,5 +290,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       fallback: 'helped crypto',
     })
   }
-  return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />
+  return (
+    <RecentActivityRowBase
+      action={action}
+      countryCode={countryCode}
+      {...getActionSpecificProps()}
+    />
+  )
 }

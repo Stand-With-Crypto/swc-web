@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
-import { useCountryCode } from '@/hooks/useLocale'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { fullUrl } from '@/utils/shared/urls'
 import {
   getUserActionDeeplink,

@@ -11,7 +11,7 @@ import {
   sortDTSIPersonDataTable,
 } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
-import { useLocale } from '@/hooks/useLocale'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
@@ -44,7 +44,7 @@ export function DTSIClientPersonDataTable({
     fallbackData: { people: sortDTSIPersonDataTable(initialData) },
     keepPreviousData: true,
   })
-  const locale = useLocale()
+  const countryCode = useCountryCode()
 
   const passedData = useMemo(() => {
     if (!data?.people) return
@@ -52,12 +52,16 @@ export function DTSIClientPersonDataTable({
     return sortDTSIPersonDataTable(data?.people)
   }, [data?.people])
 
-  const tableColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
+  const tableColumns = useMemo(
+    () => getDTSIClientPersonDataTableColumns({ countryCode }),
+    [countryCode],
+  )
 
   return (
     <Suspense fallback={<DataTableSkeleton columns={tableColumns} data={passedData} />}>
       <DataTable
         columns={tableColumns}
+        countryCode={countryCode}
         data={passedData}
         globalFilterFn={(row, _, filterValue, addMeta) => {
           const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
@@ -79,7 +83,6 @@ export function DTSIClientPersonDataTable({
         }}
         key={data?.people ? 'loaded' : 'static'}
         loadState={data?.people ? 'loaded' : 'static'}
-        locale={locale}
       />
     </Suspense>
   )

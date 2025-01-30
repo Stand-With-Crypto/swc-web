@@ -1,9 +1,9 @@
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export type PageAdvocatesHeatmapProps = {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   homepageData: Awaited<ReturnType<typeof getHomepageData>>
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   title?: string

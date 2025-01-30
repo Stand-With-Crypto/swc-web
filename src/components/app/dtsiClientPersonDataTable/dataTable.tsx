@@ -39,12 +39,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
   loadState: 'loaded' | 'static'
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
 export const SortableHeader = <TData extends Person = Person>({
@@ -83,7 +83,7 @@ export function DataTable<TData extends Person = Person>({
   data = [],
   loadState,
   globalFilterFn,
-  locale,
+  countryCode,
   ...rest
 }: DataTableProps<TData>) {
   const router = useRouter()
@@ -122,14 +122,14 @@ export function DataTable<TData extends Person = Person>({
 
   const handleTableRowClick = useCallback(
     (event: MouseEvent<HTMLTableRowElement>, row: Row<TData>) => {
-      const politicianUrl = getIntlUrls(locale).politicianDetails(row.original.slug)
+      const politicianUrl = getIntlUrls(countryCode).politicianDetails(row.original.slug)
       if (event.ctrlKey || event.metaKey) {
         event.preventDefault()
         return window.open(politicianUrl, '_blank')
       }
       return router.push(politicianUrl)
     },
-    [locale, router],
+    [countryCode, router],
   )
 
   const tableRowModel = table.getRowModel()

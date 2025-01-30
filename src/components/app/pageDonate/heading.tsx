@@ -6,10 +6,10 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-export function Heading({ locale, title, description, sumDonations }: PageDonateProps) {
+export function Heading({ countryCode, title, description, sumDonations }: PageDonateProps) {
   return (
     <section className="mt-12 space-y-7">
-      <SumDonationsCounter initialData={sumDonations} locale={locale} />
+      <SumDonationsCounter countryCode={countryCode} initialData={sumDonations} />
       <PageTitle>{title}</PageTitle>
       <PageSubTitle>{description}</PageSubTitle>
       <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} unavailableContent={null}>
