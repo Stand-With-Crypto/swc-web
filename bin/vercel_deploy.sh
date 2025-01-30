@@ -19,7 +19,8 @@ checkDbSchema() {
   fi
 }
 
-checkDbSchema
+# removed temporarily until we have a better way to check the DB schema
+# checkDbSchema
 
 npx prisma generate
 npm run codegen
