@@ -43,6 +43,7 @@ model Address {
   usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
+  tenantId                 String   @default("US") @map("tenant_id")
 
   userActionEmails                      UserActionEmail[]
   userActionCalls                       UserActionCall[]
@@ -215,6 +216,7 @@ model UserEmailAddress {
   dataCreationMethod DataCreationMethod     @default(BY_USER) @map("data_creation_method")
   datetimeUpdated    DateTime               @updatedAt @map("datetime_updated")
   datetimeCreated    DateTime               @default(now()) @map("datetime_created")
+  tenantId           String                 @default("US") @map("tenant_id")
 
   userActions                     UserAction[]
   asPrimaryUserEmailAddress       User?              @relation("asPrimaryUserEmailAddress")
@@ -465,6 +467,7 @@ model UserActionVoterAttestation {
   id         String     @id @default(uuid())
   userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usaState   String?    @map("usa_state")
+  tenantId   String     @default("US") @map("tenant_id")
 
   @@map("user_action_voter_attestation")
 }
@@ -473,6 +476,7 @@ model UserActionTweetAtPerson {
   id                String     @id @default(uuid())
   userAction        UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   recipientDtsiSlug String?    @map("recipient_dtsi_slug")
+  tenantId          String     @default("US") @map("tenant_id")
 
   @@map("user_action_tweet_at_person")
 }
@@ -483,6 +487,7 @@ model UserActionRsvpEvent {
   eventState                 String     @map("event_state")
   shouldReceiveNotifications Boolean    @map("should_receive_notifications")
   userAction                 UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
+  tenantId                   String     @default("US") @map("tenant_id")
 
   @@index([eventSlug, eventState])
   @@map("user_action_rsvp_event")
@@ -494,6 +499,7 @@ model UserActionVotingInformationResearched {
   shouldReceiveNotifications Boolean    @map("should_receive_notifications")
   address                    Address?   @relation(fields: [addressId], references: [id])
   addressId                  String?    @map("address_id")
+  tenantId                   String     @default("US") @map("tenant_id")
 
   @@index([addressId])
   @@map("user_action_voting_information_researched")
@@ -515,6 +521,7 @@ model UserCommunicationJourney {
   datetimeCreated    DateTime                     @default(now()) @map("datetime_created")
   userCommunications UserCommunication[]
   campaignName       String?                      @map("campaign_name")
+  tenantId           String                       @default("US") @map("tenant_id")
 
   @@index([userId])
   @@map("user_communication_journey")
