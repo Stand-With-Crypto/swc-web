@@ -7,6 +7,7 @@ import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { MOCK_CURRENT_ETH_USD_EXCHANGE_RATE } from '@/utils/shared/exchangeRate'
 import { NFTSlug } from '@/utils/shared/nft'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 export function mockCreateNFTMintInput() {
   const status = faker.helpers.arrayElement(Object.values(NFTMintStatus))
@@ -31,6 +32,7 @@ export function mockCreateNFTMintInput() {
     costAtMintCurrencyCode: NFTCurrency.ETH,
     contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
     costAtMintUsd: costAtMint.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
+    tenantId: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Prisma.NFTMintCreateInput
 }
 export function mockNFTMint(): NFTMint {
