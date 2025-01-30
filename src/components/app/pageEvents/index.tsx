@@ -31,7 +31,7 @@ export function EventsPage({ events, isDeepLink }: EventsPageProps) {
 
       <PromotedEvents events={events} />
 
-      <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} unavailableContent={null}>
+      <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
         <EventsNearYou events={filteredFutureEvents} />
       </GeoGate>
 
