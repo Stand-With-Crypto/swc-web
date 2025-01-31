@@ -130,14 +130,10 @@ Sentry.init({
       return null
     }
 
-    console.log(window.self, window.top)
-
     // Check if the current window is within an iframe
     if (window.self !== window.top) {
       // Retrieve the URL of the parent frame
       const parentUrl = document.referrer
-
-      console.log('Parent URL:', parentUrl)
 
       if (IGNORED_IFRAME_PARENT_URLS.some(url => url.startsWith(parentUrl))) {
         return null
