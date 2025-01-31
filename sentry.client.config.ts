@@ -46,7 +46,7 @@ const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/a
 // List of parent page URLs where errors should be ignored
 // If the app is embedded in an iframe on any of these domains,
 // Sentry will discard errors to avoid unnecessary reporting.
-const IGNORED_IFRAME_PARENT_URLS = ['https://builder.io']
+const IGNORED_IFRAME_PARENT_URLS = ['https://builder.io/']
 
 const isSupportedBrowser = getIsSupportedBrowser(maybeDetectBrowser())
 
@@ -130,10 +130,14 @@ Sentry.init({
       return null
     }
 
+    console.log(window.self, window.top)
+
     // Check if the current window is within an iframe
     if (window.self !== window.top) {
       // Retrieve the URL of the parent frame
       const parentUrl = document.referrer
+
+      console.log('Parent URL:', parentUrl)
 
       if (IGNORED_IFRAME_PARENT_URLS.some(url => url.startsWith(parentUrl))) {
         return null
