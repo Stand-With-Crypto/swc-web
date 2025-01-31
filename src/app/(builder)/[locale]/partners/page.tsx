@@ -18,7 +18,6 @@ export default async function PartnersPage(props: PageProps) {
   const { locale } = await props.params
 
   const content = await getPageContent(PAGE_MODEL, PATHNAME)
-
   const partners = await getPartners()
 
   return (

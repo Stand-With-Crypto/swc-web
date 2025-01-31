@@ -22,9 +22,7 @@ async function getAllPartnersWithOffset(offset: number) {
         limit: LIMIT,
         fields: 'data',
         offset,
-        fetchOptions: {
-          headers: { next: { revalidate: 30 } },
-        },
+        cachebust: true,
       }),
     {
       retries: 3,
