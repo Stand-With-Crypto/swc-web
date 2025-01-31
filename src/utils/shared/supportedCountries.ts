@@ -1,7 +1,7 @@
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export enum SupportedCountryCodes {
-  US = 'US',
+  US = 'us',
 }
 
 export const DEFAULT_SUPPORTED_COUNTRY_CODE = SupportedCountryCodes.US

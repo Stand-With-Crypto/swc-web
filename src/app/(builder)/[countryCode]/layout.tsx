@@ -54,7 +54,7 @@ export default async function Layout({
 }: PageProps & { children: React.ReactNode }) {
   const { countryCode } = await params
 
-  if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode?.toUpperCase())) {
+  if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode)) {
     notFound()
   }
 

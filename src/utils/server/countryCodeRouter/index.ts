@@ -21,20 +21,19 @@ export function countryCodeRouter(request: NextRequest): NextResponse {
   const searchParams = request.nextUrl.search
 
   const segments = pathname.split('/').filter(Boolean)
-  const firstSegment = segments[0]?.toLowerCase() ?? null
-  const defaultCountryCode = DEFAULT_SUPPORTED_COUNTRY_CODE.toLowerCase()
+  const firstSegment = segments[0] ?? null
 
   const createUrl = (path: string): URL => new URL(`${path}${searchParams}`, request.url)
 
   // If path starts with default country code, redirect to path without it
-  if (firstSegment === defaultCountryCode) {
-    const newPath = pathname.replace(`/${defaultCountryCode}`, '') || '/'
+  if (firstSegment === DEFAULT_SUPPORTED_COUNTRY_CODE) {
+    const newPath = pathname.replace(`/${DEFAULT_SUPPORTED_COUNTRY_CODE}`, '') || '/'
     return NextResponse.redirect(createUrl(newPath))
   }
 
   // If path doesn't start with any country code, rewrite to include default country code
   if (!firstSegment || !COUNTRY_CODE_PATTERN.test(firstSegment)) {
-    const newPath = `/${defaultCountryCode}${pathname}`
+    const newPath = `/${DEFAULT_SUPPORTED_COUNTRY_CODE}${pathname}`
     return NextResponse.rewrite(createUrl(newPath))
   }
 
