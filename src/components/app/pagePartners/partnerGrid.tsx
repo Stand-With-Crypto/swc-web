@@ -44,6 +44,7 @@ export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
                 quality={100}
                 sizes={'(max-width: 768px) 160px, 224px'}
                 src={image}
+                unoptimized
               />
             </div>
           </ExternalLink>

@@ -22,7 +22,6 @@ async function getAllPartnersWithOffset(offset: number) {
         limit: LIMIT,
         fields: 'data',
         offset,
-        cachebust: true,
       }),
     {
       retries: 3,
