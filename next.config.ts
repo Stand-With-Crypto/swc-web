@@ -231,6 +231,7 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.builder.io',
       },
     ],
+    dangerouslyAllowSVG: true,
   },
   async headers() {
     return [
