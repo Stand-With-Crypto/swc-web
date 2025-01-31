@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server'
 
+import { countryCodeRouter } from '@/utils/server/countryCodeRouter'
 import {
   getCountryCode,
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
-import { localeRouter } from '@/utils/server/localeRouter'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
 
-  const localeResponse = localeRouter(request)
+  const localeResponse = countryCodeRouter(request)
 
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value

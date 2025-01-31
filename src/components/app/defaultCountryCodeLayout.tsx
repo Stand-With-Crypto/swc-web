@@ -13,7 +13,7 @@ import { fontClassName } from '@/utils/web/fonts'
 
 export const dynamic = 'error'
 
-export function DefaultLocaleLayout({ children }: { children: React.ReactNode }) {
+export function DefaultCountryCodeLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" translate="no">
       <body className={fontClassName}>

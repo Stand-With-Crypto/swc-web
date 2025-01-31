@@ -21,7 +21,7 @@ export default async function Home(props: PageProps) {
   a path that includes a "." like /requestProvider.js.map nextjs will try to render the page with that as the locality
   Adding this check here fixes that issue
   */
-  if (!ORDERED_SUPPORTED_COUNTRIES.includes(params.countryCode)) {
+  if (!ORDERED_SUPPORTED_COUNTRIES.includes(params.countryCode?.toUpperCase())) {
     notFound()
   }
   return (

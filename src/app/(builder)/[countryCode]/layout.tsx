@@ -20,7 +20,6 @@ import {
   COUNTRY_CODE_TO_LOCALE,
   ORDERED_SUPPORTED_COUNTRIES,
 } from '@/utils/shared/supportedCountries'
-import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
 import { fontClassName } from '@/utils/web/fonts'
 
 export { viewport } from '@/utils/server/metadataUtils'
@@ -29,7 +28,7 @@ export { viewport } from '@/utils/server/metadataUtils'
 // Next.js doesn't allow this so we allow dynamic params in the config here, and then trigger a notFound in the layout if one is passed
 // export const dynamicParams = false
 export async function generateStaticParams() {
-  return ORDERED_SUPPORTED_LOCALES.map(locale => ({ locale }))
+  return ORDERED_SUPPORTED_COUNTRIES.map(countryCode => ({ countryCode }))
 }
 
 const title = `${
@@ -55,7 +54,7 @@ export default async function Layout({
 }: PageProps & { children: React.ReactNode }) {
   const { countryCode } = await params
 
-  if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode)) {
+  if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode?.toUpperCase())) {
     notFound()
   }
 
