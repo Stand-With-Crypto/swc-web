@@ -149,7 +149,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
         const messageId = await sendMail({
           to: user.primaryUserEmailAddress.emailAddress,
           subject: NFTArrivedEmail.subjectLine,
-          html: render(
+          html: await render(
             <NFTArrivedEmail
               actionNFT={actionType}
               completedActionTypes={user.userActions

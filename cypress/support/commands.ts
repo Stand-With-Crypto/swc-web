@@ -55,7 +55,7 @@ Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText, typingRequire
     cy.get('[cmdk-group-items]')
       .children()
       .first()
-      .click()
+      .click({ force: true })
       .then(el => {
         // Sometimes we need a double click to select the item
         el?.trigger('click')

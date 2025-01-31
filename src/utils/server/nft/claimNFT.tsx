@@ -223,7 +223,7 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
   const messageId = await sendMail({
     to: user.primaryUserEmailAddress.emailAddress,
     subject: NFTOnTheWayEmail.subjectLine,
-    html: render(
+    html: await render(
       <NFTOnTheWayEmail
         actionNFT={userAction.actionType as EmailEnabledActionNFTs}
         completedActionTypes={user.userActions
