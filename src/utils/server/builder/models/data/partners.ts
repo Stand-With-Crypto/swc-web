@@ -19,10 +19,14 @@ async function getAllPartnersWithOffset(offset: number) {
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
-        cacheSeconds: 60,
         limit: LIMIT,
         fields: 'data',
         offset,
+        fetchOptions: {
+          headers: {
+            cache: 'no-store',
+          },
+        },
       }),
     {
       retries: 3,
