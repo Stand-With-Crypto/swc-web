@@ -28,7 +28,7 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -179,9 +179,9 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
       {representative && (
         <div className="align-center mb-6 flex w-full justify-center">
           <DTSIPersonHeroCard
+            countryCode={SupportedCountryCodes.US}
             isClickable={false}
             isRecommended={false}
-            locale={SupportedLocale.EN_US}
             person={representative}
             subheader="role-w-state"
           />

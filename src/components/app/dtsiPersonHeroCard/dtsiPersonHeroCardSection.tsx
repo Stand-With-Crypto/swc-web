@@ -7,10 +7,10 @@ import { Button } from '@/components/ui/button'
 import { PageTitleProps } from '@/components/ui/pageTitleText'
 import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface DTSIPersonHeroCardSectionProps {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   title: React.ReactNode
   titleProps?: PageTitleProps
   subtitle?: React.ReactNode
@@ -27,7 +27,7 @@ export function DTSIPersonHeroCardSection({
   cta,
   subtitle,
   people,
-  locale,
+  countryCode,
   recommend = true,
   forceMobile = false,
   target,
@@ -40,9 +40,9 @@ export function DTSIPersonHeroCardSection({
       <DTSIPersonHeroCardRow forceMobile={forceMobile}>
         {recommended && (
           <DTSIPersonHeroCard
+            countryCode={countryCode}
             forceMobile={forceMobile}
             isRecommended
-            locale={locale}
             person={recommended}
             subheader="role"
             target={target}
@@ -50,9 +50,9 @@ export function DTSIPersonHeroCardSection({
         )}
         {others.map(person => (
           <DTSIPersonHeroCard
+            countryCode={countryCode}
             forceMobile={forceMobile}
             key={person.id}
-            locale={locale}
             person={person}
             subheader={person.isIncumbent ? 'Incumbent' : 'role'}
             target={target}

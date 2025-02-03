@@ -27,7 +27,7 @@ Here are some basic guidelines when developing Frames in this repository:
 
 - Frames live in `src/app/api/public/frames/...`
   - See `src/app/api/public/frames/register-to-vote/` directory for an example of building Frames.
-- You can add a Frame to an existing page by exporting Frames metadata as OpenGraph tags. See `src/app/[locale]/vote/page.tsx` for an example.
+- You can add a Frame to an existing page by exporting Frames metadata as OpenGraph tags. See `src/app/[countryCode]/vote/page.tsx` for an example.
 
 ### Local Frames Tooling
 

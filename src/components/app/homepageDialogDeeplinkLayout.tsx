@@ -30,7 +30,7 @@ export async function HomepageDialogDeeplinkLayout({
   pageParams,
   dialogContentClassName,
 }: HomepageDialogDeeplinkLayoutProps) {
-  const urls = getIntlUrls(pageParams.locale)
+  const urls = getIntlUrls(pageParams.countryCode)
   const [{ sumDonations, countUsers, countPolicymakerContacts }] = await Promise.all([
     getHomepageTopLevelMetrics(),
   ])

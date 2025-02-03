@@ -7,24 +7,24 @@ import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentMana
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface CookieConsentBannerProps {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   onAcceptSpecificCookies: (accepted: CookieConsentPermissions) => void
   onRejectAll: () => void
   onAcceptAll: () => void
 }
 
 export function CookieConsentBanner({
-  locale,
+  countryCode,
   onAcceptSpecificCookies,
   onAcceptAll,
   onRejectAll,
 }: CookieConsentBannerProps) {
-  const urls = useMemo(() => getIntlUrls(locale), [locale])
+  const urls = useMemo(() => getIntlUrls(countryCode), [countryCode])
 
   return (
     <div
@@ -54,7 +54,7 @@ export function CookieConsentBanner({
 
         <div className={cn('mb-2 flex items-center justify-between gap-4 md:mb-0 md:justify-end')}>
           <div className="flex gap-4">
-            <ManageCookiesModal locale={locale} onSubmit={onAcceptSpecificCookies}>
+            <ManageCookiesModal countryCode={countryCode} onSubmit={onAcceptSpecificCookies}>
               <Button className="px-0 py-4" variant="link">
                 Manage cookies
               </Button>

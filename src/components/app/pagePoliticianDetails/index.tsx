@@ -30,17 +30,17 @@ import {
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SWCQuestionnaireAnswers } from '@/utils/shared/getSWCQuestionnaire'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
 export function PagePoliticianDetails({
   person,
-  locale,
+  countryCode,
   questionnaire,
 }: {
   person: DTSIPersonDetails
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   questionnaire: SWCQuestionnaireAnswers | null
 }) {
   const stances = orderBy(person.stances, [
@@ -145,7 +145,12 @@ export function PagePoliticianDetails({
         <div className="space-y-14 md:space-y-16">
           {!stances.length && <div>No recent statements.</div>}
           {stances.map(stance => (
-            <DTSIStanceDetails key={stance.id} locale={locale} person={person} stance={stance} />
+            <DTSIStanceDetails
+              countryCode={countryCode}
+              key={stance.id}
+              person={person}
+              stance={stance}
+            />
           ))}
         </div>
       </section>

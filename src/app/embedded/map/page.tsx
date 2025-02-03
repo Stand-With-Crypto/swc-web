@@ -28,9 +28,9 @@ export default async function MapPage(props: PageProps) {
   return (
     <AdvocatesHeatmapPage
       advocatesMapPageData={advocatePerStateDataProps}
+      countryCode={params.countryCode}
       homepageData={homeDataProps}
       isEmbedded={true}
-      locale={params.locale}
     />
   )
 }

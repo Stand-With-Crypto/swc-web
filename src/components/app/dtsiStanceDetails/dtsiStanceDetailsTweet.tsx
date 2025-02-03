@@ -18,6 +18,7 @@ import {
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
+import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
@@ -188,7 +189,7 @@ export const DTSIStanceDetailsTweet: React.FC<
   Omit<IStanceDetailsProps, 'stance'> & {
     stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
   }
-> = ({ stance, person, locale, bodyClassName, hideImages }) => {
+> = ({ stance, person, countryCode, bodyClassName, hideImages }) => {
   const isOwnTweet = stance.tweet.twitterAccount.personId === person.id
   return (
     <article className="rounded-lg text-gray-800">
@@ -268,7 +269,7 @@ export const DTSIStanceDetailsTweet: React.FC<
           <FormattedDatetime
             date={new Date(stance.tweet.datetimeCreatedOnTwitter)}
             dateStyle="medium"
-            locale={locale}
+            locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
           />{' '}
           on X
         </ExternalLink>

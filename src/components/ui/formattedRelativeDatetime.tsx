@@ -1,18 +1,20 @@
 import { differenceInMinutes } from 'date-fns'
 
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export function FormattedRelativeDatetime({
   date,
-  locale,
+  countryCode,
   timeFormatStyle = 'short',
 }: {
   date: Date
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   timeFormatStyle?: Intl.RelativeTimeFormatStyle
 }) {
   const minutesAgo = differenceInMinutes(new Date(), date)
-  const intlRelative = new Intl.RelativeTimeFormat(locale, { style: timeFormatStyle })
+  const intlRelative = new Intl.RelativeTimeFormat(COUNTRY_CODE_TO_LOCALE[countryCode], {
+    style: timeFormatStyle,
+  })
   if (minutesAgo < 1) {
     return 'Just now'
   }

@@ -5,7 +5,7 @@ import { IStanceDetailsProps } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonDetailsQuery, DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonDetailsQueryString } from '@/data/dtsi/queries/queryDTSIPersonDetails/dtsiPersonDetailsQueryString'
 import { queryDTSIMockSchema } from '@/mocks/dtsi/queryDTSIMockSchema'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const meta = {
   title: 'App/DTSIStanceDetails',
@@ -28,7 +28,7 @@ const getProps =
     queryDTSIMockSchema<DTSI_PersonDetailsQuery>(dtsiPersonDetailsQueryString).then(data => {
       const person = data.people[0]
       const stance = person.stances[0]
-      return transform({ person, stance, locale: SupportedLocale.EN_US })
+      return transform({ person, stance, countryCode: SupportedCountryCodes.US })
     })
 
 export const Quote = {

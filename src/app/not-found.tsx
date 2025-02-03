@@ -1,14 +1,14 @@
 import '@/globals.css'
 
-import { DefaultLocaleLayout } from '@/components/app/defaultLocaleLayout'
+import { DefaultCountryCodeLayout } from '@/components/app/defaultCountryCodeLayout'
 import { NotFoundPagesContent } from '@/components/app/notFoundPagesContent'
 
 export const dynamic = 'error'
 
 export default function NotFound() {
   return (
-    <DefaultLocaleLayout>
+    <DefaultCountryCodeLayout>
       <NotFoundPagesContent />
-    </DefaultLocaleLayout>
+    </DefaultCountryCodeLayout>
   )
 }

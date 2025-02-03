@@ -10,7 +10,7 @@ import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import type { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import type { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -30,20 +30,20 @@ export type PageLeaderboardInferredProps =
     }
 
 type PageLeaderboardProps = PageLeaderboardInferredProps & {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   offset: number
   pageNum: number
 }
 
 export function PageLeaderboard({
   tab,
-  locale,
+  countryCode,
   offset,
   pageNum,
   sumDonationsByUser,
   publicRecentActivity,
 }: PageLeaderboardProps) {
-  const urls = getIntlUrls(locale)
+  const urls = getIntlUrls(countryCode)
   const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
   return (
     <div className="standard-spacing-from-navbar container space-y-7">
@@ -86,7 +86,11 @@ export function PageLeaderboard({
           ) : (
             <>
               {publicRecentActivity.map(action => (
-                <VariantRecentActivityRow action={action} key={action.id} locale={locale} />
+                <VariantRecentActivityRow
+                  action={action}
+                  countryCode={countryCode}
+                  key={action.id}
+                />
               ))}
             </>
           )
@@ -95,9 +99,9 @@ export function PageLeaderboard({
           <>
             {sumDonationsByUser.map((donor, index) => (
               <SumDonationsByUserRow
+                countryCode={countryCode}
                 index={offset + index}
                 key={index}
-                locale={locale}
                 sumDonations={donor}
               />
             ))}

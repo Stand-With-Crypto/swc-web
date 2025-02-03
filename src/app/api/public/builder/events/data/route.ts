@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
-import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('builder-events-data-route')
 
@@ -36,7 +36,9 @@ export const POST = async (request: NextRequest) => {
   }
 
   revalidatePath(EVENTS_PATH)
-  ORDERED_SUPPORTED_LOCALES.forEach(locale => revalidatePath(`/${locale}${EVENTS_PATH}`))
+  ORDERED_SUPPORTED_COUNTRIES.forEach(countryCode =>
+    revalidatePath(`/${countryCode}${EVENTS_PATH}`),
+  )
 
   logger.info(`Revalidation completed for path: ${EVENTS_PATH}`)
 

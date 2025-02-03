@@ -14,8 +14,8 @@ import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSucc
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
-import { useLocale } from '@/hooks/useLocale'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -26,8 +26,8 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
 
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const router = useRouter()
-  const locale = useLocale()
-  const urls = getIntlUrls(locale)
+  const countryCode = useCountryCode()
+  const urls = getIntlUrls(countryCode)
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
   const [initialValues, loadingParams] = useEncodedInitialValuesQueryParam<FormFields>({
@@ -44,7 +44,7 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   }, [])
 
   return fetchUser.isLoading || loadingParams ? (
-    <UserActionFormEmailCongresspersonSkeleton locale={locale} />
+    <UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />
   ) : state === 'form' ? (
     <UserActionFormEmailCongressperson
       initialValues={initialValues}
@@ -62,13 +62,13 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
 }
 
 export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
-  const locale = useLocale()
+  const countryCode = useCountryCode()
   return (
     <GeoGate
       countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
       unavailableContent={<UserActionFormActionUnavailable />}
     >
-      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
+      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
         <UserActionFormEmailCongresspersonDeeplinkWrapperContent />
       </Suspense>
     </GeoGate>

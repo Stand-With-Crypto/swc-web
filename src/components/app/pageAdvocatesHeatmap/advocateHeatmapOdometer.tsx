@@ -7,7 +7,7 @@ import { roundDownNumberByGranularityToAnimateIn } from '@/components/ui/animate
 import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
@@ -18,11 +18,11 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (countUsers: num
 })
 
 export function AdvocateHeatmapOdometer({
-  locale,
+  countryCode,
   countUsers,
   className,
 }: {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   countUsers: number
   className?: string
 }) {
@@ -37,10 +37,12 @@ export function AdvocateHeatmapOdometer({
   const formatted = useMemo(() => {
     return {
       countUsers: {
-        count: intlNumberFormat(locale).format(values.countUsers.count),
+        count: intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode]).format(
+          values.countUsers.count,
+        ),
       },
     }
-  }, [values, locale])
+  }, [values, countryCode])
 
   return (
     <div className={cn(`flex-shrink-0 bg-secondary px-0 py-2 text-center`, className)}>

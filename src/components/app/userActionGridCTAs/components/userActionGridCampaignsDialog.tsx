@@ -6,8 +6,8 @@ import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
-import { useLocale } from '@/hooks/useLocale'
 import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
@@ -43,7 +43,7 @@ export function UserActionGridCampaignsDialogContent({
   performedUserActions,
   shouldOpenDeeplink,
 }: Omit<UserActionGridCampaignsDialogProps, 'children'>) {
-  const locale = useLocale()
+  const countryCode = useCountryCode()
 
   const activeCampaigns = campaigns.filter(campaign => campaign.isCampaignActive)
   const completedInactiveCampaigns = campaigns.filter(
@@ -105,7 +105,7 @@ export function UserActionGridCampaignsDialogContent({
                   ? getUserActionDeeplink({
                       actionType: campaign.actionType as UserActionTypesWithDeeplink,
                       config: {
-                        locale,
+                        countryCode,
                       },
                       campaign: campaign.campaignName as any,
                     })

@@ -8,18 +8,18 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
   'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
-> & { locale: SupportedLocale }
+> & { countryCode: SupportedCountryCodes }
 
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
-  initial: Omit<Props, 'locale'>,
-): Omit<Props, 'locale'> => ({
+  initial: Omit<Props, 'countryCode'>,
+): Omit<Props, 'countryCode'> => ({
   sumDonations: {
     amountUsd: roundDownNumberToAnimateIn(initial.sumDonations.amountUsd, 10000),
     fairshakeAmountUsd: roundDownNumberToAnimateIn(initial.sumDonations.fairshakeAmountUsd, 10000),
@@ -43,7 +43,10 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   },
 })
 
-export function TopLevelMetrics({ locale, ...data }: Props & { locale: SupportedLocale }) {
+export function TopLevelMetrics({
+  countryCode,
+  ...data
+}: Props & { countryCode: SupportedCountryCodes }) {
   const [isDonatedTooltipOpen, setIsDonatedTooltipOpen] = useState(false)
   const decreasedInitialValues = useMemo(
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
@@ -57,14 +60,14 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
       notation?: Intl.NumberFormatOptions['notation'],
       maximumFractionDigits: number = 0,
     ) => {
-      return intlNumberFormat(locale, {
+      return intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode], {
         style: 'currency',
         currency: SupportedFiatCurrencyCodes.USD,
         maximumFractionDigits,
         notation,
       }).format(value)
     },
-    [locale],
+    [countryCode],
   )
 
   const formatted = useMemo(() => {
@@ -83,17 +86,19 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
         ),
       },
       countUsers: {
-        count: intlNumberFormat(locale).format(values.countUsers.count),
+        count: intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode]).format(
+          values.countUsers.count,
+        ),
       },
       countPolicymakerContacts: {
-        count: intlNumberFormat(locale).format(
+        count: intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode]).format(
           values.countPolicymakerContacts.countUserActionEmailRecipients +
             values.countPolicymakerContacts.countUserActionCalls +
             values.countPolicymakerContacts.hardcodedCountSum,
         ),
       },
     }
-  }, [formatCurrency, values, locale])
+  }, [formatCurrency, values, countryCode])
 
   return (
     <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
