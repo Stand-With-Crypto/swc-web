@@ -13,7 +13,7 @@ import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   getYourPoliticianCategoryDisplayName,
   YourPoliticianCategory,
@@ -32,7 +32,9 @@ function DefaultPlacesSelect(
     </div>
   )
 }
-export function ClientCurrentUserDTSIPersonCardOrCTA(props: { locale: SupportedLocale }) {
+export function ClientCurrentUserDTSIPersonCardOrCTA(props: {
+  countryCode: SupportedCountryCodes
+}) {
   return (
     <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
       <SuspenseClientCurrentUserDTSIPersonCardOrCTA {...props} />
@@ -42,7 +44,11 @@ export function ClientCurrentUserDTSIPersonCardOrCTA(props: { locale: SupportedL
 
 const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
-function SuspenseClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
+function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
     POLITICIAN_CATEGORY,
@@ -85,7 +91,12 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Supp
       </p>
       <DTSIPersonHeroCardRow>
         {people.map(person => (
-          <DTSIPersonHeroCard key={person.id} locale={locale} person={person} subheader="role" />
+          <DTSIPersonHeroCard
+            countryCode={countryCode}
+            key={person.id}
+            person={person}
+            subheader="role"
+          />
         ))}
       </DTSIPersonHeroCardRow>
     </div>

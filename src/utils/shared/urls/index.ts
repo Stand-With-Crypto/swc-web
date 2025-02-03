@@ -1,7 +1,10 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { DEFAULT_LOCALE, SupportedLocale } from '@/utils/shared/supportedLocales'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -16,12 +19,12 @@ function getBaseUrl() {
 
 export const INTERNAL_BASE_URL = getBaseUrl()
 
-export const getIntlPrefix = (locale: SupportedLocale) =>
+export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  locale === DEFAULT_LOCALE ? '' : `/${locale}`
+  countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `/${countryCode}`
 
 export const getIntlUrls = (
-  locale: SupportedLocale,
+  countryCode: SupportedCountryCodes,
   {
     actualPaths,
   }: {
@@ -29,18 +32,19 @@ export const getIntlUrls = (
     actualPaths?: true
   } = {},
 ) => {
-  const localePrefix = locale === DEFAULT_LOCALE && !actualPaths ? '' : `/${locale}`
+  const countryPrefix =
+    countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !actualPaths ? '' : `/${countryCode}`
   return {
-    home: () => `${locale === DEFAULT_LOCALE ? '/' : localePrefix}`,
-    termsOfService: () => `${localePrefix}/terms-of-service`,
-    privacyPolicy: () => `${localePrefix}/privacy`,
-    about: () => `${localePrefix}/about`,
-    resources: () => `${localePrefix}/resources`,
-    bills: () => `${localePrefix}/bills`,
-    billDetails: (billSlug: string) => `${localePrefix}/bills/${billSlug}`,
-    contribute: () => `${localePrefix}/contribute`,
-    questionnaire: () => `${localePrefix}/questionnaire`,
-    donate: () => `${localePrefix}/donate`,
+    home: () => `${countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '/' : countryPrefix}`,
+    termsOfService: () => `${countryPrefix}/terms-of-service`,
+    privacyPolicy: () => `${countryPrefix}/privacy`,
+    about: () => `${countryPrefix}/about`,
+    resources: () => `${countryPrefix}/resources`,
+    bills: () => `${countryPrefix}/bills`,
+    billDetails: (billSlug: string) => `${countryPrefix}/bills/${billSlug}`,
+    contribute: () => `${countryPrefix}/contribute`,
+    questionnaire: () => `${countryPrefix}/questionnaire`,
+    donate: () => `${countryPrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const tabPrefix =
         params?.tab === RecentActivityAndLeaderboardTabs.LEADERBOARD
@@ -48,26 +52,26 @@ export const getIntlUrls = (
           : '/community'
 
       if (!params) {
-        return `${localePrefix}${tabPrefix}`
+        return `${countryPrefix}${tabPrefix}`
       }
       const pageNum = params.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${localePrefix}${tabPrefix}${tabSuffix}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
-    partners: () => `${localePrefix}/partners`,
-    politiciansHomepage: () => `${localePrefix}/politicians`,
-    politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
-    profile: () => `${localePrefix}/profile`,
-    updateProfile: () => `${localePrefix}/profile?hasOpenUpdateUserProfileForm=true`,
-    internalHomepage: () => `${localePrefix}/internal`,
-    becomeMember: () => `${localePrefix}/action/become-member`,
-    community: () => `${localePrefix}/community`,
-    events: () => `${localePrefix}/events`,
-    advocacyToolkit: () => `${localePrefix}/advocacy-toolkit`,
-    creatorDefenseFund: () => `${localePrefix}/creator-defense-fund`,
-    press: () => `${localePrefix}/press`,
-    emailDeeplink: () => `${localePrefix}/action/email`,
+    partners: () => `${countryPrefix}/partners`,
+    politiciansHomepage: () => `${countryPrefix}/politicians`,
+    politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
+    profile: () => `${countryPrefix}/profile`,
+    updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
+    internalHomepage: () => `${countryPrefix}/internal`,
+    becomeMember: () => `${countryPrefix}/action/become-member`,
+    community: () => `${countryPrefix}/community`,
+    events: () => `${countryPrefix}/events`,
+    advocacyToolkit: () => `${countryPrefix}/advocacy-toolkit`,
+    creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
+    press: () => `${countryPrefix}/press`,
+    emailDeeplink: () => `${countryPrefix}/action/email`,
   }
 }
 
@@ -119,7 +123,8 @@ export const apiUrls = {
     stateCode: string
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
-  totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
+  totalDonations: (countryCode: SupportedCountryCodes) =>
+    `/api/public/total-donations/${countryCode}`,
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,

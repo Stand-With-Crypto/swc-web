@@ -10,12 +10,12 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface DTSIAvatarBoxProps extends DTSIAvatarProps {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   person: DTSIAvatarProps['person'] &
     Pick<DTSI_Person, 'slug' | 'politicalAffiliationCategory'> & {
       primaryRole: Maybe<DTSIPersonRoleCategoryDisplayNameProps>
@@ -24,7 +24,7 @@ interface DTSIAvatarBoxProps extends DTSIAvatarProps {
 }
 
 export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
-  const { person, locale, prefetch = false, ...avatarProps } = props
+  const { person, countryCode, prefetch = false, ...avatarProps } = props
   const politicalAffiliationCategoryAbbr =
     person.politicalAffiliationCategory &&
     dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
@@ -35,7 +35,7 @@ export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
         <InternalLink
           className={cn(linkBoxLinkClassName, 'cursor-pointer font-semibold')}
           data-link-box-subject
-          href={getIntlUrls(locale).politicianDetails(person.slug)}
+          href={getIntlUrls(countryCode).politicianDetails(person.slug)}
           prefetch={prefetch}
         >
           {dtsiPersonFullName(person)}

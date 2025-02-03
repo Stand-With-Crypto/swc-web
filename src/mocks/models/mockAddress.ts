@@ -18,7 +18,7 @@ export function mockCreateAddressInput() {
     administrativeAreaLevel2: '',
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
-    countryCode: countryCode,
+    countryCode: countryCode.toUpperCase(),
     usCongressionalDistrict: '12',
     tenantId: countryCode,
   } satisfies Partial<Prisma.AddressCreateInput>

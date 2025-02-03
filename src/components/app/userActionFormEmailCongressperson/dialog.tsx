@@ -11,8 +11,8 @@ import { FormFields } from '@/components/app/userActionFormEmailCongressperson/t
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
-import { useLocale } from '@/hooks/useLocale'
 import { cn } from '@/utils/web/cn'
 
 export function UserActionFormEmailCongresspersonDialog({
@@ -28,7 +28,7 @@ export function UserActionFormEmailCongresspersonDialog({
     initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   })
-  const locale = useLocale()
+  const countryCode = useCountryCode()
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
@@ -40,9 +40,9 @@ export function UserActionFormEmailCongresspersonDialog({
 
   return (
     <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
-      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
+      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
         {fetchUser.isLoading ? (
-          <UserActionFormEmailCongresspersonSkeleton locale={locale} />
+          <UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />
         ) : state === 'form' ? (
           <LazyUserActionFormEmailCongressperson
             initialValues={initialValues}

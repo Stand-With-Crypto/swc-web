@@ -7,7 +7,7 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface Props {
@@ -19,16 +19,21 @@ interface Props {
   stances: Array<
     DTSIStanceDetailsStancePassedProp & { computedStanceScore: number | null | undefined }
   >
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
-export function MaybeOverflowedStances({ person, stances, locale }: Props) {
+export function MaybeOverflowedStances({ person, stances, countryCode }: Props) {
   const orderedStances = orderBy(stances, x => -1 * new Date(x.dateStanceMade).getTime())
 
   const stancesContent = orderedStances
     .slice(0, 3)
     .map(stance => (
-      <DTSIStanceDetails key={stance.id} locale={locale} person={person} stance={stance} />
+      <DTSIStanceDetails
+        countryCode={countryCode}
+        key={stance.id}
+        person={person}
+        stance={stance}
+      />
     ))
   if (orderedStances.length < 4) {
     return <div className="space-y-6">{stancesContent}</div>
@@ -46,7 +51,7 @@ export function MaybeOverflowedStances({ person, stances, locale }: Props) {
       </div>
       <div className="mt-6 text-center">
         <Button asChild className="max-sm:w-full">
-          <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
+          <InternalLink href={getIntlUrls(countryCode).politicianDetails(person.slug)}>
             View all statements
           </InternalLink>
         </Button>

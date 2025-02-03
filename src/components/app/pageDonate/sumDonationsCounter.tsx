@@ -8,30 +8,30 @@ import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdome
 import { SumDonations } from '@/data/aggregations/getSumDonations'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 interface SumDonationsCounterProps {
   initialData: SumDonations
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
 export function SumDonationsCounter(props: SumDonationsCounterProps) {
   const { data } = useLiveSumDonations(props)
   const formatted = useMemo(() => {
-    return intlNumberFormat(props.locale, {
+    return intlNumberFormat(COUNTRY_CODE_TO_LOCALE[props.countryCode], {
       style: 'currency',
       currency: SupportedFiatCurrencyCodes.USD,
       maximumFractionDigits: 0,
     }).format(data.amountUsd)
-  }, [props.locale, data.amountUsd])
+  }, [props.countryCode, data.amountUsd])
   return <AnimatedNumericOdometer className="text-primary-cta" size={60} value={formatted} />
 }
 
-function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) {
+function useLiveSumDonations({ countryCode, initialData }: SumDonationsCounterProps) {
   return useSWR(
-    apiUrls.totalDonations(locale),
+    apiUrls.totalDonations(countryCode),
     url =>
       fetchReq(url)
         .then(res => res.json())

@@ -4,14 +4,14 @@ import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookie
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { externalUrls, getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 const footerLinkStyles = cn('block text-gray-400')
 
-export function Footer({ locale }: { locale: SupportedLocale }) {
-  const urls = getIntlUrls(locale)
+export function Footer({ countryCode }: { countryCode: SupportedCountryCodes }) {
+  const urls = getIntlUrls(countryCode)
 
   return (
     <footer className="mt-36 border-t bg-black py-24 text-muted antialiased">

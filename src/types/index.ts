@@ -1,9 +1,9 @@
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export type PageProps<Params = object> = {
   params: Promise<
     Params & {
-      locale: SupportedLocale
+      countryCode: SupportedCountryCodes
     }
   >
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>

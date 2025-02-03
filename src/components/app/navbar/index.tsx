@@ -30,14 +30,14 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-export function Navbar({ locale }: { locale: SupportedLocale }) {
+export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
-  const urls = getIntlUrls(locale)
+  const urls = getIntlUrls(countryCode)
   const [hoveredMenuIndex, setHoveredMenuIndex] = useState<number | null>(null)
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 

@@ -34,8 +34,8 @@ export function PageHome({
 }: { params: Awaited<PageProps['params']> } & Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
   }) {
-  const { locale } = params
-  const urls = getIntlUrls(locale)
+  const { countryCode } = params
+  const urls = getIntlUrls(countryCode)
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
 
@@ -58,7 +58,7 @@ export function PageHome({
         </div>
       </section>
       <div className="container">
-        <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
+        <TopLevelMetrics {...{ sumDonations, countryCode, countUsers, countPolicymakerContacts }} />
 
         <section className="mb-16 md:mb-36">
           <PageTitle as="h3" className="mb-6 !text-[32px]">
@@ -90,7 +90,7 @@ export function PageHome({
                   actions={actions}
                   advocatesMapPageData={advocatePerStateDataProps}
                   countUsers={countUsers.count}
-                  locale={locale}
+                  countryCode={countryCode}
                 />
               </>
             </TabsContent>
@@ -106,9 +106,9 @@ export function PageHome({
                 <div className="space-y-8 lg:space-y-10">
                   {sumDonationsByUser.map((donor, index) => (
                     <SumDonationsByUserRow
+                      countryCode={countryCode}
                       index={index}
                       key={index}
-                      locale={locale}
                       sumDonations={donor}
                     />
                   ))}
@@ -174,8 +174,8 @@ export function PageHome({
           <DTSIPersonHeroCardRow>
             {highestScores.map(person => (
               <DTSIPersonHeroCard
+                countryCode={countryCode}
                 key={person.id}
-                locale={locale}
                 person={person}
                 subheader="role-w-state"
               />
@@ -189,8 +189,8 @@ export function PageHome({
           <DTSIPersonHeroCardRow>
             {lowestScores.map(person => (
               <DTSIPersonHeroCard
+                countryCode={countryCode}
                 key={person.id}
-                locale={locale}
                 person={person}
                 subheader="role-w-state"
               />

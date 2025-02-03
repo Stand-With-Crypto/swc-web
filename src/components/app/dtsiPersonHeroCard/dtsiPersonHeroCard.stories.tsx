@@ -9,12 +9,12 @@ import {
   DTSI_TwitterAccountState,
   DTSI_TwitterAccountType,
 } from '@/data/dtsi/generated'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const getDefaultProps = () => {
   const props: React.ComponentProps<typeof DTSIPersonHeroCard> = {
     subheader: 'role',
-    locale: SupportedLocale.EN_US,
+    countryCode: SupportedCountryCodes.US,
     person: {
       id: 'fakeId',
       slug: 'joseph---biden',

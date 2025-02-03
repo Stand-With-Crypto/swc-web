@@ -8,7 +8,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 export function AdvocatesHeatmapPage({
   title,
   description,
-  locale,
+  countryCode,
   homepageData,
   advocatesMapPageData,
   isEmbedded,
@@ -38,8 +38,8 @@ export function AdvocatesHeatmapPage({
           actions={homepageData.actions}
           advocatesMapPageData={advocatesMapPageData}
           countUsers={homepageData.countUsers.count}
+          countryCode={countryCode}
           isEmbedded={isEmbedded}
-          locale={locale}
         />
       </section>
     </div>

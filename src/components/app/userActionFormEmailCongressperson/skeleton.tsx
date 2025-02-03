@@ -13,18 +13,18 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
 export function UserActionFormEmailCongresspersonSkeleton({
-  locale,
+  countryCode,
   politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
 }: {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   politicianCategory?: YourPoliticianCategory
 }) {
-  const urls = getIntlUrls(locale)
+  const urls = getIntlUrls(countryCode)
   return (
     <form className="flex max-h-dvh flex-col">
       <LoadingOverlay />

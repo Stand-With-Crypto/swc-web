@@ -10,15 +10,15 @@ import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface PageBillDetailsProps {
   bill: DTSIBillDetails
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
 export function PageBillDetails(props: PageBillDetailsProps) {
-  const { bill, locale } = props
+  const { bill, countryCode } = props
 
   const analyses = bill.analysis.filter(
     analysis =>
@@ -41,7 +41,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           <FormattedDatetime
             date={new Date(bill.dateIntroduced)}
             dateStyle="medium"
-            locale={locale}
+            locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
           />
         </p>
         <ExternalLink className="inline-block" href={bill.congressDotGovUrl}>
@@ -72,7 +72,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         </Button>
       </section>
 
-      <VotesSection locale={locale} votes={relationships} />
+      <VotesSection countryCode={countryCode} votes={relationships} />
     </div>
   )
 }

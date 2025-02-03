@@ -7,15 +7,15 @@ import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserActi
 import { ActivityAvatar } from '@/components/app/recentActivityRow/activityAvatar'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUserWithENSData }
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
 export function RecentActivityRowBase({
-  locale,
+  countryCode,
   action,
   children,
   onFocusContent,
@@ -48,14 +48,14 @@ export function RecentActivityRowBase({
           <>
             <span className="hidden md:inline">
               <FormattedRelativeDatetimeWithClientHydration
+                countryCode={countryCode}
                 date={new Date(action.datetimeCreated)}
-                locale={locale}
               />
             </span>
             <span className="inline md:hidden">
               <FormattedRelativeDatetimeWithClientHydration
+                countryCode={countryCode}
                 date={new Date(action.datetimeCreated)}
-                locale={locale}
                 timeFormatStyle="narrow"
               />
             </span>

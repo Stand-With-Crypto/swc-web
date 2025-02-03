@@ -19,7 +19,7 @@ import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -28,15 +28,15 @@ import { CookiePreferencesForm } from './cookiePreferencesForm'
 interface ManageCookiesModalProps {
   children: React.ReactNode
   onSubmit: (accepted: CookieConsentPermissions) => void
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
 export default function ManageCookiesModal({
   children,
   onSubmit,
-  locale,
+  countryCode,
 }: ManageCookiesModalProps) {
-  const urls = useMemo(() => getIntlUrls(locale), [locale])
+  const urls = useMemo(() => getIntlUrls(countryCode), [countryCode])
   const dialogProps = useDialog({ analytics: 'Cookie Consent Management' })
   const {
     isMobile,
