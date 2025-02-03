@@ -55,7 +55,7 @@ export async function getPartners() {
     logger.error('error getting all partners:' + e)
     Sentry.captureException(e, {
       level: 'error',
-      tags: { domain: 'getPartners' },
+      tags: { domain: 'builder.io', model: 'partners' },
     })
     return null
   }
