@@ -39,16 +39,17 @@ Builder.registerComponent(
         defaultValue: 'Enter some text...',
       },
       {
-        name: 'as',
-        type: 'enum',
-        defaultValue: 'h2',
-        enum: AsVariantsConfig,
-      },
-      {
         name: 'size',
         type: 'enum',
         defaultValue: subTitleVariantsConfig.size.md,
         enum: Object.keys(subTitleVariantsConfig.size),
+      },
+      {
+        name: 'as',
+        type: 'enum',
+        defaultValue: 'h2',
+        enum: AsVariantsConfig,
+        advanced: true,
       },
     ],
   },

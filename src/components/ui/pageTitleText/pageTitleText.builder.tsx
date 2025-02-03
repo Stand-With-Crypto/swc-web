@@ -34,16 +34,17 @@ Builder.registerComponent(
         defaultValue: 'Enter some text...',
       },
       {
-        name: 'as',
-        type: 'enum',
-        defaultValue: 'h1',
-        enum: AsVariantsConfig,
-      },
-      {
         name: 'size',
         type: 'enum',
         defaultValue: titleVariantsConfig.size.xl,
         enum: Object.keys(titleVariantsConfig.size),
+      },
+      {
+        name: 'as',
+        type: 'enum',
+        defaultValue: 'h1',
+        enum: AsVariantsConfig,
+        advanced: true,
       },
     ],
   },
