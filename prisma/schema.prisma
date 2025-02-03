@@ -43,7 +43,7 @@ model Address {
   usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
-  tenantId                 String   @default("US") @map("tenant_id")
+  tenantId                 String   @default("us") @map("tenant_id")
 
   userActionEmails                      UserActionEmail[]
   userActionCalls                       UserActionCall[]
@@ -146,7 +146,7 @@ model User {
   capitolCanaryInstance    CapitolCanaryInstance?     @map("capitol_canary_instance")
   UserCommunicationJourney UserCommunicationJourney[]
   smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
-  tenantId                 String                     @default("US") @map("tenant_id")
+  tenantId                 String                     @default("us") @map("tenant_id")
 
   @@index([addressId])
   @@index([internalStatus])
@@ -216,7 +216,7 @@ model UserEmailAddress {
   dataCreationMethod DataCreationMethod     @default(BY_USER) @map("data_creation_method")
   datetimeUpdated    DateTime               @updatedAt @map("datetime_updated")
   datetimeCreated    DateTime               @default(now()) @map("datetime_created")
-  tenantId           String                 @default("US") @map("tenant_id")
+  tenantId           String                 @default("us") @map("tenant_id")
 
   userActions                     UserAction[]
   asPrimaryUserEmailAddress       User?              @relation("asPrimaryUserEmailAddress")
@@ -297,7 +297,7 @@ model UserAction {
   nftMintId           String?            @unique @map("nft_mint_id")
   nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
   actionType          UserActionType     @map("action_type")
-  tenantId            String             @default("US") @map("tenant_id")
+  tenantId            String             @default("us") @map("tenant_id")
 
   // We'll need in-memory logic to validate and verify only one action type is every associated with a UserAction
   userActionEmail                       UserActionEmail?
@@ -331,7 +331,7 @@ model UserActionOptIn {
   id         String              @id @default(uuid())
   userAction UserAction          @relation(fields: [id], references: [id])
   optInType  UserActionOptInType @map("opt_in_type")
-  tenantId   String              @default("US") @map("tenant_id")
+  tenantId   String              @default("us") @map("tenant_id")
 
   @@map("user_action_opt_in")
 }
@@ -345,7 +345,7 @@ model UserActionEmail {
   address                   Address?                   @relation(fields: [addressId], references: [id])
   addressId                 String?                    @map("address_id")
   userActionEmailRecipients UserActionEmailRecipient[]
-  tenantId                  String                     @default("US") @map("tenant_id")
+  tenantId                  String                     @default("us") @map("tenant_id")
 
   @@index([addressId])
   @@map("user_action_email")
@@ -371,7 +371,7 @@ model UserActionCall {
   recipientPhoneNumber String?    @map("recipient_phone_number")
   address              Address?   @relation(fields: [addressId], references: [id])
   addressId            String?    @map("address_id")
-  tenantId             String     @default("US") @map("tenant_id")
+  tenantId             String     @default("us") @map("tenant_id")
 
   @@index([addressId])
   @@map("user_action_call")
@@ -389,7 +389,7 @@ model UserActionDonation {
   amountCurrencyCode String               @map("amount_currency_code")
   amountUsd          Decimal              @map("amount_usd")
   recipient          DonationOrganization
-  tenantId           String               @default("US") @map("tenant_id")
+  tenantId           String               @default("us") @map("tenant_id")
 
   coinbaseCommerceDonationId String? @map("coinbase_commerce_donation_id")
 
@@ -426,7 +426,7 @@ model NFTMint {
   costAtMint             Decimal       @map("cost_at_mint")
   costAtMintCurrencyCode NFTCurrency   @map("cost_at_mint_currency_code")
   costAtMintUsd          Decimal       @map("cost_at_mint_usd")
-  tenantId               String        @default("US") @map("tenant_id")
+  tenantId               String        @default("us") @map("tenant_id")
 
   userActions UserAction[]
 
@@ -439,7 +439,7 @@ model UserActionVotingDay {
   userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   votingYear String     @map("voting_year")
   usaState   String?    @map("usa_state")
-  tenantId   String     @default("US") @map("tenant_id")
+  tenantId   String     @default("us") @map("tenant_id")
 
   @@map("user_action_voting_day")
 }
@@ -449,7 +449,7 @@ model UserActionViewKeyRaces {
   userAction              UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usCongressionalDistrict String?    @map("us_congressional_district")
   usaState                String?    @map("usa_state")
-  tenantId                String     @default("US") @map("tenant_id")
+  tenantId                String     @default("us") @map("tenant_id")
 
   @@map("user_action_view_key_races")
 }
@@ -458,7 +458,7 @@ model UserActionVoterRegistration {
   id         String     @id @default(uuid())
   userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usaState   String?    @map("usa_state")
-  tenantId   String     @default("US") @map("tenant_id")
+  tenantId   String     @default("us") @map("tenant_id")
 
   @@map("user_action_voter_registration")
 }
@@ -467,7 +467,7 @@ model UserActionVoterAttestation {
   id         String     @id @default(uuid())
   userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usaState   String?    @map("usa_state")
-  tenantId   String     @default("US") @map("tenant_id")
+  tenantId   String     @default("us") @map("tenant_id")
 
   @@map("user_action_voter_attestation")
 }
@@ -476,7 +476,7 @@ model UserActionTweetAtPerson {
   id                String     @id @default(uuid())
   userAction        UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   recipientDtsiSlug String?    @map("recipient_dtsi_slug")
-  tenantId          String     @default("US") @map("tenant_id")
+  tenantId          String     @default("us") @map("tenant_id")
 
   @@map("user_action_tweet_at_person")
 }
@@ -487,7 +487,7 @@ model UserActionRsvpEvent {
   eventState                 String     @map("event_state")
   shouldReceiveNotifications Boolean    @map("should_receive_notifications")
   userAction                 UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
-  tenantId                   String     @default("US") @map("tenant_id")
+  tenantId                   String     @default("us") @map("tenant_id")
 
   @@index([eventSlug, eventState])
   @@map("user_action_rsvp_event")
@@ -499,7 +499,7 @@ model UserActionVotingInformationResearched {
   shouldReceiveNotifications Boolean    @map("should_receive_notifications")
   address                    Address?   @relation(fields: [addressId], references: [id])
   addressId                  String?    @map("address_id")
-  tenantId                   String     @default("US") @map("tenant_id")
+  tenantId                   String     @default("us") @map("tenant_id")
 
   @@index([addressId])
   @@map("user_action_voting_information_researched")
@@ -521,7 +521,7 @@ model UserCommunicationJourney {
   datetimeCreated    DateTime                     @default(now()) @map("datetime_created")
   userCommunications UserCommunication[]
   campaignName       String?                      @map("campaign_name")
-  tenantId           String                       @default("US") @map("tenant_id")
+  tenantId           String                       @default("us") @map("tenant_id")
 
   @@index([userId])
   @@map("user_communication_journey")
