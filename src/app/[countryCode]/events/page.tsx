@@ -5,7 +5,6 @@ import { EventsPage } from '@/components/app/pageEvents'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
-export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const title = 'Events'
