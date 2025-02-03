@@ -10,18 +10,11 @@ interface BuilderPageTitleProps extends BuilderComponentBaseProps {
 }
 
 Builder.registerComponent(
-  (props: BuilderPageTitleProps) => {
-    const pageTitleProps = {
-      ...props.attributes,
-      as: props.as,
-      size: props.size,
-    }
-    return (
-      <PageTitle {...pageTitleProps} key={props.attributes?.key} size={props.size}>
-        {props.title}
-      </PageTitle>
-    )
-  },
+  (props: BuilderPageTitleProps) => (
+    <PageTitle {...props.attributes} as={props.as} key={props.attributes?.key} size={props.size}>
+      {props.title}
+    </PageTitle>
+  ),
   {
     name: 'PageTitle',
     friendlyName: 'Page Title',

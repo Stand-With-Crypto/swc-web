@@ -5,8 +5,8 @@ import { SWCPartners } from '@/utils/shared/getSWCPartners'
 export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-8">
-      {partners?.map(currentParter => {
-        const { name, image, imageLink, imageAlt } = currentParter.data
+      {partners?.map(currentPartner => {
+        const { name, image, imageLink, imageAlt } = currentPartner.data
 
         return (
           <ExternalLink href={imageLink.Default} key={name}>

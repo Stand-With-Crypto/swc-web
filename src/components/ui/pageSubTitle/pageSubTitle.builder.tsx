@@ -14,19 +14,11 @@ interface BuilderPageSubtitleProps extends BuilderComponentBaseProps {
 }
 
 Builder.registerComponent(
-  (props: BuilderPageSubtitleProps) => {
-    const pageSubTitleProps = {
-      ...props.attributes,
-      as: props.as,
-      size: props.size,
-    }
-
-    return (
-      <PageSubTitle {...pageSubTitleProps} key={props.attributes?.key} size={props.size}>
-        {props.title}
-      </PageSubTitle>
-    )
-  },
+  (props: BuilderPageSubtitleProps) => (
+    <PageSubTitle {...props.attributes} as={props.as} key={props.attributes?.key} size={props.size}>
+      {props.title}
+    </PageSubTitle>
+  ),
   {
     name: 'PageSubTitle',
     friendlyName: 'Page Subtitle',
