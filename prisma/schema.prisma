@@ -146,6 +146,7 @@ model User {
   capitolCanaryInstance    CapitolCanaryInstance?     @map("capitol_canary_instance")
   UserCommunicationJourney UserCommunicationJourney[]
   smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
+  tenantId                 String                     @default("us") @map("tenant_id")
 
   @@index([addressId])
   @@index([internalStatus])
@@ -296,6 +297,7 @@ model UserAction {
   nftMintId           String?            @unique @map("nft_mint_id")
   nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
   actionType          UserActionType     @map("action_type")
+  tenantId            String             @default("us") @map("tenant_id")
 
   // We'll need in-memory logic to validate and verify only one action type is every associated with a UserAction
   userActionEmail                       UserActionEmail?
@@ -329,6 +331,7 @@ model UserActionOptIn {
   id         String              @id @default(uuid())
   userAction UserAction          @relation(fields: [id], references: [id])
   optInType  UserActionOptInType @map("opt_in_type")
+  tenantId   String              @default("us") @map("tenant_id")
 
   @@map("user_action_opt_in")
 }
@@ -342,6 +345,7 @@ model UserActionEmail {
   address                   Address?                   @relation(fields: [addressId], references: [id])
   addressId                 String?                    @map("address_id")
   userActionEmailRecipients UserActionEmailRecipient[]
+  tenantId                  String                     @default("us") @map("tenant_id")
 
   @@index([addressId])
   @@map("user_action_email")
@@ -367,6 +371,7 @@ model UserActionCall {
   recipientPhoneNumber String?    @map("recipient_phone_number")
   address              Address?   @relation(fields: [addressId], references: [id])
   addressId            String?    @map("address_id")
+  tenantId             String     @default("us") @map("tenant_id")
 
   @@index([addressId])
   @@map("user_action_call")
@@ -384,6 +389,7 @@ model UserActionDonation {
   amountCurrencyCode String               @map("amount_currency_code")
   amountUsd          Decimal              @map("amount_usd")
   recipient          DonationOrganization
+  tenantId           String               @default("us") @map("tenant_id")
 
   coinbaseCommerceDonationId String? @map("coinbase_commerce_donation_id")
 
@@ -420,6 +426,7 @@ model NFTMint {
   costAtMint             Decimal       @map("cost_at_mint")
   costAtMintCurrencyCode NFTCurrency   @map("cost_at_mint_currency_code")
   costAtMintUsd          Decimal       @map("cost_at_mint_usd")
+  tenantId               String        @default("us") @map("tenant_id")
 
   userActions UserAction[]
 
