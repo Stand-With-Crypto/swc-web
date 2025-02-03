@@ -9,7 +9,6 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 type Props = PageProps<{ state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP }>
 
-export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const description =
