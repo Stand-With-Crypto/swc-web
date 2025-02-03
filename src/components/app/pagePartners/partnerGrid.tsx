@@ -9,7 +9,7 @@ export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
         const { name, image, imageLink, imageAlt } = currentPartner.data
 
         return (
-          <ExternalLink href={imageLink.Default} key={name}>
+          <ExternalLink href={imageLink} key={name}>
             <div className="relative flex h-40 w-40 items-center rounded-lg border-[12px] border-secondary bg-secondary transition hover:drop-shadow-lg sm:h-56 sm:w-56 sm:border-[36px]">
               <NextImage
                 alt={imageAlt}

@@ -5,10 +5,7 @@ export const zodPartnerSchemaValidation = object({
     name: string(),
     image: string().url(),
     imageAlt: string(),
-    imageLink: object({
-      '@type': string(),
-      Default: string().url(),
-    }),
+    imageLink: string().url(),
   }),
 })
 
