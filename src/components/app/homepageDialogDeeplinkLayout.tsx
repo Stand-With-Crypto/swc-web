@@ -14,6 +14,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
+import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -35,6 +36,7 @@ export async function HomepageDialogDeeplinkLayout({
     getHomepageTopLevelMetrics(),
   ])
   const advocatePerStateDataProps = await getAdvocatesMapData()
+  const partners = await getPartners()
 
   return (
     <>
@@ -69,6 +71,7 @@ export async function HomepageDialogDeeplinkLayout({
           countPolicymakerContacts,
         }}
         advocatePerStateDataProps={advocatePerStateDataProps}
+        partners={partners}
       />
     </>
   )
