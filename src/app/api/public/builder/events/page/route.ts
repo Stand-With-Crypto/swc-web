@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
-import { ORDERED_SUPPORTED_LOCALES } from '@/utils/shared/supportedLocales'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('builder-events-page-route')
 
@@ -91,7 +91,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     if (property === 'urlPath') {
       logger.info(`Revalidating path: ${value}`)
       revalidatePath(value)
-      ORDERED_SUPPORTED_LOCALES.forEach(locale => revalidatePath(`/${locale}${value}`))
+      ORDERED_SUPPORTED_COUNTRIES.forEach(countryCode => revalidatePath(`/${countryCode}${value}`))
     }
   })
 

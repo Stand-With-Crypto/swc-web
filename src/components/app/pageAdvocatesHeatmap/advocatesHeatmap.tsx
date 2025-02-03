@@ -20,12 +20,12 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 interface RenderMapProps {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   actions: PublicRecentActivity
   countUsers: number
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
@@ -33,7 +33,7 @@ interface RenderMapProps {
 }
 
 export function AdvocatesHeatmap({
-  locale,
+  countryCode,
   actions,
   countUsers,
   advocatesMapPageData,
@@ -114,17 +114,17 @@ export function AdvocatesHeatmap({
       >
         {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
         <MapComponent
+          countryCode={countryCode}
           handleStateMouseHover={handleStateMouseHover}
           handleStateMouseOut={handleStateMouseOut}
           isEmbedded={isEmbedded}
-          locale={locale}
           markers={markers}
         />
         <TotalAdvocatesPerStateTooltip
+          countryCode={countryCode}
           getTotalAdvocatesPerState={getTotalAdvocatesPerState}
           handleClearPressedState={handleClearPressedState}
           hoveredStateName={hoveredStateName}
-          locale={locale}
           mousePosition={mousePosition}
         />
       </div>
@@ -136,7 +136,7 @@ export function AdvocatesHeatmap({
               isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black',
             )}
             countUsers={countUsers}
-            locale={locale}
+            countryCode={countryCode}
           />
         ) : (
           <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
@@ -150,13 +150,13 @@ const MapComponent = ({
   markers,
   handleStateMouseHover,
   handleStateMouseOut,
-  locale,
+  countryCode,
   isEmbedded,
 }: {
   markers: MapMarker[]
   handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
   handleStateMouseOut: () => void
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   isEmbedded?: boolean
 }) => {
   const [actionInfo, setActionInfo] = useState<string | null>(null)
@@ -233,7 +233,7 @@ const MapComponent = ({
                   const currentAmountUsd = amountUsd
                     ? FormattedCurrency({
                         amount: amountUsd,
-                        locale,
+                        locale: COUNTRY_CODE_TO_LOCALE[countryCode],
                         currencyCode: SupportedFiatCurrencyCodes.USD,
                       })
                     : ''

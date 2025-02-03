@@ -10,7 +10,7 @@ import {
   DTSI_TwitterAccount,
 } from '@/data/dtsi/generated'
 import { PartialButDefined } from '@/types'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export type DTSIStanceDetailsQuoteProp = {
   stanceType: DTSI_PersonStanceType.QUOTE
@@ -62,7 +62,7 @@ export type DTSIStanceDetailsPersonProp = Pick<
 >
 
 export type IStanceDetailsProps = {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   person: DTSIStanceDetailsPersonProp
   stance: DTSIStanceDetailsStancePassedProp
   className?: string

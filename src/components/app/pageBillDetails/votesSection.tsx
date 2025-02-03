@@ -7,17 +7,17 @@ import { DTSIAvatarBox } from '@/components/app/pageBillDetails/dtsiAvatarBox'
 import { FILTER_KEYS, Filters, getDefaultFilters } from '@/components/app/pageBillDetails/filters'
 import { DTSI_BillPersonRelationshipType, DTSI_PersonRoleStatus } from '@/data/dtsi/generated'
 import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const AVATAR_SIZE = 126
 
 interface VotesSectionProps {
   votes: DTSIBillDetails['relationships']
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
 export function VotesSection(props: VotesSectionProps) {
-  const { votes, locale } = props
+  const { votes, countryCode } = props
 
   const [filters, setFilters] = useState<FILTER_KEYS>(getDefaultFilters())
 
@@ -77,7 +77,12 @@ export function VotesSection(props: VotesSectionProps) {
           <AvatarGrid nItems={14}>
             {sponsors?.length ? (
               sponsors?.map((person, i) => (
-                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+                <DTSIAvatarBox
+                  countryCode={countryCode}
+                  key={i}
+                  person={person}
+                  size={AVATAR_SIZE}
+                />
               ))
             ) : (
               <p className="text-fontcolor-muted">No sponsors</p>
@@ -92,7 +97,12 @@ export function VotesSection(props: VotesSectionProps) {
           <AvatarGrid nItems={14}>
             {coSponsors?.length ? (
               coSponsors?.map((person, i) => (
-                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+                <DTSIAvatarBox
+                  countryCode={countryCode}
+                  key={i}
+                  person={person}
+                  size={AVATAR_SIZE}
+                />
               ))
             ) : (
               <p className="text-fontcolor-muted">No co-sponsors</p>
@@ -107,7 +117,12 @@ export function VotesSection(props: VotesSectionProps) {
           <AvatarGrid nItems={14}>
             {votedFor?.length ? (
               votedFor?.map((person, i) => (
-                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+                <DTSIAvatarBox
+                  countryCode={countryCode}
+                  key={i}
+                  person={person}
+                  size={AVATAR_SIZE}
+                />
               ))
             ) : (
               <p className="text-fontcolor-muted">No votes for</p>
@@ -122,7 +137,12 @@ export function VotesSection(props: VotesSectionProps) {
           <AvatarGrid nItems={14}>
             {votedAgainst?.length ? (
               votedAgainst?.map((person, i) => (
-                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+                <DTSIAvatarBox
+                  countryCode={countryCode}
+                  key={i}
+                  person={person}
+                  size={AVATAR_SIZE}
+                />
               ))
             ) : (
               <p className="text-fontcolor-muted">No votes against</p>

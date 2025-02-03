@@ -48,23 +48,24 @@ export default function BecomeMemberReminderEmail({
           Becoming a full 501(c)4 member changes what SWC is allowed to communicate with you about,
           and you'll have access to benefits like:
           <br />
-          <ul className="text-foreground-muted pl-4">
-            <li>
-              Exclusive political communications about key elections and candidates we're tracking
-            </li>
-            <li>
-              Election analysis from top crypto political strategists who are making big moves
-              leading into November
-            </li>
-            <li>
-              More chances to connect with fellow SWC members - particularly other full members
-            </li>
-            <li>
-              Briefings from major crypto executives on how they see the political landscape and the
-              future of crypto in America
-            </li>
-          </ul>
         </Text>
+      </Section>
+
+      <Section>
+        <ul className="text-foreground-muted pl-4">
+          <li>
+            Exclusive political communications about key elections and candidates we're tracking
+          </li>
+          <li>
+            Election analysis from top crypto political strategists who are making big moves leading
+            into November
+          </li>
+          <li>More chances to connect with fellow SWC members - particularly other full members</li>
+          <li>
+            Briefings from major crypto executives on how they see the political landscape and the
+            future of crypto in America
+          </li>
+        </ul>
       </Section>
 
       <Section className="mt-4 text-center">

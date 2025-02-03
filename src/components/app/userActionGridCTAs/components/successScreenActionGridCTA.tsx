@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { SuccessScreenActionCard } from '@/components/app/userActionGridCTAs/components/successScreenActionCard'
 import { UserActionGridCampaignsDialog } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
-import { useLocale } from '@/hooks/useLocale'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 
 export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
-  const locale = useLocale()
+  const countryCode = useCountryCode()
 
   if (props.link) {
     const LinkComponent = props.link
@@ -27,7 +27,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
     const url = getUserActionDeeplink({
       actionType: campaign.actionType as UserActionTypesWithDeeplink,
       config: {
-        locale,
+        countryCode,
       },
       campaign: campaign.campaignName as any,
     })

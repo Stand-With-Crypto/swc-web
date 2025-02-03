@@ -54,7 +54,7 @@ export function UserActionActionNameFormDialog({
 
 ```javascript
 /// homepageDialogDeeplinkWrapper.tsx
-/// Used in app/[locale]/(homepageDialogDeeplink)/action folder
+/// Used in app/[countryCode]/(homepageDialogDeeplink)/action folder
 
 function UserActionFormActionNameDeeplinkWrapperContent() {
   const fetchUser = useApiResponseForUserFullProfileInfo()
@@ -169,7 +169,7 @@ export function UserActionFormActionNameSkeleton() {
 
 ## Create `/action/actionName` deeplink
 
-1. Create a folder in `src/swc-web/src/app/[locale]/(homepageDialogDeeplink)/action/` called the action name
+1. Create a folder in `src/swc-web/src/app/[countryCode]/(homepageDialogDeeplink)/action/` called the action name
 2. Create a `page.tsx` file in the folder with content similar to the following. Replace `ActionName` with the name of the new action.
 
 ```javascript

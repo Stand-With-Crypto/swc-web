@@ -5,20 +5,20 @@ import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
 import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 
 interface SumDonationsRowProps {
   sumDonations: SumDonationsByUser[0]
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   index: number
   overrideDonationRecipient?: string
 }
 
 const INDEX_SHIELD_IMAGE_MAP = ['/shields/gold.svg', '/shields/silver.svg', '/shields/bronze.svg']
 
-export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonationsRowProps) {
+export function SumDonationsByUserRow({ countryCode, sumDonations, index }: SumDonationsRowProps) {
   return (
     <div className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
@@ -48,7 +48,7 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
         <FormattedCurrency
           amount={sumDonations.totalAmountUsd}
           currencyCode={SupportedFiatCurrencyCodes.USD}
-          locale={locale}
+          locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
           maximumFractionDigits={2}
         />
       </div>

@@ -1,8 +1,8 @@
 import { SumDonations } from '@/data/aggregations/getSumDonations'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface PageDonateProps {
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   title: string
   description: string
   sumDonations: SumDonations

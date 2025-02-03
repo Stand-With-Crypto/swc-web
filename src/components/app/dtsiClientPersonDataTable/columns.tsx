@@ -15,7 +15,7 @@ import {
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -56,7 +56,11 @@ const personColumnHelper = createColumnHelper<Person>()
  *
  * @see https://tanstack.com/table/latest/docs/guide/column-defs#column-helpers
  */
-export const getDTSIClientPersonDataTableColumns = ({ locale }: { locale: SupportedLocale }) => [
+export const getDTSIClientPersonDataTableColumns = ({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) => [
   personColumnHelper.accessor(dtsiPersonFullName, {
     id: PERSON_TABLE_COLUMNS_IDS.FULL_NAME,
     filterFn: PERSON_TABLE_COLUMNS_IDS.FULL_NAME,
@@ -65,7 +69,7 @@ export const getDTSIClientPersonDataTableColumns = ({ locale }: { locale: Suppor
         <DTSIAvatar person={row.original} size={40} />
         <InternalLink
           className={cn(linkBoxLinkClassName, 'cursor-pointer')}
-          href={getIntlUrls(locale).politicianDetails(row.original.slug)}
+          href={getIntlUrls(countryCode).politicianDetails(row.original.slug)}
         >
           {dtsiPersonFullName(row.original)}
         </InternalLink>

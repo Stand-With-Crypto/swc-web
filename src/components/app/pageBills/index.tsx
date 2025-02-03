@@ -4,19 +4,19 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIBill, DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface PageBillsProps {
   title: string
   description: string
   bills: DTSIBill[]
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
 }
 
 const KEY_BILLS = ['hr4763', 'hjres109', 'hr5403']
 
 export function PageBills(props: PageBillsProps) {
-  const { title, description, bills, locale } = props
+  const { title, description, bills, countryCode } = props
 
   const [keyBills, otherBills] = partition(bills, bill => KEY_BILLS.includes(bill.slug))
   const sortedKeyBills = sortBy(keyBills, bill => KEY_BILLS.indexOf(bill.slug))
@@ -38,7 +38,7 @@ export function PageBills(props: PageBillsProps) {
           </PageTitle>
           <div className="flex flex-col gap-4 lg:gap-8">
             {results.map(bill => (
-              <DTSIBillCard bill={bill} key={bill.id} locale={locale}>
+              <DTSIBillCard bill={bill} countryCode={countryCode} key={bill.id}>
                 <CryptoSupportHighlight
                   className="flex-shrink-0 rounded-full text-base"
                   stanceScore={bill.computedStanceScore}

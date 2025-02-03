@@ -2,7 +2,7 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 export const dynamic = 'error'
@@ -27,7 +27,7 @@ export default function UnsubscribeSuccessPage() {
           <br />
           <br />
           Check out{' '}
-          <InternalLink href={getIntlUrls(SupportedLocale.EN_US).home()} replace>
+          <InternalLink href={getIntlUrls(SupportedCountryCodes.US).home()} replace>
             www.StandWithCrypto.org
           </InternalLink>{' '}
           for easy tools that let you reach out to lawmakers, check your voter registration, and

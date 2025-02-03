@@ -3,20 +3,20 @@
 import React, { useEffect } from 'react'
 
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 export function TotalAdvocatesPerStateTooltip({
   hoveredStateName,
   mousePosition,
   getTotalAdvocatesPerState,
-  locale,
+  countryCode,
   handleClearPressedState,
 }: {
   hoveredStateName: string | null
   mousePosition: { x: number; y: number } | null
   getTotalAdvocatesPerState: (stateName: string) => number | undefined
-  locale: SupportedLocale
+  countryCode: SupportedCountryCodes
   handleClearPressedState: () => void
 }) {
   useEffect(() => {
@@ -41,7 +41,7 @@ export function TotalAdvocatesPerStateTooltip({
 
   if (!totalAdvocatesPerState) return null
 
-  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale })} advocates in ${hoveredStateName}`
+  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale: COUNTRY_CODE_TO_LOCALE[countryCode] })} advocates in ${hoveredStateName}`
 
   const tooltipWidth = formattedNumber.length * 10
   const offsetX = tooltipWidth / 2
