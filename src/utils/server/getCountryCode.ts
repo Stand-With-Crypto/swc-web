@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { geolocation } from '@vercel/functions'
 import { NextRequest } from 'next/server'
 
@@ -26,7 +27,28 @@ export const parseUserCountryCodeCookie = (cookieValue?: string | null) => {
     return null
   }
 
-  return cookieValue?.includes('{')
-    ? (JSON.parse(cookieValue) as UserCountryCodeCookie)
-    : { countryCode: cookieValue, bypassed: false }
+  let parsedCookieValue: UserCountryCodeCookie | null = null
+
+  try {
+    if (cookieValue.includes('{')) {
+      parsedCookieValue = JSON.parse(cookieValue) as UserCountryCodeCookie
+    }
+  } catch (error) {
+    Sentry.captureException(error, {
+      tags: { domain: 'parseUserCountryCodeCookie' },
+      extra: {
+        cookieValue,
+      },
+    })
+    return null
+  }
+
+  const countryCode = (parsedCookieValue?.countryCode || cookieValue)?.toLowerCase()
+
+  return parsedCookieValue
+    ? {
+        ...parsedCookieValue,
+        countryCode,
+      }
+    : { countryCode, bypassed: false }
 }

@@ -21,7 +21,6 @@ import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
-import { setCookie } from '@/utils/server/setCookie'
 
 type FormFields = {
   countryCode: string
@@ -110,7 +109,7 @@ export function UserConfig() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async values => {
-            void setCookie(
+            void Cookies.set(
               USER_COUNTRY_CODE_COOKIE_NAME,
               JSON.stringify({ countryCode: values.countryCode, bypassed: true }),
               {
