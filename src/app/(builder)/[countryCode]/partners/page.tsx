@@ -8,7 +8,6 @@ import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
-export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE

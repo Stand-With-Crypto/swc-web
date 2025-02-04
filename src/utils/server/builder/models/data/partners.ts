@@ -24,7 +24,7 @@ async function getAllPartnersWithOffset(offset: number) {
         limit: LIMIT,
         fields: 'data',
         offset,
-        cachebust: NEXT_PUBLIC_ENVIRONMENT !== 'production',
+        cachebust: true,
       })
     },
     {
