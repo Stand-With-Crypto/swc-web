@@ -2,7 +2,6 @@ import { array, object, string } from 'zod'
 
 export const zodPartnerSchemaValidation = object({
   data: object({
-    name: string(),
     image: string().url(),
     imageAlt: string(),
     imageLink: string().url(),

@@ -48,7 +48,17 @@ export async function getPartners() {
     const filteredIncompletePartners = entries
       .map(entry => {
         const validEntry = zodPartnerSchemaValidation.safeParse(entry)
-        return validEntry.success ? validEntry.data : null
+
+        if (!validEntry.success) {
+          logger.warn('invalid partner entry', {
+            entry,
+            validEntry,
+          })
+
+          return null
+        }
+
+        return validEntry.data
       })
       .filter(Boolean) as SWCPartners
 

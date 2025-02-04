@@ -6,10 +6,10 @@ export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-8">
       {partners?.map(currentPartner => {
-        const { name, image, imageLink, imageAlt } = currentPartner.data
+        const { image, imageLink, imageAlt } = currentPartner.data
 
         return (
-          <ExternalLink href={imageLink} key={name}>
+          <ExternalLink href={imageLink} key={image}>
             <div className="relative flex h-40 w-40 items-center rounded-lg border-[12px] border-secondary bg-secondary transition hover:drop-shadow-lg sm:h-56 sm:w-56 sm:border-[36px]">
               <NextImage
                 alt={imageAlt}

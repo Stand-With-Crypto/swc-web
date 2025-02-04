@@ -20,10 +20,10 @@ export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
   return (
     <div className="flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-8">
       {visiblePartners?.map(currentPartner => {
-        const { name, image, imageAlt } = currentPartner.data
+        const { image, imageAlt } = currentPartner.data
 
         return (
-          <div className="relative flex h-20 w-44 items-center" key={name}>
+          <div className="relative flex h-20 w-44 items-center" key={image}>
             {!hasHydrated ? (
               <Skeleton className="h-20 w-44" />
             ) : (
