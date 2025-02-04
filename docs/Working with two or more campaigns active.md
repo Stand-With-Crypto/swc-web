@@ -61,8 +61,8 @@ export const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   }
 } = {
   [UserActionType.EMAIL]: {
-    [UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024]: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/email-cnn`
+    [UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/email-cnn`
     },
   },
 }

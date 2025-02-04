@@ -1,22 +1,25 @@
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
-import { INDUSTRY_PARTNERS } from '@/utils/shared/industryPartners'
+import { SWCPartners } from '@/utils/shared/getSWCPartners'
 
-export function PartnerGrid() {
+export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-8">
-      {INDUSTRY_PARTNERS.map(({ title, url, imageSrc }) => {
+      {partners?.map(currentPartner => {
+        const { image, imageLink, imageAlt } = currentPartner.data
+
         return (
-          <ExternalLink href={url} key={title}>
+          <ExternalLink href={imageLink} key={image}>
             <div className="relative flex h-40 w-40 items-center rounded-lg border-[12px] border-secondary bg-secondary transition hover:drop-shadow-lg sm:h-56 sm:w-56 sm:border-[36px]">
               <NextImage
-                alt={`${title} logo`}
+                alt={imageAlt}
                 className="object-contain"
                 fill
                 priority
                 quality={100}
                 sizes={'(max-width: 768px) 160px, 224px'}
-                src={imageSrc}
+                src={image}
+                unoptimized
               />
             </div>
           </ExternalLink>

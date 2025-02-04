@@ -2,18 +2,11 @@ import * as Sentry from '@sentry/nextjs'
 import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
+import { withBuilderIoAuthMiddleware } from '@/utils/server/serverWrappers/withBuilderIoAuthMiddleware'
 import { getLogger } from '@/utils/shared/logger'
-import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
-const logger = getLogger('builder-events-page-route')
-
-const BUILDER_IO_WEBHOOK_AUTH_TOKEN = requiredOutsideLocalEnv(
-  process.env.BUILDER_IO_WEBHOOK_AUTH_TOKEN,
-  'BUILDER_IO_WEBHOOK_AUTH_TOKEN',
-  "Builder.io webhook's auth token",
-)!
+const logger = getLogger('builder-webhook-events-page-route')
 
 interface EventValue {
   id: string
@@ -53,24 +46,7 @@ interface PageEventBody {
   previousValue?: EventValue
 }
 
-export const POST = withRouteMiddleware(async (request: NextRequest) => {
-  const authHeader = request.headers.get('Authorization')
-
-  if (authHeader !== `Bearer ${BUILDER_IO_WEBHOOK_AUTH_TOKEN}`) {
-    Sentry.captureMessage('Received unauthorized request to Builder.io webhook', {
-      extra: {
-        ...request,
-      },
-      tags: {
-        domain: 'builder.io',
-      },
-    })
-
-    return new NextResponse('Unauthorized', {
-      status: 401,
-    })
-  }
-
+export const POST = withBuilderIoAuthMiddleware(async (request: NextRequest) => {
   const body = (await request.json()) as PageEventBody
 
   const query = body.newValue?.query ?? body.previousValue?.query ?? []

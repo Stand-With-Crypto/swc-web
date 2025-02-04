@@ -97,7 +97,7 @@ export async function getEvents() {
     logger.error('error getting all events:' + e)
     Sentry.captureException(e, {
       level: 'error',
-      tags: { domain: 'getEvents' },
+      tags: { domain: 'builder.io', model: 'events' },
     })
     return null
   }
