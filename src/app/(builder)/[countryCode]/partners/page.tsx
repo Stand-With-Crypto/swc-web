@@ -20,6 +20,8 @@ export default async function PartnersPage(props: PageProps) {
   const content = await getPageContent(PAGE_MODEL, PATHNAME)
   const partners = await getPartners()
 
+  console.log('partners at home', partners)
+
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
       <RenderBuilderContent content={content} model={PAGE_MODEL} />
