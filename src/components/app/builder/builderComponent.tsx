@@ -1,6 +1,6 @@
 'use client'
 
-import type { ComponentProps } from 'react'
+import { type ComponentProps } from 'react'
 import { Builder, BuilderComponent } from '@builder.io/react'
 import { notFound } from 'next/navigation'
 

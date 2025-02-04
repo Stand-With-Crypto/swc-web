@@ -18,6 +18,7 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { SWCPartners } from '@/utils/shared/getSWCPartners'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { TopLevelMetrics } from './topLevelMetrics'
@@ -31,8 +32,10 @@ export function PageHome({
   sumDonationsByUser,
   dtsiHomepagePeople,
   advocatePerStateDataProps,
+  partners,
 }: { params: Awaited<PageProps['params']> } & Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
+    partners: SWCPartners | null
   }) {
   const { countryCode } = params
   const urls = getIntlUrls(countryCode)
@@ -140,7 +143,7 @@ export function PageHome({
             We've also partnered with a number of companies to fight alongside us.
           </PageSubTitle>
           <div className="space-y-6">
-            <PartnerGrid />
+            <PartnerGrid partners={partners} />
             <Button asChild variant="secondary">
               <InternalLink href={urls.partners()}>View all</InternalLink>
             </Button>

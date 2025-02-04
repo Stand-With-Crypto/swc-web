@@ -6,7 +6,7 @@ import { cn, twNoop } from '@/utils/web/cn'
 
 export const DEFAULT_PAGE_TITLE_SIZE = 'xl'
 
-const titleVariantsConfig = {
+export const titleVariantsConfig = {
   size: {
     xxs: twNoop('text-base md:text-lg lg:text-lg'),
     xs: twNoop('text-lg md:text-lg lg:text-xl'),
@@ -17,17 +17,19 @@ const titleVariantsConfig = {
   },
 }
 
-const pageTitleVariants = cva('font-sans text-center font-bold', {
+export const pageTitleVariants = cva('font-sans text-center font-bold', {
   variants: titleVariantsConfig,
   defaultVariants: {
     size: DEFAULT_PAGE_TITLE_SIZE,
   },
 })
 
+export const AsVariantsConfig = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'] as const
+
 export interface PageTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof pageTitleVariants> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
+  as?: (typeof AsVariantsConfig)[number]
   withoutBalancer?: boolean
 }
 
