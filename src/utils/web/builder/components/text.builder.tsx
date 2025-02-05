@@ -52,9 +52,6 @@ Builder.registerComponent(
     name: 'Text',
     override: true,
     noWrap: true, // Disables the default "Link URL" field
-    defaultStyles: {
-      marginTop: '0px',
-    },
     inputs: [
       {
         name: 'text',
