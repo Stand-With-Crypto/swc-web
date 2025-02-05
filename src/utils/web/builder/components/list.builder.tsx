@@ -81,7 +81,7 @@ Builder.registerComponent(
         component: {
           name: LIT_ITEM_NAME,
           options: {
-            text: 'List Item 1',
+            text: 'List Item',
           },
         },
       },
@@ -97,7 +97,7 @@ Builder.registerComponent(
   withChildren((props: ListItemProps) => (
     <li
       {...props.attributes}
-      // Builder.io adds a display flex to the list item which breaks the list item marker
+      // Adding !list-item here because Builder.io adds a display flex to the list item which breaks the list item marker
       className={cn('!list-item [&>p]:!m-0', props.attributes?.className)}
       key={props.attributes?.key}
     >
@@ -110,6 +110,7 @@ Builder.registerComponent(
             },
           }),
         }}
+        key={'content-' + props.attributes?.key}
       />
       {props.children}
     </li>
