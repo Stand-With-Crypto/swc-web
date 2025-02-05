@@ -36,7 +36,7 @@ Builder.registerComponent(
       {
         name: 'size',
         type: 'enum',
-        defaultValue: titleVariantsConfig.size.xl,
+        defaultValue: 'xl',
         enum: Object.keys(titleVariantsConfig.size),
       },
       {
