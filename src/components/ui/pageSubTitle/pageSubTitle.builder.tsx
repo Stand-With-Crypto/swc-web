@@ -40,7 +40,7 @@ Builder.registerComponent(
       {
         name: 'size',
         type: 'enum',
-        defaultValue: subTitleVariantsConfig.size.md,
+        defaultValue: 'md',
         enum: Object.keys(subTitleVariantsConfig.size),
       },
       {
