@@ -7,11 +7,18 @@ interface BuilderPageTitleProps extends BuilderComponentBaseProps {
   title: string
   as: (typeof AsVariantsConfig)[number]
   size: keyof typeof titleVariantsConfig.size
+  withoutBalancer?: boolean
 }
 
 Builder.registerComponent(
   (props: BuilderPageTitleProps) => (
-    <PageTitle {...props.attributes} as={props.as} key={props.attributes?.key} size={props.size}>
+    <PageTitle
+      {...props.attributes}
+      as={props.as}
+      key={props.attributes?.key}
+      size={props.size}
+      withoutBalancer={props.withoutBalancer}
+    >
       {props.title}
     </PageTitle>
   ),
@@ -36,7 +43,15 @@ Builder.registerComponent(
         name: 'as',
         type: 'enum',
         defaultValue: 'h1',
+        helperText: 'The HTML tag to use for the title',
         enum: AsVariantsConfig,
+        advanced: true,
+      },
+      {
+        name: 'withoutBalancer',
+        type: 'boolean',
+        defaultValue: false,
+        helperText: 'Whether to disable the balancer for the title',
         advanced: true,
       },
     ],
