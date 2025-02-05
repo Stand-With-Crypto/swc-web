@@ -6,7 +6,7 @@ import { BuilderComponentBaseProps } from '@/utils/web/builder/types'
 import { cn } from '@/utils/web/cn'
 
 const LIST_NAME = 'List'
-const LIT_ITEM_NAME = 'List Item'
+const LIST_ITEM_NAME = 'List Item'
 
 interface ListProps extends BuilderComponentBaseProps {
   type: 'ordered' | 'unordered'
@@ -42,9 +42,9 @@ Builder.registerComponent(
     canHaveChildren: true,
     noWrap: true,
     childRequirements: {
-      message: `This component only accepts ${LIT_ITEM_NAME} and Text as children`,
+      message: `This component only accepts ${LIST_ITEM_NAME} and Text as children`,
       query: {
-        'component.name': { $in: [LIT_ITEM_NAME, 'Text'] },
+        'component.name': { $in: [LIST_ITEM_NAME, 'Text'] },
       },
     },
     defaultStyles: {
@@ -79,7 +79,7 @@ Builder.registerComponent(
       {
         '@type': '@builder.io/sdk:Element',
         component: {
-          name: LIT_ITEM_NAME,
+          name: LIST_ITEM_NAME,
           options: {
             text: 'List Item',
           },
@@ -116,7 +116,7 @@ Builder.registerComponent(
     </li>
   )),
   {
-    name: LIT_ITEM_NAME,
+    name: LIST_ITEM_NAME,
     requiresParent: {
       message: `List item must be inside a ${LIST_NAME} component`,
       component: LIST_NAME,
