@@ -98,14 +98,14 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: readonly {
 }[] = [
   {
     language: 'en-GB',
-    countryCode: 'UK',
+    countryCode: 'uk',
     label: 'United Kingdom',
     url: 'https://uk.standwithcrypto.org',
     emoji: '🇬🇧',
   },
   {
     language: 'en-CA',
-    countryCode: 'CA',
+    countryCode: 'ca',
     label: 'Canada',
     url: 'https://ca.standwithcrypto.org',
     emoji: '🇨🇦',
