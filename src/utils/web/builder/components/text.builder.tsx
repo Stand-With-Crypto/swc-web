@@ -11,6 +11,15 @@ function transformLi(tagName: string, attribs: Record<string, string>) {
     // So we need to use margin-left instead
     attribs.style = attribs.style.replace('text-indent', 'margin-left')
   }
+
+  attribs.style = 'margin:0px;padding:0px;'
+
+  return { tagName, attribs }
+}
+
+function transformOlAndUl(tagName: string, attribs: Record<string, string>) {
+  attribs.style = 'margin-left:1rem;padding:0;'
+
   return { tagName, attribs }
 }
 
@@ -31,6 +40,8 @@ Builder.registerComponent(
           },
           transformTags: {
             li: transformLi,
+            ul: transformOlAndUl,
+            ol: transformOlAndUl,
           },
         }),
       }}
@@ -41,6 +52,9 @@ Builder.registerComponent(
     name: 'Text',
     override: true,
     noWrap: true, // Disables the default "Link URL" field
+    defaultStyles: {
+      marginTop: '0px',
+    },
     inputs: [
       {
         name: 'text',
