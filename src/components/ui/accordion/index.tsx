@@ -24,7 +24,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
 Accordion.displayName = AccordionPrimitive.Root.displayName
 
 const AccordionItem = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Item>,
+  React.ComponentRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item className={cn(cardClassNames, 'p-0', className)} ref={ref} {...props} />
@@ -32,7 +32,7 @@ const AccordionItem = React.forwardRef<
 AccordionItem.displayName = AccordionPrimitive.Item.displayName
 
 const AccordionTrigger = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & { chevronClassName?: string }
 >(({ className, children, chevronClassName, ...props }, ref) => (
   <AccordionPrimitive.Header className="flex">
@@ -54,7 +54,7 @@ const AccordionTrigger = React.forwardRef<
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
 const AccordionContent = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Content>,
+  React.ComponentRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
