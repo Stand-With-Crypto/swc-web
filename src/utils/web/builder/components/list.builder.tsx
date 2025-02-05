@@ -25,11 +25,21 @@ Builder.registerComponent(
         key={props.attributes?.key}
       >
         <ListElement
-          className={cn({
-            'list-disc': props.type === 'unordered' && props.unorderedMarker === 'disc',
-            'list-[circle]': props.type === 'unordered' && props.unorderedMarker === 'circle',
-            'list-[square]': props.type === 'unordered' && props.unorderedMarker === 'square',
-          })}
+          className={cn(
+            props.type === 'ordered'
+              ? {
+                  'list-decimal': props.orderedMarker === '1',
+                  'list-[lower-alpha]': props.orderedMarker === 'a',
+                  'list-[upper-alpha]': props.orderedMarker === 'A',
+                  'list-[lower-roman]': props.orderedMarker === 'i',
+                  'list-[upper-roman]': props.orderedMarker === 'I',
+                }
+              : {
+                  'list-disc': props.unorderedMarker === 'disc',
+                  'list-[circle]': props.unorderedMarker === 'circle',
+                  'list-[square]': props.unorderedMarker === 'square',
+                },
+          )}
           type={props.type === 'ordered' ? props.orderedMarker : undefined}
         >
           {props.children}
