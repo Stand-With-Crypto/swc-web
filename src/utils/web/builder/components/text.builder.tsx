@@ -12,13 +12,13 @@ function transformLi(tagName: string, attribs: Record<string, string>) {
     attribs.style = attribs.style.replace('text-indent', 'margin-left')
   }
 
-  attribs.style = 'margin:0px;padding:0px;'
+  attribs.class = attribs.class ? attribs.class.concat(' m-0 p-0') : 'm-0 p-0'
 
   return { tagName, attribs }
 }
 
 function transformOlAndUl(tagName: string, attribs: Record<string, string>) {
-  attribs.style = 'margin-left:1rem;padding:0;'
+  attribs.class = attribs.class ? attribs.class.concat(' ml-4 p-0') : 'ml-4 p-0'
 
   return { tagName, attribs }
 }
