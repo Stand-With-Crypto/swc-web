@@ -11,6 +11,15 @@ function transformLi(tagName: string, attribs: Record<string, string>) {
     // So we need to use margin-left instead
     attribs.style = attribs.style.replace('text-indent', 'margin-left')
   }
+
+  attribs.class = cn(attribs.class, 'm-0 p-0')
+
+  return { tagName, attribs }
+}
+
+function transformOlAndUl(tagName: string, attribs: Record<string, string>) {
+  attribs.class = cn(attribs.class, 'ml-4 p-0')
+
   return { tagName, attribs }
 }
 
@@ -31,6 +40,8 @@ Builder.registerComponent(
           },
           transformTags: {
             li: transformLi,
+            ul: transformOlAndUl,
+            ol: transformOlAndUl,
           },
         }),
       }}

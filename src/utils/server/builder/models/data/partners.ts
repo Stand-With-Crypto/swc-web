@@ -13,10 +13,8 @@ const LIMIT = 100
 
 async function getAllPartnersWithOffset(offset: number) {
   return await pRetry(
-    () => {
-      logger.info(`getting all partners with offset ${offset}`)
-
-      return builderSDKClient.getAll(BuilderDataModelIdentifiers.PARTNERS, {
+    () =>
+      builderSDKClient.getAll(BuilderDataModelIdentifiers.PARTNERS, {
         query: {
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
         },
@@ -25,8 +23,7 @@ async function getAllPartnersWithOffset(offset: number) {
         limit: LIMIT,
         fields: 'data',
         offset,
-      })
-    },
+      }),
     {
       retries: 3,
       minTimeout: 10000,
