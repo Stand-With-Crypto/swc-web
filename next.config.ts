@@ -1,6 +1,13 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
+import * as Sentry from '@sentry/nextjs'
 import type { NextConfig } from 'next'
+
+interface VanityUrl {
+  source: string
+  destination: string
+  permanent: boolean
+}
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -241,9 +248,22 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
+    const apiURL = `${process.env.INTERNAL_API_BASE_URL!}/api/public/vanity-url`
+    const vanityUrls = (await fetch(apiURL)
+      .then(res => res.json() ?? [])
+      .catch(error => {
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'vanityUrl',
+          },
+        })
+        return []
+      })) as VanityUrl[]
+
     return [
       // redirects from v1 -> v2
       ...V1_ACTION_REDIRECTS,
+      ...vanityUrls,
       {
         permanent: true,
         destination: '/action/call',
@@ -283,17 +303,6 @@ const nextConfig: NextConfig = {
         source: '/action/mint-nft',
         destination: '/action/nft-mint',
         permanent: true,
-      },
-      // vanity urls
-      {
-        source: '/join/:referralId',
-        destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
-        permanent: false,
-      },
-      {
-        source: '/politicians/person/:slug/questionnaire',
-        destination: '/politicians/person/:slug#questionnaire',
-        permanent: false,
       },
       // Live event campaigns
       {
