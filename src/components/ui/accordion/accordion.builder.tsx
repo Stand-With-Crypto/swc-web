@@ -19,16 +19,40 @@ interface AccordionProps extends BuilderComponentBaseProps {
 }
 
 Builder.registerComponent(
-  withChildren((props: AccordionProps) => (
-    <Accordion
-      {...props.attributes}
-      collapsible={props.collapsible}
-      key={props.attributes?.key}
-      type={props.type}
-    >
-      {props.children}
-    </Accordion>
-  )),
+  withChildren((props: AccordionProps) => {
+    const defaultValues = props.builderBlock?.children
+      .filter(child => Boolean((child.component.options as AccordionItemProps)?.open))
+      .map(child => (child.component.options as AccordionItemProps)?.title)
+
+    if (props.type === 'single') {
+      const defaultValue = defaultValues?.[0]
+
+      return (
+        <Accordion
+          {...props.attributes}
+          collapsible={props.collapsible}
+          key={props.attributes?.key}
+          type="single"
+          value={Builder.isEditing ? defaultValue : undefined}
+          defaultValue={Builder.isEditing ? undefined : defaultValue}
+        >
+          {props.children}
+        </Accordion>
+      )
+    }
+
+    return (
+      <Accordion
+        {...props.attributes}
+        key={props.attributes?.key}
+        type="multiple"
+        value={Builder.isEditing ? defaultValues : undefined}
+        defaultValue={Builder.isEditing ? undefined : defaultValues}
+      >
+        {props.children}
+      </Accordion>
+    )
+  }),
   {
     name: ACCORDION_NAME,
     canHaveChildren: true,
@@ -44,18 +68,19 @@ Builder.registerComponent(
     },
     inputs: [
       {
-        name: 'collapsible',
-        type: 'boolean',
-        defaultValue: true,
-        helperText: 'Whether an accordion item can be collapsed after it has been opened',
-      },
-      {
         name: 'type',
         type: 'enum',
         required: true,
         defaultValue: 'single',
         enum: ['single', 'multiple'],
         helperText: 'Whether the accordion opens one or multiple items at a time',
+      },
+      {
+        name: 'collapsible',
+        type: 'boolean',
+        showIf: options => options.get('type') === 'single',
+        defaultValue: true,
+        helperText: 'Whether an accordion item can be collapsed after it has been opened',
       },
     ],
     defaultChildren: [
@@ -77,6 +102,7 @@ interface AccordionItemProps extends BuilderComponentBaseProps {
   title: string
   content: string
   titleBold: boolean
+  open?: boolean
 }
 
 Builder.registerComponent(
@@ -131,6 +157,11 @@ Builder.registerComponent(
         type: 'string',
         helperText: 'The title of the accordion item',
         defaultValue: 'Accordion Item',
+      },
+      {
+        name: 'open',
+        type: 'boolean',
+        defaultValue: false,
       },
       {
         name: 'content',
