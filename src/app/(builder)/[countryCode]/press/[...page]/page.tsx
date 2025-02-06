@@ -10,12 +10,14 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 export const dynamic = 'error'
 export const dynamicParams = true
 
-const PAGE_PREFIX = '/content/'
-const PAGE_MODEL = BuilderPageModelIdentifiers.CONTENT
+const PAGE_PREFIX = '/press/'
+const PAGE_MODEL = BuilderPageModelIdentifiers.PRESS
 
-type DynamicPageProps = PageProps<{ page: string[] }>
+type PressReleasePageProps = PageProps<{
+  page: string[]
+}>
 
-export default async function Page(props: DynamicPageProps) {
+export default async function Page(props: PressReleasePageProps) {
   const { page, countryCode } = await props.params
 
   const pathname = PAGE_PREFIX + page?.join('/')
@@ -29,7 +31,7 @@ export default async function Page(props: DynamicPageProps) {
   )
 }
 
-export async function generateMetadata(props: DynamicPageProps): Promise<Metadata> {
+export async function generateMetadata(props: PressReleasePageProps): Promise<Metadata> {
   const { page } = await props.params
 
   const pathname = PAGE_PREFIX + page?.join('/')
@@ -43,6 +45,7 @@ export async function generateMetadata(props: DynamicPageProps): Promise<Metadat
 }
 
 export async function generateStaticParams() {
+  // TODO: We probably don't want to generate static pages for all press releases
   const paths = await builderSDKClient
     .getAll(PAGE_MODEL, { options: { noTargeting: true } })
     .then(res => res?.map(({ data }) => data?.url) ?? [])
