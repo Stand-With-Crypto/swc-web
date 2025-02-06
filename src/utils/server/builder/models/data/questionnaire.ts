@@ -31,7 +31,7 @@ export async function getQuestionnaire(DTSISlug: string) {
     logger.error('error getting questionnaire entry:' + e)
     Sentry.captureException(e, {
       level: 'error',
-      tags: { domain: 'getQuestionnaire' },
+      tags: { domain: 'builder.io', model: 'questionnaire' },
       extra: { DTSISlug },
     })
     return null
