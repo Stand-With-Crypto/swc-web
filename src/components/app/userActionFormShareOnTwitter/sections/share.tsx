@@ -13,7 +13,7 @@ import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-interface ShareOnXProps extends UseSectionsReturn<SECTIONS_NAMES> {}
+type ShareOnXProps = UseSectionsReturn<SECTIONS_NAMES>
 
 export function ShareOnX(props: ShareOnXProps) {
   const { goToSection } = props

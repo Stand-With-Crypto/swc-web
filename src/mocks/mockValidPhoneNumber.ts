@@ -27,7 +27,7 @@ function validatePhoneNumber(phoneNumber: string) {
     if (!parsedPhoneNumber) return false
 
     return parsedPhoneNumber.isPossible() && parsedPhoneNumber.isValid()
-  } catch (e) {
+  } catch {
     return false
   }
 }

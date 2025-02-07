@@ -1,4 +1,4 @@
-import { array, boolean, nativeEnum, number, object, string } from 'zod'
+import { array, boolean, nativeEnum, number, object, string, z } from 'zod'
 
 enum EVENT_TYPE_OPTIONS {
   'official' = 'official',
@@ -26,7 +26,5 @@ export const zodEventSchemaValidation = object({
   }),
 })
 
-const zodEventsSchemaValidation = array(zodEventSchemaValidation)
-
-export type SWCEvents = Zod.infer<typeof zodEventsSchemaValidation>
+export type SWCEvents = z.infer<typeof zodEventSchemaValidation>[]
 export type SWCEvent = SWCEvents[0]['data']
