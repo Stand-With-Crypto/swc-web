@@ -214,7 +214,7 @@ function ThirdwebLoginEmbedded(
     <ConnectEmbed
       appMetadata={appMetadata}
       auth={{
-        isLoggedIn: () => isLoggedIn(),
+        isLoggedIn: async () => await isLoggedIn(),
         doLogin: async params => {
           await login(params)
           await props.onLoginCallback?.()
