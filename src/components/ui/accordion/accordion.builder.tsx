@@ -1,4 +1,4 @@
-import { createContext,useContext, useId, useState } from 'react'
+import { createContext, useContext, useId, useState } from 'react'
 import { Builder, withChildren } from '@builder.io/react'
 import sanitizeHtml from 'sanitize-html'
 
@@ -83,9 +83,9 @@ Builder.registerComponent(
     canHaveChildren: true,
     noWrap: true,
     childRequirements: {
-      message: `This component only accepts ${ACCORDION_ITEM_NAME} and Text as children`,
+      message: `This component only accepts ${ACCORDION_ITEM_NAME} as children`,
       query: {
-        'component.name': { $in: [ACCORDION_ITEM_NAME, 'Text'] },
+        'component.name': { $eq: ACCORDION_ITEM_NAME },
       },
     },
     defaultStyles: {
@@ -131,7 +131,7 @@ interface AccordionItemProps extends BuilderComponentBaseProps {
 }
 
 Builder.registerComponent(
-  withChildren((props: AccordionItemProps) => {
+  (props: AccordionItemProps) => {
     const { handleAccordionItemClick } = useContext(AccordionEditingContext) ?? {}
 
     const value = props.attributes?.key ?? useId()
@@ -163,24 +163,19 @@ Builder.registerComponent(
               }}
               key={`content-${props.attributes?.key ?? ''}`}
             />
-            {props.children}
           </div>
         </AccordionContent>
       </AccordionItem>
     )
-  }),
+  },
   {
     name: ACCORDION_ITEM_NAME,
     requiresParent: {
       message: `Accordion item must be inside a ${ACCORDION_NAME} component`,
       component: ACCORDION_NAME,
     },
-    canHaveChildren: true,
+    canHaveChildren: false,
     noWrap: true,
-    childRequirements: {
-      message: `This component only accepts ${ACCORDION_NAME} as children`,
-      component: ACCORDION_NAME,
-    },
     defaultStyles: {
       marginTop: '0px',
     },
@@ -211,7 +206,6 @@ Builder.registerComponent(
         type: 'boolean',
         defaultValue: true,
         helperText: 'Whether the title should be bold',
-        advanced: true,
       },
     ],
   },
