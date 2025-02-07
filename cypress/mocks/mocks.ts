@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-import { fakerFields } from '@/mocks/fakerUtils'
+import { fakerFields } from '../utils/faker'
 
 const mockUserFirstName = faker.person.firstName()
 const mockUserLastName = faker.person.lastName()
