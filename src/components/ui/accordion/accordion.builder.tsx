@@ -59,20 +59,20 @@ Builder.registerComponent(
           <Accordion
             {...props.attributes}
             collapsible={props.collapsible}
+            defaultValue={defaultValue?.[0]}
             key={props.attributes?.key}
             type="single"
             value={Builder.isEditing ? mockedSingleOpenItem : undefined}
-            defaultValue={defaultValue?.[0]}
           >
             {props.children}
           </Accordion>
         ) : (
           <Accordion
             {...props.attributes}
-            key={props.attributes?.key}
-            value={Builder.isEditing ? Array.from(mockedOpenedItems) : undefined}
             defaultValue={defaultValue}
+            key={props.attributes?.key}
             type="multiple"
+            value={Builder.isEditing ? Array.from(mockedOpenedItems) : undefined}
           >
             {props.children}
           </Accordion>
@@ -142,8 +142,8 @@ Builder.registerComponent(
       <AccordionItem
         {...props.attributes}
         key={props.attributes?.key}
-        value={value}
         onClick={() => mockOpenItem?.(value)}
+        value={value}
       >
         <AccordionTrigger key={`trigger-${props.attributes?.key ?? ''}`}>
           {props.titleBold ? (
