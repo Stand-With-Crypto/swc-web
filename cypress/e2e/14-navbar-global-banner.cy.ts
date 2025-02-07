@@ -1,12 +1,16 @@
 /// <reference types="cypress" />
 
+function getCountryCodeCookieValue(countryCode: string) {
+  return `{%22countryCode%22:%22${countryCode}%22%2C%22bypassed%22:true}`
+}
+
 describe('NavBarGlobalBanner', () => {
   beforeEach(() => {
     cy.clearCookie('USER_COUNTRY_CODE')
   })
 
   it('should show UK banner when countryCode is "UK"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', '{%22countryCode%22:%22UK%22%2C%22bypassed%22:true}')
+    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('UK'))
 
     cy.visit('/')
 
@@ -14,7 +18,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show UK banner when countryCode is "uk"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', '{%22countryCode%22:%22uk%22%2C%22bypassed%22:true}')
+    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('uk'))
 
     cy.visit('/')
 
@@ -22,7 +26,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "CA"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', '{%22countryCode%22:%22CA%22%2C%22bypassed%22:true}')
+    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('CA'))
 
     cy.visit('/')
 
@@ -30,7 +34,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "ca"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', '{%22countryCode%22:%22ca%22%2C%22bypassed%22:true}')
+    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('ca'))
 
     cy.visit('/')
 
@@ -38,7 +42,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show US restriction banner when countryCode is not supported', () => {
-    cy.setCookie('USER_COUNTRY_CODE', '{%22countryCode%22:%22br%22%2C%22bypassed%22:true}')
+    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('br'))
 
     cy.visit('/')
 
@@ -48,7 +52,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show current US campaign for US users', () => {
-    cy.setCookie('USER_COUNTRY_CODE', '{%22countryCode%22:%22US%22%2C%22bypassed%22:true}')
+    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('US'))
 
     cy.visit('/')
 
