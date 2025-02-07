@@ -149,19 +149,18 @@ Builder.registerComponent(
           )}
         </AccordionTrigger>
         <AccordionContent key={`content-${props.attributes?.key ?? ''}`}>
-          <div className="prose prose-sm max-w-none px-4 pb-6 text-muted-foreground">
-            <span
-              dangerouslySetInnerHTML={{
-                __html: sanitizeHtml(props.content, {
-                  allowedAttributes: {
-                    '*': ['style', 'class'],
-                    a: ['href'],
-                  },
-                }),
-              }}
-              key={`content-${props.attributes?.key ?? ''}`}
-            />
-          </div>
+          <div
+            className="prose prose-sm max-w-none px-4 pb-2 text-muted-foreground"
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(props.content, {
+                allowedAttributes: {
+                  '*': ['style', 'class'],
+                  a: ['href'],
+                },
+              }),
+            }}
+            key={`content-${props.attributes?.key ?? ''}`}
+          />
         </AccordionContent>
       </AccordionItem>
     )
