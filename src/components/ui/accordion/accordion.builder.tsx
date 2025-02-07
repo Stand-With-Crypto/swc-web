@@ -1,4 +1,4 @@
-import { createContext, useContext, useId, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { Builder, withChildren } from '@builder.io/react'
 import sanitizeHtml from 'sanitize-html'
 
@@ -134,14 +134,12 @@ Builder.registerComponent(
   (props: AccordionItemProps) => {
     const { handleAccordionItemClick } = useContext(AccordionEditingContext) ?? {}
 
-    const value = props.attributes?.key ?? useId()
-
     return (
       <AccordionItem
         {...props.attributes}
         key={props.attributes?.key}
-        onClick={() => handleAccordionItemClick?.(value)}
-        value={value}
+        onClick={() => handleAccordionItemClick?.(props.title)}
+        value={props.title}
       >
         <AccordionTrigger key={`trigger-${props.attributes?.key ?? ''}`}>
           {props.titleBold ? (
