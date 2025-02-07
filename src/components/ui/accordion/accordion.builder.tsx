@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react'
+import { useId, useState, useContext, createContext } from 'react'
 import { Builder, withChildren } from '@builder.io/react'
 import sanitizeHtml from 'sanitize-html'
 
@@ -13,8 +13,8 @@ import { BuilderComponentBaseProps } from '@/utils/web/builder/types'
 const ACCORDION_NAME = 'Accordion'
 const ACCORDION_ITEM_NAME = 'Accordion Item'
 
-const AccordionEditingContext = React.createContext<{
-  mockOpenItem: (value: string) => void
+const AccordionEditingContext = createContext<{
+  handleAccordionItemClick: (value: string) => void
 } | null>(null)
 
 interface AccordionProps extends BuilderComponentBaseProps {
@@ -24,10 +24,10 @@ interface AccordionProps extends BuilderComponentBaseProps {
 
 Builder.registerComponent(
   withChildren((props: AccordionProps) => {
-    const [mockedOpenedItems, setMockedOpenedItems] = useState<Set<string>>(new Set())
+    const [mockedOpenedItems, setMockedOpenedItems] = useState<string[]>([])
     const [mockedSingleOpenItem, setMockedSingleOpenItem] = useState<string>()
 
-    const mockOpenItem = (value: string) => {
+    const handleAccordionItemClick = (value: string) => {
       if (props.type === 'single') {
         if (mockedSingleOpenItem === value && props.collapsible) {
           setMockedSingleOpenItem(undefined)
@@ -38,15 +38,11 @@ Builder.registerComponent(
         return
       }
 
-      setMockedOpenedItems(prevSet => {
-        const newSet = new Set(prevSet)
-        if (newSet.has(value)) {
-          newSet.delete(value)
-        } else {
-          newSet.add(value)
-        }
-        return newSet
-      })
+      setMockedOpenedItems(prevItems =>
+        prevItems.includes(value)
+          ? prevItems.filter(item => item !== value)
+          : [...prevItems, value],
+      )
     }
 
     const defaultValue = props.builderBlock?.children
@@ -54,7 +50,9 @@ Builder.registerComponent(
       .map(child => (child.component.options as AccordionItemProps)?.title)
 
     return (
-      <AccordionEditingContext.Provider value={Builder.isEditing ? { mockOpenItem } : null}>
+      <AccordionEditingContext.Provider
+        value={Builder.isEditing ? { handleAccordionItemClick } : null}
+      >
         {props.type === 'single' ? (
           <Accordion
             {...props.attributes}
@@ -134,7 +132,7 @@ interface AccordionItemProps extends BuilderComponentBaseProps {
 
 Builder.registerComponent(
   withChildren((props: AccordionItemProps) => {
-    const { mockOpenItem } = React.useContext(AccordionEditingContext) ?? {}
+    const { handleAccordionItemClick } = useContext(AccordionEditingContext) ?? {}
 
     const value = props.attributes?.key ?? useId()
 
@@ -143,7 +141,7 @@ Builder.registerComponent(
         {...props.attributes}
         key={props.attributes?.key}
         value={value}
-        onClick={() => mockOpenItem?.(value)}
+        onClick={() => handleAccordionItemClick?.(value)}
       >
         <AccordionTrigger key={`trigger-${props.attributes?.key ?? ''}`}>
           {props.titleBold ? (
@@ -197,7 +195,7 @@ Builder.registerComponent(
       {
         name: 'defaultOpen',
         helperText:
-          'Whether the accordion item should be open by default when the page loads. **If the accordion is single, only the first item with this option will be open',
+          'Whether the accordion item should be open by default when the page loads. **If the accordion is single, only the first item with this option will be open**',
         type: 'boolean',
         defaultValue: false,
       },
