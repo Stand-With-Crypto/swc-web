@@ -10,6 +10,7 @@ interface News {
 }
 
 interface InternalNews extends News {
+  type: 'internal'
   pressPage: {
     id: string
     model: BuilderPageModelIdentifiers
@@ -17,8 +18,10 @@ interface InternalNews extends News {
 }
 
 interface ExternalNews extends News {
+  type: 'external'
   title: string
   url: string
+  source: string
 }
 
 export async function getAllNews() {
@@ -44,4 +47,12 @@ export async function getAllNews() {
       minTimeout: 10000,
     },
   )
+}
+
+export function isInternalNews(news: News): news is InternalNews {
+  return news.type === 'internal'
+}
+
+export function isExternalNews(news: News): news is ExternalNews {
+  return news.type === 'external'
 }

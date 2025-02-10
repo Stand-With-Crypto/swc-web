@@ -1,45 +1,49 @@
-import { MOCK_PRESS_CONTENT } from '@/components/app/pagePress/mock'
 import { PressSection } from '@/components/app/pagePress/press/pressSection'
 import { Button } from '@/components/ui/button'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import { slugify } from '@/utils/shared/slugify'
+
+export interface PressContent {
+  dateHeading: Date
+  title: string
+  source: string
+  url: string
+}
 
 interface PagePressProps {
-  pressContent: typeof MOCK_PRESS_CONTENT
+  pressContent: PressContent[]
 }
 
 export function PagePress({ pressContent }: PagePressProps) {
   return (
     <div className="standard-spacing-from-navbar container flex flex-col gap-20">
       <div className="flex flex-col gap-16">
-        {pressContent.map(({ dateHeading, heading, publication, link }, idx) => {
-          const isInternal = publication === 'Press Release' && link.startsWith('/')
+        {pressContent.map(({ dateHeading, title, source, url }, idx) => {
+          const isInternal = source === 'Press Release' && url.startsWith('/')
 
           const LinkComponent = isInternal ? TrackedInternalLink : TrackedExternalLink
-          const currentLink = isInternal ? `/press/${slugify(link) ?? ''}` : link
 
           return (
             <PressSection
-              dateHeading={dateHeading}
-              heading={heading}
+              dateHeading={dateHeading.toDateString()}
+              heading={title}
               key={idx}
-              publication={publication}
+              publication={source}
             >
               <Button asChild variant="secondary">
                 <LinkComponent
-                  aria-label={`Read more about ${heading}`}
+                  aria-label={`Read more about ${title}`}
                   className="text-foreground no-underline hover:no-underline"
                   eventProperties={{
                     component: AnalyticComponentType.link,
                     action: AnalyticActionType.click,
-                    link,
+                    link: url,
                     page: 'Press',
                     surface: 'Press Section',
                   }}
-                  href={currentLink}
-                  title={`Read more about ${heading}`}
+                  href={url}
+                  title={`Read more about ${title}`}
                 >
                   Read more
                 </LinkComponent>
