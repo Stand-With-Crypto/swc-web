@@ -12,7 +12,7 @@ const COINBASE_COMMERCE_WEBHOOK_SECRET = requiredEnv(
 function areSignaturesEqual(a: string, b: string) {
   try {
     return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b))
-  } catch (e) {
+  } catch {
     return false
   }
 }

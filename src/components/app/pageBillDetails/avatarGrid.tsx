@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { useSplitChildren, UseSplitChildrenProps } from '@/hooks/useSplitChildren'
 
-interface AvatarGridProps extends UseSplitChildrenProps {}
+type AvatarGridProps = UseSplitChildrenProps
 
 export const AvatarGrid = (props: AvatarGridProps) => {
   const { children, nItems } = props

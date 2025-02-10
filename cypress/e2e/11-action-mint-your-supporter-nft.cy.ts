@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { mockRandomUser } from 'cypress/mocks/mocks'
+import { mockRandomUser } from 'cypress/mocks'
 
 describe('action - mint your supporter NFT', () => {
   it.skip('should go through signing in and nft minting', () => {

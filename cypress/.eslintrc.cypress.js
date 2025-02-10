@@ -1,7 +1,7 @@
 /* eslint-env node */
 module.exports = {
   root: true,
-  ignorePatterns: ['**/**/*.generated.ts', '*.js'],
+  ignorePatterns: ['**/**/*.generated.ts', '*.js', '**/src/*'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -45,7 +45,7 @@ module.exports = {
       {
         patterns: [
           {
-            group: ['@/*', 'src/*'],
+            group: ['@/*', '**/src/*'],
             message: 'Please do not import outside Cypress environment.',
           },
         ],
