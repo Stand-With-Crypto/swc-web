@@ -1,8 +1,7 @@
 import { faker } from '@faker-js/faker'
+import dtsiSlugs from 'cypress/fixture/testingDtsiSlugs.json'
 import { parsePhoneNumber } from 'libphonenumber-js/core'
 import phoneNumberMetadata from 'libphonenumber-js/mobile/metadata'
-
-import dtsiSlugs from '../fixture/testingDtsiSlugs.json'
 
 export enum SupportedFiatCurrencyCodes {
   USD = 'USD',

@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
-
-import { fakerFields } from '../utils/faker'
+import { fakerFields } from 'cypress/utils/faker'
 
 const mockUserFirstName = faker.person.firstName()
 const mockUserLastName = faker.person.lastName()

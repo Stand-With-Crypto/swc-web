@@ -36,10 +36,7 @@ module.exports = {
     'import/newline-after-import': 'warn',
     curly: ['error', 'multi-line'],
     'import/no-duplicates': 'error',
-    'no-relative-import-paths/no-relative-import-paths': [
-      'error',
-      { allowSameFolder: true, allowedDepth: 1 },
-    ],
+    'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true }],
     'no-restricted-imports': [
       'error',
       {
