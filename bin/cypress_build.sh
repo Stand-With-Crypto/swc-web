@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-npm run lint:cypress
 npx prisma generate
 npm run codegen
 SEED_SIZE=SM npm run db:seed

@@ -20,7 +20,7 @@
     "initial": "npx prisma generate && npm run codegen && npm run db:seed",
     "inngest": "npx inngest-cli@latest dev --no-discovery -u http://localhost:3000/api/inngest",
     "lint": "concurrently \"next lint --max-warnings=0\"  \"prettier --check .\"",
-    "lint:cypress": "eslint --config ./cypress/.eslintrc.cypress.js ./cypress",
+    "lint:cypress": "eslint ./cypress",
     "newbranch": "npm i && npx prisma generate && npm run codegen",
     "postbuild": "next-sitemap",
     "prettier": "prettier --write .",

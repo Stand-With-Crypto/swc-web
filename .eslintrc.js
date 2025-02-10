@@ -48,6 +48,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {
@@ -57,18 +58,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-namespace': 'off',
     'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true }],
-    'react-hooks/exhaustive-deps': [
-      'warn',
-      {
-        additionalHooks: 'useLoadingCallback',
-      },
-    ],
-    'simple-import-sort/imports': ['warn', sortImports],
-    'simple-import-sort/exports': 'warn',
-    'import/first': 'warn',
-    'import/newline-after-import': 'warn',
-    curly: ['error', 'multi-line'],
-    'import/no-duplicates': 'error',
     'no-restricted-imports': [
       'error',
       {
@@ -85,6 +74,23 @@ module.exports = {
         ],
       },
     ],
-    '@typescript-eslint/no-floating-promises': 'error',
+    'react-hooks/exhaustive-deps': [
+      'warn',
+      {
+        additionalHooks: 'useLoadingCallback',
+      },
+    ],
+    'simple-import-sort/imports': ['warn', sortImports],
+    'simple-import-sort/exports': 'warn',
+    'import/first': 'warn',
+    'import/newline-after-import': 'warn',
+    curly: ['error', 'multi-line'],
+    'import/no-duplicates': 'error',
+    'import/no-restricted-paths': [
+      'error',
+      {
+        zones: [{ target: './cypress', from: './src' }],
+      },
+    ],
   },
 }
