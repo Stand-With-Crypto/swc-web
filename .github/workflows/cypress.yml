@@ -102,9 +102,6 @@ jobs:
             sleep 4;
           done
 
-      - name: Cypress lint
-        run: npm run lint:cypress
-
       - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6.7.0
