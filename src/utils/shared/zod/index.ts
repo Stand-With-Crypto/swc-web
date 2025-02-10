@@ -81,7 +81,7 @@ export function withSafeParseWithMetadata<T>(schema: z.ZodType<T>, data: T) {
         if (metadata) {
           errorsMetadata[field as keyof T] = metadata as ZodDescribeMetadata
         }
-      } catch (error) {
+      } catch {
         errorsMetadata[field as keyof T] = {
           triggerException: true,
           message: `Failed to parse description for field ${field}`,

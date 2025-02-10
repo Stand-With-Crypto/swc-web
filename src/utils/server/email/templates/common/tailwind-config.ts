@@ -115,5 +115,6 @@ export const tailwindConfig: TailwindConfig = {
       96: '384px',
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require('@tailwindcss/aspect-ratio')],
 }

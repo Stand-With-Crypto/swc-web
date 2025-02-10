@@ -1,6 +1,4 @@
-/// <reference types="cypress" />
-
-import { mockRandomUser } from 'cypress/fixture/mocks'
+import { mockRandomUser } from 'cypress/mocks'
 
 // ***********************************************
 // This example commands.ts shows you how to

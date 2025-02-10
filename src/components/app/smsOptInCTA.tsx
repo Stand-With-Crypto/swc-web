@@ -2,7 +2,7 @@
 
 import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/smsOptInForm'
 
-interface SMSOptInProps extends Omit<SMSOptInFormProps, 'children'> {}
+type SMSOptInProps = Omit<SMSOptInFormProps, 'children'>
 
 export function SMSOptInCTA(props: SMSOptInProps) {
   return (

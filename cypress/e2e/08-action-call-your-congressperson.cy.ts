@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { GoogleCivicInfoOfficial, GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
+import { GoogleCivicInfoOfficial, GoogleCivicInfoResponse } from 'cypress/utils/googleCivicInfo'
 
 it.skip('action - call your congressperson', () => {
   cy.viewport('iphone-6')
