@@ -7,6 +7,7 @@ import { getNewsList } from '@/utils/server/builder/models/data/news'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 
@@ -19,11 +20,13 @@ export default async function PressPage(props: PageProps) {
   const news = await getNewsList()
   const content = await getPageContent(PAGE_MODEL, PATHNAME)
 
+  const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
+
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
       <RenderBuilderContent content={content} model={PAGE_MODEL} />
 
-      {news && <NewsList pressContent={news} />}
+      {news && <NewsList locale={locale} pressContent={news} />}
     </BuilderPageLayout>
   )
 }

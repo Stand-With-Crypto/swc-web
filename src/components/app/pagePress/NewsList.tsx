@@ -5,13 +5,14 @@ import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import { NormalizedNews } from '@/utils/server/builder/models/data/news'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 interface NewsListProps {
   pressContent: NormalizedNews[]
+  locale: SupportedLocale
 }
 
-export function NewsList({ pressContent }: NewsListProps) {
+export function NewsList({ pressContent, locale }: NewsListProps) {
   return (
     <div className="standard-spacing-from-navbar container flex flex-col gap-20">
       <div className="flex flex-col gap-16">
@@ -26,7 +27,7 @@ export function NewsList({ pressContent }: NewsListProps) {
                     <FormattedDatetime
                       date={dateHeading}
                       day="numeric"
-                      locale={DEFAULT_LOCALE}
+                      locale={locale}
                       month="long"
                       year="numeric"
                     />
