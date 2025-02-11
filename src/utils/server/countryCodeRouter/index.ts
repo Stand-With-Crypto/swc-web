@@ -54,7 +54,6 @@ export function countryCodeRouter(request: NextRequest): NextResponse {
  * Saves the current country code as a cookie
  * @param request - The request object
  * @param response - The response object
- * @returns The response object
  */
 export function saveCurrentCountryCodeAsCookie(request: NextRequest, response: NextResponse) {
   const { pathname } = request.nextUrl
