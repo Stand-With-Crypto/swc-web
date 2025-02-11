@@ -10,6 +10,7 @@ import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const zodParams = z.object({
   slug: zodDTSISlug,
   billId: z.string(),

@@ -64,6 +64,7 @@ const zodExternalUserActionOptInUserAddress = object({
   countryCode: string().length(2),
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const zodExternalUserActionOptIn = z.object({
   emailAddress: zodEmailAddress,
   cryptoAddress: string()

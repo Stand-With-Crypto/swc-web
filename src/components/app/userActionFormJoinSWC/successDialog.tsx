@@ -28,7 +28,7 @@ const UserActionFormSuccessScreenNextAction = dynamic(
   },
 )
 
-interface UserActionFormJoinSWCSuccessDialogProps extends DialogProps {}
+type UserActionFormJoinSWCSuccessDialogProps = DialogProps
 
 export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCSuccessDialogProps) {
   const { ...dialogProps } = props

@@ -1,6 +1,15 @@
 import { faker } from '@faker-js/faker'
+import dtsiSlugs from 'cypress/fixture/testingDtsiSlugs.json'
 import { parsePhoneNumber } from 'libphonenumber-js/core'
 import phoneNumberMetadata from 'libphonenumber-js/mobile/metadata'
+
+export enum SupportedFiatCurrencyCodes {
+  USD = 'USD',
+}
+
+export enum SupportedCryptoCurrencyCodes {
+  ETH = 'ETH',
+}
 
 // There is no way to generate a valid phone number programmatically, so this is a workaround to generate phone numbers that will pass the new validation
 export const mockValidPhoneNumber = () => {
@@ -30,4 +39,18 @@ function validatePhoneNumber(phoneNumber: string) {
   } catch {
     return false
   }
+}
+
+export const fakerFields = {
+  id: () => faker.string.uuid(),
+  dtsiStanceScore: () => faker.number.int({ min: 0, max: 100 }),
+  dtsiSlug: () => faker.helpers.arrayElement(dtsiSlugs),
+  supportedFiatCurrencyCode: () =>
+    faker.helpers.arrayElement(Object.values(SupportedFiatCurrencyCodes)),
+  supportedCryptoCurrencyCode: () =>
+    faker.helpers.arrayElement(Object.values(SupportedCryptoCurrencyCodes)),
+  phoneNumber: mockValidPhoneNumber,
+  stateCode: (options?: { abbreviated?: boolean }) => faker.location.state(options),
+  usCongressionalDistrict: () => faker.number.int({ min: 1, max: 20 }).toString(),
+  generateReferralId: () => faker.string.uuid().slice(0, 12),
 }

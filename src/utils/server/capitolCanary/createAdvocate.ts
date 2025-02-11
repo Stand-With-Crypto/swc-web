@@ -7,7 +7,7 @@ const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0
 
 // Interface based on: https://docs.phone2action.com/#:~:text=update%20Phone2Action%20advocates-,Create%20an%20advocate,-This%20endpoint%20will
 // Interface should not be accessed directly - use the requirements interface above.
-interface CreateAdvocateInCapitolCanaryRequest extends BaseUpsertAdvocateRequest {}
+type CreateAdvocateInCapitolCanaryRequest = BaseUpsertAdvocateRequest
 
 interface CreateAdvocateInCapitolCanaryResponse {
   success: number

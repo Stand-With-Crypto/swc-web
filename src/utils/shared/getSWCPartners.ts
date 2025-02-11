@@ -1,4 +1,4 @@
-import { array, object, string } from 'zod'
+import { object, string, z } from 'zod'
 
 export const zodPartnerSchemaValidation = object({
   data: object({
@@ -8,6 +8,4 @@ export const zodPartnerSchemaValidation = object({
   }),
 })
 
-const zodEventsSchemaValidation = array(zodPartnerSchemaValidation)
-
-export type SWCPartners = Zod.infer<typeof zodEventsSchemaValidation>
+export type SWCPartners = z.infer<typeof zodPartnerSchemaValidation>[]

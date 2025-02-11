@@ -18,7 +18,7 @@ export function decodeBasicAuthHeader(basicAuthHeader: string) {
       .toString('utf-8')
       .split(':')
     return { username, password }
-  } catch (e) {
+  } catch {
     return { failReason: 'Could not decode' }
   }
 }

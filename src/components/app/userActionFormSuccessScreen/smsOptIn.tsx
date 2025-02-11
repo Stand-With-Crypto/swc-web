@@ -2,7 +2,7 @@ import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/smsOptInForm'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { Skeleton } from '@/components/ui/skeleton'
 
-interface SMSOptInContentProps extends Omit<SMSOptInFormProps, 'children'> {}
+type SMSOptInContentProps = Omit<SMSOptInFormProps, 'children'>
 
 export function SMSOptInContent(props: SMSOptInContentProps) {
   return (
