@@ -5,10 +5,8 @@ import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
 import { OLD_NEWS_DATE_OVERRIDES } from '@/utils/server/builder/models/data/news/constants'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
-import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-
-const logger = getLogger('builderIONews')
+import { sleep } from '@/utils/shared/sleep'
 
 interface InternalNews {
   id: string
@@ -52,7 +50,7 @@ export interface NormalizedNews {
   url: string
 }
 
-const LIMIT = 20
+export const LIMIT = 10
 
 async function getAllNewsWithOffset(offset: number) {
   return await pRetry(
@@ -90,8 +88,6 @@ export async function getNewsList(page = 0): Promise<NormalizedNews[]> {
     const offset = page * LIMIT
 
     const news = await getAllNewsWithOffset(offset)
-
-    logger.info('news', news)
 
     return news.map(normalizeNewsListItem).filter(Boolean)
   } catch (error) {

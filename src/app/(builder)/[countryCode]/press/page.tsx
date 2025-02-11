@@ -25,8 +25,7 @@ export default async function PressPage(props: PageProps) {
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
       <RenderBuilderContent content={content} model={PAGE_MODEL} />
-
-      {news && <NewsList locale={locale} pressContent={news} />}
+      <NewsList initialNews={news} locale={locale} />
     </BuilderPageLayout>
   )
 }
