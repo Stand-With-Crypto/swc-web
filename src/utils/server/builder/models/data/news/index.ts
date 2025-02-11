@@ -6,7 +6,6 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { OLD_NEWS_DATE_OVERRIDES } from '@/utils/server/builder/models/data/news/constants'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { sleep } from '@/utils/shared/sleep'
 
 interface InternalNews {
   id: string

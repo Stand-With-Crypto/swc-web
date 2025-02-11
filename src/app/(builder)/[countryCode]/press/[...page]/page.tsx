@@ -5,10 +5,10 @@ import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageProps } from '@/types'
-import { builderSDKClient } from '@/utils/server/builder'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { OLD_PRESS_PAGES_DATE_OVERRIDES } from '@/utils/server/builder/models/page/press/constants'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
+import { getPagePaths } from '@/utils/server/builder/models/page/utils/getPagePaths'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 
@@ -35,16 +35,20 @@ export default async function Page(props: PressReleasePageProps) {
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={pathname}>
       <section className="standard-spacing-from-navbar space-y-14">
         <div className="container flex flex-col items-center gap-4">
-          <PageTitle className="mb-7 font-sans !text-5xl">{content.data.title}</PageTitle>
-          <PageSubTitle className="text-muted-foreground" size="lg">
-            <FormattedDatetime
-              date={OLD_PRESS_PAGES_DATE_OVERRIDES[content.id] ?? content.createdDate}
-              day="numeric"
-              locale={locale}
-              month="long"
-              year="numeric"
-            />
-          </PageSubTitle>
+          {content?.data?.title && (
+            <PageTitle className="mb-7 font-sans !text-5xl">{content.data.title}</PageTitle>
+          )}
+          {content && (
+            <PageSubTitle className="text-muted-foreground" size="md">
+              <FormattedDatetime
+                date={OLD_PRESS_PAGES_DATE_OVERRIDES[content.id] ?? content.createdDate}
+                day="numeric"
+                locale={locale}
+                month="long"
+                year="numeric"
+              />
+            </PageSubTitle>
+          )}
         </div>
       </section>
 
@@ -69,12 +73,12 @@ export async function generateMetadata(props: PressReleasePageProps): Promise<Me
 }
 
 export async function generateStaticParams() {
-  // TODO: We probably don't want to generate static pages for all press releases
-  const paths = await builderSDKClient
-    .getAll(PAGE_MODEL, { options: { noTargeting: true } })
-    .then(res => res?.map(({ data }) => data?.url) ?? [])
+  const paths = await getPagePaths({
+    modelName: PAGE_MODEL,
+    limit: 10,
+  })
 
-  return paths.map((path?: string) => {
+  return paths.map(path => {
     return {
       params: {
         page: path?.replace(PAGE_PREFIX, '').split('/'),
