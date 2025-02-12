@@ -1,7 +1,11 @@
+import * as Sentry from '@sentry/nextjs'
+import { revalidatePath } from 'next/cache'
 import { NextRequest } from 'next/server'
 
+import { BuilderEventBody } from '@/utils/server/builder/types'
 import { withBuilderIoAuthMiddleware } from '@/utils/server/serverWrappers/withBuilderIoAuthMiddleware'
 import { getLogger } from '@/utils/shared/logger'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('builder-webhook-events-data-route')
 
@@ -12,9 +16,39 @@ const MODEL_PATHS_TO_REVALIDATE: Record<string, string[]> = {
 }
 
 export const POST = withBuilderIoAuthMiddleware(async (request: NextRequest) => {
-  const body = await request.json()
+  const body = (await request.json()) as BuilderEventBody
 
-  logger.info('Received webhook event', body)
+  const modelId = body.newValue?.modelId ?? body.previousValue?.modelId
+
+  const modelName = body.modelName
+
+  if (!modelId) {
+    Sentry.captureMessage('No modelId found in Builder.io webhook data model event', {
+      extra: { ...body },
+      tags: {
+        domain: 'builder.io',
+      },
+    })
+    return new Response('No modelId found', {
+      status: 400,
+    })
+  }
+
+  const pathsToRevalidate = MODEL_PATHS_TO_REVALIDATE[modelId]
+
+  pathsToRevalidate.forEach(path => {
+    logger.info(`Revalidating path: ${path}`)
+    revalidatePath(path)
+  })
+
+  ORDERED_SUPPORTED_COUNTRIES.forEach(countryCode => {
+    pathsToRevalidate.forEach(path => {
+      logger.info(`Revalidating path: ${path}`)
+      revalidatePath(`/${countryCode}${path}`)
+    })
+  })
+
+  logger.info(`Revalidation completed for modelId: ${modelId} and modelName: ${modelName}`)
 
   return new Response('Success', {
     status: 200,
