@@ -105,32 +105,6 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
   }, [dialogProps])
 
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production' && !isPreviewing
-  const LoginButton = () => (
-    <LoginDialogWrapper
-      authenticatedContent={
-        <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
-      }
-    >
-      <Button
-        className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
-        variant="primary-cta"
-      >
-        Sign In
-      </Button>
-    </LoginDialogWrapper>
-  )
-
-  const DonateButton = () => (
-    <Button
-      asChild
-      className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
-      key={urls.donate()}
-      onClick={maybeCloseAfterNavigating}
-      variant="default"
-    >
-      <InternalLink href={urls.donate()}>Donate</InternalLink>
-    </Button>
-  )
 
   return (
     <>
@@ -256,8 +230,11 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
               ))}
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
-              <DonateButton />
-              <LoginButton />
+              <DonateButton
+                href={urls.donate()}
+                maybeCloseAfterNavigating={maybeCloseAfterNavigating}
+              />
+              <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
             </div>
           </div>
         </div>
@@ -352,10 +329,13 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                 )
               })}
               <div className="mt-4 px-6">
-                <LoginButton />
+                <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
               </div>
               <div className="mt-4 px-6">
-                <DonateButton />
+                <DonateButton
+                  href={urls.donate()}
+                  maybeCloseAfterNavigating={maybeCloseAfterNavigating}
+                />
               </div>
             </div>
           </DrawerContent>
@@ -364,3 +344,36 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
     </>
   )
 }
+
+const LoginButton = ({ maybeCloseAfterNavigating }: { maybeCloseAfterNavigating: () => void }) => (
+  <LoginDialogWrapper
+    authenticatedContent={
+      <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
+    }
+  >
+    <Button
+      className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
+      variant="primary-cta"
+    >
+      Sign In
+    </Button>
+  </LoginDialogWrapper>
+)
+
+const DonateButton = ({
+  href,
+  maybeCloseAfterNavigating,
+}: {
+  maybeCloseAfterNavigating: () => void
+  href: string
+}) => (
+  <Button
+    asChild
+    className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
+    key={href}
+    onClick={maybeCloseAfterNavigating}
+    variant="default"
+  >
+    <InternalLink href={href}>Donate</InternalLink>
+  </Button>
+)
