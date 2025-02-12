@@ -1,4 +1,4 @@
-import { UserActionType } from '@prisma/client'
+import { DataCreationMethod, UserActionType } from '@prisma/client'
 import { groupBy } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
@@ -7,8 +7,8 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 
-const BACKFILL_USER_ACTION_REFER_INNGEST_EVENT_NAME = 'script/backfill-user-action-refer'
-const BACKFILL_USER_ACTION_REFER_INNGEST_FUNCTION_ID = 'script.backfill-user-action-refer'
+export const BACKFILL_USER_ACTION_REFER_INNGEST_EVENT_NAME = 'script/backfill-user-action-refer'
+export const BACKFILL_USER_ACTION_REFER_INNGEST_FUNCTION_ID = 'script.backfill-user-action-refer'
 
 export interface BackfillUserActionReferInngestSchema {
   name: typeof BACKFILL_USER_ACTION_REFER_INNGEST_EVENT_NAME
@@ -17,6 +17,25 @@ export interface BackfillUserActionReferInngestSchema {
   }
 }
 
+const selectFields = {
+  id: true,
+  userId: true,
+  actionType: true,
+  campaignName: true,
+  dataCreationMethod: true,
+  userActionRefer: {
+    select: {
+      referralsCount: true,
+    },
+  },
+}
+
+/**
+ * This function is used to backfill the user action refer table.
+ * It will find all users who were referred (have utm_source=swc and utm_medium=referral)
+ * and then find all referrers by their referral IDs.
+ * It will then create or update the referrer's user action refer record.
+ */
 export const backfillUserActionRefer = inngest.createFunction(
   {
     id: BACKFILL_USER_ACTION_REFER_INNGEST_FUNCTION_ID,
@@ -35,14 +54,12 @@ export const backfillUserActionRefer = inngest.createFunction(
         where: {
           acquisitionSource: 'swc',
           acquisitionMedium: 'referral',
-          // Make sure they have a referral ID in the campaign
           NOT: {
             acquisitionCampaign: '',
           },
         },
         select: {
-          id: true,
-          acquisitionCampaign: true, // This contains the referrer's referral ID
+          acquisitionCampaign: true,
         },
       })
       logger.info(`Found ${users.length} referred users`)
@@ -61,15 +78,18 @@ export const backfillUserActionRefer = inngest.createFunction(
             in: referrerIds,
           },
         },
-        include: {
-          userActions: true,
+        select: {
+          id: true,
+          referralId: true,
+          userActions: {
+            select: selectFields,
+          },
         },
       })
       logger.info(`Found ${users.length} referrers`)
       return users
     })
 
-    // Create or update REFER actions
     const updates = referrers.map(referrer => ({
       referrer,
       referredCount: referredUsersGroupedByReferrerId[referrer.referralId].length,
@@ -80,28 +100,14 @@ export const backfillUserActionRefer = inngest.createFunction(
 
     if (!persist) {
       logger.info(`[DRY RUN] Would process ${updates.length} referrer actions`)
-      return { message: 'Dry run complete', count: updates.length }
+      return { message: 'Dry run complete', referrerCount: updates.length }
     }
 
     const results = await step.run('process-updates', async () => {
       const processed = await batchAsyncAndLog(updates, async batch =>
         Promise.all(
           batch.map(({ referrer, referredCount, existingReferAction }) => {
-            if (existingReferAction) {
-              logger.info(
-                `Updating existing REFER action for user ${referrer.id} with ${referredCount} referrals`,
-              )
-              return prismaClient.userAction.update({
-                where: { id: existingReferAction.id },
-                data: {
-                  userActionRefer: {
-                    update: {
-                      referralsCount: referredCount,
-                    },
-                  },
-                },
-              })
-            } else {
+            if (!existingReferAction) {
               logger.info(
                 `Creating new REFER action for user ${referrer.id} with ${referredCount} referrals`,
               )
@@ -115,17 +121,60 @@ export const backfillUserActionRefer = inngest.createFunction(
                       referralsCount: referredCount,
                     },
                   },
+                  dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
                 },
+                select: selectFields,
               })
+            }
+
+            const shouldUpdateExistingReferAction =
+              existingReferAction.userActionRefer?.referralsCount !== referredCount
+
+            if (shouldUpdateExistingReferAction) {
+              logger.info(
+                `Updating existing REFER action for user ${referrer.id} with ${referredCount} referrals`,
+              )
+              return prismaClient.userAction.update({
+                where: { id: existingReferAction.id },
+                data: {
+                  userActionRefer: {
+                    update: {
+                      referralsCount: referredCount,
+                    },
+                  },
+                },
+                select: selectFields,
+              })
+            }
+
+            return {
+              message: 'No update needed',
+              referrer: referrer.id,
+              existingReferAction,
+              referredCount,
             }
           }),
         ),
       )
-      const totalProcessed = processed.reduce((acc, batch) => acc + batch.length, 0)
-      logger.info(`Successfully processed ${totalProcessed} referral actions`)
-      return totalProcessed
+      return processed
     })
 
-    return { processedCount: results, updatesFound: updates.length }
+    const totalProcessed = results.reduce((acc, batch) => acc + batch.length, 0)
+    logger.info(`Successfully processed ${totalProcessed} referrer actions`)
+
+    if (totalProcessed !== updates.length) {
+      logger.error(`Processed ${totalProcessed} referrer actions, but expected ${updates.length}`)
+      return {
+        message: 'Partially processed referrer actions',
+        referrerCount: totalProcessed,
+        updatesFound: updates.length,
+      }
+    }
+
+    return {
+      message: 'Successfully processed all referrer actions',
+      referrerCount: totalProcessed,
+      updatesFound: updates.length,
+    }
   },
 )
