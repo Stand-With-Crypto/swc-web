@@ -33,7 +33,6 @@ export function NewsList({ initialNews, locale }: NewsListProps) {
 
   const loadModeNews = useCallback(async () => {
     if (offset === -1) return
-    console.log('loadModeNews')
 
     setIsLoading(true)
     const newOffset = offset + 1
