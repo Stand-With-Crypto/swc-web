@@ -113,6 +113,7 @@
     "react-simple-maps": "^3.0.0",
     "react-use": "^17.5.0",
     "react-wrap-balancer": "^1.1.0",
+    "react-youtube": "^10.1.0",
     "sanitize-html": "^2.11.0",
     "server-only": "^0.0.1",
     "sms-segments-calculator": "^1.2.0",

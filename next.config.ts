@@ -27,7 +27,7 @@ const contentSecurityPolicy = {
         a nonce strategy won't work as it requires all our pages to be dynamically generated https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy#adding-a-nonce-with-middleware
         */
         "'unsafe-inline'",
-    isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
+    isDev ? 'http://www.youtube.com/iframe_api' : 'https://static.ads-twitter.com/uwt.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
