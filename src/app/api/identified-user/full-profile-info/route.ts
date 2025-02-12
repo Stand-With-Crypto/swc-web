@@ -40,6 +40,7 @@ async function apiResponseForUserFullProfileInfo() {
               },
             },
             userActionVotingDay: true,
+            userActionRefer: true,
           },
         },
       },

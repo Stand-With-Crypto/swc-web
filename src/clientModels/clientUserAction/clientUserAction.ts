@@ -7,6 +7,7 @@ import {
   UserActionEmail,
   UserActionEmailRecipient,
   UserActionOptIn,
+  UserActionRefer,
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
@@ -53,6 +54,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
       })
     | null
   userActionVotingDay: UserActionVotingDay | null
+  userActionRefer: UserActionRefer | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -118,6 +120,9 @@ type ClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
   actionType: typeof UserActionType.VOTING_DAY
 }
 
+type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
+  actionType: typeof UserActionType.REFER
+}
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -140,6 +145,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionViewKeyRaces
       | ClientUserActionVotingInformationResearched
       | ClientUserActionVotingDay
+      | ClientUserActionRefer
     )
 >
 
@@ -303,6 +309,14 @@ export const getClientUserAction = ({
         actionType: UserActionType.VOTING_DAY,
       }
       return getClientModel({ ...sharedProps, ...votingDayFields })
+    },
+    [UserActionType.REFER]: () => {
+      const { referralsCount } = getRelatedModel(record, 'userActionRefer')
+      const referFields: ClientUserActionRefer = {
+        referralsCount,
+        actionType: UserActionType.REFER,
+      }
+      return getClientModel({ ...sharedProps, ...referFields })
     },
   }
 
