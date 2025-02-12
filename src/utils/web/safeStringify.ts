@@ -5,10 +5,10 @@ import * as Sentry from '@sentry/nextjs'
 export function safeStringify(...params: Parameters<typeof JSON.stringify>) {
   try {
     return JSON.stringify(...params)
-  } catch (e) {
+  } catch {
     // https://stackoverflow.com/a/9382383
     const seen: any = []
-    const result = JSON.stringify(params[0], (key, val) => {
+    const result = JSON.stringify(params[0], (_, val) => {
       if (val !== null && typeof val === 'object') {
         if (seen.indexOf(val) >= 0) {
           return

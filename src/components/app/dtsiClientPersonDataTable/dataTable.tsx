@@ -59,11 +59,11 @@ export const SortableHeader = <TData extends Person = Person>({
   return (
     <Button
       className="p-0"
-      onClick={() => {
+      onClick={() =>
         !sortVal || sortVal === 'desc'
           ? column.toggleSorting(sortVal !== 'desc')
           : column.clearSorting()
-      }}
+      }
       variant="ghost"
     >
       {children}

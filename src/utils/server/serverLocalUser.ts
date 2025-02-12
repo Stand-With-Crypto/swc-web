@@ -97,14 +97,14 @@ function parseFromCookieStrings({
     try {
       const localUser: ServerLocalUser = zodServerLocalUser.parse({ persisted, currentSession })
       return localUser
-    } catch (e) {
+    } catch {
       Sentry.captureMessage('serverLocalUser: JSON failed to validate', {
         extra: { persistedStr, currentSessionStr },
         tags: { source },
       })
       return null
     }
-  } catch (e) {
+  } catch {
     Sentry.captureMessage('serverLocalUser: cookie contained invalid JSON', {
       extra: { persistedStr, currentSessionStr },
       tags: { source },

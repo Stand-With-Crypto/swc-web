@@ -16,7 +16,7 @@ const maybeParseBody = async (response: Response) =>
     .then(x => {
       try {
         return { type: 'json' as const, value: JSON.stringify(JSON.parse(x), null, 4) }
-      } catch (e) {
+      } catch {
         if (x.includes('<html')) {
           return { type: 'html' as const, value: x }
         }
@@ -29,7 +29,7 @@ const maybeWithoutQueryParams = (url: string) => {
   try {
     const urlParts = new URL(url)
     return `${urlParts.origin}${urlParts.pathname}`
-  } catch (e) {
+  } catch {
     return url
   }
 }
