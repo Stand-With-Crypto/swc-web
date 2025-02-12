@@ -162,15 +162,6 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
           <NFTDisplay userActions={userActions} />
         </div>
       </section>
-      <section>
-        <PageTitle className="mb-4" size="md">
-          Refer Your Friends
-        </PageTitle>
-        <PageSubTitle className="mb-5">
-          Send friends your unique referral code to encourage them to sign up and take action.
-        </PageSubTitle>
-        <UserReferralUrl referralId={user.referralId} />
-      </section>
     </div>
   )
 }
