@@ -10,8 +10,7 @@ const COUNTRY_CODE_PATTERN = /^[a-z]{2}$/
 
 function extractCountryCode(pathname: string) {
   const segments = pathname.split('/').filter(Boolean)
-  const firstSegment = segments[0] ?? null
-
+  const firstSegment = segments[0]
   return COUNTRY_CODE_PATTERN.test(firstSegment) ? firstSegment : null
 }
 
