@@ -283,6 +283,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: <MainText>Someone {inStateOrEmpty} claimed "I Voted" NFT</MainText>,
         }
       }
+      case UserActionType.REFER: {
+        return {
+          onFocusContent: () => null,
+          children: <MainText>Someone referred a friend</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore
