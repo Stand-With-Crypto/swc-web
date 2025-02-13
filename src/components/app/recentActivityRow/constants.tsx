@@ -87,36 +87,38 @@ type ActionSpecificProps = {
   children: React.ReactNode
 }
 
-const OptInActionFocusContent = () => {
+const OptInActivityRow = (props: ExtendedRecentActivityRowProps) => {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
-  const hasSignedUp = data?.performedUserActionTypes.some(
-    performedAction => performedAction.actionType === UserActionType.OPT_IN,
-  )
+  const hasSignedUp =
+    data?.performedUserActionTypes.some(
+      performedAction => performedAction.actionType === UserActionType.OPT_IN,
+    ) ?? false
 
-  return hasSignedUp ? null : (
-    <LoginDialogWrapper>
-      <Button>Join</Button>
-    </LoginDialogWrapper>
-  )
+  if (!isOptInAction(props.action)) {
+    throw new Error(`Wrong action type ${props.action.actionType} passed to OPT_IN variant`)
+  }
+
+  return {
+    onFocusContent: hasSignedUp
+      ? undefined
+      : () => (
+          <LoginDialogWrapper>
+            <Button>Join</Button>
+          </LoginDialogWrapper>
+        ),
+    children: (
+      <MainText>
+        New member {getLocationText(props.action.user.userLocationDetails, 'from')} joined{' '}
+        {getSWCDisplayText()}
+      </MainText>
+    ),
+  }
 }
 
 export const USER_ACTION_PROPS_FOR_RECENT_ACTIVITY_ROW: {
   [key in UserActionType]: (props: ExtendedRecentActivityRowProps) => ActionSpecificProps
 } = {
-  [UserActionType.OPT_IN]: ({ action }) => {
-    if (!isOptInAction(action)) {
-      throw new Error(`Wrong action type ${action.actionType} passed to OPT_IN variant`)
-    }
-    const { userLocationDetails } = action.user
-    return {
-      onFocusContent: OptInActionFocusContent,
-      children: (
-        <MainText>
-          New member {getLocationText(userLocationDetails, 'from')} joined {getSWCDisplayText()}
-        </MainText>
-      ),
-    }
-  },
+  [UserActionType.OPT_IN]: OptInActivityRow,
 
   [UserActionType.CALL]: ({ action, urls }) => {
     if (!isCallAction(action)) {
@@ -245,11 +247,7 @@ export const USER_ACTION_PROPS_FOR_RECENT_ACTIVITY_ROW: {
       throw new Error(`Wrong action type ${action.actionType} passed to TWEET variant`)
     }
     const { userLocationDetails } = action.user
-    const onFocusContent = () => (
-      <UserActionTweetLink>
-        <Button>Follow</Button>
-      </UserActionTweetLink>
-    )
+    const onFocusContent = () => <UserActionTweetLink>Follow</UserActionTweetLink>
     return {
       onFocusContent,
       children:
@@ -388,11 +386,23 @@ export const USER_ACTION_PROPS_FOR_RECENT_ACTIVITY_ROW: {
   },
 
   [UserActionType.REFER]: ({ action }) => {
+    const { data } = useApiResponseForUserPerformedUserActionTypes()
+    const hasSignedUp =
+      data?.performedUserActionTypes.some(
+        performedAction => performedAction.actionType === UserActionType.OPT_IN,
+      ) ?? false
+
     if (!isReferAction(action)) {
       throw new Error(`Wrong action type ${action.actionType} passed to REFER variant`)
     }
     return {
-      onFocusContent: undefined,
+      onFocusContent: hasSignedUp
+        ? undefined
+        : () => (
+            <LoginDialogWrapper>
+              <Button>Join</Button>
+            </LoginDialogWrapper>
+          ),
       children: <MainText>Someone referred a friend to SWC</MainText>,
     }
   },
