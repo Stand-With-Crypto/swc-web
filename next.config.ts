@@ -94,7 +94,6 @@ const contentSecurityPolicy = {
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
-    'https://www.youtube-nocookie.com/',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
