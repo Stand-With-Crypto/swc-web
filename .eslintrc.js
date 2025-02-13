@@ -92,5 +92,6 @@ module.exports = {
         zones: [{ target: './cypress', from: './src' }],
       },
     ],
+    'react/no-unstable-nested-components': ['error', { allowAsProps: true }],
   },
 }

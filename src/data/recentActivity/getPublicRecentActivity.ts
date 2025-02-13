@@ -47,6 +47,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
           },
         },
         userActionVotingDay: true,
+        userActionRefer: true,
       },
     })
     .then(userActions =>
