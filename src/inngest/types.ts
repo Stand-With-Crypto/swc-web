@@ -17,7 +17,6 @@ import type { CapitolCanaryEmailInngestEventSchema } from '@/inngest/functions/c
 import type { CapitolCanaryUpsertAdvocateInngestSchema } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import type { CleanupNftMintsEventSchema } from '@/inngest/functions/cleanupNFTMints'
 import type { CleanupPostalCodesInngestEventSchema } from '@/inngest/functions/cleanupPostalCodes'
-import { FixTenantIdInngestEventSchema } from '@/inngest/functions/fixTenantId'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
@@ -61,6 +60,5 @@ type EventTypes =
   | BackfillUserCommunicationMessageStatusSchema
   | UpdateMetricsCounterCacheCronJobSchema
   | BackfillOptedOutUsersSchema
-  | FixTenantIdInngestEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
