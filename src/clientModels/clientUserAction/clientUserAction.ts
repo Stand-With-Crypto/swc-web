@@ -57,58 +57,61 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionRefer: UserActionRefer | null
 }
 
-type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
+export type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
   person: DTSIPersonForUserActions | null
 }
-type ClientUserActionEmail = {
+export type ClientUserActionEmail = {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
-type ClientUserActionCall = {
+export type ClientUserActionCall = {
   person: DTSIPersonForUserActions | null
   actionType: typeof UserActionType.CALL
 }
-type ClientUserActionDonation = Pick<UserActionDonation, 'amountCurrencyCode' | 'recipient'> & {
+export type ClientUserActionDonation = Pick<
+  UserActionDonation,
+  'amountCurrencyCode' | 'recipient'
+> & {
   actionType: typeof UserActionType.DONATION
   amount: number
   amountUsd: number
 }
-type ClientUserActionNFTMint = {
+export type ClientUserActionNFTMint = {
   nftMint: ClientNFTMint
   actionType: typeof UserActionType.NFT_MINT
 }
-type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
+export type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
   actionType: typeof UserActionType.OPT_IN
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
-type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
-type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
+export type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
+export type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
-type ClientUserActionLiveEvent = {
+export type ClientUserActionLiveEvent = {
   actionType: typeof UserActionType.LIVE_EVENT
   campaignName: UserActionLiveEventCampaignName
 }
-type ClientUserActionTweetAtPerson = {
+export type ClientUserActionTweetAtPerson = {
   actionType: typeof UserActionType.TWEET_AT_PERSON
   campaignName: UserActionTweetAtPersonCampaignName
   person: DTSIPersonForUserActions | null
 }
-type ClientUserActionVoterAttestation = Pick<UserActionVoterAttestation, 'usaState'> & {
+export type ClientUserActionVoterAttestation = Pick<UserActionVoterAttestation, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_ATTESTATION
 }
-type ClientUserActionRsvpEvent = {
+export type ClientUserActionRsvpEvent = {
   actionType: typeof UserActionType.RSVP_EVENT
   eventSlug: string
   eventState: string
 }
-type ClientUserActionViewKeyRaces = Pick<
+export type ClientUserActionViewKeyRaces = Pick<
   UserActionViewKeyRaces,
   'usaState' | 'usCongressionalDistrict'
 > & {
   actionType: typeof UserActionType.VIEW_KEY_RACES
 }
-type ClientUserActionVotingInformationResearched = Pick<
+export type ClientUserActionVotingInformationResearched = Pick<
   UserActionVotingInformationResearched,
   'addressId' | 'shouldReceiveNotifications'
 > & {
@@ -116,11 +119,11 @@ type ClientUserActionVotingInformationResearched = Pick<
   actionType: typeof UserActionType.VOTING_INFORMATION_RESEARCHED
 }
 
-type ClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
+export type ClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
   actionType: typeof UserActionType.VOTING_DAY
 }
 
-type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
+export type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
   actionType: typeof UserActionType.REFER
 }
 /*
