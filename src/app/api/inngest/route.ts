@@ -22,7 +22,6 @@ import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { cleanupDatadogSyntheticTestsWithInngest } from '@/inngest/functions/datadog/cleanup'
 import { sendEventNotificationWithInngest } from '@/inngest/functions/eventNotification'
-import { fixTenantIdWithInngest } from '@/inngest/functions/fixTenantId'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
@@ -80,6 +79,5 @@ export const { GET, POST, PUT } = serve({
     updateMetricsCacheInngestCronJob,
     backfillOptedOutUsers,
     cleanupDatadogSyntheticTestsWithInngest,
-    fixTenantIdWithInngest,
   ],
 })
