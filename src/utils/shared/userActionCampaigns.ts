@@ -16,6 +16,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VIEW_KEY_RACES,
   UserActionType.VOTING_INFORMATION_RESEARCHED,
   UserActionType.VOTING_DAY,
+  UserActionType.REFER,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -73,6 +74,10 @@ export enum UserActionVotingDayCampaignName {
   '2024_ELECTION' = '2024_ELECTION',
 }
 
+export enum UserActionReferCampaignName {
+  DEFAULT = 'DEFAULT',
+}
+
 export type UserActionCampaignName =
   | UserActionEmailCampaignName
   | UserActionCallCampaignName
@@ -87,6 +92,7 @@ export type UserActionCampaignName =
   | UserActionViewKeyRacesCampaignName
   | UserActionVotingInformationResearchedCampaignName
   | UserActionVotingDayCampaignName
+  | UserActionReferCampaignName
 
 export type UserActionCampaigns = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName
@@ -103,6 +109,7 @@ export type UserActionCampaigns = {
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: UserActionVotingInformationResearchedCampaignName
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName
+  [UserActionType.REFER]: UserActionReferCampaignName
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -121,4 +128,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTING_INFORMATION_RESEARCHED]:
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
+  [UserActionType.REFER]: UserActionReferCampaignName.DEFAULT,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>

@@ -275,6 +275,7 @@ enum UserActionType {
   VIEW_KEY_RACES
   VOTING_INFORMATION_RESEARCHED
   VOTING_DAY
+  REFER
 }
 
 model UserAction {
@@ -311,6 +312,7 @@ model UserAction {
   userActionViewKeyRaces                UserActionViewKeyRaces?
   userActionVotingInformationResearched UserActionVotingInformationResearched?
   userActionVotingDay                   UserActionVotingDay?
+  userActionRefer                       UserActionRefer?
 
   @@index([datetimeCreated])
   @@index([userId, nftMintId])
@@ -503,6 +505,15 @@ model UserActionVotingInformationResearched {
 
   @@index([addressId])
   @@map("user_action_voting_information_researched")
+}
+
+model UserActionRefer {
+  id             String     @id @default(uuid())
+  userAction     UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
+  referralsCount Int        @default(0) @map("referrals_count")
+  tenantId       String     @default("us") @map("tenant_id")
+
+  @@map("user_action_refer")
 }
 
 enum UserCommunicationJourneyType {

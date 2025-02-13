@@ -14,10 +14,9 @@ export const DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO = {
     ? '... and got a free NFT for doing so! Complete the actions below to continue your progress as a crypto advocate.'
     : 'Complete the actions below to continue your progress as a crypto advocate.',
 }
-
-export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
-  ActiveClientUserActionType,
-  UserActionFormSuccessScreenFeedbackProps
+export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Omit<
+  Record<ActiveClientUserActionType, UserActionFormSuccessScreenFeedbackProps>,
+  'REFER'
 > = {
   [UserActionType.EMAIL]: {
     title: 'You emailed your representatives!',
