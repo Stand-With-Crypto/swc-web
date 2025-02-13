@@ -27,8 +27,6 @@ import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
-import { UserReferralUrl } from './userReferralUrl'
-
 type PageUserProfile = { params: Awaited<PageProps['params']> } & {
   user: PageUserProfileUser
 }

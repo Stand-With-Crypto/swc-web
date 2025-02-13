@@ -289,7 +289,13 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Refer a Friend',
         description: 'You have referred friends to join Stand With Crypto.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormReferDialog,
+        WrapperComponent: ({ children }) => (
+          <LoginDialogWrapper
+            authenticatedContent={<UserActionFormReferDialog>{children}</UserActionFormReferDialog>}
+          >
+            {children}
+          </LoginDialogWrapper>
+        ),
       },
     ],
   },
