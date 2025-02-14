@@ -59,3 +59,5 @@ certificates
 
 .docker
 cypress/downloads
+
+yarn.lock

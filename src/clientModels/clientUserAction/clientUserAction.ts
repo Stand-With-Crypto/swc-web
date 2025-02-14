@@ -9,6 +9,7 @@ import {
   UserActionOptIn,
   UserActionPoll,
   UserActionPollAnswer,
+  UserActionRefer,
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
@@ -55,6 +56,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
       })
     | null
   userActionVotingDay: UserActionVotingDay | null
+  userActionRefer: UserActionRefer | null
   userActionPoll:
     | (UserActionPoll & {
         userActionPollAnswers: UserActionPollAnswer[]
@@ -120,16 +122,16 @@ type ClientUserActionVotingInformationResearched = Pick<
   address: ClientAddress | null
   actionType: typeof UserActionType.VOTING_INFORMATION_RESEARCHED
 }
-
 type ClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
   actionType: typeof UserActionType.VOTING_DAY
 }
-
 type ClientUserActionPollAnswer = Pick<
   UserActionPollAnswer,
   'answer' | 'isOther' | 'userActionCampaignName'
 >
-
+type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
+  actionType: typeof UserActionType.REFER
+}
 type ClientUserActionPoll = {
   actionType: typeof UserActionType.POLL
   userActionPollAnswers: ClientUserActionPollAnswer[]
@@ -157,6 +159,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionViewKeyRaces
       | ClientUserActionVotingInformationResearched
       | ClientUserActionVotingDay
+      | ClientUserActionRefer
       | ClientUserActionPoll
     )
 >
@@ -321,6 +324,14 @@ export const getClientUserAction = ({
         actionType: UserActionType.VOTING_DAY,
       }
       return getClientModel({ ...sharedProps, ...votingDayFields })
+    },
+    [UserActionType.REFER]: () => {
+      const { referralsCount } = getRelatedModel(record, 'userActionRefer')
+      const referFields: ClientUserActionRefer = {
+        referralsCount,
+        actionType: UserActionType.REFER,
+      }
+      return getClientModel({ ...sharedProps, ...referFields })
     },
     [UserActionType.POLL]: () => {
       const { userActionPollAnswers } = getRelatedModel(record, 'userActionPoll')

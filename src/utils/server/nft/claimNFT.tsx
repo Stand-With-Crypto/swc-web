@@ -34,6 +34,7 @@ import {
   UserActionNftMintCampaignName,
   UserActionOptInCampaignName,
   UserActionPollCampaignName,
+  UserActionReferCampaignName,
   UserActionRsvpEventCampaignName,
   UserActionTweetAtPersonCampaignName,
   UserActionTweetCampaignName,
@@ -94,6 +95,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VOTING_DAY]: {
     [UserActionVotingDayCampaignName['2024_ELECTION']]: NFTSlug.I_VOTED,
+  },
+  [UserActionType.REFER]: {
+    [UserActionReferCampaignName.DEFAULT]: null,
   },
   [UserActionType.POLL]: {
     [UserActionPollCampaignName['3b19d81c4bac4c12b83375b2fa2a9057']]: null,

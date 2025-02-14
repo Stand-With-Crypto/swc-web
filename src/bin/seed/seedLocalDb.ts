@@ -18,6 +18,7 @@ import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUser
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
 import { mockCreateUserActionPollInput } from '@/mocks/models/mockUserActionPoll'
 import { mockCreateUserActionPollAnswerInput } from '@/mocks/models/mockUserActionPollAnswer'
+import { mockCreateUserActionReferInput } from '@/mocks/models/mockUserActionRefer'
 import { mockCreateUserActionRsvpEventInput } from '@/mocks/models/mockUserActionRsvpEvent'
 import { mockUserActionTweetAtPersonInput } from '@/mocks/models/mockUserActionTweetAtPerson'
 import { mockCreateUserActionViewKeyRacesInput } from '@/mocks/models/mockUserActionViewKeyRaces'
@@ -627,6 +628,22 @@ async function seed() {
   )
   const userActionPoll = await prismaClient.userActionPoll.findMany()
   logEntity({ userActionPoll })
+
+  /* userActionRefer */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.REFER].map(action => {
+      return {
+        ...mockCreateUserActionReferInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionRefer.createMany({
+        data,
+      }),
+  )
+  const userActionRefer = await prismaClient.userActionRefer.findMany()
+  logEntity({ userActionRefer })
 
   /*
   userActionPollAnswer

@@ -9,6 +9,7 @@ import {
   UserActionOptIn,
   UserActionPoll,
   UserActionPollAnswer,
+  UserActionRefer,
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
@@ -50,6 +51,7 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
       })
     | null
   userActionVotingDay: UserActionVotingDay | null
+  userActionRefer: UserActionRefer | null
   userActionPoll:
     | (UserActionPoll & {
         userActionPollAnswers: UserActionPollAnswer[]
@@ -134,6 +136,10 @@ type SensitiveDataClientUserActionPoll = {
   userActionPollAnswers: SensitiveDataClientUserActionPollAnswer[]
 }
 
+type SensitiveDataClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
+  actionType: typeof UserActionType.REFER
+}
+
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -156,6 +162,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionViewKeyRaces
       | SensitiveDataClientUserActionVotingInformationResearched
       | SensitiveDataClientUserActionVotingDay
+      | SensitiveDataClientUserActionRefer
       | SensitiveDataClientUserActionPoll
     )
 >
@@ -318,6 +325,14 @@ export const getSensitiveDataClientUserAction = ({
         actionType: UserActionType.VOTING_DAY,
       }
       return getClientModel({ ...sharedProps, ...votingDayFields })
+    },
+    [UserActionType.REFER]: () => {
+      const { referralsCount } = getRelatedModel(record, 'userActionRefer')
+      const referFields: SensitiveDataClientUserActionRefer = {
+        referralsCount,
+        actionType: UserActionType.REFER,
+      }
+      return getClientModel({ ...sharedProps, ...referFields })
     },
     [UserActionType.POLL]: () => {
       const { userActionPollAnswers } = getRelatedModel(record, 'userActionPoll')

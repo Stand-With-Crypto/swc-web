@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 
-import { countryCodeRouter } from '@/utils/server/countryCodeRouter'
+import { countryCodeRouter, saveCurrentCountryCodeAsCookie } from '@/utils/server/countryCodeRouter'
 import {
   getCountryCode,
   parseUserCountryCodeCookie,
@@ -21,6 +21,7 @@ export function middleware(request: NextRequest) {
   }
 
   const localeResponse = countryCodeRouter(request)
+  saveCurrentCountryCodeAsCookie(request, localeResponse)
 
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
