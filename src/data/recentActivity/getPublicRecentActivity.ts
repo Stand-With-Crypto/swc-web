@@ -47,6 +47,11 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
           },
         },
         userActionVotingDay: true,
+        userActionPoll: {
+          include: {
+            userActionPollAnswers: true,
+          },
+        },
       },
     })
     .then(userActions =>

@@ -16,6 +16,8 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockCreateUserActionPollInput } from '@/mocks/models/mockUserActionPoll'
+import { mockCreateUserActionPollAnswerInput } from '@/mocks/models/mockUserActionPollAnswer'
 import { mockCreateUserActionRsvpEventInput } from '@/mocks/models/mockUserActionRsvpEvent'
 import { mockUserActionTweetAtPersonInput } from '@/mocks/models/mockUserActionTweetAtPerson'
 import { mockCreateUserActionViewKeyRacesInput } from '@/mocks/models/mockUserActionViewKeyRaces'
@@ -35,6 +37,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  UserActionPollCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
@@ -321,7 +324,10 @@ async function seed() {
             ? usedNftMints.splice(faker.number.int({ min: 0, max: usedNftMints.length - 1 }), 1)[0]
                 .id
             : null,
-        campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
+        campaignName:
+          actionType === UserActionType.POLL
+            ? faker.helpers.arrayElement(Object.values(UserActionPollCampaignName))
+            : USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
       }
     }),
     data =>
@@ -603,6 +609,43 @@ async function seed() {
   )
   const userActionVotingDay = await prismaClient.userActionVotingDay.findMany()
   logEntity({ userActionVotingDay })
+
+  /*
+  userActionPoll
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.POLL].map(action => {
+      return {
+        ...mockCreateUserActionPollInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionPoll.createMany({
+        data,
+      }),
+  )
+  const userActionPoll = await prismaClient.userActionPoll.findMany()
+  logEntity({ userActionPoll })
+
+  /*
+  userActionPollAnswer
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.POLL].map(action => {
+      return {
+        ...mockCreateUserActionPollAnswerInput(action.campaignName as UserActionPollCampaignName),
+        id: action.id,
+        userActionPollId: faker.helpers.arrayElement(userActionPoll).id,
+      }
+    }),
+    data =>
+      prismaClient.userActionPollAnswer.createMany({
+        data,
+      }),
+  )
+  const userActionPollAnswer = await prismaClient.userActionPollAnswer.findMany()
+  logEntity({ userActionPollAnswer })
 }
 
 void runBin(seed)

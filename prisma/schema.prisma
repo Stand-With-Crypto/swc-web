@@ -275,6 +275,7 @@ enum UserActionType {
   VIEW_KEY_RACES
   VOTING_INFORMATION_RESEARCHED
   VOTING_DAY
+  POLL
 }
 
 model UserAction {
@@ -311,6 +312,7 @@ model UserAction {
   userActionViewKeyRaces                UserActionViewKeyRaces?
   userActionVotingInformationResearched UserActionVotingInformationResearched?
   userActionVotingDay                   UserActionVotingDay?
+  userActionPoll                        UserActionPoll?
 
   @@index([datetimeCreated])
   @@index([userId, nftMintId])
@@ -361,6 +363,29 @@ model UserActionEmailRecipient {
 
   @@index([userActionEmailId])
   @@map("user_action_email_recipient")
+}
+
+model UserActionPoll {
+  id                    String                 @id @default(uuid())
+  userAction            UserAction             @relation(fields: [id], references: [id], onDelete: Cascade)
+  tenantId              String                 @default("us") @map("tenant_id")
+  userActionPollAnswers UserActionPollAnswer[]
+
+  @@map("user_action_poll")
+}
+
+model UserActionPollAnswer {
+  id                     String         @id @default(uuid())
+  userActionPollId       String         @map("user_action_poll_id")
+  userActionPoll         UserActionPoll @relation(fields: [userActionPollId], references: [id], onDelete: Cascade)
+  // denormalized from userAction's campaignName to allow for easier querying
+  userActionCampaignName String         @map("user_action_campaign_name")
+  answer                 String         @map("answer")
+  isOther                Boolean        @map("is_other")
+  tenantId               String         @default("us") @map("tenant_id")
+
+  @@index([userActionPollId])
+  @@map("user_action_poll_answer")
 }
 
 model UserActionCall {

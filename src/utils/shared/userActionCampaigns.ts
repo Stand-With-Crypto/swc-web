@@ -16,6 +16,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VIEW_KEY_RACES,
   UserActionType.VOTING_INFORMATION_RESEARCHED,
   UserActionType.VOTING_DAY,
+  UserActionType.POLL,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -29,6 +30,9 @@ export enum UserActionEmailCampaignName {
   SEC_COMMISSIONER_2024 = 'SEC_COMMISSIONER_2024',
   WELCOME_119_CONGRESS_2025 = 'WELCOME_119_CONGRESS_2025',
   BROKER_REPORTING_RULE_SJ_RES_3 = 'BROKER_REPORTING_RULE_SJ_RES_3',
+}
+export enum UserActionPollCampaignName {
+  '3b19d81c4bac4c12b83375b2fa2a9057' = '3b19d81c4bac4c12b83375b2fa2a9057',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
@@ -87,7 +91,7 @@ export type UserActionCampaignName =
   | UserActionViewKeyRacesCampaignName
   | UserActionVotingInformationResearchedCampaignName
   | UserActionVotingDayCampaignName
-
+  | UserActionPollCampaignName
 export type UserActionCampaigns = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName
   [UserActionType.CALL]: UserActionCallCampaignName
@@ -103,6 +107,7 @@ export type UserActionCampaigns = {
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: UserActionVotingInformationResearchedCampaignName
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName
+  [UserActionType.POLL]: UserActionPollCampaignName
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -121,4 +126,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTING_INFORMATION_RESEARCHED]:
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
+  [UserActionType.POLL]: UserActionPollCampaignName['3b19d81c4bac4c12b83375b2fa2a9057'],
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
