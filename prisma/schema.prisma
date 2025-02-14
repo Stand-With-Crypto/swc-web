@@ -383,7 +383,7 @@ model UserActionPollAnswer {
   // denormalized from userAction's campaignName to allow for easier querying
   userActionCampaignName String         @map("user_action_campaign_name")
   answer                 String         @map("answer")
-  isOther                Boolean        @map("is_other")
+  isOtherAnswer          Boolean        @map("is_other_answer")
   tenantId               String         @default("us") @map("tenant_id")
 
   @@index([userActionPollId])

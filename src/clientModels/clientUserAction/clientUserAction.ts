@@ -127,7 +127,7 @@ type ClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
 }
 type ClientUserActionPollAnswer = Pick<
   UserActionPollAnswer,
-  'answer' | 'isOther' | 'userActionCampaignName'
+  'answer' | 'isOtherAnswer' | 'userActionCampaignName'
 >
 type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
   actionType: typeof UserActionType.REFER
@@ -339,7 +339,7 @@ export const getClientUserAction = ({
         actionType: UserActionType.POLL,
         userActionPollAnswers: userActionPollAnswers.map(x => ({
           answer: x.answer,
-          isOther: x.isOther,
+          isOtherAnswer: x.isOtherAnswer,
           userActionCampaignName: x.userActionCampaignName,
         })),
       }

@@ -10,7 +10,7 @@ export function mockCreateUserActionPollAnswerInput(campaignName: string) {
   return {
     userActionCampaignName: campaignName,
     answer: faker.helpers.arrayElement(POLL_ANSWER_OPTIONS),
-    isOther: faker.helpers.arrayElement([true, false]),
+    isOtherAnswer: faker.helpers.arrayElement([true, false]),
     tenantId: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Omit<Prisma.UserActionPollAnswerCreateInput, 'userActionPoll'>
 }

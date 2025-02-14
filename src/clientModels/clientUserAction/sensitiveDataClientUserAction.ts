@@ -129,7 +129,7 @@ type SensitiveDataClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingY
 }
 type SensitiveDataClientUserActionPollAnswer = Pick<
   UserActionPollAnswer,
-  'answer' | 'isOther' | 'userActionCampaignName'
+  'answer' | 'isOtherAnswer' | 'userActionCampaignName'
 >
 type SensitiveDataClientUserActionPoll = {
   actionType: typeof UserActionType.POLL
@@ -340,7 +340,7 @@ export const getSensitiveDataClientUserAction = ({
         actionType: UserActionType.POLL,
         userActionPollAnswers: userActionPollAnswers.map(x => ({
           answer: x.answer,
-          isOther: x.isOther,
+          isOtherAnswer: x.isOtherAnswer,
           userActionCampaignName: x.userActionCampaignName,
         })),
       }
