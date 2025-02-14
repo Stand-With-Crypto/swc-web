@@ -33,7 +33,7 @@ export enum UserActionEmailCampaignName {
   BROKER_REPORTING_RULE_SJ_RES_3 = 'BROKER_REPORTING_RULE_SJ_RES_3',
 }
 export enum UserActionPollCampaignName {
-  '3b19d81c4bac4c12b83375b2fa2a9057' = '3b19d81c4bac4c12b83375b2fa2a9057',
+  DEFAULT_INITIAL_POLL_ID = '3b19d81c4bac4c12b83375b2fa2a9057',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
@@ -135,5 +135,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
   [UserActionType.REFER]: UserActionReferCampaignName.DEFAULT,
-  [UserActionType.POLL]: UserActionPollCampaignName['3b19d81c4bac4c12b83375b2fa2a9057'],
+  [UserActionType.POLL]: UserActionPollCampaignName.DEFAULT_INITIAL_POLL_ID,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
