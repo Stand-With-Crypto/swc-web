@@ -16,6 +16,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockCreateUserActionReferInput } from '@/mocks/models/mockUserActionRefer'
 import { mockCreateUserActionRsvpEventInput } from '@/mocks/models/mockUserActionRsvpEvent'
 import { mockUserActionTweetAtPersonInput } from '@/mocks/models/mockUserActionTweetAtPerson'
 import { mockCreateUserActionViewKeyRacesInput } from '@/mocks/models/mockUserActionViewKeyRaces'
@@ -603,6 +604,22 @@ async function seed() {
   )
   const userActionVotingDay = await prismaClient.userActionVotingDay.findMany()
   logEntity({ userActionVotingDay })
+
+  /* userActionRefer */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.REFER].map(action => {
+      return {
+        ...mockCreateUserActionReferInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionRefer.createMany({
+        data,
+      }),
+  )
+  const userActionRefer = await prismaClient.userActionRefer.findMany()
+  logEntity({ userActionRefer })
 }
 
 void runBin(seed)

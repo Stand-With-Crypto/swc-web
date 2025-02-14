@@ -33,6 +33,7 @@ import {
   UserActionLiveEventCampaignName,
   UserActionNftMintCampaignName,
   UserActionOptInCampaignName,
+  UserActionReferCampaignName,
   UserActionRsvpEventCampaignName,
   UserActionTweetAtPersonCampaignName,
   UserActionTweetCampaignName,
@@ -93,6 +94,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VOTING_DAY]: {
     [UserActionVotingDayCampaignName['2024_ELECTION']]: NFTSlug.I_VOTED,
+  },
+  [UserActionType.REFER]: {
+    [UserActionReferCampaignName.DEFAULT]: null,
   },
 }
 

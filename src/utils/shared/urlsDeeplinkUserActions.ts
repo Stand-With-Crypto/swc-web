@@ -77,6 +77,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(countryCode)}/action/voting-day`
     },
   },
+  [UserActionType.REFER]: {
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/refer`
+    },
+  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 

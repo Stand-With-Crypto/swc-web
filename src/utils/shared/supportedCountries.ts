@@ -12,3 +12,5 @@ export const ORDERED_SUPPORTED_COUNTRIES: readonly SupportedCountryCodes[] = [
 export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLocale> = {
   [SupportedCountryCodes.US]: SupportedLocale.EN_US,
 }
+
+export const SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME = 'SWC_CURRENT_PAGE_COUNTRY_CODE'
