@@ -90,8 +90,6 @@ export async function getNewsList(page = 0): Promise<NormalizedNews[]> {
 
     const news = await getAllNewsWithOffset(offset)
 
-    console.log(news)
-
     return news.map(normalizeNewsListItem).filter(Boolean)
   } catch (error) {
     Sentry.captureException(error, {
