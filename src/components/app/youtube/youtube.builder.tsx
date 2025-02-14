@@ -44,6 +44,7 @@ Builder.registerComponent(
         name: 'url',
         type: 'string',
         required: true,
+        helperText: 'Any YouTube video URL',
       },
       {
         name: 'autoplay',
