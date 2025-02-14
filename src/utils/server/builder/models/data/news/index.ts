@@ -13,7 +13,8 @@ interface InternalNews {
   pressPage: {
     id: string
     model: BuilderPageModelIdentifiers
-    value: {
+    // When the page gets deleted the value is undefined
+    value?: {
       createdDate: number
       name: string
       data: {
@@ -42,6 +43,7 @@ interface NewsData {
 }
 
 export interface NormalizedNews {
+  id: string
   type: 'internal' | 'external'
   dateHeading: Date
   title: string
@@ -88,6 +90,8 @@ export async function getNewsList(page = 0): Promise<NormalizedNews[]> {
 
     const news = await getAllNewsWithOffset(offset)
 
+    console.log(news)
+
     return news.map(normalizeNewsListItem).filter(Boolean)
   } catch (error) {
     Sentry.captureException(error, {
@@ -111,9 +115,14 @@ function normalizeNewsListItem(newsData: NewsData): NormalizedNews | undefined {
   const dataHeading = OLD_NEWS_DATE_OVERRIDES[id] ?? new Date(createdDate)
 
   if (isInternalNews(news)) {
+    if (!news.pressPage?.value) {
+      return
+    }
+
     const { source, title, url } = news.pressPage?.value?.data ?? {}
 
     return {
+      id,
       type: 'internal',
       dateHeading: dataHeading,
       source: source,
@@ -122,6 +131,7 @@ function normalizeNewsListItem(newsData: NewsData): NormalizedNews | undefined {
     }
   } else if (isExternalNews(news)) {
     return {
+      id,
       type: 'external',
       dateHeading: dataHeading,
       source: news.source,

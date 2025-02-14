@@ -57,11 +57,11 @@ export function NewsList({ initialNews, locale }: NewsListProps) {
   return (
     <div className="standard-spacing-from-navbar container flex flex-col gap-20">
       <div className="flex flex-col gap-16">
-        {news.map(({ dateHeading, source, title, type, url }, idx) => {
+        {news.map(({ dateHeading, source, title, type, url, id }) => {
           const LinkComponent = type === 'internal' ? TrackedInternalLink : TrackedExternalLink
 
           return (
-            <section key={idx}>
+            <section key={id}>
               <div className="container flex flex-col items-center gap-2">
                 {dateHeading && (
                   <p className="text-center font-mono text-sm text-muted-foreground">
