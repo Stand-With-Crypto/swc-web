@@ -49,7 +49,7 @@ export interface NormalizedNews {
   url: string
 }
 
-export const LIMIT = 10
+export const NEWS_LIST_LIMIT = 10
 
 async function getAllNewsWithOffset(offset: number) {
   return await pRetry(
@@ -67,7 +67,7 @@ async function getAllNewsWithOffset(offset: number) {
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
         fields: 'data,createdDate,id',
-        limit: LIMIT,
+        limit: NEWS_LIST_LIMIT,
         offset,
       }) as Promise<Array<NewsData>>,
     {
@@ -84,7 +84,7 @@ async function getAllNewsWithOffset(offset: number) {
 
 export async function getNewsList(page = 0): Promise<NormalizedNews[]> {
   try {
-    const offset = page * LIMIT
+    const offset = page * NEWS_LIST_LIMIT
 
     const news = await getAllNewsWithOffset(offset)
 

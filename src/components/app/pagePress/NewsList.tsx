@@ -10,7 +10,7 @@ import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import {
   getNewsList,
-  LIMIT as NEWS_LIMIT,
+  NEWS_LIST_LIMIT,
   NormalizedNews,
 } from '@/utils/server/builder/models/data/news'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
@@ -39,7 +39,7 @@ export function NewsList({ initialNews, locale }: NewsListProps) {
     const newNews = await getNewsList(newOffset)
     setIsLoading(false)
 
-    if (!newNews || newNews.length < NEWS_LIMIT) {
+    if (!newNews || newNews.length < NEWS_LIST_LIMIT) {
       setOffset(-1)
     } else {
       setOffset(newOffset)
