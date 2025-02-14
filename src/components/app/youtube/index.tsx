@@ -1,8 +1,11 @@
 'use client'
 
-import ReactPlayer from 'react-player/youtube'
+// https://github.com/cookpete/react-player/issues/1428
+// Lazy load the ReactPlayer component to avoid hydration issues
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 import { cn } from '@/utils/web/cn'
+import dynamic from 'next/dynamic'
 
 interface Props {
   url: string
@@ -47,11 +50,13 @@ export function YouTube({
     >
       <ReactPlayer
         config={{
-          playerVars: {
-            // https://developers.google.com/youtube/player_parameters
-            start: String(start),
-            iv_load_policy: '3', // Hide video annotations
-            fs: allowFullScreen ? '1' : '0',
+          youtube: {
+            playerVars: {
+              // https://developers.google.com/youtube/player_parameters
+              start: String(start),
+              iv_load_policy: '3', // Hide video annotations
+              fs: allowFullScreen ? '1' : '0',
+            },
           },
         }}
         height="100%"

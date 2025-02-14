@@ -8,7 +8,7 @@ import { getPageContent } from '@/utils/server/builder/models/page/utils'
 export const dynamic = 'error'
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
-const PATHNAME = '/test'
+const PATHNAME = '/builder/test'
 
 const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
