@@ -289,6 +289,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: <MainText>Someone referred a friend</MainText>,
         }
       }
+      case UserActionType.POLL: {
+        return {
+          onFocusContent: () => null,
+          children: <MainText>Someone voted in a poll</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore
