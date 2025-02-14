@@ -33,6 +33,7 @@ import {
   UserActionLiveEventCampaignName,
   UserActionNftMintCampaignName,
   UserActionOptInCampaignName,
+  UserActionPollCampaignName,
   UserActionReferCampaignName,
   UserActionRsvpEventCampaignName,
   UserActionTweetAtPersonCampaignName,
@@ -97,6 +98,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.REFER]: {
     [UserActionReferCampaignName.DEFAULT]: null,
+  },
+  [UserActionType.POLL]: {
+    [UserActionPollCampaignName.DEFAULT_INITIAL_POLL_ID]: null,
   },
 }
 

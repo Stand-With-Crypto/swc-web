@@ -17,6 +17,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VOTING_INFORMATION_RESEARCHED,
   UserActionType.VOTING_DAY,
   UserActionType.REFER,
+  UserActionType.POLL,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -30,6 +31,11 @@ export enum UserActionEmailCampaignName {
   SEC_COMMISSIONER_2024 = 'SEC_COMMISSIONER_2024',
   WELCOME_119_CONGRESS_2025 = 'WELCOME_119_CONGRESS_2025',
   BROKER_REPORTING_RULE_SJ_RES_3 = 'BROKER_REPORTING_RULE_SJ_RES_3',
+}
+
+// this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
+export enum UserActionPollCampaignName {
+  DEFAULT_INITIAL_POLL_ID = '3b19d81c4bac4c12b83375b2fa2a9057',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
@@ -93,6 +99,7 @@ export type UserActionCampaignName =
   | UserActionVotingInformationResearchedCampaignName
   | UserActionVotingDayCampaignName
   | UserActionReferCampaignName
+  | UserActionPollCampaignName
 
 export type UserActionCampaigns = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName
@@ -110,6 +117,7 @@ export type UserActionCampaigns = {
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: UserActionVotingInformationResearchedCampaignName
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName
   [UserActionType.REFER]: UserActionReferCampaignName
+  [UserActionType.POLL]: UserActionPollCampaignName
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -129,4 +137,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
   [UserActionType.REFER]: UserActionReferCampaignName.DEFAULT,
+  [UserActionType.POLL]: UserActionPollCampaignName.DEFAULT_INITIAL_POLL_ID,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>

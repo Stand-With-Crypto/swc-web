@@ -21,6 +21,7 @@ const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.VOTING_DAY]: '/activityFeedIcons/i-voted.svg',
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: '/activityFeedIcons/voting-info-researched.svg',
   [UserActionType.REFER]: '/activityFeedIcons/join.svg',
+  [UserActionType.POLL]: '/activityFeedIcons/vote.svg',
 }
 
 type ActivityAvatarProps = {
