@@ -44,7 +44,7 @@ export async function generateMetadata(props: DynamicPageProps): Promise<Metadat
 
 export async function generateStaticParams() {
   const paths = await getPagePaths({
-    modelName: PAGE_MODEL,
+    pageModelName: PAGE_MODEL,
   })
 
   return paths.map(path => {

@@ -46,7 +46,7 @@ export async function generateMetadata(props: PressReleasePageProps): Promise<Me
 
 export async function generateStaticParams() {
   const paths = await getPagePaths({
-    modelName: PAGE_MODEL,
+    pageModelName: PAGE_MODEL,
     limit: 10,
   })
 
