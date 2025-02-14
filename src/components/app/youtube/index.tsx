@@ -8,7 +8,7 @@ import { cn } from '@/utils/web/cn'
 import dynamic from 'next/dynamic'
 
 interface Props {
-  url: string
+  videoId: string
   aspectRatio?: number
   /** The time in seconds at which the video should start playing */
   start?: number
@@ -38,8 +38,13 @@ export function YouTube({
   style,
   className,
   autoplay,
+  videoId,
   ...props
 }: Props) {
+  // Using nocookie player to reduce the amount of console warnings
+  // https://github.com/cookpete/react-player/issues/1869
+  const url = `https://www.youtube-nocookie.com/embed/${videoId}`
+
   return (
     <div
       className={cn('w-full', className)}
@@ -62,6 +67,7 @@ export function YouTube({
         height="100%"
         playing={autoplay}
         width="100%"
+        url={url}
         {...props}
       />
     </div>

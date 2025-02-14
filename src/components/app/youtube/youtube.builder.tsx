@@ -4,7 +4,7 @@ import { DEFAULT_ASPECT_RATIO, YouTube } from '@/components/app/youtube'
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
 interface Props extends BuilderComponentBaseProps {
-  url: string
+  videoId: string
   aspectRatio: string
   start: number
   allowFullScreen: boolean
@@ -31,7 +31,7 @@ Builder.registerComponent(
       loop={props.loop}
       muted={props.muted}
       playsinline={props.playsinline}
-      url={props.url}
+      videoId={props.videoId}
       autoplay={!Builder.isEditing && props.autoplay}
       volume={props.overrideDefaultVolume && !props.muted ? Number(props.volume) / 100 : undefined}
     />
@@ -41,10 +41,10 @@ Builder.registerComponent(
     noWrap: true,
     inputs: [
       {
-        name: 'url',
+        name: 'videoId',
         type: 'string',
         required: true,
-        helperText: 'Any YouTube video URL',
+        helperText: 'youtube.com/embed/VIDEO_ID or youtube.com/watch?v=VIDEO_ID',
       },
       {
         name: 'autoplay',
