@@ -8,6 +8,7 @@ import { testCaseMultipleUsersWithSameLegacyEmail } from '@/bin/smokeTests/onNew
 import { testCaseWithLongAcquisitionReferer } from '@/bin/smokeTests/onNewLogin/9testCaseWithLongAcquisitionReferrer'
 import { testCaseWithPhoneSignUp } from '@/bin/smokeTests/onNewLogin/10testCaseWithPhoneSignUp'
 import { testCaseWithPhoneSignUpWithExistingAccount } from '@/bin/smokeTests/onNewLogin/11testCaseWithPhoneSignUpWithExistingAccount'
+import { testCaseWithValidReferral } from '@/bin/smokeTests/onNewLogin/12testCaseWithValidReferral'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
 import { logger } from '@/utils/shared/logger'
 
@@ -40,6 +41,7 @@ async function smokeTestOnLogin() {
     testCaseWithLongAcquisitionReferer,
     testCaseWithPhoneSignUp,
     testCaseWithPhoneSignUpWithExistingAccount,
+    testCaseWithValidReferral,
   ]
   for (const test of tests) {
     await runTestCase(test)
