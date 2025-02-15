@@ -23,6 +23,7 @@ interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
   pageParams: Awaited<PageProps['params']>
   hideModal?: boolean
   dialogContentClassName?: string
+  className?: string
 }
 
 export async function HomepageDialogDeeplinkLayout({
@@ -30,6 +31,7 @@ export async function HomepageDialogDeeplinkLayout({
   size = 'md',
   pageParams,
   dialogContentClassName,
+  className,
 }: HomepageDialogDeeplinkLayoutProps) {
   const urls = getIntlUrls(pageParams.countryCode)
   const [{ sumDonations, countUsers, countPolicymakerContacts }] = await Promise.all([
@@ -51,6 +53,7 @@ export async function HomepageDialogDeeplinkLayout({
           size === 'md' && 'max-w-3xl',
           'min-h-[400px]',
           dialogContentClassName,
+          className,
         )}
       >
         <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
