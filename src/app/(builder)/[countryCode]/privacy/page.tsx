@@ -7,6 +7,7 @@ import { getPageContent, getPageDetails } from '@/utils/server/builder/models/pa
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
+export const revalidate = 86400 // 1 day
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
 const PATHNAME = '/privacy'
