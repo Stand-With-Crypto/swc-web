@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'motion/react'
 
 import { Button } from '@/components/ui/button'
-import { FormattedDatetime } from '@/components/ui/formattedDatetime'
+import { format } from 'date-fns'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
@@ -65,13 +65,7 @@ export function NewsList({ initialNews, locale }: NewsListProps) {
               <div className="container flex flex-col items-center gap-2">
                 {dateHeading && (
                   <p className="text-center font-mono text-sm text-muted-foreground">
-                    <FormattedDatetime
-                      date={dateHeading}
-                      day="numeric"
-                      locale={locale}
-                      month="long"
-                      year="numeric"
-                    />
+                    {format(dateHeading, 'MMMM d, yyyy')}
                   </p>
                 )}
                 <PageSubTitle className={'font-bold text-foreground'} size="md">
