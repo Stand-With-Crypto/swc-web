@@ -1,12 +1,15 @@
 import { Builder } from '@builder.io/react'
 
-import { DEFAULT_ASPECT_RATIO, YouTube } from '@/components/app/youtube'
+import { VideoPlayer, DEFAULT_ASPECT_RATIO, PlayerType } from '.'
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
 interface Props extends BuilderComponentBaseProps {
-  videoId: string
+  type: PlayerType['type']
+  video?: string
+  videoId?: string
   aspectRatio: string
   start: number
+  posterImage?: string
   allowFullScreen: boolean
   controls: boolean
   loop: boolean
@@ -17,34 +20,66 @@ interface Props extends BuilderComponentBaseProps {
   overrideDefaultVolume: boolean
 }
 
-// TODO: Add volume control if muted is off and if override default value is on
+const DEFAULT_VIDEO_TYPE: PlayerType['type'] = 'video'
 
+const supportedVideoTypes: PlayerType['type'][] = ['youtube', 'video']
+
+// TODO: add fit prop
+// TODO: add width and height as advanced options
 Builder.registerComponent(
-  (props: Props) => (
-    <YouTube
-      {...props.attributes}
-      allowFullScreen={props.allowFullScreen}
-      aspectRatio={100 / Number(props.aspectRatio)}
-      key={props.attributes?.key}
-      controls={props.controls}
-      start={props.start}
-      loop={props.loop}
-      muted={props.muted}
-      playsinline={props.playsinline}
-      videoId={props.videoId}
-      autoplay={!Builder.isEditing && props.autoplay}
-      volume={props.overrideDefaultVolume && !props.muted ? Number(props.volume) / 100 : undefined}
-    />
-  ),
+  (props: Props) => {
+    let playerType: PlayerType
+
+    if (props.type === 'youtube') {
+      playerType = { type: 'youtube', videoId: props.videoId! }
+    } else {
+      playerType = { type: 'video', url: props.video! }
+    }
+
+    return (
+      <VideoPlayer
+        {...props.attributes}
+        {...playerType}
+        allowFullScreen={props.allowFullScreen}
+        aspectRatio={100 / Number(props.aspectRatio)}
+        key={props.attributes?.key}
+        controls={props.controls}
+        start={props.start}
+        loop={props.loop}
+        muted={props.muted}
+        playsinline={props.playsinline}
+        autoplay={!Builder.isEditing && props.autoplay}
+        previewImage={props.posterImage}
+        volume={
+          props.overrideDefaultVolume && !props.muted ? Number(props.volume) / 100 : undefined
+        }
+      />
+    )
+  },
   {
-    name: 'Youtube Video',
+    name: 'Video',
+    override: true,
     noWrap: true,
     inputs: [
+      {
+        name: 'type',
+        type: 'enum',
+        required: true,
+        enum: supportedVideoTypes,
+        defaultValue: DEFAULT_VIDEO_TYPE,
+      },
       {
         name: 'videoId',
         type: 'string',
         required: true,
         helperText: 'youtube.com/embed/VIDEO_ID or youtube.com/watch?v=VIDEO_ID',
+        showIf: options => options.get('type') === 'youtube',
+      },
+      {
+        name: 'video',
+        type: 'file',
+        required: true,
+        showIf: options => options.get('type') === 'video',
       },
       {
         name: 'autoplay',
@@ -54,6 +89,14 @@ Builder.registerComponent(
         helperText: 'Automatically play the video when the page loads. Requires mute to work',
       },
       {
+        name: 'posterImage',
+        friendlyName: 'Poster Image',
+        type: 'file',
+        helperText:
+          'Image to display before the video plays. If Video type is Youtube, leave it empty to use the default thumbnail',
+        showIf: options => options.get('autoplay') === false,
+      },
+      {
         name: 'muted',
         type: 'boolean',
         defaultValue: false,
@@ -61,6 +104,7 @@ Builder.registerComponent(
       },
       {
         name: 'overrideDefaultVolume',
+        friendlyName: 'Override Default Volume',
         type: 'boolean',
         showIf: options => options.get('muted') === false,
       },
@@ -89,6 +133,7 @@ Builder.registerComponent(
         type: 'boolean',
         defaultValue: true,
         helperText: 'Allow the video to be played in full screen',
+        friendlyName: 'Allow Full Screen',
       },
       {
         name: 'start',

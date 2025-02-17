@@ -1,7 +1,7 @@
 import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
+import { VideoPlayer } from '@/components/ui/video'
 import { NextImage } from '@/components/ui/image'
-import { Video } from '@/components/ui/video'
 
 export const UserActionFormCallCongresspersonSuccess = () => {
   const ImageFallback = (
@@ -17,10 +17,17 @@ export const UserActionFormCallCongresspersonSuccess = () => {
   return (
     <UserActionFormSuccessScreenFeedback
       image={
-        <Video
-          className={'h-[245px] w-[300px] overflow-hidden rounded-xl object-cover sm:w-[345px]'}
+        <VideoPlayer
+          type="video"
+          url="/actionTypeVideos/swca_call.mp4"
+          height={300}
+          width={300}
           fallback={ImageFallback}
-          src="/actionTypeVideos/swca_call.mp4"
+          className="overflow-hidden rounded-xl sm:w-[345px]"
+          fit="cover"
+          autoplay
+          muted
+          loop
         />
       }
       {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.CALL}

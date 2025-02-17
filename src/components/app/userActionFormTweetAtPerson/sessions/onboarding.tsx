@@ -4,16 +4,19 @@ import { TweetAtPersonSectionNames } from '@/components/app/userActionFormTweetA
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { Video } from '@/components/ui/video'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { VideoPlayer } from '@/components/ui/video'
 
 export function OnboardingTweetAtPersonCampaign({
   goToSection,
 }: UseSectionsReturn<TweetAtPersonSectionNames>) {
   return (
     <div className="flex flex-col items-center justify-center pb-8">
-      <Video
-        className={'h-full max-h-[266px] w-full max-w-[454px] rounded-lg object-cover'}
+      <VideoPlayer
+        type="video"
+        url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
+        className="max-h-[266px] max-w-[454px] overflow-hidden rounded-lg"
+        fit="cover"
         fallback={
           <NextImage
             alt="Pizza Day"
@@ -23,8 +26,9 @@ export function OnboardingTweetAtPersonCampaign({
             width={454}
           />
         }
-        poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMcJ/2HwAESgIuKCMGAAAAAABJRU5ErkJggg=="
-        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
+        autoplay
+        muted
+        loop
       />
 
       <div className="mt-4 space-y-2">
