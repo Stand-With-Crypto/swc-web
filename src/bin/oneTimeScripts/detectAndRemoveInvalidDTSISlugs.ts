@@ -9,7 +9,7 @@ async function run() {
   // npm run ts src/bin/oneTimeScripts/detectAndRemoveInvalidDTSISlugs.ts -- --persist
   const persist = process.argv.includes('--persist')
 
-  logger.info(`Running with persist=${persist}`)
+  logger.info(`Running with persist=${String(persist)}`)
 
   logger.info('Querying all DTSI slugs')
 
@@ -94,4 +94,4 @@ async function run() {
   }
 }
 
-runBin(run)
+void runBin(run)
