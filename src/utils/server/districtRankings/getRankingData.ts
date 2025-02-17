@@ -19,7 +19,7 @@ function isValidDistrict(state: string, district: string): boolean {
   }
 
   const districtNum = parseInt(district, 10)
-  if (isNaN(districtNum) || districtNum <= 0) {
+  if (isNaN(districtNum) || districtNum <= 0 || districtNum > stateDistrictCount) {
     logger.warn('[District Rankings] Invalid district number:', { state, district })
     return false
   }
