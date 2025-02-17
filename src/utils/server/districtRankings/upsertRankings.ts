@@ -11,6 +11,13 @@ export type DistrictRankingEntry = {
   count: number
 }
 
+type RedisEntryData = Omit<DistrictRankingEntry, 'count'>
+
+const getLog =
+  (redisKey: string) =>
+  (message: string, ...args: any[]) =>
+    logger.info(`[${redisKey}] ${message}`, ...args)
+
 function isValidDistrictEntry(entry: DistrictRankingEntry): boolean {
   return (
     typeof entry.state === 'string' &&
@@ -26,7 +33,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
   const districts: DistrictRankingEntry[] = []
 
   Object.entries(US_STATE_CODE_TO_DISTRICT_COUNT_MAP).forEach(([state, districtCount]) => {
-    // Skip states with no districts (e.g., DC) // TODO: Figure a way to show DC in the rankings
+    // TODO: Figure a way to show DC in the rankings
     if (districtCount === 0) return
 
     for (let i = 1; i <= districtCount; i++) {
@@ -42,6 +49,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
 }
 
 async function maybeInitializeCacheKey(redisKey: string) {
+  const log = getLog(redisKey)
   const existingCount = await redisWithCache.zcard(redisKey)
 
   if (existingCount > 0) {
@@ -52,21 +60,27 @@ async function maybeInitializeCacheKey(redisKey: string) {
   const districts = getAllPossibleDistricts()
 
   districts.forEach(({ district, state }) => {
-    pipeline.zadd(redisKey, {
+    const member: RedisEntryData = { district, state }
+    log(`Adding district entry: ${JSON.stringify(member)}`)
+    pipeline.zadd<RedisEntryData>(redisKey, {
       score: 0,
-      member: JSON.stringify({ district, state }),
+      member,
     })
   })
 
   await pipeline.exec()
+
+  log('Cache key initialized')
 }
 
 export function createDistrictRankingUpserter(
   redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS],
 ) {
+  const log = getLog(redisKey)
+
   return async (entry: DistrictRankingEntry) => {
     if (!isValidDistrictEntry(entry)) {
-      logger.warn(`[${redisKey}] Invalid district entry:`, { entry })
+      log(`Invalid district entry:`, entry)
       return {
         success: false,
         entry,
@@ -76,18 +90,18 @@ export function createDistrictRankingUpserter(
 
     await maybeInitializeCacheKey(redisKey)
 
-    const member = JSON.stringify({ district: entry.district, state: entry.state })
-    logger.info(`[${redisKey}] Upserting district entry:`, member)
+    const member: RedisEntryData = { district: entry.district, state: entry.state }
+    log(`Upserting district entry:`, member)
 
-    const result = await redis.zadd(redisKey, {
+    const result = await redis.zadd<RedisEntryData>(redisKey, {
       score: entry.count,
       member,
     })
 
     if (result === null) {
-      logger.warn(`[${redisKey}] Failed to upsert district entry:`, { entry })
+      log(`Failed to upsert district entry:`, member)
     } else {
-      logger.info(`[${redisKey}] Upserted district entry:`, { entry })
+      log(`Successfully upserted district entry:`, member)
     }
 
     return {
