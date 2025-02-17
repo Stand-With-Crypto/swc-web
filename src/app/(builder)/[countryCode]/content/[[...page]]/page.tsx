@@ -9,6 +9,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
 export const dynamicParams = true
+export const revalidate = 86400 // 1 day
 
 const PAGE_PREFIX = '/content/'
 const PAGE_MODEL = BuilderPageModelIdentifiers.CONTENT

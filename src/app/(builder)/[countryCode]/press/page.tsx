@@ -10,6 +10,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
+export const revalidate = 21600 // 6 hours
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
 const PATHNAME = '/press'
