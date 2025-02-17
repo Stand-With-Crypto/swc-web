@@ -26,8 +26,7 @@ export function mockCreateAddressInput() {
   const countryCode = faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES))
 
   const stateCode = faker.location.state({ abbreviated: true })
-  const stateDistrictCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode]
-  const district = faker.number.int({ min: 1, max: stateDistrictCount })
+  const district = getDistrict(stateCode as USStateCode)
 
   const partial = {
     googlePlaceId: null,
@@ -40,7 +39,7 @@ export function mockCreateAddressInput() {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
-    usCongressionalDistrict: district.toString(),
+    usCongressionalDistrict: district,
     tenantId: countryCode,
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
