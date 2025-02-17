@@ -7,12 +7,26 @@ import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
+const getDistrict = (stateCode: USStateCode) => {
+  const stateDistrictCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]
+
+  if (stateDistrictCount === 0) {
+    return null
+  }
+
+  // Faker number.int throws when there are no integers between min and max
+  if (stateDistrictCount === 1) {
+    return '1'
+  }
+
+  return faker.number.int({ min: 1, max: stateDistrictCount }).toString()
+}
+
 export function mockCreateAddressInput() {
   const countryCode = faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES))
 
   const stateCode = faker.location.state({ abbreviated: true })
-  const stateDistrictCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode]
-  const district = faker.number.int({ min: 1, max: stateDistrictCount })
+  const district = getDistrict(stateCode as USStateCode)
 
   const partial = {
     googlePlaceId: null,
@@ -25,7 +39,7 @@ export function mockCreateAddressInput() {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
-    usCongressionalDistrict: district.toString(),
+    usCongressionalDistrict: district,
     tenantId: countryCode,
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
