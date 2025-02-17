@@ -25,7 +25,11 @@ const getDistrict = (stateCode: USStateCode) => {
 export function mockCreateAddressInput() {
   const countryCode = faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES))
 
-  const stateCode = faker.location.state({ abbreviated: true })
+  // Faker location.state does not generates DC
+  const stateCode =
+    faker.helpers.maybe(() => 'DC', { probability: 0.05 }) ||
+    faker.location.state({ abbreviated: true })
+
   const district = getDistrict(stateCode as USStateCode)
 
   const partial = {
