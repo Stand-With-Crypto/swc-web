@@ -33,15 +33,20 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
   const districts: DistrictRankingEntry[] = []
 
   Object.entries(US_STATE_CODE_TO_DISTRICT_COUNT_MAP).forEach(([state, districtCount]) => {
-    // TODO: Figure a way to show DC in the rankings
-    if (districtCount === 0) return
-
-    for (let i = 1; i <= districtCount; i++) {
+    if (districtCount === 0) {
       districts.push({
         state: state as USStateCode,
-        district: i.toString(),
+        district: 'N/A',
         count: 0,
       })
+    } else {
+      for (let i = 1; i <= districtCount; i++) {
+        districts.push({
+          state: state as USStateCode,
+          district: i.toString(),
+          count: 0,
+        })
+      }
     }
   })
 
@@ -73,10 +78,11 @@ async function maybeInitializeCacheKey(redisKey: string) {
   log('Cache key initialized')
 }
 
-export function createDistrictRankingUpserter(
+export async function createDistrictRankingUpserter(
   redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS],
 ) {
   const log = getLog(redisKey)
+  await maybeInitializeCacheKey(redisKey)
 
   return async (entry: DistrictRankingEntry) => {
     if (!isValidDistrictEntry(entry)) {
@@ -87,8 +93,6 @@ export function createDistrictRankingUpserter(
         rank: null,
       }
     }
-
-    await maybeInitializeCacheKey(redisKey)
 
     const member: RedisEntryData = { district: entry.district, state: entry.state }
     log(`Upserting district entry:`, member)

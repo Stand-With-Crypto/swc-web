@@ -38,20 +38,15 @@ export const updateDistrictsRankings = inngest.createFunction(
       }),
     ])
 
-    const upsertDistrictAdvocatesRanking = createDistrictRankingUpserter(
-      REDIS_KEYS.DISTRICT_ADVOCATES_RANKING,
-    )
-    const upsertDistrictReferralsRanking = createDistrictRankingUpserter(
-      REDIS_KEYS.DISTRICT_REFERRALS_RANKING,
-    )
+    const [upsertDistrictAdvocatesRanking, upsertDistrictReferralsRanking] = await Promise.all([
+      createDistrictRankingUpserter(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING),
+      createDistrictRankingUpserter(REDIS_KEYS.DISTRICT_REFERRALS_RANKING),
+    ])
 
     const [districtAdvocatesRankingResults, districtReferralsRankingResults] = await Promise.all([
       step.run('Update Districts Advocates Rankings', async () => {
         const results = await Promise.all(
-          districtAdvocatesCounts.map(entry => {
-            logger.info(`Updating District Advocates Count for ${entry.state}-${entry.district}`)
-            return upsertDistrictAdvocatesRanking(entry)
-          }),
+          districtAdvocatesCounts.map(entry => upsertDistrictAdvocatesRanking(entry)),
         )
 
         const successfulResults = results.filter(result => result.success)
@@ -64,12 +59,10 @@ export const updateDistrictsRankings = inngest.createFunction(
           failedEntries: failedResults.map(result => result.entry),
         }
       }),
+
       step.run('Update Districts Referrals Ranking', async () => {
         const results = await Promise.all(
-          districtsReferralsCount.map(entry => {
-            logger.info(`Updating District Referrals Count for ${entry.state}-${entry.district}`)
-            return upsertDistrictReferralsRanking(entry)
-          }),
+          districtsReferralsCount.map(entry => upsertDistrictReferralsRanking(entry)),
         )
 
         const successfulResults = results.filter(result => result.success)
