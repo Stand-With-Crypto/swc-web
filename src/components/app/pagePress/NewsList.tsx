@@ -1,9 +1,9 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { format } from 'date-fns'
 import { motion, useInView } from 'motion/react'
 
 import { Button } from '@/components/ui/button'
-import { format } from 'date-fns'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
@@ -14,14 +14,12 @@ import {
   NormalizedNews,
 } from '@/utils/server/builder/models/data/news'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 interface NewsListProps {
   initialNews: NormalizedNews[]
-  locale: SupportedLocale
 }
 
-export function NewsList({ initialNews, locale }: NewsListProps) {
+export function NewsList({ initialNews }: NewsListProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [offset, setOffset] = useState(0)
   const [news, setNews] = useState(initialNews)
