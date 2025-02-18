@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 import { after } from 'next/server'
 
 import { actionCreateUserActionReferral } from '@/actions/actionCreateUserActionReferral'
+import { addToPendingReferralsQueue } from '@/utils/server/referral/pendingReferrals'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 
@@ -39,7 +40,26 @@ export function triggerReferralSteps({
   }
 
   after(async () => {
-    await actionCreateUserActionReferral({ referralId, userId, localUser })
-    // sendReferralEmail() TODO
+    try {
+      const result = await actionCreateUserActionReferral({ referralId, userId, localUser })
+
+      if (result.errors) {
+        await addToPendingReferralsQueue({ referralId, userId })
+        logger.info('Failed to process referral immediately, added to queue for retry', {
+          referralId,
+          userId,
+          errors: result.errors,
+        })
+      } else {
+        // sendReferralEmail() TODO
+      }
+    } catch (error) {
+      await addToPendingReferralsQueue({ referralId, userId })
+      logger.error('Failed to process referral immediately, added to queue for retry')
+      Sentry.captureException(error, {
+        extra: { referralId, userId, error },
+        tags: { domain: 'referral' },
+      })
+    }
   })
 }
