@@ -1,4 +1,5 @@
 import { Builder } from '@builder.io/react'
+import { format } from 'date-fns'
 
 import {
   AsVariantsConfig,
@@ -7,15 +8,29 @@ import {
 } from '@/components/ui/pageSubTitle'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-interface BuilderPageSubtitleProps extends BuilderComponentBaseProps {
-  title: string
+interface SubtitleCommonProps extends BuilderComponentBaseProps {
   as: (typeof AsVariantsConfig)[number]
   size: keyof typeof subTitleVariantsConfig.size
   withoutBalancer?: boolean
 }
 
+interface TextSubtitleProps extends SubtitleCommonProps {
+  type: 'text'
+  title: string
+}
+
+interface DateSubtitleProps extends SubtitleCommonProps {
+  type: 'date'
+  format: string
+  date: string
+}
+
+type SubtitleProps = TextSubtitleProps | DateSubtitleProps
+
+const DEFAULT_SUBTITLE_DATE_FORMAT = 'MMMM d, yyyy'
+
 Builder.registerComponent(
-  (props: BuilderPageSubtitleProps) => (
+  (props: SubtitleProps) => (
     <PageSubTitle
       {...props.attributes}
       as={props.as}
@@ -23,7 +38,9 @@ Builder.registerComponent(
       size={props.size}
       withoutBalancer={props.withoutBalancer}
     >
-      {props.title}
+      {props.type === 'date'
+        ? format(new Date(props.date), props.format ?? DEFAULT_SUBTITLE_DATE_FORMAT)
+        : props.title}
     </PageSubTitle>
   ),
   {
@@ -32,10 +49,34 @@ Builder.registerComponent(
     noWrap: true,
     inputs: [
       {
+        name: 'type',
+        type: 'enum',
+        enum: ['text', 'date'],
+        defaultValue: 'text',
+        required: true,
+      },
+      {
         name: 'title',
         type: 'string',
         required: true,
         defaultValue: 'Enter some text...',
+        showIf: options => options.get('type') === 'text',
+      },
+      {
+        name: 'date',
+        type: 'date',
+        required: true,
+        defaultValue: new Date().toISOString(),
+        helperText: "You can customize the date's format in the Advanced Options tab",
+        showIf: options => options.get('type') === 'date',
+      },
+      {
+        name: 'format',
+        type: 'string',
+        defaultValue: DEFAULT_SUBTITLE_DATE_FORMAT,
+        helperText: 'Visit https://dub.sh/l1Bige3 to learn more about date formats',
+        advanced: true,
+        showIf: options => options.get('type') === 'date',
       },
       {
         name: 'size',
