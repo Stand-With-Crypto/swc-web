@@ -1,15 +1,17 @@
 import * as Sentry from '@sentry/nextjs'
 import { after } from 'next/server'
 
-import { createReferral } from '@/utils/server/referral/createReferral'
+import { actionCreateUserActionReferral } from '@/actions/actionCreateUserActionReferral'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
-import { logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
 
 type ReferralUTMParams = {
   utm_source?: string
   utm_medium?: string
   utm_campaign?: string
 }
+
+const logger = getLogger('triggerReferralSteps')
 
 function isValidReferral(params: ReferralUTMParams | undefined): boolean {
   if (!params) return false
@@ -25,26 +27,28 @@ function isValidReferral(params: ReferralUTMParams | undefined): boolean {
 export function triggerReferralSteps({
   localUser,
   searchParams,
+  userId,
 }: {
   localUser: ServerLocalUser | null
   searchParams: Record<string, string | undefined>
+  userId: string
 }) {
   const isReferral =
     isValidReferral(searchParams) || isValidReferral(localUser?.persisted?.initialSearchParams)
 
   const referralId = searchParams?.utm_campaign ?? ''
 
-  logger.info(`triggerReferralSteps: referralId "${referralId}"`)
+  logger.info(`referralId "${referralId}", newUserId "${userId}"`)
 
   if (isReferral && !referralId) {
-    logger.error('triggerReferralSteps: invalid logic, referral has no referralId')
+    logger.error('invalid logic, referral has no referralId')
     Sentry.captureMessage(
-      'triggerReferralSteps: invalid logic, we should only hit this point if the referralId is present',
+      'invalid logic, we should only hit this point if the referralId is present',
       {
         tags: {
           domain: 'referral',
         },
-        extra: { referralId, searchParams, localUser },
+        extra: { referralId, searchParams, localUser, userId },
       },
     )
     return
@@ -52,7 +56,7 @@ export function triggerReferralSteps({
 
   if (isReferral) {
     after(async () => {
-      await createReferral({ referralId })
+      await actionCreateUserActionReferral({ referralId, userId, localUser })
       // sendReferralEmail() TODO
     })
   }

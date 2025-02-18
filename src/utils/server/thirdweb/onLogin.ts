@@ -482,7 +482,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Datetime of Last Login': new Date(),
   })
 
-  triggerReferralSteps({ localUser, searchParams })
+  triggerReferralSteps({ localUser, searchParams, userId: user.id })
 
   waitUntil(beforeFinish())
   return {
