@@ -3,16 +3,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { differenceInDays } from 'date-fns'
+import Cookies from 'js-cookie'
 import { EyeIcon } from 'lucide-react'
 
 import { actionCreatePollVote } from '@/actions/actionCreatePollVote'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
+import { useDialog } from '@/hooks/useDialog'
+import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 interface PollsProps {
@@ -22,6 +29,51 @@ interface PollsProps {
   pollsResultsData: Record<string, PollResultsDataResponse>
   userPollsData: PollsVotesFromUserResponse | undefined
   isLoading: boolean
+}
+
+function SubmitButton({ isSubmitDisabled }: { isSubmitDisabled: boolean }) {
+  const dialogProps = useDialog({ analytics: 'Active Poll Submit Button' })
+
+  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
+  const isValid = isValidCountryCode({
+    countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
+    userCountryCode,
+    bypassCountryCheck: false,
+  })
+
+  const setDialogOpen = (open: boolean) => {
+    dialogProps.onOpenChange(open)
+  }
+
+  return (
+    <LoginDialogWrapper
+      authenticatedContent={
+        isValid ? (
+          <Button disabled={isSubmitDisabled} size="lg" type="submit" variant="primary-cta">
+            Submit
+          </Button>
+        ) : (
+          <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button disabled={isSubmitDisabled} size="lg" variant="primary-cta">
+                Submit
+              </Button>
+            </DialogTrigger>
+            <DialogContent a11yTitle="Active Poll Submit Button" className="max-w-l w-full">
+              <DialogBody>
+                <UserActionFormActionUnavailable />
+              </DialogBody>
+            </DialogContent>
+          </Dialog>
+        )
+      }
+      bypassCountryCheck={false}
+    >
+      <Button disabled={isSubmitDisabled} size="lg" variant="primary-cta">
+        Submit
+      </Button>
+    </LoginDialogWrapper>
+  )
 }
 
 export function ActivePoll({
@@ -85,7 +137,12 @@ export function ActivePoll({
 
       setIsInternalLoading(true)
 
-      await actionCreatePollVote(pollData, isVoteAgain)
+      await actionCreatePollVote(pollData, isVoteAgain).catch(error => {
+        console.error('Error creating poll vote', error)
+        setIsInternalLoading(false)
+
+        return
+      })
 
       setIsInternalLoading(false)
 
@@ -131,9 +188,6 @@ export function ActivePoll({
     isFormDisabled
 
   const endsIn = differenceInDays(new Date(endDate), new Date())
-
-  console.log('defaultValues', defaultValues)
-  console.log('defaultValues', defaultValues)
 
   return (
     <div className="p-4">
@@ -222,17 +276,7 @@ export function ActivePoll({
           </label>
         )}
 
-        <LoginDialogWrapper
-          authenticatedContent={
-            <Button disabled={isSubmitDisabled} size="lg" type="submit" variant="primary-cta">
-              Submit
-            </Button>
-          }
-        >
-          <Button disabled={isSubmitDisabled} size="lg" variant="primary-cta">
-            Submit
-          </Button>
-        </LoginDialogWrapper>
+        <SubmitButton isSubmitDisabled={isSubmitDisabled} />
       </form>
 
       <p className="mt-2 text-sm text-gray-500">
