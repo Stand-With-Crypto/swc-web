@@ -13,4 +13,5 @@ export const zodAddress = object({
   postalCodeSuffix: string(),
   countryCode: string().length(2),
   usCongressionalDistrict: string().optional(),
+  tenantId: string().length(2).optional(),
 })
