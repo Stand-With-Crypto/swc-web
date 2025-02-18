@@ -20,11 +20,6 @@ export const queryDTSIPeopleBySlugForUserActions = async (slugs: string[]) => {
     slugs,
   })
   if (slugs.length !== data.people.length) {
-    console.log({
-      expected: slugs,
-      returned: data.people.map(x => x.slug),
-      difference: slugs.length - data.people.length,
-    })
     const scope = Sentry.getCurrentScope()
     scope.setExtras({
       expected: slugs,

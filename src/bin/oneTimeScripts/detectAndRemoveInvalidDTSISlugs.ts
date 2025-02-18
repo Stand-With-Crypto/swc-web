@@ -5,6 +5,7 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('bin:oneTimeScripts:detectAndRemoveInvalidDTSISlugs')
 
+// Remember to set up DO_THEY_SUPPORT_IT_API_KEY env variable, otherwise the data will be mocked
 async function run() {
   // npm run ts src/bin/oneTimeScripts/detectAndRemoveInvalidDTSISlugs.ts -- --persist
   const persist = process.argv.includes('--persist')
