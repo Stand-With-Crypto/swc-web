@@ -13,5 +13,6 @@ const ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.VOTING_INFORMATION_RESEARCHED,
   UserActionType.VOTING_DAY,
   UserActionType.REFER,
+  UserActionType.POLL,
 ] as const
 export type ActiveClientUserActionType = (typeof ACTIVE_CLIENT_USER_ACTION_TYPES)[number]
