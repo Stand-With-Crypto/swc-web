@@ -3,6 +3,7 @@ import { UserActionOptInType, UserActionType } from '@prisma/client'
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 import { getDefaultParameters, mockEmbeddedWalletMetadata, TestCase, verify } from './utils'
@@ -20,15 +21,18 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
               ...mockCreateUserEmailAddressInput(),
               isVerified: true,
               source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+              tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
             },
           },
           userActions: {
             create: {
               actionType: UserActionType.OPT_IN,
               campaignName: UserActionOptInCampaignName.DEFAULT,
+              tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
               userActionOptIn: {
                 create: {
                   optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+                  tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
                 },
               },
             },
