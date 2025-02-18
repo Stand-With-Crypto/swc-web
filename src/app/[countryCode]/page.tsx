@@ -9,6 +9,7 @@ import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
+export const dynamicParams = false
 
 export default async function Home(props: PageProps) {
   const params = await props.params
