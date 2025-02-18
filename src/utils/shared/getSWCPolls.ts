@@ -3,10 +3,13 @@ import { array, boolean, discriminatedUnion, literal, number, object, string, z 
 export const zodPollSchemaValidation = object({
   id: string(),
   name: string(),
+  // descriminated union allows us to have different poll types (single choice, multiple choice)
+  // and we can have different requirements for maxNumberOptionsSelected
   data: discriminatedUnion('multiple', [
     object({
       pollTitle: string(),
       allowOther: boolean(),
+      endDate: string(),
       pollList: array(
         object({
           value: string(),
@@ -20,6 +23,7 @@ export const zodPollSchemaValidation = object({
     object({
       pollTitle: string(),
       allowOther: boolean(),
+      endDate: string(),
       pollList: array(
         object({
           value: string(),

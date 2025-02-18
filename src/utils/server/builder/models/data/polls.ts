@@ -22,7 +22,7 @@ async function getAllPollsWithOffset(offset: number) {
         cacheSeconds: 60,
         limit: LIMIT,
         fields:
-          'id,name,data.maxNumberOptionsSelected,data.pollList,data.pollTitle,data.allowOther,data.multiple',
+          'id,name,data.maxNumberOptionsSelected,data.pollList,data.pollTitle,data.allowOther,data.multiple,data.endDate',
         offset,
       }),
     {

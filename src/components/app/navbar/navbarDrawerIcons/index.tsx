@@ -290,3 +290,26 @@ export function PressIcon({ height = 24, width = 24, ...rest }: IconProps) {
     </svg>
   )
 }
+
+export function PollIcon({ height = 24, width = 24, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      viewBox="0 0 24 24"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <path
+        d="M3.33301 12.6668H12.6663V3.3335H3.33301V12.6668ZM9.99967 8.66683H11.333V11.3335H9.99967V8.66683ZM7.33301 4.66683H8.66634V11.3335H7.33301V4.66683ZM4.66634 6.66683H5.99967V11.3335H4.66634V6.66683Z"
+        fill="#00A9DD"
+        opacity="0.3"
+      />
+      <path
+        d="M12.6667 2H3.33333C2.6 2 2 2.6 2 3.33333V12.6667C2 13.4 2.6 14 3.33333 14H12.6667C13.4 14 14 13.4 14 12.6667V3.33333C14 2.6 13.4 2 12.6667 2ZM12.6667 12.6667H3.33333V3.33333H12.6667V12.6667ZM4.66667 6.66667H6V11.3333H4.66667V6.66667ZM7.33333 4.66667H8.66667V11.3333H7.33333V4.66667ZM10 8.66667H11.3333V11.3333H10V8.66667Z"
+        fill="#00A9DD"
+      />
+    </svg>
+  )
+}

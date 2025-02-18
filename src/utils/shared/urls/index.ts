@@ -72,6 +72,7 @@ export const getIntlUrls = (
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
+    polls: () => `${countryPrefix}/polls`,
   }
 }
 
@@ -146,4 +147,7 @@ export const apiUrls = {
     hasWelcomeMessageInBody?: boolean
   }) =>
     `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
+  pollsVotesFromUser: ({ userId }: { userId?: string }) =>
+    `/api/identified-user/polls-votes-from-user?userId=${userId ?? ''}`,
+  pollsResultsData: () => `/api/public/polls`,
 }
