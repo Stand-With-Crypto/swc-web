@@ -283,8 +283,17 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.POLL,
-        campaignName: UserActionPollCampaignName.DEFAULT_INITIAL_POLL_ID,
+        campaignName: UserActionPollCampaignName.ACTIVE_POLL_ID,
         isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: UserActionPollCampaignName.INACTIVE_DEFAULT_INITIAL_POLL_ID,
+        isCampaignActive: false,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,

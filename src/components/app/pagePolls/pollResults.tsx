@@ -126,8 +126,8 @@ export function PollResults({
               .filter(answer => !pollList.find(option => option.value === answer.answer))
               .map((otherAnswer, index) => {
                 const percentage = getPercentage(totalPollVotes, otherAnswer.totalVotes || 0)
-                const isUserVote = userVotes?.answers.find(
-                  answer => answer.isOtherAnswer && answer.answer === otherAnswer.answer,
+                const isOtherAnswer = userVotes?.answers.find(
+                  answer => answer.isOtherAnswer && answer.answer,
                 )
                 const totalAbsoluteVotes = otherAnswer?.totalVotes ?? 0
 
@@ -145,7 +145,7 @@ export function PollResults({
                       <span className="text-sm text-gray-600">
                         {isLoading ? <BlankVoteInfo /> : votesInfo}
                       </span>
-                      {!isLoading && isUserVote && (
+                      {!isLoading && isOtherAnswer && (
                         <div className="relative h-4 w-4">
                           <CheckIcon completed={true} index={0} svgClassname="bg-muted h-4 w-4" />
                         </div>

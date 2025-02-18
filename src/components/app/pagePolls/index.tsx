@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 
 import { ActivePoll } from '@/components/app/pagePolls/activePoll'
 import { InactivePolls } from '@/components/app/pagePolls/inactivePolls'
@@ -26,20 +26,27 @@ export function PagePolls({
   inactivePolls: SWCPoll[] | null
   pollsResultsData: Record<string, PollResultsDataResponse>
 }) {
+  const [isPendingVoteSubmissionTransaction, startVoteSubmissionTransaction] = useTransition()
   const { user, isUserProfileLoading } = useSession()
   const {
     data: userPollsData,
     isLoading: isPollsVotesLoading,
-    mutate: refreshPollsVotes,
+    mutate: refreshPollsVotesFromUser,
   } = usePollsVotesFromUser(user?.id)
-  const { data: pollsResults, mutate: refreshPollsResults } = usePollsResultsData(pollsResultsData)
+  const {
+    data: pollsResults,
+    mutate: refreshPollsResults,
+    isLoading: isPollsResultsLoading,
+  } = usePollsResultsData(pollsResultsData)
   const [showResults, setShowResults] = useState(true)
   const [isVoteAgain, setIsVoteAgain] = useState(false)
 
   const handleShowResults = async () => {
-    await refreshPollsVotes()
-    await refreshPollsResults()
-    setShowResults(true)
+    startVoteSubmissionTransaction(async () => {
+      await refreshPollsVotesFromUser()
+      await refreshPollsResults()
+      setShowResults(true)
+    })
   }
 
   const handleVoteAgain = () => {
@@ -47,7 +54,11 @@ export function PagePolls({
     setIsVoteAgain(true)
   }
 
-  const isLoading = isUserProfileLoading || isPollsVotesLoading
+  const isLoading =
+    isUserProfileLoading ||
+    isPollsVotesLoading ||
+    isPollsResultsLoading ||
+    isPendingVoteSubmissionTransaction
 
   return (
     <div className="standard-spacing-from-navbar container">

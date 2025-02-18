@@ -122,11 +122,18 @@ export function ActivePoll({
   }
 
   const isFormDisabled = isSubmitting || isInternalLoading
-  const isSubmitDisabled =
-    isFormDisabled ||
-    (multiple ? selectedAnswers.length < maxNumberOptionsSelected : selectedAnswers.length < 1)
+  const isSubmitDisabled = isFormDisabled || selectedAnswers.length < 1
+
+  const isOtherFieldDisabled =
+    (maxNumberOptionsSelected > 0 &&
+      selectedAnswers.length >= maxNumberOptionsSelected &&
+      !selectedAnswers.includes('other')) ||
+    isFormDisabled
 
   const endsIn = differenceInDays(new Date(endDate), new Date())
+
+  console.log('defaultValues', defaultValues)
+  console.log('defaultValues', defaultValues)
 
   return (
     <div className="p-4">
@@ -145,8 +152,7 @@ export function ActivePoll({
         {pollList.map((option, optionIndex) => {
           const isChecked = selectedAnswers?.includes(option.value)
           const isDisabled =
-            (multiple &&
-              Array.isArray(selectedAnswers) &&
+            (maxNumberOptionsSelected > 0 &&
               selectedAnswers.length >= maxNumberOptionsSelected &&
               !isChecked) ||
             isFormDisabled
@@ -156,6 +162,7 @@ export function ActivePoll({
               className={cn(
                 'flex h-14 cursor-pointer items-center justify-between rounded-2xl bg-gray-100 px-4 py-2 text-base font-medium leading-6 text-muted-foreground hover:bg-gray-200',
                 isChecked && 'text-foreground',
+                isDisabled && 'hover:none cursor-default',
               )}
               key={optionIndex}
             >
@@ -183,6 +190,7 @@ export function ActivePoll({
             className={cn(
               'flex h-auto min-h-14 cursor-pointer flex-col justify-center gap-2 rounded-2xl bg-gray-100 px-4 py-2 text-base font-medium leading-6 text-muted-foreground hover:bg-gray-200',
               isOtherSelected && 'text-foreground',
+              isOtherFieldDisabled && 'hover:none cursor-default',
             )}
           >
             <div className="flex items-center justify-between">
@@ -191,13 +199,7 @@ export function ActivePoll({
                   type={multiple ? 'checkbox' : 'radio'}
                   {...register('answers')}
                   className="h-5 w-5 cursor-pointer"
-                  disabled={
-                    (multiple &&
-                      Array.isArray(selectedAnswers) &&
-                      selectedAnswers.length >= maxNumberOptionsSelected &&
-                      !selectedAnswers.includes('other')) ||
-                    isFormDisabled
-                  }
+                  disabled={isOtherFieldDisabled}
                   value="other"
                 />
                 <span className="py-2">Other</span>
@@ -212,6 +214,7 @@ export function ActivePoll({
               <Input
                 className="w-full rounded-lg border px-4 py-2 focus:border-gray-400 focus:outline-none"
                 {...register('otherValue')}
+                disabled={isOtherFieldDisabled}
                 placeholder="Please specify"
                 type="text"
               />
@@ -226,11 +229,7 @@ export function ActivePoll({
             </Button>
           }
         >
-          <Button
-            disabled={isSubmitDisabled || isSubmitting || isInternalLoading}
-            size="lg"
-            variant="primary-cta"
-          >
+          <Button disabled={isSubmitDisabled} size="lg" variant="primary-cta">
             Submit
           </Button>
         </LoginDialogWrapper>

@@ -35,7 +35,8 @@ export enum UserActionEmailCampaignName {
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
 export enum UserActionPollCampaignName {
-  DEFAULT_INITIAL_POLL_ID = '3b19d81c4bac4c12b83375b2fa2a9057',
+  ACTIVE_POLL_ID = 'b5d406a439734ae88e89de9c2d3803bb',
+  INACTIVE_DEFAULT_INITIAL_POLL_ID = '3b19d81c4bac4c12b83375b2fa2a9057',
   INACTIVE_POLL_ID = 'f374e663801c435b9409a4606007f7ba',
 }
 export enum UserActionCallCampaignName {
@@ -138,5 +139,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
   [UserActionType.REFER]: UserActionReferCampaignName.DEFAULT,
-  [UserActionType.POLL]: UserActionPollCampaignName.DEFAULT_INITIAL_POLL_ID,
+  [UserActionType.POLL]: UserActionPollCampaignName.ACTIVE_POLL_ID,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>

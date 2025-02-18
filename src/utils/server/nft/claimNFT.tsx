@@ -100,7 +100,9 @@ export const ACTION_NFT_SLUG: Record<
     [UserActionReferCampaignName.DEFAULT]: null,
   },
   [UserActionType.POLL]: {
-    [UserActionPollCampaignName.DEFAULT_INITIAL_POLL_ID]: null,
+    [UserActionPollCampaignName.ACTIVE_POLL_ID]: null,
+    [UserActionPollCampaignName.INACTIVE_DEFAULT_INITIAL_POLL_ID]: null,
+    [UserActionPollCampaignName.INACTIVE_POLL_ID]: null,
   },
 }
 
