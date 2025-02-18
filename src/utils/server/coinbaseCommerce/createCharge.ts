@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/nextjs'
-import { z } from 'zod'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
@@ -103,18 +102,6 @@ interface CreateChargeRequest {
   redirect_url?: string
 }
 
-export const zodCoinbaseCommerceDonation = z.object({
-  address: z.string(),
-  email: z.string(),
-  employer: z.string(),
-  full_name: z.string(),
-  is_citizen: z.boolean(),
-  occupation: z.string(),
-})
-
-// mini-dApps donation flow
-export type CoinbaseCommerceDonation = z.infer<typeof zodCoinbaseCommerceDonation>
-
 export async function createCharge({ sessionId, userId }: { sessionId: string; userId: string }) {
   const payload: CreateChargeRequest = {
     cancel_url: `https://www.standwithcrypto.org?sessionId=${sessionId}`,
@@ -138,36 +125,6 @@ export async function createCharge({ sessionId, userId }: { sessionId: string; u
     Sentry.captureException(error, {
       level: 'error',
       extra: { sessionId },
-    })
-    throw error
-  }
-}
-
-export async function createInAppCharge(createInAppChargeParams: CoinbaseCommerceDonation) {
-  const payload: CreateChargeRequest = {
-    cancel_url: 'https://www.standwithcrypto.org',
-    description: 'Donate to Crypto',
-    metadata: { ...createInAppChargeParams },
-    name: createInAppChargeParams.full_name,
-    pricing_type: 'no_price',
-  }
-
-  try {
-    const httpResp = await fetchReq(COINBASE_COMMERCE_CREATE_CHARGE_URL, {
-      method: 'POST',
-      mode: 'cors' as RequestMode,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CC-Api-Key': String(COINBASE_COMMERCE_API_KEY),
-      },
-      body: JSON.stringify(payload),
-    })
-    return (await httpResp.json()) as CreateChargeResponse
-  } catch (error) {
-    Sentry.captureException(error, {
-      level: 'error',
-      extra: { payload },
     })
     throw error
   }
