@@ -27,7 +27,6 @@ it.skip('should not create user action for non-US users', () => {
   cy.get('textarea').type('test message')
 
   cy.setCookie('USER_COUNTRY_CODE', 'BR')
-  cy.wait(100)
 
   cy.get('button[type="submit"]').click()
 
