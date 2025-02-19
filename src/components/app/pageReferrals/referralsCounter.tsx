@@ -1,14 +1,15 @@
 'use client'
 
+import { useMemo } from 'react'
+import { UserActionType } from '@prisma/client'
+import useSWR from 'swr'
+
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
-import { UserActionType } from '@prisma/client'
-import { useMemo } from 'react'
-import useSWR from 'swr'
 
 export function ReferralsCounter() {
   const userResponse = useApiResponseForUserFullProfileInfo({
@@ -70,9 +71,9 @@ export function ReferralsCounter() {
           <div className="flex gap-1">
             <span className="text-4xl font-semibold">#</span>
             <AnimatedNumericOdometer
+              className="justify-start"
               size={48}
               value={districtRankingResponse.data?.toString() ?? ''}
-              className="justify-start"
             />
           </div>
         )}
