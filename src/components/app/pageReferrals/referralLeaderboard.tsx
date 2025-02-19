@@ -14,11 +14,11 @@ export function ReferralLeaderboard(props: ReferralLeaderboardProps) {
 
       {districtRankings.map(({ state, district, count }, index) => (
         <ReferralLeaderboardRow
+          count={count}
+          district={district}
           key={`${state}-${district}`}
           rank={index + 1}
           state={state}
-          district={district}
-          count={count}
         />
       ))}
     </div>

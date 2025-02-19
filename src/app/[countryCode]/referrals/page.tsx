@@ -2,9 +2,10 @@ import { Metadata } from 'next'
 
 import { PageReferrals } from '@/components/app/pageReferrals'
 import { PageProps } from '@/types'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
-import { getDistrictRanking } from '@/utils/server/districtRankings/upsertRankings'
+
+export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const title = 'Referral Leaderboard'
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ReferralsPage(props: PageProps) {
-  const districtRankings = await getDistrictRanking(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING)
+  const districtRankings = await getDistrictsLeaderboardData()
 
   return (
     <PageReferrals

@@ -1,4 +1,5 @@
 import { ReferralLeaderboard } from '@/components/app/pageReferrals/referralLeaderboard'
+import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/userReferralUrl'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -27,6 +28,8 @@ export function PageReferrals(props: PageBillsProps) {
       </section>
 
       <UserReferralUrlWithApi />
+
+      <ReferralsCounter />
 
       <section>
         <ReferralLeaderboard districtRankings={districtRankings} />
