@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { getPollsVotesFromUser } from '@/data/polls/getPollsData'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
 const zodPayload = z.object({
   userId: z.string(),
 })
 
-export async function GET(request: NextRequest) {
+export const GET = withRouteMiddleware(async (request: NextRequest) => {
   const validatedFields = zodPayload.safeParse(Object.fromEntries(request.nextUrl.searchParams))
 
   if (!validatedFields.success) {
@@ -28,4 +29,4 @@ export async function GET(request: NextRequest) {
   }
 
   return NextResponse.json(pollVote)
-}
+})
