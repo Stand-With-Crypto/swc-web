@@ -10,6 +10,7 @@ import { PollItem } from '@/components/app/pagePolls/pollItem'
 import { ProtectedSubmitButton } from '@/components/app/pagePolls/protectedSubmitButton'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
 import { useSession } from '@/hooks/useSession'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
@@ -155,7 +156,14 @@ export function ActivePoll({
       <span className="text-sm text-gray-500">
         {endsIn === 0 ? 'Ends today' : endDisclaimerText}
       </span>
-      <h2 className="mb-3 mt-2 text-xl leading-5">{pollTitle}</h2>
+      <PageSubTitle
+        as="h3"
+        className="mb-4 mt-2 text-left text-foreground"
+        size="lg"
+        withoutBalancer
+      >
+        {pollTitle}
+      </PageSubTitle>
 
       {pollSubtitleText}
 

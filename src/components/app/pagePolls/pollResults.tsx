@@ -5,6 +5,7 @@ import { ReloadIcon } from '@radix-ui/react-icons'
 import { differenceInDays, format, isPast } from 'date-fns'
 
 import { Button } from '@/components/ui/button'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
 
@@ -110,7 +111,14 @@ export function PollResults({
       <span className="text-sm text-gray-500">
         {endsIn === 0 ? `${inactivePoll ? 'Ended' : 'Ends'} today` : endDisclaimerText}
       </span>
-      <h2 className="mb-4 mt-2 text-xl leading-5">{pollTitle}</h2>
+      <PageSubTitle
+        as="h3"
+        className="mb-4 mt-2 text-left text-foreground"
+        size="lg"
+        withoutBalancer
+      >
+        {pollTitle}
+      </PageSubTitle>
 
       <div className="flex flex-col gap-2">
         {pollResultsList.map(resultItem => {
