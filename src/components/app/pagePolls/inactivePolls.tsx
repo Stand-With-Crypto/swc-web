@@ -1,9 +1,10 @@
 import { PollResults } from '@/components/app/pagePolls/pollResults'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
 
 interface InactivePollsProps {
-  inactivePolls: SWCPoll[] | null
+  inactivePolls: SWCPoll[]
   pollsResultsData: Record<string, PollResultsDataResponse>
   isLoading: boolean
   userPollsData: PollsVotesFromUserResponse | undefined
@@ -17,7 +18,9 @@ export function InactivePolls({
 }: InactivePollsProps) {
   return (
     <div className="px-4">
-      <h2 className="mb-6 text-[28px] font-medium leading-9">Closed polls</h2>
+      <PageSubTitle className="mb-6 text-left text-foreground" size="2xl" withoutBalancer>
+        Closed polls
+      </PageSubTitle>
       <div className="flex flex-col gap-8">
         {inactivePolls &&
           inactivePolls.map(poll => (

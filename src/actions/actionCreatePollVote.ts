@@ -1,45 +1,25 @@
 'use server'
 import 'server-only'
 
-import {
-  Address,
-  SMSStatus,
-  User,
-  UserActionType,
-  UserCryptoAddress,
-  UserInformationVisibility,
-} from '@prisma/client'
+import { UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
-import {
-  AnalyticsUserActionUserState,
-  getServerAnalytics,
-  getServerPeopleAnalytics,
-} from '@/utils/server/serverAnalytics'
-import {
-  mapLocalUserToUserDatabaseFields,
-  parseLocalUserFromCookies,
-  ServerLocalUser,
-} from '@/utils/server/serverLocalUser'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
-import { generateReferralId } from '@/utils/shared/referralId'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`actionCreatePollVote`)
-
-type UserWithRelations = User & {
-  primaryUserCryptoAddress: UserCryptoAddress | null
-  address: Address | null
-}
 
 export type CreatePollVoteInput = {
   campaignName: string
@@ -64,23 +44,32 @@ async function actionCreatePollVoteWithoutMiddleware(
     context: 'unauthenticated',
   })
 
-  const userMatch = await getMaybeUserAndMethodOfMatch({
-    prisma: {
-      include: { primaryUserCryptoAddress: true, address: true },
+  const localUser = await parseLocalUserFromCookies()
+  const sessionId = await getUserSessionId()
+
+  const authUser = await appRouterGetThirdwebAuthUser()
+  if (!authUser) {
+    const error = new Error('Create User Action NFT Mint - Not authenticated')
+    Sentry.captureException(error, {
+      tags: { domain: 'actionCreateUserActionMintNFT' },
+      extra: {
+        sessionId,
+      },
+    })
+
+    throw error
+  }
+
+  const user = await prismaClient.user.findFirstOrThrow({
+    where: {
+      id: authUser.userId,
+    },
+    include: {
+      primaryUserCryptoAddress: true,
+      address: true,
     },
   })
-  logger.info(userMatch.user ? 'found user' : 'no user found')
-  const sessionId = await getUserSessionId()
-  const localUser = await parseLocalUserFromCookies()
 
-  if (!userMatch.user) {
-    await triggerRateLimiterAtMostOnce()
-  }
-  const { user, userState } = await maybeUpsertUser({
-    existingUser: userMatch.user,
-    sessionId,
-    localUser,
-  })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
@@ -137,7 +126,7 @@ async function actionCreatePollVoteWithoutMiddleware(
       campaignName,
       reason: 'User Voted Again',
       creationMethod: 'On Site',
-      userState,
+      userState: 'Existing With Updates',
     })
     waitUntil(beforeFinish())
     return { user: getClientUser(user) }
@@ -149,7 +138,7 @@ async function actionCreatePollVoteWithoutMiddleware(
       campaignName,
       reason: 'Too Many Recent',
       creationMethod: 'On Site',
-      userState,
+      userState: 'Existing',
     })
     waitUntil(beforeFinish())
     return { user: getClientUser(user) }
@@ -175,9 +164,9 @@ async function actionCreatePollVoteWithoutMiddleware(
       user: { connect: { id: user.id } },
       actionType,
       campaignName,
-      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
+      ...('primaryUserCryptoAddressId' in user && user.primaryUserCryptoAddressId
         ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+            userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId } },
           }
         : { userSession: { connect: { id: sessionId } } }),
     },
@@ -186,40 +175,10 @@ async function actionCreatePollVoteWithoutMiddleware(
     actionType,
     campaignName,
     creationMethod: 'On Site',
-    userState,
+    userState: 'New',
   })
 
   waitUntil(beforeFinish())
   logger.info('created action')
   return { user: getClientUser(user) }
-}
-
-async function maybeUpsertUser({
-  existingUser,
-  sessionId,
-  localUser,
-}: {
-  existingUser: UserWithRelations | null
-  sessionId: string
-  localUser: ServerLocalUser | null
-}): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
-  if (existingUser) {
-    return { user: existingUser, userState: 'Existing' }
-  }
-  const user = await prismaClient.user.create({
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
-    data: {
-      ...mapLocalUserToUserDatabaseFields(localUser),
-      referralId: generateReferralId(),
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      userSessions: { create: { id: sessionId } },
-      hasOptedInToEmails: false,
-      hasOptedInToMembership: false,
-      smsStatus: SMSStatus.NOT_OPTED_IN,
-    },
-  })
-  return { user, userState: 'New' }
 }

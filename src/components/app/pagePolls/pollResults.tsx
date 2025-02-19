@@ -3,12 +3,12 @@
 import { useMemo } from 'react'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { differenceInDays, format, isPast } from 'date-fns'
-import { motion } from 'framer-motion'
 
-import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { Button } from '@/components/ui/button'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
+
+import { PollResultItem, PollResultItemOther } from './pollResultItem'
 
 interface PollResultsProps {
   currentPoll: SWCPoll
@@ -20,40 +20,8 @@ interface PollResultsProps {
   inactivePoll?: boolean
 }
 
-function VoteItemLoading() {
-  return (
-    <motion.div
-      animate={{ opacity: [0.3, 0.7, 0.3] }}
-      className="absolute bottom-0 left-0 h-full w-full rounded-lg bg-purple-100"
-      transition={{ duration: 1.2, repeat: Infinity }}
-    />
-  )
-}
-
-function BlankVoteInfo() {
-  return (
-    <motion.span
-      animate={{ opacity: [0.8, 0.6, 0.4, 0.2, 0.4, 0.6, 0.8] }}
-      transition={{ duration: 2, repeat: Infinity }}
-    >
-      --
-    </motion.span>
-  )
-}
-
 function getPercentage(totalVotes: number, optionVotes: number) {
   return totalVotes ? ((optionVotes || 0) / totalVotes) * 100 : 0
-}
-
-function PercentageBar({ percentage }: { percentage: number }) {
-  return (
-    <motion.div
-      animate={{ width: `${percentage}%` }}
-      className="absolute bottom-0 left-0 h-full rounded-lg bg-purple-200"
-      initial={{ width: '0%' }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-    />
-  )
 }
 
 export function PollResults({
@@ -95,7 +63,8 @@ export function PollResults({
         )
 
         const percentage = getPercentage(totalPollVotes, optionData?.totalVotes || 0)
-        const isUserVote = userVotes?.answers.find(answer => answer.answer === option.value)
+        const isUserVote =
+          typeof userVotes?.answers.find(answer => answer.answer === option.value) !== 'undefined'
         const totalAbsoluteVotes = optionData?.totalVotes ?? 0
 
         const votesInfo = multiple ? `${totalAbsoluteVotes} votes` : `${percentage.toFixed(0)}%`
@@ -118,9 +87,8 @@ export function PollResults({
         .filter(answer => !pollList.find(option => option.value === answer.answer))
         .map(otherAnswer => {
           const percentage = getPercentage(totalPollVotes, otherAnswer.totalVotes || 0)
-          const isOtherAnswer = userVotes?.answers.find(
-            answer => answer.isOtherAnswer && answer.answer,
-          )
+          const isOtherAnswer =
+            typeof userVotes?.answers.find(answer => answer.isOtherAnswer) !== 'undefined'
           const totalAbsoluteVotes = otherAnswer?.totalVotes ?? 0
 
           const votesInfo = multiple ? `${totalAbsoluteVotes} votes` : `${percentage.toFixed(0)}%`
@@ -147,57 +115,31 @@ export function PollResults({
       <div className="flex flex-col gap-2">
         {pollResultsList.map(resultItem => {
           return (
-            <div
-              className="relative flex h-14 items-center justify-between px-4 py-2 font-medium"
+            <PollResultItem
+              displayName={resultItem.displayName}
+              isLoading={isLoading}
+              isUserVote={resultItem.isUserVote}
               key={resultItem.value}
-            >
-              <span className="z-10">{resultItem.displayName}</span>
-              <div className="z-10 flex items-center gap-2">
-                <span className="text-sm text-gray-600">
-                  {isLoading ? <BlankVoteInfo /> : resultItem.votesInfo}
-                </span>
-                {!isLoading && resultItem.isUserVote && (
-                  <div className="relative h-4 w-4">
-                    <CheckIcon completed={true} index={0} svgClassname="bg-muted h-4 w-4" />
-                  </div>
-                )}
-              </div>
-
-              {isLoading ? (
-                <VoteItemLoading />
-              ) : (
-                <PercentageBar percentage={resultItem.percentage} />
-              )}
-            </div>
+              percentage={resultItem.percentage}
+              value={resultItem.value}
+              votesInfo={resultItem.votesInfo}
+            />
           )
         })}
 
         {allowOther && (
           <div className="flex flex-col gap-2">
-            {pollResultsListWithOther.map(resultWithOtherItem => {
+            {pollResultsListWithOther?.map(resultWithOtherItem => {
               return (
-                <div
-                  className="relative flex h-14 items-center justify-between px-4 py-2 font-medium"
-                  key={`other-${resultWithOtherItem.value}`}
-                >
-                  <span className="z-10 py-2">Other</span>
-                  <div className="z-10 flex items-center gap-2">
-                    <span className="text-sm text-gray-600">
-                      {isLoading ? <BlankVoteInfo /> : resultWithOtherItem.votesInfo}
-                    </span>
-                    {!isLoading && resultWithOtherItem.isOtherAnswer && (
-                      <div className="relative h-4 w-4">
-                        <CheckIcon completed={true} index={0} svgClassname="bg-muted h-4 w-4" />
-                      </div>
-                    )}
-                  </div>
-
-                  {isLoading ? (
-                    <VoteItemLoading />
-                  ) : (
-                    <PercentageBar percentage={resultWithOtherItem.percentage} />
-                  )}
-                </div>
+                <PollResultItemOther
+                  displayName={resultWithOtherItem.displayName}
+                  isLoading={isLoading}
+                  isUserVote={resultWithOtherItem.isOtherAnswer}
+                  key={resultWithOtherItem.value}
+                  percentage={resultWithOtherItem.percentage}
+                  value={resultWithOtherItem.value}
+                  votesInfo={resultWithOtherItem.votesInfo}
+                />
               )
             })}
           </div>

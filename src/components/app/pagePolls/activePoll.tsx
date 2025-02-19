@@ -3,75 +3,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { differenceInDays, format, isPast } from 'date-fns'
-import Cookies from 'js-cookie'
 import { EyeIcon } from 'lucide-react'
 
 import { actionCreatePollVote } from '@/actions/actionCreatePollVote'
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { PollItem, PollItemOther } from '@/components/app/pagePolls/pollItem'
-import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
+import { ProtectedSubmitButton } from '@/components/app/pagePolls/protectedSubmitButton'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
-import { useDialog } from '@/hooks/useDialog'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
-import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-interface PollsProps {
+interface ActivePollProps {
   activePoll: SWCPoll
   isVoteAgain: boolean
   handleShowResults: () => void
   pollsResultsData: Record<string, PollResultsDataResponse>
   userPollsData: PollsVotesFromUserResponse | undefined
   isLoading: boolean
-}
-
-function SubmitButton({ isSubmitDisabled }: { isSubmitDisabled: boolean }) {
-  const dialogProps = useDialog({ analytics: 'Active Poll Submit Button' })
-
-  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
-  const isValid = isValidCountryCode({
-    countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
-    userCountryCode,
-    bypassCountryCheck: false,
-  })
-
-  const setDialogOpen = (open: boolean) => {
-    dialogProps.onOpenChange(open)
-  }
-
-  return (
-    <LoginDialogWrapper
-      authenticatedContent={
-        isValid ? (
-          <Button disabled={isSubmitDisabled} size="lg" type="submit" variant="primary-cta">
-            Submit
-          </Button>
-        ) : (
-          <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
-            <DialogTrigger asChild>
-              <Button disabled={isSubmitDisabled} size="lg" variant="primary-cta">
-                Submit
-              </Button>
-            </DialogTrigger>
-            <DialogContent a11yTitle="Active Poll Submit Button" className="max-w-l w-full">
-              <DialogBody>
-                <UserActionFormActionUnavailable />
-              </DialogBody>
-            </DialogContent>
-          </Dialog>
-        )
-      }
-      bypassCountryCheck={false}
-    >
-      <Button disabled={isSubmitDisabled} size="lg" variant="primary-cta">
-        Submit
-      </Button>
-    </LoginDialogWrapper>
-  )
 }
 
 export function ActivePoll({
@@ -81,7 +29,7 @@ export function ActivePoll({
   pollsResultsData,
   userPollsData,
   isLoading,
-}: PollsProps) {
+}: ActivePollProps) {
   const {
     id: pollId,
     data: { pollTitle, multiple, allowOther, maxNumberOptionsSelected = 0, endDate, pollList },
@@ -171,6 +119,14 @@ export function ActivePoll({
     ? `Ended on ${format(new Date(endDate), 'MMM d, yyyy')}`
     : `Ends in ${endsIn} days`
 
+  const pollSubtitleText = multiple && (
+    <div className="mb-3 text-sm text-gray-600">
+      {maxNumberOptionsSelected <= 0
+        ? 'Select all that apply'
+        : `Select up to ${maxNumberOptionsSelected} options`}
+    </div>
+  )
+
   const onSubmit = useCallback(
     async (formData: { answers: string[]; otherValue: string }) => {
       const { answers, otherValue } = formData
@@ -218,10 +174,6 @@ export function ActivePoll({
     }
   }, [isLoading, isInternalLoading])
 
-  if (!activePoll) {
-    return <div className="p-4">No active poll available</div>
-  }
-
   return (
     <div className="p-4">
       <span className="text-sm text-gray-500">
@@ -229,13 +181,7 @@ export function ActivePoll({
       </span>
       <h2 className="mb-3 mt-2 text-xl leading-5">{pollTitle}</h2>
 
-      {multiple && (
-        <div className="mb-3 text-sm text-gray-600">
-          {maxNumberOptionsSelected <= 0
-            ? 'Select all that apply'
-            : `Select up to ${maxNumberOptionsSelected} options`}
-        </div>
-      )}
+      {pollSubtitleText}
 
       <Form {...form}>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
@@ -255,7 +201,7 @@ export function ActivePoll({
             />
           )}
 
-          <SubmitButton isSubmitDisabled={isSubmitDisabled} />
+          <ProtectedSubmitButton isDisabled={isSubmitDisabled} />
         </form>
       </Form>
 

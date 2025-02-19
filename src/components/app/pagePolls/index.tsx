@@ -5,6 +5,7 @@ import { useState, useTransition } from 'react'
 import { ActivePoll } from '@/components/app/pagePolls/activePoll'
 import { InactivePolls } from '@/components/app/pagePolls/inactivePolls'
 import { PollResults } from '@/components/app/pagePolls/pollResults'
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PollResultsDataResponse } from '@/data/polls/getPollsData'
@@ -60,17 +61,29 @@ export function PagePolls({
     isPollsResultsLoading ||
     isPendingVoteSubmissionTransaction
 
+  const hasAnyResults = Object.keys(pollsResultsData).length > 0
+
   return (
     <div className="standard-spacing-from-navbar container">
       <section className="container">
         <PageTitle className="mb-7">{title}</PageTitle>
         <PageSubTitle className="text-muted-foreground" size="md" withoutBalancer>
-          {description}
+          {!activePoll && !inactivePolls ? (
+            <div className="mt-12">
+              <p>No Polls available at the moment.</p>
+              <p>Please check back later.</p>
+              <p className="mt-4">
+                <InternalLink href="/about">Our mission</InternalLink>
+              </p>
+            </div>
+          ) : (
+            description
+          )}
         </PageSubTitle>
       </section>
       <section>
         {activePoll &&
-          (showResults ? (
+          (showResults && hasAnyResults ? (
             <PollResults
               currentPoll={activePoll}
               handleVoteAgain={handleVoteAgain}
@@ -89,14 +102,16 @@ export function PagePolls({
             />
           ))}
       </section>
-      <section>
-        <InactivePolls
-          inactivePolls={inactivePolls}
-          isLoading={isLoading}
-          pollsResultsData={pollsResults}
-          userPollsData={userPollsData}
-        />
-      </section>
+      {inactivePolls && (
+        <section>
+          <InactivePolls
+            inactivePolls={inactivePolls}
+            isLoading={isLoading}
+            pollsResultsData={pollsResults}
+            userPollsData={userPollsData}
+          />
+        </section>
+      )}
     </div>
   )
 }
