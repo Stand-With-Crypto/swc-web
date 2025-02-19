@@ -147,4 +147,6 @@ export const apiUrls = {
     hasWelcomeMessageInBody?: boolean
   }) =>
     `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
+  districtRanking: ({ state, district }: { state: string; district: string }) =>
+    `/api/public/referrals/district?state=${state}&district=${district}`,
 }
