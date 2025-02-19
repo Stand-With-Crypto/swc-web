@@ -72,6 +72,7 @@ export const getIntlUrls = (
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
+    referrals: () => `${countryPrefix}/referrals`,
   }
 }
 
