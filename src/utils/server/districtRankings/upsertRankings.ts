@@ -1,3 +1,4 @@
+import { chunk } from 'lodash-es'
 import { redis, redisWithCache } from '@/utils/server/redis'
 import { logger } from '@/utils/shared/logger'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
@@ -116,19 +117,21 @@ export async function createDistrictRankingUpserter(
   }
 }
 
-type RedisZRangeResult = [string, number][]
+type RedisInterlacedResult = Array<[RedisEntryData, number]>
 
 export async function getDistrictRanking(
   redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS],
   limit = 10,
 ): Promise<DistrictRankingEntry[]> {
-  const results = await redisWithCache.zrange<RedisZRangeResult>(redisKey, 0, limit - 1, {
+  const rawResults = (await redisWithCache.zrange(redisKey, 0, limit - 1, {
     rev: true,
     withScores: true,
-  })
+  })) as Array<RedisEntryData | number>
+
+  const results = chunk(rawResults, 2) as RedisInterlacedResult
 
   return results.map(([member, score]) => ({
-    ...(JSON.parse(member) as Omit<DistrictRankingEntry, 'count'>),
+    ...(member as Omit<DistrictRankingEntry, 'count'>),
     count: score,
   }))
 }
