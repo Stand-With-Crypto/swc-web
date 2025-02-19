@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { getPollsVotesFromUser } from '@/data/polls/getPollsData'
-import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
@@ -11,7 +10,7 @@ const zodPayload = z.object({
   userId: z.string(),
 })
 
-export const GET = withRouteMiddleware(async (request: NextRequest) => {
+export async function GET(request: NextRequest) {
   const validatedFields = zodPayload.safeParse(Object.fromEntries(request.nextUrl.searchParams))
 
   if (!validatedFields.success) {
@@ -32,4 +31,4 @@ export const GET = withRouteMiddleware(async (request: NextRequest) => {
   }
 
   return NextResponse.json(pollVote)
-})
+}
