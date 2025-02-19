@@ -11,10 +11,12 @@ export interface PollResultsDataResponse {
   computedAnswers: {
     answer: string
     totalVotes: number
+    isOtherAnswer: boolean
   }[]
   computedAnswersWithOther: {
     answer: string
     totalVotes: number
+    isOtherAnswer: boolean
   }[]
 }
 
@@ -101,7 +103,7 @@ export async function getPollsResultsData(): Promise<Record<string, PollResultsD
         computedAnswersWithOther,
       }
 
-      return acc
+      return acc as Record<string, PollResultsDataResponse>
     },
     {},
   )

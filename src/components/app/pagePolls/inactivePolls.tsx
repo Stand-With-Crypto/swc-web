@@ -25,6 +25,7 @@ export function InactivePolls({
               <PollResults
                 currentPoll={poll}
                 hideVoteAgain={true}
+                inactivePoll={true}
                 isLoading={isLoading}
                 pollsResultsData={pollsResultsData}
                 userPollsData={userPollsData}
