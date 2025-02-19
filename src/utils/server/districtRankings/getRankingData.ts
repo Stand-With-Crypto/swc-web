@@ -73,7 +73,7 @@ export async function getAdvocatesCountByDistrict(): Promise<Result[]> {
 
     SELECT
       'DC' as state,
-      'N/A' as district,
+      '1' as district,
       COUNT(DISTINCT u.id) as count
     FROM address a
     INNER JOIN user u ON u.address_id = a.id
@@ -123,7 +123,7 @@ export async function getReferralsCountByDistrict(): Promise<Result[]> {
 
     SELECT
       'DC' as state,
-      'N/A' as district,
+      '1' as district,
       COUNT(DISTINCT u.id) as users_count,
       COUNT(DISTINCT ua.id) as refer_actions_count,
       SUM(uar.referrals_count) as referrals
