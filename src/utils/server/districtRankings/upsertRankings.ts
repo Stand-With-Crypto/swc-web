@@ -1,23 +1,24 @@
+'server-only'
+
 import { chunk } from 'lodash-es'
+
 import { redis, redisWithCache } from '@/utils/server/redis'
-import { logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
-import { REDIS_KEYS } from './constants'
+import { CURRENT_DISTRICT_RANKING, REDIS_KEYS } from './constants'
 
 export type DistrictRankingEntry = {
-  state: string
+  state: USStateCode
   district: string
   count: number
 }
 
+type MemberKey = `${USStateCode}:${string}`
 type RedisEntryData = Omit<DistrictRankingEntry, 'count'>
 
-const getLog =
-  (redisKey: string) =>
-  (message: string, ...args: any[]) =>
-    logger.info(`[${redisKey}] ${message}`, ...args)
+const getLog = (redisKey: string) => getLogger(redisKey)
 
 function isValidDistrictEntry(entry: DistrictRankingEntry): boolean {
   return (
@@ -54,6 +55,14 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
   return districts
 }
 
+const getMemberKey = (data: RedisEntryData): MemberKey => `${data.state}:${data.district}`
+
+const parseMemberKey = (key: MemberKey): RedisEntryData => {
+  const parts = key.split(':')
+  const [state, district] = parts
+  return { state: state as USStateCode, district }
+}
+
 async function maybeInitializeCacheKey(redisKey: string) {
   const log = getLog(redisKey)
   const existingCount = await redisWithCache.zcard(redisKey)
@@ -66,9 +75,9 @@ async function maybeInitializeCacheKey(redisKey: string) {
   const districts = getAllPossibleDistricts()
 
   districts.forEach(({ district, state }) => {
-    const member: RedisEntryData = { district, state }
-    log(`Adding district entry: ${JSON.stringify(member)}`)
-    pipeline.zadd<RedisEntryData>(redisKey, {
+    const member = getMemberKey({ district, state })
+    log.info(`Adding district entry: ${member}`)
+    pipeline.zadd<MemberKey>(redisKey, {
       score: 0,
       member,
     })
@@ -76,7 +85,7 @@ async function maybeInitializeCacheKey(redisKey: string) {
 
   await pipeline.exec()
 
-  log('Cache key initialized')
+  log.info('Cache key initialized')
 }
 
 export async function createDistrictRankingUpserter(
@@ -87,7 +96,7 @@ export async function createDistrictRankingUpserter(
 
   return async (entry: DistrictRankingEntry) => {
     if (!isValidDistrictEntry(entry)) {
-      log(`Invalid district entry:`, entry)
+      log.warn(`Invalid district entry:`, entry)
       return {
         success: false,
         entry,
@@ -95,18 +104,18 @@ export async function createDistrictRankingUpserter(
       }
     }
 
-    const member: RedisEntryData = { district: entry.district, state: entry.state }
-    log(`Upserting district entry:`, member)
+    const member = getMemberKey(entry)
+    log.info(`Upserting district entry:`, member)
 
-    const result = await redis.zadd<RedisEntryData>(redisKey, {
+    const result = await redis.zadd<MemberKey>(redisKey, {
       score: entry.count,
       member,
     })
 
     if (result === null) {
-      log(`Failed to upsert district entry:`, member)
+      log.error(`Failed to upsert district entry:`, member)
     } else {
-      log(`Successfully upserted district entry:`, member)
+      log.info(`Successfully upserted district entry:`, member)
     }
 
     return {
@@ -117,21 +126,29 @@ export async function createDistrictRankingUpserter(
   }
 }
 
-type RedisInterlacedResult = Array<[RedisEntryData, number]>
+type RedisInterlacedResult = Array<[MemberKey, number]>
 
-export async function getDistrictRanking(
-  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS],
+export async function getDistrictsLeaderboardData(
+  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
   limit = 10,
 ): Promise<DistrictRankingEntry[]> {
   const rawResults = (await redisWithCache.zrange(redisKey, 0, limit - 1, {
     rev: true,
     withScores: true,
-  })) as Array<RedisEntryData | number>
+  })) as Array<MemberKey | number>
 
   const results = chunk(rawResults, 2) as RedisInterlacedResult
 
   return results.map(([member, score]) => ({
-    ...(member as Omit<DistrictRankingEntry, 'count'>),
+    ...parseMemberKey(member),
     count: score,
   }))
+}
+
+export async function getDistrictRankPosition(
+  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
+  member: RedisEntryData,
+) {
+  const rank = await redisWithCache.zrevrank(redisKey, getMemberKey(member))
+  return rank === null ? null : rank + 1
 }
