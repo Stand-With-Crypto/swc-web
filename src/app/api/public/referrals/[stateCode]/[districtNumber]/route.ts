@@ -18,7 +18,6 @@ export async function GET(
 
   const parseResult = zodStateDistrict.safeParse({ state: stateCode, district: districtNumber })
   if (!parseResult.success) {
-    console.log('parseResult', parseResult.error.errors)
     return NextResponse.json({ error: parseResult.error.errors }, { status: 400 })
   }
 
