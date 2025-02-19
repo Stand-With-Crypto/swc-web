@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input, InputProps } from '@/components/ui/input'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -42,9 +43,10 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
 }
 
 export function UserReferralUrlWithApi() {
-  const { data } = useApiResponseForUserFullProfileInfo()
+  const { data, isLoading } = useApiResponseForUserFullProfileInfo()
+  const hasHydrated = useHasHydrated()
 
-  if (!data?.user) {
+  if (!data?.user || isLoading || !hasHydrated) {
     return null
   }
 

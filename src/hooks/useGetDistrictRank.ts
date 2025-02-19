@@ -24,7 +24,7 @@ export function useGetDistrictRank(props: UseGetDistrictRankProps) {
     url =>
       fetchReq(url)
         .then(res => res.json())
-        .then(data => data as number | null),
+        .then(data => data as GetDistrictRankResponse),
     {
       refreshInterval: 1000 * 60 * 1, // 1 minute
       ...config,
