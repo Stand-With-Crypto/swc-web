@@ -9,7 +9,7 @@ export function ReferralLeaderboard(props: ReferralLeaderboardProps) {
   const { districtRankings } = props
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 md:space-y-4">
       <p className="pl-4 text-lg font-bold">Top district</p>
 
       {districtRankings.map(({ state, district, count }, index) => (
