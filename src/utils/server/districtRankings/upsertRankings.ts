@@ -38,7 +38,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
     if (districtCount === 0) {
       districts.push({
         state: state as USStateCode,
-        district: 'N/A',
+        district: '1',
         count: 0,
       })
     } else {

@@ -2,6 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { ClassValue } from 'clsx'
 
 import { NextImage } from '@/components/ui/image'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
@@ -39,7 +40,7 @@ export function ReferralLeaderboardRow(props: ReferralLeaderboardRowProps) {
   const { rank, state, district, count, className, variant } = props
 
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[state as USStateCode] ?? state
-  const showDistrict = district !== 'N/A'
+  const showDistrict = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[state as USStateCode] > 0
 
   return (
     <div className={cn(rowVariants({ variant }), className)}>

@@ -20,6 +20,9 @@ export const metadata: Metadata = {
 
 export default async function ReferralsPage(props: PageProps) {
   const districtRankings = await getDistrictsLeaderboardData()
+  if (!districtRankings.length) {
+    throw new Error('District Leaderboard data not found')
+  }
 
   return (
     <PageReferrals
