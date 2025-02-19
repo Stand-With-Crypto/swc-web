@@ -6,7 +6,7 @@ function VoteItemLoading() {
   return (
     <motion.div
       animate={{ opacity: [0.3, 0.7, 0.3] }}
-      className="absolute bottom-0 left-0 h-full w-full rounded-lg bg-purple-100"
+      className="absolute bottom-0 left-0 h-full w-full rounded-lg bg-secondary"
       transition={{ duration: 1.2, repeat: Infinity }}
     />
   )

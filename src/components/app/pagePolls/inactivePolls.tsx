@@ -24,7 +24,7 @@ export function InactivePolls({
       <div className="flex flex-col gap-8">
         {inactivePolls &&
           inactivePolls.map(poll => (
-            <div className="rounded-2xl bg-[#F5F8FF]" key={poll.id}>
+            <div className="rounded-2xl bg-secondary" key={poll.id}>
               <PollResults
                 currentPoll={poll}
                 hideVoteAgain={true}
