@@ -3,8 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
 type RawQueryResult = {
   state: string
@@ -21,20 +20,13 @@ type ReferralsCountByDistrictResult = {
 }
 
 function isValidDistrict(state: string, district: string): boolean {
-  const stateDistrictCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[state as USStateCode]
-  if (stateDistrictCount === undefined) {
-    logger.warn('[District Rankings] State not found in district map:', { state })
-    return false
-  }
-
-  // Special case for DC
-  if (stateDistrictCount === 0) {
-    return district === 'N/A'
-  }
-
-  const districtNum = parseInt(district, 10)
-  if (isNaN(districtNum) || districtNum <= 0 || districtNum > stateDistrictCount) {
-    logger.warn('[District Rankings] Invalid district number:', { state, district })
+  const zodResult = zodStateDistrict.safeParse({ state, district })
+  if (!zodResult.success) {
+    logger.warn('[District Rankings] Invalid district:', {
+      state,
+      district,
+      errors: zodResult.error.errors,
+    })
     return false
   }
 
