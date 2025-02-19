@@ -145,7 +145,7 @@ export async function getDistrictsLeaderboardData(
   }))
 }
 
-export async function getDistrictRankPosition(
+export async function getDistrictRank(
   redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
   member: RedisEntryData,
 ) {
