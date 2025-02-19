@@ -2,14 +2,13 @@
 
 import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
-import useSWR from 'swr'
 
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
-import { fetchReq } from '@/utils/shared/fetchReq'
-import { apiUrls } from '@/utils/shared/urls'
+import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export function ReferralsCounter() {
   const userResponse = useApiResponseForUserFullProfileInfo({
@@ -36,21 +35,10 @@ export function ReferralsCounter() {
     return null
   }, [districtResponse.data])
 
-  const districtRankingResponse = useSWR(
-    address && district
-      ? apiUrls.districtRanking({
-          state: address.administrativeAreaLevel1,
-          district,
-        })
-      : null,
-    url =>
-      fetchReq(url)
-        .then(res => res.json())
-        .then(data => data as number | null),
-    {
-      refreshInterval: 1000 * 60 * 1, // 1 minute
-    },
-  )
+  const districtRankingResponse = useGetDistrictRank({
+    stateCode: address?.administrativeAreaLevel1 as USStateCode,
+    districtNumber: district,
+  })
 
   return (
     <div className="flex w-full gap-4">

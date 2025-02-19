@@ -31,6 +31,11 @@ export function PageReferrals(props: PageBillsProps) {
 
       <ReferralsCounter />
 
+      {/* <section>
+        <p className="pl-4 text-lg font-bold">Your district</p>
+        <ReferralLeaderboardRow districtRankings={districtRankings} />
+      </section> */}
+
       <section>
         <ReferralLeaderboard districtRankings={districtRankings} />
       </section>
