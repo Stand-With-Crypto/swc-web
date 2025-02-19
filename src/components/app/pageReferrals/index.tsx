@@ -1,32 +1,27 @@
 import { PageReferralsHeading } from '@/components/app/pageReferrals/heading'
-import { ReferralLeaderboard } from '@/components/app/pageReferrals/referralLeaderboard'
+import { PaginatedDistrictsLeaderboard } from '@/components/app/pageReferrals/paginatedReferralLeaderboard'
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/userReferralUrl'
-import { DistrictRankingEntry } from '@/utils/server/districtRankings/upsertRankings'
+import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-interface PageBillsProps {
+interface PageReferralsProps {
+  leaderboardData: DistrictRankingEntryWithRank[]
+  page: number
   countryCode: SupportedCountryCodes
-  districtRankings: DistrictRankingEntry[]
 }
 
-export function PageReferrals(props: PageBillsProps) {
-  const { districtRankings } = props
+export function PageReferrals(props: PageReferralsProps) {
+  const { leaderboardData, page, countryCode } = props
 
   return (
     <div className="standard-spacing-from-navbar container space-y-8">
       <PageReferralsHeading />
-
       <UserReferralUrlWithApi />
-
       <ReferralsCounter />
-
       <YourDistrictRank />
-
-      <section>
-        <ReferralLeaderboard districtRankings={districtRankings} />
-      </section>
+      <PaginatedDistrictsLeaderboard countryCode={countryCode} data={leaderboardData} page={page} />
     </div>
   )
 }

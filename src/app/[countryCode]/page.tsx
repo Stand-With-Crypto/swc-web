@@ -13,13 +13,13 @@ export const dynamic = 'error'
 export const dynamicParams = false
 
 export default async function Home(props: PageProps) {
-  const [params, asyncProps, advocatePerStateDataProps, partners, districtRankings] =
+  const [params, asyncProps, advocatePerStateDataProps, partners, leaderboardData] =
     await Promise.all([
       props.params,
       getHomepageData({ recentActivityLimit: 30, restrictToUS: true }),
       getAdvocatesMapData(),
       getPartners(),
-      getDistrictsLeaderboardData(),
+      getDistrictsLeaderboardData({ limit: 10 }),
     ])
 
   /*
@@ -34,7 +34,7 @@ export default async function Home(props: PageProps) {
   return (
     <PageHome
       advocatePerStateDataProps={advocatePerStateDataProps}
-      districtRankings={districtRankings}
+      leaderboardData={leaderboardData.items}
       params={params}
       partners={partners}
       {...asyncProps}

@@ -7,7 +7,7 @@ import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { ReferralLeaderboard } from '@/components/app/pageReferrals/referralLeaderboard'
+import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -20,7 +20,7 @@ import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
-import { DistrictRankingEntry } from '@/utils/server/districtRankings/upsertRankings'
+import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SWCPartners } from '@/utils/shared/getSWCPartners'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -37,11 +37,11 @@ export function PageHome({
   dtsiHomepagePeople,
   advocatePerStateDataProps,
   partners,
-  districtRankings,
+  leaderboardData,
 }: { params: Awaited<PageProps['params']> } & Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
     partners: SWCPartners | null
-    districtRankings: DistrictRankingEntry[]
+    leaderboardData: DistrictRankingEntryWithRank[]
   }) {
   const { countryCode } = params
   const urls = getIntlUrls(countryCode)
@@ -147,7 +147,7 @@ export function PageHome({
                       See which district has the most number of advocates.
                     </PageSubTitle>
                     <YourDistrictRank />
-                    <ReferralLeaderboard districtRankings={districtRankings} />
+                    <DistrictsLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <UserActionFormReferDialog>
                         <Button className="w-full">Refer</Button>
