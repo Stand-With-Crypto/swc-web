@@ -3,16 +3,22 @@ import * as Sentry from '@sentry/nextjs'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/usStateUtils'
+import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
-type RawQueryResult = {
+type Result = {
+  state: USStateCode
+  district: string
+  count: number
+}
+
+type AdvocatesCountByDistrictQueryResult = {
   state: string
   district: string
   count: number
 }
 
-type ReferralsCountByDistrictResult = {
+type ReferralsCountByDistrictQueryResult = {
   state: string
   district: string
   users_count: number
@@ -21,28 +27,21 @@ type ReferralsCountByDistrictResult = {
 }
 
 function isValidDistrict(state: string, district: string): boolean {
-  const stateDistrictCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[state as USStateCode]
-  if (stateDistrictCount === undefined) {
-    logger.warn('[District Rankings] State not found in district map:', { state })
-    return false
-  }
-
-  // Special case for DC
-  if (stateDistrictCount === 0) {
-    return district === 'N/A'
-  }
-
-  const districtNum = parseInt(district, 10)
-  if (isNaN(districtNum) || districtNum <= 0 || districtNum > stateDistrictCount) {
-    logger.warn('[District Rankings] Invalid district number:', { state, district })
+  const zodResult = zodStateDistrict.safeParse({ state, district })
+  if (!zodResult.success) {
+    logger.warn('[District Rankings] Invalid district:', {
+      state,
+      district,
+      errors: zodResult.error.errors,
+    })
     return false
   }
 
   return true
 }
 
-export async function getAdvocatesCountByDistrict(): Promise<RawQueryResult[]> {
-  const results = await prismaClient.$queryRaw<RawQueryResult[]>`
+export async function getAdvocatesCountByDistrict(): Promise<Result[]> {
+  const results = await prismaClient.$queryRaw<AdvocatesCountByDistrictQueryResult[]>`
     SELECT
       a.administrative_area_level_1 as state,
       a.us_congressional_district as district,
@@ -81,14 +80,14 @@ export async function getAdvocatesCountByDistrict(): Promise<RawQueryResult[]> {
   return results
     .filter(result => isValidDistrict(result.state, result.district))
     .map(({ state, district, count }) => ({
-      state,
+      state: state as USStateCode,
       district,
       count: Number(count),
     }))
 }
 
-export async function getReferralsCountByDistrict(): Promise<RawQueryResult[]> {
-  const results = await prismaClient.$queryRaw<ReferralsCountByDistrictResult[]>`
+export async function getReferralsCountByDistrict(): Promise<Result[]> {
+  const results = await prismaClient.$queryRaw<ReferralsCountByDistrictQueryResult[]>`
     SELECT
       a.administrative_area_level_1 as state,
       a.us_congressional_district as district,
@@ -145,7 +144,7 @@ export async function getReferralsCountByDistrict(): Promise<RawQueryResult[]> {
   return filteredResults
     .filter(result => isValidDistrict(result.state, result.district))
     .map(result => ({
-      state: result.state,
+      state: result.state as USStateCode,
       district: result.district,
       count: Number(result.referrals),
     }))
