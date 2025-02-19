@@ -2,6 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { ClassValue } from 'clsx'
 
 import { NextImage } from '@/components/ui/image'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 interface ReferralLeaderboardRowProps extends VariantProps<typeof rowVariants> {
@@ -37,15 +38,19 @@ function getRankIcon(rank: number) {
 export function ReferralLeaderboardRow(props: ReferralLeaderboardRowProps) {
   const { rank, state, district, count, className, variant } = props
 
+  const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[state as USStateCode] ?? state
+  const showDistrict = district !== 'N/A'
+
   return (
     <div className={cn(rowVariants({ variant }), className)}>
       <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center">
         {getRankIcon(rank)}
       </div>
       <div className="font-semibold capitalize">
-        <span>{state}</span> - District <span>{district}</span>
+        <span>{stateName}</span>
+        {showDistrict && <span> - District {district}</span>}
       </div>
-      <p className="ml-auto">{count}</p>
+      <p className="ml-auto">{isNaN(count) ? '' : count}</p>
     </div>
   )
 }

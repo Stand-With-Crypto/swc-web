@@ -8,9 +8,11 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
+import { useSession } from '@/hooks/useSession'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
-export function ReferralsCounter() {
+export function ReferralsCounterContent() {
   const userResponse = useApiResponseForUserFullProfileInfo({
     refreshInterval: 1000 * 60 * 1, // 1 minute
   })
@@ -40,10 +42,40 @@ export function ReferralsCounter() {
     districtNumber: district,
   })
 
+  const rank = districtRankingResponse.data?.rank
+
+  const districtRanking = useMemo(() => {
+    if (districtRankingResponse.isLoading || userResponse.isLoading || districtResponse.isLoading) {
+      return <Skeleton className="h-12 w-14 bg-primary-cta/10" />
+    }
+
+    if (!address && !userResponse.isLoading) {
+      return <p>Finish your profile to see your district ranking</p>
+    }
+
+    if (!rank || !districtRankingResponse.data) {
+      return null
+    }
+
+    return (
+      <div className="flex gap-1">
+        <span className="text-4xl font-semibold">#</span>
+        <AnimatedNumericOdometer className="justify-start" size={48} value={rank.toString()} />
+      </div>
+    )
+  }, [
+    districtRankingResponse.data,
+    districtRankingResponse.isLoading,
+    districtResponse.isLoading,
+    userResponse.isLoading,
+    address,
+    rank,
+  ])
+
   return (
     <div className="flex w-full gap-4">
       <div className="flex w-full flex-col items-start justify-between gap-10 rounded-2xl bg-primary-cta p-4 text-white">
-        <p className="text-sm font-medium">Your referrals</p>
+        <p className="font-medium">Your referrals</p>
         {userResponse.isLoading ? (
           <Skeleton className="h-12 w-14" />
         ) : (
@@ -52,20 +84,20 @@ export function ReferralsCounter() {
       </div>
 
       <div className="flex w-full flex-col items-start justify-between gap-10 rounded-2xl bg-secondary p-4">
-        <p className="text-sm font-medium">District ranking</p>
-        {districtRankingResponse.isLoading || userResponse.isLoading ? (
-          <Skeleton className="h-12 w-14 bg-primary-cta/10" />
-        ) : (
-          <div className="flex gap-1">
-            <span className="text-4xl font-semibold">#</span>
-            <AnimatedNumericOdometer
-              className="justify-start"
-              size={48}
-              value={districtRankingResponse.data?.toString() ?? ''}
-            />
-          </div>
-        )}
+        <p className="font-medium">District ranking</p>
+        {districtRanking}
       </div>
     </div>
   )
+}
+
+export function ReferralsCounter() {
+  const { isLoggedIn, isLoading } = useSession()
+  const hasHydrated = useHasHydrated()
+
+  if (!isLoggedIn || isLoading || !hasHydrated) {
+    return null
+  }
+
+  return <ReferralsCounterContent />
 }
