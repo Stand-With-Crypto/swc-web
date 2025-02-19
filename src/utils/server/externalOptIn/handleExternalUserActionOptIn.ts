@@ -45,6 +45,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -156,7 +157,11 @@ export async function handleExternalUserActionOptIn(
       },
     },
   })
-  const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
+
+  const { user, userState } = await maybeUpsertUser({
+    existingUser: existingAction?.user,
+    input,
+  })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -225,8 +230,10 @@ export async function handleExternalUserActionOptIn(
       userActionOptIn: {
         create: {
           optInType,
+          tenantId: user.tenantId,
         },
       },
+      tenantId: user.tenantId,
       user: { connect: { id: user.id } },
     },
   })
@@ -292,7 +299,11 @@ async function maybeUpsertUser({
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
   if (address) {
     const formattedDescription = getFormattedDescription(address, true)
-    dbAddress = { ...address, formattedDescription: formattedDescription, googlePlaceId: undefined }
+    dbAddress = {
+      ...address,
+      formattedDescription: formattedDescription,
+      googlePlaceId: undefined,
+    }
     try {
       dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(
         getFormattedDescription(address, false),
@@ -325,6 +336,9 @@ async function maybeUpsertUser({
     }
   }
 
+  // TODO (@twistershark): This needs to be dynamic after @ydruffin-cb updates the payload on CB side
+  const tenantId = DEFAULT_SUPPORTED_COUNTRY_CODE
+
   const emailSource = partner
     ? UserEmailAddressSource.VERIFIED_THIRD_PARTY
     : UserEmailAddressSource.USER_ENTERED
@@ -344,6 +358,7 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: isVerifiedEmailAddress,
               source: emailSource,
+              tenantId,
             },
           },
         }),
@@ -363,11 +378,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: dbAddress,
+                  create: { ...dbAddress, tenantId },
                 },
               }
             : {
-                create: dbAddress,
+                create: { ...dbAddress, tenantId },
               }),
         },
       }),
@@ -444,11 +459,13 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
+      tenantId,
       userEmailAddresses: {
         create: {
           emailAddress,
           isVerified: isVerifiedEmailAddress,
           source: emailSource,
+          tenantId,
         },
       },
       ...(cryptoAddress && {
@@ -466,11 +483,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: dbAddress,
+                  create: { ...dbAddress, tenantId },
                 },
               }
             : {
-                create: dbAddress,
+                create: { ...dbAddress, tenantId },
               }),
         },
       }),
