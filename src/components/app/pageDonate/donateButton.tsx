@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import * as Sentry from '@sentry/nextjs'
 
 import {
   actionCreateCoinbaseCommerceCharge,
@@ -28,6 +29,11 @@ export function DonateButton() {
     )
 
     if (actionCreateCoinbaseCommerceChargeResponse.status !== 'success') {
+      Sentry.captureException('Donate button failed', {
+        level: 'fatal',
+        tags: { domain: 'donate' },
+        extra: { response: actionCreateCoinbaseCommerceChargeResponse.response },
+      })
       return null
     }
 
@@ -37,6 +43,11 @@ export function DonateButton() {
     if (commerceChargeResponse && 'hostedUrl' in commerceChargeResponse) {
       return commerceChargeResponse.hostedUrl
     } else {
+      Sentry.captureException('Donate button returned unexpected response', {
+        level: 'fatal',
+        tags: { domain: 'donate' },
+        extra: { response: actionCreateCoinbaseCommerceChargeResponse.response },
+      })
       return null
     }
   }
