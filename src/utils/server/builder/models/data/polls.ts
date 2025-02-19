@@ -21,8 +21,7 @@ async function getAllPollsWithOffset(offset: number) {
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
         limit: LIMIT,
-        fields:
-          'id,name,data.maxNumberOptionsSelected,data.pollList,data.pollTitle,data.allowOther,data.multiple,data.endDate',
+        fields: 'id,name,data',
         offset,
       }),
     {

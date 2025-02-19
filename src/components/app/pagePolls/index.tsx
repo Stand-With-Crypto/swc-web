@@ -39,7 +39,7 @@ export function PagePolls({
     mutate: refreshPollsResults,
     isLoading: isPollsResultsLoading,
   } = usePollsResultsData(pollsResultsData)
-  const [showResults, setShowResults] = useState(true)
+  const [showResults, setShowResults] = useState(false)
   const [isVoteAgain, setIsVoteAgain] = useState(false)
 
   const handleShowResults = async () => {

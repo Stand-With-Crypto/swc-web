@@ -1,16 +1,17 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { differenceInDays, format, isPast } from 'date-fns'
 import { EyeIcon } from 'lucide-react'
 
 import { actionCreatePollVote } from '@/actions/actionCreatePollVote'
-import { PollItem, PollItemOther } from '@/components/app/pagePolls/pollItem'
+import { PollItem } from '@/components/app/pagePolls/pollItem'
 import { ProtectedSubmitButton } from '@/components/app/pagePolls/protectedSubmitButton'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
+import { useSession } from '@/hooks/useSession'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
 
 interface ActivePollProps {
@@ -35,6 +36,7 @@ export function ActivePoll({
     data: { pollTitle, multiple, allowOther, maxNumberOptionsSelected = 0, endDate, pollList },
   } = activePoll
 
+  const { isLoggedIn } = useSession()
   const [isInternalLoading, setIsInternalLoading] = useState(isLoading)
 
   const defaultValues = useMemo(() => {
@@ -73,44 +75,24 @@ export function ActivePoll({
     defaultValues,
   })
 
-  const { handleSubmit, watch, setValue, reset, formState } = form
+  const { handleSubmit, control, reset, formState } = form
 
   const { isSubmitting } = formState
 
-  const selectedAnswers = watch('answers')
-  const isOtherSelected =
-    selectedAnswers &&
-    (Array.isArray(selectedAnswers)
-      ? selectedAnswers.includes('other')
-      : selectedAnswers === 'other')
+  const selectedAnswers = useWatch({ control, name: 'answers' })
 
   const isFormDisabled = isSubmitting || isInternalLoading
   const isSubmitDisabled = isFormDisabled || selectedAnswers.length < 1
 
-  const isOtherFieldDisabled =
-    (maxNumberOptionsSelected > 0 &&
-      selectedAnswers.length >= maxNumberOptionsSelected &&
-      !selectedAnswers.includes('other')) ||
-    isFormDisabled
-
   const activePollItems = useMemo(
     () =>
       pollList.map(option => {
-        const isChecked = selectedAnswers?.includes(option.value)
-        const isDisabled =
-          (maxNumberOptionsSelected > 0 &&
-            selectedAnswers.length >= maxNumberOptionsSelected &&
-            !isChecked) ||
-          isFormDisabled
-
         return {
-          isChecked,
-          isDisabled,
           value: option.value,
           displayName: option.displayName,
         }
       }),
-    [isFormDisabled, maxNumberOptionsSelected, pollList, selectedAnswers],
+    [pollList],
   )
 
   const endsIn = differenceInDays(new Date(endDate), new Date())
@@ -159,12 +141,6 @@ export function ActivePoll({
   )
 
   useEffect(() => {
-    if (!isOtherSelected) {
-      setValue('otherValue', '')
-    }
-  }, [isOtherSelected, setValue])
-
-  useEffect(() => {
     reset(defaultValues)
   }, [defaultValues, reset])
 
@@ -186,17 +162,25 @@ export function ActivePoll({
       <Form {...form}>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
           {activePollItems.map(pollItem => {
-            return <PollItem key={pollItem.value} multiple={multiple} {...pollItem} />
+            return (
+              <PollItem
+                displayName={pollItem.displayName}
+                isFormDisabled={isFormDisabled}
+                key={pollItem.value}
+                maxNumberOptionsSelected={maxNumberOptionsSelected}
+                multiple={multiple}
+                value={pollItem.value}
+              />
+            )
           })}
 
           {allowOther && (
-            <PollItemOther
+            <PollItem
               displayName="Other"
-              isChecked={isOtherSelected}
-              isDisabled={isOtherFieldDisabled}
-              isOtherFieldDisabled={isOtherFieldDisabled}
-              isOtherSelected={isOtherSelected}
+              isFormDisabled={isFormDisabled}
+              maxNumberOptionsSelected={maxNumberOptionsSelected}
               multiple={multiple}
+              showOtherField={allowOther}
               value="other"
             />
           )}
@@ -207,14 +191,16 @@ export function ActivePoll({
 
       <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes • Vote to see result</p>
 
-      <Button
-        className="px-0 pt-4 hover:no-underline"
-        disabled={formState.isSubmitting || isInternalLoading}
-        onClick={handleShowResults}
-        variant="link"
-      >
-        <EyeIcon className="mr-2 h-4 w-4" /> View results
-      </Button>
+      {!isLoading && isLoggedIn && (
+        <Button
+          className="px-0 pt-4 hover:no-underline"
+          disabled={formState.isSubmitting || isInternalLoading}
+          onClick={handleShowResults}
+          variant="link"
+        >
+          <EyeIcon className="mr-2 h-4 w-4" /> View results
+        </Button>
+      )}
     </div>
   )
 }
