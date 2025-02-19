@@ -12,7 +12,7 @@ import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
-export function ReferralsCounterContent() {
+function ReferralsCounterContent() {
   const userResponse = useApiResponseForUserFullProfileInfo({
     refreshInterval: 1000 * 60 * 1, // 1 minute
   })

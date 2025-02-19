@@ -10,6 +10,7 @@ import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/rece
 import { ReferralLeaderboard } from '@/components/app/pageReferrals/referralLeaderboard'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -147,6 +148,14 @@ export function PageHome({
                     </PageSubTitle>
                     <YourDistrictRank />
                     <ReferralLeaderboard districtRankings={districtRankings} />
+                    <div className="mx-auto flex w-fit justify-center gap-2">
+                      <UserActionFormReferDialog>
+                        <Button className="w-full">Refer</Button>
+                      </UserActionFormReferDialog>
+                      <Button asChild variant="secondary">
+                        <InternalLink href={urls.referrals()}>View all</InternalLink>
+                      </Button>
+                    </div>
                   </div>
                 ),
               },
