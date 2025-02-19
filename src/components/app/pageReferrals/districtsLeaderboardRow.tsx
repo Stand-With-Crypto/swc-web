@@ -6,7 +6,7 @@ import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistr
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-interface ReferralLeaderboardRowProps extends VariantProps<typeof rowVariants> {
+interface DistrictsLeaderboardRowProps extends VariantProps<typeof rowVariants> {
   state: string
   district: string
   count: number
@@ -36,7 +36,7 @@ function getRankIcon(rank: number) {
   return <p className="text-center font-semibold text-fontcolor-muted">{rank}</p>
 }
 
-export function ReferralLeaderboardRow(props: ReferralLeaderboardRowProps) {
+export function DistrictsLeaderboardRow(props: DistrictsLeaderboardRowProps) {
   const { rank, state, district, count, className, variant } = props
 
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[state as USStateCode] ?? state

@@ -3,7 +3,7 @@
 import { Suspense, useMemo } from 'react'
 import { noop } from 'lodash-es'
 
-import { ReferralLeaderboardRow } from '@/components/app/pageReferrals/referralLeaderboardRow'
+import { DistrictsLeaderboardRow } from '@/components/app/pageReferrals/districtsLeaderboardRow'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
@@ -62,7 +62,7 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   return (
     <div className="space-y-3">
       <p className="pl-4 text-lg font-bold">Your district</p>
-      <ReferralLeaderboardRow
+      <DistrictsLeaderboardRow
         count={count}
         district={districtNumber ?? ''}
         rank={rank ?? 0}

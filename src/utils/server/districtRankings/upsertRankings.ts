@@ -127,22 +127,42 @@ export async function createDistrictRankingUpserter(
 }
 
 type RedisInterlacedResult = Array<[MemberKey, number]>
+export type DistrictRankingEntryWithRank = DistrictRankingEntry & { rank: number }
+
+export type LeaderboardPaginationData = {
+  items: DistrictRankingEntryWithRank[]
+  total: number
+}
 
 export async function getDistrictsLeaderboardData(
-  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
-  limit = 10,
-): Promise<DistrictRankingEntry[]> {
-  const rawResults = (await redisWithCache.zrange(redisKey, 0, limit - 1, {
-    rev: true,
-    withScores: true,
-  })) as Array<MemberKey | number>
+  options: {
+    redisKey?: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS]
+    limit?: number
+    offset?: number
+  } = {},
+): Promise<LeaderboardPaginationData> {
+  const { redisKey = CURRENT_DISTRICT_RANKING, limit = 10, offset = 0 } = options
+
+  const [rawResults, total] = await Promise.all([
+    redisWithCache.zrange(redisKey, offset, offset + limit - 1, {
+      rev: true,
+      withScores: true,
+    }) as Promise<Array<MemberKey | number>>,
+    redisWithCache.zcard(redisKey),
+  ])
 
   const results = chunk(rawResults, 2) as RedisInterlacedResult
 
-  return results.map(([member, score]) => ({
+  const items = results.map(([member, score], index) => ({
     ...parseMemberKey(member),
     count: score,
+    rank: offset + index + 1,
   }))
+
+  return {
+    items,
+    total,
+  }
 }
 
 export async function getDistrictRank(
