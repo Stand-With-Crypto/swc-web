@@ -4,6 +4,9 @@ import { z } from 'zod'
 import { getPollsVotesFromUser } from '@/data/polls/getPollsData'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
+export const revalidate = 30 // 30 seconds
+export const dynamic = 'error'
+
 const zodPayload = z.object({
   userId: z.string(),
 })
