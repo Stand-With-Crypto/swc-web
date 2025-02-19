@@ -8,7 +8,7 @@ import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SWCPoll } from '@/utils/shared/getSWCPolls'
 
-export const revalidate = 86400 // 24 hours
+export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 
 const title = 'Crypto Polls'
