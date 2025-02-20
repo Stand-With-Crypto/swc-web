@@ -1,6 +1,16 @@
 /// <reference types="cypress" />
 
 describe('page - politician details', () => {
+  it('page with questionnaire and hashing deeplink', () => {
+    cy.visit('/politicians/person/adam---schiff#questionnaire')
+
+    cy.get('h2').contains('Candidate questionnaire')
+
+    cy.contains(
+      'Do you have experience buying, selling, or using blockchain technology assets or investment tools?',
+    )
+  })
+
   it('page with questionnaire', () => {
     cy.visit('/politicians/person/adam---schiff')
 
@@ -77,16 +87,6 @@ describe('page - politician details', () => {
         'contain',
         "A: While I'm still reviewing the FIT for the 21st Century Act, I agree we need to develop a comprehensive regulatory framework to ensure that these companies and jobs stay here and grow here, and that the U.S. remains a global leader in these important new technologies. Otherwise, we risk losing jobs to workers overseas, where these technologies will face less oversight and transparency.",
       )
-  })
-
-  it('page with questionnaire and hashing deeplink', () => {
-    cy.visit('/politicians/person/adam---schiff#questionnaire')
-
-    cy.get('h2').contains('Candidate questionnaire')
-
-    cy.contains(
-      'Do you have experience buying, selling, or using blockchain technology assets or investment tools?',
-    )
   })
 
   it('page with questionnaire and hashing deeplink using vanity url', () => {
