@@ -1,7 +1,8 @@
 import { Builder } from '@builder.io/react'
 
-import { VideoPlayer, DEFAULT_ASPECT_RATIO, PlayerType } from '.'
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
+
+import { DEFAULT_ASPECT_RATIO, PlayerType, VideoPlayer } from '.'
 
 interface Props extends BuilderComponentBaseProps {
   type: PlayerType['type']
@@ -42,14 +43,14 @@ Builder.registerComponent(
         {...playerType}
         allowFullScreen={props.allowFullScreen}
         aspectRatio={100 / Number(props.aspectRatio)}
-        key={props.attributes?.key}
+        autoplay={!Builder.isEditing && props.autoplay}
         controls={props.controls}
-        start={props.start}
+        key={props.attributes?.key}
         loop={props.loop}
         muted={props.muted}
         playsinline={props.playsinline}
-        autoplay={!Builder.isEditing && props.autoplay}
         previewImage={props.posterImage}
+        start={props.start}
         volume={
           props.overrideDefaultVolume && !props.muted ? Number(props.volume) / 100 : undefined
         }

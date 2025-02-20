@@ -1,15 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import * as Sentry from '@sentry/nextjs'
+import dynamic from 'next/dynamic'
+
+import { cn } from '@/utils/web/cn'
 
 // https://github.com/cookpete/react-player/issues/1428
 // Lazy load the ReactPlayer component to avoid hydration issues
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
-
-import { useState } from 'react'
-
-import { cn } from '@/utils/web/cn'
-import dynamic from 'next/dynamic'
 
 export const supportedVideoTypes = ['youtube', 'video'] as const
 
@@ -114,13 +113,6 @@ export function VideoPlayer(props: VideoProps) {
         '[&>*]:object-contain': fit === 'contain',
         '[&>*]:object-fill': fit === 'fill',
       })}
-      style={{
-        ...style,
-        aspectRatio,
-      }}
-      height={height}
-      width={width}
-      onError={() => setError(true)}
       config={{
         youtube: {
           playerVars: {
@@ -131,15 +123,22 @@ export function VideoPlayer(props: VideoProps) {
           },
         },
       }}
-      light={autoplay && props.muted ? undefined : previewImage}
-      playing={autoplay}
-      fallback={loadingFallback ? <>{loadingFallback}</> : undefined}
-      url={url}
       controls={controls}
+      fallback={loadingFallback ? <>{loadingFallback}</> : undefined}
+      height={height}
+      light={autoplay && props.muted ? undefined : previewImage}
       loop={loop}
       muted={muted}
+      onError={() => setError(true)}
+      playing={autoplay}
       playsinline={playsinline}
+      style={{
+        ...style,
+        aspectRatio,
+      }}
+      url={url}
       volume={volume}
+      width={width}
     />
   )
 }
