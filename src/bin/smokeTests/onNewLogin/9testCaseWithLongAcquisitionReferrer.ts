@@ -31,6 +31,11 @@ export const testCaseWithLongAcquisitionReferer: TestCase = {
         },
       },
       getUserSessionId: () => Promise.resolve(fakerFields.id()),
+      searchParams: {
+        utm_source: faker.string.alphanumeric({ length: 200 }),
+        utm_medium: faker.string.alphanumeric({ length: 200 }),
+        utm_campaign: faker.string.alphanumeric({ length: 200 }),
+      },
       // dependency injecting this in to the function so we can mock it in tests
       injectedFetchEmbeddedWalletMetadataFromThirdweb: () => Promise.resolve(null),
     }
