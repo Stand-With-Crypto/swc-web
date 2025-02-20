@@ -13,7 +13,7 @@ interface PollItemProps {
   displayName: string
   multiple: boolean
   isFormDisabled: boolean
-  maxNumberOptionsSelected: number
+  maxNumberOfOptions: number
   showOtherField?: boolean
 }
 
@@ -22,7 +22,7 @@ export function PollItem({
   displayName,
   multiple,
   isFormDisabled,
-  maxNumberOptionsSelected,
+  maxNumberOfOptions,
   showOtherField,
 }: PollItemProps) {
   const { register, control, setValue, clearErrors } = useFormContext()
@@ -30,10 +30,15 @@ export function PollItem({
 
   const isItemSelected = selectedAnswers.includes(value)
   const isDisabled =
-    (maxNumberOptionsSelected > 0 &&
-      selectedAnswers.length >= maxNumberOptionsSelected &&
-      !isItemSelected) ||
-    isFormDisabled
+    isFormDisabled || multiple
+      ? maxNumberOfOptions > 0 && selectedAnswers.length >= maxNumberOfOptions && !isItemSelected
+      : isItemSelected
+
+  if (isItemSelected) {
+    console.log('isDisabled', isDisabled)
+    console.log('isItemSelected', isItemSelected)
+    console.log('value', value)
+  }
 
   const isOtherSelected =
     selectedAnswers &&
@@ -42,8 +47,8 @@ export function PollItem({
       : selectedAnswers === 'other')
 
   const isOtherFieldDisabled =
-    (maxNumberOptionsSelected > 0 &&
-      selectedAnswers.length >= maxNumberOptionsSelected &&
+    (maxNumberOfOptions > 0 &&
+      selectedAnswers.length >= maxNumberOfOptions &&
       !selectedAnswers.includes('other')) ||
     isFormDisabled
 

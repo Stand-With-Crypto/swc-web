@@ -34,7 +34,7 @@ export function ActivePoll({
 }: ActivePollProps) {
   const {
     id: pollId,
-    data: { pollTitle, multiple, allowOther, maxNumberOptionsSelected = 0, endDate, pollList },
+    data: { pollTitle, allowOther, maxNumberOptionsSelected, endDate, pollList },
   } = activePoll
 
   const { isLoggedIn } = useSession()
@@ -102,11 +102,14 @@ export function ActivePoll({
     ? `Ended on ${format(new Date(endDate), 'MMM d, yyyy')}`
     : `Ends in ${endsIn} days`
 
+  const maxNumberOfOptions = maxNumberOptionsSelected ?? 0
+  const multiple = maxNumberOfOptions === 0 || maxNumberOfOptions > 1
+
   const pollSubtitleText = multiple && (
     <div className="mb-3 text-sm text-gray-600">
-      {maxNumberOptionsSelected <= 0
+      {maxNumberOfOptions === 0
         ? 'Select all that apply'
-        : `Select up to ${maxNumberOptionsSelected} options`}
+        : `Select up to ${maxNumberOfOptions} options`}
     </div>
   )
 
@@ -175,7 +178,7 @@ export function ActivePoll({
                 displayName={pollItem.displayName}
                 isFormDisabled={isFormDisabled}
                 key={pollItem.value}
-                maxNumberOptionsSelected={maxNumberOptionsSelected}
+                maxNumberOfOptions={maxNumberOfOptions}
                 multiple={multiple}
                 value={pollItem.value}
               />
@@ -186,7 +189,7 @@ export function ActivePoll({
             <PollItem
               displayName="Other"
               isFormDisabled={isFormDisabled}
-              maxNumberOptionsSelected={maxNumberOptionsSelected}
+              maxNumberOfOptions={maxNumberOfOptions}
               multiple={multiple}
               showOtherField={allowOther}
               value="other"

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 
 import { ActivePoll } from '@/components/app/pagePolls/activePoll'
 import { InactivePolls } from '@/components/app/pagePolls/inactivePolls'
@@ -28,7 +28,7 @@ export function PagePolls({
   pollsResultsData: Record<string, PollResultsDataResponse>
 }) {
   const [isPendingVoteSubmissionTransaction, startVoteSubmissionTransaction] = useTransition()
-  const { user, isUserProfileLoading } = useSession()
+  const { user, isUserProfileLoading, isLoggedIn } = useSession()
   const {
     data: userPollsData,
     isLoading: isPollsVotesLoading,
@@ -62,10 +62,17 @@ export function PagePolls({
     isPendingVoteSubmissionTransaction
 
   const hasAnyResults = Object.keys(pollsResultsData).length > 0
+  const hasUserVoted = typeof userPollsData?.pollVote[activePoll?.id ?? ''] !== 'undefined'
+
+  useEffect(() => {
+    if (hasUserVoted && isLoggedIn) {
+      setShowResults(true)
+    }
+  }, [hasUserVoted, isLoggedIn, setShowResults])
 
   return (
     <div className="standard-spacing-from-navbar container">
-      <section className="container">
+      <section className="container mb-16 max-w-3xl">
         <PageTitle className="mb-7">{title}</PageTitle>
         <PageSubTitle className="text-muted-foreground" size="md" withoutBalancer>
           {!activePoll && !inactivePolls ? (
@@ -81,7 +88,7 @@ export function PagePolls({
           )}
         </PageSubTitle>
       </section>
-      <section>
+      <section className="container max-w-3xl">
         {activePoll &&
           (showResults && hasAnyResults ? (
             <PollResults
@@ -103,7 +110,7 @@ export function PagePolls({
           ))}
       </section>
       {inactivePolls && (
-        <section>
+        <section className="container max-w-3xl">
           <InactivePolls
             inactivePolls={inactivePolls}
             isLoading={isLoading}

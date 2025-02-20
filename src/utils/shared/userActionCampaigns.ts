@@ -36,7 +36,7 @@ export enum UserActionEmailCampaignName {
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
 export enum UserActionPollCampaignName {
   ACTIVE_POLL_ID = 'b5d406a439734ae88e89de9c2d3803bb',
-  INACTIVE_DEFAULT_INITIAL_POLL_ID = '3b19d81c4bac4c12b83375b2fa2a9057',
+  INACTIVE_DEFAULT_INITIAL_POLL_ID = 'f82669b830d5475dae9e466a7c4598c7',
   INACTIVE_POLL_ID = 'f374e663801c435b9409a4606007f7ba',
 }
 export enum UserActionCallCampaignName {

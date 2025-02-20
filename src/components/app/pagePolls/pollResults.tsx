@@ -36,8 +36,11 @@ export function PollResults({
 }: PollResultsProps) {
   const {
     id: pollId,
-    data: { pollTitle, multiple, allowOther, endDate, pollList },
+    data: { pollTitle, allowOther, maxNumberOptionsSelected, endDate, pollList },
   } = currentPoll
+
+  const maxNumberOfOptions = maxNumberOptionsSelected ?? 0
+  const multiple = maxNumberOfOptions === 0 || maxNumberOfOptions > 1
 
   const userVotes = userPollsData?.pollVote[pollId]
 

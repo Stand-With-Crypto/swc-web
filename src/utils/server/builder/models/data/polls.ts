@@ -23,6 +23,7 @@ async function getAllPollsWithOffset(offset: number) {
         limit: LIMIT,
         fields: 'id,name,data',
         offset,
+        cachebust: true,
       }),
     {
       retries: 3,
