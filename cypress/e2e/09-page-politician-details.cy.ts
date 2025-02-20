@@ -6,7 +6,8 @@ describe('page - politician details', () => {
 
     cy.get('h2').contains('Candidate questionnaire')
 
-    cy.get('[data-testid="questionnaire-trigger"]').click()
+    cy.get('[data-testid="questionnaire-trigger"]').as('questionnaireTrigger').scrollIntoView()
+    cy.get('@questionnaireTrigger').should('be.visible').click()
 
     cy.get('div')
       .should(
