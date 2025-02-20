@@ -33,6 +33,7 @@ import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { triggerReferralSteps } from '@/utils/server/referral/triggerReferralSteps'
 import {
   getServerAnalytics,
   getServerPeopleAnalytics,
@@ -67,17 +68,20 @@ type UpsertedUser = User & {
 const getLog = (address: string) => (message: string) =>
   logger.info(`address ${address}: ${message}`)
 
-export async function login(payload: VerifyLoginPayloadParams) {
+export async function login(
+  payload: VerifyLoginPayloadParams,
+  searchParams: Record<string, string>,
+) {
   const currentCookies = await cookies()
   const verifiedPayload = await thirdwebAuth.verifyPayload(payload)
 
   if (!verifiedPayload.valid) return
 
   const { address } = payload.payload
-
   const cryptoAddress = parseThirdwebAddress(address)
 
   const localUser = await parseLocalUserFromCookies()
+
   const log = getLog(cryptoAddress)
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
@@ -143,6 +147,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     getUserSessionId: () => _getUserSessionId(),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
     decreaseCommunicationTimers: decreaseCommunicationTimersCookie === 'true',
+    searchParams,
   })
     .then(res => ({ userId: res.userId }))
     .catch(e => {
@@ -230,6 +235,7 @@ interface NewLoginParams {
   localUser: ServerLocalUser | null
   getUserSessionId: () => Promise<string>
   decreaseCommunicationTimers?: boolean
+  searchParams: Record<string, string>
   // dependency injecting this in to the function so we can mock it in tests
   injectedFetchEmbeddedWalletMetadataFromThirdweb: typeof fetchEmbeddedWalletMetadataFromThirdweb
 }
@@ -299,7 +305,7 @@ This function will ensure we create a user opt-in action if one does not already
 */
 
 export async function onNewLogin(props: NewLoginParams) {
-  const { cryptoAddress: _cryptoAddress, localUser } = props
+  const { cryptoAddress: _cryptoAddress, localUser, searchParams } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
   const countryCode = await getCountryCodeCookie()
@@ -436,7 +442,7 @@ export async function onNewLogin(props: NewLoginParams) {
 
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   // triggerPostLoginUserActionSteps logic
   const postLoginUserActionSteps = await triggerPostLoginUserActionSteps({
@@ -479,6 +485,15 @@ export async function onNewLogin(props: NewLoginParams) {
     'Datetime of Last Login': new Date(),
   })
 
+  const isReferral =
+    isValidReferral(searchParams) ||
+    isValidReferral(localUser?.persisted?.initialSearchParams) ||
+    isValidReferral(localUser?.currentSession?.searchParamsOnLoad)
+
+  if (isReferral) {
+    triggerReferralSteps({ localUser, searchParams, userId: user.id })
+  }
+
   waitUntil(beforeFinish())
   return {
     userId: user.id,
@@ -500,7 +515,7 @@ async function queryMatchingUsers({
   cryptoAddress,
   getUserSessionId,
   injectedFetchEmbeddedWalletMetadataFromThirdweb,
-}: NewLoginParams) {
+}: Omit<NewLoginParams, 'searchParams'>) {
   const log = getLog(cryptoAddress)
   const userSessionId = await getUserSessionId()
   const embeddedWalletUserDetails =
@@ -848,6 +863,7 @@ async function triggerPostLoginUserActionSteps({
   countryCode: string
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
+
   /**
    * Ensure subscriber opt-in user action exists for this logged-in user (user can be new or existing).
    * Create if opt-in action does not exist.
@@ -993,4 +1009,21 @@ async function getExistingUsers({
   )
 
   return existingUsers.flat()
+}
+
+type ReferralUTMParams = {
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+}
+
+function isValidReferral(params: ReferralUTMParams | undefined): boolean {
+  if (!params) return false
+
+  return (
+    params?.utm_source === 'swc' &&
+    params?.utm_medium === 'referral' &&
+    typeof params?.utm_campaign === 'string' &&
+    params?.utm_campaign?.length > 0
+  )
 }
