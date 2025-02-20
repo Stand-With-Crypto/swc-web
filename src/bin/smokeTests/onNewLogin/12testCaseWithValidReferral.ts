@@ -6,6 +6,7 @@ import { fakerFields } from '@/mocks/fakerUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { sleep } from '@/utils/shared/sleep'
 
 import { TestCase, verify } from './utils'
 
@@ -133,7 +134,7 @@ export const testCaseWithValidReferral: TestCase = {
     verifyBasicUserCreation(data, issues)
 
     // Wait a bit for the after() function to complete
-    await new Promise(resolve => setTimeout(resolve, 100))
+    await sleep(100)
 
     await verifyReferralAction(issues)
 

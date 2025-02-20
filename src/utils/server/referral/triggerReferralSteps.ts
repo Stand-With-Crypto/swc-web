@@ -5,24 +5,7 @@ import { actionCreateUserActionReferral } from '@/actions/actionCreateUserAction
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 
-type ReferralUTMParams = {
-  utm_source?: string
-  utm_medium?: string
-  utm_campaign?: string
-}
-
 const logger = getLogger('triggerReferralSteps')
-
-function isValidReferral(params: ReferralUTMParams | undefined): boolean {
-  if (!params) return false
-
-  return (
-    params?.utm_source === 'swc' &&
-    params?.utm_medium === 'referral' &&
-    typeof params?.utm_campaign === 'string' &&
-    params?.utm_campaign?.length > 0
-  )
-}
 
 export function triggerReferralSteps({
   localUser,
@@ -33,14 +16,15 @@ export function triggerReferralSteps({
   searchParams: Record<string, string | undefined>
   userId: string
 }) {
-  const isReferral =
-    isValidReferral(searchParams) || isValidReferral(localUser?.persisted?.initialSearchParams)
-
-  const referralId = searchParams?.utm_campaign ?? ''
+  const referralId =
+    searchParams?.utm_campaign ??
+    localUser?.persisted?.initialSearchParams?.utm_campaign ??
+    localUser?.currentSession?.searchParamsOnLoad?.utm_campaign ??
+    ''
 
   logger.info(`referralId "${referralId}", newUserId "${userId}"`)
 
-  if (isReferral && !referralId) {
+  if (!referralId) {
     logger.error('invalid logic, referral has no referralId')
     Sentry.captureMessage(
       'invalid logic, we should only hit this point if the referralId is present',
@@ -54,10 +38,8 @@ export function triggerReferralSteps({
     return
   }
 
-  if (isReferral) {
-    after(async () => {
-      await actionCreateUserActionReferral({ referralId, userId, localUser })
-      // sendReferralEmail() TODO
-    })
-  }
+  after(async () => {
+    await actionCreateUserActionReferral({ referralId, userId, localUser })
+    // sendReferralEmail() TODO
+  })
 }

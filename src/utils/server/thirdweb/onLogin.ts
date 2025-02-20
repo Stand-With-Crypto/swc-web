@@ -482,7 +482,14 @@ export async function onNewLogin(props: NewLoginParams) {
     'Datetime of Last Login': new Date(),
   })
 
-  triggerReferralSteps({ localUser, searchParams, userId: user.id })
+  const isReferral =
+    isValidReferral(searchParams) ||
+    isValidReferral(localUser?.persisted?.initialSearchParams) ||
+    isValidReferral(localUser?.currentSession?.searchParamsOnLoad)
+
+  if (isReferral) {
+    triggerReferralSteps({ localUser, searchParams, userId: user.id })
+  }
 
   waitUntil(beforeFinish())
   return {
@@ -996,4 +1003,21 @@ async function getExistingUsers({
   )
 
   return existingUsers.flat()
+}
+
+type ReferralUTMParams = {
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+}
+
+function isValidReferral(params: ReferralUTMParams | undefined): boolean {
+  if (!params) return false
+
+  return (
+    params?.utm_source === 'swc' &&
+    params?.utm_medium === 'referral' &&
+    typeof params?.utm_campaign === 'string' &&
+    params?.utm_campaign?.length > 0
+  )
 }
