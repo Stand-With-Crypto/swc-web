@@ -30,19 +30,19 @@ describe('action - mint your supporter NFT', () => {
       typingRequired: true,
     })
 
-    cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
-      .clear()
-      .type(mockRandomUser.email)
+    cy.get('input[placeholder="Your email"], input[placeholder="Email"]').as('@emailInput').clear()
+    cy.get('@emailInput').type(mockRandomUser.email)
 
-    cy.get('input[data-testid="phone-number-input"]').clear().type(mockRandomUser.phoneNumber)
+    cy.get('input[data-testid="phone-number-input"]').as('@phoneInput').clear()
+    cy.get('@phoneInput').type(mockRandomUser.phoneNumber)
 
     cy.get('button[type="submit"]')
       .contains(/Next|Create account/)
       .scrollIntoView()
-      .click()
+    cy.get('button[type="submit"]').click()
 
     cy.contains('You joined Stand With Crypto!').should('be.visible')
-    cy.get('[role="dialog"]').eq(1).find('button').contains('Close').click({ force: true })
+    cy.get('[role="dialog"]').eq(1).find('button').contains('Close').click()
 
     cy.contains('Continue').should('be.visible').click()
 
