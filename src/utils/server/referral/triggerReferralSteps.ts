@@ -5,6 +5,8 @@ import { actionCreateUserActionReferral } from '@/actions/actionCreateUserAction
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 
+import { sendReferralCompletedEmail } from './sendReferralCompletedEmail'
+
 const logger = getLogger('triggerReferralSteps')
 
 export function triggerReferralSteps({
@@ -39,7 +41,10 @@ export function triggerReferralSteps({
   }
 
   after(async () => {
-    await actionCreateUserActionReferral({ referralId, userId, localUser })
-    // sendReferralEmail() TODO
+    const result = await actionCreateUserActionReferral({ referralId, userId, localUser })
+
+    if (result.wasActionCreated) {
+      await sendReferralCompletedEmail(referralId)
+    }
   })
 }
