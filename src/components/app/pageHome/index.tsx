@@ -1,3 +1,4 @@
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
@@ -149,9 +150,15 @@ export function PageHome({
                     <YourDistrictRank />
                     <DistrictsLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
-                      <UserActionFormReferDialog>
-                        <Button className="w-full">Refer</Button>
-                      </UserActionFormReferDialog>
+                      <LoginDialogWrapper
+                        authenticatedContent={
+                          <UserActionFormReferDialog>
+                            <Button className="w-full">Refer</Button>
+                          </UserActionFormReferDialog>
+                        }
+                      >
+                        <Button className="w-full">Join</Button>
+                      </LoginDialogWrapper>
                       <Button asChild variant="secondary">
                         <InternalLink href={urls.referrals()}>View all</InternalLink>
                       </Button>
