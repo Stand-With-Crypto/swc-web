@@ -28,6 +28,7 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
+import { getTenantId } from '@/utils/server/getTenantId'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
@@ -301,6 +302,7 @@ export async function onNewLogin(props: NewLoginParams) {
   const { cryptoAddress: _cryptoAddress, localUser } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
+  const tenantId = await getTenantId()
 
   // queryMatchingUsers logic
   const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
@@ -360,6 +362,7 @@ export async function onNewLogin(props: NewLoginParams) {
       localUser,
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
+      tenantId,
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -412,6 +415,7 @@ export async function onNewLogin(props: NewLoginParams) {
           user,
           cryptoAddressAssociatedWithEmail: userCryptoAddress,
           embeddedWalletUserDetails,
+          tenantId,
         })
       : null
 
@@ -446,6 +450,7 @@ export async function onNewLogin(props: NewLoginParams) {
     sessionId: await props.getUserSessionId(),
     embeddedWalletUserDetails,
     decreaseCommunicationTimers: props.decreaseCommunicationTimers,
+    tenantId,
   })
 
   if (localUser) {
@@ -593,10 +598,12 @@ async function createUser({
   localUser,
   hasSignedInWithEmail,
   sessionId,
+  tenantId,
 }: {
   localUser: ServerLocalUser | null
   hasSignedInWithEmail: boolean
   sessionId: string | null
+  tenantId: string
 }) {
   return prismaClient.user.create({
     include: {
@@ -614,6 +621,7 @@ async function createUser({
       userSessions: {
         create: { id: sessionId ?? undefined },
       },
+      tenantId,
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
   })
@@ -709,10 +717,12 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
   user,
   cryptoAddressAssociatedWithEmail,
   embeddedWalletUserDetails,
+  tenantId,
 }: {
   user: UpsertedUser
   cryptoAddressAssociatedWithEmail: UserCryptoAddress
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata
+  tenantId: string
 }) {
   const log = getLog(cryptoAddressAssociatedWithEmail.cryptoAddress)
   let email = user.userEmailAddresses.find(
@@ -732,6 +742,7 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
         emailAddress: embeddedWalletUserDetails.email!.toLowerCase(),
         userId: user.id,
         asPrimaryUserEmailAddress: { connect: { id: user.id } },
+        tenantId,
       },
     })
     log(`maybeUpsertEmbeddedWalletEmailAddress: user email address created from embedded wallet`)
@@ -832,6 +843,7 @@ async function triggerPostLoginUserActionSteps({
   sessionId,
   embeddedWalletUserDetails,
   decreaseCommunicationTimers,
+  tenantId,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
@@ -841,6 +853,7 @@ async function triggerPostLoginUserActionSteps({
   sessionId: string | null
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata | null
   decreaseCommunicationTimers?: boolean
+  tenantId: string
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -864,9 +877,11 @@ async function triggerPostLoginUserActionSteps({
         user: { connect: { id: user.id } },
         actionType: UserActionType.OPT_IN,
         campaignName: UserActionOptInCampaignName.DEFAULT,
+        tenantId,
         userActionOptIn: {
           create: {
             optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+            tenantId,
           },
         },
       },
