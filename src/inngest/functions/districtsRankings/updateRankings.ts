@@ -38,13 +38,11 @@ export const updateDistrictsRankings = inngest.createFunction(
       }),
     ])
 
-    const [upsertDistrictAdvocatesRanking, upsertDistrictReferralsRanking] = await Promise.all([
-      createDistrictRankingUpserter(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING),
-      createDistrictRankingUpserter(REDIS_KEYS.DISTRICT_REFERRALS_RANKING),
-    ])
-
     const [districtAdvocatesRankingResults, districtReferralsRankingResults] = await Promise.all([
       step.run('Update Districts Advocates Rankings', async () => {
+        const upsertDistrictAdvocatesRanking = await createDistrictRankingUpserter(
+          REDIS_KEYS.DISTRICT_ADVOCATES_RANKING,
+        )
         const results = await Promise.all(
           districtAdvocatesCounts.map(entry => upsertDistrictAdvocatesRanking(entry)),
         )
@@ -61,6 +59,9 @@ export const updateDistrictsRankings = inngest.createFunction(
       }),
 
       step.run('Update Districts Referrals Ranking', async () => {
+        const upsertDistrictReferralsRanking = await createDistrictRankingUpserter(
+          REDIS_KEYS.DISTRICT_REFERRALS_RANKING,
+        )
         const results = await Promise.all(
           districtsReferralsCount.map(entry => upsertDistrictReferralsRanking(entry)),
         )
