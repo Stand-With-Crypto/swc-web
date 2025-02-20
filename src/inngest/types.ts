@@ -20,6 +20,7 @@ import type { CleanupNftMintsEventSchema } from '@/inngest/functions/cleanupNFTM
 import type { CleanupPostalCodesInngestEventSchema } from '@/inngest/functions/cleanupPostalCodes'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
+import { ProcessPendingReferralsCronJobSchema } from '@/inngest/functions/referrals/processReferralsQueue'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import type { BackfillOptedOutUsersSchema } from '@/inngest/functions/sms/backfillOptedOutUsers'
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
@@ -62,5 +63,6 @@ type EventTypes =
   | UpdateMetricsCounterCacheCronJobSchema
   | BackfillOptedOutUsersSchema
   | BackfillUserActionReferInngestSchema
+  | ProcessPendingReferralsCronJobSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
