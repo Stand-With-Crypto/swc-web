@@ -72,6 +72,7 @@ export const getIntlUrls = (
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
+    referrals: () => `${countryPrefix}/referrals`,
   }
 }
 
@@ -146,4 +147,6 @@ export const apiUrls = {
     hasWelcomeMessageInBody?: boolean
   }) =>
     `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
+  districtRanking: ({ stateCode, districtNumber }: { stateCode: string; districtNumber: string }) =>
+    `/api/public/referrals/${stateCode}/${districtNumber}`,
 }
