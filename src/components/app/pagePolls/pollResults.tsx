@@ -2,8 +2,8 @@
 
 import { useMemo } from 'react'
 import { ReloadIcon } from '@radix-ui/react-icons'
-import { differenceInDays, format, isPast } from 'date-fns'
 
+import { PollLegend } from '@/components/app/pagePolls/pollLegend'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
@@ -17,8 +17,8 @@ interface PollResultsProps {
   userPollsData: PollsVotesFromUserResponse | undefined
   isLoading: boolean
   handleVoteAgain?: () => void
-  hideVoteAgain?: boolean
-  inactivePoll?: boolean
+  shouldHideVoteAgain?: boolean
+  isInactivePoll?: boolean
 }
 
 function getPercentage(totalVotes: number, optionVotes: number) {
@@ -31,8 +31,8 @@ export function PollResults({
   userPollsData,
   isLoading,
   handleVoteAgain,
-  hideVoteAgain,
-  inactivePoll,
+  shouldHideVoteAgain,
+  isInactivePoll,
 }: PollResultsProps) {
   const {
     id: pollId,
@@ -43,12 +43,6 @@ export function PollResults({
   const multiple = maxNumberOfOptions === 0 || maxNumberOfOptions > 1
 
   const userVotes = userPollsData?.pollVote[pollId]
-
-  const endsIn = differenceInDays(new Date(endDate), new Date())
-  const hasEnded = isPast(new Date(endDate))
-  const endDisclaimerText = hasEnded
-    ? `Ended on ${format(new Date(endDate), 'MMM d, yyyy')}`
-    : `Ends in ${endsIn} days`
 
   const totalPollVotes = useMemo(
     () =>
@@ -111,9 +105,7 @@ export function PollResults({
 
   return (
     <div className="p-4">
-      <span className="text-sm text-gray-500">
-        {endsIn === 0 ? `${inactivePoll ? 'Ended' : 'Ends'} today` : endDisclaimerText}
-      </span>
+      <PollLegend endDate={endDate} isInactivePoll={isInactivePoll} />
       <PageSubTitle
         as="h3"
         className="mb-4 mt-2 text-left text-foreground"
@@ -122,7 +114,6 @@ export function PollResults({
       >
         {pollTitle}
       </PageSubTitle>
-
       <div className="flex flex-col gap-2">
         {pollResultsList.map(resultItem => {
           return (
@@ -137,7 +128,6 @@ export function PollResults({
             />
           )
         })}
-
         {allowOther && (
           <div className="flex flex-col gap-2">
             {pollResultsListWithOther?.map(resultWithOtherItem => {
@@ -156,10 +146,8 @@ export function PollResults({
           </div>
         )}
       </div>
-
       {totalPollVotes && <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes</p>}
-
-      {!hideVoteAgain && (
+      {!shouldHideVoteAgain && (
         <Button className="px-0 pt-4 hover:no-underline" onClick={handleVoteAgain} variant="link">
           <ReloadIcon className="mr-2 h-4 w-4 scale-x-[-1]" /> {userVotes ? 'Vote again' : 'Vote'}
         </Button>

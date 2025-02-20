@@ -64,6 +64,8 @@ export function PagePolls({
   const hasAnyResults = Object.keys(pollsResultsData).length > 0
   const hasUserVoted = typeof userPollsData?.pollVote[activePoll?.id ?? ''] !== 'undefined'
 
+  const shouldShowResults = showResults && hasAnyResults
+
   useEffect(() => {
     if (hasUserVoted && isLoggedIn) {
       setShowResults(true)
@@ -90,7 +92,7 @@ export function PagePolls({
       </section>
       <section className="container max-w-3xl">
         {activePoll &&
-          (showResults && hasAnyResults ? (
+          (shouldShowResults ? (
             <PollResults
               currentPoll={activePoll}
               handleVoteAgain={handleVoteAgain}

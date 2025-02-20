@@ -2,11 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import { differenceInDays, format, isPast } from 'date-fns'
 import { EyeIcon } from 'lucide-react'
 
 import { actionCreatePollVote } from '@/actions/actionCreatePollVote'
 import { PollItem } from '@/components/app/pagePolls/pollItem'
+import { PollLegend } from '@/components/app/pagePolls/pollLegend'
 import { ProtectedSubmitButton } from '@/components/app/pagePolls/protectedSubmitButton'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
@@ -36,6 +36,9 @@ export function ActivePoll({
     id: pollId,
     data: { pollTitle, allowOther, maxNumberOptionsSelected, endDate, pollList },
   } = activePoll
+
+  const maxNumberOfOptions = maxNumberOptionsSelected ?? 0
+  const isMultiple = maxNumberOfOptions === 0 || maxNumberOfOptions > 1
 
   const { isLoggedIn } = useSession()
   const [isInternalLoading, setIsInternalLoading] = useState(isLoading)
@@ -96,23 +99,6 @@ export function ActivePoll({
     [pollList],
   )
 
-  const endsIn = differenceInDays(new Date(endDate), new Date())
-  const hasEnded = isPast(new Date(endDate))
-  const endDisclaimerText = hasEnded
-    ? `Ended on ${format(new Date(endDate), 'MMM d, yyyy')}`
-    : `Ends in ${endsIn} days`
-
-  const maxNumberOfOptions = maxNumberOptionsSelected ?? 0
-  const multiple = maxNumberOfOptions === 0 || maxNumberOfOptions > 1
-
-  const pollSubtitleText = multiple && (
-    <div className="mb-3 text-sm text-gray-600">
-      {maxNumberOfOptions === 0
-        ? 'Select all that apply'
-        : `Select up to ${maxNumberOfOptions} options`}
-    </div>
-  )
-
   const onSubmit = useCallback(
     async (formData: { answers: string[]; otherValue: string }) => {
       const { answers, otherValue } = formData
@@ -156,9 +142,7 @@ export function ActivePoll({
 
   return (
     <div className="p-4">
-      <span className="text-sm text-gray-500">
-        {endsIn === 0 ? 'Ends today' : endDisclaimerText}
-      </span>
+      <PollLegend endDate={endDate} />
       <PageSubTitle
         as="h3"
         className="mb-4 mt-2 text-left text-foreground"
@@ -167,9 +151,7 @@ export function ActivePoll({
       >
         {pollTitle}
       </PageSubTitle>
-
-      {pollSubtitleText}
-
+      <PollSubtitle isMultiple={isMultiple} maxNumberOfOptions={maxNumberOfOptions} />
       <Form {...form}>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
           {activePollItems.map(pollItem => {
@@ -177,31 +159,27 @@ export function ActivePoll({
               <PollItem
                 displayName={pollItem.displayName}
                 isFormDisabled={isFormDisabled}
+                isMultiple={isMultiple}
                 key={pollItem.value}
                 maxNumberOfOptions={maxNumberOfOptions}
-                multiple={multiple}
                 value={pollItem.value}
               />
             )
           })}
-
           {allowOther && (
             <PollItem
               displayName="Other"
               isFormDisabled={isFormDisabled}
+              isMultiple={isMultiple}
               maxNumberOfOptions={maxNumberOfOptions}
-              multiple={multiple}
-              showOtherField={allowOther}
+              shouldShowOtherField={allowOther}
               value="other"
             />
           )}
-
           <ProtectedSubmitButton isDisabled={isSubmitDisabled} />
         </form>
       </Form>
-
       <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes • Vote to see result</p>
-
       {!isLoading && isLoggedIn && (
         <Button
           className="px-0 pt-4 hover:no-underline"
@@ -212,6 +190,24 @@ export function ActivePoll({
           <EyeIcon className="mr-2 h-4 w-4" /> View results
         </Button>
       )}
+    </div>
+  )
+}
+
+const PollSubtitle = ({
+  isMultiple,
+  maxNumberOfOptions,
+}: {
+  isMultiple: boolean
+  maxNumberOfOptions: number
+}) => {
+  if (!isMultiple) return null
+
+  return (
+    <div className="mb-3 text-sm text-gray-600">
+      {maxNumberOfOptions === 0
+        ? 'Select all that apply'
+        : `Select up to ${maxNumberOfOptions} options`}
     </div>
   )
 }

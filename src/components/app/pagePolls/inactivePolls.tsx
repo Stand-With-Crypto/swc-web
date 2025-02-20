@@ -27,10 +27,10 @@ export function InactivePolls({
             <div className="rounded-2xl bg-secondary" key={poll.id}>
               <PollResults
                 currentPoll={poll}
-                hideVoteAgain={true}
-                inactivePoll={true}
+                isInactivePoll={true}
                 isLoading={isLoading}
                 pollsResultsData={pollsResultsData}
+                shouldHideVoteAgain={true}
                 userPollsData={userPollsData}
               />
             </div>

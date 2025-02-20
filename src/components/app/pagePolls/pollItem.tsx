@@ -11,34 +11,28 @@ import { cn } from '@/utils/web/cn'
 interface PollItemProps {
   value: string
   displayName: string
-  multiple: boolean
+  isMultiple: boolean
   isFormDisabled: boolean
   maxNumberOfOptions: number
-  showOtherField?: boolean
+  shouldShowOtherField?: boolean
 }
 
 export function PollItem({
   value,
   displayName,
-  multiple,
+  isMultiple,
   isFormDisabled,
   maxNumberOfOptions,
-  showOtherField,
+  shouldShowOtherField,
 }: PollItemProps) {
   const { register, control, setValue, clearErrors } = useFormContext()
   const selectedAnswers = useWatch({ control, name: 'answers' })
 
   const isItemSelected = selectedAnswers.includes(value)
   const isDisabled =
-    isFormDisabled || multiple
+    isFormDisabled || isMultiple
       ? maxNumberOfOptions > 0 && selectedAnswers.length >= maxNumberOfOptions && !isItemSelected
       : isItemSelected
-
-  if (isItemSelected) {
-    console.log('isDisabled', isDisabled)
-    console.log('isItemSelected', isItemSelected)
-    console.log('value', value)
-  }
 
   const isOtherSelected =
     selectedAnswers &&
@@ -70,7 +64,7 @@ export function PollItem({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          {multiple ? (
+          {isMultiple ? (
             <FormField
               control={control}
               name="answers"
@@ -99,13 +93,13 @@ export function PollItem({
           )}
           <span className="py-2">{displayName}</span>
         </div>
-        {!multiple && isItemSelected && (
+        {!isMultiple && isItemSelected && (
           <div className="relative h-4 w-4">
             <CheckIcon completed={true} index={0} svgClassname="bg-muted h-4 w-4" />
           </div>
         )}
       </div>
-      {showOtherField && isOtherSelected && (
+      {shouldShowOtherField && isOtherSelected && (
         <FormField
           control={control}
           name="otherValue"
