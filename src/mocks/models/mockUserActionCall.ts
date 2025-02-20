@@ -8,6 +8,7 @@ export function mockCreateUserActionCallInput() {
   return {
     recipientPhoneNumber: fakerFields.phoneNumber(),
     recipientDtsiSlug: fakerFields.dtsiSlug(),
+    tenantId: faker.helpers.arrayElement(ORDERED_SUPPORTED_COUNTRIES),
   } satisfies Omit<Prisma.UserActionCallCreateInput, 'addressId' | 'address'>
 }
 

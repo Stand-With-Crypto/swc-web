@@ -16,6 +16,7 @@ import { mockUserActionTweetAtPerson } from '@/mocks/models/mockUserActionTweetA
 import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
 import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
+import { getTenantId } from '@/utils/server/getTenantId'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
@@ -111,6 +112,7 @@ async function createUser() {
 }
 
 async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
+  const tenantId = await getTenantId()
   const actionType = user.primaryUserEmailAddressId
     ? UserActionType.EMAIL
     : faker.helpers.arrayElement(Object.values(UserActionType))
@@ -215,6 +217,7 @@ async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
           userActionTweetAtPerson: {
             create: {
               recipientDtsiSlug: mockUserActionTweetAtPerson().recipientDtsiSlug,
+              tenantId,
             },
           },
         },
