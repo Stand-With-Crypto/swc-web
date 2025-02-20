@@ -3,6 +3,7 @@
 import { GeoGate } from '@/components/app/geoGate'
 import { Dialog, DialogContent, DialogProps, DialogTrigger } from '@/components/ui/dialog'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { cn } from '@/utils/web/cn'
 
 import { UserActionFormActionUnavailable } from './actionUnavailable'
 
@@ -12,6 +13,7 @@ interface UserActionFormDialogProps extends DialogProps {
   countryCode?: string
   bypassCountryCheck?: boolean
   padding?: boolean
+  className?: string
 }
 
 export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
@@ -21,6 +23,7 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
     countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
     bypassCountryCheck = false,
     padding = true,
+    className,
     ...dialogProps
   } = props
 
@@ -32,7 +35,7 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
         aria-describedby={
           typeof dialogProps.analytics === 'string' ? dialogProps.analytics : undefined
         }
-        className="max-w-3xl"
+        className={cn('max-w-3xl', className)}
         padding={padding}
       >
         <GeoGate
