@@ -68,41 +68,49 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
             <div className="px-6 last:*:border-none">
               <QuestionnaireItem
                 answer={questionnaire.data?.q1ExperienceUsingBlockchainTechnology}
+                data-testid="q1ExperienceUsingBlockchainTechnology"
                 question="Do you have experience buying, selling, or using blockchain technology assets or investment tools?"
               />
 
               <QuestionnaireItem
                 answer={questionnaire.data?.q2BlockchainWillPlayMajorRoleNextInnoWave}
+                data-testid="q2BlockchainWillPlayMajorRoleNextInnoWave"
                 question="Do you believe blockchain technology and digital assets, including cryptocurrency like Bitcoin, will play a major role in the next wave of technological innovation globally?"
               />
 
               <QuestionnaireItem
                 answer={questionnaire.data?.q3AmerCryptoIsDrivingEconomicGrowth}
+                data-testid="q3AmerCryptoIsDrivingEconomicGrowth"
                 question="Do you believe the American cryptocurrency and digital asset industry is driving economic growth and supporting millions of jobs across the country?"
               />
 
               <QuestionnaireItem
                 answer={questionnaire.data?.q4UsCompAtRiskIfDigitalAssetsPushedOverse}
+                data-testid="q4UsCompAtRiskIfDigitalAssetsPushedOverse"
                 question="Do you believe US competitiveness and American national security are at risk if the digital asset industry is pushed overseas?"
               />
 
               <QuestionnaireItem
                 answer={questionnaire.data?.q5UsModernizeRegulatoryEnvironmentForCrypto}
+                data-testid="q5UsModernizeRegulatoryEnvironmentForCrypto"
                 question="Do you believe it is important for the United States to modernize the regulatory environment for crypto and digital assets to ensure proper consumer protection while also fostering responsible innovation?"
               />
 
               <QuestionnaireItem
                 answer={questionnaire.data?.q6WouldYouVoteInFavorOfLegislation}
+                data-testid="q6WouldYouVoteInFavorOfLegislation"
                 question="If you are currently a Member of Congress or are elected to Congress, would you vote in favor of legislation that creates a comprehensive regulatory framework for digital assets like HR 4763, the “Financial Innovation and Technology for the 21st Century Act”, a bipartisan bill?"
               />
 
               <QuestionnaireItem
                 answer={questionnaire.data?.q7VoteInFavorOfLegisToPaymentStablecoins}
+                data-testid="q7VoteInFavorOfLegisToPaymentStablecoins"
                 question="If you are currently a Member of Congress or are elected to Congress, would you vote in favor of legislation to create clear rules for payment stablecoins (i.e., digital assets that are redeemable for U.S. dollars 1:1) like HR 4766, “Clarity for Payment Stablecoins Act of 2023”, a bipartisan bill?"
               />
 
               <QuestionnaireItem
                 answer={questionnaire.data?.q8ShareAnyOtherOpinionsOnCrypto ?? ''}
+                data-testid="q8ShareAnyOtherOpinionsOnCrypto"
                 isBooleanQuestion={false}
                 question="Please share any other positions or opinions that you have on how crypto and digital assets should be regulated?"
               />
@@ -120,7 +128,12 @@ interface QuestionnaireItemProps {
   isBooleanQuestion?: boolean
 }
 
-function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: QuestionnaireItemProps) {
+function QuestionnaireItem({
+  answer,
+  question,
+  isBooleanQuestion = true,
+  ...props
+}: QuestionnaireItemProps) {
   function getAnswerStyles() {
     if (!isBooleanQuestion || answer === QUESTION_ANSWER_OPTIONS['Not answered']) {
       return ''
@@ -142,7 +155,10 @@ function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: Quest
   }
 
   return (
-    <div className="last-of-type:div:bg-red-500 flex flex-col gap-4 border-b-[1px] border-[#5B616E33]  py-6 text-base text-fontcolor-muted">
+    <div
+      className="last-of-type:div:bg-red-500 flex flex-col gap-4 border-b-[1px] border-[#5B616E33]  py-6 text-base text-fontcolor-muted"
+      {...props}
+    >
       <p>
         <strong className="text-foreground">Q: </strong>
         {question}
