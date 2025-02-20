@@ -16,7 +16,7 @@ export async function getTenantId() {
     }
 
     if (!COUNTRY_CODE_REGEX_PATTERN.test(tenantId)) {
-      throw new Error('Invalid Tenant ID cookie')
+      throw new Error(`Invalid Tenant ID cookie. loaded tenantId cookie: ${tenantId}`)
     }
 
     return tenantId
