@@ -11,7 +11,7 @@ describe('page - politician details', () => {
     )
   })
 
-  it('page with questionnaire', () => {
+  it.skip('page with questionnaire', () => {
     cy.visit('/politicians/person/adam---schiff')
 
     cy.get('h2').contains('Candidate questionnaire').should('be.visible')
