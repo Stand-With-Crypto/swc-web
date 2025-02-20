@@ -14,7 +14,6 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 type ReferralCompletedEmailProps = KeepUpTheFightSectionProps &
   EmailTemplateProps & {
     name: string | null
-    referralLink: string
   }
 
 ReferralCompletedEmail.subjectLine = "You Did It! Now Let's Get More People Involved"
@@ -25,7 +24,6 @@ export default function ReferralCompletedEmail({
   session = {},
   hrefSearchParams = {},
   name,
-  referralLink,
   ...keepUpTheFightSectionProps
 }: ReferralCompletedEmailProps) {
   const hydratedHrefSearchParams = {
@@ -33,6 +31,8 @@ export default function ReferralCompletedEmail({
     ...hrefSearchParams,
     ...session,
   }
+
+  const referActionHref = buildTemplateInternalUrl('/action/refer', hydratedHrefSearchParams)
 
   return (
     <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
@@ -56,7 +56,7 @@ export default function ReferralCompletedEmail({
           participate, the stronger our impact!
           <br />
           <br />
-          <Button fullWidth="mobile" href={referralLink}>
+          <Button fullWidth="mobile" href={referActionHref}>
             Share Your Link
           </Button>
           <br />

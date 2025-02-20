@@ -4,6 +4,7 @@ import { after } from 'next/server'
 import { actionCreateUserActionReferral } from '@/actions/actionCreateUserActionReferral'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
+
 import { sendReferralCompletedEmail } from './sendReferralCompletedEmail'
 
 const logger = getLogger('triggerReferralSteps')

@@ -7,7 +7,6 @@ import { EmailActiveActions } from '@/utils/server/email/templates/common/consta
 import ReferralCompletedEmail from '@/utils/server/email/templates/referralCompleted'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
-import { externalUrls } from '@/utils/shared/urls'
 
 const logger = getLogger('sendReferralCompletedEmail')
 
@@ -26,8 +25,6 @@ export async function sendReferralCompletedEmail(referralId: string) {
     return null
   }
 
-  const referralLink = externalUrls.swcReferralUrl({ referralId })
-
   const userSession = referrer.userSessions?.[0]
   const emailPayload: SendMailPayload = {
     to: referrer.primaryUserEmailAddress.emailAddress,
@@ -38,7 +35,6 @@ export async function sendReferralCompletedEmail(referralId: string) {
           .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
           .map(action => action.actionType as EmailActiveActions)}
         name={referrer.firstName}
-        referralLink={referralLink}
         session={
           userSession
             ? {
@@ -52,8 +48,6 @@ export async function sendReferralCompletedEmail(referralId: string) {
     customArgs: {
       userId: referrer.id,
       campaign: ReferralCompletedEmail.campaign,
-      name: referrer.firstName,
-      referralLink,
     },
   }
 
