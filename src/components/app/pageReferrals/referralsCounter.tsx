@@ -6,6 +6,7 @@ import { UserActionType } from '@prisma/client'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
@@ -24,32 +25,29 @@ function ReferralsCounterContent() {
     return referAction?.referralsCount ?? 0
   }, [user])
 
-  const address = useMemo(() => user?.address, [user])
-  const districtResponse = useGetDistrictFromAddress(address?.formattedDescription)
+  const { address } = useMutableCurrentUserAddress()
+  const districtResponse = useGetDistrictFromAddress(
+    address === 'loading' ? null : address?.description,
+  )
 
   const district = useMemo(() => {
-    if (!districtResponse.data) {
-      return null
-    }
-    if ('districtNumber' in districtResponse.data) {
-      return districtResponse.data.districtNumber.toString()
-    }
-    return null
+    if (!districtResponse.data) return null
+    return 'districtNumber' in districtResponse.data ? districtResponse.data : null
   }, [districtResponse.data])
 
   const districtRankingResponse = useGetDistrictRank({
-    stateCode: address?.administrativeAreaLevel1 as USStateCode,
-    districtNumber: district,
+    stateCode: district?.stateCode as USStateCode,
+    districtNumber: district?.districtNumber?.toString() ?? null,
   })
 
   const rank = districtRankingResponse.data?.rank
 
   const districtRanking = useMemo(() => {
-    if (districtRankingResponse.isLoading || userResponse.isLoading || districtResponse.isLoading) {
+    if (districtRankingResponse.isLoading || districtResponse.isLoading || address === 'loading') {
       return <Skeleton className="h-12 w-14 bg-primary-cta/10" />
     }
 
-    if (!address && !userResponse.isLoading) {
+    if (!address) {
       return <p>Finish your profile to see your district ranking</p>
     }
 
@@ -67,7 +65,6 @@ function ReferralsCounterContent() {
     districtRankingResponse.data,
     districtRankingResponse.isLoading,
     districtResponse.isLoading,
-    userResponse.isLoading,
     address,
     rank,
   ])

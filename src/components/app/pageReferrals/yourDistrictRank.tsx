@@ -78,7 +78,7 @@ export function SuspenseYourDistrictRank() {
   const isLoading = address === 'loading'
 
   const districtResponse = useGetDistrictFromAddress(
-    address && typeof address === 'object' && 'description' in address ? address.description : null,
+    address === 'loading' ? null : address?.description,
   )
 
   const district = useMemo(() => {
