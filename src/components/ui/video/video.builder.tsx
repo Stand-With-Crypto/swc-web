@@ -2,10 +2,16 @@ import { Builder } from '@builder.io/react'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-import { DEFAULT_ASPECT_RATIO, PlayerType, VideoPlayer } from '.'
+import {
+  DEFAULT_ASPECT_RATIO,
+  PlayerType,
+  supportedVideoFitTypes,
+  SupportedVideoTypes,
+  VideoPlayer,
+} from '.'
 
 interface Props extends BuilderComponentBaseProps {
-  type: PlayerType['type']
+  type: SupportedVideoTypes
   video?: string
   videoId?: string
   aspectRatio: string
@@ -19,22 +25,18 @@ interface Props extends BuilderComponentBaseProps {
   playsinline: boolean
   volume: string
   overrideDefaultVolume: boolean
+  width: string
+  height: string
 }
 
-const DEFAULT_VIDEO_TYPE: PlayerType['type'] = 'video'
-
-const supportedVideoTypes: PlayerType['type'][] = ['youtube', 'video']
-
-// TODO: add fit prop
-// TODO: add width and height as advanced options
 Builder.registerComponent(
   (props: Props) => {
     let playerType: PlayerType
 
     if (props.type === 'youtube') {
-      playerType = { type: 'youtube', videoId: props.videoId! }
+      playerType = { type: SupportedVideoTypes.YOUTUBE, videoId: props.videoId! }
     } else {
-      playerType = { type: 'video', url: props.video! }
+      playerType = { type: SupportedVideoTypes.VIDEO, url: props.video! }
     }
 
     return (
@@ -45,6 +47,7 @@ Builder.registerComponent(
         aspectRatio={100 / Number(props.aspectRatio)}
         autoplay={!Builder.isEditing && props.autoplay}
         controls={props.controls}
+        height={props.height || undefined}
         key={props.attributes?.key}
         loop={props.loop}
         muted={props.muted}
@@ -54,6 +57,7 @@ Builder.registerComponent(
         volume={
           props.overrideDefaultVolume && !props.muted ? Number(props.volume) / 100 : undefined
         }
+        width={props.width || undefined}
       />
     )
   },
@@ -66,8 +70,8 @@ Builder.registerComponent(
         name: 'type',
         type: 'enum',
         required: true,
-        enum: supportedVideoTypes,
-        defaultValue: DEFAULT_VIDEO_TYPE,
+        enum: [SupportedVideoTypes.YOUTUBE, SupportedVideoTypes.VIDEO],
+        defaultValue: SupportedVideoTypes.VIDEO,
       },
       {
         name: 'videoId',
@@ -144,6 +148,13 @@ Builder.registerComponent(
         defaultValue: 0,
       },
       {
+        name: 'playsinline',
+        type: 'boolean',
+        defaultValue: true,
+        helperText: 'Allows video to play inline on iOS',
+        friendlyName: 'Plays Inline',
+      },
+      {
         name: 'aspectRatio',
         type: 'range',
         friendlyName: 'Aspect Ratio',
@@ -152,11 +163,22 @@ Builder.registerComponent(
         defaultValue: String(DEFAULT_ASPECT_RATIO * 100),
       },
       {
-        name: 'playsinline',
-        type: 'boolean',
-        defaultValue: true,
-        helperText: 'Allows video to play inline on iOS',
-        friendlyName: 'Plays Inline',
+        name: 'fit',
+        type: 'enum',
+        enum: supportedVideoFitTypes,
+        helperText: 'How the video should fit within the parent element',
+      },
+      {
+        name: 'width',
+        type: 'string',
+        advanced: true,
+        defaultValue: '100%',
+      },
+      {
+        name: 'height',
+        type: 'string',
+        advanced: true,
+        defaultValue: '100%',
       },
     ],
   },
