@@ -27,8 +27,6 @@ import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
-import { UserReferralUrl } from './userReferralUrl'
-
 type PageUserProfile = { params: Awaited<PageProps['params']> } & {
   user: PageUserProfileUser
 }
@@ -161,15 +159,6 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
         <div>
           <NFTDisplay userActions={userActions} />
         </div>
-      </section>
-      <section>
-        <PageTitle className="mb-4" size="md">
-          Refer Your Friends
-        </PageTitle>
-        <PageSubTitle className="mb-5">
-          Send friends your unique referral code to encourage them to sign up and take action.
-        </PageSubTitle>
-        <UserReferralUrl referralId={user.referralId} />
       </section>
     </div>
   )
