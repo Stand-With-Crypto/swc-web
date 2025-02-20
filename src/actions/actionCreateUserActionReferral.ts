@@ -13,15 +13,12 @@ import { zodServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
+import { zodReferralId } from '@/validation/fields/zodReferrald'
 
 const logger = getLogger(`actionCreateUserActionReferral`)
 
 const zodUserActionReferralInput = z.object({
-  referralId: z
-    .string()
-    .length(12, 'Referral ID must be exactly 12 characters long')
-    // Zod's nanoid does not allows to specify a custom length for the id
-    .regex(/^[A-Za-z0-9_-]+$/, 'Referral ID contains invalid characters'),
+  referralId: zodReferralId,
   userId: z.string().uuid('Invalid user ID format'),
   /**
    * Calling the server action from Nextjs `after` may not have the client cookies.
