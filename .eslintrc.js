@@ -1,6 +1,3 @@
-// const pluginCypress = require('eslint-plugin-cypress/flat')
-// import pluginCypress from 'eslint-plugin-cypress/flat'
-
 /* eslint-env node */
 const sortImports = {
   groups: [
