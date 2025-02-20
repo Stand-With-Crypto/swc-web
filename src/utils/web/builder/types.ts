@@ -24,7 +24,9 @@ export interface BuilderComponentBaseProps {
   children?: React.ReactNode
   attributes?: BuilderComponentAttributes
   builderState?: {
-    state: BuilderState
+    state: BuilderState & {
+      locale?: string
+    }
   }
   builderBlock?: BuilderBlock
 }
