@@ -17,12 +17,9 @@ async function generatePollsAnswers() {
     }
   })
 
-  console.log(pollsAnswers)
-
   const workbook = xlsx.utils.book_new()
 
   pollsAnswers.forEach((poll, idx) => {
-    // Create worksheet
     const worksheet = xlsx.utils.aoa_to_sheet([[`Campaign Name: ${poll.campaignName}`]])
 
     // Add hyperlink to campaign name
@@ -32,7 +29,6 @@ async function generatePollsAnswers() {
       Tooltip: `View ${poll.campaignName} in Builder.io`,
     }
 
-    // Add answers data starting at A2
     const answersData = poll.answers.map(answer => ({
       Answer: answer.answer,
       'Is Other Answer': answer.isOtherAnswer,

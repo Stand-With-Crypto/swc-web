@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 
@@ -29,10 +31,10 @@ export function PollItem({
   const selectedAnswers = useWatch({ control, name: 'answers' })
 
   const isItemSelected = selectedAnswers.includes(value)
-  const isDisabled =
-    isFormDisabled || isMultiple
-      ? maxNumberOfOptions > 0 && selectedAnswers.length >= maxNumberOfOptions && !isItemSelected
-      : isItemSelected
+  const isDisabled = isMultiple
+    ? isFormDisabled ||
+      (maxNumberOfOptions > 0 && selectedAnswers.length >= maxNumberOfOptions && !isItemSelected)
+    : isFormDisabled || isItemSelected
 
   const isOtherSelected =
     selectedAnswers &&
@@ -58,7 +60,7 @@ export function PollItem({
       className={cn(
         'flex h-auto min-h-14 cursor-pointer flex-col justify-center gap-2 rounded-2xl bg-gray-100 px-4 py-2 text-base font-medium leading-6 text-muted-foreground hover:bg-gray-200',
         isItemSelected && 'text-foreground',
-        isDisabled && 'hover:none cursor-default',
+        isDisabled && 'cursor-default hover:bg-inherit',
       )}
       key={value}
     >

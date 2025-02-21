@@ -13,8 +13,8 @@ import { PollResultItem, PollResultItemOther } from './pollResultItem'
 
 interface PollResultsProps {
   currentPoll: SWCPoll
-  pollsResultsData: Record<string, PollResultsDataResponse>
-  userPollsData: PollsVotesFromUserResponse | undefined
+  pollsResults: Record<string, PollResultsDataResponse>
+  userPolls: PollsVotesFromUserResponse | undefined
   isLoading: boolean
   handleVoteAgain?: () => void
   shouldHideVoteAgain?: boolean
@@ -27,8 +27,8 @@ function getPercentage(totalVotes: number, optionVotes: number) {
 
 export function PollResults({
   currentPoll,
-  pollsResultsData,
-  userPollsData,
+  pollsResults,
+  userPolls,
   isLoading,
   handleVoteAgain,
   shouldHideVoteAgain,
@@ -42,21 +42,21 @@ export function PollResults({
   const maxNumberOfOptions = maxNumberOptionsSelected ?? 0
   const multiple = maxNumberOfOptions === 0 || maxNumberOfOptions > 1
 
-  const userVotes = userPollsData?.pollVote[pollId]
+  const userVotes = userPolls?.pollVote[pollId]
 
   const totalPollVotes = useMemo(
     () =>
-      pollsResultsData[pollId]?.computedAnswers.reduce(
+      pollsResults[pollId]?.computedAnswers.reduce(
         (acc: number, curr: any) => acc + curr.totalVotes,
         0,
       ),
-    [pollId, pollsResultsData],
+    [pollId, pollsResults],
   )
 
   const pollResultsList = useMemo(
     () =>
       pollList.map(option => {
-        const optionData = pollsResultsData[pollId]?.computedAnswers.find(
+        const optionData = pollsResults[pollId]?.computedAnswers.find(
           (answer: any) => answer.answer === option.value,
         )
 
@@ -76,12 +76,12 @@ export function PollResults({
           percentage,
         }
       }),
-    [pollList, pollsResultsData, pollId, totalPollVotes, userVotes, multiple],
+    [pollList, pollsResults, pollId, totalPollVotes, userVotes, multiple],
   )
 
   const pollResultsListWithOther = useMemo(
     () =>
-      pollsResultsData[pollId]?.computedAnswersWithOther
+      pollsResults[pollId]?.computedAnswersWithOther
         .filter(answer => !pollList.find(option => option.value === answer.answer))
         .map(otherAnswer => {
           const percentage = getPercentage(totalPollVotes, otherAnswer.totalVotes || 0)
@@ -100,7 +100,7 @@ export function PollResults({
             percentage,
           }
         }),
-    [multiple, pollId, pollList, pollsResultsData, totalPollVotes, userVotes?.answers],
+    [multiple, pollId, pollList, pollsResults, totalPollVotes, userVotes?.answers],
   )
 
   return (
@@ -146,7 +146,11 @@ export function PollResults({
           </div>
         )}
       </div>
-      {totalPollVotes && <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes</p>}
+      {totalPollVotes ? (
+        <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes</p>
+      ) : (
+        <p className="mt-2 text-sm text-gray-500">No votes yet</p>
+      )}
       {!shouldHideVoteAgain && (
         <Button className="px-0 pt-4 hover:no-underline" onClick={handleVoteAgain} variant="link">
           <ReloadIcon className="mr-2 h-4 w-4 scale-x-[-1]" /> {userVotes ? 'Vote again' : 'Vote'}

@@ -1,3 +1,5 @@
+'use client'
+
 import { PollResults } from '@/components/app/pagePolls/pollResults'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
@@ -5,16 +7,16 @@ import { SWCPoll } from '@/utils/shared/getSWCPolls'
 
 interface InactivePollsProps {
   inactivePolls: SWCPoll[]
-  pollsResultsData: Record<string, PollResultsDataResponse>
+  pollsResults: Record<string, PollResultsDataResponse>
   isLoading: boolean
-  userPollsData: PollsVotesFromUserResponse | undefined
+  userPolls: PollsVotesFromUserResponse | undefined
 }
 
 export function InactivePolls({
   inactivePolls,
-  pollsResultsData,
+  pollsResults,
   isLoading,
-  userPollsData,
+  userPolls,
 }: InactivePollsProps) {
   return (
     <div className="px-4">
@@ -29,9 +31,9 @@ export function InactivePolls({
                 currentPoll={poll}
                 isInactivePoll={true}
                 isLoading={isLoading}
-                pollsResultsData={pollsResultsData}
+                pollsResults={pollsResults}
                 shouldHideVoteAgain={true}
-                userPollsData={userPollsData}
+                userPolls={userPolls}
               />
             </div>
           ))}

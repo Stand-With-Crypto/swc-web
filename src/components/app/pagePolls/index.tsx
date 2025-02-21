@@ -2,9 +2,8 @@
 
 import { useEffect, useState, useTransition } from 'react'
 
-import { ActivePoll } from '@/components/app/pagePolls/activePoll'
+import { GeoGateContent } from '@/components/app/pagePolls/geoGatedPollsContent'
 import { InactivePolls } from '@/components/app/pagePolls/inactivePolls'
-import { PollResults } from '@/components/app/pagePolls/pollResults'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -30,7 +29,7 @@ export function PagePolls({
   const [isPendingVoteSubmissionTransaction, startVoteSubmissionTransaction] = useTransition()
   const { user, isUserProfileLoading, isLoggedIn } = useSession()
   const {
-    data: userPollsData,
+    data: userPolls,
     isLoading: isPollsVotesLoading,
     mutate: refreshPollsVotesFromUser,
   } = usePollsVotesFromUser(user?.id)
@@ -40,7 +39,6 @@ export function PagePolls({
     isLoading: isPollsResultsLoading,
   } = usePollsResultsData(pollsResultsData)
   const [showResults, setShowResults] = useState(false)
-  const [isVoteAgain, setIsVoteAgain] = useState(false)
 
   const handleShowResults = async () => {
     startVoteSubmissionTransaction(async () => {
@@ -52,7 +50,6 @@ export function PagePolls({
 
   const handleVoteAgain = () => {
     setShowResults(false)
-    setIsVoteAgain(true)
   }
 
   const isLoading =
@@ -61,8 +58,8 @@ export function PagePolls({
     isPollsResultsLoading ||
     isPendingVoteSubmissionTransaction
 
-  const hasAnyResults = Object.keys(pollsResultsData).length > 0
-  const hasUserVoted = typeof userPollsData?.pollVote[activePoll?.id ?? ''] !== 'undefined'
+  const hasAnyResults = Object.keys(pollsResults).length > 0
+  const hasUserVoted = typeof userPolls?.pollVote[activePoll?.id ?? ''] !== 'undefined'
 
   const shouldShowResults = showResults && hasAnyResults
 
@@ -91,33 +88,25 @@ export function PagePolls({
         </PageSubTitle>
       </section>
       <section className="container max-w-3xl">
-        {activePoll &&
-          (shouldShowResults ? (
-            <PollResults
-              currentPoll={activePoll}
-              handleVoteAgain={handleVoteAgain}
-              isLoading={isLoading}
-              pollsResultsData={pollsResults}
-              userPollsData={userPollsData}
-            />
-          ) : (
-            <ActivePoll
-              activePoll={activePoll}
-              handleShowResults={handleShowResults}
-              isLoading={isLoading}
-              isVoteAgain={isVoteAgain}
-              pollsResultsData={pollsResults}
-              userPollsData={userPollsData}
-            />
-          ))}
+        {activePoll && (
+          <GeoGateContent
+            activePoll={activePoll}
+            handleShowResults={handleShowResults}
+            handleVoteAgain={handleVoteAgain}
+            isLoading={isLoading}
+            pollsResults={pollsResults}
+            shouldShowResults={shouldShowResults}
+            userPolls={userPolls}
+          />
+        )}
       </section>
       {inactivePolls && (
         <section className="container max-w-3xl">
           <InactivePolls
             inactivePolls={inactivePolls}
             isLoading={isLoading}
-            pollsResultsData={pollsResults}
-            userPollsData={userPollsData}
+            pollsResults={pollsResults}
+            userPolls={userPolls}
           />
         </section>
       )}

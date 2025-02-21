@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { EyeIcon } from 'lucide-react'
 
-import { actionCreatePollVote } from '@/actions/actionCreatePollVote'
+import { actionCreateUserActionPoll } from '@/actions/actionCreateUserActionPoll'
 import { PollItem } from '@/components/app/pagePolls/pollItem'
 import { PollLegend } from '@/components/app/pagePolls/pollLegend'
 import { ProtectedSubmitButton } from '@/components/app/pagePolls/protectedSubmitButton'
@@ -17,19 +17,17 @@ import { SWCPoll } from '@/utils/shared/getSWCPolls'
 
 interface ActivePollProps {
   activePoll: SWCPoll
-  isVoteAgain: boolean
   handleShowResults: () => void
-  pollsResultsData: Record<string, PollResultsDataResponse>
-  userPollsData: PollsVotesFromUserResponse | undefined
+  pollsResults: Record<string, PollResultsDataResponse>
+  userPolls: PollsVotesFromUserResponse | undefined
   isLoading: boolean
 }
 
 export function ActivePoll({
   activePoll,
-  isVoteAgain,
   handleShowResults,
-  pollsResultsData,
-  userPollsData,
+  pollsResults,
+  userPolls,
   isLoading,
 }: ActivePollProps) {
   const {
@@ -44,7 +42,7 @@ export function ActivePoll({
   const [isInternalLoading, setIsInternalLoading] = useState(isLoading)
 
   const defaultValues = useMemo(() => {
-    const currentPollData = userPollsData?.pollVote[pollId]
+    const currentPollData = userPolls?.pollVote[pollId]
 
     if (!currentPollData) {
       return {
@@ -64,15 +62,15 @@ export function ActivePoll({
         currentPollData?.answers.find(currentOtherAnswer => currentOtherAnswer.isOtherAnswer)
           ?.answer ?? '',
     }
-  }, [pollId, userPollsData?.pollVote])
+  }, [pollId, userPolls?.pollVote])
 
   const totalPollVotes = useMemo(
     () =>
-      pollsResultsData[pollId]?.computedAnswers.reduce(
+      pollsResults[pollId]?.computedAnswers.reduce(
         (acc: number, curr: any) => acc + curr.totalVotes,
         0,
       ),
-    [pollId, pollsResultsData],
+    [pollId, pollsResults],
   )
 
   const form = useForm({
@@ -85,8 +83,9 @@ export function ActivePoll({
 
   const selectedAnswers = useWatch({ control, name: 'answers' })
 
-  const isFormDisabled = isSubmitting || isInternalLoading
-  const isSubmitDisabled = isFormDisabled || selectedAnswers.length < 1
+  const isFormDisabled = isSubmitting || isInternalLoading || !(!isLoading && isLoggedIn)
+  const isSubmitDisabled =
+    (isFormDisabled || selectedAnswers.length < 1) && !isLoading && isLoggedIn
 
   const activePollItems = useMemo(
     () =>
@@ -116,7 +115,7 @@ export function ActivePoll({
 
       setIsInternalLoading(true)
 
-      await actionCreatePollVote(pollData, isVoteAgain).catch(error => {
+      await actionCreateUserActionPoll(pollData).catch(error => {
         console.error('Error creating poll vote', error)
         setIsInternalLoading(false)
 
@@ -127,7 +126,7 @@ export function ActivePoll({
 
       return handleShowResults()
     },
-    [pollId, handleShowResults, isVoteAgain],
+    [pollId, handleShowResults],
   )
 
   useEffect(() => {

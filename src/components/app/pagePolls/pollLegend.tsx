@@ -1,3 +1,5 @@
+'use client'
+
 import { differenceInDays, format, isPast } from 'date-fns'
 
 export const PollLegend = ({

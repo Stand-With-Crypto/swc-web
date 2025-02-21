@@ -19,25 +19,22 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-const logger = getLogger(`actionCreatePollVote`)
+const logger = getLogger(`actionCreateUserActionPoll`)
 
 export type CreatePollVoteInput = {
   campaignName: string
   answers: { answer: string; isOtherAnswer: boolean }[]
 }
 
-export const actionCreatePollVote = withServerActionMiddleware(
-  'actionCreatePollVote',
+export const actionCreateUserActionPoll = withServerActionMiddleware(
+  'actionCreateUserActionPoll',
   withValidations(
     [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
-    actionCreatePollVoteWithoutMiddleware,
+    actionCreateUserActionPollWithoutMiddleware,
   ),
 )
 
-async function actionCreatePollVoteWithoutMiddleware(
-  input: CreatePollVoteInput,
-  isVoteAgain: boolean,
-) {
+async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVoteInput) {
   logger.info('triggered')
 
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
@@ -81,13 +78,18 @@ async function actionCreatePollVoteWithoutMiddleware(
   const campaignName = input.campaignName
   const actionType = UserActionType.POLL
 
-  let userAction = await prismaClient.userAction.findFirst({
+  const userAction = await prismaClient.userAction.findFirst({
     where: {
       actionType,
       campaignName,
       userId: user.id,
     },
+    include: {
+      userActionPoll: true,
+    },
   })
+
+  const isVoteAgain = !!userAction && !!userAction?.userActionPoll
 
   if (userAction && isVoteAgain) {
     await prismaClient.userActionPollAnswer.deleteMany({
@@ -146,7 +148,7 @@ async function actionCreatePollVoteWithoutMiddleware(
 
   await triggerRateLimiterAtMostOnce()
 
-  userAction = await prismaClient.userAction.create({
+  await prismaClient.userAction.create({
     data: {
       userActionPoll: {
         create: {
