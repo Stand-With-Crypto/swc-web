@@ -44,7 +44,7 @@ interface CommonProps {
   muted?: boolean
   /** Requires muted to be `true` to work */
   autoplay?: boolean
-  /** Allows video to play inline on iOS. Default is `false` */
+  /** Allows video to play inline on iOS. Default is `true` */
   playsinline?: boolean
   /** `undefined` uses default volume on all players  */
   volume?: number
@@ -83,7 +83,7 @@ export function VideoPlayer(props: VideoProps) {
     controls,
     loop,
     muted,
-    playsinline,
+    playsinline = true,
     volume,
   } = props
 
@@ -129,7 +129,7 @@ export function VideoPlayer(props: VideoProps) {
       controls={controls}
       fallback={loadingFallback ? <>{loadingFallback}</> : undefined}
       height={height}
-      light={autoplay && props.muted ? undefined : previewImage}
+      light={previewImage}
       loop={loop}
       muted={muted}
       onError={() => setError(true)}

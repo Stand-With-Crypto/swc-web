@@ -100,8 +100,7 @@ Builder.registerComponent(
         friendlyName: 'Poster Image',
         type: 'file',
         helperText:
-          'Image to display before the video plays. If Video type is Youtube, leave it empty to use the default thumbnail',
-        showIf: options => options.get('autoplay') === false,
+          'Image to display before the video plays. If Video type is Youtube and you want to use the default thumbnail, leave this field empty',
       },
       {
         name: 'muted',
@@ -155,6 +154,7 @@ Builder.registerComponent(
         defaultValue: true,
         helperText: 'Allows video to play inline on iOS',
         friendlyName: 'Plays Inline',
+        showIf: options => options.get('type') === 'video',
       },
       {
         name: 'aspectRatio',
@@ -169,6 +169,7 @@ Builder.registerComponent(
         type: 'enum',
         enum: supportedVideoFitTypes,
         helperText: 'How the video should fit within the parent element',
+        advanced: true,
       },
       {
         name: 'width',
