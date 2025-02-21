@@ -100,12 +100,6 @@ export function VideoPlayer(props: VideoProps) {
     })
   }
 
-  console.log({
-    url,
-    type,
-    error,
-  })
-
   if (!url || error) {
     return fallback || null
   }
