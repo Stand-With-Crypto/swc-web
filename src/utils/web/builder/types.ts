@@ -24,7 +24,14 @@ export interface BuilderComponentBaseProps {
   children?: React.ReactNode
   attributes?: BuilderComponentAttributes
   builderState?: {
-    state: BuilderState
+    state: BuilderState & {
+      locale?: string
+    }
   }
   builderBlock?: BuilderBlock
+}
+
+export interface BuilderInputTypeOptions {
+  set: (key: string, value: any) => void
+  get: (key: string) => any
 }
