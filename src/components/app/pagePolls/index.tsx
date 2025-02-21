@@ -87,7 +87,7 @@ export function PagePolls({
           )}
         </PageSubTitle>
       </section>
-      <section className="container max-w-3xl">
+      <section className="container mb-16 max-w-3xl">
         {activePoll && (
           <GeoGateContent
             activePoll={activePoll}
