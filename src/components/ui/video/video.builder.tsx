@@ -46,7 +46,7 @@ Builder.registerComponent(
         height={props.height || undefined}
         key={props.attributes?.key}
         loop={props.loop}
-        muted={props.muted}
+        muted={Builder.isEditing || props.muted}
         playsinline={props.playsinline}
         previewImage={props.posterImage}
         start={props.start}
@@ -134,6 +134,7 @@ Builder.registerComponent(
         defaultValue: true,
         helperText: 'Allow the video to be played in full screen',
         friendlyName: 'Allow Full Screen',
+        showIf: options => options.get('type') === 'youtube',
       },
       {
         name: 'start',
@@ -141,6 +142,7 @@ Builder.registerComponent(
         friendlyName: 'Start Time',
         helperText: 'The time in seconds at which the video should start playing',
         defaultValue: 0,
+        showIf: options => options.get('type') === 'youtube',
       },
       {
         name: 'playsinline',
