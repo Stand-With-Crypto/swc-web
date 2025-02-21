@@ -30,3 +30,8 @@ export interface BuilderComponentBaseProps {
   }
   builderBlock?: BuilderBlock
 }
+
+export interface BuilderInputTypeOptions {
+  set: (key: string, value: any) => void
+  get: (key: string) => any
+}

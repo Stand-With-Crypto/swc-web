@@ -7,6 +7,7 @@ import {
   SupportedLocale,
 } from '@/utils/shared/supportedLocales'
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
+import { BuilderInputTypeOptions } from '@/utils/web/builder/types'
 
 interface DateProps extends BuilderComponentBaseProps {
   date: string
@@ -18,6 +19,23 @@ interface DateProps extends BuilderComponentBaseProps {
   hour: Intl.DateTimeFormatOptions['hour']
   minute: Intl.DateTimeFormatOptions['minute']
   second: Intl.DateTimeFormatOptions['second']
+}
+
+// The FormattedDatetime component is a wrapper around the Intl.DateTimeFormat API
+// The component crashes if you pass a prop like day or month together with dateStyle or timeStyle
+// So we need to handle the change of these props in the Builder.io editor
+const handleStyleChange = (options: BuilderInputTypeOptions) => {
+  options.set('day', '')
+  options.set('month', '')
+  options.set('year', '')
+  options.set('hour', '')
+  options.set('minute', '')
+  options.set('second', '')
+}
+
+const handlePropChange = (options: BuilderInputTypeOptions) => {
+  options.set('dateStyle', '')
+  options.set('timeStyle', '')
 }
 
 Builder.registerComponent(
@@ -65,48 +83,56 @@ Builder.registerComponent(
         type: 'enum',
         enum: ['full', 'long', 'medium', 'short'],
         defaultValue: 'full',
+        onChange: handleStyleChange,
       },
       {
         name: 'timeStyle',
         type: 'enum',
         enum: ['full', 'long', 'medium', 'short'],
         defaultValue: 'full',
+        onChange: handleStyleChange,
       },
       {
         name: 'day',
         advanced: true,
         type: 'enum',
         enum: ['numeric', '2-digit'],
+        onChange: handlePropChange,
       },
       {
         name: 'month',
         advanced: true,
         type: 'enum',
         enum: ['numeric', '2-digit', 'long', 'short', 'narrow'],
+        onChange: handlePropChange,
       },
       {
         name: 'year',
         advanced: true,
         type: 'enum',
         enum: ['numeric', '2-digit'],
+        onChange: handlePropChange,
       },
       {
         name: 'hour',
         advanced: true,
         type: 'enum',
         enum: ['numeric', '2-digit'],
+        onChange: handlePropChange,
       },
       {
         name: 'minute',
         advanced: true,
         type: 'enum',
         enum: ['numeric', '2-digit'],
+        onChange: handlePropChange,
       },
       {
         name: 'second',
         advanced: true,
         type: 'enum',
         enum: ['numeric', '2-digit'],
+        onChange: handlePropChange,
       },
     ],
   },
