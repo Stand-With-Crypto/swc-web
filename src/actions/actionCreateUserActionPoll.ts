@@ -91,6 +91,8 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
 
   const isVoteAgain = !!userAction && !!userAction?.userActionPoll
 
+  await triggerRateLimiterAtMostOnce()
+
   if (userAction && isVoteAgain) {
     await prismaClient.userActionPollAnswer.deleteMany({
       where: {
@@ -103,8 +105,6 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
         id: userAction.id,
       },
     })
-
-    await triggerRateLimiterAtMostOnce()
 
     await prismaClient.userActionPoll.create({
       data: {

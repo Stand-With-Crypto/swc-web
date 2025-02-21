@@ -21,6 +21,7 @@ interface ActivePollProps {
   pollsResults: Record<string, PollResultsDataResponse>
   userPolls: PollsVotesFromUserResponse | undefined
   isLoading: boolean
+  shouldHideVotes?: boolean
 }
 
 export function ActivePoll({
@@ -29,6 +30,7 @@ export function ActivePoll({
   pollsResults,
   userPolls,
   isLoading,
+  shouldHideVotes,
 }: ActivePollProps) {
   const {
     id: pollId,
@@ -83,9 +85,9 @@ export function ActivePoll({
 
   const selectedAnswers = useWatch({ control, name: 'answers' })
 
-  const isFormDisabled = isSubmitting || isInternalLoading || !(!isLoading && isLoggedIn)
-  const isSubmitDisabled =
-    (isFormDisabled || selectedAnswers.length < 1) && !isLoading && isLoggedIn
+  const isFormDisabled =
+    shouldHideVotes || isSubmitting || isInternalLoading || !(!isLoading && isLoggedIn)
+  const isSubmitDisabled = isFormDisabled || selectedAnswers.length < 1
 
   const activePollItems = useMemo(
     () =>
@@ -178,11 +180,13 @@ export function ActivePoll({
           <ProtectedSubmitButton isDisabled={isSubmitDisabled} />
         </form>
       </Form>
-      <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes • Vote to see result</p>
-      {!isLoading && isLoggedIn && (
+      {!isFormDisabled && (
+        <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes • Vote to see result</p>
+      )}
+      {totalPollVotes > 0 && (
         <Button
           className="px-0 pt-4 hover:no-underline"
-          disabled={formState.isSubmitting || isInternalLoading}
+          disabled={isFormDisabled}
           onClick={handleShowResults}
           variant="link"
         >

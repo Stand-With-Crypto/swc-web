@@ -64,10 +64,10 @@ export function PagePolls({
   const shouldShowResults = showResults && hasAnyResults
 
   useEffect(() => {
-    if (hasUserVoted && isLoggedIn) {
+    if (hasUserVoted && isLoggedIn && hasAnyResults) {
       setShowResults(true)
     }
-  }, [hasUserVoted, isLoggedIn, setShowResults])
+  }, [hasAnyResults, hasUserVoted, isLoggedIn, setShowResults])
 
   return (
     <div className="standard-spacing-from-navbar container">

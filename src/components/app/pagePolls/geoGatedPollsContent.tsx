@@ -28,17 +28,17 @@ export function GeoGateContent({
   return (
     <GeoGate
       unavailableContent={
-        <PollResults
-          currentPoll={activePoll}
-          isInactivePoll
+        <ActivePoll
+          activePoll={activePoll}
+          handleShowResults={handleShowResults}
           isLoading={isLoading}
           pollsResults={pollsResults}
-          shouldHideVoteAgain
+          shouldHideVotes
           userPolls={userPolls}
         />
       }
     >
-      {!shouldShowResults ? (
+      {shouldShowResults ? (
         <PollResults
           currentPoll={activePoll}
           handleVoteAgain={handleVoteAgain}

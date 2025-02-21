@@ -60,7 +60,7 @@ export function PollItem({
       className={cn(
         'flex h-auto min-h-14 cursor-pointer flex-col justify-center gap-2 rounded-2xl bg-gray-100 px-4 py-2 text-base font-medium leading-6 text-muted-foreground hover:bg-gray-200',
         isItemSelected && 'text-foreground',
-        isDisabled && 'cursor-default hover:bg-inherit',
+        isDisabled && 'cursor-default hover:bg-gray-100',
       )}
       key={value}
     >

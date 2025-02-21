@@ -13,7 +13,7 @@ export function ProtectedSubmitButton({ isDisabled }: { isDisabled: boolean }) {
       }
       bypassCountryCheck={false}
     >
-      <Button disabled={isDisabled} size="lg" variant="primary-cta">
+      <Button size="lg" variant="primary-cta">
         Sign up to vote
       </Button>
     </LoginDialogWrapper>
