@@ -44,7 +44,7 @@ export default function ReferralCompletedEmail({
         <Heading gutterBottom="md">Your voice matters—now amplify it!</Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Hey {name ?? 'Advocate'},
+          Hey {name || 'Advocate'},
           <br />
           <br />
           You just completed your referral—nice work! 🚀 Now, let’s keep the momentum going. Every
