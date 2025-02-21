@@ -6,8 +6,8 @@ import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionF
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { SupportedVideoTypes, VideoPlayer } from '@/components/ui/video'
 import { cn } from '@/utils/web/cn'
-import { VideoPlayer } from '@/components/ui/video'
 
 interface HeroImageProps {
   children: ReactNode
@@ -22,11 +22,10 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
   return (
     <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
       <VideoPlayer
+        autoplay
         className={cn('absolute left-0 top-0')}
-        type="video"
-        url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
-        fit="cover"
         fallback={fallback}
+        fit="cover"
         loadingFallback={
           <NextImage
             alt="loading"
@@ -36,9 +35,10 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
           />
         }
-        muted
-        autoplay
         loop
+        muted
+        type={SupportedVideoTypes.VIDEO}
+        url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
       />
 
       <div

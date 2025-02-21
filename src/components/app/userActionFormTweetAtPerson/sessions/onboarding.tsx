@@ -4,8 +4,8 @@ import { TweetAtPersonSectionNames } from '@/components/app/userActionFormTweetA
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { SupportedVideoTypes, VideoPlayer } from '@/components/ui/video'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { VideoPlayer } from '@/components/ui/video'
 
 export function OnboardingTweetAtPersonCampaign({
   goToSection,
@@ -13,10 +13,8 @@ export function OnboardingTweetAtPersonCampaign({
   return (
     <div className="flex flex-col items-center justify-center pb-8">
       <VideoPlayer
-        type="video"
-        url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
+        autoplay
         className="max-h-[266px] max-w-[454px] overflow-hidden rounded-lg"
-        fit="cover"
         fallback={
           <NextImage
             alt="Pizza Day"
@@ -26,9 +24,11 @@ export function OnboardingTweetAtPersonCampaign({
             width={454}
           />
         }
-        autoplay
-        muted
+        fit="cover"
         loop
+        muted
+        type={SupportedVideoTypes.VIDEO}
+        url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
       />
 
       <div className="mt-4 space-y-2">
