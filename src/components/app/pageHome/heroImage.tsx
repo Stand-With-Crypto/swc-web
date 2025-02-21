@@ -6,7 +6,7 @@ import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionF
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { SupportedVideoTypes, VideoPlayer } from '@/components/ui/video'
+import { VideoPlayer } from '@/components/ui/video'
 import { cn } from '@/utils/web/cn'
 
 interface HeroImageProps {
@@ -37,7 +37,7 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
         }
         loop
         muted
-        type={SupportedVideoTypes.VIDEO}
+        type="video"
         url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
       />
 

@@ -2,16 +2,10 @@ import { Builder } from '@builder.io/react'
 
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 
-import {
-  DEFAULT_ASPECT_RATIO,
-  PlayerType,
-  supportedVideoFitTypes,
-  SupportedVideoTypes,
-  VideoPlayer,
-} from '.'
+import { DEFAULT_ASPECT_RATIO, PlayerType, supportedVideoFitTypes, VideoPlayer } from '.'
 
 interface Props extends BuilderComponentBaseProps {
-  type: SupportedVideoTypes
+  type: 'youtube' | 'video'
   video?: string
   videoId?: string
   aspectRatio: string
@@ -33,10 +27,10 @@ Builder.registerComponent(
   (props: Props) => {
     let playerType: PlayerType
 
-    if (props.type === SupportedVideoTypes.YOUTUBE && props.videoId) {
-      playerType = { type: SupportedVideoTypes.YOUTUBE, videoId: props.videoId }
-    } else if (props.type === SupportedVideoTypes.VIDEO && props.video) {
-      playerType = { type: SupportedVideoTypes.VIDEO, url: props.video }
+    if (props.type === 'youtube' && props.videoId) {
+      playerType = { type: 'youtube', videoId: props.videoId }
+    } else if (props.type === 'video' && props.video) {
+      playerType = { type: 'video', url: props.video }
     } else {
       return null
     }
@@ -72,8 +66,8 @@ Builder.registerComponent(
         name: 'type',
         type: 'enum',
         required: true,
-        enum: [SupportedVideoTypes.YOUTUBE, SupportedVideoTypes.VIDEO],
-        defaultValue: SupportedVideoTypes.VIDEO,
+        enum: ['youtube', 'video'],
+        defaultValue: 'video',
       },
       {
         name: 'videoId',

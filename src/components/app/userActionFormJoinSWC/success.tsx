@@ -1,7 +1,7 @@
 import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { NextImage } from '@/components/ui/image'
-import { SupportedVideoTypes, VideoPlayer } from '@/components/ui/video'
+import { VideoPlayer } from '@/components/ui/video'
 
 export const UserActionFormJoinSWCSuccess = () => {
   const imageFallback = (
@@ -25,7 +25,7 @@ export const UserActionFormJoinSWCSuccess = () => {
           height={300}
           loop
           muted
-          type={SupportedVideoTypes.VIDEO}
+          type="video"
           url="/actionTypeVideos/swca_join.mp4"
           width={300}
         />

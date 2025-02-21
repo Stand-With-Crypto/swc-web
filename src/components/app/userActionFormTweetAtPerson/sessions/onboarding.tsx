@@ -4,7 +4,7 @@ import { TweetAtPersonSectionNames } from '@/components/app/userActionFormTweetA
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedVideoTypes, VideoPlayer } from '@/components/ui/video'
+import { VideoPlayer } from '@/components/ui/video'
 import { UseSectionsReturn } from '@/hooks/useSections'
 
 export function OnboardingTweetAtPersonCampaign({
@@ -27,7 +27,7 @@ export function OnboardingTweetAtPersonCampaign({
         fit="cover"
         loop
         muted
-        type={SupportedVideoTypes.VIDEO}
+        type="video"
         url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
       />
 

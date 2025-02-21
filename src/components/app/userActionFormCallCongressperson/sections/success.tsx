@@ -1,7 +1,7 @@
 import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { NextImage } from '@/components/ui/image'
-import { SupportedVideoTypes, VideoPlayer } from '@/components/ui/video'
+import { VideoPlayer } from '@/components/ui/video'
 
 export const UserActionFormCallCongresspersonSuccess = () => {
   const ImageFallback = (
@@ -25,7 +25,7 @@ export const UserActionFormCallCongresspersonSuccess = () => {
           height={300}
           loop
           muted
-          type={SupportedVideoTypes.VIDEO}
+          type="video"
           url="/actionTypeVideos/swca_call.mp4"
           width={300}
         />

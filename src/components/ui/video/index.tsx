@@ -10,20 +10,15 @@ import { cn } from '@/utils/web/cn'
 // Lazy load the ReactPlayer component to avoid hydration issues
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
-export enum SupportedVideoTypes {
-  YOUTUBE = 'youtube',
-  VIDEO = 'video',
-}
-
 export const supportedVideoFitTypes = ['cover', 'contain', 'fill'] as const
 
 interface YoutubePlayerType {
-  type: SupportedVideoTypes.YOUTUBE
+  type: 'youtube'
   videoId: string
 }
 
 interface VideoPlayerType {
-  type: SupportedVideoTypes.VIDEO
+  type: 'video'
   url: string
 }
 
@@ -88,11 +83,11 @@ export function VideoPlayer(props: VideoProps) {
   } = props
 
   let url: string | undefined
-  if (type === SupportedVideoTypes.YOUTUBE) {
+  if (type === 'youtube') {
     // Using nocookie player to reduce the amount of console warnings
     // https://github.com/cookpete/react-player/issues/1869
     url = `https://www.youtube-nocookie.com/embed/${props.videoId}`
-  } else if (type === SupportedVideoTypes.VIDEO) {
+  } else if (type === 'video') {
     url = props.url
   } else {
     Sentry.captureMessage(`Unsupported player type`, {
@@ -104,6 +99,12 @@ export function VideoPlayer(props: VideoProps) {
       },
     })
   }
+
+  console.log({
+    url,
+    type,
+    error,
+  })
 
   if (!url || error) {
     return fallback || null
