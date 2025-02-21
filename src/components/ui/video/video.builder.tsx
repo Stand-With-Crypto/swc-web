@@ -33,10 +33,12 @@ Builder.registerComponent(
   (props: Props) => {
     let playerType: PlayerType
 
-    if (props.type === 'youtube') {
-      playerType = { type: SupportedVideoTypes.YOUTUBE, videoId: props.videoId! }
+    if (props.type === SupportedVideoTypes.YOUTUBE && props.videoId) {
+      playerType = { type: SupportedVideoTypes.YOUTUBE, videoId: props.videoId }
+    } else if (props.type === SupportedVideoTypes.VIDEO && props.video) {
+      playerType = { type: SupportedVideoTypes.VIDEO, url: props.video }
     } else {
-      playerType = { type: SupportedVideoTypes.VIDEO, url: props.video! }
+      return null
     }
 
     return (
@@ -45,7 +47,7 @@ Builder.registerComponent(
         {...playerType}
         allowFullScreen={props.allowFullScreen}
         aspectRatio={100 / Number(props.aspectRatio)}
-        autoplay={!Builder.isEditing && props.autoplay}
+        autoplay={props.autoplay}
         controls={props.controls}
         height={props.height || undefined}
         key={props.attributes?.key}
