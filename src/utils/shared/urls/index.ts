@@ -49,7 +49,9 @@ export const getIntlUrls = (
       const tabPrefix =
         params?.tab === RecentActivityAndLeaderboardTabs.LEADERBOARD
           ? '/community/leaderboard'
-          : '/community'
+          : params?.tab === RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+            ? '/community/referrals'
+            : '/community'
 
       if (!params) {
         return `${countryPrefix}${tabPrefix}`
@@ -76,7 +78,7 @@ export const getIntlUrls = (
       const pageNum = params?.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${countryPrefix}/referrals${pageSuffix}`
+      return `${countryPrefix}/community/referrals${pageSuffix}`
     },
   }
 }

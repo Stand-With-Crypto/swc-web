@@ -4,26 +4,27 @@ import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import {
+  PAGE_LEADERBOARD_DESCRIPTION,
+  PAGE_LEADERBOARD_TITLE,
+  PageLeaderboard,
+  PageLeaderboardInferredProps,
+} from '@/components/app/pageLeaderboard'
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
-import { PageReferrals } from '@/components/app/pageReferrals'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 export const dynamicParams = true
 
-const TOTAL_PREGENERATED_PAGES =
-  COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS].totalPages
-
 type Props = PageProps<{ page: string[] }>
 
 export async function generateMetadata(_props: Props): Promise<Metadata> {
   return generateMetadataDetails({
-    title: 'District Referral Leaderboard',
-    description: 'See which districts are leading in referrals.',
+    title: PAGE_LEADERBOARD_TITLE,
+    description: PAGE_LEADERBOARD_DESCRIPTION,
   })
 }
 
@@ -40,10 +41,12 @@ const validatePageNum = ([pageParam]: (string | undefined)[]) => {
 }
 
 export async function generateStaticParams() {
-  return flatten(times(TOTAL_PREGENERATED_PAGES).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  const { totalPregeneratedPages } =
+    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
-export default async function ReferralsPage(props: Props) {
+export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   const { countryCode, page } = params
@@ -59,11 +62,14 @@ export default async function ReferralsPage(props: Props) {
     offset,
   })
 
+  const dataProps: PageLeaderboardInferredProps = {
+    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+    leaderboardData,
+    sumDonationsByUser: undefined,
+    publicRecentActivity: undefined,
+  }
+
   return (
-    <PageReferrals
-      countryCode={countryCode as SupportedCountryCodes}
-      leaderboardData={leaderboardData}
-      page={pageNum}
-    />
+    <PageLeaderboard {...dataProps} countryCode={countryCode} offset={offset} pageNum={pageNum} />
   )
 }

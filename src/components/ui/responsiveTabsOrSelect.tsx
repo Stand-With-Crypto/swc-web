@@ -29,9 +29,9 @@ export function ResponsiveTabsOrSelect({ defaultValue, options, analytics }: Pro
   return (
     <Tabs analytics={analytics} onValueChange={setValue} value={value}>
       {/* Mobile: Select */}
-      <div className="md:hidden">
+      <div className="sm:hidden">
         <Select onValueChange={setValue} value={value}>
-          <SelectTrigger className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary text-base font-semibold">
+          <SelectTrigger className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary px-4 text-base font-semibold">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="rounded-2xl font-bold">
@@ -48,7 +48,7 @@ export function ResponsiveTabsOrSelect({ defaultValue, options, analytics }: Pro
       </div>
 
       {/* Desktop: TabsList */}
-      <div className="mb-8 hidden text-center md:mb-4 md:block">
+      <div className="mb-8 hidden text-center sm:mb-4 sm:block">
         <TabsList className="mx-auto">
           {options.map(option => (
             <TabsTrigger key={option.value} value={option.value}>
