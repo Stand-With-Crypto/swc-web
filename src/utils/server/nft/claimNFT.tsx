@@ -116,6 +116,7 @@ export async function claimNFT(
   userAction: UserActionToClaim,
   userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
   config: Config = {},
+  tenantId?: string,
 ) {
   const hydratedConfig = {
     skipTransactionFeeCheck: false,
@@ -152,7 +153,7 @@ export async function claimNFT(
     throw Error(`Action ${userAction.id} for campaign ${campaignName} already has an NFT mint.`)
   }
 
-  const tenantId = await getTenantId()
+  const tenant = tenantId ?? (await getTenantId())
 
   const action = await prismaClient.userAction.update({
     where: { id: userAction.id },
@@ -166,7 +167,7 @@ export async function claimNFT(
           contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0),
-          tenantId,
+          tenantId: tenant,
         },
       },
     },

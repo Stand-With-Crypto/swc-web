@@ -140,9 +140,14 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       await step.run(`script.claim-nfts-${batchNum}`, async () => {
         await Promise.all(
           userActionBatch.map(userAction =>
-            claimNFT(userAction, userAction.user.primaryUserCryptoAddress!, {
-              skipTransactionFeeCheck: true,
-            }),
+            claimNFT(
+              userAction,
+              userAction.user.primaryUserCryptoAddress!,
+              {
+                skipTransactionFeeCheck: true,
+              },
+              userAction.user.tenantId,
+            ),
           ),
         )
       })
