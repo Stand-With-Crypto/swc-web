@@ -12,8 +12,15 @@ import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
 import { USStateCode } from '@/utils/shared/usStateUtils'
+import { cn } from '@/utils/web/cn'
 
-function ReferralsCounterContent() {
+interface ReferralsCounterContentProps {
+  className?: string
+}
+
+function ReferralsCounterContent(props: ReferralsCounterContentProps) {
+  const { className } = props
+
   const userResponse = useApiResponseForUserFullProfileInfo({
     refreshInterval: 1000 * 60 * 1, // 1 minute
   })
@@ -70,7 +77,7 @@ function ReferralsCounterContent() {
   ])
 
   return (
-    <div className="flex w-full gap-4">
+    <div className={cn('flex w-full gap-4', className)}>
       <div className="flex w-full flex-col items-start justify-between gap-10 rounded-2xl bg-primary-cta p-4 text-white">
         <p className="font-medium">Your referrals</p>
         {userResponse.isLoading ? (
@@ -88,7 +95,7 @@ function ReferralsCounterContent() {
   )
 }
 
-export function ReferralsCounter() {
+export function ReferralsCounter(props: ReferralsCounterContentProps) {
   const { isLoggedIn, isLoading } = useSession()
   const hasHydrated = useHasHydrated()
 
@@ -96,5 +103,5 @@ export function ReferralsCounter() {
     return null
   }
 
-  return <ReferralsCounterContent />
+  return <ReferralsCounterContent {...props} />
 }

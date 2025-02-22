@@ -11,7 +11,7 @@ export function UserActionFormRefer() {
 
   return (
     <UserActionFormLayout className="min-h-max">
-      <UserActionFormLayout.Container className="h-auto items-center justify-between">
+      <UserActionFormLayout.Container className="h-auto items-center justify-around">
         <div className="flex w-full flex-col gap-2 text-center">
           <div>
             <PageTitle size="sm">Invite a friend to join</PageTitle>
@@ -24,7 +24,7 @@ export function UserActionFormRefer() {
 
         <UserReferralUrl referralId={referralId} />
 
-        <ReferralsCounter />
+        <ReferralsCounter className="flex-col md:flex-row" />
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
   )
