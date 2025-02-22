@@ -7,10 +7,21 @@ import { DistrictsLeaderboardRow } from '@/components/app/pageReferrals/district
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { USStateCode } from '@/utils/shared/usStateUtils'
+
+function Heading() {
+  return (
+    <div className="flex items-center justify-between">
+      <p className="pl-4 text-lg font-bold">Your district</p>
+      <p className="text-fontcolor-muted">Advocates</p>
+    </div>
+  )
+}
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -34,6 +45,8 @@ interface YourDistrictRankContentProps {
 
 function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   const { stateCode, districtNumber } = props
+  const countryCode = useCountryCode()
+
   const { setAddress, address } = useMutableCurrentUserAddress()
 
   const districtRankingResponse = useGetDistrictRank({
@@ -44,7 +57,7 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   if (districtRankingResponse.isLoading) {
     return (
       <div className="space-y-3">
-        <p className="pl-4 text-lg font-bold">Your district</p>
+        <Heading />
         <Skeleton className="h-12 w-full bg-primary-cta/10" />
       </div>
     )
@@ -75,10 +88,11 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
 
   return (
     <div className="space-y-3">
-      <p className="pl-4 text-lg font-bold">Your district</p>
+      <Heading />
       <DistrictsLeaderboardRow
         count={count}
         district={districtNumber ?? ''}
+        locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
         rank={rank ?? 0}
         state={stateCode}
         variant="highlight"
@@ -121,7 +135,7 @@ export function SuspenseYourDistrictRank() {
   if (districtResponse.isLoading) {
     return (
       <div className="space-y-3">
-        <p className="pl-4 text-lg font-bold">Your district</p>
+        <Heading />
         <Skeleton className="h-12 w-full bg-primary-cta/10" />
       </div>
     )

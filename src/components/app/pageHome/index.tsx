@@ -148,7 +148,7 @@ export function PageHome({
                       See which district has the most number of advocates.
                     </PageSubTitle>
                     <YourDistrictRank />
-                    <DistrictsLeaderboard data={leaderboardData} />
+                    <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper
                         authenticatedContent={

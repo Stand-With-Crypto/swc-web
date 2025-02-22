@@ -24,7 +24,7 @@ export function PaginatedDistrictsLeaderboard({
 
   return (
     <div className="space-y-6">
-      <DistrictsLeaderboard data={data} />
+      <DistrictsLeaderboard countryCode={countryCode} data={data} />
       <div className="flex justify-center">
         <PaginationLinks
           currentPageNumber={page}
