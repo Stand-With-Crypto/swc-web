@@ -18,11 +18,8 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
   const { referralId, className } = props
 
   const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
-  const fullUrl = externalUrls.swcReferralUrl({ referralId: props.referralId })
-  const presentationUrl = externalUrls
-    .swcReferralUrl({ referralId })
-    .replace('https://www.', '')
-    .replace('/join/', '/join/\n')
+  const fullUrl = externalUrls.swcReferralUrl({ referralId })
+  const presentationUrl = fullUrl.replace(/https?:\/\/(www\.)?/, '').replace('/join/', '/join/\n')
 
   const handleCopy = () => handleCopyToClipboard(fullUrl)
 

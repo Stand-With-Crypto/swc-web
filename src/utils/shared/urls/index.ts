@@ -116,8 +116,7 @@ export const externalUrls = {
   twitter: () => 'https://twitter.com/standwithcrypto',
   youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
   swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
-  swcReferralUrl: ({ referralId }: { referralId: string }) =>
-    `https://www.standwithcrypto.org/join/${referralId}`,
+  swcReferralUrl: ({ referralId }: { referralId: string }) => fullUrl(`/join/${referralId}`),
   swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
 }
 
