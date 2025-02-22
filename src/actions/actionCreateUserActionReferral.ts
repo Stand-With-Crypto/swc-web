@@ -135,5 +135,9 @@ export async function actionCreateUserActionReferral(input: Input) {
   }
 
   waitUntil(beforeFinish())
-  return { user: getClientUser(user), wasActionCreated: !existingReferAction }
+  return {
+    user: getClientUser(user),
+    wasActionCreated: !existingReferAction,
+    action: existingReferAction,
+  }
 }
