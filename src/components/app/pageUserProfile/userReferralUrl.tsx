@@ -2,6 +2,7 @@
 import { Copy } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
@@ -16,7 +17,7 @@ interface UserReferralUrlProps {
 export function UserReferralUrl(props: UserReferralUrlProps) {
   const { referralId, className } = props
 
-  const [_, handleCopyToClipboard] = useCopyTextToClipboard()
+  const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
   const fullUrl = externalUrls.swcReferralUrl({ referralId: props.referralId })
   const presentationUrl = externalUrls
     .swcReferralUrl({ referralId })
@@ -41,9 +42,18 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
           {presentationUrl}
         </span>
 
-        <div className="rounded-full p-4 hover:bg-secondary">
-          <Copy height={26} width={26} />
-        </div>
+        <TooltipProvider>
+          <Tooltip open={hasCopied}>
+            <TooltipTrigger asChild>
+              <div className="rounded-full p-4 hover:bg-secondary">
+                <Copy height={26} width={26} />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-xs" side="top">
+              <p className="text-sm font-normal tracking-normal">Copied to clipboard</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </Button>
     </div>
   )
