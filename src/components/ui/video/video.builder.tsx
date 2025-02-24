@@ -25,13 +25,19 @@ interface Props extends BuilderComponentBaseProps {
 
 Builder.registerComponent(
   (props: Props) => {
-    let playerType: PlayerType
+    const getPlayerType = (): PlayerType | undefined => {
+      if (props.type === 'youtube' && props.videoId) {
+        return { type: 'youtube', videoId: props.videoId }
+      }
 
-    if (props.type === 'youtube' && props.videoId) {
-      playerType = { type: 'youtube', videoId: props.videoId }
-    } else if (props.type === 'video' && props.video) {
-      playerType = { type: 'video', url: props.video }
-    } else {
+      if (props.type === 'video' && props.video) {
+        return { type: 'video', url: props.video }
+      }
+    }
+
+    const playerType = getPlayerType()
+
+    if (!playerType) {
       return null
     }
 

@@ -82,14 +82,17 @@ export function VideoPlayer(props: VideoProps) {
     volume,
   } = props
 
-  let url: string | undefined
-  if (type === 'youtube') {
-    // Using nocookie player to reduce the amount of console warnings
-    // https://github.com/cookpete/react-player/issues/1869
-    url = `https://www.youtube-nocookie.com/embed/${props.videoId}`
-  } else if (type === 'video') {
-    url = props.url
-  } else {
+  const getUrl = () => {
+    if (type === 'youtube') {
+      // Using nocookie player to reduce the amount of console warnings
+      // https://github.com/cookpete/react-player/issues/1869
+      return `https://www.youtube-nocookie.com/embed/${props.videoId}`
+    }
+
+    if (type === 'video') {
+      return props.url
+    }
+
     Sentry.captureMessage(`Unsupported player type`, {
       extra: {
         props,
@@ -99,6 +102,8 @@ export function VideoPlayer(props: VideoProps) {
       },
     })
   }
+
+  const url = getUrl()
 
   if (!url || error) {
     return fallback || null
