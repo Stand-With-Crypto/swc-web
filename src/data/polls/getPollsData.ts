@@ -1,6 +1,8 @@
 import { UserActionType } from '@prisma/client'
 
+import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { SWCPoll } from '@/utils/shared/getSWCPolls'
 
 export interface PollResultsDataResponse {
   campaignName: string
@@ -18,6 +20,13 @@ export interface PollResultsDataResponse {
     totalVotes: number
     isOtherAnswer: boolean
   }[]
+}
+
+export interface PollsWithResults {
+  pollData: {
+    id: string
+  } & SWCPoll['data']
+  computedAnswers: PollResultsDataResponse['computedAnswers']
 }
 
 export interface PollsVotesFromUserResponse {
@@ -65,13 +74,11 @@ export async function getPollsResultsData(): Promise<Record<string, PollResultsD
         }
       }
 
-      // Add new answers to existing campaign
       acc[campaignName].answers = [
         ...acc[campaignName].answers,
         ...processAnswers(poll.userActionPollAnswers),
       ]
 
-      // Recompute vote totals for this campaign
       const computedAnswers = acc[campaignName].answers.reduce<
         Array<{ answer: string; totalVotes: number; isOtherAnswer: boolean }>
       >((computed, { answer, isOtherAnswer }) => {
@@ -147,4 +154,57 @@ export async function getPollsVotesFromUser(userId: string): Promise<PollsVotesF
   )
 
   return { pollVote: groupedAnswersByCampaignName }
+}
+
+export async function getPollsWithAbsoluteResults(): Promise<PollsWithResults[]> {
+  const builderIoPolls = await getPolls()
+  const pollsResultsData = await getPollsResultsData()
+
+  if (!builderIoPolls) {
+    return []
+  }
+
+  const pollsWithResults = builderIoPolls.map(poll => {
+    const pollResults = pollsResultsData[poll.id] || {
+      computedAnswers: [],
+      computedAnswersWithOther: [],
+    }
+
+    const allAnswers = poll.data.pollList.map(answer => ({
+      answer: answer.value,
+      displayName: answer.displayName,
+      isOtherAnswer: false,
+      totalVotes: 0,
+    }))
+
+    const computedAnswersMap = new Map<
+      string,
+      { answer: string; displayName: string; isOtherAnswer: boolean; totalVotes: number }
+    >()
+
+    allAnswers.forEach(answer => {
+      computedAnswersMap.set(answer.answer, answer)
+    })
+
+    pollResults.computedAnswers.forEach(({ answer, isOtherAnswer, totalVotes }) => {
+      if (computedAnswersMap.has(answer)) {
+        computedAnswersMap.set(answer, {
+          ...computedAnswersMap.get(answer)!,
+          totalVotes,
+        })
+      } else {
+        computedAnswersMap.set(answer, { answer, displayName: answer, isOtherAnswer, totalVotes })
+      }
+    })
+
+    return {
+      pollData: {
+        ...poll.data,
+        id: poll.id,
+      },
+      computedAnswers: Array.from(computedAnswersMap.values()),
+    }
+  })
+
+  return pollsWithResults
 }
