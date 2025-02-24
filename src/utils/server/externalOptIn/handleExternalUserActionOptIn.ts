@@ -121,6 +121,7 @@ export async function handleExternalUserActionOptIn(
   input: Input,
 ): Promise<ExternalUserActionOptInResponse<ExternalUserActionOptInResult>> {
   const { emailAddress, cryptoAddress, optInType, campaignName, countryCode } = input
+  logger.info(`Received: ${countryCode ?? 'undefined'} FROM CB`)
   // TODO (@twistershark): This needs to be dynamic after @ydruffin-cb updates the payload on CB side
   const tenantId = countryCode?.toLowerCase() || DEFAULT_SUPPORTED_COUNTRY_CODE
   const actionType = UserActionType.OPT_IN
