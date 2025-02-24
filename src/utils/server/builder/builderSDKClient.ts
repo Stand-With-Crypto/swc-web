@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { builder } from '@builder.io/sdk'
 
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'

@@ -1,3 +1,5 @@
+'use server'
+
 import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
@@ -51,9 +53,7 @@ export interface NormalizedNews {
   url: string
 }
 
-export const NEWS_LIST_LIMIT = 10
-
-async function getAllNewsWithOffset(offset: number) {
+async function getAllNewsWithOffset(offset: number, limit: number) {
   return await pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.NEWS, {
@@ -69,7 +69,7 @@ async function getAllNewsWithOffset(offset: number) {
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
         fields: 'data,createdDate,id',
-        limit: NEWS_LIST_LIMIT,
+        limit,
         offset,
       }) as Promise<Array<NewsData>>,
     {
@@ -84,11 +84,11 @@ async function getAllNewsWithOffset(offset: number) {
   })
 }
 
-export async function getNewsList(page = 0): Promise<NormalizedNews[]> {
+export async function getNewsList(page = 0, limit = 10): Promise<NormalizedNews[]> {
   try {
-    const offset = page * NEWS_LIST_LIMIT
+    const offset = page * limit
 
-    const news = await getAllNewsWithOffset(offset)
+    const news = await getAllNewsWithOffset(offset, limit)
 
     return news.map(normalizeNewsListItem).filter(Boolean)
   } catch (error) {
@@ -99,11 +99,11 @@ export async function getNewsList(page = 0): Promise<NormalizedNews[]> {
   }
 }
 
-export function isInternalNews(news: News) {
+function isInternalNews(news: News) {
   return news.type === 'internal'
 }
 
-export function isExternalNews(news: News) {
+function isExternalNews(news: News) {
   return news.type === 'external'
 }
 

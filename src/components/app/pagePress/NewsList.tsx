@@ -8,16 +8,14 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
-import {
-  getNewsList,
-  NEWS_LIST_LIMIT,
-  NormalizedNews,
-} from '@/utils/server/builder/models/data/news'
+import { getNewsList, NormalizedNews } from '@/utils/server/builder/models/data/news'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 interface NewsListProps {
   initialNews: NormalizedNews[]
 }
+
+const NEWS_LIST_LIMIT = 10
 
 export function NewsList({ initialNews }: NewsListProps) {
   const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +32,7 @@ export function NewsList({ initialNews }: NewsListProps) {
 
     setIsLoading(true)
     const newOffset = offset + 1
-    const newNews = await getNewsList(newOffset)
+    const newNews = await getNewsList(newOffset, NEWS_LIST_LIMIT)
     setIsLoading(false)
 
     if (!newNews || newNews.length < NEWS_LIST_LIMIT) {
