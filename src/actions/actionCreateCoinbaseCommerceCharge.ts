@@ -23,3 +23,7 @@ async function _actionCreateCoinbaseCommerceCharge() {
   ).data.hosted_url
   return { hostedUrl }
 }
+
+export type ActionCreateCoinbaseCommerceChargeResponse = Awaited<
+  ReturnType<typeof actionCreateCoinbaseCommerceCharge>
+>

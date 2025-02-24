@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
-import { getPageContent } from '@/utils/server/builder/models/page/utils'
 
 export interface PageMetadata {
   title: string
@@ -14,7 +14,16 @@ export async function getPageDetails(
   pageModelName: BuilderPageModelIdentifiers,
   pathname: string,
 ): Promise<PageMetadata> {
-  const content = await getPageContent(pageModelName, pathname)
+  const content = await builderSDKClient
+    .get(pageModelName, {
+      userAttributes: {
+        urlPath: pathname,
+      },
+      // Set prerender to false to return JSON instead of HTML
+      prerender: false,
+      fields: 'data',
+    })
+    .toPromise()
 
   if (!content?.data) {
     Sentry.captureMessage(`Page content not found for model ${pageModelName}`, {
