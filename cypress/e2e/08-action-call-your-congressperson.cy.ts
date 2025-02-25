@@ -6,17 +6,15 @@ it.skip('action - call your congressperson', () => {
   cy.viewport('iphone-6')
   cy.visit('/')
 
-  // wait for actions to show up
-  cy.wait(1000)
-
   // validate CTA button
   cy.contains('div', 'Call your congressperson').as('ctaButton')
   /**
    * Animations are not playing when running in headless mode,
    * so we check for element existence instead of visibility.
    */
-  cy.get('@ctaButton').scrollIntoView().should('exist')
-  cy.get('@ctaButton').click({ force: true })
+  cy.get('@ctaButton').scrollIntoView()
+  cy.get('@ctaButton').should('be.visible')
+  cy.get('@ctaButton').click()
 
   // validate modal
   cy.get('[role="dialog"]').as('ctaDialog').should('be.visible')
