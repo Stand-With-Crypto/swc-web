@@ -141,12 +141,13 @@ export function ActivePoll({
     }
   }, [isLoading, isInternalLoading])
 
-  const shouldShowViewResults = !shouldHideVotes && isLoggedIn && totalPollVotes > 0
+  const shouldShowViewResults =
+    !isInternalLoading && !shouldHideVotes && isLoggedIn && totalPollVotes > 0
   const hasUserVoted = typeof userPolls?.pollVote[activePoll?.id ?? ''] !== 'undefined'
   const shouldShowVoteInfo = !isFormDisabled && !hasUserVoted
 
   return (
-    <div className="p-2">
+    <div className="p-4">
       <PollLegend endDate={endDate} />
       <PageSubTitle
         as="h3"
