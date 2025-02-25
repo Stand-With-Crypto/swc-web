@@ -79,7 +79,7 @@ export const getLocalUser = (): LocalUser => {
     return localUser
   }
 
-  const currentSession: CurrentSessionLocalUser = getDefaultCurrentSessionLocalUser(countryCode)
+  const currentSession = getDefaultCurrentSessionLocalUser(countryCode)
 
   if (!canUsePersistedData) {
     localUser = { currentSession, persisted: undefined }
