@@ -13,9 +13,7 @@ export function getCountryCodeOnClient() {
   const countryCode = Cookies.get(SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME)
 
   if (!countryCode) {
-    const error = new Error('Country code cookie not found on client')
-    Sentry.captureException(error, { tags: { countryCode } })
-    throw error
+    return 'not-set'
   }
 
   if (!COUNTRY_CODE_REGEX_PATTERN.test(countryCode)) {
