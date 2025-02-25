@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 import { any, object, record, string } from 'zod'
 
+import { getTenantId } from '@/utils/server/getTenantId'
 import { COOKIE_CONSENT_COOKIE_NAME, deserializeCookieConsent } from '@/utils/shared/cookieConsent'
 import {
   CurrentSessionLocalUser,
@@ -88,11 +89,13 @@ function parseFromCookieStrings({
   currentSessionStr,
   cookieConsentStr,
   source,
+  countryCode,
 }: {
   source: string
   cookieConsentStr: string | undefined
   persistedStr: string | undefined
   currentSessionStr: string | undefined
+  countryCode: string
 }) {
   if (cookieConsentStr && !deserializeCookieConsent(cookieConsentStr).targeting) {
     return null
@@ -101,10 +104,18 @@ function parseFromCookieStrings({
     return null
   }
   try {
-    const persisted = JSON.parse(persistedStr)
-    const currentSession = JSON.parse(currentSessionStr)
+    const persisted = JSON.parse(persistedStr) as PersistedLocalUser
+    const currentSession = JSON.parse(currentSessionStr) as CurrentSessionLocalUser
+
     try {
-      const localUser: ServerLocalUser = zodServerLocalUser.parse({ persisted, currentSession })
+      // We are adding the country code in case it doesn't exist to support the incremental adoption of the new local user object type.
+      const localUser: ServerLocalUser = zodServerLocalUser.parse({
+        persisted: { ...persisted, countryCode: persisted?.countryCode ?? countryCode },
+        currentSession: {
+          ...currentSession,
+          countryCode: currentSession?.countryCode ?? countryCode,
+        },
+      })
       return localUser
     } catch {
       Sentry.captureMessage('serverLocalUser: JSON failed to validate', {
@@ -124,6 +135,7 @@ function parseFromCookieStrings({
 
 export async function parseLocalUserFromCookies() {
   const cookieObj = await cookies()
+  const countryCode = await getTenantId()
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value
@@ -132,5 +144,6 @@ export async function parseLocalUserFromCookies() {
     currentSessionStr,
     cookieConsentStr,
     source: 'app-router',
+    countryCode,
   })
 }
