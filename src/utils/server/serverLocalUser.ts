@@ -16,7 +16,7 @@ export type ServerLocalUser = {
   currentSession: CurrentSessionLocalUser
 }
 
-const zodServerLocalUser = object({
+export const zodServerLocalUser = object({
   persisted: object({
     initialSearchParams: record(string(), string()),
     initialReferer: string().optional(),
