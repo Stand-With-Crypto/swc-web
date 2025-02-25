@@ -414,7 +414,6 @@ export async function onNewLogin(props: NewLoginParams) {
           user,
           cryptoAddressAssociatedWithEmail: userCryptoAddress,
           embeddedWalletUserDetails,
-          tenantId,
         })
       : null
 
@@ -713,12 +712,10 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
   user,
   cryptoAddressAssociatedWithEmail,
   embeddedWalletUserDetails,
-  tenantId,
 }: {
   user: UpsertedUser
   cryptoAddressAssociatedWithEmail: UserCryptoAddress
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata
-  tenantId: string
 }) {
   const log = getLog(cryptoAddressAssociatedWithEmail.cryptoAddress)
   let email = user.userEmailAddresses.find(
@@ -738,7 +735,6 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
         emailAddress: embeddedWalletUserDetails.email!.toLowerCase(),
         userId: user.id,
         asPrimaryUserEmailAddress: { connect: { id: user.id } },
-        tenantId,
       },
     })
     log(`maybeUpsertEmbeddedWalletEmailAddress: user email address created from embedded wallet`)
@@ -877,7 +873,6 @@ async function triggerPostLoginUserActionSteps({
         userActionOptIn: {
           create: {
             optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-            tenantId,
           },
         },
       },

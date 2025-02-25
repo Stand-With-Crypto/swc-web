@@ -184,11 +184,11 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
           senderEmail: validatedFields.data.emailAddress,
           firstName: validatedFields.data.firstName,
           lastName: validatedFields.data.lastName,
-          tenantId,
+
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-              create: { ...validatedFields.data.address, tenantId },
+              create: validatedFields.data.address,
             },
           },
           userActionEmailRecipients: {
@@ -297,7 +297,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: false,
               source: UserEmailAddressSource.USER_ENTERED,
-              tenantId,
             },
           },
         }),
@@ -306,7 +305,7 @@ async function maybeUpsertUser({
           address: {
             connectOrCreate: {
               where: { googlePlaceId: address.googlePlaceId },
-              create: { ...address, tenantId },
+              create: address,
             },
           },
         }),
@@ -361,13 +360,12 @@ async function maybeUpsertUser({
           emailAddress,
           isVerified: false,
           source: UserEmailAddressSource.USER_ENTERED,
-          tenantId,
         },
       },
       address: {
         connectOrCreate: {
           where: { googlePlaceId: address.googlePlaceId },
-          create: { ...address, tenantId },
+          create: address,
         },
       },
       tenantId,

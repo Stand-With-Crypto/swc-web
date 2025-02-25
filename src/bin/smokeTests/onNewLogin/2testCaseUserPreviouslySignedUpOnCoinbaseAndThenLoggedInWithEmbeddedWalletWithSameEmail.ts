@@ -21,7 +21,6 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
               ...mockCreateUserEmailAddressInput(),
               isVerified: true,
               source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
-              tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
             },
           },
           userActions: {
@@ -32,7 +31,6 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
               userActionOptIn: {
                 create: {
                   optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-                  tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
                 },
               },
             },
