@@ -256,10 +256,9 @@ async function createActionAndUpdateUser<U extends User>({
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedInput.address.googlePlaceId },
-              create: { ...validatedInput.address, tenantId },
+              create: validatedInput.address,
             },
           },
-          tenantId,
         },
       },
     },

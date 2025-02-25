@@ -140,7 +140,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-              create: { ...validatedFields.data.address, tenantId },
+              create: validatedFields.data.address,
             },
           },
           userActionEmailRecipients: {
@@ -148,7 +148,6 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
               emailAddress: DEBATE_RECEIVER_EMAIL,
             },
           },
-          tenantId,
         },
       },
       tenantId,
@@ -226,7 +225,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: false,
               source: UserEmailAddressSource.USER_ENTERED,
-              tenantId,
             },
           },
         }),
@@ -235,7 +233,7 @@ async function maybeUpsertUser({
           address: {
             connectOrCreate: {
               where: { googlePlaceId: address.googlePlaceId },
-              create: { ...address, tenantId },
+              create: address,
             },
           },
         }),
@@ -289,13 +287,12 @@ async function maybeUpsertUser({
           emailAddress,
           isVerified: false,
           source: UserEmailAddressSource.USER_ENTERED,
-          tenantId,
         },
       },
       address: {
         connectOrCreate: {
           where: { googlePlaceId: address.googlePlaceId },
-          create: { ...address, tenantId },
+          create: address,
         },
       },
     },

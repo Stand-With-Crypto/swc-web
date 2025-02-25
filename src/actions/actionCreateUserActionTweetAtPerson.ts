@@ -249,7 +249,6 @@ async function createAction<U extends User>({
       userActionTweetAtPerson: {
         create: {
           recipientDtsiSlug: validatedInput.dtsiSlug,
-          tenantId,
         },
       },
     },

@@ -243,7 +243,6 @@ async function createAction<U extends User>({
           eventSlug: validatedInput.eventSlug,
           eventState: validatedInput.eventState,
           shouldReceiveNotifications: validatedInput.shouldReceiveNotifications,
-          tenantId,
         },
       },
     },
