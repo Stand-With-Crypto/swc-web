@@ -22,11 +22,13 @@ const zodServerLocalUser = object({
     initialReferer: string().optional(),
     datetimeFirstSeen: string(),
     experiments: any(),
+    countryCode: string(),
   }),
   currentSession: object({
     datetimeOnLoad: string(),
     refererOnLoad: string().optional(),
     searchParamsOnLoad: record(string(), string()),
+    countryCode: string(),
   }),
 })
 
@@ -41,11 +43,13 @@ export function getLocalUserFromUser(user: User): ServerLocalUser {
       },
       initialReferer: '',
       datetimeFirstSeen: user.datetimeCreated.toISOString(),
+      countryCode: user.tenantId,
     },
     currentSession: {
       datetimeOnLoad: user.datetimeCreated.toISOString(),
       refererOnLoad: '',
       searchParamsOnLoad: {},
+      countryCode: user.tenantId,
     },
   }
 }
@@ -54,7 +58,11 @@ export function mapLocalUserToUserDatabaseFields(
   localUser: ServerLocalUser | null,
 ): Pick<
   User,
-  'acquisitionReferer' | 'acquisitionSource' | 'acquisitionMedium' | 'acquisitionCampaign'
+  | 'acquisitionReferer'
+  | 'acquisitionSource'
+  | 'acquisitionMedium'
+  | 'acquisitionCampaign'
+  | 'tenantId'
 > {
   return {
     // We are trimming the char input in case it is greater than the DB limit (191 characters)
@@ -71,6 +79,7 @@ export function mapLocalUserToUserDatabaseFields(
       localUser?.persisted?.initialSearchParams.utm_campaign?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_campaign?.slice(0, 191) ||
       '',
+    tenantId: localUser?.persisted?.countryCode || localUser?.currentSession.countryCode || '',
   }
 }
 
