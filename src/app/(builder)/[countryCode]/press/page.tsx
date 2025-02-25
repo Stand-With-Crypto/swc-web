@@ -18,18 +18,20 @@ export default async function PressPage(props: PageProps) {
   const { countryCode } = await props.params
 
   const news = await getNewsList()
-  const content = await getPageContent(PAGE_MODEL, PATHNAME)
+  const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
-      <RenderBuilderContent content={content} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
       <NewsList initialNews={news} />
     </BuilderPageLayout>
   )
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const metadata = await getPageDetails(PAGE_MODEL, PATHNAME)
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { countryCode } = await props.params
+
+  const metadata = await getPageDetails(PAGE_MODEL, PATHNAME, countryCode)
 
   return generateMetadataDetails({
     title: metadata.title,

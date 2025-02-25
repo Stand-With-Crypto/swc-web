@@ -15,7 +15,7 @@ export async function BuilderPageLayout({
   pathname: string
   modelName: BuilderPageModelIdentifiers
 }) {
-  const pageMetadata = await getPageDetails(modelName, pathname)
+  const pageMetadata = await getPageDetails(modelName, pathname, countryCode)
 
   return (
     <>
