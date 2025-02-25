@@ -362,7 +362,6 @@ export async function onNewLogin(props: NewLoginParams) {
       localUser,
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
-      tenantId,
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -598,12 +597,10 @@ async function createUser({
   localUser,
   hasSignedInWithEmail,
   sessionId,
-  tenantId,
 }: {
   localUser: ServerLocalUser | null
   hasSignedInWithEmail: boolean
   sessionId: string | null
-  tenantId: string
 }) {
   return prismaClient.user.create({
     include: {
@@ -621,7 +618,6 @@ async function createUser({
       userSessions: {
         create: { id: sessionId ?? undefined },
       },
-      tenantId,
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
   })
