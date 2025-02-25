@@ -9,10 +9,10 @@ import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const zodVerifiedSWCPartnersUserAddress = object({
   streetNumber: string(),
@@ -38,12 +38,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
-  countryCode: string().refine(
-    value => ORDERED_SUPPORTED_COUNTRIES.includes(value?.toLowerCase()),
-    {
-      message: 'Invalid country code',
-    },
-  ),
+  countryCode: zodSupportedCountryCode,
 })
 
 type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {

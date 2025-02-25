@@ -45,13 +45,13 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 const zodExternalUserActionOptInUserAddress = object({
   streetNumber: string(),
@@ -89,12 +89,7 @@ const zodExternalUserActionOptIn = z.object({
     })
     .optional(),
   additionalAnalyticsProperties: z.record(z.string()).optional(),
-  countryCode: string().refine(
-    value => ORDERED_SUPPORTED_COUNTRIES.includes(value?.toLowerCase()),
-    {
-      message: 'Invalid country code',
-    },
-  ),
+  countryCode: zodSupportedCountryCode,
 })
 
 const logger = getLogger('handleExternalUserActionOptIn')
