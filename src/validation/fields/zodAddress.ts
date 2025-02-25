@@ -1,5 +1,6 @@
 import { object, string, ZodIssueCode } from 'zod'
 
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
@@ -16,6 +17,11 @@ export const zodAddress = object({
   postalCodeSuffix: string(),
   countryCode: string().length(2),
   usCongressionalDistrict: string().optional(),
+  tenantId: string()
+    .refine(value => ORDERED_SUPPORTED_COUNTRIES.includes(value), {
+      message: 'Invalid country code',
+    })
+    .optional(),
 })
 
 export const zodStateDistrict = object({

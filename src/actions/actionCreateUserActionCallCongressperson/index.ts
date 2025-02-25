@@ -11,6 +11,7 @@ import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getTenantId } from '@/utils/server/getTenantId'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -54,6 +55,7 @@ interface SharedDependencies {
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
   hasRegisteredRatelimit: boolean
+  tenantId: string
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
@@ -83,6 +85,7 @@ async function _actionCreateUserActionCallCongressperson(
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
+  const tenantId = await getTenantId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -94,7 +97,7 @@ async function _actionCreateUserActionCallCongressperson(
     await triggerRateLimiterAtMostOnce()
   }
 
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+  const user = userMatch.user || (await createUser({ localUser, sessionId, tenantId }))
 
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
@@ -147,6 +150,7 @@ async function _actionCreateUserActionCallCongressperson(
     validatedInput: validatedInput.data,
     userMatch,
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
+    tenantId,
   })
 
   if (user.primaryUserCryptoAddress !== null) {
@@ -157,7 +161,9 @@ async function _actionCreateUserActionCallCongressperson(
   return { user: getClientUser(updatedUser) }
 }
 
-async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
+async function createUser(
+  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId' | 'tenantId'>,
+) {
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
@@ -168,6 +174,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
       hasOptedInToMembership: false,
       smsStatus: SMSStatus.NOT_OPTED_IN,
       ...mapLocalUserToUserDatabaseFields(localUser),
+      tenantId: sharedDependencies.tenantId,
     },
     include: {
       primaryUserCryptoAddress: true,
@@ -222,12 +229,14 @@ async function createActionAndUpdateUser<U extends User>({
   userMatch,
   sharedDependencies,
   isNewUser,
+  tenantId,
 }: {
   user: U
   isNewUser: boolean
   validatedInput: CreateActionCallCongresspersonInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+  tenantId: string
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
@@ -239,6 +248,7 @@ async function createActionAndUpdateUser<U extends User>({
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
+      tenantId,
       userActionCall: {
         create: {
           recipientDtsiSlug: validatedInput.dtsiSlug,
@@ -246,9 +256,10 @@ async function createActionAndUpdateUser<U extends User>({
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedInput.address.googlePlaceId },
-              create: validatedInput.address,
+              create: { ...validatedInput.address, tenantId },
             },
           },
+          tenantId,
         },
       },
     },

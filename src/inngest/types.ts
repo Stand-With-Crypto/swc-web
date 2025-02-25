@@ -5,7 +5,6 @@ import type { BackfillUsCongressionalDistrictsInngestCronJobSchema } from '@/inn
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
-import type { BackfillReactivationInngestSchema } from '@/inngest/functions/backfillReactivation'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
 import type { BackfillUserActionReferInngestSchema } from '@/inngest/functions/backfillUserActionRefer'
 import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
@@ -41,7 +40,6 @@ type EventTypes =
   | BackfillFailedNftInngestSchema
   | BackfillNftInngestSchema
   | BackfillNftInngestCronJobSchema
-  | BackfillReactivationInngestSchema
   | BackfillSessionIdInngestSchema
   | CapitolCanaryBackfillSmsOptInReplySchema
   | CapitolCanaryBackfillSmsOptInReplyUpdateBatchOfUsersSchema

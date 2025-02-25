@@ -5,10 +5,6 @@ import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfi
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
-import {
-  backfillReactivationCron,
-  backfillReactivationWithInngest,
-} from '@/inngest/functions/backfillReactivation'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
 import { backfillUserActionRefer } from '@/inngest/functions/backfillUserActionRefer'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
@@ -72,8 +68,6 @@ export const { GET, POST, PUT } = serve({
     backfillCongressionalDistrictCronJob,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
-    backfillReactivationWithInngest,
-    backfillReactivationCron,
     sendEventNotificationWithInngest,
     deleteUserActions,
     enqueueSMS,

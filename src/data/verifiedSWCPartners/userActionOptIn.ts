@@ -37,6 +37,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
+  countryCode: string().length(2).optional(), // This will be used as tenantId for the new user. It is optional for now until CB updates the payload that is sent to this function.
 })
 
 type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
@@ -59,5 +60,6 @@ export async function verifiedSWCPartnersUserActionOptIn(
     hasOptedInToEmails: input.hasOptedInToEmails,
     hasOptedInToMembership: input.hasOptedInToMembership,
     partner: input.partner,
+    countryCode: input.countryCode,
   })
 }

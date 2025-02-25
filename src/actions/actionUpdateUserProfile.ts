@@ -24,6 +24,7 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
+import { getTenantId } from '@/utils/server/getTenantId'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -48,6 +49,7 @@ const logger = getLogger(`actionUpdateUserProfile`)
 
 async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfileFormAction>) {
   const authUser = await appRouterGetAuthUser()
+  const tenantId = await getTenantId()
   if (!authUser) {
     throw new Error('Unauthenticated')
   }
@@ -105,6 +107,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         },
         create: {
           ...validatedFields.data.address,
+          tenantId,
         },
         update: {},
       })
@@ -119,6 +122,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
             emailAddress,
             source: UserEmailAddressSource.USER_ENTERED,
             isVerified: false,
+            tenantId,
             user: {
               connect: {
                 id: user.id,
