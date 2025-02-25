@@ -18,6 +18,7 @@ import {
   EmailEnabledActionNFTs,
 } from '@/utils/server/email/templates/common/constants'
 import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
+import { getTenantId } from '@/utils/server/getTenantId'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -115,6 +116,7 @@ export async function claimNFT(
   userAction: UserActionToClaim,
   userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
   config: Config = {},
+  tenantId?: string,
 ) {
   const hydratedConfig = {
     skipTransactionFeeCheck: false,
@@ -151,6 +153,8 @@ export async function claimNFT(
     throw Error(`Action ${userAction.id} for campaign ${campaignName} already has an NFT mint.`)
   }
 
+  const tenant = tenantId ?? (await getTenantId())
+
   const action = await prismaClient.userAction.update({
     where: { id: userAction.id },
     data: {
@@ -163,6 +167,7 @@ export async function claimNFT(
           contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0),
+          tenantId: tenant,
         },
       },
     },

@@ -1,6 +1,7 @@
 import { Builder } from '@builder.io/react'
 import sanitizeHtml from 'sanitize-html'
 
+import { INTERNAL_BASE_URL } from '@/utils/shared/urls'
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 import { cn } from '@/utils/web/cn'
 
@@ -23,6 +24,16 @@ function transformOlAndUl(tagName: string, attribs: Record<string, string>) {
   return { tagName, attribs }
 }
 
+function transformLink(tagName: string, attribs: Record<string, string>) {
+  if (attribs.href?.startsWith(INTERNAL_BASE_URL) || attribs.href?.startsWith('/')) {
+    attribs.target = '_self'
+  } else {
+    attribs.target = '_blank'
+  }
+
+  return { tagName, attribs }
+}
+
 interface BuilderTextProps extends BuilderComponentBaseProps {
   text: string
 }
@@ -36,12 +47,13 @@ Builder.registerComponent(
         __html: sanitizeHtml(text, {
           allowedAttributes: {
             '*': ['style', 'class'],
-            a: ['href'],
+            a: ['href', 'target'],
           },
           transformTags: {
             li: transformLi,
             ul: transformOlAndUl,
             ol: transformOlAndUl,
+            a: transformLink,
           },
         }),
       }}
