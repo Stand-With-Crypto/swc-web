@@ -45,7 +45,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -89,7 +89,12 @@ const zodExternalUserActionOptIn = z.object({
     })
     .optional(),
   additionalAnalyticsProperties: z.record(z.string()).optional(),
-  countryCode: string().length(2).optional(), // This will be used as tenantId for the new user. It is optional for now until CB updates the payload that is sent to this function.
+  countryCode: string().refine(
+    value => ORDERED_SUPPORTED_COUNTRIES.includes(value?.toLowerCase()),
+    {
+      message: 'Invalid country code',
+    },
+  ),
 })
 
 const logger = getLogger('handleExternalUserActionOptIn')
@@ -121,8 +126,6 @@ export async function handleExternalUserActionOptIn(
   input: Input,
 ): Promise<ExternalUserActionOptInResponse<ExternalUserActionOptInResult>> {
   const { emailAddress, cryptoAddress, optInType, campaignName, countryCode } = input
-  // TODO (@twistershark): This needs to be dynamic after @ydruffin-cb updates the payload on CB side
-  const tenantId = countryCode?.toLowerCase() || DEFAULT_SUPPORTED_COUNTRY_CODE
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -164,7 +167,7 @@ export async function handleExternalUserActionOptIn(
   const { user, userState } = await maybeUpsertUser({
     existingUser: existingAction?.user,
     input,
-    tenantId,
+    tenantId: countryCode?.toLowerCase(),
   })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })

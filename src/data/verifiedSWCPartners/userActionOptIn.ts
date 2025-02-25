@@ -9,6 +9,7 @@ import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -37,7 +38,12 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
-  countryCode: string().length(2).optional(), // This will be used as tenantId for the new user. It is optional for now until CB updates the payload that is sent to this function.
+  countryCode: string().refine(
+    value => ORDERED_SUPPORTED_COUNTRIES.includes(value?.toLowerCase()),
+    {
+      message: 'Invalid country code',
+    },
+  ),
 })
 
 type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
