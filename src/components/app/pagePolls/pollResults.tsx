@@ -146,16 +146,20 @@ export function PollResults({
           </div>
         )}
       </div>
-      {totalPollVotes ? (
-        <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes</p>
-      ) : (
-        <p className="mt-2 text-sm text-gray-500">No votes yet</p>
-      )}
+      <PollResultsVotesInfo totalPollVotes={totalPollVotes} />
       {!shouldHideVoteAgain && (
         <Button className="px-0 pt-4 hover:no-underline" onClick={handleVoteAgain} variant="link">
           <ReloadIcon className="mr-2 h-4 w-4 scale-x-[-1]" /> {userVotes ? 'Vote again' : 'Vote'}
         </Button>
       )}
     </div>
+  )
+}
+
+const PollResultsVotesInfo = ({ totalPollVotes }: { totalPollVotes: number }) => {
+  return totalPollVotes ? (
+    <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes</p>
+  ) : (
+    <p className="mt-2 text-sm text-gray-500">No votes yet</p>
   )
 }

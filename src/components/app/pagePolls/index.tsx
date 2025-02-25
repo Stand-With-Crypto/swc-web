@@ -70,8 +70,8 @@ export function PagePolls({
   }, [hasAnyResults, hasUserVoted, isLoggedIn, setShowResults])
 
   return (
-    <div className="standard-spacing-from-navbar container">
-      <section className="container mb-16 max-w-3xl">
+    <div className="standard-spacing-from-navbar container px-2">
+      <section className="container mb-16 max-w-3xl p-0">
         <PageTitle className="mb-7">{title}</PageTitle>
         <PageSubTitle className="text-muted-foreground" size="md" withoutBalancer>
           {!activePoll && !inactivePolls ? (
@@ -87,7 +87,7 @@ export function PagePolls({
           )}
         </PageSubTitle>
       </section>
-      <section className="container mb-16 max-w-3xl">
+      <section className="container mb-16 max-w-3xl p-0">
         {activePoll && (
           <GeoGateContent
             activePoll={activePoll}
@@ -101,7 +101,7 @@ export function PagePolls({
         )}
       </section>
       {inactivePolls && (
-        <section className="container max-w-3xl">
+        <section className="container max-w-3xl p-0">
           <InactivePolls
             inactivePolls={inactivePolls}
             isLoading={isLoading}

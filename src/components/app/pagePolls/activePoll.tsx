@@ -141,8 +141,12 @@ export function ActivePoll({
     }
   }, [isLoading, isInternalLoading])
 
+  const shouldShowViewResults = !shouldHideVotes && isLoggedIn && totalPollVotes > 0
+  const hasUserVoted = typeof userPolls?.pollVote[activePoll?.id ?? ''] !== 'undefined'
+  const shouldShowVoteInfo = !isFormDisabled && !hasUserVoted
+
   return (
-    <div className="p-4">
+    <div className="p-2">
       <PollLegend endDate={endDate} />
       <PageSubTitle
         as="h3"
@@ -177,20 +181,20 @@ export function ActivePoll({
               value="other"
             />
           )}
-          <ProtectedSubmitButton isDisabled={isSubmitDisabled} />
+          <ProtectedSubmitButton isDisabled={isSubmitDisabled} isMultiple={isMultiple} />
         </form>
       </Form>
-      {!isFormDisabled && (
-        <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes • Vote to see result</p>
+      {shouldShowVoteInfo && (
+        <PollVotesInfo isMultiple={isMultiple} totalPollVotes={totalPollVotes} />
       )}
-      {totalPollVotes > 0 && (
+      {shouldShowViewResults && (
         <Button
           className="px-0 pt-4 hover:no-underline"
           disabled={isFormDisabled}
           onClick={handleShowResults}
           variant="link"
         >
-          <EyeIcon className="mr-2 h-4 w-4" /> View results
+          <EyeIcon className="mr-2 h-4 w-4" /> {isMultiple ? 'View results' : 'View result'}
         </Button>
       )}
     </div>
@@ -212,5 +216,21 @@ const PollSubtitle = ({
         ? 'Select all that apply'
         : `Select up to ${maxNumberOfOptions} options`}
     </div>
+  )
+}
+
+const PollVotesInfo = ({
+  totalPollVotes,
+  isMultiple,
+}: {
+  totalPollVotes: number
+  isMultiple: boolean
+}) => {
+  return (
+    <p className="mt-2 text-sm text-gray-500">
+      {totalPollVotes
+        ? `${totalPollVotes} votes • Vote to see ${isMultiple ? 'results' : 'result'}`
+        : `Vote to see ${isMultiple ? 'results' : 'result'}`}
+    </p>
   )
 }
