@@ -150,7 +150,7 @@ export function SuspenseYourDistrictRank() {
 
 export function YourDistrictRank() {
   return (
-    <Suspense fallback={<DefaultPlacesSelect loading={true} onChange={noop} value={null} />}>
+    <Suspense fallback={<DefaultPlacesSelect loading onChange={noop} value={null} />}>
       <SuspenseYourDistrictRank />
     </Suspense>
   )

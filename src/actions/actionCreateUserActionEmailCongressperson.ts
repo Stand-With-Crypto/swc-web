@@ -24,6 +24,7 @@ import {
   SandboxCapitolCanaryCampaignId,
 } from '@/utils/server/capitolCanary/campaigns'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getTenantId } from '@/utils/server/getTenantId'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -89,6 +90,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     zodUserActionFormEmailCongresspersonAction,
     input,
   )
+  const tenantId = await getTenantId()
 
   if (!validatedFields.success) {
     return {
@@ -129,6 +131,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     sessionId,
     localUser,
     onUpsertUser: triggerRateLimiterAtMostOnce,
+    tenantId,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -169,6 +172,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     data: {
       user: { connect: { id: user.id } },
       actionType,
+      tenantId,
       campaignName: validatedFields.data.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
@@ -180,10 +184,11 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
           senderEmail: validatedFields.data.emailAddress,
           firstName: validatedFields.data.firstName,
           lastName: validatedFields.data.lastName,
+          tenantId,
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-              create: validatedFields.data.address,
+              create: { ...validatedFields.data.address, tenantId },
             },
           },
           userActionEmailRecipients: {
@@ -269,12 +274,14 @@ async function maybeUpsertUser({
   sessionId,
   localUser,
   onUpsertUser,
+  tenantId,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
   onUpsertUser: () => Promise<void> | void
+  tenantId: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -290,6 +297,7 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: false,
               source: UserEmailAddressSource.USER_ENTERED,
+              tenantId,
             },
           },
         }),
@@ -298,10 +306,11 @@ async function maybeUpsertUser({
           address: {
             connectOrCreate: {
               where: { googlePlaceId: address.googlePlaceId },
-              create: address,
+              create: { ...address, tenantId },
             },
           },
         }),
+      tenantId,
     }
     const keysToUpdate = Object.keys(updatePayload)
     if (!keysToUpdate.length) {
@@ -352,14 +361,16 @@ async function maybeUpsertUser({
           emailAddress,
           isVerified: false,
           source: UserEmailAddressSource.USER_ENTERED,
+          tenantId,
         },
       },
       address: {
         connectOrCreate: {
           where: { googlePlaceId: address.googlePlaceId },
-          create: address,
+          create: { ...address, tenantId },
         },
       },
+      tenantId,
     },
   })
   const primaryUserEmailAddressId = user.userEmailAddresses[0].id

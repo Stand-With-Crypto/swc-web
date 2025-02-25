@@ -42,24 +42,31 @@ function isValidDistrict(state: string, district: string): boolean {
 
 export async function getAdvocatesCountByDistrict(): Promise<Result[]> {
   const results = await prismaClient.$queryRaw<AdvocatesCountByDistrictQueryResult[]>`
+    WITH valid_addresses AS (
+      SELECT
+        a.administrative_area_level_1,
+        a.us_congressional_district,
+        a.id
+      FROM address a
+      WHERE a.country_code = 'US'
+        AND a.us_congressional_district IS NOT NULL
+        AND a.us_congressional_district != ''
+        AND a.us_congressional_district REGEXP '^[0-9]+$'
+        AND a.administrative_area_level_1 IS NOT NULL
+        AND a.administrative_area_level_1 != ''
+        AND a.administrative_area_level_1 != 'DC'
+    )
     SELECT
-      a.administrative_area_level_1 as state,
-      a.us_congressional_district as district,
+      va.administrative_area_level_1 as state,
+      va.us_congressional_district as district,
       COUNT(DISTINCT u.id) as count
-    FROM address a
-    INNER JOIN user u ON u.address_id = a.id
+    FROM valid_addresses va
+    INNER JOIN user u ON u.address_id = va.id
     INNER JOIN user_action ua ON ua.user_id = u.id
-    WHERE a.country_code = 'US'
-      AND a.us_congressional_district IS NOT NULL
-      AND a.us_congressional_district != ''
-      AND a.us_congressional_district REGEXP '^[0-9]+$'
-      AND a.administrative_area_level_1 IS NOT NULL
-      AND a.administrative_area_level_1 != ''
-      AND a.administrative_area_level_1 != 'DC'
-      AND ua.action_type = ${UserActionType.OPT_IN}
+    WHERE ua.action_type = ${UserActionType.OPT_IN}
     GROUP BY
-      a.administrative_area_level_1,
-      a.us_congressional_district
+      va.administrative_area_level_1,
+      va.us_congressional_district
     HAVING count > 0
 
     UNION ALL

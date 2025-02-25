@@ -46,13 +46,18 @@ export const getIntlUrls = (
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
-      const tabPrefix =
-        params?.tab === RecentActivityAndLeaderboardTabs.LEADERBOARD
-          ? '/community/leaderboard'
-          : params?.tab === RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
-            ? '/community/referrals'
-            : '/community'
-
+      const getTabPrefix = (tab = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY) => {
+        switch (tab) {
+          case RecentActivityAndLeaderboardTabs.LEADERBOARD:
+            return '/community/leaderboard'
+          case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+            return '/community/referrals'
+          case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          default:
+            return '/community'
+        }
+      }
+      const tabPrefix = getTabPrefix(params?.tab)
       if (!params) {
         return `${countryPrefix}${tabPrefix}`
       }
@@ -78,7 +83,7 @@ export const getIntlUrls = (
       const pageNum = params?.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${countryPrefix}/community/referrals${pageSuffix}`
+      return `${countryPrefix}/referrals${pageSuffix}`
     },
   }
 }
