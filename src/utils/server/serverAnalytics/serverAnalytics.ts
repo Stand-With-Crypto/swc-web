@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { PropertyDict } from 'mixpanel'
 import { promisify } from 'util'
 
+import { getTenantId } from '@/utils/server/getTenantId'
 import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
@@ -83,12 +84,17 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
 
     logger.info(`Event Name: "${eventName}"`, eventProperties)
 
-    trackingRequests.push(
-      promisifiedMixpanelTrack(eventName, {
+    const getCountryCodeAndTrack = async () => {
+      const countryCode = await getTenantId()
+
+      await promisifiedMixpanelTrack(eventName, {
         ...eventProperties,
         distinct_id: config.userId,
-      }).catch(onError({ eventName, eventProperties })),
-    )
+        countryCode,
+      })
+    }
+
+    trackingRequests.push(getCountryCodeAndTrack().catch(onError({ eventName, eventProperties })))
 
     return { flush }
   }
