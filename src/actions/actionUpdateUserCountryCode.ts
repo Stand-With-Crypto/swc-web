@@ -10,7 +10,7 @@ import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
-import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
+import { zodSimpleCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const actionUpdateUserCountryCode = withServerActionMiddleware(
   'actionUpdateUserCountryCode',
@@ -19,8 +19,10 @@ export const actionUpdateUserCountryCode = withServerActionMiddleware(
 
 const logger = getLogger(`actionUpdateUserCountryCode`)
 
+type ActionUpdateUserCountryCodeInput = z.infer<typeof zodSimpleCountryCode>
+
 async function actionUpdateUserCountryCodeWithoutMiddleware(
-  countryCode: z.infer<typeof zodSupportedCountryCode>,
+  countryCode: ActionUpdateUserCountryCodeInput,
 ) {
   const sessionId = await getUserSessionId()
   const authUser = await appRouterGetAuthUser()
@@ -38,7 +40,7 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
     throw error
   }
 
-  const validatedFields = zodSupportedCountryCode.safeParse(countryCode)
+  const validatedFields = zodSimpleCountryCode.safeParse(countryCode)
   if (!validatedFields.success) {
     const error = new Error('Update User Country Code - Invalid country code')
 

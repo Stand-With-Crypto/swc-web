@@ -46,11 +46,11 @@ export function UserConfig() {
   })
 
   const handleCountryCodeSubmit = async (values: FormFields) => {
-    const result = await actionUpdateUserCountryCode(values.countryCode)
+    const result = await actionUpdateUserCountryCode(values.countryCode.toLowerCase())
 
     Cookies.set(
       USER_COUNTRY_CODE_COOKIE_NAME,
-      JSON.stringify({ countryCode: values.countryCode, bypassed: true }),
+      JSON.stringify({ countryCode: values.countryCode.toLowerCase(), bypassed: true }),
       {
         sameSite: 'lax',
         secure: true,

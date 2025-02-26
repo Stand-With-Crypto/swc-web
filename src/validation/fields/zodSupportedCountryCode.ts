@@ -13,3 +13,7 @@ export const zodSupportedCountryCode = string()
   .refine(value => ORDERED_SUPPORTED_COUNTRIES.includes(value), {
     message: 'Invalid country code',
   })
+
+export const zodSimpleCountryCode = string()
+  .length(2)
+  .transform(value => value.toLowerCase())
