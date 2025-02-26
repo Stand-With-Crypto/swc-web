@@ -35,7 +35,11 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
       },
     })
 
-    throw error
+    return {
+      errors: {
+        countryCode: ['Not authenticated'],
+      },
+    }
   }
 
   const validatedFields = zodSupportedCountryCode.safeParse(countryCode)

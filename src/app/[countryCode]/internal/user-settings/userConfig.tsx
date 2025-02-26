@@ -66,7 +66,7 @@ export function UserConfig() {
 
       return setTimeout(() => {
         window.location.reload()
-      }, 5000)
+      }, 1000)
     }
 
     window.location.reload()
