@@ -27,7 +27,7 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
             create: {
               actionType: UserActionType.OPT_IN,
               campaignName: UserActionOptInCampaignName.DEFAULT,
-              tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
+              countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
               userActionOptIn: {
                 create: {
                   optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,

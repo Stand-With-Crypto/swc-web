@@ -208,7 +208,7 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
       acquisitionCampaign: '',
       // Defaulting to US here as we don't expect to support donations in other countries.
       // If we do, then we need to find a way to get the user's country code and update this accordingly.
-      tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
+      countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
       ...(payment.event.data.metadata.email && {
         userEmailAddresses: {
           create: {
@@ -310,7 +310,7 @@ async function createUserActionDonation(
       }),
       campaignName: UserActionDonationCampaignName.DEFAULT,
       actionType: UserActionType.DONATION,
-      tenantId: user.tenantId,
+      countryCode: user.countryCode,
       userActionDonation: {
         create: {
           amount: pricingValues.amount,

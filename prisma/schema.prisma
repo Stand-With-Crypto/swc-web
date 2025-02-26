@@ -145,7 +145,7 @@ model User {
   capitolCanaryInstance    CapitolCanaryInstance?     @map("capitol_canary_instance")
   UserCommunicationJourney UserCommunicationJourney[]
   smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
-  tenantId                 String                     @default("us") @map("tenant_id")
+  countryCode              String                     @map("country_code")
 
   @@index([addressId])
   @@index([internalStatus])
@@ -296,7 +296,7 @@ model UserAction {
   nftMintId           String?            @unique @map("nft_mint_id")
   nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
   actionType          UserActionType     @map("action_type")
-  tenantId            String             @default("us") @map("tenant_id")
+  countryCode         String             @map("country_code")
 
   // We'll need in-memory logic to validate and verify only one action type is every associated with a UserAction
   userActionEmail                       UserActionEmail?
