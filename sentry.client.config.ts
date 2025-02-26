@@ -39,6 +39,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'null is not an object',
   'Unknown root exit status',
   'Connection closed',
+  '500 from GET /api/public/recent-activity/30/restrictToUS',
 ]
 
 const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/api/js']
