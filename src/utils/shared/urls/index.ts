@@ -137,7 +137,8 @@ export const apiUrls = {
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
   recentActivity: ({ limit, restrictToUS }: { limit: number; restrictToUS?: boolean }) =>
     `/api/public/recent-activity/${limit}${restrictToUS ? '/restrictToUS' : ''}`,
-  homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
+  homepageTopLevelMetrics: (countryCode: SupportedCountryCodes) =>
+    `/api/public/homepage/top-level-metrics/${countryCode}`,
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,

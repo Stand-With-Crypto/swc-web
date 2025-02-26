@@ -40,7 +40,7 @@ const DialogPortal = DialogPrimitive.Portal
 const DialogClose = DialogPrimitive.Close
 
 const DialogOverlay = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay className={cn(dialogOverlayStyles, className)} ref={ref} {...props} />
@@ -55,7 +55,7 @@ interface DialogContentProps
   a11yTitle: string
 }
 const DialogContent = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentRef<typeof DialogPrimitive.Content>,
   DialogContentProps
 >(
   (
@@ -85,7 +85,7 @@ const DialogContent = React.forwardRef<
             <DialogPrimitive.Description>{props['aria-describedby']}</DialogPrimitive.Description>
             <DialogTitle>{a11yTitle}</DialogTitle>
           </VisuallyHidden>
-          <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
+          <ScrollArea className="overflow-visible md:max-h-[90vh]">{children}</ScrollArea>
           <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
             <X size={20} />
             <span className="sr-only">Close</span>
@@ -103,7 +103,7 @@ const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 DialogHeader.displayName = 'DialogHeader'
 
 const DialogTitle = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title

@@ -19,6 +19,7 @@ export const testCaseWithLongAcquisitionReferer: TestCase = {
           },
           initialReferer: faker.string.alphanumeric({ length: 200 }),
           datetimeFirstSeen: new Date().toISOString(),
+          countryCode: 'us',
         },
         currentSession: {
           datetimeOnLoad: new Date().toISOString(),
