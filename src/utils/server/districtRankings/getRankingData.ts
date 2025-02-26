@@ -1,5 +1,4 @@
 import { UserActionType } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
@@ -93,18 +92,21 @@ export async function getAdvocatesCountByDistrict(): Promise<Result[]> {
     }))
 }
 
+/*
+ * Looks at the address stored in UserActionRefer records to determine which district
+ * a referral should be attributed to. Users can have multiple UserActionRefer records if they've
+ * made referrals while living in different districts.
+ */
 export async function getReferralsCountByDistrict(): Promise<Result[]> {
   const results = await prismaClient.$queryRaw<ReferralsCountByDistrictQueryResult[]>`
     SELECT
       a.administrative_area_level_1 as state,
       a.us_congressional_district as district,
-      COUNT(DISTINCT u.id) as users_count,
       COUNT(DISTINCT ua.id) as refer_actions_count,
       SUM(uar.referrals_count) as referrals
     FROM user_action_refer uar
     INNER JOIN user_action ua ON ua.id = uar.id
-    INNER JOIN user u ON u.id = ua.user_id
-    INNER JOIN address a ON a.id = u.address_id
+    INNER JOIN address a ON a.id = uar.address_id
     WHERE a.country_code = 'US'
       AND a.administrative_area_level_1 IS NOT NULL
       AND a.administrative_area_level_1 != ''
@@ -124,13 +126,11 @@ export async function getReferralsCountByDistrict(): Promise<Result[]> {
     SELECT
       'DC' as state,
       '1' as district,
-      COUNT(DISTINCT u.id) as users_count,
       COUNT(DISTINCT ua.id) as refer_actions_count,
       SUM(uar.referrals_count) as referrals
     FROM user_action_refer uar
     INNER JOIN user_action ua ON ua.id = uar.id
-    INNER JOIN user u ON u.id = ua.user_id
-    INNER JOIN address a ON a.id = u.address_id
+    INNER JOIN address a ON a.id = uar.address_id
     WHERE a.country_code = 'US'
       AND a.administrative_area_level_1 = 'DC'
       AND ua.action_type = ${UserActionType.REFER}
@@ -138,17 +138,7 @@ export async function getReferralsCountByDistrict(): Promise<Result[]> {
     HAVING referrals > 0
   `
 
-  const filteredResults = results.filter(r => r.refer_actions_count !== r.users_count)
-  if (filteredResults.length > 0) {
-    logger.warn('Found districts where users have multiple REFER actions:', filteredResults)
-    Sentry.captureMessage('Found districts where users have multiple REFER actions:', {
-      extra: { results: filteredResults },
-      tags: { domain: 'referrals' },
-      level: 'error',
-    })
-  }
-
-  return filteredResults
+  return results
     .filter(result => isValidDistrict(result.state, result.district))
     .map(result => ({
       state: result.state as USStateCode,

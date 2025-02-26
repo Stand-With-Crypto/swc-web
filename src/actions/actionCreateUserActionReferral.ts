@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { UserActionType } from '@prisma/client'
+import { Address, User, UserAction, UserActionRefer, UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
@@ -30,6 +30,214 @@ const zodUserActionReferralInput = z.object({
 
 type Input = z.infer<typeof zodUserActionReferralInput>
 
+/**
+ * Creates a referral record with optional address attribution
+ */
+async function createReferralRecord({
+  referrerId,
+  analytics,
+  addressData,
+}: {
+  referrerId: string
+  analytics: ReturnType<typeof getServerAnalytics>
+  addressData?: {
+    addressId: string
+    districtInfo?: {
+      state: string
+      district: string
+    }
+  }
+}) {
+  const countryCode = await getCountryCodeCookie()
+
+  const userActionReferData = addressData
+    ? {
+        referralsCount: 1,
+        addressId: addressData.addressId,
+      }
+    : {
+        referralsCount: 1,
+      }
+
+  const userAction = await prismaClient.userAction.create({
+    data: {
+      userId: referrerId,
+      actionType: UserActionType.REFER,
+      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+      countryCode,
+      userActionRefer: {
+        create: userActionReferData,
+      },
+    },
+  })
+
+  analytics.trackUserActionCreated({
+    actionType: UserActionType.REFER,
+    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+    creationMethod: 'On Site',
+    userState: 'Existing',
+  })
+
+  if (addressData?.districtInfo) {
+    const { state, district } = addressData.districtInfo
+    logger.info(
+      `Created REFER action for referrer ${referrerId} in district ${state}-${district} with address ${addressData.addressId}`,
+    )
+  } else {
+    logger.info(`Created REFER action for referrer ${referrerId} without district attribution`)
+  }
+
+  return userAction
+}
+
+async function incrementExistingReferral({
+  existingActionId,
+  referrerId,
+  addressId,
+  analytics,
+  districtInfo,
+}: {
+  existingActionId: string
+  referrerId: string
+  addressId: string
+  analytics: ReturnType<typeof getServerAnalytics>
+  districtInfo?: { state: string; district: string }
+}) {
+  const userAction = await prismaClient.userAction.update({
+    where: { id: existingActionId },
+    data: {
+      userActionRefer: {
+        update: {
+          referralsCount: { increment: 1 },
+        },
+      },
+    },
+  })
+
+  analytics.trackUserActionUpdated({
+    actionType: UserActionType.REFER,
+    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+    userState: 'Existing',
+    actionId: existingActionId,
+  })
+
+  const districtStr = districtInfo
+    ? ` in district ${districtInfo.state}-${districtInfo.district}`
+    : ''
+  logger.info(
+    `Incremented referral count for referrer ${referrerId}${districtStr} with address ${addressId}`,
+  )
+
+  return userAction
+}
+
+async function findOrCreateUserActionRefer({
+  referrer,
+  analytics,
+}: {
+  referrer: User & {
+    address: Address | null
+    userActions: (UserAction & {
+      userActionRefer:
+        | (UserActionRefer & {
+            address: Address | null
+          })
+        | null
+    })[]
+  }
+  analytics: ReturnType<typeof getServerAnalytics>
+}) {
+  // For users without an address, find an existing record without an address
+  if (!referrer.address) {
+    logger.warn(`Referrer ${referrer.id} has no address, can't attribute to a district`)
+
+    // Look for an existing referral without an address
+    const existingReferWithoutAddress = referrer.userActions.find(
+      action =>
+        action.actionType === UserActionType.REFER && action.userActionRefer?.address === null,
+    )
+
+    if (existingReferWithoutAddress) {
+      return await incrementExistingReferral({
+        existingActionId: existingReferWithoutAddress.id,
+        referrerId: referrer.id,
+        addressId: 'no-address', // This is just for logging
+        analytics,
+      })
+    } else {
+      return await createReferralRecord({
+        referrerId: referrer.id,
+        analytics,
+      })
+    }
+  }
+
+  const {
+    id: addressId,
+    administrativeAreaLevel1: state,
+    usCongressionalDistrict: district,
+  } = referrer.address
+
+  if (!state || !district) {
+    logger.warn(
+      `Address ${addressId} doesn't have valid district information, creating record without district attribution`,
+    )
+
+    // Look for an existing referral with this address but without district info
+    const existingReferWithAddressButNoDistrict = referrer.userActions.find(
+      action =>
+        action.actionType === UserActionType.REFER &&
+        action.userActionRefer?.address?.id === addressId,
+    )
+
+    if (existingReferWithAddressButNoDistrict) {
+      return await incrementExistingReferral({
+        existingActionId: existingReferWithAddressButNoDistrict.id,
+        referrerId: referrer.id,
+        addressId,
+        analytics,
+      })
+    } else {
+      return await createReferralRecord({
+        referrerId: referrer.id,
+        analytics,
+      })
+    }
+  }
+
+  // Look for an existing referral with district info
+  const existingReferForDistrict = referrer.userActions.find(
+    action =>
+      action.actionType === UserActionType.REFER &&
+      action.userActionRefer?.address?.administrativeAreaLevel1 === state &&
+      action.userActionRefer?.address?.usCongressionalDistrict === district,
+  )
+
+  const districtInfo = {
+    state,
+    district,
+  }
+
+  if (existingReferForDistrict) {
+    return await incrementExistingReferral({
+      existingActionId: existingReferForDistrict.id,
+      referrerId: referrer.id,
+      addressId,
+      analytics,
+      districtInfo,
+    })
+  } else {
+    return await createReferralRecord({
+      referrerId: referrer.id,
+      analytics,
+      addressData: {
+        addressId,
+        districtInfo,
+      },
+    })
+  }
+}
+
 export async function actionCreateUserActionReferral(input: Input) {
   logger.info('triggered', input)
 
@@ -41,7 +249,6 @@ export async function actionCreateUserActionReferral(input: Input) {
     }
   }
   const { referralId, userId, localUser } = validatedFields.data
-  const countryCode = await getCountryCodeCookie()
 
   const user = await prismaClient.user.findFirstOrThrow({
     where: { id: userId },
@@ -65,14 +272,18 @@ export async function actionCreateUserActionReferral(input: Input) {
 
   const referrer = await prismaClient.user.findFirst({
     where: { referralId },
-    select: {
-      id: true,
+    include: {
+      address: true,
       userActions: {
-        select: {
-          id: true,
-          actionType: true,
-          campaignName: true,
-          userActionRefer: true,
+        where: {
+          actionType: UserActionType.REFER,
+        },
+        include: {
+          userActionRefer: {
+            include: {
+              address: true,
+            },
+          },
         },
       },
     },
@@ -91,56 +302,23 @@ export async function actionCreateUserActionReferral(input: Input) {
       level: 'error',
     })
     waitUntil(beforeFinish())
-    return { user: getClientUser(user) }
+    return { errors: { referralId: ['Referrer not found'] } }
   }
 
   logger.info(`found referrer ${referrer.id}`)
 
-  const existingReferAction = referrer.userActions.find(
-    action => action.actionType === UserActionType.REFER,
-  )
+  const userAction = await findOrCreateUserActionRefer({
+    referrer,
+    analytics,
+  })
 
-  if (existingReferAction?.userActionRefer) {
-    await prismaClient.userActionRefer.update({
-      where: { id: existingReferAction.id },
-      data: {
-        referralsCount: { increment: 1 },
-      },
-    })
-    analytics.trackUserActionUpdated({
-      actionType: UserActionType.REFER,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
-      userState: 'Existing',
-      actionId: existingReferAction.id,
-    })
-    logger.info(`incremented referral count for referrer ${referrer.id}`)
-  } else {
-    await prismaClient.userAction.create({
-      data: {
-        userId: referrer.id,
-        actionType: UserActionType.REFER,
-        campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
-        countryCode,
-        userActionRefer: {
-          create: {
-            referralsCount: 1,
-          },
-        },
-      },
-    })
-    analytics.trackUserActionCreated({
-      actionType: UserActionType.REFER,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
-      creationMethod: 'On Site',
-      userState: 'Existing',
-    })
-    logger.info(`created REFER action for referrer ${referrer.id}`)
-  }
+  const hasExistingReferActions = referrer.userActions.length > 0
 
   waitUntil(beforeFinish())
+
   return {
     user: getClientUser(user),
-    wasActionCreated: !existingReferAction,
-    action: existingReferAction,
+    wasActionCreated: !hasExistingReferActions,
+    action: userAction,
   }
 }
