@@ -176,7 +176,6 @@ async function createAction<U extends User>({
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: decimalEthTransactionValue.mul(ratio),
           transactionHash: validatedInput.transactionHash,
-          tenantId,
         },
       },
     },

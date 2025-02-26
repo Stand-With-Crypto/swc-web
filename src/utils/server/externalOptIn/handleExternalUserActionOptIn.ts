@@ -232,7 +232,6 @@ export async function handleExternalUserActionOptIn(
       userActionOptIn: {
         create: {
           optInType,
-          tenantId: user.tenantId,
         },
       },
       tenantId: user.tenantId,
@@ -359,7 +358,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: isVerifiedEmailAddress,
               source: emailSource,
-              tenantId,
             },
           },
         }),
@@ -379,11 +377,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: { ...dbAddress, tenantId },
+                  create: dbAddress,
                 },
               }
             : {
-                create: { ...dbAddress, tenantId },
+                create: dbAddress,
               }),
         },
       }),
@@ -466,7 +464,6 @@ async function maybeUpsertUser({
           emailAddress,
           isVerified: isVerifiedEmailAddress,
           source: emailSource,
-          tenantId,
         },
       },
       ...(cryptoAddress && {
@@ -484,11 +481,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: { ...dbAddress, tenantId },
+                  create: dbAddress,
                 },
               }
             : {
-                create: { ...dbAddress, tenantId },
+                create: dbAddress,
               }),
         },
       }),

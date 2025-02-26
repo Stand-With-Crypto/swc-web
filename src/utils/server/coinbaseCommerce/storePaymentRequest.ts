@@ -215,8 +215,6 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
             isVerified: false,
             emailAddress: payment.event.data.metadata.email,
             source: 'USER_ENTERED',
-            // Same as above
-            tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
           },
         },
       }),
@@ -320,7 +318,6 @@ async function createUserActionDonation(
           amountUsd: pricingValues.amountUsd,
           recipient: DonationOrganization.STAND_WITH_CRYPTO,
           coinbaseCommerceDonationId: payment.id,
-          tenantId: user.tenantId,
         },
       },
     },
