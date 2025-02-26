@@ -4,9 +4,9 @@ import useSWR from 'swr'
 
 import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomepageData'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { getCountryCodeOnClient } from '@/utils/web/getCountryCodeOnClient'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetricsResponse) {
   const initialDelayToShowAnimation = 1500
