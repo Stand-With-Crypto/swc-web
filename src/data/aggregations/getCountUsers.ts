@@ -8,7 +8,7 @@ interface GetCountUsersProps {
 }
 
 export const getCountUsers = async ({ countryCode }: GetCountUsersProps) => {
-  const count = await prismaClient.user.count({ where: { tenantId: countryCode } })
+  const count = await prismaClient.user.count({ where: { countryCode } })
   if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
     return { count }
   }

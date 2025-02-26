@@ -14,10 +14,10 @@ export const getCountPolicymakerContacts = async ({
 }: GetCountPolicymakerContactsProps) => {
   const [countUserActionEmailRecipients, countUserActionCalls] = await Promise.all([
     prismaClient.userActionEmailRecipient.count({
-      where: { userActionEmail: { userAction: { tenantId: countryCode } } },
+      where: { userActionEmail: { userAction: { countryCode } } },
     }),
     prismaClient.userAction.count({
-      where: { actionType: UserActionType.CALL, tenantId: countryCode },
+      where: { actionType: UserActionType.CALL, countryCode },
     }),
   ])
   /*

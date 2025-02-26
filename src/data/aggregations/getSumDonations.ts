@@ -22,7 +22,7 @@ export const getSumDonations = async ({ countryCode }: GetSumDonationsProps) => 
       totalDonationAmountUsd: true,
     },
     where: {
-      tenantId: countryCode,
+      countryCode,
     },
   })
   return {
