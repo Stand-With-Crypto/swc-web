@@ -17,11 +17,7 @@ interface RequestContext {
 export async function GET(_: Request, { params }: RequestContext) {
   const { countryCode } = await params
 
-  const isValid = zodSupportedCountryCode.safeParse(countryCode)
-
-  if (!isValid.success) {
-    return new NextResponse('Invalid country code', { status: 400 })
-  }
+  zodSupportedCountryCode.parse(countryCode)
 
   const data = await getHomepageTopLevelMetrics({ countryCode })
   return NextResponse.json(data)
