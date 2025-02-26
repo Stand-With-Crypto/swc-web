@@ -36,10 +36,11 @@ export const zodStateDistrict = object({
 
   const districtCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[data.state as USStateCode]
   if (districtCount === 0) {
-    if (data.district !== 'N/A') {
+    // Special case for DC
+    if (data.district !== 'N/A' && data.district.toString() !== '1') {
       ctx.addIssue({
         code: ZodIssueCode.custom,
-        message: 'District must be N/A for this state',
+        message: 'District must be N/A or 1 for this state',
         path: ['district'],
       })
     }
