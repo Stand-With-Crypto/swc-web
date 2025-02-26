@@ -38,8 +38,6 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
     throw error
   }
 
-  console.log('countryCode', countryCode)
-
   const validatedFields = zodSupportedCountryCode.safeParse(countryCode)
   if (!validatedFields.success) {
     const error = new Error('Update User Country Code - Invalid country code')
