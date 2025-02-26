@@ -1,14 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import ReactPlayer from 'react-player'
 import * as Sentry from '@sentry/nextjs'
-import dynamic from 'next/dynamic'
 
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { cn } from '@/utils/web/cn'
-
-// https://github.com/cookpete/react-player/issues/1428
-// Lazy load the ReactPlayer component to avoid hydration issues
-const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 export const supportedVideoFitTypes = ['cover', 'contain', 'fill'] as const
 
@@ -44,8 +41,8 @@ interface CommonProps {
   /** `undefined` uses default volume on all players  */
   volume?: number
   /** Fallback component to show if the video fails to load */
-  fallback?: React.ReactNode
-  /** Fallback component to show while the video is loading */
+  failFallback?: React.ReactNode
+  /** Fallback component to show while the video is loading or if the page has not yet hydrated */
   loadingFallback?: React.ReactNode
   fit?: (typeof supportedVideoFitTypes)[number]
   height?: string | number
@@ -60,6 +57,7 @@ export const DEFAULT_ASPECT_RATIO = 9 / 16
 
 export function VideoPlayer(props: VideoProps) {
   const [error, setError] = useState(false)
+  const hasHydrated = useHasHydrated()
 
   const {
     aspectRatio = DEFAULT_ASPECT_RATIO,
@@ -70,7 +68,7 @@ export function VideoPlayer(props: VideoProps) {
     autoplay,
     type,
     previewImage,
-    fallback,
+    failFallback,
     loadingFallback,
     fit,
     height = '100%',
@@ -105,8 +103,12 @@ export function VideoPlayer(props: VideoProps) {
 
   const url = getUrl()
 
+  if (!hasHydrated) {
+    return loadingFallback
+  }
+
   if (!url || error) {
-    return fallback || null
+    return failFallback || null
   }
 
   return (

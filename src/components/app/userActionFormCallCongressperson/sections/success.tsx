@@ -20,9 +20,18 @@ export const UserActionFormCallCongresspersonSuccess = () => {
         <VideoPlayer
           autoplay
           className="overflow-hidden rounded-xl sm:w-[345px]"
-          fallback={ImageFallback}
+          failFallback={ImageFallback}
           fit="cover"
           height={300}
+          loadingFallback={
+            <NextImage
+              alt="loading"
+              className="h-full w-full object-cover"
+              fill
+              priority
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+            />
+          }
           loop
           muted
           type="video"

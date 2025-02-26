@@ -15,7 +15,7 @@ export function OnboardingTweetAtPersonCampaign({
       <VideoPlayer
         autoplay
         className="max-h-[266px] max-w-[454px] overflow-hidden rounded-lg"
-        fallback={
+        failFallback={
           <NextImage
             alt="Pizza Day"
             height={266}
@@ -25,6 +25,15 @@ export function OnboardingTweetAtPersonCampaign({
           />
         }
         fit="cover"
+        loadingFallback={
+          <NextImage
+            alt="loading"
+            className="h-full w-full object-cover"
+            fill
+            priority
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+          />
+        }
         loop
         muted
         type="video"

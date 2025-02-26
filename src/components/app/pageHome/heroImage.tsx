@@ -24,7 +24,7 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
       <VideoPlayer
         autoplay
         className={cn('absolute left-0 top-0')}
-        fallback={fallback}
+        failFallback={fallback}
         fit="cover"
         loadingFallback={
           <NextImage
