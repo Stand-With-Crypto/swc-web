@@ -3,8 +3,12 @@ import 'server-only'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-export const getCountUsers = async () => {
-  const count = await prismaClient.user.count()
+interface GetCountUsersProps {
+  countryCode: string
+}
+
+export const getCountUsers = async ({ countryCode }: GetCountUsersProps) => {
+  const count = await prismaClient.user.count({ where: { tenantId: countryCode } })
   if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
     return { count }
   }
