@@ -30,16 +30,6 @@ export async function mergeUsers({
   const userToKeep = usersWithData.find(x => x.id === userToKeepId)!
   const userToDelete = usersWithData.find(x => x.id === userToDeleteId)!
 
-  if (userToKeep.tenantId !== userToDelete.tenantId) {
-    logger.warn(
-      `Not merging user ${userToDelete.id} into user ${userToKeep.id} because the tenantId is different`,
-    )
-    logger.warn(
-      `User ${userToDelete.id} tenantId: ${userToDelete.tenantId} | User ${userToKeep.id} tenantId: ${userToKeep.tenantId}`,
-    )
-    return
-  }
-
   const shouldTransferAddress = !userToKeep.addressId && userToDelete.addressId
 
   const emailsToTransfer = userToDelete.userEmailAddresses.filter(userToDeleteEmail => {

@@ -23,8 +23,8 @@ import {
   CapitolCanaryCampaignId,
   SandboxCapitolCanaryCampaignId,
 } from '@/utils/server/capitolCanary/campaigns'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getTenantId } from '@/utils/server/getTenantId'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -90,7 +90,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     zodUserActionFormEmailCongresspersonAction,
     input,
   )
-  const tenantId = await getTenantId()
+  const countryCode = await getCountryCodeCookie()
 
   if (!validatedFields.success) {
     return {
@@ -131,7 +131,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     sessionId,
     localUser,
     onUpsertUser: triggerRateLimiterAtMostOnce,
-    tenantId,
+    countryCode,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -172,7 +172,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     data: {
       user: { connect: { id: user.id } },
       actionType,
-      tenantId,
+      countryCode,
       campaignName: validatedFields.data.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
@@ -184,11 +184,11 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
           senderEmail: validatedFields.data.emailAddress,
           firstName: validatedFields.data.firstName,
           lastName: validatedFields.data.lastName,
-          tenantId,
+
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-              create: { ...validatedFields.data.address, tenantId },
+              create: validatedFields.data.address,
             },
           },
           userActionEmailRecipients: {
@@ -274,14 +274,14 @@ async function maybeUpsertUser({
   sessionId,
   localUser,
   onUpsertUser,
-  tenantId,
+  countryCode,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
   onUpsertUser: () => Promise<void> | void
-  tenantId: string
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -297,7 +297,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: false,
               source: UserEmailAddressSource.USER_ENTERED,
-              tenantId,
             },
           },
         }),
@@ -306,11 +305,11 @@ async function maybeUpsertUser({
           address: {
             connectOrCreate: {
               where: { googlePlaceId: address.googlePlaceId },
-              create: { ...address, tenantId },
+              create: address,
             },
           },
         }),
-      tenantId,
+      countryCode,
     }
     const keysToUpdate = Object.keys(updatePayload)
     if (!keysToUpdate.length) {
@@ -361,16 +360,15 @@ async function maybeUpsertUser({
           emailAddress,
           isVerified: false,
           source: UserEmailAddressSource.USER_ENTERED,
-          tenantId,
         },
       },
       address: {
         connectOrCreate: {
           where: { googlePlaceId: address.googlePlaceId },
-          create: { ...address, tenantId },
+          create: address,
         },
       },
-      tenantId,
+      countryCode,
     },
   })
   const primaryUserEmailAddressId = user.userEmailAddresses[0].id

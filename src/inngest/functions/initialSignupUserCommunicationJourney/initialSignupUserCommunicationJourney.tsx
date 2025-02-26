@@ -173,20 +173,10 @@ async function createCommunicationJourney(userId: string) {
     throw new NonRetriableError('UserCommunicationJourney already exists')
   }
 
-  const { tenantId } = await prismaClient.user.findFirstOrThrow({
-    where: {
-      id: userId,
-    },
-    select: {
-      tenantId: true,
-    },
-  })
-
   return prismaClient.userCommunicationJourney.create({
     data: {
       userId,
       journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
-      tenantId,
     },
   })
 }

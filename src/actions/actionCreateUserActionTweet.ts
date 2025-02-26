@@ -12,8 +12,8 @@ import {
 import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getTenantId } from '@/utils/server/getTenantId'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -66,7 +66,7 @@ async function _actionCreateUserActionTweet() {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
-  const tenantId = await getTenantId()
+  const countryCode = await getCountryCodeCookie()
 
   if (!userMatch.user) {
     await triggerRateLimiterAtMostOnce()
@@ -75,7 +75,7 @@ async function _actionCreateUserActionTweet() {
     existingUser: userMatch.user,
     sessionId,
     localUser,
-    tenantId,
+    countryCode,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -114,7 +114,7 @@ async function _actionCreateUserActionTweet() {
       user: { connect: { id: user.id } },
       actionType,
       campaignName,
-      tenantId,
+      countryCode,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
@@ -138,12 +138,12 @@ async function maybeUpsertUser({
   existingUser,
   sessionId,
   localUser,
-  tenantId,
+  countryCode,
 }: {
   existingUser: UserWithRelations | null
   sessionId: string
   localUser: ServerLocalUser | null
-  tenantId: string
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   if (existingUser) {
     return { user: existingUser, userState: 'Existing' }
@@ -161,7 +161,7 @@ async function maybeUpsertUser({
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       smsStatus: SMSStatus.NOT_OPTED_IN,
-      tenantId,
+      countryCode,
     },
   })
   return { user, userState: 'New' }
