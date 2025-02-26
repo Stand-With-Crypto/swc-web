@@ -7,6 +7,7 @@ import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { zodServerLocalUser } from '@/utils/server/serverLocalUser'
@@ -40,6 +41,7 @@ export async function actionCreateUserActionReferral(input: Input) {
     }
   }
   const { referralId, userId, localUser } = validatedFields.data
+  const countryCode = await getCountryCodeCookie()
 
   const user = await prismaClient.user.findFirstOrThrow({
     where: { id: userId },
@@ -112,6 +114,7 @@ export async function actionCreateUserActionReferral(input: Input) {
         userId: referrer.id,
         actionType: UserActionType.REFER,
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+        countryCode,
         userActionRefer: {
           create: {
             referralsCount: 1,
