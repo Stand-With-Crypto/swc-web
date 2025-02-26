@@ -5,10 +5,20 @@ import { UserActionType } from '@prisma/client'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-export const getCountPolicymakerContacts = async () => {
+interface GetCountPolicymakerContactsProps {
+  countryCode: string
+}
+
+export const getCountPolicymakerContacts = async ({
+  countryCode,
+}: GetCountPolicymakerContactsProps) => {
   const [countUserActionEmailRecipients, countUserActionCalls] = await Promise.all([
-    prismaClient.userActionEmailRecipient.count(),
-    prismaClient.userAction.count({ where: { actionType: UserActionType.CALL } }),
+    prismaClient.userActionEmailRecipient.count({
+      where: { userActionEmail: { userAction: { countryCode } } },
+    }),
+    prismaClient.userAction.count({
+      where: { actionType: UserActionType.CALL, countryCode },
+    }),
   ])
   /*
   We also return the sum of the following hardcoded numbers:

@@ -13,14 +13,17 @@ export const dynamic = 'error'
 export const dynamicParams = false
 
 export default async function Home(props: PageProps) {
-  const [params, asyncProps, advocatePerStateDataProps, partners, leaderboardData] =
-    await Promise.all([
-      props.params,
-      getHomepageData({ recentActivityLimit: 30, restrictToUS: true }),
-      getAdvocatesMapData(),
-      getPartners(),
-      getDistrictsLeaderboardData({ limit: 10 }),
-    ])
+  const params = await props.params
+  const [asyncProps, advocatePerStateDataProps, partners, leaderboardData] = await Promise.all([
+    getHomepageData({
+      recentActivityLimit: 30,
+      restrictToUS: true,
+      countryCode: params.countryCode,
+    }),
+    getAdvocatesMapData(),
+    getPartners(),
+    getDistrictsLeaderboardData({ limit: 10 }),
+  ])
 
   /*
   the country code check in layout works for most cases, but for some reason if we hit
