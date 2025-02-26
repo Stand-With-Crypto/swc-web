@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 import { any, object, record, string } from 'zod'
 
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { COOKIE_CONSENT_COOKIE_NAME, deserializeCookieConsent } from '@/utils/shared/cookieConsent'
 import {
   CurrentSessionLocalUser,
@@ -22,11 +23,13 @@ export const zodServerLocalUser = object({
     initialReferer: string().optional(),
     datetimeFirstSeen: string(),
     experiments: any(),
+    countryCode: string(),
   }),
   currentSession: object({
     datetimeOnLoad: string(),
     refererOnLoad: string().optional(),
     searchParamsOnLoad: record(string(), string()),
+    countryCode: string(),
   }),
 })
 
@@ -41,11 +44,13 @@ export function getLocalUserFromUser(user: User): ServerLocalUser {
       },
       initialReferer: '',
       datetimeFirstSeen: user.datetimeCreated.toISOString(),
+      countryCode: user.countryCode,
     },
     currentSession: {
       datetimeOnLoad: user.datetimeCreated.toISOString(),
       refererOnLoad: '',
       searchParamsOnLoad: {},
+      countryCode: user.countryCode,
     },
   }
 }
@@ -54,7 +59,11 @@ export function mapLocalUserToUserDatabaseFields(
   localUser: ServerLocalUser | null,
 ): Pick<
   User,
-  'acquisitionReferer' | 'acquisitionSource' | 'acquisitionMedium' | 'acquisitionCampaign'
+  | 'acquisitionReferer'
+  | 'acquisitionSource'
+  | 'acquisitionMedium'
+  | 'acquisitionCampaign'
+  | 'countryCode'
 > {
   return {
     // We are trimming the char input in case it is greater than the DB limit (191 characters)
@@ -71,6 +80,7 @@ export function mapLocalUserToUserDatabaseFields(
       localUser?.persisted?.initialSearchParams.utm_campaign?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_campaign?.slice(0, 191) ||
       '',
+    countryCode: localUser?.persisted?.countryCode || localUser?.currentSession.countryCode || '',
   }
 }
 
@@ -79,11 +89,13 @@ function parseFromCookieStrings({
   currentSessionStr,
   cookieConsentStr,
   source,
+  countryCode,
 }: {
   source: string
   cookieConsentStr: string | undefined
   persistedStr: string | undefined
   currentSessionStr: string | undefined
+  countryCode: string
 }) {
   if (cookieConsentStr && !deserializeCookieConsent(cookieConsentStr).targeting) {
     return null
@@ -92,10 +104,18 @@ function parseFromCookieStrings({
     return null
   }
   try {
-    const persisted = JSON.parse(persistedStr)
-    const currentSession = JSON.parse(currentSessionStr)
+    const persisted = JSON.parse(persistedStr) as PersistedLocalUser
+    const currentSession = JSON.parse(currentSessionStr) as CurrentSessionLocalUser
+
     try {
-      const localUser: ServerLocalUser = zodServerLocalUser.parse({ persisted, currentSession })
+      // We are adding the country code in case it doesn't exist to support the incremental adoption of the new local user object type.
+      const localUser: ServerLocalUser = zodServerLocalUser.parse({
+        persisted: { ...persisted, countryCode: persisted?.countryCode ?? countryCode },
+        currentSession: {
+          ...currentSession,
+          countryCode: currentSession?.countryCode ?? countryCode,
+        },
+      })
       return localUser
     } catch {
       Sentry.captureMessage('serverLocalUser: JSON failed to validate', {
@@ -115,6 +135,7 @@ function parseFromCookieStrings({
 
 export async function parseLocalUserFromCookies() {
   const cookieObj = await cookies()
+  const countryCode = await getCountryCodeCookie()
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value
@@ -123,5 +144,6 @@ export async function parseLocalUserFromCookies() {
     currentSessionStr,
     cookieConsentStr,
     source: 'app-router',
+    countryCode,
   })
 }

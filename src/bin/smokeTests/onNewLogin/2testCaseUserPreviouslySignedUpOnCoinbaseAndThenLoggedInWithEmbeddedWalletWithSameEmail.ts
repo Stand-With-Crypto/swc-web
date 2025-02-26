@@ -21,18 +21,16 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
               ...mockCreateUserEmailAddressInput(),
               isVerified: true,
               source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
-              tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
             },
           },
           userActions: {
             create: {
               actionType: UserActionType.OPT_IN,
               campaignName: UserActionOptInCampaignName.DEFAULT,
-              tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
+              countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
               userActionOptIn: {
                 create: {
                   optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-                  tenantId: DEFAULT_SUPPORTED_COUNTRY_CODE,
                 },
               },
             },

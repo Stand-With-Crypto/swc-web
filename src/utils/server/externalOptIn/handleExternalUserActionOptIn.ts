@@ -45,13 +45,13 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 const zodExternalUserActionOptInUserAddress = object({
   streetNumber: string(),
@@ -89,7 +89,7 @@ const zodExternalUserActionOptIn = z.object({
     })
     .optional(),
   additionalAnalyticsProperties: z.record(z.string()).optional(),
-  countryCode: string().length(2).optional(), // This will be used as tenantId for the new user. It is optional for now until CB updates the payload that is sent to this function.
+  countryCode: zodSupportedCountryCode,
 })
 
 const logger = getLogger('handleExternalUserActionOptIn')
@@ -121,8 +121,6 @@ export async function handleExternalUserActionOptIn(
   input: Input,
 ): Promise<ExternalUserActionOptInResponse<ExternalUserActionOptInResult>> {
   const { emailAddress, cryptoAddress, optInType, campaignName, countryCode } = input
-  // TODO (@twistershark): This needs to be dynamic after @ydruffin-cb updates the payload on CB side
-  const tenantId = countryCode?.toLowerCase() || DEFAULT_SUPPORTED_COUNTRY_CODE
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -164,7 +162,7 @@ export async function handleExternalUserActionOptIn(
   const { user, userState } = await maybeUpsertUser({
     existingUser: existingAction?.user,
     input,
-    tenantId,
+    countryCode: countryCode?.toLowerCase(),
   })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
@@ -234,10 +232,9 @@ export async function handleExternalUserActionOptIn(
       userActionOptIn: {
         create: {
           optInType,
-          tenantId: user.tenantId,
         },
       },
-      tenantId: user.tenantId,
+      countryCode: user.countryCode,
       user: { connect: { id: user.id } },
     },
   })
@@ -283,11 +280,11 @@ export async function handleExternalUserActionOptIn(
 async function maybeUpsertUser({
   existingUser,
   input,
-  tenantId,
+  countryCode,
 }: {
   existingUser: UserWithRelations | undefined
   input: Input
-  tenantId: string
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const {
     emailAddress,
@@ -361,7 +358,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: isVerifiedEmailAddress,
               source: emailSource,
-              tenantId,
             },
           },
         }),
@@ -381,11 +377,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: { ...dbAddress, tenantId },
+                  create: dbAddress,
                 },
               }
             : {
-                create: { ...dbAddress, tenantId },
+                create: dbAddress,
               }),
         },
       }),
@@ -462,13 +458,12 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
-      tenantId,
+      countryCode,
       userEmailAddresses: {
         create: {
           emailAddress,
           isVerified: isVerifiedEmailAddress,
           source: emailSource,
-          tenantId,
         },
       },
       ...(cryptoAddress && {
@@ -486,11 +481,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: { ...dbAddress, tenantId },
+                  create: dbAddress,
                 },
               }
             : {
-                create: { ...dbAddress, tenantId },
+                create: dbAddress,
               }),
         },
       }),
