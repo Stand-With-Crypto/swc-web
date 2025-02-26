@@ -28,7 +28,7 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { getTenantId } from '@/utils/server/getTenantId'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
@@ -302,7 +302,7 @@ export async function onNewLogin(props: NewLoginParams) {
   const { cryptoAddress: _cryptoAddress, localUser } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
-  const tenantId = await getTenantId()
+  const countryCode = await getCountryCodeCookie()
 
   // queryMatchingUsers logic
   const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
@@ -448,7 +448,7 @@ export async function onNewLogin(props: NewLoginParams) {
     sessionId: await props.getUserSessionId(),
     embeddedWalletUserDetails,
     decreaseCommunicationTimers: props.decreaseCommunicationTimers,
-    tenantId,
+    countryCode,
   })
 
   if (localUser) {
@@ -835,7 +835,7 @@ async function triggerPostLoginUserActionSteps({
   sessionId,
   embeddedWalletUserDetails,
   decreaseCommunicationTimers,
-  tenantId,
+  countryCode,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
@@ -845,7 +845,7 @@ async function triggerPostLoginUserActionSteps({
   sessionId: string | null
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata | null
   decreaseCommunicationTimers?: boolean
-  tenantId: string
+  countryCode: string
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -869,7 +869,7 @@ async function triggerPostLoginUserActionSteps({
         user: { connect: { id: user.id } },
         actionType: UserActionType.OPT_IN,
         campaignName: UserActionOptInCampaignName.DEFAULT,
-        tenantId,
+        countryCode,
         userActionOptIn: {
           create: {
             optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
