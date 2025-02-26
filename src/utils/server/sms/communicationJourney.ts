@@ -36,7 +36,6 @@ export async function bulkCreateCommunicationJourney({
     select: {
       id: true,
       phoneNumber: true,
-      tenantId: true,
     },
   })
 
@@ -55,7 +54,6 @@ export async function bulkCreateCommunicationJourney({
       },
       select: {
         userId: true,
-        tenantId: true,
       },
     })
   ).map(({ userId }) => userId)
@@ -63,11 +61,10 @@ export async function bulkCreateCommunicationJourney({
   await prismaClient.userCommunicationJourney.createMany({
     data: users
       .filter(({ id }) => !usersWithExistingCommunicationJourney.includes(id))
-      .map(({ id, tenantId }) => ({
+      .map(({ id }) => ({
         journeyType,
         campaignName,
         userId: id,
-        tenantId,
       })),
   })
 

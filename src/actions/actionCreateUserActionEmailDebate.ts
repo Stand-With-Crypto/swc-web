@@ -17,8 +17,8 @@ import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getTenantId } from '@/utils/server/getTenantId'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -78,14 +78,14 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
   logger.info('validated fields')
 
   const localUser = await parseLocalUserFromCookies()
-  const tenantId = await getTenantId()
+  const countryCode = await getCountryCodeCookie()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,
     sessionId,
     localUser,
     onUpsertUser: triggerRateLimiterAtMostOnce,
-    tenantId,
+    countryCode,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -140,7 +140,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-              create: { ...validatedFields.data.address, tenantId },
+              create: validatedFields.data.address,
             },
           },
           userActionEmailRecipients: {
@@ -148,10 +148,9 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
               emailAddress: DEBATE_RECEIVER_EMAIL,
             },
           },
-          tenantId,
         },
       },
-      tenantId,
+      countryCode,
     },
     include: {
       userActionEmail: true,
@@ -205,14 +204,14 @@ async function maybeUpsertUser({
   sessionId,
   localUser,
   onUpsertUser,
-  tenantId,
+  countryCode,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
   onUpsertUser: () => Promise<void> | void
-  tenantId: string
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -226,7 +225,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: false,
               source: UserEmailAddressSource.USER_ENTERED,
-              tenantId,
             },
           },
         }),
@@ -235,7 +233,7 @@ async function maybeUpsertUser({
           address: {
             connectOrCreate: {
               where: { googlePlaceId: address.googlePlaceId },
-              create: { ...address, tenantId },
+              create: address,
             },
           },
         }),
@@ -283,19 +281,18 @@ async function maybeUpsertUser({
       hasOptedInToMembership: false,
       firstName,
       lastName,
-      tenantId,
+      countryCode,
       userEmailAddresses: {
         create: {
           emailAddress,
           isVerified: false,
           source: UserEmailAddressSource.USER_ENTERED,
-          tenantId,
         },
       },
       address: {
         connectOrCreate: {
           where: { googlePlaceId: address.googlePlaceId },
-          create: { ...address, tenantId },
+          create: address,
         },
       },
     },

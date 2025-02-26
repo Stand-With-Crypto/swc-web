@@ -6,11 +6,11 @@ import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getTenantId } from '@/utils/server/getTenantId'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -96,7 +96,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const tenantId = await getTenantId()
+  const countryCode = await getCountryCodeCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
@@ -105,7 +105,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   let user = userMatch.user
   if (!user) {
     await triggerRateLimiterAtMostOnce()
-    user = await createUser({ localUser, sessionId, tenantId })
+    user = await createUser({ localUser, sessionId, countryCode })
   }
 
   const peopleAnalytics = getServerPeopleAnalytics({
@@ -135,7 +135,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     validatedInput: validatedInput.data,
     userMatch,
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
-    tenantId,
+    countryCode,
   })
 
   if (user.primaryUserCryptoAddress !== null) {
@@ -147,9 +147,9 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
 }
 
 async function createUser(
-  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'> & { tenantId: string },
+  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'> & { countryCode: string },
 ) {
-  const { localUser, sessionId, tenantId } = sharedDependencies
+  const { localUser, sessionId, countryCode } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
       informationVisibility: UserInformationVisibility.ANONYMOUS,
@@ -159,7 +159,7 @@ async function createUser(
       smsStatus: SMSStatus.NOT_OPTED_IN,
       referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
-      tenantId,
+      countryCode,
     },
     include: {
       primaryUserCryptoAddress: true,
@@ -213,21 +213,21 @@ async function createAction<U extends User>({
   userMatch,
   sharedDependencies,
   isNewUser,
-  tenantId,
+  countryCode,
 }: {
   user: U
   isNewUser: boolean
   validatedInput: CreateActionLiveEventInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
-  tenantId: string
+  countryCode: string
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
       actionType: UserActionType.LIVE_EVENT,
       campaignName: validatedInput.campaignName,
-      tenantId,
+      countryCode,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },

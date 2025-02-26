@@ -12,6 +12,7 @@ import {
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const zodVerifiedSWCPartnersUserAddress = object({
   streetNumber: string(),
@@ -37,7 +38,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
-  countryCode: string().length(2).optional(), // This will be used as tenantId for the new user. It is optional for now until CB updates the payload that is sent to this function.
+  countryCode: zodSupportedCountryCode,
 })
 
 type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {

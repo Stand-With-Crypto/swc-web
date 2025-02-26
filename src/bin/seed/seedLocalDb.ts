@@ -242,7 +242,6 @@ async function seed() {
       emailAddress: emailAddress,
       isVerified: true,
       source: UserEmailAddressSource.USER_ENTERED,
-      tenantId: otherUserToMerge.tenantId,
     })),
   })
   await prismaClient.userMergeAlert.create({

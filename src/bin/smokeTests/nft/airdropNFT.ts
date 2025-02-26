@@ -34,16 +34,14 @@ async function smokeTestAirdropNFTWithInngest() {
           contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0),
-          tenantId: user.tenantId,
         },
       },
-      tenantId: user.tenantId,
+      countryCode: user.countryCode,
       actionType: UserActionType.OPT_IN,
       campaignName: UserActionOptInCampaignName.DEFAULT,
       userActionOptIn: {
         create: {
           optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-          tenantId: user.tenantId,
         },
       },
     },

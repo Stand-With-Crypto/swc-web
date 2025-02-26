@@ -8,7 +8,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
 
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE =
-  Number(process.env.AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE) || 2000
+  Number(process.env.AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE) || 3000
 
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_FUNCTION_ID =
   'script.audit-users-total-donation-amount-usd'

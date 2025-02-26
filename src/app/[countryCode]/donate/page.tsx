@@ -20,7 +20,7 @@ export default async function DonatePage(props: PageProps) {
 
   const { countryCode } = params
 
-  const sumDonations = await getSumDonations()
+  const sumDonations = await getSumDonations({ countryCode })
 
   return (
     <PageDonate

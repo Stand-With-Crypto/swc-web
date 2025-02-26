@@ -17,6 +17,7 @@ import { getUserIdOnClient } from '@/utils/shared/userId'
 import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
+import { getCountryCodeOnClient } from '@/utils/web/getCountryCodeOnClient'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 
 const InitialOrchestration = () => {
@@ -24,6 +25,7 @@ const InitialOrchestration = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const authUser = useThirdwebAuthUser()
+  const countryCode = getCountryCodeOnClient()
 
   useReloadDueToInactivity({ timeInMinutes: 25 })
 
@@ -40,6 +42,9 @@ const InitialOrchestration = () => {
       Sentry.setUser({ id: sessionId, idType: 'session' })
     }
   }, [])
+  useEffect(() => {
+    Sentry.setTag('countryCode', countryCode)
+  }, [countryCode])
   useEffect(() => {
     const clientUserId = getUserIdOnClient()
     if (authUser.user?.userId || clientUserId) {

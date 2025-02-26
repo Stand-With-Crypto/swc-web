@@ -8,12 +8,14 @@ export interface PersistedLocalUser {
   datetimeFirstSeen: string
   recentlyUsedAddress?: Pick<ClientAddress, 'googlePlaceId' | 'formattedDescription'>
   experiments?: IExperimentContext
+  countryCode: string
 }
 
 export interface CurrentSessionLocalUser {
   datetimeOnLoad: string
   refererOnLoad?: string
   searchParamsOnLoad: Record<string, string>
+  countryCode?: string
 }
 
 export interface LocalUser {
