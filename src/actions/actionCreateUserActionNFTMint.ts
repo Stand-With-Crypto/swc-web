@@ -9,7 +9,7 @@ import { BigNumber } from 'ethers'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getTenantId } from '@/utils/server/getTenantId'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -157,7 +157,7 @@ async function createAction<U extends User>({
       return new Decimal(0)
     })
 
-  const tenantId = await getTenantId()
+  const countryCode = await getCountryCodeCookie()
   const decimalEthTransactionValue = new Decimal(ethTransactionValue)
   await prismaClient.userAction.create({
     data: {
@@ -165,7 +165,7 @@ async function createAction<U extends User>({
       actionType: UserActionType.NFT_MINT,
       campaignName: validatedInput.campaignName,
       userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId! } },
-      tenantId,
+      countryCode,
       nftMint: {
         create: {
           nftSlug: NFTSlug.STAND_WITH_CRYPTO_SUPPORTER,
