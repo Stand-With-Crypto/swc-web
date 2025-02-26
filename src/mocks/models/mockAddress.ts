@@ -58,7 +58,7 @@ export function mockCreateAddressInputWithDC() {
     route: faker.location.street(),
     subpremise: faker.location.secondaryAddress(),
     locality: faker.location.city(),
-    administrativeAreaLevel1: faker.location.state({ abbreviated: true }),
+    administrativeAreaLevel1: stateCode,
     administrativeAreaLevel2: '',
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',

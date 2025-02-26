@@ -50,7 +50,6 @@ model Address {
   userActionVotingInformationResearched UserActionVotingInformationResearched[]
 
   @@index([administrativeAreaLevel1, countryCode])
-  @@index([countryCode, usCongressionalDistrict, administrativeAreaLevel1])
   @@map("address")
 }
 
