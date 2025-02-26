@@ -43,7 +43,7 @@ export function mockCreateUserInput({
     internalStatus: UserInternalStatus.VISIBLE,
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
-    tenantId: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
+    countryCode: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Prisma.UserCreateInput
 }
 

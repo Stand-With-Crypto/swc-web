@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 import { any, object, record, string } from 'zod'
 
-import { getTenantId } from '@/utils/server/getTenantId'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { COOKIE_CONSENT_COOKIE_NAME, deserializeCookieConsent } from '@/utils/shared/cookieConsent'
 import {
   CurrentSessionLocalUser,
@@ -44,13 +44,13 @@ export function getLocalUserFromUser(user: User): ServerLocalUser {
       },
       initialReferer: '',
       datetimeFirstSeen: user.datetimeCreated.toISOString(),
-      countryCode: user.tenantId,
+      countryCode: user.countryCode,
     },
     currentSession: {
       datetimeOnLoad: user.datetimeCreated.toISOString(),
       refererOnLoad: '',
       searchParamsOnLoad: {},
-      countryCode: user.tenantId,
+      countryCode: user.countryCode,
     },
   }
 }
@@ -63,7 +63,7 @@ export function mapLocalUserToUserDatabaseFields(
   | 'acquisitionSource'
   | 'acquisitionMedium'
   | 'acquisitionCampaign'
-  | 'tenantId'
+  | 'countryCode'
 > {
   return {
     // We are trimming the char input in case it is greater than the DB limit (191 characters)
@@ -80,7 +80,7 @@ export function mapLocalUserToUserDatabaseFields(
       localUser?.persisted?.initialSearchParams.utm_campaign?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_campaign?.slice(0, 191) ||
       '',
-    tenantId: localUser?.persisted?.countryCode || localUser?.currentSession.countryCode || '',
+    countryCode: localUser?.persisted?.countryCode || localUser?.currentSession.countryCode || '',
   }
 }
 
@@ -135,7 +135,7 @@ function parseFromCookieStrings({
 
 export async function parseLocalUserFromCookies() {
   const cookieObj = await cookies()
-  const countryCode = await getTenantId()
+  const countryCode = await getCountryCodeCookie()
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value

@@ -162,7 +162,7 @@ export async function handleExternalUserActionOptIn(
   const { user, userState } = await maybeUpsertUser({
     existingUser: existingAction?.user,
     input,
-    tenantId: countryCode?.toLowerCase(),
+    countryCode: countryCode?.toLowerCase(),
   })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
@@ -232,10 +232,9 @@ export async function handleExternalUserActionOptIn(
       userActionOptIn: {
         create: {
           optInType,
-          tenantId: user.tenantId,
         },
       },
-      tenantId: user.tenantId,
+      countryCode: user.countryCode,
       user: { connect: { id: user.id } },
     },
   })
@@ -281,11 +280,11 @@ export async function handleExternalUserActionOptIn(
 async function maybeUpsertUser({
   existingUser,
   input,
-  tenantId,
+  countryCode,
 }: {
   existingUser: UserWithRelations | undefined
   input: Input
-  tenantId: string
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const {
     emailAddress,
@@ -359,7 +358,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: isVerifiedEmailAddress,
               source: emailSource,
-              tenantId,
             },
           },
         }),
@@ -379,11 +377,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: { ...dbAddress, tenantId },
+                  create: dbAddress,
                 },
               }
             : {
-                create: { ...dbAddress, tenantId },
+                create: dbAddress,
               }),
         },
       }),
@@ -460,13 +458,12 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
-      tenantId,
+      countryCode,
       userEmailAddresses: {
         create: {
           emailAddress,
           isVerified: isVerifiedEmailAddress,
           source: emailSource,
-          tenantId,
         },
       },
       ...(cryptoAddress && {
@@ -484,11 +481,11 @@ async function maybeUpsertUser({
             ? {
                 connectOrCreate: {
                   where: { googlePlaceId: dbAddress.googlePlaceId },
-                  create: { ...dbAddress, tenantId },
+                  create: dbAddress,
                 },
               }
             : {
-                create: { ...dbAddress, tenantId },
+                create: dbAddress,
               }),
         },
       }),
