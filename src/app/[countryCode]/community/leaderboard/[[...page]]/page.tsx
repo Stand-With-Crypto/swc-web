@@ -67,6 +67,7 @@ export default async function CommunityLeaderboardPage(props: Props) {
     tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
     sumDonationsByUser,
     publicRecentActivity: undefined,
+    leaderboardData: undefined,
   }
 
   return (

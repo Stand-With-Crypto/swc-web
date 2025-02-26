@@ -11,11 +11,11 @@ import {
   PageLeaderboardInferredProps,
 } from '@/components/app/pageLeaderboard'
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
-import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
-export const revalidate = 30 // 30 seconds
+export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 export const dynamicParams = true
 
@@ -29,45 +29,44 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 }
 
 const pageValidator = z.string().pipe(z.coerce.number().int().gte(1).lte(50))
-const validatePageNum = ([page]: (string | undefined)[]) => {
-  if (!page) {
+const validatePageNum = ([pageParam]: (string | undefined)[]) => {
+  if (!pageParam) {
     return 1
   }
-  const val = pageValidator.safeParse(page)
+  const val = pageValidator.safeParse(pageParam)
   if (val.success) {
     return val.data
   }
   return null
 }
 
-// pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
-export default async function CommunityRecentActivityPage(props: Props) {
+export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
-  const { itemsPerPage } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+  const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   const { countryCode, page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
   }
+
   const offset = (pageNum - 1) * itemsPerPage
 
-  const publicRecentActivity = await getPublicRecentActivity({
+  const { items: leaderboardData } = await getDistrictsLeaderboardData({
     limit: itemsPerPage,
     offset,
   })
 
   const dataProps: PageLeaderboardInferredProps = {
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-    publicRecentActivity,
+    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+    leaderboardData,
     sumDonationsByUser: undefined,
-    leaderboardData: undefined,
+    publicRecentActivity: undefined,
   }
 
   return (

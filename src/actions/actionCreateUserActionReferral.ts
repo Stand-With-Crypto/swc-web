@@ -7,6 +7,7 @@ import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { zodServerLocalUser } from '@/utils/server/serverLocalUser'
@@ -40,6 +41,7 @@ export async function actionCreateUserActionReferral(input: Input) {
     }
   }
   const { referralId, userId, localUser } = validatedFields.data
+  const countryCode = await getCountryCodeCookie()
 
   const user = await prismaClient.user.findFirstOrThrow({
     where: { id: userId },
@@ -105,6 +107,12 @@ export async function actionCreateUserActionReferral(input: Input) {
         referralsCount: { increment: 1 },
       },
     })
+    analytics.trackUserActionUpdated({
+      actionType: UserActionType.REFER,
+      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+      userState: 'Existing',
+      actionId: existingReferAction.id,
+    })
     logger.info(`incremented referral count for referrer ${referrer.id}`)
   } else {
     await prismaClient.userAction.create({
@@ -112,6 +120,7 @@ export async function actionCreateUserActionReferral(input: Input) {
         userId: referrer.id,
         actionType: UserActionType.REFER,
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+        countryCode,
         userActionRefer: {
           create: {
             referralsCount: 1,
@@ -119,16 +128,19 @@ export async function actionCreateUserActionReferral(input: Input) {
         },
       },
     })
+    analytics.trackUserActionCreated({
+      actionType: UserActionType.REFER,
+      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+      creationMethod: 'On Site',
+      userState: 'Existing',
+    })
     logger.info(`created REFER action for referrer ${referrer.id}`)
   }
 
-  analytics.trackUserActionCreated({
-    actionType: UserActionType.REFER,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
-    creationMethod: 'On Site',
-    userState: 'Existing',
-  })
-
   waitUntil(beforeFinish())
-  return { user: getClientUser(user) }
+  return {
+    user: getClientUser(user),
+    wasActionCreated: !existingReferAction,
+    action: existingReferAction,
+  }
 }

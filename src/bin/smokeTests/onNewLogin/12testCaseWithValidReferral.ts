@@ -28,6 +28,7 @@ async function createTestReferrer() {
       acquisitionSource: '',
       acquisitionMedium: '',
       acquisitionCampaign: '',
+      countryCode: 'us',
     },
   })
   testReferrer = referrer
@@ -46,6 +47,7 @@ function createTestParams(referrerId: string): TestParams {
         },
         initialReferer: '',
         datetimeFirstSeen: new Date().toISOString(),
+        countryCode: 'us',
       },
       currentSession: {
         datetimeOnLoad: new Date().toISOString(),
@@ -54,6 +56,7 @@ function createTestParams(referrerId: string): TestParams {
           utm_source: 'swc',
           utm_medium: 'referral',
           utm_campaign: referrerId,
+          countryCode: 'us',
         },
       },
     },
