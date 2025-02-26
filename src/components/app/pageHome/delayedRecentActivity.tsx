@@ -16,6 +16,7 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
+import { getCountryCodeOnClient } from '@/utils/web/getCountryCodeOnClient'
 
 export function DelayedRecentActivityWithMap(props: {
   actions: PublicRecentActivity
@@ -23,7 +24,8 @@ export function DelayedRecentActivityWithMap(props: {
   countryCode: SupportedCountryCodes
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
 }) {
-  const recentActivity = useApiRecentActivity(props.actions, { limit: 30, restrictToUS: true })
+  const countryCode = getCountryCodeOnClient()
+  const recentActivity = useApiRecentActivity(props.actions, { limit: 30, countryCode })
   const ref = useRef(null)
   const isInView = useInView(ref, { margin: '-50%', once: true })
   const visibleActions = recentActivity.data.slice(isInView ? 0 : 1, recentActivity.data.length)
