@@ -8,6 +8,7 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { OLD_NEWS_DATE_OVERRIDES } from '@/utils/server/builder/models/data/news/constants'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface InternalNews {
   id: string
@@ -53,12 +54,19 @@ export interface NormalizedNews {
   url: string
 }
 
-async function getAllNewsWithOffset(offset: number, limit: number) {
+async function getAllNewsWithOffset(
+  offset: number,
+  limit: number,
+  countryCode: SupportedCountryCodes,
+) {
   return await pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.NEWS, {
         query: {
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
+          data: {
+            countryCode: countryCode.toUpperCase(),
+          },
         },
         options: {
           includeRefs: true,
@@ -84,11 +92,21 @@ async function getAllNewsWithOffset(offset: number, limit: number) {
   })
 }
 
-export async function getNewsList(page = 0, limit = 10): Promise<NormalizedNews[]> {
+interface GetNewsListOptions {
+  page?: number
+  limit?: number
+  countryCode: SupportedCountryCodes
+}
+
+export async function getNewsList({
+  page = 0,
+  limit = 10,
+  countryCode,
+}: GetNewsListOptions): Promise<NormalizedNews[]> {
   try {
     const offset = page * limit
 
-    const news = await getAllNewsWithOffset(offset, limit)
+    const news = await getAllNewsWithOffset(offset, limit, countryCode)
 
     return news.map(normalizeNewsListItem).filter(Boolean)
   } catch (error) {

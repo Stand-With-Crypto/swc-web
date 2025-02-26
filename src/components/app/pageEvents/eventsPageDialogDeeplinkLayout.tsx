@@ -30,7 +30,7 @@ export async function EventsPageDialogDeeplinkLayout({
   const { countryCode } = pageParams
   const urls = getIntlUrls(countryCode)
 
-  const events = await getEvents()
+  const events = await getEvents({ countryCode })
 
   if (!events || !events?.length) {
     return NotFound()

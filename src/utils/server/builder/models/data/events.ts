@@ -6,10 +6,19 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`builderIOEvents`)
 
-export async function getEvent(eventSlug: string, state: string) {
+export async function getEvent({
+  eventSlug,
+  state,
+  countryCode,
+}: {
+  eventSlug: string
+  state: string
+  countryCode: SupportedCountryCodes
+}) {
   try {
     const entry = await pRetry(
       () =>
@@ -18,6 +27,7 @@ export async function getEvent(eventSlug: string, state: string) {
             data: {
               slug: eventSlug,
               state: state.toUpperCase(),
+              countryCode: countryCode.toUpperCase(),
               isOccuring: true,
             },
             ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
@@ -50,7 +60,13 @@ export async function getEvent(eventSlug: string, state: string) {
 
 const LIMIT = 100
 
-async function getAllEventsWithOffset(offset: number) {
+async function getAllEventsWithOffset({
+  offset,
+  countryCode,
+}: {
+  offset: number
+  countryCode: SupportedCountryCodes
+}) {
   return await pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.EVENTS, {
@@ -58,6 +74,7 @@ async function getAllEventsWithOffset(offset: number) {
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
           data: {
             isOccuring: true,
+            countryCode: countryCode.toUpperCase(),
           },
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
@@ -72,15 +89,15 @@ async function getAllEventsWithOffset(offset: number) {
   )
 }
 
-export async function getEvents() {
+export async function getEvents({ countryCode }: { countryCode: SupportedCountryCodes }) {
   try {
     let offset = 0
 
-    const entries = await getAllEventsWithOffset(offset)
+    const entries = await getAllEventsWithOffset({ offset, countryCode })
 
     while (entries.length === LIMIT + offset) {
       offset += entries.length
-      entries.push(...(await getAllEventsWithOffset(offset)))
+      entries.push(...(await getAllEventsWithOffset({ offset, countryCode })))
     }
 
     const filteredIncompleteEvents = entries
