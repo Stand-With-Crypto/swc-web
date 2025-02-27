@@ -38,7 +38,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
     if (districtCount === 0) {
       districts.push({
         state: state as USStateCode,
-        district: 'N/A',
+        district: '1',
         count: 0,
       })
     } else {
@@ -127,28 +127,57 @@ export async function createDistrictRankingUpserter(
 }
 
 type RedisInterlacedResult = Array<[MemberKey, number]>
+export type DistrictRankingEntryWithRank = DistrictRankingEntry & { rank: number }
+
+export type LeaderboardPaginationData = {
+  items: DistrictRankingEntryWithRank[]
+  total: number
+}
 
 export async function getDistrictsLeaderboardData(
-  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
-  limit = 10,
-): Promise<DistrictRankingEntry[]> {
-  const rawResults = (await redisWithCache.zrange(redisKey, 0, limit - 1, {
-    rev: true,
-    withScores: true,
-  })) as Array<MemberKey | number>
+  options: {
+    redisKey?: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS]
+    limit?: number
+    offset?: number
+  } = {},
+): Promise<LeaderboardPaginationData> {
+  const { redisKey = CURRENT_DISTRICT_RANKING, limit = 10, offset = 0 } = options
+
+  const [rawResults, total] = await Promise.all([
+    redisWithCache.zrange(redisKey, offset, offset + limit - 1, {
+      rev: true,
+      withScores: true,
+    }) as Promise<Array<MemberKey | number>>,
+    redisWithCache.zcard(redisKey),
+  ])
 
   const results = chunk(rawResults, 2) as RedisInterlacedResult
 
-  return results.map(([member, score]) => ({
+  const items = results.map(([member, score], index) => ({
     ...parseMemberKey(member),
     count: score,
+    rank: offset + index + 1,
   }))
+
+  return {
+    items,
+    total,
+  }
 }
 
-export async function getDistrictRankPosition(
+export async function getDistrictRank(
   redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
   member: RedisEntryData,
 ) {
-  const rank = await redisWithCache.zrevrank(redisKey, getMemberKey(member))
-  return rank === null ? null : rank + 1
+  const [rankResponse, scoreResponse] = await Promise.all([
+    redisWithCache.zrevrank(redisKey, getMemberKey(member)),
+    redisWithCache.zscore(redisKey, getMemberKey(member)),
+  ])
+  const rank = rankResponse === null ? null : rankResponse + 1
+  const score = scoreResponse === null ? null : scoreResponse
+
+  return {
+    rank,
+    score,
+  }
 }
