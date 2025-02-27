@@ -34,25 +34,24 @@ type Input = z.infer<typeof zodUserActionReferralInput>
  */
 async function createReferralRecord({
   referrerId,
-  addressData,
+  addressId,
   countryCode,
   analytics,
+  districtInfo,
 }: {
   referrerId: string
+  addressId: string | null
   countryCode: string
-  addressData?: {
-    addressId: string
-    districtInfo?: {
-      state: string
-      district: string
-    }
-  }
   analytics: ReturnType<typeof getServerAnalytics>
+  districtInfo?: {
+    state: string
+    district: string
+  }
 }) {
-  const userActionReferData = addressData
+  const userActionReferData = addressId
     ? {
         referralsCount: 1,
-        addressId: addressData.addressId,
+        addressId,
       }
     : {
         referralsCount: 1,
@@ -77,10 +76,10 @@ async function createReferralRecord({
     userState: 'Existing',
   })
 
-  if (addressData?.districtInfo) {
-    const { state, district } = addressData.districtInfo
+  if (districtInfo) {
+    const { state, district } = districtInfo
     logger.info(
-      `Created REFER action for referrer ${referrerId} in district ${state}-${district} with address ${addressData.addressId}`,
+      `Created REFER action for referrer ${referrerId} in district ${state}-${district} with address ${addressId ?? 'no-address'}`,
     )
   } else {
     logger.info(`Created REFER action for referrer ${referrerId} without district attribution`)
@@ -98,7 +97,7 @@ async function incrementExistingReferral({
 }: {
   existingActionId: string
   referrerId: string
-  addressId: string
+  addressId: string | null
   analytics: ReturnType<typeof getServerAnalytics>
   districtInfo?: { state: string; district: string }
 }) {
@@ -124,7 +123,7 @@ async function incrementExistingReferral({
     ? ` in district ${districtInfo.state}-${districtInfo.district}`
     : ''
   logger.info(
-    `Incremented referral count for referrer ${referrerId}${districtStr} with address ${addressId}`,
+    `Incremented referral count for referrer ${referrerId}${districtStr} with address ${addressId ?? 'no-address'}`,
   )
 
   return userAction
@@ -148,11 +147,13 @@ async function findOrCreateUserActionRefer({
   analytics: ReturnType<typeof getServerAnalytics>
   countryCode: string
 }) {
-  // For users without an address, find an existing record without an address
+  /**
+   * For users without an address,
+   * find an existing record without an address or create the first without address
+   */
   if (!referrer.address) {
     logger.warn(`Referrer ${referrer.id} has no address, can't attribute to a district`)
 
-    // Look for an existing referral without an address
     const existingReferWithoutAddress = referrer.userActions.find(
       action =>
         action.actionType === UserActionType.REFER && action.userActionRefer?.address === null,
@@ -162,12 +163,13 @@ async function findOrCreateUserActionRefer({
       return await incrementExistingReferral({
         existingActionId: existingReferWithoutAddress.id,
         referrerId: referrer.id,
-        addressId: 'no-address', // This is just for logging
+        addressId: referrer.addressId,
         analytics,
       })
     } else {
       return await createReferralRecord({
         referrerId: referrer.id,
+        addressId: referrer.addressId,
         analytics,
         countryCode,
       })
@@ -180,12 +182,15 @@ async function findOrCreateUserActionRefer({
     usCongressionalDistrict: district,
   } = referrer.address
 
+  /**
+   * If the address doesn't have valid district information,
+   * create a record without district attribution or update an existing record
+   */
   if (!state || !district) {
     logger.warn(
       `Address ${addressId} doesn't have valid district information, creating record without district attribution`,
     )
 
-    // Look for an existing referral with this address but without district info
     const existingReferWithAddressButNoDistrict = referrer.userActions.find(
       action =>
         action.actionType === UserActionType.REFER &&
@@ -203,12 +208,16 @@ async function findOrCreateUserActionRefer({
       return await createReferralRecord({
         referrerId: referrer.id,
         analytics,
+        addressId,
         countryCode,
       })
     }
   }
 
-  // Look for an existing referral with district info
+  /**
+   * For Users with valid district info,
+   * look for an existing referral with district info or create a new one
+   */
   const existingReferForDistrict = referrer.userActions.find(
     action =>
       action.actionType === UserActionType.REFER &&
@@ -233,10 +242,8 @@ async function findOrCreateUserActionRefer({
     return await createReferralRecord({
       referrerId: referrer.id,
       analytics,
-      addressData: {
-        addressId,
-        districtInfo,
-      },
+      addressId,
+      districtInfo,
       countryCode,
     })
   }
