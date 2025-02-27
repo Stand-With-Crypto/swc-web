@@ -50,6 +50,14 @@ export function internationalHandler(request: NextRequest, response: NextRespons
     isIPCountryCodeSupported &&
     !isIPCountryCodeDifferentFromTheCountryCodeCookie
 
+  console.log({
+    shouldRedirect,
+    userCountryCode,
+    existingCountryCode,
+    parsedExistingCountryCode,
+    isIPCountryCodeDifferentFromTheCountryCodeCookie,
+  })
+
   // TODO(@twistershark): Remove the isProd comparison after the internationalization feature is fully implemented
   const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
   if (shouldRedirect && !isProd) {
