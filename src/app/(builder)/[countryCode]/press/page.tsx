@@ -17,13 +17,15 @@ const PATHNAME = '/press'
 export default async function PressPage(props: PageProps) {
   const { countryCode } = await props.params
 
-  const news = await getNewsList()
+  const news = await getNewsList({
+    countryCode,
+  })
   const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
       <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
-      <NewsList initialNews={news} />
+      <NewsList countryCode={countryCode} initialNews={news} />
     </BuilderPageLayout>
   )
 }
