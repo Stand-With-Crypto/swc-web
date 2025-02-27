@@ -1,11 +1,7 @@
 import { NextRequest } from 'next/server'
 
-import { countryCodeRouter, saveCurrentCountryCodeAsCookie } from '@/utils/server/countryCodeRouter'
-import {
-  getCountryCode,
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
+import { countryCodeRouter } from '@/utils/server/countryCodeRouter'
+import { internationalHandler } from '@/utils/server/internationalHandler'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
@@ -21,7 +17,6 @@ export function middleware(request: NextRequest) {
   }
 
   const localeResponse = countryCodeRouter(request)
-  saveCurrentCountryCodeAsCookie(request, localeResponse)
 
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
@@ -59,23 +54,7 @@ export function middleware(request: NextRequest) {
     })
   }
 
-  const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-  const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
-
-  const userCountryCode = getCountryCode(request)
-
-  if (
-    parsedExistingCountryCode?.countryCode !== userCountryCode &&
-    !parsedExistingCountryCode?.bypassed
-  ) {
-    localeResponse.cookies.set({
-      name: USER_COUNTRY_CODE_COOKIE_NAME,
-      value: JSON.stringify({ countryCode: userCountryCode, bypassed: false }),
-      httpOnly: false,
-      sameSite: 'lax',
-      secure: true,
-    })
-  }
+  internationalHandler(request, localeResponse)
 
   return localeResponse
 }
