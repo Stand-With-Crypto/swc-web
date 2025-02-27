@@ -29,7 +29,7 @@ export const zodServerLocalUser = object({
     datetimeOnLoad: string(),
     refererOnLoad: string().optional(),
     searchParamsOnLoad: record(string(), string()),
-    countryCode: string(),
+    countryCode: string().optional(),
   }),
 })
 
