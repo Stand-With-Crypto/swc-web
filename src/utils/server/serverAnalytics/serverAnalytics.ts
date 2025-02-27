@@ -1,6 +1,7 @@
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { PropertyDict } from 'mixpanel'
+import { cookies } from 'next/headers'
 import { promisify } from 'util'
 
 import {
@@ -11,10 +12,9 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import { SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/supportedCountries'
 
 import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
-import { cookies } from 'next/headers'
-import { SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('serverAnalytics')
 
