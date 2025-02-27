@@ -48,14 +48,14 @@ it('formats the "create capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "64601 Wellington Road",
-  "address2": "Apt. 535",
+  "address1": "164 Bins Corners",
+  "address2": "Suite 904",
   "campaigns": [
     142628,
   ],
-  "city": "Huntersville",
+  "city": "New Trycia",
   "country": "US",
-  "email": "Cordia12@hotmail.com",
+  "email": "Nicklaus_Walker51@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Haylie",
@@ -65,7 +65,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "smsOptin": 0,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "ME",
+  "state": "MA",
   "tags": [
     "tag1",
     "tag2",
@@ -75,7 +75,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "79753",
+  "zip5": "27975",
 }
 `)
 })

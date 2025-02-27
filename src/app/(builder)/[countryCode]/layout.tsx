@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
 
 import { TopLevelBuilderClientLogic } from '@/app/(builder)/[countryCode]/topLevelBuilderClientLogic'
-import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
+import { TopLevelClientLogic } from '@/app/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
 import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
