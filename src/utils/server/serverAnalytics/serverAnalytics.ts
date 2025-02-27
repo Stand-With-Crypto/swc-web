@@ -13,6 +13,8 @@ import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 
 import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
+import { cookies } from 'next/headers'
+import { SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('serverAnalytics')
 
@@ -83,12 +85,29 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
 
     logger.info(`Event Name: "${eventName}"`, eventProperties)
 
-    trackingRequests.push(
-      promisifiedMixpanelTrack(eventName, {
+    const getCountryCodeAndTrack = async () => {
+      let countryCode: string | undefined
+
+      try {
+        // We already have a function that gets the country code from the cookies (getCountryCodeCookie.ts)
+        // The problem is that it throws an error if the country code cookie is not found
+        // This serverAnalytics function is also called in edge context (inngest). Because of this,
+        // we are duplicating the logic to get the cookie here but ignoring if it fails or if the cookie doesn't exist
+        const currentCookies = await cookies()
+
+        countryCode = currentCookies.get(SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME)?.value
+      } catch {
+        // We don't want to throw errors because in edge context, we won't have access to cookies
+      }
+
+      await promisifiedMixpanelTrack(eventName, {
         ...eventProperties,
         distinct_id: config.userId,
-      }).catch(onError({ eventName, eventProperties })),
-    )
+        ...(countryCode && { countryCode }),
+      })
+    }
+
+    trackingRequests.push(getCountryCodeAndTrack().catch(onError({ eventName, eventProperties })))
 
     return { flush }
   }
