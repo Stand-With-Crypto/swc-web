@@ -8,7 +8,8 @@ export enum SupportedCountryCodes {
 export const DEFAULT_SUPPORTED_COUNTRY_CODE = SupportedCountryCodes.US
 export const ORDERED_SUPPORTED_COUNTRIES: readonly SupportedCountryCodes[] = [
   SupportedCountryCodes.US,
-  SupportedCountryCodes.GB,
+  // TODO: uncomment this line when we complete the UK implementation
+  // SupportedCountryCodes.GB,
 ]
 
 export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLocale> = {
