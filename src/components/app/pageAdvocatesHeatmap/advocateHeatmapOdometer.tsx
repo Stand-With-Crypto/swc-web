@@ -31,9 +31,10 @@ export function AdvocateHeatmapOdometer({
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(countUsers),
     [countUsers],
   )
-  const values = useApiHomepageTopLevelMetrics(
-    decreasedInitialValues as GetHomepageTopLevelMetricsResponse,
-  ).data
+  const values = useApiHomepageTopLevelMetrics({
+    initial: decreasedInitialValues as GetHomepageTopLevelMetricsResponse,
+    countryCode,
+  }).data
   const formatted = useMemo(() => {
     return {
       countUsers: {
