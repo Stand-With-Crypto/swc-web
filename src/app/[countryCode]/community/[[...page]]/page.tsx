@@ -61,6 +61,7 @@ export default async function CommunityRecentActivityPage(props: Props) {
   const publicRecentActivity = await getPublicRecentActivity({
     limit: itemsPerPage,
     offset,
+    countryCode: params.countryCode,
   })
 
   const dataProps: PageLeaderboardInferredProps = {
