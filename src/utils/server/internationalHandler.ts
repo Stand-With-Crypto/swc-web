@@ -55,6 +55,7 @@ export function internationalHandler(request: NextRequest, response: NextRespons
     isHomepageRequested,
     isCountryCookieNotSet,
     isIPCountryCodeSupported,
+    userCountryCode,
     isIPCountryCodeDifferentFromTheCountryCodeCookie,
   })
 
