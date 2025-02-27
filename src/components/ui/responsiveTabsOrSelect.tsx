@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { TabsProps } from '@radix-ui/react-tabs'
 
 import {
   Select,
@@ -17,17 +18,16 @@ type TabOption = {
   content: React.ReactNode
 }
 
-type Props = {
-  defaultValue: string
+type Props = TabsProps & {
   options: TabOption[]
   analytics: string
 }
 
-export function ResponsiveTabsOrSelect({ defaultValue, options, analytics }: Props) {
+export function ResponsiveTabsOrSelect({ defaultValue, options, analytics, ...props }: Props) {
   const [value, setValue] = useState(defaultValue)
 
   return (
-    <Tabs analytics={analytics} onValueChange={setValue} value={value}>
+    <Tabs analytics={analytics} onValueChange={setValue} value={value} {...props}>
       {/* Mobile: Select */}
       <div className="md:hidden">
         <Select onValueChange={setValue} value={value}>
