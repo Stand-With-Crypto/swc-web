@@ -7,10 +7,9 @@ import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { zodServerLocalUser } from '@/utils/server/serverLocalUser'
+import { ServerLocalUser, zodServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
@@ -35,11 +34,12 @@ type Input = z.infer<typeof zodUserActionReferralInput>
  */
 async function createReferralRecord({
   referrerId,
-  analytics,
   addressData,
+  countryCode,
+  analytics,
 }: {
   referrerId: string
-  analytics: ReturnType<typeof getServerAnalytics>
+  countryCode: string
   addressData?: {
     addressId: string
     districtInfo?: {
@@ -47,9 +47,8 @@ async function createReferralRecord({
       district: string
     }
   }
+  analytics: ReturnType<typeof getServerAnalytics>
 }) {
-  const countryCode = await getCountryCodeCookie()
-
   const userActionReferData = addressData
     ? {
         referralsCount: 1,
@@ -134,6 +133,7 @@ async function incrementExistingReferral({
 async function findOrCreateUserActionRefer({
   referrer,
   analytics,
+  countryCode,
 }: {
   referrer: User & {
     address: Address | null
@@ -146,6 +146,7 @@ async function findOrCreateUserActionRefer({
     })[]
   }
   analytics: ReturnType<typeof getServerAnalytics>
+  countryCode: string
 }) {
   // For users without an address, find an existing record without an address
   if (!referrer.address) {
@@ -168,6 +169,7 @@ async function findOrCreateUserActionRefer({
       return await createReferralRecord({
         referrerId: referrer.id,
         analytics,
+        countryCode,
       })
     }
   }
@@ -201,6 +203,7 @@ async function findOrCreateUserActionRefer({
       return await createReferralRecord({
         referrerId: referrer.id,
         analytics,
+        countryCode,
       })
     }
   }
@@ -234,6 +237,7 @@ async function findOrCreateUserActionRefer({
         addressId,
         districtInfo,
       },
+      countryCode,
     })
   }
 }
@@ -307,9 +311,22 @@ export async function actionCreateUserActionReferral(input: Input) {
 
   logger.info(`found referrer ${referrer.id}`)
 
+  const countryCode = getCountryCode(user, localUser)
+  if (!countryCode) {
+    logger.error('no country code found')
+    Sentry.captureMessage('no country code found', {
+      tags: { domain: 'referrals' },
+      extra: { userId },
+    })
+    return {
+      errors: { countryCode: ['No country code found'] },
+    }
+  }
+
   const userAction = await findOrCreateUserActionRefer({
     referrer,
     analytics,
+    countryCode,
   })
 
   const hasExistingReferActions = referrer.userActions.length > 0
@@ -321,4 +338,10 @@ export async function actionCreateUserActionReferral(input: Input) {
     wasActionCreated: !hasExistingReferActions,
     action: userAction,
   }
+}
+
+function getCountryCode(user: User | null, localUser: ServerLocalUser | null) {
+  return (
+    user?.countryCode || localUser?.persisted?.countryCode || localUser?.currentSession?.countryCode
+  )
 }

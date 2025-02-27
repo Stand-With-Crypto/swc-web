@@ -2,7 +2,6 @@
 import 'server-only'
 
 import { UserActionType } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
@@ -42,7 +41,7 @@ export async function syncReferralsWithoutAddress() {
   if (!referActionsWithoutAddress?.length) {
     return {
       message: 'No REFER actions without address found',
-      processedCount: 0,
+      referActionsWithoutAddress: 0,
       updatedCount: 0,
     }
   }
@@ -55,43 +54,30 @@ export async function syncReferralsWithoutAddress() {
     logger.info('No REFER actions to update')
     return {
       message: 'No REFER actions to update',
-      processedCount: referActionsWithoutAddress.length,
+      referActionsWithoutAddress: referActionsWithoutAddress.length,
       updatedCount: 0,
     }
   }
 
   logger.info(`Found ${actionsToUpdate.length} REFER actions where user now has an address`)
 
-  try {
-    const updatedActions = await Promise.all(
-      actionsToUpdate.map(action =>
-        prismaClient.userActionRefer.update({
-          where: { id: action.userActionRefer!.id },
-          data: { addressId: action.user.address!.id },
-        }),
-      ),
-    )
+  const updatedActions = await Promise.all(
+    actionsToUpdate.map(action => {
+      if (!action.userActionRefer || !action.user.address) {
+        logger.warn(`Missing userActionRefer or address for action ${action.id}`)
+        return Promise.resolve(null)
+      }
 
-    return {
-      message: 'Successfully synced referrals without address',
-      processedCount: actionsToUpdate.length,
-      updatedCount: updatedActions.length,
-    }
-  } catch (error) {
-    logger.error('Error syncing referrals without address:', error)
-    Sentry.captureException(error, {
-      tags: { domain: 'referrals' },
-      extra: {
-        actions: referActionsWithoutAddress.map(action => ({
-          id: action.id,
-        })),
-      },
-    })
+      return prismaClient.userActionRefer.update({
+        where: { id: action.userActionRefer.id },
+        data: { addressId: action.user.address.id },
+      })
+    }),
+  )
 
-    return {
-      message: 'Error syncing referrals without address',
-      processedCount: 0,
-      updatedCount: 0,
-    }
+  return {
+    message: 'Successfully synced referrals without address',
+    referActionsWithoutAddress: referActionsWithoutAddress.length,
+    updatedCount: updatedActions.filter(Boolean).length,
   }
 }
