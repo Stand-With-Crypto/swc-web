@@ -491,7 +491,7 @@ export async function onNewLogin(props: NewLoginParams) {
     isValidReferral(localUser?.currentSession?.searchParamsOnLoad)
 
   if (isReferral) {
-    triggerReferralSteps({ localUser, searchParams, userId: user.id })
+    triggerReferralSteps({ localUser, searchParams, newUser: user })
   }
 
   waitUntil(beforeFinish())

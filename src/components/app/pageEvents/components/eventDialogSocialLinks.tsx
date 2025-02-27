@@ -21,7 +21,7 @@ export function EventDialogSocialLinks({
       <div className="flex items-center justify-center gap-2">
         <Button
           onClick={() => {
-            handleCopyToClipboard(eventDeeplink)
+            void handleCopyToClipboard(eventDeeplink)
           }}
           variant="link"
         >
