@@ -17,15 +17,17 @@ import { getUserIdOnClient } from '@/utils/shared/userId'
 import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
-import { getCountryCodeOnClient } from '@/utils/web/getCountryCodeOnClient'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 
-const InitialOrchestration = () => {
+interface InitialOrchestrationProps {
+  countryCode: SupportedCountryCodes
+}
+
+const InitialOrchestration = ({ countryCode }: InitialOrchestrationProps) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const router = useRouter()
   const authUser = useThirdwebAuthUser()
-  const countryCode = getCountryCodeOnClient()
 
   useReloadDueToInactivity({ timeInMinutes: 25 })
 
@@ -104,7 +106,7 @@ export function TopLevelClientLogic({
       <ThirdwebProvider>
         {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
         <Suspense>
-          <InitialOrchestration />
+          <InitialOrchestration countryCode={countryCode} />
         </Suspense>
         {children}
       </ThirdwebProvider>
