@@ -209,6 +209,7 @@ export async function handleExternalUserActionOptIn(
       reason: 'Already Exists',
       userState,
       ...input.additionalAnalyticsProperties,
+      countryCode,
     })
     waitUntil(flushAnalytics())
     return {
@@ -250,6 +251,7 @@ export async function handleExternalUserActionOptIn(
     userState,
     ...input.additionalAnalyticsProperties,
     ...addressAnalyticsProperties,
+    countryCode,
   })
   peopleAnalytics.set({
     ...addressAnalyticsProperties,
