@@ -10,14 +10,16 @@ import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import { getNewsList, NormalizedNews } from '@/utils/server/builder/models/data/news'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface NewsListProps {
   initialNews: NormalizedNews[]
+  countryCode: SupportedCountryCodes
 }
 
 const NEWS_LIST_LIMIT = 10
 
-export function NewsList({ initialNews }: NewsListProps) {
+export function NewsList({ initialNews, countryCode }: NewsListProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [offset, setOffset] = useState(0)
   const [news, setNews] = useState(initialNews)
@@ -32,7 +34,7 @@ export function NewsList({ initialNews }: NewsListProps) {
 
     setIsLoading(true)
     const newOffset = offset + 1
-    const newNews = await getNewsList(newOffset, NEWS_LIST_LIMIT)
+    const newNews = await getNewsList({ page: newOffset, limit: NEWS_LIST_LIMIT, countryCode })
     setIsLoading(false)
 
     if (!newNews || newNews.length < NEWS_LIST_LIMIT) {
@@ -42,7 +44,7 @@ export function NewsList({ initialNews }: NewsListProps) {
     }
 
     setNews([...news, ...newNews])
-  }, [news, offset])
+  }, [news, offset, countryCode])
 
   useEffect(() => {
     if (isInView) {
