@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={COUNTRY_CODE_TO_LOCALE[SupportedCountryCodes.GB]} translate="no">
+    <html lang={COUNTRY_CODE_TO_LOCALE[SupportedCountryCodes.BR]} translate="no">
       <GoogleTagManager />
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
@@ -55,12 +55,12 @@ export default async function Layout({ children }: { children: React.ReactNode }
           shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
           showSpinner={false}
         />
-        <TopLevelClientLogic countryCode={SupportedCountryCodes.GB}>
+        <TopLevelClientLogic countryCode={SupportedCountryCodes.BR}>
           <FullHeight.Container>
             <NavBarGlobalBanner />
-            <Navbar countryCode={SupportedCountryCodes.GB} />
+            <Navbar countryCode={SupportedCountryCodes.BR} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer countryCode={SupportedCountryCodes.GB} />
+            <Footer countryCode={SupportedCountryCodes.BR} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
