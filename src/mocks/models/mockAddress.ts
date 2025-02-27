@@ -73,13 +73,9 @@ export function mockCreateAddressInputWithDC() {
   } satisfies Prisma.AddressCreateInput
 }
 
-export function mockAddress(includeDC = false): Address {
+export function mockAddress(): Address {
   return {
-    /**
-     * Need to ensure our tests are not affected by the DC change.
-     * ANY address related changes made to the mockCreateAddressInput affects the seed output.
-     */
-    ...(includeDC ? mockCreateAddressInputWithDC() : mockCreateAddressInput()),
+    ...mockCreateAddressInput(),
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
   }
