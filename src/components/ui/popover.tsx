@@ -39,7 +39,7 @@ const PopoverTrigger = PopoverPrimitive.Trigger
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & {
-    a11yTitle: string
+    a11yTitle?: string
   }
 >(({ className, align = 'center', sideOffset = 4, a11yTitle, ...props }, ref) => (
   <PopoverPrimitive.Portal>
