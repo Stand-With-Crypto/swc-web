@@ -3,7 +3,7 @@ import '@/globals.css'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from 'sonner'
 
-import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
+import { TopLevelClientLogic } from '@/app/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'

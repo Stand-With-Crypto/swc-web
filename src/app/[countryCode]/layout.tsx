@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
 
-import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
+import { TopLevelClientLogic } from '@/app/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
