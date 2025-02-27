@@ -60,13 +60,13 @@ export function UserConfig() {
     if (result?.errors) {
       const [errorMessage] = result.errors.countryCode ?? ['Unknown error']
 
-      toast.warning(`${errorMessage}. Cookie was updated regardless.`, {
-        duration: 5000,
+      toast.warning(`Cookie was updated successfully. ${errorMessage}`, {
+        duration: 2000,
       })
 
       return setTimeout(() => {
         window.location.reload()
-      }, 1000)
+      }, 2000)
     }
 
     window.location.reload()

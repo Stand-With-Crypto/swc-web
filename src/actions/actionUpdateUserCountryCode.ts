@@ -26,7 +26,9 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
   const authUser = await appRouterGetAuthUser()
 
   if (!authUser) {
-    const error = new Error('Update User Country Code - Not authenticated')
+    const error = new Error("User's Country Code update failed - Not authenticated")
+
+    logger.error(error.message)
 
     Sentry.captureException(error, {
       tags: { domain: 'actionUpdateUserCountryCode' },
@@ -37,18 +39,16 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
 
     return {
       errors: {
-        countryCode: ['Not authenticated'],
+        countryCode: [error.message],
       },
     }
   }
 
   const validatedFields = zodSupportedCountryCode.safeParse(countryCode)
   if (!validatedFields.success) {
-    const error = new Error('Update User Country Code - Invalid country code')
+    const error = new Error("User's Country Code update failed - Country code is not supported")
 
-    logger.error('Update User Country Code - Invalid country code', {
-      countryCode,
-    })
+    logger.error(error.message)
 
     Sentry.captureException(error, {
       tags: { domain: 'actionUpdateUserCountryCode' },
@@ -60,7 +60,7 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
 
     return {
       errors: {
-        countryCode: [`Country code ${countryCode.toUpperCase()} is not supported`],
+        countryCode: [error.message],
       },
     }
   }
@@ -74,11 +74,11 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
   })
 
   if (user.countryCode === validatedFields.data) {
-    logger.info('Update User Country Code - Country code is the same. Skipping update.')
+    logger.info("User's Country Code update skipped - Country code is the same.")
 
     return {
       errors: {
-        countryCode: ['New country code is the same as the current country code'],
+        countryCode: ["User's Country Code update skipped - Country code is the same."],
       },
     }
   }
@@ -92,9 +92,7 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
     },
   })
 
-  logger.info('Update User Country Code - Country code updated', {
-    countryCode: validatedFields.data,
-  })
+  logger.info("User's Country Code updated")
 
   return {
     countryCode: validatedFields.data,
