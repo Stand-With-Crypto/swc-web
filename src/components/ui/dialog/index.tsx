@@ -81,9 +81,9 @@ const DialogContent = React.forwardRef<
         <DialogOverlay />
         <DialogPrimitive.Content
           className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
-          onOpenAutoFocus={isMobile && !forceAutoFocus ? e => e.preventDefault() : onOpenAutoFocus}
           onEscapeKeyDown={preventCloseOnEscapeKeyDown ? e => e.preventDefault() : undefined}
           onInteractOutside={preventCloseOnInteractOutside ? e => e.preventDefault() : undefined}
+          onOpenAutoFocus={isMobile && !forceAutoFocus ? e => e.preventDefault() : onOpenAutoFocus}
           ref={ref}
           {...props}
         >
