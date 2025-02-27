@@ -41,7 +41,7 @@ export function internationalHandler(request: NextRequest, response: NextRespons
   const isCountryCookieNotSet = !existingCountryCode
 
   // - If the IP country code is supported by SWC
-  const isIPCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(userCountryCode)
+  const isIPCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(userCountryCode?.toLowerCase())
 
   // - If the IP country code is different from the requested page country code
   const shouldRedirect =
