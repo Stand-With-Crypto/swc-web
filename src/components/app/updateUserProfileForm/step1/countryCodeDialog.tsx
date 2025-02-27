@@ -18,7 +18,9 @@ export function CountryCodeDisclaimerDialog({
         a11yTitle="Country Code Disclaimer"
         className="max-w-xl p-6"
         closeClassName="hidden"
-        onInteractOutside={e => {
+        preventCloseOnEscapeKeyDown
+        preventCloseOnInteractOutside
+        onEscapeKeyDown={e => {
           e.preventDefault()
         }}
         padding={false}

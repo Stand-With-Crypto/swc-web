@@ -53,6 +53,8 @@ interface DialogContentProps
   closeClassName?: string
   forceAutoFocus?: boolean
   a11yTitle: string
+  preventCloseOnEscapeKeyDown?: boolean
+  preventCloseOnInteractOutside?: boolean
 }
 const DialogContent = React.forwardRef<
   React.ComponentRef<typeof DialogPrimitive.Content>,
@@ -67,6 +69,8 @@ const DialogContent = React.forwardRef<
       onOpenAutoFocus,
       closeClassName = '',
       a11yTitle,
+      preventCloseOnEscapeKeyDown = false,
+      preventCloseOnInteractOutside = false,
       ...props
     },
     ref,
@@ -78,6 +82,8 @@ const DialogContent = React.forwardRef<
         <DialogPrimitive.Content
           className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
           onOpenAutoFocus={isMobile && !forceAutoFocus ? e => e.preventDefault() : onOpenAutoFocus}
+          onEscapeKeyDown={preventCloseOnEscapeKeyDown ? e => e.preventDefault() : undefined}
+          onInteractOutside={preventCloseOnInteractOutside ? e => e.preventDefault() : undefined}
           ref={ref}
           {...props}
         >
