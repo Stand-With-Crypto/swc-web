@@ -80,6 +80,7 @@ export function PageHome({
 
           <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
+            data-testid="community-leaderboard-tabs"
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
               {
