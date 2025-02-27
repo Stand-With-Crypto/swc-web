@@ -82,6 +82,7 @@ export const backfillUserActionRefer = inngest.createFunction(
         select: {
           id: true,
           referralId: true,
+          addressId: true,
           userActions: {
             select: selectFields,
           },
@@ -121,6 +122,7 @@ export const backfillUserActionRefer = inngest.createFunction(
                   userActionRefer: {
                     create: {
                       referralsCount: referredCount,
+                      addressId: referrer.addressId,
                     },
                   },
                   dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,

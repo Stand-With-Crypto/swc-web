@@ -27,9 +27,11 @@ function ReferralsCounterContent(props: ReferralsCounterContentProps) {
   const user = userResponse.data?.user
 
   const referrals = useMemo(() => {
-    const referAction = user?.userActions.find(action => action.actionType === UserActionType.REFER)
+    if (!user?.userActions?.length) return 0
 
-    return referAction?.referralsCount ?? 0
+    return user.userActions
+      .filter(action => action.actionType === UserActionType.REFER)
+      .reduce((total, action) => total + (action.referralsCount || 0), 0)
   }, [user])
 
   const { address } = useMutableCurrentUserAddress()
