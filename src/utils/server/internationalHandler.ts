@@ -48,13 +48,13 @@ export function internationalHandler(request: NextRequest, response: NextRespons
     isHomepageRequested &&
     isCountryCookieNotSet &&
     isIPCountryCodeSupported &&
-    !isIPCountryCodeDifferentFromTheCountryCodeCookie
+    isIPCountryCodeDifferentFromTheCountryCodeCookie
 
   console.log({
     shouldRedirect,
-    userCountryCode,
-    existingCountryCode,
-    parsedExistingCountryCode,
+    isHomepageRequested,
+    isCountryCookieNotSet,
+    isIPCountryCodeSupported,
     isIPCountryCodeDifferentFromTheCountryCodeCookie,
   })
 
