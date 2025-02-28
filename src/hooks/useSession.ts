@@ -22,8 +22,10 @@ export function useSession() {
 
   const isLoggedIn = thirdwebSession.isLoggedIn || hasOptInUserAction
   const isLoggedInThirdweb = thirdwebSession.isLoggedIn
+
   return {
     isLoading: !isLoggedIn && isLoading,
+    isUserProfileLoading: isLoading,
     isLoggedIn,
     isLoggedInThirdweb,
     user,
