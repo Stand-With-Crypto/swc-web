@@ -12,48 +12,93 @@ import {
 
 const HAS_REDIRECTED_HEADER = 'x-swc-international-redirected'
 
-export function internationalRedirectHandler(request: NextRequest) {
-  if (request.headers.get(HAS_REDIRECTED_HEADER)) return
+type CountryCookieData = {
+  countryCode: string
+  bypassed: boolean
+}
 
-  const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-  const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
+export function internationalRedirectHandler(request: NextRequest): {
+  response?: NextResponse
+  countryCookie?: CountryCookieData | null
+} {
+  if (request.headers.get(HAS_REDIRECTED_HEADER)) {
+    return { response: NextResponse.next() }
+  }
 
-  const userCountryCode = getCountryCode(request)
+  const geoLocationCountryCode = getCountryCode(request)?.toLowerCase()
+  const countryCodeCookieData = getCountryCookieData(request)
 
-  // Redirect to a different country homepage if:
-  // - If the requested page is the homepage
-  const requestedPathname = request.nextUrl.pathname
-  const homepagePathnameRegex = new RegExp(
-    `^/(|(${Object.values(SupportedCountryCodes).join('|')}))$`,
+  const responseCountryCodeCookie = shouldUpdateCountryCookie(
+    countryCodeCookieData,
+    geoLocationCountryCode,
   )
-  const isHomepageRequested = homepagePathnameRegex.test(requestedPathname)
+    ? { countryCode: geoLocationCountryCode, bypassed: false }
+    : null
 
-  // - If the country cookie is not set
-  const isCountryCookieNotSet = !existingCountryCode
+  if (
+    shouldRedirectToCountrySpecificHomepage(request, geoLocationCountryCode, countryCodeCookieData)
+  ) {
+    const response = createRedirectResponse(request, geoLocationCountryCode)
+    return {
+      response,
+      countryCookie: responseCountryCodeCookie,
+    }
+  }
 
-  // - If the IP country code is supported by SWC
-  const isIPCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(userCountryCode?.toLowerCase())
+  return {
+    countryCookie: responseCountryCodeCookie,
+  }
+}
 
-  // - If the IP country code is different from the requested page country code
-  const isIPCountryCodeDifferentFromTheCountryCodeCookie =
-    parsedExistingCountryCode?.countryCode !== userCountryCode
+function getCountryCookieData(request: NextRequest): CountryCookieData | null {
+  const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+  return parseUserCountryCodeCookie(existingCountryCode)
+}
 
-  const shouldRedirect =
-    isHomepageRequested &&
-    isCountryCookieNotSet &&
-    isIPCountryCodeSupported &&
-    isIPCountryCodeDifferentFromTheCountryCodeCookie
-
+function shouldRedirectToCountrySpecificHomepage(
+  request: NextRequest,
+  geoLocationCountryCode: string,
+  countryCodeCookieData: CountryCookieData | null,
+): boolean {
   // TODO(@twistershark): Remove the isProd comparison after the internationalization feature is fully implemented
   const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
-  if (shouldRedirect && !isProd) {
-    const response = NextResponse.redirect(
-      new URL(`/${userCountryCode?.toLowerCase()}`, request.url),
-    )
+  if (isProd) return false
 
-    // Set header to prevent redirect loops
-    response.headers.set(HAS_REDIRECTED_HEADER, 'true')
+  const isHomepageRequested = new RegExp(
+    `^/(|(${Object.values(SupportedCountryCodes).join('|')}))$`,
+  ).test(request.nextUrl.pathname)
+  if (!isHomepageRequested) return false
 
-    return response
-  }
+  const isCountryCodeCookieDefined = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+  if (isCountryCodeCookieDefined) return false
+
+  const isCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(
+    geoLocationCountryCode?.toLowerCase(),
+  )
+  if (!isCountryCodeSupported) return false
+
+  const geoLocationCountryCodeMatchesTheCountryCodeCookie =
+    geoLocationCountryCode === countryCodeCookieData?.countryCode
+  if (geoLocationCountryCodeMatchesTheCountryCodeCookie) return false
+
+  return true
+}
+
+function shouldUpdateCountryCookie(
+  countryCodeCookieData: CountryCookieData | null,
+  geoLocationCountryCode: string,
+): boolean {
+  return (
+    countryCodeCookieData?.countryCode !== geoLocationCountryCode &&
+    !countryCodeCookieData?.bypassed
+  )
+}
+
+function createRedirectResponse(
+  request: NextRequest,
+  geoLocationCountryCode: string,
+): NextResponse {
+  const response = NextResponse.redirect(new URL(`/${geoLocationCountryCode}`, request.url))
+  response.headers.set(HAS_REDIRECTED_HEADER, 'true')
+  return response
 }
