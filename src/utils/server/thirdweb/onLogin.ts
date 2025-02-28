@@ -132,7 +132,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
         name: USER_COUNTRY_CODE_COOKIE_NAME,
         value: JSON.stringify({
           countryCode: currentUserCountryCode.toLowerCase(),
-          bypassed: false,
+          bypassed: true,
         }),
         httpOnly: false,
         sameSite: 'lax',
