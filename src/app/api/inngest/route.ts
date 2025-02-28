@@ -22,7 +22,7 @@ import { updateDistrictsRankings } from '@/inngest/functions/districtsRankings/u
 import { sendEventNotificationWithInngest } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
-import { processReferralsQueue } from '@/inngest/functions/referrals/processReferralsQueue'
+import { processPendingReferralsQueue } from '@/inngest/functions/referrals/processReferralsQueue'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
   backfillOptedOutUsers,
@@ -78,6 +78,6 @@ export const { GET, POST, PUT } = serve({
     cleanupDatadogSyntheticTestsWithInngest,
     backfillUserActionRefer,
     updateDistrictsRankings,
-    processReferralsQueue,
+    processPendingReferralsQueue,
   ],
 })

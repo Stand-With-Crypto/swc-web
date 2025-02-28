@@ -13,7 +13,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 
-const logger = getLogger('processReferralsQueue')
+const logger = getLogger('processPendingReferralsQueue')
 
 const PENDING_REFERRALS_QUEUE = 'pending-referrals'
 const BATCH_SIZE = 100
@@ -67,12 +67,17 @@ async function updateReferralCount(
   )
 }
 
-async function createReferralAction(referrerId: string, referralsCount: number) {
+async function createReferralAction(
+  referrerId: string,
+  referralsCount: number,
+  countryCode: string,
+) {
   await prismaClient.userAction.create({
     data: {
       userId: referrerId,
       actionType: UserActionType.REFER,
       campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+      countryCode,
       userActionRefer: {
         create: {
           referralsCount,
@@ -85,7 +90,7 @@ async function createReferralAction(referrerId: string, referralsCount: number) 
   )
 }
 
-async function processReferral(rawReferral: unknown) {
+async function processPendingReferral(rawReferral: unknown) {
   if (!isValidPendingReferralEntry(rawReferral)) {
     logger.error('Invalid referral data structure', { rawReferral })
     return { success: false, referralId: 'unknown' }
@@ -105,6 +110,7 @@ async function processReferral(rawReferral: unknown) {
       where: { referralId: rawReferral.referralId },
       select: {
         id: true,
+        countryCode: true,
         userActions: {
           select: {
             id: true,
@@ -134,7 +140,7 @@ async function processReferral(rawReferral: unknown) {
         actualReferralCount,
       )
     } else {
-      await createReferralAction(referrer.id, actualReferralCount)
+      await createReferralAction(referrer.id, actualReferralCount, referrer.countryCode)
     }
 
     return { success: true, referralId: rawReferral.referralId }
@@ -148,7 +154,7 @@ async function processReferral(rawReferral: unknown) {
   }
 }
 
-export const processReferralsQueue = inngest.createFunction(
+export const processPendingReferralsQueue = inngest.createFunction(
   {
     id: PROCESS_REFERRALS_QUEUE_INNGEST_FUNCTION_ID,
     onFailure: onScriptFailure,
@@ -176,7 +182,7 @@ export const processReferralsQueue = inngest.createFunction(
     logger.info(`Processing ${referralBatch.length} referrals`)
 
     const processed = await step.run('Process referrals batch', () =>
-      Promise.all(referralBatch.map(rawReferral => processReferral(rawReferral))),
+      Promise.all(referralBatch.map(rawReferral => processPendingReferral(rawReferral))),
     )
 
     return {

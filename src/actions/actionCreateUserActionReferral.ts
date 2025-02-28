@@ -11,6 +11,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { zodServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
 import { zodReferralId } from '@/validation/fields/zodReferrald'
@@ -65,6 +66,7 @@ export async function actionCreateUserActionReferral(input: Input) {
     where: { referralId },
     select: {
       id: true,
+      countryCode: true,
       userActions: {
         select: {
           id: true,
@@ -94,6 +96,12 @@ export async function actionCreateUserActionReferral(input: Input) {
 
   logger.info(`found referrer ${referrer.id}`)
 
+  const countryCode =
+    referrer.countryCode ||
+    localUser?.persisted.countryCode ||
+    localUser?.currentSession.countryCode ||
+    DEFAULT_SUPPORTED_COUNTRY_CODE
+
   const existingReferAction = referrer.userActions.find(
     action => action.actionType === UserActionType.REFER,
   )
@@ -112,6 +120,7 @@ export async function actionCreateUserActionReferral(input: Input) {
         userId: referrer.id,
         actionType: UserActionType.REFER,
         campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+        countryCode,
         userActionRefer: {
           create: {
             referralsCount: 1,
