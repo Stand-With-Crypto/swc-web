@@ -15,6 +15,7 @@ import {
   DonateIcon,
   MissionIcon,
   PartnersIcon,
+  PollIcon,
   PressIcon,
 } from '@/components/app/navbar/navbarDrawerIcons'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
@@ -57,6 +58,11 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
           href: urls.donate(),
           text: 'Donate',
           icon: DonateIcon,
+        },
+        {
+          href: urls.polls(),
+          text: 'Polls',
+          icon: PollIcon,
         },
         {
           href: urls.about(),
