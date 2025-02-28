@@ -10,7 +10,11 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 
+const HAS_REDIRECTED_HEADER = 'x-swc-international-redirected'
+
 export function internationalRedirectHandler(request: NextRequest) {
+  if (request.headers.get(HAS_REDIRECTED_HEADER)) return
+
   const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
   const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
 
@@ -43,6 +47,13 @@ export function internationalRedirectHandler(request: NextRequest) {
   // TODO(@twistershark): Remove the isProd comparison after the internationalization feature is fully implemented
   const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
   if (shouldRedirect && !isProd) {
-    return NextResponse.redirect(new URL(`/${userCountryCode?.toLowerCase()}`, request.url))
+    const response = NextResponse.redirect(
+      new URL(`/${userCountryCode?.toLowerCase()}`, request.url),
+    )
+
+    // Set header to prevent redirect loops
+    response.headers.set(HAS_REDIRECTED_HEADER, 'true')
+
+    return response
   }
 }
