@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 import { refreshJWT } from 'thirdweb/utils'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
+import { ServerAuthUser } from '@/utils/server/authentication/getAuthUser'
 import {
   THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS,
   thirdwebAdminAccount,
@@ -13,10 +14,9 @@ import {
 import { logger } from '@/utils/shared/logger'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
-export async function appRouterGetThirdwebAuthUser(): Promise<{
-  userId: string
-  address: string
-} | null> {
+export async function getThirdwebAuthUser(
+  { isSSR } = { isSSR: false },
+): Promise<ServerAuthUser | null> {
   const currentCookies = await cookies()
   const token = currentCookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 
@@ -24,7 +24,12 @@ export async function appRouterGetThirdwebAuthUser(): Promise<{
     return null
   }
 
-  const parsedTokenBody = await getValidatedAuthTokenPayload(token.value)
+  const parsedTokenBody = await getValidatedAuthTokenPayload({
+    cookieToken: token.value,
+    // We cannot set and delete cookies in an SSR page, so we should not revalidate the token there.
+    // The token will instead be revalidated when the page loads on the client.
+    shouldRevalidateToken: !isSSR,
+  })
 
   if (!parsedTokenBody) {
     return null
@@ -38,13 +43,23 @@ export async function appRouterGetThirdwebAuthUser(): Promise<{
   }
 }
 
-async function getValidatedAuthTokenPayload(cookieToken: string) {
+async function getValidatedAuthTokenPayload({
+  cookieToken,
+  shouldRevalidateToken,
+}: {
+  cookieToken: string
+  shouldRevalidateToken: boolean
+}) {
   const currentCookies = await cookies()
   try {
     const jwtToken = await thirdwebAuth.verifyJWT({ jwt: cookieToken })
 
     if (jwtToken.valid) {
       return jwtToken.parsedJWT
+    }
+
+    if (!shouldRevalidateToken) {
+      return null
     }
 
     if (!/^this token expired at/i.test(jwtToken.error)) {
