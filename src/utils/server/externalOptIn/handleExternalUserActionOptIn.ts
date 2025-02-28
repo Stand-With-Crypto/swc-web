@@ -51,6 +51,7 @@ import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 const zodExternalUserActionOptInUserAddress = object({
   streetNumber: string(),
@@ -88,6 +89,7 @@ const zodExternalUserActionOptIn = z.object({
     })
     .optional(),
   additionalAnalyticsProperties: z.record(z.string()).optional(),
+  countryCode: zodSupportedCountryCode,
 })
 
 const logger = getLogger('handleExternalUserActionOptIn')
@@ -118,7 +120,7 @@ export type ExternalUserActionOptInResponse<ResultOptions extends string> = {
 export async function handleExternalUserActionOptIn(
   input: Input,
 ): Promise<ExternalUserActionOptInResponse<ExternalUserActionOptInResult>> {
-  const { emailAddress, cryptoAddress, optInType, campaignName } = input
+  const { emailAddress, cryptoAddress, optInType, campaignName, countryCode } = input
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -156,7 +158,12 @@ export async function handleExternalUserActionOptIn(
       },
     },
   })
-  const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
+
+  const { user, userState } = await maybeUpsertUser({
+    existingUser: existingAction?.user,
+    input,
+    countryCode: countryCode?.toLowerCase(),
+  })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -202,6 +209,7 @@ export async function handleExternalUserActionOptIn(
       reason: 'Already Exists',
       userState,
       ...input.additionalAnalyticsProperties,
+      countryCode,
     })
     waitUntil(flushAnalytics())
     return {
@@ -227,6 +235,7 @@ export async function handleExternalUserActionOptIn(
           optInType,
         },
       },
+      countryCode: user.countryCode,
       user: { connect: { id: user.id } },
     },
   })
@@ -242,6 +251,7 @@ export async function handleExternalUserActionOptIn(
     userState,
     ...input.additionalAnalyticsProperties,
     ...addressAnalyticsProperties,
+    countryCode,
   })
   peopleAnalytics.set({
     ...addressAnalyticsProperties,
@@ -272,9 +282,11 @@ export async function handleExternalUserActionOptIn(
 async function maybeUpsertUser({
   existingUser,
   input,
+  countryCode,
 }: {
   existingUser: UserWithRelations | undefined
   input: Input
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const {
     emailAddress,
@@ -292,7 +304,11 @@ async function maybeUpsertUser({
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
   if (address) {
     const formattedDescription = getFormattedDescription(address, true)
-    dbAddress = { ...address, formattedDescription: formattedDescription, googlePlaceId: undefined }
+    dbAddress = {
+      ...address,
+      formattedDescription: formattedDescription,
+      googlePlaceId: undefined,
+    }
     try {
       dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(
         getFormattedDescription(address, false),
@@ -444,6 +460,7 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
+      countryCode,
       userEmailAddresses: {
         create: {
           emailAddress,

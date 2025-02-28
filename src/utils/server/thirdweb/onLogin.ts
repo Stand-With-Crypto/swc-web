@@ -28,6 +28,11 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
+import {
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
@@ -80,12 +85,8 @@ export async function login(payload: VerifyLoginPayloadParams) {
   const log = getLog(cryptoAddress)
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
-    include: {
-      userActions: { select: { actionType: true } },
-    },
-    where: {
-      userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } },
-    },
+    include: { userActions: { select: { actionType: true } } },
+    where: { userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } } },
   })
 
   const hasOptedIn = existingVerifiedUser?.userActions.some(
@@ -95,11 +96,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
   if (existingVerifiedUser && hasOptedIn) {
     log('existing verified user found')
 
-    await onExistingUserLogin({
-      existingVerifiedUser,
-      cryptoAddress,
-      localUser,
-    }).catch(e => {
+    await onExistingUserLogin({ existingVerifiedUser, cryptoAddress, localUser }).catch(e => {
       Sentry.captureException(e, {
         tags: { domain: 'onLogin/existingUser' },
         extra: { existingVerifiedUser, cryptoAddress, localUser },
@@ -113,22 +110,33 @@ export async function login(payload: VerifyLoginPayloadParams) {
         .track('User Logged In')
         .flush(),
       getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser })
-        .set({
-          'Datetime of Last Login': new Date(),
-        })
+        .set({ 'Datetime of Last Login': new Date() })
         .flush(),
     ])
 
     const jwt = await thirdwebAuth.generateJWT({
       payload: verifiedPayload.payload,
-      context: {
-        userId: existingVerifiedUser.id,
-        address,
-      },
+      context: { userId: existingVerifiedUser.id, address },
     })
+
+    const currentUserCountryCode = existingVerifiedUser.countryCode
+
+    const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+    const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
 
     currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
 
+    if (
+      !parsedUserCountryCodeCookie?.bypassed &&
+      parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
+        currentUserCountryCode.toLowerCase()
+    ) {
+      currentCookies.set(
+        USER_COUNTRY_CODE_COOKIE_NAME,
+        JSON.stringify({ countryCode: currentUserCountryCode.toLowerCase(), bypassed: false }),
+        { sameSite: 'lax' },
+      )
+    }
     return
   }
 
@@ -155,10 +163,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
 
   const jwt = await thirdwebAuth.generateJWT({
     payload: verifiedPayload.payload,
-    context: {
-      userId: user.userId,
-      address,
-    },
+    context: { userId: user.userId, address },
   })
 
   currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
@@ -195,9 +200,7 @@ async function onExistingUserLogin({
     `onExistingUserLogin: proceeding with potential ${existingUsersWithSource.length} users to merge`,
   )
   const userToKeepId = existingVerifiedUser.id
-  const merge = findUsersToMerge(existingUsersWithSource, {
-    userToKeepId,
-  })
+  const merge = findUsersToMerge(existingUsersWithSource, { userToKeepId })
 
   if (!merge?.usersToDelete?.length) {
     log('onExistingUserLogin: no users to merge')
@@ -216,11 +219,7 @@ async function onExistingUserLogin({
       continue
     }
     log(`onExistingUserLogin: merging user ${userToDelete.user.id} into user ${userToKeepId}`)
-    await mergeUsers({
-      persist: true,
-      userToKeepId,
-      userToDeleteId: userToDelete.user.id,
-    })
+    await mergeUsers({ persist: true, userToKeepId, userToDeleteId: userToDelete.user.id })
   }
 }
 
@@ -301,6 +300,7 @@ export async function onNewLogin(props: NewLoginParams) {
   const { cryptoAddress: _cryptoAddress, localUser } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
+  const countryCode = await getCountryCodeCookie()
 
   // queryMatchingUsers logic
   const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
@@ -363,19 +363,12 @@ export async function onNewLogin(props: NewLoginParams) {
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
-          {
-            embeddedWalletUserDetails,
-            merge,
-          },
+          { embeddedWalletUserDetails, merge },
           null,
           2,
         )}`,
       )
-      Sentry.setExtras({
-        hasSignedInWithEmail,
-        hasSignedInWithPhoneNumber,
-        mergeObjectInfo,
-      })
+      Sentry.setExtras({ hasSignedInWithEmail, hasSignedInWithPhoneNumber, mergeObjectInfo })
       throw error
     })
     wasUserCreated = true
@@ -396,10 +389,7 @@ export async function onNewLogin(props: NewLoginParams) {
 
   const maybeUpsertPhoneNumberResult =
     !hasSignedInWithEmail && embeddedWalletUserDetails?.phone
-      ? await maybeUpsertPhoneNumber({
-          user,
-          embeddedWalletUserDetails,
-        })
+      ? await maybeUpsertPhoneNumber({ user, embeddedWalletUserDetails })
       : null
 
   if (maybeUpsertPhoneNumberResult) {
@@ -446,6 +436,7 @@ export async function onNewLogin(props: NewLoginParams) {
     sessionId: await props.getUserSessionId(),
     embeddedWalletUserDetails,
     decreaseCommunicationTimers: props.decreaseCommunicationTimers,
+    countryCode,
   })
 
   if (localUser) {
@@ -472,9 +463,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Had Opt In User Action': postLoginUserActionSteps.hadOptInUserAction,
     'Count Past Actions Minted': postLoginUserActionSteps.pastActionsMinted.length,
   })
-  peopleAnalytics.set({
-    'Datetime of Last Login': new Date(),
-  })
+  peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
 
   waitUntil(beforeFinish())
   return {
@@ -539,9 +528,7 @@ async function queryMatchingUsers({
   return { embeddedWalletUserDetails, existingUsersWithSource }
 }
 
-type FindUsersToMergeOptions = {
-  userToKeepId?: string
-}
+type FindUsersToMergeOptions = { userToKeepId?: string }
 
 function findUsersToMerge(
   existingUsersWithSource: Awaited<
@@ -611,9 +598,7 @@ async function createUser({
       hasOptedInToMembership: false,
       smsStatus: SMSStatus.NOT_OPTED_IN,
       referralId: generateReferralId(),
-      userSessions: {
-        create: { id: sessionId ?? undefined },
-      },
+      userSessions: { create: { id: sessionId ?? undefined } },
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
   })
@@ -631,10 +616,7 @@ async function maybeUpsertPhoneNumber({
 
   const result = await prismaClient.user.update({
     where: { id: user.id },
-    data: {
-      smsStatus,
-      phoneNumber,
-    },
+    data: { smsStatus, phoneNumber },
 
     include: {
       address: true,
@@ -644,11 +626,7 @@ async function maybeUpsertPhoneNumber({
     },
   })
 
-  return {
-    user: result,
-    phoneNumber,
-    smsStatus,
-  }
+  return { user: result, phoneNumber, smsStatus }
 }
 
 async function maybeUpsertCryptoAddress({
@@ -764,9 +742,7 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
 
   const result = await prismaClient.userCryptoAddress.update({
     where: { id: cryptoAddressAssociatedWithEmail.id },
-    data: {
-      embeddedWalletUserEmailAddressId: email.id,
-    },
+    data: { embeddedWalletUserEmailAddressId: email.id },
     include: {
       user: {
         include: {
@@ -809,14 +785,9 @@ async function upsertCapitalCanaryAdvocate({
     name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
     data: {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-      user: {
-        ...user,
-        address: user.address || null,
-      },
+      user: { ...user, address: user.address || null },
       userEmailAddress: user.primaryUserEmailAddress,
-      opts: {
-        isEmailOptin: true,
-      },
+      opts: { isEmailOptin: true },
     },
   })
   getLog(cryptoAddress)(`upsertCapitalCanaryAdvocate: metadata added to capital canary`)
@@ -832,6 +803,7 @@ async function triggerPostLoginUserActionSteps({
   sessionId,
   embeddedWalletUserDetails,
   decreaseCommunicationTimers,
+  countryCode,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
@@ -841,6 +813,7 @@ async function triggerPostLoginUserActionSteps({
   sessionId: string | null
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata | null
   decreaseCommunicationTimers?: boolean
+  countryCode: string
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -852,9 +825,7 @@ async function triggerPostLoginUserActionSteps({
       userId: user.id,
       campaignName: UserActionOptInCampaignName.DEFAULT,
       actionType: UserActionType.OPT_IN,
-      userActionOptIn: {
-        optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-      },
+      userActionOptIn: { optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER },
     },
   })
   const hadOptInUserAction = !!optInUserAction
@@ -864,11 +835,8 @@ async function triggerPostLoginUserActionSteps({
         user: { connect: { id: user.id } },
         actionType: UserActionType.OPT_IN,
         campaignName: UserActionOptInCampaignName.DEFAULT,
-        userActionOptIn: {
-          create: {
-            optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-          },
-        },
+        countryCode,
+        userActionOptIn: { create: { optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER } },
       },
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
@@ -888,11 +856,7 @@ async function triggerPostLoginUserActionSteps({
 
     const result = await inngest.send({
       name: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-      data: {
-        userId: user.id,
-        sessionId,
-        decreaseTimers: decreaseCommunicationTimers,
-      },
+      data: { userId: user.id, sessionId, decreaseTimers: decreaseCommunicationTimers },
     })
     log(
       `triggerPostLoginUserActionSteps: initial signup communication journey triggered with inngest id: ${result.ids[0]}`,
@@ -924,19 +888,13 @@ async function getExistingUsers({
 
   const existingUsersWithCryptoAddressNotVerifiedViaAuth = prismaClient.user.findMany({
     include,
-    where: {
-      userCryptoAddresses: {
-        some: { cryptoAddress, hasBeenVerifiedViaAuth: false },
-      },
-    },
+    where: { userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: false } } },
   })
 
   const existingUsersWithCurrentUserSessionId = userSessionId
     ? prismaClient.user.findMany({
         include,
-        where: {
-          userSessions: { some: { id: userSessionId } },
-        },
+        where: { userSessions: { some: { id: userSessionId } } },
       })
     : null
 

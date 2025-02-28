@@ -1,4 +1,4 @@
-import { Builder } from '@builder.io/react'
+import { Builder, withChildren } from '@builder.io/react'
 
 import {
   AsVariantsConfig,
@@ -8,14 +8,13 @@ import {
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
 
 interface BuilderPageSubtitleProps extends BuilderComponentBaseProps {
-  title: string
   as: (typeof AsVariantsConfig)[number]
   size: keyof typeof subTitleVariantsConfig.size
   withoutBalancer?: boolean
 }
 
 Builder.registerComponent(
-  (props: BuilderPageSubtitleProps) => (
+  withChildren((props: BuilderPageSubtitleProps) => (
     <PageSubTitle
       {...props.attributes}
       as={props.as}
@@ -23,20 +22,15 @@ Builder.registerComponent(
       size={props.size}
       withoutBalancer={props.withoutBalancer}
     >
-      {props.title}
+      {props.children}
     </PageSubTitle>
-  ),
+  )),
   {
     name: 'PageSubTitle',
+    canHaveChildren: true,
     friendlyName: 'Page Subtitle',
     noWrap: true,
     inputs: [
-      {
-        name: 'title',
-        type: 'string',
-        required: true,
-        defaultValue: 'Enter some text...',
-      },
       {
         name: 'size',
         type: 'enum',
@@ -57,6 +51,23 @@ Builder.registerComponent(
         defaultValue: false,
         helperText: 'Whether to disable the balancer for the subtitle',
         advanced: true,
+      },
+    ],
+    childRequirements: {
+      message: 'Add a Text or Date component',
+      query: {
+        'component.name': { $in: ['Text', 'Date'] },
+      },
+    },
+    defaultChildren: [
+      {
+        '@type': '@builder.io/sdk:Element',
+        component: {
+          name: 'Text',
+          options: {
+            text: 'Enter some text...',
+          },
+        },
       },
     ],
   },

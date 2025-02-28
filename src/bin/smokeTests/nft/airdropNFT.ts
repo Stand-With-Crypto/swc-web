@@ -36,6 +36,7 @@ async function smokeTestAirdropNFTWithInngest() {
           costAtMintUsd: new Decimal(0),
         },
       },
+      countryCode: user.countryCode,
       actionType: UserActionType.OPT_IN,
       campaignName: UserActionOptInCampaignName.DEFAULT,
       userActionOptIn: {

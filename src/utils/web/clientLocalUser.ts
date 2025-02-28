@@ -11,6 +11,7 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 import { getAllExperiments } from '@/utils/web/clientExperiments'
+import { getCountryCodeForClientAnalytics } from '@/utils/web/getCountryCodeForClientAnalytics'
 
 const getPersistedLocalUser = () => {
   const val = Cookies.get(LOCAL_USER_PERSISTED_KEY)
@@ -25,17 +26,19 @@ const removeLocalUser = () => {
   Cookies.remove(LOCAL_USER_CURRENT_SESSION_KEY)
 }
 
-const getDefaultCurrentSessionLocalUser = (): CurrentSessionLocalUser => ({
+const getDefaultCurrentSessionLocalUser = (countryCode: string): CurrentSessionLocalUser => ({
   datetimeOnLoad: new Date().toISOString(),
   refererOnLoad: window.document.referrer || undefined,
   searchParamsOnLoad: Object.fromEntries(new URLSearchParams(window.location.search)),
+  countryCode,
 })
 
-const getDefaultPersistedLocalUser = (): PersistedLocalUser => ({
+const getDefaultPersistedLocalUser = (countryCode: string): PersistedLocalUser => ({
   initialReferer: window.document.referrer || undefined,
   datetimeFirstSeen: new Date().toISOString(),
   initialSearchParams: Object.fromEntries(new URLSearchParams(window.location.search)),
   experiments: getAllExperiments(null).experiments,
+  countryCode,
 })
 
 let localUser: LocalUser | null = null
@@ -54,12 +57,16 @@ export const getLocalUser = (): LocalUser => {
         refererOnLoad: undefined,
         datetimeOnLoad: new Date().toISOString(),
         searchParamsOnLoad: {},
+        countryCode: undefined,
       },
       persisted: undefined,
     }
   }
   const canUsePersistedData =
     getClientCookieConsent().targeting && getClientCookieConsent().functional
+
+  const countryCode = getCountryCodeForClientAnalytics()
+
   if (localUser) {
     if (!canUsePersistedData) {
       if (localUser.persisted) {
@@ -71,7 +78,9 @@ export const getLocalUser = (): LocalUser => {
     }
     return localUser
   }
-  const currentSession: CurrentSessionLocalUser = getDefaultCurrentSessionLocalUser()
+
+  const currentSession = getDefaultCurrentSessionLocalUser(countryCode)
+
   if (!canUsePersistedData) {
     localUser = { currentSession, persisted: undefined }
     return localUser
@@ -86,7 +95,11 @@ export const getLocalUser = (): LocalUser => {
       return { currentSession, persisted }
     }
     logger.info('new experiments, updating existed persisted data')
-    const newPersisted = { ...persisted, experiments: experimentResults.experiments }
+    const newPersisted = {
+      ...persisted,
+      experiments: experimentResults.experiments,
+      countryCode: persisted?.countryCode ?? countryCode,
+    }
     Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
       expires: 365,
     })
@@ -94,7 +107,7 @@ export const getLocalUser = (): LocalUser => {
     return localUser
   }
   logger.info('no data, setting new persisted data')
-  const newPersisted = getDefaultPersistedLocalUser()
+  const newPersisted = getDefaultPersistedLocalUser(countryCode)
   Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
     expires: 365,
   })

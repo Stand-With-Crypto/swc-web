@@ -8,7 +8,7 @@ import { apiUrls } from '@/utils/shared/urls'
 
 export function useApiRecentActivity(
   fallbackData: PublicRecentActivity,
-  args: { limit: number; restrictToUS?: boolean },
+  args: { limit: number; countryCode: string },
   config?: Pick<FullConfiguration, 'revalidateOnFocus'> & { refreshManually?: boolean },
 ) {
   return useSWR(

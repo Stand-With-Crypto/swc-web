@@ -7,6 +7,7 @@ import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
@@ -54,6 +55,7 @@ interface SharedDependencies {
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
   hasRegisteredRatelimit: boolean
+  countryCode: string
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
@@ -83,6 +85,7 @@ async function _actionCreateUserActionCallCongressperson(
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
+  const countryCode = await getCountryCodeCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -94,7 +97,7 @@ async function _actionCreateUserActionCallCongressperson(
     await triggerRateLimiterAtMostOnce()
   }
 
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+  const user = userMatch.user || (await createUser({ localUser, sessionId, countryCode }))
 
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
@@ -147,6 +150,7 @@ async function _actionCreateUserActionCallCongressperson(
     validatedInput: validatedInput.data,
     userMatch,
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
+    countryCode,
   })
 
   if (user.primaryUserCryptoAddress !== null) {
@@ -157,7 +161,9 @@ async function _actionCreateUserActionCallCongressperson(
   return { user: getClientUser(updatedUser) }
 }
 
-async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
+async function createUser(
+  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId' | 'countryCode'>,
+) {
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
@@ -168,6 +174,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
       hasOptedInToMembership: false,
       smsStatus: SMSStatus.NOT_OPTED_IN,
       ...mapLocalUserToUserDatabaseFields(localUser),
+      countryCode: sharedDependencies.countryCode,
     },
     include: {
       primaryUserCryptoAddress: true,
@@ -222,12 +229,14 @@ async function createActionAndUpdateUser<U extends User>({
   userMatch,
   sharedDependencies,
   isNewUser,
+  countryCode,
 }: {
   user: U
   isNewUser: boolean
   validatedInput: CreateActionCallCongresspersonInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+  countryCode: string
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
@@ -239,6 +248,7 @@ async function createActionAndUpdateUser<U extends User>({
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
+      countryCode,
       userActionCall: {
         create: {
           recipientDtsiSlug: validatedInput.dtsiSlug,

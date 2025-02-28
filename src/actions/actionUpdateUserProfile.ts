@@ -48,6 +48,7 @@ const logger = getLogger(`actionUpdateUserProfile`)
 
 async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfileFormAction>) {
   const authUser = await appRouterGetAuthUser()
+
   if (!authUser) {
     throw new Error('Unauthenticated')
   }
@@ -103,9 +104,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         where: {
           googlePlaceId: validatedFields.data.address.googlePlaceId,
         },
-        create: {
-          ...validatedFields.data.address,
-        },
+        create: validatedFields.data.address,
         update: {},
       })
     : null

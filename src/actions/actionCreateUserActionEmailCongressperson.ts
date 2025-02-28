@@ -23,6 +23,7 @@ import {
   CapitolCanaryCampaignId,
   SandboxCapitolCanaryCampaignId,
 } from '@/utils/server/capitolCanary/campaigns'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -89,6 +90,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     zodUserActionFormEmailCongresspersonAction,
     input,
   )
+  const countryCode = await getCountryCodeCookie()
 
   if (!validatedFields.success) {
     return {
@@ -129,6 +131,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     sessionId,
     localUser,
     onUpsertUser: triggerRateLimiterAtMostOnce,
+    countryCode,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -169,6 +172,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     data: {
       user: { connect: { id: user.id } },
       actionType,
+      countryCode,
       campaignName: validatedFields.data.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
@@ -180,6 +184,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
           senderEmail: validatedFields.data.emailAddress,
           firstName: validatedFields.data.firstName,
           lastName: validatedFields.data.lastName,
+
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
@@ -269,12 +274,14 @@ async function maybeUpsertUser({
   sessionId,
   localUser,
   onUpsertUser,
+  countryCode,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
   onUpsertUser: () => Promise<void> | void
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -302,6 +309,7 @@ async function maybeUpsertUser({
             },
           },
         }),
+      countryCode,
     }
     const keysToUpdate = Object.keys(updatePayload)
     if (!keysToUpdate.length) {
@@ -360,6 +368,7 @@ async function maybeUpsertUser({
           create: address,
         },
       },
+      countryCode,
     },
   })
   const primaryUserEmailAddressId = user.userEmailAddresses[0].id

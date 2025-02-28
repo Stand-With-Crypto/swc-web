@@ -7,6 +7,7 @@ import { getPageContent, getPageDetails } from '@/utils/server/builder/models/pa
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
+export const revalidate = 86400 // 1 day
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
 const PATHNAME = '/terms-of-service'
@@ -14,17 +15,19 @@ const PATHNAME = '/terms-of-service'
 export default async function TermsOfServicePage(props: PageProps) {
   const { countryCode } = await props.params
 
-  const content = await getPageContent(PAGE_MODEL, PATHNAME)
+  const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
-      <RenderBuilderContent content={content} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const metadata = await getPageDetails(PAGE_MODEL, PATHNAME)
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { countryCode } = await props.params
+
+  const metadata = await getPageDetails(PAGE_MODEL, PATHNAME, countryCode)
 
   return generateMetadataDetails({
     title: metadata.title,

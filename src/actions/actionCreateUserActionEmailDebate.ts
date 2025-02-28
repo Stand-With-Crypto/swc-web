@@ -17,6 +17,7 @@ import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -77,12 +78,14 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
   logger.info('validated fields')
 
   const localUser = await parseLocalUserFromCookies()
+  const countryCode = await getCountryCodeCookie()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,
     sessionId,
     localUser,
     onUpsertUser: triggerRateLimiterAtMostOnce,
+    countryCode,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -147,6 +150,7 @@ async function _actionCreateUserActionEmailDebate(input: Input) {
           },
         },
       },
+      countryCode,
     },
     include: {
       userActionEmail: true,
@@ -200,12 +204,14 @@ async function maybeUpsertUser({
   sessionId,
   localUser,
   onUpsertUser,
+  countryCode,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
   onUpsertUser: () => Promise<void> | void
+  countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -275,6 +281,7 @@ async function maybeUpsertUser({
       hasOptedInToMembership: false,
       firstName,
       lastName,
+      countryCode,
       userEmailAddresses: {
         create: {
           emailAddress,

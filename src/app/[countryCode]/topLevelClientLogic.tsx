@@ -19,7 +19,11 @@ import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 
-const InitialOrchestration = () => {
+interface InitialOrchestrationProps {
+  countryCode: SupportedCountryCodes
+}
+
+const InitialOrchestration = ({ countryCode }: InitialOrchestrationProps) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -40,6 +44,9 @@ const InitialOrchestration = () => {
       Sentry.setUser({ id: sessionId, idType: 'session' })
     }
   }, [])
+  useEffect(() => {
+    Sentry.setTag('countryCode', countryCode)
+  }, [countryCode])
   useEffect(() => {
     const clientUserId = getUserIdOnClient()
     if (authUser.user?.userId || clientUserId) {
@@ -99,7 +106,7 @@ export function TopLevelClientLogic({
       <ThirdwebProvider>
         {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
         <Suspense>
-          <InitialOrchestration />
+          <InitialOrchestration countryCode={countryCode} />
         </Suspense>
         {children}
       </ThirdwebProvider>
