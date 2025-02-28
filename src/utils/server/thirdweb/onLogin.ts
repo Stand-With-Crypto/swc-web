@@ -145,8 +145,24 @@ export async function login(payload: VerifyLoginPayloadParams) {
       context: { userId: existingVerifiedUser.id, address },
     })
 
+    const currentUserCountryCode = existingVerifiedUser.countryCode
+
+    const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+    const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
+
     currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
 
+    if (
+      !parsedUserCountryCodeCookie?.bypassed &&
+      parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
+        currentUserCountryCode.toLowerCase()
+    ) {
+      currentCookies.set(
+        USER_COUNTRY_CODE_COOKIE_NAME,
+        JSON.stringify({ countryCode: currentUserCountryCode.toLowerCase(), bypassed: false }),
+        { sameSite: 'lax' },
+      )
+    }
     return
   }
 
