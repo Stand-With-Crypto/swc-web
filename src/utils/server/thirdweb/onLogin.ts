@@ -119,15 +119,15 @@ export async function login(payload: VerifyLoginPayloadParams) {
     const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
     const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
 
-    log(`currentUserCountryCode: ${currentUserCountryCode}`)
-    log(`parsedUserCountryCodeCookie: ${JSON.stringify(parsedUserCountryCodeCookie)}`)
-
     if (
+      parsedUserCountryCodeCookie &&
       !parsedUserCountryCodeCookie?.bypassed &&
       parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
         currentUserCountryCode.toLowerCase()
     ) {
-      log(`setting user country code cookie to ${currentUserCountryCode.toLowerCase()}`)
+      log(
+        `setting user country code cookie from ${parsedUserCountryCodeCookie.countryCode.toLowerCase()} to ${currentUserCountryCode.toLowerCase()}`,
+      )
       currentCookies.set({
         name: USER_COUNTRY_CODE_COOKIE_NAME,
         value: JSON.stringify({
