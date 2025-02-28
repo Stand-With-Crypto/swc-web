@@ -1,16 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import {
-  getCountryCode,
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
+import { getCountryCode, USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import {
   COUNTRY_CODE_REGEX_PATTERN,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-
-const HAS_REDIRECTED_HEADER = 'x-swc-international-redirected'
 
 type CountryCookieData = {
   countryCode: string
@@ -21,14 +15,10 @@ export function internationalRedirectHandler(request: NextRequest): {
   response?: NextResponse
   countryCookie?: CountryCookieData | null
 } {
-  if (request.headers.get(HAS_REDIRECTED_HEADER)) {
-    return { response: NextResponse.next() }
-  }
-
   const geoLocationCountryCode = getCountryCode(request)?.toLowerCase()
   const countryCodeCookieData = getCountryCookieData(request)
 
-  const responseCountryCodeCookie = shouldUpdateCountryCookie(
+  const maybeResponseCountryCodeCookie = shouldUpdateCountryCookie(
     countryCodeCookieData,
     geoLocationCountryCode,
   )
@@ -41,18 +31,40 @@ export function internationalRedirectHandler(request: NextRequest): {
     const response = createRedirectResponse(request, geoLocationCountryCode)
     return {
       response,
-      countryCookie: responseCountryCodeCookie,
+      countryCookie: maybeResponseCountryCodeCookie,
     }
   }
 
   return {
-    countryCookie: responseCountryCodeCookie,
+    countryCookie: maybeResponseCountryCodeCookie,
   }
 }
 
 function getCountryCookieData(request: NextRequest): CountryCookieData | null {
   const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-  return parseUserCountryCodeCookie(existingCountryCode)
+
+  if (!existingCountryCode) {
+    return null
+  }
+
+  let parsedCookieValue: CountryCookieData | null = null
+
+  if (existingCountryCode.includes('{')) {
+    try {
+      parsedCookieValue = JSON.parse(existingCountryCode) as CountryCookieData
+    } catch {
+      return null
+    }
+  }
+
+  const countryCode = (parsedCookieValue?.countryCode || existingCountryCode)?.toLowerCase()
+
+  return parsedCookieValue
+    ? {
+        ...parsedCookieValue,
+        countryCode,
+      }
+    : { countryCode, bypassed: false }
 }
 
 function shouldRedirectToCountrySpecificHomepage(
@@ -67,29 +79,20 @@ function shouldRedirectToCountrySpecificHomepage(
   const isHomepageRequested = new RegExp(
     `^/(|(${Object.values(SupportedCountryCodes).join('|')}))$`,
   ).test(request.nextUrl.pathname)
-  console.log('isHomepageRequested', isHomepageRequested)
   if (!isHomepageRequested) return false
 
   const isCountryCodeCookieDefined = !!countryCodeCookieData
-  console.log('isCountryCodeCookieDefined', isCountryCodeCookieDefined)
   if (isCountryCodeCookieDefined) return false
 
   const isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode =
     request.nextUrl.pathname.startsWith(`/${geoLocationCountryCode}`) ||
     (request.nextUrl.pathname === '/' && geoLocationCountryCode === SupportedCountryCodes.US)
-  console.log(
-    'isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode',
-    isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode,
-  )
   if (isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode) return false
 
   const isCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(
     geoLocationCountryCode?.toLowerCase(),
   )
-  console.log('isCountryCodeSupported', isCountryCodeSupported)
   if (!isCountryCodeSupported) return false
-
-  console.log('deve redirecionar')
 
   return true
 }
@@ -108,7 +111,13 @@ function createRedirectResponse(
   request: NextRequest,
   geoLocationCountryCode: string,
 ): NextResponse {
-  const response = NextResponse.redirect(new URL(`/${geoLocationCountryCode}`, request.url))
-  response.headers.set(HAS_REDIRECTED_HEADER, 'true')
-  return response
+  const currentUrl = new URL(request.url)
+
+  const redirectUrl = new URL(`/${geoLocationCountryCode}`, request.url)
+
+  redirectUrl.search = currentUrl.search
+
+  redirectUrl.hash = currentUrl.hash
+
+  return NextResponse.redirect(redirectUrl)
 }
