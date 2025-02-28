@@ -24,9 +24,9 @@ function extractCountryCode(pathname: string) {
  * /gb/path → /gb/path (pass through)
  */
 export function countryCodeRouter(request: NextRequest): NextResponse {
-  const maybeRedirectResponse = internationalRedirectHandler(request)
+  // const maybeRedirectResponse = internationalRedirectHandler(request)
 
-  if (maybeRedirectResponse) return maybeRedirectResponse
+  // if (maybeRedirectResponse) return maybeRedirectResponse
 
   const { pathname } = request.nextUrl
   const searchParams = request.nextUrl.search
