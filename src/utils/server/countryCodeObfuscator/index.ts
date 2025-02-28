@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { internationalRedirectHandler } from '@/utils/server/internationalRedirectHandler'
 import {
   COUNTRY_CODE_REGEX_PATTERN,
   DEFAULT_SUPPORTED_COUNTRY_CODE,
@@ -23,11 +22,7 @@ function extractCountryCode(pathname: string) {
  * /path → /us/path (rewrite if "us" is default)
  * /gb/path → /gb/path (pass through)
  */
-export function countryCodeRouter(request: NextRequest): NextResponse {
-  const maybeRedirectResponse = internationalRedirectHandler(request)
-
-  if (maybeRedirectResponse) return maybeRedirectResponse
-
+export function countryCodeObfuscator(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl
   const searchParams = request.nextUrl.search
 
