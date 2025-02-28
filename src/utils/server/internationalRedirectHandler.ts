@@ -25,7 +25,8 @@ export function internationalRedirectHandler(request: NextRequest): {
     return { response: NextResponse.next() }
   }
 
-  const geoLocationCountryCode = getCountryCode(request)?.toLowerCase()
+  // const geoLocationCountryCode = getCountryCode(request)?.toLowerCase()
+  const geoLocationCountryCode = 'br'
   const countryCodeCookieData = getCountryCookieData(request)
 
   const responseCountryCodeCookie = shouldUpdateCountryCookie(
@@ -80,6 +81,8 @@ function shouldRedirectToCountrySpecificHomepage(
   const geoLocationCountryCodeMatchesTheCountryCodeCookie =
     geoLocationCountryCode === countryCodeCookieData?.countryCode
   if (geoLocationCountryCodeMatchesTheCountryCodeCookie) return false
+
+  console.log('deve redirecionar')
 
   return true
 }

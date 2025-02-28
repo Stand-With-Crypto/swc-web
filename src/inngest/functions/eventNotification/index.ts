@@ -10,7 +10,8 @@ const SEND_EVENT_NOTIFICATION_INNGEST_FUNCTION_ID = 'script.send-event-notificat
 
 const countryCodeToTimezoneMap: Record<SupportedCountryCodes, string> = {
   [SupportedCountryCodes.US]: 'America/New_York',
-  [SupportedCountryCodes.GB]: 'Europe/London',
+  // TODO: uncomment this line when we add support for UK
+  // [SupportedCountryCodes.UK]: 'Europe/London',
 }
 
 export const globalSendEventNotifications = ORDERED_SUPPORTED_COUNTRIES.map(countryCode => {
