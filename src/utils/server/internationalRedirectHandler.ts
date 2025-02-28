@@ -70,23 +70,24 @@ function shouldRedirectToCountrySpecificHomepage(
   console.log('isHomepageRequested', isHomepageRequested)
   if (!isHomepageRequested) return false
 
-  const isCountryCodeCookieDefined = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+  const isCountryCodeCookieDefined = !!countryCodeCookieData
   console.log('isCountryCodeCookieDefined', isCountryCodeCookieDefined)
   if (isCountryCodeCookieDefined) return false
+
+  const isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode =
+    request.nextUrl.pathname.startsWith(`/${geoLocationCountryCode}`) ||
+    (request.nextUrl.pathname === '/' && geoLocationCountryCode === SupportedCountryCodes.US)
+  console.log(
+    'isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode',
+    isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode,
+  )
+  if (isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode) return false
 
   const isCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(
     geoLocationCountryCode?.toLowerCase(),
   )
   console.log('isCountryCodeSupported', isCountryCodeSupported)
   if (!isCountryCodeSupported) return false
-
-  const geoLocationCountryCodeMatchesTheCountryCodeCookie =
-    geoLocationCountryCode === countryCodeCookieData?.countryCode
-  console.log(
-    'geoLocationCountryCodeMatchesTheCountryCodeCookie',
-    geoLocationCountryCodeMatchesTheCountryCodeCookie,
-  )
-  if (geoLocationCountryCodeMatchesTheCountryCodeCookie) return false
 
   console.log('deve redirecionar')
 
