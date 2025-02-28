@@ -2,7 +2,7 @@ import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 export enum SupportedCountryCodes {
   US = 'us',
-  BR = 'br',
+  GB = 'gb',
 }
 
 export const DEFAULT_SUPPORTED_COUNTRY_CODE = SupportedCountryCodes.US
@@ -14,7 +14,7 @@ export const ORDERED_SUPPORTED_COUNTRIES: readonly SupportedCountryCodes[] = [
 
 export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLocale> = {
   [SupportedCountryCodes.US]: SupportedLocale.EN_US,
-  [SupportedCountryCodes.BR]: SupportedLocale.PT_BR,
+  [SupportedCountryCodes.GB]: SupportedLocale.EN_GB,
 }
 
 // Two lowercase letters (e.g., "us", "uk")

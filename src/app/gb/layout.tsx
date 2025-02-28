@@ -14,17 +14,13 @@ import { Toaster } from '@/components/ui/sonner'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails, TOP_LEVEL_METADATA_DETAILS } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import {
-  COUNTRY_CODE_TO_LOCALE,
-  ORDERED_SUPPORTED_COUNTRIES,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
 export { viewport } from '@/utils/server/metadataUtils'
 
 export async function generateStaticParams() {
-  return ORDERED_SUPPORTED_COUNTRIES.map(countryCode => ({ countryCode }))
+  return SupportedCountryCodes.GB
 }
 
 const title = `${
@@ -46,7 +42,7 @@ export const metadata: Metadata = {
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={COUNTRY_CODE_TO_LOCALE[SupportedCountryCodes.BR]} translate="no">
+    <html lang={COUNTRY_CODE_TO_LOCALE[SupportedCountryCodes.GB]} translate="no">
       <GoogleTagManager />
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
@@ -55,12 +51,12 @@ export default async function Layout({ children }: { children: React.ReactNode }
           shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
           showSpinner={false}
         />
-        <TopLevelClientLogic countryCode={SupportedCountryCodes.BR}>
+        <TopLevelClientLogic countryCode={SupportedCountryCodes.GB}>
           <FullHeight.Container>
             <NavBarGlobalBanner />
-            <Navbar countryCode={SupportedCountryCodes.BR} />
+            <Navbar countryCode={SupportedCountryCodes.GB} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer countryCode={SupportedCountryCodes.BR} />
+            <Footer countryCode={SupportedCountryCodes.GB} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
