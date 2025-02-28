@@ -137,6 +137,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
         httpOnly: false,
         sameSite: 'lax',
         secure: true,
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
       })
     }
 
