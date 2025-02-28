@@ -129,6 +129,7 @@ export function VideoPlayer(props: VideoProps) {
         },
       }}
       controls={controls}
+      fallback={loadingFallback ? <>{loadingFallback}</> : undefined}
       height={height}
       light={previewImage}
       loop={loop}
