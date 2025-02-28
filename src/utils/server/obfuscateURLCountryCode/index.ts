@@ -22,7 +22,7 @@ function extractCountryCode(pathname: string) {
  * /path → /us/path (rewrite if "us" is default)
  * /gb/path → /gb/path (pass through)
  */
-export function countryCodeObfuscator(request: NextRequest): NextResponse {
+export function obfuscateURLCountryCode(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl
   const searchParams = request.nextUrl.search
 

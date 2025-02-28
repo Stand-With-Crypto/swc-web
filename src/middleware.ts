@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { countryCodeObfuscator } from '@/utils/server/countryCodeObfuscator'
 import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { internationalRedirectHandler } from '@/utils/server/internationalRedirectHandler'
+import { obfuscateURLCountryCode } from '@/utils/server/obfuscateURLCountryCode'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
 
-  const { response = countryCodeObfuscator(request), countryCookie } =
+  const { response = obfuscateURLCountryCode(request), countryCookie } =
     internationalRedirectHandler(request)
 
   setSessionCookiesFromRequest(request, response)
