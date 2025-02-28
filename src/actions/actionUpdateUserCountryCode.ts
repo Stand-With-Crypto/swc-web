@@ -19,7 +19,7 @@ export const actionUpdateUserCountryCode = withServerActionMiddleware(
 
 const logger = getLogger(`actionUpdateUserCountryCode`)
 
-async function actionUpdateUserCountryCodeWithoutMiddleware(
+export async function actionUpdateUserCountryCodeWithoutMiddleware(
   countryCode: z.infer<typeof zodSupportedCountryCode>,
 ) {
   const sessionId = await getUserSessionId()

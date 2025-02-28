@@ -1,6 +1,7 @@
 'use client'
-import { useRef } from 'react'
-import { useForm } from 'react-hook-form'
+
+import { useEffect, useRef, useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
@@ -27,6 +28,7 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useDialog } from '@/hooks/useDialog'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -36,10 +38,13 @@ import {
 } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 import {
   zodUpdateUserProfileFormFields,
   zodUpdateUserProfileWithRequiredFormFields,
 } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
+
+import { CountryCodeDisclaimerDialog } from './countryCodeDialog'
 
 const FORM_NAME = 'User Profile'
 
@@ -81,40 +86,96 @@ export function UpdateUserProfileForm({
     ),
     defaultValues: defaultValues.current,
   })
-  const phoneNumberValue = form.watch('phoneNumber')
+
+  const phoneNumberValue = useWatch({ control: form.control, name: 'phoneNumber' })
+  const addressValue = useWatch({ control: form.control, name: 'address' })
+
+  const [resolvedAddress, setResolvedAddress] = useState<Awaited<
+    ReturnType<typeof convertGooglePlaceAutoPredictionToAddressSchema>
+  > | null>(null)
+
+  const dialogProps = useDialog({ analytics: 'Update User Profile' })
+  const [hasUserAcceptedCountryCodeDisclaimer, setHasUserAcceptedCountryCodeDisclaimer] =
+    useState(false)
+
+  useEffect(() => {
+    async function resolveAddress() {
+      if (addressValue) {
+        const newAddress = await convertGooglePlaceAutoPredictionToAddressSchema(
+          addressValue,
+        ).catch(e => {
+          Sentry.captureException(e)
+          catchUnexpectedServerErrorAndTriggerToast(e)
+          return null
+        })
+
+        setResolvedAddress(newAddress)
+        setHasUserAcceptedCountryCodeDisclaimer(false)
+      }
+    }
+
+    void resolveAddress()
+  }, [addressValue])
+
+  useEffect(() => {
+    if (resolvedAddress) {
+      const addressCountryCode = resolvedAddress.countryCode.toLowerCase()
+      const userCountryCode = user.countryCode.toLowerCase()
+
+      const { success, data: validatedAddressCountryCode } =
+        zodSupportedCountryCode.safeParse(addressCountryCode)
+
+      const TEMPORARY_ALLOWED_COUNTRY_CODE = 'gb' // TODO(@olavoparno): Remove this once we start supporting UK inside zodSupportedCountryCode
+
+      const isCountryCodeSupported =
+        success || addressCountryCode === TEMPORARY_ALLOWED_COUNTRY_CODE
+
+      if (
+        !hasUserAcceptedCountryCodeDisclaimer &&
+        isCountryCodeSupported &&
+        validatedAddressCountryCode !== userCountryCode
+      ) {
+        return dialogProps.onOpenChange(true)
+      }
+    }
+  }, [resolvedAddress, dialogProps, user.countryCode, hasUserAcceptedCountryCodeDisclaimer])
+
+  const onSubmit = async (values: typeof defaultValues.current) => {
+    const result = await triggerServerActionForForm(
+      {
+        form,
+        formName: FORM_NAME,
+        analyticsProps: {
+          ...(resolvedAddress ? convertAddressToAnalyticsProperties(resolvedAddress) : {}),
+        },
+        payload: { ...values, address: resolvedAddress, optedInToSms: !!values.phoneNumber },
+      },
+      payload => actionUpdateUserProfile(payload),
+    )
+    if (result.status === 'success') {
+      router.refresh()
+      toast.success('Profile updated', { duration: 5000 })
+      const { firstName, lastName } = values
+      onSuccess({ firstName, lastName, address: values.address })
+    }
+  }
+
+  const handleUserAcceptance = () => {
+    setHasUserAcceptedCountryCodeDisclaimer(true)
+
+    return dialogProps.onOpenChange(false)
+  }
 
   return (
     <Form {...form}>
       <form
         className="flex min-h-full flex-col gap-6"
-        onSubmit={form.handleSubmit(async values => {
-          const address = values.address
-            ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
-                Sentry.captureException(e)
-                catchUnexpectedServerErrorAndTriggerToast(e)
-                return null
-              })
-            : null
-
-          const result = await triggerServerActionForForm(
-            {
-              form,
-              formName: FORM_NAME,
-              analyticsProps: {
-                ...(address ? convertAddressToAnalyticsProperties(address) : {}),
-              },
-              payload: { ...values, address, optedInToSms: !!values.phoneNumber },
-            },
-            payload => actionUpdateUserProfile(payload),
-          )
-          if (result.status === 'success') {
-            router.refresh()
-            toast.success('Profile updated', { duration: 5000 })
-            const { firstName, lastName } = values
-            onSuccess({ firstName, lastName, address: values.address })
-          }
-        }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        onSubmit={form.handleSubmit(onSubmit, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
+        <CountryCodeDisclaimerDialog
+          dialogProps={dialogProps}
+          handleUserAcceptance={handleUserAcceptance}
+        />
         <div>
           <PageTitle className="mb-1" size="md">
             {hasCompleteUserProfile(user) ? 'Edit' : 'Finish'} your profile
