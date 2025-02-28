@@ -114,29 +114,40 @@ export async function login(payload: VerifyLoginPayloadParams) {
         .flush(),
     ])
 
-    const jwt = await thirdwebAuth.generateJWT({
-      payload: verifiedPayload.payload,
-      context: { userId: existingVerifiedUser.id, address },
-    })
-
     const currentUserCountryCode = existingVerifiedUser.countryCode
 
     const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
     const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
 
-    currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
-
     if (
+      parsedUserCountryCodeCookie &&
       !parsedUserCountryCodeCookie?.bypassed &&
       parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
         currentUserCountryCode.toLowerCase()
     ) {
-      currentCookies.set(
-        USER_COUNTRY_CODE_COOKIE_NAME,
-        JSON.stringify({ countryCode: currentUserCountryCode.toLowerCase(), bypassed: false }),
-        { sameSite: 'lax' },
+      log(
+        `setting user country code cookie from ${parsedUserCountryCodeCookie.countryCode.toLowerCase()} to ${currentUserCountryCode.toLowerCase()}`,
       )
+      currentCookies.set({
+        name: USER_COUNTRY_CODE_COOKIE_NAME,
+        value: JSON.stringify({
+          countryCode: currentUserCountryCode.toLowerCase(),
+          bypassed: true,
+        }),
+        httpOnly: false,
+        sameSite: 'lax',
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      })
     }
+
+    const jwt = await thirdwebAuth.generateJWT({
+      payload: verifiedPayload.payload,
+      context: { userId: existingVerifiedUser.id, address },
+    })
+
+    currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
+
     return
   }
 
