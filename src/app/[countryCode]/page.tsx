@@ -16,6 +16,7 @@ export default async function Home(props: PageProps) {
   const asyncProps = await getHomepageData({
     recentActivityLimit: 30,
     restrictToUS: true,
+    countryCode: params.countryCode,
   })
   const advocatePerStateDataProps = await getAdvocatesMapData()
   const partners = await getPartners()

@@ -4,9 +4,18 @@ import useSWR from 'swr'
 
 import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomepageData'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 
-export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetricsResponse) {
+interface UseApiHomepageTopLevelMetricsProps {
+  countryCode: SupportedCountryCodes
+  initial: GetHomepageTopLevelMetricsResponse
+}
+
+export function useApiHomepageTopLevelMetrics({
+  initial,
+  countryCode,
+}: UseApiHomepageTopLevelMetricsProps) {
   const initialDelayToShowAnimation = 1500
   const [refreshInterval, setRefreshInterval] = useState(initialDelayToShowAnimation)
   /*
@@ -19,7 +28,7 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
     return () => clearTimeout(timeout)
   }, [initialDelayToShowAnimation])
   return useSWR(
-    apiUrls.homepageTopLevelMetrics(),
+    apiUrls.homepageTopLevelMetrics(countryCode),
     url =>
       fetchReq(url)
         .then(res => res.json())

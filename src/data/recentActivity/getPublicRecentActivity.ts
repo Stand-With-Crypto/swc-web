@@ -12,7 +12,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 interface RecentActivityConfig {
   limit: number
   offset?: number
-  restrictToUS?: boolean
+  countryCode: string
 }
 
 const fetchFromPrisma = async (config: RecentActivityConfig) => {
@@ -21,7 +21,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
       orderBy: {
         datetimeCreated: 'desc',
       },
-      take: config.restrictToUS ? 1000 : config.limit,
+      take: config.limit ?? 1000,
       skip: config.offset,
       include: {
         user: {
@@ -49,6 +49,9 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
         userActionVotingDay: true,
         userActionRefer: true,
       },
+      where: {
+        countryCode: config.countryCode,
+      },
     })
     .then(userActions =>
       userActions.filter(
@@ -58,22 +61,8 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
 }
 
 export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
-  const rawData = await fetchFromPrisma(config)
+  const data = await fetchFromPrisma(config)
   const dtsiSlugs = new Set<string>()
-
-  // TODO: this feeds the advocates map at home until a better query at fetchFromPrisma is written
-  const filterDataToUSOnly = (data: typeof rawData) => {
-    return data
-      .filter(currentData => {
-        return (
-          currentData.user?.address?.countryCode === 'US' &&
-          !!currentData.user?.address?.administrativeAreaLevel1
-        )
-      })
-      .slice(0, config?.offset || 0 + config.limit)
-  }
-
-  const data = config.restrictToUS ? filterDataToUSOnly(rawData) : rawData
 
   data.forEach(userAction => {
     if (userAction.userActionCall?.recipientDtsiSlug) {

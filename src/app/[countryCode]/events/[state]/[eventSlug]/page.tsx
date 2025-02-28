@@ -22,9 +22,9 @@ const description =
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const { state, eventSlug } = params
+  const { state, eventSlug, countryCode } = params
 
-  const event = await getEvent(eventSlug, state)
+  const event = await getEvent({ eventSlug, state, countryCode })
 
   if (!event) {
     return generateMetadataDetails({
@@ -44,9 +44,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function EventDetailsPageRoot(props: Props) {
   const params = await props.params
-  const { state, eventSlug } = params
+  const { state, eventSlug, countryCode } = params
 
-  const event = await getEvent(eventSlug, state)
+  const event = await getEvent({ eventSlug, state, countryCode })
 
   const isStateValid = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(state.toUpperCase())
 

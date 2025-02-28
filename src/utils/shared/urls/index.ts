@@ -129,9 +129,10 @@ export const apiUrls = {
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
-  recentActivity: ({ limit, restrictToUS }: { limit: number; restrictToUS?: boolean }) =>
-    `/api/public/recent-activity/${limit}${restrictToUS ? '/restrictToUS' : ''}`,
-  homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
+  recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
+    `/api/public/recent-activity/${limit}/${countryCode}`,
+  homepageTopLevelMetrics: (countryCode: SupportedCountryCodes) =>
+    `/api/public/homepage/top-level-metrics/${countryCode}`,
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,

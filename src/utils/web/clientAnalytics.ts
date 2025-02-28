@@ -7,7 +7,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 import { getLocalUser } from '@/utils/web/clientLocalUser'
-import { getCountryCodeOnClient } from '@/utils/web/getCountryCodeOnClient'
+import { getCountryCodeForClientAnalytics } from '@/utils/web/getCountryCodeForClientAnalytics'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
@@ -52,7 +52,7 @@ export function trackClientAnalytic(
   _eventProperties?: AnalyticProperties,
   optionsOrCallback?: RequestOptions | Callback,
 ) {
-  const countryCode = getCountryCodeOnClient()
+  const countryCode = getCountryCodeForClientAnalytics()
   const eventProperties = { ...getExperimentProperties(), ..._eventProperties, countryCode }
   customLogger(
     {
