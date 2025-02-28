@@ -22,7 +22,12 @@ export function middleware(request: NextRequest) {
   setSessionCookiesFromRequest(request, response)
 
   if (countryCookie) {
-    setResponseCookie(response, USER_COUNTRY_CODE_COOKIE_NAME, JSON.stringify(countryCookie))
+    setResponseCookie({
+      response,
+      cookieName: USER_COUNTRY_CODE_COOKIE_NAME,
+      cookieValue: JSON.stringify(countryCookie),
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours,
+    })
   }
 
   return response
@@ -39,28 +44,51 @@ function setSessionCookiesFromRequest(request: NextRequest, response: NextRespon
 
   if (urlSessionId && urlSessionId !== existingSessionId) {
     logger.info(`session id being set via url: ${urlSessionId}`)
-    setResponseCookie(response, USER_SESSION_ID_COOKIE_NAME, urlSessionId)
+    setResponseCookie({
+      response,
+      cookieName: USER_SESSION_ID_COOKIE_NAME,
+      cookieValue: urlSessionId,
+    })
   } else if (!existingSessionId) {
     const sessionId = generateUserSessionId()
     if (!isCypress) {
       logger.info(`setting initial session id: ${sessionId}`)
     }
-    setResponseCookie(response, USER_SESSION_ID_COOKIE_NAME, sessionId)
+    setResponseCookie({
+      response,
+      cookieName: USER_SESSION_ID_COOKIE_NAME,
+      cookieValue: sessionId,
+    })
   }
 
   // User ID from URL
   const urlUserId = request.nextUrl.searchParams.get('userId')
   if (urlUserId) {
-    setResponseCookie(response, USER_ID_COOKIE_NAME, urlUserId)
+    setResponseCookie({
+      response,
+      cookieName: USER_ID_COOKIE_NAME,
+      cookieValue: urlUserId,
+    })
   }
 }
 
-function setResponseCookie(response: NextResponse, cookieName: string, cookieValue: string) {
+function setResponseCookie({
+  cookieName,
+  cookieValue,
+  response,
+  maxAge,
+}: {
+  response: NextResponse
+  cookieName: string
+  cookieValue: string
+  maxAge?: number
+}) {
   response.cookies.set({
     name: cookieName,
     value: cookieValue,
     httpOnly: false,
     sameSite: 'lax',
     secure: true,
+    ...(maxAge && { maxAge }),
   })
 }
