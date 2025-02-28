@@ -2,14 +2,17 @@ import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 
 import {
-  COUNTRY_CODE_REGEX_PATTERN,
-  SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/shared/supportedCountries'
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
+import { COUNTRY_CODE_REGEX_PATTERN } from '@/utils/shared/supportedCountries'
 
 export async function getCountryCodeCookie() {
   const currentCookies = await cookies()
 
-  const countryCode = currentCookies.get(SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME)?.value
+  const maybeCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+
+  const countryCode = parseUserCountryCodeCookie(maybeCountryCodeCookie)?.countryCode ?? null
 
   if (!countryCode) {
     const error = new Error('Country Code cookie not found')
