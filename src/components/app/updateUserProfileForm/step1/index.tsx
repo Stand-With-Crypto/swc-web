@@ -71,10 +71,7 @@ export function UpdateUserProfileForm({
     hasOptedInToMembership: user.hasOptedInToMembership,
     optedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
     address: user.address
-      ? {
-          description: user.address.formattedDescription,
-          place_id: user.address.googlePlaceId,
-        }
+      ? { description: user.address.formattedDescription, place_id: user.address.googlePlaceId }
       : null,
   })
 
@@ -172,10 +169,13 @@ export function UpdateUserProfileForm({
         className="flex min-h-full flex-col gap-6"
         onSubmit={form.handleSubmit(onSubmit, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
-        <CountryCodeDisclaimerDialog
-          dialogProps={dialogProps}
-          handleUserAcceptance={handleUserAcceptance}
-        />
+        {resolvedAddress && (
+          <CountryCodeDisclaimerDialog
+            addressCountryCode={resolvedAddress.countryCode}
+            dialogProps={dialogProps}
+            handleUserAcceptance={handleUserAcceptance}
+          />
+        )}
         <div>
           <PageTitle className="mb-1" size="md">
             {hasCompleteUserProfile(user) ? 'Edit' : 'Finish'} your profile

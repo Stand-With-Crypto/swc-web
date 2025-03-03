@@ -10,6 +10,4 @@ export const zodSupportedCountryCode = string()
     if (lowerCaseCountryCode === 'gb') return 'uk'
     return lowerCaseCountryCode
   })
-  .refine(value => ORDERED_SUPPORTED_COUNTRIES.includes(value), {
-    message: 'Invalid country code',
-  })
+  .refine(value => ORDERED_SUPPORTED_COUNTRIES.includes(value), { message: 'Invalid country code' })
