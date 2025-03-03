@@ -6,6 +6,7 @@ import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -37,34 +38,26 @@ export const actionCreateUserActionPoll = withServerActionMiddleware(
 async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVoteInput) {
   logger.info('triggered')
 
-  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
-    context: 'unauthenticated',
-  })
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({ context: 'unauthenticated' })
 
-  const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
+  const localUser = await parseLocalUserFromCookies()
+  const countryCode = await getCountryCodeCookie()
 
   const authUser = await appRouterGetThirdwebAuthUser()
   if (!authUser) {
     const error = new Error('Create User Action NFT Mint - Not authenticated')
     Sentry.captureException(error, {
       tags: { domain: 'actionCreateUserActionMintNFT' },
-      extra: {
-        sessionId,
-      },
+      extra: { sessionId },
     })
 
     throw error
   }
 
   const user = await prismaClient.user.findFirstOrThrow({
-    where: {
-      id: authUser.userId,
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
+    where: { id: authUser.userId },
+    include: { primaryUserCryptoAddress: true, address: true },
   })
 
   const analytics = getServerAnalytics({ userId: user.id, localUser })
@@ -79,14 +72,8 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
   const actionType = UserActionType.POLL
 
   const userAction = await prismaClient.userAction.findFirst({
-    where: {
-      actionType,
-      campaignName,
-      userId: user.id,
-    },
-    include: {
-      userActionPoll: true,
-    },
+    where: { actionType, campaignName, userId: user.id },
+    include: { userActionPoll: true },
   })
 
   const isVoteAgain = !!userAction && !!userAction?.userActionPoll
@@ -95,22 +82,14 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
 
   if (userAction && isVoteAgain) {
     await prismaClient.userActionPollAnswer.deleteMany({
-      where: {
-        userActionPollId: userAction.id,
-      },
+      where: { userActionPollId: userAction.id },
     })
 
-    await prismaClient.userActionPoll.delete({
-      where: {
-        id: userAction.id,
-      },
-    })
+    await prismaClient.userActionPoll.delete({ where: { id: userAction.id } })
 
     await prismaClient.userActionPoll.create({
       data: {
-        userAction: {
-          connect: { id: userAction.id },
-        },
+        userAction: { connect: { id: userAction.id } },
         userActionPollAnswers: {
           createMany: {
             data: input.answers.map(value => ({
@@ -150,6 +129,7 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
 
   await prismaClient.userAction.create({
     data: {
+      countryCode,
       userActionPoll: {
         create: {
           userActionPollAnswers: {
@@ -167,9 +147,7 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
       actionType,
       campaignName,
       ...('primaryUserCryptoAddressId' in user && user.primaryUserCryptoAddressId
-        ? {
-            userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId } },
-          }
+        ? { userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId } } }
         : { userSession: { connect: { id: sessionId } } }),
     },
   })
