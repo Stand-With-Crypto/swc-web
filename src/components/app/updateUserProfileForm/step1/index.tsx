@@ -10,6 +10,10 @@ import { toast } from 'sonner'
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import {
+  DEFAULT_DISCLAIMER,
+  DISCLAIMERS_BY_COUNTRY_CODE,
+} from '@/components/app/updateUserProfileForm/step1/constants'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -28,9 +32,9 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useDialog } from '@/hooks/useDialog'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
@@ -43,8 +47,6 @@ import {
   zodUpdateUserProfileFormFields,
   zodUpdateUserProfileWithRequiredFormFields,
 } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
-
-import { CountryCodeDisclaimerDialog } from './countryCodeDialog'
 
 const FORM_NAME = 'User Profile'
 
@@ -90,10 +92,7 @@ export function UpdateUserProfileForm({
   const [resolvedAddress, setResolvedAddress] = useState<Awaited<
     ReturnType<typeof convertGooglePlaceAutoPredictionToAddressSchema>
   > | null>(null)
-
-  const dialogProps = useDialog({ analytics: 'Update User Profile' })
-  const [hasUserAcceptedCountryCodeDisclaimer, setHasUserAcceptedCountryCodeDisclaimer] =
-    useState(false)
+  const [shouldShowCountryCodeDisclaimer, setShouldShowCountryCodeDisclaimer] = useState(false)
 
   useEffect(() => {
     async function resolveAddress() {
@@ -107,7 +106,7 @@ export function UpdateUserProfileForm({
         })
 
         setResolvedAddress(newAddress)
-        setHasUserAcceptedCountryCodeDisclaimer(false)
+        setShouldShowCountryCodeDisclaimer(false)
       }
     }
 
@@ -127,15 +126,11 @@ export function UpdateUserProfileForm({
       const isCountryCodeSupported =
         success || addressCountryCode === TEMPORARY_ALLOWED_COUNTRY_CODE
 
-      if (
-        !hasUserAcceptedCountryCodeDisclaimer &&
-        isCountryCodeSupported &&
-        validatedAddressCountryCode !== userCountryCode
-      ) {
-        return dialogProps.onOpenChange(true)
+      if (isCountryCodeSupported && validatedAddressCountryCode !== userCountryCode) {
+        setShouldShowCountryCodeDisclaimer(true)
       }
     }
-  }, [resolvedAddress, dialogProps, user.countryCode, hasUserAcceptedCountryCodeDisclaimer])
+  }, [resolvedAddress, user.countryCode])
 
   const onSubmit = async (values: typeof defaultValues.current) => {
     const result = await triggerServerActionForForm(
@@ -157,25 +152,12 @@ export function UpdateUserProfileForm({
     }
   }
 
-  const handleUserAcceptance = () => {
-    setHasUserAcceptedCountryCodeDisclaimer(true)
-
-    return dialogProps.onOpenChange(false)
-  }
-
   return (
     <Form {...form}>
       <form
         className="flex min-h-full flex-col gap-6"
         onSubmit={form.handleSubmit(onSubmit, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
-        {resolvedAddress && (
-          <CountryCodeDisclaimerDialog
-            addressCountryCode={resolvedAddress.countryCode}
-            dialogProps={dialogProps}
-            handleUserAcceptance={handleUserAcceptance}
-          />
-        )}
         <div>
           <PageTitle className="mb-1" size="md">
             {hasCompleteUserProfile(user) ? 'Edit' : 'Finish'} your profile
@@ -231,24 +213,33 @@ export function UpdateUserProfileForm({
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Address</FormLabel>
-                <FormControl>
-                  <GooglePlacesSelect
-                    {...field}
-                    onChange={field.onChange}
-                    placeholder="Street address"
-                    value={field.value}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <GooglePlacesSelect
+                      {...field}
+                      onChange={field.onChange}
+                      placeholder="Street address"
+                      value={field.value}
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+            <Collapsible open={shouldShowCountryCodeDisclaimer}>
+              <CollapsibleContent className="AnimateCollapsibleContent">
+                <FormDescription className="text-center lg:text-left">
+                  {getCountryCodeDisclaimer(resolvedAddress?.countryCode)}
+                </FormDescription>
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
           {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' &&
             !validatePhoneNumber(user?.phoneNumber || '') && (
               <FormField
@@ -334,4 +325,12 @@ export function UpdateUserProfileForm({
       </form>
     </Form>
   )
+}
+
+function getCountryCodeDisclaimer(countryCode?: string) {
+  const parsedCountryCode = zodSupportedCountryCode.safeParse(countryCode)
+
+  return parsedCountryCode.data
+    ? DISCLAIMERS_BY_COUNTRY_CODE[parsedCountryCode.data as SupportedCountryCodes]
+    : DEFAULT_DISCLAIMER
 }
