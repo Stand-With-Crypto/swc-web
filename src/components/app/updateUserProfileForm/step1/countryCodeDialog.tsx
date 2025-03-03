@@ -1,6 +1,9 @@
 'use client'
 
-import { DISCLAIMERS_BY_COUNTRY_CODE } from '@/components/app/updateUserProfileForm/step1/constants'
+import {
+  DEFAULT_DISCLAIMER,
+  DISCLAIMERS_BY_COUNTRY_CODE,
+} from '@/components/app/updateUserProfileForm/step1/constants'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogProps } from '@/components/ui/dialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -48,5 +51,5 @@ function getDisclaimer(countryCode: string) {
 
   return parsedCountryCode.data
     ? DISCLAIMERS_BY_COUNTRY_CODE[parsedCountryCode.data as SupportedCountryCodes]
-    : DISCLAIMERS_BY_COUNTRY_CODE.default
+    : DEFAULT_DISCLAIMER
 }
