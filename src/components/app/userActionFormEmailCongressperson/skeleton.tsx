@@ -34,7 +34,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
             Contact your member of congress
           </PageTitle>
           <PageSubTitle className="mb-7">
-            Tell your senator to sign the discharge petition
+            Tell your senator to Vote “Yes” for S.J.Res.3.
           </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
