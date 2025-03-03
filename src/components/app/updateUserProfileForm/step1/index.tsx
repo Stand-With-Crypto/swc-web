@@ -83,7 +83,7 @@ export function UpdateUserProfileForm({
   return (
     <Form {...form}>
       <form
-        className="flex min-h-full flex-col gap-6 px-6"
+        className="flex min-h-full flex-col gap-6 px-4 md:px-6"
         onSubmit={form.handleSubmit(async values => {
           const address = values.address
             ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
@@ -120,7 +120,7 @@ export function UpdateUserProfileForm({
           </PageSubTitle>
         </div>
 
-        <div className="flex h-full flex-col">
+        <div className="flex h-full flex-col space-y-4">
           {user.hasEmbeddedWallet || (
             <FormField
               control={form.control}
@@ -136,7 +136,7 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8">
+          <div className="grid grid-cols-1 space-y-4 md:grid-cols-2 md:gap-8 md:space-y-0">
             <FormField
               control={form.control}
               name="firstName"

@@ -206,25 +206,27 @@ export function UnauthenticatedSection({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         a11yTitle={currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
-        className="max-w-l w-full"
+        className="max-w-l w-full pl-0 pr-0 md:pl-0 md:pr-0"
       >
         <GeoGate
           bypassCountryCheck // For Onchain Summer
           countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
           unavailableContent={<UserActionFormActionUnavailable />}
         >
-          {currentSection === LoginSections.LOGIN ? (
-            <DialogBody>
-              <LoginSection onLogin={handleLoginSuccess} {...props} />
-            </DialogBody>
-          ) : (
-            <FinishProfileSection
-              onSuccess={() => {
-                setDialogOpen(false)
-                void mutate()
-              }}
-            />
-          )}
+          <div className="px-4 md:px-6">
+            {currentSection === LoginSections.LOGIN ? (
+              <DialogBody>
+                <LoginSection onLogin={handleLoginSuccess} {...props} />
+              </DialogBody>
+            ) : (
+              <FinishProfileSection
+                onSuccess={() => {
+                  setDialogOpen(false)
+                  void mutate()
+                }}
+              />
+            )}
+          </div>
         </GeoGate>
       </DialogContent>
     </Dialog>

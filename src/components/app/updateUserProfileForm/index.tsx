@@ -64,7 +64,7 @@ export function UpdateUserProfileFormContainer({
   }
   if (sections.currentSection === UserProfileFormSections.InformationVisibility) {
     return (
-      <>
+      <div className="px-4 md:px-6">
         <div
           className={cn('left-2', dialogButtonStyles)}
           onClick={() => sections.goToSection(UserProfileFormSections.Profile)}
@@ -73,7 +73,7 @@ export function UpdateUserProfileFormContainer({
           <ArrowLeft size={20} />
         </div>
         <UpdateUserInformationVisibilityForm onSuccess={onSuccess} user={statefulUser} />
-      </>
+      </div>
     )
   }
 
