@@ -66,10 +66,7 @@ export function UpdateUserProfileForm({
     hasOptedInToMembership: user.hasOptedInToMembership,
     optedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
     address: user.address
-      ? {
-          description: user.address.formattedDescription,
-          place_id: user.address.googlePlaceId,
-        }
+      ? { description: user.address.formattedDescription, place_id: user.address.googlePlaceId }
       : null,
   })
 
@@ -86,7 +83,7 @@ export function UpdateUserProfileForm({
   return (
     <Form {...form}>
       <form
-        className="flex min-h-full flex-col gap-6"
+        className="flex min-h-full flex-col gap-6 px-6"
         onSubmit={form.handleSubmit(async values => {
           const address = values.address
             ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
@@ -100,9 +97,7 @@ export function UpdateUserProfileForm({
             {
               form,
               formName: FORM_NAME,
-              analyticsProps: {
-                ...(address ? convertAddressToAnalyticsProperties(address) : {}),
-              },
+              analyticsProps: { ...(address ? convertAddressToAnalyticsProperties(address) : {}) },
               payload: { ...values, address, optedInToSms: !!values.phoneNumber },
             },
             payload => actionUpdateUserProfile(payload),
@@ -125,7 +120,7 @@ export function UpdateUserProfileForm({
           </PageSubTitle>
         </div>
 
-        <div className="flex h-full flex-col space-y-4">
+        <div className="flex h-full flex-col">
           {user.hasEmbeddedWallet || (
             <FormField
               control={form.control}
@@ -141,7 +136,7 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <div className="grid grid-cols-1 space-y-4 md:grid-cols-2 md:gap-8 md:space-y-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8">
             <FormField
               control={form.control}
               name="firstName"
