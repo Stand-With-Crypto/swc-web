@@ -10,7 +10,6 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { formatCapitolCanaryAdvocateUpdateRequest } from '@/utils/server/capitolCanary/updateAdvocate'
-import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
 it('formats the "update capitol canary advocate" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
