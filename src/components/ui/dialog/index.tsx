@@ -91,7 +91,7 @@ const DialogContent = React.forwardRef<
             <DialogPrimitive.Description>{props['aria-describedby']}</DialogPrimitive.Description>
             <DialogTitle>{a11yTitle}</DialogTitle>
           </VisuallyHidden>
-          <ScrollArea className="overflow-visible md:max-h-[90vh]">{children}</ScrollArea>
+          <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
           <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
             <X size={20} />
             <span className="sr-only">Close</span>

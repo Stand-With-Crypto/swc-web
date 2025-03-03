@@ -6,12 +6,18 @@ import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomep
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
-import { getCountryCodeOnClient } from '@/utils/web/getCountryCodeOnClient'
 
-export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetricsResponse) {
+interface UseApiHomepageTopLevelMetricsProps {
+  countryCode: SupportedCountryCodes
+  initial: GetHomepageTopLevelMetricsResponse
+}
+
+export function useApiHomepageTopLevelMetrics({
+  initial,
+  countryCode,
+}: UseApiHomepageTopLevelMetricsProps) {
   const initialDelayToShowAnimation = 1500
   const [refreshInterval, setRefreshInterval] = useState(initialDelayToShowAnimation)
-  const countryCode = getCountryCodeOnClient()
   /*
     After we initially fetch data we can slow down how often we check for additional data
   */
@@ -22,7 +28,7 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
     return () => clearTimeout(timeout)
   }, [initialDelayToShowAnimation])
   return useSWR(
-    apiUrls.homepageTopLevelMetrics(countryCode as SupportedCountryCodes),
+    apiUrls.homepageTopLevelMetrics(countryCode),
     url =>
       fetchReq(url)
         .then(res => res.json())

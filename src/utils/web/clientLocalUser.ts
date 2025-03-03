@@ -11,7 +11,7 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 import { getAllExperiments } from '@/utils/web/clientExperiments'
-import { getCountryCodeOnClient } from '@/utils/web/getCountryCodeOnClient'
+import { getCountryCodeForClientAnalytics } from '@/utils/web/getCountryCodeForClientAnalytics'
 
 const getPersistedLocalUser = () => {
   const val = Cookies.get(LOCAL_USER_PERSISTED_KEY)
@@ -65,7 +65,7 @@ export const getLocalUser = (): LocalUser => {
   const canUsePersistedData =
     getClientCookieConsent().targeting && getClientCookieConsent().functional
 
-  const countryCode = getCountryCodeOnClient()
+  const countryCode = getCountryCodeForClientAnalytics()
 
   if (localUser) {
     if (!canUsePersistedData) {
