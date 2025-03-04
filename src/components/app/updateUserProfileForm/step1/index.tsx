@@ -1,14 +1,15 @@
 'use client'
-import { useRef } from 'react'
-import { useForm } from 'react-hook-form'
+
+import { useRef, useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { AddressField } from '@/components/app/updateUserProfileForm/step1/addressField'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -23,7 +24,6 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -35,7 +35,6 @@ import {
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
-import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import {
   zodUpdateUserProfileFormFields,
   zodUpdateUserProfileWithRequiredFormFields,
@@ -66,10 +65,7 @@ export function UpdateUserProfileForm({
     hasOptedInToMembership: user.hasOptedInToMembership,
     optedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
     address: user.address
-      ? {
-          description: user.address.formattedDescription,
-          place_id: user.address.googlePlaceId,
-        }
+      ? { description: user.address.formattedDescription, place_id: user.address.googlePlaceId }
       : null,
   })
 
@@ -81,39 +77,37 @@ export function UpdateUserProfileForm({
     ),
     defaultValues: defaultValues.current,
   })
-  const phoneNumberValue = form.watch('phoneNumber')
+
+  const phoneNumberValue = useWatch({ control: form.control, name: 'phoneNumber' })
+  const [resolvedAddress, setResolvedAddress] = useState<Awaited<
+    ReturnType<typeof convertGooglePlaceAutoPredictionToAddressSchema>
+  > | null>(null)
+
+  const onSubmit = async (values: typeof defaultValues.current) => {
+    const result = await triggerServerActionForForm(
+      {
+        form,
+        formName: FORM_NAME,
+        analyticsProps: {
+          ...(resolvedAddress ? convertAddressToAnalyticsProperties(resolvedAddress) : {}),
+        },
+        payload: { ...values, address: resolvedAddress, optedInToSms: !!values.phoneNumber },
+      },
+      payload => actionUpdateUserProfile(payload),
+    )
+    if (result.status === 'success') {
+      router.refresh()
+      toast.success('Profile updated', { duration: 5000 })
+      const { firstName, lastName } = values
+      onSuccess({ firstName, lastName, address: values.address })
+    }
+  }
 
   return (
     <Form {...form}>
       <form
         className="flex min-h-full flex-col gap-6"
-        onSubmit={form.handleSubmit(async values => {
-          const address = values.address
-            ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
-                Sentry.captureException(e)
-                catchUnexpectedServerErrorAndTriggerToast(e)
-                return null
-              })
-            : null
-
-          const result = await triggerServerActionForForm(
-            {
-              form,
-              formName: FORM_NAME,
-              analyticsProps: {
-                ...(address ? convertAddressToAnalyticsProperties(address) : {}),
-              },
-              payload: { ...values, address, optedInToSms: !!values.phoneNumber },
-            },
-            payload => actionUpdateUserProfile(payload),
-          )
-          if (result.status === 'success') {
-            router.refresh()
-            toast.success('Profile updated', { duration: 5000 })
-            const { firstName, lastName } = values
-            onSuccess({ firstName, lastName, address: values.address })
-          }
-        }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        onSubmit={form.handleSubmit(onSubmit, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
         <div>
           <PageTitle className="mb-1" size="md">
@@ -170,24 +164,12 @@ export function UpdateUserProfileForm({
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Address</FormLabel>
-                <FormControl>
-                  <GooglePlacesSelect
-                    {...field}
-                    onChange={field.onChange}
-                    placeholder="Street address"
-                    value={field.value}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
+          <AddressField
+            resolvedAddress={resolvedAddress}
+            setResolvedAddress={setResolvedAddress}
+            user={user}
           />
+
           {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' &&
             !validatePhoneNumber(user?.phoneNumber || '') && (
               <FormField

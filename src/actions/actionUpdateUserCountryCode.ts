@@ -2,14 +2,18 @@
 import 'server-only'
 
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from 'node_modules/@vercel/functions/wait-until'
 import { z } from 'zod'
 
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics/serverPeopleAnalytics'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const actionUpdateUserCountryCode = withServerActionMiddleware(
@@ -19,7 +23,7 @@ export const actionUpdateUserCountryCode = withServerActionMiddleware(
 
 const logger = getLogger(`actionUpdateUserCountryCode`)
 
-async function actionUpdateUserCountryCodeWithoutMiddleware(
+export async function actionUpdateUserCountryCodeWithoutMiddleware(
   countryCode: z.infer<typeof zodSupportedCountryCode>,
 ) {
   const sessionId = await getUserSessionId()
@@ -71,6 +75,10 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
     where: {
       id: authUser.userId,
     },
+    select: {
+      countryCode: true,
+      address: true,
+    },
   })
 
   if (user.countryCode === validatedFields.data) {
@@ -91,6 +99,21 @@ async function actionUpdateUserCountryCodeWithoutMiddleware(
       countryCode: validatedFields.data,
     },
   })
+
+  const localUser = await parseLocalUserFromCookies()
+
+  waitUntil(
+    getServerPeopleAnalytics({
+      userId: authUser.userId,
+      localUser,
+    })
+      .set({
+        ...(user?.address ? convertAddressToAnalyticsProperties(user.address) : {}),
+        'Address Country Code Is': user.address?.countryCode,
+        'User Country Code Was': user.countryCode,
+      })
+      .flush(),
+  )
 
   logger.info("User's Country Code updated")
 
