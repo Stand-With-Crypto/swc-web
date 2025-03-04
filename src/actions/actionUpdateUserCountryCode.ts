@@ -116,23 +116,22 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
   )
 
   waitUntil(
-    getServerAnalytics({
-      userId: authUser.userId,
-      localUser,
-    })
-      .trackCountryCodeChanged({ previousCountryCode: user.countryCode })
-      .flush(),
-  )
-
-  waitUntil(
-    getServerPeopleAnalytics({
-      userId: authUser.userId,
-      localUser,
-    })
-      .set({
-        countryCode: validatedFields.data,
+    Promise.all([
+      getServerPeopleAnalytics({
+        userId: authUser.userId,
+        localUser,
       })
-      .flush(),
+        .set({
+          countryCode: validatedFields.data,
+        })
+        .flush(),
+      getServerAnalytics({
+        userId: authUser.userId,
+        localUser,
+      })
+        .trackCountryCodeChanged({ previousCountryCode: user.countryCode })
+        .flush(),
+    ]),
   )
 
   logger.info("User's Country Code updated")
