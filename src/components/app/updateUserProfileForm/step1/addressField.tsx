@@ -5,6 +5,7 @@ import { useFormContext, useWatch } from 'react-hook-form'
 import * as Sentry from '@sentry/nextjs'
 
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
 import {
   DEFAULT_DISCLAIMER,
   DISCLAIMERS_BY_COUNTRY_CODE,
@@ -20,6 +21,7 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
@@ -68,6 +70,10 @@ export function AddressField({ user, resolvedAddress, setResolvedAddress }: Addr
         zodSupportedCountryCode.safeParse(addressCountryCode)
 
       if (isCountryCodeSupported && validatedAddressCountryCode !== userCountryCode) {
+        trackSectionVisible({
+          section: 'Address Field Country Code Change Disclaimer',
+          sectionGroup: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
+        })
         setShouldShowCountryCodeDisclaimer(true)
       }
     }
