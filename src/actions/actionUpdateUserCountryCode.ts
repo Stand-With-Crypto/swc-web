@@ -2,18 +2,20 @@
 import 'server-only'
 
 import * as Sentry from '@sentry/nextjs'
+import { cookies } from 'next/headers'
 import { waitUntil } from 'node_modules/@vercel/functions/wait-until'
 import { z } from 'zod'
 
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics/serverAnalytics'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics/serverPeopleAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
-import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const actionUpdateUserCountryCode = withServerActionMiddleware(
@@ -102,15 +104,33 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
 
   const localUser = await parseLocalUserFromCookies()
 
+  const currentCookies = await cookies()
+
+  currentCookies.set(
+    USER_COUNTRY_CODE_COOKIE_NAME,
+    JSON.stringify({ countryCode: validatedFields.data, bypassed: true }),
+    {
+      sameSite: 'lax',
+      secure: true,
+    },
+  )
+
+  waitUntil(
+    getServerAnalytics({
+      userId: authUser.userId,
+      localUser,
+    })
+      .trackCountryCodeChanged({ previousCountryCode: user.countryCode })
+      .flush(),
+  )
+
   waitUntil(
     getServerPeopleAnalytics({
       userId: authUser.userId,
       localUser,
     })
       .set({
-        ...(user?.address ? convertAddressToAnalyticsProperties(user.address) : {}),
-        'Address Country Code Is': user.address?.countryCode,
-        'User Country Code Was': user.countryCode,
+        countryCode: validatedFields.data,
       })
       .flush(),
   )
