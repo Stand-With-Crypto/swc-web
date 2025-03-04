@@ -1,19 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import {
-  DEFAULT_DISCLAIMER,
-  DISCLAIMERS_BY_COUNTRY_CODE,
-} from '@/components/app/updateUserProfileForm/step1/constants'
+import { AddressField } from '@/components/app/updateUserProfileForm/step1/addressField'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -28,21 +24,17 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
-import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 import {
   zodUpdateUserProfileFormFields,
   zodUpdateUserProfileWithRequiredFormFields,
@@ -87,50 +79,9 @@ export function UpdateUserProfileForm({
   })
 
   const phoneNumberValue = useWatch({ control: form.control, name: 'phoneNumber' })
-  const addressValue = useWatch({ control: form.control, name: 'address' })
-
   const [resolvedAddress, setResolvedAddress] = useState<Awaited<
     ReturnType<typeof convertGooglePlaceAutoPredictionToAddressSchema>
   > | null>(null)
-  const [shouldShowCountryCodeDisclaimer, setShouldShowCountryCodeDisclaimer] = useState(false)
-
-  useEffect(() => {
-    async function resolveAddress() {
-      if (addressValue) {
-        const newAddress = await convertGooglePlaceAutoPredictionToAddressSchema(
-          addressValue,
-        ).catch(e => {
-          Sentry.captureException(e)
-          catchUnexpectedServerErrorAndTriggerToast(e)
-          return null
-        })
-
-        setResolvedAddress(newAddress)
-        setShouldShowCountryCodeDisclaimer(false)
-      }
-    }
-
-    void resolveAddress()
-  }, [addressValue])
-
-  useEffect(() => {
-    if (resolvedAddress) {
-      const addressCountryCode = resolvedAddress.countryCode.toLowerCase()
-      const userCountryCode = user.countryCode.toLowerCase()
-
-      const { success, data: validatedAddressCountryCode } =
-        zodSupportedCountryCode.safeParse(addressCountryCode)
-
-      const TEMPORARY_ALLOWED_COUNTRY_CODE = 'gb' // TODO(@olavoparno): Remove this once we start supporting UK inside zodSupportedCountryCode
-
-      const isCountryCodeSupported =
-        success || addressCountryCode === TEMPORARY_ALLOWED_COUNTRY_CODE
-
-      if (isCountryCodeSupported && validatedAddressCountryCode !== userCountryCode) {
-        setShouldShowCountryCodeDisclaimer(true)
-      }
-    }
-  }, [resolvedAddress, user.countryCode])
 
   const onSubmit = async (values: typeof defaultValues.current) => {
     const result = await triggerServerActionForForm(
@@ -213,33 +164,12 @@ export function UpdateUserProfileForm({
             />
           </div>
 
-          <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Address</FormLabel>
-                  <FormControl>
-                    <GooglePlacesSelect
-                      {...field}
-                      onChange={field.onChange}
-                      placeholder="Street address"
-                      value={field.value}
-                    />
-                  </FormControl>
-                  <FormErrorMessage />
-                </FormItem>
-              )}
-            />
-            <Collapsible open={shouldShowCountryCodeDisclaimer}>
-              <CollapsibleContent className="AnimateCollapsibleContent">
-                <FormDescription className="text-center lg:text-left">
-                  {getCountryCodeDisclaimer(resolvedAddress?.countryCode)}
-                </FormDescription>
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
+          <AddressField
+            resolvedAddress={resolvedAddress}
+            setResolvedAddress={setResolvedAddress}
+            user={user}
+          />
+
           {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' &&
             !validatePhoneNumber(user?.phoneNumber || '') && (
               <FormField
@@ -325,12 +255,4 @@ export function UpdateUserProfileForm({
       </form>
     </Form>
   )
-}
-
-function getCountryCodeDisclaimer(countryCode?: string) {
-  const parsedCountryCode = zodSupportedCountryCode.safeParse(countryCode)
-
-  return parsedCountryCode.data
-    ? DISCLAIMERS_BY_COUNTRY_CODE[parsedCountryCode.data as SupportedCountryCodes]
-    : DEFAULT_DISCLAIMER
 }
