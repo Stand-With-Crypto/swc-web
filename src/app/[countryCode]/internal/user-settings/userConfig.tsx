@@ -2,6 +2,7 @@
 
 import { useForm } from 'react-hook-form'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { actionUpdateUserCountryCode } from '@/actions/actionUpdateUserCountryCode'
@@ -29,6 +30,7 @@ type FormFields = {
 }
 
 export function UserConfig() {
+  const router = useRouter()
   const { resetCookieConsent } = useCookieConsent()
   const [decreaseCommunicationTimers, setDecreaseCommunicationTimers] = useCookieState(
     'SWC_DECREASE_COMMUNICATION_TIMERS',
@@ -61,15 +63,17 @@ export function UserConfig() {
       const [errorMessage] = result.errors.countryCode ?? ['Unknown error']
 
       toast.warning(`Cookie was updated successfully. ${errorMessage}`, {
-        duration: 2000,
+        duration: 5000,
       })
 
-      return setTimeout(() => {
-        window.location.reload()
-      }, 2000)
+      return router.refresh()
     }
 
-    window.location.reload()
+    toast.success('Cookie was updated successfully', {
+      duration: 5000,
+    })
+
+    return router.refresh()
   }
 
   return (

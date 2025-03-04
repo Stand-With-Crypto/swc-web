@@ -180,6 +180,12 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     )
   }
 
+  const trackCountryCodeChanged = ({ previousCountryCode }: { previousCountryCode: string }) => {
+    return trackAnalytic(config, 'Country Code Changed', {
+      'Previous Country Code': previousCountryCode,
+    })
+  }
+
   const track = (
     eventName: string,
     {
@@ -197,6 +203,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     trackUserActionCreated,
     trackUserActionUpdated,
     trackUserActionCreatedIgnored,
+    trackCountryCodeChanged,
     track,
     flush,
   }
