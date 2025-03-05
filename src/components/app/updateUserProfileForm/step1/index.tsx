@@ -83,7 +83,7 @@ export function UpdateUserProfileForm({
   return (
     <Form {...form}>
       <form
-        className="flex min-h-full flex-col gap-6"
+        className="flex min-h-full flex-col gap-6 px-4 md:px-6"
         onSubmit={form.handleSubmit(async values => {
           const address = values.address
             ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
