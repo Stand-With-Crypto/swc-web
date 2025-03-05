@@ -16,7 +16,7 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
-import { compact, groupBy } from 'lodash-es'
+import { compact, groupBy, isEmpty } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
@@ -119,12 +119,13 @@ export async function login(payload: VerifyLoginPayloadParams) {
     const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
     const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
 
-    if (
-      parsedUserCountryCodeCookie &&
-      !parsedUserCountryCodeCookie?.bypassed &&
+    const hasValidCurrentCountryCode = !isEmpty(currentUserCountryCode)
+    const hasParsedCookie = !!parsedUserCountryCodeCookie
+    const cookieCountryCodeDiffersFromUser =
       parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
-        currentUserCountryCode.toLowerCase()
-    ) {
+      currentUserCountryCode.toLowerCase()
+
+    if (hasValidCurrentCountryCode && hasParsedCookie && cookieCountryCodeDiffersFromUser) {
       log(
         `setting user country code cookie from ${parsedUserCountryCodeCookie.countryCode.toLowerCase()} to ${currentUserCountryCode.toLowerCase()}`,
       )
@@ -371,6 +372,7 @@ export async function onNewLogin(props: NewLoginParams) {
       localUser,
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
+      countryCode,
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -591,10 +593,12 @@ async function createUser({
   localUser,
   hasSignedInWithEmail,
   sessionId,
+  countryCode,
 }: {
   localUser: ServerLocalUser | null
   hasSignedInWithEmail: boolean
   sessionId: string | null
+  countryCode: string
 }) {
   return prismaClient.user.create({
     include: {
@@ -611,6 +615,7 @@ async function createUser({
       referralId: generateReferralId(),
       userSessions: { create: { id: sessionId ?? undefined } },
       ...mapLocalUserToUserDatabaseFields(localUser),
+      countryCode,
     },
   })
 }
