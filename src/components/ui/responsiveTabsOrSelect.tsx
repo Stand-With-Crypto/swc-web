@@ -24,14 +24,17 @@ type Props = TabsProps & {
 }
 
 export function ResponsiveTabsOrSelect({ defaultValue, options, analytics, ...props }: Props) {
-  const [value, setValue] = useState(defaultValue)
+  const [currentTab, setCurrentTab] = useState(defaultValue)
 
   return (
-    <Tabs analytics={analytics} onValueChange={setValue} value={value} {...props}>
+    <Tabs analytics={analytics} onValueChange={setCurrentTab} value={currentTab} {...props}>
       {/* Mobile: Select */}
-      <div className="sm:hidden">
-        <Select onValueChange={setValue} value={value}>
-          <SelectTrigger className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary px-4 text-base font-semibold">
+      <div className="md:hidden">
+        <Select onValueChange={setCurrentTab} value={currentTab}>
+          <SelectTrigger
+            className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary text-base font-semibold"
+            data-testid="responsive-tabs-or-select-trigger"
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="rounded-2xl font-bold">
@@ -48,8 +51,8 @@ export function ResponsiveTabsOrSelect({ defaultValue, options, analytics, ...pr
       </div>
 
       {/* Desktop: TabsList */}
-      <div className="mb-8 hidden text-center sm:mb-4 sm:block">
-        <TabsList className="mx-auto">
+      <div className="mb-8 hidden text-center md:mb-4 md:block">
+        <TabsList className="mx-auto" data-testid="responsive-tabs-or-select-tabs-list">
           {options.map(option => (
             <TabsTrigger key={option.value} value={option.value}>
               {option.label}
