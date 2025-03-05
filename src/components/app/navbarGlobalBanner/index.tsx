@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
   parseUserCountryCodeCookie,
@@ -114,38 +113,5 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: readonly {
 ]
 
 function CurrentCampaign() {
-  const isMobile = useIsMobile()
-  const urls = useIntlUrls()
-
-  return (
-    <div className="flex w-full items-center justify-center bg-primary-cta px-1 py-3">
-      <CurrentCampaignWrapper url={urls.emailDeeplink()}>
-        <div className="container flex justify-between">
-          <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-            <p>
-              KEY VOTE ALERT IN THE SENATE – VOTE “YES” ON S.J. RES 3
-              {isMobile ? <br /> : <span> – </span>}
-              Find out more{' '}
-              <strong>{isMobile ? 'here' : <Link href={urls.emailDeeplink()}>here</Link>}</strong>
-            </p>
-          </div>
-        </div>
-      </CurrentCampaignWrapper>
-    </div>
-  )
-}
-
-function CurrentCampaignWrapper({ url, children }: { url: string; children: React.ReactNode }) {
-  const isMobile = useIsMobile()
-
-  const className = 'flex h-full w-full items-center text-center'
-  if (isMobile) {
-    return (
-      <Link className={className} href={url}>
-        {children}
-      </Link>
-    )
-  }
-
-  return <div className={className}>{children}</div>
+  return null
 }
