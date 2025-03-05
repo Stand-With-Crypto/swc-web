@@ -213,20 +213,20 @@ export function UnauthenticatedSection({
           countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
           unavailableContent={<UserActionFormActionUnavailable />}
         >
-          <div className="px-4 md:px-6">
-            {currentSection === LoginSections.LOGIN ? (
+          {currentSection === LoginSections.LOGIN ? (
+            <div className="px-4 md:px-6">
               <DialogBody>
                 <LoginSection onLogin={handleLoginSuccess} {...props} />
               </DialogBody>
-            ) : (
-              <FinishProfileSection
-                onSuccess={() => {
-                  setDialogOpen(false)
-                  void mutate()
-                }}
-              />
-            )}
-          </div>
+            </div>
+          ) : (
+            <FinishProfileSection
+              onSuccess={() => {
+                setDialogOpen(false)
+                void mutate()
+              }}
+            />
+          )}
         </GeoGate>
       </DialogContent>
     </Dialog>
