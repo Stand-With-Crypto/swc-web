@@ -1,14 +1,27 @@
 'use client'
 
 import { Suspense, useMemo } from 'react'
-import { noop } from 'lodash-es'
+import { isNil, noop } from 'lodash-es'
 
 import { DistrictsLeaderboardRow } from '@/components/app/pageReferrals/districtsLeaderboardRow'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { USStateCode } from '@/utils/shared/usStateUtils'
+
+function Heading() {
+  return (
+    <div className="flex items-center justify-between">
+      <p className="pl-4 text-lg font-bold">Your district</p>
+      <p className="text-fontcolor-muted">Advocates</p>
+    </div>
+  )
+}
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -32,6 +45,8 @@ interface YourDistrictRankContentProps {
 
 function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   const { stateCode, districtNumber } = props
+  const countryCode = useCountryCode()
+
   const { setAddress, address } = useMutableCurrentUserAddress()
 
   const districtRankingResponse = useGetDistrictRank({
@@ -41,30 +56,43 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
 
   if (districtRankingResponse.isLoading) {
     return (
-      <DefaultPlacesSelect loading onChange={noop} value={address === 'loading' ? null : address} />
+      <div className="space-y-3">
+        <Heading />
+        <Skeleton className="h-12 w-full bg-primary-cta/10" />
+      </div>
     )
   }
 
   const { data } = districtRankingResponse
-  const count = data?.score ?? 0
-  const rank = data?.rank
-
   if (!data) {
     return (
-      <DefaultPlacesSelect
-        loading={address === 'loading'}
-        onChange={setAddress}
-        value={address === 'loading' ? null : address}
-      />
+      <div className="space-y-3">
+        <DefaultPlacesSelect
+          loading={districtRankingResponse.isLoading}
+          onChange={setAddress}
+          value={address === 'loading' ? null : address}
+        />
+        <p className="pl-4 text-sm text-fontcolor-muted">
+          District rank not found, please try a different address.
+        </p>
+      </div>
     )
+  }
+
+  const count = data.score
+  const rank = data.rank
+
+  if (isNil(count) || isNil(rank)) {
+    return null
   }
 
   return (
     <div className="space-y-3">
-      <p className="pl-4 text-lg font-bold">Your district</p>
+      <Heading />
       <DistrictsLeaderboardRow
         count={count}
         district={districtNumber ?? ''}
+        locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
         rank={rank ?? 0}
         state={stateCode}
         variant="highlight"
@@ -74,28 +102,44 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
 }
 
 export function SuspenseYourDistrictRank() {
-  const { setAddress, address } = useMutableCurrentUserAddress()
-  const isLoading = address === 'loading'
+  const profileResponse = useApiResponseForUserFullProfileInfo()
+  const { setAddress, address: mutableAddress } = useMutableCurrentUserAddress()
+  const isLoadingAddress = profileResponse.isLoading || mutableAddress === 'loading'
 
-  const districtResponse = useGetDistrictFromAddress(
-    address && typeof address === 'object' && 'description' in address ? address.description : null,
-  )
+  const address = useMemo(() => {
+    if (isLoadingAddress) return null
+    if (profileResponse.data?.user?.address) {
+      return profileResponse.data.user.address.formattedDescription
+    }
+    if (mutableAddress) return mutableAddress.description
+    return null
+  }, [isLoadingAddress, mutableAddress, profileResponse.data?.user?.address])
+
+  const districtResponse = useGetDistrictFromAddress(address)
 
   const district = useMemo(() => {
     if (!districtResponse.data) return null
     return 'districtNumber' in districtResponse.data ? districtResponse.data : null
   }, [districtResponse.data])
 
-  if (!address || isLoading) {
+  if (!address || isLoadingAddress) {
     return (
       <DefaultPlacesSelect
-        loading={isLoading}
+        loading={isLoadingAddress}
         onChange={setAddress}
-        value={isLoading ? null : address}
+        value={mutableAddress === 'loading' ? null : mutableAddress}
       />
     )
   }
 
+  if (districtResponse.isLoading) {
+    return (
+      <div className="space-y-3">
+        <Heading />
+        <Skeleton className="h-12 w-full bg-primary-cta/10" />
+      </div>
+    )
+  }
   return (
     <YourDistrictRankContent
       districtNumber={district?.districtNumber?.toString() ?? null}
@@ -106,7 +150,7 @@ export function SuspenseYourDistrictRank() {
 
 export function YourDistrictRank() {
   return (
-    <Suspense fallback={<DefaultPlacesSelect loading={true} onChange={noop} value={null} />}>
+    <Suspense fallback={<DefaultPlacesSelect loading onChange={noop} value={null} />}>
       <SuspenseYourDistrictRank />
     </Suspense>
   )
