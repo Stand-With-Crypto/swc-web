@@ -58,6 +58,7 @@ function createTestParams(referrerId: string): TestParams {
           utm_campaign: referrerId,
           countryCode: 'us',
         },
+        countryCode: 'us',
       },
     },
     getUserSessionId: () => Promise.resolve(fakerFields.id()),
