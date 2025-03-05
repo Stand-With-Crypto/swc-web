@@ -38,7 +38,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
     if (districtCount === 0) {
       districts.push({
         state: state as USStateCode,
-        district: 'N/A',
+        district: '1',
         count: 0,
       })
     } else {
@@ -145,10 +145,19 @@ export async function getDistrictsLeaderboardData(
   }))
 }
 
-export async function getDistrictRankPosition(
+export async function getDistrictRank(
   redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
   member: RedisEntryData,
 ) {
-  const rank = await redisWithCache.zrevrank(redisKey, getMemberKey(member))
-  return rank === null ? null : rank + 1
+  const [rankResponse, scoreResponse] = await Promise.all([
+    redisWithCache.zrevrank(redisKey, getMemberKey(member)),
+    redisWithCache.zscore(redisKey, getMemberKey(member)),
+  ])
+  const rank = rankResponse === null ? null : rankResponse + 1
+  const score = scoreResponse === null ? null : scoreResponse
+
+  return {
+    rank,
+    score,
+  }
 }
