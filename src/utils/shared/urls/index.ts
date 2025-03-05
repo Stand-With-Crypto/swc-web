@@ -72,10 +72,9 @@ export const getIntlUrls = (
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
-    referrals: (params?: { pageNum?: number }) => {
-      const pageNum = params?.pageNum ?? 1
+    referrals: (pageNum?: number) => {
       const shouldSuppressPageNum = pageNum === 1
-      const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
+      const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
   }
