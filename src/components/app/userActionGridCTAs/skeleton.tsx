@@ -15,7 +15,7 @@ export function UserActionGridCTAsSkeleton({
   const { ctas } = useGridCTAs({ excludeUserActionTypes, performedUserActionTypes: [] })
 
   return (
-    <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-3">
       {ctas.map(cta => {
         const filteredCampaigns = cta.campaigns.filter(campaign => campaign.isCampaignActive)
 
