@@ -6,6 +6,7 @@ import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
+import { backfillUserActionRefer } from '@/inngest/functions/backfillUserActionRefer'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import {
   backfillSMSOptInReplyWithInngest,
@@ -17,6 +18,7 @@ import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/ca
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { cleanupDatadogSyntheticTestsWithInngest } from '@/inngest/functions/datadog/cleanup'
+import { updateDistrictsRankings } from '@/inngest/functions/districtsRankings/updateRankings'
 import { globalSendEventNotifications } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
@@ -73,5 +75,7 @@ export const { GET, POST, PUT } = serve({
     updateMetricsCacheInngestCronJob,
     backfillOptedOutUsers,
     cleanupDatadogSyntheticTestsWithInngest,
+    backfillUserActionRefer,
+    updateDistrictsRankings,
   ],
 })

@@ -15,6 +15,7 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -23,6 +24,7 @@ interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
   pageParams: Awaited<PageProps['params']>
   hideModal?: boolean
   dialogContentClassName?: string
+  className?: string
 }
 
 export async function HomepageDialogDeeplinkLayout({
@@ -30,13 +32,20 @@ export async function HomepageDialogDeeplinkLayout({
   size = 'md',
   pageParams,
   dialogContentClassName,
+  className,
 }: HomepageDialogDeeplinkLayoutProps) {
   const urls = getIntlUrls(pageParams.countryCode)
-  const [{ sumDonations, countUsers, countPolicymakerContacts }] = await Promise.all([
+  const [
+    { sumDonations, countUsers, countPolicymakerContacts },
+    advocatePerStateDataProps,
+    partners,
+    leaderboardData,
+  ] = await Promise.all([
     getHomepageTopLevelMetrics({ countryCode: pageParams.countryCode }),
+    getAdvocatesMapData(),
+    getPartners(),
+    getDistrictsLeaderboardData({ limit: 10 }),
   ])
-  const advocatePerStateDataProps = await getAdvocatesMapData()
-  const partners = await getPartners()
 
   return (
     <>
@@ -51,6 +60,7 @@ export async function HomepageDialogDeeplinkLayout({
           size === 'md' && 'max-w-3xl',
           'min-h-[400px]',
           dialogContentClassName,
+          className,
         )}
       >
         <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
@@ -63,6 +73,7 @@ export async function HomepageDialogDeeplinkLayout({
       <PageHome
         actions={[]}
         dtsiHomepagePeople={{ lowestScores: [], highestScores: [] }}
+        leaderboardData={leaderboardData.items}
         params={pageParams}
         sumDonationsByUser={[]}
         {...{

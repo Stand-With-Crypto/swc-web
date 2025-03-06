@@ -22,7 +22,10 @@ describe('page - homepage interactions', () => {
     cy.visit('/')
 
     // verify the donations tab shows top donors
-    cy.contains('Top donations').click()
+    cy.get('[data-testid="community-leaderboard-tabs"]').scrollIntoView()
+    cy.get('[data-testid="responsive-tabs-or-select-trigger"]').should('be.visible').click()
+    cy.get('[role="option"]').contains('Top donations').should('be.visible').click()
+
     cy.get('img[alt="position 1 medal"]').should('be.visible')
   })
 })

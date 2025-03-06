@@ -48,6 +48,7 @@ model Address {
   userActionCalls                       UserActionCall[]
   users                                 User[]
   userActionVotingInformationResearched UserActionVotingInformationResearched[]
+  userActionRefers                      UserActionRefer[]
 
   @@index([administrativeAreaLevel1, countryCode])
   @@map("address")
@@ -497,7 +498,10 @@ model UserActionRefer {
   id             String     @id @default(uuid())
   userAction     UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   referralsCount Int        @default(0) @map("referrals_count")
+  address        Address?   @relation(fields: [addressId], references: [id])
+  addressId      String?    @map("address_id")
 
+  @@index([addressId])
   @@map("user_action_refer")
 }
 
