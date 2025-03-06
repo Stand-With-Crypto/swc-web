@@ -8,7 +8,7 @@ const referralSchema = z.object({
   utm_campaign: zodReferralId,
 })
 
-export type ReferralUTMParams = z.infer<typeof referralSchema>
+export type ReferralUTMParams = Partial<z.infer<typeof referralSchema>>
 
 export function isValidReferral(params: ReferralUTMParams | undefined): boolean {
   if (!params) return false
