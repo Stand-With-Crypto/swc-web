@@ -21,7 +21,7 @@ export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
 
-export async function generateMetadata(_props: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   return generateMetadataDetails({
     title: PAGE_LEADERBOARD_TITLE,
     description: PAGE_LEADERBOARD_DESCRIPTION,
