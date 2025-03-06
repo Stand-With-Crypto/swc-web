@@ -1,7 +1,6 @@
 import { Address, User } from '@prisma/client'
 import { uniq } from 'lodash-es'
 
-import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
 import {
   getMemberKey,
   getMultipleDistrictRankings,
@@ -108,7 +107,7 @@ async function getDistrictRankMap(users: Array<User & { address: Address | null 
   )
 
   const districtRankings = await getMultipleDistrictRankings(
-    REDIS_KEYS.DISTRICT_ADVOCATES_RANKING,
+    undefined, // undefined to use the default ranking strategy
     uniqueUserDistricts,
   )
 
