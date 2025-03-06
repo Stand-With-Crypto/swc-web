@@ -1,6 +1,7 @@
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
+import { findOrCreateUserActionRefer } from '@/actions/actionCreateUserActionReferral'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -9,9 +10,9 @@ import {
   getPendingReferrals,
   isValidPendingReferralEntry,
 } from '@/utils/server/referral/pendingReferrals'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger('processPendingReferralsQueue')
 
@@ -25,69 +26,6 @@ const PROCESS_REFERRALS_QUEUE_INNGEST_EVENT_NAME = 'script/process-referrals-que
 
 export interface ProcessPendingReferralsCronJobSchema {
   name: typeof PROCESS_REFERRALS_QUEUE_INNGEST_EVENT_NAME
-}
-
-async function getActualReferralCount(referralId: string): Promise<number> {
-  return prismaClient.user.count({
-    where: {
-      acquisitionCampaign: referralId,
-    },
-  })
-}
-
-async function updateReferralCount(
-  referrerId: string,
-  actionId: string,
-  currentCount: number,
-  actualCount: number,
-) {
-  if (actualCount <= currentCount) {
-    logger.warn(
-      `Stored referral count (${currentCount}) is higher than actual count (${actualCount}) for referrer ${referrerId}`,
-    )
-    Sentry.captureMessage('Stored referral count is higher than actual count', {
-      extra: {
-        referrerId,
-        storedCount: currentCount,
-        actualCount,
-      },
-      tags: { domain: 'referrals' },
-    })
-    return
-  }
-
-  await prismaClient.userActionRefer.update({
-    where: { id: actionId },
-    data: {
-      referralsCount: actualCount,
-    },
-  })
-  logger.info(
-    `Updated referral count for referrer ${referrerId} from ${currentCount} to ${actualCount}`,
-  )
-}
-
-async function createReferralAction(
-  referrerId: string,
-  referralsCount: number,
-  countryCode: string,
-) {
-  await prismaClient.userAction.create({
-    data: {
-      userId: referrerId,
-      actionType: UserActionType.REFER,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
-      countryCode,
-      userActionRefer: {
-        create: {
-          referralsCount,
-        },
-      },
-    },
-  })
-  logger.info(
-    `Created REFER action for referrer ${referrerId} with initial count ${referralsCount}`,
-  )
 }
 
 async function processPendingReferral(rawReferral: unknown) {
@@ -108,15 +46,18 @@ async function processPendingReferral(rawReferral: unknown) {
   try {
     const referrer = await prismaClient.user.findFirst({
       where: { referralId: rawReferral.referralId },
-      select: {
-        id: true,
-        countryCode: true,
+      include: {
+        address: true,
         userActions: {
-          select: {
-            id: true,
-            actionType: true,
-            campaignName: true,
-            userActionRefer: true,
+          where: {
+            actionType: UserActionType.REFER,
+          },
+          include: {
+            userActionRefer: {
+              include: {
+                address: true,
+              },
+            },
           },
         },
       },
@@ -127,21 +68,17 @@ async function processPendingReferral(rawReferral: unknown) {
       return { success: false, referralId: rawReferral.referralId }
     }
 
-    const actualReferralCount = await getActualReferralCount(rawReferral.referralId)
-    const existingReferAction = referrer.userActions.find(
-      action => action.actionType === UserActionType.REFER,
-    )
-
-    if (existingReferAction?.userActionRefer) {
-      await updateReferralCount(
-        referrer.id,
-        existingReferAction.id,
-        existingReferAction.userActionRefer.referralsCount,
-        actualReferralCount,
-      )
-    } else {
-      await createReferralAction(referrer.id, actualReferralCount, referrer.countryCode)
-    }
+    const analytics = getServerAnalytics({
+      userId: referrer.id,
+      localUser: null,
+    })
+    const beforeFinish = () => Promise.all([analytics.flush()])
+    await findOrCreateUserActionRefer({
+      referrer,
+      analytics,
+      countryCode: referrer.countryCode,
+    })
+    await beforeFinish()
 
     return { success: true, referralId: rawReferral.referralId }
   } catch (error) {

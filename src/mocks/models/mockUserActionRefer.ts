@@ -6,7 +6,7 @@ import { fakerFields } from '@/mocks/fakerUtils'
 export function mockCreateUserActionReferInput() {
   return {
     referralsCount: faker.number.int({ min: 1, max: 100 }),
-  } satisfies Prisma.UserActionReferCreateInput
+  } satisfies Omit<Prisma.UserActionReferCreateInput, 'address' | 'addressId'>
 }
 
 export function mockUserActionRefer(): UserActionRefer {

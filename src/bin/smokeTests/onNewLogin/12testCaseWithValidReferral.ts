@@ -56,6 +56,7 @@ function createTestParams(referrerId: string): TestParams {
           utm_source: 'swc',
           utm_medium: 'referral',
           utm_campaign: referrerId,
+          countryCode: 'us',
         },
         countryCode: 'us',
       },

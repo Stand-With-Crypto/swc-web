@@ -5,6 +5,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 
 export const BACKFILL_USER_ACTION_REFER_INNGEST_EVENT_NAME = 'script/backfill-user-action-refer'
@@ -81,6 +82,7 @@ export const backfillUserActionRefer = inngest.createFunction(
         select: {
           id: true,
           referralId: true,
+          addressId: true,
           countryCode: true,
           userActions: {
             select: selectFields,
@@ -117,10 +119,11 @@ export const backfillUserActionRefer = inngest.createFunction(
                   userId: referrer.id,
                   actionType: UserActionType.REFER,
                   campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
-                  countryCode: referrer.countryCode,
+                  countryCode: referrer.countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE,
                   userActionRefer: {
                     create: {
                       referralsCount: referredCount,
+                      addressId: referrer.addressId,
                     },
                   },
                   dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,

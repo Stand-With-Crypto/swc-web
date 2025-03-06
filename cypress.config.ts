@@ -20,7 +20,7 @@ export default defineConfig({
   e2e: {
     env: {
       SWC_INTERNAL_ENDPOINTS_SECRET: process.env.SWC_INTERNAL_ENDPOINTS_SECRET,
-      USER_COUNTRY_CODE: 'US',
+      USER_COUNTRY_CODE: 'us',
     },
     baseUrl: 'http://localhost:3000',
     setupNodeEvents(on) {
