@@ -38,6 +38,7 @@ import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { triggerReferralSteps } from '@/utils/server/referral/triggerReferralSteps'
+import { isValidReferral } from '@/utils/server/referral/validateReferral'
 import {
   getServerAnalytics,
   getServerPeopleAnalytics,
@@ -60,7 +61,6 @@ import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
-import { toBool } from '@/utils/shared/toBool'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 type UpsertedUser = User & {
@@ -978,21 +978,4 @@ async function getExistingUsers({
   )
 
   return existingUsers.flat()
-}
-
-type ReferralUTMParams = {
-  utm_source?: string
-  utm_medium?: string
-  utm_campaign?: string
-}
-
-function isValidReferral(params: ReferralUTMParams | undefined): boolean {
-  if (!params) return false
-
-  return toBool(
-    params?.utm_source === 'swc' &&
-      params?.utm_medium?.includes('referral') &&
-      typeof params?.utm_campaign === 'string' &&
-      params?.utm_campaign?.length > 0,
-  )
 }
