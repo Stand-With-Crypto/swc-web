@@ -17,7 +17,6 @@ interface SMSVariables {
           | undefined
       }
     | undefined
-  stateName: string | undefined
   districtRank: number | undefined
 }
 
@@ -32,7 +31,6 @@ export function applySMSVariables(message: string, userSMSVariables: UserSMSVari
     referralId: undefined,
     address: undefined,
     districtRank: undefined,
-    stateName: undefined,
   }
   const compiled = template(message)
   return compiled({ ...variables, ...userSMSVariables })
