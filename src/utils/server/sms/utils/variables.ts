@@ -2,9 +2,23 @@ import { template } from 'lodash-es'
 
 interface SMSVariables {
   userId: string | undefined
+  referralId: string | undefined
   sessionId: string | undefined
   firstName: string | undefined
   lastName: string | undefined
+  address:
+    | {
+        district?: string
+        state?:
+          | {
+              name?: string
+              code?: string
+            }
+          | undefined
+      }
+    | undefined
+  stateName: string | undefined
+  districtRank: number | undefined
 }
 
 export type UserSMSVariables = Partial<SMSVariables>
@@ -15,6 +29,10 @@ export function applySMSVariables(message: string, userSMSVariables: UserSMSVari
     lastName: undefined,
     sessionId: undefined,
     userId: undefined,
+    referralId: undefined,
+    address: undefined,
+    districtRank: undefined,
+    stateName: undefined,
   }
   const compiled = template(message)
   return compiled({ ...variables, ...userSMSVariables })

@@ -15,7 +15,7 @@ export type DistrictRankingEntry = {
   count: number
 }
 
-type MemberKey = `${USStateCode}:${string}`
+export type MemberKey = `${USStateCode}:${string}`
 type RedisEntryData = Omit<DistrictRankingEntry, 'count'>
 
 const getLog = (redisKey: string) => getLogger(redisKey)
@@ -55,7 +55,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
   return districts
 }
 
-const getMemberKey = (data: RedisEntryData): MemberKey => `${data.state}:${data.district}`
+export const getMemberKey = (data: RedisEntryData): MemberKey => `${data.state}:${data.district}`
 
 const parseMemberKey = (key: MemberKey): RedisEntryData => {
   const parts = key.split(':')
@@ -221,4 +221,35 @@ export async function getDistrictRank(
     rank,
     score,
   }
+}
+
+export async function getMultipleDistrictRankings(
+  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
+  members: MemberKey[],
+): Promise<Array<{ member: MemberKey; rank: number | null; score: number | null }>> {
+  const pipeline = redisWithCache.pipeline()
+
+  members.forEach(member => {
+    pipeline.zrevrank(redisKey, member)
+    pipeline.zscore(redisKey, member)
+  })
+
+  const results: number[] = await pipeline.exec()
+  const rankings = []
+
+  for (let i = 0; i < members.length; i++) {
+    const rankResponse = results[i * 2]
+    const scoreResponse = results[i * 2 + 1]
+
+    const rank = rankResponse === null ? null : rankResponse + 1
+    const score = scoreResponse === null ? null : scoreResponse
+
+    rankings.push({
+      member: members[i],
+      rank,
+      score,
+    })
+  }
+
+  return rankings
 }

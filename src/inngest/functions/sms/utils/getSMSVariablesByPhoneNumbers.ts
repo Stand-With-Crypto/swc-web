@@ -1,5 +1,16 @@
+import { Address, User } from '@prisma/client'
+import { uniq } from 'lodash-es'
+
+import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
+import {
+  getMemberKey,
+  getMultipleDistrictRankings,
+  MemberKey,
+} from '@/utils/server/districtRankings/upsertRankings'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
 export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
   const users = await prismaClient.user.findMany({
@@ -13,6 +24,7 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
       datetimeCreated: 'asc',
     },
     include: {
+      address: true,
       userSessions: {
         orderBy: {
           datetimeUpdated: 'desc',
@@ -22,20 +34,91 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
     },
   })
 
+  const districtRankMap = await getDistrictRankMap(users)
+
   return users.reduce(
     (acc, user) => {
       if (!user?.phoneNumber) return acc
+
+      const getDistrictRank = () => {
+        const stateCode = user.address?.administrativeAreaLevel1
+        const districtNumber = user.address?.usCongressionalDistrict
+
+        const parseResult = zodStateDistrict.safeParse({
+          state: stateCode,
+          district: districtNumber,
+        })
+
+        if (!parseResult.success) {
+          return undefined
+        }
+
+        return districtRankMap[getMemberKey(parseResult.data)] || undefined
+      }
 
       return {
         ...acc,
         [user.phoneNumber]: {
           userId: user.id,
+          referralId: user.referralId,
           firstName: user.firstName,
           lastName: user.lastName,
           sessionId: user.userSessions?.[0]?.id,
+          address: {
+            district: user.address?.usCongressionalDistrict ?? undefined,
+            state: {
+              name: user.address?.administrativeAreaLevel1
+                ? getUSStateNameFromStateCode(user.address?.administrativeAreaLevel1)
+                : undefined,
+              code: user.address?.administrativeAreaLevel1 ?? undefined,
+            },
+          },
+          districtRank: getDistrictRank(),
         },
       }
     },
     {} as Record<string, UserSMSVariables>,
+  )
+}
+
+async function getDistrictRankMap(users: Array<User & { address: Address | null }>) {
+  const uniqueUserDistricts = uniq(
+    users
+      .map(user => {
+        const stateCode = user.address?.administrativeAreaLevel1
+        const districtNumber = user.address?.usCongressionalDistrict
+
+        const parseResult = zodStateDistrict.safeParse({
+          state: stateCode,
+          district: districtNumber,
+        })
+
+        if (!parseResult.success) {
+          return
+        }
+
+        return getMemberKey({
+          state: parseResult.data.state,
+          district: parseResult.data.district,
+        })
+      })
+      .filter(Boolean),
+  )
+
+  const districtRankings = await getMultipleDistrictRankings(
+    REDIS_KEYS.DISTRICT_ADVOCATES_RANKING,
+    uniqueUserDistricts,
+  )
+
+  return districtRankings.reduce(
+    (acc, { member, rank }) => {
+      if (!rank) return acc
+
+      return {
+        ...acc,
+        [member]: rank,
+      }
+    },
+    {} as Record<MemberKey, number | null>,
   )
 }
