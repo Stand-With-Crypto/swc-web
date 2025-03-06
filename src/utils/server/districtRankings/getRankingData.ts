@@ -20,7 +20,6 @@ type AdvocatesCountByDistrictQueryResult = {
 type ReferralsCountByDistrictQueryResult = {
   state: string
   district: string
-  users_count: number
   refer_actions_count: number
   referrals: number
 }

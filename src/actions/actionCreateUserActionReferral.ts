@@ -318,7 +318,7 @@ export async function actionCreateUserActionReferral(input: Input) {
 
   logger.info(`found referrer ${referrer.id}`)
 
-  const countryCode = getCountryCode(user, localUser)
+  const countryCode = getCountryCode(referrer, localUser)
   if (!countryCode) {
     logger.error('no country code found')
     Sentry.captureMessage('no country code found', {
