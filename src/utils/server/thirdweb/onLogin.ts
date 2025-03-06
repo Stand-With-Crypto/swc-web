@@ -60,6 +60,7 @@ import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
+import { toBool } from '@/utils/shared/toBool'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 type UpsertedUser = User & {
@@ -988,10 +989,10 @@ type ReferralUTMParams = {
 function isValidReferral(params: ReferralUTMParams | undefined): boolean {
   if (!params) return false
 
-  return (
+  return toBool(
     params?.utm_source === 'swc' &&
-    params?.utm_medium === 'referral' &&
-    typeof params?.utm_campaign === 'string' &&
-    params?.utm_campaign?.length > 0
+      params?.utm_medium?.includes('referral') &&
+      typeof params?.utm_campaign === 'string' &&
+      params?.utm_campaign?.length > 0,
   )
 }
