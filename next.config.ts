@@ -301,11 +301,11 @@ const nextConfig: NextConfig = {
           {
             type: 'query',
             key: 'utm_medium',
-            value: '(?<utm_medium>.*)',
+            value: '(?<utm_medium>.+)',
           },
         ],
       },
-      // Fallback for when utm_medium is not present
+      // Fallback for when utm_medium is not present or empty
       {
         source: '/join/:referralId',
         destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
