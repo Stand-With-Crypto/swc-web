@@ -1,17 +1,20 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { ClassValue } from 'clsx'
 
+import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-interface ReferralLeaderboardRowProps extends VariantProps<typeof rowVariants> {
+interface DistrictsLeaderboardRowProps extends VariantProps<typeof rowVariants> {
   state: string
   district: string
   count: number
   rank: number
   className?: ClassValue
+  locale: SupportedLocale
 }
 
 const rowVariants = cva('flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-primary-cta/5', {
@@ -36,8 +39,8 @@ function getRankIcon(rank: number) {
   return <p className="text-center font-semibold text-fontcolor-muted">{rank}</p>
 }
 
-export function ReferralLeaderboardRow(props: ReferralLeaderboardRowProps) {
-  const { rank, state, district, count, className, variant } = props
+export function DistrictsLeaderboardRow(props: DistrictsLeaderboardRowProps) {
+  const { rank, state, district, count, className, variant, locale } = props
 
   const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[state as USStateCode] ?? state
   const showDistrict = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[state as USStateCode] > 0
@@ -51,7 +54,7 @@ export function ReferralLeaderboardRow(props: ReferralLeaderboardRowProps) {
         <span>{stateName}</span>
         {showDistrict && <span> - District {district}</span>}
       </div>
-      <p className="ml-auto">{isNaN(count) ? '' : count}</p>
+      <p className="ml-auto">{isNaN(count) ? '' : FormattedNumber({ amount: count, locale })}</p>
     </div>
   )
 }

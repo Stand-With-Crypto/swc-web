@@ -1,3 +1,4 @@
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
@@ -7,16 +8,20 @@ import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
+import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
+import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SWCPartners } from '@/utils/shared/getSWCPartners'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -33,9 +38,11 @@ export function PageHome({
   dtsiHomepagePeople,
   advocatePerStateDataProps,
   partners,
+  leaderboardData,
 }: { params: Awaited<PageProps['params']> } & Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
     partners: SWCPartners | null
+    leaderboardData: DistrictRankingEntryWithRank[]
   }) {
   const { countryCode } = params
   const urls = getIntlUrls(countryCode)
@@ -67,70 +74,101 @@ export function PageHome({
           <PageTitle as="h3" className="mb-6 !text-[32px]">
             Our community
           </PageTitle>
+          <PageSubTitle as="h4" className="mb-10 md:hidden">
+            See how our community is taking a stand to safeguard the future of crypto in America.
+          </PageSubTitle>
 
-          <Tabs
+          <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
+            data-testid="community-leaderboard-tabs"
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
-          >
-            <div className="mb-8 text-center lg:mb-10">
-              <TabsList className="mx-auto">
-                <TabsTrigger value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-                  Recent activity
-                </TabsTrigger>
-                <TabsTrigger value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
-                  Top donations
-                </TabsTrigger>
-              </TabsList>
-            </div>
-
-            <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-              <>
-                <PageSubTitle as="h4" className="mb-10">
-                  See the most recent actions our community has taken to safeguard the future of
-                  crypto in America.
-                </PageSubTitle>
-                <DelayedRecentActivityWithMap
-                  actions={actions}
-                  advocatesMapPageData={advocatePerStateDataProps}
-                  countUsers={countUsers.count}
-                  countryCode={countryCode}
-                />
-              </>
-            </TabsContent>
-            <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
-              <>
-                <PageSubTitle as="h4" className="mb-10">
-                  Donations to{' '}
-                  <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
-                    Fairshake
-                  </ExternalLink>
-                  , a pro-crypto Super PAC, are not included on the leaderboard.
-                </PageSubTitle>
-                <div className="space-y-8 lg:space-y-10">
-                  {sumDonationsByUser.map((donor, index) => (
-                    <SumDonationsByUserRow
+            options={[
+              {
+                value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                label: 'Recent activity',
+                content: (
+                  <>
+                    <PageSubTitle as="h4" className="mb-10 hidden md:block">
+                      See the most recent actions our community has taken to safeguard the future of
+                      crypto in America.
+                    </PageSubTitle>
+                    <DelayedRecentActivityWithMap
+                      actions={actions}
+                      advocatesMapPageData={advocatePerStateDataProps}
+                      countUsers={countUsers.count}
                       countryCode={countryCode}
-                      index={index}
-                      key={index}
-                      sumDonations={donor}
                     />
-                  ))}
-                </div>{' '}
-              </>
-              <div className="mt-7 space-x-4 text-center">
-                <Button asChild>
-                  <InternalLink href={urls.donate()}>Donate</InternalLink>
-                </Button>
-                <Button asChild variant="secondary">
-                  <InternalLink
-                    href={urls.leaderboard({ tab: RecentActivityAndLeaderboardTabs.LEADERBOARD })}
-                  >
-                    View all
-                  </InternalLink>
-                </Button>
-              </div>
-            </TabsContent>
-          </Tabs>
+                  </>
+                ),
+              },
+              {
+                value: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+                label: 'Top donations',
+                content: (
+                  <>
+                    <PageSubTitle as="h4" className="mb-10">
+                      Donations to{' '}
+                      <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
+                        Fairshake
+                      </ExternalLink>
+                      , a pro-crypto Super PAC, are not included on the leaderboard.
+                    </PageSubTitle>
+                    <div className="space-y-8 lg:space-y-10">
+                      {sumDonationsByUser.map((donor, index) => (
+                        <SumDonationsByUserRow
+                          countryCode={countryCode}
+                          index={index}
+                          key={index}
+                          sumDonations={donor}
+                        />
+                      ))}
+                    </div>
+                    <div className="mt-7 space-x-4 text-center">
+                      <Button asChild>
+                        <InternalLink href={urls.donate()}>Donate</InternalLink>
+                      </Button>
+                      <Button asChild variant="secondary">
+                        <InternalLink
+                          href={urls.leaderboard({
+                            tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+                          })}
+                        >
+                          View all
+                        </InternalLink>
+                      </Button>
+                    </div>
+                  </>
+                ),
+              },
+              {
+                value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+                label: 'Top Districts',
+                content: (
+                  <div className="space-y-4">
+                    <PageSubTitle as="h4" className="mb-10 hidden md:block">
+                      See which district has the most number of advocates.
+                    </PageSubTitle>
+                    <YourDistrictRank />
+                    <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
+                    <div className="mx-auto flex w-fit justify-center gap-2">
+                      <LoginDialogWrapper
+                        authenticatedContent={
+                          <UserActionFormReferDialog>
+                            <Button className="w-full">Refer</Button>
+                          </UserActionFormReferDialog>
+                        }
+                      >
+                        <Button className="w-full">Join</Button>
+                      </LoginDialogWrapper>
+                      <Button asChild variant="secondary">
+                        <InternalLink href={urls.referrals()}>View all</InternalLink>
+                      </Button>
+                    </div>
+                  </div>
+                ),
+              },
+            ]}
+          />
         </section>
 
         <section className="mb-16 text-center md:mb-36">
