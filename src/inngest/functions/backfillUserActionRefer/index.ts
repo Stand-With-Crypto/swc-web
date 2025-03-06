@@ -82,6 +82,8 @@ export const backfillUserActionRefer = inngest.createFunction(
         select: {
           id: true,
           referralId: true,
+          addressId: true,
+          countryCode: true,
           userActions: {
             select: selectFields,
           },
@@ -117,10 +119,11 @@ export const backfillUserActionRefer = inngest.createFunction(
                   userId: referrer.id,
                   actionType: UserActionType.REFER,
                   campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
-                  countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
+                  countryCode: referrer.countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE,
                   userActionRefer: {
                     create: {
                       referralsCount: referredCount,
+                      addressId: referrer.addressId,
                     },
                   },
                   dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,

@@ -5,6 +5,7 @@ import {
   getAdvocatesCountByDistrict,
   getReferralsCountByDistrict,
 } from '@/utils/server/districtRankings/getRankingData'
+import { syncReferralsWithoutAddress } from '@/utils/server/districtRankings/syncReferralsWithoutAddress'
 import { createDistrictRankingUpserter } from '@/utils/server/districtRankings/upsertRankings'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -27,6 +28,11 @@ export const updateDistrictsRankings = inngest.createFunction(
       : { event: UPDATE_DISTRICT_RANKINGS_INNGEST_EVENT_NAME }),
   },
   async ({ step, logger }) => {
+    await step.run('Sync Referrals Without Address', async () => {
+      logger.info("Syncing referrals without address to their users' current addresses")
+      return await syncReferralsWithoutAddress()
+    })
+
     const [districtAdvocatesCounts, districtsReferralsCount] = await Promise.all([
       step.run('Get Advocates Count by District', async () => {
         logger.info('Getting Advocates Count by District')
