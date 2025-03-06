@@ -7,6 +7,7 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
@@ -16,6 +17,7 @@ import {
   UserActionDonationCampaignName,
   UserActionEmailCampaignName,
   UserActionOptInCampaignName,
+  UserActionReferCampaignName,
   UserActionTweetCampaignName,
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
@@ -268,7 +270,6 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: 'Find your polling location and learn about early voting options.',
     mobileCTADescription: 'Find your polling location and learn about early voting options.',
     campaignsModalDescription: 'Find your polling location and learn about early voting options.',
-
     image: '/actionTypeIcons/votingResearched.png',
     campaigns: [
       {
@@ -279,6 +280,31 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Prepare to vote',
         description: 'Find your polling location and learn about early voting options.',
         WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.REFER]: {
+    title: 'Refer a Friend',
+    description: 'Get your friend to signup for Stand With Crypto and verify their account.',
+    mobileCTADescription:
+      'Get your friend to signup for Stand With Crypto and verify their account.',
+    campaignsModalDescription: 'Share your referral link with friends to help grow our movement.',
+    image: '/actionTypeIcons/refer.png',
+    campaigns: [
+      {
+        actionType: UserActionType.REFER,
+        campaignName: UserActionReferCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Refer a Friend',
+        description: 'You have referred friends to join Stand With Crypto.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <LoginDialogWrapper
+            authenticatedContent={<UserActionFormReferDialog>{children}</UserActionFormReferDialog>}
+          >
+            {children}
+          </LoginDialogWrapper>
+        ),
       },
     ],
   },

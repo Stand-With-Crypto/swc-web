@@ -31,10 +31,6 @@ const iconVariants = cva('pointer-events-none absolute', {
       lg: 'right-5',
     },
   },
-  defaultVariants: {
-    left: 'md',
-    right: 'md',
-  },
 })
 
 export interface InputWithIconsProps
@@ -45,14 +41,17 @@ export interface InputWithIconsProps
 }
 
 const InputWithIcons = React.forwardRef<HTMLInputElement, InputWithIconsProps>(
-  ({ className, leftIcon, rightIcon, variant, ...props }, ref) => {
+  ({ className, leftIcon, rightIcon, variant = 'md', ...props }, ref) => {
     return (
-      <div className="relative flex items-center">
+      <div className="relative flex w-full items-center">
         {leftIcon && (
           <div
-            className={iconVariants({
-              left: variant,
-            })}
+            className={cn(
+              'right-auto',
+              iconVariants({
+                left: variant,
+              }),
+            )}
           >
             {leftIcon}
           </div>
@@ -72,9 +71,12 @@ const InputWithIcons = React.forwardRef<HTMLInputElement, InputWithIconsProps>(
         />
         {rightIcon && (
           <div
-            className={iconVariants({
-              right: variant,
-            })}
+            className={cn(
+              'left-auto',
+              iconVariants({
+                right: variant,
+              }),
+            )}
           >
             {rightIcon}
           </div>
