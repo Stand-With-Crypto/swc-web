@@ -161,13 +161,7 @@ export function PageHome({
                         <Button className="w-full">Join</Button>
                       </LoginDialogWrapper>
                       <Button asChild variant="secondary">
-                        <InternalLink
-                          href={urls.leaderboard({
-                            tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
-                          })}
-                        >
-                          View all
-                        </InternalLink>
+                        <InternalLink href={urls.referrals()}>View all</InternalLink>
                       </Button>
                     </div>
                   </div>
