@@ -126,6 +126,47 @@ export async function createDistrictRankingUpserter(
   }
 }
 
+export async function createDistrictRankingIncrementer(
+  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS],
+) {
+  const log = getLog(redisKey)
+  return async (entry: DistrictRankingEntry) => {
+    if (!isValidDistrictEntry(entry)) {
+      log.warn(`Invalid district entry:`, entry)
+      return {
+        success: false,
+        entry,
+        rank: null,
+      }
+    }
+
+    const member = getMemberKey(entry)
+    const exists = await redis.zscore(redisKey, member)
+    if (exists === null) {
+      log.info(`District entry does not exist, creating it:`, member)
+      return await redis.zadd<MemberKey>(redisKey, {
+        score: entry.count,
+        member,
+      })
+    }
+
+    log.info(`Incrementing district entry:`, member)
+    const result = await redis.zincrby<MemberKey>(redisKey, entry.count, member)
+
+    if (result === null) {
+      log.error(`Failed to increment district entry:`, member)
+    } else {
+      log.info(`Successfully incremented district entry:`, member)
+    }
+
+    return {
+      success: result !== null,
+      entry,
+      rank: result,
+    }
+  }
+}
+
 type RedisInterlacedResult = Array<[MemberKey, number]>
 export type DistrictRankingEntryWithRank = DistrictRankingEntry & { rank: number }
 

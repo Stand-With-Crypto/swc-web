@@ -1,15 +1,25 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
 import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
+import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
+import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import type { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import type { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -17,16 +27,42 @@ import { cn } from '@/utils/web/cn'
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
 
+const TAB_OPTIONS: {
+  value: RecentActivityAndLeaderboardTabs
+  label: string
+}[] = [
+  {
+    value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    label: 'Recent activity',
+  },
+  {
+    value: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+    label: 'Top donations',
+  },
+  {
+    value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+    label: 'Top districts',
+  },
+]
+
 export type PageLeaderboardInferredProps =
   | {
       tab: RecentActivityAndLeaderboardTabs.LEADERBOARD
       sumDonationsByUser: SumDonationsByUser
       publicRecentActivity: undefined
+      leaderboardData: undefined
     }
   | {
       tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
       sumDonationsByUser: undefined
       publicRecentActivity: PublicRecentActivity
+      leaderboardData: undefined
+    }
+  | {
+      tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+      sumDonationsByUser: undefined
+      publicRecentActivity: undefined
+      leaderboardData: DistrictRankingEntryWithRank[]
     }
 
 type PageLeaderboardProps = PageLeaderboardInferredProps & {
@@ -42,9 +78,11 @@ export function PageLeaderboard({
   pageNum,
   sumDonationsByUser,
   publicRecentActivity,
+  leaderboardData,
 }: PageLeaderboardProps) {
   const urls = getIntlUrls(countryCode)
   const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
+
   return (
     <div className="standard-spacing-from-navbar container space-y-7">
       <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
@@ -56,27 +94,52 @@ export function PageLeaderboard({
         , a pro-crypto Super PAC, are not included on the leaderboard.
       </PageSubTitle>
       <div className="text-center">
-        <div className={cn(tabListStyles, 'mx-auto')}>
-          <InternalLink
-            className={tabTriggerStyles}
-            data-state={
-              tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? 'active' : undefined
-            }
-            href={urls.leaderboard({
-              tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-            })}
-          >
-            Recent activity
-          </InternalLink>
-          <InternalLink
-            className={tabTriggerStyles}
-            data-state={tab === RecentActivityAndLeaderboardTabs.LEADERBOARD ? 'active' : undefined}
-            href={urls.leaderboard({
-              tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
-            })}
-          >
-            Top donations
-          </InternalLink>
+        {/* Mobile: Select */}
+        <div className="sm:hidden">
+          <Select value={tab}>
+            <SelectTrigger className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary px-4 text-base font-semibold">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="rounded-2xl font-bold">
+              <SelectItem
+                className="pl-4 text-muted-foreground opacity-100"
+                disabled
+                value={'first'}
+              >
+                Select View
+              </SelectItem>
+              {TAB_OPTIONS.map(option => (
+                <SelectItem key={option.value} value={option.value}>
+                  <InternalLink
+                    className={cn(tabTriggerStyles, 'px-0')}
+                    href={urls.leaderboard({
+                      tab: option.value,
+                    })}
+                  >
+                    {option.label}
+                  </InternalLink>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Desktop: TabsList */}
+        <div className="mb-8 hidden text-center sm:mb-4 sm:block">
+          <div className={cn(tabListStyles, 'mx-auto')}>
+            {TAB_OPTIONS.map(option => (
+              <InternalLink
+                className={tabTriggerStyles}
+                data-state={tab === option.value ? 'active' : undefined}
+                href={urls.leaderboard({
+                  tab: option.value,
+                })}
+                key={option.value}
+              >
+                {option.label}
+              </InternalLink>
+            ))}
+          </div>
         </div>
       </div>
       <div className="space-y-8 lg:space-y-10">
@@ -105,6 +168,12 @@ export function PageLeaderboard({
                 sumDonations={donor}
               />
             ))}
+          </>
+        )}
+        {tab === RecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
+          <>
+            <YourDistrictRank />
+            <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
           </>
         )}
       </div>

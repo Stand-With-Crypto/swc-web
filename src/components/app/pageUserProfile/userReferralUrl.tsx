@@ -2,6 +2,7 @@
 import { Copy } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
@@ -16,39 +17,41 @@ interface UserReferralUrlProps {
 export function UserReferralUrl(props: UserReferralUrlProps) {
   const { referralId, className } = props
 
-  const [_, handleCopyToClipboard] = useCopyTextToClipboard()
-  const url = externalUrls.swcReferralUrl({ referralId }).replace('https://www.', '')
-  const formattedUrl = url.replace('/join/', '/join/\n')
-  const fullUrl = externalUrls.swcReferralUrl({ referralId: props.referralId })
+  const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
+  const fullUrl = externalUrls.swcReferralUrl({ referralId })
+  const presentationUrl = fullUrl.replace(/https?:\/\/(www\.)?/, '').replace('/join/', '/join/\n')
 
   const handleCopy = () => handleCopyToClipboard(fullUrl)
 
   return (
     <div className="relative flex w-full items-center">
-      <div
+      <Button
         className={cn(
-          'flex min-h-16 w-full cursor-pointer items-center rounded-lg border bg-background p-4 text-lg',
-          'whitespace-pre-wrap sm:whitespace-normal',
-          'transition-all hover:border-primary-cta hover:bg-muted/75 active:bg-muted',
+          'min-h-16 w-full justify-between rounded-lg px-4 py-2 text-lg font-normal',
+          'transition-all hover:border-primary-cta hover:bg-secondary/25 active:bg-secondary',
           className,
         )}
         onClick={handleCopy}
-        role="button"
+        size="lg"
+        variant="outline"
       >
-        {formattedUrl}
-        <div className="absolute right-3">
-          <Button
-            className="hover:bg-background/80"
-            onClick={e => {
-              e.stopPropagation()
-              handleCopy()
-            }}
-            variant="ghost"
-          >
-            <Copy height={26} width={26} />
-          </Button>
-        </div>
-      </div>
+        <span className="whitespace-pre-wrap text-start sm:whitespace-normal">
+          {presentationUrl}
+        </span>
+
+        <TooltipProvider>
+          <Tooltip open={hasCopied}>
+            <TooltipTrigger asChild>
+              <div className="rounded-full p-4 hover:bg-secondary">
+                <Copy height={26} width={26} />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-xs" side="top">
+              <p className="text-sm font-normal tracking-normal">Copied to clipboard</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </Button>
     </div>
   )
 }
