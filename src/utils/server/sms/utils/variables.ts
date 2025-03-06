@@ -8,16 +8,16 @@ interface SMSVariables {
   lastName: string | undefined
   address:
     | {
-        district?: string
-        state?:
-          | {
-              name?: string
-              code?: string
-            }
-          | undefined
+        district?: {
+          name?: string
+          rank?: number
+        }
+        state?: {
+          name?: string
+          code?: string
+        }
       }
     | undefined
-  districtRank: number | undefined
 }
 
 export type UserSMSVariables = Partial<SMSVariables>
@@ -30,7 +30,6 @@ export function applySMSVariables(message: string, userSMSVariables: UserSMSVari
     userId: undefined,
     referralId: undefined,
     address: undefined,
-    districtRank: undefined,
   }
   const compiled = template(message)
   return compiled({ ...variables, ...userSMSVariables })

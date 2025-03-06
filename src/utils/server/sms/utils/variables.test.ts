@@ -34,10 +34,10 @@ describe('applySMSVariables', () => {
   })
 
   it('should display variables inside objects', () => {
-    const message = 'Your district is <%= address.district %>.'
+    const message = 'Your district is <%= address.district.name %>.'
     const variables: UserSMSVariables = {
       address: {
-        district: 'CA-12',
+        district: { name: 'CA-12' },
       },
     }
     const result = applySMSVariables(message, variables)
@@ -48,7 +48,7 @@ describe('applySMSVariables', () => {
     const message = 'Your state is <%= address?.state?.name %>.'
     const variables: UserSMSVariables = {
       address: {
-        district: 'CA-12',
+        district: { name: 'CA-12' },
       },
     }
     const result = applySMSVariables(message, variables)

@@ -65,7 +65,10 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
           lastName: user.lastName,
           sessionId: user.userSessions?.[0]?.id,
           address: {
-            district: user.address?.usCongressionalDistrict ?? undefined,
+            district: {
+              name: user.address?.usCongressionalDistrict ?? undefined,
+              rank: getDistrictRank(),
+            },
             state: {
               name: user.address?.administrativeAreaLevel1
                 ? getUSStateNameFromStateCode(user.address?.administrativeAreaLevel1)
@@ -73,7 +76,6 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
               code: user.address?.administrativeAreaLevel1 ?? undefined,
             },
           },
-          districtRank: getDistrictRank(),
         },
       }
     },
