@@ -4,7 +4,7 @@ import { TweetAtPersonSectionNames } from '@/components/app/userActionFormTweetA
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { Video } from '@/components/ui/video'
+import { VideoPlayer } from '@/components/ui/video'
 import { UseSectionsReturn } from '@/hooks/useSections'
 
 export function OnboardingTweetAtPersonCampaign({
@@ -12,9 +12,10 @@ export function OnboardingTweetAtPersonCampaign({
 }: UseSectionsReturn<TweetAtPersonSectionNames>) {
   return (
     <div className="flex flex-col items-center justify-center pb-8">
-      <Video
-        className={'h-full max-h-[266px] w-full max-w-[454px] rounded-lg object-cover'}
-        fallback={
+      <VideoPlayer
+        autoplay
+        className="max-h-[266px] max-w-[454px] overflow-hidden rounded-lg"
+        failFallback={
           <NextImage
             alt="Pizza Day"
             height={266}
@@ -23,8 +24,20 @@ export function OnboardingTweetAtPersonCampaign({
             width={454}
           />
         }
-        poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMcJ/2HwAESgIuKCMGAAAAAABJRU5ErkJggg=="
-        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
+        fit="cover"
+        loadingFallback={
+          <NextImage
+            alt="loading"
+            className="h-full w-full object-cover"
+            fill
+            priority
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+          />
+        }
+        loop
+        muted
+        type="video"
+        url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
       />
 
       <div className="mt-4 space-y-2">
