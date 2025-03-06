@@ -38,8 +38,10 @@ const PopoverTrigger = PopoverPrimitive.Trigger
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(({ className, align = 'center', sideOffset = 4, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & {
+    a11yTitle?: string
+  }
+>(({ className, align = 'center', sideOffset = 4, a11yTitle, ...props }, ref) => (
   <PopoverPrimitive.Portal>
     <PopoverPrimitive.Content
       align={align}
@@ -49,6 +51,7 @@ const PopoverContent = React.forwardRef<
       )}
       ref={ref}
       sideOffset={sideOffset}
+      title={a11yTitle}
       {...props}
     />
   </PopoverPrimitive.Portal>

@@ -19,7 +19,7 @@ import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { cleanupDatadogSyntheticTestsWithInngest } from '@/inngest/functions/datadog/cleanup'
 import { updateDistrictsRankings } from '@/inngest/functions/districtsRankings/updateRankings'
-import { sendEventNotificationWithInngest } from '@/inngest/functions/eventNotification'
+import { globalSendEventNotifications } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
@@ -68,7 +68,7 @@ export const { GET, POST, PUT } = serve({
     backfillCongressionalDistrictCronJob,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
-    sendEventNotificationWithInngest,
+    ...globalSendEventNotifications,
     deleteUserActions,
     enqueueSMS,
     backfillUserCommunicationMessageStatus,

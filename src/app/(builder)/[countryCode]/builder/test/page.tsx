@@ -1,19 +1,23 @@
-import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
 import { PageProps } from '@/types'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
-import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getPageContent } from '@/utils/server/builder/models/page/utils'
 
 export const dynamic = 'error'
-export const revalidate = 86400 // 1 day
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
-const PATHNAME = '/privacy'
+const PATHNAME = '/builder/test'
 
-export default async function PrivacyPage(props: PageProps) {
+const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
+
+export default async function BuilderTestPage(props: PageProps) {
   const { countryCode } = await props.params
+
+  if (isProd) {
+    return notFound()
+  }
 
   const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
 
@@ -22,15 +26,4 @@ export default async function PrivacyPage(props: PageProps) {
       <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
-}
-
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const { countryCode } = await props.params
-
-  const metadata = await getPageDetails(PAGE_MODEL, PATHNAME, countryCode)
-
-  return generateMetadataDetails({
-    title: metadata.title,
-    description: metadata.description,
-  })
 }

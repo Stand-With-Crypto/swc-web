@@ -52,7 +52,10 @@ export function TopLevelMetrics({
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
     [data],
   )
-  const values = useApiHomepageTopLevelMetrics(decreasedInitialValues).data
+  const values = useApiHomepageTopLevelMetrics({
+    initial: decreasedInitialValues,
+    countryCode,
+  }).data
 
   const formatCurrency = useCallback(
     (

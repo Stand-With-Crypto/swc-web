@@ -112,8 +112,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Contact your member of congress',
-    description: 'Tell your senator to sign the discharge petition',
+    title: 'Contact your Member of Congress',
+    description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -184,9 +184,18 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
-        isCampaignActive: true,
-        title: 'Contact your member of congress',
+        isCampaignActive: false,
+        title: 'Contact your Member of Congress',
         description: 'Tell your senator to sign the discharge petition',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
+        isCampaignActive: false,
+        title: 'Contact your Member of Congress',
+        description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },

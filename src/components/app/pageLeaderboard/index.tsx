@@ -145,7 +145,7 @@ export function PageLeaderboard({
       <div className="space-y-8 lg:space-y-10">
         {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
           pageNum === 1 ? (
-            <DynamicRecentActivity actions={publicRecentActivity} />
+            <DynamicRecentActivity actions={publicRecentActivity} countryCode={countryCode} />
           ) : (
             <>
               {publicRecentActivity.map(action => (
