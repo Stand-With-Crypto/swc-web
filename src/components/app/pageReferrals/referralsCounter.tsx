@@ -26,7 +26,7 @@ function ReferralsCounterContent(props: ReferralsCounterContentProps) {
   })
   const user = userResponse.data?.user
 
-  const referrals = useMemo(() => {
+  const referralsCount = useMemo(() => {
     if (!user?.userActions?.length) return 0
 
     return user.userActions
@@ -85,7 +85,7 @@ function ReferralsCounterContent(props: ReferralsCounterContentProps) {
         {userResponse.isLoading ? (
           <Skeleton className="h-12 w-14" />
         ) : (
-          <AnimatedNumericOdometer size={48} value={referrals.toString()} />
+          <AnimatedNumericOdometer size={48} value={referralsCount.toString()} />
         )}
       </div>
 

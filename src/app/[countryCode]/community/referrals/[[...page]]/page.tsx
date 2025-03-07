@@ -1,7 +1,6 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { z } from 'zod'
 
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import {
@@ -11,6 +10,7 @@ import {
   PageLeaderboardInferredProps,
 } from '@/components/app/pageLeaderboard'
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
+import { validatePageNum } from '@/components/app/pageLeaderboard/pageValidator'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -21,23 +21,11 @@ export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
 
-export async function generateMetadata(_props: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   return generateMetadataDetails({
     title: PAGE_LEADERBOARD_TITLE,
     description: PAGE_LEADERBOARD_DESCRIPTION,
   })
-}
-
-const pageValidator = z.string().pipe(z.coerce.number().int().gte(1).lte(50))
-const validatePageNum = ([pageParam]: (string | undefined)[]) => {
-  if (!pageParam) {
-    return 1
-  }
-  const val = pageValidator.safeParse(pageParam)
-  if (val.success) {
-    return val.data
-  }
-  return null
 }
 
 export async function generateStaticParams() {

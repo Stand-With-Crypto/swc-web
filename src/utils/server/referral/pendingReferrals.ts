@@ -48,8 +48,3 @@ export async function getPendingReferrals(limit = 100) {
 
   return referrals
 }
-
-export async function getPendingReferralsCount() {
-  const count = await redis.llen(PENDING_REFERRALS_QUEUE)
-  return count
-}

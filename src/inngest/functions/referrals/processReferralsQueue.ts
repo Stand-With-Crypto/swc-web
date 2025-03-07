@@ -21,8 +21,9 @@ const BATCH_SIZE = 100
 const MAX_RETRIES = 3
 
 const PROCESS_REFERRALS_QUEUE_SCHEDULE = '0 0 * * *' // Every day at midnight
-const PROCESS_REFERRALS_QUEUE_INNGEST_FUNCTION_ID = 'script.process-referrals-queue-cron-job'
-const PROCESS_REFERRALS_QUEUE_INNGEST_EVENT_NAME = 'script/process-referrals-queue.cron.job'
+const PROCESS_REFERRALS_QUEUE_INNGEST_FUNCTION_ID =
+  'script.process-pending-referrals-queue-cron-job'
+const PROCESS_REFERRALS_QUEUE_INNGEST_EVENT_NAME = 'script/process-pending-referrals-queue.cron.job'
 
 export interface ProcessPendingReferralsCronJobSchema {
   name: typeof PROCESS_REFERRALS_QUEUE_INNGEST_EVENT_NAME
@@ -102,7 +103,7 @@ export const processPendingReferralsQueue = inngest.createFunction(
       : { event: PROCESS_REFERRALS_QUEUE_INNGEST_EVENT_NAME }),
   },
   async ({ step }) => {
-    const referralBatch = await step.run('Get referrals batch', () =>
+    const referralBatch = await step.run('Get pending referrals', () =>
       getPendingReferrals(BATCH_SIZE),
     )
 
@@ -118,7 +119,7 @@ export const processPendingReferralsQueue = inngest.createFunction(
 
     logger.info(`Processing ${referralBatch.length} referrals`)
 
-    const processed = await step.run('Process referrals batch', () =>
+    const processed = await step.run('Process pending referrals', () =>
       Promise.all(referralBatch.map(rawReferral => processPendingReferral(rawReferral))),
     )
 

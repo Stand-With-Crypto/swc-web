@@ -6,6 +6,7 @@ import { getEvents } from '@/utils/server/builder/models/data/events'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const defaultLogger = getLogger('sendEventNotifications')
 
@@ -22,8 +23,11 @@ interface SendEventNotificationsResponse {
   notifications: Array<Notification>
 }
 
-export async function sendEventNotifications(logger = defaultLogger) {
-  const allEvents = await getEvents()
+export async function sendEventNotifications(
+  countryCode: SupportedCountryCodes,
+  logger = defaultLogger,
+) {
+  const allEvents = await getEvents({ countryCode })
 
   if (!allEvents || !allEvents.length) {
     logger.info('Could not load events from Builder.IO. Ending the script...')

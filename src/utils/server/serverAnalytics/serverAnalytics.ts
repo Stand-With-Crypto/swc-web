@@ -1,8 +1,13 @@
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { PropertyDict } from 'mixpanel'
+import { cookies } from 'next/headers'
 import { promisify } from 'util'
 
+import {
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
 import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
@@ -83,12 +88,31 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
 
     logger.info(`Event Name: "${eventName}"`, eventProperties)
 
-    trackingRequests.push(
-      promisifiedMixpanelTrack(eventName, {
+    const getCountryCodeAndTrack = async () => {
+      let countryCode: string | null = null
+
+      try {
+        // We already have a function that gets the country code from the cookies (getCountryCodeCookie.ts)
+        // The problem is that it throws an error if the country code cookie is not found
+        // This serverAnalytics function is also called in edge context (inngest). Because of this,
+        // we are duplicating the logic to get the cookie here but ignoring if it fails or if the cookie doesn't exist
+        const currentCookies = await cookies()
+
+        const maybeCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+
+        countryCode = parseUserCountryCodeCookie(maybeCountryCodeCookie)?.countryCode ?? null
+      } catch {
+        // We don't want to throw errors because in edge context, we won't have access to cookies
+      }
+
+      await promisifiedMixpanelTrack(eventName, {
         ...eventProperties,
         distinct_id: config.userId,
-      }).catch(onError({ eventName, eventProperties })),
-    )
+        ...(countryCode && { countryCode }),
+      })
+    }
+
+    trackingRequests.push(getCountryCodeAndTrack().catch(onError({ eventName, eventProperties })))
 
     return { flush }
   }

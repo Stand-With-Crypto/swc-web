@@ -130,7 +130,3 @@ select[id='countries'] {
 div[data-scroll-area-viewport] > div:first-child {
   height: 100%;
 }
-
-div[data-scroll-area-viewport] {
-  overflow: visible !important;
-}

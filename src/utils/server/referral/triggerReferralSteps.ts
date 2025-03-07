@@ -82,33 +82,37 @@ export function triggerReferralSteps({
       await sendReferralCompletedEmail(referralId)
     }
 
-    const [incrementDistrictAdvocatesRanking, incrementDistrictReferralsRanking] =
-      await Promise.all([
-        createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING),
-        createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_REFERRALS_RANKING),
-      ])
+    after(async () => {
+      if (result.errors || !result) return
 
-    if (newUser.address) {
-      await incrementDistrictAdvocatesRanking({
-        state: newUser.address.administrativeAreaLevel1 as USStateCode,
-        district: newUser.address.usCongressionalDistrict || '1',
-        count: 1,
+      const [incrementDistrictAdvocatesRanking, incrementDistrictReferralsRanking] =
+        await Promise.all([
+          createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING),
+          createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_REFERRALS_RANKING),
+        ])
+
+      if (newUser.address) {
+        await incrementDistrictAdvocatesRanking({
+          state: newUser.address.administrativeAreaLevel1 as USStateCode,
+          district: newUser.address.usCongressionalDistrict || '1',
+          count: 1,
+        })
+      }
+
+      const referrer = await prismaClient.user.findFirst({
+        where: { referralId },
+        include: {
+          address: true,
+        },
       })
-    }
 
-    const referrer = await prismaClient.user.findFirst({
-      where: { referralId },
-      include: {
-        address: true,
-      },
+      if (referrer?.address) {
+        await incrementDistrictReferralsRanking({
+          state: referrer.address.administrativeAreaLevel1 as USStateCode,
+          district: referrer.address.usCongressionalDistrict || '1',
+          count: 1,
+        })
+      }
     })
-
-    if (referrer?.address) {
-      await incrementDistrictReferralsRanking({
-        state: referrer.address.administrativeAreaLevel1 as USStateCode,
-        district: referrer.address.usCongressionalDistrict || '1',
-        count: 1,
-      })
-    }
   })
 }

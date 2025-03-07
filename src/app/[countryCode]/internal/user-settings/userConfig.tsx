@@ -2,7 +2,9 @@
 
 import { useForm } from 'react-hook-form'
 import Cookies from 'js-cookie'
+import { toast } from 'sonner'
 
+import { actionUpdateUserCountryCode } from '@/actions/actionUpdateUserCountryCode'
 import { useCookieConsent } from '@/components/app/cookieConsent/useCookieConsent'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -42,6 +44,33 @@ export function UserConfig() {
       countryCode: parsedExistingCountryCode?.countryCode,
     },
   })
+
+  const handleCountryCodeSubmit = async (values: FormFields) => {
+    const result = await actionUpdateUserCountryCode(values.countryCode.toLowerCase())
+
+    Cookies.set(
+      USER_COUNTRY_CODE_COOKIE_NAME,
+      JSON.stringify({ countryCode: values.countryCode.toLowerCase(), bypassed: true }),
+      {
+        sameSite: 'lax',
+        secure: true,
+      },
+    )
+
+    if (result?.errors) {
+      const [errorMessage] = result.errors.countryCode ?? ['Unknown error']
+
+      toast.warning(`Cookie was updated successfully. ${errorMessage}`, {
+        duration: 2000,
+      })
+
+      return setTimeout(() => {
+        window.location.reload()
+      }, 2000)
+    }
+
+    window.location.reload()
+  }
 
   return (
     <div className="flex flex-col gap-12">
@@ -107,19 +136,7 @@ export function UserConfig() {
       </Button>
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(async values => {
-            void Cookies.set(
-              USER_COUNTRY_CODE_COOKIE_NAME,
-              JSON.stringify({ countryCode: values.countryCode, bypassed: true }),
-              {
-                sameSite: 'lax',
-                secure: true,
-              },
-            )
-            window.location.reload()
-          })}
-        >
+        <form onSubmit={form.handleSubmit(handleCountryCodeSubmit)}>
           <div className="flex items-end gap-4">
             <FormField
               control={form.control}
