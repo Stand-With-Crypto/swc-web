@@ -223,10 +223,13 @@ export async function getDistrictRank(
   }
 }
 
-export async function getMultipleDistrictRankings(
-  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
-  members: MemberKey[],
-): Promise<Array<{ member: MemberKey; rank: number | null; score: number | null }>> {
+export async function getMultipleDistrictRankings({
+  redisKey = CURRENT_DISTRICT_RANKING,
+  members,
+}: {
+  redisKey?: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS]
+  members: MemberKey[]
+}) {
   const pipeline = redisWithCache.pipeline()
 
   members.forEach(member => {

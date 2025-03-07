@@ -106,10 +106,9 @@ async function getDistrictRankMap(users: Array<User & { address: Address | null 
       .filter(Boolean),
   )
 
-  const districtRankings = await getMultipleDistrictRankings(
-    undefined, // undefined to use the default ranking strategy
-    uniqueUserDistricts,
-  )
+  const districtRankings = await getMultipleDistrictRankings({
+    members: uniqueUserDistricts,
+  })
 
   return districtRankings.reduce(
     (acc, { member, rank }) => {
