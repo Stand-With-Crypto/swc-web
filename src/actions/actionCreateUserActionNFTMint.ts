@@ -17,7 +17,7 @@ import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
+import { getThirdwebAuthUser } from '@/utils/server/thirdweb/getThirdwebAuthUser'
 import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
@@ -65,7 +65,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
 
-  const authUser = await appRouterGetThirdwebAuthUser()
+  const authUser = await getThirdwebAuthUser()
   if (!authUser) {
     const error = new Error('Create User Action NFT Mint - Not authenticated')
     Sentry.captureException(error, {
