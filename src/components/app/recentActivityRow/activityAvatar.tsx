@@ -20,8 +20,8 @@ const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.VIEW_KEY_RACES]: '/activityFeedIcons/view-key-races.svg',
   [UserActionType.VOTING_DAY]: '/activityFeedIcons/i-voted.svg',
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: '/activityFeedIcons/voting-info-researched.svg',
-  [UserActionType.REFER]: '/activityFeedIcons/join.svg',
   [UserActionType.POLL]: '/activityFeedIcons/vote.svg',
+  [UserActionType.REFER]: '/activityFeedIcons/refer.svg',
 }
 
 type ActivityAvatarProps = {

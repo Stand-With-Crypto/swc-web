@@ -286,7 +286,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.REFER: {
         return {
           onFocusContent: () => null,
-          children: <MainText>Someone referred a friend</MainText>,
+          children: <MainText>Someone {fromStateOrEmpty} referred a friend</MainText>,
         }
       }
       case UserActionType.POLL: {

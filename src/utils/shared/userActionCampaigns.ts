@@ -31,6 +31,7 @@ export enum UserActionEmailCampaignName {
   SEC_COMMISSIONER_2024 = 'SEC_COMMISSIONER_2024',
   WELCOME_119_CONGRESS_2025 = 'WELCOME_119_CONGRESS_2025',
   BROKER_REPORTING_RULE_SJ_RES_3 = 'BROKER_REPORTING_RULE_SJ_RES_3',
+  BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign

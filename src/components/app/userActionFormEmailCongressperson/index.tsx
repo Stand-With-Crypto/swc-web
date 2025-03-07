@@ -67,7 +67,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
+      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -87,7 +87,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
+    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
     firstName: '',
     lastName: '',
     emailAddress: '',
@@ -236,10 +236,10 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Contact your member of congress
+              Contact your Member of Congress
             </PageTitle>
             <PageSubTitle className="mb-7">
-              Tell your senator to sign the discharge petition
+              Tell your Senator to Vote “Yes” for S.J.Res.3.
             </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

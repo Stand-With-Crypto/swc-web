@@ -2,4 +2,5 @@
 export enum RecentActivityAndLeaderboardTabs {
   LEADERBOARD = 'leaderboard',
   RECENT_ACTIVITY = 'recent-activity',
+  TOP_DISTRICTS = 'top-districts',
 }

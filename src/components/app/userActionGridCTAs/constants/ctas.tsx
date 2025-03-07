@@ -7,6 +7,7 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
@@ -17,6 +18,7 @@ import {
   UserActionEmailCampaignName,
   UserActionOptInCampaignName,
   UserActionPollCampaignName,
+  UserActionReferCampaignName,
   UserActionTweetCampaignName,
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
@@ -111,8 +113,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Contact your member of congress',
-    description: 'Tell your senator to sign the discharge petition',
+    title: 'Contact your Member of Congress',
+    description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -183,9 +185,18 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
-        isCampaignActive: true,
-        title: 'Contact your member of congress',
+        isCampaignActive: false,
+        title: 'Contact your Member of Congress',
         description: 'Tell your senator to sign the discharge petition',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
+        isCampaignActive: false,
+        title: 'Contact your Member of Congress',
+        description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
@@ -307,6 +318,31 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.REFER]: {
+    title: 'Refer a Friend',
+    description: 'Get your friend to signup for Stand With Crypto and verify their account.',
+    mobileCTADescription:
+      'Get your friend to signup for Stand With Crypto and verify their account.',
+    campaignsModalDescription: 'Share your referral link with friends to help grow our movement.',
+    image: '/actionTypeIcons/refer.png',
+    campaigns: [
+      {
+        actionType: UserActionType.REFER,
+        campaignName: UserActionReferCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Refer a Friend',
+        description: 'You have referred friends to join Stand With Crypto.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <LoginDialogWrapper
+            authenticatedContent={<UserActionFormReferDialog>{children}</UserActionFormReferDialog>}
+          >
+            {children}
+          </LoginDialogWrapper>
+        ),
       },
     ],
   },

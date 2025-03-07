@@ -6,7 +6,7 @@ import { flatten, groupBy, keyBy, times } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
-import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
+import { mockCreateAddressInputWithDC } from '@/mocks/models/mockAddress'
 import { mockCreateAuthenticationNonceInput } from '@/mocks/models/mockAuthenticationNonce'
 import { mockCreateNFTMintInput } from '@/mocks/models/mockNFTMint'
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
@@ -78,7 +78,7 @@ async function seed() {
   */
   await batchAsyncAndLog(
     times(seedSizes([10, 100, 1000])).map(() => {
-      const address = mockCreateAddressInput()
+      const address = mockCreateAddressInputWithDC()
       return address
     }),
     data =>

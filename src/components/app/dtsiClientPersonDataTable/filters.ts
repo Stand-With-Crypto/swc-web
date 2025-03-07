@@ -24,24 +24,30 @@ export const getPersonDataTableFilterFns = (): Record<
   [PERSON_TABLE_COLUMNS_IDS.FULL_NAME]: () => true,
 
   [PERSON_TABLE_COLUMNS_IDS.STANCE]: (row, _columnId, filterValue, _addMeta) => {
+    const scoreToUse =
+      row.original.manuallyOverriddenStanceScore ?? row.original.computedStanceScore
+
     if (filterValue === StanceOnCryptoOptions.ALL) {
       return true
     }
-    const scoreToUse =
-      row.original.manuallyOverriddenStanceScore ?? row.original.computedStanceScore
+
     if (filterValue === StanceOnCryptoOptions.PENDING) {
       return isNil(scoreToUse)
     }
+
     if (filterValue === StanceOnCryptoOptions.NEUTRAL) {
-      return scoreToUse === 50
+      return !isNil(scoreToUse) && scoreToUse >= 50 && scoreToUse < 70
     }
-    const stance =
-      !scoreToUse || scoreToUse === 50
-        ? null
-        : scoreToUse > 50
-          ? StanceOnCryptoOptions.PRO_CRYPTO
-          : StanceOnCryptoOptions.ANTI_CRYPTO
-    return stance === filterValue
+
+    if (filterValue === StanceOnCryptoOptions.PRO_CRYPTO) {
+      return !isNil(scoreToUse) && scoreToUse >= 70
+    }
+
+    if (filterValue === StanceOnCryptoOptions.ANTI_CRYPTO) {
+      return !isNil(scoreToUse) && scoreToUse < 50
+    }
+
+    return false
   },
 
   [PERSON_TABLE_COLUMNS_IDS.ROLE]: (row, _columnId, filterValue, _addMeta) => {

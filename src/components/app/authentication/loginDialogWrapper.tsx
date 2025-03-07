@@ -217,7 +217,7 @@ function UnauthenticatedSection({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         a11yTitle={currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
-        className="max-w-l w-full"
+        className="max-w-l w-full px-0 md:px-0"
       >
         <GeoGate
           bypassCountryCheck={bypassCountryCheck}
@@ -225,9 +225,11 @@ function UnauthenticatedSection({
           unavailableContent={<UserActionFormActionUnavailable />}
         >
           {currentSection === LoginSections.LOGIN ? (
-            <DialogBody>
-              <LoginSection onLogin={handleLoginSuccess} {...props} />
-            </DialogBody>
+            <div className="px-4 md:px-6">
+              <DialogBody>
+                <LoginSection onLogin={handleLoginSuccess} {...props} />
+              </DialogBody>
+            </div>
           ) : (
             <FinishProfileSection
               onSuccess={() => {

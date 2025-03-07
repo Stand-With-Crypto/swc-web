@@ -17,6 +17,7 @@ import {
   PartnersIcon,
   PollIcon,
   PressIcon,
+  ReferralsIcon,
 } from '@/components/app/navbar/navbarDrawerIcons'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import {
@@ -65,6 +66,11 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
           icon: PollIcon,
         },
         {
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: ReferralsIcon,
+        },
+        {
           href: urls.about(),
           text: 'Our mission',
           icon: MissionIcon,
@@ -94,7 +100,6 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
           text: 'Advocacy toolkit',
           icon: AdvocacyToolkitIcon,
         },
-
         {
           href: urls.press(),
           text: 'Press',
