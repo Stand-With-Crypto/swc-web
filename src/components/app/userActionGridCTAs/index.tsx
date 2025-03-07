@@ -26,7 +26,7 @@ export function UserActionGridCTAs({
 
   return (
     // TODO: figure out a better way to control grid-cols based on the number of active actions
-    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-3', className)}>
+    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-4', className)}>
       {ctas.map(cta => {
         const completedCampaigns = cta.campaigns.reduce((acc, campaign) => {
           const key = `${campaign.actionType}-${campaign.campaignName}`

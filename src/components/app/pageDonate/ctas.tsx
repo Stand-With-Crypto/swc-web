@@ -17,7 +17,7 @@ export function CTAs() {
       </PageSubTitle>
 
       <UserActionGridCTAs
-        className="lg:grid-cols-2 lg:place-items-center"
+        className="lg:grid-cols-3 lg:place-items-center"
         excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES}
       />
     </section>
