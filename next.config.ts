@@ -295,13 +295,13 @@ const nextConfig: NextConfig = {
       {
         source: '/join/:referralId',
         destination:
-          '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utm_medium',
+          '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utmMedium',
         permanent: false,
         has: [
           {
             type: 'query',
             key: 'utm_medium',
-            value: '(?<utm_medium>.+)',
+            value: '(?<utmMedium>.+)',
           },
         ],
       },
