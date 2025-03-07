@@ -6,7 +6,7 @@ import {
 } from '@prisma/client'
 import { addDays, addHours, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
+import { chunk, merge, take, uniq, uniqBy, update } from 'lodash-es'
 
 import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
 import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
@@ -35,6 +35,7 @@ export interface BulkSMSPayload {
     includePendingDoubleOptIn?: boolean
     campaignName: string
     media?: string[]
+    limit?: number
   }>
   // default to ET: -5
   timezone?: number
@@ -89,7 +90,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     const messagesInfo: Record<string, object> = {}
 
     for (const message of messages) {
-      const { campaignName, smsBody, includePendingDoubleOptIn, media, userWhereInput } = message
+      const { campaignName, smsBody, includePendingDoubleOptIn, media, userWhereInput, limit } =
+        message
 
       logger.info(prettyStringify(message))
 
@@ -98,6 +100,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       // We need to keep this order as true -> false because later we use groupBy, which keeps the first occurrence of each element. In this case, that would be the user who already received the welcome message, so we don’t need to send the legal disclaimer again.
       // This happens because of how where works with groupBy, and there are cases where different users with the same phone number show up in both groups. So, in those cases, we don’t want to send two messages—just one.
       for (const userHasWelcomeMessage of [true, false]) {
+        if (limit && messagesPayload.length >= limit) {
+          break
+        }
+
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
@@ -178,7 +184,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
           logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
 
-          if (!DATABASE_QUERY_LIMIT || phoneNumberList.length < DATABASE_QUERY_LIMIT) {
+          if (
+            !DATABASE_QUERY_LIMIT ||
+            phoneNumberList.length < DATABASE_QUERY_LIMIT ||
+            (limit && allPhoneNumbers.length >= limit)
+          ) {
             hasNumbersLeft = false
           }
         }
@@ -191,19 +201,21 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
         // We need to use concat here because using spread is exceeding maximum call stack size
         messagesPayload = messagesPayload.concat(
-          uniq(allPhoneNumbers).map(phoneNumber => ({
-            phoneNumber,
-            messages: [
-              {
-                body,
-                campaignName,
-                journeyType: UserCommunicationJourneyType.BULK_SMS,
-                media,
-                // If the user does not have a welcome message, the body must have it
-                hasWelcomeMessageInBody: !userHasWelcomeMessage,
-              },
-            ],
-          })),
+          take(uniq(allPhoneNumbers), limit ? limit - messagesPayload.length : undefined).map(
+            phoneNumber => ({
+              phoneNumber,
+              messages: [
+                {
+                  body,
+                  campaignName,
+                  journeyType: UserCommunicationJourneyType.BULK_SMS,
+                  media,
+                  // If the user does not have a welcome message, the body must have it
+                  hasWelcomeMessageInBody: !userHasWelcomeMessage,
+                },
+              ],
+            }),
+          ),
         )
 
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
