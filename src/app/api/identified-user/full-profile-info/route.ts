@@ -41,6 +41,11 @@ async function apiResponseForUserFullProfileInfo() {
             },
             userActionVotingDay: true,
             userActionRefer: true,
+            userActionPoll: {
+              include: {
+                userActionPollAnswers: true,
+              },
+            },
           },
         },
       },

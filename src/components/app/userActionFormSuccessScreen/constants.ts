@@ -16,7 +16,7 @@ export const DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO = {
 }
 export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Omit<
   Record<ActiveClientUserActionType, UserActionFormSuccessScreenFeedbackProps>,
-  'REFER'
+  'REFER' | 'POLL'
 > = {
   [UserActionType.EMAIL]: {
     title: 'You emailed your representatives!',
