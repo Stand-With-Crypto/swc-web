@@ -54,7 +54,6 @@ export function TopLevelMetrics({
   )
   const values = useApiHomepageTopLevelMetrics({
     initial: decreasedInitialValues,
-    countryCode,
   }).data
 
   const formatCurrency = useCallback(

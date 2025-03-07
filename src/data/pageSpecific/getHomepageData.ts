@@ -7,15 +7,11 @@ import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
-interface GetHomePageTopLevelMetricsProps {
-  countryCode: string
-}
-
-export async function getHomepageTopLevelMetrics({ countryCode }: GetHomePageTopLevelMetricsProps) {
+export async function getHomepageTopLevelMetrics() {
   const [sumDonations, countUsers, countPolicymakerContacts] = await Promise.all([
-    getSumDonations({ countryCode }),
-    getCountUsers({ countryCode }),
-    getCountPolicymakerContacts({ countryCode }),
+    getSumDonations(),
+    getCountUsers(),
+    getCountPolicymakerContacts(),
   ])
   return {
     sumDonations,
@@ -40,7 +36,7 @@ export async function getHomepageData(props: GetHomePageDataProps) {
     dtsiHomepagePeople,
     sumDonationsByUser,
   ] = await Promise.all([
-    getHomepageTopLevelMetrics({ countryCode: props.countryCode }),
+    getHomepageTopLevelMetrics(),
     getPublicRecentActivity({
       limit: props?.recentActivityLimit ?? 10,
       countryCode: props.countryCode,
