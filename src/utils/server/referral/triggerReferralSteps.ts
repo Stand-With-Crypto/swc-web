@@ -3,10 +3,11 @@ import * as Sentry from '@sentry/nextjs'
 import { after } from 'next/server'
 
 import { actionCreateUserActionReferral } from '@/actions/actionCreateUserActionReferral'
+import { PROCESS_REFERRAL_INNGEST_EVENT_NAME } from '@/inngest/functions/referrals/processReferral'
+import { inngest } from '@/inngest/inngest'
 import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
 import { createDistrictRankingIncrementer } from '@/utils/server/districtRankings/upsertRankings'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { addToPendingReferralsQueue } from '@/utils/server/referral/pendingReferrals'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 import { USStateCode } from '@/utils/shared/usStateUtils'
@@ -55,12 +56,19 @@ export function triggerReferralSteps({
     try {
       result = await actionCreateUserActionReferral({
         referralId,
-        userId: newUser.id,
+        newUserId: newUser.id,
         localUser,
       })
     } catch (error) {
       logger.error('Failed to process referral immediately, added to queue for retry')
-      await addToPendingReferralsQueue({ referralId, userId: newUser.id })
+      await inngest.send({
+        name: PROCESS_REFERRAL_INNGEST_EVENT_NAME,
+        data: {
+          referralId,
+          newUserId: newUser.id,
+          localUser,
+        },
+      })
       Sentry.captureException(error, {
         tags: { domain: 'referral' },
         extra: { referralId, newUserId: newUser.id, localUser },
@@ -69,7 +77,14 @@ export function triggerReferralSteps({
     }
 
     if (result.errors) {
-      await addToPendingReferralsQueue({ referralId, userId: newUser.id })
+      await inngest.send({
+        name: PROCESS_REFERRAL_INNGEST_EVENT_NAME,
+        data: {
+          referralId,
+          newUserId: newUser.id,
+          localUser,
+        },
+      })
       logger.error('Failed to process referral immediately, added to queue for retry')
       Sentry.captureException('Failed to process referral immediately', {
         tags: { domain: 'referral' },

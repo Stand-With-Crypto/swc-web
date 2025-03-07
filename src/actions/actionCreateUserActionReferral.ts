@@ -19,7 +19,7 @@ const logger = getLogger(`actionCreateUserActionReferral`)
 
 const zodUserActionReferralInput = z.object({
   referralId: zodReferralId,
-  userId: z.string().uuid('Invalid user ID format'),
+  newUserId: z.string().uuid('Invalid user ID format'),
   /**
    * Calling the server action from Nextjs `after` may not have the client cookies.
    * This is why we accept the localUser as an optional parameter.
@@ -259,19 +259,19 @@ export async function actionCreateUserActionReferral(input: Input) {
       errorsMetadata: validatedFields.errorsMetadata,
     }
   }
-  const { referralId, userId, localUser } = validatedFields.data
+  const { referralId, newUserId, localUser } = validatedFields.data
 
   const user = await prismaClient.user.findFirstOrThrow({
-    where: { id: userId },
+    where: { id: newUserId },
     include: {
       primaryUserCryptoAddress: true,
       address: true,
     },
   })
   if (!user) {
-    logger.error('user not found', { userId })
+    logger.error('user not found', { newUserId })
     return {
-      errors: { userId: ['User not found'] },
+      errors: { newUserId: ['User not found'] },
     }
   }
 
@@ -285,6 +285,7 @@ export async function actionCreateUserActionReferral(input: Input) {
     where: { referralId },
     include: {
       address: true,
+      primaryUserCryptoAddress: true,
       userActions: {
         where: {
           actionType: UserActionType.REFER,
@@ -308,7 +309,7 @@ export async function actionCreateUserActionReferral(input: Input) {
       },
       extra: {
         referralId,
-        userId,
+        newUserId,
       },
       level: 'error',
     })
@@ -323,7 +324,7 @@ export async function actionCreateUserActionReferral(input: Input) {
     logger.error('no country code found')
     Sentry.captureMessage('no country code found', {
       tags: { domain: 'referrals' },
-      extra: { userId },
+      extra: { newUserId },
     })
     return {
       errors: { countryCode: ['No country code found'] },
@@ -341,7 +342,7 @@ export async function actionCreateUserActionReferral(input: Input) {
   waitUntil(beforeFinish())
 
   return {
-    user: getClientUser(user),
+    user: getClientUser(referrer),
     wasActionCreated: !hasExistingReferActions,
     action: userAction,
   }
