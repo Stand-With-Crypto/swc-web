@@ -33,7 +33,6 @@ export default async function Layout({
 
   return (
     <PageLayout countryCode={countryCode} shouldRenderGTM={true}>
-      <NavBarGlobalBanner />
       <Navbar countryCode={countryCode} />
       <FullHeight.Content>{children}</FullHeight.Content>
       <Footer countryCode={countryCode} />
