@@ -33,7 +33,6 @@ export function AdvocateHeatmapOdometer({
   )
   const values = useApiHomepageTopLevelMetrics({
     initial: decreasedInitialValues as GetHomepageTopLevelMetricsResponse,
-    countryCode,
   }).data
   const formatted = useMemo(() => {
     return {

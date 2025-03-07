@@ -41,7 +41,7 @@ export async function HomepageDialogDeeplinkLayout({
     partners,
     leaderboardData,
   ] = await Promise.all([
-    getHomepageTopLevelMetrics({ countryCode: pageParams.countryCode }),
+    getHomepageTopLevelMetrics(),
     getAdvocatesMapData(),
     getPartners(),
     getDistrictsLeaderboardData({ limit: 10 }),
