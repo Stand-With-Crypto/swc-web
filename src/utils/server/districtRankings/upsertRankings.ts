@@ -230,6 +230,10 @@ export async function getMultipleDistrictRankings({
   redisKey?: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS]
   members: MemberKey[]
 }) {
+  if (members.length === 0) {
+    return []
+  }
+
   const pipeline = redisWithCache.pipeline()
 
   members.forEach(member => {

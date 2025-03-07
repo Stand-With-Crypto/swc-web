@@ -6,7 +6,7 @@ import {
 } from '@prisma/client'
 import { addDays, addHours, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk, merge, take, uniq, uniqBy, update } from 'lodash-es'
+import { chunk, merge, uniq, uniqBy, update } from 'lodash-es'
 
 import { EnqueueMessagePayload, enqueueSMS } from '@/inngest/functions/sms/enqueueMessages'
 import { countMessagesAndSegments } from '@/inngest/functions/sms/utils/countMessagesAndSegments'
@@ -201,8 +201,9 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         // Using uniq outside the while loop, because getPhoneNumberList could return the same phone number in two separate batches
         // We need to use concat here because using spread is exceeding maximum call stack size
         messagesPayload = messagesPayload.concat(
-          take(uniq(allPhoneNumbers), limit ? limit - messagesPayload.length : undefined).map(
-            phoneNumber => ({
+          uniq(allPhoneNumbers)
+            .slice(0, limit ? limit - messagesPayload.length : undefined)
+            .map(phoneNumber => ({
               phoneNumber,
               messages: [
                 {
@@ -214,8 +215,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                   hasWelcomeMessageInBody: !userHasWelcomeMessage,
                 },
               ],
-            }),
-          ),
+            })),
         )
 
         logger.info(`messagesPayload.length ${messagesPayload.length}`)
