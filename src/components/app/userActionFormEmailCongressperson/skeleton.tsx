@@ -34,7 +34,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
             Contact your Member of Congress
           </PageTitle>
           <PageSubTitle className="mb-7">
-            Tell your Member to Vote “Yes” for S.J.Res.3.
+            Tell your Member to Vote “Yes” for H.J.Res.25.
           </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
