@@ -369,6 +369,12 @@ const nextConfig: NextConfig = {
           '/action/email?utm_source=swc&utm_medium=email&utm_campaign=broker-reporting-rule-1',
         permanent: true,
       },
+      {
+        source: '/e/crahouse',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=email&utm_campaign=broker-reporting-rule-house',
+        permanent: true,
+      },
       // SMS shortlinks
       {
         source: '/new-congress-2/:sessionId*',
