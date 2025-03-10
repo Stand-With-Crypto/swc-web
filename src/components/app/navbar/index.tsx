@@ -8,6 +8,7 @@ import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
+import { getNavbarItems } from '@/components/app/navbar/utils'
 import {
   Accordion,
   AccordionContent,
@@ -42,10 +43,9 @@ export type NavbarItem =
 
 interface NavbarProps {
   countryCode: SupportedCountryCodes
-  navbarItems: NavbarItem[]
 }
 
-export function Navbar({ countryCode, navbarItems }: NavbarProps) {
+export function Navbar({ countryCode }: NavbarProps) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
   const urls = getIntlUrls(countryCode)
@@ -59,6 +59,8 @@ export function Navbar({ countryCode, navbarItems }: NavbarProps) {
   }, [dialogProps])
 
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production' && !isPreviewing
+
+  const navbarItems = getNavbarItems(countryCode)
 
   return (
     <>

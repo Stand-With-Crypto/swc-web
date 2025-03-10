@@ -6,12 +6,9 @@ import {
   MissionIcon,
   PartnersIcon,
 } from '@/components/app/navbar/navbarDrawerIcons'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-export const getNavbarItems = (countryCode: SupportedCountryCodes): NavbarItem[] => {
-  const urls = getIntlUrls(countryCode)
-
+export const getGbNavbarItems = (urls: ReturnType<typeof getIntlUrls>): NavbarItem[] => {
   return [
     {
       href: urls.politiciansHomepage(),

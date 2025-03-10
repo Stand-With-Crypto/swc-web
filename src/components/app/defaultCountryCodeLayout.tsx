@@ -8,7 +8,6 @@ import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
-import { getDefaultNavbarItems } from '@/components/app/navbar/constants'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
@@ -16,8 +15,6 @@ import { fontClassName } from '@/utils/web/fonts'
 export const dynamic = 'error'
 
 export function DefaultCountryCodeLayout({ children }: { children: React.ReactNode }) {
-  const navbarItems = getDefaultNavbarItems(DEFAULT_SUPPORTED_COUNTRY_CODE)
-
   return (
     <html lang="en" translate="no">
       <body className={fontClassName}>
@@ -28,7 +25,7 @@ export function DefaultCountryCodeLayout({ children }: { children: React.ReactNo
         />
         <TopLevelClientLogic countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
           <FullHeight.Container>
-            <Navbar countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} navbarItems={navbarItems} />
+            <Navbar countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
           </FullHeight.Container>

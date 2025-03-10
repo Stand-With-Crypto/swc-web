@@ -1,6 +1,5 @@
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
-import { getDefaultNavbarItems } from '@/components/app/navbar/constants'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -17,11 +16,10 @@ export async function BuilderPageLayout({
   modelName: BuilderPageModelIdentifiers
 }) {
   const pageMetadata = await getPageDetails(modelName, pathname, countryCode)
-  const navbarItems = getDefaultNavbarItems(countryCode)
 
   return (
     <>
-      {pageMetadata.hasNavbar && <Navbar countryCode={countryCode} navbarItems={navbarItems} />}
+      {pageMetadata.hasNavbar && <Navbar countryCode={countryCode} />}
       {children}
       {pageMetadata.hasFooter && <Footer countryCode={countryCode} />}
     </>

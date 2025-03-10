@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PageLayout } from '@/components/app/layout/layout'
-import { getDefaultNavbarItems } from '@/components/app/navbar/constants'
 import { PageProps } from '@/types'
 import { generateCountryCodeLayoutMetadata } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
@@ -28,10 +27,8 @@ export default async function Layout({
     notFound()
   }
 
-  const navbarItems = getDefaultNavbarItems(countryCode)
-
   return (
-    <PageLayout countryCode={countryCode} navbarItems={navbarItems} shouldRenderGTM={true}>
+    <PageLayout countryCode={countryCode} shouldRenderGTM={true}>
       {children}
     </PageLayout>
   )

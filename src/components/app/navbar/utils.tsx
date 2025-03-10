@@ -1,3 +1,6 @@
+import { getAuNavbarItems } from '@/app/au/utils'
+import { getCaNavbarItems } from '@/app/ca/utils'
+import { getGbNavbarItems } from '@/app/gb/utils'
 import { NavbarItem } from '@/components/app/navbar'
 import {
   AdvocacyToolkitIcon,
@@ -12,9 +15,7 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-export const getDefaultNavbarItems = (countryCode: SupportedCountryCodes): NavbarItem[] => {
-  const urls = getIntlUrls(countryCode)
-
+export const getDefaultNavbarItems = (urls: ReturnType<typeof getIntlUrls>): NavbarItem[] => {
   return [
     {
       href: urls.politiciansHomepage(),
@@ -71,4 +72,20 @@ export const getDefaultNavbarItems = (countryCode: SupportedCountryCodes): Navba
       ],
     },
   ]
+}
+
+export const getNavbarItems = (countryCode: SupportedCountryCodes): NavbarItem[] => {
+  const urls = getIntlUrls(countryCode)
+
+  const navbarItemsCountryMap: Record<
+    SupportedCountryCodes,
+    (urls: ReturnType<typeof getIntlUrls>) => NavbarItem[]
+  > = {
+    [SupportedCountryCodes.AU]: getAuNavbarItems,
+    [SupportedCountryCodes.CA]: getCaNavbarItems,
+    [SupportedCountryCodes.GB]: getGbNavbarItems,
+    [SupportedCountryCodes.US]: getDefaultNavbarItems,
+  }
+
+  return navbarItemsCountryMap[countryCode]?.(urls) ?? getDefaultNavbarItems(urls)
 }
