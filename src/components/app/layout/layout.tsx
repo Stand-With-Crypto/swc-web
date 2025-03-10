@@ -3,6 +3,9 @@ import NextTopLoader from 'nextjs-toploader'
 
 import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
+import { Footer } from '@/components/app/footer'
+import { GoogleTagManager } from '@/components/app/googleTagManager'
+import { Navbar, NavbarItem } from '@/components/app/navbar'
 import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
@@ -13,9 +16,16 @@ import { fontClassName } from '@/utils/web/fonts'
 export function PageLayout({
   children,
   countryCode,
-}: React.PropsWithChildren<{ countryCode: SupportedCountryCodes }>) {
+  navbarItems,
+  shouldRenderGTM,
+}: React.PropsWithChildren<{
+  countryCode: SupportedCountryCodes
+  navbarItems: NavbarItem[]
+  shouldRenderGTM?: boolean
+}>) {
   return (
     <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
+      {shouldRenderGTM && <GoogleTagManager />}
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <NextTopLoader
@@ -26,7 +36,9 @@ export function PageLayout({
         <TopLevelClientLogic countryCode={countryCode}>
           <FullHeight.Container>
             <NavBarGlobalBanner />
-            {children}
+            <Navbar countryCode={countryCode} navbarItems={navbarItems} />
+            <FullHeight.Content>{children}</FullHeight.Content>
+            <Footer countryCode={countryCode} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
