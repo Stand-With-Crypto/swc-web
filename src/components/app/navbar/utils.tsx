@@ -1,7 +1,7 @@
-import { getAuNavbarItems } from '@/app/au/utils'
-import { getCaNavbarItems } from '@/app/ca/utils'
-import { getGbNavbarItems } from '@/app/gb/utils'
 import { NavbarItem } from '@/components/app/navbar'
+import { getAUNavbarItems } from '@/components/app/navbar/au/utils'
+import { getCANavbarItems } from '@/components/app/navbar/ca/utils'
+import { getGBNavbarItems } from '@/components/app/navbar/gb/utils'
 import {
   AdvocacyToolkitIcon,
   BillsIcon,
@@ -81,9 +81,9 @@ export const getNavbarItems = (countryCode: SupportedCountryCodes): NavbarItem[]
     SupportedCountryCodes,
     (urls: ReturnType<typeof getIntlUrls>) => NavbarItem[]
   > = {
-    [SupportedCountryCodes.AU]: getAuNavbarItems,
-    [SupportedCountryCodes.CA]: getCaNavbarItems,
-    [SupportedCountryCodes.GB]: getGbNavbarItems,
+    [SupportedCountryCodes.AU]: getAUNavbarItems,
+    [SupportedCountryCodes.CA]: getCANavbarItems,
+    [SupportedCountryCodes.GB]: getGBNavbarItems,
     [SupportedCountryCodes.US]: getDefaultNavbarItems,
   }
 

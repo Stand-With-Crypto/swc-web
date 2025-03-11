@@ -8,7 +8,7 @@ import {
 } from '@/components/app/navbar/navbarDrawerIcons'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-export const getGbNavbarItems = (urls: ReturnType<typeof getIntlUrls>): NavbarItem[] => {
+export const getGBNavbarItems = (urls: ReturnType<typeof getIntlUrls>): NavbarItem[] => {
   return [
     {
       href: urls.politiciansHomepage(),
