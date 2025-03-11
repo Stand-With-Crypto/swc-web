@@ -123,7 +123,7 @@ function CurrentCampaign() {
         <div className="container flex justify-between">
           <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
             <p>
-              KEY VOTE ALERT IN THE HOUSE – VOTE “YES” ON S.J. RES 3
+              KEY VOTE ALERT IN THE HOUSE – VOTE “YES” ON H.J.RES.25
               {isMobile ? <br /> : <span> – </span>}
               Find out more{' '}
               <strong>{isMobile ? 'here' : <Link href={urls.emailDeeplink()}>here</Link>}</strong>
