@@ -202,7 +202,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Contact your Member of Congress',
         description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
         canBeTriggeredMultipleTimes: true,
