@@ -16,7 +16,7 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
-import { compact, groupBy } from 'lodash-es'
+import { compact, groupBy, isEmpty } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
@@ -37,6 +37,8 @@ import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { triggerReferralSteps } from '@/utils/server/referral/triggerReferralSteps'
+import { isValidReferral } from '@/utils/server/referral/validateReferral'
 import {
   getServerAnalytics,
   getServerPeopleAnalytics,
@@ -71,17 +73,20 @@ type UpsertedUser = User & {
 const getLog = (address: string) => (message: string) =>
   logger.info(`address ${address}: ${message}`)
 
-export async function login(payload: VerifyLoginPayloadParams) {
+export async function login(
+  payload: VerifyLoginPayloadParams,
+  searchParams: Record<string, string>,
+) {
   const currentCookies = await cookies()
   const verifiedPayload = await thirdwebAuth.verifyPayload(payload)
 
   if (!verifiedPayload.valid) return
 
   const { address } = payload.payload
-
   const cryptoAddress = parseThirdwebAddress(address)
 
   const localUser = await parseLocalUserFromCookies()
+
   const log = getLog(cryptoAddress)
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
@@ -114,29 +119,41 @@ export async function login(payload: VerifyLoginPayloadParams) {
         .flush(),
     ])
 
-    const jwt = await thirdwebAuth.generateJWT({
-      payload: verifiedPayload.payload,
-      context: { userId: existingVerifiedUser.id, address },
-    })
-
     const currentUserCountryCode = existingVerifiedUser.countryCode
 
     const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
     const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
 
+    const hasValidCurrentCountryCode = !isEmpty(currentUserCountryCode)
+    const hasParsedCookie = !!parsedUserCountryCodeCookie
+    const cookieCountryCodeDiffersFromUser =
+      parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
+      currentUserCountryCode.toLowerCase()
+
+    if (hasValidCurrentCountryCode && hasParsedCookie && cookieCountryCodeDiffersFromUser) {
+      log(
+        `setting user country code cookie from ${parsedUserCountryCodeCookie.countryCode.toLowerCase()} to ${currentUserCountryCode.toLowerCase()}`,
+      )
+      currentCookies.set({
+        name: USER_COUNTRY_CODE_COOKIE_NAME,
+        value: JSON.stringify({
+          countryCode: currentUserCountryCode.toLowerCase(),
+          bypassed: true,
+        }),
+        httpOnly: false,
+        sameSite: 'lax',
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      })
+    }
+
+    const jwt = await thirdwebAuth.generateJWT({
+      payload: verifiedPayload.payload,
+      context: { userId: existingVerifiedUser.id, address },
+    })
+
     currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
 
-    if (
-      !parsedUserCountryCodeCookie?.bypassed &&
-      parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
-        currentUserCountryCode.toLowerCase()
-    ) {
-      currentCookies.set(
-        USER_COUNTRY_CODE_COOKIE_NAME,
-        JSON.stringify({ countryCode: currentUserCountryCode.toLowerCase(), bypassed: false }),
-        { sameSite: 'lax' },
-      )
-    }
     return
   }
 
@@ -150,6 +167,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     getUserSessionId: () => _getUserSessionId(),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
     decreaseCommunicationTimers: decreaseCommunicationTimersCookie === 'true',
+    searchParams,
   })
     .then(res => ({ userId: res.userId }))
     .catch(e => {
@@ -228,6 +246,7 @@ interface NewLoginParams {
   localUser: ServerLocalUser | null
   getUserSessionId: () => Promise<string>
   decreaseCommunicationTimers?: boolean
+  searchParams: Record<string, string>
   // dependency injecting this in to the function so we can mock it in tests
   injectedFetchEmbeddedWalletMetadataFromThirdweb: typeof fetchEmbeddedWalletMetadataFromThirdweb
 }
@@ -297,10 +316,10 @@ This function will ensure we create a user opt-in action if one does not already
 */
 
 export async function onNewLogin(props: NewLoginParams) {
-  const { cryptoAddress: _cryptoAddress, localUser } = props
+  const { cryptoAddress: _cryptoAddress, localUser, searchParams } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getCountryCodeCookie({ bypassValidCountryCodeCheck: true })
 
   // queryMatchingUsers logic
   const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
@@ -360,6 +379,7 @@ export async function onNewLogin(props: NewLoginParams) {
       localUser,
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
+      countryCode,
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -424,7 +444,7 @@ export async function onNewLogin(props: NewLoginParams) {
 
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+  const beforeFinish = async () => await Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   // triggerPostLoginUserActionSteps logic
   const postLoginUserActionSteps = await triggerPostLoginUserActionSteps({
@@ -465,6 +485,15 @@ export async function onNewLogin(props: NewLoginParams) {
   })
   peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
 
+  const isReferral =
+    isValidReferral(searchParams) ||
+    isValidReferral(localUser?.persisted?.initialSearchParams) ||
+    isValidReferral(localUser?.currentSession?.searchParamsOnLoad)
+
+  if (isReferral) {
+    triggerReferralSteps({ localUser, searchParams, newUser: user })
+  }
+
   waitUntil(beforeFinish())
   return {
     userId: user.id,
@@ -486,7 +515,7 @@ async function queryMatchingUsers({
   cryptoAddress,
   getUserSessionId,
   injectedFetchEmbeddedWalletMetadataFromThirdweb,
-}: NewLoginParams) {
+}: Omit<NewLoginParams, 'searchParams'>) {
   const log = getLog(cryptoAddress)
   const userSessionId = await getUserSessionId()
   const embeddedWalletUserDetails =
@@ -580,10 +609,12 @@ async function createUser({
   localUser,
   hasSignedInWithEmail,
   sessionId,
+  countryCode,
 }: {
   localUser: ServerLocalUser | null
   hasSignedInWithEmail: boolean
   sessionId: string | null
+  countryCode: string
 }) {
   return prismaClient.user.create({
     include: {
@@ -600,6 +631,7 @@ async function createUser({
       referralId: generateReferralId(),
       userSessions: { create: { id: sessionId ?? undefined } },
       ...mapLocalUserToUserDatabaseFields(localUser),
+      countryCode,
     },
   })
 }
@@ -816,6 +848,7 @@ async function triggerPostLoginUserActionSteps({
   countryCode: string
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
+
   /**
    * Ensure subscriber opt-in user action exists for this logged-in user (user can be new or existing).
    * Create if opt-in action does not exist.
