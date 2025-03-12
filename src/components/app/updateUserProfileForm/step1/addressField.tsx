@@ -70,10 +70,15 @@ export function AddressField({ user, resolvedAddress, setResolvedAddress }: Addr
         zodSupportedCountryCode.safeParse(addressCountryCode)
 
       if (isCountryCodeSupported && validatedAddressCountryCode !== userCountryCode) {
-        trackSectionVisible({
-          section: 'Address Field Country Code Change Disclaimer',
-          sectionGroup: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
-        })
+        trackSectionVisible(
+          {
+            section: 'Address Field Country Code Change Disclaimer',
+            sectionGroup: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
+          },
+          {
+            countryCode: validatedAddressCountryCode,
+          },
+        )
         setShouldShowCountryCodeDisclaimer(true)
       }
     }
