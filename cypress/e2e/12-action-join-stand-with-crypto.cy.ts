@@ -11,7 +11,7 @@ describe('action - join stand with crypto', () => {
     cy.waitForProfileCreation()
 
     cy.contains('You joined Stand With Crypto!').should('be.visible')
-    cy.get('[role="dialog"]').find('button').contains('Close').click({ force: true })
+    cy.get('[role="dialog"]').find('svg.lucide-x').click()
 
     // asserts that join with crypto is done and not clickable
 

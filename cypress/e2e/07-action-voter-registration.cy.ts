@@ -46,7 +46,7 @@ describe('action - voter registration', () => {
 
       cy.get('button')
         .contains(/register to vote/i)
-        .trigger('click', { force: true })
+        .trigger('click')
 
       // waiting for Inngest to consume job
       cy.contains('Nice work!')
@@ -70,7 +70,7 @@ describe('action - voter registration', () => {
       cy.waitForProfileCreation()
 
       cy.contains('You joined Stand With Crypto!').should('be.visible')
-      cy.get('[role="dialog"]').find('button').contains('Close').click({ force: true })
+      cy.get('[role="dialog"]').find('button').contains('Close').click()
 
       cy.contains('Check your voter registration').click()
       cy.get('[role="dialog"]').as('dialog')
@@ -84,7 +84,7 @@ describe('action - voter registration', () => {
 
       cy.get('button')
         .contains(/check my registration status/i)
-        .trigger('click', { force: true })
+        .trigger('click')
 
       // waiting for Inngest to consume job
       cy.contains('You registered to vote!').should('be.visible')
