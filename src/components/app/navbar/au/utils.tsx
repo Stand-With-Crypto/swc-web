@@ -1,5 +1,5 @@
 import { NavbarItem } from '@/components/app/navbar'
-import { DonateIcon, MissionIcon } from '@/components/app/navbar/navbarDrawerIcons'
+import { MissionIcon } from '@/components/app/navbar/navbarDrawerIcons'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 export const getAUNavbarItems = (urls: ReturnType<typeof getIntlUrls>): NavbarItem[] => {
@@ -9,17 +9,8 @@ export const getAUNavbarItems = (urls: ReturnType<typeof getIntlUrls>): NavbarIt
       text: 'Politician scores',
     },
     {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
       text: 'Resources',
       children: [
-        {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: <DonateIcon />,
-        },
         {
           href: urls.about(),
           text: 'Our mission',
