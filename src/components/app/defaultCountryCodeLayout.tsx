@@ -1,6 +1,7 @@
 import '@/globals.css'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import NextTopLoader from 'nextjs-toploader'
 import { Toaster } from 'sonner'
 
 import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
@@ -17,8 +18,11 @@ export function DefaultCountryCodeLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" translate="no">
       <body className={fontClassName}>
-        {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
-        {/* <NextTopLoader /> */}
+        <NextTopLoader
+          color="hsl(var(--primary-cta))"
+          shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
+          showSpinner={false}
+        />
         <TopLevelClientLogic countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
           <FullHeight.Container>
             <Navbar countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
@@ -28,7 +32,6 @@ export function DefaultCountryCodeLayout({ children }: { children: React.ReactNo
         </TopLevelClientLogic>
         <Toaster />
         <CookieConsent countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
-        {/* <Analytics debug={false} /> */}
         <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>
