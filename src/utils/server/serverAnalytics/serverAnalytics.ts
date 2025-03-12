@@ -5,6 +5,10 @@ import { cookies } from 'next/headers'
 import { promisify } from 'util'
 
 import {
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
+import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
   mapPersistedLocalUserToExperimentAnalyticsProperties,
@@ -12,7 +16,6 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
-import { SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/supportedCountries'
 
 import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
 
@@ -86,7 +89,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     logger.info(`Event Name: "${eventName}"`, eventProperties)
 
     const getCountryCodeAndTrack = async () => {
-      let countryCode: string | undefined
+      let countryCode: string | null = null
 
       try {
         // We already have a function that gets the country code from the cookies (getCountryCodeCookie.ts)
@@ -95,7 +98,9 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
         // we are duplicating the logic to get the cookie here but ignoring if it fails or if the cookie doesn't exist
         const currentCookies = await cookies()
 
-        countryCode = currentCookies.get(SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME)?.value
+        const maybeCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+
+        countryCode = parseUserCountryCodeCookie(maybeCountryCodeCookie)?.countryCode ?? null
       } catch {
         // We don't want to throw errors because in edge context, we won't have access to cookies
       }
@@ -180,6 +185,12 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     )
   }
 
+  const trackCountryCodeChanged = ({ previousCountryCode }: { previousCountryCode: string }) => {
+    return trackAnalytic(config, 'Country Code Changed', {
+      'Previous Country Code': previousCountryCode,
+    })
+  }
+
   const track = (
     eventName: string,
     {
@@ -197,6 +208,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     trackUserActionCreated,
     trackUserActionUpdated,
     trackUserActionCreatedIgnored,
+    trackCountryCodeChanged,
     track,
     flush,
   }

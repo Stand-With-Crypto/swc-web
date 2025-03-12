@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { AuthOption } from 'node_modules/thirdweb/dist/types/wallets/types'
 import { Arguments, useSWRConfig } from 'swr'
 import { signLoginPayload } from 'thirdweb/auth'
@@ -154,6 +154,9 @@ function ThirdwebLoginEmbedded(
   const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
   const { connect } = useConnect()
+  const searchParams = useSearchParams()
+
+  const searchParamsObject = searchParams ? Object.fromEntries(searchParams.entries()) : {}
 
   useEffect(() => {
     if (!session.isLoggedIn && !hasTracked.current) {
@@ -202,7 +205,7 @@ function ThirdwebLoginEmbedded(
       account: account!,
     })
 
-    await login(params)
+    await login(params, searchParamsObject)
     await props.onLoginCallback?.()
   }
 
@@ -212,7 +215,7 @@ function ThirdwebLoginEmbedded(
       auth={{
         isLoggedIn: async () => await isLoggedIn(),
         doLogin: async params => {
-          await login(params)
+          await login(params, searchParamsObject)
           await props.onLoginCallback?.()
         },
         getLoginPayload: async ({ address }) => generateThirdwebLoginPayload(address),

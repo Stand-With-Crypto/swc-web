@@ -17,7 +17,7 @@ export type ServerLocalUser = {
   currentSession: CurrentSessionLocalUser
 }
 
-const zodServerLocalUser = object({
+export const zodServerLocalUser = object({
   persisted: object({
     initialSearchParams: record(string(), string()),
     initialReferer: string().optional(),
@@ -29,7 +29,7 @@ const zodServerLocalUser = object({
     datetimeOnLoad: string(),
     refererOnLoad: string().optional(),
     searchParamsOnLoad: record(string(), string()),
-    countryCode: string(),
+    countryCode: string().optional(),
   }),
 })
 
@@ -135,7 +135,7 @@ function parseFromCookieStrings({
 
 export async function parseLocalUserFromCookies() {
   const cookieObj = await cookies()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getCountryCodeCookie({ bypassValidCountryCodeCheck: true })
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value

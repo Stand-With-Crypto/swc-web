@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { Footer } from '@/components/app/footer'
 import { PageLayout } from '@/components/app/layout/layout'
-import { Navbar } from '@/components/app/navbar'
-import { FullHeight } from '@/components/ui/fullHeight'
 import { PageProps } from '@/types'
 import { generateCountryCodeLayoutMetadata } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
@@ -32,9 +29,7 @@ export default async function Layout({
 
   return (
     <PageLayout countryCode={countryCode} shouldRenderGTM={true}>
-      <Navbar countryCode={countryCode} />
-      <FullHeight.Content>{children}</FullHeight.Content>
-      <Footer countryCode={countryCode} />
+      {children}
     </PageLayout>
   )
 }
