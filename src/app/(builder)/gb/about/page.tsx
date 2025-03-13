@@ -1,31 +1,27 @@
 import { Metadata } from 'next'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
-import { PartnerGrid } from '@/components/app/pagePartners/partnerGrid'
-import { PageProps } from '@/types'
-import { getPartners } from '@/utils/server/builder/models/data/partners'
-import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import {
+  BuilderPageModelIdentifiers,
+  InternationalBuilderPageModel,
+} from '@/utils/server/builder/models/page/constants'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 export const revalidate = 86400 // 1 day
 
-const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
-const PATHNAME = '/partners'
+const countryCode = SupportedCountryCodes.GB
+const PAGE_MODEL: InternationalBuilderPageModel = `${BuilderPageModelIdentifiers.PAGE}-${countryCode}`
+const PATHNAME = '/gb/about'
 
-export default async function PartnersPage(props: PageProps) {
-  const { countryCode } = await props.params
-
+export default async function AboutPage() {
   const content = await getPageContent(PAGE_MODEL, PATHNAME)
-  const partners = await getPartners()
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
       <RenderBuilderContent content={content} model={PAGE_MODEL} />
-      <div className="standard-spacing-from-navbar container space-y-20">
-        <PartnerGrid partners={partners} />
-      </div>
     </BuilderPageLayout>
   )
 }

@@ -5,10 +5,6 @@ import {
   BuilderPageModelIdentifiers,
   InternationalBuilderPageModel,
 } from '@/utils/server/builder/models/page/constants'
-import {
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
 
 export interface PageMetadata {
   title: string
@@ -18,27 +14,13 @@ export interface PageMetadata {
 }
 
 export async function getPageDetails(
-  pageModelName: BuilderPageModelIdentifiers,
+  pageModelName: BuilderPageModelIdentifiers | InternationalBuilderPageModel,
   pathname: string,
-  countryCode: SupportedCountryCodes,
 ): Promise<PageMetadata> {
-  let urlPath = pathname
-  let pageModel: BuilderPageModelIdentifiers | InternationalBuilderPageModel = pageModelName
-
-  if (
-    pageModelName === BuilderPageModelIdentifiers.PAGE &&
-    countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
-  ) {
-    // TODO: remove this once we add more SupportedCountryCodes
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    urlPath = `/${countryCode}${pathname}`
-    pageModel = ('page-' + countryCode) as InternationalBuilderPageModel
-  }
-
   const content = await builderSDKClient
-    .get(pageModel, {
+    .get(pageModelName, {
       userAttributes: {
-        urlPath,
+        urlPath: pathname,
       },
       // Set prerender to false to return JSON instead of HTML
       prerender: false,
@@ -47,14 +29,14 @@ export async function getPageDetails(
     .toPromise()
 
   if (!content?.data) {
-    Sentry.captureMessage(`Page content not found for model ${pageModel}`, {
+    Sentry.captureMessage(`Page content not found for model ${pageModelName}`, {
       extra: {
-        pathname: urlPath,
+        pathname,
         content,
       },
       tags: {
         domain: 'builder.io',
-        model: pageModel,
+        model: pageModelName,
       },
     })
     return {

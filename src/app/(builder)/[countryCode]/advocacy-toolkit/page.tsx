@@ -15,19 +15,17 @@ const PATHNAME = '/advocacy-toolkit'
 export default async function AdvocacyToolkitPage(props: PageProps) {
   const { countryCode } = await props.params
 
-  const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
+  const content = await getPageContent(PAGE_MODEL, PATHNAME)
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
-      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
 }
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const { countryCode } = await props.params
-
-  const metadata = await getPageDetails(PAGE_MODEL, PATHNAME, countryCode)
+export async function generateMetadata(): Promise<Metadata> {
+  const metadata = await getPageDetails(PAGE_MODEL, PATHNAME)
 
   return generateMetadataDetails({
     title: metadata.title,

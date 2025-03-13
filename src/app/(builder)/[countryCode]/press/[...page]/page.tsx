@@ -23,21 +23,21 @@ export default async function Page(props: PressReleasePageProps) {
 
   const pathname = PAGE_PREFIX + page?.join('/')
 
-  const content = await getPageContent(PAGE_MODEL, pathname, countryCode)
+  const content = await getPageContent(PAGE_MODEL, pathname)
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={pathname}>
-      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
 }
 
 export async function generateMetadata(props: PressReleasePageProps): Promise<Metadata> {
-  const { page, countryCode } = await props.params
+  const { page } = await props.params
 
   const pathname = PAGE_PREFIX + page?.join('/')
 
-  const metadata = await getPageDetails(PAGE_MODEL, pathname, countryCode)
+  const metadata = await getPageDetails(PAGE_MODEL, pathname)
 
   return generateMetadataDetails({
     title: metadata.title,
