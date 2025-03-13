@@ -7,6 +7,8 @@ import {
   UserActionEmail,
   UserActionEmailRecipient,
   UserActionOptIn,
+  UserActionPoll,
+  UserActionPollAnswer,
   UserActionRefer,
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
@@ -55,6 +57,11 @@ type ClientUserActionDatabaseQuery = UserAction & {
     | null
   userActionVotingDay: UserActionVotingDay | null
   userActionRefer: UserActionRefer | null
+  userActionPoll:
+    | (UserActionPoll & {
+        userActionPollAnswers: UserActionPollAnswer[]
+      })
+    | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -115,14 +122,21 @@ type ClientUserActionVotingInformationResearched = Pick<
   address: ClientAddress | null
   actionType: typeof UserActionType.VOTING_INFORMATION_RESEARCHED
 }
-
 type ClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
   actionType: typeof UserActionType.VOTING_DAY
 }
-
+type ClientUserActionPollAnswer = Pick<
+  UserActionPollAnswer,
+  'answer' | 'isOtherAnswer' | 'userActionCampaignName'
+>
 type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
   actionType: typeof UserActionType.REFER
 }
+type ClientUserActionPoll = {
+  actionType: typeof UserActionType.POLL
+  userActionPollAnswers: ClientUserActionPollAnswer[]
+}
+
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -146,6 +160,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionVotingInformationResearched
       | ClientUserActionVotingDay
       | ClientUserActionRefer
+      | ClientUserActionPoll
     )
 >
 
@@ -317,6 +332,18 @@ export const getClientUserAction = ({
         actionType: UserActionType.REFER,
       }
       return getClientModel({ ...sharedProps, ...referFields })
+    },
+    [UserActionType.POLL]: () => {
+      const { userActionPollAnswers } = getRelatedModel(record, 'userActionPoll')
+      const pollFields: ClientUserActionPoll = {
+        actionType: UserActionType.POLL,
+        userActionPollAnswers: userActionPollAnswers.map(x => ({
+          answer: x.answer,
+          isOtherAnswer: x.isOtherAnswer,
+          userActionCampaignName: x.userActionCampaignName,
+        })),
+      }
+      return getClientModel({ ...sharedProps, ...pollFields })
     },
   }
 
