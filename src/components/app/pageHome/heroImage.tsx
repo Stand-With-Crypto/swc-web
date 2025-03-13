@@ -6,7 +6,7 @@ import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionF
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { VideoPlayer } from '@/components/ui/video'
+import { Video } from '@/components/ui/video'
 import { cn } from '@/utils/web/cn'
 
 interface HeroImageProps {
@@ -21,24 +21,11 @@ interface HeroImageProps {
 const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
   return (
     <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-      <VideoPlayer
-        autoplay
-        className={cn('absolute left-0 top-0')}
-        failFallback={fallback}
-        fit="cover"
-        loadingFallback={
-          <NextImage
-            alt="loading"
-            className="h-full w-full object-cover"
-            fill
-            priority
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
-          />
-        }
-        loop
-        muted
-        type="video"
-        url="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
+      <Video
+        className={cn('absolute left-0 top-0 h-full w-full object-cover')}
+        fallback={fallback}
+        poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0dpm3AgAD5gHXYQBQLgAAAABJRU5ErkJggg=="
+        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
       />
 
       <div
