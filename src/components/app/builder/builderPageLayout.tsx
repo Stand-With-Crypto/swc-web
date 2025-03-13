@@ -1,9 +1,6 @@
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
-import {
-  BuilderPageModelIdentifiers,
-  InternationalBuilderPageModel,
-} from '@/utils/server/builder/models/page/constants'
+import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -16,9 +13,9 @@ export async function BuilderPageLayout({
   children: React.ReactNode
   countryCode: SupportedCountryCodes
   pathname: string
-  modelName: BuilderPageModelIdentifiers | InternationalBuilderPageModel
+  modelName: BuilderPageModelIdentifiers
 }) {
-  const pageMetadata = await getPageDetails(modelName, pathname)
+  const pageMetadata = await getPageDetails(modelName, pathname, countryCode)
 
   return (
     <>

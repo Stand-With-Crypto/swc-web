@@ -19,11 +19,11 @@ export default async function BuilderTestPage(props: PageProps) {
     return notFound()
   }
 
-  const content = await getPageContent(PAGE_MODEL, PATHNAME)
+  const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
-      <RenderBuilderContent content={content} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
 }

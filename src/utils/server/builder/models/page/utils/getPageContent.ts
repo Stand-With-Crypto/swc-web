@@ -3,15 +3,33 @@ import {
   BuilderPageModelIdentifiers,
   InternationalBuilderPageModel,
 } from '@/utils/server/builder/models/page/constants'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 export function getPageContent(
-  pageModelName: BuilderPageModelIdentifiers | InternationalBuilderPageModel,
+  pageModelName: BuilderPageModelIdentifiers,
   pathname: string,
+  countryCode: SupportedCountryCodes,
 ) {
+  let urlPath = pathname
+  let pageModel: BuilderPageModelIdentifiers | InternationalBuilderPageModel = pageModelName
+
+  if (
+    pageModelName === BuilderPageModelIdentifiers.PAGE &&
+    countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
+  ) {
+    // TODO: remove this once we add more SupportedCountryCodes
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    urlPath = `/${countryCode}${pathname}`
+    pageModel = ('page-' + countryCode) as InternationalBuilderPageModel
+  }
+
   return builderSDKClient
-    .get(pageModelName, {
+    .get(pageModel, {
       userAttributes: {
-        urlPath: pathname,
+        urlPath,
       },
       // Set prerender to false to return JSON instead of HTML
       prerender: false,
