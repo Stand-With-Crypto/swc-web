@@ -48,7 +48,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "64601 Wellington Road",
+  "address1": "5601 Wellington Road",
   "address2": "Apt. 535",
   "campaigns": [
     142628,
@@ -62,7 +62,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "lastname": "Macejkovic",
   "p2aSource": "source",
   "phone": "+19178798306",
-  "smsOptin": 1,
+  "smsOptin": 0,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
   "state": "ME",
