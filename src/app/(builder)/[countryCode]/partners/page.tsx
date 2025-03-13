@@ -30,8 +30,8 @@ export default async function PartnersPage(props: PageProps) {
   )
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { countryCode } = await params
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { countryCode } = await props.params
 
   const metadata = await getPageDetails(PAGE_MODEL, PATHNAME, countryCode)
 
