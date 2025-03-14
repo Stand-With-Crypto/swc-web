@@ -3,6 +3,8 @@ import '@/globals.css'
 import { NotFoundLayout } from '@/components/app/notFoundLayout'
 import { NotFoundPagesContent } from '@/components/app/notFoundPagesContent'
 
+export const dynamic = 'error'
+
 export default function NotFound() {
   return (
     <NotFoundLayout>

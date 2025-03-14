@@ -1,5 +1,4 @@
 import { ClientAddress } from '@/clientModels/clientAddress'
-import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { Experiments, EXPERIMENTS_CONFIG, IExperimentContext } from '@/utils/shared/experiments'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import {
