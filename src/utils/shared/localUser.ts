@@ -1,6 +1,11 @@
 import { ClientAddress } from '@/clientModels/clientAddress'
+import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { Experiments, EXPERIMENTS_CONFIG, IExperimentContext } from '@/utils/shared/experiments'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 export interface PersistedLocalUser {
   initialSearchParams: Record<string, string>
@@ -67,4 +72,10 @@ export function mapCurrentSessionLocalUserToAnalyticsProperties(
       {} as Record<string, string | undefined>,
     ),
   }
+}
+
+export function getCountryCodeFromLocalUser(localUser: LocalUser): SupportedCountryCodes {
+  return (localUser.persisted?.countryCode ||
+    localUser.currentSession?.countryCode ||
+    DEFAULT_SUPPORTED_COUNTRY_CODE) as SupportedCountryCodes
 }

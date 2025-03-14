@@ -3,7 +3,6 @@
 import '@/globals.css'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { usePathname } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
 import { Toaster } from 'sonner'
 
@@ -12,12 +11,13 @@ import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { FullHeight } from '@/components/ui/fullHeight'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { useLocalUser } from '@/hooks/useLocalUser'
+import { getCountryCodeFromLocalUser } from '@/utils/shared/localUser'
 import { fontClassName } from '@/utils/web/fonts'
 
-export function DefaultCountryCodeLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const countryCode = pathname?.split('/')[1] as SupportedCountryCodes
+export function NotFoundLayout({ children }: { children: React.ReactNode }) {
+  const localUser = useLocalUser()
+  const countryCode = getCountryCodeFromLocalUser(localUser)
 
   return (
     <html lang="en" translate="no">

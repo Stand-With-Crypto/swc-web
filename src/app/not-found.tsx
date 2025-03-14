@@ -1,12 +1,12 @@
 import '@/globals.css'
 
-import { DefaultCountryCodeLayout } from '@/components/app/defaultCountryCodeLayout'
+import { NotFoundLayout } from '@/components/app/notFoundLayout'
 import { NotFoundPagesContent } from '@/components/app/notFoundPagesContent'
 
 export default function NotFound() {
   return (
-    <DefaultCountryCodeLayout>
+    <NotFoundLayout>
       <NotFoundPagesContent />
-    </DefaultCountryCodeLayout>
+    </NotFoundLayout>
   )
 }
