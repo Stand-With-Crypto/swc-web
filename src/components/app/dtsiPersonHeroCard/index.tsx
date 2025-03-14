@@ -12,6 +12,7 @@ import {
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
+  isPoliticianStanceHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguage,
@@ -95,6 +96,8 @@ export function DTSIPersonHeroCard(props: Props) {
     : ''
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
 
+  const isStanceHidden = isPoliticianStanceHidden(person.slug)
+
   return (
     <DtsiPersonHeroCardWrapper
       countryCode={countryCode}
@@ -166,9 +169,11 @@ export function DTSIPersonHeroCard(props: Props) {
                 </div>
               )}
             </div>
-            <div className="ml-auto h-12 w-10 flex-shrink-0">
-              <DTSIFormattedLetterGrade className="h-full w-full" person={person} />
-            </div>
+            {!isStanceHidden && (
+              <div className="ml-auto h-12 w-10 flex-shrink-0">
+                <DTSIFormattedLetterGrade className="h-full w-full" person={person} />
+              </div>
+            )}
           </div>
         </div>
 
@@ -191,12 +196,14 @@ export function DTSIPersonHeroCard(props: Props) {
                 {person.stanceCount}{' '}
                 {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
-                <div className="shrink-0">
-                  <DTSIFormattedLetterGrade className="h-5 w-5" person={person} />
+              {!isStanceHidden && (
+                <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
+                  <div className="shrink-0">
+                    <DTSIFormattedLetterGrade className="h-5 w-5" person={person} />
+                  </div>
+                  <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
                 </div>
-                <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
-              </div>
+              )}
             </div>
           )}
         </div>
@@ -212,7 +219,7 @@ export function DTSIPersonHeroCard(props: Props) {
               <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
             </>
           ) : (
-            convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
+            isStanceHidden && convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
           )}
         </DTSIPersonHeroCardFooter>
       )}
