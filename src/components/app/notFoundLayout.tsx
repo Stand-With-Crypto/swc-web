@@ -15,6 +15,8 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 import { fontClassName } from '@/utils/web/fonts'
 
 export function NotFoundLayout({ children }: { children: React.ReactNode }) {
+  //TODO: @olavoparno - this is a temporary layout for the not found page. We should get countryCode according to the user's location
+
   return (
     <html lang="en" translate="no">
       <body className={fontClassName}>
