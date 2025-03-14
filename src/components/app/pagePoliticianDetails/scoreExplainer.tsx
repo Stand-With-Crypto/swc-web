@@ -27,9 +27,12 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
           {!isStanceHidden && <DTSIFormattedLetterGrade className="h-14 w-14" person={person} />}
         </div>
         <div>
-          <h3 className="mb-1 font-bold md:text-xl">
-            {!isStanceHidden && convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
-          </h3>
+          {!isStanceHidden && (
+            <h3 className="mb-1 font-bold md:text-xl">
+              {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
+            </h3>
+          )}
+
           <h4 className="text-sm text-fontcolor-muted md:text-base">
             {dtsiPersonFullName(person)} has made{' '}
             <FormattedNumber

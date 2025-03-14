@@ -45,7 +45,7 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
   }
 }
 
-const hideStanceSlugs: string[] = []
+export const hideStanceSlugs: string[] = []
 
 export function isPoliticianStanceHidden(dtsiSlug: string) {
   const exemptPolitician = hideStanceSlugs?.find(
