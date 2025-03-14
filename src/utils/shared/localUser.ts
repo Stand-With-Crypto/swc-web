@@ -1,10 +1,6 @@
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { Experiments, EXPERIMENTS_CONFIG, IExperimentContext } from '@/utils/shared/experiments'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
-import {
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
 
 export interface PersistedLocalUser {
   initialSearchParams: Record<string, string>
