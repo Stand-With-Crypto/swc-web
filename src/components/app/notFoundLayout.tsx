@@ -11,14 +11,10 @@ import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { FullHeight } from '@/components/ui/fullHeight'
-import { useLocalUser } from '@/hooks/useLocalUser'
-import { getCountryCodeFromLocalUser } from '@/utils/shared/localUser'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
 export function NotFoundLayout({ children }: { children: React.ReactNode }) {
-  const localUser = useLocalUser()
-  const countryCode = getCountryCodeFromLocalUser(localUser)
-
   return (
     <html lang="en" translate="no">
       <body className={fontClassName}>
@@ -27,15 +23,15 @@ export function NotFoundLayout({ children }: { children: React.ReactNode }) {
           shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
           showSpinner={false}
         />
-        <TopLevelClientLogic countryCode={countryCode}>
+        <TopLevelClientLogic countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
           <FullHeight.Container>
-            <Navbar countryCode={countryCode} />
+            <Navbar countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer countryCode={countryCode} />
+            <Footer countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
-        <CookieConsent countryCode={countryCode} />
+        <CookieConsent countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
         <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>
