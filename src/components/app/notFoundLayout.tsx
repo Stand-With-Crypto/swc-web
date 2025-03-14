@@ -1,3 +1,5 @@
+'use client'
+
 import '@/globals.css'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -12,9 +14,9 @@ import { FullHeight } from '@/components/ui/fullHeight'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
-export const dynamic = 'error'
+export function NotFoundLayout({ children }: { children: React.ReactNode }) {
+  //TODO: @olavoparno - this is a temporary layout for the not found page. We should get countryCode according to the user's location
 
-export function DefaultCountryCodeLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" translate="no">
       <body className={fontClassName}>
