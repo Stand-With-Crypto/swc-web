@@ -44,3 +44,15 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
       return 'Independent'
   }
 }
+
+const hideStanceSlugs: string[] = []
+
+export function isPoliticianStanceHidden(dtsiSlug: string) {
+  const exemptPolitician = hideStanceSlugs?.find(
+    slug => slug.toLowerCase() === dtsiSlug.toLowerCase(),
+  )
+
+  const isStanceHidden = exemptPolitician !== undefined
+
+  return isStanceHidden
+}

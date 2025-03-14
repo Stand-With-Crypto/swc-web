@@ -12,6 +12,7 @@ import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
+import { isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 
 function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
@@ -22,18 +23,26 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
     return <DTSIStanceDetailsQuote {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
+    const isStanceHidden = isPoliticianStanceHidden(props.person.slug)
+
     return (
       <DTSIBillCard
         bill={stance.billRelationship?.bill}
         className="p-0 sm:p-0"
-        description={`This bill is ${convertDTSIStanceScoreToCryptoSupportLanguage(stance.billRelationship.bill.computedStanceScore).toLowerCase()}.`}
+        description={
+          !isStanceHidden
+            ? `This bill is ${convertDTSIStanceScoreToCryptoSupportLanguage(stance.billRelationship.bill.computedStanceScore).toLowerCase()}.`
+            : undefined
+        }
         {...props}
       >
-        <CryptoSupportHighlight
-          className="flex-shrink-0 rounded-full py-2"
-          stanceScore={stance.computedStanceScore}
-          text={dtsiPersonBillRelationshipTypeAsVerb(stance?.billRelationship?.relationshipType)}
-        />
+        {!isStanceHidden ? (
+          <CryptoSupportHighlight
+            className="flex-shrink-0 rounded-full py-2"
+            stanceScore={stance.computedStanceScore}
+            text={dtsiPersonBillRelationshipTypeAsVerb(stance?.billRelationship?.relationshipType)}
+          />
+        ) : undefined}
       </DTSIBillCard>
     )
   }
@@ -47,9 +56,10 @@ export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) 
   return (
     <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
       <StanceTypeContent {...props} />
-      {stance.stanceType !== DTSI_PersonStanceType.BILL_RELATIONSHIP && (
-        <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
-      )}
+      {!isPoliticianStanceHidden(props.person.slug) &&
+        stance.stanceType !== DTSI_PersonStanceType.BILL_RELATIONSHIP && (
+          <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
+        )}
     </article>
   )
 }

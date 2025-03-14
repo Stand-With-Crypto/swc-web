@@ -19,6 +19,8 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
+import { isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
+import { StanceHiddenCard } from '@/components/app/dtsiClientPersonDataTable/StanceHiddenCard'
 
 export type Person = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people'][0]
 
@@ -99,10 +101,16 @@ export const getDTSIClientPersonDataTableColumns = ({
       },
       cell: ({ row }) => (
         <div className="flex items-center gap-2">
-          <DTSIFormattedLetterGrade className="h-7 w-7" person={row.original} />
-          <span className="hidden md:inline">
-            {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
-          </span>
+          {!isPoliticianStanceHidden(row.original.slug) ? (
+            <>
+              <DTSIFormattedLetterGrade className="h-7 w-7" person={row.original} />
+              <span className="hidden md:inline">
+                {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
+              </span>
+            </>
+          ) : (
+            <StanceHiddenCard />
+          )}
         </div>
       ),
     },
