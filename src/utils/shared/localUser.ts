@@ -72,9 +72,3 @@ export function mapCurrentSessionLocalUserToAnalyticsProperties(
     ),
   }
 }
-
-export function getCountryCodeFromLocalUser(localUser: LocalUser): SupportedCountryCodes {
-  return (localUser.persisted?.countryCode ||
-    localUser.currentSession?.countryCode ||
-    DEFAULT_SUPPORTED_COUNTRY_CODE) as SupportedCountryCodes
-}
