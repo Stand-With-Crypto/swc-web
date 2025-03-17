@@ -12,7 +12,7 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
-import { externalUrls } from '@/utils/shared/urls'
+import { usExternalUrls } from '@/utils/shared/urls'
 
 export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
@@ -44,7 +44,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
       >
         <div className="p-6 md:p-0">
           <p className="mb-3 text-sm">
-            <ExternalLink href={externalUrls.dtsi()}>DoTheySupportIt</ExternalLink> calculates
+            <ExternalLink href={usExternalUrls.dtsi()}>DoTheySupportIt</ExternalLink> calculates
             scores based on members' public statements or actions. Press "Add Position" to
             contribute more statements.
           </p>
@@ -60,7 +60,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
             .
           </p>
           <Button asChild className="w-full">
-            <ExternalLink href={externalUrls.dtsiCreateStance(person.slug)}>
+            <ExternalLink href={usExternalUrls.dtsiCreateStance(person.slug)}>
               Add Position <MoveUpRight className="ml-2" />
             </ExternalLink>
           </Button>

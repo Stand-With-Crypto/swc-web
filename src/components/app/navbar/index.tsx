@@ -8,7 +8,6 @@ import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
-import { getNavbarItems } from '@/components/app/navbar/utils'
 import {
   Accordion,
   AccordionContent,
@@ -24,6 +23,8 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+
+import { NavbarCountrySelect } from './navbarCountrySelect'
 
 export type NavbarItem =
   | {
@@ -41,11 +42,27 @@ export type NavbarItem =
       href?: undefined
     }
 
-interface NavbarProps {
+export interface NavbarProps {
   countryCode: SupportedCountryCodes
+  items: NavbarItem[]
+  showDonateButton?: boolean
+  logo?: {
+    src: string
+    width: number
+    height: number
+  }
 }
 
-export function Navbar({ countryCode }: NavbarProps) {
+export function Navbar({
+  countryCode,
+  items,
+  logo = {
+    src: '/logo/shield.svg',
+    width: 41,
+    height: 40,
+  },
+  showDonateButton = false,
+}: NavbarProps) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
   const urls = getIntlUrls(countryCode)
@@ -59,8 +76,6 @@ export function Navbar({ countryCode }: NavbarProps) {
   }, [dialogProps])
 
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production' && !isPreviewing
-
-  const navbarItems = getNavbarItems(countryCode)
 
   return (
     <>
@@ -86,17 +101,11 @@ export function Navbar({ countryCode }: NavbarProps) {
       >
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
-            <NextImage
-              alt="Stand With Crypto Logo"
-              height={40}
-              priority
-              src="/logo/shield.svg"
-              width={41}
-            />
+            <NextImage alt="Stand With Crypto Logo" priority {...logo} />
           </InternalLink>
           <div className="flex gap-4">
             <div className="flex h-fit gap-4 rounded-full bg-secondary">
-              {navbarItems.map(({ href, text, children }, index) => (
+              {items.map(({ href, text, children }, index) => (
                 <div
                   className="nav-item group relative"
                   key={text}
@@ -184,10 +193,13 @@ export function Navbar({ countryCode }: NavbarProps) {
               ))}
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
-              <DonateButton
-                href={urls.donate()}
-                maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-              />
+              <NavbarCountrySelect />
+              {showDonateButton && (
+                <DonateButton
+                  href={urls.donate()}
+                  maybeCloseAfterNavigating={maybeCloseAfterNavigating}
+                />
+              )}
               <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
             </div>
           </div>
@@ -203,13 +215,7 @@ export function Navbar({ countryCode }: NavbarProps) {
             <div className="h-screen overflow-y-auto pb-6 text-left">
               <div className="flex justify-between p-6">
                 <InternalLink className="flex-shrink-0" href={urls.home()}>
-                  <NextImage
-                    alt="Stand With Crypto Logo"
-                    height={40}
-                    priority
-                    src="/logo/shield.svg"
-                    width={41}
-                  />
+                  <NextImage alt="Stand With Crypto Logo" priority {...logo} />
                 </InternalLink>
                 <DrawerClose asChild>
                   <Button className="px-0" variant="ghost">
@@ -218,7 +224,7 @@ export function Navbar({ countryCode }: NavbarProps) {
                 </DrawerClose>
               </div>
 
-              {navbarItems.map(({ href, text, children }) => {
+              {items.map(({ href, text, children }) => {
                 if (children) {
                   const accordionTitle = text
                   return (
@@ -286,11 +292,16 @@ export function Navbar({ countryCode }: NavbarProps) {
                 <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
               </div>
               <div className="mt-4 px-6">
-                <DonateButton
-                  href={urls.donate()}
-                  maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-                />
+                <NavbarCountrySelect />
               </div>
+              {showDonateButton && (
+                <div className="mt-4 px-6">
+                  <DonateButton
+                    href={urls.donate()}
+                    maybeCloseAfterNavigating={maybeCloseAfterNavigating}
+                  />
+                </div>
+              )}
             </div>
           </DrawerContent>
         </Drawer>
