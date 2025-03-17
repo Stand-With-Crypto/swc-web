@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useTransition } from 'react'
+import { isEmpty } from 'lodash-es'
 
 import { GeoGateContent } from '@/components/app/pagePolls/geoGatedPollsContent'
 import { InactivePolls } from '@/components/app/pagePolls/inactivePolls'
@@ -69,12 +70,16 @@ export function PagePolls({
     }
   }, [hasAnyResults, hasUserVoted, isLoggedIn, setShowResults])
 
+  const hasActivePoll = activePoll && !isEmpty(activePoll)
+  const hasInactivePolls = inactivePolls && !isEmpty(inactivePolls)
+  const hasNoPolls = !hasActivePoll && !hasInactivePolls
+
   return (
     <div className="standard-spacing-from-navbar container px-2">
       <section className="container mb-16 max-w-3xl p-0">
         <PageTitle className="mb-7">{title}</PageTitle>
         <PageSubTitle className="text-muted-foreground" size="md" withoutBalancer>
-          {!activePoll && !inactivePolls ? (
+          {hasNoPolls ? (
             <div className="mt-12">
               <p>No Polls available at the moment.</p>
               <p>Please check back later.</p>
@@ -87,8 +92,8 @@ export function PagePolls({
           )}
         </PageSubTitle>
       </section>
-      <section className="container mb-16 max-w-3xl p-0">
-        {activePoll && (
+      {hasActivePoll && (
+        <section className="container mb-16 max-w-3xl p-0">
           <GeoGateContent
             activePoll={activePoll}
             handleShowResults={handleShowResults}
@@ -98,9 +103,9 @@ export function PagePolls({
             shouldShowResults={shouldShowResults}
             userPolls={userPolls}
           />
-        )}
-      </section>
-      {inactivePolls && (
+        </section>
+      )}
+      {hasInactivePolls && (
         <section className="container max-w-3xl p-0">
           <InactivePolls
             inactivePolls={inactivePolls}

@@ -15,7 +15,6 @@ import {
   DonateIcon,
   MissionIcon,
   PartnersIcon,
-  PollIcon,
   PressIcon,
   ReferralsIcon,
 } from '@/components/app/navbar/navbarDrawerIcons'
@@ -60,11 +59,12 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
           text: 'Donate',
           icon: DonateIcon,
         },
-        {
-          href: urls.polls(),
-          text: 'Polls',
-          icon: PollIcon,
-        },
+        // TODO: Add polls back in when Poll data is available
+        // {
+        //   href: urls.polls(),
+        //   text: 'Polls',
+        //   icon: PollIcon,
+        // },
         {
           href: urls.referrals(),
           text: 'Referrals',

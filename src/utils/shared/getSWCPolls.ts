@@ -5,7 +5,7 @@ export const zodPollSchemaValidation = object({
   name: string(),
   data: object({
     pollTitle: string(),
-    allowOther: boolean(),
+    allowOther: boolean().optional(),
     endDate: string(),
     pollList: array(
       object({
