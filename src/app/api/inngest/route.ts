@@ -6,7 +6,6 @@ import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
-import { backfillUserActionRefer } from '@/inngest/functions/backfillUserActionRefer'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import {
   backfillSMSOptInReplyWithInngest,
@@ -75,7 +74,6 @@ export const { GET, POST, PUT } = serve({
     updateMetricsCacheInngestCronJob,
     backfillOptedOutUsers,
     cleanupDatadogSyntheticTestsWithInngest,
-    backfillUserActionRefer,
     updateDistrictsRankings,
   ],
 })
