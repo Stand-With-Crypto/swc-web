@@ -1,10 +1,12 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -84,6 +86,20 @@ export const getIntlUrls = (
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
+    locationStateSpecific: (stateCode: USStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
+    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
+    locationUnitedStatesPresidential: () => `${countryPrefix}/races/presidential`,
+    locationUnitedStates: () => `${countryPrefix}/races/`,
+    endorsedCandidates: () => `${countryPrefix}/races/endorsed/`,
+    locationDistrictSpecific: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: USStateCode
+      district: NormalizedDTSIDistrictId
+    }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
   }
 }
 
@@ -158,4 +174,11 @@ export const apiUrls = {
     `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
   districtRanking: ({ stateCode, districtNumber }: { stateCode: string; districtNumber: string }) =>
     `/api/public/referrals/${stateCode}/${districtNumber}`,
+  dtsiRacesByCongressionalDistrict: ({
+    stateCode,
+    district,
+  }: {
+    stateCode: string
+    district: number
+  }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
 }
