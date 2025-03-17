@@ -11,13 +11,7 @@ const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
-  'media-src': [
-    "'self'",
-    'blob:',
-    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
-    'https://www.youtube-nocookie.com/embed/',
-    'https://cdn.builder.io/',
-  ],
+  'media-src': ["'self'", 'blob:', 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com'],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
@@ -98,7 +92,6 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.com/',
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
-    'https://www.youtube-nocookie.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
   ],
