@@ -29,9 +29,9 @@ export function SumDonationsCounter(props: SumDonationsCounterProps) {
   return <AnimatedNumericOdometer className="text-primary-cta" size={60} value={formatted} />
 }
 
-function useLiveSumDonations({ countryCode, initialData }: SumDonationsCounterProps) {
+function useLiveSumDonations({ initialData }: SumDonationsCounterProps) {
   return useSWR(
-    apiUrls.totalDonations(countryCode),
+    apiUrls.totalDonations(),
     url =>
       fetchReq(url)
         .then(res => res.json())

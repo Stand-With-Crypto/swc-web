@@ -2,40 +2,19 @@ import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 
 import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
-import { COUNTRY_CODE_REGEX_PATTERN } from '@/utils/shared/supportedCountries'
+  COUNTRY_CODE_REGEX_PATTERN,
+  SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/shared/supportedCountries'
 
-interface GetCountryCodeCookieProps {
-  bypassValidCountryCodeCheck?: boolean
-}
-
-export async function getCountryCodeCookie({
-  bypassValidCountryCodeCheck,
-}: GetCountryCodeCookieProps = {}) {
+export async function getCountryCodeCookie() {
   const currentCookies = await cookies()
 
-  const maybeCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-
-  const countryCode = parseUserCountryCodeCookie(maybeCountryCodeCookie)?.countryCode ?? null
+  const countryCode = currentCookies.get(SWC_CURRENT_PAGE_COUNTRY_CODE_COOKIE_NAME)?.value
 
   if (!countryCode) {
     const error = new Error('Country Code cookie not found')
     Sentry.captureException(error, { tags: { countryCode } })
     throw error
-  }
-
-  if (bypassValidCountryCodeCheck) {
-    const isValidFormat = /^[a-z]{2}$/.test(countryCode)
-
-    if (!isValidFormat) {
-      const error = new Error('Invalid Country Code cookie format.')
-      Sentry.captureException(error, { tags: { countryCode } })
-      throw error
-    }
-
-    return countryCode
   }
 
   if (!COUNTRY_CODE_REGEX_PATTERN.test(countryCode)) {

@@ -11,13 +11,7 @@ const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
-  'media-src': [
-    "'self'",
-    'blob:',
-    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
-    'https://www.youtube-nocookie.com/embed/',
-    'https://cdn.builder.io/',
-  ],
+  'media-src': ["'self'", 'blob:', 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com'],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
@@ -98,7 +92,6 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.com/',
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
-    'https://www.youtube-nocookie.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
   ],
@@ -295,13 +288,13 @@ const nextConfig: NextConfig = {
       {
         source: '/join/:referralId',
         destination:
-          '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utm_medium',
+          '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utmMedium',
         permanent: false,
         has: [
           {
             type: 'query',
             key: 'utm_medium',
-            value: '(?<utm_medium>.+)',
+            value: '(?<utmMedium>.+)',
           },
         ],
       },
@@ -367,6 +360,12 @@ const nextConfig: NextConfig = {
         source: '/e/sj-res-3',
         destination:
           '/action/email?utm_source=swc&utm_medium=email&utm_campaign=broker-reporting-rule-1',
+        permanent: true,
+      },
+      {
+        source: '/e/crahouse',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=email&utm_campaign=broker-reporting-rule-house',
         permanent: true,
       },
       // SMS shortlinks

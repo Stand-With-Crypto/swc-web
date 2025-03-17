@@ -135,16 +135,14 @@ export const apiUrls = {
     stateCode: string
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
-  totalDonations: (countryCode: SupportedCountryCodes) =>
-    `/api/public/total-donations/${countryCode}`,
+  totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
   recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
     `/api/public/recent-activity/${limit}/${countryCode}`,
-  homepageTopLevelMetrics: (countryCode: SupportedCountryCodes) =>
-    `/api/public/homepage/top-level-metrics/${countryCode}`,
+  homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,

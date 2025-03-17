@@ -67,7 +67,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
+      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -87,7 +87,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
+    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
     firstName: '',
     lastName: '',
     emailAddress: '',
@@ -239,7 +239,7 @@ export function UserActionFormEmailCongressperson({
               Contact your Member of Congress
             </PageTitle>
             <PageSubTitle className="mb-7">
-              Tell your Senator to Vote “Yes” for S.J.Res.3.
+              Tell your Member to Vote “Yes” for H.J.Res.25.
             </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

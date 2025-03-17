@@ -1,8 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
-import { internationalRedirectHandler } from '@/utils/server/internationalRedirectHandler'
-import { obfuscateURLCountryCode } from '@/utils/server/obfuscateURLCountryCode'
+import { countryCodeRouter, saveCurrentCountryCodeAsCookie } from '@/utils/server/countryCodeRouter'
+import {
+  getCountryCode,
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
@@ -11,84 +14,72 @@ import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shar
 const logger = getLogger('middleware')
 
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
+
 export function middleware(request: NextRequest) {
   if (isCypress) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
 
-  const { response = obfuscateURLCountryCode(request), countryCookie } =
-    internationalRedirectHandler(request)
+  const localeResponse = countryCodeRouter(request)
+  saveCurrentCountryCodeAsCookie(request, localeResponse)
 
-  setSessionCookiesFromRequest(request, response)
-
-  if (countryCookie) {
-    setResponseCookie({
-      response,
-      cookieName: USER_COUNTRY_CODE_COOKIE_NAME,
-      cookieValue: JSON.stringify(countryCookie),
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours,
-    })
-  }
-
-  return response
-}
-
-export const config = {
-  matcher: '/((?!api|static|embedded|.*\\..*|_next|favicon.ico).*)',
-}
-
-function setSessionCookiesFromRequest(request: NextRequest, response: NextResponse) {
-  // Session ID from URL or generate new one
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
-
   if (urlSessionId && urlSessionId !== existingSessionId) {
     logger.info(`session id being set via url: ${urlSessionId}`)
-    setResponseCookie({
-      response,
-      cookieName: USER_SESSION_ID_COOKIE_NAME,
-      cookieValue: urlSessionId,
+    localeResponse.cookies.set({
+      name: USER_SESSION_ID_COOKIE_NAME,
+      value: urlSessionId,
+      httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
     })
   } else if (!existingSessionId) {
     const sessionId = generateUserSessionId()
     if (!isCypress) {
       logger.info(`setting initial session id: ${sessionId}`)
     }
-    setResponseCookie({
-      response,
-      cookieName: USER_SESSION_ID_COOKIE_NAME,
-      cookieValue: sessionId,
+    localeResponse.cookies.set({
+      name: USER_SESSION_ID_COOKIE_NAME,
+      value: sessionId,
+      httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
     })
   }
 
-  // User ID from URL
   const urlUserId = request.nextUrl.searchParams.get('userId')
   if (urlUserId) {
-    setResponseCookie({
-      response,
-      cookieName: USER_ID_COOKIE_NAME,
-      cookieValue: urlUserId,
+    localeResponse.cookies.set({
+      name: USER_ID_COOKIE_NAME,
+      value: urlUserId,
+      httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
     })
   }
+
+  const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+  const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
+
+  const userCountryCode = getCountryCode(request)
+
+  if (
+    parsedExistingCountryCode?.countryCode !== userCountryCode &&
+    !parsedExistingCountryCode?.bypassed
+  ) {
+    localeResponse.cookies.set({
+      name: USER_COUNTRY_CODE_COOKIE_NAME,
+      value: JSON.stringify({ countryCode: userCountryCode, bypassed: false }),
+      httpOnly: false,
+      sameSite: 'lax',
+      secure: true,
+    })
+  }
+
+  return localeResponse
 }
 
-function setResponseCookie({
-  cookieName,
-  cookieValue,
-  response,
-  maxAge,
-}: {
-  response: NextResponse
-  cookieName: string
-  cookieValue: string
-  maxAge?: number
-}) {
-  response.cookies.set({
-    name: cookieName,
-    value: cookieValue,
-    httpOnly: false,
-    sameSite: 'lax',
-    secure: true,
-    ...(maxAge && { maxAge }),
-  })
+export const config = {
+  matcher: '/((?!api|static|embedded|.*\\..*|_next|favicon.ico).*)',
 }

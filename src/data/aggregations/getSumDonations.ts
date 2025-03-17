@@ -12,17 +12,10 @@ const MANUALLY_TRACKED_DONATIONS = [
   1_300_000, // 2024-09-23 Exodus donation
 ]
 
-interface GetSumDonationsProps {
-  countryCode: string
-}
-
-export const getSumDonations = async ({ countryCode }: GetSumDonationsProps) => {
+export const getSumDonations = async () => {
   const amountUsd = await prismaClient.user.aggregate({
     _sum: {
       totalDonationAmountUsd: true,
-    },
-    where: {
-      countryCode,
     },
   })
   return {
