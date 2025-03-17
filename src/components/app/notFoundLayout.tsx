@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import NextTopLoader from 'nextjs-toploader'
 import { Toaster } from 'sonner'
 
+import { footerConfig, navbarConfig } from '@/app/[countryCode]/config'
 import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
@@ -27,9 +28,9 @@ export function NotFoundLayout({ children }: { children: React.ReactNode }) {
         />
         <TopLevelClientLogic countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
           <FullHeight.Container>
-            <Navbar countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+            <Navbar {...navbarConfig} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+            <Footer {...footerConfig} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />

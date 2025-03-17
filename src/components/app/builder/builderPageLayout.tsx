@@ -1,3 +1,4 @@
+import { footerConfig, navbarConfig } from '@/app/[countryCode]/config'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
@@ -19,9 +20,9 @@ export async function BuilderPageLayout({
 
   return (
     <>
-      {pageMetadata.hasNavbar && <Navbar countryCode={countryCode} />}
+      {pageMetadata.hasNavbar && <Navbar {...navbarConfig} />}
       {children}
-      {pageMetadata.hasFooter && <Footer countryCode={countryCode} />}
+      {pageMetadata.hasFooter && <Footer {...footerConfig} />}
     </>
   )
 }
