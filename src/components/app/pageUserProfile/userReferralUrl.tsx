@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
-import { usExternalUrls } from '@/utils/shared/urls'
+import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface UserReferralUrlProps {
@@ -18,7 +18,7 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
   const { referralId, className } = props
 
   const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
-  const fullUrl = usExternalUrls.swcReferralUrl({ referralId })
+  const fullUrl = externalUrls.swcReferralUrl({ referralId })
   const presentationUrl = fullUrl.replace(/https?:\/\/(www\.)?/, '').replace('/join/', '/join/\n')
 
   const handleCopy = () => handleCopyToClipboard(fullUrl)
