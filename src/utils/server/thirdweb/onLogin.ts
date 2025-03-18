@@ -17,7 +17,7 @@ import {
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { compact, groupBy, isEmpty } from 'lodash-es'
-import { cookies, headers } from 'next/headers'
+import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
@@ -32,11 +32,10 @@ import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getCountryCodeFromURL } from '@/utils/server/getCountryCodeFromURL'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
-import { extractCountryCode } from '@/utils/server/obfuscateURLCountryCode'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { triggerReferralSteps } from '@/utils/server/referral/triggerReferralSteps'
 import { isValidReferral } from '@/utils/server/referral/validateReferral'
@@ -61,7 +60,6 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
@@ -75,20 +73,6 @@ type UpsertedUser = User & {
 const getLog = (address: string) => (message: string) =>
   logger.info(`address ${address}: ${message}`)
 
-const getCountryCodeFromURL = async () => {
-  const headersList = await headers()
-
-  const referer = headersList.get('referer')
-  const xMatchedPath = headersList.get('x-matched-path')
-  logger.info('referer', referer)
-  logger.info('xMatchedPath', xMatchedPath)
-
-  const countryCode = extractCountryCode(xMatchedPath || '') || extractCountryCode(referer || '')
-  logger.info('countryCode', countryCode)
-
-  return countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE
-}
-
 export async function login(
   payload: VerifyLoginPayloadParams,
   searchParams: Record<string, string>,
@@ -97,9 +81,6 @@ export async function login(
   const verifiedPayload = await thirdwebAuth.verifyPayload(payload)
 
   if (!verifiedPayload.valid) return
-
-  const countryCodeFromURL = await getCountryCodeFromURL()
-  logger.info('countryCodeFromURL', countryCodeFromURL)
 
   const { address } = payload.payload
   const cryptoAddress = parseThirdwebAddress(address)
@@ -338,7 +319,7 @@ export async function onNewLogin(props: NewLoginParams) {
   const { cryptoAddress: _cryptoAddress, localUser, searchParams } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
-  const countryCode = await getCountryCodeCookie({ bypassValidCountryCodeCheck: true })
+  const countryCode = await getCountryCodeFromURL()
 
   // queryMatchingUsers logic
   const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
