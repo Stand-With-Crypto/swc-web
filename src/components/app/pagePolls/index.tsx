@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useTransition } from 'react'
+import { useCallback } from 'react'
 import { isEmpty } from 'lodash-es'
 
 import { GeoGatedPollsContent } from '@/components/app/pagePolls/geoGatedPollsContent'
@@ -17,18 +17,17 @@ import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 export function PagePolls({
   description,
   title,
-  activePoll,
+  activePolls,
   inactivePolls,
   pollsResultsData,
 }: {
   description: string
   title: string
-  activePoll: SWCPoll | null
+  activePolls: SWCPoll[] | null
   inactivePolls: SWCPoll[] | null
   pollsResultsData: Record<string, PollResultsDataResponse>
 }) {
-  const [isPendingVoteSubmissionTransaction, startVoteSubmissionTransaction] = useTransition()
-  const { user, isUserProfileLoading, isLoggedIn } = useSession()
+  const { user, isUserProfileLoading } = useSession()
   const {
     data: userPolls,
     isLoading: isPollsVotesLoading,
@@ -39,40 +38,17 @@ export function PagePolls({
     mutate: refreshPollsResults,
     isLoading: isPollsResultsLoading,
   } = usePollsResultsData(pollsResultsData)
-  const [showResults, setShowResults] = useState(false)
 
-  const handleShowResults = async () => {
-    startVoteSubmissionTransaction(async () => {
-      await refreshPollsVotesFromUser()
-      await refreshPollsResults()
-      setShowResults(true)
-    })
-  }
+  const isLoading = isUserProfileLoading || isPollsVotesLoading || isPollsResultsLoading
 
-  const handleVoteAgain = () => {
-    setShowResults(false)
-  }
-
-  const isLoading =
-    isUserProfileLoading ||
-    isPollsVotesLoading ||
-    isPollsResultsLoading ||
-    isPendingVoteSubmissionTransaction
-
-  const hasAnyResults = Object.keys(pollsResults).length > 0
-  const hasUserVoted = typeof userPolls?.pollVote[activePoll?.id ?? ''] !== 'undefined'
-
-  const shouldShowResults = showResults && hasAnyResults
-
-  useEffect(() => {
-    if (hasUserVoted && isLoggedIn && hasAnyResults) {
-      setShowResults(true)
-    }
-  }, [hasAnyResults, hasUserVoted, isLoggedIn, setShowResults])
-
-  const hasActivePoll = activePoll && !isEmpty(activePoll)
+  const hasActivePoll = activePolls && !isEmpty(activePolls)
   const hasInactivePolls = inactivePolls && !isEmpty(inactivePolls)
   const hasNoPolls = !hasActivePoll && !hasInactivePolls
+
+  const handleRefreshVotes = useCallback(async () => {
+    await refreshPollsVotesFromUser()
+    await refreshPollsResults()
+  }, [refreshPollsResults, refreshPollsVotesFromUser])
 
   return (
     <div className="standard-spacing-from-navbar container px-2">
@@ -92,19 +68,18 @@ export function PagePolls({
           )}
         </PageSubTitle>
       </section>
-      {hasActivePoll && (
-        <section className="container mb-16 max-w-3xl p-0">
-          <GeoGatedPollsContent
-            activePoll={activePoll}
-            handleShowResults={handleShowResults}
-            handleVoteAgain={handleVoteAgain}
-            isLoading={isLoading}
-            pollsResults={pollsResults}
-            shouldShowResults={shouldShowResults}
-            userPolls={userPolls}
-          />
-        </section>
-      )}
+      {hasActivePoll &&
+        activePolls?.map(activePoll => (
+          <section className="container mb-16 max-w-3xl p-0" key={activePoll.id}>
+            <GeoGatedPollsContent
+              activePoll={activePoll}
+              handleRefreshVotes={handleRefreshVotes}
+              isLoading={isLoading}
+              pollsResults={pollsResults}
+              userPolls={userPolls}
+            />
+          </section>
+        ))}
       {hasInactivePolls && (
         <section className="container max-w-3xl p-0">
           <InactivePolls

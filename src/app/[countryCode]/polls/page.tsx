@@ -25,12 +25,10 @@ export default async function PollsPage() {
   const builderIoPolls = await getPolls()
   const pollsResultsData = await getPollsResultsData()
 
-  const activePoll = builderIoPolls?.find(poll => {
-    const activeCampaign = USER_ACTION_CTAS_FOR_GRID_DISPLAY[UserActionType.POLL].campaigns.find(
-      campaign => campaign.isCampaignActive,
-    )
-    return poll.id === activeCampaign?.campaignName
-  }) as SWCPoll | null
+  const activePolls = USER_ACTION_CTAS_FOR_GRID_DISPLAY[UserActionType.POLL].campaigns
+    .filter(campaign => campaign.isCampaignActive)
+    .map(campaign => builderIoPolls?.find(poll => poll.id === campaign.campaignName))
+    .filter(Boolean) as SWCPoll[] | null
 
   const inactivePolls = USER_ACTION_CTAS_FOR_GRID_DISPLAY[UserActionType.POLL].campaigns
     .filter(campaign => !campaign.isCampaignActive)
@@ -39,7 +37,7 @@ export default async function PollsPage() {
 
   return (
     <PagePolls
-      activePoll={activePoll}
+      activePolls={activePolls}
       description={description}
       inactivePolls={inactivePolls}
       pollsResultsData={pollsResultsData}

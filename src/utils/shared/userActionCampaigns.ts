@@ -37,9 +37,10 @@ export enum UserActionEmailCampaignName {
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
 export enum UserActionPollCampaignName {
-  ACTIVE_POLL_ID = 'b5d406a439734ae88e89de9c2d3803bb',
-  INACTIVE_DEFAULT_INITIAL_POLL_ID = 'f82669b830d5475dae9e466a7c4598c7',
-  INACTIVE_POLL_ID = 'f374e663801c435b9409a4606007f7ba',
+  CRYPTO_NEWS = '13ba79f9884342a39e1f8825a68bf6e6',
+  DIGITAL_ASSETS = '83cfa60cf9f54b28836635dc7ce7f3b9',
+  ENCOURAGE = '063780ccc6094b83935b8cb49dcc6bdd',
+  OVAL_OFFICE = 'c5b32ae0dce44b1780bedd9a8c905e67',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
@@ -141,5 +142,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
     UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: UserActionVotingDayCampaignName['2024_ELECTION'],
   [UserActionType.REFER]: UserActionReferCampaignName.DEFAULT,
-  [UserActionType.POLL]: UserActionPollCampaignName.ACTIVE_POLL_ID,
+  [UserActionType.POLL]: UserActionPollCampaignName.CRYPTO_NEWS,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>

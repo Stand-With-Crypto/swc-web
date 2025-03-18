@@ -303,8 +303,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.POLL,
-        campaignName: UserActionPollCampaignName.ACTIVE_POLL_ID,
-        isCampaignActive: false,
+        campaignName: UserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: true,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
@@ -312,8 +312,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.POLL,
-        campaignName: UserActionPollCampaignName.INACTIVE_DEFAULT_INITIAL_POLL_ID,
-        isCampaignActive: false,
+        campaignName: UserActionPollCampaignName.DIGITAL_ASSETS,
+        isCampaignActive: true,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
@@ -321,8 +321,17 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.POLL,
-        campaignName: UserActionPollCampaignName.INACTIVE_POLL_ID,
-        isCampaignActive: false,
+        campaignName: UserActionPollCampaignName.ENCOURAGE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: UserActionPollCampaignName.OVAL_OFFICE,
+        isCampaignActive: true,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
