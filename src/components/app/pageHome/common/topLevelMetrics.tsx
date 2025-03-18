@@ -106,7 +106,7 @@ export function TopLevelMetrics({
     <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
       {[
         {
-          label: 'Donated by crypto advocates',
+          label: 'Global donations',
           value: (
             <TooltipProvider delayDuration={0}>
               <Tooltip onOpenChange={setIsDonatedTooltipOpen} open={isDonatedTooltipOpen}>
@@ -132,11 +132,11 @@ export function TopLevelMetrics({
           ),
         },
         {
-          label: 'Crypto advocates',
+          label: 'Global advocates',
           value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
         },
         {
-          label: 'Policymaker contacts',
+          label: 'Global policymaker contacts',
           value: (
             <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),

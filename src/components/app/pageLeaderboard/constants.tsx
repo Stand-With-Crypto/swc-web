@@ -1,4 +1,4 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { toBool } from '@/utils/shared/toBool'
 
 const maybeIgnorePreGeneration = (num: number) =>

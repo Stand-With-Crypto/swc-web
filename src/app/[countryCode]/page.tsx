@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { PageHome } from '@/components/app/pageHome'
+import { UsPageHome } from '@/components/app/pageHome/us'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
@@ -28,7 +28,7 @@ export default async function Home(props: PageProps) {
   }
 
   return (
-    <PageHome
+    <UsPageHome
       advocatePerStateDataProps={advocatePerStateDataProps}
       leaderboardData={leaderboardData.items}
       params={params}

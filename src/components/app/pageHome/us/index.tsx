@@ -3,11 +3,10 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
-import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/delayedRecentActivity'
-import { HeroCTA } from '@/components/app/pageHome/heroCTA'
-import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
-import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
+import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
+import { PartnerGrid } from '@/components/app/pageHome/us/partnerGrid'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
@@ -26,9 +25,9 @@ import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constan
 import { SWCPartners } from '@/utils/shared/getSWCPartners'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-import { TopLevelMetrics } from './topLevelMetrics'
+import { UsHero } from './hero'
 
-export function PageHome({
+export function UsPageHome({
   params,
   sumDonations,
   countUsers,
@@ -51,22 +50,7 @@ export function PageHome({
 
   return (
     <>
-      <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
-        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
-          <PageTitle className={'lg:text-left'} withoutBalancer>
-            If you care about crypto, it's time to prove it
-          </PageTitle>
-          <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
-            52 million Americans own crypto. And yet, crypto's future in America remains uncertain.
-            Congress is writing the rules as we speak - but they won't vote YES until they've heard
-            from you.
-          </PageSubTitle>
-          <HeroCTA />
-        </div>
-        <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <HeroImageWrapper />
-        </div>
-      </section>
+      <UsHero />
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, countryCode, countUsers, countPolicymakerContacts }} />
 

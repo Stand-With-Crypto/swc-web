@@ -3,7 +3,7 @@ import 'server-only'
 import React from 'react'
 import { X } from 'lucide-react'
 
-import { PageHome } from '@/components/app/pageHome'
+import { UsPageHome } from '@/components/app/pageHome/us'
 import {
   dialogCloseStyles,
   dialogContentStyles,
@@ -70,7 +70,7 @@ export async function HomepageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <PageHome
+      <UsPageHome
         actions={[]}
         dtsiHomepagePeople={{ lowestScores: [], highestScores: [] }}
         leaderboardData={leaderboardData.items}
