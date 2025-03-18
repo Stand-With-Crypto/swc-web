@@ -2,7 +2,6 @@ import { faker } from '@faker-js/faker'
 import { Prisma, UserActionPollAnswer } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 const POLL_ANSWER_OPTIONS = ['Mike Tyson', 'Nick Cage', 'John Cena', 'The Rock']
 
@@ -11,7 +10,6 @@ export function mockCreateUserActionPollAnswerInput(campaignName: string) {
     userActionCampaignName: campaignName,
     answer: faker.helpers.arrayElement(POLL_ANSWER_OPTIONS),
     isOtherAnswer: faker.helpers.arrayElement([true, false]),
-    tenantId: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Omit<Prisma.UserActionPollAnswerCreateInput, 'userActionPoll'>
 }
 

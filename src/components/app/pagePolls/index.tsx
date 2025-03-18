@@ -3,7 +3,7 @@
 import { useEffect, useState, useTransition } from 'react'
 import { isEmpty } from 'lodash-es'
 
-import { GeoGateContent } from '@/components/app/pagePolls/geoGatedPollsContent'
+import { GeoGatedPollsContent } from '@/components/app/pagePolls/geoGatedPollsContent'
 import { InactivePolls } from '@/components/app/pagePolls/inactivePolls'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -12,7 +12,7 @@ import { PollResultsDataResponse } from '@/data/polls/getPollsData'
 import { usePollsResultsData } from '@/hooks/usePollsResultsData'
 import { usePollsVotesFromUser } from '@/hooks/usePollsVotesFromUser'
 import { useSession } from '@/hooks/useSession'
-import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 export function PagePolls({
   description,
@@ -94,7 +94,7 @@ export function PagePolls({
       </section>
       {hasActivePoll && (
         <section className="container mb-16 max-w-3xl p-0">
-          <GeoGateContent
+          <GeoGatedPollsContent
             activePoll={activePoll}
             handleShowResults={handleShowResults}
             handleVoteAgain={handleVoteAgain}

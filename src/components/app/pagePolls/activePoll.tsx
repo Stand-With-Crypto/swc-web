@@ -13,7 +13,8 @@ import { Form } from '@/components/ui/form'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
 import { useSession } from '@/hooks/useSession'
-import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { pluralize } from '@/utils/shared/pluralize'
+import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 interface ActivePollProps {
   activePoll: SWCPoll
@@ -227,10 +228,16 @@ const PollVotesInfo = ({
   totalPollVotes: number
   isMultiple: boolean
 }) => {
+  const votesInfo = pluralize({
+    singular: `${totalPollVotes} vote`,
+    plural: `${totalPollVotes} votes`,
+    count: totalPollVotes,
+  })
+
   return (
     <p className="mt-2 text-sm text-gray-500">
       {totalPollVotes
-        ? `${totalPollVotes} votes • Vote to see ${isMultiple ? 'results' : 'result'}`
+        ? `${votesInfo} • Vote to see ${isMultiple ? 'results' : 'result'}`
         : `Vote to see ${isMultiple ? 'results' : 'result'}`}
     </p>
   )

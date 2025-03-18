@@ -6,7 +6,7 @@ import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGr
 import { getPollsResultsData } from '@/data/polls/getPollsData'
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'

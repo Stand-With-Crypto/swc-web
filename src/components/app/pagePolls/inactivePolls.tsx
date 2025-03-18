@@ -3,7 +3,7 @@
 import { PollResults } from '@/components/app/pagePolls/pollResults'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
-import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 interface InactivePollsProps {
   inactivePolls: SWCPoll[]

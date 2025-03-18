@@ -367,7 +367,6 @@ model UserActionEmailRecipient {
 model UserActionPoll {
   id                    String                 @id @default(uuid())
   userAction            UserAction             @relation(fields: [id], references: [id], onDelete: Cascade)
-  tenantId              String                 @default("us") @map("tenant_id")
   userActionPollAnswers UserActionPollAnswer[]
 
   @@map("user_action_poll")
@@ -381,7 +380,6 @@ model UserActionPollAnswer {
   userActionCampaignName String         @map("user_action_campaign_name")
   answer                 String         @map("answer")
   isOtherAnswer          Boolean        @map("is_other_answer")
-  tenantId               String         @default("us") @map("tenant_id")
 
   @@index([userActionPollId])
   @@map("user_action_poll_answer")

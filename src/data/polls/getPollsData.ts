@@ -2,7 +2,7 @@ import { UserActionType } from '@prisma/client'
 
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 export interface PollResultsDataResponse {
   campaignName: string

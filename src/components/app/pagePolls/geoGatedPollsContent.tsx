@@ -4,9 +4,9 @@ import { GeoGate } from '@/components/app/geoGate'
 import { ActivePoll } from '@/components/app/pagePolls/activePoll'
 import { PollResults } from '@/components/app/pagePolls/pollResults'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
-import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
-interface GeoGateContentProps {
+interface GeoGatedPollsContentProps {
   activePoll: SWCPoll
   shouldShowResults: boolean
   handleShowResults: () => void
@@ -16,7 +16,7 @@ interface GeoGateContentProps {
   userPolls: PollsVotesFromUserResponse | undefined
 }
 
-export function GeoGateContent({
+export function GeoGatedPollsContent({
   activePoll,
   shouldShowResults,
   handleShowResults,
@@ -24,7 +24,7 @@ export function GeoGateContent({
   isLoading,
   pollsResults,
   userPolls,
-}: GeoGateContentProps) {
+}: GeoGatedPollsContentProps) {
   return (
     <GeoGate
       unavailableContent={

@@ -16,7 +16,6 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
-import { mockCreateUserActionPollInput } from '@/mocks/models/mockUserActionPoll'
 import { mockCreateUserActionPollAnswerInput } from '@/mocks/models/mockUserActionPollAnswer'
 import { mockCreateUserActionReferInput } from '@/mocks/models/mockUserActionRefer'
 import { mockCreateUserActionRsvpEventInput } from '@/mocks/models/mockUserActionRsvpEvent'
@@ -617,7 +616,6 @@ async function seed() {
   await batchAsyncAndLog(
     userActionsByType[UserActionType.POLL].map(action => {
       return {
-        ...mockCreateUserActionPollInput(),
         id: action.id,
       }
     }),

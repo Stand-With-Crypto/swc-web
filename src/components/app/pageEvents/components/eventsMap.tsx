@@ -7,12 +7,12 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
 import { EVENT_MAP_STATE_COORDS } from '@/components/app/pageEvents/utils/mapCoordinates'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import {
   getUSStateCodeFromStateName,
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
+import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
 interface MapMarker {

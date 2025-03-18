@@ -12,8 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface UpcomingEventsProps {
   events: SWCEvents

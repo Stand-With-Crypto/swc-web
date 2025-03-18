@@ -9,8 +9,9 @@ export const PollLegend = ({
   endDate: string
   isInactivePoll?: boolean
 }) => {
-  const endsIn = differenceInDays(new Date(endDate), new Date())
-  const hasEnded = isPast(new Date(endDate))
+  const currentEndDate = new Date(endDate)
+  const endsIn = differenceInDays(currentEndDate, new Date())
+  const hasEnded = isPast(currentEndDate)
   const hasEndedToday = endsIn === 0
   const dayOrDays = endsIn === 1 ? 'day' : 'days'
 
@@ -23,7 +24,7 @@ export const PollLegend = ({
   return (
     <span className="text-sm text-gray-500">
       {hasEnded
-        ? `Ended on ${format(new Date(endDate), 'MMM d, yyyy')}`
+        ? `Ended on ${format(currentEndDate, 'MMM d, yyyy')}`
         : `Ends in ${endsIn} ${dayOrDays}`}
     </span>
   )

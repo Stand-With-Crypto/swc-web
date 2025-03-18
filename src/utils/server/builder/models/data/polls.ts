@@ -3,9 +3,9 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
-import { SWCPoll, zodPollSchemaValidation } from '@/utils/shared/getSWCPolls'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SWCPoll, zodPollSchemaValidation } from '@/utils/shared/zod/getSWCPolls'
 
 const logger = getLogger(`builderIOPolls`)
 

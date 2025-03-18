@@ -8,7 +8,7 @@ import { handleCreateRsvpAction } from '@/components/app/pageEvents/utils/create
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { SWCEvent, SWCEvents } from '@/utils/shared/getSWCEvents'
+import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface PromotedEventsProps {
   events: SWCEvents

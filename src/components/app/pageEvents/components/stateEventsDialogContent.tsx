@@ -6,9 +6,9 @@ import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
-import { SWCEvent, SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface StateEventsDialogProps {
   state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP

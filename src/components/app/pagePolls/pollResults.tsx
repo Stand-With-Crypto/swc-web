@@ -7,7 +7,8 @@ import { PollLegend } from '@/components/app/pagePolls/pollLegend'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
-import { SWCPoll } from '@/utils/shared/getSWCPolls'
+import { pluralize } from '@/utils/shared/pluralize'
+import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 import { PollResultItem, PollResultItemOther } from './pollResultItem'
 
@@ -23,6 +24,24 @@ interface PollResultsProps {
 
 function getPercentage(totalVotes: number, optionVotes: number) {
   return totalVotes ? ((optionVotes || 0) / totalVotes) * 100 : 0
+}
+
+function getVotesInfo({
+  multiple,
+  totalAbsoluteVotes,
+  percentage,
+}: {
+  multiple: boolean
+  totalAbsoluteVotes: number
+  percentage: number
+}) {
+  return multiple
+    ? pluralize({
+        count: totalAbsoluteVotes,
+        singular: `${totalAbsoluteVotes} vote`,
+        plural: `${totalAbsoluteVotes} votes`,
+      })
+    : `${percentage.toFixed(0)}%`
 }
 
 export function PollResults({
@@ -65,7 +84,11 @@ export function PollResults({
           typeof userVotes?.answers.find(answer => answer.answer === option.value) !== 'undefined'
         const totalAbsoluteVotes = optionData?.totalVotes ?? 0
 
-        const votesInfo = multiple ? `${totalAbsoluteVotes} votes` : `${percentage.toFixed(0)}%`
+        const votesInfo = getVotesInfo({
+          multiple,
+          totalAbsoluteVotes,
+          percentage,
+        })
 
         return {
           votesInfo,
@@ -89,7 +112,11 @@ export function PollResults({
             typeof userVotes?.answers.find(answer => answer.isOtherAnswer) !== 'undefined'
           const totalAbsoluteVotes = otherAnswer?.totalVotes ?? 0
 
-          const votesInfo = multiple ? `${totalAbsoluteVotes} votes` : `${percentage.toFixed(0)}%`
+          const votesInfo = getVotesInfo({
+            multiple,
+            totalAbsoluteVotes,
+            percentage,
+          })
 
           return {
             votesInfo,
@@ -157,9 +184,15 @@ export function PollResults({
 }
 
 const PollResultsVotesInfo = ({ totalPollVotes }: { totalPollVotes: number }) => {
-  return totalPollVotes ? (
-    <p className="mt-2 text-sm text-gray-500">{totalPollVotes} votes</p>
-  ) : (
-    <p className="mt-2 text-sm text-gray-500">No votes yet</p>
-  )
+  const votesInfo = pluralize({
+    singular: `${totalPollVotes} vote`,
+    plural: `${totalPollVotes} votes`,
+    count: totalPollVotes,
+  })
+
+  if (totalPollVotes === 0) {
+    return <p className="mt-2 text-sm text-gray-500">No votes yet</p>
+  }
+
+  return <p className="mt-2 text-sm text-gray-500">{votesInfo}</p>
 }
