@@ -2,7 +2,7 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
