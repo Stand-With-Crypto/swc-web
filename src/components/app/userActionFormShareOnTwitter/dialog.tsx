@@ -3,13 +3,14 @@
 import dynamic from 'next/dynamic'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
-import { ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER } from '@/components/app/userActionFormShareOnTwitter/constants'
+import { getUserActionTweetContentByCountry } from '@/components/app/userActionFormShareOnTwitter/common/getUserActionContentByCountry'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useDialog } from '@/hooks/useDialog'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const UserActionFormShareOnTwitter = dynamic(
   () =>
-    import('@/components/app/userActionFormShareOnTwitter').then(
+    import('@/components/app/userActionFormShareOnTwitter/userActionFormShareOnTwitter').then(
       mod => mod.UserActionFormShareOnTwitter,
     ),
   {
@@ -24,18 +25,25 @@ const UserActionFormShareOnTwitter = dynamic(
 export function UserActionFormShareOnTwitterDialog({
   children,
   defaultOpen = false,
+  countryCode = SupportedCountryCodes.GB,
 }: {
   children: React.ReactNode
+  countryCode: SupportedCountryCodes
   defaultOpen?: boolean
 }) {
+  const countryConfig = getUserActionTweetContentByCountry(countryCode)
+
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
-    analytics: ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER,
+    analytics: countryConfig.analyticsName,
   })
 
   return (
     <UserActionFormDialog {...dialogProps} trigger={children}>
-      <UserActionFormShareOnTwitter onClose={() => dialogProps.onOpenChange(false)} />
+      <UserActionFormShareOnTwitter
+        countryCode={countryCode}
+        onClose={() => dialogProps.onOpenChange(false)}
+      />
     </UserActionFormDialog>
   )
 }

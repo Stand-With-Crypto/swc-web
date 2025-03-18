@@ -2,26 +2,21 @@
 
 import { UserActionType } from '@prisma/client'
 import { Check } from 'lucide-react'
-import { useSearchParams } from 'next/navigation'
 
 import { actionCreateUserActionTweet } from '@/actions/actionCreateUserActionTweet'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { SECTIONS_NAMES } from '@/components/app/userActionFormShareOnTwitter/constants'
+import { getUserActionTweetContentByCountry } from '@/components/app/userActionFormShareOnTwitter/common/getUserActionContentByCountry'
+import { ShareOnXSectionProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { Button } from '@/components/ui/button'
-import { UseSectionsReturn } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-type ShareOnXProps = UseSectionsReturn<SECTIONS_NAMES>
-
-export function ShareOnX(props: ShareOnXProps) {
-  const { goToSection } = props
-  const searchParams = useSearchParams()
+export function CommonShareSection<T extends string>(props: ShareOnXSectionProps<T>) {
+  const { goToSection, countryCode } = props
+  const config = getUserActionTweetContentByCountry(countryCode)
 
   const handleFollowClick = () => {
-    const target = searchParams?.get('target') ?? '_blank'
-
     void triggerServerActionForForm(
       {
         formName: 'User Action Tweet',
@@ -33,29 +28,22 @@ export function ShareOnX(props: ShareOnXProps) {
       },
       () => actionCreateUserActionTweet(),
     ).then(result => {
-      if (result.status === 'success') goToSection(SECTIONS_NAMES.SUCCESS)
+      if (result.status === 'success') goToSection(config.sections[1] as T)
     })
 
-    openWindow('https://x.com/standwithcrypto', target, `noopener`)
+    openWindow(config.meta.followUrl, '_blank', 'noopener')
   }
 
   return (
     <UserActionFormLayout>
       <UserActionFormLayout.Container className="h-auto items-center justify-between">
-        <UserActionFormLayout.Heading
-          subtitle="Follow Stand With Crypto and stay up to date on crypto policy"
-          title="Follow us on X"
-        />
+        <UserActionFormLayout.Heading subtitle={config.meta.subtitle} title={config.meta.title} />
 
         <div>
           <p className="mb-4">By following Stand With Crypto, you are:</p>
 
           <ul className="space-y-2">
-            {[
-              'Helping influence policymakers and decision makers',
-              'Staying informed on everything crypto policy related',
-              'Joining a community of like-minded individuals focused on keeping crypto in America',
-            ].map(info => (
+            {config.meta.benefits.map((info: string) => (
               <li className="flex items-center gap-4" key={info}>
                 <Check size={20} />
                 <span>{info}</span>
@@ -65,7 +53,7 @@ export function ShareOnX(props: ShareOnXProps) {
         </div>
 
         <Button className="w-full max-w-[450px]" onClick={handleFollowClick} size="lg">
-          Follow @StandWithCrypto
+          {config.meta.followText}
         </Button>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
