@@ -319,7 +319,7 @@ export async function onNewLogin(props: NewLoginParams) {
   const { cryptoAddress: _cryptoAddress, localUser, searchParams } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getCountryCodeCookie({ bypassValidCountryCodeCheck: true })
 
   // queryMatchingUsers logic
   const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
