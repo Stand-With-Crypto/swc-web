@@ -64,6 +64,11 @@ export async function getAuthenticatedData() {
       },
       userActionVotingDay: true,
       userActionRefer: true,
+      userActionPoll: {
+        include: {
+          userActionPollAnswers: true,
+        },
+      },
     },
   })
 
