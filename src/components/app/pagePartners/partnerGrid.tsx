@@ -1,6 +1,6 @@
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
-import { SWCPartners } from '@/utils/shared/getSWCPartners'
+import { SWCPartners } from '@/utils/shared/zod/getSWCPartners'
 
 export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
   return (

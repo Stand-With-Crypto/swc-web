@@ -4,9 +4,9 @@ import { BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/fun
 import { inngest } from '@/inngest/inngest'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 const defaultLogger = getLogger('sendEventNotifications')
 

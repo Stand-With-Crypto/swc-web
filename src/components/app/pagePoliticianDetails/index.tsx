@@ -29,8 +29,8 @@ import {
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
-import { SWCQuestionnaireAnswers } from '@/utils/shared/getSWCQuestionnaire'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCQuestionnaireAnswers } from '@/utils/shared/zod/getSWCQuestionnaire'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 

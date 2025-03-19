@@ -18,7 +18,7 @@ export default async function PartnersPage(props: PageProps) {
   const { countryCode } = await props.params
 
   const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
-  const partners = await getPartners()
+  const partners = await getPartners({ countryCode })
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>

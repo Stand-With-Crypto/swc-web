@@ -7,6 +7,7 @@ import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UserActionCampaigns,
   UserActionEmailCampaignName,
+  UserActionPollCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 const parseQueryString = (queryString?: string) => {
@@ -82,6 +83,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(countryCode)}/action/refer`
     },
   },
+  [UserActionType.POLL]: {
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/poll`
+    },
+  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
@@ -96,6 +102,20 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     },
     [UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email`
+    },
+  },
+  [UserActionType.POLL]: {
+    [UserActionPollCampaignName.CRYPTO_NEWS]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/poll`
+    },
+    [UserActionPollCampaignName.DIGITAL_ASSETS]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/poll`
+    },
+    [UserActionPollCampaignName.ENCOURAGE]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/poll`
+    },
+    [UserActionPollCampaignName.OVAL_OFFICE]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/poll`
     },
   },
 }

@@ -3,8 +3,8 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
-import { zodQuestionnaireSchemaValidation } from '@/utils/shared/getSWCQuestionnaire'
 import { getLogger } from '@/utils/shared/logger'
+import { zodQuestionnaireSchemaValidation } from '@/utils/shared/zod/getSWCQuestionnaire'
 
 const logger = getLogger(`builderIOQuestionnaire`)
 export async function getQuestionnaire(DTSISlug: string) {

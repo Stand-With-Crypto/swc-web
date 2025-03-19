@@ -3,10 +3,10 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
-import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/zod/getSWCEvents'
 
 const logger = getLogger(`builderIOEvents`)
 

@@ -14,13 +14,14 @@ export const dynamicParams = false
 
 export default async function Home(props: PageProps) {
   const params = await props.params
+  const { countryCode } = params
   const asyncProps = await getHomepageData({
     recentActivityLimit: 30,
     restrictToUS: true,
-    countryCode: params.countryCode,
+    countryCode,
   })
   const advocatePerStateDataProps = await getAdvocatesMapData()
-  const partners = await getPartners()
+  const partners = await getPartners({ countryCode })
   const leaderboardData = await getDistrictsLeaderboardData({ limit: 10 })
 
   /*
@@ -28,7 +29,7 @@ export default async function Home(props: PageProps) {
   a path that includes a "." like /requestProvider.js.map nextjs will try to render the page with that as the locality
   Adding this check here fixes that issue
   */
-  if (!ORDERED_SUPPORTED_COUNTRIES.includes(params.countryCode)) {
+  if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode)) {
     notFound()
   }
 
