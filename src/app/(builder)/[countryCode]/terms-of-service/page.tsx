@@ -19,7 +19,7 @@ export default async function TermsOfServicePage(props: PageProps) {
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
-      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
 }

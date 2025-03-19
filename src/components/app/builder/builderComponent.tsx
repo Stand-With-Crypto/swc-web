@@ -5,21 +5,11 @@ import { Builder, BuilderComponent } from '@builder.io/react'
 import { notFound } from 'next/navigation'
 
 import { useSession } from '@/hooks/useSession'
-// import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
-import {
-  // DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
 import { BuilderState } from '@/utils/web/builder/types'
 
-type BuilderPageProps = ComponentProps<typeof BuilderComponent> & {
-  countryCode: SupportedCountryCodes
-}
+type BuilderPageProps = ComponentProps<typeof BuilderComponent>
 
-export function RenderBuilderContent({
-  // countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
-  ...props
-}: BuilderPageProps) {
+export function RenderBuilderContent({ ...props }: BuilderPageProps) {
   const session = useSession()
 
   const builderData: BuilderState = {
