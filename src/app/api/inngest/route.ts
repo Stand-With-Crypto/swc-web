@@ -7,6 +7,7 @@ import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
+import { backfillUserCountryCodeEmptyWithInngest } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import {
   backfillSMSOptInReplyWithInngest,
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -75,5 +76,6 @@ export const { GET, POST, PUT } = serve({
     backfillOptedOutUsers,
     cleanupDatadogSyntheticTestsWithInngest,
     updateDistrictsRankings,
+    backfillUserCountryCodeEmptyWithInngest,
   ],
 })
