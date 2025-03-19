@@ -6,7 +6,7 @@ import { LazyEventDialogContent } from '@/components/app/pageEvents/components/e
 import { EventDialogContentSkeleton } from '@/components/app/pageEvents/components/eventDialogContentSkeleton'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
-import { SWCEvent } from '@/utils/shared/getSWCEvents'
+import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 
 interface EventDialogProps {
   event: SWCEvent

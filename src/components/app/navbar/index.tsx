@@ -59,6 +59,12 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
           text: 'Donate',
           icon: DonateIcon,
         },
+        // TODO: Add polls back in when Poll data is available
+        // {
+        //   href: urls.polls(),
+        //   text: 'Polls',
+        //   icon: PollIcon,
+        // },
         {
           href: urls.referrals(),
           text: 'Referrals',

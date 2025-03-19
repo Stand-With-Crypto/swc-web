@@ -7,6 +7,8 @@ import {
   UserActionEmail,
   UserActionEmailRecipient,
   UserActionOptIn,
+  UserActionPoll,
+  UserActionPollAnswer,
   UserActionRefer,
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
@@ -50,6 +52,11 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
     | null
   userActionVotingDay: UserActionVotingDay | null
   userActionRefer: UserActionRefer | null
+  userActionPoll:
+    | (UserActionPoll & {
+        userActionPollAnswers: UserActionPollAnswer[]
+      })
+    | null
 }
 
 type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'>
@@ -82,27 +89,22 @@ type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
-
 type SensitiveDataClientUserActionVoterRegistration = Pick<
   UserActionVoterRegistration,
   'usaState'
 > & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
-
 type SensitiveDataClientUserActionLiveEvent = { actionType: typeof UserActionType.LIVE_EVENT }
-
 type SensitiveDataClientUserActionTweetAtPerson = {
   actionType: typeof UserActionType.TWEET_AT_PERSON
   recipientDtsiSlug: string | null
 }
-
 type SensitiveDataClientUserActionRsvpEvent = {
   actionType: typeof UserActionType.RSVP_EVENT
   eventSlug: string
   eventState: string
 }
-
 type SensitiveDataClientUserActionVoterAttestation = Pick<
   UserActionVoterAttestation,
   'usaState'
@@ -122,9 +124,16 @@ type SensitiveDataClientUserActionVotingInformationResearched = Pick<
   address: ClientAddress | null
   actionType: typeof UserActionType.VOTING_INFORMATION_RESEARCHED
 }
-
 type SensitiveDataClientUserActionVotingDay = Pick<UserActionVotingDay, 'votingYear'> & {
   actionType: typeof UserActionType.VOTING_DAY
+}
+type SensitiveDataClientUserActionPollAnswer = Pick<
+  UserActionPollAnswer,
+  'answer' | 'isOtherAnswer' | 'userActionCampaignName'
+>
+type SensitiveDataClientUserActionPoll = {
+  actionType: typeof UserActionType.POLL
+  userActionPollAnswers: SensitiveDataClientUserActionPollAnswer[]
 }
 
 type SensitiveDataClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
@@ -154,6 +163,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionVotingInformationResearched
       | SensitiveDataClientUserActionVotingDay
       | SensitiveDataClientUserActionRefer
+      | SensitiveDataClientUserActionPoll
     )
 >
 
@@ -323,6 +333,18 @@ export const getSensitiveDataClientUserAction = ({
         actionType: UserActionType.REFER,
       }
       return getClientModel({ ...sharedProps, ...referFields })
+    },
+    [UserActionType.POLL]: () => {
+      const { userActionPollAnswers } = getRelatedModel(record, 'userActionPoll')
+      const pollFields: SensitiveDataClientUserActionPoll = {
+        actionType: UserActionType.POLL,
+        userActionPollAnswers: userActionPollAnswers.map(x => ({
+          answer: x.answer,
+          isOtherAnswer: x.isOtherAnswer,
+          userActionCampaignName: x.userActionCampaignName,
+        })),
+      }
+      return getClientModel({ ...sharedProps, ...pollFields })
     },
   }
 
