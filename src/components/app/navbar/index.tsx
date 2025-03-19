@@ -1,25 +1,14 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { JSX, useCallback, useState } from 'react'
 import { useIsPreviewing } from '@builder.io/react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
 import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import {
-  AdvocacyToolkitIcon,
-  BillsIcon,
-  CommunityIcon,
-  CreatorDefenseIcon,
-  DonateIcon,
-  MissionIcon,
-  PartnersIcon,
-  PollIcon,
-  PressIcon,
-  ReferralsIcon,
-} from '@/components/app/navbar/navbarDrawerIcons'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
+import { getNavbarItems } from '@/components/app/navbar/utils'
 import {
   Accordion,
   AccordionContent,
@@ -36,78 +25,32 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) {
+export type NavbarItem =
+  | {
+      href: string
+      text: string
+      children?: undefined
+    }
+  | {
+      text: string
+      children: {
+        href: string
+        text: string
+        icon: JSX.Element
+      }[]
+      href?: undefined
+    }
+
+interface NavbarProps {
+  countryCode: SupportedCountryCodes
+}
+
+export function Navbar({ countryCode }: NavbarProps) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
   const urls = getIntlUrls(countryCode)
   const [hoveredMenuIndex, setHoveredMenuIndex] = useState<number | null>(null)
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
-
-  const leftLinks = [
-    {
-      href: urls.politiciansHomepage(),
-      text: 'Politician scores',
-    },
-    {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
-      text: 'Resources',
-      children: [
-        {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: DonateIcon,
-        },
-        {
-          href: urls.polls(),
-          text: 'Polls',
-          icon: PollIcon,
-        },
-        {
-          href: urls.referrals(),
-          text: 'Referrals',
-          icon: ReferralsIcon,
-        },
-        {
-          href: urls.about(),
-          text: 'Our mission',
-          icon: MissionIcon,
-        },
-        {
-          href: urls.community(),
-          text: 'Community',
-          icon: CommunityIcon,
-        },
-        {
-          href: urls.partners(),
-          text: 'Partners',
-          icon: PartnersIcon,
-        },
-        {
-          href: urls.bills(),
-          text: 'Bills',
-          icon: BillsIcon,
-        },
-        {
-          href: urls.creatorDefenseFund(),
-          text: 'Creator Defense Fund',
-          icon: CreatorDefenseIcon,
-        },
-        {
-          href: urls.advocacyToolkit(),
-          text: 'Advocacy toolkit',
-          icon: AdvocacyToolkitIcon,
-        },
-        {
-          href: urls.press(),
-          text: 'Press',
-          icon: PressIcon,
-        },
-      ],
-    },
-  ]
 
   const maybeCloseAfterNavigating = useCallback(() => {
     if (dialogProps.open) {
@@ -116,6 +59,8 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
   }, [dialogProps])
 
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production' && !isPreviewing
+
+  const navbarItems = getNavbarItems(countryCode)
 
   return (
     <>
@@ -151,7 +96,7 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
           </InternalLink>
           <div className="flex gap-4">
             <div className="flex h-fit gap-4 rounded-full bg-secondary">
-              {leftLinks.map(({ href, text, children }, index) => (
+              {navbarItems.map(({ href, text, children }, index) => (
                 <div
                   className="nav-item group relative"
                   key={text}
@@ -206,35 +151,33 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                         }
                       }}
                     >
-                      {children.map(
-                        ({ href: childHref, text: childText, icon: Icon }, childIndex) => (
-                          <Button
-                            asChild
+                      {children.map(({ href: childHref, text: childText, icon }, childIndex) => (
+                        <Button
+                          asChild
+                          className={cn(
+                            'block w-full rounded-b-none rounded-t-none font-sans text-base font-bold',
+                            childIndex === 0 && 'rounded-t-[24px]',
+                            childIndex === children.length - 1 && 'rounded-b-[24px]',
+                          )}
+                          key={childHref}
+                          variant="ghost"
+                        >
+                          <InternalLink
                             className={cn(
-                              'block w-full rounded-b-none rounded-t-none font-sans text-base font-bold',
+                              'flex px-0 py-0',
+                              !!icon &&
+                                'items-center justify-start gap-2 rounded-b-none rounded-t-none p-6',
                               childIndex === 0 && 'rounded-t-[24px]',
                               childIndex === children.length - 1 && 'rounded-b-[24px]',
                             )}
-                            key={childHref}
-                            variant="ghost"
+                            href={childHref}
+                            onClick={() => setHoveredMenuIndex(null)}
                           >
-                            <InternalLink
-                              className={cn(
-                                'flex px-0 py-0',
-                                !!Icon &&
-                                  'items-center justify-start gap-2 rounded-b-none rounded-t-none p-6',
-                                childIndex === 0 && 'rounded-t-[24px]',
-                                childIndex === children.length - 1 && 'rounded-b-[24px]',
-                              )}
-                              href={childHref}
-                              onClick={() => setHoveredMenuIndex(null)}
-                            >
-                              {Icon && <Icon />}
-                              {childText}
-                            </InternalLink>
-                          </Button>
-                        ),
-                      )}
+                            {icon}
+                            {childText}
+                          </InternalLink>
+                        </Button>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -275,7 +218,7 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                 </DrawerClose>
               </div>
 
-              {leftLinks.map(({ href, text, children }) => {
+              {navbarItems.map(({ href, text, children }) => {
                 if (children) {
                   const accordionTitle = text
                   return (
@@ -300,7 +243,7 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                           {accordionTitle}
                         </AccordionTrigger>
                         <AccordionContent>
-                          {children.map(({ href: childHref, text: childText, icon: Icon }) => (
+                          {children.map(({ href: childHref, text: childText, icon }) => (
                             <Button
                               asChild
                               className="block w-full font-sans text-xl font-bold"
@@ -310,12 +253,12 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                               <InternalLink
                                 className={cn(
                                   'flex p-6 first:pt-3',
-                                  !!Icon && 'items-center justify-start gap-3',
+                                  !!icon && 'items-center justify-start gap-3',
                                 )}
                                 href={childHref}
                                 onClick={maybeCloseAfterNavigating}
                               >
-                                {Icon && <Icon />}
+                                {icon}
                                 {childText}
                               </InternalLink>
                             </Button>

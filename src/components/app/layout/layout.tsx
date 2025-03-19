@@ -1,37 +1,46 @@
-import '@/globals.css'
-
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import NextTopLoader from 'nextjs-toploader'
-import { Toaster } from 'sonner'
 
 import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
+import { GoogleTagManager } from '@/components/app/googleTagManager'
 import { Navbar } from '@/components/app/navbar'
+import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
+import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { Toaster } from '@/components/ui/sonner'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
-export const dynamic = 'error'
-
-export function DefaultCountryCodeLayout({ children }: { children: React.ReactNode }) {
+export function PageLayout({
+  children,
+  countryCode,
+  shouldRenderGTM,
+}: React.PropsWithChildren<{
+  countryCode: SupportedCountryCodes
+  shouldRenderGTM?: boolean
+}>) {
   return (
-    <html lang="en" translate="no">
+    <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
+      {shouldRenderGTM && <GoogleTagManager />}
       <body className={fontClassName}>
+        <OverrideGlobalLocalStorage />
         <NextTopLoader
           color="hsl(var(--primary-cta))"
           shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
           showSpinner={false}
         />
-        <TopLevelClientLogic countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
+        <TopLevelClientLogic countryCode={countryCode}>
           <FullHeight.Container>
-            <Navbar countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+            <NavBarGlobalBanner />
+            <Navbar countryCode={countryCode} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+            <Footer countryCode={countryCode} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
-        <CookieConsent countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+        <CookieConsent countryCode={countryCode} />
         <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>
