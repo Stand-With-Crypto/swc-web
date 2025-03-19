@@ -4,7 +4,6 @@ import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UserActionEmailCampaignName,
   UserActionPollCampaignName,
 } from '@/utils/shared/userActionCampaigns'
