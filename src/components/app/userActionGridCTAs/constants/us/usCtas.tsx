@@ -13,18 +13,17 @@ import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionCallCampaignName,
-  UserActionDonationCampaignName,
-  UserActionEmailCampaignName,
-  UserActionOptInCampaignName,
-  UserActionReferCampaignName,
-  UserActionTweetCampaignName,
-  UserActionVoterAttestationCampaignName,
-  UserActionVoterRegistrationCampaignName,
-  UserActionVotingDayCampaignName,
-  UserActionVotingInformationResearchedCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+  USUserActionCallCampaignName,
+  USUserActionDonationCampaignName,
+  USUserActionEmailCampaignName,
+  USUserActionOptInCampaignName,
+  USUserActionReferCampaignName,
+  USUserActionTweetCampaignName,
+  USUserActionVoterAttestationCampaignName,
+  USUserActionVoterRegistrationCampaignName,
+  USUserActionVotingDayCampaignName,
+  USUserActionVotingInformationResearchedCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
@@ -37,7 +36,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
-        campaignName: UserActionOptInCampaignName.DEFAULT,
+        campaignName: USUserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
         description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
@@ -58,7 +57,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.TWEET,
-        campaignName: UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
+        campaignName: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
         isCampaignActive: true,
         title: 'Follow us on X',
         description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
@@ -71,7 +70,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.TWEET,
-        campaignName: UserActionTweetCampaignName.DEFAULT,
+        campaignName: USUserActionTweetCampaignName.DEFAULT,
         isCampaignActive: false,
         title: 'Tweet Campaign',
         description: 'You helped bring more advocates to the cause by tweeting about SWC.',
@@ -93,7 +92,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTING_DAY,
-        campaignName: UserActionVotingDayCampaignName['2024_ELECTION'],
+        campaignName: USUserActionVotingDayCampaignName['2024_ELECTION'],
         isCampaignActive: false,
         title: 'I voted!',
         description: 'Claimed your "proof-of-vote" NFT.',
@@ -111,7 +110,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.DONATION,
-        campaignName: UserActionDonationCampaignName.DEFAULT,
+        campaignName: USUserActionDonationCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Make a donation',
         description: 'Donate fiat or crypto to help keep crypto in America.',
@@ -129,7 +128,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
-        campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
+        campaignName: USUserActionEmailCampaignName.DEFAULT,
         isCampaignActive: false,
         title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
         description: 'You emailed your representative about FIT21.',
@@ -138,7 +137,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.DEFAULT,
+        campaignName: USUserActionEmailCampaignName.DEFAULT,
         isCampaignActive: false,
         title: 'FIT21 Email Campaign',
         description: 'You emailed your representative and asked them to vote YES on FIT21.',
@@ -147,7 +146,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.FIT21_2024_04,
+        campaignName: USUserActionEmailCampaignName.FIT21_2024_04,
         isCampaignActive: false,
         title: 'FIT21 Email Campaign',
         description: 'You emailed your representative and asked them to vote YES on FIT21.',
@@ -156,7 +155,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
+        campaignName: USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
         isCampaignActive: false,
         title: 'CNN Presidential Debate 2024',
         description: "You emailed CNN and asked them to include the candidates' stance on crypto.",
@@ -165,7 +164,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
+        campaignName: USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
         isCampaignActive: false,
         title: 'ABC Presidential Debate 2024',
         description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
@@ -174,7 +173,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.SEC_COMMISSIONER_2024,
+        campaignName: USUserActionEmailCampaignName.SEC_COMMISSIONER_2024,
         isCampaignActive: false,
         title: 'Email Your Senator',
         description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
@@ -183,7 +182,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+        campaignName: USUserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
         isCampaignActive: false,
         title: 'Contacted and welcomed the 119 congress',
         description: 'The 119th Congress needs to hear from you!',
@@ -192,7 +191,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
+        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
         isCampaignActive: false,
         title: 'Contact your Member of Congress',
         description: 'Tell your senator to sign the discharge petition',
@@ -201,7 +200,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
+        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
         isCampaignActive: false,
         title: 'Contact your Member of Congress',
         description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
@@ -210,7 +209,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
         isCampaignActive: false,
         title: 'Contact your Member of Congress',
         description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
@@ -228,7 +227,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.CALL,
-        campaignName: UserActionCallCampaignName.FIT21_2024_04,
+        campaignName: USUserActionCallCampaignName.FIT21_2024_04,
         isCampaignActive: false, // FALSE UNTIL THE 2024 ELECTION IS OVER
         title: `Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`,
         // description: "The most effective way to make your voice heard. We'll show you how.", // TODO: RETURN TO THIS DESCRIPTION AFTER THE 2024 ELECTION IS OVER
@@ -238,7 +237,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.CALL,
-        campaignName: UserActionCallCampaignName.DEFAULT,
+        campaignName: USUserActionCallCampaignName.DEFAULT,
         isCampaignActive: false,
         title: 'FIT21 Call Campaign',
         description: 'You called your representative and asked them to vote YES on FIT21.',
@@ -256,7 +255,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTER_ATTESTATION,
-        campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
+        campaignName: USUserActionVoterAttestationCampaignName.DEFAULT,
         isCampaignActive: false,
         title: 'Get informed',
         description: 'See where your politicians stand on crypto.',
@@ -274,7 +273,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTER_REGISTRATION,
-        campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+        campaignName: USUserActionVoterRegistrationCampaignName.DEFAULT,
         isCampaignActive: false,
         title: 'Check your voter registration',
         description: 'Make sure you’re registered to vote in this year’s election.',
@@ -292,7 +291,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
-        campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+        campaignName: USUserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
         isCampaignActive: false,
         canBeTriggeredMultipleTimes: false,
         title: 'Prepare to vote',
@@ -311,7 +310,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.REFER,
-        campaignName: UserActionReferCampaignName.DEFAULT,
+        campaignName: USUserActionReferCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Refer a Friend',
         description: 'You have referred friends to join Stand With Crypto.',

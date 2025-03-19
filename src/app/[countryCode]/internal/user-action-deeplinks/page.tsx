@@ -13,7 +13,7 @@ import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
-import { UserActionCampaigns } from '@/utils/shared/userActionCampaigns'
+import { UserActionCampaigns } from '@/utils/shared/userActionCampaigns/index'
 
 export const dynamic = 'error'
 

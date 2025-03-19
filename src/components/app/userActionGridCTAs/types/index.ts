@@ -1,6 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
-import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns/index'
 
 export interface UserActionGridCTACampaign {
   actionType: UserActionType

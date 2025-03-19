@@ -1,14 +1,17 @@
 import { UserActionType } from '@prisma/client'
 
-import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionCampaigns,
   UserActionEmailCampaignName,
   UserActionPollCampaignName,
 } from '@/utils/shared/userActionCampaigns'
+import {
+  COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  UserActionCampaigns,
+} from '@/utils/shared/userActionCampaigns/index'
 
 const parseQueryString = (queryString?: string) => {
   if (!queryString) return ''
@@ -133,7 +136,10 @@ export const getUserActionDeeplink = <
   config,
   campaign,
 }: GetUserActionDeeplinkArgs<ActionType>) => {
-  if (!campaign || campaign === USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType]) {
+  if (
+    !campaign ||
+    campaign === COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[config.countryCode][actionType]
+  ) {
     return USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl(config)
   }
 
