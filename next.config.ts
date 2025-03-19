@@ -290,12 +290,12 @@ const nextConfig: NextConfig = {
         has: [
           {
             type: 'query',
-            key: 'countryCode',
+            key: 'ccRedirect',
             // Only match SupportedCountryCode values, excluding US
             value: '^(ca|gb|au)$',
           },
         ],
-        destination: '/:redirectInternational/:path*:query',
+        destination: '/:ccRedirect/:path*:query',
         permanent: false,
       },
       // vanity urls
