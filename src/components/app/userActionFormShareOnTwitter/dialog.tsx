@@ -25,7 +25,7 @@ const UserActionFormShareOnTwitter = dynamic(
 export function UserActionFormShareOnTwitterDialog({
   children,
   defaultOpen = false,
-  countryCode = SupportedCountryCodes.GB,
+  countryCode,
 }: {
   children: React.ReactNode
   countryCode: SupportedCountryCodes

@@ -7,7 +7,7 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 
-export const USER_ACTION_TWEET_CONTENT_BY_COUNTRY: Record<
+const USER_ACTION_TWEET_CONTENT_BY_COUNTRY: Record<
   SupportedCountryCodes,
   UserActionTweetCountryConfig
 > = {

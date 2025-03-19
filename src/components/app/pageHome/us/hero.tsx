@@ -1,5 +1,6 @@
 import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/hero'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export function UsHero() {
   return (
@@ -15,7 +16,7 @@ export function UsHero() {
       </Hero.Heading>
       <HeroAnnouncementCard
         authenticatedContent={
-          <UserActionFormShareOnTwitterDialog>
+          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
             <HeroAnnouncementCard.Image
               media={{
                 videoSrc: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
