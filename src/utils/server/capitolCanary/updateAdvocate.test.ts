@@ -51,7 +51,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "64601 Wellington Road",
+  "address1": "5601 Wellington Road",
   "address2": "Apt. 535",
   "advocateid": 68251920,
   "campaigns": [

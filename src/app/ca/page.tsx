@@ -1,9 +1,11 @@
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { CaPageHome } from '@/components/app/pageHome/ca'
+import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 
-export default function GbHomePage() {
-  return (
-    <div className="container">
-      <PageTitle>CA Home Page</PageTitle>
-    </div>
-  )
+export const revalidate = 60 // 1 minute
+export const dynamic = 'error'
+
+export default async function CaHomePage() {
+  const topLevelMetrics = await getHomepageTopLevelMetrics()
+
+  return <CaPageHome topLevelMetrics={topLevelMetrics} />
 }
