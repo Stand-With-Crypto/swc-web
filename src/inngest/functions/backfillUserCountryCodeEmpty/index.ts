@@ -18,6 +18,7 @@ export interface BackfillUserCountryCodeEmptyInngestSchema {
   name: typeof BACKFILL_USER_COUNTRY_CODE_EMPTY_INNGEST_EVENT_NAME
   data: {
     persist: boolean
+    onlyUS: boolean
   }
 }
 
@@ -34,7 +35,7 @@ export const backfillUserCountryCodeEmptyWithInngest = inngest.createFunction(
   },
   { event: BACKFILL_USER_COUNTRY_CODE_EMPTY_INNGEST_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { persist } = event.data
+    const { persist, onlyUS } = event.data
 
     const usersWithoutCountryCode = await step.run(
       'get users without country code',
@@ -60,6 +61,17 @@ export const backfillUserCountryCodeEmptyWithInngest = inngest.createFunction(
 
     await step.run('update users without country code', async () => {
       for (const user of usersWithoutCountryCode) {
+        if (onlyUS) {
+          logger.info('Setting only US', {
+            userId: user.id,
+            countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
+          })
+
+          await updateUserCountryCode(user.id, DEFAULT_SUPPORTED_COUNTRY_CODE, persist, logger)
+
+          continue
+        }
+
         if (!user.address?.formattedDescription && !user.address?.googlePlaceId) {
           logger.info('No address whatsoever. Using default country code', {
             userId: user.id,
