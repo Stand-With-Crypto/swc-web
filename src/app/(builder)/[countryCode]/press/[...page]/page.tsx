@@ -57,8 +57,6 @@ export async function generateStaticParams() {
 
   const countryPagePaths = await Promise.all(countryPagePathsPromises)
 
-  console.log(countryPagePaths.flat())
-
   return countryPagePaths.flat().map(path => {
     return {
       params: {
