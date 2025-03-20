@@ -1,6 +1,7 @@
 'use client'
 
 import { UserActionType } from '@prisma/client'
+import { useSearchParams } from 'next/navigation'
 
 import { actionCreateUserActionTweet } from '@/actions/actionCreateUserActionTweet'
 import {
@@ -11,24 +12,18 @@ import { ShareOnX } from '@/components/app/userActionFormShareOnTwitter/common/s
 import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/common/sections/success'
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
-import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { openWindow } from '@/utils/shared/openWindow'
-import { fullUrl } from '@/utils/shared/urls'
-import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function UKUserActionFormShareOnTwitter({ onClose }: UserActionFormShareOnTwitterProps) {
+  const searchParams = useSearchParams()
+
   const sectionProps = useSections({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SHARE,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER,
   })
-
-  const tweetMessage = `I #StandWithCrypto. More than ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} people are already advocating for better crypto policy in the UK. Join the fight to receive email updates on crypto policy, invites to local events, and more.`
-  const tweetUrl = fullUrl(
-    '/action/sign-up?utm_source=twitter&utm_medium=social&utm_campaign=user-action-tweet-uk',
-  )
 
   const ukBenefits = [
     'Staying informed about crypto policy in the UK',
@@ -38,6 +33,8 @@ export function UKUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
   ]
 
   const handleSubmit = () => {
+    const target = searchParams?.get('target') ?? '_blank'
+
     void triggerServerActionForForm(
       {
         formName: 'User Action Form Share On Twitter [UK]',
@@ -54,11 +51,7 @@ export function UKUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
       }
     })
 
-    openWindow(
-      createTweetLink({ url: tweetUrl, message: tweetMessage }),
-      'Twitter',
-      'noopener, width=550,height=400',
-    )
+    openWindow('https://x.com/standwithcrypto', target, `noopener`)
   }
 
   switch (sectionProps.currentSection) {

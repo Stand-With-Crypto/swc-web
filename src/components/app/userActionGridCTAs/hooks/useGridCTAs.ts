@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 import { usePathname } from 'next/navigation'
 
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -21,6 +21,8 @@ export function useGridCTAs({
   const countryCode = useCountryCode()
   const isProfilePage = pathname?.includes(getIntlUrls(countryCode).profile())
 
+  const userActionCTAs = getUserActionCTAsByCountry(countryCode)
+
   const performedUserActionObj = performedUserActionTypes.length
     ? performedUserActionTypes.reduce(
         (acc, performedUserAction) => {
@@ -33,10 +35,10 @@ export function useGridCTAs({
     : {}
 
   const ctas = excludeUserActionTypes
-    ? Object.entries(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
+    ? Object.entries(userActionCTAs)
         .filter(([key, _]) => !excludeUserActionTypes?.includes(key))
         .map(([_, value]) => value)
-    : Object.values(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
+    : Object.values(userActionCTAs)
 
   const filteredInactiveCampaigns = ctas
     .map(cta => {
