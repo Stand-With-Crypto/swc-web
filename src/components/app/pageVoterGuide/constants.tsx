@@ -30,9 +30,8 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     description: 'See where politicians on your ballot stand on crypto.',
     WrapperComponent: KeyRacesDialog,
     action: UserActionType.VOTER_ATTESTATION,
-    campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
-    image: '/actionTypeIcons/getInformed.png',
-    mobileImage: '/actionTypeIcons/optIn.png',
+    campaignName: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
+    image: '/actionTypeIcons/getInformedAction.png',
     wideDesktopImage: true,
   },
   {
@@ -40,7 +39,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     description: 'Make sure you’re registered to vote in this year’s election.',
     WrapperComponent: UserActionFormVoterRegistrationDialog,
     action: UserActionType.VOTER_REGISTRATION,
-    campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+    campaignName: UserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/voterAttestation.png',
   },
   {
@@ -51,7 +50,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
         <Suspense fallback={children}>
           <UserActionFormVotingInformationResearchedDialog
             initialValues={{
-              campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+              campaignName: UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
               address: undefined,
               shouldReceiveNotifications: false,
             }}
@@ -62,7 +61,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
       )
     },
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
-    campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+    campaignName: UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/votingResearched.png',
   },
 ]

@@ -11,6 +11,7 @@ import {
   dialogContentPaddingBottomStyles,
   dialogContentPaddingXStyles,
 } from '@/components/ui/dialog/styles'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { cn } from '@/utils/web/cn'
@@ -36,10 +37,18 @@ export function KeyRacesList(props: KeyRacesListProps) {
     target: '_blank',
   }
 
+  const doesNotHaveRaces = !congressional?.length && !presidential?.length && !senate?.length
+
   return (
-    <div className="space-y-6 md:space-y-10">
+    <div className="flex flex-1 flex-col space-y-6 md:space-y-10">
       {races ? (
         <>
+          {doesNotHaveRaces && (
+            <RaceSectionWrapper className="flex-1">
+              <PageSubTitle>No races in your district.</PageSubTitle>
+            </RaceSectionWrapper>
+          )}
+
           {!!presidential && presidential?.length > 0 && (
             <RaceSectionWrapper>
               <DTSIPersonHeroCardSection
@@ -79,7 +88,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
             </>
           )}
 
-          <RaceSectionWrapper className={dialogContentPaddingBottomStyles}>
+          <RaceSectionWrapper className={cn(dialogContentPaddingBottomStyles, 'mt-auto')}>
             <PACFooter className="static" />
           </RaceSectionWrapper>
         </>

@@ -66,7 +66,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const countryCode = await getCountryCodeCookie()
 
   const actionType = UserActionType.VIEW_KEY_RACES
-  const campaignName = UserActionViewKeyRacesCampaignName['2024_ELECTION']
+  const campaignName = UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS']
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -140,7 +140,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     maybeCongressionalDistrict?.districtNumber?.toString() ||
     null
 
-  const existingViewKeyRacesAction = await getUserAlreadyViewedKeyRaces(userId)
+  const existingViewKeyRacesAction = await getUserAlreadyViewedKeyRaces(userId, campaignName)
 
   if (existingViewKeyRacesAction) {
     logger.info(`User ${userId} has already viewed key races`)
@@ -330,7 +330,7 @@ async function createUserActionViewKeyRaces(
     data: {
       countryCode,
       actionType: UserActionType.VIEW_KEY_RACES,
-      campaignName: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
+      campaignName: UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
       userActionViewKeyRaces: {
         create: {
           usCongressionalDistrict,
@@ -346,13 +346,17 @@ async function createUserActionViewKeyRaces(
   })
 }
 
-async function getUserAlreadyViewedKeyRaces(userId: string) {
+async function getUserAlreadyViewedKeyRaces(
+  userId: string,
+  campaignName: UserActionViewKeyRacesCampaignName,
+) {
   return prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.VIEW_KEY_RACES,
       user: {
         id: userId,
       },
+      campaignName,
     },
     include: {
       userActionViewKeyRaces: true,

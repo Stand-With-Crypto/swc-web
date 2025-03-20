@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import { useCallback, useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 import { ClassValue } from 'clsx'
 
@@ -20,7 +20,7 @@ export function VoterJourneyStepList(props: VoterJourneyStepListProps) {
 
   const performedActions = useApiResponseForUserPerformedUserActionTypes()
 
-  const getStepStatus = React.useCallback(
+  const getStepStatus = useCallback(
     (action: UserActionType, campaignName: string) => {
       if (performedActions?.isLoading) {
         return 'unknown'
@@ -36,7 +36,7 @@ export function VoterJourneyStepList(props: VoterJourneyStepListProps) {
     [performedActions],
   )
 
-  const hydratedSteps = React.useMemo(
+  const hydratedSteps = useMemo(
     () =>
       VOTER_GUIDE_STEPS.map(step => ({
         ...step,

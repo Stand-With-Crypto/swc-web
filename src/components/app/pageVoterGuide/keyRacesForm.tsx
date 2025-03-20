@@ -56,8 +56,8 @@ export function KeyRacesForm(props: KeyRacesFormProps) {
 
   const isMobile = useIsMobile({ defaultState: true })
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const error = form.formState.errors?.address
-  const errorRef = useRef(error)
+  const addressError = form.formState.errors?.address
+  const errorRef = useRef(addressError)
 
   useEffect(() => {
     if (!isMobile && !errorRef.current && !initialValues?.address) {
@@ -75,9 +75,9 @@ export function KeyRacesForm(props: KeyRacesFormProps) {
   })
 
   const racesByAddressRequest = useRacesByAddress(address?.description, {
-    onError: () => {
+    onError: (error: Error) => {
       form.setError('address', {
-        message: 'Invalid address',
+        message: error.message,
       })
     },
     onSuccess: () => {
@@ -149,12 +149,22 @@ export function KeyRacesForm(props: KeyRacesFormProps) {
     racesByAddressRequest.isLoading ||
     !racesByAddressRequest.data ||
     !address?.place_id ||
-    !!error
+    !!addressError
+
+  const onFormSubmit = async (formValues: VoterGuideFormValues) => {
+    if (!racesByAddressRequest.data) {
+      form.setError('address', {
+        message: 'Invalid address',
+      })
+      return
+    }
+    await onSubmit?.(formValues)
+  }
 
   return (
     <UserActionFormLayout>
       <div className="flex h-full flex-1 flex-col">
-        <ScrollArea className="min-h-[70vh] overflow-auto md:max-h-[70vh]">
+        <ScrollArea className="flex min-h-[70vh]  flex-1 flex-col overflow-auto md:max-h-[70vh]">
           <div className={cn(dialogContentPaddingStyles)}>
             <div className="space-y-6">
               <p className="text-center text-xl font-semibold">Get informed</p>
@@ -166,22 +176,17 @@ export function KeyRacesForm(props: KeyRacesFormProps) {
                 <Form {...form}>
                   <form
                     id="view-key-races-form"
-                    onSubmit={form.handleSubmit(async formValues => {
-                      if (!racesByAddressRequest.data) {
-                        form.setError('address', {
-                          message: 'Invalid address',
-                        })
-                        return
-                      }
-                      await onSubmit?.(formValues)
-                    }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
+                    onSubmit={form.handleSubmit(
+                      onFormSubmit,
+                      trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED),
+                    )}
                   >
                     <FormField
                       control={form.control}
                       name="address"
                       render={({ field }) => (
                         <FormItem>
-                          <FormControl aria-invalid={!!error}>
+                          <FormControl aria-invalid={!!addressError}>
                             <GooglePlacesSelect
                               {...field}
                               className="rounded-full bg-secondary"
@@ -195,7 +200,7 @@ export function KeyRacesForm(props: KeyRacesFormProps) {
                               variant="lg"
                             />
                           </FormControl>
-                          {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
+                          {!!addressError && <ErrorMessage>{addressError?.message}</ErrorMessage>}
                         </FormItem>
                       )}
                     />
@@ -205,7 +210,7 @@ export function KeyRacesForm(props: KeyRacesFormProps) {
             </div>
           </div>
 
-          <div className="space-y-6 md:space-y-10">
+          <div className="flex flex-1 flex-col space-y-6 md:space-y-10">
             {racesByAddressRequest.isLoading ? (
               <KeyRacesSkeleton />
             ) : (

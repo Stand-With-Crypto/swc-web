@@ -132,7 +132,7 @@ export function UserActionFormVoterAttestation({
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
 
     const data: CreateActionVoterAttestationInput = {
-      campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
+      campaignName: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
       address: addressSchema,
       stateCode: racesByAddressRequest.data.stateCode as USStateCode,
     }

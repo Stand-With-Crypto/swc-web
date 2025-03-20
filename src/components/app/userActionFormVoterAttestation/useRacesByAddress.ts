@@ -55,7 +55,14 @@ async function getDTSIRacesFromCongressionalDistrict(result: CongressionalDistri
   }
 
   if (!data.congressional.length && !data.presidential.length && !data.senate.length) {
-    throw new Error(getErrorMessageByNotFoundReason('MISSING_FROM_DTSI'))
+    return {
+      ...data,
+      congressional: [],
+      presidential: [],
+      senate: [],
+      stateCode: result.stateCode,
+      districtNumber: result.districtNumber,
+    }
   }
 
   if (data?.presidential) {
