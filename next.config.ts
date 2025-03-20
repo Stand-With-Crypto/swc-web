@@ -666,6 +666,16 @@ const nextConfig: NextConfig = {
         destination: '/politicians',
         permanent: true,
       },
+      {
+        source: '/:country/manifesto',
+        destination: '/:country/about',
+        permanent: true,
+      },
+      {
+        source: '/:country/mission',
+        destination: '/:country/about',
+        permanent: true,
+      },
     ]
   },
 }
