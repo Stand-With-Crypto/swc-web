@@ -9,6 +9,7 @@ import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJo
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
 import { backfillUserActionRefer } from '@/inngest/functions/backfillUserActionRefer'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
+import { backfillUserCountryCodeEmptyWithInngest } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import {
   backfillSMSOptInReplyWithInngest,
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -79,5 +80,6 @@ export const { GET, POST, PUT } = serve({
     cleanupDatadogSyntheticTestsWithInngest,
     backfillUserActionRefer,
     updateDistrictsRankings,
+    backfillUserCountryCodeEmptyWithInngest,
   ],
 })
