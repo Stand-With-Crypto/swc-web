@@ -23,7 +23,7 @@ export function CheckIcon({
         cx="16"
         cy="16"
         fill={completed ? '#6100FF' : '#BFC4CF'}
-        r="15"
+        r="16"
         stroke="var(--muted-foreground)"
         strokeWidth="2"
       />

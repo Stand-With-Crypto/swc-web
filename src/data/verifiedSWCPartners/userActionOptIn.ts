@@ -12,7 +12,7 @@ import {
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
+// import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const zodVerifiedSWCPartnersUserAddress = object({
   streetNumber: string(),
@@ -38,7 +38,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
-  countryCode: zodSupportedCountryCode,
+  countryCode: z.string().length(2),
 })
 
 type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {

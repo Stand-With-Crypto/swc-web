@@ -7,7 +7,6 @@ import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfil
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
-import type { BackfillUserActionReferInngestSchema } from '@/inngest/functions/backfillUserActionRefer'
 import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import { BackfillUserCountryCodeEmptyInngestSchema } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import type {
@@ -63,7 +62,6 @@ type EventTypes =
   | BackfillUserCommunicationMessageStatusSchema
   | UpdateMetricsCounterCacheCronJobSchema
   | BackfillOptedOutUsersSchema
-  | BackfillUserActionReferInngestSchema
   | UpdateDistrictsRankingsCronJobSchema
   | BackfillUserCountryCodeEmptyInngestSchema
 
