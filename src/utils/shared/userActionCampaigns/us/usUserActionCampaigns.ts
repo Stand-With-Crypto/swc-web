@@ -17,6 +17,7 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VOTING_INFORMATION_RESEARCHED,
   UserActionType.VOTING_DAY,
   UserActionType.REFER,
+  UserActionType.POLL,
 ] as const
 export type USActiveClientUserActionWithCampaignType =
   (typeof US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -32,6 +33,14 @@ export enum USUserActionEmailCampaignName {
   BROKER_REPORTING_RULE_SJ_RES_3 = 'BROKER_REPORTING_RULE_SJ_RES_3',
   BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD',
   BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH',
+}
+
+// this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
+export enum USUserActionPollCampaignName {
+  CRYPTO_NEWS = '13ba79f9884342a39e1f8825a68bf6e6',
+  DIGITAL_ASSETS = '83cfa60cf9f54b28836635dc7ce7f3b9',
+  ENCOURAGE = '063780ccc6094b83935b8cb49dcc6bdd',
+  OVAL_OFFICE = 'c5b32ae0dce44b1780bedd9a8c905e67',
 }
 export enum USUserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
@@ -95,6 +104,7 @@ export type USUserActionCampaignName =
   | USUserActionVotingInformationResearchedCampaignName
   | USUserActionVotingDayCampaignName
   | USUserActionReferCampaignName
+  | USUserActionPollCampaignName
 
 export type USUserActionCampaigns = {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName
@@ -112,6 +122,7 @@ export type USUserActionCampaigns = {
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: USUserActionVotingInformationResearchedCampaignName
   [UserActionType.VOTING_DAY]: USUserActionVotingDayCampaignName
   [UserActionType.REFER]: USUserActionReferCampaignName
+  [UserActionType.POLL]: USUserActionPollCampaignName
 }
 
 export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -131,4 +142,5 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
     USUserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   [UserActionType.VOTING_DAY]: USUserActionVotingDayCampaignName['2024_ELECTION'],
   [UserActionType.REFER]: USUserActionReferCampaignName.DEFAULT,
+  [UserActionType.POLL]: USUserActionPollCampaignName.CRYPTO_NEWS,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>

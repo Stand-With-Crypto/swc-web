@@ -9,7 +9,10 @@ import {
   isActionSupportedForCountry,
   UserActionCampaignNames,
 } from '@/utils/shared/userActionCampaigns/index'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import {
+  USUserActionEmailCampaignName,
+  USUserActionPollCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const parseQueryString = (queryString?: string) => {
   if (!queryString) return ''
@@ -108,16 +111,16 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     },
   },
   [UserActionType.POLL]: {
-    [UserActionPollCampaignName.CRYPTO_NEWS]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.CRYPTO_NEWS]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
-    [UserActionPollCampaignName.DIGITAL_ASSETS]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.DIGITAL_ASSETS]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
-    [UserActionPollCampaignName.ENCOURAGE]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.ENCOURAGE]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
-    [UserActionPollCampaignName.OVAL_OFFICE]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.OVAL_OFFICE]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
   },
