@@ -1,14 +1,8 @@
 import * as Sentry from '@sentry/nextjs'
 
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
-import {
-  BuilderPageModelIdentifiers,
-  InternationalBuilderPageModel,
-} from '@/utils/server/builder/models/page/constants'
-import {
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
+import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface PageMetadata {
   title: string
@@ -22,23 +16,15 @@ export async function getPageDetails(
   pathname: string,
   countryCode: SupportedCountryCodes,
 ): Promise<PageMetadata> {
-  let urlPath = pathname
-  let pageModel: BuilderPageModelIdentifiers | InternationalBuilderPageModel = pageModelName
-
-  if (
-    pageModelName === BuilderPageModelIdentifiers.PAGE &&
-    countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
-  ) {
-    // TODO: remove this once we add more SupportedCountryCodes
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    urlPath = `/${countryCode}${pathname}`
-    pageModel = ('page-' + countryCode) as InternationalBuilderPageModel
-  }
-
   const content = await builderSDKClient
-    .get(pageModel, {
+    .get(pageModelName, {
+      query: {
+        data: {
+          countryCode: countryCode.toUpperCase(),
+        },
+      },
       userAttributes: {
-        urlPath,
+        urlPath: pathname,
       },
       // Set prerender to false to return JSON instead of HTML
       prerender: false,
@@ -47,14 +33,14 @@ export async function getPageDetails(
     .toPromise()
 
   if (!content?.data) {
-    Sentry.captureMessage(`Page content not found for model ${pageModel}`, {
+    Sentry.captureMessage(`Page content not found for model ${pageModelName}`, {
       extra: {
-        pathname: urlPath,
+        pathname,
         content,
       },
       tags: {
         domain: 'builder.io',
-        model: pageModel,
+        model: pageModelName,
       },
     })
     return {
