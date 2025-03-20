@@ -667,8 +667,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/manifesto',
+        destination: '/about',
+        permanent: true,
+      },
+      {
         source: '/:country/manifesto',
         destination: '/:country/about',
+        permanent: true,
+      },
+      {
+        source: '/mission',
+        destination: '/about',
         permanent: true,
       },
       {
