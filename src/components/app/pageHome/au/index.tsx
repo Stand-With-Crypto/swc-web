@@ -1,12 +1,12 @@
+import { RecentActivity } from '@/components/app/pageHome/common/recentActivity'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
+import { Button } from '@/components/ui/button'
+import { InternalLink } from '@/components/ui/link'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 import { AuHero } from './hero'
-import { RecentActivity } from '@/components/app/pageHome/common/recentActivity'
-import { InternalLink } from '@/components/ui/link'
-import { Button } from '@/components/ui/button'
-import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = SupportedCountryCodes.AU
 
