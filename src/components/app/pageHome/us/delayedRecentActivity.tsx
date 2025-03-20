@@ -16,16 +16,22 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
+import { RecentActivity } from '@/components/app/pageHome/common/recentActivity'
 
-export function DelayedRecentActivityWithMap(props: {
+export function DelayedRecentActivityWithMap({
+  actions,
+  countUsers,
+  countryCode,
+  advocatesMapPageData,
+}: {
   actions: PublicRecentActivity
   countUsers: number
   countryCode: SupportedCountryCodes
-  advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  advocatesMapPageData?: Awaited<ReturnType<typeof getAdvocatesMapData>>
 }) {
-  const recentActivity = useApiRecentActivity(props.actions, {
+  const recentActivity = useApiRecentActivity(actions, {
     limit: 30,
-    countryCode: props.countryCode,
+    countryCode,
   })
   const ref = useRef(null)
   const isInView = useInView(ref, { margin: '-50%', once: true })
@@ -33,25 +39,25 @@ export function DelayedRecentActivityWithMap(props: {
   const urls = useIntlUrls()
   const isMobile = useIsMobile()
 
-  return isMobile ? (
+  return isMobile || !advocatesMapPageData ? (
     <TabsContent ref={ref} value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-      <RecentActivityRowAnimatedContainer actions={visibleActions} />
-      <div className="mt-7 space-x-4 text-center">
+      <RecentActivity.List actions={visibleActions} />
+      <RecentActivity.Footer>
         <Button asChild>
           <InternalLink href={urls.donate()}>Donate</InternalLink>
         </Button>
         <Button asChild variant="secondary">
           <InternalLink href={urls.leaderboard()}>View all</InternalLink>
         </Button>
-      </div>
+      </RecentActivity.Footer>
     </TabsContent>
   ) : (
     <ErrorBoundary
       extras={{
         mapProps: {
-          countUsers: props.countUsers,
-          locale: props.countryCode,
-          advocatesMapPageData: props.advocatesMapPageData,
+          countUsers,
+          locale: countryCode,
+          advocatesMapPageData,
         },
       }}
       severityLevel="error"
@@ -61,9 +67,9 @@ export function DelayedRecentActivityWithMap(props: {
     >
       <AdvocatesHeatmap
         actions={recentActivity.data}
-        advocatesMapPageData={props.advocatesMapPageData}
-        countUsers={props.countUsers}
-        countryCode={props.countryCode}
+        advocatesMapPageData={advocatesMapPageData}
+        countUsers={countUsers}
+        countryCode={countryCode}
         isEmbedded={false}
       />
     </ErrorBoundary>

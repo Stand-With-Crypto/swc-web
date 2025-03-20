@@ -26,6 +26,7 @@ import { SWCPartners } from '@/utils/shared/getSWCPartners'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { UsHero } from './hero'
+import { RecentActivity } from '@/components/app/pageHome/common/recentActivity'
 
 export function UsPageHome({
   params,
@@ -51,16 +52,14 @@ export function UsPageHome({
   return (
     <>
       <UsHero />
-      <div className="container">
+      <div className="container mt-12">
         <TopLevelMetrics {...{ sumDonations, countryCode, countUsers, countPolicymakerContacts }} />
 
-        <section className="mb-16 md:mb-36">
-          <PageTitle as="h3" className="mb-6 !text-[32px]">
-            Our community
-          </PageTitle>
-          <PageSubTitle as="h4" className="mb-10 md:hidden">
+        <RecentActivity>
+          <RecentActivity.Title>Our community</RecentActivity.Title>
+          <RecentActivity.Subtitle className="md:hidden">
             See how our community is taking a stand to safeguard the future of crypto in America.
-          </PageSubTitle>
+          </RecentActivity.Subtitle>
 
           <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
@@ -153,7 +152,7 @@ export function UsPageHome({
               },
             ]}
           />
-        </section>
+        </RecentActivity>
 
         <section className="mb-16 text-center md:mb-36">
           <PageTitle as="h3" className="mb-6 !text-[32px]">

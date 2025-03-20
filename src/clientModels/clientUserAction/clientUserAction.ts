@@ -181,6 +181,7 @@ export const getClientUserAction = ({
           ...getClientNFTMint(nftMint),
         }
       : null,
+    countryCode: record.countryCode,
   }
 
   const actionTypes: {

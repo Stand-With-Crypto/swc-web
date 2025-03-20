@@ -103,7 +103,7 @@ export function TopLevelMetrics({
   }, [formatCurrency, values, countryCode])
 
   return (
-    <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
+    <section className="flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
       {[
         {
           label: 'Global donations',

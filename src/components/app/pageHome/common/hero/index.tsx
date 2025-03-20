@@ -9,9 +9,9 @@ export { HeroAnnouncementCard } from './heroAnnouncementCard'
 
 export function Hero({ children }: React.PropsWithChildren) {
   return (
-    <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-5 lg:gap-8 lg:gap-y-1">
+    <div className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-5 lg:gap-8 lg:gap-y-1">
       {children}
-    </section>
+    </div>
   )
 }
 

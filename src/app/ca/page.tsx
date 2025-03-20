@@ -1,11 +1,21 @@
 import { CaPageHome } from '@/components/app/pageHome/ca'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.CA
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 export default async function CaHomePage() {
-  const topLevelMetrics = await getHomepageTopLevelMetrics()
+  const [topLevelMetrics, recentActivity] = await Promise.all([
+    getHomepageTopLevelMetrics(),
+    getPublicRecentActivity({
+      limit: 10,
+      countryCode,
+    }),
+  ])
 
-  return <CaPageHome topLevelMetrics={topLevelMetrics} />
+  return <CaPageHome recentActivity={recentActivity} topLevelMetrics={topLevelMetrics} />
 }
