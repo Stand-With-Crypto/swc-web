@@ -5,7 +5,7 @@ import { TabsContent } from '@radix-ui/react-tabs'
 import { useInView } from 'motion/react'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivityRowAnimatedContainer } from '@/components/app/recentActivityRow/recentActivityRowAnimatedContainer'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'

@@ -2,11 +2,13 @@ import { EventSchemas } from 'inngest'
 
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
 import type { BackfillUsCongressionalDistrictsInngestCronJobSchema } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
+import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
 import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
+import { BackfillUserCountryCodeEmptyInngestSchema } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import type {
   CapitolCanaryBackfillSmsOptInReplySchema,
   CapitolCanaryBackfillSmsOptInReplyUpdateBatchOfUsersSchema,
@@ -35,6 +37,7 @@ import type {
 type EventTypes =
   | CapitolCanaryCheckSmsOptInReplySchema
   | AirdropNftInngestSchema
+  | BackfillCountryCodesEventSchema
   | BackfillUsCongressionalDistrictsInngestCronJobSchema
   | BackfillFailedNftInngestSchema
   | BackfillNftInngestSchema
@@ -60,5 +63,6 @@ type EventTypes =
   | UpdateMetricsCounterCacheCronJobSchema
   | BackfillOptedOutUsersSchema
   | UpdateDistrictsRankingsCronJobSchema
+  | BackfillUserCountryCodeEmptyInngestSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

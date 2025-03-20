@@ -1,5 +1,5 @@
 'use client'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
 import { RecentActivityRowAnimatedContainer } from '@/components/app/recentActivityRow/recentActivityRowAnimatedContainer'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'

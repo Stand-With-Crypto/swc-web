@@ -6,7 +6,7 @@ import { waitUntil } from '@vercel/functions'
 import { boolean, object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getCountryCodeFromURL } from '@/utils/server/getCountryCodeFromURL'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
@@ -62,7 +62,7 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getCountryCodeFromURL()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },

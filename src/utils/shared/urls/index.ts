@@ -1,6 +1,5 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
@@ -104,45 +103,6 @@ export const getIntlUrls = (
   }
 }
 
-const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
-  process.env.NEXT_PUBLIC_VERCEL_URL,
-  'NEXT_PUBLIC_VERCEL_URL',
-  null,
-)
-
-export const fullUrl = (path: string) => {
-  switch (NEXT_PUBLIC_ENVIRONMENT) {
-    case 'local':
-      return `http://localhost:3000${path}`
-    case 'testing':
-      return `https://testing.standwithcrypto.org${path}`
-    case 'preview':
-      return `https://${NEXT_PUBLIC_VERCEL_URL!}${path}`
-    case 'production':
-      return `https://www.standwithcrypto.org${path}`
-  }
-}
-
-export const externalUrls = {
-  discord: () => 'https://discord.com/invite/standwithcrypto',
-  donate: () =>
-    NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad'
-      : 'https://commerce.coinbase.com/checkout/582a836d-733c-4a66-84d9-4e3c40c90281',
-  dtsi: () => 'https://www.dotheysupportit.com',
-  dtsiCreateStance: (slug: string) =>
-    `https://www.dotheysupportit.com/people/${slug}/create-stance`,
-  emailFeedback: () => 'mailto:info@standwithcrypto.org',
-  facebook: () => 'https://www.facebook.com/standwithcrypto',
-  instagram: () => 'https://www.instagram.com/standwithcrypto/',
-  linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
-  twitter: () => 'https://twitter.com/standwithcrypto',
-  youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
-  swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
-  swcReferralUrl: ({ referralId }: { referralId: string }) => fullUrl(`/join/${referralId}`),
-  swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
-}
-
 export const apiUrls = {
   dtsiPeopleByCongressionalDistrict: ({
     stateCode,
@@ -186,3 +146,6 @@ export const apiUrls = {
     district: number
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
 }
+
+export * from './externalUrls'
+export * from './fullUrl'
