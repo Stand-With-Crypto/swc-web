@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
-import { SWCEvent } from '@/utils/shared/getSWCEvents'
+import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 
 interface EventCardProps {
   event: SWCEvent

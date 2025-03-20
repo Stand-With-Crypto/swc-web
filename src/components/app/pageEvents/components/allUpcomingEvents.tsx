@@ -6,7 +6,7 @@ import { EventsMap } from '@/components/app/pageEvents/components/eventsMap'
 import { UpcomingEventsList } from '@/components/app/pageEvents/components/upcomingEvents'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface AllUpcomingEventsProps {
   events: SWCEvents

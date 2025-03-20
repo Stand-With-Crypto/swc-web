@@ -4,8 +4,8 @@ import {
   actionCreateUserActionRsvpEvent,
   CreateActionRsvpEventInput,
 } from '@/actions/actionCreateUserActionRsvpEvent'
-import { SWCEvent } from '@/utils/shared/getSWCEvents'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'

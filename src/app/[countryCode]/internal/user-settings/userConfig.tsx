@@ -20,6 +20,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useCookieState } from '@/hooks/useCookieState'
+import { useSession } from '@/hooks/useSession'
 import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
@@ -31,6 +32,7 @@ type FormFields = {
 
 export function UserConfig() {
   const router = useRouter()
+  const { isLoggedIn } = useSession()
   const { resetCookieConsent } = useCookieConsent()
   const [decreaseCommunicationTimers, setDecreaseCommunicationTimers] = useCookieState(
     'SWC_DECREASE_COMMUNICATION_TIMERS',
@@ -48,7 +50,17 @@ export function UserConfig() {
   })
 
   const handleCountryCodeSubmit = async (values: FormFields) => {
-    const result = await actionUpdateUserCountryCode(values.countryCode.toLowerCase())
+    if (isLoggedIn) {
+      const result = await actionUpdateUserCountryCode(values.countryCode.toLowerCase())
+
+      if (result?.errors) {
+        const [errorMessage] = result.errors.countryCode ?? ['Unknown error']
+
+        toast.warning(`Cookie was updated successfully. ${errorMessage}`, {
+          duration: 2000,
+        })
+      }
+    }
 
     Cookies.set(
       USER_COUNTRY_CODE_COOKIE_NAME,
@@ -59,21 +71,7 @@ export function UserConfig() {
       },
     )
 
-    if (result?.errors) {
-      const [errorMessage] = result.errors.countryCode ?? ['Unknown error']
-
-      toast.warning(`Cookie was updated successfully. ${errorMessage}`, {
-        duration: 5000,
-      })
-
-      return router.refresh()
-    }
-
-    toast.success('Cookie was updated successfully', {
-      duration: 5000,
-    })
-
-    return router.refresh()
+    router.refresh()
   }
 
   return (

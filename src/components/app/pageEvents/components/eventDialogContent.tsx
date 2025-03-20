@@ -20,7 +20,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
-import { SWCEvent } from '@/utils/shared/getSWCEvents'
+import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 
 enum SectionNames {
   EVENT_INFO = 'Event Information',

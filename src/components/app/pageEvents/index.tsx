@@ -6,8 +6,8 @@ import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featuredPastEvents'
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
 interface EventsPageProps {

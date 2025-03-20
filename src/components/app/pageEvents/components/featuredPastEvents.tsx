@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface FeaturedPastEventsProps {
   events: SWCEvents

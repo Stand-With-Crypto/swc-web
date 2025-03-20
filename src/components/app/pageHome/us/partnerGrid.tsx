@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
-import { SWCPartners } from '@/utils/shared/getSWCPartners'
+import { SWCPartners } from '@/utils/shared/zod/getSWCPartners'
 
 export function PartnerGrid({ partners }: { partners: SWCPartners | null }) {
   const hasHydrated = useHasHydrated()

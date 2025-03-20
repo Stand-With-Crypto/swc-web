@@ -51,7 +51,7 @@ import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
+// import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 const zodExternalUserActionOptInUserAddress = object({
   streetNumber: string(),
@@ -89,7 +89,7 @@ const zodExternalUserActionOptIn = z.object({
     })
     .optional(),
   additionalAnalyticsProperties: z.record(z.string()).optional(),
-  countryCode: zodSupportedCountryCode,
+  countryCode: z.string().length(2),
 })
 
 const logger = getLogger('handleExternalUserActionOptIn')

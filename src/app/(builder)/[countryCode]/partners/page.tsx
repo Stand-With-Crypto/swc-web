@@ -18,11 +18,11 @@ export default async function PartnersPage(props: PageProps) {
   const { countryCode } = await props.params
 
   const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
-  const partners = await getPartners()
+  const partners = await getPartners({ countryCode })
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
-      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} model={PAGE_MODEL} />
       <div className="standard-spacing-from-navbar container space-y-20">
         <PartnerGrid partners={partners} />
       </div>

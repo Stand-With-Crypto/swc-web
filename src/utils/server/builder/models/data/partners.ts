@@ -3,20 +3,32 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
-import { SWCPartners, zodPartnerSchemaValidation } from '@/utils/shared/getSWCPartners'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCPartners, zodPartnerSchemaValidation } from '@/utils/shared/zod/getSWCPartners'
 
 const logger = getLogger(`builderIOPartners`)
 
 const LIMIT = 100
 
-async function getAllPartnersWithOffset(offset: number) {
+async function getAllPartnersWithOffset({
+  offset,
+  countryCode,
+}: {
+  offset: number
+  countryCode: SupportedCountryCodes
+}) {
   return await pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.PARTNERS, {
         query: {
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
+          'data.countryCode': {
+            $elemMatch: {
+              $eq: countryCode.toUpperCase(),
+            },
+          },
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
@@ -31,15 +43,15 @@ async function getAllPartnersWithOffset(offset: number) {
   )
 }
 
-export async function getPartners() {
+export async function getPartners({ countryCode }: { countryCode: SupportedCountryCodes }) {
   try {
     let offset = 0
 
-    const entries = await getAllPartnersWithOffset(offset)
+    const entries = await getAllPartnersWithOffset({ offset, countryCode })
 
     while (entries.length === LIMIT + offset) {
       offset += entries.length
-      entries.push(...(await getAllPartnersWithOffset(offset)))
+      entries.push(...(await getAllPartnersWithOffset({ offset, countryCode })))
     }
 
     const filteredIncompletePartners = entries
