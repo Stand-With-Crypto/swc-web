@@ -8,7 +8,7 @@ import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionForm
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
-import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
+import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

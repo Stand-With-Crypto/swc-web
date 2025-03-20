@@ -1,5 +1,5 @@
 import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/hero'
-import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
+import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export function UsHero() {

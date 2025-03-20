@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
+import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

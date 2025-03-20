@@ -3,14 +3,14 @@
 import dynamic from 'next/dynamic'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
-import { getUserActionTweetContentByCountry } from '@/components/app/userActionFormShareOnTwitter/common/getUserActionContentByCountry'
+import { ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER } from '@/components/app/userActionFormShareOnTwitter/common/constants'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const UserActionFormShareOnTwitter = dynamic(
   () =>
-    import('@/components/app/userActionFormShareOnTwitter/userActionFormShareOnTwitter').then(
+    import('@/components/app/userActionFormShareOnTwitter').then(
       mod => mod.UserActionFormShareOnTwitter,
     ),
   {
@@ -31,11 +31,9 @@ export function UserActionFormShareOnTwitterDialog({
   countryCode: SupportedCountryCodes
   defaultOpen?: boolean
 }) {
-  const countryConfig = getUserActionTweetContentByCountry(countryCode)
-
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
-    analytics: countryConfig.analyticsName,
+    analytics: ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER,
   })
 
   return (
