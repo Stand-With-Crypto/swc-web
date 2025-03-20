@@ -6,6 +6,7 @@ import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -13,7 +14,6 @@ import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/ser
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
@@ -44,11 +44,11 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
   const localUser = await parseLocalUserFromCookies()
   const countryCode = await getCountryCodeCookie()
 
-  const authUser = await appRouterGetThirdwebAuthUser()
+  const authUser = await appRouterGetAuthUser()
   if (!authUser) {
-    const error = new Error('Create User Action NFT Mint - Not authenticated')
+    const error = new Error('Create User Action Poll - Not authenticated')
     Sentry.captureException(error, {
-      tags: { domain: 'actionCreateUserActionMintNFT' },
+      tags: { domain: 'actionCreateUserActionPoll' },
       extra: { sessionId },
     })
 

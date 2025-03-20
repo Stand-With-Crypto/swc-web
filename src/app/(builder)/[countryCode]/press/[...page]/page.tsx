@@ -6,6 +6,7 @@ import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { getPagePaths } from '@/utils/server/builder/models/page/utils/getPagePaths'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 export const dynamicParams = true
@@ -27,7 +28,7 @@ export default async function Page(props: PressReleasePageProps) {
 
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={pathname}>
-      <RenderBuilderContent content={content} countryCode={countryCode} model={PAGE_MODEL} />
+      <RenderBuilderContent content={content} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )
 }
@@ -46,12 +47,17 @@ export async function generateMetadata(props: PressReleasePageProps): Promise<Me
 }
 
 export async function generateStaticParams() {
-  const paths = await getPagePaths({
-    pageModelName: PAGE_MODEL,
-    limit: 10,
-  })
+  const countryPagePathsPromises = ORDERED_SUPPORTED_COUNTRIES.map(countryCode =>
+    getPagePaths({
+      pageModelName: PAGE_MODEL,
+      limit: 10,
+      countryCode,
+    }),
+  )
 
-  return paths.map(path => {
+  const countryPagePaths = await Promise.all(countryPagePathsPromises)
+
+  return countryPagePaths.flat().map(path => {
     return {
       params: {
         page: path?.replace(PAGE_PREFIX, '').split('/'),
