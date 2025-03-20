@@ -5,6 +5,8 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 
+import { AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './au/auCtas'
+import { CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './ca/caCtas'
 import { UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './uk/ukCtas'
 import { US_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './us/usCtas'
 
@@ -12,8 +14,8 @@ const COUNTRY_USER_ACTION_CTAS_FOR_GRID_DISPLAY: Record<SupportedCountryCodes, U
   {
     [SupportedCountryCodes.US]: US_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
     [SupportedCountryCodes.GB]: UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
-    [SupportedCountryCodes.CA]: US_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
-    [SupportedCountryCodes.AU]: US_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
+    [SupportedCountryCodes.CA]: CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
+    [SupportedCountryCodes.AU]: AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
   }
 
 export function getUserActionCTAsByCountry(countryCode: SupportedCountryCodes) {

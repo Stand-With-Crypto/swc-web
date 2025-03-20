@@ -6,24 +6,24 @@ import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
-  UKUserActionOptInCampaignName,
-  UKUserActionTweetCampaignName,
-} from '@/utils/shared/userActionCampaigns/uk/ukUserActionCampaigns'
+  CAUserActionOptInCampaignName,
+  CAUserActionTweetCampaignName,
+} from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
-export const UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
+export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
-    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in United Kingdom.`,
-    mobileCTADescription: 'Join the fight to keep crypto in United Kingdom.',
-    campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in United Kingdom.`,
+    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Canada.`,
+    mobileCTADescription: 'Join the fight to keep crypto in Canada.',
+    campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Canada.`,
     image: '/actionTypeIcons/optIn.png',
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
-        campaignName: UKUserActionOptInCampaignName.DEFAULT,
+        campaignName: CAUserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
-        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in United Kingdom.`,
+        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Canada.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -41,13 +41,13 @@ export const UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.TWEET,
-        campaignName: UKUserActionTweetCampaignName.DEFAULT,
+        campaignName: CAUserActionTweetCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Follow us on X',
         description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.GB}>
+          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.CA}>
             {children}
           </UserActionFormShareOnTwitterDialog>
         ),

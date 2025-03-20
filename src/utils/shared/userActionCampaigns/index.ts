@@ -1,40 +1,97 @@
+import { UserActionType } from '@prisma/client'
+
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { ActiveClientUserActionWithCampaignType } from '@/utils/shared/userActionCampaigns'
+import {
+  AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  AUActiveClientUserActionWithCampaignType,
+  AUUserActionCampaigns,
+} from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import {
+  CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  CAActiveClientUserActionWithCampaignType,
+  CAUserActionCampaigns,
+} from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import {
   UK_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   UK_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UKActiveClientUserActionWithCampaignType,
-  UKUserActionCampaignName,
   UKUserActionCampaigns,
 } from '@/utils/shared/userActionCampaigns/uk/ukUserActionCampaigns'
 import {
   US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   USActiveClientUserActionWithCampaignType,
-  USUserActionCampaignName,
   USUserActionCampaigns,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-export const COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN: Record<
-  SupportedCountryCodes,
-  readonly (USActiveClientUserActionWithCampaignType | UKActiveClientUserActionWithCampaignType)[]
-> = {
+// Define which action types are available for each country
+export type CountryActiveClientUserActionWithCampaignType = {
+  [SupportedCountryCodes.US]: USActiveClientUserActionWithCampaignType
+  [SupportedCountryCodes.GB]: UKActiveClientUserActionWithCampaignType
+  [SupportedCountryCodes.CA]: CAActiveClientUserActionWithCampaignType
+  [SupportedCountryCodes.AU]: AUActiveClientUserActionWithCampaignType
+}
+
+export type ActiveClientUserActionWithCampaignType =
+  CountryActiveClientUserActionWithCampaignType[SupportedCountryCodes]
+
+export const COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN: {
+  [key in SupportedCountryCodes]: readonly ActiveClientUserActionWithCampaignType[]
+} = {
   [SupportedCountryCodes.US]: US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   [SupportedCountryCodes.GB]: UK_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  [SupportedCountryCodes.CA]: US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  [SupportedCountryCodes.AU]: US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.CA]: CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.AU]: AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
 }
 
-export type UserActionCampaignName = USUserActionCampaignName | UKUserActionCampaignName
+export type CountryUserActionCampaigns = {
+  [SupportedCountryCodes.US]: USUserActionCampaigns
+  [SupportedCountryCodes.GB]: UKUserActionCampaigns
+  [SupportedCountryCodes.CA]: CAUserActionCampaigns
+  [SupportedCountryCodes.AU]: AUUserActionCampaigns
+}
 
-export type UserActionCampaigns = USUserActionCampaigns | UKUserActionCampaigns
+export type UserActionCampaignNames =
+  | USUserActionCampaigns[keyof USUserActionCampaigns]
+  | UKUserActionCampaigns[keyof UKUserActionCampaigns]
+  | CAUserActionCampaigns[keyof CAUserActionCampaigns]
+  | AUUserActionCampaigns[keyof AUUserActionCampaigns]
 
-export const COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP: Record<
-  SupportedCountryCodes,
-  Record<ActiveClientUserActionWithCampaignType, string>
-> = {
+export type UserActionCampaigns = CountryUserActionCampaigns[SupportedCountryCodes]
+
+export const COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP: {
+  [key in SupportedCountryCodes]: CountryUserActionCampaigns[key]
+} = {
   [SupportedCountryCodes.US]: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   [SupportedCountryCodes.GB]: UK_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  [SupportedCountryCodes.CA]: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  [SupportedCountryCodes.AU]: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  [SupportedCountryCodes.CA]: CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  [SupportedCountryCodes.AU]: AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 }
+
+export function isActionSupportedForCountry<
+  Country extends SupportedCountryCodes,
+  Action extends UserActionType,
+>(country: Country, action: Action): action is Action & keyof CountryUserActionCampaigns[Country] {
+  return (
+    country in COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP &&
+    action in COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[country]
+  )
+}
+
+// For backwards compatibility
+export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
+  ...US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  ...UK_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  ...CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  ...AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+]
+
+// For backwards compatibility
+export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
+  ...US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  ...UK_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  ...CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  ...AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+} satisfies Record<ActiveClientUserActionWithCampaignType, string>

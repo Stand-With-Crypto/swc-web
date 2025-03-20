@@ -117,7 +117,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
+        campaignName: USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
         isCampaignActive: true,
         title: `Email CNN about the Presidential Debate`,
         description: 'Make your voice heard about crypto in the debate. We make it easy.',
@@ -147,11 +147,11 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   }
 } = {
   [UserActionType.EMAIL]: {
-    [UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
+    [USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email-cnn`
     },
     // Add your new campaign here
-    [UserActionEmailCampaignName.YOUR_NEW_CAMPAIGN]: ({ countryCode }) => {
+    [USUserActionEmailCampaignName.YOUR_NEW_CAMPAIGN]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/your-new-campaign-path`
     },
   },
@@ -163,7 +163,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
 ```javascript
 const url = getUserActionDeeplink({
   actionType: UserActionType.EMAIL,
-  campaign: UserActionEmailCampaignName.YOUR_NEW_CAMPAIGN,
+  campaign: USUserActionEmailCampaignName.YOUR_NEW_CAMPAIGN,
   config: { countryCode },
 })
 ```
@@ -187,7 +187,7 @@ const url = getUserActionDeeplink({
 
 {
   actionType: UserActionType.EMAIL,
-  campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
+  campaignName: USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
   isCampaignActive: false, // This disables the campaign
   title: 'CNN Presidential Debate 2024',
   description: "You emailed CNN and asked them to include the candidates' stance on crypto.",

@@ -3,14 +3,13 @@ import { UserActionType } from '@prisma/client'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
-import {
-  UserActionEmailCampaignName,
-  UserActionPollCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+import { ActiveClientUserActionWithCampaignType } from '@/utils/shared/userActionCampaigns'
 import {
   COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionCampaigns,
+  isActionSupportedForCountry,
+  UserActionCampaignNames,
 } from '@/utils/shared/userActionCampaigns/index'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const parseQueryString = (queryString?: string) => {
   if (!queryString) return ''
@@ -94,15 +93,17 @@ export const USER_ACTION_DEEPLINK_MAP: {
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
 const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
-  [key in ActiveClientUserActionType]?: {
-    [campaign in UserActionCampaigns[key]]?: DeeplinkFunction
+  [actionType in ActiveClientUserActionWithCampaignType]?: {
+    [campaign in UserActionCampaignNames]?: DeeplinkFunction
   }
 } = {
   [UserActionType.EMAIL]: {
-    [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
+    [USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email-debate`
     },
-    [UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]: ({ countryCode }) => {
+    [USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]: ({
+      countryCode,
+    }) => {
       return `${getIntlPrefix(countryCode)}/action/email`
     },
   },
@@ -125,7 +126,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
 type GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> = {
   actionType: ActionType
   config: DeeplinkConfig
-  campaign?: UserActionCampaigns[ActionType]
+  campaign?: UserActionCampaignNames
 }
 
 export const getUserActionDeeplink = <
@@ -135,10 +136,11 @@ export const getUserActionDeeplink = <
   config,
   campaign,
 }: GetUserActionDeeplinkArgs<ActionType>) => {
-  if (
-    !campaign ||
+  const isDefaultCampaign =
+    isActionSupportedForCountry(config.countryCode, actionType) &&
     campaign === COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[config.countryCode][actionType]
-  ) {
+
+  if (!campaign || isDefaultCampaign) {
     return USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl(config)
   }
 
