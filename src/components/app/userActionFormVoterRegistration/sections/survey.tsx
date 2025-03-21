@@ -30,7 +30,7 @@ export function Survey({ onAnswer }: SurveyProps) {
         <UserActionFormLayout.Container>
           <DialogBody className="flex flex-col gap-24 lg:pb-8 lg:pt-6">
             <UserActionFormLayout.Heading
-              subtitle="This year's election is critical for the future of crypto in America. Make sure you're able to vote in your state."
+              subtitle="Your voice is critical to the future of crypto in America. Make sure you're able to vote in your state."
               title="Are you registered to vote?"
             />
             <div className="flex flex-grow flex-col items-center gap-3 lg:flex-row lg:justify-center">

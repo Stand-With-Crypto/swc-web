@@ -51,8 +51,9 @@ export function LocationUnitedStates({
           <h2 className="space-y-4 font-light text-muted lg:space-y-1">
             <p>
               <Balancer>
-                2024 will be a monumental election year and Congress holds the power to shape the
-                future of crypto in the U.S.
+                View the key races occurring across the US that will impact the future of crypto.
+                Learn where politicians stand on crypto to make an informed decision at the ballot
+                box.
               </Balancer>
             </p>
           </h2>
@@ -81,13 +82,7 @@ export function LocationUnitedStates({
           />
         )}
         <UserAddressVoterGuideInputSection countryCode={countryCode} />
-        <ContentSection
-          className="container"
-          subtitle={
-            'There are dozens of races in the House and the Senate that matter in this upcoming election. View your state below:'
-          }
-          title={'Key Races Across US States'}
-        >
+        <ContentSection className="container" title={'Key Races Across US States'}>
           <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
             {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
               const stateCode = _stateCode as USStateCode

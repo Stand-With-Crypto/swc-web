@@ -99,7 +99,7 @@ export function LocationStateSpecific({
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
         <PageTitle as="h3" className="mt-20" size="sm">
-          There's no election data for {stateName}
+          There's no key races currently in {stateName}
         </PageTitle>
       ) : (
         <div className="space-y-20">

@@ -92,7 +92,6 @@ export const getIntlUrls = (
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
     locationUnitedStatesPresidential: () => `${countryPrefix}/races/presidential`,
     locationUnitedStates: () => `${countryPrefix}/races/`,
-    endorsedCandidates: () => `${countryPrefix}/races/endorsed/`,
     locationDistrictSpecific: ({
       stateCode,
       district,
