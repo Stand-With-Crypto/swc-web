@@ -15,14 +15,17 @@ export const dynamicParams = false
 export default async function Home(props: PageProps) {
   const params = await props.params
   const { countryCode } = params
-  const asyncProps = await getHomepageData({
-    recentActivityLimit: 30,
-    restrictToUS: true,
-    countryCode,
-  })
-  const advocatePerStateDataProps = await getAdvocatesMapData()
-  const partners = await getPartners({ countryCode })
-  const leaderboardData = await getDistrictsLeaderboardData({ limit: 10 })
+
+  const [asyncProps, advocatePerStateDataProps, partners, leaderboardData] = await Promise.all([
+    getHomepageData({
+      recentActivityLimit: 30,
+      restrictToUS: true,
+      countryCode,
+    }),
+    getAdvocatesMapData(),
+    getPartners({ countryCode }),
+    getDistrictsLeaderboardData({ limit: 10 }),
+  ])
 
   if (params.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
     notFound()
