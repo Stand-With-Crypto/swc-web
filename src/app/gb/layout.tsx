@@ -6,18 +6,21 @@ import { Navbar } from '@/components/app/navbar'
 import { generateCountryCodeLayoutMetadata } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { footerConfig, navbarConfig } from './config'
+import { getCountryConfig } from '@/configs'
 
 const countryCode = SupportedCountryCodes.GB
 
 export const metadata: Metadata = generateCountryCodeLayoutMetadata(countryCode)
 
 export default async function GbLayout({ children }: React.PropsWithChildren) {
+  const countryConfig = await getCountryConfig(countryCode)
+
   return (
     <PageLayout
       countryCode={countryCode}
-      footer={<Footer {...footerConfig} />}
-      navbar={<Navbar {...navbarConfig} />}
+      footer={<Footer {...countryConfig.footer} />}
+      navbar={<Navbar {...countryConfig.navbar} />}
+      shouldRenderGTM={countryConfig.GTM}
     >
       {children}
     </PageLayout>

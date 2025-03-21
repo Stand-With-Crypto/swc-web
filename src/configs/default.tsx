@@ -5,10 +5,14 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 import { getIntlUrls } from '@/utils/shared/urls'
 import { usExternalUrls } from '@/utils/shared/urls/externalUrls'
 
-const urls = getIntlUrls(DEFAULT_SUPPORTED_COUNTRY_CODE)
+import type { CountryConfig } from '.'
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+const urls = getIntlUrls(countryCode)
 
 export const navbarConfig: NavbarProps = {
-  countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
+  countryCode,
   showDonateButton: true,
   items: [
     {
@@ -69,7 +73,7 @@ export const navbarConfig: NavbarProps = {
 }
 
 export const footerConfig: FooterProps = {
-  countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
+  countryCode,
   title: 'Fight for Crypto Rights',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #StandWithCrypto',
@@ -120,4 +124,11 @@ export const footerConfig: FooterProps = {
       text: 'Send feedback',
     },
   ],
+}
+
+export const defaultConfigs: CountryConfig = {
+  countryCode,
+  navbar: navbarConfig,
+  footer: footerConfig,
+  GTM: true,
 }

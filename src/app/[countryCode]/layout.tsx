@@ -8,7 +8,7 @@ import { PageProps } from '@/types'
 import { generateCountryCodeLayoutMetadata } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-import { footerConfig, navbarConfig } from './config'
+import { getCountryConfig } from '@/configs'
 
 export { viewport } from '@/utils/server/metadataUtils'
 
@@ -27,6 +27,8 @@ export default async function Layout({
 }: PageProps & { children: React.ReactNode }) {
   const { countryCode } = await params
 
+  const countryConfig = await getCountryConfig(countryCode)
+
   if (countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
     notFound()
   }
@@ -34,9 +36,9 @@ export default async function Layout({
   return (
     <PageLayout
       countryCode={countryCode}
-      footer={<Footer {...footerConfig} />}
-      navbar={<Navbar {...navbarConfig} />}
-      shouldRenderGTM
+      footer={<Footer {...countryConfig.footer} />}
+      navbar={<Navbar {...countryConfig.navbar} />}
+      shouldRenderGTM={countryConfig.GTM}
     >
       {children}
     </PageLayout>
