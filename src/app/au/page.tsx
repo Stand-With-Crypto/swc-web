@@ -9,9 +9,10 @@ export const dynamic = 'error'
 const countryCode = SupportedCountryCodes.AU
 
 export default async function AuHomePage() {
-  const topLevelMetrics = await getHomepageTopLevelMetrics()
-
-  const partners = await getPartners({ countryCode })
+  const [topLevelMetrics, partners] = await Promise.all([
+    getHomepageTopLevelMetrics(),
+    getPartners({ countryCode }),
+  ])
 
   return <AuPageHome partners={partners} topLevelMetrics={topLevelMetrics} />
 }

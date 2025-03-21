@@ -9,9 +9,10 @@ export const dynamic = 'error'
 const countryCode = SupportedCountryCodes.CA
 
 export default async function CaHomePage() {
-  const topLevelMetrics = await getHomepageTopLevelMetrics()
-
-  const partners = await getPartners({ countryCode })
+  const [topLevelMetrics, partners] = await Promise.all([
+    getHomepageTopLevelMetrics(),
+    getPartners({ countryCode }),
+  ])
 
   return <CaPageHome partners={partners} topLevelMetrics={topLevelMetrics} />
 }

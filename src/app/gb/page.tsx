@@ -9,9 +9,10 @@ export const dynamic = 'error'
 const countryCode = SupportedCountryCodes.GB
 
 export default async function GbHomePage() {
-  const topLevelMetrics = await getHomepageTopLevelMetrics()
-
-  const partners = await getPartners({ countryCode })
+  const [topLevelMetrics, partners] = await Promise.all([
+    getHomepageTopLevelMetrics(),
+    getPartners({ countryCode }),
+  ])
 
   return <GbPageHome partners={partners} topLevelMetrics={topLevelMetrics} />
 }
