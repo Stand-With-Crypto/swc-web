@@ -34,7 +34,7 @@ export async function NotFoundLayout({
           shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
           showSpinner={false}
         />
-        <TopLevelClientLogic countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
+        <TopLevelClientLogic countryCode={countryCode}>
           <FullHeight.Container>
             <Navbar {...configs.navbar} />
             <FullHeight.Content>{children}</FullHeight.Content>
@@ -42,7 +42,7 @@ export async function NotFoundLayout({
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
-        <CookieConsent countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+        <CookieConsent countryCode={countryCode} />
         <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>
