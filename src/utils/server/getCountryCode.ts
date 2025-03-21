@@ -19,7 +19,8 @@ const defaultCountryCode = ['local', 'testing'].includes(NEXT_PUBLIC_ENVIRONMENT
 
 export const getCountryCode = (request: NextRequest) => {
   const { country: userCountryCode } = geolocation(request)
-  const pageCountryCode = extractCountryCode(request.nextUrl.pathname) ?? SupportedCountryCodes.US
+  const pageCountryCode =
+    extractCountryCode(request.nextUrl.pathname)?.toLowerCase() ?? SupportedCountryCodes.US
 
   return userCountryCode || defaultCountryCode || pageCountryCode
 }
