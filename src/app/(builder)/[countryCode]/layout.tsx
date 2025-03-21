@@ -44,7 +44,7 @@ export default async function Layout({
 }: PageProps & { children: React.ReactNode }) {
   const { countryCode } = await params
 
-  const countryConfig = getCountryConfig(countryCode)
+  const countryConfig = await getCountryConfig(countryCode)
 
   if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode)) {
     notFound()

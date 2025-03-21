@@ -19,7 +19,7 @@ export async function BuilderPageLayout({
 }) {
   const pageMetadata = await getPageDetails(modelName, pathname, countryCode)
 
-  const countryConfig = getCountryConfig(countryCode)
+  const countryConfig = await getCountryConfig(countryCode)
 
   return (
     <>

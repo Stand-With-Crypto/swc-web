@@ -13,7 +13,7 @@ const countryCode = SupportedCountryCodes.CA
 export const metadata: Metadata = generateCountryCodeLayoutMetadata(countryCode)
 
 export default async function CaLayout({ children }: React.PropsWithChildren) {
-  const countryConfig = getCountryConfig(countryCode)
+  const countryConfig = await getCountryConfig(countryCode)
 
   return (
     <PageLayout
