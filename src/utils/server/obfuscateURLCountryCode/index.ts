@@ -5,7 +5,7 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
 } from '@/utils/shared/supportedCountries'
 
-function extractCountryCode(pathname: string) {
+export function extractCountryCode(pathname: string) {
   const segments = pathname.split('/').filter(Boolean)
   const firstSegment = segments[0]
   return COUNTRY_CODE_REGEX_PATTERN.test(firstSegment) ? firstSegment : null
