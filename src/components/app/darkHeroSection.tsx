@@ -3,7 +3,7 @@ import React from 'react'
 import { cn } from '@/utils/web/cn'
 
 export const DarkHeroSection = React.forwardRef<
-  React.ElementRef<'section'>,
+  React.ComponentRef<'section'>,
   React.HTMLAttributes<HTMLElement>
 >(({ className, children, ...props }, ref) => {
   return (
