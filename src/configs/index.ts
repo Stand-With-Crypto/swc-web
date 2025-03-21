@@ -1,6 +1,9 @@
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 export interface CountryConfig {
   countryCode: SupportedCountryCodes
@@ -9,18 +12,11 @@ export interface CountryConfig {
   GTM: boolean
 }
 
-const loadCountryConfig = async (countryCode: SupportedCountryCodes): Promise<CountryConfig> => {
-  switch (countryCode) {
-    case SupportedCountryCodes.AU:
-      return (await import('./au')).auConfigs
-    case SupportedCountryCodes.CA:
-      return (await import('./ca')).caConfigs
-    case SupportedCountryCodes.GB:
-      return (await import('./gb')).gbConfigs
-    default:
-      return (await import('./default')).defaultConfigs
-  }
+const configs: Record<SupportedCountryCodes, Promise<CountryConfig>> = {
+  [SupportedCountryCodes.AU]: import('./au').then(m => m.auConfigs),
+  [SupportedCountryCodes.CA]: import('./ca').then(m => m.caConfigs),
+  [SupportedCountryCodes.GB]: import('./gb').then(m => m.gbConfigs),
+  [DEFAULT_SUPPORTED_COUNTRY_CODE]: import('./default').then(m => m.defaultConfigs),
 }
 
-export const getCountryConfig = (countryCode: SupportedCountryCodes) =>
-  loadCountryConfig(countryCode)
+export const getCountryConfig = (countryCode: SupportedCountryCodes) => configs[countryCode]

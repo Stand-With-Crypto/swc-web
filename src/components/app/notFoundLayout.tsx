@@ -1,5 +1,3 @@
-'use client'
-
 import '@/globals.css'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -11,15 +9,22 @@ import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { FullHeight } from '@/components/ui/fullHeight'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
 import { getCountryConfig } from '@/configs'
 
-export async function NotFoundLayout({ children }: { children: React.ReactNode }) {
-  //TODO: @olavoparno - this is a temporary layout for the not found page. We should get countryCode according to the user's location
-
-  const defaultConfig = await getCountryConfig(DEFAULT_SUPPORTED_COUNTRY_CODE)
+export async function NotFoundLayout({
+  children,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+}: {
+  children: React.ReactNode
+  countryCode?: SupportedCountryCodes
+}) {
+  const configs = await getCountryConfig(countryCode)
 
   return (
     <html lang="en" translate="no">
@@ -31,9 +36,9 @@ export async function NotFoundLayout({ children }: { children: React.ReactNode }
         />
         <TopLevelClientLogic countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
           <FullHeight.Container>
-            <Navbar {...defaultConfig.navbar} />
+            <Navbar {...configs.navbar} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer {...defaultConfig.footer} />
+            <Footer {...configs.footer} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
