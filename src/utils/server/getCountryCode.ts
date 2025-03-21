@@ -2,8 +2,9 @@ import * as Sentry from '@sentry/nextjs'
 import { geolocation } from '@vercel/functions'
 import { NextRequest } from 'next/server'
 
+import { extractCountryCode } from '@/utils/server/obfuscateURLCountryCode'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const USER_COUNTRY_CODE_COOKIE_NAME = 'USER_COUNTRY_CODE'
 
@@ -13,13 +14,14 @@ interface UserCountryCodeCookie {
 }
 
 const defaultCountryCode = ['local', 'testing'].includes(NEXT_PUBLIC_ENVIRONMENT)
-  ? process.env.USER_COUNTRY_CODE || DEFAULT_SUPPORTED_COUNTRY_CODE
+  ? process.env.USER_COUNTRY_CODE
   : ''
 
 export const getCountryCode = (request: NextRequest) => {
   const { country: userCountryCode } = geolocation(request)
+  const pageCountryCode = extractCountryCode(request.nextUrl.pathname) ?? SupportedCountryCodes.US
 
-  return userCountryCode || defaultCountryCode
+  return userCountryCode || defaultCountryCode || pageCountryCode
 }
 
 export const parseUserCountryCodeCookie = (cookieValue?: string | null) => {
