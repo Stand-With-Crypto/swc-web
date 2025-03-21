@@ -113,7 +113,7 @@ export function KeyRacesSkeleton() {
     <div className="flex flex-col items-center gap-8 text-center">
       <ContentSection
         className="w-full max-w-sm"
-        title="Presidential Election"
+        title="Key races in your district"
         titleProps={{
           size: 'xs',
         }}
