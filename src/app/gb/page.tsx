@@ -6,10 +6,12 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
+const countryCode = SupportedCountryCodes.GB
+
 export default async function GbHomePage() {
   const topLevelMetrics = await getHomepageTopLevelMetrics()
 
-  const partners = await getPartners({ countryCode: SupportedCountryCodes.GB })
+  const partners = await getPartners({ countryCode })
 
   return <GbPageHome partners={partners} topLevelMetrics={topLevelMetrics} />
 }
