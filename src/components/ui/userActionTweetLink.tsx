@@ -13,7 +13,7 @@ import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 
 export const UserActionTweetLink = React.forwardRef<
-  React.ElementRef<typeof Button>,
+  React.ComponentRef<typeof Button>,
   React.ComponentPropsWithoutRef<typeof Button> & {
     eventProperties?: AnalyticProperties
     message?: string
