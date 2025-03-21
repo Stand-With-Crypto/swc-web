@@ -3,16 +3,18 @@
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { caExternalUrls, getIntlUrls } from '@/utils/shared/urls'
+import { auExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
-const countryCode = SupportedCountryCodes.CA
+import { CountryConfig } from '@/configs'
+
+const countryCode = SupportedCountryCodes.AU
 
 const urls = getIntlUrls(countryCode)
 
 export const navbarConfig: NavbarProps = {
   countryCode,
   logo: {
-    src: '/ca/logo/shield-text.svg',
+    src: '/au/logo/shield-text.svg',
     width: 120,
     height: 40,
   },
@@ -50,9 +52,9 @@ export const footerConfig: FooterProps = {
       <img
         alt="Footer Banner"
         className="mx-auto w-full max-w-[1920px]"
-        src="/ca/footer-banner.svg"
+        src="/au/footer-banner.svg"
       />
-      <img alt="Footer Banner Divider" className="w-full" src="/ca/footer-banner-divider.png" />
+      <img alt="Footer Banner Divider" className="w-full" src="/au/footer-banner-divider.png" />
     </div>
   ),
   links: [
@@ -64,32 +66,39 @@ export const footerConfig: FooterProps = {
   ],
   socialLinks: [
     {
-      href: caExternalUrls.discord(),
+      href: auExternalUrls.discord(),
       text: 'Discord',
     },
     {
-      href: caExternalUrls.twitter(),
+      href: auExternalUrls.twitter(),
       text: 'Twitter / X',
     },
     {
-      href: caExternalUrls.instagram(),
+      href: auExternalUrls.instagram(),
       text: 'Instagram',
     },
     {
-      href: caExternalUrls.youtube(),
+      href: auExternalUrls.youtube(),
       text: 'Youtube',
     },
     {
-      href: caExternalUrls.facebook(),
+      href: auExternalUrls.facebook(),
       text: 'Facebook',
     },
     {
-      href: caExternalUrls.linkedin(),
+      href: auExternalUrls.linkedin(),
       text: 'LinkedIn',
     },
     {
-      href: caExternalUrls.emailFeedback(),
+      href: auExternalUrls.emailFeedback(),
       text: 'Send feedback',
     },
   ],
+}
+
+export const auConfigs: CountryConfig = {
+  countryCode,
+  navbar: navbarConfig,
+  footer: footerConfig,
+  GTM: false,
 }

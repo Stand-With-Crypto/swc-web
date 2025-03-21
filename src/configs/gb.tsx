@@ -5,6 +5,8 @@ import { NavbarProps } from '@/components/app/navbar'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { gbExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
+import type { CountryConfig } from '.'
+
 const countryCode = SupportedCountryCodes.GB
 
 const urls = getIntlUrls(countryCode)
@@ -92,4 +94,11 @@ export const footerConfig: FooterProps = {
       text: 'Send feedback',
     },
   ],
+}
+
+export const gbConfigs: CountryConfig = {
+  countryCode,
+  navbar: navbarConfig,
+  footer: footerConfig,
+  GTM: false,
 }
