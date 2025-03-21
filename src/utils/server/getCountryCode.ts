@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server'
 
 import { extractCountryCode } from '@/utils/server/obfuscateURLCountryCode'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const USER_COUNTRY_CODE_COOKIE_NAME = 'USER_COUNTRY_CODE'
 
@@ -20,7 +20,7 @@ const defaultCountryCode = ['local', 'testing'].includes(NEXT_PUBLIC_ENVIRONMENT
 export const getCountryCode = (request: NextRequest) => {
   const { country: userCountryCode } = geolocation(request)
   const pageCountryCode =
-    extractCountryCode(request.nextUrl.pathname)?.toLowerCase() ?? SupportedCountryCodes.US
+    extractCountryCode(request.nextUrl.pathname)?.toLowerCase() ?? DEFAULT_SUPPORTED_COUNTRY_CODE
 
   return userCountryCode || defaultCountryCode || pageCountryCode
 }
