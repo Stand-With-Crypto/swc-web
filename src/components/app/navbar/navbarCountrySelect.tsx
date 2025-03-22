@@ -42,7 +42,8 @@ export function NavbarCountrySelect() {
   if (!currentOption) {
     return null
   }
-
+  // .focus-visible\:ring-offset-2:focus-visible
+  //.focus-visible\:ring-2:focus-visible
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -52,7 +53,12 @@ export function NavbarCountrySelect() {
         {options.map(option => {
           const urls = getIntlUrls(option.value)
           return (
-            <DropdownMenuItem asChild disabled={option.value === value} key={option.value}>
+            <DropdownMenuItem
+              asChild
+              className="cursor-pointer"
+              disabled={option.value === value}
+              key={option.value}
+            >
               <Link href={urls.home()}>{option.label}</Link>
             </DropdownMenuItem>
           )
