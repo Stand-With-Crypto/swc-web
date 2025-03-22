@@ -666,7 +666,42 @@ const nextConfig: NextConfig = {
         destination: '/politicians',
         permanent: true,
       },
+      {
+        source: '/manifesto',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/:country/manifesto',
+        destination: '/:country/about',
+        permanent: true,
+      },
+      {
+        source: '/mission',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/:country/mission',
+        destination: '/:country/about',
+        permanent: true,
+      },
     ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // These rewrites are checked after headers/redirects
+        // and before all files including _next/public files which
+        // allows overriding page files
+        {
+          source: '/:locale/(mission|manifesto)',
+          destination: '/:locale/about',
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    }
   },
 }
 

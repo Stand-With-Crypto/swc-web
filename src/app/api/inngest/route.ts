@@ -2,11 +2,13 @@ import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
+import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
+import { backfillUserCountryCodeEmptyWithInngest } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import {
   backfillSMSOptInReplyWithInngest,
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -52,6 +54,7 @@ export const { GET, POST, PUT } = serve({
     backfillSMSOptInReplyWithInngest,
     backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
     airdropNFTWithInngest,
+    backfillCountryCodesInngest,
     cleanupPostalCodesWithInngest,
     monitorBaseETHBalances,
     setPrimaryCryptoAddressOfUserWithInngest,
@@ -75,5 +78,6 @@ export const { GET, POST, PUT } = serve({
     backfillOptedOutUsers,
     cleanupDatadogSyntheticTestsWithInngest,
     updateDistrictsRankings,
+    backfillUserCountryCodeEmptyWithInngest,
   ],
 })

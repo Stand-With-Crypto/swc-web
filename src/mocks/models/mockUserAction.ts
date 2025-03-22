@@ -1,20 +1,46 @@
 import { faker } from '@faker-js/faker'
-import { DataCreationMethod, Prisma, UserAction } from '@prisma/client'
+import { DataCreationMethod, Prisma, UserAction, UserActionType } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
+import {
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 } from '@/utils/shared/userActionCampaigns'
 
-export function mockCreateUserActionInput() {
-  const actionType = faker.helpers.arrayElement(ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)
+const activeActionTypesByCountry: Record<SupportedCountryCodes, readonly UserActionType[]> = {
+  [SupportedCountryCodes.US]: ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.CA]: [UserActionType.OPT_IN, UserActionType.TWEET],
+  [SupportedCountryCodes.GB]: [UserActionType.OPT_IN, UserActionType.TWEET],
+  [SupportedCountryCodes.AU]: [UserActionType.OPT_IN, UserActionType.TWEET],
+}
+
+export function mockCreateUserActionInput({
+  actionType: overrideActionType,
+}: {
+  actionType?: UserActionType
+} = {}) {
+  let countryCode = faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES))
+
+  if (overrideActionType) {
+    countryCode = faker.helpers.arrayElement(
+      ORDERED_SUPPORTED_COUNTRIES.filter(code =>
+        activeActionTypesByCountry[code].includes(overrideActionType),
+      ),
+    )
+  }
+
+  const actionType =
+    overrideActionType ?? faker.helpers.arrayElement(activeActionTypesByCountry[countryCode])
+
   return {
     actionType,
+    countryCode,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
-    countryCode: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
   } satisfies Omit<
     Prisma.UserActionCreateInput,
     'userId' | 'nftMintId' | 'userCryptoAddressId' | 'userSessionId' | 'userEmailAddressId' | 'user'

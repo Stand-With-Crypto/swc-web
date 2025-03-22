@@ -11,6 +11,7 @@ import {
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 const languages = getNavigatorLanguages()
 
@@ -100,15 +101,21 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: readonly {
     language: 'en-GB',
     countryCode: 'uk',
     label: 'United Kingdom',
-    url: 'https://uk.standwithcrypto.org',
+    url: getIntlUrls(SupportedCountryCodes.GB).home(),
     emoji: '🇬🇧',
   },
   {
     language: 'en-CA',
     countryCode: 'ca',
     label: 'Canada',
-    url: 'https://ca.standwithcrypto.org',
+    url: getIntlUrls(SupportedCountryCodes.CA).home(),
     emoji: '🇨🇦',
+  },
+  {
+    language: 'en-AU',
+    countryCode: 'au',
+    label: 'Australia',
+    url: getIntlUrls(SupportedCountryCodes.AU).home(),
   },
 ]
 

@@ -3,7 +3,6 @@
 import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
@@ -82,7 +81,11 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
             </div>
           </div>
 
-          {!isMobile && <ProfileAndNFTButtons user={user} />}
+          {!isMobile && (
+            <div className="flex items-center gap-4">
+              <EditProfileButton user={user} />
+            </div>
+          )}
         </div>
         <div className="grid grid-cols-4 rounded-3xl bg-secondary p-3 text-center sm:p-6">
           {[
@@ -143,7 +146,11 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
         </div>
       </section>
 
-      {isMobile && <ProfileAndNFTButtons user={user} />}
+      {isMobile && (
+        <div className="flex items-center gap-4">
+          <EditProfileButton user={user} />
+        </div>
+      )}
 
       <section>
         <PageTitle className="mb-4" size="md">
@@ -172,23 +179,6 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
           <NFTDisplay userActions={userActions} />
         </div>
       </section>
-    </div>
-  )
-}
-
-function ProfileAndNFTButtons({ user }: { user: PageUserProfileUser }) {
-  return (
-    <div className="flex items-center gap-4">
-      <LoginDialogWrapper
-        authenticatedContent={null}
-        subtitle="Confirm your email address or connect a wallet to receive your NFT."
-        title="Claim your free NFT"
-        useThirdwebSession
-      >
-        <Button className="w-full lg:w-auto">Claim my NFTs</Button>
-      </LoginDialogWrapper>
-
-      <EditProfileButton user={user} />
     </div>
   )
 }

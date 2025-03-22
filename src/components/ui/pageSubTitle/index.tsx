@@ -25,7 +25,7 @@ export const pageSubTitleVariants = cva('text-center text-fontcolor-muted', {
 
 export const AsVariantsConfig = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'] as const
 
-interface PageSubTitleProps
+export interface PageSubTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof pageSubTitleVariants> {
   as?: (typeof AsVariantsConfig)[number]
