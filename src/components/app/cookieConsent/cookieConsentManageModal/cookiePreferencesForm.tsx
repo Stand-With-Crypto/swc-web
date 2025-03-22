@@ -93,7 +93,7 @@ interface CheckboxFieldProps extends CheckboxProps {
   helpText: string
 }
 
-const CheckboxField = React.forwardRef<React.ElementRef<typeof FormItem>, CheckboxFieldProps>(
+const CheckboxField = React.forwardRef<React.ComponentRef<typeof FormItem>, CheckboxFieldProps>(
   ({ label, helpText, ...props }, ref) => {
     return (
       <FormItem ref={ref}>
