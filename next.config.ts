@@ -657,16 +657,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/races',
-        destination: '/politicians',
-        permanent: true,
-      },
-      {
-        source: '/vote',
-        destination: '/politicians',
-        permanent: true,
-      },
-      {
         source: '/manifesto',
         destination: '/about',
         permanent: true,

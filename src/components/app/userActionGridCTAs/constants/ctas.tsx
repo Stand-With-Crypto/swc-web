@@ -248,7 +248,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTER_ATTESTATION,
-        campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
+        campaignName: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
         isCampaignActive: false,
         title: 'Get informed',
         description: 'See where your politicians stand on crypto.',
@@ -266,7 +266,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTER_REGISTRATION,
-        campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+        campaignName: UserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
         isCampaignActive: false,
         title: 'Check your voter registration',
         description: 'Make sure you’re registered to vote in this year’s election.',
@@ -284,7 +284,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
-        campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+        campaignName: UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
         isCampaignActive: false,
         canBeTriggeredMultipleTimes: false,
         title: 'Prepare to vote',
