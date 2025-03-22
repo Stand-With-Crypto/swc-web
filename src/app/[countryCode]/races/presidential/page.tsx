@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific'
+import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceSpecific'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'

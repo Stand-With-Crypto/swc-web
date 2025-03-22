@@ -1,57 +1,64 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 import { ClassValue } from 'clsx'
 
+import { VOTER_GUIDE_STEPS } from '@/components/app/pageVoterGuide/constants'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { NextImage } from '@/components/ui/image'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
-
-import { VOTER_GUIDE_STEPS } from './constants'
 
 interface VoterJourneyStepListProps {
   className?: ClassValue
 }
 
-export function VoterJourneyStepList(props: VoterJourneyStepListProps) {
-  const { className } = props
+const getStepStatus = (
+  action: UserActionType,
+  campaignName: string,
+  performedActions: Awaited<ReturnType<typeof useApiResponseForUserPerformedUserActionTypes>>,
+) => {
+  if (performedActions?.isLoading) {
+    return 'unknown'
+  }
 
-  const performedActions = useApiResponseForUserPerformedUserActionTypes()
-
-  const getStepStatus = useCallback(
-    (action: UserActionType, campaignName: string) => {
-      if (performedActions?.isLoading) {
-        return 'unknown'
-      }
-
-      return performedActions?.data?.performedUserActionTypes?.some(
-        performedAction =>
-          performedAction.actionType === action && performedAction.campaignName === campaignName,
-      )
-        ? 'complete'
-        : 'incomplete'
-    },
-    [performedActions],
+  return performedActions?.data?.performedUserActionTypes?.some(
+    performedAction =>
+      performedAction.actionType === action && performedAction.campaignName === campaignName,
   )
+    ? 'complete'
+    : 'incomplete'
+}
+
+export function VoterJourneyStepList({ className }: VoterJourneyStepListProps) {
+  const userCountryCode = useCountryCode()
+  const performedActions = useApiResponseForUserPerformedUserActionTypes()
 
   const hydratedSteps = useMemo(
     () =>
-      VOTER_GUIDE_STEPS.map(step => ({
+      VOTER_GUIDE_STEPS.filter(step =>
+        step.onlyShowInTheUS ? userCountryCode === DEFAULT_SUPPORTED_COUNTRY_CODE : true,
+      ).map(step => ({
         ...step,
-        status: getStepStatus(step.action, step.campaignName),
+        status: getStepStatus(step.action, step.campaignName, performedActions),
       })),
-    [getStepStatus],
+    [performedActions, userCountryCode],
   )
 
+  const gridColumnsClassName = useMemo(() => {
+    return `lg:grid-cols-${hydratedSteps.length}`
+  }, [hydratedSteps])
+
   return (
-    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-3', className)}>
+    <div className={cn(`grid grid-cols-1 gap-[18px] ${gridColumnsClassName}`, className)}>
       {hydratedSteps.map(({ WrapperComponent, status, ...stepProps }, index) => (
         <WrapperComponent key={index}>
           <button
             className={cn(
-              'flex h-full w-full cursor-pointer flex-row-reverse rounded-3xl transition-shadow hover:shadow-lg lg:max-w-96 lg:flex-col',
+              'flex h-full w-full cursor-pointer flex-row-reverse justify-self-center rounded-3xl transition-shadow hover:shadow-lg lg:max-w-96 lg:flex-col',
             )}
           >
             <div className="flex h-full min-h-32 min-w-32 max-w-32 items-center justify-center rounded-br-3xl rounded-tr-3xl bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9 lg:h-auto lg:min-h-48 lg:w-full lg:max-w-full lg:rounded-br-none lg:rounded-tl-3xl">

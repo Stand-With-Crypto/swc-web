@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -42,9 +43,11 @@ interface KeyRacesFormProps {
   initialValues?: VoterGuideFormValues
 }
 
-export function KeyRacesForm(props: KeyRacesFormProps) {
-  const { onSubmit, initialValues, onViewKeyRacesActionSuccess } = props
-
+export function KeyRacesForm({
+  onSubmit,
+  initialValues,
+  onViewKeyRacesActionSuccess,
+}: KeyRacesFormProps) {
   const router = useRouter()
 
   const { mutate } = useApiResponseForUserPerformedUserActionTypes()

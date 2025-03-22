@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationUnitedStates } from '@/components/app/pageLocationKeyRaces/locationUnitedStates'
+import { LocationUnitedStates } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'

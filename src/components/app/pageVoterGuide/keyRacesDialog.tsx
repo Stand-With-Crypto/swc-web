@@ -14,9 +14,11 @@ import { getDefaultValues } from '@/components/app/pageVoterGuide/formConfig'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
 import { useSession } from '@/hooks/useSession'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -44,9 +46,8 @@ interface KeyRacesDialogProps {
   defaultOpen?: boolean
 }
 
-export function KeyRacesDialog(props: KeyRacesDialogProps) {
-  const { children, defaultOpen } = props
-
+export function KeyRacesDialog({ children, defaultOpen }: KeyRacesDialogProps) {
+  const countryCode = useCountryCode()
   const router = useRouter()
 
   const session = useSession()
@@ -112,7 +113,12 @@ export function KeyRacesDialog(props: KeyRacesDialogProps) {
 
   return (
     <>
-      <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
+      <UserActionFormDialog
+        {...dialogProps}
+        bypassCountryCheck={countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE}
+        padding={false}
+        trigger={children}
+      >
         {session?.isLoading ? (
           <div className="min-h-[400px]">
             <LoadingOverlay />

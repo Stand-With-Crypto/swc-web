@@ -11,7 +11,7 @@ import {
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
-type VoterGuideStep = {
+export type VoterGuideStep = {
   title: string
   description: string
   WrapperComponent: (args: { children: React.ReactNode }) => React.ReactNode
@@ -20,6 +20,7 @@ type VoterGuideStep = {
   image: string
   mobileImage?: string
   wideDesktopImage?: boolean
+  onlyShowInTheUS?: boolean
 }
 
 export const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Get Informed'
@@ -33,6 +34,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     campaignName: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/getInformedAction.png',
     wideDesktopImage: true,
+    onlyShowInTheUS: false,
   },
   {
     title: 'Check your voter registration',
@@ -41,6 +43,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     action: UserActionType.VOTER_REGISTRATION,
     campaignName: UserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/voterAttestation.png',
+    onlyShowInTheUS: true,
   },
   {
     title: 'Prepare to vote',
@@ -63,5 +66,6 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
     campaignName: UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/votingResearched.png',
+    onlyShowInTheUS: true,
   },
 ]

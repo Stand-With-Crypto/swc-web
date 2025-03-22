@@ -15,6 +15,6 @@ export const metadata: Metadata = {
   }),
 }
 
-export default function VoterGuidePageRoot() {
+export default function GbVoterGuidePage() {
   return <PageVoterGuide />
 }

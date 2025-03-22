@@ -14,6 +14,7 @@ import {
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 interface KeyRacesListProps {
@@ -38,6 +39,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
   }
 
   const doesNotHaveRaces = !congressional?.length && !presidential?.length && !senate?.length
+  const showPACFooter = countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE
 
   return (
     <div className="flex flex-1 flex-col space-y-6 md:space-y-10">
@@ -77,7 +79,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
           {!!congressional && congressional?.length > 0 && (
             <>
               <hr />
-              <RaceSectionWrapper>
+              <RaceSectionWrapper className={cn(!showPACFooter && 'pb-6')}>
                 <DTSIPersonHeroCardSection
                   {...dtsiPersonHeroCardSectionProps}
                   countryCode={countryCode}
@@ -88,9 +90,11 @@ export function KeyRacesList(props: KeyRacesListProps) {
             </>
           )}
 
-          <RaceSectionWrapper className={cn(dialogContentPaddingBottomStyles, 'mt-auto')}>
-            <PACFooter className="static" />
-          </RaceSectionWrapper>
+          {showPACFooter && (
+            <RaceSectionWrapper className={cn(dialogContentPaddingBottomStyles, 'mt-auto')}>
+              <PACFooter className="static" />
+            </RaceSectionWrapper>
+          )}
         </>
       ) : null}
     </div>
