@@ -2,6 +2,7 @@ import { HomePageSection } from '@/components/app/pageHome/common/homePageSectio
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -37,6 +38,15 @@ export function CaPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
             </Button>
           </RecentActivity.Footer>
         </RecentActivity>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Get involved</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          The future of crypto is in your hands. Here’s how you can help.
+        </HomePageSection.Subtitle>
+
+        <UserActionGridCTAs />
       </HomePageSection>
     </>
   )
