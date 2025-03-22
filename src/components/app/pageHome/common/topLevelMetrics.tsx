@@ -103,7 +103,7 @@ export function TopLevelMetrics({
   }, [formatCurrency, values, countryCode])
 
   return (
-    <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
+    <div className="flex flex-col gap-3 text-center md:flex-row md:gap-0">
       {[
         {
           label: 'Global donations',
@@ -157,6 +157,6 @@ export function TopLevelMetrics({
           <div className="text-gray-500">{label}</div>
         </div>
       ))}
-    </section>
+    </div>
   )
 }
