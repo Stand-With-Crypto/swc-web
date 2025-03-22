@@ -7,13 +7,13 @@ import {
 
 import { AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './au/auCtas'
 import { CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './ca/caCtas'
-import { UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './uk/ukCtas'
+import { GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './gb/gbCtas'
 import { US_USER_ACTION_CTAS_FOR_GRID_DISPLAY } from './us/usCtas'
 
 const COUNTRY_USER_ACTION_CTAS_FOR_GRID_DISPLAY: Record<SupportedCountryCodes, UserActionGridCTA> =
   {
     [SupportedCountryCodes.US]: US_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
-    [SupportedCountryCodes.GB]: UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
+    [SupportedCountryCodes.GB]: GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
     [SupportedCountryCodes.CA]: CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
     [SupportedCountryCodes.AU]: AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY,
   }

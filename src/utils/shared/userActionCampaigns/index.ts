@@ -14,11 +14,11 @@ import {
   CAUserActionCampaigns,
 } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import {
-  UK_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  UK_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UKActiveClientUserActionWithCampaignType,
-  UKUserActionCampaigns,
-} from '@/utils/shared/userActionCampaigns/uk/ukUserActionCampaigns'
+  GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  GBActiveClientUserActionWithCampaignType,
+  GBUserActionCampaigns,
+} from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import {
   US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -29,7 +29,7 @@ import {
 // Define which action types are available for each country
 export type CountryActiveClientUserActionWithCampaignType = {
   [SupportedCountryCodes.US]: USActiveClientUserActionWithCampaignType
-  [SupportedCountryCodes.GB]: UKActiveClientUserActionWithCampaignType
+  [SupportedCountryCodes.GB]: GBActiveClientUserActionWithCampaignType
   [SupportedCountryCodes.CA]: CAActiveClientUserActionWithCampaignType
   [SupportedCountryCodes.AU]: AUActiveClientUserActionWithCampaignType
 }
@@ -41,21 +41,21 @@ export const COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN: {
   [key in SupportedCountryCodes]: readonly ActiveClientUserActionWithCampaignType[]
 } = {
   [SupportedCountryCodes.US]: US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  [SupportedCountryCodes.GB]: UK_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.GB]: GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   [SupportedCountryCodes.CA]: CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   [SupportedCountryCodes.AU]: AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
 }
 
 export type CountryUserActionCampaigns = {
   [SupportedCountryCodes.US]: USUserActionCampaigns
-  [SupportedCountryCodes.GB]: UKUserActionCampaigns
+  [SupportedCountryCodes.GB]: GBUserActionCampaigns
   [SupportedCountryCodes.CA]: CAUserActionCampaigns
   [SupportedCountryCodes.AU]: AUUserActionCampaigns
 }
 
 export type UserActionCampaignNames =
   | USUserActionCampaigns[keyof USUserActionCampaigns]
-  | UKUserActionCampaigns[keyof UKUserActionCampaigns]
+  | GBUserActionCampaigns[keyof GBUserActionCampaigns]
   | CAUserActionCampaigns[keyof CAUserActionCampaigns]
   | AUUserActionCampaigns[keyof AUUserActionCampaigns]
 
@@ -65,7 +65,7 @@ export const COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP: {
   [key in SupportedCountryCodes]: CountryUserActionCampaigns[key]
 } = {
   [SupportedCountryCodes.US]: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  [SupportedCountryCodes.GB]: UK_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  [SupportedCountryCodes.GB]: GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   [SupportedCountryCodes.CA]: CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   [SupportedCountryCodes.AU]: AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 }
@@ -83,7 +83,7 @@ export function isActionSupportedForCountry<
 // For backwards compatibility
 export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   ...US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  ...UK_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  ...GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   ...CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   ...AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
 ]
@@ -91,7 +91,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
 // For backwards compatibility
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   ...US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  ...UK_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  ...GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   ...CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   ...AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>

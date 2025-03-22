@@ -70,6 +70,7 @@ export function USUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
     case SectionNames.SUCCESS:
       return <SuccessSection onClose={onClose} />
     default:
+      sectionProps.onSectionNotFound()
       return null
   }
 }

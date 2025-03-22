@@ -27,10 +27,10 @@ const CAUserActionFormShareOnTwitter = dynamic(
   },
 )
 
-const UKUserActionFormShareOnTwitter = dynamic(
+const GBUserActionFormShareOnTwitter = dynamic(
   () =>
-    import('@/components/app/userActionFormShareOnTwitter/uk').then(
-      mod => mod.UKUserActionFormShareOnTwitter,
+    import('@/components/app/userActionFormShareOnTwitter/gb').then(
+      mod => mod.GBUserActionFormShareOnTwitter,
     ),
   {
     loading: () => <UserActionFormShareOnTwitterSkeleton />,
@@ -54,7 +54,7 @@ export function UserActionFormShareOnTwitter(props: UserActionFormShareOnTwitter
     case SupportedCountryCodes.US:
       return <USUserActionFormShareOnTwitter {...props} />
     case SupportedCountryCodes.GB:
-      return <UKUserActionFormShareOnTwitter {...props} />
+      return <GBUserActionFormShareOnTwitter {...props} />
     case SupportedCountryCodes.CA:
       return <CAUserActionFormShareOnTwitter {...props} />
     case SupportedCountryCodes.AU:

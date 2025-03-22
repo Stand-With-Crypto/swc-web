@@ -12,7 +12,7 @@ import {
 
 export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
-    title: 'Join Stand With Crypto',
+    title: 'Join Stand With Crypto Australia',
     description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Australia.`,
     mobileCTADescription: 'Join the fight to keep crypto in Australia.',
     campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Australia.`,
@@ -22,7 +22,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.OPT_IN,
         campaignName: AUUserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Join Stand With Crypto',
+        title: 'Join Stand With Crypto Australia',
         description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Australia.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (

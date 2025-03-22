@@ -37,7 +37,7 @@ export function AUUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
 
     void triggerServerActionForForm(
       {
-        formName: 'User Action Form Share On Twitter [AU]',
+        formName: 'User Action Form Share On Twitter',
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },

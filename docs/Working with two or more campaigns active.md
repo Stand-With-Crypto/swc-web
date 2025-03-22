@@ -1,14 +1,14 @@
 # Working with two or more campaigns active at the same time
 
 - [Working with two or more campaigns active at the same time](#working-with-two-or-more-campaigns-active-at-the-same-time)
-  - [Create the campaign](#create-the-campaign)
-  - [Country-specific campaigns](#country-specific-campaigns)
-  - [Change CTAs priority order](#change-ctas-priority-order)
-  - [Create the corresponding modules for the campaign](#create-the-corresponding-modules-for-the-campaign)
-  - [Create the campaign CTA](#create-the-campaign-cta)
-  - [Update the deeplink URL for our internal deeplink page](#update-the-deeplink-url-for-our-internal-deeplink-page)
-  - [Update the variantRecentActivityRow](#update-the-variantrecentactivityrow)
-  - [How to disable the campaign after it is not necessary anymore](#how-to-disable-the-campaign-after-it-is-not-necessary-anymore)
+    - [Create the campaign](#create-the-campaign)
+    - [Country-specific campaigns](#country-specific-campaigns)
+    - [Change CTAs priority order](#change-ctas-priority-order)
+    - [Create the corresponding modules for the campaign](#create-the-corresponding-modules-for-the-campaign)
+    - [Create the campaign CTA](#create-the-campaign-cta)
+    - [Update the deeplink URL for our internal deeplink page](#update-the-deeplink-url-for-our-internal-deeplink-page)
+    - [Update the variantRecentActivityRow](#update-the-variantrecentactivityrow)
+    - [How to disable the campaign after it is not necessary anymore](#how-to-disable-the-campaign-after-it-is-not-necessary-anymore)
 
 ### Create the campaign
 
@@ -52,20 +52,20 @@ When creating campaigns that should behave differently based on country:
      }
    };
 
-   // src/components/app/userActionGridCTAs/constants/uk/ukCtas.tsx
-   export const UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
+   // src/components/app/userActionGridCTAs/constants/gb/gbCtas.tsx
+   export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
      [UserActionType.TWEET]: {
-       // UK general tweet action configuration
+       // GB general tweet action configuration
        campaigns: [
          {
            actionType: UserActionType.TWEET,
            campaignName: UserActionTweetCampaignName['2024_05_22_PIZZA_DAY'],
            isCampaignActive: true,
-           title: 'UK Bitcoin Pizza Day',
-           description: 'Tweet about Bitcoin Pizza Day in the UK',
+           title: 'GB Bitcoin Pizza Day',
+           description: 'Tweet about Bitcoin Pizza Day in the GB',
            canBeTriggeredMultipleTimes: true,
            WrapperComponent: ({ children }) => (
-             <UserActionFormTweetDialog countryCode="UK" defaultOpen={false}>
+             <UserActionFormTweetDialog countryCode="GB" defaultOpen={false}>
                {children}
              </UserActionFormTweetDialog>
            ),
@@ -93,9 +93,9 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.TWEET]: { /* ... */ }
 };
 
-// For UK, show TWEET first, then EMAIL
-// src/components/app/userActionGridCTAs/constants/uk/ukCtas.tsx
-export const UK_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
+// For GB, show TWEET first, then EMAIL
+// src/components/app/userActionGridCTAs/constants/gb/gbCtas.tsx
+export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.TWEET]: { /* ... */ },
   [UserActionType.EMAIL]: { /* ... */ }
 };
@@ -182,7 +182,7 @@ const url = getUserActionDeeplink({
 ```javascript
 // In each country file:
 // src/components/app/userActionGridCTAs/constants/us/usCtas.tsx
-// src/components/app/userActionGridCTAs/constants/uk/ukCtas.tsx
+// src/components/app/userActionGridCTAs/constants/gb/gbCtas.tsx
 // etc.
 
 {

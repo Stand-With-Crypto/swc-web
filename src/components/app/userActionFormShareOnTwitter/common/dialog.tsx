@@ -33,7 +33,7 @@ export function UserActionFormShareOnTwitterDialog(props: UserActionFormShareOnT
   })
 
   return (
-    <UserActionFormDialog {...dialogProps} trigger={children}>
+    <UserActionFormDialog {...dialogProps} countryCode={countryCode} trigger={children}>
       <UserActionFormShareOnTwitter
         countryCode={countryCode}
         onClose={() => dialogProps.onOpenChange(false)}

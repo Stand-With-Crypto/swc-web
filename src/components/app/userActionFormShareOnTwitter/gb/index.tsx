@@ -16,7 +16,7 @@ import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-export function UKUserActionFormShareOnTwitter({ onClose }: UserActionFormShareOnTwitterProps) {
+export function GBUserActionFormShareOnTwitter({ onClose }: UserActionFormShareOnTwitterProps) {
   const searchParams = useSearchParams()
 
   const sectionProps = useSections({
@@ -25,8 +25,8 @@ export function UKUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER,
   })
 
-  const ukBenefits = [
-    'Staying informed about crypto policy in the UK',
+  const gbBenefits = [
+    'Staying informed about crypto policy in the GB',
     'Supporting the British crypto community',
     'Getting updates on important regulatory changes',
     "Being part of a movement that's shaping the future of finance in Britain",
@@ -37,7 +37,7 @@ export function UKUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
 
     void triggerServerActionForForm(
       {
-        formName: 'User Action Form Share On Twitter [UK]',
+        formName: 'User Action Form Share On Twitter [GB]',
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },
@@ -60,12 +60,12 @@ export function UKUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         <ShareOnX>
           <ShareOnX.Heading
             subtitle="Stay up to date on crypto policy changes in the UK"
-            title="Follow @StandWithCrypto on Twitter"
+            title="Follow @StandWithCryptoUK on Twitter"
           />
 
-          <ShareOnX.Benefits benefits={ukBenefits} />
+          <ShareOnX.Benefits benefits={gbBenefits} />
 
-          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWithCrypto" />
+          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWithCryptoGB" />
         </ShareOnX>
       )
     case SectionNames.SUCCESS:
