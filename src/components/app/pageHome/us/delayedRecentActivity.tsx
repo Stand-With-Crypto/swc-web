@@ -6,7 +6,7 @@ import { useInView } from 'motion/react'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { RecentActivityRowAnimatedContainer } from '@/components/app/recentActivityRow/recentActivityRowAnimatedContainer'
+import { RecentActivity } from '@/components/app/recentActivity'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
@@ -16,7 +16,6 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
-import { RecentActivity } from '@/components/app/recentActivity'
 
 export function DelayedRecentActivityWithMap({
   actions,

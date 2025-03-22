@@ -2,15 +2,15 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
+import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
-  PageLeaderboard,
   PageLeaderboardInferredProps,
-} from '@/components/app/pageLeaderboard/us'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/common/constants'
-import { validatePageNum } from '@/components/app/pageLeaderboard/pageValidator'
+  UsPageCommunity,
+} from '@/components/app/pageCommunity/us'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -59,6 +59,6 @@ export default async function CommunityLeaderboardPage(props: Props) {
   }
 
   return (
-    <PageLeaderboard {...dataProps} countryCode={countryCode} offset={offset} pageNum={pageNum} />
+    <UsPageCommunity {...dataProps} countryCode={countryCode} offset={offset} pageNum={pageNum} />
   )
 }

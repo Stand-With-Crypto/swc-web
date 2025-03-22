@@ -1,5 +1,5 @@
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/common/constants'
 import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
 import { PageReferralsHeading } from '@/components/app/pageReferrals/heading'
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
