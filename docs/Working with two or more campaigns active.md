@@ -1,14 +1,14 @@
 # Working with two or more campaigns active at the same time
 
 - [Working with two or more campaigns active at the same time](#working-with-two-or-more-campaigns-active-at-the-same-time)
-    - [Create the campaign](#create-the-campaign)
-    - [Country-specific campaigns](#country-specific-campaigns)
-    - [Change CTAs priority order](#change-ctas-priority-order)
-    - [Create the corresponding modules for the campaign](#create-the-corresponding-modules-for-the-campaign)
-    - [Create the campaign CTA](#create-the-campaign-cta)
-    - [Update the deeplink URL for our internal deeplink page](#update-the-deeplink-url-for-our-internal-deeplink-page)
-    - [Update the variantRecentActivityRow](#update-the-variantrecentactivityrow)
-    - [How to disable the campaign after it is not necessary anymore](#how-to-disable-the-campaign-after-it-is-not-necessary-anymore)
+  - [Create the campaign](#create-the-campaign)
+  - [Country-specific campaigns](#country-specific-campaigns)
+  - [Change CTAs priority order](#change-ctas-priority-order)
+  - [Create the corresponding modules for the campaign](#create-the-corresponding-modules-for-the-campaign)
+  - [Create the campaign CTA](#create-the-campaign-cta)
+  - [Update the deeplink URL for our internal deeplink page](#update-the-deeplink-url-for-our-internal-deeplink-page)
+  - [Update the variantRecentActivityRow](#update-the-variantrecentactivityrow)
+  - [How to disable the campaign after it is not necessary anymore](#how-to-disable-the-campaign-after-it-is-not-necessary-anymore)
 
 ### Create the campaign
 
