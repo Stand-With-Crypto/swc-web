@@ -16,7 +16,7 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
-import { RecentActivity } from '@/components/app/pageHome/common/recentActivity'
+import { RecentActivity } from '@/components/app/recentActivity'
 
 export function DelayedRecentActivityWithMap({
   actions,

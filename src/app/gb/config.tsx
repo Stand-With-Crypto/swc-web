@@ -34,8 +34,8 @@ export const navbarConfig: NavbarProps = {
       text: 'Events',
     },
     {
-      href: urls.press(),
-      text: 'Press',
+      href: urls.community(),
+      text: 'Community',
     },
   ],
 }

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/common/constants'
 import { PageReferrals } from '@/components/app/pageReferrals'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'

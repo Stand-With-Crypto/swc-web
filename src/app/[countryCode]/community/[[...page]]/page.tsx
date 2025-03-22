@@ -1,19 +1,18 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { getPageData } from '@/components/app/pageCommunity'
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
-  PageLeaderboard,
   PageLeaderboardInferredProps,
-} from '@/components/app/pageLeaderboard'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
-import { validatePageNum } from '@/components/app/pageLeaderboard/pageValidator'
-import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+  UsPageCommunity,
+} from '@/components/app/pageCommunity/us'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
@@ -37,20 +36,7 @@ export async function generateStaticParams() {
 
 export default async function CommunityRecentActivityPage(props: Props) {
   const params = await props.params
-  const { itemsPerPage } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
-  const { countryCode, page } = params
-  const pageNum = validatePageNum(page ?? [])
-  if (!pageNum) {
-    notFound()
-  }
-  const offset = (pageNum - 1) * itemsPerPage
-
-  const publicRecentActivity = await getPublicRecentActivity({
-    limit: itemsPerPage,
-    offset,
-    countryCode: params.countryCode,
-  })
+  const { publicRecentActivity, pageNum, offset } = await getPageData(params)
 
   const dataProps: PageLeaderboardInferredProps = {
     tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
@@ -60,6 +46,11 @@ export default async function CommunityRecentActivityPage(props: Props) {
   }
 
   return (
-    <PageLeaderboard {...dataProps} countryCode={countryCode} offset={offset} pageNum={pageNum} />
+    <UsPageCommunity
+      {...dataProps}
+      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+      offset={offset}
+      pageNum={pageNum}
+    />
   )
 }

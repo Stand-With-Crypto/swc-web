@@ -1,13 +1,12 @@
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
-import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
 import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
+import { RecentActivity } from '@/components/app/recentActivity'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { PageLayout } from '@/components/ui/pageLayout'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import {
   Select,
@@ -71,7 +70,7 @@ type PageLeaderboardProps = PageLeaderboardInferredProps & {
   pageNum: number
 }
 
-export function PageLeaderboard({
+export function UsPageCommunity({
   tab,
   countryCode,
   offset,
@@ -84,15 +83,15 @@ export function PageLeaderboard({
   const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
 
   return (
-    <div className="standard-spacing-from-navbar container space-y-7">
-      <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
-      <PageSubTitle>
+    <PageLayout className="space-y-7">
+      <PageLayout.Title>{PAGE_LEADERBOARD_TITLE}</PageLayout.Title>
+      <PageLayout.Subtitle>
         {PAGE_LEADERBOARD_DESCRIPTION} Donations to{' '}
         <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
           Fairshake
         </ExternalLink>
         , a pro-crypto Super PAC, are not included on the leaderboard.
-      </PageSubTitle>
+      </PageLayout.Subtitle>
       <div className="text-center">
         {/* Mobile: Select */}
         <div className="sm:hidden">
@@ -145,7 +144,14 @@ export function PageLeaderboard({
       <div className="space-y-8 lg:space-y-10">
         {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
           pageNum === 1 ? (
-            <DynamicRecentActivity actions={publicRecentActivity} countryCode={countryCode} />
+            <RecentActivity.DynamicList
+              actions={publicRecentActivity}
+              countryCode={countryCode}
+              pageSize={
+                COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+                  .itemsPerPage
+              }
+            />
           ) : (
             <>
               {publicRecentActivity.map(action => (
@@ -190,6 +196,6 @@ export function PageLeaderboard({
           />
         </div>
       )}
-    </div>
+    </PageLayout>
   )
 }

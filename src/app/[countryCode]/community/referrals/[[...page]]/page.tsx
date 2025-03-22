@@ -8,8 +8,8 @@ import {
   PAGE_LEADERBOARD_TITLE,
   PageLeaderboard,
   PageLeaderboardInferredProps,
-} from '@/components/app/pageLeaderboard'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
+} from '@/components/app/pageLeaderboard/us'
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/common/constants'
 import { validatePageNum } from '@/components/app/pageLeaderboard/pageValidator'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'

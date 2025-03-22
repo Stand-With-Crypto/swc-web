@@ -3,25 +3,25 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { getPageData } from '@/components/app/pageCommunity'
-import { AuPageCommunity } from '@/components/app/pageCommunity/au'
 import { RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/common/constants'
+import { GbPageCommunity } from '@/components/app/pageCommunity/gb'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const countryCode = SupportedCountryCodes.AU
+const countryCode = SupportedCountryCodes.GB
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 export const dynamicParams = true
 
-type AuCommunityRecentActivityPageProps = PageProps<{ page: string[] }>
+type GbCommunityRecentActivityPageProps = PageProps<{ page: string[] }>
 
-export async function generateMetadata(_: AuCommunityRecentActivityPageProps): Promise<Metadata> {
+export async function generateMetadata(_: GbCommunityRecentActivityPageProps): Promise<Metadata> {
   return generateMetadataDetails({
     title: 'Our community',
     description:
-      'See how our community is taking a stand to safeguard the future of crypto in Australia.',
+      'See how our community is taking a stand to safeguard the future of crypto in the UK.',
   })
 }
 
@@ -30,8 +30,8 @@ export async function generateStaticParams() {
   return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
-export default async function AuCommunityRecentActivityPage(
-  props: AuCommunityRecentActivityPageProps,
+export default async function GbCommunityRecentActivityPage(
+  props: GbCommunityRecentActivityPageProps,
 ) {
   const params = await props.params
   const pageData = await getPageData({
@@ -39,5 +39,5 @@ export default async function AuCommunityRecentActivityPage(
     countryCode,
   })
 
-  return <AuPageCommunity {...pageData} />
+  return <GbPageCommunity {...pageData} />
 }

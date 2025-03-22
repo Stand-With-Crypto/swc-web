@@ -17,5 +17,5 @@ export default async function GbHomePage() {
     }),
   ])
 
-  return <GbPageHome topLevelMetrics={topLevelMetrics} recentActivity={recentActivity} />
+  return <GbPageHome recentActivity={recentActivity} topLevelMetrics={topLevelMetrics} />
 }
