@@ -1,7 +1,7 @@
 import { GbPageHome } from '@/components/app/pageHome/gb'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
-import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute

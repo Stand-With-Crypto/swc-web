@@ -21,9 +21,9 @@ export default async function AuHomePage() {
 
   return (
     <AuPageHome
+      partners={partners}
       recentActivity={recentActivity}
       topLevelMetrics={topLevelMetrics}
-      partners={partners}
     />
   )
 }
