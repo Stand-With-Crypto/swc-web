@@ -1,4 +1,4 @@
-export enum SECTIONS_NAMES {
+export enum SectionNames {
   SHARE = 'Share',
   SUCCESS = 'Success',
 }

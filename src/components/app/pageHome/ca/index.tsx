@@ -1,42 +1,70 @@
-import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
+import { RecentActivity } from '@/components/app/recentActivity'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { CaHero } from './hero'
+import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 
 const countryCode = SupportedCountryCodes.CA
-
 const urls = getIntlUrls(countryCode)
 
-export function CaPageHome({ topLevelMetrics, partners }: HomePageProps) {
+export function CaPageHome({ topLevelMetrics, recentActivity, partners }: HomePageProps) {
   return (
     <>
       <CaHero />
-      <div className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
 
-        <section className="mb-16 text-center md:mb-36">
-          <PageTitle as="h3" className="mb-6 !text-[32px]">
-            Our partners
-          </PageTitle>
-          <PageSubTitle as="h4" className="mb-10">
-            We’re proud to partner with some of the most influential and forward-thinking companies
-            driving innovation through blockchain and crypto.
-          </PageSubTitle>
-          <div className="space-y-6">
-            <PartnerGrid partners={partners} />
+      <section className="container">
+        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
+      </section>
+
+      <HomePageSection>
+        <HomePageSection.Title>
+          People in <span className="text-primary-cta">Canada</span> are fighting for crypto
+        </HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          See how the community is taking a stand to safeguard the future of crypto in Canada.
+        </HomePageSection.Subtitle>
+
+        <RecentActivity>
+          <RecentActivity.List actions={recentActivity} />
+          <RecentActivity.Footer>
             <Button asChild variant="secondary">
-              <InternalLink href={urls.partners()}>View all</InternalLink>
+              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
             </Button>
-          </div>
-        </section>
-      </div>
+          </RecentActivity.Footer>
+        </RecentActivity>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Our partners</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          Join Stand With Crypto and shape the future of finance and tech in Canada. Whether you're
+          a developer, advocate, or curious about blockchain, engage with our community through
+          exclusive events, resources, and networking. Collaborate on projects, influence policy,
+          and help build an inclusive web3 ecosystem. Your participation is crucial.
+        </HomePageSection.Subtitle>
+        <div className="flex flex-col items-center gap-6">
+          <PartnerGrid partners={partners} />
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.partners()}>View all</InternalLink>
+          </Button>
+        </div>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Get involved</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          The future of crypto is in your hands. Here’s how you can help.
+        </HomePageSection.Subtitle>
+
+        <UserActionGridCTAs />
+      </HomePageSection>
     </>
   )
 }

@@ -302,8 +302,9 @@ async function seed() {
       const relatedItem = getRelatedItem()
 
       return {
-        ...mockCreateUserActionInput(),
-        actionType,
+        ...mockCreateUserActionInput({
+          actionType,
+        }),
         userCryptoAddressId:
           actionType === UserActionType.OPT_IN
             ? null

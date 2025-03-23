@@ -1,10 +1,10 @@
 import { UserActionType } from '@prisma/client'
 
-import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionCampaignNames } from '@/utils/shared/userActionCampaigns/index'
 
 export interface UserActionGridCTACampaign {
   actionType: UserActionType
-  campaignName: UserActionCampaignName
+  campaignName: UserActionCampaignNames
   /**
    * CTA title.
    */

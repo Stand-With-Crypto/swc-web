@@ -22,7 +22,7 @@ export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLoca
   [SupportedCountryCodes.AU]: SupportedLocale.EN_US,
 }
 
-// Two lowercase letters (e.g., "us", "uk")
+// Two lowercase letters (e.g., "us", "gb")
 export const COUNTRY_CODE_REGEX_PATTERN = new RegExp(
   `^(${Object.values(SupportedCountryCodes).join('|')})$`,
 )

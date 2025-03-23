@@ -1,42 +1,69 @@
-import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
+import { RecentActivity } from '@/components/app/recentActivity'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { GbHero } from './hero'
+import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 
 const countryCode = SupportedCountryCodes.GB
-
 const urls = getIntlUrls(countryCode)
 
-export function GbPageHome({ topLevelMetrics, partners }: HomePageProps) {
+export function GbPageHome({ topLevelMetrics, recentActivity, partners }: HomePageProps) {
   return (
     <>
       <GbHero />
-      <div className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
 
-        <section className="mb-16 text-center md:mb-36">
-          <PageTitle as="h3" className="mb-6 !text-[32px]">
-            Our partners
-          </PageTitle>
-          <PageSubTitle as="h4" className="mb-10">
-            We’re proud to partner with some of the most influential and forward-thinking companies
-            driving innovation through blockchain and crypto.
-          </PageSubTitle>
-          <div className="space-y-6">
-            <PartnerGrid partners={partners} />
+      <section className="container">
+        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
+      </section>
+
+      <HomePageSection>
+        <HomePageSection.Title>
+          People in <span className="text-primary-cta">Britain</span> are fighting for crypto
+        </HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          See how the community is taking a stand to safeguard the future of crypto in Britain.
+        </HomePageSection.Subtitle>
+
+        <RecentActivity>
+          <RecentActivity.List actions={recentActivity} />
+          <RecentActivity.Footer>
             <Button asChild variant="secondary">
-              <InternalLink href={urls.partners()}>View all</InternalLink>
+              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
             </Button>
-          </div>
-        </section>
-      </div>
+          </RecentActivity.Footer>
+        </RecentActivity>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Our partners</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          Stand with Crypto in the UK has joined forces with numerous companies to support our case,
+          and we couldn't be more grateful. If you also want to become an official partner, fill out
+          the form via the button below.
+        </HomePageSection.Subtitle>
+        <div className="flex flex-col items-center gap-6">
+          <PartnerGrid partners={partners} />
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.partners()}>View all</InternalLink>
+          </Button>
+        </div>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Get involved</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          The future of crypto is in your hands. Here’s how you can help.
+        </HomePageSection.Subtitle>
+
+        <UserActionGridCTAs />
+      </HomePageSection>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ACTIVE_CLIENT_USER_ACTION_TYPES = [
+const US_ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.CALL,
   UserActionType.EMAIL,
   UserActionType.DONATION,
@@ -15,4 +15,4 @@ const ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.REFER,
   UserActionType.POLL,
 ] as const
-export type ActiveClientUserActionType = (typeof ACTIVE_CLIENT_USER_ACTION_TYPES)[number]
+export type USActiveClientUserActionType = (typeof US_ACTIVE_CLIENT_USER_ACTION_TYPES)[number]
