@@ -66,6 +66,7 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
+    founders: () => `${countryPrefix}/founders`,
     politiciansHomepage: () => `${countryPrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,

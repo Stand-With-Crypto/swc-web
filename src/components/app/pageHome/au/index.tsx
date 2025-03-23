@@ -9,12 +9,13 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { AuHero } from './hero'
+import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 
 const countryCode = SupportedCountryCodes.AU
 
 const urls = getIntlUrls(countryCode)
 
-export function AuPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
+export function AuPageHome({ topLevelMetrics, recentActivity, founders }: HomePageProps) {
   return (
     <>
       <AuHero />
@@ -48,6 +49,17 @@ export function AuPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
         </HomePageSection.Subtitle>
 
         <UserActionGridCTAs />
+      </HomePageSection>
+
+      <HomePageSection container={false} className="text-center">
+        <HomePageSection.Title>Founders</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          Members from our community that have founded crypto-related businesses in the UK.
+        </HomePageSection.Subtitle>
+        <FoundersCarousel founders={founders} />
+        <Button asChild variant="secondary">
+          <InternalLink href={urls.founders()}>View all</InternalLink>
+        </Button>
       </HomePageSection>
     </>
   )
