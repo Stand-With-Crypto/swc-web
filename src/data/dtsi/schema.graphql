@@ -1,15 +1,9 @@
-"""
-The `BigInt` scalar type represents non-fractional signed whole numeric values.
-@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
-"""
-scalar BigInt
-
 type Bill {
   analysis: [BillAnalysis!]!
   computedStanceScore: Float
   congressDotGovUrl: String!
-  createdByPersonRoleGroup: PersonRoleGroup!
-  createdByPersonRoleGroupId: String!
+  createdByPersonRoleGroup: PersonRoleGroup
+  createdByPersonRoleGroupId: String
   dateIntroduced: String!
   datetimeCreated: DateTime!
   datetimeTweetedByDoTheySupportIt: DateTime
@@ -78,11 +72,6 @@ enum BillStatus {
 }
 
 """
-The `Byte` scalar type represents byte value as a Buffer
-"""
-scalar Bytes
-
-"""
 Valid Chambers Of Congress
 """
 enum CongressionalChamber {
@@ -97,6 +86,7 @@ enum CongressionalSession {
   SESSION_116
   SESSION_117
   SESSION_118
+  SESSION_119
 }
 
 """
@@ -416,6 +406,9 @@ type Tweet {
   entities: Json!
   id: ID!
   isActive: Boolean!
+  quotedTweet: Tweet
+  replyToTweet: Tweet
+  retweetedTweet: Tweet
   text: String!
   tweetMedia: [TweetMedia!]!
   twitterAccount: TwitterAccount!
@@ -448,7 +441,9 @@ type TwitterAccount {
   datetimeOldestTweetQueried: DateTime
   datetimeUpdated: DateTime!
   id: ID!
+  name: String!
   personId: String
+  profileImageUrl: String!
   state: TwitterAccountState!
   username: String!
 }
