@@ -50,15 +50,17 @@ export function CaPageHome({ topLevelMetrics, recentActivity, founders }: HomePa
         <UserActionGridCTAs />
       </HomePageSection>
 
-      <HomePageSection container={false} className="text-center">
+      <HomePageSection container={false}>
         <HomePageSection.Title>Founders</HomePageSection.Title>
         <HomePageSection.Subtitle>
           Members from our community that have founded crypto-related businesses in the UK.
         </HomePageSection.Subtitle>
-        <FoundersCarousel founders={founders} />
-        <Button asChild variant="secondary">
-          <InternalLink href={urls.founders()}>View all</InternalLink>
-        </Button>
+        <div className="flex flex-col items-center gap-6">
+          <FoundersCarousel founders={founders} />
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.founders()}>View all</InternalLink>
+          </Button>
+        </div>
       </HomePageSection>
     </>
   )

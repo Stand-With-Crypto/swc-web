@@ -12,7 +12,7 @@ export function FoundersCarousel({ founders }: { founders: SWCFounders | null })
       className="w-full"
       autoplay
     >
-      <CarouselContent className="mb-4">
+      <CarouselContent>
         {founders?.map(founder => (
           <CarouselItem
             key={founder.data.name}
