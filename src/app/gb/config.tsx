@@ -22,8 +22,8 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
-      href: urls.about(),
-      text: 'Our mission',
+      href: urls.manifesto(),
+      text: 'Manifesto',
     },
     {
       href: urls.partners(),
