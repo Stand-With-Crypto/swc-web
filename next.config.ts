@@ -666,26 +666,6 @@ const nextConfig: NextConfig = {
         destination: '/politicians',
         permanent: true,
       },
-      {
-        source: '/manifesto',
-        destination: '/about',
-        permanent: true,
-      },
-      {
-        source: '/:country/manifesto',
-        destination: '/:country/about',
-        permanent: true,
-      },
-      {
-        source: '/mission',
-        destination: '/about',
-        permanent: true,
-      },
-      {
-        source: '/:country/mission',
-        destination: '/:country/about',
-        permanent: true,
-      },
     ]
   },
   async rewrites() {
