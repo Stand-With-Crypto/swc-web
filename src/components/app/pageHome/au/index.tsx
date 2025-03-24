@@ -43,19 +43,21 @@ export function AuPageHome({ topLevelMetrics, recentActivity, partners, founders
         </RecentActivity>
       </HomePageSection>
 
-      <HomePageSection>
-        <HomePageSection.Title>Our partners</HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          We’re proud to partner with some of the most influential and forward-thinking companies
-          driving innovation through blockchain and crypto.
-        </HomePageSection.Subtitle>
-        <div className="flex flex-col items-center gap-6">
-          <PartnerGrid partners={partners} />
-          <Button asChild variant="secondary">
-            <InternalLink href={urls.partners()}>View all</InternalLink>
-          </Button>
-        </div>
-      </HomePageSection>
+      {partners && (
+        <HomePageSection>
+          <HomePageSection.Title>Our partners</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            We’re proud to partner with some of the most influential and forward-thinking companies
+            driving innovation through blockchain and crypto.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <PartnerGrid partners={partners} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
 
       <HomePageSection>
         <HomePageSection.Title>Get involved</HomePageSection.Title>
@@ -66,18 +68,20 @@ export function AuPageHome({ topLevelMetrics, recentActivity, partners, founders
         <UserActionGridCTAs />
       </HomePageSection>
 
-      <HomePageSection container={false}>
-        <HomePageSection.Title>Founders</HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          Members from our community that have founded crypto-related businesses in the UK.
-        </HomePageSection.Subtitle>
-        <div className="flex flex-col items-center gap-6">
-          <FoundersCarousel founders={founders} />
-          <Button asChild variant="secondary">
-            <InternalLink href={urls.founders()}>View all</InternalLink>
-          </Button>
-        </div>
-      </HomePageSection>
+      {founders && (
+        <HomePageSection container={false}>
+          <HomePageSection.Title>Founders</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            Members from our community that have founded crypto-related businesses in the UK.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <FoundersCarousel founders={founders} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.founders()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
     </>
   )
 }
