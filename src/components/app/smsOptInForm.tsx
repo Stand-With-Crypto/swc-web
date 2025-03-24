@@ -69,9 +69,11 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
 
 SMSOptInForm.PhoneNumberField = function SMSOptInFormPhoneNumberField({
   shouldAutoFocus = false,
+  disabled,
   className,
 }: {
   shouldAutoFocus?: boolean
+  disabled?: boolean
   className?: ClassValue
 }) {
   const { control, setFocus } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
@@ -86,6 +88,7 @@ SMSOptInForm.PhoneNumberField = function SMSOptInFormPhoneNumberField({
     <div className={cn('flex', className)}>
       <FormField
         control={control}
+        disabled={disabled}
         name="phoneNumber"
         render={({ field }) => (
           <FormItem className="flex-1">

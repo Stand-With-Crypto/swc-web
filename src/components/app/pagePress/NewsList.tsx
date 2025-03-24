@@ -10,6 +10,7 @@ import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import { getNewsList, NormalizedNews } from '@/utils/server/builder/models/data/news'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { EmptyList } from '@/components/app/pagePress/EmptyList'
 
 interface NewsListProps {
   initialNews: NormalizedNews[]
@@ -51,65 +52,77 @@ export function NewsList({ initialNews, countryCode }: NewsListProps) {
     }
   }, [isInView, loadModeNews])
 
+  if (!news || news.length === 0) {
+    return <EmptyList />
+  }
+
   return (
     <div className="standard-spacing-from-navbar container flex flex-col">
       <div className="flex flex-col gap-8">
-        {news.map(
-          ({ dateHeading, source, title, type, url, id, previewImage, description }, index) => {
-            const LinkComponent = type === 'internal' ? TrackedInternalLink : TrackedExternalLink
-
-            return (
-              <React.Fragment key={id}>
-                {index !== 0 && <hr />}
-                <LinkComponent
-                  aria-label={`Read more about ${title}`}
-                  className="group text-foreground no-underline hover:no-underline"
-                  eventProperties={{
-                    component: AnalyticComponentType.link,
-                    action: AnalyticActionType.click,
-                    link: url,
-                    page: 'Press',
-                    surface: 'Press Section',
-                  }}
-                  href={url}
-                  title={`Read more about ${title}`}
-                >
-                  <article className="flex flex-col items-center gap-4 group-hover:cursor-pointer">
-                    {previewImage && (
-                      <div className="relative h-64 w-6/12">
-                        <NextImage
-                          alt={`Preview image for ${title}`}
-                          className="h-48 w-full object-cover"
-                          layout="fill"
-                          src={previewImage}
-                        />
-                      </div>
-                    )}
-                    <div className="text-center">
-                      <strong className="text-primary group-hover:underline group-focus:underline">
-                        {source}: {title}
-                      </strong>
-                      <p className="mt-2 max-w-prose text-sm text-muted-foreground">
-                        {description}
-                      </p>
-                    </div>
-                    <p className="text-center font-mono text-sm text-muted-foreground">
-                      {format(dateHeading, 'MM/dd/yy')}
-                    </p>
-                  </article>
-                </LinkComponent>
-              </React.Fragment>
-            )
-          },
-        )}
-        {isLoading && <ListItemSkeleton />}
+        {news.map((newsItem, index) => (
+          <React.Fragment key={newsItem.id}>
+            {index !== 0 && <hr />}
+            <NewsListItem {...newsItem} />
+          </React.Fragment>
+        ))}
+        {isLoading && <NewsListItemSkeleton />}
       </div>
       <div ref={loadMoreComponentRef} />
     </div>
   )
 }
 
-function ListItemSkeleton() {
+function NewsListItem({
+  dateHeading,
+  source,
+  title,
+  type,
+  url,
+  previewImage,
+  description,
+}: NormalizedNews) {
+  const LinkComponent = type === 'internal' ? TrackedInternalLink : TrackedExternalLink
+
+  return (
+    <LinkComponent
+      aria-label={`Read more about ${title}`}
+      className="group text-foreground no-underline hover:no-underline"
+      eventProperties={{
+        component: AnalyticComponentType.link,
+        action: AnalyticActionType.click,
+        link: url,
+        page: 'Press',
+        surface: 'Press Section',
+      }}
+      href={url}
+      title={`Read more about ${title}`}
+    >
+      <article className="flex flex-col items-center gap-4 group-hover:cursor-pointer">
+        {previewImage && (
+          <div className="relative h-64 w-6/12">
+            <NextImage
+              alt={`Preview image for ${title}`}
+              className="h-48 w-full object-cover"
+              layout="fill"
+              src={previewImage}
+            />
+          </div>
+        )}
+        <div className="text-center">
+          <strong className="text-primary group-hover:underline group-focus:underline">
+            {source}: {title}
+          </strong>
+          <p className="mt-2 max-w-prose text-sm text-muted-foreground">{description}</p>
+        </div>
+        <p className="text-center font-mono text-sm text-muted-foreground">
+          {format(dateHeading, 'MM/dd/yy')}
+        </p>
+      </article>
+    </LinkComponent>
+  )
+}
+
+function NewsListItemSkeleton() {
   return (
     <motion.div
       animate={{ opacity: 1, scale: 1 }}
