@@ -1,4 +1,5 @@
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
+import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -13,7 +14,7 @@ import { CaHero } from './hero'
 const countryCode = SupportedCountryCodes.CA
 const urls = getIntlUrls(countryCode)
 
-export function CaPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
+export function CaPageHome({ topLevelMetrics, recentActivity, partners }: HomePageProps) {
   return (
     <>
       <CaHero />
@@ -38,6 +39,22 @@ export function CaPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
             </Button>
           </RecentActivity.Footer>
         </RecentActivity>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Our partners</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          Join Stand With Crypto and shape the future of finance and tech in Canada. Whether you're
+          a developer, advocate, or curious about blockchain, engage with our community through
+          exclusive events, resources, and networking. Collaborate on projects, influence policy,
+          and help build an inclusive web3 ecosystem. Your participation is crucial.
+        </HomePageSection.Subtitle>
+        <div className="flex flex-col items-center gap-6">
+          <PartnerGrid partners={partners} />
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.partners()}>View all</InternalLink>
+          </Button>
+        </div>
       </HomePageSection>
 
       <HomePageSection>

@@ -1,4 +1,5 @@
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
+import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -14,7 +15,7 @@ const countryCode = SupportedCountryCodes.AU
 
 const urls = getIntlUrls(countryCode)
 
-export function AuPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
+export function AuPageHome({ topLevelMetrics, recentActivity, partners }: HomePageProps) {
   return (
     <>
       <AuHero />
@@ -39,6 +40,20 @@ export function AuPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
             </Button>
           </RecentActivity.Footer>
         </RecentActivity>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Our partners</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          We’re proud to partner with some of the most influential and forward-thinking companies
+          driving innovation through blockchain and crypto.
+        </HomePageSection.Subtitle>
+        <div className="flex flex-col items-center gap-6">
+          <PartnerGrid partners={partners} />
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.partners()}>View all</InternalLink>
+          </Button>
+        </div>
       </HomePageSection>
 
       <HomePageSection>

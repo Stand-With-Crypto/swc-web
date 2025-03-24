@@ -1,4 +1,5 @@
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
+import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -13,7 +14,7 @@ import { GbHero } from './hero'
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
 
-export function GbPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
+export function GbPageHome({ topLevelMetrics, recentActivity, partners }: HomePageProps) {
   return (
     <>
       <GbHero />
@@ -38,6 +39,21 @@ export function GbPageHome({ topLevelMetrics, recentActivity }: HomePageProps) {
             </Button>
           </RecentActivity.Footer>
         </RecentActivity>
+      </HomePageSection>
+
+      <HomePageSection>
+        <HomePageSection.Title>Our partners</HomePageSection.Title>
+        <HomePageSection.Subtitle>
+          Stand with Crypto in the UK has joined forces with numerous companies to support our case,
+          and we couldn't be more grateful. If you also want to become an official partner, fill out
+          the form via the button below.
+        </HomePageSection.Subtitle>
+        <div className="flex flex-col items-center gap-6">
+          <PartnerGrid partners={partners} />
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.partners()}>View all</InternalLink>
+          </Button>
+        </div>
       </HomePageSection>
 
       <HomePageSection>
