@@ -21,9 +21,9 @@ export default async function CaHomePage() {
 
   return (
     <CaPageHome
+      founders={founders}
       recentActivity={recentActivity}
       topLevelMetrics={topLevelMetrics}
-      founders={founders}
     />
   )
 }

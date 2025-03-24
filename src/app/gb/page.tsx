@@ -21,9 +21,9 @@ export default async function GbHomePage() {
 
   return (
     <GbPageHome
+      founders={founders}
       recentActivity={recentActivity}
       topLevelMetrics={topLevelMetrics}
-      founders={founders}
     />
   )
 }

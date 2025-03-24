@@ -21,8 +21,8 @@ export default async function AuHomePage() {
 
   return (
     <AuPageHome
-      recentActivity={recentActivity}
       founders={founders}
+      recentActivity={recentActivity}
       topLevelMetrics={topLevelMetrics}
     />
   )

@@ -1,3 +1,4 @@
+import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
@@ -9,7 +10,6 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { GbHero } from './hero'
-import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
