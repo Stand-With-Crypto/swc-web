@@ -13,21 +13,21 @@ import { fontClassName } from '@/utils/web/fonts'
 
 export interface PageLayoutProps {
   countryCode: SupportedCountryCodes
-  shouldRenderGTM?: boolean
   navbar: React.ReactNode
   footer: React.ReactNode
 }
 
+const COUNTRIES_WITH_GTM = [SupportedCountryCodes.US]
+
 export function PageLayout({
   children,
   countryCode,
-  shouldRenderGTM,
   navbar,
   footer,
 }: React.PropsWithChildren<PageLayoutProps>) {
   return (
     <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
-      {shouldRenderGTM && <GoogleTagManager />}
+      {COUNTRIES_WITH_GTM.includes(countryCode) && <GoogleTagManager />}
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <NextTopLoader

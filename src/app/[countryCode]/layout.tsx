@@ -36,7 +36,6 @@ export default async function Layout({
       countryCode={countryCode}
       footer={<Footer {...footerConfig} />}
       navbar={<Navbar {...navbarConfig} />}
-      shouldRenderGTM
     >
       {children}
     </PageLayout>
