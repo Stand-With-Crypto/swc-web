@@ -40,6 +40,8 @@ export const getIntlUrls = (
     termsOfService: () => `${countryPrefix}/terms-of-service`,
     privacyPolicy: () => `${countryPrefix}/privacy`,
     about: () => `${countryPrefix}/about`,
+    // Uses Next.js rewrite function to render the same page as /about
+    manifesto: () => `${countryPrefix}/manifesto`,
     resources: () => `${countryPrefix}/resources`,
     bills: () => `${countryPrefix}/bills`,
     billDetails: (billSlug: string) => `${countryPrefix}/bills/${billSlug}`,
