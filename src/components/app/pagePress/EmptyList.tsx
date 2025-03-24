@@ -1,11 +1,12 @@
 'use client'
 
+import { SMSStatus } from '@prisma/client'
+
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { SMSOptInForm } from '@/components/app/smsOptInForm'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { SMSStatus } from '@prisma/client'
 
 export function EmptyList() {
   return (
@@ -50,18 +51,18 @@ function EmptyListCTA() {
             <div className="space-y-2">
               <div className="flex flex-col items-center gap-4">
                 <SMSOptInForm.PhoneNumberField
+                  className="w-full max-w-[400px]"
                   disabled={[
                     SMSStatus.OPTED_IN,
                     SMSStatus.OPTED_IN_HAS_REPLIED,
                     SMSStatus.OPTED_OUT,
                   ].includes(user.smsStatus)}
-                  className="w-full max-w-[400px]"
                 />
 
                 {user && (
                   <SMSStatusFooter
-                    smsStatus={user.smsStatus}
                     isSubmitting={form.formState.isSubmitting}
+                    smsStatus={user.smsStatus}
                   />
                 )}
               </div>

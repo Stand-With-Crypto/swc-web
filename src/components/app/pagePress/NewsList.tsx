@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { format } from 'date-fns'
 import { motion, useInView } from 'motion/react'
 
+import { EmptyList } from '@/components/app/pagePress/EmptyList'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
@@ -10,7 +11,6 @@ import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import { getNewsList, NormalizedNews } from '@/utils/server/builder/models/data/news'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { EmptyList } from '@/components/app/pagePress/EmptyList'
 
 interface NewsListProps {
   initialNews: NormalizedNews[]
