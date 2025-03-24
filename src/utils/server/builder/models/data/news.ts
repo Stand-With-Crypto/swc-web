@@ -5,7 +5,6 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
-import { OLD_NEWS_DATE_OVERRIDES } from '@/utils/server/builder/models/data/news/constants'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -37,7 +36,10 @@ interface ExternalNews {
   source: string
 }
 
-type News = InternalNews | ExternalNews
+type News = (InternalNews | ExternalNews) & {
+  publicationDate: number // timestamp
+  previewImage?: string
+}
 
 interface NewsData {
   data: News
@@ -49,6 +51,7 @@ export interface NormalizedNews {
   id: string
   type: 'internal' | 'external'
   dateHeading: Date
+  previewImage?: string
   title: string
   source: string
   url: string
@@ -72,7 +75,7 @@ async function getAllNewsWithOffset(
           includeRefs: true,
         },
         sort: {
-          createdDate: -1,
+          'data.publicationDate': -1,
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
@@ -126,9 +129,9 @@ function isExternalNews(news: News) {
 }
 
 function normalizeNewsListItem(newsData: NewsData): NormalizedNews | undefined {
-  const { createdDate, data: news, id } = newsData
+  const { data: news, id } = newsData
 
-  const dataHeading = OLD_NEWS_DATE_OVERRIDES[id] ?? new Date(createdDate)
+  const dataHeading = new Date(news.publicationDate)
 
   if (isInternalNews(news)) {
     if (!news.pressPage?.value) {
@@ -141,6 +144,7 @@ function normalizeNewsListItem(newsData: NewsData): NormalizedNews | undefined {
       id,
       type: 'internal',
       dateHeading: dataHeading,
+      previewImage: news.previewImage,
       source: source,
       title: title,
       url: url,
@@ -150,6 +154,7 @@ function normalizeNewsListItem(newsData: NewsData): NormalizedNews | undefined {
       id,
       type: 'external',
       dateHeading: dataHeading,
+      previewImage: news.previewImage,
       source: news.source,
       title: news.title,
       url: news.url,
