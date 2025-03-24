@@ -656,26 +656,6 @@ const nextConfig: NextConfig = {
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
         permanent: true,
       },
-      {
-        source: '/manifesto',
-        destination: '/about',
-        permanent: true,
-      },
-      {
-        source: '/:country/manifesto',
-        destination: '/:country/about',
-        permanent: true,
-      },
-      {
-        source: '/mission',
-        destination: '/about',
-        permanent: true,
-      },
-      {
-        source: '/:country/mission',
-        destination: '/:country/about',
-        permanent: true,
-      },
     ]
   },
   async rewrites() {
