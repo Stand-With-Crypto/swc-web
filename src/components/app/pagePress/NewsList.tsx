@@ -1,10 +1,9 @@
 'use client'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { format } from 'date-fns'
 import { motion, useInView } from 'motion/react'
 
-import { Button } from '@/components/ui/button'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
@@ -53,45 +52,56 @@ export function NewsList({ initialNews, countryCode }: NewsListProps) {
   }, [isInView, loadModeNews])
 
   return (
-    <div className="standard-spacing-from-navbar container flex flex-col gap-20">
-      <div className="flex flex-col gap-16">
-        {news.map(({ dateHeading, source, title, type, url, id }) => {
-          const LinkComponent = type === 'internal' ? TrackedInternalLink : TrackedExternalLink
+    <div className="standard-spacing-from-navbar container flex flex-col">
+      <div className="flex flex-col gap-8">
+        {news.map(
+          ({ dateHeading, source, title, type, url, id, previewImage, description }, index) => {
+            const LinkComponent = type === 'internal' ? TrackedInternalLink : TrackedExternalLink
 
-          return (
-            <section key={id}>
-              <div className="container flex flex-col items-center gap-2">
-                {dateHeading && (
-                  <p className="text-center font-mono text-sm text-muted-foreground">
-                    {format(dateHeading, 'MMMM d, yyyy')}
-                  </p>
-                )}
-                <PageSubTitle className={'font-bold text-foreground'} size="md">
-                  {source}: {title}
-                </PageSubTitle>
-              </div>
-              <div className={'mt-4 flex items-center justify-center'}>
-                <Button asChild variant="secondary">
-                  <LinkComponent
-                    aria-label={`Read more about ${title}`}
-                    className="text-foreground no-underline hover:no-underline"
-                    eventProperties={{
-                      component: AnalyticComponentType.link,
-                      action: AnalyticActionType.click,
-                      link: url,
-                      page: 'Press',
-                      surface: 'Press Section',
-                    }}
-                    href={url}
-                    title={`Read more about ${title}`}
-                  >
-                    Read more
-                  </LinkComponent>
-                </Button>
-              </div>
-            </section>
-          )
-        })}
+            return (
+              <React.Fragment key={id}>
+                {index !== 0 && <hr />}
+                <LinkComponent
+                  aria-label={`Read more about ${title}`}
+                  className="group text-foreground no-underline hover:no-underline"
+                  eventProperties={{
+                    component: AnalyticComponentType.link,
+                    action: AnalyticActionType.click,
+                    link: url,
+                    page: 'Press',
+                    surface: 'Press Section',
+                  }}
+                  href={url}
+                  title={`Read more about ${title}`}
+                >
+                  <article className="flex flex-col items-center gap-4 group-hover:cursor-pointer">
+                    {previewImage && (
+                      <div className="relative h-64 w-6/12">
+                        <NextImage
+                          alt={`Preview image for ${title}`}
+                          className="h-48 w-full object-cover"
+                          layout="fill"
+                          src={previewImage}
+                        />
+                      </div>
+                    )}
+                    <div className="text-center">
+                      <strong className="text-primary group-hover:underline group-focus:underline">
+                        {source}: {title}
+                      </strong>
+                      <p className="mt-2 max-w-prose text-sm text-muted-foreground">
+                        {description}
+                      </p>
+                    </div>
+                    <p className="text-center font-mono text-sm text-muted-foreground">
+                      {format(dateHeading, 'MM/dd/yy')}
+                    </p>
+                  </article>
+                </LinkComponent>
+              </React.Fragment>
+            )
+          },
+        )}
         {isLoading && <ListItemSkeleton />}
       </div>
       <div ref={loadMoreComponentRef} />
@@ -110,11 +120,8 @@ function ListItemSkeleton() {
         ease: [0, 0.71, 0.2, 1.01],
       }}
     >
-      <Skeleton className="h-7 w-44" />
-      <Skeleton className="mt-2 h-8 w-11/12" />
-      <Skeleton className="mt-3">
-        <Button>Read more</Button>
-      </Skeleton>
+      <Skeleton className="h-8 w-10/12" />
+      <Skeleton className="mt-4 h-6 w-24" />
     </motion.div>
   )
 }
