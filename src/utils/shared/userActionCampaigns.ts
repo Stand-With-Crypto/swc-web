@@ -140,7 +140,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName.DEFAULT,
-  [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName.DEFAULT,
+  [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
   [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName.DEFAULT,
   [UserActionType.VOTING_INFORMATION_RESEARCHED]:
