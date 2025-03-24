@@ -3,6 +3,7 @@ import { getYear, parseISO } from 'date-fns'
 import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleGroupCategory,
+  DTSI_PersonRoleStatus,
   DTSI_StateSpecificInformationQuery,
 } from '@/data/dtsi/generated'
 import {
@@ -37,6 +38,29 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
       runningForSpecificRole,
     }
   }
+
+  if (specificRole === DTSI_PersonRoleCategory.GOVERNOR) {
+    const currentSpecificRole =
+      roles.find(role => {
+        return role.roleCategory === DTSI_PersonRoleCategory.GOVERNOR
+      }) ?? null
+
+    const runningForSpecificRole = roles.find(role => {
+      return (
+        role.roleCategory === DTSI_PersonRoleCategory.GOVERNOR &&
+        role.status === DTSI_PersonRoleStatus.RUNNING_FOR
+      )
+    })
+
+    return {
+      ...rest,
+      roles,
+      isIncumbent: currentSpecificRole?.roleCategory === runningForSpecificRole?.roleCategory,
+      currentSpecificRole,
+      runningForSpecificRole,
+    }
+  }
+
   const currentSpecificRole = roles.find(role => {
     return (
       role.group?.category === DTSI_PersonRoleGroupCategory.CONGRESS &&

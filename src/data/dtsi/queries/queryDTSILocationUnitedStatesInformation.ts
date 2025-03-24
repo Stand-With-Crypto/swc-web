@@ -26,10 +26,17 @@ const query = /* GraphQL */ `
   }
 
   query UnitedStatesInformation {
-    runningForPresident: people(
-      limit: 10
+    vaGovernorsRace: people(
+      limit: 100
       offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_PRESIDENT]
+      specificPersonRole: { primaryState: "VA", roleCategory: GOVERNOR, status: RUNNING_FOR }
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    njGovernorsRace: people(
+      limit: 100
+      offset: 0
+      specificPersonRole: { primaryState: "NJ", roleCategory: GOVERNOR, status: RUNNING_FOR }
     ) {
       ...UnitedStatesPersonFragment
     }
@@ -146,13 +153,12 @@ const query = /* GraphQL */ `
 `
 
 export const queryDTSILocationUnitedStatesInformation = async () => {
-  const { runningForPresident, __typename, ...results } = await fetchDTSI<
+  const { __typename, ...results } = await fetchDTSI<
     DTSI_UnitedStatesInformationQuery,
     DTSI_UnitedStatesInformationQueryVariables
   >(query)
   const keyRaces = flatten(Object.values(results))
   return {
-    runningForPresident,
     keyRaces,
   }
 }

@@ -14,6 +14,7 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -40,6 +41,8 @@ export function LocationUnitedStates({
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces()
   }, [])
+
+  console.log(groups)
 
   return (
     <div className="space-y-20">
@@ -69,30 +72,18 @@ export function LocationUnitedStates({
         </div>
       </DarkHeroSection>
       <div className="space-y-20 xl:space-y-28">
-        {!!groups.president.length && (
-          <DTSIPersonHeroCardSection
-            countryCode={countryCode}
-            cta={
-              <InternalLink href={urls.locationUnitedStatesPresidential()}>View Race</InternalLink>
-            }
-            people={groups.president}
-            recommend={false}
-            subtitle="Vote for pro-crypto candidates. See where presidential candidates stand on crypto."
-            title={<>Presidential Race</>}
-          />
-        )}
         <UserAddressVoterGuideInputSection countryCode={countryCode} />
         <ContentSection className="container" title={'Key Races Across US States'}>
           <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-            {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
-              const stateCode = _stateCode as USStateCode
+            {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(currentStateCode => {
+              const stateCode = currentStateCode as USStateCode
               return (
                 <InternalLink
                   className={cn('mb-4 block flex-shrink-0 font-semibold')}
                   href={urls.locationStateSpecific(stateCode)}
                   key={stateCode}
                 >
-                  {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}
+                  {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}!!!
                 </InternalLink>
               )
             })}
@@ -114,10 +105,21 @@ export function LocationUnitedStates({
                 {stateName}
               </PageTitle>
 
-              {races.map(people => {
+              {races.map((people, idx) => {
+                const raceCategory = people[0].runningForSpecificRole?.roleCategory
                 const primaryDistrict =
-                  people[0].runningForSpecificRole.primaryDistrict &&
+                  people[0].runningForSpecificRole?.primaryDistrict &&
                   normalizeDTSIDistrictId(people[0].runningForSpecificRole)
+
+                const subtitleNoDistrict =
+                  raceCategory === DTSI_PersonRoleCategory.GOVERNOR
+                    ? 'Governor Race'
+                    : 'Senate Race'
+
+                const linkNoDistrict =
+                  raceCategory === DTSI_PersonRoleCategory.GOVERNOR
+                    ? urls.locationStateSpecificGovernorRace(stateCode as USStateCode)
+                    : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
 
                 return (
                   <DTSIPersonHeroCardSection
@@ -130,13 +132,13 @@ export function LocationUnitedStates({
                                 stateCode: stateCode as USStateCode,
                                 district: primaryDistrict,
                               })
-                            : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
+                            : linkNoDistrict
                         }
                       >
                         View Race
                       </InternalLink>
                     }
-                    key={`${stateCode}-${primaryDistrict}`}
+                    key={`${stateCode}-${primaryDistrict ?? idx}`}
                     people={people}
                     subtitle={
                       primaryDistrict ? (
@@ -145,7 +147,9 @@ export function LocationUnitedStates({
                           Race
                         </>
                       ) : (
-                        <>{stateName} Senate Race</>
+                        <>
+                          {stateName} {subtitleNoDistrict}
+                        </>
                       )
                     }
                     title=""

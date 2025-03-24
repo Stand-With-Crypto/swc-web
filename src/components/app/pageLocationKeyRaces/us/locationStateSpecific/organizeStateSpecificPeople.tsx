@@ -18,9 +18,9 @@ export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformatio
     >,
   }
   formatted.forEach(person => {
-    if (person.runningForSpecificRole.roleCategory === DTSI_PersonRoleCategory.SENATE) {
+    if (person.runningForSpecificRole?.roleCategory === DTSI_PersonRoleCategory.SENATE) {
       grouped.senators.push(person)
-    } else if (person.runningForSpecificRole.roleCategory === DTSI_PersonRoleCategory.CONGRESS) {
+    } else if (person.runningForSpecificRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS) {
       const district = normalizeDTSIDistrictId(person.runningForSpecificRole)
       if (district) {
         if (!grouped.congresspeople[district]) {

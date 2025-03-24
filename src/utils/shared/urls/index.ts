@@ -92,7 +92,8 @@ export const getIntlUrls = (
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
     locationStateSpecificSenateRace: (stateCode: USStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
-    locationUnitedStatesPresidential: () => `${countryPrefix}/races/presidential`,
+    locationStateSpecificGovernorRace: (stateCode: USStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/governor`,
     locationUnitedStates: () => `${countryPrefix}/races/`,
     locationDistrictSpecific: ({
       stateCode,
