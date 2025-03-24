@@ -52,10 +52,16 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
       )
     })
 
+    const isIncumbent =
+      (currentSpecificRole &&
+        runningForSpecificRole &&
+        currentSpecificRole?.roleCategory === runningForSpecificRole?.roleCategory) ??
+      false
+
     return {
       ...rest,
       roles,
-      isIncumbent: currentSpecificRole?.roleCategory === runningForSpecificRole?.roleCategory,
+      isIncumbent,
       currentSpecificRole,
       runningForSpecificRole,
     }

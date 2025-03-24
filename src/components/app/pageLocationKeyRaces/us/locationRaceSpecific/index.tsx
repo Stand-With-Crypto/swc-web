@@ -29,17 +29,26 @@ interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuer
   stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   countryCode: SupportedCountryCodes
+  isGovernor?: boolean
 }
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
+  {
+    district,
+    stateCode,
+    isGovernor,
+  }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode' | 'isGovernor'>,
 ) {
-  const targetedRoleCategory = district
-    ? DTSI_PersonRoleCategory.CONGRESS
-    : stateCode
-      ? DTSI_PersonRoleCategory.SENATE
-      : DTSI_PersonRoleCategory.PRESIDENT
+  let targetedRoleCategory = DTSI_PersonRoleCategory.PRESIDENT
+
+  if (district) {
+    targetedRoleCategory = DTSI_PersonRoleCategory.CONGRESS
+  } else if (stateCode) {
+    targetedRoleCategory = isGovernor
+      ? DTSI_PersonRoleCategory.GOVERNOR
+      : DTSI_PersonRoleCategory.SENATE
+  }
 
   const formatted = people.map(x =>
     formatSpecificRoleDTSIPerson(x, {
@@ -60,6 +69,17 @@ function organizeRaceSpecificPeople(
     const bPartyIndex = b.politicalAffiliationCategory
       ? partyOrder.indexOf(b.politicalAffiliationCategory)
       : -1
+    const aPersonScore = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
+    const bPersonScore = b.computedStanceScore || b.manuallyOverriddenStanceScore || 0
+
+    if (aPersonScore !== bPersonScore) {
+      return bPersonScore - aPersonScore
+    }
+
+    if (a.profilePictureUrl !== b.profilePictureUrl) {
+      return a.profilePictureUrl ? -1 : 1
+    }
+
     if (aPartyIndex !== bPartyIndex) {
       return aPartyIndex - bPartyIndex
     }
@@ -79,8 +99,9 @@ export function LocationRaceSpecific({
   district,
   people,
   countryCode,
+  isGovernor,
 }: LocationRaceSpecificProps) {
-  const groups = organizeRaceSpecificPeople(people, { district, stateCode })
+  const groups = organizeRaceSpecificPeople(people, { district, stateCode, isGovernor })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
@@ -116,7 +137,9 @@ export function LocationRaceSpecific({
                 <span>
                   {district
                     ? `${stateCode} Congressional District ${district}`
-                    : `U.S. Senate (${stateCode})`}
+                    : isGovernor
+                      ? `Governors (${stateCode})`
+                      : `U.S. Senate (${stateCode})`}
                 </span>
               </>
             )
@@ -127,7 +150,9 @@ export function LocationRaceSpecific({
             ? 'U.S. Presidential Race'
             : district
               ? `${stateCode} Congressional District ${district}`
-              : `U.S. Senate (${stateCode})`}
+              : isGovernor
+                ? `Governors (${stateCode})`
+                : `U.S. Senate (${stateCode})`}
         </PageTitle>
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">

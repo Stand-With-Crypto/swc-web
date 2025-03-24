@@ -2,12 +2,12 @@ import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonStanceDetails } from '@/data/dtsi/fragments/fragmentDTSIPersonStanceDetails'
 import { fragmentRaceSpecificPersonInfo } from '@/data/dtsi/fragments/fragmentRaceSpecificPersonInfo'
 import {
-  DTSI_SenateSpecificInformationQuery,
-  DTSI_SenateSpecificInformationQueryVariables,
+  DTSI_GovernorSpecificInformationQuery,
+  DTSI_GovernorSpecificInformationQueryVariables,
 } from '@/data/dtsi/generated'
 
 const query = /* GraphQL */ `
-  query SenateSpecificInformation($stateCode: String!) {
+  query GovernorSpecificInformation($stateCode: String!) {
     people(
       limit: 999
       offset: 0
@@ -22,14 +22,14 @@ const query = /* GraphQL */ `
   ${fragmentDTSIPersonStanceDetails}
   ${fragmentRaceSpecificPersonInfo}
 `
-export const queryDTSILocationSenateSpecificInformation = async ({
+export const queryDTSILocationGovernorSpecificInformation = async ({
   stateCode,
 }: {
   stateCode: string
 }) => {
   const results = await fetchDTSI<
-    DTSI_SenateSpecificInformationQuery,
-    DTSI_SenateSpecificInformationQueryVariables
+    DTSI_GovernorSpecificInformationQuery,
+    DTSI_GovernorSpecificInformationQueryVariables
   >(query, {
     stateCode,
   })

@@ -23,7 +23,26 @@ export function organizePeople({ keyRaces }: QueryDTSILocationUnitedStatesInform
 
     const sortedGroupedByDistrict = Object.keys(groupedByDistrict).map(district => {
       const racesInDistrict = groupedByDistrict[district]
-      racesInDistrict.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+
+      racesInDistrict.sort((a, b) => {
+        if (a.isIncumbent !== b.isIncumbent) {
+          return a.isIncumbent ? -1 : 1
+        }
+
+        const scoreA = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
+        const scoreB = b.computedStanceScore || b.manuallyOverriddenStanceScore || 0
+
+        if (scoreA !== scoreB) {
+          return scoreB - scoreA
+        }
+
+        if (a.profilePictureUrl !== b.profilePictureUrl) {
+          return a.profilePictureUrl ? -1 : 1
+        }
+
+        return 0
+      })
+
       return racesInDistrict
     })
 
@@ -31,33 +50,7 @@ export function organizePeople({ keyRaces }: QueryDTSILocationUnitedStatesInform
     return group
   }, {} as GroupedRaces)
 
-  const rolePriority: DTSI_PersonRoleCategory[] = [
-    DTSI_PersonRoleCategory.SENATE,
-    DTSI_PersonRoleCategory.CONGRESS,
-  ]
-
-  const sortedGroupedKeyRaces: GroupedRaces = Object.keys(groupedKeyRaces).reduce(
-    (group, state) => {
-      group[state as USStateCode] = groupedKeyRaces[state as USStateCode].sort((a, b) => {
-        const aPriority = a[0].runningForSpecificRole?.roleCategory
-          ? rolePriority.indexOf(a[0].runningForSpecificRole.roleCategory)
-          : -1
-        const bPriority = b[0].runningForSpecificRole?.roleCategory
-          ? rolePriority.indexOf(b[0].runningForSpecificRole.roleCategory)
-          : -1
-
-        if (aPriority !== bPriority) return aPriority - bPriority
-        return (a[0].runningForSpecificRole?.primaryDistrict || '').localeCompare(
-          b[0].runningForSpecificRole?.primaryDistrict || '',
-        )
-      })
-
-      return group
-    },
-    {} as GroupedRaces,
-  )
-
   return {
-    keyRaces: sortedGroupedKeyRaces,
+    keyRaces: groupedKeyRaces,
   }
 }

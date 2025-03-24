@@ -42,8 +42,6 @@ export function LocationUnitedStates({
     void actionCreateUserActionViewKeyRaces()
   }, [])
 
-  console.log(groups)
-
   return (
     <div className="space-y-20">
       <DarkHeroSection>
@@ -73,22 +71,6 @@ export function LocationUnitedStates({
       </DarkHeroSection>
       <div className="space-y-20 xl:space-y-28">
         <UserAddressVoterGuideInputSection countryCode={countryCode} />
-        <ContentSection className="container" title={'Key Races Across US States'}>
-          <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-            {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(currentStateCode => {
-              const stateCode = currentStateCode as USStateCode
-              return (
-                <InternalLink
-                  className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                  href={urls.locationStateSpecific(stateCode)}
-                  key={stateCode}
-                >
-                  {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}!!!
-                </InternalLink>
-              )
-            })}
-          </div>
-        </ContentSection>
 
         {Object.entries(groups.keyRaces).map(([stateCode, races]) => {
           const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
@@ -159,6 +141,23 @@ export function LocationUnitedStates({
             </div>
           )
         })}
+
+        <ContentSection className="container" title={'Key Races Across US States'}>
+          <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
+            {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(currentStateCode => {
+              const stateCode = currentStateCode as USStateCode
+              return (
+                <InternalLink
+                  className={cn('mb-4 block flex-shrink-0 font-semibold')}
+                  href={urls.locationStateSpecific(stateCode)}
+                  key={stateCode}
+                >
+                  {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}
+                </InternalLink>
+              )
+            })}
+          </div>
+        </ContentSection>
 
         <PACFooter className="container" />
       </div>

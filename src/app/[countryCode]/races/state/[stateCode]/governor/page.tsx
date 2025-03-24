@@ -1,10 +1,9 @@
 import { Metadata } from 'next'
 
-import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/us/locationStateSpecific'
-import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
+import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceSpecific'
+import { queryDTSILocationGovernorSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationGovernorSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { prismaClient } from '@/utils/server/prismaClient'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
 import {
@@ -17,14 +16,14 @@ export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
 export const dynamicParams = false
 
-type LocationStateSpecificPageProps = PageProps<{
+type LocationStateGovernorSpecificPageProps = PageProps<{
   stateCode: string
   countryCode: SupportedCountryCodes
 }>
 
 export async function generateMetadata({
   params,
-}: LocationStateSpecificPageProps): Promise<Metadata> {
+}: LocationStateGovernorSpecificPageProps): Promise<Metadata> {
   const { stateCode } = await params
   const validatedStateCode = zodUsaState.parse(stateCode.toUpperCase())
 
@@ -46,29 +45,24 @@ export async function generateStaticParams() {
     }))
 }
 
-export default async function LocationStateSpecificGovernorPage({
+export default async function LocationStateGovernorSpecificPage({
   params,
-}: LocationStateSpecificPageProps) {
+}: LocationStateGovernorSpecificPageProps) {
   const { stateCode, countryCode } = await params
   const validatedStateCode = zodUsaState.parse(stateCode.toUpperCase())
-  const [dtsiResults, countAdvocates] = await Promise.all([
-    queryDTSILocationStateSpecificInformation({ stateCode: validatedStateCode }),
-    prismaClient.user.count({
-      where: { address: { countryCode, administrativeAreaLevel1: validatedStateCode } },
-    }),
-  ])
 
-  if (!dtsiResults) {
-    throw new Error(
-      `Invalid params for LocationStateSpecificGovernorPage: ${JSON.stringify(params)}`,
-    )
+  const data = await queryDTSILocationGovernorSpecificInformation({
+    stateCode: validatedStateCode,
+  })
+
+  if (!data) {
+    throw new Error(`Invalid params for LocationGovernorSpecificPage: ${JSON.stringify(params)}`)
   }
 
   return (
-    <LocationStateSpecific
-      countAdvocates={countAdvocates}
-      {...dtsiResults}
-      {...{ stateCode: validatedStateCode, countryCode }}
+    <LocationRaceSpecific
+      {...data}
+      {...{ stateCode: validatedStateCode, countryCode, isGovernor: true }}
     />
   )
 }
