@@ -33,10 +33,10 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.TWEET]: {
     title: 'Follow us on X',
-    description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+    description: 'Stay up to date on crypto policy by following @StandWithCryptoGB on X.',
     mobileCTADescription: 'Stay up to date on crypto policy.',
     campaignsModalDescription:
-      'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+      'Stay up to date on crypto policy by following @StandWithCryptoGB on X.',
     image: '/actionTypeIcons/tweet.png',
     campaigns: [
       {

@@ -6,9 +6,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
-const countryCode = SupportedCountryCodes.US
+const countryCode = SupportedCountryCodes.CA
 
-export default function USUserActionShareOnTwitterDeepLink() {
+export default function CAUserActionShareOnTwitterDeepLink() {
   return (
     <div className={cn(dialogContentPaddingStyles, 'h-full')}>
       <ErrorBoundary

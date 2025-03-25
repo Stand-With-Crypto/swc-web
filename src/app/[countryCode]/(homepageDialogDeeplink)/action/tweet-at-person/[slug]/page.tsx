@@ -2,12 +2,13 @@ import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { CAMPAIGN_METADATA } from '@/components/app/userActionFormTweetAtPerson/constants'
 import { UserActionFormTweetToPersonDeeplinkWrapper } from '@/components/app/userActionFormTweetAtPerson/homepageDialogDeeplinkWrapper.tsx'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
@@ -50,7 +51,10 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
   }
 
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
+    <USHomepageDialogDeeplinkLayout
+      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+      pageParams={params}
+    >
       <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
         <ErrorBoundary
           extras={{
@@ -70,6 +74,6 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
           />
         </ErrorBoundary>
       </div>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }
