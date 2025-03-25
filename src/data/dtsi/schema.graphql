@@ -71,17 +71,13 @@ enum BillStatus {
   SPONSORED
 }
 
-"""
-Valid Chambers Of Congress
-"""
+"""Valid Chambers Of Congress"""
 enum CongressionalChamber {
   HOUSE_OF_REPRESENTATIVES
   SENATE
 }
 
-"""
-Valid Sessions Of Congress
-"""
+"""Valid Sessions Of Congress"""
 enum CongressionalSession {
   SESSION_116
   SESSION_117
@@ -94,9 +90,7 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
-"""
-An arbitrary-precision Decimal type
-"""
+"""An arbitrary-precision Decimal type"""
 scalar Decimal
 
 enum Gender {
@@ -150,14 +144,8 @@ type Person {
   promotedPositioning: Int
   roles: [PersonRole!]!
   slug: String!
-  stanceCount(
-    promotedPositioningOption: PersonStanceHasPromotedPositioning
-    verificationStatusIn: [PersonStanceVerificationStatus!]
-  ): Int
-  stances(
-    promotedPositioningOption: PersonStanceHasPromotedPositioning
-    verificationStatusIn: [PersonStanceVerificationStatus!]
-  ): [PersonStance!]!
+  stanceCount(promotedPositioningOption: PersonStanceHasPromotedPositioning, verificationStatusIn: [PersonStanceVerificationStatus!]): Int
+  stances(promotedPositioningOption: PersonStanceHasPromotedPositioning, verificationStatusIn: [PersonStanceVerificationStatus!]): [PersonStance!]!
   suffixName: String!
   twitterAccounts: [TwitterAccount!]!
   votesmartId: String!
@@ -165,27 +153,53 @@ type Person {
   youtubeAccountUsername: String!
 }
 
-"""
-Common groupings of people to query for
-"""
+"""Common groupings of people to query for"""
 enum PersonGrouping {
+  CURRENT_AU_HOUSE_OF_REPS
+  CURRENT_AU_SENATE
+  CURRENT_CA_HOUSE_OF_COMMONS
+  CURRENT_CA_SENATE
+  CURRENT_UK_HOUSE_OF_COMMONS
+  CURRENT_UK_HOUSE_OF_LORDS
   CURRENT_US_HOUSE_OF_REPS
   CURRENT_US_SENATE
+  NEXT_AU_HOUSE_OF_REPS
+  NEXT_AU_SENATE
+  NEXT_CA_HOUSE_OF_COMMONS
+  NEXT_CA_SENATE
   NEXT_PRESIDENT
+  NEXT_UK_HOUSE_OF_COMMONS
+  NEXT_UK_HOUSE_OF_LORDS
   NEXT_US_HOUSE_OF_REPS
   NEXT_US_SENATE
+  RUNNING_FOR_AU_HOUSE_OF_REPS
+  RUNNING_FOR_AU_SENATE
+  RUNNING_FOR_CA_HOUSE_OF_COMMONS
+  RUNNING_FOR_CA_SENATE
   RUNNING_FOR_PRESIDENT
+  RUNNING_FOR_UK_HOUSE_OF_COMMONS
+  RUNNING_FOR_UK_HOUSE_OF_LORDS
   RUNNING_FOR_US_HOUSE_OF_REPS
   RUNNING_FOR_US_SENATE
   US_PRESIDENT
 }
 
 enum PersonPoliticalAffiliationCategory {
+  CONSERVATIVE
   DEMOCRAT
+  DEMOCRATIC_SOCIALIST
+  GREEN
   INDEPENDENT
+  LABOR
+  LIBERAL
+  LIBERAL_DEMOCRAT
   LIBERTARIAN
+  NATIONAL_LIBERAL
+  NDP
   OTHER
+  REFORM
   REPUBLICAN
+  SOCIALIST
 }
 
 type PersonRole {
@@ -213,6 +227,8 @@ enum PersonRoleCategory {
   COMMITTEE_MEMBER
   CONGRESS
   GOVERNOR
+  HOUSE_OF_COMMONS
+  HOUSE_OF_LORDS
   MAYOR
   PRESIDENT
   SENATE
@@ -302,18 +318,12 @@ enum PersonStanceFlagType {
   MISCATEGORIZED
 }
 
-"""
-A ranking of where a stance lies from pro-topic to anti-topic
-"""
+"""A ranking of where a stance lies from pro-topic to anti-topic"""
 enum PersonStanceHasPromotedPositioning {
-  """
-  Only return stances without a set promoted positioning
-  """
+  """Only return stances without a set promoted positioning"""
   DOES_NOT_HAVE_PROMOTED_POSITION
 
-  """
-  Only return stances with a set promoted positioning
-  """
+  """Only return stances with a set promoted positioning"""
   HAS_PROMOTED_POSITION
 
   """
@@ -357,40 +367,24 @@ type PublicUser {
 type Query {
   bill(id: String!): Bill!
   bills: [Bill!]!
-  congressPeople(chamber: CongressionalChamber!, session: CongressionalSession!): [Person!]!
-    @deprecated(reason: "Use people instead")
+  congressPeople(chamber: CongressionalChamber!, session: CongressionalSession!): [Person!]! @deprecated(reason: "Use people instead")
   nonCongressPeople: [Person!]! @deprecated(reason: "Use people instead")
-  people(
-    grouping: PersonGrouping
-    hasPromotedPositioning: Boolean
-    limit: Int!
-    offset: Int!
-    personRoleGroupingOr: [PersonGrouping!]
-    personRolePrimaryCity: String
-    personRolePrimaryCountryCode: String
-    personRolePrimaryDistrict: String
-    personRolePrimaryState: String
-    slugIn: [String!]
-    stanceScoreGte: Int
-    stanceScoreLte: Int
-  ): [Person!]!
+  people(grouping: PersonGrouping, hasPromotedPositioning: Boolean, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, slugIn: [String!], specificPersonRole: SpecificPersonRole, stanceScoreGte: Int, stanceScoreLte: Int): [Person!]!
   peopleByUSCongressionalDistrict(congressionalDistrict: Int, stateCode: String!): [Person!]!
-  personStances(
-    grouping: PersonGrouping
-    limit: Int!
-    offset: Int!
-    personRoleGroupingOr: [PersonGrouping!]
-    personRolePrimaryCity: String
-    personRolePrimaryCountryCode: String
-    personRolePrimaryDistrict: String
-    personRolePrimaryState: String
-    personSlugIn: [String!]
-  ): [PersonStance!]!
+  personStances(grouping: PersonGrouping, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, personSlugIn: [String!], specificPersonRole: SpecificPersonRole): [PersonStance!]!
 }
 
-"""
-A ranking of where a stance lies from pro-topic to anti-topic
-"""
+input SpecificPersonRole {
+  dateStart: String
+  primaryCity: String
+  primaryCountryCode: String
+  primaryDistrict: String
+  primaryState: String
+  roleCategory: PersonRoleCategory
+  status: PersonRoleStatus
+}
+
+"""A ranking of where a stance lies from pro-topic to anti-topic"""
 enum StanceScore {
   NEUTRAL
   SOMEWHAT_AGAINST
