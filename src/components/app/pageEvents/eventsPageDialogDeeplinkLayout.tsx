@@ -55,7 +55,7 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage events={filteredFutureEvents!} isDeepLink />
+      <EventsPage events={filteredFutureEvents!} isDeepLink countryCode={countryCode} />
     </>
   )
 }

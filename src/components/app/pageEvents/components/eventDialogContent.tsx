@@ -21,6 +21,8 @@ import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
+import { StateShield } from '@/components/ui/stateShield'
+import { useCountryCode } from '@/hooks/useCountryCode'
 
 enum SectionNames {
   EVENT_INFO = 'Event Information',
@@ -104,6 +106,8 @@ function EventInformation({
   handleGetUpdatesButtonClick: () => Promise<void>
   handleRSVPButtonClick: () => void
 }) {
+  const countryCode = useCountryCode()
+
   const eventDate = event?.time
     ? new Date(`${event.date}T${event.time}`)
     : new Date(`${event.date}T00:00`)
@@ -114,12 +118,11 @@ function EventInformation({
     <div className="flex h-full flex-col">
       <ScrollArea className="overflow-auto px-4 py-6 md:max-h-[70vh]">
         <div className="flex h-full flex-col items-center gap-2">
-          <NextImage
-            alt={`${event.state} shield`}
+          <StateShield
+            state={event.state}
+            size={100}
             className="mb-2 lg:mb-0"
-            height={100}
-            src={`/stateShields/${event.state}.png`}
-            width={100}
+            countryCode={countryCode}
           />
           <h3 className="text-center font-sans text-xl font-bold">
             <Balancer>{event.name}</Balancer>

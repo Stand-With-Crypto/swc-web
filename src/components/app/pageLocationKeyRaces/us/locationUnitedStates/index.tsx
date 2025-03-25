@@ -23,6 +23,7 @@ import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
 import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
+import { StateShield } from '@/components/ui/stateShield'
 
 interface LocationUnitedStatesProps extends QueryDTSILocationUnitedStatesInformationData {
   countryCode: SupportedCountryCodes
@@ -103,12 +104,7 @@ export function LocationUnitedStates({
           const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
           return (
             <div className="container flex flex-col items-center" key={stateCode}>
-              <NextImage
-                alt={`${stateName} shield`}
-                height={150}
-                src={`/stateShields/${stateCode}.png`}
-                width={150}
-              />
+              <StateShield size={150} state={stateCode} countryCode={countryCode} />
 
               <PageTitle as="h2" size="sm">
                 {stateName}

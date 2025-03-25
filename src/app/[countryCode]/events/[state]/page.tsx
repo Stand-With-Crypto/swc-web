@@ -26,7 +26,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function StateEventsPageRoot(props: Props) {
   const params = await props.params
-  const { state } = params
+  const { state, countryCode } = params
 
   const isStateValid = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(state.toUpperCase())
 
@@ -36,7 +36,7 @@ export default async function StateEventsPageRoot(props: Props) {
 
   return (
     <EventsPageDialogDeeplinkLayout pageParams={params}>
-      <StateEventsDialogContent state={state} />
+      <StateEventsDialogContent state={state} countryCode={countryCode} />
     </EventsPageDialogDeeplinkLayout>
   )
 }

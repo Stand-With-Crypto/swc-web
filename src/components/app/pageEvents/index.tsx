@@ -7,6 +7,7 @@ import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featu
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface EventsPageProps {
   events: SWCEvents | null

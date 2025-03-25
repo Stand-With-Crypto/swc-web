@@ -3,19 +3,21 @@
 import { format, isAfter } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
-import { NextImage } from '@/components/ui/image'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { pluralize } from '@/utils/shared/pluralize'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { StateShield } from '@/components/ui/stateShield'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface StateEventsDialogProps {
   state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
   events?: SWCEvents
+  countryCode: SupportedCountryCodes
 }
 
-export function StateEventsDialogContent({ state, events }: StateEventsDialogProps) {
+export function StateEventsDialogContent({ state, events, countryCode }: StateEventsDialogProps) {
   usePreventOverscroll()
 
   const parsedState = state.toUpperCase() as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
@@ -31,12 +33,11 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
 
   return (
     <div className="flex flex-col items-center gap-2 pb-4">
-      <NextImage
-        alt={`${parsedState} shield`}
+      <StateShield
+        state={parsedState}
+        size={100}
         className="mb-2 lg:mb-0"
-        height={100}
-        src={`/stateShields/${parsedState}.png`}
-        width={100}
+        countryCode={countryCode}
       />
 
       <h3 className="font-sans text-xl font-bold">
@@ -56,7 +57,7 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
               <EventDialog
                 event={event.data}
                 key={event.data.slug}
-                trigger={<StateDialogEventCard event={event.data} />}
+                trigger={<StateDialogEventCard event={event.data} countryCode={countryCode} />}
               />
             ))}
           </div>
@@ -69,19 +70,19 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
 
 interface StateDialogEventCardProps {
   event: SWCEvent
+  countryCode: SupportedCountryCodes
 }
 
-function StateDialogEventCard({ event }: StateDialogEventCardProps) {
+function StateDialogEventCard({ event, countryCode }: StateDialogEventCardProps) {
   const formattedEventDate = format(new Date(`${event.date}T00:00`), 'MMMM d, yyyy')
 
   return (
     <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 transition hover:bg-backgroundAlternate/60 lg:flex-row lg:items-center lg:p-4 lg:pt-4">
-      <NextImage
-        alt={`${event.state} shield`}
+      <StateShield
+        state={event.state}
+        size={70}
         className="mb-2 lg:mb-0"
-        height={70}
-        src={`/stateShields/${event.state}.png`}
-        width={70}
+        countryCode={countryCode}
       />
 
       <strong className="block lg:hidden">{event.name}</strong>
