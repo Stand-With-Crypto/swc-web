@@ -11,7 +11,8 @@ const query = /* GraphQL */ `
     people(
       limit: 999
       offset: 0
-      specificPersonRole: { primaryState: $stateCode, roleCategory: GOVERNOR, status: RUNNING_FOR }
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: $stateCode
     ) {
       ...RaceSpecificPersonInfo
       stances(verificationStatusIn: APPROVED) {

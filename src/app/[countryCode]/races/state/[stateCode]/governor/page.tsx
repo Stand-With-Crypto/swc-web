@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceSpecific'
+import { LocationRaceGovernorSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceGovernorSpecific'
 import { queryDTSILocationGovernorSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationGovernorSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -60,7 +60,7 @@ export default async function LocationStateGovernorSpecificPage({
   }
 
   return (
-    <LocationRaceSpecific
+    <LocationRaceGovernorSpecific
       {...data}
       {...{ stateCode: validatedStateCode, countryCode, isGovernor: true }}
     />

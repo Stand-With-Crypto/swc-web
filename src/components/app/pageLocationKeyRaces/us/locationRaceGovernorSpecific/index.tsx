@@ -25,7 +25,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
-interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
+interface LocationRaceGovernorSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   countryCode: SupportedCountryCodes
@@ -34,14 +34,20 @@ interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuer
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
+  {
+    district,
+    stateCode,
+    isGovernor,
+  }: Pick<LocationRaceGovernorSpecificProps, 'district' | 'stateCode' | 'isGovernor'>,
 ) {
   let targetedRoleCategory = DTSI_PersonRoleCategory.PRESIDENT
 
   if (district) {
     targetedRoleCategory = DTSI_PersonRoleCategory.CONGRESS
   } else if (stateCode) {
-    targetedRoleCategory = DTSI_PersonRoleCategory.SENATE
+    targetedRoleCategory = isGovernor
+      ? DTSI_PersonRoleCategory.GOVERNOR
+      : DTSI_PersonRoleCategory.SENATE
   }
 
   const formatted = people.map(x =>
@@ -88,13 +94,14 @@ function organizeRaceSpecificPeople(
   return formatted
 }
 
-export function LocationRaceSpecific({
+export function LocationRaceGovernorSpecific({
   stateCode,
   district,
   people,
   countryCode,
-}: LocationRaceSpecificProps) {
-  const groups = organizeRaceSpecificPeople(people, { district, stateCode })
+  isGovernor,
+}: LocationRaceGovernorSpecificProps) {
+  const groups = organizeRaceSpecificPeople(people, { district, stateCode, isGovernor })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
@@ -128,20 +135,13 @@ export function LocationRaceSpecific({
               return <span>Presidential</span>
             }
             return (
-              <>
-                <InternalLink
-                  className="text-gray-400"
-                  href={urls.locationStateSpecific(stateCode)}
-                >
-                  {stateDisplayName}
-                </InternalLink>{' '}
-                /{' '}
-                <span>
-                  {district
-                    ? `${stateCode} Congressional District ${district}`
+              <span>
+                {district
+                  ? `${stateCode} Congressional District ${district}`
+                  : isGovernor
+                    ? `Governors (${stateCode})`
                     : `U.S. Senate (${stateCode})`}
-                </span>
-              </>
+              </span>
             )
           })()}
         </h2>
@@ -150,7 +150,9 @@ export function LocationRaceSpecific({
             ? 'U.S. Presidential Race'
             : district
               ? `${stateCode} Congressional District ${district}`
-              : `U.S. Senate (${stateCode})`}
+              : isGovernor
+                ? `Governors (${stateCode})`
+                : `U.S. Senate (${stateCode})`}
         </PageTitle>
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
