@@ -40,10 +40,12 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
   }
 
   if (specificRole === DTSI_PersonRoleCategory.GOVERNOR) {
-    const currentSpecificRole =
-      roles.find(role => {
-        return role.roleCategory === DTSI_PersonRoleCategory.GOVERNOR
-      }) ?? null
+    const currentSpecificRole = roles.find(role => {
+      return (
+        role.roleCategory === DTSI_PersonRoleCategory.GOVERNOR &&
+        role.status === DTSI_PersonRoleStatus.HELD
+      )
+    })
 
     const runningForSpecificRole = roles.find(role => {
       return (
@@ -52,11 +54,7 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
       )
     })
 
-    const isIncumbent =
-      (currentSpecificRole &&
-        runningForSpecificRole &&
-        currentSpecificRole?.roleCategory === runningForSpecificRole?.roleCategory) ??
-      false
+    const isIncumbent = currentSpecificRole?.roleCategory === runningForSpecificRole?.roleCategory
 
     return {
       ...rest,
