@@ -64,7 +64,7 @@ export const processIntlUsersBatch = inngest.createFunction(
 
     const stats = await step.run(`process-users-batch-${batchIndex}`, async () => {
       logger.info(
-        `Processing batch ${batchIndex + 1}/${totalBatches} with ${users.length} users for country code ${validCountryCode}`,
+        `Processing batch ${batchIndex}/${totalBatches} with ${users.length} users for country code ${validCountryCode}`,
       )
 
       const results = {
@@ -109,7 +109,6 @@ export const processIntlUsersBatch = inngest.createFunction(
 
     return {
       batchIndex,
-      totalBatches,
       countryCode: validCountryCode,
       stats,
     }

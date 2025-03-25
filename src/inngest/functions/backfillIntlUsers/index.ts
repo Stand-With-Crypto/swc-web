@@ -20,12 +20,32 @@ export const BACKFILL_INTL_USERS_FUNCTION_ID = 'script.backfill-intl-users'
 const BATCH_SIZE = 1000
 
 const createUserDataSchema = (countryCode: SupportedCountryCodes) => {
-  return z.object({
-    firstName: zodFirstName.optional().transform(v => v || ''),
-    lastName: zodLastName.optional().transform(v => v || ''),
-    email: zodEmailAddress,
-    phoneNumber: z.union([zodPhoneNumberWithCountryCode(countryCode), z.literal('')]).optional(),
-  })
+  // Map common CSV column variations to our expected field names
+  return z.preprocess(
+    data => {
+      if (typeof data !== 'object' || data === null) return data
+
+      const csvFieldNames: Record<string, string> = { ...data }
+
+      if ('phone' in csvFieldNames) {
+        csvFieldNames.phoneNumber = csvFieldNames.phone
+      }
+
+      if ('fullName' in csvFieldNames) {
+        const [firstName, lastName] = csvFieldNames.fullName.split(' ')
+        csvFieldNames.firstName = firstName
+        csvFieldNames.lastName = lastName
+      }
+
+      return csvFieldNames
+    },
+    z.object({
+      firstName: zodFirstName.optional(),
+      lastName: zodLastName.optional(),
+      email: zodEmailAddress,
+      phoneNumber: z.union([zodPhoneNumberWithCountryCode(countryCode), z.literal('')]).optional(),
+    }),
+  )
 }
 
 export type UserData = z.infer<ReturnType<typeof createUserDataSchema>>
@@ -55,8 +75,9 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
 
     const { countryCode, csvData, persist } = payloadValidation.data
 
-    const { batches, totalUsers, invalidCount } = await step.run('parse-csv', async () => {
-      try {
+    const { batches, totalUsers, validUsers, invalidUsers } = await step.run(
+      'parse-csv',
+      async () => {
         const buffer = Buffer.from(csvData, 'base64')
         const workbook = read(buffer, { type: 'buffer' })
         const firstSheetName = workbook.SheetNames[0]
@@ -64,25 +85,53 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
         const rawUsers = utils.sheet_to_json<Record<string, unknown>>(worksheet)
 
         const userDataSchema = createUserDataSchema(countryCode)
-        const validatedResults = rawUsers.map(rawUser => {
-          const result = userDataSchema.safeParse(rawUser)
-          return {
-            isValid: result.success,
-            data: result.success ? result.data : null,
-            error: !result.success ? result.error.message : null,
-            rawData: rawUser,
-          }
-        })
+        const errorsByType = new Map<
+          string,
+          { count: number; examples: Array<{ rawUserData: unknown; message: string }> }
+        >()
 
-        const invalidUsers = validatedResults.filter(r => !r.isValid)
-        const validUsers = validatedResults.filter(r => r.isValid).map(r => r.data) as UserData[]
+        const processedResults = rawUsers.reduce<{
+          validUsers: UserData[]
+          invalidCount: number
+        }>(
+          (acc, rawUser) => {
+            const result = userDataSchema.safeParse(rawUser)
+            if (result.success) {
+              acc.validUsers.push(result.data)
+            } else {
+              acc.invalidCount++
+              result.error.errors.forEach(err => {
+                const errorKey = `${err.path.join('.')}: ${err.code}`
+                const current = errorsByType.get(errorKey) || { count: 0, examples: [] }
+                current.examples.push({
+                  rawUserData: err.path.length ? rawUser[err.path[0]] : rawUser,
+                  message: err.message,
+                })
+                errorsByType.set(errorKey, {
+                  count: current.count + 1,
+                  examples: current.examples,
+                })
+              })
+            }
 
-        if (invalidUsers.length > 0) {
-          logger.warn(`Found ${invalidUsers.length} invalid user records that will be skipped`)
-          invalidUsers.slice(0, 5).forEach(invalid => {
-            logger.warn(
-              `Invalid user: ${JSON.stringify(invalid.rawData)}, Error: ${invalid.error || 'Unknown validation error'}`,
-            )
+            return acc
+          },
+          { validUsers: [], invalidCount: 0 },
+        )
+
+        const validUsers = processedResults.validUsers
+
+        if (processedResults.invalidCount > 0) {
+          logger.warn(
+            `Found ${processedResults.invalidCount} invalid user records that will be skipped`,
+          )
+          errorsByType.forEach((data, errorType) => {
+            logger.warn(`Error type: ${errorType} - found ${data.count} occurrences`)
+            data.examples.forEach((example, i) => {
+              logger.warn(
+                `Example ${i + 1}: ${JSON.stringify(example.rawUserData)} - ${example.message}`,
+              )
+            })
           })
         }
 
@@ -95,24 +144,22 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
 
         return {
           batches,
-          totalUsers: validUsers.length,
-          invalidCount: invalidUsers.length,
+          totalUsers: rawUsers.length,
+          validUsers: validUsers.length,
+          invalidUsers: processedResults.invalidCount,
+          errorsByType: Object.fromEntries(errorsByType),
         }
-      } catch (error) {
-        logger.error(
-          `Error parsing data: ${error instanceof Error ? error.message : String(error)}`,
-        )
-        throw error
-      }
-    })
+      },
+    )
 
-    if (totalUsers === 0) {
+    if (totalUsers === 0 || validUsers === 0) {
       logger.info(`No valid users found to process for country code ${countryCode}`)
       return {
         message: `No valid users found to process for country code ${countryCode}`,
         countryCode,
-        totalUsers: 0,
-        invalidCount,
+        totalUsers,
+        validUsers,
+        invalidUsers,
       }
     }
 
@@ -133,7 +180,8 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
       message: `Processed ${totalUsers} valid users for country code ${countryCode} in ${batches.length} batches`,
       countryCode,
       totalUsers,
-      invalidCount,
+      validUsers,
+      invalidUsers,
       batches: batches.length,
     }
   },
