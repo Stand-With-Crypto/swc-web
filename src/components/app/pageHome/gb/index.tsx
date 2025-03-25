@@ -1,3 +1,4 @@
+import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
@@ -14,7 +15,7 @@ import { GbHero } from './hero'
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
 
-export function GbPageHome({ topLevelMetrics, recentActivity, partners }: HomePageProps) {
+export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders }: HomePageProps) {
   return (
     <>
       <GbHero />
@@ -41,20 +42,22 @@ export function GbPageHome({ topLevelMetrics, recentActivity, partners }: HomePa
         </RecentActivity>
       </HomePageSection>
 
-      <HomePageSection>
-        <HomePageSection.Title>Our partners</HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          Stand with Crypto in the UK has joined forces with numerous companies to support our case,
-          and we couldn't be more grateful. If you also want to become an official partner, fill out
-          the form via the button below.
-        </HomePageSection.Subtitle>
-        <div className="flex flex-col items-center gap-6">
-          <PartnerGrid partners={partners} />
-          <Button asChild variant="secondary">
-            <InternalLink href={urls.partners()}>View all</InternalLink>
-          </Button>
-        </div>
-      </HomePageSection>
+      {partners && (
+        <HomePageSection>
+          <HomePageSection.Title>Our partners</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            Stand with Crypto in the UK has joined forces with numerous companies to support our
+            case, and we couldn't be more grateful. If you also want to become an official partner,
+            fill out the form via the button below.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <PartnerGrid partners={partners} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
 
       <HomePageSection>
         <HomePageSection.Title>Get involved</HomePageSection.Title>
@@ -64,6 +67,21 @@ export function GbPageHome({ topLevelMetrics, recentActivity, partners }: HomePa
 
         <UserActionGridCTAs />
       </HomePageSection>
+
+      {founders && (
+        <HomePageSection container={false}>
+          <HomePageSection.Title>Founders</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            Members from our community that have founded crypto-related businesses in the UK.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <FoundersCarousel founders={founders} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.founders()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
     </>
   )
 }

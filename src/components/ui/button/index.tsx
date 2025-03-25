@@ -23,6 +23,7 @@ export const buttonVariantsConfig = {
     default: 'px-4 py-3',
     sm: 'py-2 px-3',
     lg: 'py-4 text-base px-8',
+    icon: 'h-10 w-10',
   },
 } satisfies Record<string, Record<string, ClassValue>>
 const buttonVariants = cva(
