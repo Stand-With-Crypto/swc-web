@@ -44,11 +44,7 @@ export default async function UserActionCampaignsLayout(props: UserActionCampaig
   }
 
   return (
-    <USHomepageDialogDeeplinkLayout
-      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      dialogContentClassName="min-h-28 max-w-2xl"
-      pageParams={params}
-    >
+    <USHomepageDialogDeeplinkLayout dialogContentClassName="min-h-28 max-w-2xl" pageParams={params}>
       <React.Suspense>{children}</React.Suspense>
     </USHomepageDialogDeeplinkLayout>
   )

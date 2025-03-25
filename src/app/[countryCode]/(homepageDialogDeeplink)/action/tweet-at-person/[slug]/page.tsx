@@ -51,10 +51,7 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
   }
 
   return (
-    <USHomepageDialogDeeplinkLayout
-      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      pageParams={params}
-    >
+    <USHomepageDialogDeeplinkLayout pageParams={params}>
       <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
         <ErrorBoundary
           extras={{
