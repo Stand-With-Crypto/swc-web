@@ -41,10 +41,10 @@ export function USUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },
-        payload: undefined,
+        payload: { campaignName: USUserActionTweetCampaignName.DEFAULT },
         onError: toastGenericError,
       },
-      () => actionCreateUserActionTweet({ campaignName: USUserActionTweetCampaignName.DEFAULT }),
+      actionCreateUserActionTweet,
     ).then(result => {
       if (result.status === 'success') {
         sectionProps.goToSection(SectionNames.SUCCESS)
