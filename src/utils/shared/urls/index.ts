@@ -1,9 +1,11 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -68,6 +70,7 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
+    founders: () => `${countryPrefix}/founders`,
     politiciansHomepage: () => `${countryPrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
@@ -86,6 +89,19 @@ export const getIntlUrls = (
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
+    locationStateSpecific: (stateCode: USStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
+    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
+    locationUnitedStatesPresidential: () => `${countryPrefix}/races/presidential`,
+    locationUnitedStates: () => `${countryPrefix}/races/`,
+    locationDistrictSpecific: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: USStateCode
+      district: NormalizedDTSIDistrictId
+    }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
   }
 }
 
@@ -124,6 +140,13 @@ export const apiUrls = {
   pollsResultsData: () => `/api/public/polls`,
   districtRanking: ({ stateCode, districtNumber }: { stateCode: string; districtNumber: string }) =>
     `/api/public/referrals/${stateCode}/${districtNumber}`,
+  dtsiRacesByCongressionalDistrict: ({
+    stateCode,
+    district,
+  }: {
+    stateCode: string
+    district: number
+  }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
 }
 
 export * from './externalUrls'

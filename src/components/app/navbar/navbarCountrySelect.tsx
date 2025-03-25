@@ -1,6 +1,9 @@
-import React from 'react'
+'use client'
+
+import { ReactNode } from 'react'
 import Link from 'next/link'
 
+import * as Icons from '@/components/app/navbar/navbarCountryIcons'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -12,51 +15,63 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-// TODO: replace emojis with flag images
 const options: {
-  label: React.ReactNode
+  label: ReactNode
   value: SupportedCountryCodes
+  icon: ReactNode
 }[] = [
   {
-    label: '🇺🇸 United States',
+    label: 'United States',
     value: SupportedCountryCodes.US,
+    icon: <Icons.USACountryIcon />,
   },
   {
-    label: '🇬🇧 United Kingdom',
+    label: 'United Kingdom',
     value: SupportedCountryCodes.GB,
+    icon: <Icons.GreatBritainCountryIcon />,
   },
   {
-    label: '🇦🇺 Australia',
+    label: 'Australia',
     value: SupportedCountryCodes.AU,
+    icon: <Icons.AustraliaCountryIcon />,
   },
   {
-    label: '🇨🇦 Canada',
+    label: 'Canada',
     value: SupportedCountryCodes.CA,
+    icon: <Icons.CanadaCountryIcon />,
   },
 ]
 
 export function NavbarCountrySelect() {
-  const value = useCountryCode()
-  const currentOption = options.find(option => option.value === value)
+  const countryCode = useCountryCode()
+  const currentOption = options.find(option => option.value === countryCode)
 
   if (!currentOption) {
     return null
   }
-  // .focus-visible\:ring-offset-2:focus-visible
-  //.focus-visible\:ring-2:focus-visible
+
+  const countryOptions = [
+    currentOption,
+    ...options.filter(option => option.value !== currentOption.value),
+  ]
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="primary-cta-outline">{currentOption.label}</Button>
+        <Button variant="primary-cta-outline">
+          <div className="flex items-center gap-2">
+            {currentOption.icon} <span className="font-sans font-bold">{currentOption.label}</span>
+          </div>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {options.map(option => {
+        {countryOptions.map(option => {
           const urls = getIntlUrls(option.value)
           return (
             <DropdownMenuItem
               asChild
               className="cursor-pointer"
-              disabled={option.value === value}
+              disabled={option.value === countryCode}
               key={option.value}
             >
               <Link href={urls.home()}>{option.label}</Link>
