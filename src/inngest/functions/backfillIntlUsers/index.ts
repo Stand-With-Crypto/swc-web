@@ -17,7 +17,7 @@ import { processIntlUsersBatch } from './logic'
 export const BACKFILL_INTL_USERS_INNGEST_EVENT_NAME = 'script/backfill-intl-users'
 export const BACKFILL_INTL_USERS_FUNCTION_ID = 'script.backfill-intl-users'
 
-const BATCH_SIZE = 2000
+const BATCH_SIZE = 1000
 
 const createUserDataSchema = (countryCode: SupportedCountryCodes) => {
   return z.object({
