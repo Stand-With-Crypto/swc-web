@@ -1,11 +1,11 @@
 'use client'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { format } from 'date-fns'
-import { motion, useInView } from 'motion/react'
+import { useInView } from 'motion/react'
 
 import { EmptyList } from '@/components/app/pagePress/EmptyList'
 import { NextImage } from '@/components/ui/image'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Spinner } from '@/components/ui/spinner'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { TrackedInternalLink } from '@/components/ui/trackedInternalLink'
 import { getNewsList, NormalizedNews } from '@/utils/server/builder/models/data/news'
@@ -21,7 +21,7 @@ const NEWS_LIST_LIMIT = 10
 
 export function NewsList({ initialNews, countryCode }: NewsListProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const [offset, setOffset] = useState(0)
+  const [offset, setOffset] = useState(initialNews.length < NEWS_LIST_LIMIT ? -1 : 0)
   const [news, setNews] = useState(initialNews)
 
   const loadMoreComponentRef = useRef(null)
@@ -65,7 +65,7 @@ export function NewsList({ initialNews, countryCode }: NewsListProps) {
             <NewsListItem {...newsItem} />
           </React.Fragment>
         ))}
-        {isLoading && <NewsListItemSkeleton />}
+        {isLoading && <Spinner className="mt-4 h-8 w-8 self-center" />}
       </div>
       <div ref={loadMoreComponentRef} />
     </div>
@@ -119,22 +119,5 @@ function NewsListItem({
         </p>
       </article>
     </LinkComponent>
-  )
-}
-
-function NewsListItemSkeleton() {
-  return (
-    <motion.div
-      animate={{ opacity: 1, scale: 1 }}
-      className="flex flex-col items-center gap-2"
-      initial={{ opacity: 0, scale: 0.5 }}
-      transition={{
-        duration: 0.1,
-        ease: [0, 0.71, 0.2, 1.01],
-      }}
-    >
-      <Skeleton className="h-8 w-10/12" />
-      <Skeleton className="mt-4 h-6 w-24" />
-    </motion.div>
   )
 }
