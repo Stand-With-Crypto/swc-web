@@ -7,6 +7,7 @@ import { HomepageDialogDeeplinkLayoutProps } from '@/components/app/homepageDial
 import { GbPageHome } from '@/components/app/pageHome/gb'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { getFounders } from '@/utils/server/builder/models/data/founders'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -18,13 +19,14 @@ export async function GBHomepageDialogDeeplinkLayout({
   dialogContentClassName,
   className,
 }: HomepageDialogDeeplinkLayoutProps) {
-  const [topLevelMetrics, recentActivity, partners] = await Promise.all([
+  const [topLevelMetrics, recentActivity, partners, founders] = await Promise.all([
     getHomepageTopLevelMetrics(),
     getPublicRecentActivity({
       limit: 10,
       countryCode,
     }),
     getPartners({ countryCode }),
+    getFounders({ countryCode }),
   ])
 
   return (
@@ -39,6 +41,7 @@ export async function GBHomepageDialogDeeplinkLayout({
       </PseudoDialog>
 
       <GbPageHome
+        founders={founders}
         partners={partners}
         recentActivity={recentActivity}
         topLevelMetrics={topLevelMetrics}
