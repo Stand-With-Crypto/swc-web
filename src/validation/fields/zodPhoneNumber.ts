@@ -1,4 +1,4 @@
-import { literal, string, union, z } from 'zod'
+import { literal, string, union } from 'zod'
 
 import { normalizePhoneNumber, validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

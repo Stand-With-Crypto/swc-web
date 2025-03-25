@@ -33,6 +33,7 @@ export type UserData = z.infer<ReturnType<typeof createUserDataSchema>>
 const eventPayloadSchema = z.object({
   countryCode: zodSupportedCountryCode,
   csvData: z.string().min(1, 'CSV data is required'),
+  persist: z.boolean().optional().default(false),
 })
 
 export type BackfillIntlUsersSchema = {
@@ -52,9 +53,9 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
       throw new NonRetriableError(`Invalid event payload: ${payloadValidation.error.message}`)
     }
 
-    const { countryCode, csvData } = payloadValidation.data
+    const { countryCode, csvData, persist } = payloadValidation.data
 
-    const { users, totalUsers, invalidCount } = await step.run('parse-csv', async () => {
+    const { batches, totalUsers, invalidCount } = await step.run('parse-csv', async () => {
       try {
         const buffer = Buffer.from(csvData, 'base64')
         const workbook = read(buffer, { type: 'buffer' })
@@ -88,8 +89,12 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
         logger.info(
           `Found ${validUsers.length} valid users to process for country code ${countryCode}`,
         )
+
+        const batches = chunk(validUsers, BATCH_SIZE)
+        logger.info(`Split data into ${batches.length} batches for processing`)
+
         return {
-          users: validUsers,
+          batches,
           totalUsers: validUsers.length,
           invalidCount: invalidUsers.length,
         }
@@ -102,6 +107,7 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
     })
 
     if (totalUsers === 0) {
+      logger.info(`No valid users found to process for country code ${countryCode}`)
       return {
         message: `No valid users found to process for country code ${countryCode}`,
         countryCode,
@@ -110,24 +116,21 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
       }
     }
 
-    const batches = chunk(users, BATCH_SIZE)
-    logger.info(`Split data into ${batches.length} batches for processing`)
-
     for (const [batchIndex, batch] of batches.entries()) {
-      logger.info(`Dispatching batch ${batchIndex + 1}/${batches.length}`)
-      await step.invoke(`dispatch-batch-of-users-${batchIndex}`, {
+      await step.invoke(`dispatch-batch-of-users-${batchIndex + 1}`, {
         function: processIntlUsersBatch,
         data: {
           countryCode,
           users: batch,
           batchIndex: batchIndex + 1,
           totalBatches: batches.length,
+          persist,
         },
       })
     }
 
     return {
-      message: `Processing ${totalUsers} valid users for country code ${countryCode} in ${batches.length} batches`,
+      message: `Processed ${totalUsers} valid users for country code ${countryCode} in ${batches.length} batches`,
       countryCode,
       totalUsers,
       invalidCount,
