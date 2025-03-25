@@ -149,7 +149,7 @@ export function LocationUnitedStates({
               return (
                 <InternalLink
                   className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                  href={urls.locationStateSpecific(stateCode)}
+                  href={urls.locationStateSpecificGovernorRace(stateCode)}
                   key={stateCode}
                 >
                   {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}

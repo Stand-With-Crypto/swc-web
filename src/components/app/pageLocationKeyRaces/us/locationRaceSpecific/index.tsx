@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
-import { compact } from 'lodash-es'
+import { useEffect, useMemo } from 'react'
+import { compact, isEmpty } from 'lodash-es'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
@@ -113,6 +113,15 @@ export function LocationRaceSpecific({
     })
   }, [district, stateCode])
 
+  const racesData = useMemo(
+    () =>
+      compact([
+        recommended && { person: recommended, isRecommended: true },
+        ...others.map(person => ({ person, isRecommended: false })),
+      ]),
+    [others, recommended],
+  )
+
   return (
     <div>
       <DarkHeroSection className="text-center">
@@ -161,45 +170,48 @@ export function LocationRaceSpecific({
         </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
       <div className="divide-y-2">
-        {compact([
-          recommended && { person: recommended, isRecommended: true },
-          ...others.map(person => ({ person, isRecommended: false })),
-        ]).map(({ person, isRecommended }) => (
-          <div key={person.id}>
-            <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
-              <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
-                <div className="sticky top-24 text-center">
-                  <DTSIPersonHeroCard
-                    countryCode={countryCode}
-                    isRecommended={isRecommended}
-                    person={person}
-                    subheader="role"
-                  />
-                </div>
-              </div>
-              <div className="w-full py-10 md:py-20">
-                {person.stances.length ? (
-                  <>
-                    <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
-                      {dtsiPersonFullName(person)} statements on crypto
-                    </PageTitle>
-                    <MaybeOverflowedStances
+        {isEmpty(racesData) ? (
+          <PageTitle as="h3" className="mt-20" size="sm">
+            There's no key races currently in {stateDisplayName}
+          </PageTitle>
+        ) : (
+          racesData.map(({ person, isRecommended }) => (
+            <div key={person.id}>
+              <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
+                <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
+                  <div className="sticky top-24 text-center">
+                    <DTSIPersonHeroCard
                       countryCode={countryCode}
+                      isRecommended={isRecommended}
                       person={person}
-                      stances={person.stances}
+                      subheader="role"
                     />
-                  </>
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-center">
-                    <h3 className="text-xl md:text-2xl">
-                      {dtsiPersonFullName(person)} has no statements on crypto.
-                    </h3>
                   </div>
-                )}
-              </div>
-            </section>
-          </div>
-        ))}
+                </div>
+                <div className="w-full py-10 md:py-20">
+                  {person.stances.length ? (
+                    <>
+                      <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                        {dtsiPersonFullName(person)} statements on crypto
+                      </PageTitle>
+                      <MaybeOverflowedStances
+                        countryCode={countryCode}
+                        person={person}
+                        stances={person.stances}
+                      />
+                    </>
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-center">
+                      <h3 className="text-xl md:text-2xl">
+                        {dtsiPersonFullName(person)} has no statements on crypto.
+                      </h3>
+                    </div>
+                  )}
+                </div>
+              </section>
+            </div>
+          ))
+        )}
       </div>
       <PACFooter className="container" />
     </div>
