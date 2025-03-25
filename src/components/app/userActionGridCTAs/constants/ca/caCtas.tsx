@@ -16,7 +16,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Canada.`,
     mobileCTADescription: 'Join the fight to keep crypto in Canada.',
     campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Canada.`,
-    image: '/actionTypeIcons/optIn.png',
+    image: '/ca/actionTypeIcons/opt-in.png',
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
@@ -37,7 +37,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Stay up to date on crypto policy.',
     campaignsModalDescription:
       'Stay up to date on crypto policy by following @StandWithCryptoCA on X.',
-    image: '/actionTypeIcons/tweet.png',
+    image: '/ca/actionTypeIcons/tweet.png',
     campaigns: [
       {
         actionType: UserActionType.TWEET,
