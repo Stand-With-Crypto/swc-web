@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   }),
 }
 
-const countryCode = SupportedCountryCodes.AU
+const countryCode = SupportedCountryCodes.GB
 
 export default async function EventsPageRoot() {
   const events = await getEvents({ countryCode })
