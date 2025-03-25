@@ -2,6 +2,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { SWCFounders } from '@/utils/shared/zod/getSWCFounders'
+import { cn } from '@/utils/web/cn'
 
 export function FoundersCarousel({ founders }: { founders: SWCFounders | null }) {
   return (
@@ -13,14 +14,17 @@ export function FoundersCarousel({ founders }: { founders: SWCFounders | null })
       }}
     >
       <CarouselContent>
-        {founders?.map(founder => (
+        {founders?.map((founder, index) => (
           <CarouselItem
-            className="basis-2/5 pl-3 sm:pl-5 md:basis-[31%] lg:basis-1/4 xl:basis-[21.55%]"
+            className={cn('max-w-72 pl-3', {
+              'ml-auto': index === 0,
+              'mr-auto': index === founders.length - 1,
+            })}
             key={founder.data.name}
           >
             <ExternalLink className="mb-5 block shadow-lg" href={founder.data.founderLink}>
               <div className="flex flex-col">
-                <div className="relative h-64 md:h-80">
+                <div className="relative h-72">
                   <NextImage
                     alt={`Profile picture of ${founder.data.name}`}
                     className="object-cover"
