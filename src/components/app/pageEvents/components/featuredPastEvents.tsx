@@ -1,4 +1,3 @@
-import { isBefore } from 'date-fns'
 import { ArrowRight } from 'lucide-react'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
@@ -11,16 +10,6 @@ interface FeaturedPastEventsProps {
 }
 
 export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
-  const pastFeaturedEvents = events.filter(event => {
-    const eventDate = event.data?.time
-      ? new Date(`${event.data.date}T${event.data.time}`)
-      : new Date(event.data.date)
-
-    return isBefore(eventDate, new Date())
-  })
-
-  if (!pastFeaturedEvents.length) return null
-
   return (
     <section className="grid w-full gap-4">
       <PageTitle as="h3" className="mb-2">
@@ -28,10 +17,10 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
       </PageTitle>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        {pastFeaturedEvents.map(event => (
+        {events.map(event => (
           <EventDialog
             event={event.data}
-            key={event.data.slug}
+            key={event.data.slug + event.data.date}
             trigger={
               <div className="group relative" key={event.data.slug}>
                 <div className="relative h-[222px] min-w-[345px] lg:h-[271px] lg:min-w-[271px]">

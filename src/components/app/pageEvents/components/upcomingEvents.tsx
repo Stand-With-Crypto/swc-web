@@ -26,7 +26,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const filteredEvents = useMemo(() => {
     const result =
       selectedStateFilter === 'All'
-        ? events
+        ? [...events]
         : events.filter(event => event.data.state === selectedStateFilter)
 
     const orderedResult = result.sort((a, b) => {
@@ -87,7 +87,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
       <div className="my-2 flex w-full flex-col items-center gap-4">
         {filteredEvents.slice(0, eventsToShow).map(event => (
-          <EventCard event={event.data} key={event.data.slug} />
+          <EventCard event={event.data} key={event.data.slug + event.data.name} />
         ))}
       </div>
 

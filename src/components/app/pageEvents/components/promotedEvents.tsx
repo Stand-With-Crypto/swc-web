@@ -15,12 +15,6 @@ interface PromotedEventsProps {
 }
 
 export function PromotedEvents({ events }: PromotedEventsProps) {
-  const filteredPromotionalEvents = events.filter(event => !!event.data.promotedPositioning)
-
-  const orderedPromotionalEvents = filteredPromotionalEvents.sort(
-    (a, b) => a.data.promotedPositioning! - b.data.promotedPositioning!,
-  )
-
   const handleRSVPButtonClick = (event: SWCEvent) => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
@@ -32,7 +26,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
 
   return (
     <section className="flex flex-col items-center gap-8">
-      {orderedPromotionalEvents.map(event => {
+      {events.map(event => {
         const eventDate = event.data?.time
           ? new Date(`${event.data.date}T${event.data.time}`)
           : new Date(event.data.date)
