@@ -116,7 +116,8 @@ export const apiUrls = {
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
-  dtsiAllPeople: () => `/api/public/dtsi/all-people`,
+  dtsiAllPeople: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/public/dtsi/all-people/${countryCode}`,
   recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
     `/api/public/recent-activity/${limit}/${countryCode}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
