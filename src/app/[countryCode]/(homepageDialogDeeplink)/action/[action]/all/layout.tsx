@@ -7,7 +7,6 @@ import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogD
 import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 
