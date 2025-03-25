@@ -13,6 +13,7 @@ import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/co
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { CAUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
@@ -44,7 +45,7 @@ export function CAUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         payload: undefined,
         onError: toastGenericError,
       },
-      () => actionCreateUserActionTweet(),
+      () => actionCreateUserActionTweet({ campaignName: CAUserActionTweetCampaignName.DEFAULT }),
     ).then(result => {
       if (result.status === 'success') {
         sectionProps.goToSection(SectionNames.SUCCESS)

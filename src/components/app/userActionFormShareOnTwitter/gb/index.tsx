@@ -13,6 +13,7 @@ import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/co
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { GBUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
@@ -41,17 +42,19 @@ export function GBUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },
-        payload: undefined,
+        payload: {
+          campaignName: GBUserActionTweetCampaignName.DEFAULT,
+        },
         onError: toastGenericError,
       },
-      () => actionCreateUserActionTweet(),
+      actionCreateUserActionTweet,
     ).then(result => {
       if (result.status === 'success') {
         sectionProps.goToSection(SectionNames.SUCCESS)
       }
     })
 
-    openWindow('https://x.com/standwithcrypto', target, `noopener`)
+    openWindow('https://x.com/StandWCrypto_UK', target, `noopener`)
   }
 
   switch (sectionProps.currentSection) {
@@ -60,12 +63,12 @@ export function GBUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         <ShareOnX>
           <ShareOnX.Heading
             subtitle="Stay up to date on crypto policy changes in the UK"
-            title="Follow @StandWithCryptoUK on Twitter"
+            title="Follow @StandWCrypto_UK on Twitter"
           />
 
           <ShareOnX.Benefits benefits={gbBenefits} />
 
-          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWithCryptoGB" />
+          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWCrypto_UK" />
         </ShareOnX>
       )
     case SectionNames.SUCCESS:
