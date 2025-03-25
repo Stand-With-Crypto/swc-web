@@ -76,7 +76,7 @@ function EmptyListCTA() {
   return (
     <div className="flex flex-col items-center gap-4">
       <p className="text-center text-muted-foreground">
-        Sign in to get updates on relevant crypto news
+        Join Stand With Crypto and we’ll send you updates when relevant articles are posted
       </p>
       <LoginDialogWrapper>
         <Button variant="secondary">Sign in</Button>
