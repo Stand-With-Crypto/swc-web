@@ -20,28 +20,27 @@ export const BACKFILL_INTL_USERS_FUNCTION_ID = 'script.backfill-intl-users'
 const BATCH_SIZE = 1000
 
 const createUserDataSchema = (countryCode: SupportedCountryCodes) => {
-  // Map common CSV column variations to our expected field names
+  // Map  CSV columns to our expected field names
   return z.preprocess(
     data => {
       if (typeof data !== 'object' || data === null) return data
 
       const csvFieldNames: Record<string, string> = { ...data }
 
-      if ('phone' in csvFieldNames) {
-        csvFieldNames.phoneNumber = csvFieldNames.phone
+      if ('What is your name?' in csvFieldNames) {
+        csvFieldNames.firstName = csvFieldNames['What is your name?']
+        csvFieldNames.lastName = ''
       }
 
-      if ('fullName' in csvFieldNames) {
-        const [firstName, lastName] = csvFieldNames.fullName.split(' ')
-        csvFieldNames.firstName = firstName
-        csvFieldNames.lastName = lastName
+      if ('What is your email?' in csvFieldNames) {
+        csvFieldNames.email = csvFieldNames['What is your email?']
       }
 
       return csvFieldNames
     },
     z.object({
-      firstName: zodFirstName.optional(),
-      lastName: zodLastName.optional(),
+      firstName: z.union([zodFirstName.optional(), z.literal('')]),
+      lastName: z.union([zodLastName.optional(), z.literal('')]),
       email: zodEmailAddress,
       phoneNumber: z.union([zodPhoneNumberWithCountryCode(countryCode), z.literal('')]).optional(),
     }),

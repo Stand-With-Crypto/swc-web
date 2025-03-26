@@ -42,7 +42,7 @@ type UserProcessingResult = {
 }
 
 const getLog = (persist: boolean) => {
-  return getLogger(`backfill-intl-users ${persist ? '' : '[DRY RUN]'}:`)
+  return getLogger(`backfill-intl-users ${persist ? '' : '[DRY RUN]'}`)
 }
 
 export const processIntlUsersBatch = inngest.createFunction(
@@ -196,6 +196,7 @@ async function createUserWithCountryCode(
             user: { connect: { id: user.id } },
             actionType: UserActionType.OPT_IN,
             campaignName: UserActionOptInCampaignName.DEFAULT,
+            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
             countryCode,
             userActionOptIn: {
               create: {
@@ -209,7 +210,7 @@ async function createUserWithCountryCode(
       })
     }
 
-    logger.info(`Created new user from international backfill: ${emailAddress}`)
+    logger.info(`Created new user: ${emailAddress}`)
     return {
       action: 'created',
       userId: newUser?.id,
