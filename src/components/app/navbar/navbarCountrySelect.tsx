@@ -3,9 +3,9 @@
 import React from 'react'
 import { useToggle } from 'react-use'
 import { ChevronDownIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
-import * as Icons from '@/components/app/navbar/navbarCountryIcons'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -14,35 +14,33 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdownMenu'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface Option {
-  label: React.ReactNode
+  label: string
   value: SupportedCountryCodes
-  icon: React.ReactNode
 }
 
 const options: Option[] = [
   {
     label: 'United States',
     value: SupportedCountryCodes.US,
-    icon: <Icons.USACountryIcon />,
   },
   {
     label: 'United Kingdom',
     value: SupportedCountryCodes.GB,
-    icon: <Icons.GreatBritainCountryIcon />,
   },
   {
     label: 'Australia',
     value: SupportedCountryCodes.AU,
-    icon: <Icons.AustraliaCountryIcon />,
   },
   {
     label: 'Canada',
     value: SupportedCountryCodes.CA,
-    icon: <Icons.CanadaCountryIcon />,
   },
 ]
 
@@ -75,7 +73,8 @@ export function NavbarCountrySelect() {
           size="sm"
           variant="primary-cta-outline"
         >
-          {currentOption.icon}
+          <FlagIcon countryCode={currentOption.value} />
+
           <span>{currentOption.label}</span>
           <ChevronDownIcon
             className="h-4 w-4 transition-transform"
@@ -95,7 +94,7 @@ export function NavbarCountrySelect() {
             >
               <Link href={getIntlUrls(option.value).home()}>
                 <div className="flex items-center gap-2">
-                  {option.icon}
+                  <FlagIcon countryCode={option.value} />
                   <span>{option.label}</span>
                 </div>
               </Link>
@@ -104,5 +103,19 @@ export function NavbarCountrySelect() {
         })}
       </DropdownMenuContent>
     </DropdownMenu>
+  )
+}
+
+function FlagIcon({ countryCode }: { countryCode: SupportedCountryCodes }) {
+  const prefix = countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `/${countryCode}`
+  return (
+    <div className="w-8">
+      <Image
+        alt={`${countryCode} flag`}
+        height={16}
+        src={`${prefix}/navbar-select-flag.svg`}
+        width={32}
+      />
+    </div>
   )
 }
