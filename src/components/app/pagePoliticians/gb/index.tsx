@@ -1,6 +1,5 @@
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
 import { GbDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/gb'
-
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
