@@ -21,7 +21,7 @@ export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders
       <GbHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
+        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
       </section>
 
       <HomePageSection>

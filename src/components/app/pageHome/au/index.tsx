@@ -22,7 +22,7 @@ export function AuPageHome({ topLevelMetrics, recentActivity, partners, founders
       <AuHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
+        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
       </section>
 
       <HomePageSection>

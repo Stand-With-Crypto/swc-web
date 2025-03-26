@@ -21,7 +21,7 @@ export function CaPageHome({ topLevelMetrics, recentActivity, partners, founders
       <CaHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
+        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
       </section>
 
       <HomePageSection>
