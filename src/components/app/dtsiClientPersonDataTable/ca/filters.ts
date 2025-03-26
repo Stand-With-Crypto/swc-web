@@ -94,6 +94,7 @@ export const PARTY_OPTIONS = {
   NDP: DTSI_PersonPoliticalAffiliationCategory.NDP,
   GREEN: DTSI_PersonPoliticalAffiliationCategory.GREEN,
   INDEPENDENT: DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
+  OTHER: DTSI_PersonPoliticalAffiliationCategory.OTHER,
 }
 
 export function getPartyOptionDisplayName(party: string) {
@@ -108,6 +109,8 @@ export function getPartyOptionDisplayName(party: string) {
       return 'Green'
     case PARTY_OPTIONS.INDEPENDENT:
       return 'Independent'
+    case PARTY_OPTIONS.OTHER:
+      return 'Other Parties'
     default:
       return 'All'
   }

@@ -105,6 +105,8 @@ export function getPartyOptionDisplayName(party: string) {
       return 'Australian Greens'
     case PARTY_OPTIONS.INDEPENDENT:
       return 'Independent members of Parliament'
+    case PARTY_OPTIONS.OTHER:
+      return 'Other Parties'
     default:
       return 'All'
   }
