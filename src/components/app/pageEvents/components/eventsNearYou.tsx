@@ -33,7 +33,8 @@ function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
   const userState = useMemo(() => {
     if (address === 'loading') return null
 
-    const possibleStateMatches = address?.description.matchAll(/\s([A-Z]{2})\s*/g)
+    // TODO: validate if this will work for GB countries
+    const possibleStateMatches = address?.description.matchAll(/\s([A-Z]{2,3})\s*/g)
 
     if (!possibleStateMatches) return null
 
