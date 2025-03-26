@@ -1,7 +1,10 @@
+import { Suspense } from 'react'
+
 import { ClientCurrentUserDTSIPersonCardOrCTA } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { UsDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/us'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -24,7 +27,9 @@ export function UsPagePoliticians({
         <ClientCurrentUserDTSIPersonCardOrCTA countryCode={countryCode} />
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <UsDTSIClientPersonDataTable countryCode={countryCode} initialData={politicians} />
+        <Suspense fallback={<LoadingOverlay />}>
+          <UsDTSIClientPersonDataTable countryCode={countryCode} initialData={politicians} />
+        </Suspense>
       </PagePoliticiansLayout.PoliticiansTableSection>
     </PagePoliticiansLayout>
   )

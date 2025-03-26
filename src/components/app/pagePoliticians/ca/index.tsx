@@ -1,6 +1,9 @@
+import { Suspense } from 'react'
+
 import { CaDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/ca'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -15,7 +18,9 @@ export function CaPagePoliticians({ politicians }: { politicians: DTSIPersonData
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <CaDTSIClientPersonDataTable initialData={politicians} />
+        <Suspense fallback={<LoadingOverlay />}>
+          <CaDTSIClientPersonDataTable initialData={politicians} />
+        </Suspense>
       </PagePoliticiansLayout.PoliticiansTableSection>
     </PagePoliticiansLayout>
   )
