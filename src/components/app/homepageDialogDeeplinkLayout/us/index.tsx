@@ -1,41 +1,30 @@
 import 'server-only'
 
 import React from 'react'
-import { X } from 'lucide-react'
 
+import { PseudoDialog } from '@/components/app/homepageDialogDeeplinkLayout/common/pseudoDialog'
+import { HomepageDialogDeeplinkLayoutProps } from '@/components/app/homepageDialogDeeplinkLayout/common/types'
 import { UsPageHome } from '@/components/app/pageHome/us'
-import {
-  dialogCloseStyles,
-  dialogContentStyles,
-  dialogOverlayStyles,
-} from '@/components/ui/dialog/styles'
-import { InternalLink } from '@/components/ui/link'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
-import { getIntlUrls } from '@/utils/shared/urls'
-import { cn } from '@/utils/web/cn'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
-  size?: 'sm' | 'md'
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+interface USHomepageDialogDeeplinkLayoutProps extends HomepageDialogDeeplinkLayoutProps {
   pageParams: Awaited<PageProps['params']>
   hideModal?: boolean
-  dialogContentClassName?: string
-  className?: string
 }
 
-export async function HomepageDialogDeeplinkLayout({
+export async function USHomepageDialogDeeplinkLayout({
   children,
   size = 'md',
   pageParams,
-  dialogContentClassName,
   className,
-}: HomepageDialogDeeplinkLayoutProps) {
-  const { countryCode } = pageParams
-  const urls = getIntlUrls(countryCode)
+}: USHomepageDialogDeeplinkLayoutProps) {
   const [
     { sumDonations, countUsers, countPolicymakerContacts },
     advocatePerStateDataProps,
@@ -50,26 +39,9 @@ export async function HomepageDialogDeeplinkLayout({
 
   return (
     <>
-      <InternalLink
-        className={cn(dialogOverlayStyles, 'cursor-default')}
-        href={urls.home()}
-        replace
-      />
-      <div
-        className={cn(
-          dialogContentStyles,
-          size === 'md' && 'max-w-3xl',
-          'min-h-[400px]',
-          dialogContentClassName,
-          className,
-        )}
-      >
-        <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
-        <InternalLink className={dialogCloseStyles} href={urls.home()} replace>
-          <X size={20} />
-          <span className="sr-only">Close</span>
-        </InternalLink>
-      </div>
+      <PseudoDialog className={className} countryCode={countryCode} size={size}>
+        {children}
+      </PseudoDialog>
 
       <UsPageHome
         actions={[]}

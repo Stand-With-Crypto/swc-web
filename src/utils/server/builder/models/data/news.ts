@@ -5,10 +5,12 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
-import { OLD_NEWS_DATE_OVERRIDES } from '@/utils/server/builder/models/data/news/constants'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 interface InternalNews {
   id: string
@@ -23,6 +25,7 @@ interface InternalNews {
       data: {
         source: string
         title: string
+        description?: string
         url: string
       }
     }
@@ -33,11 +36,15 @@ interface ExternalNews {
   id: string
   type: 'external'
   title: string
+  description?: string
   url: string
   source: string
 }
 
-type News = InternalNews | ExternalNews
+type News = (InternalNews | ExternalNews) & {
+  publicationDate: number // timestamp
+  previewImage?: string
+}
 
 interface NewsData {
   data: News
@@ -49,7 +56,9 @@ export interface NormalizedNews {
   id: string
   type: 'internal' | 'external'
   dateHeading: Date
+  previewImage?: string
   title: string
+  description?: string
   source: string
   url: string
 }
@@ -72,7 +81,7 @@ async function getAllNewsWithOffset(
           includeRefs: true,
         },
         sort: {
-          createdDate: -1,
+          'data.publicationDate': -1,
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
@@ -108,7 +117,7 @@ export async function getNewsList({
 
     const news = await getAllNewsWithOffset(offset, limit, countryCode)
 
-    return news.map(normalizeNewsListItem).filter(Boolean)
+    return news.map(newsItem => normalizeNewsListItem(newsItem, countryCode)).filter(Boolean)
   } catch (error) {
     Sentry.captureException(error, {
       tags: { domain: 'builder.io', model: 'getNewsList' },
@@ -125,33 +134,40 @@ function isExternalNews(news: News) {
   return news.type === 'external'
 }
 
-function normalizeNewsListItem(newsData: NewsData): NormalizedNews | undefined {
-  const { createdDate, data: news, id } = newsData
+function normalizeNewsListItem(
+  newsData: NewsData,
+  countryCode: SupportedCountryCodes,
+): NormalizedNews | undefined {
+  const { data: news, id } = newsData
 
-  const dataHeading = OLD_NEWS_DATE_OVERRIDES[id] ?? new Date(createdDate)
+  const dateHeading = new Date(news.publicationDate)
 
   if (isInternalNews(news)) {
     if (!news.pressPage?.value) {
       return
     }
 
-    const { source, title, url } = news.pressPage?.value?.data ?? {}
+    const { source, title, url, description } = news.pressPage?.value?.data ?? {}
 
     return {
       id,
       type: 'internal',
-      dateHeading: dataHeading,
-      source: source,
-      title: title,
-      url: url,
+      dateHeading,
+      previewImage: news.previewImage,
+      source,
+      title,
+      description,
+      url: countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE ? `/${countryCode}${url}` : url,
     }
   } else if (isExternalNews(news)) {
     return {
       id,
       type: 'external',
-      dateHeading: dataHeading,
+      dateHeading,
+      previewImage: news.previewImage,
       source: news.source,
       title: news.title,
+      description: news.description,
       url: news.url,
     }
   }

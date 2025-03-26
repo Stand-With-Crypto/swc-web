@@ -16,7 +16,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Australia.`,
     mobileCTADescription: 'Join the fight to keep crypto in Australia.',
     campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in Australia.`,
-    image: '/actionTypeIcons/optIn.png',
+    image: '/au/actionTypeIcons/opt-in.png',
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
@@ -37,7 +37,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Stay up to date on crypto policy.',
     campaignsModalDescription:
       'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-    image: '/actionTypeIcons/tweet.png',
+    image: '/au/actionTypeIcons/tweet.png',
     campaigns: [
       {
         actionType: UserActionType.TWEET,

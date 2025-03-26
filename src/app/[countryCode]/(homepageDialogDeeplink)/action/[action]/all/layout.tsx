@@ -3,7 +3,7 @@ import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -43,8 +43,8 @@ export default async function UserActionCampaignsLayout(props: UserActionCampaig
   }
 
   return (
-    <HomepageDialogDeeplinkLayout dialogContentClassName="min-h-28 max-w-2xl" pageParams={params}>
+    <USHomepageDialogDeeplinkLayout className="min-h-28 max-w-2xl" pageParams={params}>
       <React.Suspense>{children}</React.Suspense>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }

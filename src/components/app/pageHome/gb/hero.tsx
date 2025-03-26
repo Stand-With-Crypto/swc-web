@@ -25,7 +25,7 @@ export function GbHero() {
             <HeroAnnouncementCard.Image
               media={{
                 src: '/gb/home/hero.svg',
-                alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+                alt: 'Stay up to date on crypto policy by following @StandWCrypto_UK on X.',
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Get started">
@@ -38,7 +38,7 @@ export function GbHero() {
           <HeroAnnouncementCard.Image
             media={{
               src: '/gb/home/hero.svg',
-              alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+              alt: 'Stay up to date on crypto policy by following @StandWCrypto_UK on X.',
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">

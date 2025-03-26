@@ -13,6 +13,7 @@ import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/co
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { USUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
@@ -36,14 +37,14 @@ export function USUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
     const target = searchParams?.get('target') ?? '_blank'
     void triggerServerActionForForm(
       {
-        formName: 'User Action Form Share On Twitter [US]',
+        formName: 'User Action Form Share On Twitter',
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },
-        payload: undefined,
+        payload: { campaignName: USUserActionTweetCampaignName.DEFAULT },
         onError: toastGenericError,
       },
-      () => actionCreateUserActionTweet(),
+      actionCreateUserActionTweet,
     ).then(result => {
       if (result.status === 'success') {
         sectionProps.goToSection(SectionNames.SUCCESS)
