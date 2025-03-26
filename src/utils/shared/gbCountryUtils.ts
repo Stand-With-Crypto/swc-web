@@ -25,3 +25,7 @@ export const getGBCountryCodeFromName = (name: string) => {
   )
   return code as GBCountryCode | undefined
 }
+
+export const isValidGBCountryCode = (code: string) => {
+  return code.toUpperCase() in GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP
+}

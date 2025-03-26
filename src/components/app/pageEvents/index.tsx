@@ -8,14 +8,17 @@ import { PromotedEvents } from '@/components/app/pageEvents/components/promotedE
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { GeoGate } from '@/components/app/geoGate'
 
-interface EventsPageProps {
+export interface EventsPageProps {
   events: SWCEvents | null
   isDeepLink?: boolean
+  /** Default to true */
   showMap?: boolean
+  countryCode: SupportedCountryCodes
 }
 
-export function EventsPage({ events, isDeepLink, showMap = true }: EventsPageProps) {
+export function EventsPage({ events, isDeepLink, showMap = true, countryCode }: EventsPageProps) {
   const futureEvents = events?.filter(event =>
     isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
   )
@@ -43,7 +46,9 @@ export function EventsPage({ events, isDeepLink, showMap = true }: EventsPagePro
 
       {promotedEvents && promotedEvents.length > 0 && <PromotedEvents events={promotedEvents} />}
 
+      {/* <GeoGate countryCode={countryCode}> */}
       <EventsNearYou events={futureEvents ?? []} />
+      {/* </GeoGate> */}
 
       {futureEvents && futureEvents.length > 0 && (
         <AllUpcomingEvents events={futureEvents} showMap={showMap} />

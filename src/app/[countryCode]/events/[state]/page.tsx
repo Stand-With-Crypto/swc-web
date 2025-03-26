@@ -5,7 +5,12 @@ import { StateEventsDialogContent } from '@/components/app/pageEvents/components
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import {
+  getUSStateNameFromStateCode,
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  isValidUSStateCode,
+} from '@/utils/shared/usStateUtils'
+import { getEvents } from '@/utils/server/builder/models/data/events'
 
 type Props = PageProps<{ state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP }>
 
@@ -28,15 +33,23 @@ export default async function StateEventsPageRoot(props: Props) {
   const params = await props.params
   const { state, countryCode } = params
 
-  const isStateValid = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(state.toUpperCase())
-
-  if (!isStateValid) {
+  if (!isValidUSStateCode(state)) {
     notFound()
   }
 
+  const stateCode = state.toUpperCase()
+
+  const events = await getEvents({ countryCode })
+
   return (
-    <EventsPageDialogDeeplinkLayout pageParams={params}>
-      <StateEventsDialogContent state={state} countryCode={countryCode} />
+    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
+      <StateEventsDialogContent
+        state={{
+          code: stateCode,
+          name: getUSStateNameFromStateCode(stateCode),
+        }}
+        countryCode={countryCode}
+      />
     </EventsPageDialogDeeplinkLayout>
   )
 }

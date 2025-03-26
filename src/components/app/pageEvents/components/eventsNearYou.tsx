@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useMemo } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { SMSStatus } from '@prisma/client'
 
@@ -12,9 +12,12 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 
 interface EventsNearYouProps {
   events: SWCEvents
@@ -30,29 +33,54 @@ export function EventsNearYou(props: EventsNearYouProps) {
 
 function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
+  const [userState, setUserState] = useState(null)
 
-  const userState = useMemo(() => {
-    if (address === 'loading') return null
+  // const userState = useMemo(() => {
+  //   if (address === 'loading') return null
 
-    // TODO: validate if this will work for GB countries
-    const possibleStateMatches = address?.description.matchAll(/\s([A-Z]{2,3})\s*/g)
+  //   // TODO: validate if this will work for GB countries - its not :)
+  //   console.log('---address', address)
 
-    if (!possibleStateMatches) return null
+  //   const possibleStateMatches = address?.description.matchAll(/\s([A-Z]{2,3})\s*/g)
 
-    for (const match of possibleStateMatches) {
-      const stateCode = match[1]
+  //   if (!possibleStateMatches) return null
 
-      if (
-        US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[
-          stateCode as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
-        ]
-      ) {
-        return stateCode
+  //   console.log('---possibleStateMatches', possibleStateMatches)
+
+  //   for (const match of possibleStateMatches) {
+  //     console.log('---match', match)
+
+  //     const stateCode = match[1]
+
+  //     console.log('---stateCode', stateCode)
+
+  //     // if (isValidStateCode(stateCode)) {
+  //     // return stateCode
+  //     // }
+  //   }
+
+  //   return null
+  // }, [address])
+
+  const onChangeAddress = useCallback(
+    async (prediction: GooglePlaceAutocompletePrediction | null) => {
+      if (!prediction) {
+        setAddress(null)
+        return
       }
-    }
 
-    return null
-  }, [address])
+      const details = await convertGooglePlaceAutoPredictionToAddressSchema(prediction)
+
+      console.log(details)
+    },
+    [],
+  )
+
+  useEffect(() => {
+    if (address === 'loading') return
+
+    void onChangeAddress(address)
+  }, [address, onChangeAddress])
 
   return (
     <section className="grid w-full items-center gap-4 lg:gap-6">
@@ -64,7 +92,6 @@ function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
           loading={address === 'loading'}
           onChange={setAddress}
           placeholder="Enter your address"
-          shouldLimitUSAddresses
           value={address !== 'loading' ? address : null}
         />
       </div>

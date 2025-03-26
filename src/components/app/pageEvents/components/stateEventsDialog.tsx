@@ -6,21 +6,21 @@ import { LazyStateEventsDialogContent } from '@/components/app/pageEvents/compon
 import { StateEventsDialogContentSkeleton } from '@/components/app/pageEvents/components/stateEventsDialogContentSkeleton'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { useCountryCode } from '@/hooks/useCountryCode'
 
-interface StateEventsDialogProps {
-  state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP | null
+export interface StateEventsDialogProps {
+  state: {
+    code: string
+    name: string
+  } | null
   events?: SWCEvents
   isOpen: boolean
   setIsOpen: (open: boolean) => void
 }
 
 export function StateEventsDialog({ state, events, isOpen, setIsOpen }: StateEventsDialogProps) {
-  const analytics = state
-    ? `${US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP]} Events Dialog`
-    : 'State Events Dialog'
+  const analytics = state ? `${state.name} Events Dialog` : 'State Events Dialog'
   const dialogProps = useDialog({
     analytics: analytics,
   })
@@ -30,7 +30,7 @@ export function StateEventsDialog({ state, events, isOpen, setIsOpen }: StateEve
 
   return (
     <Dialog {...dialogProps} onOpenChange={open => setIsOpen(open)} open={isOpen}>
-      <DialogContent a11yTitle={`State ${state} Events`} className="max-w-[578px]">
+      <DialogContent a11yTitle={`State ${state.name} Events`} className="max-w-[578px]">
         <Suspense fallback={<StateEventsDialogContentSkeleton />}>
           <LazyStateEventsDialogContent events={events} state={state} countryCode={countryCode} />
         </Suspense>

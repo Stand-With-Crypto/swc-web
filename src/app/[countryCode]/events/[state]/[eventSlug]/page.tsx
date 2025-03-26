@@ -5,9 +5,9 @@ import sanitizeHtml from 'sanitize-html'
 import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
-import { getEvent } from '@/utils/server/builder/models/data/events'
+import { getEvent, getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { isValidUSStateCode, US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 type Props = PageProps<{
   state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
@@ -48,14 +48,14 @@ export default async function EventDetailsPageRoot(props: Props) {
 
   const event = await getEvent({ eventSlug, state, countryCode })
 
-  const isStateValid = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(state.toUpperCase())
-
-  if (!isStateValid || !event) {
+  if (!isValidUSStateCode(state) || !event) {
     notFound()
   }
 
+  const events = await getEvents({ countryCode })
+
   return (
-    <EventsPageDialogDeeplinkLayout pageParams={params}>
+    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
       <EventDialogContent event={event.data} />
     </EventsPageDialogDeeplinkLayout>
   )

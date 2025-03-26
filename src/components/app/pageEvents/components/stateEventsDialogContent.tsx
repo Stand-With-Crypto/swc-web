@@ -6,14 +6,16 @@ import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { pluralize } from '@/utils/shared/pluralize'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { StateShield } from '@/components/ui/stateShield'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 
 interface StateEventsDialogProps {
-  state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+  state: {
+    code: string
+    name: string
+  }
   events?: SWCEvents
   countryCode: SupportedCountryCodes
 }
@@ -21,9 +23,9 @@ interface StateEventsDialogProps {
 export function StateEventsDialogContent({ state, events, countryCode }: StateEventsDialogProps) {
   usePreventOverscroll()
 
-  const parsedState = state.toUpperCase() as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+  const parsedState = state.code.toUpperCase()
   const stateEvents =
-    events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase()) ?? []
+    events?.filter(event => event.data.state?.toLowerCase() === state.code.toLowerCase()) ?? []
 
   const orderedResult = stateEvents.sort((a, b) => {
     const aDate = a.data.time ? new Date(`${a.data.date}T${a.data.time}`) : new Date(a.data.date)
@@ -41,14 +43,11 @@ export function StateEventsDialogContent({ state, events, countryCode }: StateEv
         countryCode={countryCode}
       />
 
-      <h3 className="font-sans text-xl font-bold">
-        Events in {US_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}
-      </h3>
+      <h3 className="font-sans text-xl font-bold">Events in {state.name}</h3>
       <p className="font-mono text-base text-muted-foreground">
         There {pluralize({ singular: 'is', plural: 'are', count: orderedResult?.length ?? 0 })}{' '}
         {orderedResult?.length ?? 0} Stand With Crypto{' '}
-        {pluralize({ singular: 'event', count: orderedResult?.length ?? 0 })} in{' '}
-        {US_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
+        {pluralize({ singular: 'event', count: orderedResult?.length ?? 0 })} in {state.name}.
       </p>
 
       <ScrollArea className="w-full">

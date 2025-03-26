@@ -5,32 +5,27 @@ import { isAfter, parseISO, subDays } from 'date-fns'
 import { X } from 'lucide-react'
 
 import NotFound from '@/app/not-found'
-import { EventsPage } from '@/components/app/pageEvents'
+import { EventsPage, EventsPageProps } from '@/components/app/pageEvents'
 import {
   dialogCloseStyles,
   dialogContentStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
-import { PageProps } from '@/types'
-import { getEvents } from '@/utils/server/builder/models/data/events'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-interface EventsPageDialogDeeplinkLayout {
-  pageParams: Awaited<PageProps['params']>
-  hideModal?: boolean
+interface EventsPageDialogDeeplinkLayout extends Omit<EventsPageProps, 'isDeepLink'> {
   children: JSX.Element
 }
 
 export async function EventsPageDialogDeeplinkLayout({
   children,
-  pageParams,
+  countryCode,
+  events,
+  ...eventPageProps
 }: EventsPageDialogDeeplinkLayout) {
-  const { countryCode } = pageParams
   const urls = getIntlUrls(countryCode)
-
-  const events = await getEvents({ countryCode })
 
   if (!events || !events?.length) {
     return NotFound()
@@ -55,7 +50,12 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage events={filteredFutureEvents!} isDeepLink countryCode={countryCode} />
+      <EventsPage
+        {...eventPageProps}
+        events={filteredFutureEvents!}
+        isDeepLink
+        countryCode={countryCode}
+      />
     </>
   )
 }

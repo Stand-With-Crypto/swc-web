@@ -12,17 +12,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getAUStateNameFromStateCode } from '@/utils/shared/auStateUtils'
+import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/caProvinceUtils'
+import { getGBCountryNameFromCode } from '@/utils/shared/gbCountryUtils'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { useCountryCode } from '@/hooks/useCountryCode'
 
 interface UpcomingEventsProps {
   events: SWCEvents
 }
 
+const GET_STATE_NAME_FROM_CODE_MAP: Record<SupportedCountryCodes, (code: string) => string> = {
+  [SupportedCountryCodes.AU]: getAUStateNameFromStateCode,
+  [SupportedCountryCodes.CA]: getCAProvinceOrTerritoryNameFromCode,
+  [SupportedCountryCodes.GB]: getGBCountryNameFromCode,
+  [SupportedCountryCodes.US]: getUSStateNameFromStateCode,
+}
+
+const getStateNameFromCode = (code: string, countryCode: SupportedCountryCodes) => {
+  return GET_STATE_NAME_FROM_CODE_MAP[countryCode](code)
+}
+
 export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
+  const countryCode = useCountryCode()
 
   const filteredEvents = useMemo(() => {
     const result =
@@ -54,7 +71,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
     const options = stateArr.map(state => ({
       key: state,
-      name: `${US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP]} (${stateWithEvents[state]})`,
+      name: `${getStateNameFromCode(state, countryCode)} (${stateWithEvents[state]})`,
     }))
 
     options.unshift({ key: 'All', name: 'All' })

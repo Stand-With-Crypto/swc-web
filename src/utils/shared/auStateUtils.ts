@@ -36,3 +36,7 @@ export const getAUStateCodeFromStateName = (stateName: string) => {
   )
   return stateCode as AUStateCode | undefined
 }
+
+export const isValidAUStateCode = (code: string) => {
+  return code.toUpperCase() in AU_STATE_CODE_TO_DISPLAY_NAME_MAP
+}
