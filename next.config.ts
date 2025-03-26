@@ -596,6 +596,11 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: '/tweet/case-dismissed/:state',
+        destination: '/api/public/x-redirect/:state',
+        permanent: false,
+      },
+      {
         source: '/oh/1',
         destination:
           'https://americalovescryptooh.splashthat.com?utm_source=swc&utm_medium=sms&utm_campaign=oh_1&utm_id=ss',
