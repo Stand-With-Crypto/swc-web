@@ -36,8 +36,8 @@ export type ProcessBatchSchema = {
 
 type UserProcessingResult = {
   action: 'created' | 'updated' | 'skipped' | 'error'
-  userId?: string
   email: string
+  userId?: string
   error?: string
 }
 
@@ -131,25 +131,15 @@ async function createUserWithCountryCode(
     })
 
     if (existingUser) {
-      if (existingUser.user.countryCode !== countryCode) {
-        if (persist) {
-          await prismaClient.user.update({
-            where: { id: existingUser.user.id },
-            data: { countryCode },
-          })
-        }
-        logger.info(`Updated country code for existing user: ${emailAddress}`)
-        return {
-          action: 'updated',
-          userId: existingUser.user.id,
-          email: emailAddress,
-        }
-      }
-      logger.info(`Skipping user: ${emailAddress}`)
+      const result = await handleExistingUser({
+        existingUser: existingUser.user,
+        countryCode,
+        persist,
+      })
+
       return {
-        action: 'skipped',
-        userId: existingUser.user.id,
-        email: emailAddress,
+        ...result,
+        email: existingUser.emailAddress,
       }
     }
 
@@ -166,7 +156,7 @@ async function createUserWithCountryCode(
             hasOptedInToMembership: false,
             smsStatus: SMSStatus.NOT_OPTED_IN,
             dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-            referralId: generateReferralId(),
+            referralId: userData.referralId || generateReferralId(),
             userSessions: { create: { id: generateUserSessionId() } },
             countryCode,
             acquisitionReferer: '',
@@ -196,7 +186,6 @@ async function createUserWithCountryCode(
             user: { connect: { id: user.id } },
             actionType: UserActionType.OPT_IN,
             campaignName: UserActionOptInCampaignName.DEFAULT,
-            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
             countryCode,
             userActionOptIn: {
               create: {
@@ -223,4 +212,40 @@ async function createUserWithCountryCode(
       error: error instanceof Error ? error.message : String(error),
     }
   }
+}
+
+const handleExistingUser = async ({
+  existingUser,
+  countryCode,
+  persist,
+}: {
+  countryCode: string
+  existingUser: User
+  persist: boolean
+}) => {
+  const logger = getLog(persist)
+
+  if (existingUser.countryCode !== countryCode) {
+    try {
+      if (persist) {
+        await prismaClient.user.update({ where: { id: existingUser.id }, data: { countryCode } })
+      }
+      logger.info(`Updated country code for existing user: ${existingUser.id}`)
+      return {
+        action: 'updated',
+        userId: existingUser.id,
+      } as const
+    } catch (error) {
+      return {
+        action: 'error',
+        userId: existingUser.id,
+        error: error instanceof Error ? error.message : String(error),
+      } as const
+    }
+  }
+
+  return {
+    action: 'skipped',
+    userId: existingUser.id,
+  } as const
 }

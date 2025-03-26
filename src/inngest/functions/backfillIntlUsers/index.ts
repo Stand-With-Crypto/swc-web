@@ -10,6 +10,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumberWithCountryCode } from '@/validation/fields/zodPhoneNumber'
+import { zodReferralId } from '@/validation/fields/zodReferrald'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 import { processIntlUsersBatch } from './logic'
@@ -27,21 +28,39 @@ const createUserDataSchema = (countryCode: SupportedCountryCodes) => {
 
       const csvFieldNames: Record<string, string> = { ...data }
 
-      if ('What is your name?' in csvFieldNames) {
+      if ('What is your name?' in csvFieldNames && Boolean(csvFieldNames['What is your name?'])) {
         csvFieldNames.firstName = csvFieldNames['What is your name?']
         csvFieldNames.lastName = ''
       }
 
-      if ('What is your email?' in csvFieldNames) {
+      if ('What is your email?' in csvFieldNames && Boolean(csvFieldNames['What is your email?'])) {
         csvFieldNames.email = csvFieldNames['What is your email?']
+      }
+
+      if (
+        'Waitlist Referral URL' in csvFieldNames &&
+        Boolean(csvFieldNames['Waitlist Referral URL'])
+      ) {
+        try {
+          const url = new URL(csvFieldNames['Waitlist Referral URL'])
+          const referralParam = url.searchParams.get('referral')
+          if (referralParam) {
+            csvFieldNames.referralId = referralParam
+          }
+        } catch (error) {
+          logger.error(`Error parsing referral URL: ${csvFieldNames['Waitlist Referral URL']}`, {
+            error,
+          })
+        }
       }
 
       return csvFieldNames
     },
     z.object({
+      email: zodEmailAddress,
       firstName: z.union([zodFirstName.optional(), z.literal('')]),
       lastName: z.union([zodLastName.optional(), z.literal('')]),
-      email: zodEmailAddress,
+      referralId: zodReferralId.optional(),
       phoneNumber: z.union([zodPhoneNumberWithCountryCode(countryCode), z.literal('')]).optional(),
     }),
   )
