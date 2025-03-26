@@ -68,24 +68,8 @@ export const footerConfig: FooterProps = {
   ],
   socialLinks: [
     {
-      href: gbExternalUrls.discord(),
-      text: 'Discord',
-    },
-    {
       href: gbExternalUrls.twitter(),
       text: 'Twitter / X',
-    },
-    {
-      href: gbExternalUrls.instagram(),
-      text: 'Instagram',
-    },
-    {
-      href: gbExternalUrls.youtube(),
-      text: 'Youtube',
-    },
-    {
-      href: gbExternalUrls.facebook(),
-      text: 'Facebook',
     },
     {
       href: gbExternalUrls.linkedin(),

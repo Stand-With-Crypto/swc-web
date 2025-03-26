@@ -25,35 +25,20 @@ export const usExternalUrls = {
   swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
 }
 
-// TODO: fill in
 export const auExternalUrls = {
-  discord: usExternalUrls.discord,
-  twitter: usExternalUrls.twitter,
-  instagram: usExternalUrls.instagram,
-  youtube: usExternalUrls.youtube,
-  facebook: usExternalUrls.facebook,
-  linkedin: usExternalUrls.linkedin,
+  twitter: () => 'https://x.com/StandWCrypto_AU',
+  linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-australia',
   emailFeedback: usExternalUrls.emailFeedback,
 }
 
-// TODO: fill in
 export const gbExternalUrls = {
-  discord: usExternalUrls.discord,
   twitter: () => 'https://x.com/StandWCrypto_UK',
-  instagram: usExternalUrls.instagram,
-  youtube: usExternalUrls.youtube,
-  facebook: usExternalUrls.facebook,
-  linkedin: usExternalUrls.linkedin,
+  linkedin: () => 'https://www.linkedin.com/company/standwithcryptouk',
   emailFeedback: usExternalUrls.emailFeedback,
 }
 
-// TODO: fill in
 export const caExternalUrls = {
-  discord: usExternalUrls.discord,
-  twitter: usExternalUrls.twitter,
-  instagram: usExternalUrls.instagram,
-  youtube: usExternalUrls.youtube,
-  facebook: usExternalUrls.facebook,
-  linkedin: usExternalUrls.linkedin,
+  twitter: () => 'https://x.com/StandWCrypto_CA',
+  linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-canada',
   emailFeedback: usExternalUrls.emailFeedback,
 }
