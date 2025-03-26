@@ -1,5 +1,5 @@
 import { AuDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/au'
-import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
+import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'

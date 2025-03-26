@@ -22,7 +22,7 @@ import {
   Person,
   PERSON_TABLE_COLUMNS_IDS,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
-import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/common/dataTablePagination'
+import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/common/pagination'
 import {
   useColumnFilters,
   useSearchFilter,

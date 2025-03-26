@@ -1,6 +1,6 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'

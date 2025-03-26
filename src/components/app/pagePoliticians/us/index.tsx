@@ -1,5 +1,5 @@
 import { ClientCurrentUserDTSIPersonCardOrCTA } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
-import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
+import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { UsDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/us'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'

@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 import { PERSON_TABLE_COLUMNS_IDS } from '@/components/app/dtsiClientPersonDataTable/common/columns'
-import { StanceOnCryptoOptions } from '@/components/app/dtsiClientPersonDataTable/common/commonGlobalFiltersUtils'
+import { StanceOnCryptoOptions } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import { useSearchParamState } from '@/hooks/useSearchParamState'
 
 export function useSearchFilter(

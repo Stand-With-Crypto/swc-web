@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import {
   PAGE_POLITICIANS_DESCRIPTION,
   PAGE_POLITICIANS_TITLE,

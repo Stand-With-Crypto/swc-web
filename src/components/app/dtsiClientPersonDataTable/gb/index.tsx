@@ -5,18 +5,18 @@ import {
   getDTSIClientPersonDataTableColumns,
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
-import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/commonGlobalFiltersUtils'
 import {
   DataTable,
   DataTableSkeleton,
 } from '@/components/app/dtsiClientPersonDataTable/common/dataTable'
-import {
-  DTSIPersonDataTablePeople,
-  sortDTSIPersonDataTable,
-} from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
+import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
-import { parseStringPoliticiansTable } from '@/components/app/dtsiClientPersonDataTable/common/utils'
+import {
+  DTSIPersonDataTablePeople,
+  parseStringPoliticiansTable,
+  sortDTSIPersonDataTable,
+} from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import {
   getGlobalFilterDefaults,
   getPartyOptionDisplayName,

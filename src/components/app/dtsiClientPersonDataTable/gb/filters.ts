@@ -5,7 +5,7 @@ import {
   Person,
   PERSON_TABLE_COLUMNS_IDS,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
-import { StanceOnCryptoOptions } from '@/components/app/dtsiClientPersonDataTable/common/commonGlobalFiltersUtils'
+import { StanceOnCryptoOptions } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
