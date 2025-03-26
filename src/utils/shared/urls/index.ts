@@ -1,11 +1,20 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { AUStateCode } from '@/utils/shared/auStateUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/caProvinceUtils'
+import { GBCountryCode } from '@/utils/shared/gbCountryUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { USStateCode } from '@/utils/shared/usStateUtils'
+
+export type LocationStateCode =
+  | USStateCode
+  | GBCountryCode
+  | AUStateCode
+  | CAProvinceOrTerritoryCode
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -89,18 +98,18 @@ export const getIntlUrls = (
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
-    locationStateSpecific: (stateCode: USStateCode) =>
+    locationStateSpecific: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
-    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
+    locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
-    locationStateSpecificGovernorRace: (stateCode: USStateCode) =>
+    locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/governor`,
-    locationUnitedStates: () => `${countryPrefix}/races/`,
+    locationKeyRaces: () => `${countryPrefix}/races/`,
     locationDistrictSpecific: ({
       stateCode,
       district,
     }: {
-      stateCode: USStateCode
+      stateCode: LocationStateCode
       district: NormalizedDTSIDistrictId
     }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
   }

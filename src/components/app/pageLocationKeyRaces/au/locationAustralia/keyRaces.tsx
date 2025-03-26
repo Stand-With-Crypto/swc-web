@@ -1,17 +1,17 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { organizePeopleAU } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
-import { NextImage } from '@/components/ui/image'
+import { ImageWithFallbackOnError } from '@/components/ui/imageWithFallbackOnError'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { AU_STATE_CODE_TO_DISPLAY_NAME_MAP, AUStateCode } from '@/utils/shared/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 interface AUKeyRacesProps {
   groups: ReturnType<typeof organizePeopleAU>
-  countryCode: SupportedCountryCodes
+  countryCode: SupportedCountryCodes.AU
 }
 
 export function AUKeyRaces({ groups, countryCode }: AUKeyRacesProps) {
@@ -30,14 +30,14 @@ export function AUKeyRaces({ groups, countryCode }: AUKeyRacesProps) {
   }
 
   return keyRaces.map(([stateCode, races]) => {
-    // TODO: Add CA state name mapping @olavoparno
-    const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
+    const stateName = AU_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as AUStateCode]
     return (
       <div className="container flex flex-col items-center" key={stateCode}>
-        <NextImage
+        <ImageWithFallbackOnError
           alt={`${stateName} shield`}
+          fallbackSrc="/logo/shield.png"
           height={150}
-          src={`/stateShields/${stateCode}.png`}
+          src={`/stateShields/au/${stateCode}.png`}
           width={150}
         />
 
@@ -56,27 +56,13 @@ export function AUKeyRaces({ groups, countryCode }: AUKeyRacesProps) {
 
           const linkNoDistrict =
             raceCategory === DTSI_PersonRoleCategory.GOVERNOR
-              ? urls.locationStateSpecificGovernorRace(stateCode as USStateCode)
-              : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
+              ? urls.locationStateSpecificGovernorRace(stateCode as AUStateCode)
+              : urls.locationStateSpecificSenateRace(stateCode as AUStateCode)
 
           return (
             <DTSIPersonHeroCardSection
               countryCode={countryCode}
-              cta={
-                <InternalLink
-                  href={
-                    primaryDistrict
-                      ? urls.locationDistrictSpecific({
-                          // TODO: Add CA state name mapping @olavoparno
-                          stateCode: stateCode as USStateCode,
-                          district: primaryDistrict,
-                        })
-                      : linkNoDistrict
-                  }
-                >
-                  View Race
-                </InternalLink>
-              }
+              cta={<InternalLink href={linkNoDistrict}>View Race</InternalLink>}
               key={`${stateCode}-${primaryDistrict ?? idx}`}
               people={people}
               subtitle={

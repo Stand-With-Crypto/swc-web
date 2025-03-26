@@ -126,7 +126,7 @@ export function LocationRaceGovernorSpecific({
     <div>
       <DarkHeroSection className="text-center">
         <h2 className={'mb-4'}>
-          <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
+          <InternalLink className="text-gray-400" href={urls.locationKeyRaces()}>
             United States
           </InternalLink>
           {' / '}

@@ -1,17 +1,20 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { organizePeopleGB } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/organizePeople'
-import { NextImage } from '@/components/ui/image'
+import { ImageWithFallbackOnError } from '@/components/ui/imageWithFallbackOnError'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import {
+  GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
+  GBCountryCode,
+} from '@/utils/shared/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 interface GBKeyRacesProps {
   groups: ReturnType<typeof organizePeopleGB>
-  countryCode: SupportedCountryCodes
+  countryCode: SupportedCountryCodes.GB
 }
 
 export function GBKeyRaces({ groups, countryCode }: GBKeyRacesProps) {
@@ -30,14 +33,15 @@ export function GBKeyRaces({ groups, countryCode }: GBKeyRacesProps) {
   }
 
   return keyRaces.map(([stateCode, races]) => {
-    // TODO: Add GB state name mapping @olavoparno
-    const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
+    const stateName = GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP[stateCode as GBCountryCode]
+
     return (
       <div className="container flex flex-col items-center" key={stateCode}>
-        <NextImage
+        <ImageWithFallbackOnError
           alt={`${stateName} shield`}
+          fallbackSrc="/logo/shield.png"
           height={150}
-          src={`/stateShields/${stateCode}.png`}
+          src={`/stateShields/gb/${stateCode}.png`}
           width={150}
         />
 
@@ -56,27 +60,13 @@ export function GBKeyRaces({ groups, countryCode }: GBKeyRacesProps) {
 
           const linkNoDistrict =
             raceCategory === DTSI_PersonRoleCategory.GOVERNOR
-              ? urls.locationStateSpecificGovernorRace(stateCode as USStateCode)
-              : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
+              ? urls.locationStateSpecificGovernorRace(stateCode as GBCountryCode)
+              : urls.locationStateSpecificSenateRace(stateCode as GBCountryCode)
 
           return (
             <DTSIPersonHeroCardSection
               countryCode={countryCode}
-              cta={
-                <InternalLink
-                  href={
-                    primaryDistrict
-                      ? urls.locationDistrictSpecific({
-                          // TODO: Add GB state name mapping @olavoparno
-                          stateCode: stateCode as USStateCode,
-                          district: primaryDistrict,
-                        })
-                      : linkNoDistrict
-                  }
-                >
-                  View Race
-                </InternalLink>
-              }
+              cta={<InternalLink href={linkNoDistrict}>View Race</InternalLink>}
               key={`${stateCode}-${primaryDistrict ?? idx}`}
               people={people}
               subtitle={
