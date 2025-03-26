@@ -17,7 +17,7 @@ export async function GET(_: NextRequest, props: { params: Promise<{ state: stri
 
   const tweetLink = createTweetLink({
     url: 'https://standwithcrypto.org',
-    message: `Thank you ${getUSStateNameFromStateCode(state)} for dropping the case against @coinbase. Now ${parsedState} users can stake their crypto! We deserve the right to utilize our assets and we are securing that right. Join me in applauding ${parsedState} for a job well done: https://standwithcrypto.org/tweet/case-dismissed/${state}\n\n`,
+    message: `Thank you ${getUSStateNameFromStateCode(state)} for dropping the case against @coinbase. Now ${parsedState} users can stake their crypto! We deserve the right to utilize our assets and we are securing that right.\n\nJoin me in applauding ${parsedState} for a job well done: https://standwithcrypto.org/tweet/case-dismissed/${state}\n\n`,
   })
   return NextResponse.redirect(tweetLink)
 }
