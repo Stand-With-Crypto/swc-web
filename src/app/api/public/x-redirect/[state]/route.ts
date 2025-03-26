@@ -3,11 +3,8 @@ import 'server-only'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-import { createTweetLink } from '@/utils/web/createTweetLink'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-
-export const revalidate = 60 * 60 * 24
-export const dynamic = 'error'
+import { createTweetLink } from '@/utils/web/createTweetLink'
 
 const zodParams = z.object({
   state: z.string().length(2),
