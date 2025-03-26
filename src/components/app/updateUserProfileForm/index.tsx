@@ -48,18 +48,20 @@ export function UpdateUserProfileFormContainer({
 
   if (sections.currentSection === UserProfileFormSections.Profile) {
     return (
-      <UpdateUserProfileForm
-        onSuccess={newFields => {
-          const { address: _, ...updatedFields } = newFields
-          setStatefulUser(prev => ({ ...prev, ...updatedFields }))
-          void mutate(apiUrls.userFullProfileInfo())
-          sections.goToSection(UserProfileFormSections.InformationVisibility)
-          if (skipSections?.includes(UserProfileFormSections.InformationVisibility)) {
-            onSuccess()
-          }
-        }}
-        user={user}
-      />
+      <div className="px-4 md:px-6">
+        <UpdateUserProfileForm
+          onSuccess={newFields => {
+            const { address: _, ...updatedFields } = newFields
+            setStatefulUser(prev => ({ ...prev, ...updatedFields }))
+            void mutate(apiUrls.userFullProfileInfo())
+            sections.goToSection(UserProfileFormSections.InformationVisibility)
+            if (skipSections?.includes(UserProfileFormSections.InformationVisibility)) {
+              onSuccess()
+            }
+          }}
+          user={user}
+        />
+      </div>
     )
   }
   if (sections.currentSection === UserProfileFormSections.InformationVisibility) {

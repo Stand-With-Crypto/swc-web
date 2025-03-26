@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import React from 'react'
 import { useToggle } from 'react-use'
 import { ChevronDownIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -17,11 +17,13 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-const options: {
-  label: ReactNode
+interface Option {
+  label: React.ReactNode
   value: SupportedCountryCodes
-  icon: ReactNode
-}[] = [
+  icon: React.ReactNode
+}
+
+const options: Option[] = [
   {
     label: 'United States',
     value: SupportedCountryCodes.US,
@@ -47,22 +49,29 @@ const options: {
 export function NavbarCountrySelect() {
   const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
+
   const currentOption = options.find(option => option.value === countryCode)
+  const sortedOptions = React.useMemo(() => {
+    if (!currentOption) {
+      return options
+    }
+
+    const currentOptionIndex = options.findIndex(option => option.value === currentOption.value)
+    const newOptions = [...options]
+    newOptions.splice(currentOptionIndex, 1)
+    newOptions.unshift(currentOption)
+    return newOptions
+  }, [currentOption])
 
   if (!currentOption) {
     return null
   }
 
-  const countryOptions = [
-    currentOption,
-    ...options.filter(option => option.value !== currentOption.value),
-  ]
-
   return (
     <DropdownMenu onOpenChange={toggleIsOpen} open={isOpen}>
       <DropdownMenuTrigger asChild>
         <Button
-          className="flex items-center gap-2 text-base font-bold"
+          className="flex w-full items-center gap-2 text-base font-bold min-[1096px]:w-auto"
           size="sm"
           variant="primary-cta-outline"
         >
@@ -75,17 +84,16 @@ export function NavbarCountrySelect() {
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        {countryOptions.map(option => {
-          const urls = getIntlUrls(option.value)
+      <DropdownMenuContent className="w-[calc(100vw-48px)] rounded-3xl min-[1096px]:w-auto">
+        {sortedOptions.map(option => {
           return (
             <DropdownMenuItem
               asChild
-              className="cursor-pointer"
-              disabled={option.value === countryCode}
+              className="cursor-pointer data-[disabled]:font-bold data-[disabled]:text-primary-cta data-[disabled]:opacity-100"
+              disabled={option.value === currentOption.value}
               key={option.value}
             >
-              <Link href={urls.home()}>
+              <Link href={getIntlUrls(option.value).home()}>
                 <div className="flex items-center gap-2">
                   {option.icon}
                   <span>{option.label}</span>
