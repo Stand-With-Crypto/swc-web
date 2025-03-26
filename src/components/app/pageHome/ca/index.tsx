@@ -75,12 +75,8 @@ export function CaPageHome({ topLevelMetrics, recentActivity, partners, founders
           <HomePageSection.Subtitle>
             Members from our community that have founded crypto-related businesses in the UK.
           </HomePageSection.Subtitle>
-          <div className="flex flex-col items-center gap-6">
-            <FoundersCarousel founders={founders} />
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.founders()}>View all</InternalLink>
-            </Button>
-          </div>
+
+          <FoundersCarousel founders={founders} />
         </HomePageSection>
       )}
     </>

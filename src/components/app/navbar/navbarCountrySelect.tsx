@@ -115,6 +115,8 @@ function FlagIcon({ countryCode }: { countryCode: SupportedCountryCodes }) {
         height={16}
         src={`${prefix}/navbar-select-flag.svg`}
         width={32}
+        priority
+        quality={100}
       />
     </div>
   )
