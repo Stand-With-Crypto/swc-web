@@ -14,6 +14,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 
 interface EventsNearYouProps {
   events: SWCEvents
@@ -89,7 +90,9 @@ function FilteredEventsNearUser({
   return (
     <div className="flex w-full flex-col items-center gap-4">
       {hasEvents ? (
-        filteredEventsNearUser.map(event => <EventCard event={event.data} key={event.data.slug} />)
+        filteredEventsNearUser.map(event => (
+          <EventCard event={event.data} key={getUniqueEventKey(event.data)} />
+        ))
       ) : (
         <NoEventsNearYou />
       )}

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 
 interface PromotedEventsProps {
   events: SWCEvents
@@ -36,7 +37,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
         return (
           <div
             className="flex flex-col items-center gap-4 lg:flex-row lg:gap-6"
-            key={event.data.slug}
+            key={getUniqueEventKey(event.data)}
           >
             <div className="relative h-[182px] min-w-[271px]">
               <NextImage

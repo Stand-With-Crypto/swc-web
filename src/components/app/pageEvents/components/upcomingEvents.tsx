@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 
 interface UpcomingEventsProps {
   events: SWCEvents
@@ -87,7 +88,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
       <div className="my-2 flex w-full flex-col items-center gap-4">
         {filteredEvents.slice(0, eventsToShow).map(event => (
-          <EventCard event={event.data} key={event.data.slug + event.data.name} />
+          <EventCard event={event.data} key={getUniqueEventKey(event.data)} />
         ))}
       </div>
 

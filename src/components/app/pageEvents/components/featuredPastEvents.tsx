@@ -4,6 +4,7 @@ import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 
 interface FeaturedPastEventsProps {
   events: SWCEvents
@@ -20,9 +21,9 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
         {events.map(event => (
           <EventDialog
             event={event.data}
-            key={event.data.slug + event.data.date}
+            key={getUniqueEventKey(event.data)}
             trigger={
-              <div className="group relative" key={event.data.slug}>
+              <div className="group relative" key={getUniqueEventKey(event.data)}>
                 <div className="relative h-[222px] min-w-[345px] lg:h-[271px] lg:min-w-[271px]">
                   <NextImage
                     alt={event.data.name}

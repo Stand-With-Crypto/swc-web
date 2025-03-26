@@ -10,6 +10,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { StateShield } from '@/components/ui/stateShield'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 
 interface StateEventsDialogProps {
   state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
@@ -56,7 +57,7 @@ export function StateEventsDialogContent({ state, events, countryCode }: StateEv
             {orderedResult.map(event => (
               <EventDialog
                 event={event.data}
-                key={event.data.slug}
+                key={getUniqueEventKey(event.data)}
                 trigger={<StateDialogEventCard event={event.data} countryCode={countryCode} />}
               />
             ))}
