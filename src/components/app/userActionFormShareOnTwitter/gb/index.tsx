@@ -13,6 +13,7 @@ import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/co
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { gbExternalUrls } from '@/utils/shared/urls'
 import { GBUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -54,7 +55,7 @@ export function GBUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
       }
     })
 
-    openWindow('https://x.com/StandWCrypto_UK', target, `noopener`)
+    openWindow(gbExternalUrls.twitter(), target, `noopener`)
   }
 
   switch (sectionProps.currentSection) {

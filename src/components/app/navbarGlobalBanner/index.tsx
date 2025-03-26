@@ -10,12 +10,23 @@ import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  COUNTRY_CODE_TO_DISPLAY_NAME,
+  COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX,
+} from '@/utils/shared/countryCode/displayNames'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 const languages = getNavigatorLanguages()
 
-export function NavBarGlobalBanner() {
+export function NavBarGlobalBanner({
+  countryCode: propCountryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) {
   const router = useRouter()
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
@@ -39,7 +50,7 @@ export function NavBarGlobalBanner() {
     return <CurrentCampaign />
   }
 
-  if (currentCountry) {
+  if (currentCountry && propCountryCode !== currentCountry.countryCode) {
     return (
       <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
         <WrapperContainer
@@ -62,14 +73,19 @@ export function NavBarGlobalBanner() {
     )
   }
 
-  if (parsedExistingCountryCode?.countryCode !== SupportedCountryCodes.US) {
+  if (parsedExistingCountryCode?.countryCode !== propCountryCode) {
     return (
       <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
         <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
           <div className="container flex justify-between">
             <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
               <p>
-                Actions on Stand With Crypto are only available to users based in the United States.
+                Actions on Stand With Crypto
+                {propCountryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
+                  ? ` ${COUNTRY_CODE_TO_DISPLAY_NAME[propCountryCode]}`
+                  : ''}{' '}
+                are only available to users based in{' '}
+                {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[propCountryCode]}.
               </p>
             </div>
           </div>
