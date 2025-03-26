@@ -83,3 +83,6 @@ export const getUSStateCodeFromStateName = (stateName: string) => {
   )
   return stateCode as USStateCode | undefined
 }
+
+export const isValidUSStateCode = (stateCode: string) =>
+  stateCode.toUpperCase() in US_STATE_CODE_TO_DISPLAY_NAME_MAP
