@@ -19,6 +19,7 @@ import type { CleanupPostalCodesInngestEventSchema } from '@/inngest/functions/c
 import { UpdateDistrictsRankingsCronJobSchema } from '@/inngest/functions/districtsRankings/updateRankings'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
+import type { ProcessReferralSchema } from '@/inngest/functions/referrals/processReferral'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import type { BackfillOptedOutUsersSchema } from '@/inngest/functions/sms/backfillOptedOutUsers'
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
@@ -60,5 +61,6 @@ type EventTypes =
   | UpdateMetricsCounterCacheCronJobSchema
   | BackfillOptedOutUsersSchema
   | UpdateDistrictsRankingsCronJobSchema
+  | ProcessReferralSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
