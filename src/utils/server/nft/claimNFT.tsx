@@ -24,6 +24,7 @@ import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrent
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   ActiveClientUserActionWithCampaignType,
@@ -231,6 +232,10 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
   }
 
   const userSession = user.userSessions?.[0]
+  // TODO: remove this once we have templates for all countries
+  if (user.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
+    return null
+  }
   const messageId = await sendMail({
     to: user.primaryUserEmailAddress.emailAddress,
     subject: NFTOnTheWayEmail.subjectLine,
