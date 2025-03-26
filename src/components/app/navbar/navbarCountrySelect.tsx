@@ -1,6 +1,8 @@
 'use client'
 
 import { ReactNode } from 'react'
+import { useToggle } from 'react-use'
+import { ChevronDownIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import * as Icons from '@/components/app/navbar/navbarCountryIcons'
@@ -43,6 +45,7 @@ const options: {
 ]
 
 export function NavbarCountrySelect() {
+  const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
   const currentOption = options.find(option => option.value === countryCode)
 
@@ -56,12 +59,20 @@ export function NavbarCountrySelect() {
   ]
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={toggleIsOpen} open={isOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="primary-cta-outline">
-          <div className="flex items-center gap-2">
-            {currentOption.icon} <span className="font-sans font-bold">{currentOption.label}</span>
-          </div>
+        <Button
+          className="flex items-center gap-2 text-base font-bold"
+          size="sm"
+          variant="primary-cta-outline"
+        >
+          {currentOption.icon}
+          <span>{currentOption.label}</span>
+          <ChevronDownIcon
+            className="h-4 w-4 transition-transform"
+            size={16}
+            style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -74,7 +85,12 @@ export function NavbarCountrySelect() {
               disabled={option.value === countryCode}
               key={option.value}
             >
-              <Link href={urls.home()}>{option.label}</Link>
+              <Link href={urls.home()}>
+                <div className="flex items-center gap-2">
+                  {option.icon}
+                  <span>{option.label}</span>
+                </div>
+              </Link>
             </DropdownMenuItem>
           )
         })}
