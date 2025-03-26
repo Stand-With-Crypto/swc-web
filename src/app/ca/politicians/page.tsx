@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
 import {
   CaPagePoliticians,
   PAGE_POLITICIANS_DESCRIPTION,
@@ -9,7 +10,6 @@ import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/sortPeople'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
