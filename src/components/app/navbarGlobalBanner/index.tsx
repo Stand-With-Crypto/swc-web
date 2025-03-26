@@ -13,7 +13,7 @@ import {
 import {
   COUNTRY_CODE_TO_DISPLAY_NAME,
   COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX,
-} from '@/utils/shared/countryCode/displayNames'
+} from '@/utils/shared/intl/displayNames'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
