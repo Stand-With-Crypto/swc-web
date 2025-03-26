@@ -29,7 +29,13 @@ export const GeoGate = (props: GeoGateProps) => {
 
   const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
 
-  if (!isValidCountryCode({ countryCode, userCountryCode, bypassCountryCheck })) {
+  const isLocallyBypassed =
+    process.env.NEXT_PUBLIC_BYPASS_GEO_GATE === 'true' && process.env.NODE_ENV === 'development'
+
+  if (
+    !isValidCountryCode({ countryCode, userCountryCode, bypassCountryCheck }) &&
+    !isLocallyBypassed
+  ) {
     if (!unavailableContent) return null
 
     return React.cloneElement(unavailableContent as React.ReactElement<{ countryCode: string }>, {
