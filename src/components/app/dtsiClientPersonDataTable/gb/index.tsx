@@ -1,5 +1,7 @@
+'use client'
+
 import { Suspense, useMemo } from 'react'
-import { Column, ColumnDef, filterFns } from '@tanstack/react-table'
+import { Column, filterFns } from '@tanstack/react-table'
 
 import {
   getDTSIClientPersonDataTableColumns,
@@ -31,11 +33,10 @@ import {
 } from '@/utils/shared/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
-const GLOBAL_SUBTITLE = 'Search for a politician'
-const GLOBAL_TITLE = 'Politicians'
-
-type PersonTableColumn = ColumnDef<Person, unknown>
+const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or region'
+const GLOBAL_SUBTITLE =
+  'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
+const GLOBAL_TITLE = 'Search for a politician'
 
 export function GbDTSIClientPersonDataTable({
   initialData,
@@ -57,7 +58,7 @@ export function GbDTSIClientPersonDataTable({
   }, [data?.people])
 
   const tableColumns = useMemo(
-    () => getDTSIClientPersonDataTableColumns({ countryCode }) as PersonTableColumn[],
+    () => getDTSIClientPersonDataTableColumns({ countryCode }),
     [countryCode],
   )
 
@@ -68,7 +69,7 @@ export function GbDTSIClientPersonDataTable({
       data: parsedData,
       getGlobalFilterDefaults,
       getPersonDataTableFilterFns,
-      globalFilters: <GbGlobalFilters columns={tableColumns} />,
+      globalFilters: <GbGlobalFilters />,
     }
   }, [tableColumns, parsedData, countryCode])
 
@@ -121,8 +122,10 @@ export function GbDTSIClientPersonDataTable({
   )
 }
 
-function GbGlobalFilters({ columns }: { columns: PersonTableColumn[] }) {
+function GbGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
   const namedColumns = useMemo(() => {
+    if (!columns) return {}
+
     const ids: Record<string, Column<Person>> = {}
     columns.forEach(col => {
       const columnId = typeof col.id === 'string' ? col.id : ''
@@ -132,6 +135,8 @@ function GbGlobalFilters({ columns }: { columns: PersonTableColumn[] }) {
     })
     return ids
   }, [columns])
+
+  if (!columns) return null
 
   return (
     <GlobalFilters>

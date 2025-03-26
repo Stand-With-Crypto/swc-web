@@ -1,6 +1,14 @@
 'use client'
 
-import { MouseEvent, ReactNode, SetStateAction, useCallback, useMemo } from 'react'
+import {
+  cloneElement,
+  isValidElement,
+  MouseEvent,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useMemo,
+} from 'react'
 import {
   Column,
   ColumnFiltersState,
@@ -42,9 +50,19 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
+interface GlobalFiltersProps<TData extends Person = Person> {
+  columns?: Column<TData>[]
+}
+
 interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
   loadState: 'loaded' | 'static'
   countryCode: SupportedCountryCodes
+}
+
+interface DataTableBodyProps<TData extends Person = Person> extends DataTableProps<TData> {
+  globalFilters: React.ReactElement<GlobalFiltersProps<TData>>
+  getGlobalFilterDefaults: () => ColumnFiltersState
+  getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
 }
 
 export function DataTable({ children }: { children: ReactNode }) {
@@ -102,11 +120,7 @@ export function DataTableBody<TData extends Person = Person>({
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
   ...rest
-}: DataTableProps<TData> & {
-  globalFilters: React.ReactNode
-  getGlobalFilterDefaults: () => ColumnFiltersState
-  getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
-}) {
+}: DataTableBodyProps<TData>) {
   const router = useRouter()
 
   const [columnFilters, setColumnFilters] = useColumnFilters()
@@ -140,8 +154,6 @@ export function DataTableBody<TData extends Person = Person>({
     ...rest,
   })
 
-  console.log('columns', table.getAllColumns())
-
   const handleTableRowClick = useCallback(
     (event: MouseEvent<HTMLTableRowElement>, row: Row<TData>) => {
       const politicianUrl = getIntlUrls(countryCode).politicianDetails(row.original.slug)
@@ -163,7 +175,9 @@ export function DataTableBody<TData extends Person = Person>({
           <PageTitle className="text-left" size="md">
             Politicians
           </PageTitle>
-          {globalFilters}
+          {isValidElement(globalFilters)
+            ? cloneElement(globalFilters, { columns: table.getAllColumns() })
+            : globalFilters}
         </div>
 
         <div className="relative w-full">

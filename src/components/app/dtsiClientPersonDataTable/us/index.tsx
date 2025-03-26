@@ -1,5 +1,7 @@
+'use client'
+
 import { Suspense, useMemo } from 'react'
-import { Column, ColumnDef, filterFns } from '@tanstack/react-table'
+import { Column, filterFns } from '@tanstack/react-table'
 
 import {
   getGlobalFilterDefaults,
@@ -32,10 +34,9 @@ import {
 } from '@/utils/shared/usStateUtils'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
-const GLOBAL_SUBTITLE = 'Search for a politician'
-const GLOBAL_TITLE = 'Politicians'
-
-type PersonTableColumn = ColumnDef<Person, unknown>
+const GLOBAL_SUBTITLE =
+  'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
+const GLOBAL_TITLE = 'Search for a politician'
 
 export function UsDTSIClientPersonDataTable({
   initialData,
@@ -58,7 +59,7 @@ export function UsDTSIClientPersonDataTable({
   }, [data?.people])
 
   const tableColumns = useMemo(
-    () => getDTSIClientPersonDataTableColumns({ countryCode }) as PersonTableColumn[],
+    () => getDTSIClientPersonDataTableColumns({ countryCode }),
     [countryCode],
   )
 
@@ -69,7 +70,7 @@ export function UsDTSIClientPersonDataTable({
       data: parsedData,
       getGlobalFilterDefaults,
       getPersonDataTableFilterFns,
-      globalFilters: <UsGlobalFilters columns={tableColumns} />,
+      globalFilters: <UsGlobalFilters />,
     }
   }, [tableColumns, parsedData, countryCode])
 
@@ -122,8 +123,10 @@ export function UsDTSIClientPersonDataTable({
   )
 }
 
-function UsGlobalFilters({ columns }: { columns: PersonTableColumn[] }) {
+function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
   const namedColumns = useMemo(() => {
+    if (!columns) return {}
+
     const ids: Record<string, Column<Person>> = {}
     columns.forEach(col => {
       const columnId = typeof col.id === 'string' ? col.id : ''
@@ -133,6 +136,8 @@ function UsGlobalFilters({ columns }: { columns: PersonTableColumn[] }) {
     })
     return ids
   }, [columns])
+
+  if (!columns) return null
 
   return (
     <GlobalFilters>
