@@ -59,6 +59,7 @@ export type DTSIStanceDetailsPersonProp = Pick<
   | 'nameSuffix'
   | 'profilePictureUrl'
   | 'id'
+  | 'slug'
 >
 
 export type IStanceDetailsProps = {
