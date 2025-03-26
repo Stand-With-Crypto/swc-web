@@ -33,7 +33,7 @@ import {
 } from '@/utils/shared/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or region'
+const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or location'
 const GLOBAL_SUBTITLE =
   'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
@@ -69,32 +69,34 @@ export function GbDTSIClientPersonDataTable({
       data: parsedData,
       getGlobalFilterDefaults,
       getPersonDataTableFilterFns,
-      globalFilters: <GbGlobalFilters />,
+      globalFiltersComponent: <GbGlobalFilters />,
+      globalFilter,
+      setGlobalFilter,
     }
-  }, [tableColumns, parsedData, countryCode])
+  }, [tableColumns, parsedData, countryCode, globalFilter, setGlobalFilter])
 
   return (
     <Suspense
       fallback={
         <DataTableSkeleton>
-          <DataTableSkeleton.DataTableGlobalFilterSkeleton
+          <DataTableSkeleton.GlobalFilter
             searchPlaceholder={GLOBAL_SEARCH_PLACEHOLDER}
             subtitle={GLOBAL_SUBTITLE}
             title={GLOBAL_TITLE}
           />
-          <DataTableSkeleton.DataTableBodySkeleton {...tableBodyProps} loadState={'static'} />
+          <DataTableSkeleton.Body {...tableBodyProps} loadState={'static'} />
         </DataTableSkeleton>
       }
     >
       <DataTable>
-        <DataTable.DataTableGlobalFilter
+        <DataTable.GlobalFilter
           globalFilter={globalFilter}
           searchPlaceholder={GLOBAL_SEARCH_PLACEHOLDER}
           setGlobalFilter={setGlobalFilter}
           subtitle={GLOBAL_SUBTITLE}
           title={GLOBAL_TITLE}
         />
-        <DataTable.DataTableBody
+        <DataTable.Body
           {...tableBodyProps}
           globalFilterFn={(row, _, filterValue, addMeta) => {
             const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
@@ -153,7 +155,7 @@ function GbGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
       />
       <GlobalFilters.StateSelect
         namedColumns={namedColumns}
-        stateOptions={Object.values(GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP)}
+        stateOptions={['All', ...Object.keys(GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP).sort()]}
       />
     </GlobalFilters>
   )

@@ -33,7 +33,6 @@ import {
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/common/pagination'
 import {
   useColumnFilters,
-  useSearchFilter,
   useSortingFilter,
 } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import { Button } from '@/components/ui/button'
@@ -60,17 +59,19 @@ interface DataTableProps<TData extends Person = Person> extends Partial<TableOpt
 }
 
 interface DataTableBodyProps<TData extends Person = Person> extends DataTableProps<TData> {
-  globalFilters: React.ReactElement<GlobalFiltersProps<TData>>
+  globalFiltersComponent: React.ReactElement<GlobalFiltersProps<TData>>
   getGlobalFilterDefaults: () => ColumnFiltersState
   getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
+  globalFilter: string
+  setGlobalFilter: SetStateAction<any>
 }
 
 export function DataTable({ children }: { children: ReactNode }) {
   return <div className="space-y-6">{children}</div>
 }
 
-DataTable.DataTableGlobalFilter = DataTableGlobalFilter
-DataTable.DataTableBody = DataTableBody
+DataTable.GlobalFilter = DataTableGlobalFilter
+DataTable.Body = DataTableBody
 
 export function DataTableGlobalFilter({
   title,
@@ -116,15 +117,16 @@ export function DataTableBody<TData extends Person = Person>({
   loadState,
   globalFilterFn,
   countryCode,
-  globalFilters,
+  globalFiltersComponent,
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
+  globalFilter,
+  setGlobalFilter,
   ...rest
 }: DataTableBodyProps<TData>) {
   const router = useRouter()
 
   const [columnFilters, setColumnFilters] = useColumnFilters()
-  const [globalFilter, setGlobalFilter] = useSearchFilter('')
 
   const [sorting, setSorting] = useSortingFilter([])
 
@@ -175,9 +177,9 @@ export function DataTableBody<TData extends Person = Person>({
           <PageTitle className="text-left" size="md">
             Politicians
           </PageTitle>
-          {isValidElement(globalFilters)
-            ? cloneElement(globalFilters, { columns: table.getAllColumns() })
-            : globalFilters}
+          {isValidElement(globalFiltersComponent)
+            ? cloneElement(globalFiltersComponent, { columns: table.getAllColumns() })
+            : globalFiltersComponent}
         </div>
 
         <div className="relative w-full">
@@ -238,8 +240,8 @@ export function DataTableSkeleton({ children }: { children: ReactNode }) {
   return <div className="space-y-6">{children}</div>
 }
 
-DataTableSkeleton.DataTableGlobalFilterSkeleton = DataTableGlobalFilterSkeleton
-DataTableSkeleton.DataTableBodySkeleton = DataTableBodySkeleton
+DataTableSkeleton.GlobalFilter = DataTableGlobalFilterSkeleton
+DataTableSkeleton.Body = DataTableBodySkeleton
 
 export function DataTableGlobalFilterSkeleton({
   title,
@@ -275,13 +277,9 @@ export function DataTableBodySkeleton<TData extends Person = Person>({
   data = [],
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
-  globalFilters,
+  globalFiltersComponent,
   ...rest
-}: DataTableProps<TData> & {
-  globalFilters: React.ReactNode
-  getGlobalFilterDefaults: () => ColumnFiltersState
-  getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
-}) {
+}: DataTableBodyProps<TData>) {
   const table = useReactTable<TData>({
     data,
     columns,
@@ -308,7 +306,9 @@ export function DataTableBodySkeleton<TData extends Person = Person>({
           <PageTitle className="text-left" size="md">
             Politicians
           </PageTitle>
-          {globalFilters}
+          {isValidElement(globalFiltersComponent)
+            ? cloneElement(globalFiltersComponent, { columns: table.getAllColumns() })
+            : globalFiltersComponent}
         </div>
 
         <div className="relative w-full" data-testid="table-skeleton">

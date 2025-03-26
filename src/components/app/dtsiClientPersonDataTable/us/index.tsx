@@ -4,14 +4,6 @@ import { Suspense, useMemo } from 'react'
 import { Column, filterFns } from '@tanstack/react-table'
 
 import {
-  getGlobalFilterDefaults,
-  getPartyOptionDisplayName,
-  getPersonDataTableFilterFns,
-  getRoleOptionDisplayName,
-  PARTY_OPTIONS,
-  ROLE_OPTIONS,
-} from '@/components/app/dtsiClientPersonDataTable/au/filters'
-import {
   getDTSIClientPersonDataTableColumns,
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
@@ -27,6 +19,14 @@ import {
   parseStringPoliticiansTable,
   sortDTSIPersonDataTable,
 } from '@/components/app/dtsiClientPersonDataTable/common/utils'
+import {
+  getGlobalFilterDefaults,
+  getPartyOptionDisplayName,
+  getPersonDataTableFilterFns,
+  getRoleOptionDisplayName,
+  PARTY_OPTIONS,
+  ROLE_OPTIONS,
+} from '@/components/app/dtsiClientPersonDataTable/us/filters'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   getUSStateNameFromStateCode,
@@ -35,7 +35,7 @@ import {
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
 const GLOBAL_SUBTITLE =
-  'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
+  'We have a database of over 1,000 politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
 
 export function UsDTSIClientPersonDataTable({
@@ -70,32 +70,34 @@ export function UsDTSIClientPersonDataTable({
       data: parsedData,
       getGlobalFilterDefaults,
       getPersonDataTableFilterFns,
-      globalFilters: <UsGlobalFilters />,
+      globalFiltersComponent: <UsGlobalFilters />,
+      globalFilter,
+      setGlobalFilter,
     }
-  }, [tableColumns, parsedData, countryCode])
+  }, [tableColumns, parsedData, countryCode, globalFilter, setGlobalFilter])
 
   return (
     <Suspense
       fallback={
         <DataTableSkeleton>
-          <DataTableSkeleton.DataTableGlobalFilterSkeleton
+          <DataTableSkeleton.GlobalFilter
             searchPlaceholder={GLOBAL_SEARCH_PLACEHOLDER}
             subtitle={GLOBAL_SUBTITLE}
             title={GLOBAL_TITLE}
           />
-          <DataTableSkeleton.DataTableBodySkeleton {...tableBodyProps} loadState={'static'} />
+          <DataTableSkeleton.Body {...tableBodyProps} loadState={'static'} />
         </DataTableSkeleton>
       }
     >
       <DataTable>
-        <DataTable.DataTableGlobalFilter
+        <DataTable.GlobalFilter
           globalFilter={globalFilter}
           searchPlaceholder={GLOBAL_SEARCH_PLACEHOLDER}
           setGlobalFilter={setGlobalFilter}
           subtitle={GLOBAL_SUBTITLE}
           title={GLOBAL_TITLE}
         />
-        <DataTable.DataTableBody
+        <DataTable.Body
           {...tableBodyProps}
           globalFilterFn={(row, _, filterValue, addMeta) => {
             const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
@@ -154,7 +156,7 @@ function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
       />
       <GlobalFilters.StateSelect
         namedColumns={namedColumns}
-        stateOptions={Object.values(US_STATE_CODE_TO_DISPLAY_NAME_MAP)}
+        stateOptions={['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]}
       />
     </GlobalFilters>
   )

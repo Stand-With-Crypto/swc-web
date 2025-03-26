@@ -68,8 +68,8 @@ export function useColumnFilters(): [
     PERSON_TABLE_COLUMNS_IDS.STANCE,
     StanceOnCryptoOptions.ALL,
   )
-  const [roleValue, setRoleValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.ROLE, 'ALL')
-  const [partyValue, setPartyValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.PARTY, 'ALL')
+  const [roleValue, setRoleValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.ROLE, 'All')
+  const [partyValue, setPartyValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.PARTY, 'All')
   const [stateValue, setStateValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.STATE, 'All')
 
   const filters: ColumnFiltersState = useMemo(
