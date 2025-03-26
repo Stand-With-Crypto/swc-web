@@ -1,16 +1,12 @@
 import { groupBy } from 'lodash-es'
 
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/us/queryDTSILocationUnitedStatesInformation'
-import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { formatSpecificRoleDTSIPersonAU } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/specificRoleDTSIPerson'
+import { QueryDTSILocationAustraliaInformationData } from '@/data/dtsi/queries/au/queryDTSILocationAustraliaInformation'
 
-export function organizePeople({ keyRaces }: QueryDTSILocationUnitedStatesInformationData) {
-  const formattedKeyRaces = keyRaces.map(x =>
-    formatSpecificRoleDTSIPerson(x, { specificRole: DTSI_PersonRoleCategory.GOVERNOR }),
-  )
+export function organizePeopleAU({ keyRaces }: QueryDTSILocationAustraliaInformationData) {
+  const formattedKeyRaces = keyRaces.map(x => formatSpecificRoleDTSIPersonAU(x))
 
-  type GroupedRaces = Record<USStateCode, (typeof formattedKeyRaces)[]>
+  type GroupedRaces = Record<string, (typeof formattedKeyRaces)[]>
 
   const groupedByState = groupBy(formattedKeyRaces, x => x.runningForSpecificRole?.primaryState)
 
@@ -46,7 +42,7 @@ export function organizePeople({ keyRaces }: QueryDTSILocationUnitedStatesInform
       return racesInDistrict
     })
 
-    group[state as USStateCode] = sortedGroupedByDistrict
+    group[state as string] = sortedGroupedByDistrict
     return group
   }, {} as GroupedRaces)
 

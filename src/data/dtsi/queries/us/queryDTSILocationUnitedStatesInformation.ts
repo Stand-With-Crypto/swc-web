@@ -1,44 +1,27 @@
 import { flatten } from 'lodash-es'
 
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
-import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+import { fragmentDTSIPersonCardWithRoles } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import {
   DTSI_UnitedStatesInformationQuery,
   DTSI_UnitedStatesInformationQueryVariables,
 } from '@/data/dtsi/generated'
 
 const query = /* GraphQL */ `
-  fragment UnitedStatesPersonFragment on Person {
-    ...PersonCard
-    roles {
-      id
-      primaryDistrict
-      primaryState
-      roleCategory
-      status
-      dateStart
-      group {
-        id
-        category
-        groupInstance
-      }
-    }
-  }
-
   query UnitedStatesInformation {
     vaGovernorsRace: people(
       limit: 100
       offset: 0
       specificPersonRole: { primaryState: "VA", roleCategory: GOVERNOR, status: RUNNING_FOR }
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     njGovernorsRace: people(
       limit: 100
       offset: 0
       specificPersonRole: { primaryState: "NJ", roleCategory: GOVERNOR, status: RUNNING_FOR }
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     OHSenate: people(
       limit: 100
@@ -46,7 +29,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "OH"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     MTSenate: people(
       limit: 100
@@ -54,7 +37,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "MT"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     PASenate: people(
       limit: 100
@@ -62,7 +45,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "PA"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     AZSenate: people(
       limit: 100
@@ -70,7 +53,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "AZ"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     MASenate: people(
       limit: 100
@@ -78,7 +61,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "MA"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     MISenate: people(
       limit: 100
@@ -86,7 +69,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "MI"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     NVSenate: people(
       limit: 100
@@ -94,7 +77,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "NV"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     WISenate: people(
       limit: 100
@@ -102,7 +85,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "WI"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     MDSenate: people(
       limit: 100
@@ -110,7 +93,7 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "MD"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     CO_District8: people(
       limit: 100
@@ -119,7 +102,7 @@ const query = /* GraphQL */ `
       personRolePrimaryState: "CO"
       personRolePrimaryDistrict: "8"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     NV_District4: people(
       limit: 100
@@ -128,7 +111,7 @@ const query = /* GraphQL */ `
       personRolePrimaryState: "NV"
       personRolePrimaryDistrict: "4"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     IA_District3: people(
       limit: 100
@@ -137,7 +120,7 @@ const query = /* GraphQL */ `
       personRolePrimaryState: "IA"
       personRolePrimaryDistrict: "3"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
     OR_District5: people(
       limit: 100
@@ -146,10 +129,11 @@ const query = /* GraphQL */ `
       personRolePrimaryState: "OR"
       personRolePrimaryDistrict: "5"
     ) {
-      ...UnitedStatesPersonFragment
+      ...PersonCardWithRoles
     }
   }
-  ${fragmentDTSIPersonCard}
+
+  ${fragmentDTSIPersonCardWithRoles}
 `
 
 export const queryDTSILocationUnitedStatesInformation = async () => {
