@@ -15,6 +15,7 @@ export async function GET(_: NextRequest, props: { params: Promise<{ state: stri
   const { state } = zodParams.parse(params)
 
   const tweetLink = createTweetLink({
+    url: 'https://standwithcrypto.org',
     message: `${getUSStateNameFromStateCode(state)} just scored a HUGE win for crypto! The state is dropping its staking case against Coinbase, which means YOU can soon stake your crypto freely. Click here to spread the word: https://standwithcrypto.org/tweet/case-dismissed/${state}\n`,
   })
 
