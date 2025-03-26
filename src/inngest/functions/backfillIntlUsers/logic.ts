@@ -4,6 +4,7 @@ import {
   User,
   UserActionOptInType,
   UserActionType,
+  UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
@@ -178,8 +179,8 @@ async function createUserWithCountryCode(
         const emailRecord = await tx.userEmailAddress.create({
           data: {
             emailAddress,
-            isVerified: Boolean(emailAddress),
-            source: 'VERIFIED_THIRD_PARTY',
+            isVerified: false,
+            source: UserEmailAddressSource.USER_ENTERED,
             dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
             userId: user.id,
           },
