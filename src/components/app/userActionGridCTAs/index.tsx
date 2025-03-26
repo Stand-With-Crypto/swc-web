@@ -27,7 +27,10 @@ export function UserActionGridCTAs({
   return (
     <div
       className={cn(
-        'grid grid-cols-1 gap-[18px] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:justify-items-center',
+        ctas.length < 3
+          ? 'flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'
+          : 'grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:justify-items-center',
+        'gap-[18px]',
         className,
       )}
     >
