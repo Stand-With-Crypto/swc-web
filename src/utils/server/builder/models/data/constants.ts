@@ -4,4 +4,5 @@ export enum BuilderDataModelIdentifiers {
   PARTNERS = 'partners',
   POLLS = 'polls',
   NEWS = 'news',
+  FOUNDERS = 'founders',
 }

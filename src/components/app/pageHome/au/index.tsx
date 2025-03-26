@@ -1,3 +1,4 @@
+import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
@@ -15,7 +16,7 @@ const countryCode = SupportedCountryCodes.AU
 
 const urls = getIntlUrls(countryCode)
 
-export function AuPageHome({ topLevelMetrics, recentActivity, partners }: HomePageProps) {
+export function AuPageHome({ topLevelMetrics, recentActivity, partners, founders }: HomePageProps) {
   return (
     <>
       <AuHero />
@@ -42,19 +43,21 @@ export function AuPageHome({ topLevelMetrics, recentActivity, partners }: HomePa
         </RecentActivity>
       </HomePageSection>
 
-      <HomePageSection>
-        <HomePageSection.Title>Our partners</HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          We’re proud to partner with some of the most influential and forward-thinking companies
-          driving innovation through blockchain and crypto.
-        </HomePageSection.Subtitle>
-        <div className="flex flex-col items-center gap-6">
-          <PartnerGrid partners={partners} />
-          <Button asChild variant="secondary">
-            <InternalLink href={urls.partners()}>View all</InternalLink>
-          </Button>
-        </div>
-      </HomePageSection>
+      {partners && (
+        <HomePageSection>
+          <HomePageSection.Title>Our partners</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            We’re proud to partner with some of the most influential and forward-thinking companies
+            driving innovation through blockchain and crypto.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <PartnerGrid partners={partners} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
 
       <HomePageSection>
         <HomePageSection.Title>Get involved</HomePageSection.Title>
@@ -64,6 +67,21 @@ export function AuPageHome({ topLevelMetrics, recentActivity, partners }: HomePa
 
         <UserActionGridCTAs />
       </HomePageSection>
+
+      {founders && (
+        <HomePageSection container={false}>
+          <HomePageSection.Title>Founders</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            Members from our community that have founded crypto-related businesses in the UK.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <FoundersCarousel founders={founders} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.founders()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
     </>
   )
 }

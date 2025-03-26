@@ -61,7 +61,6 @@ export default function UserActionOptInSWCDeepLink() {
         'max-md:pt-16',
       )}
     >
-      {/* ThirdwebLoginContent already with its own ErrorBoundary with severity level Fatal */}
       <ThirdwebLoginContent onLoginCallback={() => handleRedirectOnLogin()} />
     </div>
   )
