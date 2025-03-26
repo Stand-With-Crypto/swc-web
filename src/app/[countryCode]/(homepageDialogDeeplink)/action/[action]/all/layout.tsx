@@ -43,7 +43,7 @@ export default async function UserActionCampaignsLayout(props: UserActionCampaig
   }
 
   return (
-    <USHomepageDialogDeeplinkLayout dialogContentClassName="min-h-28 max-w-2xl" pageParams={params}>
+    <USHomepageDialogDeeplinkLayout className="min-h-28 max-w-2xl" pageParams={params}>
       <React.Suspense>{children}</React.Suspense>
     </USHomepageDialogDeeplinkLayout>
   )

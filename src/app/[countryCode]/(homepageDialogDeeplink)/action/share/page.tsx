@@ -2,13 +2,13 @@ import { UserActionType } from '@prisma/client'
 
 import { UserActionFormShareOnTwitterDeeplinkWrapper } from '@/components/app/userActionFormShareOnTwitter/common/homepageDialogDeeplinkWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
-const countryCode = SupportedCountryCodes.US
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
-export default function USUserActionShareOnTwitterDeepLink() {
+export default function UserActionShareOnTwitterDeepLink() {
   return (
     <div className={cn(dialogContentPaddingStyles, 'h-full')}>
       <ErrorBoundary

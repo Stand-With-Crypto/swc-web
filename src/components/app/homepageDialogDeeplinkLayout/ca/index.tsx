@@ -16,7 +16,6 @@ const countryCode = SupportedCountryCodes.CA
 export async function CAHomepageDialogDeeplinkLayout({
   children,
   size = 'md',
-  dialogContentClassName,
   className,
 }: HomepageDialogDeeplinkLayoutProps) {
   const [topLevelMetrics, recentActivity, partners, founders] = await Promise.all([
@@ -31,12 +30,7 @@ export async function CAHomepageDialogDeeplinkLayout({
 
   return (
     <>
-      <PseudoDialog
-        className={className}
-        countryCode={countryCode}
-        dialogContentClassName={dialogContentClassName}
-        size={size}
-      >
+      <PseudoDialog className={className} countryCode={countryCode} size={size}>
         {children}
       </PseudoDialog>
 

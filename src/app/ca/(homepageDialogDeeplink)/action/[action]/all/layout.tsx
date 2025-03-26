@@ -45,7 +45,7 @@ export default async function UserActionCampaignsLayout(props: UserActionCampaig
   }
 
   return (
-    <CAHomepageDialogDeeplinkLayout dialogContentClassName="min-h-28 max-w-2xl">
+    <CAHomepageDialogDeeplinkLayout className="min-h-28 max-w-2xl">
       <React.Suspense>{children}</React.Suspense>
     </CAHomepageDialogDeeplinkLayout>
   )

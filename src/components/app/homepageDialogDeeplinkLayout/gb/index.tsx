@@ -16,7 +16,6 @@ const countryCode = SupportedCountryCodes.GB
 export async function GBHomepageDialogDeeplinkLayout({
   children,
   size = 'md',
-  dialogContentClassName,
   className,
 }: HomepageDialogDeeplinkLayoutProps) {
   const [topLevelMetrics, recentActivity, partners, founders] = await Promise.all([
@@ -31,12 +30,7 @@ export async function GBHomepageDialogDeeplinkLayout({
 
   return (
     <>
-      <PseudoDialog
-        className={className}
-        countryCode={countryCode}
-        dialogContentClassName={dialogContentClassName}
-        size={size}
-      >
+      <PseudoDialog className={className} countryCode={countryCode} size={size}>
         {children}
       </PseudoDialog>
 

@@ -23,7 +23,6 @@ export async function USHomepageDialogDeeplinkLayout({
   children,
   size = 'md',
   pageParams,
-  dialogContentClassName,
   className,
 }: USHomepageDialogDeeplinkLayoutProps) {
   const [
@@ -40,12 +39,7 @@ export async function USHomepageDialogDeeplinkLayout({
 
   return (
     <>
-      <PseudoDialog
-        className={className}
-        countryCode={countryCode}
-        dialogContentClassName={dialogContentClassName}
-        size={size}
-      >
+      <PseudoDialog className={className} countryCode={countryCode} size={size}>
         {children}
       </PseudoDialog>
 

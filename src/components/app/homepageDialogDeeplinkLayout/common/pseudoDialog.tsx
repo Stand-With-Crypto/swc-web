@@ -14,20 +14,13 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-interface PseudoDialogProps extends React.PropsWithChildren {
+export interface PseudoDialogProps extends React.PropsWithChildren {
   countryCode: SupportedCountryCodes
   size?: 'sm' | 'md'
-  dialogContentClassName?: string
   className?: string
 }
 
-export function PseudoDialog({
-  children,
-  countryCode,
-  size = 'md',
-  dialogContentClassName,
-  className,
-}: PseudoDialogProps) {
+export function PseudoDialog({ children, countryCode, size = 'md', className }: PseudoDialogProps) {
   const urls = getIntlUrls(countryCode)
   return (
     <>
@@ -41,7 +34,6 @@ export function PseudoDialog({
           dialogContentStyles,
           size === 'md' && 'max-w-3xl',
           'min-h-[400px]',
-          dialogContentClassName,
           className,
         )}
       >
