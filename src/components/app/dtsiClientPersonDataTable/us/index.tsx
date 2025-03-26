@@ -13,11 +13,11 @@ import {
   getDTSIClientPersonDataTableColumns,
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
+import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import {
   DataTable,
   DataTableSkeleton,
-} from '@/components/app/dtsiClientPersonDataTable/common/dataTable'
-import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
+} from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {

@@ -13,11 +13,11 @@ import {
   getDTSIClientPersonDataTableColumns,
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
+import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import {
   DataTable,
   DataTableSkeleton,
-} from '@/components/app/dtsiClientPersonDataTable/common/dataTable'
-import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
+} from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -26,9 +26,9 @@ import {
   sortDTSIPersonDataTable,
 } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import {
-  CANADA_STATE_CODE_TO_DISPLAY_NAME_MAP,
-  getCanadaStateNameFromStateCode,
-} from '@/utils/shared/caStateUtils'
+  CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+  getCAProvinceOrTerritoryNameFromCode,
+} from '@/utils/shared/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
@@ -110,7 +110,7 @@ export function CaDTSIClientPersonDataTable({
             const parsedFilterValue = parseStringPoliticiansTable(filterValue)
             return (
               parsedState.includes(parsedFilterValue) ||
-              getCanadaStateNameFromStateCode(state)?.toLowerCase().includes(parsedFilterValue)
+              getCAProvinceOrTerritoryNameFromCode(state)?.toLowerCase().includes(parsedFilterValue)
             )
           }}
           key={data?.people ? 'loaded' : 'static'}
@@ -148,7 +148,7 @@ function CaGlobalFilters({ columns }: { columns: PersonTableColumn[] }) {
       />
       <GlobalFilters.StateSelect
         namedColumns={namedColumns}
-        stateOptions={Object.values(CANADA_STATE_CODE_TO_DISPLAY_NAME_MAP)}
+        stateOptions={Object.values(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP)}
       />
     </GlobalFilters>
   )

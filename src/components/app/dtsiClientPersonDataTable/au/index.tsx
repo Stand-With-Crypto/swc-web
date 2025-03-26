@@ -13,11 +13,11 @@ import {
   getDTSIClientPersonDataTableColumns,
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
+import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import {
   DataTable,
   DataTableSkeleton,
-} from '@/components/app/dtsiClientPersonDataTable/common/dataTable'
-import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
+} from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -26,7 +26,7 @@ import {
   sortDTSIPersonDataTable,
 } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import {
-  AUSTRALIA_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
   getAUStateNameFromStateCode,
 } from '@/utils/shared/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -148,7 +148,7 @@ function AuGlobalFilters({ columns }: { columns: PersonTableColumn[] }) {
       />
       <GlobalFilters.StateSelect
         namedColumns={namedColumns}
-        stateOptions={Object.values(AUSTRALIA_STATE_CODE_TO_DISPLAY_NAME_MAP)}
+        stateOptions={Object.values(AU_STATE_CODE_TO_DISPLAY_NAME_MAP)}
       />
     </GlobalFilters>
   )

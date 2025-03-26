@@ -5,11 +5,11 @@ import {
   getDTSIClientPersonDataTableColumns,
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
+import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import {
   DataTable,
   DataTableSkeleton,
-} from '@/components/app/dtsiClientPersonDataTable/common/dataTable'
-import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
+} from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -26,9 +26,9 @@ import {
   ROLE_OPTIONS,
 } from '@/components/app/dtsiClientPersonDataTable/gb/filters'
 import {
-  getUKCountryNameFromCountryCode,
-  UK_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
-} from '@/utils/shared/gbStateUtils'
+  GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
+  getGBCountryNameFromCode,
+} from '@/utils/shared/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
@@ -110,7 +110,7 @@ export function GbDTSIClientPersonDataTable({
             const parsedFilterValue = parseStringPoliticiansTable(filterValue)
             return (
               parsedState.includes(parsedFilterValue) ||
-              getUKCountryNameFromCountryCode(state)?.toLowerCase().includes(parsedFilterValue)
+              getGBCountryNameFromCode(state)?.toLowerCase().includes(parsedFilterValue)
             )
           }}
           key={data?.people ? 'loaded' : 'static'}
@@ -148,7 +148,7 @@ function GbGlobalFilters({ columns }: { columns: PersonTableColumn[] }) {
       />
       <GlobalFilters.StateSelect
         namedColumns={namedColumns}
-        stateOptions={Object.values(UK_COUNTRY_CODE_TO_DISPLAY_NAME_MAP)}
+        stateOptions={Object.values(GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP)}
       />
     </GlobalFilters>
   )
