@@ -18,6 +18,8 @@ import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getGBCountryCodeFromName } from '@/utils/shared/gbCountryUtils'
 
 interface EventsNearYouProps {
   events: SWCEvents
@@ -33,34 +35,7 @@ export function EventsNearYou(props: EventsNearYouProps) {
 
 function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const [userState, setUserState] = useState(null)
-
-  // const userState = useMemo(() => {
-  //   if (address === 'loading') return null
-
-  //   // TODO: validate if this will work for GB countries - its not :)
-  //   console.log('---address', address)
-
-  //   const possibleStateMatches = address?.description.matchAll(/\s([A-Z]{2,3})\s*/g)
-
-  //   if (!possibleStateMatches) return null
-
-  //   console.log('---possibleStateMatches', possibleStateMatches)
-
-  //   for (const match of possibleStateMatches) {
-  //     console.log('---match', match)
-
-  //     const stateCode = match[1]
-
-  //     console.log('---stateCode', stateCode)
-
-  //     // if (isValidStateCode(stateCode)) {
-  //     // return stateCode
-  //     // }
-  //   }
-
-  //   return null
-  // }, [address])
+  const [userState, setUserState] = useState<string>()
 
   const onChangeAddress = useCallback(
     async (prediction: GooglePlaceAutocompletePrediction | null) => {
@@ -71,7 +46,11 @@ function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
 
       const details = await convertGooglePlaceAutoPredictionToAddressSchema(prediction)
 
-      console.log(details)
+      if (details.countryCode.toLowerCase() === SupportedCountryCodes.GB) {
+        return setUserState(getGBCountryCodeFromName(details.administrativeAreaLevel1))
+      }
+
+      setUserState(details.administrativeAreaLevel1)
     },
     [],
   )
@@ -106,7 +85,7 @@ function FilteredEventsNearUser({
   userState,
 }: {
   events: SWCEvents
-  userState: string | null
+  userState: string | undefined
 }) {
   const filteredEventsNearUser = useMemo(() => {
     return events.filter(event => event.data.state === userState)
