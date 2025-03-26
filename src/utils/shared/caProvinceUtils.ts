@@ -44,6 +44,5 @@ export const getCAProvinceOrTerritoryCodeFromName = (provinceOrTerritoryName: st
   return code as CAProvinceOrTerritoryCode | undefined
 }
 
-export const isValidCAProvinceOrTerritoryCode = (code: string) => {
-  return code.toUpperCase() in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP
-}
+export const isValidCAProvinceOrTerritoryCode = (code: string) =>
+  code.toUpperCase() in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP
