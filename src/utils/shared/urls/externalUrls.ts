@@ -39,7 +39,7 @@ export const auExternalUrls = {
 // TODO: fill in
 export const gbExternalUrls = {
   discord: usExternalUrls.discord,
-  twitter: usExternalUrls.twitter,
+  twitter: () => 'https://x.com/StandWCrypto_UK',
   instagram: usExternalUrls.instagram,
   youtube: usExternalUrls.youtube,
   facebook: usExternalUrls.facebook,

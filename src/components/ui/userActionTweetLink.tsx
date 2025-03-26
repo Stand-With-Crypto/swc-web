@@ -5,10 +5,12 @@ import { Slot } from '@radix-ui/react-slot'
 
 import { actionCreateUserActionTweet } from '@/actions/actionCreateUserActionTweet'
 import { Button } from '@/components/ui/button'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { openWindow } from '@/utils/shared/openWindow'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { fullUrl } from '@/utils/shared/urls'
+import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/index'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 
@@ -34,6 +36,10 @@ export const UserActionTweetLink = React.forwardRef<
     ref,
   ) => {
     const Comp = asChild ? Slot : Button
+    const countryCode = useCountryCode()
+    const campaignName =
+      COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode][UserActionType.TWEET]
+
     return (
       <Comp
         onClick={() => {
@@ -44,9 +50,9 @@ export const UserActionTweetLink = React.forwardRef<
                 ...eventProperties,
                 'User Action Type': UserActionType.TWEET,
               },
-              payload: undefined,
+              payload: { campaignName },
             },
-            () => actionCreateUserActionTweet(),
+            actionCreateUserActionTweet,
           )
 
           openWindow(createTweetLink({ url, message }), 'Twitter', `noopener, width=550,height=400`)
