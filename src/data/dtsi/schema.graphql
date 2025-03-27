@@ -155,12 +155,30 @@ type Person {
 
 """Common groupings of people to query for"""
 enum PersonGrouping {
+  CURRENT_AU_HOUSE_OF_REPS
+  CURRENT_AU_SENATE
+  CURRENT_CA_HOUSE_OF_COMMONS
+  CURRENT_CA_SENATE
+  CURRENT_UK_HOUSE_OF_COMMONS
+  CURRENT_UK_HOUSE_OF_LORDS
   CURRENT_US_HOUSE_OF_REPS
   CURRENT_US_SENATE
+  NEXT_AU_HOUSE_OF_REPS
+  NEXT_AU_SENATE
+  NEXT_CA_HOUSE_OF_COMMONS
+  NEXT_CA_SENATE
   NEXT_PRESIDENT
+  NEXT_UK_HOUSE_OF_COMMONS
+  NEXT_UK_HOUSE_OF_LORDS
   NEXT_US_HOUSE_OF_REPS
   NEXT_US_SENATE
+  RUNNING_FOR_AU_HOUSE_OF_REPS
+  RUNNING_FOR_AU_SENATE
+  RUNNING_FOR_CA_HOUSE_OF_COMMONS
+  RUNNING_FOR_CA_SENATE
   RUNNING_FOR_PRESIDENT
+  RUNNING_FOR_UK_HOUSE_OF_COMMONS
+  RUNNING_FOR_UK_HOUSE_OF_LORDS
   RUNNING_FOR_US_HOUSE_OF_REPS
   RUNNING_FOR_US_SENATE
   US_PRESIDENT
@@ -209,6 +227,8 @@ enum PersonRoleCategory {
   COMMITTEE_MEMBER
   CONGRESS
   GOVERNOR
+  HOUSE_OF_COMMONS
+  HOUSE_OF_LORDS
   MAYOR
   PRESIDENT
   SENATE
@@ -351,7 +371,7 @@ type Query {
   nonCongressPeople: [Person!]! @deprecated(reason: "Use people instead")
   people(grouping: PersonGrouping, hasPromotedPositioning: Boolean, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, slugIn: [String!], specificPersonRole: SpecificPersonRole, stanceScoreGte: Int, stanceScoreLte: Int): [Person!]!
   peopleByUSCongressionalDistrict(congressionalDistrict: Int, stateCode: String!): [Person!]!
-  personStances(grouping: PersonGrouping, limit: Int!, offset: Int!, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, personSlugIn: [String!]): [PersonStance!]!
+  personStances(grouping: PersonGrouping, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, personSlugIn: [String!], specificPersonRole: SpecificPersonRole): [PersonStance!]!
 }
 
 input SpecificPersonRole {
