@@ -11,11 +11,13 @@ import {
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface EventsPageDialogDeeplinkLayout extends Omit<EventsPageProps, 'isDeepLink'> {
   children: JSX.Element
+  countryCode: SupportedCountryCodes
 }
 
 export async function EventsPageDialogDeeplinkLayout({
@@ -45,7 +47,7 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage countryCode={countryCode} events={events} isDeepLink showMap={showMap} />
+      <EventsPage events={events} isDeepLink showMap={showMap} />
     </>
   )
 }

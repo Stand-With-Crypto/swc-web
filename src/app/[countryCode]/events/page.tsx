@@ -23,5 +23,5 @@ export default async function EventsPageRoot(props: PageProps) {
 
   const events = await getEvents({ countryCode })
 
-  return <EventsPage countryCode={countryCode} events={events} />
+  return <EventsPage events={events} />
 }
