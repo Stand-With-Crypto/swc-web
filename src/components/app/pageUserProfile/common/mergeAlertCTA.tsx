@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { actionConfirmUserMergeAlert } from '@/actions/actionConfirmUserMergeAlert'
-import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'

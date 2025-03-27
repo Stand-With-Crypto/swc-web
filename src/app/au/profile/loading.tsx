@@ -18,5 +18,5 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 }
 
 export default function Profile() {
-  return <PageUserProfileSkeleton />
+  return <PageUserProfileSkeleton hideUserMetrics />
 }

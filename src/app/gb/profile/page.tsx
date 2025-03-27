@@ -8,9 +8,9 @@ import {
 import { getAuthenticatedData } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+const countryCode = SupportedCountryCodes.GB
 
 export const dynamic = 'force-dynamic'
 
@@ -25,7 +25,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
   })
 }
 
-export default async function Profile(props: Props) {
+export default async function GBProfile(props: Props) {
   const user = await getAuthenticatedData()
   const isSignedIn = getIsUserSignedIn(user)
 
@@ -34,5 +34,5 @@ export default async function Profile(props: Props) {
     return <AuthRedirect countryCode={countryCode} searchParams={searchParams} />
   }
 
-  return <PageUserProfile countryCode={countryCode} user={user} />
+  return <PageUserProfile countryCode={countryCode} hideUserMetrics user={user} />
 }
