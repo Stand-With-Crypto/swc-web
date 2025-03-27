@@ -94,7 +94,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
         {people.map(person => (
           <DTSIPersonHeroCard
             countryCode={countryCode}
-            cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             key={person.id}
             person={person}
             subheader="role"

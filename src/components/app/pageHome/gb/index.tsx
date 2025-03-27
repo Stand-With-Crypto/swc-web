@@ -1,5 +1,5 @@
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
@@ -112,7 +112,7 @@ export function GbPageHome({
             {highestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
-                cryptoStanceGradeElement={<DTSIThumbsUpOrDownGrade person={person} />}
+                cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"
@@ -128,7 +128,7 @@ export function GbPageHome({
             {lowestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
-                cryptoStanceGradeElement={<DTSIThumbsUpOrDownGrade person={person} />}
+                cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"
