@@ -6,27 +6,19 @@ import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 
 import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
 import { QUESTIONNAIRE_HASH_KEY } from '@/components/app/pagePoliticianDetails/common/constants'
-import { SWCQuestionnaireAnswers } from '@/utils/shared/zod/getSWCQuestionnaire'
-import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/us/questionnaireAccordion'
 
-export function UsPagePoliticianDetails({
-  person,
-  countryCode,
-  questionnaire,
-}: {
-  person: DTSIPersonDetails
-  countryCode: SupportedCountryCodes
-  questionnaire: SWCQuestionnaireAnswers | null
-}) {
+const countryCode = SupportedCountryCodes.AU
+
+export function AuPagePoliticianDetails({ person }: { person: DTSIPersonDetails }) {
   return (
     <PagePoliticianDetails>
       <section>
         <PagePoliticianDetails.Header person={person} />
-        <PagePoliticianDetails.Links person={person} />
-        <ScoreExplainer person={person} useLetterGrade />
+        <PagePoliticianDetails.Links person={person} showDonateButton={false} />
+        <ScoreExplainer person={person} useLetterGrade={false} />
       </section>
 
-      {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />}
+      {/* {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />} */}
 
       <section>
         <PagePoliticianDetails.Stances countryCode={countryCode} person={person} />

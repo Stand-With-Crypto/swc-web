@@ -15,7 +15,7 @@ export function GbPagePoliticianDetails({ person }: { person: DTSIPersonDetails 
       <section>
         <PagePoliticianDetails.Header person={person} />
         <PagePoliticianDetails.Links person={person} showDonateButton={false} />
-        <ScoreExplainer person={person} />
+        <ScoreExplainer person={person} useLetterGrade={false} />
       </section>
 
       {/* {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />} */}
