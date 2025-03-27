@@ -28,42 +28,42 @@ import { mockRandomUser } from 'cypress/mocks'
 //
 
 Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText, typingRequired = false }) => {
-  // Wait for the DOM to be ready
-  cy.wait(1000)
-
-  trigger.click()
-
-  // Wait for the combo box to be fully ready
-  cy.wait(1000)
+  trigger.scrollIntoView()
+  trigger.should('be.visible').click()
 
   if (typingRequired) {
     // Handle typing case
     cy.get('[cmdk-input]').then(input => {
       // Clear input and wait for results to clear before typing and selecting the new option
       if (input.val()) {
-        return cy.get('[cmdk-input]').clear().wait(500).type(searchText)
+        cy.get('[cmdk-input]').clear()
+        return cy.get('[cmdk-input]').should('not.have.value').type(searchText)
       }
       return cy.get('[cmdk-input]').type(searchText)
     })
 
     // Wait for items to appear
     cy.get('[cmdk-item]')
-
     // Select the first item
-    cy.get('[cmdk-group-items]')
-      .children()
-      .first()
-      .click({ force: true })
-      .then(el => {
-        // Sometimes we need a double click to select the item
-        el?.trigger('click')
-      })
+    cy.get('[cmdk-group-items]').children().first().click()
+
+    // Sometimes we need a double click to select the item
+    cy.get('[cmdk-group-items]').children().first().click()
 
     return
   }
 
   cy.get('[role="option"]').contains('div', searchText).as('selectOption')
-  cy.get('@selectOption').should('exist').click({ force: true })
+  cy.get('@selectOption').should('exist').click()
+})
+
+Cypress.Commands.add('selectFromSelect', ({ trigger, option }) => {
+  trigger.as('selectTrigger').scrollIntoView()
+  cy.get('@selectTrigger').should('be.visible').click()
+
+  cy.get('[role="option"]').contains('div', option).as('selectOption')
+  cy.get('@selectOption').should('be.visible').click()
+  cy.get('@selectTrigger').children().should('contain', option)
 })
 
 Cypress.Commands.add('queryDb', (query: string) => {
@@ -102,9 +102,9 @@ Cypress.Commands.add('seedDb', () => {
   cy.exec('SEED_SIZE=SM')
   cy.exec('npm run ts --transpile-only src/bin/seed/seedLocalDb.ts')
 })
-
 Cypress.Commands.add('typeIntoInput', ({ selector, text }) => {
-  cy.get(selector).should('be.visible').clear().wait(500).type(text)
+  cy.get(selector).should('be.visible').clear()
+  cy.get(selector).should('be.visible').type(text)
 })
 
 Cypress.Commands.add('assertLoginModalOpened', () => {
@@ -114,9 +114,7 @@ Cypress.Commands.add('assertLoginModalOpened', () => {
 Cypress.Commands.add('waitForLogin', trigger => {
   trigger?.click()
 
-  cy.wait(500)
-
-  cy.get('button[data-testid="e2e-test-login"]').click()
+  cy.get('button[data-testid="e2e-test-login"]').should('be.visible').click()
 
   cy.get('Join Stand With Crypto', { timeout: 20000 }).should('not.exist')
 })
@@ -142,28 +140,25 @@ Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => 
     typingRequired: true,
   })
 
-  cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
-    .clear()
-    .type(customUser.email)
+  cy.get('input[placeholder="Your email"], input[placeholder="Email"]').as('emailInput').clear()
+  cy.get('@emailInput').type(customUser.email)
 
-  cy.get('input[data-testid="phone-number-input"]').clear().type(customUser.phoneNumber)
+  cy.get('input[data-testid="phone-number-input"]').as('phoneInput').clear()
+  cy.get('@phoneInput').type(customUser.phoneNumber)
 
   cy.get('button[data-testid="opt-in-checkbox"]').click()
 
   cy.get('button[type="submit"]')
     .contains(/Next|Create account/)
+    .as('submitButton')
     .scrollIntoView()
-    .click()
-
-  cy.wait(500)
+  cy.get('@submitButton').click()
 
   cy.contains('Profile updated')
 })
 
 Cypress.Commands.add('waitForLogout', () => {
   cy.get('button[data-testid="drawer-trigger"]').click()
-
-  cy.wait(500)
 
   cy.get('button[data-testid="login-button"]').filter(':visible').click()
 
@@ -186,6 +181,17 @@ declare global {
         searchText: string
         typingRequired?: boolean
       }): Chainable<void>
+
+      /**
+       * This command is used to select an option from a select element.
+       * @param config - An object with trigger and searchText
+       * @example cy.selectFromSelect({ trigger: cy.get('select[data-test="select-input"]'), searchText: 'test' })
+       */
+      selectFromSelect(config: {
+        trigger: Cypress.Chainable<JQuery<HTMLElement>>
+        option: string
+      }): Chainable<void>
+
       queryDb(query: string): Chainable<any>
       executeDb(query: string): Chainable<any>
       clearDb(): Chainable<void>

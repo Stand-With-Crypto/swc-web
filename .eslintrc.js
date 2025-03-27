@@ -27,8 +27,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
+    'plugin:cypress/recommended',
   ],
-  plugins: ['no-relative-import-paths', 'formatjs', 'simple-import-sort'],
+  plugins: ['no-relative-import-paths', 'formatjs', 'simple-import-sort', 'cypress'],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
@@ -93,5 +94,6 @@ module.exports = {
       },
     ],
     'react/no-unstable-nested-components': ['error', { allowAsProps: true }],
+    'cypress/no-force': 'error',
   },
 }
