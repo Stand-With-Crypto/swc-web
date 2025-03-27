@@ -27,15 +27,11 @@ const query = /* GraphQL */ `
 `
 
 export const queryDTSIHomepagePeople = ({
-  countryCode = SupportedCountryCodes.US,
+  countryCode,
 }: {
-  countryCode?: string
-} = {}) => {
-  const personRoleGroupingOr =
-    countryCode in PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY
-      ? PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY[countryCode as SupportedCountryCodes]
-      : []
+  countryCode: SupportedCountryCodes
+}) => {
   return fetchDTSI<DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables>(query, {
-    personRoleGroupingOr,
+    personRoleGroupingOr: PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY[countryCode],
   })
 }
