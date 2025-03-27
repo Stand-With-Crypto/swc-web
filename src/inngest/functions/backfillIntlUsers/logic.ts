@@ -127,18 +127,11 @@ async function createUserWithCountryCode(
   try {
     const existingUser = await prismaClient.userEmailAddress.findFirst({
       where: { emailAddress },
-      include: { user: true },
     })
 
     if (existingUser) {
-      const result = await handleExistingUser({
-        existingUser: existingUser.user,
-        countryCode,
-        persist,
-      })
-
       return {
-        ...result,
+        action: 'skipped',
         email: existingUser.emailAddress,
       }
     }
@@ -212,40 +205,4 @@ async function createUserWithCountryCode(
       error: error instanceof Error ? error.message : String(error),
     }
   }
-}
-
-const handleExistingUser = async ({
-  existingUser,
-  countryCode,
-  persist,
-}: {
-  countryCode: string
-  existingUser: User
-  persist: boolean
-}) => {
-  const logger = getLog(persist)
-
-  if (existingUser.countryCode !== countryCode) {
-    try {
-      if (persist) {
-        await prismaClient.user.update({ where: { id: existingUser.id }, data: { countryCode } })
-      }
-      logger.info(`Updated country code for existing user: ${existingUser.id}`)
-      return {
-        action: 'updated',
-        userId: existingUser.id,
-      } as const
-    } catch (error) {
-      return {
-        action: 'error',
-        userId: existingUser.id,
-        error: error instanceof Error ? error.message : String(error),
-      } as const
-    }
-  }
-
-  return {
-    action: 'skipped',
-    userId: existingUser.id,
-  } as const
 }
