@@ -72,16 +72,7 @@ export function LocationKeyRacesContainer({
       <div className="space-y-20 xl:space-y-28">
         {voterGuideInput}
         {keyRaces}
-        {keyRacesStates && (
-          <ContentSection
-            className="container"
-            title={`Key Races Across ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}`}
-          >
-            <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-              {keyRacesStates}
-            </div>
-          </ContentSection>
-        )}
+        {keyRacesStates}
         {shouldShowPACFooter && <PACFooter className="container" />}
       </div>
     </div>
