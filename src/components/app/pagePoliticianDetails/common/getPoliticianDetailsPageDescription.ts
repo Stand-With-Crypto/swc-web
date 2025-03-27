@@ -1,9 +1,6 @@
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-
-import { DTSILetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
-
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
-import { convertDTSIPersonStanceScoreToLetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { convertDTSIPersonStanceScoreToLetterGrade,DTSILetterGrade  } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
 export function getPoliticianDetailsPageDescription(person: DTSIPersonDetails) {
   const fullName = dtsiPersonFullName(person)

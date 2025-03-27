@@ -2,6 +2,7 @@
 import { MoveUpRight } from 'lucide-react'
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink } from '@/components/ui/link'
@@ -13,7 +14,6 @@ import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/u
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { externalUrls } from '@/utils/shared/urls'
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 
 export function ScoreExplainer({
   person,

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 
+import { QUESTIONNAIRE_HASH_KEY } from '@/components/app/pagePoliticianDetails/common/constants'
 import {
   Accordion,
   AccordionContent,
@@ -15,7 +16,6 @@ import {
   SWCQuestionnaireAnswers,
 } from '@/utils/shared/zod/getSWCQuestionnaire'
 import { twNoop } from '@/utils/web/cn'
-import { QUESTIONNAIRE_HASH_KEY } from '@/components/app/pagePoliticianDetails/common/constants'
 
 interface QuestionnaireAccordionProps {
   questionnaire: SWCQuestionnaireAnswers

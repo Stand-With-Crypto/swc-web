@@ -1,13 +1,11 @@
-import { PagePoliticianDetails } from '@/components/app/pagePoliticianDetails/common/politiciansDetails'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/common/scoreExplainer'
-
-import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
-
-import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
 import { QUESTIONNAIRE_HASH_KEY } from '@/components/app/pagePoliticianDetails/common/constants'
-import { SWCQuestionnaireAnswers } from '@/utils/shared/zod/getSWCQuestionnaire'
+import { PagePoliticianDetails } from '@/components/app/pagePoliticianDetails/common/politiciansDetails'
+import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/common/scoreExplainer'
 import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/us/questionnaireAccordion'
+import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
+import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCQuestionnaireAnswers } from '@/utils/shared/zod/getSWCQuestionnaire'
 
 export function UsPagePoliticianDetails({
   person,

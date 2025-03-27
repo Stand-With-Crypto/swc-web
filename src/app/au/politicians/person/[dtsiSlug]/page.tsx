@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { AuPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/au'
 import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { toBool } from '@/utils/shared/toBool'
-import { AuPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/au'
-import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'

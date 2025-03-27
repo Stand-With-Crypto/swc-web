@@ -1,15 +1,14 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
+import { UsPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/us'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
 import { toBool } from '@/utils/shared/toBool'
-
-import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
-import { UsPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/us'
-import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'

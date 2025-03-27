@@ -3,7 +3,6 @@ import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'

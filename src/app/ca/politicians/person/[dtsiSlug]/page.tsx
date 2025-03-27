@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { CaPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/ca'
 import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { toBool } from '@/utils/shared/toBool'
-import { CaPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/ca'
-import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'

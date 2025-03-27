@@ -2,12 +2,12 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
+import { GbPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/gb'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { toBool } from '@/utils/shared/toBool'
-import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
-import { GbPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/gb'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
