@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { internationalRedirectHandler } from '@/utils/server/internationalRedirectHandler'
-import { obfuscateURLCountryCode } from '@/utils/server/obfuscateURLCountryCode'
+import { extractCountryCode, obfuscateURLCountryCode } from '@/utils/server/obfuscateURLCountryCode'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
+import {
+  COUNTRY_CODE_REGEX_PATTERN,
+  USER_SELECTED_COUNTRY_COOKIE_NAME,
+} from '@/utils/shared/supportedCountries'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
@@ -29,6 +33,8 @@ export function middleware(request: NextRequest) {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours,
     })
   }
+
+  setUserSelectedCountryCookie(request, response)
 
   return response
 }
@@ -90,5 +96,28 @@ function setResponseCookie({
     sameSite: 'lax',
     secure: true,
     ...(maxAge && { maxAge }),
+  })
+}
+
+function setUserSelectedCountryCookie(request: NextRequest, response: NextResponse) {
+  const userSelectedCountryCookie = request.cookies.get(USER_SELECTED_COUNTRY_COOKIE_NAME)?.value
+  const maybeCountryCodeFromPathname = extractCountryCode(request.nextUrl.pathname)
+
+  if (!maybeCountryCodeFromPathname || userSelectedCountryCookie === maybeCountryCodeFromPathname) {
+    return
+  }
+
+  const isUserSelectedCountryCookieSupported = COUNTRY_CODE_REGEX_PATTERN.test(
+    maybeCountryCodeFromPathname,
+  )
+
+  if (!isUserSelectedCountryCookieSupported) {
+    return
+  }
+
+  setResponseCookie({
+    response,
+    cookieName: USER_SELECTED_COUNTRY_COOKIE_NAME,
+    cookieValue: maybeCountryCodeFromPathname,
   })
 }
