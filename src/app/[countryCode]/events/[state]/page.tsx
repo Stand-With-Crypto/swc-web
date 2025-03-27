@@ -6,6 +6,7 @@ import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/even
 import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getUSStateNameFromStateCode, isValidUSStateCode } from '@/utils/shared/usStateUtils'
 
 type Props = PageProps<{ state: string }>
@@ -25,9 +26,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   })
 }
 
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
 export default async function StateEventsPageRoot(props: Props) {
   const params = await props.params
-  const { state, countryCode } = params
+  const { state } = params
 
   if (!isValidUSStateCode(state)) {
     notFound()
