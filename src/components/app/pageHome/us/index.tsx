@@ -1,6 +1,7 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
@@ -194,6 +195,7 @@ export function UsPageHome({
             {highestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
+                cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"
@@ -209,6 +211,7 @@ export function UsPageHome({
             {lowestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
+                cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"

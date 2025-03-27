@@ -1,3 +1,4 @@
+import { DTSI_HomepagePeopleQuery } from '@/data/dtsi/generated'
 import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomepageData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SWCFounders } from '@/utils/shared/zod/getSWCFounders'
@@ -8,4 +9,5 @@ export interface HomePageProps {
   recentActivity: PublicRecentActivity
   founders: SWCFounders | null
   partners: SWCPartners | null
+  dtsiHomepagePoliticians: DTSI_HomepagePeopleQuery
 }

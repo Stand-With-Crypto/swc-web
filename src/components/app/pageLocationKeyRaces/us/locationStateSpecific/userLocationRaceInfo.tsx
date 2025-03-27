@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
 import { ContentSection } from '@/components/app/ContentSection'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationKeyRaces/us/locationStateSpecific/organizeStateSpecificPeople'
@@ -105,6 +106,7 @@ function SuspenseUserLocationRaceInfo({
           {recommended && (
             <DTSIPersonHeroCard
               countryCode={countryCode}
+              cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={recommended} />}
               isRecommended
               person={recommended}
               subheader="role"
@@ -113,6 +115,7 @@ function SuspenseUserLocationRaceInfo({
           {others.map(person => (
             <DTSIPersonHeroCard
               countryCode={countryCode}
+              cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
               key={person.id}
               person={person}
               subheader={person.isIncumbent ? 'Incumbent' : 'role'}
