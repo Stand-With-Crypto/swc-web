@@ -37,6 +37,7 @@ import {
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
 
@@ -113,7 +114,7 @@ async function actionUpdateUserProfileWithoutMiddleware(
     : null
 
   if (address && user.countryCode.toLowerCase() !== address.countryCode.toLowerCase()) {
-    await actionUpdateUserCountryCodeWithoutMiddleware(address.countryCode)
+    await actionUpdateUserCountryCodeWithoutMiddleware(address.countryCode as SupportedCountryCodes)
   }
 
   const existingUserEmailAddress = emailAddress
