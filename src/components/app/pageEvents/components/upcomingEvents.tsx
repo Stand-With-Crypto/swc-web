@@ -32,6 +32,13 @@ const GET_STATE_NAME_FROM_CODE_MAP: Record<SupportedCountryCodes, (code: string)
   [SupportedCountryCodes.US]: getUSStateNameFromStateCode,
 }
 
+const FILTER_NAME_BY_COUNTRY_MAP: Record<SupportedCountryCodes, string> = {
+  [SupportedCountryCodes.AU]: 'State',
+  [SupportedCountryCodes.CA]: 'Province',
+  [SupportedCountryCodes.GB]: 'Country',
+  [SupportedCountryCodes.US]: 'State',
+}
+
 const getStateNameFromCode = (code: string, countryCode: SupportedCountryCodes) => {
   return GET_STATE_NAME_FROM_CODE_MAP[countryCode](code)
 }
@@ -89,7 +96,9 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
         value={selectedStateFilter}
       >
         <SelectTrigger className="max-w-[345px]">
-          <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
+          <span className="mr-2 inline-block flex-shrink-0 font-bold">
+            {FILTER_NAME_BY_COUNTRY_MAP[countryCode]}
+          </span>
           <span className="mr-auto">
             <SelectValue placeholder="All" />
           </span>
