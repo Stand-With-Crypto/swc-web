@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { getIntlUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
+import { fullUrl, getIntlUrls } from '@/utils/shared/urls'
 
 export function EventDialogSocialLinks({
   eventState,
@@ -19,7 +19,7 @@ export function EventDialogSocialLinks({
   const urls = getIntlUrls(countryCode)
 
   const [_, handleCopyToClipboard] = useCopyTextToClipboard()
-  const eventDeeplink = INTERNAL_BASE_URL + urls.eventDeepLink(eventState.toLowerCase(), eventSlug)
+  const eventDeeplink = fullUrl(urls.eventDeepLink(eventState.toLowerCase(), eventSlug))
 
   return (
     <div className="mt-6 flex flex-col gap-2">
