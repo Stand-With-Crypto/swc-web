@@ -29,11 +29,12 @@ interface UserActionFormSuccessScreenNextActionProps {
 export function UserActionFormSuccessScreenNextAction({
   data,
 }: UserActionFormSuccessScreenNextActionProps) {
-  const { performedUserActionTypes, userHasEmbeddedWallet } = data
+  const { performedUserActionTypes, userHasEmbeddedWallet, countryCode } = data
 
   const { excludeUserActionTypes } = getUserActionsProgress({
     userHasEmbeddedWallet,
     performedUserActionTypes,
+    countryCode,
   })
 
   return (

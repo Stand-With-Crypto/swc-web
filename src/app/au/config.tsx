@@ -22,10 +22,6 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
-      href: urls.manifesto(),
-      text: 'Manifesto',
-    },
-    {
       href: urls.partners(),
       text: 'Partners',
     },
@@ -68,24 +64,8 @@ export const footerConfig: FooterProps = {
   ],
   socialLinks: [
     {
-      href: auExternalUrls.discord(),
-      text: 'Discord',
-    },
-    {
       href: auExternalUrls.twitter(),
       text: 'Twitter / X',
-    },
-    {
-      href: auExternalUrls.instagram(),
-      text: 'Instagram',
-    },
-    {
-      href: auExternalUrls.youtube(),
-      text: 'Youtube',
-    },
-    {
-      href: auExternalUrls.facebook(),
-      text: 'Facebook',
     },
     {
       href: auExternalUrls.linkedin(),

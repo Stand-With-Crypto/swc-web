@@ -2,8 +2,9 @@ import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 import { uniqBy } from 'lodash-es'
 
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
+import { useCountryCode } from '@/hooks/useCountryCode'
 
 type CTAType = {
   title: string
@@ -27,6 +28,8 @@ export function useOrderedCTAs({
   performedUserActionTypes,
   excludeUserActionTypes,
 }: UseOrderedCTAsProps) {
+  const countryCode = useCountryCode()
+
   const performedUserActionObj = useMemo(() => {
     return performedUserActionTypes.length
       ? performedUserActionTypes.reduce(
@@ -40,11 +43,13 @@ export function useOrderedCTAs({
       : {}
   }, [performedUserActionTypes])
 
+  const allCTAsForCountry = getUserActionCTAsByCountry(countryCode)
+
   const ctas = excludeUserActionTypes
-    ? Object.entries(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
+    ? Object.entries(allCTAsForCountry)
         .filter(([key, _]) => !excludeUserActionTypes?.includes(key))
         .map(([_, value]) => value)
-    : Object.values(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
+    : Object.values(allCTAsForCountry)
 
   const filteredInactiveCampaigns = ctas
     .map(cta => {

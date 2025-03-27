@@ -37,7 +37,3 @@ export function getUserActionCTAsByCountry(countryCode: SupportedCountryCodes) {
     },
   })
 }
-
-// For backward compatibility
-export const USER_ACTION_CTAS_FOR_GRID_DISPLAY =
-  COUNTRY_USER_ACTION_CTAS_FOR_GRID_DISPLAY[DEFAULT_SUPPORTED_COUNTRY_CODE]

@@ -1,13 +1,21 @@
-import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { PageUserProfile } from '@/components/app/pageUserProfile'
-import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
-import { RedirectToSignUpComponent } from '@/components/app/redirectToSignUp'
-import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
+import { PageUserProfile } from '@/components/app/pageUserProfile/common'
+import {
+  AuthRedirect,
+  getIsUserSignedIn,
+} from '@/components/app/pageUserProfile/common/authentication'
+import { getAuthenticatedData } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getSearchParam } from '@/utils/server/searchParams'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export const dynamic = 'force-dynamic'
 
@@ -23,27 +31,17 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 }
 
 export default async function Profile(props: Props) {
-  const searchParams = await props.searchParams
-  const params = await props.params
-  const { countryCode } = params
   const user = await getAuthenticatedData()
-  const hasOptInUserAction = user?.userActions?.some(
-    userAction => userAction.actionType === UserActionType.OPT_IN,
-  )
+  const isSignedIn = getIsUserSignedIn(user)
 
-  if (!user || (user && !hasOptInUserAction)) {
-    const { value } = getSearchParam({
-      searchParams,
-      queryParamKey: OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY,
-    })
-
-    return (
-      <RedirectToSignUpComponent
-        callbackDestination={value === 'true' ? 'updateProfile' : 'home'}
-        countryCode={countryCode}
-      />
-    )
+  if (!user || !isSignedIn) {
+    const searchParams = await props.searchParams
+    return <AuthRedirect countryCode={countryCode} searchParams={searchParams} />
   }
 
-  return <PageUserProfile params={params} user={user} />
+  if (user.countryCode !== countryCode) {
+    redirect(getIntlUrls(user.countryCode as SupportedCountryCodes).profile())
+  }
+
+  return <PageUserProfile countryCode={countryCode} user={user} />
 }
