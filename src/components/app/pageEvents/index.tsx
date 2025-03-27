@@ -46,9 +46,9 @@ export function EventsPage({ events, isDeepLink, showMap = true, countryCode }: 
 
       {promotedEvents && promotedEvents.length > 0 && <PromotedEvents events={promotedEvents} />}
 
-      {/* <GeoGate countryCode={countryCode}> */}
-      <EventsNearYou events={futureEvents ?? []} />
-      {/* </GeoGate> */}
+      <GeoGate countryCode={countryCode}>
+        <EventsNearYou events={futureEvents ?? []} />
+      </GeoGate>
 
       {futureEvents && futureEvents.length > 0 && (
         <AllUpcomingEvents events={futureEvents} showMap={showMap} />
