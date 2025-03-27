@@ -7,7 +7,7 @@ import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsi
 import {
   GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
   GBCountryCode,
-} from '@/utils/shared/gbCountryUtils'
+} from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 

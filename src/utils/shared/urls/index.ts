@@ -1,14 +1,14 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { AUStateCode } from '@/utils/shared/auStateUtils'
-import { CAProvinceOrTerritoryCode } from '@/utils/shared/caProvinceUtils'
-import { GBCountryCode } from '@/utils/shared/gbCountryUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBCountryCode } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export type LocationStateCode =
   | USStateCode
@@ -102,6 +102,12 @@ export const getIntlUrls = (
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
     locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
+    locationStateSpecificHouseOfLordsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-lords`,
+    locationStateSpecificHouseOfCommonsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-commons`,
+    locationStateSpecificHouseOfRepsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-representatives`,
     locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/governor`,
     locationKeyRaces: () => `${countryPrefix}/races/`,

@@ -5,9 +5,12 @@ import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 interface USKeyRacesProps {
   groups: ReturnType<typeof organizePeople>

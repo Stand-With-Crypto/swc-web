@@ -7,7 +7,7 @@ import { NextImage } from '@/components/ui/image'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { pluralize } from '@/utils/shared/pluralize'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface StateEventsDialogProps {

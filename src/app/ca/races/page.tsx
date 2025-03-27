@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 
 import { CAKeyRaces } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/keyRaces'
+import { CAKeyRacesStates } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/keyRacesStates'
 import { organizePeopleCA } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/organizePeople'
 import { LocationKeyRacesContainer } from '@/components/app/pageLocationKeyRaces/common'
 import { queryDTSILocationCanadaInformation } from '@/data/dtsi/queries/ca/queryDTSILocationCanadaInformation'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { CAKeyRacesStates } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/keyRacesStates'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'

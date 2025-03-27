@@ -1,53 +1,81 @@
 import { enum as zodEnum } from 'zod'
 
 import {
-  GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
-  GBCountryCode,
-} from '@/utils/shared/gbCountryUtils'
+  AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  AUStateCode,
+} from '@/utils/shared/stateMappings/auStateUtils'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   CAProvinceOrTerritoryCode,
-} from '@/utils/shared/caProvinceUtils'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { AU_STATE_CODE_TO_DISPLAY_NAME_MAP, AUStateCode } from '@/utils/shared/auStateUtils'
-
-const [firstUsState, ...otherUsStates] = Object.keys(
-  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
-) as USStateCode[]
-const [firstGbState, ...otherGbStates] = Object.keys(
+} from '@/utils/shared/stateMappings/caProvinceUtils'
+import {
   GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
-) as GBCountryCode[]
-const [firstCaState, ...otherCaStates] = Object.keys(
-  CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
-) as CAProvinceOrTerritoryCode[]
-const [firstAuState, ...otherAuStates] = Object.keys(
-  AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
-) as AUStateCode[]
+  GBCountryCode,
+} from '@/utils/shared/stateMappings/gbCountryUtils'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const COUNTRY_CODE_TO_ZOD_STATE_MAP = {
-  [SupportedCountryCodes.US]: zodEnum([firstUsState, ...otherUsStates], {
-    required_error: 'Please enter a valid US state',
-  }),
-  [SupportedCountryCodes.GB]: zodEnum([firstGbState, ...otherGbStates], {
-    required_error: 'Please enter a valid GB country',
-  }),
-  [SupportedCountryCodes.CA]: zodEnum([firstCaState, ...otherCaStates], {
-    required_error: 'Please enter a valid CA state',
-  }),
-  [SupportedCountryCodes.AU]: zodEnum([firstAuState, ...otherAuStates], {
-    required_error: 'Please enter a valid AU state',
-  }),
+const COUNTRY_CODE_TO_ZOD_STATE_MAP: Record<
+  SupportedCountryCodes,
+  {
+    stateMap: Record<string, string>
+    zodOptions: {
+      required_error: string
+    }
+  }
+> = {
+  [SupportedCountryCodes.US]: {
+    stateMap: US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+    zodOptions: {
+      required_error: 'Please enter a valid US state',
+    },
+  },
+  [SupportedCountryCodes.GB]: {
+    stateMap: GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
+    zodOptions: {
+      required_error: 'Please enter a valid GB country',
+    },
+  },
+  [SupportedCountryCodes.CA]: {
+    stateMap: CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+    zodOptions: {
+      required_error: 'Please enter a valid CA state',
+    },
+  },
+  [SupportedCountryCodes.AU]: {
+    stateMap: AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
+    zodOptions: {
+      required_error: 'Please enter a valid AU state',
+    },
+  },
 }
 
-export const zodState = {
-  parse: (stateCode: string, countryCode?: string) => {
-    const upperCountryCode =
-      countryCode?.toUpperCase() as keyof typeof COUNTRY_CODE_TO_ZOD_STATE_MAP
+type ZodStateReturn<T extends SupportedCountryCodes> = T extends SupportedCountryCodes.US
+  ? USStateCode
+  : T extends SupportedCountryCodes.GB
+    ? GBCountryCode
+    : T extends SupportedCountryCodes.CA
+      ? CAProvinceOrTerritoryCode
+      : AUStateCode
 
-    return (
+export const zodState = {
+  parse: <T extends SupportedCountryCodes>(
+    stateCode: string,
+    countryCode: T,
+  ): ZodStateReturn<T> => {
+    const upperCountryCode =
+      countryCode?.toLowerCase() as keyof typeof COUNTRY_CODE_TO_ZOD_STATE_MAP
+    const countryCodeMap =
       COUNTRY_CODE_TO_ZOD_STATE_MAP[upperCountryCode] ||
       COUNTRY_CODE_TO_ZOD_STATE_MAP[SupportedCountryCodes.US]
-    ).parse(stateCode)
+
+    const [firstState, ...otherStates] = Object.keys(countryCodeMap.stateMap)
+
+    return zodEnum([firstState, ...otherStates], countryCodeMap.zodOptions).parse(
+      stateCode,
+    ) as ZodStateReturn<T>
   },
 }

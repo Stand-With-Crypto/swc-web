@@ -15,9 +15,9 @@ import {
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 export type Person = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people'][0]

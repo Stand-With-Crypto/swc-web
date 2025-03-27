@@ -6,13 +6,13 @@ import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/querie
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { toBool } from '@/utils/shared/toBool'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
-} from '@/utils/shared/usStateUtils'
+} from '@/utils/shared/stateMappings/usStateUtils'
+import { toBool } from '@/utils/shared/toBool'
 import { zodNormalizedDTSIDistrictId } from '@/validation/fields/zodNormalizedDTSIDistrictId'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 

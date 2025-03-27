@@ -3,7 +3,7 @@ import { groupBy } from 'lodash-es'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/us/queryDTSILocationUnitedStatesInformation'
 import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 export function organizePeople({ keyRaces }: QueryDTSILocationUnitedStatesInformationData) {
   const formattedKeyRaces = keyRaces.map(x =>

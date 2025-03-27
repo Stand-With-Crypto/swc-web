@@ -7,7 +7,7 @@ import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsi
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   CAProvinceOrTerritoryCode,
-} from '@/utils/shared/caProvinceUtils'
+} from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -47,12 +47,14 @@ export function CAKeyRaces({ groups, countryCode }: CAKeyRacesProps) {
             normalizeDTSIDistrictId(people[0].runningForSpecificRole)
 
           const subtitleNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR ? 'Governor Race' : 'Senate Race'
+            raceCategory === DTSI_PersonRoleCategory.SENATE
+              ? 'Senate Race'
+              : 'House of Commons Race'
 
           const linkNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR
-              ? urls.locationStateSpecificGovernorRace(stateCode as CAProvinceOrTerritoryCode)
-              : urls.locationStateSpecificSenateRace(stateCode as CAProvinceOrTerritoryCode)
+            raceCategory === DTSI_PersonRoleCategory.SENATE
+              ? urls.locationStateSpecificSenateRace(stateCode as CAProvinceOrTerritoryCode)
+              : urls.locationStateSpecificHouseOfCommonsRace(stateCode as CAProvinceOrTerritoryCode)
 
           return (
             <DTSIPersonHeroCardSection

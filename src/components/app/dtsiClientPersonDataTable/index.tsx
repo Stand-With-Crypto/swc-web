@@ -13,8 +13,8 @@ import {
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { apiUrls } from '@/utils/shared/urls'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 const parseString = (str: string) => str.toLowerCase().trim()

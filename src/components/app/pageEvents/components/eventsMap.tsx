@@ -11,7 +11,7 @@ import { pluralize } from '@/utils/shared/pluralize'
 import {
   getUSStateCodeFromStateName,
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
-} from '@/utils/shared/usStateUtils'
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 

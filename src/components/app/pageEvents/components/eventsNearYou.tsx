@@ -7,7 +7,7 @@ import { EventCard } from '@/components/app/pageEvents/components/eventCard'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface EventsNearYouProps {

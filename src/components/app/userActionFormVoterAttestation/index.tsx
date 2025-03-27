@@ -24,8 +24,8 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { UserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import {

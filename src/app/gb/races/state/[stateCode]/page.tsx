@@ -1,16 +1,16 @@
 import { Metadata } from 'next'
 
-import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/us/locationStateSpecific'
+import { GBLocationStateSpecific } from '@/components/app/pageLocationKeyRaces/gb/locationStateSpecific'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
+import {
+  GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
+  getGBCountryNameFromCode,
+} from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
-import {
-  getGBCountryNameFromCode,
-  GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
-} from '@/utils/shared/gbCountryUtils'
 import { zodState } from '@/validation/fields/zodState'
 
 export const revalidate = 600 // 10 minutes
@@ -53,7 +53,7 @@ export default async function LocationStateSpecificPage({
   const { stateCode } = await params
   const validatedStateCode = zodState.parse(stateCode.toUpperCase(), countryCode)
   const [dtsiResults, countAdvocates] = await Promise.all([
-    queryDTSILocationStateSpecificInformation({ stateCode: validatedStateCode }),
+    queryDTSILocationStateSpecificInformation({ stateCode: validatedStateCode, countryCode }),
     prismaClient.user.count({
       where: { address: { countryCode, administrativeAreaLevel1: validatedStateCode } },
     }),
@@ -64,10 +64,11 @@ export default async function LocationStateSpecificPage({
   }
 
   return (
-    <LocationStateSpecific
+    <GBLocationStateSpecific
       countAdvocates={countAdvocates}
+      countryCode={countryCode}
+      stateCode={validatedStateCode}
       {...dtsiResults}
-      {...{ stateCode: validatedStateCode, countryCode }}
     />
   )
 }

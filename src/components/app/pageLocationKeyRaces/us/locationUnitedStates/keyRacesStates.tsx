@@ -1,7 +1,10 @@
 import { InternalLink } from '@/components/ui/link'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 interface KeyRacesStatesProps {

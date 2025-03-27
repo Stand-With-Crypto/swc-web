@@ -4,7 +4,10 @@ import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { AU_STATE_CODE_TO_DISPLAY_NAME_MAP, AUStateCode } from '@/utils/shared/auStateUtils'
+import {
+  AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  AUStateCode,
+} from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -43,11 +46,13 @@ export function AUKeyRaces({ groups, countryCode }: AUKeyRacesProps) {
             normalizeDTSIDistrictId(people[0].runningForSpecificRole)
 
           const subtitleNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR ? 'Governor Race' : 'Senate Race'
+            raceCategory === DTSI_PersonRoleCategory.CONGRESS
+              ? 'House of Representatives Race'
+              : 'Senate Race'
 
           const linkNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR
-              ? urls.locationStateSpecificGovernorRace(stateCode as AUStateCode)
+            raceCategory === DTSI_PersonRoleCategory.CONGRESS
+              ? urls.locationStateSpecificHouseOfRepsRace(stateCode as AUStateCode)
               : urls.locationStateSpecificSenateRace(stateCode as AUStateCode)
 
           return (

@@ -17,7 +17,7 @@ import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 
 export enum StanceOnCryptoOptions {
   ALL = 'All',

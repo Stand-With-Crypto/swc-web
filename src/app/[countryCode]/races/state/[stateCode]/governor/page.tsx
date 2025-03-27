@@ -4,12 +4,12 @@ import { LocationRaceGovernorSpecific } from '@/components/app/pageLocationKeyRa
 import { queryDTSILocationGovernorSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationGovernorSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { toBool } from '@/utils/shared/toBool'
 import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
-} from '@/utils/shared/usStateUtils'
+} from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { toBool } from '@/utils/shared/toBool'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const revalidate = 600 // 10 minutes

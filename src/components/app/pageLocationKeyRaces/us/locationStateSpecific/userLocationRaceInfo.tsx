@@ -15,9 +15,12 @@ import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>

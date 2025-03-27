@@ -7,7 +7,7 @@ import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/even
 import { PageProps } from '@/types'
 import { getEvent } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 
 type Props = PageProps<{
   state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP

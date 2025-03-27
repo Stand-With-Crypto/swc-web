@@ -6,7 +6,7 @@ import { LazyStateEventsDialogContent } from '@/components/app/pageEvents/compon
 import { StateEventsDialogContentSkeleton } from '@/components/app/pageEvents/components/stateEventsDialogContentSkeleton'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface StateEventsDialogProps {
