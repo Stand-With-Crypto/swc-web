@@ -371,7 +371,7 @@ type Query {
   nonCongressPeople: [Person!]! @deprecated(reason: "Use people instead")
   people(grouping: PersonGrouping, hasPromotedPositioning: Boolean, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, slugIn: [String!], specificPersonRole: SpecificPersonRole, stanceScoreGte: Int, stanceScoreLte: Int): [Person!]!
   peopleByUSCongressionalDistrict(congressionalDistrict: Int, stateCode: String!): [Person!]!
-  personStances(grouping: PersonGrouping, limit: Int!, offset: Int!, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, personSlugIn: [String!]): [PersonStance!]!
+  personStances(grouping: PersonGrouping, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, personSlugIn: [String!], specificPersonRole: SpecificPersonRole): [PersonStance!]!
 }
 
 input SpecificPersonRole {

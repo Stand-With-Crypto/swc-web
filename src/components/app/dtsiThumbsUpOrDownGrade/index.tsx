@@ -2,9 +2,11 @@ import { DTSI_Person } from '@/data/dtsi/generated'
 import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
+  isAntiCrypto,
+  isProCrypto,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
-export const DTSIFormattedLetterGrade: React.FC<
+export const DTSIThumbsUpOrDownGrade: React.FC<
   (
     | {
         person: Pick<
@@ -21,28 +23,18 @@ export const DTSIFormattedLetterGrade: React.FC<
     'letterGrade' in other
       ? other.letterGrade
       : convertDTSIPersonStanceScoreToLetterGrade(other.person)
-  function getLetterGradeImage() {
-    switch (letterGrade) {
-      case 'A':
-        return '/dtsiLetterGrade/a-grade.svg'
-      case 'B':
-        return '/dtsiLetterGrade/b-grade-light.svg'
-      case 'C':
-        return '/dtsiLetterGrade/c-grade.svg'
-      case 'D':
-        return '/dtsiLetterGrade/d-grade-light.svg'
-      case 'F':
-        return '/dtsiLetterGrade/f-grade.svg'
-      default:
-        return '/dtsiLetterGrade/no-stance.svg'
+
+  function getGradeImage() {
+    if (isProCrypto(letterGrade)) {
+      return '/dtsiLetterGrade/thumbs-up.svg'
     }
+    if (isAntiCrypto(letterGrade)) {
+      return '/dtsiLetterGrade/thumbs-down.svg'
+    }
+    return '/dtsiLetterGrade/no-stance.svg'
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img
-      alt={letterGrade ? `Crypto letter grade of ${letterGrade}` : 'No crypto letter grade'}
-      className={className}
-      src={getLetterGradeImage()}
-    />
+    <img alt="Politician's crypto stance" className={className} src={getGradeImage()} />
   )
 }

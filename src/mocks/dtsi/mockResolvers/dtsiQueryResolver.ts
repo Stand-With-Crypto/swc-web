@@ -120,7 +120,7 @@ function personRoleGroupingToPersonRoleMapping(
         primaryCountryCode: 'US',
         status: DTSI_PersonRoleStatus.HELD,
       }
-    // TODO (@twistershark): Add more cases for other roles
+    // TODO (@twistershark): Add more mappings
     default:
       return {}
   }
