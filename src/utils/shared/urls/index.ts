@@ -79,6 +79,8 @@ export const getIntlUrls = (
     becomeMember: () => `${countryPrefix}/action/become-member`,
     community: () => `${countryPrefix}/community`,
     events: () => `${countryPrefix}/events`,
+    eventDeepLink: (state: string, eventSlug: string) =>
+      `${countryPrefix}/events/${state}/${eventSlug}`,
     advocacyToolkit: () => `${countryPrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,

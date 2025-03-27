@@ -10,13 +10,14 @@ import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { StateShield } from '@/components/ui/stateShield'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
+import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
 
 interface StateEventsDialogProps {
   state: {
     code: string
     name: string
   }
-  events?: SWCEvents
+  events?: SWCEvents | null
   countryCode: SupportedCountryCodes
 }
 
@@ -35,7 +36,7 @@ export function StateEventsDialogContent({ state, events, countryCode }: StateEv
   })
 
   return (
-    <div className="flex flex-col items-center gap-2 pb-4">
+    <div className="flex flex-col items-center gap-2 p-6">
       <StateShield
         state={parsedState}
         size={100}
@@ -61,7 +62,9 @@ export function StateEventsDialogContent({ state, events, countryCode }: StateEv
               />
             ))}
           </div>
-        ) : null}
+        ) : (
+          <NoEventsCTA className="mt-6" />
+        )}
         <ScrollBar />
       </ScrollArea>
     </div>

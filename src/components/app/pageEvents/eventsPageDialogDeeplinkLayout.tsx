@@ -23,15 +23,11 @@ export async function EventsPageDialogDeeplinkLayout({
   children,
   countryCode,
   events,
-  ...eventPageProps
+  showMap,
 }: EventsPageDialogDeeplinkLayout) {
   const urls = getIntlUrls(countryCode)
 
-  if (!events || !events?.length) {
-    return NotFound()
-  }
-
-  const filteredFutureEvents = events.filter(event =>
+  const filteredFutureEvents = events?.filter(event =>
     isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
   )
 
@@ -50,12 +46,7 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage
-        {...eventPageProps}
-        events={filteredFutureEvents!}
-        isDeepLink
-        countryCode={countryCode}
-      />
+      <EventsPage events={events} isDeepLink countryCode={countryCode} showMap={showMap} />
     </>
   )
 }

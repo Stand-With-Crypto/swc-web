@@ -5,8 +5,13 @@ import { StateEventsDialogContent } from '@/components/app/pageEvents/components
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getUSStateNameFromStateCode, isValidUSStateCode } from '@/utils/shared/usStateUtils'
+
 import { getEvents } from '@/utils/server/builder/models/data/events'
+import {
+  getCAProvinceOrTerritoryNameFromCode,
+  isValidCAProvinceOrTerritoryCode,
+} from '@/utils/shared/caProvinceUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type Props = PageProps<{ state: string }>
 
@@ -20,16 +25,18 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { state } = params
 
   return generateMetadataDetails({
-    title: `Events in ${getUSStateNameFromStateCode(state)}`,
+    title: `Events in ${getCAProvinceOrTerritoryNameFromCode(state)}`,
     description,
   })
 }
 
+const countryCode = SupportedCountryCodes.CA
+
 export default async function StateEventsPageRoot(props: Props) {
   const params = await props.params
-  const { state, countryCode } = params
+  const { state } = params
 
-  if (!isValidUSStateCode(state)) {
+  if (!isValidCAProvinceOrTerritoryCode(state)) {
     notFound()
   }
 
@@ -38,11 +45,11 @@ export default async function StateEventsPageRoot(props: Props) {
   const events = await getEvents({ countryCode })
 
   return (
-    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
+    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events} showMap={false}>
       <StateEventsDialogContent
         state={{
           code: stateCode,
-          name: getUSStateNameFromStateCode(stateCode),
+          name: getCAProvinceOrTerritoryNameFromCode(stateCode),
         }}
         countryCode={countryCode}
       />
