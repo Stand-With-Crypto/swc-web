@@ -25,7 +25,7 @@ interface Props {
   person: DTSI_PersonCardFragment
   countryCode: SupportedCountryCodes
   subheader: 'role' | 'role-w-state' | string
-  cryptoStanceGradeComponent: React.ReactElement<{
+  cryptoStanceGradeElement: React.ReactElement<{
     className?: string
   }>
   isRecommended?: boolean
@@ -86,7 +86,7 @@ export function DTSIPersonHeroCard(props: Props) {
     footer,
     isClickable = true,
     forceMobile = false,
-    cryptoStanceGradeComponent,
+    cryptoStanceGradeElement,
     target,
   } = props
   const politicalAffiliationCategoryAbbreviation =
@@ -170,7 +170,7 @@ export function DTSIPersonHeroCard(props: Props) {
               )}
             </div>
             <div className="ml-auto h-12 w-10 flex-shrink-0">
-              {cloneElement(cryptoStanceGradeComponent, { className: 'h-full w-full' })}
+              {cloneElement(cryptoStanceGradeElement, { className: 'h-full w-full' })}
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@ export function DTSIPersonHeroCard(props: Props) {
               </div>
               <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
                 <div className="shrink-0">
-                  {cloneElement(cryptoStanceGradeComponent, { className: 'h-5 w-5' })}
+                  {cloneElement(cryptoStanceGradeElement, { className: 'h-5 w-5' })}
                 </div>
                 <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
               </div>
