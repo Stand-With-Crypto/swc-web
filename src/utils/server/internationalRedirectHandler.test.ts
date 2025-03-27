@@ -7,6 +7,7 @@ import { NextRequest } from 'next/server'
 
 import { getCountryCode, USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import * as supportedCountries from '@/utils/shared/supportedCountries'
+import { USER_SELECTED_COUNTRY_COOKIE_NAME } from '@/utils/shared/supportedCountries'
 
 import { internationalRedirectHandler } from './internationalRedirectHandler'
 
@@ -24,6 +25,7 @@ const createMockRequest = (
   path: string,
   options?: {
     countryCodeCookie?: string
+    userSelectedCountryCookie?: string
   },
 ) => {
   const url = new URL(path, 'http://localhost')
@@ -31,6 +33,13 @@ const createMockRequest = (
 
   if (options?.countryCodeCookie) {
     headers.set('cookie', `${USER_COUNTRY_CODE_COOKIE_NAME}=${options.countryCodeCookie}`)
+  }
+
+  if (options?.userSelectedCountryCookie) {
+    headers.set(
+      'cookie',
+      `${USER_SELECTED_COUNTRY_COOKIE_NAME}=${options.userSelectedCountryCookie}`,
+    )
   }
 
   return new NextRequest(url, { headers })
@@ -87,16 +96,15 @@ describe('internationalRedirectHandler - Country Cookie', () => {
   })
 })
 
-describe('internationalRedirectHandler - International Redirect', () => {
+describe('internationalRedirectHandler - International Redirect - First Visit', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    jest.spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test').mockReset()
   })
 
   afterEach(() => {
     jest.restoreAllMocks()
   })
-
-  // --------------- REDIRECT ---------------
 
   it('should not redirect when request is not on homepage', () => {
     const request = createMockRequest('/events')
@@ -198,5 +206,96 @@ describe('internationalRedirectHandler - International Redirect', () => {
     expect(response).toBeDefined()
     expect(response?.status).toBe(307)
     expect(response?.headers.get('location')).toBe('http://localhost/gb?test=1&test2=2#section')
+  })
+})
+
+describe('internationalRedirectHandler - International Redirect - User Selected Country', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+    jest.spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test').mockReset()
+  })
+
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  it('should not redirect when user selected country cookie is not set', () => {
+    const request = createMockRequest('/')
+    const { response } = internationalRedirectHandler(request)
+
+    expect(response).toBeUndefined()
+  })
+
+  it('should not redirect when user selected country cookie is set to US', () => {
+    const request = createMockRequest('/', {
+      userSelectedCountryCookie: 'us',
+    })
+
+    const { response } = internationalRedirectHandler(request)
+
+    expect(response).toBeUndefined()
+  })
+
+  it('should not redirect when request is not on US homepage', () => {
+    const request = createMockRequest('/events', {
+      userSelectedCountryCookie: 'au',
+    })
+    const { response } = internationalRedirectHandler(request)
+
+    expect(response).toBeUndefined()
+  })
+
+  it('should not redirect if selected country cookie is not supported', () => {
+    const request = createMockRequest('/', {
+      userSelectedCountryCookie: 'br',
+    })
+    const { response } = internationalRedirectHandler(request)
+
+    expect(response).toBeUndefined()
+  })
+
+  it('should redirect when user selected country is GB and request is on US homepage', () => {
+    jest
+      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
+      .mockImplementation((countryCode: string) => countryCode === 'gb')
+
+    const request = createMockRequest('/', {
+      userSelectedCountryCookie: 'gb',
+    })
+    const { response } = internationalRedirectHandler(request)
+
+    expect(response).toBeDefined()
+    expect(response?.status).toBe(307)
+    expect(response?.headers.get('location')).toBe('http://localhost/gb')
+  })
+
+  it('should redirect when user selected country is AU and request is on US homepage', () => {
+    jest
+      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
+      .mockImplementation((countryCode: string) => countryCode === 'au')
+
+    const request = createMockRequest('/', {
+      userSelectedCountryCookie: 'au',
+    })
+    const { response } = internationalRedirectHandler(request)
+
+    expect(response).toBeDefined()
+    expect(response?.status).toBe(307)
+    expect(response?.headers.get('location')).toBe('http://localhost/au')
+  })
+
+  it('should redirect when user selected country is CA and request is on US homepage', () => {
+    jest
+      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
+      .mockImplementation((countryCode: string) => countryCode === 'ca')
+
+    const request = createMockRequest('/', {
+      userSelectedCountryCookie: 'ca',
+    })
+    const { response } = internationalRedirectHandler(request)
+
+    expect(response).toBeDefined()
+    expect(response?.status).toBe(307)
+    expect(response?.headers.get('location')).toBe('http://localhost/ca')
   })
 })
