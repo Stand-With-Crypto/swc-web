@@ -5,11 +5,11 @@ import sanitizeHtml from 'sanitize-html'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { handleCreateRsvpAction } from '@/components/app/pageEvents/utils/createRsvpAction'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
-import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 
 interface PromotedEventsProps {
   events: SWCEvents

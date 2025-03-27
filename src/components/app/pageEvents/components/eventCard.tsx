@@ -3,9 +3,9 @@
 import { format } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
-import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
-import { useCountryCode } from '@/hooks/useCountryCode'
 import { StateShield } from '@/components/ui/stateShield'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 
 interface EventCardProps {
   event: SWCEvent
@@ -23,10 +23,10 @@ function EventCardContent({ event }: EventCardProps) {
   return (
     <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 text-left transition hover:drop-shadow-lg lg:flex-row lg:items-center">
       <StateShield
-        state={event.state}
-        size={70}
-        countryCode={countryCode}
         className="mb-2 lg:mb-0"
+        countryCode={countryCode}
+        size={70}
+        state={event.state}
       />
       <strong>{event.name}</strong>
       <p className="block text-muted-foreground lg:hidden">

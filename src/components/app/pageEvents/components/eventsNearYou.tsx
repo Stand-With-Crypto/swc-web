@@ -3,18 +3,18 @@
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { EventCard } from '@/components/app/pageEvents/components/eventCard'
+import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
+import { getGBCountryCodeFromName } from '@/utils/shared/gbCountryUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
-import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getGBCountryCodeFromName } from '@/utils/shared/gbCountryUtils'
-import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
 
 interface EventsNearYouProps {
   events: SWCEvents
@@ -48,7 +48,7 @@ function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
 
       setUserState(details.administrativeAreaLevel1)
     },
-    [],
+    [setAddress],
   )
 
   useEffect(() => {

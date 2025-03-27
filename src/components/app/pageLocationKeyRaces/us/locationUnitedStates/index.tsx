@@ -11,9 +11,9 @@ import { PACFooter } from '@/components/app/pacFooter'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { StateShield } from '@/components/ui/stateShield'
 import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -23,7 +23,6 @@ import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
 import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
-import { StateShield } from '@/components/ui/stateShield'
 
 interface LocationUnitedStatesProps extends QueryDTSILocationUnitedStatesInformationData {
   countryCode: SupportedCountryCodes
@@ -104,7 +103,7 @@ export function LocationUnitedStates({
           const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
           return (
             <div className="container flex flex-col items-center" key={stateCode}>
-              <StateShield size={150} state={stateCode} countryCode={countryCode} />
+              <StateShield countryCode={countryCode} size={150} state={stateCode} />
 
               <PageTitle as="h2" size="sm">
                 {stateName}

@@ -3,14 +3,14 @@
 import { format, isAfter } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
+import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { StateShield } from '@/components/ui/stateShield'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { pluralize } from '@/utils/shared/pluralize'
-import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
-import { StateShield } from '@/components/ui/stateShield'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
-import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
+import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface StateEventsDialogProps {
   state: {
@@ -38,10 +38,10 @@ export function StateEventsDialogContent({ state, events, countryCode }: StateEv
   return (
     <div className="flex flex-col items-center gap-2 p-6">
       <StateShield
-        state={parsedState}
-        size={100}
         className="mb-2 lg:mb-0"
         countryCode={countryCode}
+        size={100}
+        state={parsedState}
       />
 
       <h3 className="font-sans text-xl font-bold">Events in {state.name}</h3>
@@ -58,7 +58,7 @@ export function StateEventsDialogContent({ state, events, countryCode }: StateEv
               <EventDialog
                 event={event.data}
                 key={getUniqueEventKey(event.data)}
-                trigger={<StateDialogEventCard event={event.data} countryCode={countryCode} />}
+                trigger={<StateDialogEventCard countryCode={countryCode} event={event.data} />}
               />
             ))}
           </div>
@@ -82,10 +82,10 @@ function StateDialogEventCard({ event, countryCode }: StateDialogEventCardProps)
   return (
     <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 transition hover:bg-backgroundAlternate/60 lg:flex-row lg:items-center lg:p-4 lg:pt-4">
       <StateShield
-        state={event.state}
-        size={70}
         className="mb-2 lg:mb-0"
         countryCode={countryCode}
+        size={70}
+        state={event.state}
       />
 
       <strong className="block lg:hidden">{event.name}</strong>

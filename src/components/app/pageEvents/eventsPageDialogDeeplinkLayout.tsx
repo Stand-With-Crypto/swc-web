@@ -4,7 +4,6 @@ import React, { cloneElement, JSX } from 'react'
 import { isAfter, parseISO, subDays } from 'date-fns'
 import { X } from 'lucide-react'
 
-import NotFound from '@/app/not-found'
 import { EventsPage, EventsPageProps } from '@/components/app/pageEvents'
 import {
   dialogCloseStyles,
@@ -46,7 +45,7 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage events={events} isDeepLink countryCode={countryCode} showMap={showMap} />
+      <EventsPage countryCode={countryCode} events={events} isDeepLink showMap={showMap} />
     </>
   )
 }

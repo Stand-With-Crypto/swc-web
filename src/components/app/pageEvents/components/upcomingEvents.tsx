@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { isAfter } from 'date-fns'
 
 import { EventCard } from '@/components/app/pageEvents/components/eventCard'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -12,14 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
-import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { getAUStateNameFromStateCode } from '@/utils/shared/auStateUtils'
 import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/caProvinceUtils'
 import { getGBCountryNameFromCode } from '@/utils/shared/gbCountryUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-import { useCountryCode } from '@/hooks/useCountryCode'
+import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface UpcomingEventsProps {
   events: SWCEvents
@@ -77,7 +77,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
     options.unshift({ key: 'All', name: 'All' })
 
     return options
-  }, [events])
+  }, [countryCode, events])
 
   return (
     <>

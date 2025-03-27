@@ -1,14 +1,14 @@
 import { isAfter, isBefore, parseISO, subDays } from 'date-fns'
 
+import { GeoGate } from '@/components/app/geoGate'
 import { AllUpcomingEvents } from '@/components/app/pageEvents/components/allUpcomingEvents'
 import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featuredPastEvents'
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { GeoGate } from '@/components/app/geoGate'
 
 export interface EventsPageProps {
   events: SWCEvents | null

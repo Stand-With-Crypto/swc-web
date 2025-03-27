@@ -5,9 +5,9 @@ import { Suspense } from 'react'
 import { LazyStateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContentLazyload'
 import { StateEventsDialogContentSkeleton } from '@/components/app/pageEvents/components/stateEventsDialogContentSkeleton'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
-import { useCountryCode } from '@/hooks/useCountryCode'
 
 export interface StateEventsDialogProps {
   state: {
@@ -32,7 +32,7 @@ export function StateEventsDialog({ state, events, isOpen, setIsOpen }: StateEve
     <Dialog {...dialogProps} onOpenChange={open => setIsOpen(open)} open={isOpen}>
       <DialogContent a11yTitle={`State ${state.name} Events`} className="max-w-[578px]">
         <Suspense fallback={<StateEventsDialogContentSkeleton />}>
-          <LazyStateEventsDialogContent events={events} state={state} countryCode={countryCode} />
+          <LazyStateEventsDialogContent countryCode={countryCode} events={events} state={state} />
         </Suspense>
       </DialogContent>
     </Dialog>

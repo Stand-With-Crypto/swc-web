@@ -16,13 +16,13 @@ import { handleCreateRsvpAction as _handleCreateRsvpAction } from '@/components/
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { StateShield } from '@/components/ui/stateShield'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
-import { StateShield } from '@/components/ui/stateShield'
-import { useCountryCode } from '@/hooks/useCountryCode'
 
 enum SectionNames {
   EVENT_INFO = 'Event Information',
@@ -119,10 +119,10 @@ function EventInformation({
       <ScrollArea className="overflow-auto px-4 py-6 md:max-h-[70vh]">
         <div className="flex h-full flex-col items-center gap-2">
           <StateShield
-            state={event.state}
-            size={100}
             className="mb-2 lg:mb-0"
             countryCode={countryCode}
+            size={100}
+            state={event.state}
           />
           <h3 className="text-center font-sans text-xl font-bold">
             <Balancer>{event.name}</Balancer>

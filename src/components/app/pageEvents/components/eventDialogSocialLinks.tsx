@@ -4,8 +4,8 @@ import { Facebook, Link, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
-import { getIntlUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { getIntlUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
 
 export function EventDialogSocialLinks({
   eventState,

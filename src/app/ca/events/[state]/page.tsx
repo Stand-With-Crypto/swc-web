@@ -4,9 +4,8 @@ import { notFound } from 'next/navigation'
 import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-
 import { getEvents } from '@/utils/server/builder/models/data/events'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import {
   getCAProvinceOrTerritoryNameFromCode,
   isValidCAProvinceOrTerritoryCode,
@@ -47,11 +46,11 @@ export default async function StateEventsPageRoot(props: Props) {
   return (
     <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events} showMap={false}>
       <StateEventsDialogContent
+        countryCode={countryCode}
         state={{
           code: stateCode,
           name: getCAProvinceOrTerritoryNameFromCode(stateCode),
         }}
-        countryCode={countryCode}
       />
     </EventsPageDialogDeeplinkLayout>
   )

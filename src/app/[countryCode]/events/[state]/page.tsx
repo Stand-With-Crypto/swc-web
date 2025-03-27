@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation'
 import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
+import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { getUSStateNameFromStateCode, isValidUSStateCode } from '@/utils/shared/usStateUtils'
-import { getEvents } from '@/utils/server/builder/models/data/events'
 
 type Props = PageProps<{ state: string }>
 
@@ -40,11 +40,11 @@ export default async function StateEventsPageRoot(props: Props) {
   return (
     <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
       <StateEventsDialogContent
+        countryCode={countryCode}
         state={{
           code: stateCode,
           name: getUSStateNameFromStateCode(stateCode),
         }}
-        countryCode={countryCode}
       />
     </EventsPageDialogDeeplinkLayout>
   )
