@@ -20,16 +20,25 @@ export const PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY: Record<
     DTSI_PersonGrouping.CURRENT_AU_HOUSE_OF_REPS,
     DTSI_PersonGrouping.RUNNING_FOR_AU_HOUSE_OF_REPS,
     DTSI_PersonGrouping.NEXT_AU_HOUSE_OF_REPS,
+    DTSI_PersonGrouping.NEXT_AU_SENATE,
+    DTSI_PersonGrouping.RUNNING_FOR_AU_SENATE,
+    DTSI_PersonGrouping.CURRENT_AU_SENATE,
   ],
   [SupportedCountryCodes.GB]: [
     DTSI_PersonGrouping.CURRENT_UK_HOUSE_OF_COMMONS,
     DTSI_PersonGrouping.NEXT_UK_HOUSE_OF_COMMONS,
     DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_COMMONS,
+    DTSI_PersonGrouping.CURRENT_UK_HOUSE_OF_LORDS,
+    DTSI_PersonGrouping.NEXT_UK_HOUSE_OF_LORDS,
+    DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_LORDS,
   ],
   [SupportedCountryCodes.CA]: [
     DTSI_PersonGrouping.CURRENT_CA_HOUSE_OF_COMMONS,
     DTSI_PersonGrouping.NEXT_CA_HOUSE_OF_COMMONS,
     DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS,
+    DTSI_PersonGrouping.CURRENT_CA_SENATE,
+    DTSI_PersonGrouping.NEXT_CA_SENATE,
+    DTSI_PersonGrouping.RUNNING_FOR_CA_SENATE,
   ],
 }
 

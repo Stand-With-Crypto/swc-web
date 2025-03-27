@@ -4,6 +4,8 @@ import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/air
 import type { BackfillUsCongressionalDistrictsInngestCronJobSchema } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
+import { BackfillIntlUsersSchema } from '@/inngest/functions/backfillIntlUsers'
+import { ProcessBatchSchema } from '@/inngest/functions/backfillIntlUsers/logic'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
@@ -64,5 +66,7 @@ type EventTypes =
   | BackfillOptedOutUsersSchema
   | UpdateDistrictsRankingsCronJobSchema
   | BackfillUserCountryCodeEmptyInngestSchema
+  | BackfillIntlUsersSchema
+  | ProcessBatchSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

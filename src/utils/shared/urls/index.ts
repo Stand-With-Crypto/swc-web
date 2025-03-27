@@ -79,15 +79,16 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
-    founders: () => `${countryPrefix}/founders`,
     politiciansHomepage: () => `${countryPrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
-    internalHomepage: () => `${countryPrefix}/internal`,
+    internalHomepage: () => '/internal',
     becomeMember: () => `${countryPrefix}/action/become-member`,
     community: () => `${countryPrefix}/community`,
     events: () => `${countryPrefix}/events`,
+    eventDeepLink: (state: string, eventSlug: string) =>
+      `${countryPrefix}/events/${state}/${eventSlug}`,
     advocacyToolkit: () => `${countryPrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,

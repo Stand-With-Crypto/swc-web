@@ -1,24 +1,36 @@
-import { isAfter, parseISO, subDays } from 'date-fns'
+import { isAfter, isBefore, parseISO, subDays } from 'date-fns'
 
-import { GeoGate } from '@/components/app/geoGate'
 import { AllUpcomingEvents } from '@/components/app/pageEvents/components/allUpcomingEvents'
 import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featuredPastEvents'
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
-interface EventsPageProps {
-  events: SWCEvents
+export interface EventsPageProps {
+  events: SWCEvents | null
   isDeepLink?: boolean
+  /** Default to true */
+  showMap?: boolean
 }
 
-export function EventsPage({ events, isDeepLink }: EventsPageProps) {
-  const filteredFutureEvents = events.filter(event =>
+export function EventsPage({ events, isDeepLink, showMap = true }: EventsPageProps) {
+  const futureEvents = events?.filter(event =>
     isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
   )
+
+  const promotedEvents = futureEvents
+    ?.filter(event => !!event.data.promotedPositioning)
+    .sort((a, b) => a.data.promotedPositioning! - b.data.promotedPositioning!)
+
+  const featuredPastEvents = events?.filter(event => {
+    const eventDate = event.data?.time
+      ? new Date(`${event.data.date}T${event.data.time}`)
+      : new Date(event.data.date)
+
+    return isBefore(eventDate, new Date())
+  })
 
   return (
     <div
@@ -29,15 +41,17 @@ export function EventsPage({ events, isDeepLink }: EventsPageProps) {
     >
       <EventsIntro />
 
-      <PromotedEvents events={events} />
+      {promotedEvents && promotedEvents.length > 0 && <PromotedEvents events={promotedEvents} />}
 
-      <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
-        <EventsNearYou events={filteredFutureEvents} />
-      </GeoGate>
+      <EventsNearYou events={futureEvents ?? []} />
 
-      <AllUpcomingEvents events={filteredFutureEvents} />
+      {futureEvents && futureEvents.length > 0 && (
+        <AllUpcomingEvents events={futureEvents} showMap={showMap} />
+      )}
 
-      <FeaturedPastEvents events={events} />
+      {featuredPastEvents && featuredPastEvents.length > 0 && (
+        <FeaturedPastEvents events={featuredPastEvents} />
+      )}
     </div>
   )
 }

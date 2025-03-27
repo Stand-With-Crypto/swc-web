@@ -11,6 +11,7 @@ import {
   UserActionFormSuccessScreenNextActionSkeleton,
 } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { useSession } from '@/hooks/useSession'
 import { apiUrls } from '@/utils/shared/urls'
@@ -24,6 +25,8 @@ interface UserActionFormSuccessScreenProps {
 
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
   const { children, onClose } = props
+
+  const countryCode = useCountryCode()
 
   const { user, isLoggedIn, isLoading } = useSession()
   const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
@@ -72,6 +75,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
       ) : (
         <UserActionFormSuccessScreenNextAction
           data={{
+            countryCode,
             userHasEmbeddedWallet: user.hasEmbeddedWallet,
             performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes || [],
           }}

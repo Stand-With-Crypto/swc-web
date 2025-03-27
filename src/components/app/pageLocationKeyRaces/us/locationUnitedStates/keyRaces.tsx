@@ -1,8 +1,8 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/organizePeople'
-import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { StateShield } from '@/components/ui/stateShield'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
@@ -36,12 +36,7 @@ export function USKeyRaces({ groups, countryCode }: USKeyRacesProps) {
     const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
     return (
       <div className="container flex flex-col items-center" key={stateCode}>
-        <NextImage
-          alt={`${stateName} shield`}
-          height={150}
-          src={`/stateShields/${stateCode}.png`}
-          width={150}
-        />
+        <StateShield countryCode={countryCode} size={150} state={stateCode} />
 
         <PageTitle as="h2" size="sm">
           {stateName}

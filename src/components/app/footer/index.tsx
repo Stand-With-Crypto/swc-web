@@ -59,7 +59,7 @@ export function Footer({ title, subtitle, links, socialLinks, footerBanner }: Fo
               </div>
             </div>
           </div>
-          <div className="mb-2 text-xs text-muted">
+          <div className="mb-2 mt-2 text-xs text-muted">
             Information about people's stances on crypto sourced from{' '}
             <a
               className={'hover:underline'}

@@ -1,14 +1,20 @@
 'use client'
 
-import { Suspense, useMemo } from 'react'
-import Balancer from 'react-wrap-balancer'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { EventCard } from '@/components/app/pageEvents/components/eventCard'
+import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import { getGBCountryCodeFromName } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 
 interface EventsNearYouProps {
   events: SWCEvents
@@ -24,27 +30,32 @@ export function EventsNearYou(props: EventsNearYouProps) {
 
 function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
+  const [userState, setUserState] = useState<string>()
 
-  const userState = useMemo(() => {
-    if (address === 'loading') return null
-
-    const possibleStateMatches = address?.description.matchAll(/\s([A-Z]{2})\s*/g)
-
-    if (!possibleStateMatches) return null
-
-    for (const match of possibleStateMatches) {
-      const stateCode = match[1]
-      if (
-        US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[
-          stateCode as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
-        ]
-      ) {
-        return stateCode
+  const onChangeAddress = useCallback(
+    async (prediction: GooglePlaceAutocompletePrediction | null) => {
+      if (!prediction) {
+        setAddress(null)
+        return
       }
-    }
 
-    return null
-  }, [address])
+      const details = await convertGooglePlaceAutoPredictionToAddressSchema(prediction)
+
+      // Google Places API returns the full country name for the UK, so we need to convert it to the country code
+      if (details.countryCode.toLowerCase() === SupportedCountryCodes.GB) {
+        return setUserState(getGBCountryCodeFromName(details.administrativeAreaLevel1))
+      }
+
+      setUserState(details.administrativeAreaLevel1)
+    },
+    [setAddress],
+  )
+
+  useEffect(() => {
+    if (address === 'loading') return
+
+    void onChangeAddress(address)
+  }, [address, onChangeAddress])
 
   return (
     <section className="grid w-full items-center gap-4 lg:gap-6">
@@ -56,36 +67,36 @@ function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
           loading={address === 'loading'}
           onChange={setAddress}
           placeholder="Enter your address"
-          shouldLimitUSAddresses
           value={address !== 'loading' ? address : null}
         />
       </div>
 
-      {userState ? <FilteredEventsNearUser events={events} userState={userState} /> : null}
+      {address ? <FilteredEventsNearUser events={events} userState={userState} /> : null}
     </section>
   )
 }
 
-function FilteredEventsNearUser({ events, userState }: { events: SWCEvents; userState: string }) {
+function FilteredEventsNearUser({
+  events,
+  userState,
+}: {
+  events: SWCEvents
+  userState: string | undefined
+}) {
   const filteredEventsNearUser = useMemo(() => {
     return events.filter(event => event.data.state === userState)
   }, [events, userState])
 
   const hasEvents = filteredEventsNearUser.length > 0
 
-  if (!userState) return null
-
   return (
     <div className="flex w-full flex-col items-center gap-4">
       {hasEvents ? (
-        filteredEventsNearUser.map(event => <EventCard event={event.data} key={event.data.slug} />)
+        filteredEventsNearUser.map(event => (
+          <EventCard event={event.data} key={getUniqueEventKey(event.data)} />
+        ))
       ) : (
-        <p className="text-center font-mono text-sm text-muted-foreground">
-          <Balancer>
-            Unfortunately, there are no events happening near you at the moment. Please check back
-            later for updates, as new events may be added soon.
-          </Balancer>
-        </p>
+        <NoEventsCTA initialText="There are no events happening near you at the moment. " />
       )}
     </div>
   )

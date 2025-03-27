@@ -3,8 +3,9 @@
 import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 
+import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
-import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { UserAvatar } from '@/components/app/userAvatar'
@@ -19,20 +20,23 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSession } from '@/hooks/useSession'
-import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
-import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
-type PageUserProfile = { params: Awaited<PageProps['params']> } & {
+export interface PageUserProfileProps {
   user: PageUserProfileUser
+  hideUserMetrics?: boolean
+  countryCode: SupportedCountryCodes
 }
 
-export function PageUserProfile({ params, user }: PageUserProfile) {
-  const { countryCode } = params
-
+export function PageUserProfile({
+  user,
+  hideUserMetrics = false,
+  countryCode,
+}: PageUserProfileProps) {
   const isMobile = useIsMobile({
     defaultState: true,
   })
@@ -41,14 +45,22 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
 
   const { userActions: userActionsFromLoadedUserInServerSide } = user
 
-  const userActions = data?.user?.userActions ?? userActionsFromLoadedUserInServerSide
+  const userActions = filterUserActionsByCountry(
+    data?.user?.userActions ?? userActionsFromLoadedUserInServerSide,
+    countryCode,
+  )
 
   const performedUserActionTypes = uniq(
     userActions.map(x => ({ actionType: x.actionType, campaignName: x.campaignName })),
   )
+
   const { progressValue, numActionsCompleted, numActionsAvailable } = getUserActionsProgress({
     userHasEmbeddedWallet: user.hasEmbeddedWallet,
-    performedUserActionTypes,
+    performedUserActionTypes: [
+      ...performedUserActionTypes,
+      { actionType: UserActionType.OPT_IN, campaignName: 'DEFAULT' },
+    ],
+    countryCode,
   })
 
   return (
@@ -87,63 +99,66 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
             </div>
           )}
         </div>
-        <div className="grid grid-cols-4 rounded-3xl bg-secondary p-3 text-center sm:p-6">
-          {[
-            {
-              label: 'Actions',
-              value: (
-                <FormattedNumber
-                  amount={numActionsCompleted}
-                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-                />
-              ),
-            },
-            {
-              label: 'Donated',
-              value: (
-                <FormattedCurrency
-                  amount={sumBy(userActions, x => {
-                    if (x.actionType === UserActionType.DONATION) {
-                      return x.amountUsd
+
+        {!hideUserMetrics && (
+          <div className="grid grid-cols-4 rounded-3xl bg-secondary p-3 text-center sm:p-6">
+            {[
+              {
+                label: 'Actions',
+                value: (
+                  <FormattedNumber
+                    amount={numActionsCompleted}
+                    locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+                  />
+                ),
+              },
+              {
+                label: 'Donated',
+                value: (
+                  <FormattedCurrency
+                    amount={sumBy(userActions, x => {
+                      if (x.actionType === UserActionType.DONATION) {
+                        return x.amountUsd
+                      }
+                      if (x.actionType === UserActionType.NFT_MINT) {
+                        return x.nftMint.costAtMintUsd
+                      }
+                      return 0
+                    })}
+                    currencyCode={SupportedFiatCurrencyCodes.USD}
+                    locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+                  />
+                ),
+              },
+              {
+                label: 'NFTs',
+                value: (
+                  <FormattedNumber
+                    amount={userActions.filter(action => action.nftMint).length}
+                    locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+                  />
+                ),
+              },
+              {
+                label: 'Referrals',
+                value: (
+                  <FormattedNumber
+                    amount={
+                      userActions.find(action => action.actionType === UserActionType.REFER)
+                        ?.referralsCount ?? 0
                     }
-                    if (x.actionType === UserActionType.NFT_MINT) {
-                      return x.nftMint.costAtMintUsd
-                    }
-                    return 0
-                  })}
-                  currencyCode={SupportedFiatCurrencyCodes.USD}
-                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-                />
-              ),
-            },
-            {
-              label: 'NFTs',
-              value: (
-                <FormattedNumber
-                  amount={userActions.filter(action => action.nftMint).length}
-                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-                />
-              ),
-            },
-            {
-              label: 'Referrals',
-              value: (
-                <FormattedNumber
-                  amount={
-                    userActions.find(action => action.actionType === UserActionType.REFER)
-                      ?.referralsCount ?? 0
-                  }
-                  locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-                />
-              ),
-            },
-          ].map(({ label, value }) => (
-            <div key={label}>
-              <div className="text-xs text-gray-700 sm:text-sm md:text-base">{label}</div>
-              <div className="text-sm font-bold sm:text-base md:text-xl">{value}</div>
-            </div>
-          ))}
-        </div>
+                    locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+                  />
+                ),
+              },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <div className="text-xs text-gray-700 sm:text-sm md:text-base">{label}</div>
+                <div className="text-sm font-bold sm:text-base md:text-xl">{value}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {isMobile && (
@@ -180,6 +195,15 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
         </div>
       </section>
     </div>
+  )
+}
+
+function filterUserActionsByCountry(
+  userActions: SensitiveDataClientUserAction[],
+  countryCode: SupportedCountryCodes,
+) {
+  return userActions.filter(
+    action => action.countryCode === countryCode || action.actionType === UserActionType.OPT_IN,
   )
 }
 

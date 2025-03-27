@@ -13,6 +13,7 @@ import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/co
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { usExternalUrls } from '@/utils/shared/urls'
 import { USUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -41,7 +42,7 @@ export function USUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },
-        payload: { campaignName: USUserActionTweetCampaignName.DEFAULT },
+        payload: { campaignName: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 },
         onError: toastGenericError,
       },
       actionCreateUserActionTweet,
@@ -51,7 +52,7 @@ export function USUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
       }
     })
 
-    openWindow('https://x.com/standwithcrypto', target, `noopener`)
+    openWindow(usExternalUrls.twitter(), target, `noopener`)
   }
 
   switch (sectionProps.currentSection) {

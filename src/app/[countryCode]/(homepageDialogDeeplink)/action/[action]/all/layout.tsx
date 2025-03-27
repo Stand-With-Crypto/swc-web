@@ -4,9 +4,12 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export const dynamic = 'error'
 
@@ -16,7 +19,7 @@ export async function generateMetadata(props: UserActionCampaignsLayoutProps): P
   const { action } = await props.params
   const parsedAction = action?.toUpperCase()
 
-  const cta = USER_ACTION_CTAS_FOR_GRID_DISPLAY[parsedAction]
+  const cta = getUserActionCTAsByCountry(countryCode)[parsedAction]
 
   if (cta) {
     return generateMetadataDetails({
@@ -34,7 +37,7 @@ export default async function UserActionCampaignsLayout(props: UserActionCampaig
   const params = await props.params
   const parsedAction = params.action?.toUpperCase()
 
-  const cta = USER_ACTION_CTAS_FOR_GRID_DISPLAY[parsedAction]
+  const cta = getUserActionCTAsByCountry(countryCode)[parsedAction]
 
   const hasActiveCampaigns = cta?.campaigns?.some(campaign => campaign.isCampaignActive)
 

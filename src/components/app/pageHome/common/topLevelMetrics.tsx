@@ -15,7 +15,7 @@ import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
   'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
-> & { countryCode: SupportedCountryCodes }
+> & { countryCode: SupportedCountryCodes; disableTooltips?: boolean }
 
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   initial: Omit<Props, 'countryCode'>,
@@ -45,6 +45,7 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
 
 export function TopLevelMetrics({
   countryCode,
+  disableTooltips = false,
   ...data
 }: Props & { countryCode: SupportedCountryCodes }) {
   const [isDonatedTooltipOpen, setIsDonatedTooltipOpen] = useState(false)
@@ -102,12 +103,18 @@ export function TopLevelMetrics({
     }
   }, [formatCurrency, values, countryCode])
 
+  const globalDonationsRender = (
+    <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
+  )
+
   return (
     <div className="flex flex-col gap-3 text-center md:flex-row md:gap-0">
       {[
         {
           label: 'Global donations',
-          value: (
+          value: disableTooltips ? (
+            globalDonationsRender
+          ) : (
             <TooltipProvider delayDuration={0}>
               <Tooltip onOpenChange={setIsDonatedTooltipOpen} open={isDonatedTooltipOpen}>
                 <TooltipTrigger
@@ -115,7 +122,7 @@ export function TopLevelMetrics({
                   onClick={() => setIsDonatedTooltipOpen(true)}
                   style={{ height: 35 }}
                 >
-                  <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
+                  {globalDonationsRender}
                   <sup>
                     <Info className="h-4 w-4" />
                   </sup>

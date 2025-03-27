@@ -57,7 +57,7 @@ export function ThirdwebLoginContent({
   const swrConfig = useSWRConfig()
   const countryCode = useCountryCode()
 
-  const { title, subtitle, footerContent } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
+  const { title, subtitle, footerContent, iconSrc } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
 
   const handleLogin = useCallback(async () => {
     if (onLoginCallback) {
@@ -101,13 +101,7 @@ export function ThirdwebLoginContent({
       <DialogBody>
         <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
           <div className="flex flex-col items-center space-y-6">
-            <NextImage
-              alt="Stand With Crypto Logo"
-              height={80}
-              priority
-              src="/logo/shield.svg"
-              width={80}
-            />
+            <NextImage alt="Stand With Crypto Logo" height={80} priority src={iconSrc} width={80} />
 
             <div className="space-y-4">
               <PageTitle size="sm">{title}</PageTitle>

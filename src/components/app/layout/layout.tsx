@@ -37,7 +37,7 @@ export function PageLayout({
         />
         <TopLevelClientLogic countryCode={countryCode}>
           <FullHeight.Container>
-            <NavBarGlobalBanner />
+            <NavBarGlobalBanner countryCode={countryCode} />
             {navbar}
             <FullHeight.Content>{children}</FullHeight.Content>
             {footer}

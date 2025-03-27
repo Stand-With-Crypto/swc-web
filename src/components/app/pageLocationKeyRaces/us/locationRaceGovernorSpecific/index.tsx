@@ -5,6 +5,7 @@ import { compact, isEmpty } from 'lodash-es'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
@@ -176,6 +177,7 @@ export function LocationRaceGovernorSpecific({
                   <div className="sticky top-24 text-center">
                     <DTSIPersonHeroCard
                       countryCode={countryCode}
+                      cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
                       isRecommended={isRecommended}
                       person={person}
                       subheader="role"

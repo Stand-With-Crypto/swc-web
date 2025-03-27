@@ -1,3 +1,8 @@
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
+import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
+import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
+import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -15,13 +20,22 @@ import { GbHero } from './hero'
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
 
-export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders }: HomePageProps) {
+export function GbPageHome({
+  topLevelMetrics,
+  recentActivity,
+  partners,
+  founders,
+  dtsiHomepagePoliticians,
+}: HomePageProps) {
+  const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePoliticians.lowestScores)
+  const highestScores = sortDTSIPersonDataTable(dtsiHomepagePoliticians.highestScores)
+
   return (
     <>
       <GbHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
+        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
       </section>
 
       <HomePageSection>
@@ -74,14 +88,56 @@ export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders
           <HomePageSection.Subtitle>
             Members from our community that have founded crypto-related businesses in the UK.
           </HomePageSection.Subtitle>
-          <div className="flex flex-col items-center gap-6">
-            <FoundersCarousel founders={founders} />
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.founders()}>View all</InternalLink>
-            </Button>
-          </div>
+
+          <FoundersCarousel founders={founders} />
         </HomePageSection>
       )}
+
+      <HomePageSection className="space-y-6" container={false}>
+        <div className="container">
+          <HomePageSection.Title>Where politicians stand on crypto</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            Ask your policymakers to be pro-crypto. Here's where they stand now.
+          </HomePageSection.Subtitle>
+        </div>
+        <div>
+          <h5 className="container text-center">
+            <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={100} text="Pro-crypto" />
+          </h5>
+          <DTSIPersonHeroCardRow>
+            {highestScores.map(person => (
+              <DTSIPersonHeroCard
+                countryCode={countryCode}
+                cryptoStanceGradeElement={<DTSIThumbsUpOrDownGrade person={person} />}
+                key={person.id}
+                person={person}
+                subheader="role-w-state"
+              />
+            ))}
+          </DTSIPersonHeroCardRow>
+        </div>
+        <div>
+          <h5 className="container text-center">
+            <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={0} text="Anti-crypto" />
+          </h5>
+          <DTSIPersonHeroCardRow>
+            {lowestScores.map(person => (
+              <DTSIPersonHeroCard
+                countryCode={countryCode}
+                cryptoStanceGradeElement={<DTSIThumbsUpOrDownGrade person={person} />}
+                key={person.id}
+                person={person}
+                subheader="role-w-state"
+              />
+            ))}
+          </DTSIPersonHeroCardRow>
+        </div>
+        <div className="container space-x-4 text-center">
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.politiciansHomepage()}>View all</InternalLink>
+          </Button>
+        </div>
+      </HomePageSection>
     </>
   )
 }

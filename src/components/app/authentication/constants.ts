@@ -15,26 +15,31 @@ export const COUNTRY_SPECIFIC_LOGIN_CONTENT: Record<
     title: string
     subtitle: string
     footerContent: string
+    iconSrc: string
   }
 > = {
-  us: {
+  [SupportedCountryCodes.US]: {
     title: DEFAULT_TITLE,
     subtitle: DEFAULT_SUBTITLE,
     footerContent: DEFAULT_FOOTER_CONTENT,
+    iconSrc: '/logo/shield.svg',
   },
-  gb: {
+  [SupportedCountryCodes.GB]: {
     title: DEFAULT_TITLE,
-    subtitle: 'Join the Stand With Crypto movement to make your voice heard in London',
+    subtitle: 'Join the Stand With Crypto movement to make your voice heard in the UK',
     footerContent: DEFAULT_FOOTER_CONTENT,
+    iconSrc: '/gb/logo/shield.svg',
   },
-  ca: {
+  [SupportedCountryCodes.CA]: {
     title: DEFAULT_TITLE,
-    subtitle: 'Join the Stand With Crypto movement to make your voice heard in Ottawa',
+    subtitle: 'Join the Stand With Crypto movement to make your voice heard in Canada',
     footerContent: DEFAULT_FOOTER_CONTENT,
+    iconSrc: '/ca/logo/shield.svg',
   },
-  au: {
+  [SupportedCountryCodes.AU]: {
     title: DEFAULT_TITLE,
-    subtitle: 'Join the Stand With Crypto movement to make your voice heard in Canberra',
+    subtitle: 'Join the Stand With Crypto movement to make your voice heard in Australia',
     footerContent: DEFAULT_FOOTER_CONTENT,
+    iconSrc: '/au/logo/shield.svg',
   },
 }

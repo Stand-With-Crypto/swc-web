@@ -4,6 +4,8 @@ import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT
 import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
+import { backfillIntlUsersWithInngest } from '@/inngest/functions/backfillIntlUsers'
+import { processIntlUsersBatch } from '@/inngest/functions/backfillIntlUsers/logic'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
@@ -79,5 +81,7 @@ export const { GET, POST, PUT } = serve({
     cleanupDatadogSyntheticTestsWithInngest,
     updateDistrictsRankings,
     backfillUserCountryCodeEmptyWithInngest,
+    backfillIntlUsersWithInngest,
+    processIntlUsersBatch,
   ],
 })

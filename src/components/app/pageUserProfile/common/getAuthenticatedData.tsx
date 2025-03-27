@@ -17,7 +17,7 @@ export async function getAuthenticatedData() {
     return null
   }
 
-  const userPromise = prismaClient.user.findFirstOrThrow({
+  const userPromise = await prismaClient.user.findFirstOrThrow({
     where: {
       id: authUser.userId,
     },

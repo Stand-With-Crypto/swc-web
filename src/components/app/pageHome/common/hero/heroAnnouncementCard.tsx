@@ -96,9 +96,9 @@ function HeroAnnouncementCardCTA({
 }: React.PropsWithChildren<{ buttonText: string }>) {
   return (
     <>
-      <p>{children}</p>
+      <p className="max-sm:flex-[2]">{children}</p>
       <Button
-        className={cn('max-sm:w-full', linkBoxLinkClassName)}
+        className={cn('max-sm:flex-1', linkBoxLinkClassName)}
         data-link-box-subject
         size="sm"
         variant="secondary"
