@@ -55,13 +55,7 @@ export const getPersonDataTableFilterFns = (): Record<
       return true
     }
 
-    const rolesArray = [
-      ROLE_OPTIONS.SENATE,
-      ROLE_OPTIONS.HOUSE_OF_COMMONS,
-      ROLE_OPTIONS.MAYOR,
-      ROLE_OPTIONS.COMMITTEE_CHAIR,
-      ROLE_OPTIONS.COMMITTEE_MEMBER,
-    ]
+    const rolesArray = [ROLE_OPTIONS.HOUSE_OF_COMMONS]
 
     if (rolesArray.includes(filterValue)) {
       return (
@@ -118,11 +112,7 @@ export function getPartyOptionDisplayName(party: string) {
 
 export const ROLE_OPTIONS = {
   ALL: 'All',
-  SENATE: DTSI_PersonRoleCategory.SENATE,
   HOUSE_OF_COMMONS: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
-  MAYOR: DTSI_PersonRoleCategory.MAYOR,
-  COMMITTEE_CHAIR: DTSI_PersonRoleCategory.COMMITTEE_CHAIR,
-  COMMITTEE_MEMBER: DTSI_PersonRoleCategory.COMMITTEE_MEMBER,
   ALL_OTHER: 'ALL_OTHER',
 }
 
@@ -130,16 +120,9 @@ export function getRoleOptionDisplayName(role: string) {
   switch (role) {
     case ROLE_OPTIONS.ALL_OTHER:
       return 'Other Political Figure'
-    case ROLE_OPTIONS.SENATE:
-      return 'Senator'
+
     case ROLE_OPTIONS.HOUSE_OF_COMMONS:
-      return 'Representative'
-    case ROLE_OPTIONS.MAYOR:
-      return 'Mayor'
-    case ROLE_OPTIONS.COMMITTEE_CHAIR:
-      return 'Committee Chair'
-    case ROLE_OPTIONS.COMMITTEE_MEMBER:
-      return 'Committee Member'
+      return 'House of Commons'
     default:
       return 'All'
   }
