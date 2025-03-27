@@ -3,6 +3,7 @@
 import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 
+import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
@@ -44,14 +45,21 @@ export function PageUserProfile({
 
   const { userActions: userActionsFromLoadedUserInServerSide } = user
 
-  const userActions = data?.user?.userActions ?? userActionsFromLoadedUserInServerSide
+  const userActions = filterUserActionsByCountry(
+    data?.user?.userActions ?? userActionsFromLoadedUserInServerSide,
+    countryCode,
+  )
 
   const performedUserActionTypes = uniq(
     userActions.map(x => ({ actionType: x.actionType, campaignName: x.campaignName })),
   )
+
   const { progressValue, numActionsCompleted, numActionsAvailable } = getUserActionsProgress({
     userHasEmbeddedWallet: user.hasEmbeddedWallet,
-    performedUserActionTypes,
+    performedUserActionTypes: [
+      ...performedUserActionTypes,
+      { actionType: UserActionType.OPT_IN, campaignName: 'DEFAULT' },
+    ],
     countryCode,
   })
 
@@ -187,6 +195,15 @@ export function PageUserProfile({
         </div>
       </section>
     </div>
+  )
+}
+
+function filterUserActionsByCountry(
+  userActions: SensitiveDataClientUserAction[],
+  countryCode: SupportedCountryCodes,
+) {
+  return userActions.filter(
+    action => action.countryCode === countryCode || action.actionType === UserActionType.OPT_IN,
   )
 }
 

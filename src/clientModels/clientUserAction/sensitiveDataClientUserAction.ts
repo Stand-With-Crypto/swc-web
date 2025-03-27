@@ -23,6 +23,7 @@ import {
 import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
@@ -147,6 +148,7 @@ export type SensitiveDataClientUserAction = ClientModel<
   Pick<UserAction, 'id' | 'actionType' | 'campaignName'> & {
     nftMint: ClientNFTMint | null
     datetimeCreated: string
+    countryCode: SupportedCountryCodes
   } & (
       | SensitiveDataClientUserActionTweet
       | SensitiveDataClientUserActionOptIn
@@ -196,7 +198,7 @@ export const getSensitiveDataClientUserAction = ({
           ...getClientNFTMint(nftMint),
         }
       : null,
-    countryCode,
+    countryCode: countryCode as SupportedCountryCodes,
   }
 
   const actionTypes: {
