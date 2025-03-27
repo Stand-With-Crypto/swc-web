@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { actionUpdateUserCountryCode } from '@/actions/actionUpdateUserCountryCode'
+import { IpLocationBypass } from '@/app/[countryCode]/internal/user-settings/ipLocationBypass'
 import { useCookieConsent } from '@/components/app/cookieConsent/useCookieConsent'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -160,6 +161,8 @@ export function UserConfig() {
           </div>
         </form>
       </Form>
+
+      <IpLocationBypass />
     </div>
   )
 }
