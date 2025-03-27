@@ -56,7 +56,9 @@ async function apiResponseForUserFullProfileInfo() {
     user: user && {
       ...getSensitiveDataClientUser(user),
       address: user.address && getClientAddress(user.address),
-      userActions: user.userActions.map(record => getSensitiveDataClientUserAction({ record })),
+      userActions: user.userActions
+        .filter(action => action.countryCode === user.countryCode)
+        .map(record => getSensitiveDataClientUserAction({ record })),
     },
   }
 }

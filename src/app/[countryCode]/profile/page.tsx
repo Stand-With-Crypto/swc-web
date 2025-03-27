@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 import { PageUserProfile } from '@/components/app/pageUserProfile/common'
 import {
@@ -8,7 +9,11 @@ import {
 import { getAuthenticatedData } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
@@ -32,6 +37,10 @@ export default async function Profile(props: Props) {
   if (!user || !isSignedIn) {
     const searchParams = await props.searchParams
     return <AuthRedirect countryCode={countryCode} searchParams={searchParams} />
+  }
+
+  if (user.countryCode !== countryCode) {
+    redirect(getIntlUrls(user.countryCode as SupportedCountryCodes).profile())
   }
 
   return <PageUserProfile countryCode={countryCode} user={user} />

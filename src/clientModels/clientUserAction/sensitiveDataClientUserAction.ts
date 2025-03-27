@@ -185,7 +185,7 @@ export const getSensitiveDataClientUserAction = ({
 }: {
   record: SensitiveDataClientUserActionDatabaseQuery
 }): SensitiveDataClientUserAction => {
-  const { id, datetimeCreated, actionType, nftMint, campaignName } = record
+  const { id, datetimeCreated, actionType, nftMint, campaignName, countryCode } = record
   const sharedProps = {
     id,
     datetimeCreated: datetimeCreated.toISOString(),
@@ -196,6 +196,7 @@ export const getSensitiveDataClientUserAction = ({
           ...getClientNFTMint(nftMint),
         }
       : null,
+    countryCode,
   }
 
   const actionTypes: {

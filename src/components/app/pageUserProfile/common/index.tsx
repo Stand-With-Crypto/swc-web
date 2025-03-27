@@ -46,6 +46,8 @@ export function PageUserProfile({
 
   const userActions = data?.user?.userActions ?? userActionsFromLoadedUserInServerSide
 
+  console.log('userActions', userActions)
+
   const performedUserActionTypes = uniq(
     userActions.map(x => ({ actionType: x.actionType, campaignName: x.campaignName })),
   )

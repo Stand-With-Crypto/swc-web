@@ -17,7 +17,7 @@ export async function getAuthenticatedData() {
     return null
   }
 
-  const userPromise = prismaClient.user.findFirstOrThrow({
+  const user = await prismaClient.user.findFirstOrThrow({
     where: {
       id: authUser.userId,
     },
@@ -40,7 +40,7 @@ export async function getAuthenticatedData() {
   })
 
   const userActionsPromise = prismaClient.userAction.findMany({
-    where: { userId: authUser.userId },
+    where: { userId: authUser.userId, countryCode: user.countryCode },
     include: {
       userActionDonation: true,
       userActionEmail: {
@@ -72,8 +72,7 @@ export async function getAuthenticatedData() {
     },
   })
 
-  const [user, userMergeAlertUserA, userMergeAlertUserB, userActions] = await Promise.all([
-    userPromise,
+  const [userMergeAlertUserA, userMergeAlertUserB, userActions] = await Promise.all([
     userMergeAlertUserAPromise,
     userMergeAlertUserBPromise,
     userActionsPromise,

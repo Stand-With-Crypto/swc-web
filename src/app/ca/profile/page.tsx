@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 import { PageUserProfile } from '@/components/app/pageUserProfile/common'
 import {
@@ -9,6 +10,7 @@ import { getAuthenticatedData } from '@/components/app/pageUserProfile/common/ge
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = SupportedCountryCodes.CA
 
@@ -32,6 +34,10 @@ export default async function CAProfile(props: Props) {
   if (!user || !isSignedIn) {
     const searchParams = await props.searchParams
     return <AuthRedirect countryCode={countryCode} searchParams={searchParams} />
+  }
+
+  if (user.countryCode !== countryCode) {
+    redirect(getIntlUrls(user.countryCode as SupportedCountryCodes).profile())
   }
 
   return <PageUserProfile countryCode={countryCode} hideUserMetrics user={user} />
