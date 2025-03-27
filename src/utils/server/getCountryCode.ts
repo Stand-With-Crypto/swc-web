@@ -7,6 +7,7 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const USER_COUNTRY_CODE_COOKIE_NAME = 'USER_COUNTRY_CODE'
+export const BYPASS_IP_LOCATION_COOKIE_NAME = 'BYPASS_IP_LOCATION'
 
 interface UserCountryCodeCookie {
   countryCode: string
@@ -18,11 +19,12 @@ const defaultCountryCode = ['local', 'testing'].includes(NEXT_PUBLIC_ENVIRONMENT
   : ''
 
 export const getCountryCode = (request: NextRequest) => {
+  const bypassIpLocationCookie = request.cookies.get(BYPASS_IP_LOCATION_COOKIE_NAME)?.value
   const { country: userCountryCode } = geolocation(request)
   const pageCountryCode =
     extractCountryCode(request.nextUrl.pathname)?.toLowerCase() ?? DEFAULT_SUPPORTED_COUNTRY_CODE
 
-  return userCountryCode || defaultCountryCode || pageCountryCode
+  return bypassIpLocationCookie || userCountryCode || defaultCountryCode || pageCountryCode
 }
 
 export const parseUserCountryCodeCookie = (cookieValue?: string | null) => {

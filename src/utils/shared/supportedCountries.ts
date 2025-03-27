@@ -26,3 +26,5 @@ export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLoca
 export const COUNTRY_CODE_REGEX_PATTERN = new RegExp(
   `^(${Object.values(SupportedCountryCodes).join('|')})$`,
 )
+
+export const USER_SELECTED_COUNTRY_COOKIE_NAME = 'USER_SELECTED_COUNTRY'
