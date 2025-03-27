@@ -195,7 +195,7 @@ export function UsPageHome({
             {highestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
-                cryptoStanceGradeComponent={<DTSIFormattedLetterGrade person={person} />}
+                cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"
@@ -211,7 +211,7 @@ export function UsPageHome({
             {lowestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
-                cryptoStanceGradeComponent={<DTSIFormattedLetterGrade person={person} />}
+                cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"

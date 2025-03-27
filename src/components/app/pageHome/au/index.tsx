@@ -112,7 +112,7 @@ export function AuPageHome({
             {highestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
-                cryptoStanceGradeComponent={<DTSIThumbsUpOrDownGrade person={person} />}
+                cryptoStanceGradeElement={<DTSIThumbsUpOrDownGrade person={person} />}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"
@@ -128,7 +128,7 @@ export function AuPageHome({
             {lowestScores.map(person => (
               <DTSIPersonHeroCard
                 countryCode={countryCode}
-                cryptoStanceGradeComponent={<DTSIThumbsUpOrDownGrade person={person} />}
+                cryptoStanceGradeElement={<DTSIThumbsUpOrDownGrade person={person} />}
                 key={person.id}
                 person={person}
                 subheader="role-w-state"
