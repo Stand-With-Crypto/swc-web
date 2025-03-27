@@ -9,7 +9,7 @@ import { toBool } from '@/utils/shared/toBool'
 
 import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
 import { UsPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/us'
-import { getData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
@@ -18,7 +18,7 @@ export const dynamicParams = true
 type Props = PageProps<{ dtsiSlug: string }>
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const person = await getData((await props.params).dtsiSlug)
+  const person = await getPoliticianDetailsData((await props.params).dtsiSlug)
   if (!person) {
     return {}
   }
@@ -43,7 +43,7 @@ export default async function PoliticianDetails(props: Props) {
   const { countryCode } = params
 
   const [person, questionnaire] = await Promise.all([
-    getData(params.dtsiSlug),
+    getPoliticianDetailsData(params.dtsiSlug),
     getQuestionnaire(params.dtsiSlug),
   ])
 

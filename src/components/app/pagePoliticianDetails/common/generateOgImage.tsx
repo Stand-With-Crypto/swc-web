@@ -2,7 +2,7 @@
 // the above eslint rule is disabled because the img elements are required for the og image to work
 import { ImageResponse } from 'next/og'
 
-import { getData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,
@@ -11,7 +11,7 @@ import {
 import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
 
 export async function generateOgImage({ params }: { params: { dtsiSlug: string } }) {
-  const person = await getData(params.dtsiSlug)
+  const person = await getPoliticianDetailsData(params.dtsiSlug)
   const shieldData = await fetch(new URL('./images/shield.png', import.meta.url)).then(res =>
     res.arrayBuffer(),
   )

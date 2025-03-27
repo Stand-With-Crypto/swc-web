@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { getData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -16,7 +16,7 @@ export const dynamicParams = true
 type Props = PageProps<{ dtsiSlug: string }>
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const person = await getData((await props.params).dtsiSlug)
+  const person = await getPoliticianDetailsData((await props.params).dtsiSlug)
   if (!person) {
     return {}
   }
@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 export default async function CaPoliticianDetails(props: Props) {
   const { dtsiSlug } = await props.params
   const [person] = await Promise.all([
-    getData(dtsiSlug),
+    getPoliticianDetailsData(dtsiSlug),
     // TODO: uncomment this once we have questionnaire data for AU
     // getQuestionnaire(dtsiSlug),
   ])
