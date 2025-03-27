@@ -42,7 +42,7 @@ export function USUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },
-        payload: { campaignName: USUserActionTweetCampaignName.DEFAULT },
+        payload: { campaignName: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 },
         onError: toastGenericError,
       },
       actionCreateUserActionTweet,
