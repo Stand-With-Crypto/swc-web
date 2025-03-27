@@ -1,6 +1,5 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { organizePeopleAU } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
-import { ImageWithFallbackOnError } from '@/components/ui/imageWithFallbackOnError'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
@@ -33,14 +32,6 @@ export function AUKeyRaces({ groups, countryCode }: AUKeyRacesProps) {
     const stateName = AU_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as AUStateCode]
     return (
       <div className="container flex flex-col items-center" key={stateCode}>
-        <ImageWithFallbackOnError
-          alt={`${stateName} shield`}
-          fallbackSrc="/logo/shield.png"
-          height={150}
-          src={`/stateShields/au/${stateCode}.png`}
-          width={150}
-        />
-
         <PageTitle as="h2" size="sm">
           {stateName}
         </PageTitle>

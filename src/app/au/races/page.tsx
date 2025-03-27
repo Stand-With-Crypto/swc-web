@@ -7,6 +7,7 @@ import { queryDTSILocationAustraliaInformation } from '@/data/dtsi/queries/au/qu
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { AUKeyRacesStates } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/keyRacesStates'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
@@ -36,6 +37,7 @@ export default async function LocationAustraliaPage() {
       countAdvocates={countAdvocates}
       countryCode={countryCode}
       keyRaces={<AUKeyRaces countryCode={countryCode} groups={groups} />}
+      keyRacesStates={<AUKeyRacesStates countryCode={countryCode} />}
     />
   )
 }

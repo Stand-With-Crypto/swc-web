@@ -5,7 +5,7 @@ import {
   DTSI_StateSpecificInformationQuery,
   DTSI_StateSpecificInformationQueryVariables,
 } from '@/data/dtsi/generated'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { LocationStateCode } from '@/utils/shared/urls'
 
 const query = /* GraphQL */ `
   query StateSpecificInformation($stateCode: String!) {
@@ -55,7 +55,7 @@ const query = /* GraphQL */ `
 export const queryDTSILocationStateSpecificInformation = async ({
   stateCode,
 }: {
-  stateCode: USStateCode
+  stateCode: LocationStateCode
 }) => {
   const results = await fetchDTSI<
     DTSI_StateSpecificInformationQuery,

@@ -7,6 +7,7 @@ import { queryDTSILocationCanadaInformation } from '@/data/dtsi/queries/ca/query
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { CAKeyRacesStates } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/keyRacesStates'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
@@ -36,6 +37,7 @@ export default async function LocationCanadaPage() {
       countAdvocates={countAdvocates}
       countryCode={countryCode}
       keyRaces={<CAKeyRaces countryCode={countryCode} groups={groups} />}
+      keyRacesStates={<CAKeyRacesStates countryCode={countryCode} />}
     />
   )
 }

@@ -1,6 +1,5 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { organizePeopleGB } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/organizePeople'
-import { ImageWithFallbackOnError } from '@/components/ui/imageWithFallbackOnError'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
@@ -37,14 +36,6 @@ export function GBKeyRaces({ groups, countryCode }: GBKeyRacesProps) {
 
     return (
       <div className="container flex flex-col items-center" key={stateCode}>
-        <ImageWithFallbackOnError
-          alt={`${stateName} shield`}
-          fallbackSrc="/logo/shield.png"
-          height={150}
-          src={`/stateShields/gb/${stateCode}.png`}
-          width={150}
-        />
-
         <PageTitle as="h2" size="sm">
           {stateName}
         </PageTitle>
@@ -56,17 +47,18 @@ export function GBKeyRaces({ groups, countryCode }: GBKeyRacesProps) {
             normalizeDTSIDistrictId(people[0].runningForSpecificRole)
 
           const subtitleNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR ? 'Governor Race' : 'Senate Race'
-
-          const linkNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR
-              ? urls.locationStateSpecificGovernorRace(stateCode as GBCountryCode)
-              : urls.locationStateSpecificSenateRace(stateCode as GBCountryCode)
+            raceCategory === DTSI_PersonRoleCategory.HOUSE_OF_LORDS
+              ? 'House of Lords Race'
+              : 'House of Commons Race'
 
           return (
             <DTSIPersonHeroCardSection
               countryCode={countryCode}
-              cta={<InternalLink href={linkNoDistrict}>View Race</InternalLink>}
+              cta={
+                <InternalLink href={urls.locationStateSpecific(stateCode as GBCountryCode)}>
+                  View Race
+                </InternalLink>
+              }
               key={`${stateCode}-${primaryDistrict ?? idx}`}
               people={people}
               subtitle={

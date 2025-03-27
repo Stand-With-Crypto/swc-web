@@ -1,6 +1,5 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { organizePeopleCA } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/organizePeople'
-import { ImageWithFallbackOnError } from '@/components/ui/imageWithFallbackOnError'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
@@ -37,14 +36,6 @@ export function CAKeyRaces({ groups, countryCode }: CAKeyRacesProps) {
       CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP[stateCode as CAProvinceOrTerritoryCode]
     return (
       <div className="container flex flex-col items-center" key={stateCode}>
-        <ImageWithFallbackOnError
-          alt={`${stateName} shield`}
-          fallbackSrc="/logo/shield.png"
-          height={150}
-          src={`/stateShields/ca/${stateCode}.png`}
-          width={150}
-        />
-
         <PageTitle as="h2" size="sm">
           {stateName}
         </PageTitle>
