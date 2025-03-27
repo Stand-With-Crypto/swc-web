@@ -5,7 +5,6 @@ import { isNil } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/common/table'
-import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
@@ -58,8 +57,10 @@ const personColumnHelper = createColumnHelper<Person>()
  */
 export const getDTSIClientPersonDataTableColumns = ({
   countryCode,
+  dtsiGradeComponent: DtsiGradeComponent,
 }: {
   countryCode: SupportedCountryCodes
+  dtsiGradeComponent: React.ComponentType<{ person: Person; className: string }>
 }) => [
   personColumnHelper.accessor(dtsiPersonFullName, {
     id: PERSON_TABLE_COLUMNS_IDS.FULL_NAME,
@@ -99,8 +100,7 @@ export const getDTSIClientPersonDataTableColumns = ({
       },
       cell: ({ row }) => (
         <div className="flex items-center gap-2">
-          {/* // TODO (@twistershark): fix this */}
-          <DTSIFormattedLetterGrade className="h-7 w-7" person={row.original} />
+          <DtsiGradeComponent className="h-7 w-7" person={row.original} />
           <span className="hidden md:inline">
             {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
           </span>
