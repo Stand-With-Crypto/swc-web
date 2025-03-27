@@ -27,13 +27,14 @@ import {
   PARTY_OPTIONS,
   ROLE_OPTIONS,
 } from '@/components/app/dtsiClientPersonDataTable/gb/filters'
+import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import {
   GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
   getGBCountryNameFromCode,
 } from '@/utils/shared/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or location'
+const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or country'
 const GLOBAL_SUBTITLE =
   'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
@@ -58,7 +59,11 @@ export function GbDTSIClientPersonDataTable({
   }, [data?.people])
 
   const tableColumns = useMemo(
-    () => getDTSIClientPersonDataTableColumns({ countryCode }),
+    () =>
+      getDTSIClientPersonDataTableColumns({
+        countryCode,
+        dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
+      }),
     [countryCode],
   )
 
@@ -69,7 +74,7 @@ export function GbDTSIClientPersonDataTable({
       data: parsedData,
       getGlobalFilterDefaults,
       getPersonDataTableFilterFns,
-      globalFiltersComponent: <GbGlobalFilters />,
+      globalFiltersComponent: GbGlobalFilters,
       globalFilter,
       setGlobalFilter,
     }

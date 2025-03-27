@@ -27,6 +27,7 @@ import {
   PARTY_OPTIONS,
   ROLE_OPTIONS,
 } from '@/components/app/dtsiClientPersonDataTable/us/filters'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   getUSStateNameFromStateCode,
@@ -59,7 +60,11 @@ export function UsDTSIClientPersonDataTable({
   }, [data?.people])
 
   const tableColumns = useMemo(
-    () => getDTSIClientPersonDataTableColumns({ countryCode }),
+    () =>
+      getDTSIClientPersonDataTableColumns({
+        countryCode,
+        dtsiGradeComponent: DTSIFormattedLetterGrade,
+      }),
     [countryCode],
   )
 
@@ -70,7 +75,7 @@ export function UsDTSIClientPersonDataTable({
       data: parsedData,
       getGlobalFilterDefaults,
       getPersonDataTableFilterFns,
-      globalFiltersComponent: <UsGlobalFilters />,
+      globalFiltersComponent: UsGlobalFilters,
       globalFilter,
       setGlobalFilter,
     }

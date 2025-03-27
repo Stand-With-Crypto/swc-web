@@ -27,13 +27,14 @@ import {
   parseStringPoliticiansTable,
   sortDTSIPersonDataTable,
 } from '@/components/app/dtsiClientPersonDataTable/common/utils'
+import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   getCAProvinceOrTerritoryNameFromCode,
 } from '@/utils/shared/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or location'
+const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or province'
 const GLOBAL_SUBTITLE =
   'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
@@ -58,7 +59,11 @@ export function CaDTSIClientPersonDataTable({
   }, [data?.people])
 
   const tableColumns = useMemo(
-    () => getDTSIClientPersonDataTableColumns({ countryCode }),
+    () =>
+      getDTSIClientPersonDataTableColumns({
+        countryCode,
+        dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
+      }),
     [countryCode],
   )
 
@@ -69,7 +74,7 @@ export function CaDTSIClientPersonDataTable({
       data: parsedData,
       getGlobalFilterDefaults,
       getPersonDataTableFilterFns,
-      globalFiltersComponent: <CaGlobalFilters />,
+      globalFiltersComponent: CaGlobalFilters,
       globalFilter,
       setGlobalFilter,
     }
