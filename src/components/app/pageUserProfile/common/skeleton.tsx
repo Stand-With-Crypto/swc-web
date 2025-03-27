@@ -59,15 +59,17 @@ export function PageUserProfileSkeleton({
       )}
 
       <section>
-        <PageTitle className="mb-4" size="md">
-          <Skeleton>Your advocacy progress</Skeleton>
-        </PageTitle>
+        <Skeleton>
+          <PageTitle className="mb-4" size="md">
+            Your advocacy progress
+          </PageTitle>
+        </Skeleton>
 
-        <PageSubTitle className="mb-5">
-          <Skeleton>
+        <Skeleton>
+          <PageSubTitle className="mb-5">
             You've completed {0} out of {6} actions. Keep going!
-          </Skeleton>
-        </PageSubTitle>
+          </PageSubTitle>
+        </Skeleton>
         <div className="mx-auto mb-10 max-w-xl">
           <Progress value={0} />
         </div>
