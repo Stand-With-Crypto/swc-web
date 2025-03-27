@@ -6,6 +6,7 @@ import { UserActionFormSuccessScreenFeedback } from '@/components/app/userAction
 import { UserActionFormSuccessScreenNextActionSkeleton } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { Dialog, DialogContent, DialogProps } from '@/components/ui/dialog'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useSession } from '@/hooks/useSession'
 
 const UserActionFormJoinSWCSuccess = dynamic(
@@ -35,6 +36,7 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
 
   const session = useSession()
   const performedUserActionTypesResponse = useApiResponseForUserPerformedUserActionTypes()
+  const countryCode = useCountryCode()
 
   const performedUserActionTypes = performedUserActionTypesResponse.data?.performedUserActionTypes
 
@@ -49,6 +51,7 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
           ) : (
             <UserActionFormSuccessScreenNextAction
               data={{
+                countryCode,
                 userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
                 performedUserActionTypes: performedUserActionTypes || [],
               }}
