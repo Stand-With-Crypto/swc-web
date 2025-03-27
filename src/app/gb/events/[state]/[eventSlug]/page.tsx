@@ -7,8 +7,10 @@ import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/even
 import { PageProps } from '@/types'
 import { getEvent, getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { isValidUSStateCode } from '@/utils/shared/usStateUtils'
+import { isValidGBCountryCode } from '@/utils/shared/gbCountryUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.GB
 
 type Props = PageProps<{
   state: string
@@ -20,8 +22,6 @@ export const dynamic = 'error'
 const title = 'Event'
 const description =
   'Stand With Crypto hosts events nationwide to organize, activate, and energize the nationwide Crypto community. Check this page for information about upcoming events, including times, dates, and locations, and RSVP to events in your area'
-
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
@@ -51,14 +51,14 @@ export default async function EventDetailsPageRoot(props: Props) {
 
   const event = await getEvent({ eventSlug, state, countryCode })
 
-  if (!isValidUSStateCode(state) || !event) {
+  if (!isValidGBCountryCode(state) || !event) {
     notFound()
   }
 
   const events = await getEvents({ countryCode })
 
   return (
-    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
+    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events} showMap={false}>
       <EventDialogContent event={event.data} />
     </EventsPageDialogDeeplinkLayout>
   )

@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { EventsPage } from '@/components/app/pageEvents'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   }),
 }
 
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+const countryCode = SupportedCountryCodes.CA
 
 export default async function EventsPageRoot() {
   const events = await getEvents({ countryCode })
 
-  return <EventsPage events={events} />
+  return <EventsPage events={events} showMap={false} />
 }

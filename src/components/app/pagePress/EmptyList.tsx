@@ -52,11 +52,7 @@ function EmptyListCTA() {
               <div className="flex flex-col items-center gap-4">
                 <SMSOptInForm.PhoneNumberField
                   className="w-full max-w-[400px]"
-                  disabled={[
-                    SMSStatus.OPTED_IN,
-                    SMSStatus.OPTED_IN_HAS_REPLIED,
-                    SMSStatus.OPTED_OUT,
-                  ].includes(user.smsStatus)}
+                  disabled={user.smsStatus !== SMSStatus.NOT_OPTED_IN}
                 />
 
                 {user && (
@@ -94,7 +90,13 @@ function SMSStatusFooter({
   smsStatus: SMSStatus
   isSubmitting?: boolean
 }) {
-  if ([SMSStatus.OPTED_IN, SMSStatus.OPTED_IN_HAS_REPLIED].includes(smsStatus)) {
+  if (
+    [
+      SMSStatus.OPTED_IN,
+      SMSStatus.OPTED_IN_HAS_REPLIED,
+      SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
+    ].includes(smsStatus)
+  ) {
     return (
       <span className="mt-2 flex items-center gap-2 text-green-600">
         <NextImage
