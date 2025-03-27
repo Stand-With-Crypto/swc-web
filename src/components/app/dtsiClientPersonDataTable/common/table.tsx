@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  cloneElement,
-  isValidElement,
-  MouseEvent,
-  ReactNode,
-  SetStateAction,
-  useCallback,
-  useMemo,
-} from 'react'
+import { ComponentType, MouseEvent, ReactNode, SetStateAction, useCallback, useMemo } from 'react'
 import {
   Column,
   ColumnFiltersState,
@@ -59,7 +51,7 @@ interface DataTableProps<TData extends Person = Person> extends Partial<TableOpt
 }
 
 interface DataTableBodyProps<TData extends Person = Person> extends DataTableProps<TData> {
-  globalFiltersComponent: React.ReactElement<GlobalFiltersProps<TData>>
+  globalFiltersComponent: ComponentType<GlobalFiltersProps<TData>>
   getGlobalFilterDefaults: () => ColumnFiltersState
   getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
   globalFilter: string
@@ -117,7 +109,7 @@ export function DataTableBody<TData extends Person = Person>({
   loadState,
   globalFilterFn,
   countryCode,
-  globalFiltersComponent,
+  globalFiltersComponent: GlobalFiltersComponent,
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
   globalFilter,
@@ -177,9 +169,7 @@ export function DataTableBody<TData extends Person = Person>({
           <PageTitle className="text-left" size="md">
             Politicians
           </PageTitle>
-          {isValidElement(globalFiltersComponent)
-            ? cloneElement(globalFiltersComponent, { columns: table.getAllColumns() })
-            : globalFiltersComponent}
+          <GlobalFiltersComponent columns={table.getAllColumns()} />
         </div>
 
         <div className="relative w-full">
@@ -277,7 +267,7 @@ export function DataTableBodySkeleton<TData extends Person = Person>({
   data = [],
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
-  globalFiltersComponent,
+  globalFiltersComponent: GlobalFiltersComponent,
   ...rest
 }: DataTableBodyProps<TData>) {
   const table = useReactTable<TData>({
@@ -306,9 +296,7 @@ export function DataTableBodySkeleton<TData extends Person = Person>({
           <PageTitle className="text-left" size="md">
             Politicians
           </PageTitle>
-          {isValidElement(globalFiltersComponent)
-            ? cloneElement(globalFiltersComponent, { columns: table.getAllColumns() })
-            : globalFiltersComponent}
+          <GlobalFiltersComponent columns={table.getAllColumns()} />
         </div>
 
         <div className="relative w-full" data-testid="table-skeleton">
