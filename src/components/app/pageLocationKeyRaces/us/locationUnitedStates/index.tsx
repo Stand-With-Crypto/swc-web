@@ -1,158 +1,30 @@
 'use client'
 
-import { useEffect } from 'react'
-import Balancer from 'react-wrap-balancer'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common'
+import { USKeyRaces } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/keyRaces'
+import { USKeyRacesStates } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/keyRacesStates'
+import { organizePeople } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/organizePeople'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
-import { ContentSection } from '@/components/app/ContentSection'
-import { DarkHeroSection } from '@/components/app/darkHeroSection'
-import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
-import { PACFooter } from '@/components/app/pacFooter'
-import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
-import { Button } from '@/components/ui/button'
-import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { InternalLink } from '@/components/ui/link'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { StateShield } from '@/components/ui/stateShield'
-import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
-import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
-import { cn } from '@/utils/web/cn'
-
-import { organizePeople } from './organizePeople'
-import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
-
-interface LocationUnitedStatesProps extends QueryDTSILocationUnitedStatesInformationData {
-  countryCode: SupportedCountryCodes
-  countAdvocates: number
-}
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export function LocationUnitedStates({
-  countryCode,
   countAdvocates,
-  ...queryData
-}: LocationUnitedStatesProps) {
-  const groups = organizePeople(queryData)
-  const urls = getIntlUrls(countryCode)
-
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces()
-  }, [])
-
+  groups,
+}: {
+  countAdvocates: number
+  groups: Awaited<ReturnType<typeof organizePeople>>
+}) {
   return (
-    <div className="space-y-20">
-      <DarkHeroSection>
-        <div className="space-y-6 text-center">
-          <PageTitle as="h1" size="md">
-            Key Races in the United States
-          </PageTitle>
-          <h2 className="space-y-4 font-light text-muted lg:space-y-1">
-            <p>
-              <Balancer>
-                View the key races occurring across the US that will impact the future of crypto.
-                Learn where politicians stand on crypto to make an informed decision at the ballot
-                box.
-              </Balancer>
-            </p>
-          </h2>
-          <h3 className="text-xl font-bold">
-            <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
-            advocates in the U.S.
-          </h3>
-          <UserActionFormVoterRegistrationDialog>
-            <Button className="mt-6 w-full max-w-xs" variant="secondary">
-              Make sure you're registered to vote
-            </Button>
-          </UserActionFormVoterRegistrationDialog>
-        </div>
-      </DarkHeroSection>
-      <div className="space-y-20 xl:space-y-28">
-        {!!groups.president.length && (
-          <DTSIPersonHeroCardSection
-            countryCode={countryCode}
-            cta={
-              <InternalLink href={urls.locationUnitedStatesPresidential()}>View Race</InternalLink>
-            }
-            people={groups.president}
-            recommend={false}
-            subtitle="Vote for pro-crypto candidates. See where presidential candidates stand on crypto."
-            title={<>Presidential Race</>}
-          />
-        )}
-        <UserAddressVoterGuideInputSection countryCode={countryCode} />
-        <ContentSection className="container" title={'Key Races Across US States'}>
-          <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-            {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
-              const stateCode = _stateCode as USStateCode
-              return (
-                <InternalLink
-                  className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                  href={urls.locationStateSpecific(stateCode)}
-                  key={stateCode}
-                >
-                  {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}
-                </InternalLink>
-              )
-            })}
-          </div>
-        </ContentSection>
-
-        {Object.entries(groups.keyRaces).map(([stateCode, races]) => {
-          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
-          return (
-            <div className="container flex flex-col items-center" key={stateCode}>
-              <StateShield countryCode={countryCode} size={150} state={stateCode} />
-
-              <PageTitle as="h2" size="sm">
-                {stateName}
-              </PageTitle>
-
-              {races.map(people => {
-                const primaryDistrict =
-                  people[0].runningForSpecificRole.primaryDistrict &&
-                  normalizeDTSIDistrictId(people[0].runningForSpecificRole)
-
-                return (
-                  <DTSIPersonHeroCardSection
-                    countryCode={countryCode}
-                    cta={
-                      <InternalLink
-                        href={
-                          primaryDistrict
-                            ? urls.locationDistrictSpecific({
-                                stateCode: stateCode as USStateCode,
-                                district: primaryDistrict,
-                              })
-                            : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
-                        }
-                      >
-                        View Race
-                      </InternalLink>
-                    }
-                    key={`${stateCode}-${primaryDistrict}`}
-                    people={people}
-                    subtitle={
-                      primaryDistrict ? (
-                        <>
-                          {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District
-                          Race
-                        </>
-                      ) : (
-                        <>{stateName} Senate Race</>
-                      )
-                    }
-                    title=""
-                  />
-                )
-              })}
-            </div>
-          )
-        })}
-
-        <PACFooter className="container" />
-      </div>
-    </div>
+    <LocationRaces countAdvocates={countAdvocates} countryCode={countryCode}>
+      <LocationRaces.VoterGuideInput countryCode={countryCode} />
+      <LocationRaces.KeyRaces>
+        <USKeyRaces groups={groups} />
+      </LocationRaces.KeyRaces>
+      <LocationRaces.KeyRacesStates countryCode={countryCode}>
+        <USKeyRacesStates isGovernorRace />
+      </LocationRaces.KeyRacesStates>
+      <LocationRaces.PacFooter />
+    </LocationRaces>
   )
 }

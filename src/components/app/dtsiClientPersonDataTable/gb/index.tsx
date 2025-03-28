@@ -29,7 +29,7 @@ import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrad
 import {
   GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
   getGBCountryNameFromCode,
-} from '@/utils/shared/gbCountryUtils'
+} from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or country'

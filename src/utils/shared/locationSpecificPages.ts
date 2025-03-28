@@ -1,4 +1,4 @@
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 export const US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP: Partial<Record<USStateCode, number[]>> = {
   AL: [2],

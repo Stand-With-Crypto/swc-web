@@ -29,7 +29,7 @@ import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrad
 import {
   AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
   getAUStateNameFromStateCode,
-} from '@/utils/shared/auStateUtils'
+} from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'

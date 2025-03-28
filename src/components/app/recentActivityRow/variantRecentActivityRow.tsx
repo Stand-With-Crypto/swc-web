@@ -22,13 +22,13 @@ import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRol
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
   UserActionEmailCampaignName,
   UserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (

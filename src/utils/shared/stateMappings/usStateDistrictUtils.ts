@@ -1,4 +1,4 @@
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 export const US_STATE_CODE_TO_DISTRICT_COUNT_MAP: Record<USStateCode, number> = {
   AL: 7,

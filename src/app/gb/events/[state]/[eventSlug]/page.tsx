@@ -7,7 +7,7 @@ import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/even
 import { PageProps } from '@/types'
 import { getEvent, getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { isValidGBCountryCode } from '@/utils/shared/gbCountryUtils'
+import { isValidGBCountryCode } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.GB

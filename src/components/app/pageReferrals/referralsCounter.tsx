@@ -11,7 +11,7 @@ import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 interface ReferralsCounterContentProps {

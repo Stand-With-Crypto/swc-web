@@ -18,9 +18,9 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
 import { useSession } from '@/hooks/useSession'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,

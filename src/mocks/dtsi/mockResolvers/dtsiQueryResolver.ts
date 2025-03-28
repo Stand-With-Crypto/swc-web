@@ -20,7 +20,7 @@ import {
 
 function personRoleGroupingToPersonRoleMapping(
   grouping: DTSI_PersonGrouping,
-): Partial<Omit<DTSI_PersonRole, 'group'> & { group: Partial<DTSI_PersonRoleGroup> }> {
+): Partial<Omit<DTSI_PersonRole, 'group'> & { group: Partial<DTSI_PersonRoleGroup> }> | undefined {
   switch (grouping) {
     case DTSI_PersonGrouping.CURRENT_US_HOUSE_OF_REPS:
       return {

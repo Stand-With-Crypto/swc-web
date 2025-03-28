@@ -26,11 +26,11 @@ import {
   ROLE_OPTIONS,
 } from '@/components/app/dtsiClientPersonDataTable/us/filters'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
-} from '@/utils/shared/usStateUtils'
+} from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
 const GLOBAL_SUBTITLE =

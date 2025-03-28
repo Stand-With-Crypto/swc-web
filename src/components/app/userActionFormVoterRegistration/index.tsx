@@ -10,7 +10,7 @@ import { UserActionFormVoterRegistrationSuccess } from '@/components/app/userAct
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 export function UserActionFormVoterRegistration({
   onClose,

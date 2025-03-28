@@ -1,7 +1,7 @@
 import { object, string, ZodIssueCode } from 'zod'
 
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 export const zodAddress = object({
   googlePlaceId: string().optional(),

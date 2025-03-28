@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { MAX_DISTRICT_COUNT } from '@/utils/shared/usStateDistrictUtils'
+import { MAX_DISTRICT_COUNT } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 
 export const zodNormalizedDTSIDistrictId = z.union([
   z.literal('at-large'),

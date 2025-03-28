@@ -8,7 +8,7 @@ import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEv
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { getGBCountryCodeFromName } from '@/utils/shared/gbCountryUtils'
+import { getGBCountryCodeFromName } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import {

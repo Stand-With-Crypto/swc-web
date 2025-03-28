@@ -40,3 +40,24 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
     }
   }
 `
+
+export const fragmentDTSIPersonCardWithRoles = /* GraphQL */ `
+  fragment PersonCardWithRoles on Person {
+    ...PersonCard
+    roles {
+      id
+      primaryDistrict
+      primaryState
+      roleCategory
+      status
+      dateStart
+      group {
+        id
+        category
+        groupInstance
+      }
+    }
+  }
+
+  ${fragmentDTSIPersonCard}
+`

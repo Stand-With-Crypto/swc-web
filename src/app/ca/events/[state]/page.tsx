@@ -9,7 +9,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import {
   getCAProvinceOrTerritoryNameFromCode,
   isValidCAProvinceOrTerritoryCode,
-} from '@/utils/shared/caProvinceUtils'
+} from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type Props = PageProps<{ state: string }>
