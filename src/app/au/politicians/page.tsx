@@ -27,5 +27,5 @@ export default async function PoliticiansHomepage() {
   const results = await queryDTSIAllPeople({ countryCode: SupportedCountryCodes.AU })
 
   const politicians = sortDTSIPersonDataTable(results.people).slice(0, 100)
-  return <AuPagePoliticians {...{ politicians }} />
+  return <AuPagePoliticians politicians={politicians} />
 }
