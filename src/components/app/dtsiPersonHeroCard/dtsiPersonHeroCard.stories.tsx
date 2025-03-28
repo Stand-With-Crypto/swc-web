@@ -58,7 +58,7 @@ const getDefaultProps = () => {
     subheader: 'role',
     countryCode: SupportedCountryCodes.US,
     person,
-    cryptoStanceGradeElement: <DTSIFormattedLetterGrade person={person} />,
+    cryptoStanceGrade: DTSIFormattedLetterGrade,
   }
   return props
 }
@@ -91,7 +91,7 @@ export const NoProfilePicture: Story = {
 
 export const ThumbsUpOrDownGrade: Story = {
   args: {
-    cryptoStanceGradeElement: <DTSIThumbsUpOrDownGrade person={getDefaultProps().person} />,
+    cryptoStanceGrade: DTSIThumbsUpOrDownGrade,
   },
 }
 

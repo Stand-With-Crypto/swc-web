@@ -1,4 +1,4 @@
-import React, { cloneElement, ReactNode } from 'react'
+import React, { ComponentType, ReactNode } from 'react'
 import { User } from 'lucide-react'
 
 import { NextImage } from '@/components/ui/image'
@@ -25,8 +25,9 @@ interface Props {
   person: DTSI_PersonCardFragment
   countryCode: SupportedCountryCodes
   subheader: 'role' | 'role-w-state' | string
-  cryptoStanceGradeElement: React.ReactElement<{
+  cryptoStanceGrade: ComponentType<{
     className?: string
+    person: DTSI_PersonCardFragment
   }>
   isRecommended?: boolean
   footer?: React.ReactNode
@@ -86,7 +87,7 @@ export function DTSIPersonHeroCard(props: Props) {
     footer,
     isClickable = true,
     forceMobile = false,
-    cryptoStanceGradeElement,
+    cryptoStanceGrade: CryptoStanceGrade,
     target,
   } = props
   const politicalAffiliationCategoryAbbreviation =
@@ -170,7 +171,7 @@ export function DTSIPersonHeroCard(props: Props) {
               )}
             </div>
             <div className="ml-auto h-12 w-10 flex-shrink-0">
-              {cloneElement(cryptoStanceGradeElement, { className: 'h-full w-full' })}
+              <CryptoStanceGrade className="h-full w-full" person={person} />
             </div>
           </div>
         </div>
@@ -196,7 +197,7 @@ export function DTSIPersonHeroCard(props: Props) {
               </div>
               <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
                 <div className="shrink-0">
-                  {cloneElement(cryptoStanceGradeElement, { className: 'h-5 w-5' })}
+                  <CryptoStanceGrade className="h-5 w-5" person={person} />
                 </div>
                 <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
               </div>
