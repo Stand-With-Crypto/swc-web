@@ -33,6 +33,10 @@ export const navbarConfig: NavbarProps = {
       href: urls.community(),
       text: 'Community',
     },
+    {
+      href: urls.press(),
+      text: 'Press',
+    },
   ],
 }
 
