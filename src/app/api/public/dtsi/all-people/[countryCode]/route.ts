@@ -19,15 +19,17 @@ export async function GET(
   props: { params: Promise<{ countryCode: SupportedCountryCodes }> },
 ) {
   const params = await props.params
-  const { countryCode } = zodParams.parse(params)
+  const result = zodParams.safeParse(params)
 
-  if (!countryCode) {
+  if (!result.success) {
     return NextResponse.json(
       { error: 'Country code is required in all-people dtsi route' },
       { status: 400 },
     )
   }
 
-  const data = await queryDTSIAllPeople({ countryCode: countryCode as SupportedCountryCodes })
+  const data = await queryDTSIAllPeople({
+    countryCode: result.data.countryCode as SupportedCountryCodes,
+  })
   return NextResponse.json(data)
 }
