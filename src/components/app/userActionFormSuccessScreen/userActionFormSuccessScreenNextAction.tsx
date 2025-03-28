@@ -10,7 +10,7 @@ import {
 
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (
-    <div className="space-y-6 text-center">
+    <div className="space-y-6 pb-8 text-center">
       <Skeleton>
         <Progress />
       </Skeleton>
