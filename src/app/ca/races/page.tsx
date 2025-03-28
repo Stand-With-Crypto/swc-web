@@ -1,9 +1,7 @@
 import { Metadata } from 'next'
 
-import { CAKeyRaces } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/keyRaces'
-import { CAKeyRacesStates } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/keyRacesStates'
+import { LocationCanada } from '@/components/app/pageLocationKeyRaces/ca/locationCanada'
 import { organizePeopleCA } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/organizePeople'
-import { LocationKeyRacesContainer } from '@/components/app/pageLocationKeyRaces/common'
 import { queryDTSILocationCanadaInformation } from '@/data/dtsi/queries/ca/queryDTSILocationCanadaInformation'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -33,11 +31,6 @@ export default async function LocationCanadaPage() {
   const groups = organizePeopleCA(dtsiResults)
 
   return (
-    <LocationKeyRacesContainer
-      countAdvocates={countAdvocates}
-      countryCode={countryCode}
-      keyRaces={<CAKeyRaces countryCode={countryCode} groups={groups} />}
-      keyRacesStates={<CAKeyRacesStates countryCode={countryCode} />}
-    />
+    <LocationCanada countAdvocates={countAdvocates} countryCode={countryCode} groups={groups} />
   )
 }

@@ -1,8 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationKeyRacesContainer } from '@/components/app/pageLocationKeyRaces/common'
-import { GBKeyRaces } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/keyRaces'
-import { GBKeyRacesStates } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/keyRacesStates'
+import { LocationUnitedKingdom } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom'
 import { organizePeopleGB } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/organizePeople'
 import { queryDTSILocationUnitedKingdomInformation } from '@/data/dtsi/queries/gb/queryDTSILocationUnitedKingdomInformation'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -33,11 +31,10 @@ export default async function LocationUnitedKingdomPage() {
   const groups = organizePeopleGB(dtsiResults)
 
   return (
-    <LocationKeyRacesContainer
+    <LocationUnitedKingdom
       countAdvocates={countAdvocates}
       countryCode={countryCode}
-      keyRaces={<GBKeyRaces countryCode={countryCode} groups={groups} />}
-      keyRacesStates={<GBKeyRacesStates countryCode={countryCode} />}
+      groups={groups}
     />
   )
 }

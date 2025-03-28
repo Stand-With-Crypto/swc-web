@@ -23,11 +23,9 @@ export function CAKeyRaces({ groups, countryCode }: CAKeyRacesProps) {
 
   if (keyRaces.length === 0) {
     return (
-      <div className="container flex flex-col items-center">
-        <PageTitle as="h2" size="sm">
-          No key races found
-        </PageTitle>
-      </div>
+      <PageTitle as="h2" size="sm">
+        No key races found
+      </PageTitle>
     )
   }
 

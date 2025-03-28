@@ -1,20 +1,17 @@
 import { Metadata } from 'next'
 
-import { LocationKeyRacesContainer } from '@/components/app/pageLocationKeyRaces/common'
-import { USKeyRaces } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/keyRaces'
-import { KeyRacesStates } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/keyRacesStates'
+import { LocationUnitedStates } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates'
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/organizePeople'
-import { UserAddressVoterGuideInputSection } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/userAddressVoterGuideInput'
 import { queryDTSILocationUnitedStatesInformation } from '@/data/dtsi/queries/us/queryDTSILocationUnitedStatesInformation'
-import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
 export const dynamicParams = false
 
-type LocationUnitedStatesPageProps = PageProps
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = `Key Races in the United States`
@@ -25,8 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
-export default async function LocationUnitedStatesPage({ params }: LocationUnitedStatesPageProps) {
-  const { countryCode } = await params
+export default async function LocationUnitedStatesPage() {
   const [dtsiResults, countAdvocates] = await Promise.all([
     queryDTSILocationUnitedStatesInformation(),
     prismaClient.user.count(),
@@ -35,14 +31,10 @@ export default async function LocationUnitedStatesPage({ params }: LocationUnite
   const groups = organizePeople(dtsiResults)
 
   return (
-    <LocationKeyRacesContainer
+    <LocationUnitedStates
       countAdvocates={countAdvocates}
       countryCode={countryCode}
-      keyRaces={<USKeyRaces countryCode={countryCode} groups={groups} />}
-      keyRacesStates={<KeyRacesStates countryCode={countryCode} isGovernorRace />}
-      shouldShowPACFooter
-      shouldShowVoterRegistrationButton
-      voterGuideInput={<UserAddressVoterGuideInputSection countryCode={countryCode} />}
+      groups={groups}
     />
   )
 }

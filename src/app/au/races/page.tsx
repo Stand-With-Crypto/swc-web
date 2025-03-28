@@ -1,9 +1,7 @@
 import { Metadata } from 'next'
 
-import { AUKeyRaces } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/keyRaces'
-import { AUKeyRacesStates } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/keyRacesStates'
+import { LocationAustralia } from '@/components/app/pageLocationKeyRaces/au/locationAustralia'
 import { organizePeopleAU } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
-import { LocationKeyRacesContainer } from '@/components/app/pageLocationKeyRaces/common'
 import { queryDTSILocationAustraliaInformation } from '@/data/dtsi/queries/au/queryDTSILocationAustraliaInformation'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -33,11 +31,6 @@ export default async function LocationAustraliaPage() {
   const groups = organizePeopleAU(dtsiResults)
 
   return (
-    <LocationKeyRacesContainer
-      countAdvocates={countAdvocates}
-      countryCode={countryCode}
-      keyRaces={<AUKeyRaces countryCode={countryCode} groups={groups} />}
-      keyRacesStates={<AUKeyRacesStates countryCode={countryCode} />}
-    />
+    <LocationAustralia countAdvocates={countAdvocates} countryCode={countryCode} groups={groups} />
   )
 }

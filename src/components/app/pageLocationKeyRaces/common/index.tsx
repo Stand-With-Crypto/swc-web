@@ -4,8 +4,10 @@ import { ReactNode, useEffect } from 'react'
 import Balancer from 'react-wrap-balancer'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
+import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { PACFooter } from '@/components/app/pacFooter'
+import { UserAddressVoterGuideInputSection } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/userAddressVoterGuideInput'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -16,25 +18,19 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 
-interface LocationKeyRacesContainerProps {
-  keyRaces: ReactNode
+interface LocationRacesProps {
+  children: ReactNode
   countAdvocates: number
   countryCode: SupportedCountryCodes
-  keyRacesStates?: ReactNode
-  voterGuideInput?: ReactNode
   shouldShowVoterRegistrationButton?: boolean
-  shouldShowPACFooter?: boolean
 }
 
-export function LocationKeyRacesContainer({
-  keyRaces,
+export function LocationRaces({
+  children,
   countAdvocates,
   countryCode,
-  keyRacesStates,
-  voterGuideInput,
-  shouldShowPACFooter,
   shouldShowVoterRegistrationButton,
-}: LocationKeyRacesContainerProps) {
+}: LocationRacesProps) {
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces()
   }, [])
@@ -68,12 +64,46 @@ export function LocationKeyRacesContainer({
           )}
         </div>
       </DarkHeroSection>
-      <div className="space-y-20 xl:space-y-28">
-        {voterGuideInput}
-        {keyRaces}
-        {keyRacesStates}
-        {shouldShowPACFooter && <PACFooter className="container" />}
-      </div>
+      <div className="space-y-20 xl:space-y-28">{children}</div>
     </div>
   )
 }
+
+export function LocationKeyRacesVoterGuideInput({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) {
+  return <UserAddressVoterGuideInputSection countryCode={countryCode} />
+}
+LocationRaces.VoterGuideInput = LocationKeyRacesVoterGuideInput
+
+export function LocationKeyRacesPacFooter() {
+  return <PACFooter className="container" />
+}
+LocationRaces.PacFooter = LocationKeyRacesPacFooter
+
+export function LocationKeyRaces({ children }: { children: ReactNode }) {
+  return <div className="container flex flex-col items-center">{children}</div>
+}
+LocationRaces.KeyRaces = LocationKeyRaces
+
+export function LocationKeyRacesStates({
+  children,
+  countryCode,
+}: {
+  children: ReactNode
+  countryCode: SupportedCountryCodes
+}) {
+  return (
+    <ContentSection
+      className="container"
+      title={`Other races across ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}`}
+    >
+      <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
+        {children}
+      </div>
+    </ContentSection>
+  )
+}
+LocationRaces.KeyRacesStates = LocationKeyRacesStates
