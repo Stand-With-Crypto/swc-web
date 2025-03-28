@@ -22,7 +22,7 @@ Because this request returns so many results, we should ensure we're only trigge
 */
 export const queryDTSIAllPeople = async ({
   limit = 1500,
-  countryCode = SupportedCountryCodes.US,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
 }: {
   limit?: number
   countryCode?: SupportedCountryCodes
