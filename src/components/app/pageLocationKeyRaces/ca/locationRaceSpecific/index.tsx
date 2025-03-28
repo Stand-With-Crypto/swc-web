@@ -12,7 +12,6 @@ import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   DTSI_DistrictSpecificInformationQuery,
-  DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -34,19 +33,7 @@ interface CALocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQu
 function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuery['people']) {
   const formatted = people.map(x => formatSpecificRoleDTSIPerson(x))
 
-  const partyOrder = [
-    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-    DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-    DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
-  ]
-
   formatted.sort((a, b) => {
-    const aPartyIndex = a.politicalAffiliationCategory
-      ? partyOrder.indexOf(a.politicalAffiliationCategory)
-      : -1
-    const bPartyIndex = b.politicalAffiliationCategory
-      ? partyOrder.indexOf(b.politicalAffiliationCategory)
-      : -1
     const aPersonScore = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
     const bPersonScore = b.computedStanceScore || b.manuallyOverriddenStanceScore || 0
 
@@ -56,10 +43,6 @@ function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuer
 
     if (a.profilePictureUrl !== b.profilePictureUrl) {
       return a.profilePictureUrl ? -1 : 1
-    }
-
-    if (aPartyIndex !== bPartyIndex) {
-      return aPartyIndex - bPartyIndex
     }
 
     if (a.primaryRole?.roleCategory !== b.primaryRole?.roleCategory) {
