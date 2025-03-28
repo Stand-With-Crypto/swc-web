@@ -7,11 +7,13 @@ import { GbPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
 export const dynamicParams = true
+const countryCode = SupportedCountryCodes.GB
 
 type Props = PageProps<{ dtsiSlug: string }>
 
@@ -27,7 +29,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 }
 export async function generateStaticParams() {
-  const slugs = await queryDTSIAllPeopleSlugs().then(x =>
+  const slugs = await queryDTSIAllPeopleSlugs({ countryCode }).then(x =>
     x.people.map(({ slug: dtsiSlug }) => ({ dtsiSlug })),
   )
   if (toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)) {
