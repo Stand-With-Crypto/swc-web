@@ -33,7 +33,13 @@ export function PagePoliticianDetails({ children }: { children: ReactNode }) {
 
 PagePoliticianDetails.Header = PoliticianHeader
 
-export function PoliticianHeader({ person }: { person: DTSIPersonDetails }) {
+export function PoliticianHeader({
+  person,
+  showRoleLocation = true,
+}: {
+  person: DTSIPersonDetails
+  showRoleLocation?: boolean
+}) {
   return (
     <>
       {person.profilePictureUrl ? (
@@ -64,7 +70,6 @@ export function PoliticianHeader({ person }: { person: DTSIPersonDetails }) {
       <PageSubTitle className="mb-3">
         {person.primaryRole && (
           <>
-            {/* TODO: make this dynamic */}
             <PageSubTitle>
               {person.politicalAffiliationCategory && (
                 <>
@@ -74,7 +79,7 @@ export function PoliticianHeader({ person }: { person: DTSIPersonDetails }) {
                 </>
               )}
               {getDTSIPersonRoleCategoryDisplayName(person.primaryRole)}
-              {getDTSIPersonRoleLocation(person.primaryRole) && (
+              {showRoleLocation && getDTSIPersonRoleLocation(person.primaryRole) && (
                 <span className="font-normal text-gray-500">
                   {' '}
                   from {getDTSIPersonRoleLocation(person.primaryRole)}
