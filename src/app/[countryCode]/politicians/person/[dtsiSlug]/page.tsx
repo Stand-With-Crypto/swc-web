@@ -30,7 +30,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 }
 export async function generateStaticParams() {
-  const slugs = await queryDTSIAllPeopleSlugs().then(x =>
+  const slugs = await queryDTSIAllPeopleSlugs({ countryCode }).then(x =>
     x.people.map(({ slug: dtsiSlug }) => ({ dtsiSlug })),
   )
   if (toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)) {
