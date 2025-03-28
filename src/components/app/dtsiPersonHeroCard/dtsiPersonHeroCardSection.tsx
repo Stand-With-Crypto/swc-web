@@ -42,7 +42,7 @@ export function DTSIPersonHeroCardSection({
         {recommended && (
           <DTSIPersonHeroCard
             countryCode={countryCode}
-            cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={recommended} />}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             forceMobile={forceMobile}
             isRecommended
             person={recommended}
@@ -53,7 +53,7 @@ export function DTSIPersonHeroCardSection({
         {others.map(person => (
           <DTSIPersonHeroCard
             countryCode={countryCode}
-            cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             forceMobile={forceMobile}
             key={person.id}
             person={person}

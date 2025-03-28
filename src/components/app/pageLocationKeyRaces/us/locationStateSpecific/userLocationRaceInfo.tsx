@@ -105,7 +105,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
           {recommended && (
             <DTSIPersonHeroCard
               countryCode={countryCode}
-              cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={recommended} />}
+              cryptoStanceGrade={DTSIFormattedLetterGrade}
               isRecommended
               person={recommended}
               subheader="role"
@@ -114,7 +114,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
           {others.map(person => (
             <DTSIPersonHeroCard
               countryCode={countryCode}
-              cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
+              cryptoStanceGrade={DTSIFormattedLetterGrade}
               key={person.id}
               person={person}
               subheader={person.isIncumbent ? 'Incumbent' : 'role'}
