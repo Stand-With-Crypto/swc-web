@@ -13,6 +13,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
+const countryCode = SupportedCountryCodes.GB
 
 type Props = PageProps
 
@@ -24,7 +25,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 }
 
 export default async function PoliticiansHomepage() {
-  const results = await queryDTSIAllPeople({ countryCode: SupportedCountryCodes.GB })
+  const results = await queryDTSIAllPeople({ countryCode })
 
   const politicians = sortDTSIPersonDataTable(results.people).slice(0, 100)
   return <GbPagePoliticians politicians={politicians} />
