@@ -75,7 +75,7 @@ export function GeoGatedPollsContent({
         <ActivePoll
           activePoll={activePoll}
           handleShowResults={handleShowResults}
-          isLoading={isLoading}
+          isLoading={isLoading || isPendingVoteSubmissionTransaction}
           pollsResults={pollsResults}
           userPolls={userPolls}
         />
