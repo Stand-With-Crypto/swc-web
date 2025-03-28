@@ -10,16 +10,6 @@ import {
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
 
-export const dynamic = 'error'
-export const runtime = 'edge'
-export const alt = 'Image of politician and their stance on crypto'
-export const size = {
-  width: 1200,
-  height: 630,
-}
-
-export const contentType = 'image/png'
-
 export async function generateOgImage({ params }: { params: { dtsiSlug: string } }) {
   const person = await getPoliticianDetailsData(params.dtsiSlug)
   const shieldData = await fetch(new URL('./images/shield.png', import.meta.url)).then(res =>
