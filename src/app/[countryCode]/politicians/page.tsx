@@ -9,9 +9,11 @@ import {
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 type Props = PageProps
 
@@ -22,9 +24,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
   })
 }
 
-export default async function PoliticiansHomepage(props: PageProps) {
-  const params = await props.params
-  const { countryCode } = params
+export default async function PoliticiansHomepage() {
   const results = await queryDTSIAllPeople({ countryCode })
 
   const politicians = sortDTSIPersonDataTable(results.people).slice(0, 100)
