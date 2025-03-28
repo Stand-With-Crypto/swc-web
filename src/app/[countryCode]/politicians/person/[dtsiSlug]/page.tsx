@@ -9,10 +9,12 @@ import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
 import { toBool } from '@/utils/shared/toBool'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
 export const dynamicParams = true
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 type Props = PageProps<{ dtsiSlug: string }>
 
@@ -39,7 +41,6 @@ export async function generateStaticParams() {
 
 export default async function PoliticianDetails(props: Props) {
   const params = await props.params
-  const { countryCode } = params
 
   const [person, questionnaire] = await Promise.all([
     getPoliticianDetailsData(params.dtsiSlug),
