@@ -7,11 +7,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-interface GBKeyRacesStatesProps {
-  countryCode: SupportedCountryCodes
-}
+const countryCode = SupportedCountryCodes.GB
 
-export function GBKeyRacesStates({ countryCode }: GBKeyRacesStatesProps) {
+export function GBKeyRacesStates() {
   const urls = getIntlUrls(countryCode)
 
   const orderedStateCodes = Object.keys(GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP).sort()

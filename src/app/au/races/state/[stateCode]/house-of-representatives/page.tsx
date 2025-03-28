@@ -47,7 +47,5 @@ export default async function LocationHouseOfRepsSpecificPage({
     throw new Error(`Invalid params for LocationHouseOfRepsSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return (
-    <AULocationRaceSpecific {...data} countryCode={countryCode} stateCode={validatedStateCode} />
-  )
+  return <AULocationRaceSpecific {...data} stateCode={validatedStateCode} />
 }

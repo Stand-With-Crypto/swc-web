@@ -49,12 +49,5 @@ export default async function LocationHouseOfLordsSpecificPage({
     )
   }
 
-  return (
-    <GBLocationRaceSpecific
-      countryCode={countryCode}
-      isHouseOfLords
-      stateCode={validatedStateCode}
-      {...data}
-    />
-  )
+  return <GBLocationRaceSpecific isHouseOfLords stateCode={validatedStateCode} {...data} />
 }

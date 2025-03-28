@@ -7,11 +7,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-interface AUKeyRacesStatesProps {
-  countryCode: SupportedCountryCodes
-}
+const countryCode = SupportedCountryCodes.AU
 
-export function AUKeyRacesStates({ countryCode }: AUKeyRacesStatesProps) {
+export function AUKeyRacesStates() {
   const urls = getIntlUrls(countryCode)
 
   const orderedStateCodes = Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()

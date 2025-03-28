@@ -32,10 +32,7 @@ export const queryDTSILocationSenateSpecificInformation = async ({
   stateCode: string
   countryCode: SupportedCountryCodes
 }) => {
-  const personRoleGroupingOr =
-    countryCode in PERSON_ROLE_GROUPINGS_FOR_SENATE_SPECIFIC_QUERY
-      ? PERSON_ROLE_GROUPINGS_FOR_SENATE_SPECIFIC_QUERY[countryCode as SupportedCountryCodes]
-      : []
+  const personRoleGroupingOr = PERSON_ROLE_GROUPINGS_FOR_SENATE_SPECIFIC_QUERY[countryCode]
 
   const results = await fetchDTSI<
     DTSI_SenateSpecificInformationQuery,

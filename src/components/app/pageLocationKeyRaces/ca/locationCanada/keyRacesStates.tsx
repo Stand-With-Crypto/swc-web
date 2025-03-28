@@ -7,11 +7,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-interface CAKeyRacesStatesProps {
-  countryCode: SupportedCountryCodes
-}
+const countryCode = SupportedCountryCodes.CA
 
-export function CAKeyRacesStates({ countryCode }: CAKeyRacesStatesProps) {
+export function CAKeyRacesStates() {
   const urls = getIntlUrls(countryCode)
 
   const orderedStateCodes = Object.keys(

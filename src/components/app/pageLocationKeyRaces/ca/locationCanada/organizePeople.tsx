@@ -1,10 +1,10 @@
 import { groupBy } from 'lodash-es'
 
-import { formatSpecificRoleDTSIPersonCA } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/specificRoleDTSIPerson'
+import { caFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/specificRoleDTSIPerson'
 import { QueryDTSILocationCanadaInformationData } from '@/data/dtsi/queries/ca/queryDTSILocationCanadaInformation'
 
-export function organizePeopleCA({ keyRaces }: QueryDTSILocationCanadaInformationData) {
-  const formattedKeyRaces = keyRaces.map(x => formatSpecificRoleDTSIPersonCA(x))
+export function caOrganizePeople({ keyRaces }: QueryDTSILocationCanadaInformationData) {
+  const formattedKeyRaces = keyRaces.map(x => caFormatSpecificRoleDTSIPerson(x))
 
   type GroupedRaces = Record<string, (typeof formattedKeyRaces)[]>
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationRaceGovernorSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceGovernorSpecific'
+import { USLocationRaceGovernorSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceGovernorSpecific'
 import { queryDTSILocationGovernorSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationGovernorSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -8,7 +8,6 @@ import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
@@ -18,7 +17,6 @@ export const dynamicParams = false
 
 type LocationStateGovernorSpecificPageProps = PageProps<{
   stateCode: string
-  countryCode: SupportedCountryCodes
 }>
 
 export async function generateMetadata({
@@ -48,7 +46,7 @@ export async function generateStaticParams() {
 export default async function LocationStateGovernorSpecificPage({
   params,
 }: LocationStateGovernorSpecificPageProps) {
-  const { stateCode, countryCode } = await params
+  const { stateCode } = await params
   const validatedStateCode = zodUsaState.parse(stateCode.toUpperCase())
 
   const data = await queryDTSILocationGovernorSpecificInformation({
@@ -59,10 +57,5 @@ export default async function LocationStateGovernorSpecificPage({
     throw new Error(`Invalid params for LocationGovernorSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return (
-    <LocationRaceGovernorSpecific
-      {...data}
-      {...{ stateCode: validatedStateCode, countryCode, isGovernor: true }}
-    />
-  )
+  return <USLocationRaceGovernorSpecific {...data} isGovernor stateCode={validatedStateCode} />
 }

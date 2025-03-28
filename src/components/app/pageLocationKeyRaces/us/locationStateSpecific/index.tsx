@@ -28,14 +28,14 @@ import { UserLocationRaceInfo } from './userLocationRaceInfo'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
-  countryCode: SupportedCountryCodes
   countAdvocates: number
 }
 
-export function LocationStateSpecific({
+const countryCode = SupportedCountryCodes.US
+
+export function USLocationStateSpecific({
   stateCode,
   people,
-  countryCode,
   countAdvocates,
   personStances,
 }: LocationStateSpecificProps) {
@@ -133,12 +133,7 @@ export function LocationStateSpecific({
               />
             </div>
           ) : (
-            <UserLocationRaceInfo
-              countryCode={countryCode}
-              groups={groups}
-              stateCode={stateCode}
-              stateName={stateName}
-            />
+            <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
           )}
           {!!stances.length && (
             <ContentSection

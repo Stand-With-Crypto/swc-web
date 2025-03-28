@@ -1,5 +1,5 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
-import { organizePeopleAU } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
+import { auOrganizePeople } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
@@ -12,11 +12,12 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface AUKeyRacesProps {
-  groups: ReturnType<typeof organizePeopleAU>
-  countryCode: SupportedCountryCodes.AU
+  groups: ReturnType<typeof auOrganizePeople>
 }
 
-export function AUKeyRaces({ groups, countryCode }: AUKeyRacesProps) {
+const countryCode = SupportedCountryCodes.AU
+
+export function AUKeyRaces({ groups }: AUKeyRacesProps) {
   const urls = getIntlUrls(countryCode)
 
   const keyRaces = Object.entries(groups.keyRaces)

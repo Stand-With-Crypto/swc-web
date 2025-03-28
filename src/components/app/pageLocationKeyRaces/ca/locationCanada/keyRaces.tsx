@@ -1,5 +1,5 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
-import { organizePeopleCA } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/organizePeople'
+import { caOrganizePeople } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/organizePeople'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
@@ -12,11 +12,12 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface CAKeyRacesProps {
-  groups: ReturnType<typeof organizePeopleCA>
-  countryCode: SupportedCountryCodes.CA
+  groups: ReturnType<typeof caOrganizePeople>
 }
 
-export function CAKeyRaces({ groups, countryCode }: CAKeyRacesProps) {
+const countryCode = SupportedCountryCodes.CA
+
+export function CAKeyRaces({ groups }: CAKeyRacesProps) {
   const urls = getIntlUrls(countryCode)
 
   const keyRaces = Object.entries(groups.keyRaces)

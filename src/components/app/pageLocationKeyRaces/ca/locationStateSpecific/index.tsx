@@ -24,14 +24,14 @@ import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface CALocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: CAProvinceOrTerritoryCode
-  countryCode: SupportedCountryCodes.CA
   countAdvocates: number
 }
+
+const countryCode = SupportedCountryCodes.CA
 
 export function CALocationStateSpecific({
   stateCode,
   people,
-  countryCode,
   countAdvocates,
   personStances,
 }: CALocationStateSpecificProps) {

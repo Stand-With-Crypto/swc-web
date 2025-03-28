@@ -20,15 +20,16 @@ import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>
   stateCode: USStateCode
   stateName: string
-  countryCode: SupportedCountryCodes
 }
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 function DefaultPlacesSelect({
   stateCode,
@@ -55,12 +56,7 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
   )
 }
 
-function SuspenseUserLocationRaceInfo({
-  groups,
-  stateCode,
-  stateName,
-  countryCode,
-}: UserLocationRaceInfoProps) {
+function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDistrictFromAddress(address === 'loading' ? null : address?.description, {
     stateCode,

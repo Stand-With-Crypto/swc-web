@@ -21,14 +21,14 @@ import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface AULocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: AUStateCode
-  countryCode: SupportedCountryCodes.AU
   countAdvocates: number
 }
+
+const countryCode = SupportedCountryCodes.AU
 
 export function AULocationStateSpecific({
   stateCode,
   people,
-  countryCode,
   countAdvocates,
   personStances,
 }: AULocationStateSpecificProps) {

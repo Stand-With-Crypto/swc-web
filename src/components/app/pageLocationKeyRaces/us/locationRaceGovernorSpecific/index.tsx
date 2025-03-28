@@ -26,15 +26,16 @@ import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface LocationRaceGovernorSpecificProps extends DTSI_DistrictSpecificInformationQuery {
-  stateCode?: USStateCode
+  stateCode: USStateCode
   district?: NormalizedDTSIDistrictId
-  countryCode: SupportedCountryCodes
   isGovernor?: boolean
 }
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
@@ -98,11 +99,10 @@ function organizeRaceSpecificPeople(
   return formatted
 }
 
-export function LocationRaceGovernorSpecific({
+export function USLocationRaceGovernorSpecific({
   stateCode,
   district,
   people,
-  countryCode,
   isGovernor,
 }: LocationRaceGovernorSpecificProps) {
   const groups = organizeRaceSpecificPeople(people, { district, stateCode, isGovernor })
@@ -134,20 +134,12 @@ export function LocationRaceGovernorSpecific({
             United States
           </InternalLink>
           {' / '}
-          {(() => {
-            if (!stateDisplayName) {
-              return <span>Presidential</span>
-            }
-            return (
-              <span>
-                {district
-                  ? `${stateCode} Congressional District ${district}`
-                  : isGovernor
-                    ? `Governors (${stateCode})`
-                    : `U.S. Senate (${stateCode})`}
-              </span>
-            )
-          })()}
+          <LocationRaceLinkTitle
+            district={district}
+            isGovernor={isGovernor}
+            stateCode={stateCode}
+            stateDisplayName={stateDisplayName}
+          />
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
           {!stateCode
@@ -211,5 +203,31 @@ export function LocationRaceGovernorSpecific({
       </div>
       <PACFooter className="container" />
     </div>
+  )
+}
+
+function LocationRaceLinkTitle({
+  district,
+  isGovernor,
+  stateCode,
+  stateDisplayName,
+}: {
+  stateCode: USStateCode
+  stateDisplayName: string
+  district?: NormalizedDTSIDistrictId
+  isGovernor?: boolean
+}) {
+  if (!stateDisplayName) {
+    return <span>Presidential</span>
+  }
+
+  return (
+    <span>
+      {district
+        ? `${stateCode} Congressional District ${district}`
+        : isGovernor
+          ? `Governors (${stateCode})`
+          : `U.S. Senate (${stateCode})`}
+    </span>
   )
 }

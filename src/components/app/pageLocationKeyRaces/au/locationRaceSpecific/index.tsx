@@ -8,6 +8,7 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
+import { auFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/specificRoleDTSIPerson'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
@@ -15,7 +16,6 @@ import {
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { AUStateCode, getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -23,12 +23,13 @@ import { getIntlUrls } from '@/utils/shared/urls'
 
 interface AULocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: AUStateCode
-  countryCode: SupportedCountryCodes.AU
   isSenate?: boolean
 }
 
+const countryCode = SupportedCountryCodes.AU
+
 function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuery['people']) {
-  const formatted = people.map(x => formatSpecificRoleDTSIPerson(x))
+  const formatted = people.map(x => auFormatSpecificRoleDTSIPerson(x))
 
   formatted.sort((a, b) => {
     const aPersonScore = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
@@ -55,7 +56,6 @@ function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuer
 export function AULocationRaceSpecific({
   stateCode,
   people,
-  countryCode,
   isSenate,
 }: AULocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people)
@@ -87,22 +87,11 @@ export function AULocationRaceSpecific({
             Australia
           </InternalLink>
           {' / '}
-          {(() => {
-            return (
-              <>
-                <InternalLink
-                  className="text-gray-400"
-                  href={urls.locationStateSpecific(stateCode)}
-                >
-                  {stateDisplayName}
-                </InternalLink>{' '}
-                /{' '}
-                <span>
-                  {isSenate ? 'Australian Senate' : 'Australian House of Representatives'}
-                </span>
-              </>
-            )
-          })()}
+          <LocationRaceLinkTitle
+            href={urls.locationStateSpecific(stateCode)}
+            isSenate={isSenate}
+            stateDisplayName={stateDisplayName}
+          />
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
           {isSenate ? 'Australian Senate' : 'Australian House of Representatives'}
@@ -154,5 +143,28 @@ export function AULocationRaceSpecific({
         )}
       </div>
     </div>
+  )
+}
+
+function LocationRaceLinkTitle({
+  href,
+  stateDisplayName,
+  isSenate,
+}: {
+  href: string
+  stateDisplayName: string
+  isSenate?: boolean
+}) {
+  if (!stateDisplayName) {
+    return <span>Presidential</span>
+  }
+
+  return (
+    <>
+      <InternalLink className="text-gray-400" href={href}>
+        {stateDisplayName}
+      </InternalLink>{' '}
+      / <span>{isSenate ? 'Australian Senate' : 'Australian House of Representatives'}</span>
+    </>
   )
 }

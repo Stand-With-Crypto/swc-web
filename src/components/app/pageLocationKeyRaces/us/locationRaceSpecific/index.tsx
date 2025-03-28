@@ -26,19 +26,20 @@ import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
-  stateCode?: USStateCode
+interface USLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
+  stateCode: USStateCode
   district?: NormalizedDTSIDistrictId
-  countryCode: SupportedCountryCodes
   isGovernor?: boolean
 }
 
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
+  { district, stateCode }: Pick<USLocationRaceSpecificProps, 'district' | 'stateCode'>,
 ) {
   let targetedRoleCategory = DTSI_PersonRoleCategory.PRESIDENT
 
@@ -92,12 +93,11 @@ function organizeRaceSpecificPeople(
   return formatted
 }
 
-export function LocationRaceSpecific({
+export function USLocationRaceSpecific({
   stateCode,
   district,
   people,
-  countryCode,
-}: LocationRaceSpecificProps) {
+}: USLocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people, { district, stateCode })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(countryCode)
@@ -127,27 +127,12 @@ export function LocationRaceSpecific({
             United States
           </InternalLink>
           {' / '}
-          {(() => {
-            if (!stateDisplayName) {
-              return <span>Presidential</span>
-            }
-            return (
-              <>
-                <InternalLink
-                  className="text-gray-400"
-                  href={urls.locationStateSpecific(stateCode)}
-                >
-                  {stateDisplayName}
-                </InternalLink>{' '}
-                /{' '}
-                <span>
-                  {district
-                    ? `${stateCode} Congressional District ${district}`
-                    : `U.S. Senate (${stateCode})`}
-                </span>
-              </>
-            )
-          })()}
+          <LocationRaceLinkTitle
+            district={district}
+            href={urls.locationStateSpecific(stateCode)}
+            stateCode={stateCode}
+            stateDisplayName={stateDisplayName}
+          />
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
           {!stateCode
@@ -209,5 +194,35 @@ export function LocationRaceSpecific({
       </div>
       <PACFooter className="container" />
     </div>
+  )
+}
+
+function LocationRaceLinkTitle({
+  href,
+  stateDisplayName,
+  district,
+  stateCode,
+}: {
+  href: string
+  stateCode: USStateCode
+  stateDisplayName?: string
+  district?: NormalizedDTSIDistrictId
+}) {
+  if (!stateDisplayName) {
+    return <span>Presidential</span>
+  }
+
+  return (
+    <>
+      <InternalLink className="text-gray-400" href={href}>
+        {stateDisplayName}
+      </InternalLink>{' '}
+      /{' '}
+      <span>
+        {district
+          ? `${stateCode} Congressional District ${district}`
+          : `U.S. Senate (${stateCode})`}
+      </span>
+    </>
   )
 }

@@ -91,6 +91,6 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
   }
 }
 
-export type SpecificRoleDTSIPerson<P extends PersonFields> = ReturnType<
+export type USSpecificRoleDTSIPerson<P extends PersonFields> = ReturnType<
   typeof formatSpecificRoleDTSIPerson<P>
 >

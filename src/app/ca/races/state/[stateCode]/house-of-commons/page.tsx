@@ -49,7 +49,5 @@ export default async function LocationHouseOfCommonsSpecificPage({
     )
   }
 
-  return (
-    <CALocationRaceSpecific {...data} countryCode={countryCode} stateCode={validatedStateCode} />
-  )
+  return <CALocationRaceSpecific {...data} stateCode={validatedStateCode} />
 }

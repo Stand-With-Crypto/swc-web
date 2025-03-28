@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import { LocationUnitedKingdom } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom'
-import { organizePeopleGB } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/organizePeople'
+import { gbOrganizePeople } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/organizePeople'
 import { queryDTSILocationUnitedKingdomInformation } from '@/data/dtsi/queries/gb/queryDTSILocationUnitedKingdomInformation'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -28,13 +28,7 @@ export default async function LocationUnitedKingdomPage() {
     prismaClient.user.count({ where: { countryCode } }),
   ])
 
-  const groups = organizePeopleGB(dtsiResults)
+  const groups = gbOrganizePeople(dtsiResults)
 
-  return (
-    <LocationUnitedKingdom
-      countAdvocates={countAdvocates}
-      countryCode={countryCode}
-      groups={groups}
-    />
-  )
+  return <LocationUnitedKingdom countAdvocates={countAdvocates} groups={groups} />
 }

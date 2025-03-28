@@ -66,7 +66,6 @@ export default async function LocationStateSpecificPage({
   return (
     <CALocationStateSpecific
       countAdvocates={countAdvocates}
-      countryCode={countryCode}
       stateCode={validatedStateCode}
       {...dtsiResults}
     />

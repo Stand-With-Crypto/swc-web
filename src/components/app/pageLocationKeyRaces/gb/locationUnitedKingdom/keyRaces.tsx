@@ -1,5 +1,5 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
-import { organizePeopleGB } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/organizePeople'
+import { gbOrganizePeople } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/organizePeople'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
@@ -12,11 +12,12 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface GBKeyRacesProps {
-  groups: ReturnType<typeof organizePeopleGB>
-  countryCode: SupportedCountryCodes.GB
+  groups: ReturnType<typeof gbOrganizePeople>
 }
 
-export function GBKeyRaces({ groups, countryCode }: GBKeyRacesProps) {
+const countryCode = SupportedCountryCodes.GB
+
+export function GBKeyRaces({ groups }: GBKeyRacesProps) {
   const urls = getIntlUrls(countryCode)
 
   const keyRaces = Object.entries(groups.keyRaces)

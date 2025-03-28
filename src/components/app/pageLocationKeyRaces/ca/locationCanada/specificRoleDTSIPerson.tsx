@@ -6,7 +6,7 @@ import {
 
 type PersonFields = Pick<DTSI_StateSpecificInformationQuery['people'][0], 'roles' | 'slug'>
 
-export function formatSpecificRoleDTSIPersonCA<P extends PersonFields>(person: P) {
+export function caFormatSpecificRoleDTSIPerson<P extends PersonFields>(person: P) {
   const { roles, ...rest } = person
 
   const currentSpecificRole = roles.find(role => {
@@ -35,6 +35,6 @@ export function formatSpecificRoleDTSIPersonCA<P extends PersonFields>(person: P
   }
 }
 
-export type SpecificRoleDTSIPersonCA<P extends PersonFields> = ReturnType<
-  typeof formatSpecificRoleDTSIPersonCA<P>
+export type CASpecificRoleDTSIPerson<P extends PersonFields> = ReturnType<
+  typeof caFormatSpecificRoleDTSIPerson<P>
 >

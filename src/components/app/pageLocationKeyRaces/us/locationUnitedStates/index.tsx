@@ -4,25 +4,25 @@ import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common'
 import { USKeyRaces } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/keyRaces'
 import { USKeyRacesStates } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/keyRacesStates'
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/organizePeople'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export function LocationUnitedStates({
   countAdvocates,
-  countryCode,
   groups,
 }: {
   countAdvocates: number
-  countryCode: SupportedCountryCodes.US
   groups: Awaited<ReturnType<typeof organizePeople>>
 }) {
   return (
     <LocationRaces countAdvocates={countAdvocates} countryCode={countryCode}>
       <LocationRaces.VoterGuideInput countryCode={countryCode} />
       <LocationRaces.KeyRaces>
-        <USKeyRaces countryCode={countryCode} groups={groups} />
+        <USKeyRaces groups={groups} />
       </LocationRaces.KeyRaces>
       <LocationRaces.KeyRacesStates countryCode={countryCode}>
-        <USKeyRacesStates countryCode={countryCode} isGovernorRace />
+        <USKeyRacesStates isGovernorRace />
       </LocationRaces.KeyRacesStates>
       <LocationRaces.PacFooter />
     </LocationRaces>

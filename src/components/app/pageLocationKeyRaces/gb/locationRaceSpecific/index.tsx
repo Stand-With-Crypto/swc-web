@@ -8,6 +8,7 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
+import { gbFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/specificRoleDTSIPerson'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
@@ -15,7 +16,6 @@ import {
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import {
   GBCountryCode,
@@ -26,12 +26,13 @@ import { getIntlUrls } from '@/utils/shared/urls'
 
 interface GBLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: GBCountryCode
-  countryCode: SupportedCountryCodes.GB
   isHouseOfLords?: boolean
 }
 
+const countryCode = SupportedCountryCodes.GB
+
 function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuery['people']) {
-  const formatted = people.map(x => formatSpecificRoleDTSIPerson(x))
+  const formatted = people.map(x => gbFormatSpecificRoleDTSIPerson(x))
 
   formatted.sort((a, b) => {
     const aPersonScore = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
@@ -58,7 +59,6 @@ function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuer
 export function GBLocationRaceSpecific({
   stateCode,
   people,
-  countryCode,
   isHouseOfLords,
 }: GBLocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people)
@@ -90,24 +90,11 @@ export function GBLocationRaceSpecific({
             United Kingdom
           </InternalLink>
           {' / '}
-          {(() => {
-            return (
-              <>
-                <InternalLink
-                  className="text-gray-400"
-                  href={urls.locationStateSpecific(stateCode)}
-                >
-                  {stateDisplayName}
-                </InternalLink>{' '}
-                /{' '}
-                <span>
-                  {isHouseOfLords
-                    ? 'United Kingdom House of Lords'
-                    : 'United Kingdom House of Commons'}
-                </span>
-              </>
-            )
-          })()}
+          <LocationRaceLinkTitle
+            href={urls.locationStateSpecific(stateCode)}
+            isHouseOfLords={isHouseOfLords}
+            stateDisplayName={stateDisplayName}
+          />
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
           {isHouseOfLords ? 'United Kingdom House of Lords' : 'United Kingdom House of Commons'}
@@ -159,5 +146,27 @@ export function GBLocationRaceSpecific({
         )}
       </div>
     </div>
+  )
+}
+
+function LocationRaceLinkTitle({
+  href,
+  stateDisplayName,
+  isHouseOfLords,
+}: {
+  href: string
+  stateDisplayName: string
+  isHouseOfLords?: boolean
+}) {
+  return (
+    <>
+      <InternalLink className="text-gray-400" href={href}>
+        {stateDisplayName}
+      </InternalLink>{' '}
+      /{' '}
+      <span>
+        {isHouseOfLords ? 'United Kingdom House of Lords' : 'United Kingdom House of Commons'}
+      </span>
+    </>
   )
 }

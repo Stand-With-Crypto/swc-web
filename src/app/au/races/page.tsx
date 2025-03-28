@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import { LocationAustralia } from '@/components/app/pageLocationKeyRaces/au/locationAustralia'
-import { organizePeopleAU } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
+import { auOrganizePeople } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
 import { queryDTSILocationAustraliaInformation } from '@/data/dtsi/queries/au/queryDTSILocationAustraliaInformation'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -28,9 +28,7 @@ export default async function LocationAustraliaPage() {
     prismaClient.user.count({ where: { countryCode } }),
   ])
 
-  const groups = organizePeopleAU(dtsiResults)
+  const groups = auOrganizePeople(dtsiResults)
 
-  return (
-    <LocationAustralia countAdvocates={countAdvocates} countryCode={countryCode} groups={groups} />
-  )
+  return <LocationAustralia countAdvocates={countAdvocates} groups={groups} />
 }

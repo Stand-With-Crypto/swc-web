@@ -1,7 +1,7 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceSpecific'
+import { USLocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/us/locationRaceSpecific'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -60,7 +60,7 @@ export async function generateStaticParams() {
 export default async function LocationDistrictSpecificPage({
   params,
 }: LocationDistrictSpecificPageProps) {
-  const { district, stateCode, countryCode } = await params
+  const { district, stateCode } = await params
   const validatedDistrict = zodNormalizedDTSIDistrictId.parse(district)
   const validatedStateCode = zodUsaState.parse(stateCode.toUpperCase())
 
@@ -74,9 +74,6 @@ export default async function LocationDistrictSpecificPage({
   }
 
   return (
-    <LocationRaceSpecific
-      {...data}
-      {...{ stateCode: validatedStateCode, district: validatedDistrict, countryCode }}
-    />
+    <USLocationRaceSpecific {...data} district={validatedDistrict} stateCode={validatedStateCode} />
   )
 }

@@ -8,6 +8,7 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
+import { caFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/specificRoleDTSIPerson'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
@@ -15,7 +16,6 @@ import {
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import {
   CAProvinceOrTerritoryCode,
@@ -26,12 +26,13 @@ import { getIntlUrls } from '@/utils/shared/urls'
 
 interface CALocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: CAProvinceOrTerritoryCode
-  countryCode: SupportedCountryCodes.CA
   isSenate?: boolean
 }
 
+const countryCode = SupportedCountryCodes.CA
+
 function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuery['people']) {
-  const formatted = people.map(x => formatSpecificRoleDTSIPerson(x))
+  const formatted = people.map(x => caFormatSpecificRoleDTSIPerson(x))
 
   formatted.sort((a, b) => {
     const aPersonScore = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
@@ -58,7 +59,6 @@ function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuer
 export function CALocationRaceSpecific({
   stateCode,
   people,
-  countryCode,
   isSenate,
 }: CALocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people)
@@ -90,19 +90,11 @@ export function CALocationRaceSpecific({
             Canada
           </InternalLink>
           {' / '}
-          {(() => {
-            return (
-              <>
-                <InternalLink
-                  className="text-gray-400"
-                  href={urls.locationStateSpecific(stateCode)}
-                >
-                  {stateDisplayName}
-                </InternalLink>{' '}
-                / <span>{isSenate ? 'Canadian Senate' : 'Canadian House of Commons'}</span>
-              </>
-            )
-          })()}
+          <LocationRaceLinkTitle
+            href={urls.locationStateSpecific(stateCode)}
+            isSenate={isSenate}
+            stateDisplayName={stateDisplayName}
+          />
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
           {isSenate ? 'Canadian Senate' : 'Canadian House of Commons'}
@@ -154,5 +146,24 @@ export function CALocationRaceSpecific({
         )}
       </div>
     </div>
+  )
+}
+
+function LocationRaceLinkTitle({
+  href,
+  stateDisplayName,
+  isSenate,
+}: {
+  href: string
+  stateDisplayName: string
+  isSenate?: boolean
+}) {
+  return (
+    <>
+      <InternalLink className="text-gray-400" href={href}>
+        {stateDisplayName}
+      </InternalLink>{' '}
+      / <span>{isSenate ? 'Canadian Senate' : 'Canadian House of Commons'}</span>
+    </>
   )
 }

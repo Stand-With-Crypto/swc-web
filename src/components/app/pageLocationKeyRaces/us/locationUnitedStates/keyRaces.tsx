@@ -9,15 +9,16 @@ import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface USKeyRacesProps {
   groups: ReturnType<typeof organizePeople>
-  countryCode: SupportedCountryCodes
 }
 
-export function USKeyRaces({ groups, countryCode }: USKeyRacesProps) {
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+export function USKeyRaces({ groups }: USKeyRacesProps) {
   const urls = getIntlUrls(countryCode)
 
   const keyRaces = Object.entries(groups.keyRaces)
@@ -36,7 +37,7 @@ export function USKeyRaces({ groups, countryCode }: USKeyRacesProps) {
     const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
     return (
       <div className="container flex flex-col items-center" key={stateCode}>
-        <StateShield countryCode={countryCode} size={150} state={stateCode} />
+        <StateShield countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} size={150} state={stateCode} />
 
         <PageTitle as="h2" size="sm">
           {stateName}
@@ -58,7 +59,7 @@ export function USKeyRaces({ groups, countryCode }: USKeyRacesProps) {
 
           return (
             <DTSIPersonHeroCardSection
-              countryCode={countryCode}
+              countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
               cta={
                 <InternalLink
                   href={

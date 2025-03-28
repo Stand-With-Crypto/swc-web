@@ -24,14 +24,14 @@ import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface GBLocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: GBCountryCode
-  countryCode: SupportedCountryCodes.GB
   countAdvocates: number
 }
+
+const countryCode = SupportedCountryCodes.GB
 
 export function GBLocationStateSpecific({
   stateCode,
   people,
-  countryCode,
   countAdvocates,
   personStances,
 }: GBLocationStateSpecificProps) {

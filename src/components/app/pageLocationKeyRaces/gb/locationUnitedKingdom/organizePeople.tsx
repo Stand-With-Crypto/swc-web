@@ -1,10 +1,10 @@
 import { groupBy } from 'lodash-es'
 
-import { formatSpecificRoleDTSIPersonGB } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/specificRoleDTSIPerson'
+import { gbFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/specificRoleDTSIPerson'
 import { QueryDTSILocationUnitedKingdomInformationData } from '@/data/dtsi/queries/gb/queryDTSILocationUnitedKingdomInformation'
 
-export function organizePeopleGB({ keyRaces }: QueryDTSILocationUnitedKingdomInformationData) {
-  const formattedKeyRaces = keyRaces.map(x => formatSpecificRoleDTSIPersonGB(x))
+export function gbOrganizePeople({ keyRaces }: QueryDTSILocationUnitedKingdomInformationData) {
+  const formattedKeyRaces = keyRaces.map(x => gbFormatSpecificRoleDTSIPerson(x))
 
   type GroupedRaces = Record<string, (typeof formattedKeyRaces)[]>
 

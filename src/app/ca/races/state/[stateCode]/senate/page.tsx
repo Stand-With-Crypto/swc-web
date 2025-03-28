@@ -47,12 +47,5 @@ export default async function LocationSenateSpecificPage({
     throw new Error(`Invalid params for LocationSenateSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return (
-    <CALocationRaceSpecific
-      countryCode={countryCode}
-      isSenate
-      stateCode={validatedStateCode}
-      {...data}
-    />
-  )
+  return <CALocationRaceSpecific isSenate stateCode={validatedStateCode} {...data} />
 }
