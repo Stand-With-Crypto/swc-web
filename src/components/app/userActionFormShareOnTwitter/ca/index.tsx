@@ -62,12 +62,12 @@ export function CAUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         <ShareOnX>
           <ShareOnX.Heading
             subtitle="Stay up to date on crypto policy changes in Canada"
-            title="Follow @StandWithCrypto on Twitter"
+            title="Follow @StandWCrypto_CA on Twitter"
           />
 
           <ShareOnX.Benefits benefits={caBenefits} />
 
-          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWithCrypto" />
+          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWCrypto_CA" />
         </ShareOnX>
       )
     case SectionNames.SUCCESS:
