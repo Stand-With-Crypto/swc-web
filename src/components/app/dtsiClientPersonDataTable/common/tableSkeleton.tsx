@@ -1,31 +1,17 @@
 'use client'
 
-import { ComponentType, MouseEvent, ReactNode, SetStateAction, useCallback, useMemo } from 'react'
+import { ReactNode } from 'react'
 import {
-  Column,
-  ColumnFiltersState,
-  FilterFn,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
-  TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
-import { debounce } from 'lodash-es'
 import { Search } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import {
-  Person,
-  PERSON_TABLE_COLUMNS_IDS,
-} from '@/components/app/dtsiClientPersonDataTable/common/columns'
+import { Person } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/common/pagination'
-import {
-  useColumnFilters,
-  useSortingFilter,
-} from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
@@ -36,45 +22,21 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
+import { DataTableBodyProps } from '@/components/app/dtsiClientPersonDataTable/common/table'
 
-interface GlobalFiltersProps<TData extends Person = Person> {
-  columns?: Column<TData>[]
-}
-
-interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
-  loadState: 'loaded' | 'static'
-  countryCode: SupportedCountryCodes
-}
-
-export interface DataTableBodyProps<TData extends Person = Person> extends DataTableProps<TData> {
-  globalFiltersComponent: ComponentType<GlobalFiltersProps<TData>>
-  getGlobalFilterDefaults: () => ColumnFiltersState
-  getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
-  globalFilter: string
-  setGlobalFilter: SetStateAction<any>
-}
-
-export function DataTable({ children }: { children: ReactNode }) {
+export function DataTableSkeleton({ children }: { children: ReactNode }) {
   return <div className="space-y-6">{children}</div>
 }
 
-function DataTableGlobalFilter({
+function DataTableGlobalFilterSkeleton({
   title,
   subtitle,
   searchPlaceholder = 'Search by name or state',
-  globalFilter,
-  setGlobalFilter,
 }: {
   title: string
   subtitle: string
   searchPlaceholder: string
-  globalFilter: string
-  setGlobalFilter: SetStateAction<any>
 }) {
-  const debouncedSetGlobalFilter = useMemo(() => debounce(setGlobalFilter, 300), [setGlobalFilter])
-
   return (
     <div className="container">
       <div className="flex flex-col items-center justify-between gap-3 rounded-lg border p-6 md:flex-row">
@@ -85,11 +47,8 @@ function DataTableGlobalFilter({
         <div className="w-full flex-shrink-0 md:max-w-96">
           <InputWithIcons
             className="rounded-full bg-gray-100 text-gray-600"
-            defaultValue={globalFilter}
+            defaultValue={''}
             leftIcon={<Search className="h-4 w-4 text-gray-500" />}
-            onChange={event => {
-              debouncedSetGlobalFilter(event.target.value)
-            }}
             placeholder={searchPlaceholder}
           />
         </div>
@@ -98,36 +57,22 @@ function DataTableGlobalFilter({
   )
 }
 
-DataTable.GlobalFilter = DataTableGlobalFilter
+DataTableSkeleton.GlobalFilter = DataTableGlobalFilterSkeleton
 
-function DataTableBody<TData extends Person = Person>({
+function DataTableBodySkeleton<TData extends Person = Person>({
   columns = [],
   data = [],
-  loadState,
-  globalFilterFn,
-  countryCode,
-  globalFiltersComponent: GlobalFiltersComponent,
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
-  globalFilter,
-  setGlobalFilter,
+  globalFiltersComponent: GlobalFiltersComponent,
   ...rest
 }: DataTableBodyProps<TData>) {
-  const router = useRouter()
-
-  const [columnFilters, setColumnFilters] = useColumnFilters()
-
-  const [sorting, setSorting] = useSortingFilter([])
-
   const table = useReactTable<TData>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     initialState: {
       pagination: {
@@ -136,26 +81,8 @@ function DataTableBody<TData extends Person = Person>({
       columnFilters: getGlobalFilterDefaults(),
     },
     filterFns: getPersonDataTableFilterFns(),
-    state: {
-      sorting,
-      columnFilters,
-      globalFilter,
-    },
-    globalFilterFn,
     ...rest,
   })
-
-  const handleTableRowClick = useCallback(
-    (event: MouseEvent<HTMLTableRowElement>, row: Row<TData>) => {
-      const politicianUrl = getIntlUrls(countryCode).politicianDetails(row.original.slug)
-      if (event.ctrlKey || event.metaKey) {
-        event.preventDefault()
-        return window.open(politicianUrl, '_blank')
-      }
-      return router.push(politicianUrl)
-    },
-    [countryCode, router],
-  )
 
   const tableRowModel = table.getRowModel()
 
@@ -169,7 +96,7 @@ function DataTableBody<TData extends Person = Person>({
           <GlobalFiltersComponent columns={table.getAllColumns()} />
         </div>
 
-        <div className="relative w-full">
+        <div className="relative w-full" data-testid="table-skeleton">
           <Table className="lg:table-fixed">
             <TableHeader className="bg-secondary text-gray-400">
               {table.getHeaderGroups().map(headerGroup => (
@@ -193,7 +120,6 @@ function DataTableBody<TData extends Person = Person>({
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
-                    onClick={event => handleTableRowClick(event, row)}
                     role="button"
                   >
                     {row.getVisibleCells().map(cell => (
@@ -214,13 +140,11 @@ function DataTableBody<TData extends Person = Person>({
           </Table>
         </div>
       </div>
-      {loadState === 'loaded' && (
-        <div className="mt-3 flex justify-center">
-          <DataTablePagination table={table} />
-        </div>
-      )}
+      <div className="mt-3 flex justify-center">
+        <DataTablePagination table={table} />
+      </div>
     </div>
   )
 }
 
-DataTable.Body = DataTableBody
+DataTableSkeleton.Body = DataTableBodySkeleton

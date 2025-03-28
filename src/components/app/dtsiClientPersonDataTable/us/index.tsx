@@ -8,10 +8,7 @@ import {
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
-import {
-  DataTable,
-  DataTableSkeleton,
-} from '@/components/app/dtsiClientPersonDataTable/common/table'
+import { DataTable } from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -33,18 +30,18 @@ import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
+import { DataTableSkeleton } from '@/components/app/dtsiClientPersonDataTable/common/tableSkeleton'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
 const GLOBAL_SUBTITLE =
   'We have a database of over 1,000 politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
+const countryCode = SupportedCountryCodes.US
 
 export function UsDTSIClientPersonDataTable({
   initialData,
-  countryCode,
 }: {
   initialData: DTSIPersonDataTablePeople
-  countryCode: SupportedCountryCodes
 }) {
   const [globalFilter, setGlobalFilter] = useSearchFilter('')
 

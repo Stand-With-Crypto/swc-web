@@ -28,7 +28,7 @@ export function UsPagePoliticians({
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
         <Suspense fallback={<LoadingOverlay />}>
-          <UsDTSIClientPersonDataTable countryCode={countryCode} initialData={politicians} />
+          <UsDTSIClientPersonDataTable initialData={politicians} />
         </Suspense>
       </PagePoliticiansLayout.PoliticiansTableSection>
     </PagePoliticiansLayout>
