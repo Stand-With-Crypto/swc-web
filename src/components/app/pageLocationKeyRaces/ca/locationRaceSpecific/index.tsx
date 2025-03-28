@@ -113,7 +113,7 @@ export function CALocationRaceSpecific({
                   <div className="sticky top-24 text-center">
                     <DTSIPersonHeroCard
                       countryCode={countryCode}
-                      cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={person} />}
+                      cryptoStanceGrade={DTSIFormattedLetterGrade}
                       isRecommended={isRecommended}
                       person={person}
                       subheader="role"
