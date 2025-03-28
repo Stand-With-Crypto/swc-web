@@ -31,9 +31,7 @@ export function PagePoliticianDetails({ children }: { children: ReactNode }) {
   return <div className="standard-spacing-from-navbar container max-w-3xl">{children}</div>
 }
 
-PagePoliticianDetails.Header = PoliticianHeader
-
-export function PoliticianHeader({
+function PoliticianHeader({
   person,
   showRoleLocation = true,
 }: {
@@ -98,9 +96,9 @@ export function PoliticianHeader({
   )
 }
 
-PagePoliticianDetails.Links = PoliticianLinks
+PagePoliticianDetails.Header = PoliticianHeader
 
-export function PoliticianLinks({
+function PoliticianLinks({
   person,
   showDonateButton = true,
 }: {
@@ -139,9 +137,9 @@ export function PoliticianLinks({
   )
 }
 
-PagePoliticianDetails.Stances = PoliticianStances
+PagePoliticianDetails.Links = PoliticianLinks
 
-export function PoliticianStances({
+function PoliticianStances({
   person,
   countryCode,
 }: {
@@ -172,3 +170,5 @@ export function PoliticianStances({
     </section>
   )
 }
+
+PagePoliticianDetails.Stances = PoliticianStances
