@@ -1,6 +1,5 @@
 import { gbFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/specificRoleDTSIPerson'
 import { DTSI_PersonRoleCategory, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
-import { gracefullyError } from '@/utils/shared/gracefullyError'
 
 import { FormattedPerson } from './types'
 
@@ -15,12 +14,6 @@ export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformatio
       grouped.houseOfCommons.push(person)
     } else if (person.runningForSpecificRole?.roleCategory === DTSI_PersonRoleCategory.SENATE) {
       grouped.senate.push(person)
-    } else {
-      gracefullyError({
-        msg: 'Unexpected runningForSpecificRole',
-        fallback: null,
-        hint: { extra: { person } },
-      })
     }
   })
   grouped.houseOfCommons.sort((a, b) =>
