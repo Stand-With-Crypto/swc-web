@@ -10,8 +10,10 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { Search } from 'lucide-react'
+
 import { Person } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/common/pagination'
+import { DataTableBodyProps } from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
@@ -22,7 +24,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { DataTableBodyProps } from '@/components/app/dtsiClientPersonDataTable/common/table'
 
 export function DataTableSkeleton({ children }: { children: ReactNode }) {
   return <div className="space-y-6">{children}</div>

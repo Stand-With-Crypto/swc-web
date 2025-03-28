@@ -9,6 +9,7 @@ import {
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/common/table'
+import { DataTableSkeleton } from '@/components/app/dtsiClientPersonDataTable/common/tableSkeleton'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -30,7 +31,6 @@ import {
   getGBCountryNameFromCode,
 } from '@/utils/shared/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { DataTableSkeleton } from '@/components/app/dtsiClientPersonDataTable/common/tableSkeleton'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or country'
 const GLOBAL_SUBTITLE =

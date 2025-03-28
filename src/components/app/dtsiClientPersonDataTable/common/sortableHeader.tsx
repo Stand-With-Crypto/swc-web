@@ -1,8 +1,9 @@
-import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Column } from '@tanstack/react-table'
 import { ReactNode } from 'react'
+import { Column } from '@tanstack/react-table'
+import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
+
 import { Person } from '@/components/app/dtsiClientPersonDataTable/common/columns'
+import { Button } from '@/components/ui/button'
 
 export const SortableHeader = <TData extends Person = Person>({
   column,

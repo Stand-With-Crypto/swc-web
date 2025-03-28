@@ -2,6 +2,7 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
@@ -23,7 +24,6 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPartners } from '@/utils/shared/zod/getSWCPartners'
 
 import { UsHero } from './hero'
-import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 
 export function UsPageHome({
   params,
@@ -177,8 +177,8 @@ export function UsPageHome({
 
       <HomepagePoliticiansSection
         countryCode={countryCode}
-        dtsiHomepagePoliticians={dtsiHomepagePeople}
         cryptoStanceGrade={DTSIFormattedLetterGrade}
+        dtsiHomepagePoliticians={dtsiHomepagePeople}
       />
     </>
   )

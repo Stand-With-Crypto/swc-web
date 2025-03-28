@@ -4,7 +4,7 @@ import { createColumnHelper, FilterFn } from '@tanstack/react-table'
 import { isNil } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/common/table'
+import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/common/sortableHeader'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'

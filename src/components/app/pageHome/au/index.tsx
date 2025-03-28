@@ -2,6 +2,7 @@ import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrad
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -12,7 +13,6 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { AuHero } from './hero'
-import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 
 const countryCode = SupportedCountryCodes.AU
 
@@ -93,8 +93,8 @@ export function AuPageHome({
 
       <HomepagePoliticiansSection
         countryCode={countryCode}
-        dtsiHomepagePoliticians={dtsiHomepagePoliticians}
         cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
+        dtsiHomepagePoliticians={dtsiHomepagePoliticians}
       />
     </>
   )

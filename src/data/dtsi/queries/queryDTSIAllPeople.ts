@@ -5,7 +5,10 @@ import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPerson
 import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/generated'
 import { PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY } from '@/data/dtsi/queries/constants'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 export const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
 

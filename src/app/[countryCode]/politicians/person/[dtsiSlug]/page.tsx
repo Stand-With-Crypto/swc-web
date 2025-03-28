@@ -8,8 +8,8 @@ import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleS
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
-import { toBool } from '@/utils/shared/toBool'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { toBool } from '@/utils/shared/toBool'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'

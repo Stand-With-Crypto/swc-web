@@ -17,6 +17,7 @@ import {
 import { debounce } from 'lodash-es'
 import { Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+
 import {
   Person,
   PERSON_TABLE_COLUMNS_IDS,

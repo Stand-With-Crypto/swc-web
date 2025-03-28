@@ -9,6 +9,7 @@ import {
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/common/table'
+import { DataTableSkeleton } from '@/components/app/dtsiClientPersonDataTable/common/tableSkeleton'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -30,7 +31,6 @@ import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
-import { DataTableSkeleton } from '@/components/app/dtsiClientPersonDataTable/common/tableSkeleton'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
 const GLOBAL_SUBTITLE =
@@ -62,7 +62,7 @@ export function UsDTSIClientPersonDataTable({
         countryCode,
         dtsiGradeComponent: DTSIFormattedLetterGrade,
       }),
-    [countryCode],
+    [],
   )
 
   const tableBodyProps = useMemo(() => {
@@ -76,7 +76,7 @@ export function UsDTSIClientPersonDataTable({
       globalFilter,
       setGlobalFilter,
     }
-  }, [tableColumns, parsedData, countryCode, globalFilter, setGlobalFilter])
+  }, [tableColumns, parsedData, globalFilter, setGlobalFilter])
 
   return (
     <Suspense
