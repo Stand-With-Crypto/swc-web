@@ -48,5 +48,5 @@ export default async function AuPoliticianDetails(props: Props) {
     notFound()
   }
 
-  return <AuPagePoliticianDetails {...{ person, questionnaire: null }} />
+  return <AuPagePoliticianDetails person={person} />
 }

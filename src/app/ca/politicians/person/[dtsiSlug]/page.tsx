@@ -48,5 +48,5 @@ export default async function CaPoliticianDetails(props: Props) {
     notFound()
   }
 
-  return <CaPagePoliticianDetails {...{ person, questionnaire: null }} />
+  return <CaPagePoliticianDetails person={person} />
 }

@@ -48,5 +48,5 @@ export default async function GbPoliticianDetails(props: Props) {
     notFound()
   }
 
-  return <GbPagePoliticianDetails {...{ person, questionnaire: null }} />
+  return <GbPagePoliticianDetails person={person} />
 }
