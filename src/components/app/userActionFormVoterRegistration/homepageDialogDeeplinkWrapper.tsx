@@ -24,7 +24,9 @@ export function UserActionFormVoterRegistrationDeeplinkWrapper() {
   return (
     <GeoGate
       countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      unavailableContent={<UserActionFormActionUnavailable />}
+      unavailableContent={
+        <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+      }
     >
       <UserActionFormVoterRegistration onClose={() => router.replace(urls.home())} />
     </GeoGate>

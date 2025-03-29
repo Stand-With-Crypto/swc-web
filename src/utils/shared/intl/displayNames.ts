@@ -13,3 +13,10 @@ export const COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX: Record<SupportedCountryCo
   [SupportedCountryCodes.GB]: `the ${COUNTRY_CODE_TO_DISPLAY_NAME[SupportedCountryCodes.GB]}`,
   [SupportedCountryCodes.AU]: COUNTRY_CODE_TO_DISPLAY_NAME[SupportedCountryCodes.AU],
 }
+
+export const COUNTRY_CODE_TO_DEMONYM: Record<SupportedCountryCodes, string> = {
+  [SupportedCountryCodes.US]: 'American',
+  [SupportedCountryCodes.GB]: 'British',
+  [SupportedCountryCodes.CA]: 'Canadian',
+  [SupportedCountryCodes.AU]: 'Australian',
+}

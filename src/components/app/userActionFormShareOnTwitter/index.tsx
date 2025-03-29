@@ -5,7 +5,10 @@ import { UserActionFormActionUnavailable } from '@/components/app/userActionForm
 import { UserActionFormShareOnTwitterSkeleton } from '@/components/app/userActionFormShareOnTwitter/common/skeleton'
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 const AUUserActionFormShareOnTwitter = dynamic(
   () =>
@@ -62,7 +65,11 @@ export function UserActionFormShareOnTwitter(props: UserActionFormShareOnTwitter
     default:
       return gracefullyError({
         msg: `Country implementation not found for UserActionFormShareOnTwitter`,
-        fallback: <UserActionFormActionUnavailable />,
+        fallback: (
+          <UserActionFormActionUnavailable
+            countryCode={countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE}
+          />
+        ),
         hint: {
           level: 'error',
           tags: {

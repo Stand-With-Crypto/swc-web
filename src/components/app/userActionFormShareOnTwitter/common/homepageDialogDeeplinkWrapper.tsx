@@ -26,7 +26,10 @@ export function UserActionFormShareOnTwitterDeeplinkWrapper({
   }, [])
 
   return (
-    <GeoGate countryCode={countryCode} unavailableContent={<UserActionFormActionUnavailable />}>
+    <GeoGate
+      countryCode={countryCode}
+      unavailableContent={<UserActionFormActionUnavailable countryCode={countryCode} />}
+    >
       <UserActionFormShareOnTwitter
         countryCode={countryCode}
         onClose={() => router.replace(urls.home())}
