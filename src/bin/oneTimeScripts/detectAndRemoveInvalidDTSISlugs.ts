@@ -2,6 +2,7 @@ import { runBin } from '@/bin/runBin'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('bin:oneTimeScripts:detectAndRemoveInvalidDTSISlugs')
 
@@ -14,9 +15,18 @@ async function run() {
 
   logger.info('Querying all DTSI slugs')
 
-  const allSlugs = await queryDTSIAllPeopleSlugs()
+  const allUSSlugs = await queryDTSIAllPeopleSlugs({ countryCode: SupportedCountryCodes.US })
+  const allCASlugs = await queryDTSIAllPeopleSlugs({ countryCode: SupportedCountryCodes.CA })
+  const allGBSlugs = await queryDTSIAllPeopleSlugs({ countryCode: SupportedCountryCodes.GB })
+  const allAUSlugs = await queryDTSIAllPeopleSlugs({ countryCode: SupportedCountryCodes.AU })
+  const allSlugs = [
+    ...(allUSSlugs.people || []),
+    ...(allCASlugs.people || []),
+    ...(allGBSlugs.people || []),
+    ...(allAUSlugs.people || []),
+  ]
 
-  const slugs = allSlugs.people.map(({ slug }) => slug)
+  const slugs = allSlugs.map(({ slug }) => slug)
 
   logger.info(`Found ${slugs.length} slugs`)
 

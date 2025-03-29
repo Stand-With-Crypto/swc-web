@@ -1,5 +1,5 @@
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
-import { UserReferralUrl } from '@/components/app/pageUserProfile/userReferralUrl'
+import { UserReferralUrl } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'

@@ -2,7 +2,7 @@ import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { MESSAGES } from '@/components/app/userActionFormLiveEvent/constants'
 import { UserActionFormLiveEventDeeplinkWrapper } from '@/components/app/userActionFormLiveEvent/homepageDialogDeeplinkWrapper.tsx'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -43,7 +43,7 @@ export default async function UserActionLiveEventDeepLink(props: Props) {
   }
 
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
+    <USHomepageDialogDeeplinkLayout pageParams={params}>
       <div className={dialogContentPaddingStyles}>
         <ErrorBoundary
           extras={{
@@ -61,6 +61,6 @@ export default async function UserActionLiveEventDeepLink(props: Props) {
           <UserActionFormLiveEventDeeplinkWrapper slug={slug as UserActionLiveEventCampaignName} />
         </ErrorBoundary>
       </div>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }

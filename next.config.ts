@@ -661,17 +661,22 @@ const nextConfig: NextConfig = {
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
         permanent: true,
       },
-      {
-        source: '/races',
-        destination: '/politicians',
-        permanent: true,
-      },
-      {
-        source: '/vote',
-        destination: '/politicians',
-        permanent: true,
-      },
     ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // These rewrites are checked after headers/redirects
+        // and before all files including _next/public files which
+        // allows overriding page files
+        {
+          source: '/:locale/(mission|manifesto)',
+          destination: '/:locale/about',
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    }
   },
 }
 

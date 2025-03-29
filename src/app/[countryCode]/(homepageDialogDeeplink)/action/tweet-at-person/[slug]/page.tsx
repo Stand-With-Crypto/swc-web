@@ -2,7 +2,7 @@ import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { CAMPAIGN_METADATA } from '@/components/app/userActionFormTweetAtPerson/constants'
 import { UserActionFormTweetToPersonDeeplinkWrapper } from '@/components/app/userActionFormTweetAtPerson/homepageDialogDeeplinkWrapper.tsx'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -50,7 +50,7 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
   }
 
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
+    <USHomepageDialogDeeplinkLayout pageParams={params}>
       <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
         <ErrorBoundary
           extras={{
@@ -70,6 +70,6 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
           />
         </ErrorBoundary>
       </div>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }

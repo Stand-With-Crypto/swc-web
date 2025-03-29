@@ -3,24 +3,30 @@
 import { format, isAfter } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
-import { NextImage } from '@/components/ui/image'
+import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { StateShield } from '@/components/ui/stateShield'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { pluralize } from '@/utils/shared/pluralize'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface StateEventsDialogProps {
-  state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
-  events?: SWCEvents
+  state: {
+    code: string
+    name: string
+  }
+  events?: SWCEvents | null
+  countryCode: SupportedCountryCodes
 }
 
-export function StateEventsDialogContent({ state, events }: StateEventsDialogProps) {
+export function StateEventsDialogContent({ state, events, countryCode }: StateEventsDialogProps) {
   usePreventOverscroll()
 
-  const parsedState = state.toUpperCase() as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+  const parsedState = state.code.toUpperCase()
   const stateEvents =
-    events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase()) ?? []
+    events?.filter(event => event.data.state?.toLowerCase() === state.code.toLowerCase()) ?? []
 
   const orderedResult = stateEvents.sort((a, b) => {
     const aDate = a.data.time ? new Date(`${a.data.date}T${a.data.time}`) : new Date(a.data.date)
@@ -30,23 +36,19 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
   })
 
   return (
-    <div className="flex flex-col items-center gap-2 pb-4">
-      <NextImage
-        alt={`${parsedState} shield`}
+    <div className="flex flex-col items-center gap-2 p-6">
+      <StateShield
         className="mb-2 lg:mb-0"
-        height={100}
-        src={`/stateShields/${parsedState}.png`}
-        width={100}
+        countryCode={countryCode}
+        size={100}
+        state={parsedState}
       />
 
-      <h3 className="font-sans text-xl font-bold">
-        Events in {US_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}
-      </h3>
+      <h3 className="font-sans text-xl font-bold">Events in {state.name}</h3>
       <p className="font-mono text-base text-muted-foreground">
         There {pluralize({ singular: 'is', plural: 'are', count: orderedResult?.length ?? 0 })}{' '}
         {orderedResult?.length ?? 0} Stand With Crypto{' '}
-        {pluralize({ singular: 'event', count: orderedResult?.length ?? 0 })} in{' '}
-        {US_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
+        {pluralize({ singular: 'event', count: orderedResult?.length ?? 0 })} in {state.name}.
       </p>
 
       <ScrollArea className="w-full">
@@ -55,12 +57,14 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
             {orderedResult.map(event => (
               <EventDialog
                 event={event.data}
-                key={event.data.slug}
-                trigger={<StateDialogEventCard event={event.data} />}
+                key={getUniqueEventKey(event.data)}
+                trigger={<StateDialogEventCard countryCode={countryCode} event={event.data} />}
               />
             ))}
           </div>
-        ) : null}
+        ) : (
+          <NoEventsCTA className="mt-6" />
+        )}
         <ScrollBar />
       </ScrollArea>
     </div>
@@ -69,19 +73,19 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
 
 interface StateDialogEventCardProps {
   event: SWCEvent
+  countryCode: SupportedCountryCodes
 }
 
-function StateDialogEventCard({ event }: StateDialogEventCardProps) {
+function StateDialogEventCard({ event, countryCode }: StateDialogEventCardProps) {
   const formattedEventDate = format(new Date(`${event.date}T00:00`), 'MMMM d, yyyy')
 
   return (
     <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 transition hover:bg-backgroundAlternate/60 lg:flex-row lg:items-center lg:p-4 lg:pt-4">
-      <NextImage
-        alt={`${event.state} shield`}
+      <StateShield
         className="mb-2 lg:mb-0"
-        height={70}
-        src={`/stateShields/${event.state}.png`}
-        width={70}
+        countryCode={countryCode}
+        size={70}
+        state={event.state}
       />
 
       <strong className="block lg:hidden">{event.name}</strong>

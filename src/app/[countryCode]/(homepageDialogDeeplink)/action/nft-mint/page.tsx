@@ -1,6 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { HomepageDialogDeeplinkNFTMintWrapper } from '@/components/app/userActionFormNFTMint/homepageDialogDeeplinkNFTMintWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
@@ -13,7 +13,7 @@ export const dynamic = 'error'
 export default async function UserActionNFTMintDeepLink(props: PageProps) {
   const params = await props.params
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
+    <USHomepageDialogDeeplinkLayout pageParams={params}>
       <div
         className={cn(
           'flex flex-col items-center justify-center max-md:h-full',
@@ -35,6 +35,6 @@ export default async function UserActionNFTMintDeepLink(props: PageProps) {
           <HomepageDialogDeeplinkNFTMintWrapper />
         </ErrorBoundary>
       </div>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }

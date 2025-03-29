@@ -76,6 +76,22 @@ export const getDTSIPersonRoleCategoryDisplayName = (
       return 'Senator'
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
       return 'Vice President'
+    case DTSI_PersonRoleCategory.GOVERNOR:
+      return 'Governor'
+    case DTSI_PersonRoleCategory.HOUSE_OF_COMMONS:
+      return 'House of Commons Member'
+    case DTSI_PersonRoleCategory.HOUSE_OF_LORDS:
+      return 'House of Lords Member'
+    case DTSI_PersonRoleCategory.STATE_CONGRESS:
+      return 'State Congressperson'
+    case DTSI_PersonRoleCategory.STATE_SENATE:
+      return 'State Senator'
+    case DTSI_PersonRoleCategory.MAYOR:
+      return 'Mayor'
+    case DTSI_PersonRoleCategory.COMMITTEE_CHAIR:
+      return 'Committee Chair'
+    case DTSI_PersonRoleCategory.COMMITTEE_MEMBER:
+      return 'Committee Member'
   }
   return 'Political Figure'
 }
@@ -118,6 +134,7 @@ export const getDTSIPersonRoleLocation = (
     'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState' | 'roleCategory'
   >,
 ) => {
+  // TODO: Understand how to handle intl cases here
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
     case DTSI_PersonRoleCategory.PRESIDENT:

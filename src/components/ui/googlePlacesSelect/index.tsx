@@ -24,7 +24,7 @@ export type GooglePlacesSelectProps = {
 } & Omit<InputWithIconsProps, 'value' | 'onChange' | 'type'>
 
 export const GooglePlacesSelect = React.forwardRef<
-  React.ElementRef<'input'>,
+  React.ComponentRef<'input'>,
   GooglePlacesSelectProps
 >((props, ref) => {
   const {

@@ -4,6 +4,7 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
@@ -93,6 +94,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
         {people.map(person => (
           <DTSIPersonHeroCard
             countryCode={countryCode}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             key={person.id}
             person={person}
             subheader="role"

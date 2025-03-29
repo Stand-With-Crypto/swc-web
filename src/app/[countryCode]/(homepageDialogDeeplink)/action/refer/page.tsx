@@ -1,6 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { UserActionFormReferDeeplinkWrapper } from '@/components/app/userActionFormRefer/homepageDialogDeeplinkWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
@@ -14,7 +14,7 @@ export default async function UserActionReferDeepLink(props: PageProps) {
   const params = await props.params
 
   return (
-    <HomepageDialogDeeplinkLayout className="max-w-xl" pageParams={params}>
+    <USHomepageDialogDeeplinkLayout className="max-w-xl" pageParams={params}>
       <div className={cn(dialogContentPaddingStyles, 'h-full')}>
         <ErrorBoundary
           extras={{
@@ -31,6 +31,6 @@ export default async function UserActionReferDeepLink(props: PageProps) {
           <UserActionFormReferDeeplinkWrapper />
         </ErrorBoundary>
       </div>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }

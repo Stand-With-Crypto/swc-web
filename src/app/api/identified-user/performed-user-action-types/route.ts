@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { UserActionType } from '@prisma/client'
 import { uniqBy } from 'lodash-es'
 import { NextResponse } from 'next/server'
 
@@ -13,14 +14,19 @@ async function apiResponseForUserPerformedUserActionTypes() {
     prisma: {
       include: {
         userActions: {
-          select: { id: true, actionType: true, campaignName: true },
+          select: { id: true, actionType: true, campaignName: true, countryCode: true },
         },
       },
     },
   })
 
   const performedUserActionTypes = uniqBy(
-    user?.userActions.map(({ actionType, campaignName }) => ({ actionType, campaignName })),
+    user?.userActions
+      .filter(
+        action =>
+          action.actionType === UserActionType.OPT_IN || action.countryCode === user.countryCode,
+      )
+      .map(({ actionType, campaignName }) => ({ actionType, campaignName })),
     ({ actionType, campaignName }) => `${actionType}-${campaignName}`,
   )
   return { performedUserActionTypes }

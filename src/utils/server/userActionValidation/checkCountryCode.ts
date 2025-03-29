@@ -5,17 +5,33 @@ import { cookies } from 'next/headers'
 import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
-export function createCountryCodeValidation(requiredCountryCode: string) {
+export function createCountryCodeValidation(
+  allowedCountryCodes:
+    | SupportedCountryCodes
+    | SupportedCountryCodes[] = DEFAULT_SUPPORTED_COUNTRY_CODE,
+) {
   return async () => {
+    const allowedCountryCodesArray = Array.isArray(allowedCountryCodes)
+      ? allowedCountryCodes
+      : [allowedCountryCodes]
+
     const currentCookies = await cookies()
     const userCountryCode = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
 
-    if (!isValidCountryCode({ countryCode: requiredCountryCode, userCountryCode })) {
+    const isValidCountryCodeResults = allowedCountryCodesArray.map(countryCode =>
+      isValidCountryCode({ countryCode, userCountryCode }),
+    )
+
+    if (isValidCountryCodeResults.every(result => !result)) {
       return {
         errors: {
           [UserActionValidationErrors.ACTION_UNAVAILABLE]: [
-            `Actions on Stand With Crypto are only available to users based in the ${requiredCountryCode}.`,
+            `This action is not available on your geographic location.`,
           ],
         },
       }

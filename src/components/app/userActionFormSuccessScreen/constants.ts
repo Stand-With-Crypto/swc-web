@@ -2,7 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Cookies from 'js-cookie'
 
 import type { UserActionFormSuccessScreenFeedbackProps } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
-import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 const isLoggedinWithThirdweb = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)

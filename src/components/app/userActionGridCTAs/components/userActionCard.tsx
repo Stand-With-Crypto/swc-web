@@ -52,7 +52,7 @@ export const UserActionCard = forwardRef<
         ref={ref}
         {...rest}
       >
-        <div className="flex h-full min-h-36 min-w-32 max-w-32 items-center justify-center rounded-br-3xl rounded-tr-3xl bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9 lg:h-auto lg:min-h-48 lg:w-full lg:max-w-full lg:rounded-br-none lg:rounded-tl-3xl">
+        <div className="flex min-h-36 min-w-32 max-w-32 items-center justify-center rounded-br-3xl rounded-tr-3xl bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9 lg:h-auto lg:min-h-48 lg:w-full lg:max-w-full lg:rounded-br-none lg:rounded-tl-3xl">
           <NextImage
             alt={title}
             className="hidden lg:block"
@@ -68,7 +68,7 @@ export const UserActionCard = forwardRef<
             width={80}
           />
         </div>
-        <div className="flex h-full w-full flex-col items-start justify-between gap-3 rounded-bl-3xl rounded-tl-3xl bg-muted px-4 py-4 lg:rounded-br-3xl lg:rounded-tl-none lg:p-6">
+        <div className="flex h-auto w-full flex-col items-start justify-between gap-3 rounded-bl-3xl rounded-tl-3xl bg-muted px-4 py-4 lg:h-full lg:rounded-br-3xl lg:rounded-tl-none lg:p-6">
           <strong className="text-left font-sans text-sm font-bold lg:text-xl">{title}</strong>
           <p className="hidden text-left text-sm text-muted-foreground lg:block lg:text-base">
             {description}

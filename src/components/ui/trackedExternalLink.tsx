@@ -6,7 +6,7 @@ import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { trackExternalLink } from '@/utils/web/clientAnalytics'
 
 export const TrackedExternalLink = React.forwardRef<
-  React.ElementRef<typeof ExternalLink>,
+  React.ComponentRef<typeof ExternalLink>,
   React.ComponentPropsWithoutRef<typeof ExternalLink> & { eventProperties?: AnalyticProperties }
 >(({ eventProperties, ...props }, ref) => {
   const onClick = React.useCallback(() => {

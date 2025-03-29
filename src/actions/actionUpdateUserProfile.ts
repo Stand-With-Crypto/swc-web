@@ -14,6 +14,7 @@ import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
+import { actionUpdateUserCountryCodeWithoutMiddleware } from '@/actions/actionUpdateUserCountryCode'
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
@@ -36,17 +37,20 @@ import {
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
 
 export const actionUpdateUserProfile = withServerActionMiddleware(
   'actionUpdateUserProfile',
-  _actionUpdateUserProfile,
+  actionUpdateUserProfileWithoutMiddleware,
 )
 
 const logger = getLogger(`actionUpdateUserProfile`)
 
-async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfileFormAction>) {
+async function actionUpdateUserProfileWithoutMiddleware(
+  data: z.infer<typeof zodUpdateUserProfileFormAction>,
+) {
   const authUser = await appRouterGetAuthUser()
 
   if (!authUser) {
@@ -108,6 +112,11 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         update: {},
       })
     : null
+
+  if (address && user.countryCode.toLowerCase() !== address.countryCode.toLowerCase()) {
+    await actionUpdateUserCountryCodeWithoutMiddleware(address.countryCode as SupportedCountryCodes)
+  }
+
   const existingUserEmailAddress = emailAddress
     ? user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)
     : null

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { PageUserProfileSkeleton } from '@/components/app/pageUserProfile/skeleton'
+import { PageUserProfileSkeleton } from '@/components/app/pageUserProfile/common/skeleton'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 

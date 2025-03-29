@@ -88,9 +88,8 @@ export function PageContribute() {
                             <p>All,</p>
 
                             <p>
-                              2024 is a critical year for crypto in America. I’m reaching out to ask
-                              for help in securing crypto’s future and America’s leadership in
-                              financial innovation.
+                              I’m reaching out to ask for help in securing crypto’s future and
+                              America’s leadership in financial innovation.
                             </p>
                             <p>
                               The elections, new Congressional legislation, and court proceedings
