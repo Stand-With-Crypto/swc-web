@@ -175,7 +175,12 @@ export function PollResults({
       </div>
       <PollResultsVotesInfo totalPollVotes={totalPollVotes} />
       {!shouldHideVoteAgain && (
-        <Button className="px-0 pt-4 hover:no-underline" onClick={handleVoteAgain} variant="link">
+        <Button
+          className="px-0 pt-4 hover:no-underline"
+          disabled={isLoading}
+          onClick={handleVoteAgain}
+          variant="link"
+        >
           <ReloadIcon className="mr-2 h-4 w-4 scale-x-[-1]" /> {userVotes ? 'Vote again' : 'Vote'}
         </Button>
       )}
@@ -190,7 +195,7 @@ const PollResultsVotesInfo = ({ totalPollVotes }: { totalPollVotes: number }) =>
     count: totalPollVotes,
   })
 
-  if (totalPollVotes === 0) {
+  if (!totalPollVotes) {
     return <p className="mt-2 text-sm text-gray-500">No votes yet</p>
   }
 
