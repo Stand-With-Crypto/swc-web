@@ -22,10 +22,12 @@ export function triggerReferralSteps({
   localUser,
   searchParams,
   newUser,
+  campaignName,
 }: {
   localUser: ServerLocalUser | null
   searchParams: Record<string, string | undefined>
   newUser: UpsertedUser
+  campaignName: string
 }) {
   const referralId =
     searchParams?.utm_campaign ??
@@ -33,7 +35,9 @@ export function triggerReferralSteps({
     localUser?.currentSession?.searchParamsOnLoad?.utm_campaign ??
     ''
 
-  logger.info(`referralId "${referralId}", newUserId "${newUser.id}"`)
+  logger.info(
+    `referralId "${referralId}", newUserId "${newUser.id}"${campaignName ? `, campaignName "${campaignName}"` : ''}`,
+  )
 
   if (!referralId) {
     logger.error('invalid logic, referral has no referralId')
@@ -43,7 +47,7 @@ export function triggerReferralSteps({
         tags: {
           domain: 'referral',
         },
-        extra: { referralId, searchParams, localUser, userId: newUser.id },
+        extra: { referralId, searchParams, localUser, userId: newUser.id, campaignName },
       },
     )
     return
@@ -53,6 +57,7 @@ export function triggerReferralSteps({
     const result = await actionCreateUserActionReferral({
       referralId,
       newUserId: newUser.id,
+      campaignName,
     })
 
     if (result.errors) return
