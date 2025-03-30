@@ -1,4 +1,3 @@
-'use client'
 import dynamic from 'next/dynamic'
 
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'

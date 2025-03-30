@@ -364,7 +364,11 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper
-            authenticatedContent={<UserActionFormReferDialog>{children}</UserActionFormReferDialog>}
+            authenticatedContent={
+              <UserActionFormReferDialog countryCode={SupportedCountryCodes.US}>
+                {children}
+              </UserActionFormReferDialog>
+            }
           >
             {children}
           </LoginDialogWrapper>

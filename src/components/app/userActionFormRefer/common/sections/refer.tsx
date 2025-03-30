@@ -18,19 +18,16 @@ export function Refer({ children }: { children: ReactNode }) {
   )
 }
 
-Refer.Heading = function ReferHeading({ title, subtitle }: { title: string; subtitle: string }) {
+Refer.Heading = function ReferHeading({ description }: { description: string }) {
   return (
     <div className="flex w-full flex-col gap-2 text-center">
       <div>
-        <PageTitle size="sm">{title}</PageTitle>
-        <PageTitle size="sm">{subtitle}</PageTitle>
+        <PageTitle size="sm">Invite a friend to join</PageTitle>
+        <PageTitle size="sm">Stand With Crypto</PageTitle>
       </div>
+      <p className="text-fontcolor-muted">{description}</p>
     </div>
   )
-}
-
-Refer.Description = function ReferDescription({ children }: { children: ReactNode }) {
-  return <p className="text-center text-fontcolor-muted">{children}</p>
 }
 
 Refer.ReferralCode = function ReferralCode() {

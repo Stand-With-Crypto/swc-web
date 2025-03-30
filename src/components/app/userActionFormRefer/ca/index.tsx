@@ -20,14 +20,7 @@ export function CAUserActionFormRefer({ onClose }: UserActionFormReferProps) {
     case SectionNames.REFER:
       return (
         <Refer>
-          <Refer.Heading
-            subtitle="Support our community"
-            title="Invite a friend to join Stand With Crypto"
-          />
-
-          <Refer.Description>
-            Send friends your unique referral code to encourage them to sign up and take action.
-          </Refer.Description>
+          <Refer.Heading description="Send friends your unique referral code to encourage them to sign up and take action." />
 
           <Refer.ReferralCode />
 

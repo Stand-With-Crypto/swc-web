@@ -17,22 +17,25 @@ const UserActionFormRefer = dynamic(
 
 interface UserActionFormReferDialogProps {
   children: React.ReactNode
+  countryCode: SupportedCountryCodes
   defaultOpen?: boolean
-  countryCode?: SupportedCountryCodes
 }
 
-export function UserActionFormReferDialog({
-  children,
-  defaultOpen = false,
-  countryCode = SupportedCountryCodes.US,
-}: UserActionFormReferDialogProps) {
+export function UserActionFormReferDialog(props: UserActionFormReferDialogProps) {
+  const { children, countryCode, defaultOpen = false } = props
+
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_REFER,
   })
 
   return (
-    <UserActionFormDialog {...dialogProps} className="max-w-xl" trigger={children}>
+    <UserActionFormDialog
+      {...dialogProps}
+      className="max-w-xl"
+      countryCode={countryCode}
+      trigger={children}
+    >
       <UserActionFormRefer
         countryCode={countryCode}
         onClose={() => dialogProps.onOpenChange(false)}
