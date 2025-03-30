@@ -26,7 +26,10 @@ export function PageReferrals(props: PageReferralsProps) {
     <div className="standard-spacing-from-navbar container space-y-8">
       <PageReferralsHeading />
       <UserReferralUrlWithApi />
-      <ReferralsCounter />
+      <ReferralsCounter>
+        <ReferralsCounter.UserReferralsCount />
+        <ReferralsCounter.UserDistrictRanking />
+      </ReferralsCounter>
       <YourDistrictRank />
       <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
       <div className="flex justify-center">
